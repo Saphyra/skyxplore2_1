@@ -9,6 +9,8 @@ import skyxplore.dataaccess.user.entity.Role;
 import skyxplore.home.domain.view.converter.UserViewConverter;
 import skyxplore.home.domain.SkyXpUser;
 import skyxplore.home.exception.BadlyConfirmedPasswordException;
+import skyxplore.home.exception.EmailAlreadyExistsException;
+import skyxplore.home.exception.UserNameAlreadyExistsException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -44,8 +46,13 @@ public class UserService {
 
     private void validatePassword(UserRegistrationRequest request){
         if(!request.getPassword().equals(request.getConfirmPassword())){
-            //TODO handle
             throw new BadlyConfirmedPasswordException();
+        }
+        if(isUserNameExists(request.getUsername())){
+            throw new UserNameAlreadyExistsException();
+        }
+        if(isEmailExists(request.getEmail())){
+            throw new EmailAlreadyExistsException();
         }
     }
 }

@@ -1,6 +1,7 @@
 package skyxplore.auth.controller.advice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,6 +11,7 @@ import skyxplore.auth.domain.exception.BadRequestAuthException;
 
 @ControllerAdvice
 @Slf4j
+@Order(0)
 public class AuthExceptionHandlerAdvice {
 
     @ExceptionHandler(value = BadCredentialsException.class)

@@ -14,7 +14,7 @@ public class UserEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(nullable = false, unique = true, name = "user_name")
+    @Column(nullable = false, name = "user_name")
     private String username;
 
     @Column(nullable = false, name = "password")
@@ -29,6 +29,6 @@ public class UserEntity {
     )
     private Set<GrantedRole> roles;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 }
