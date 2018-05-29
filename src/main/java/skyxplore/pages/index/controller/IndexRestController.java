@@ -11,7 +11,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class HomeRestController {
+public class IndexRestController {
     private static final String USERNAME_EXISTS_MAPPING = "/isusernameexists";
     private static final String EMAIL_EXISTS_MAPPING = "/isemailexists";
     private static final String REGISTRATION_MAPPING = "/registration";
