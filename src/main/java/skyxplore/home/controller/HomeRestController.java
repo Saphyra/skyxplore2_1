@@ -2,10 +2,7 @@ package skyxplore.home.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import skyxplore.home.controller.request.UserRegistrationRequest;
 import skyxplore.home.service.UserService;
 
@@ -15,16 +12,29 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Slf4j
 public class HomeRestController {
+    private static final String USERNAME_EXISTS_MAPPING = "/isusernameexists";
+    private static final String EMAIL_EXISTS_MAPPING = "/isemailexists";
+    private static final String REGISTRATION_MAPPING = "/registration";
+
     private final UserService userService;
 
-    @PutMapping("/registration")
-    public void registration(@Valid UserRegistrationRequest request){
-        log.info("Method called.");
-        userService.registrateUser(request);
-    }
-
-    @GetMapping("api/isusernameexists")
+    @GetMapping(USERNAME_EXISTS_MAPPING)
     public boolean isUsernameExists(@RequestParam(value = "username", required = true) String userName){
+        log.info("Request arrived to {}, request parameter: {}", USERNAME_EXISTS_MAPPING, userName);
         return userService.isUserNameExists(userName);
     }
+
+    @GetMapping(EMAIL_EXISTS_MAPPING)
+    public  boolean isEmailExists(@RequestParam(value="email", required = true) String email){
+        log.info("Request arrived to {}, request parameter: {}", EMAIL_EXISTS_MAPPING, email);
+        return userService.isEmailExists(email);
+    }
+
+    @PostMapping(REGISTRATION_MAPPING)
+    public Long registration(@RequestBody @Valid UserRegistrationRequest request){
+        log.info("{} wants to registrate!", request.getUsername());
+        return userService.registrateUser(request);
+    }
+
+
 }

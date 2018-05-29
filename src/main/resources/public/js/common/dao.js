@@ -4,6 +4,7 @@
         this.sendRequest = sendRequest;
     }
     
+    //TODO documentation
     function sendRequest(method, path, content){
         const request = new XMLHttpRequest();
         try{
@@ -20,43 +21,24 @@
             
             content = content || "";
             if(typeof content === "object"){
-                content = stringifyContent(content);
+                content = JSON.stringify(content);
             }
             
             request.open(method, path, 0);
-            if(method === "POST"){
-                request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            if(method !== "GET"){
+                request.setRequestHeader("Content-Type", "application/json");
             }
             request.send(content);
-            validateResponse(request);
+            //validateResponse(request);
         }
         catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error", request.responseURL + " - ");
         }finally{
-            return request.responseText;
+            return request;
         }
         
-        function stringifyContent(content){
-            try{
-                let result = "";
-                let start = true;
-                    for(let index in content){
-                        if(!start){
-                            result += "&";
-                        }
-                        result += index + "=" + content[index];
-                        if(start){
-                            start = false;
-                        }
-                    }
-                return result;
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error", request.responseURL + " - ");
-            }
-        }
-        
+        //TODO documentation
         function validateResponse(request){
             try{
                 if(request.status != 200){

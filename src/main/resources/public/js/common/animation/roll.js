@@ -5,6 +5,7 @@
         this.rollOutHorizontal = rollOutHorizontal;
     }
     
+    //TODO documentation
     function rollInHorizontal(element, container, time){
         try{
             const width = DOMUtil.getElementWidth(element, container);
@@ -34,6 +35,7 @@
         }
     }
     
+    //TODO documentation
     function rollOutHorizontal(element, container, time){
         try{
             const timeout = Math.round(time / element.offsetWidth) * 3;

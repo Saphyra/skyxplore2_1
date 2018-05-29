@@ -1,6 +1,29 @@
 (function UserDao(){
     window.userDao = new function(){
+        this.isEmailExists = isEmailExists;
         this.isUserNameExists = isUserNameExists;
+        this.registrateUser = registrateUser;
+    }
+    
+    function isEmailExists(email){
+        try{
+            if(email == undefined || email == null){
+                throwException("IllegalArgument", "email must not be null or undefined.");
+            }
+            
+            const result = dao.sendRequest("GET", "isemailexists?email=" + email);
+            if(result.responseText === "true"){
+                return true;
+            }else if(result.responseText === "false"){
+                return false;
+            }else{
+                throwException("InvalidResult", result);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return true;
+        }
     }
     
     function isUserNameExists(userName){
@@ -9,10 +32,10 @@
                 throwException("IllegalArgument", "userName must not be null or undefined.");
             }
             
-            const result = dao.sendRequest("GET", "api/isusernameexists?username=" + userName);
-            if(result === "true"){
+            const result = dao.sendRequest("GET", "isusernameexists?username=" + userName);
+            if(result.responseText === "true"){
                 return true;
-            }else if(result === "false"){
+            }else if(result.responseText === "false"){
                 return false;
             }else{
                 throwException("InvalidResult", result);
@@ -20,6 +43,20 @@
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+            return true;
+        }
+    }
+    
+    function registrateUser(user){
+        try{
+            if(user == null && undefined){
+                throwException("IllegalArgument", "user must not be null or undefined");
+            }
+            return dao.sendRequest("POST", "registration", user);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return true;
         }
     }
 })();

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import skyxplore.home.dataaccess.user.dao.RoleDao;
+import skyxplore.dataaccess.user.RoleDao;
 
 import java.util.Arrays;
 

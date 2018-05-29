@@ -7,6 +7,7 @@
         this.showMessage = showMessage;
     }
     
+    //TODO documentation
     function showSuccess(message){
         try{
             showMessage(message, "green");
@@ -16,6 +17,7 @@
         }
     }
     
+    //TODO documentation
     function showError(message){
         try{
             showMessage(message, "red");
@@ -25,6 +27,7 @@
         }
     }
     
+    //TODO documentation
     function showMessage(message, bgColor){
         try{
             const container = document.getElementById("notificationcontainer") || createContainer();
@@ -39,6 +42,7 @@
             logService.log(message, "error");
         }
         
+        //TODO documentation
         function createContainer(){
             try{
                 const container = document.createElement("DIV");
@@ -55,6 +59,7 @@
             }
         }
         
+        //TODO documentation
         function createMessageElement(message, bgColor){
             try{
                 const wrapper = document.createElement("DIV");
