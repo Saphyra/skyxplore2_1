@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import skyxplore.auth.controller.request.LoginRequest;
 import skyxplore.auth.domain.AccessToken;
 import skyxplore.auth.service.AccessTokenService;
-import skyxplore.filter.AuthFilter;
+import skyxplore.global.filter.AuthFilter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +24,16 @@ public class LoginController {
     public void login(@RequestBody @Valid LoginRequest loginRequest, HttpServletResponse response){
         log.info("Login request arrived.");
         AccessToken accessToken = accessTokenService.login(loginRequest);
-        response.addCookie(new Cookie(AuthFilter.COOKIE_USERID, accessToken.getUserId().toString()));
-        response.addCookie(new Cookie(AuthFilter.COOKIE_ACCESS_TOKEN, accessToken.getAccessTokenId()));
+        response.addCookie(createLoginCookie(AuthFilter.COOKIE_USER_ID, accessToken.getUserId().toString()));
+        response.addCookie(createLoginCookie(AuthFilter.COOKIE_ACCESS_TOKEN, accessToken.getAccessTokenId()));
         log.info("Access token successfully created, and sent for the client.");
+    }
+
+    private Cookie createLoginCookie(String name, String value){
+        Cookie cookie = new Cookie(name, value);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(-1);
+        return cookie;
     }
 }
