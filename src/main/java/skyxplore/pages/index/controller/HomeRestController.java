@@ -1,10 +1,10 @@
-package skyxplore.home.controller;
+package skyxplore.pages.index.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import skyxplore.home.controller.request.UserRegistrationRequest;
-import skyxplore.home.service.UserService;
+import skyxplore.pages.index.controller.request.UserRegistrationRequest;
+import skyxplore.pages.index.service.UserService;
 
 import javax.validation.Valid;
 

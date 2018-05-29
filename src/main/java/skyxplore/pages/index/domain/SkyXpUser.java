@@ -1,4 +1,4 @@
-package skyxplore.home.domain;
+package skyxplore.pages.index.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

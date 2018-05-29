@@ -1,4 +1,4 @@
-package skyxplore.home.exception;
+package skyxplore.pages.index.exception;
 
 public class EmailAlreadyExistsException extends RuntimeException {
 }

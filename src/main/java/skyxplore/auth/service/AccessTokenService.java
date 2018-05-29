@@ -7,8 +7,8 @@ import skyxplore.auth.controller.request.LoginRequest;
 import skyxplore.auth.domain.AccessToken;
 import skyxplore.auth.domain.exception.BadCredentialsException;
 import skyxplore.dataaccess.auth.AccessTokenDao;
-import skyxplore.home.domain.SkyXpUser;
-import skyxplore.home.service.UserService;
+import skyxplore.pages.index.domain.SkyXpUser;
+import skyxplore.pages.index.service.UserService;
 import skyxplore.util.IdGenerator;
 
 import java.util.Calendar;

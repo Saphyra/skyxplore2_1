@@ -1,4 +1,4 @@
-package skyxplore.home.domain.view;
+package skyxplore.pages.index.domain.view;
 
 import lombok.Data;
 

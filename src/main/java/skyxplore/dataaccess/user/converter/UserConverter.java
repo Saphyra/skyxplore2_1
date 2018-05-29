@@ -3,7 +3,7 @@ package skyxplore.dataaccess.user.converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.user.entity.UserEntity;
-import skyxplore.home.domain.SkyXpUser;
+import skyxplore.pages.index.domain.SkyXpUser;
 
 @Component
 @RequiredArgsConstructor

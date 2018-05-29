@@ -1,4 +1,4 @@
-package skyxplore.home.controller.request;
+package skyxplore.pages.index.controller.request;
 
 import lombok.Data;
 

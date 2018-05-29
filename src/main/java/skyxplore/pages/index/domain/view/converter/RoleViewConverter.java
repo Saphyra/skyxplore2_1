@@ -1,8 +1,8 @@
-package skyxplore.home.domain.view.converter;
+package skyxplore.pages.index.domain.view.converter;
 
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.user.entity.Role;
-import skyxplore.home.domain.view.RoleView;
+import skyxplore.pages.index.domain.view.RoleView;
 
 import java.util.Set;
 import java.util.stream.Collectors;

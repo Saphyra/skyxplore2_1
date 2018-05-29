@@ -23,7 +23,7 @@
                 throwException("IllegalArgument", "password must not be null or undefined");
             }
             
-            const result = dao.sendRequest("POST", "login", {userName: userName, password: password});
+            return dao.sendRequest("POST", "login", {userName: userName, password: password});
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

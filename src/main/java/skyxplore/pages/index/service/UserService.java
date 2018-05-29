@@ -1,16 +1,16 @@
-package skyxplore.home.service;
+package skyxplore.pages.index.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.home.controller.request.UserRegistrationRequest;
+import skyxplore.pages.index.controller.request.UserRegistrationRequest;
 import skyxplore.dataaccess.user.UserDao;
 import skyxplore.dataaccess.user.entity.Role;
-import skyxplore.home.domain.view.converter.UserViewConverter;
-import skyxplore.home.domain.SkyXpUser;
-import skyxplore.home.exception.BadlyConfirmedPasswordException;
-import skyxplore.home.exception.EmailAlreadyExistsException;
-import skyxplore.home.exception.UserNameAlreadyExistsException;
+import skyxplore.pages.index.domain.view.converter.UserViewConverter;
+import skyxplore.pages.index.domain.SkyXpUser;
+import skyxplore.pages.index.exception.BadlyConfirmedPasswordException;
+import skyxplore.pages.index.exception.EmailAlreadyExistsException;
+import skyxplore.pages.index.exception.UserNameAlreadyExistsException;
 
 import java.util.Arrays;
 import java.util.HashSet;

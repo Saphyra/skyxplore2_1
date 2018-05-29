@@ -1,6 +1,10 @@
 (function LoginController(){
     window.loginController = new function(){
         this.sendForm = sendForm;
+        
+        $(document).ready(function(){
+            addListeners();
+        });
     }
     
     /*
@@ -23,6 +27,19 @@
                     window.location.href = "/home";
                 }
             }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function addListeners(){
+        try{
+            $(".logininput").on("keyup", function(e){
+                if(e.which == 13){
+                    loginController.sendForm();
+                }
+            });
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

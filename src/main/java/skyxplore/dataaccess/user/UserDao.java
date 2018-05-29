@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.user.converter.UserConverter;
 import skyxplore.dataaccess.user.entity.UserEntity;
 import skyxplore.dataaccess.user.repository.UserRepository;
-import skyxplore.home.domain.SkyXpUser;
+import skyxplore.pages.index.domain.SkyXpUser;
 
 @Component
 @RequiredArgsConstructor

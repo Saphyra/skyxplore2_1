@@ -1,9 +1,9 @@
-package skyxplore.home.domain.view.converter;
+package skyxplore.pages.index.domain.view.converter;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.home.domain.SkyXpUser;
-import skyxplore.home.domain.view.UserView;
+import skyxplore.pages.index.domain.SkyXpUser;
+import skyxplore.pages.index.domain.view.UserView;
 
 @Component
 @AllArgsConstructor

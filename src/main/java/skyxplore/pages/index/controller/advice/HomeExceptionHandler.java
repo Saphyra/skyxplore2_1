@@ -1,13 +1,13 @@
-package skyxplore.home.controller.advice;
+package skyxplore.pages.index.controller.advice;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import skyxplore.home.exception.BadlyConfirmedPasswordException;
-import skyxplore.home.exception.EmailAlreadyExistsException;
-import skyxplore.home.exception.UserNameAlreadyExistsException;
+import skyxplore.pages.index.exception.BadlyConfirmedPasswordException;
+import skyxplore.pages.index.exception.EmailAlreadyExistsException;
+import skyxplore.pages.index.exception.UserNameAlreadyExistsException;
 
 @ControllerAdvice
 @Order(0)

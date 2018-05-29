@@ -5,6 +5,10 @@
         this.showSuccess = showSuccess;
         this.showError = showError;
         this.showMessage = showMessage;
+        
+        $(document).ready(function(){
+            printStoredMessages();
+        });
     }
     
     //TODO documentation
@@ -78,6 +82,23 @@
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;
                 logService.log(message, "error");
             }
+        }
+    }
+    
+    function printStoredMessages(){
+        try{
+            if(sessionStorage.errorMessage != undefined && sessionStorage.errorMessage != null){
+                showError(sessionStorage.errorMessage);
+                delete sessionStorage.errorMessage;
+            }
+            
+            if(sessionStorage.successMessage != undefined && sessionStorage.successMessage != null){
+                showSuccess(sessionStorage.successMessage);
+                delete sessionStorage.successMessage;
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
         }
     }
 })();
