@@ -16,10 +16,15 @@
     */
     function init(){
         try{
-            document.getElementById("newcharactername").onkeydown = function(e){
+            const newCharacterNameInput = document.getElementById("newcharactername");
+            
+            newCharacterNameInput.onkeyup = function(e){
                 if(e.which == 13){
                     characterController.createCharacter();
                 }
+                characterController.validateNewCharacterName();
+            }
+            newCharacterNameInput.onfocus = function(){
                 characterController.validateNewCharacterName();
             }
         }catch(err){

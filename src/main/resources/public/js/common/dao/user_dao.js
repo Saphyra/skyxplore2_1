@@ -52,11 +52,16 @@
             if(user == null && undefined){
                 throwException("IllegalArgument", "user must not be null or undefined");
             }
-            return dao.sendRequest("POST", "registration", user);
+            const result =  dao.sendRequest("POST", "registration", user);
+            if(result.status == 200){
+                return true;
+            }else{
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return true;
+            return false;
         }
     }
 })();

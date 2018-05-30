@@ -47,8 +47,21 @@
     
     function validateNewCharacterName(){
         try{
+            const errorField = document.getElementById("invalid_newcharactername");
             const characterName = document.getElementById("newcharactername").value;
-            document.getElementById("invalid_newcharactername").style.display = characterDao.isCharNameExists(characterName) ? "block" : "none";
+            let isValid = characterName.length >= 3;
+            if(isValid){
+                notificationService.showError(isValid);
+                if(isValid){
+                    errorField.style.display = "none";
+                }else{
+                    errorField.style.display = "block";
+                    errorField.title = "Karakternév foglalt.";
+                }
+            }else{
+                errorField.style.display = "block";
+                errorField.title = "Karakternév túl rövid. (Minimum 3 karakter)";
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

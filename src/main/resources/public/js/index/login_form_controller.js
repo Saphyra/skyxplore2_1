@@ -1,6 +1,7 @@
 (function LoginController(){
     window.loginController = new function(){
         this.sendForm = sendForm;
+        this.login = login;
         
         $(document).ready(function(){
             addListeners();
@@ -23,12 +24,35 @@
             }else if(password == ""){
                 notificationService.showError("Adja meg jelszavát!");
             }else{
-                if(authService.login(userName, password)){
-                    window.location.href = "/characterselect";
-                }else{
-                    notificationService.showError("Hibás felhasználónév vagy jelszó.");
-                    passwordInput.value = "";
-                }
+                login(userName, password);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    /*
+    Logs in the user and redirects to home page.
+    Arguments:
+        - userName: The username of the user.
+        - password: The password of the user.
+    Throws:
+        - IllegalArgument exception is userName / password is null or undefined.
+    */
+    function login(userName, password){
+        try{
+            if(userName == null || userName == undefined){
+                throwException("IllegalArgument", "userName must not be null or undefined");
+            }
+            if(password == null || password == undefined){
+                throwException("IllegalArgument", "password must not be null or undefined");
+            }
+            
+            if(authService.login(userName, password)){
+                window.location.href = "/characterselect";
+            }else{
+                notificationService.showError("Hibás felhasználónév vagy jelszó.");
+                passwordInput.value = "";
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

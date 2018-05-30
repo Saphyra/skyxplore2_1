@@ -16,16 +16,20 @@
     */
     function isCharNameExists(charName){
         try{
-            if(charName == undefined){
-                throwException("IllegalArgument", "charName is undefined.");
+            if(charName == undefined || charName == null){
+                throwException("IllegalArgument", "charName must not be null or undefined.");
             }
             
             const path = "character/ischarnameexists/" + charName;
             const result = dao.sendRequest("get", path);
-            if(result == "true"){
-                return true;
-            }else if(result == "false"){
-                return false;
+            if(result.status == 200){
+                if(result.responseText == "true"){
+                    return true;
+                }else if(result.responseText == "false"){
+                    return false;
+                }else{
+                    throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                }
             }else{
                 throwException("UnknownBackendError", result.status + " - " + result.responseText);
             }
