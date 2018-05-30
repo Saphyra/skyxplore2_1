@@ -43,7 +43,7 @@ public class AccessTokenService {
             } else if (!accessToken.getAccessTokenId().equals(accessTokenId)) {
                 throw new BadCredentialsException("Invalid accessToken for user " + userIdValue);
             }
-        } catch (BadRequestAuthException | AccessTokenExpiredException e) {
+        } catch (BadCredentialsException | BadRequestAuthException | AccessTokenExpiredException e) {
             log.info("Authentication failed: {}", e.getMessage());
             return false;
         }
@@ -59,13 +59,16 @@ public class AccessTokenService {
         if (accessTokenId == null) {
             throw new BadRequestAuthException("Required cookie not found:" + AuthFilter.COOKIE_ACCESS_TOKEN);
         }
-        Long userId;
+        Long userId = convertUserId(userIdValue);
+        return userId;
+    }
+
+    private Long convertUserId(String userIdValue) {
         try {
-            userId = Long.valueOf(userIdValue);
+            return Long.valueOf(userIdValue);
         } catch (NumberFormatException e) {
             throw new BadRequestAuthException("Invalid userId type.");
         }
-        return userId;
     }
 
     private boolean isTokenValid(AccessToken token) {
@@ -105,12 +108,26 @@ public class AccessTokenService {
         return token;
     }
 
-    private void updateTokenExpiration(AccessToken token){
-        if(token == null){
+    private void updateTokenExpiration(AccessToken token) {
+        if (token == null) {
             throw new IllegalArgumentException("token must not be null.");
         }
         log.debug("Token expiration date refreshed");
         token.setLastAccess(accessTokenDateResolver.getActualDate());
         accessTokenDao.update(token);
+    }
+
+    public void logout(String userIdValue, String accessTokenId) {
+        if (userIdValue == null && accessTokenId == null) {
+            log.info("User is not logged in.");
+        } else if (userIdValue == null) {
+            log.info("UserId is null. Deleting by accessTokenId...");
+            accessTokenDao.deleteById(accessTokenId);
+        } else if (accessTokenId == null) {
+            Long userId = convertUserId(userIdValue);
+            accessTokenDao.deleteByUserId(userId);
+        } else {
+            accessTokenDao.deleteById(accessTokenId);
+        }
     }
 }

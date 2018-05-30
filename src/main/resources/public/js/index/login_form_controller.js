@@ -25,6 +25,9 @@
             }else{
                 if(authService.login(userName, password)){
                     window.location.href = "/characterselect";
+                }else{
+                    notificationService.showError("Hibás felhasználónév vagy jelszó.");
+                    passwordInput.value = "";
                 }
             }
         }catch(err){

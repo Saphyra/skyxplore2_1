@@ -1,2 +1,3 @@
 Cache isUserNameExists
 Cache isEmailExists
+Cache authenticated user (For 1 sec)

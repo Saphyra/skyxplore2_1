@@ -14,6 +14,7 @@ import skyxplore.auth.domain.exception.BadCredentialsException;
 public class LoginExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity handleBadCredentials(BadCredentialsException e){
+        log.info("Bad credentials: {}", e.getMessage());
         return new ResponseEntity(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 

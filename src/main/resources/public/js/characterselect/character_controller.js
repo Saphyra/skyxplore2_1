@@ -1,15 +1,51 @@
 (function CharacterController(){
     window.characterController = new function(){
-        //TODO implement
+        this.createCharacter = createCharacter;
+        this.deleteCharacter = deleteCharacter;
+        this.renameCharacter = renameCharacter;
+        this.showCharacters = showCharacters;
+    }
+    
+    function createCharacter(){
+        try{
+            
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function deleteCharacter(){
+        try{
+            
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function renameCharacter(){
+        try{
+            
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function showCharacters(){
+        try{
+            
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
     }
 })();
 
 /*(function CharacterController(){
     window.characterController = new function(){
-        this.createCharacter = createCharacter;
-        this.deleteCharacter = deleteCharacter;
-        this.renameCharacter = renameCharacter;
-        this.showCharacters = showCharacters;
+        
     }
     
     function createCharacter(){

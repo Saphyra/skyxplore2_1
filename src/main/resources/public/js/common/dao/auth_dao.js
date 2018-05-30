@@ -1,6 +1,7 @@
 (function AuthDao(){
     window.authDao = new function(){
         this.login = login;
+        this.logout = logout;
     }
     
     /*
@@ -24,6 +25,18 @@
             }
             
             return dao.sendRequest("POST", "login", {userName: userName, password: password});
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    /*
+        Sends the logout request.
+    */
+    function logout(){
+        try{
+            return dao.sendRequest("DELETE", "logout");
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
