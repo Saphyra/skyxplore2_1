@@ -4,7 +4,19 @@
         this.sendRequest = sendRequest;
     }
     
-    //TODO documentation
+    /*
+    Sends HttpRequest based on the specified arguments
+    Arguments:
+        - method: The method of the request.
+        - path: The target of the request.
+        - content: The body of the request.
+    Returns:
+        - The sent request.
+    Throws:
+        - IllegalArgument exception, if method is not a string.
+        - IllegalArgument exception, if method is unsupported.
+        - IllegalArgument exception, if path is not a string.
+    */
     function sendRequest(method, path, content){
         const request = new XMLHttpRequest();
         try{

@@ -1,9 +1,12 @@
 (function CharacterController(){
     window.characterController = new function(){
+        scriptLoader.loadScript("js/common/dao/character_dao.js");
+        
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
         this.renameCharacter = renameCharacter;
         this.showCharacters = showCharacters;
+        this.validateNewCharacterName = validateNewCharacterName;
     }
     
     function createCharacter(){
@@ -36,6 +39,16 @@
     function showCharacters(){
         try{
             
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function validateNewCharacterName(){
+        try{
+            const characterName = document.getElementById("newcharactername").value;
+            document.getElementById("invalid_newcharactername").style.display = characterDao.isCharNameExists(characterName) ? "block" : "none";
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

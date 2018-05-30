@@ -5,6 +5,7 @@
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/classes.css">
+    <LINK rel="stylesheet" href="/css/characterselect/characterselect.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -21,7 +22,11 @@
         </HEADER>
         <MAIN class="textaligncenter">
             <SECTION class="textaligncenter">
-                <LABEL class='fontsize1_5rem inline'>Karakternév: <INPUT type='text' id='newcharactername' class='fontsize1_25rem' placeholder='Karakternév'></LABEL>
+                <LABEL class='fontsize1_5rem inline'>
+                    Karakternév:
+                    <INPUT type='text' id='newcharactername' class='fontsize1_25rem' placeholder='Karakternév'>
+                    <DIV id="invalid_newcharactername" class="invalid" title="Karakternév foglalt.">X</DIV>
+                </LABEL>
                 <BUTTON class='fontsize1_25rem' onclick='characterController.createCharacter()'>Új karakter</BUTTON>
             </SECTION>
             

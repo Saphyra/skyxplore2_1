@@ -3,8 +3,8 @@ package skyxplore.configuration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import skyxplore.auth.service.AccessTokenService;
-import skyxplore.global.filter.AuthFilter;
+import skyxplore.service.AccessTokenService;
+import skyxplore.filter.AuthFilter;
 
 @Configuration
 public class FilterConfig {

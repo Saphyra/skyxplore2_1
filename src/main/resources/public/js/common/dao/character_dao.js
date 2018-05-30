@@ -1,6 +1,39 @@
 (function CharacterDao(){
     window.characterDao = new function(){
-        //TODO implement
+        this.isCharNameExists = isCharNameExists;
+    }
+    
+    /*
+        Checks if the character name is already registered.
+        Parameters:
+            - charName: The character name to check.
+        Returns:
+            - False is the character does not exists.
+            - True otherwise (even an exception).
+        Throws:
+            - IllegalArgument exception if charName is null or undefined.
+            - UnknownBackendError exception if request failed.
+    */
+    function isCharNameExists(charName){
+        try{
+            if(charName == undefined){
+                throwException("IllegalArgument", "charName is undefined.");
+            }
+            
+            const path = "character/ischarnameexists/" + charName;
+            const result = dao.sendRequest("get", path);
+            if(result == "true"){
+                return true;
+            }else if(result == "false"){
+                return false;
+            }else{
+                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return true;
+        }
     }
 })();
 
@@ -69,27 +102,7 @@
         }
     }
     
-    function isCharNameExists(charName){
-        try{
-            if(charName == undefined){
-                throwException("IllegalArgument", "charName is undefined.");
-            }
-            
-            const path = "api/character/ischarnameexists.php?charname=" + charName;
-            const result = dao.sendRequest("get", path);
-            if(result == "true"){
-                return true;
-            }else if(result == "false"){
-                return false;
-            }else{
-                throwException("UnknownBackendError", result);
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-            return true;
-        }
-    }
+    
     
     function renameCharacter(characterId, newCharacterName){
         try{
