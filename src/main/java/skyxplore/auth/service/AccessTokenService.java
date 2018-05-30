@@ -5,12 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.auth.controller.request.LoginRequest;
 import skyxplore.auth.domain.AccessToken;
+import skyxplore.auth.domain.exception.AccessTokenExpiredException;
 import skyxplore.auth.domain.exception.BadCredentialsException;
 import skyxplore.auth.domain.exception.BadRequestAuthException;
 import skyxplore.dataaccess.auth.AccessTokenDao;
 import skyxplore.global.filter.AuthFilter;
 import skyxplore.pages.index.domain.SkyXpUser;
 import skyxplore.pages.index.service.UserService;
+import skyxplore.util.ExpirationDateResolver;
 import skyxplore.util.IdGenerator;
 
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import java.util.TimeZone;
 @Slf4j
 public class AccessTokenService {
 
+    private final ExpirationDateResolver expirationDateResolver;
     private final AccessTokenDao accessTokenDao;
     private final UserService userService;
     private final IdGenerator idGenerator;
@@ -38,10 +41,12 @@ public class AccessTokenService {
             AccessToken accessToken = getAccessTokenByUserId(userId);
             if (accessToken == null) {
                 throw new BadCredentialsException("No valid accessToken for user " + userIdValue);
+            } else if (isTokenValid(accessToken)) {
+                throw new AccessTokenExpiredException("Access token expired.");
             } else if (!accessToken.getAccessTokenId().equals(accessTokenId)) {
                 throw new BadCredentialsException("Invalid accessToken for user " + userIdValue);
             }
-        } catch (BadRequestAuthException e) {
+        } catch (BadRequestAuthException | AccessTokenExpiredException e) {
             log.info("Authentication failed: {}", e.getMessage());
             return false;
         }
@@ -63,6 +68,10 @@ public class AccessTokenService {
             throw new BadRequestAuthException("Invalid userId type.");
         }
         return userId;
+    }
+
+    private boolean isTokenValid(AccessToken token) {
+        return token.getLastAccess().before(expirationDateResolver.getExpirationDate());
     }
 
     public AccessToken login(LoginRequest loginRequest) {
@@ -97,5 +106,4 @@ public class AccessTokenService {
         token.setLastAccess(Calendar.getInstance(TimeZone.getTimeZone("UTC")));
         return token;
     }
-
 }

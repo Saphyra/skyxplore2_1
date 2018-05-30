@@ -24,7 +24,7 @@
                 notificationService.showError("Adja meg jelszavát!");
             }else{
                 if(authService.login(userName, password)){
-                    window.location.href = "/home";
+                    window.location.href = "/characterselect";
                 }
             }
         }catch(err){

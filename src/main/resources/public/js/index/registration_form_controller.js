@@ -6,9 +6,9 @@
         this.lastEmailQueried = null;
         this.lastEmailValid = true;
         
-        
         this.validate = validate;
         this.sendForm = sendForm;
+        
         $(document).ready(function(){
             addListeners();
         });
