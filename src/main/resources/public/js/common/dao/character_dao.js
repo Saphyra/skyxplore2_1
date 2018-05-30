@@ -1,5 +1,11 @@
 (function CharacterDao(){
     window.characterDao = new function(){
+        //TODO implement
+    }
+})();
+
+/*(function CharacterDao(){
+    window.characterDao = new function(){
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
         this.getCharacters = getCharacters;
@@ -112,4 +118,4 @@
             return false;
         }
     }
-})();
+})();*/

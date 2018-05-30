@@ -5,21 +5,59 @@
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/classes.css">
-    <LINK rel="stylesheet" href="/css/index/index.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    
+    
+    <SCRIPT src="js/characterselect/character_controller.js"></SCRIPT>
+    <SCRIPT src="js/characterselect/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
-<DIV class="cover">
-    <HEADER>
-        <H1>Karakterválasztás</H1>
-    </HEADER>
-    <MAIN class="textaligncenter">
+    <DIV class="cover">
+        <HEADER>
+            <H1>Karakterválasztás</H1>
+        </HEADER>
+        <MAIN class="textaligncenter">
+            <SECTION class="textaligncenter">
+                <LABEL class='fontsize1_5rem inline'>Karakternév: <INPUT type='text' id='newcharactername' class='fontsize1_25rem' placeholder='Karakternév'></LABEL>
+                <BUTTON class='fontsize1_25rem' onclick='characterController.createCharacter()'>Új karakter</BUTTON>
+            </SECTION>
+            
+            <SECTION>
+                <TABLE class='marginauto margintop1rem'>
+                    <THEAD>
+                        <TR>
+                            <TH>Karakternév</TH>
+                            <TH>Műveletek</TH>
+                        </TR>
+                    </THEAD>
+                    
+                    <TBODY id='characters'></TBODY>
+                </TABLE>
+            </SECTION>
+        </MAIN>
         
-    </MAIN>
-</DIV>
+        <FOOTER>
+            <BUTTON onclick='authService.logout()'>Kezdőlap</BUTTON>
+        </FOOTER>
+    </DIV>
+    
+    <DIV id='renamecharactercontainer' class='cover' style='display: block;'>
+        <HEADER>
+            <H1>Karakter átnevezése</H1>
+            <BUTTON class='absolute right2px top2px' onclick='pageController.setRenameCharacterContainerDisplayStatus(false)'>X</BUTTON>
+        </HEADER>
+        
+        <MAIN class='textaligncenter'>
+            <LABEL class='fontsize1_25rem'>Új karakternév: <INPUT type='text' id='renamecharacterinput' class='fontsize1_25rem' placeholder='Új karakternév'></LABEL>
+            
+            <INPUT type='hidden' id='renamecharacterid'>
+            
+            <DIV class='button fontsize1_5rem marginauto margintop1rem width60vw' onclick='characterController.renameCharacter()' style='margin: auto; margin-top: 1rem;'>Átnevezés</DIV>
+        </MAIN>
+    </DIV>
 
 </BODY>
 </HTML>

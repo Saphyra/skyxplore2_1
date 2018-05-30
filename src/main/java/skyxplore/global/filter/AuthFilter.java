@@ -44,19 +44,25 @@ public class AuthFilter extends OncePerRequestFilter {
         if (allowedUris.stream().anyMatch(allowedPath -> pathMatcher.match(allowedPath, path))) {
             log.debug("Path allowed.");
             filterChain.doFilter(request, response);
-        } else if (isAuthenticated(request, response)) {
+        } else if (isAuthenticated(request)) {
             filterChain.doFilter(request, response);
         } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
+            if("rest".equals(request.getHeader("Request-Type"))){
+                log.info("Sending error. Cause: Unauthorized access.");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
+            }else{
+                log.info("Redirect to login page. Cause: Unauthorized access.");
+                response.sendRedirect("/");
+            }
         }
     }
 
-    private boolean isAuthenticated(HttpServletRequest request, HttpServletResponse response) {
-        log.info("Authenticating...");
+    private boolean isAuthenticated(HttpServletRequest request) {
+        log.debug("Authenticating...");
         String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
         String userIdValue = getCookie(request, COOKIE_USER_ID);
 
-        return accessTokenService.isAuthenticated(userIdValue, accessTokenId, response);
+        return accessTokenService.isAuthenticated(userIdValue, accessTokenId);
     }
 
     private String getCookie(HttpServletRequest request, String name) {

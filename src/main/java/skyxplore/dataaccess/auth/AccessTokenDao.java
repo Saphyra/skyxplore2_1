@@ -23,4 +23,8 @@ public class AccessTokenDao {
     public AccessToken findByUserId(Long userId){
         return accessTokenConverter.convertEntity(accessTokenRepository.findByUserId(userId));
     }
+
+    public void update(AccessToken token){
+        save(token);
+    }
 }

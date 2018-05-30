@@ -12,19 +12,15 @@ import skyxplore.dataaccess.auth.AccessTokenDao;
 import skyxplore.global.filter.AuthFilter;
 import skyxplore.pages.index.domain.SkyXpUser;
 import skyxplore.pages.index.service.UserService;
-import skyxplore.util.ExpirationDateResolver;
+import skyxplore.util.AccessTokenDateResolver;
 import skyxplore.util.IdGenerator;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AccessTokenService {
 
-    private final ExpirationDateResolver expirationDateResolver;
+    private final AccessTokenDateResolver accessTokenDateResolver;
     private final AccessTokenDao accessTokenDao;
     private final UserService userService;
     private final IdGenerator idGenerator;
@@ -33,12 +29,13 @@ public class AccessTokenService {
         return accessTokenDao.findByUserId(userId);
     }
 
-    public boolean isAuthenticated(String userIdValue, String accessTokenId, HttpServletResponse response) {
+    public boolean isAuthenticated(String userIdValue, String accessTokenId) {
         log.info("Authenticating user {}", userIdValue);
+        AccessToken accessToken;
         try {
             Long userId = validate(userIdValue, accessTokenId);
 
-            AccessToken accessToken = getAccessTokenByUserId(userId);
+            accessToken = getAccessTokenByUserId(userId);
             if (accessToken == null) {
                 throw new BadCredentialsException("No valid accessToken for user " + userIdValue);
             } else if (isTokenValid(accessToken)) {
@@ -51,6 +48,7 @@ public class AccessTokenService {
             return false;
         }
         log.info("Authentication successful.");
+        updateTokenExpiration(accessToken);
         return true;
     }
 
@@ -71,7 +69,7 @@ public class AccessTokenService {
     }
 
     private boolean isTokenValid(AccessToken token) {
-        return token.getLastAccess().before(expirationDateResolver.getExpirationDate());
+        return token.getLastAccess().before(accessTokenDateResolver.getExpirationDate());
     }
 
     public AccessToken login(LoginRequest loginRequest) {
@@ -103,7 +101,16 @@ public class AccessTokenService {
         AccessToken token = new AccessToken();
         token.setAccessTokenId(idGenerator.getRandomId());
         token.setUserId(user.getUserId());
-        token.setLastAccess(Calendar.getInstance(TimeZone.getTimeZone("UTC")));
+        token.setLastAccess(accessTokenDateResolver.getActualDate());
         return token;
+    }
+
+    private void updateTokenExpiration(AccessToken token){
+        if(token == null){
+            throw new IllegalArgumentException("token must not be null.");
+        }
+        log.debug("Token expiration date refreshed");
+        token.setLastAccess(accessTokenDateResolver.getActualDate());
+        accessTokenDao.update(token);
     }
 }

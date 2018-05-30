@@ -8,10 +8,14 @@ import java.util.TimeZone;
 
 @Component
 @Slf4j
-public class ExpirationDateResolver {
+public class AccessTokenDateResolver {
     public Calendar getExpirationDate(){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         calendar.add(Calendar.MINUTE, -15);
         return calendar;
+    }
+
+    public Calendar getActualDate(){
+        return Calendar.getInstance(TimeZone.getTimeZone("UTC"));
     }
 }

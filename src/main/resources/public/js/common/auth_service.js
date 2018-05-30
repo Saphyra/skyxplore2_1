@@ -3,8 +3,10 @@
         scriptLoader.loadScript("js/common/dao/auth_dao.js");
         
         this.login = login;
+        this.logout = logout;
     }
     
+    //TODO documentation
     function login(userName, password){
         try{
             const result = authDao.login(userName, password);
@@ -21,5 +23,10 @@
             logService.log(message, "error");
             return false;
         }
+    }
+    
+    //TODO documentation
+    function logout(){
+        //TODO implement
     }
 })();

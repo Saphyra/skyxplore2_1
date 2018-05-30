@@ -28,6 +28,8 @@
             if(method !== "GET"){
                 request.setRequestHeader("Content-Type", "application/json");
             }
+            
+            request.setRequestHeader("Request-Type", "rest");
             request.send(content);
         }
         catch(err){
