@@ -14,12 +14,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<String> handle(RuntimeException ex){
         log.warn("Internal Server Error: {}. Message: {}", ex.getClass().getName(), ex.getMessage());
+        ex.printStackTrace();
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<String> handleAll(Exception ex){
         log.error("Unknown Server Error: {}. Message: {}", ex.getClass().getName(), ex.getMessage());
+        ex.printStackTrace();
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

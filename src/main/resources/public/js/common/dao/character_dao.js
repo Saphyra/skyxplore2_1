@@ -1,6 +1,7 @@
 (function CharacterDao(){
     window.characterDao = new function(){
         this.isCharNameExists = isCharNameExists;
+        this.getCharacters = getCharacters;
         this.createCharacter = createCharacter;
     }
     
@@ -26,6 +27,29 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return false;
+        }
+    }
+    
+    /*
+    Queries all the characters of the user.
+    Returns:
+        - List of characters
+    Throws:
+        - UnknownBackendError exception if request failed.;
+    */
+    function getCharacters(){
+        try{
+            const path = "character/characters";
+            const result = dao.sendRequest("get", path);
+            if(result.status == 200){
+                return JSON.parse(result.responseText);
+            }else{
+                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
         }
     }
     
@@ -100,20 +124,6 @@
             return false;
         }
     }
-    
-    function getCharacters(){
-        try{
-            const path = "api/character/getcharacters.php";
-            const result = dao.sendRequest("get", path);
-            return characterConverter.convertCharacters(JSON.parse(result));
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-            return [];
-        }
-    }
-    
-    
     
     function renameCharacter(characterId, newCharacterName){
         try{

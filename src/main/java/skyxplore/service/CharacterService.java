@@ -7,6 +7,8 @@ import skyxplore.dataaccess.character.CharacterDao;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
 import skyxplore.service.domain.SkyXpCharacter;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -19,6 +21,10 @@ public class CharacterService {
         character.setCharacterName(request.getCharacterName());
         character.setUser(userService.getUserById(userId));
         characterDao.save(character);
+    }
+
+    public List<SkyXpCharacter> getCharactersByUserId(Long userId){
+        return characterDao.findByUserId(userId);
     }
 
     public boolean isCharNameExists(String charName){
