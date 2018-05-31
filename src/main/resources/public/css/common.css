@@ -120,7 +120,7 @@ input[type='checkbox']:disabled{
     opacity: 0.5;
 }
 
-input:disabled, button:disabled, textarea:disabled{
+input:disabled, button:disabled, textarea:disabled, .disabled{
     border-color: rgb(100,100,100) !important;
     cursor: no-drop
 }

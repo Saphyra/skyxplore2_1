@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.character.CharacterDao;
+import skyxplore.exception.CharacterNameAlreadyExistsException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
+import skyxplore.restcontroller.request.RenameCharacterRequest;
 import skyxplore.service.domain.SkyXpCharacter;
 
 import java.util.List;
@@ -39,5 +41,17 @@ public class CharacterService {
 
     public boolean isCharNameExists(String charName){
         return characterDao.findByCharacterName(charName) != null;
+    }
+
+    public void renameCharacter(RenameCharacterRequest request, Long userId){
+        if(isCharNameExists(request.getNewCharacterName())){
+            throw new CharacterNameAlreadyExistsException("Character name already exists: " + request.getNewCharacterName());
+        }
+        SkyXpCharacter character = characterDao.findById(request.getCharacterId());
+        if(!userId.equals(character.getUser().getUserId())){
+            throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
+        }
+        character.setCharacterName(request.getNewCharacterName());
+        characterDao.renameCharacter(request.getCharacterId(), request.getNewCharacterName());
     }
 }

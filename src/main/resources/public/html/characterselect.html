@@ -56,11 +56,15 @@
         </HEADER>
         
         <MAIN class='textaligncenter'>
-            <LABEL class='fontsize1_25rem'>Új karakternév: <INPUT type='text' id='renamecharacterinput' class='fontsize1_25rem' placeholder='Új karakternév'></LABEL>
+            <LABEL class='fontsize1_25rem inline'>
+                Új karakternév:
+                <INPUT type='text' id='renamecharacterinput' class='fontsize1_25rem' placeholder='Új karakternév'>
+                <DIV id="invalid_renamecharactername" class="invalid">X</DIV>
+            </LABEL>
             
             <INPUT type='hidden' id='renamecharacterid'>
             
-            <DIV class='button fontsize1_5rem marginauto margintop1rem width60vw' onclick='characterController.renameCharacter()' style='margin: auto; margin-top: 1rem;'>Átnevezés</DIV>
+            <DIV id="renamecharacterbutton" class='button fontsize1_5rem marginauto margintop1rem width60vw' onclick='characterController.renameCharacter()' style='margin: auto; margin-top: 1rem;'>Átnevezés</DIV>
         </MAIN>
     </DIV>
 

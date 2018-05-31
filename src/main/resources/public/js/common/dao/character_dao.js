@@ -1,9 +1,35 @@
 (function CharacterDao(){
     window.characterDao = new function(){
+        this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
         this.isCharNameExists = isCharNameExists;
         this.getCharacters = getCharacters;
-        this.createCharacter = createCharacter;
+        this.renameCharacter = renameCharacter;
+    }
+    
+    /*
+    Saves a new character with the given name.
+    Arguments:
+        - charName: The name of the new character.
+    Returns:
+        - The sent request.
+    Throws:
+        - IllegalArgument exception if charName is null or undefined.
+    */
+    function createCharacter(charName){
+        try{
+            if(charName == undefined){
+                throwException("IllegalArgument", "charName is undefined.");
+            }
+            
+            const path = "character";
+            const content = {characterName: charName};
+            return dao.sendRequest("put", path, content);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*
@@ -33,31 +59,6 @@
             }else{
                 throwException("UnknownBackendError", result);
             }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-            return false;
-        }
-    }
-    
-    /*
-    Saves a new character with the given name.
-    Arguments:
-        - charName: The name of the new character.
-    Returns:
-        - The sent request.
-    Throws:
-        - IllegalArgument exception if charName is null or undefined.
-    */
-    function createCharacter(charName){
-        try{
-            if(charName == undefined){
-                throwException("IllegalArgument", "charName is undefined.");
-            }
-            
-            const path = "character";
-            const content = {characterName: charName};
-            return dao.sendRequest("put", path, content);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -124,21 +125,20 @@
             return true;
         }
     }
-})();
-
-/*(function CharacterDao(){
-    window.characterDao = new function(){
-        this.createCharacter = createCharacter;
-        this.deleteCharacter = deleteCharacter;
-        this.getCharacters = getCharacters;
-        this.isCharNameExists = isCharNameExists;
-        this.renameCharacter = renameCharacter;
-    }
     
-    
-    
-  
-    
+    /*
+    Sends a rename character request.
+    Arguments:
+        - characterId: The id of the character to rename.
+        - newCharacterName: The new name of the character.
+    Returns:
+        - True, if the character is renamed successfully.
+        - False otherwise.
+    Throws:
+        - IllegalArgument exception if characterId/newCharacterName is null or undefined.
+        - IllegalArgument exception if characterId is not a number.
+        - UnknownBackendError exception if request failed.
+    */
     function renameCharacter(characterId, newCharacterName){
         try{
             if(characterId == undefined || characterId == null){
@@ -149,16 +149,16 @@
                 throwException("IllegalArgument", "newCharacterName is undefined.");
             }
             
-            const path = "api/character/renamecharacter.php";
+            const path = "character/rename";
             const content = {
-                characterid: characterId,
-                charactername: newCharacterName
+                characterId: characterId,
+                newCharacterName: newCharacterName
             }
             const result = dao.sendRequest("post", path, content);
-            if(result == ""){
+            if(result.status == 200){
                 return true;
             }else{
-                throwException("UnknownBackendError", result);
+                throwException("UnknownBackendError", result.status + " - " + result.responseText);
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -166,4 +166,4 @@
             return false;
         }
     }
-})();*/
+})();

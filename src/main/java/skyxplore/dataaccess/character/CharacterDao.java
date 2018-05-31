@@ -13,6 +13,7 @@ import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.service.domain.SkyXpCharacter;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +54,16 @@ public class CharacterDao {
             throw new CharacterNameAlreadyExistsException("Character already exists with name " + character.getCharacterName());
         }
         return characterConverter.convertEntity(characterRepository.save(characterConverter.convertDomain(character)));
+    }
+
+    @Transactional
+    public void renameCharacter(Long characterId, String newCharacterName){
+        Optional<CharacterEntity> character = characterRepository.findById(characterId);
+        if(character.isPresent()){
+            CharacterEntity entity = character.get();
+            entity.setCharacterName(newCharacterName);
+        }else{
+            throw new CharacterNotFoundException("Character not found with id " + characterId);
+        }
     }
 }

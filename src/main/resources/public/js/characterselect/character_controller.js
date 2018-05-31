@@ -2,13 +2,15 @@
     window.characterController = new function(){
         scriptLoader.loadScript("js/common/dao/character_dao.js");
         
-        this.isValid = false;
+        this.isNewCharacterNameValid = false;
+        this.isRenameCharacterNameValid = false;
         
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
         this.renameCharacter = renameCharacter;
         this.showCharacters = showCharacters;
         this.validateNewCharacterName = validateNewCharacterName;
+        this.validateRenameCharacterName = validateRenameCharacterName;
         
         $(document).ready(function(){
             addListeners();
@@ -58,7 +60,17 @@
     
     function renameCharacter(){
         try{
+            const newCharacterName = document.getElementById("renamecharacterinput").value;
+            const characterId = Number(document.getElementById("renamecharacterid").value);
             
+            if(newCharacterName.length < 3){
+                notificationService.showError("Karakternév túl rövid. (Minimum 3 karakter)");
+            }else if(characterDao.isCharNameExists(newCharacterName)){
+                notificationService.showError("Karakternév foglalt.");
+            }else if(characterDao.renameCharacter(characterId, newCharacterName)){
+                notificationService.showSuccess("Karakter átnevezve.");
+                pageController.refresh();
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -139,10 +151,10 @@
             const errorField = document.getElementById("invalid_newcharactername");
             const characterName = document.getElementById("newcharactername").value;
             const sendButton = document.getElementById("newcharacterbutton");
-            this.isValid = characterName.length >= 3;
-            if(this.isValid){
-                this.isValid = !characterDao.isCharNameExists(characterName);
-                if(this.isValid){
+            this.isNewCharacterNameValid = characterName.length >= 3;
+            if(this.isNewCharacterNameValid){
+                this.isNewCharacterNameValid = !characterDao.isCharNameExists(characterName);
+                if(this.isNewCharacterNameValid){
                     $(errorField).fadeOut();
                     sendButton.disabled = false;
                 }else{
@@ -161,50 +173,83 @@
         }
     }
     
+    function validateRenameCharacterName(){
+        try{
+            const errorField = document.getElementById("invalid_renamecharactername");
+            const characterName = document.getElementById("renamecharacterinput").value;
+            const sendButton = document.getElementById("renamecharacterbutton");
+            this.isRenameCharacterNameValid = characterName.length >= 3;
+            if(this.isRenameCharacterNameValid){
+                this.isRenameCharacterNameValid = !characterDao.isCharNameExists(characterName);
+                if(this.isRenameCharacterNameValid){
+                    $(errorField).fadeOut();
+                    sendButton.classList.remove("disabled");
+                }else{
+                    $(errorField).fadeIn()
+                    errorField.title = "Karakternév foglalt.";
+                    sendButton.classList.add("disabled");
+                }
+            }else{
+                $(errorField).fadeIn()
+                errorField.title = "Karakternév túl rövid. (Minimum 3 karakter)";
+                sendButton.classList.add("disabled");
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
     /*
     Adds event listener to newcharactername input field
     */
     function addListeners(){
         try{
-            const newCharacterNameInput = document.getElementById("newcharactername");
+            toNewCharacterInput();
+            toRenameCharacterInput();
             
-            newCharacterNameInput.onkeyup = function(e){
-                if(e.which == 13 || this.isValid){
-                    createCharacter();
-                }
-                validateNewCharacterName();
-            }
-            newCharacterNameInput.onfocus = function(){
-                validateNewCharacterName();
-            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+        }
+        
+        function toNewCharacterInput(){
+            try{
+                const newCharacterNameInput = document.getElementById("newcharactername");
+            
+                newCharacterNameInput.onkeyup = function(e){
+                    if(e.which == 13 && this.isNewCharacterNameValid){
+                        createCharacter();
+                    }
+                    validateNewCharacterName();
+                }
+                newCharacterNameInput.onfocus = function(){
+                    validateNewCharacterName();
+                }
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+            }
+        }
+        
+        function toRenameCharacterInput(){
+            try{
+                const renameCharacterInput = document.getElementById("renamecharacterinput");
+                
+                renameCharacterInput.onkeyup = function(e){
+                    if(e.which == 13 && this.isRenameCharacterNameValid){
+                        renameCharacter();
+                    }
+                    validateRenameCharacterName();
+                }
+                
+                renameCharacterInput.onfocus = function(){
+                    validateRenameCharacterName();
+                }
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+            }
         }
     }
 })();
-
-/*(function CharacterController(){
-    
-    
-    function renameCharacter(){
-        try{
-            const newCharacterName = document.getElementById("renamecharacterinput").value;
-            const characterId = Number(document.getElementById("renamecharacterid").value);
-            
-            if(newCharacterName == ""){
-                notificationService.showError("Adja meg a karakter új nevét!");
-            }else if(characterDao.isCharNameExists(newCharacterName)){
-                notificationService.showError("Karakternév foglalt.");
-            }else if(characterDao.renameCharacter(characterId, newCharacterName)){
-                notificationService.showSuccess("Karakter átnevezve.");
-                pageController.refresh();
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
-    
-    
-})();*/

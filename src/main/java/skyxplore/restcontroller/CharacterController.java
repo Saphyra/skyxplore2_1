@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import skyxplore.filter.AuthFilter;
 import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
+import skyxplore.restcontroller.request.RenameCharacterRequest;
 import skyxplore.restcontroller.view.CharacterView;
 import skyxplore.restcontroller.view.converter.CharacterViewConverter;
 import skyxplore.service.CharacterService;
@@ -22,6 +23,7 @@ public class CharacterController {
     private static final String DELETE_CHARACTER_MAPPING = "character";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/ischarnameexists/{charName}";
+    private static final String RENAME_CHARACTER_MAPPING = "character/rename";
 
     private final CharacterService characterService;
     private final CharacterViewConverter characterViewConverter;
@@ -49,5 +51,12 @@ public class CharacterController {
     public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
         log.info("Creating new character with name {}", request.getCharacterName());
         characterService.createCharacter(request, userId);
+    }
+
+    @PostMapping(RENAME_CHARACTER_MAPPING)
+    public void renameCharacter(@RequestBody @Valid RenameCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
+        log.info("{} wants to rename character {}", userId, request);
+        characterService.renameCharacter(request, userId);
+        log.info("Character renamed successfully.");
     }
 }
