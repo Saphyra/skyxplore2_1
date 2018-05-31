@@ -1,3 +1,41 @@
-<HTML>
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD>
+    <TITLE>Áttekintés - SkyXplore 2.1</TITLE>
+    <META charset="UTF-8"/>
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+    <LINK rel="stylesheet" href="/css/classes.css">
+    <LINK rel="stylesheet" href="/css/overview/menu.css">
+    <LINK rel="stylesheet" href="/css/overview/content.css">
 
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+</HEAD>
+<BODY>
+
+<DIV class="cover">
+    <HEADER>
+        <H1>Áttekintés</H1>
+    </HEADER>
+    
+    <MAIN>
+        <SECTION class='menucontainer'>
+            <A href='' title='Űrhajó felszerelésének módosítása'>Felszerelés</A>
+            <A href='' title='Tárgyak készítése'>Gyártósor</A>
+            <A href='' title='Tárgyak vásárlása, eladása'>Bolt</A>
+            <A href='' title='Felszállás'>Hangár</A>
+        </SECTION>
+        
+        <SECTION class='contentcontainer'>
+        
+        </SECTION>
+    </MAIN>
+    
+    <FOOTER>
+        <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
+        <BUTTON onclick='window.location.href = "characterselect"'>Karakterválasztás</BUTTON>
+    </FOOTER>
+</DIV>
+
+</BODY>
 </HTML>

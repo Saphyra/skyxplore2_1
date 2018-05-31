@@ -52,7 +52,7 @@
                 window.location.href = "/characterselect";
             }else{
                 notificationService.showError("Hibás felhasználónév vagy jelszó.");
-                passwordInput.value = "";
+                document.getElementById("login_password").value = "";
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

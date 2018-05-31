@@ -105,7 +105,10 @@
                         nameCell.classList.add("fontsize1_25rem");
                         nameCell.classList.add("textaligncenter");
                         nameCell.title = "Játék indítása";
-                        nameCell.onclick = function(){window.location.href = "overview.php?character=" + character.characterId};
+                        nameCell.onclick = function(){
+                            sessionStorage.characterId = character.characterId;
+                            window.location.href = "overview";
+                        };
                 container.appendChild(nameCell);
                     
                     const actionCell = document.createElement("TD");
