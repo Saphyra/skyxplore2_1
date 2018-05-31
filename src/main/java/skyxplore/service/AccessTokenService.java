@@ -14,6 +14,8 @@ import skyxplore.service.domain.SkyXpUser;
 import skyxplore.util.AccessTokenDateResolver;
 import skyxplore.util.IdGenerator;
 
+import java.util.Calendar;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -23,6 +25,11 @@ public class AccessTokenService {
     private final AccessTokenDao accessTokenDao;
     private final UserService userService;
     private final IdGenerator idGenerator;
+
+    public void deleteOutDatedTokens(){
+        Calendar expiration = accessTokenDateResolver.getExpirationDate();
+        accessTokenDao.deleteExpired(expiration);
+    }
 
     public AccessToken getAccessTokenByUserId(Long userId) {
         return accessTokenDao.findByUserId(userId);

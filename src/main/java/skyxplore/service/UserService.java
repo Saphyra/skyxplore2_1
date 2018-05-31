@@ -31,11 +31,13 @@ public class UserService {
     }
 
     public boolean isEmailExists(String email){
+        log.info("Someone wants to know is email {} is exists.", email);
         SkyXpUser user = userDao.findUserByEmail(email);
         return user != null;
     }
 
     public boolean isUserNameExists(String userName){
+        log.info("Someone wants to know is userName {} is exists.", userName);
         SkyXpUser user = userDao.findUserByUserName(userName);
         return user != null;
     }
