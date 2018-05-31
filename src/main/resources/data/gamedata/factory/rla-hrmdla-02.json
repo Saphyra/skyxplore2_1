@@ -1,0 +1,11 @@
+{
+    "id": "rla-hrmdla-02",
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "cable": 3,
+        "condensator": 3,
+        "hullplate": 15,
+        "adamantium": 15
+    }
+}

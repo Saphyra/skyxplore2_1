@@ -1,0 +1,12 @@
+{
+    "id": "energyregeneration",
+    "name": "Gener\u00e1tor t\u00falhajt\u00e1s",
+    "description": "N\u00f6veli egy sz\u00f6vets\u00e9ges haj\u00f3 energiatermel\u00e9s\u00e9t",
+    "energyusage": 200,
+    "active": 5,
+    "reload": 10,
+    "effect": {
+        "staticregeneration": 20,
+        "relativeregeneration": 50
+    }
+}

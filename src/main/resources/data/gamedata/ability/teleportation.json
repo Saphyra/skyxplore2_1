@@ -1,0 +1,11 @@
+{
+    "id": "teleportation",
+    "name": "Teleport\u00e1ci\u00f3",
+    "description": "A haj\u00f3 egy kis t\u00e1vols\u00e1gon bel\u00fcl a kijel\u00f6lt helyre teleport\u00e1l.",
+    "energyusage": 400,
+    "active": 0,
+    "reload": 20,
+    "effect": {
+        "range": 4
+    }
+}

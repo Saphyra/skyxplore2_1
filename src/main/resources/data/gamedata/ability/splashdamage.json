@@ -1,0 +1,11 @@
+{
+    "id": "splashdamage",
+    "name": "Repeszl\u00f6ved\u00e9k",
+    "description": "Az okozott sebz\u00e9s egy r\u00e9sz\u00e9t elszenvedik a k\u00f6rnyez\u0151 ellens\u00e9ges egys\u00e9gek is.",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 15,
+    "effect": {
+        "damage": 30
+    }
+}

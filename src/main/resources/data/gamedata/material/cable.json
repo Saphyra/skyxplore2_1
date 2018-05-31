@@ -1,0 +1,9 @@
+{
+    "id": "cable",
+    "name": "K\u00e1bel",
+    "buildable": true,
+    "materials": {
+        "xebryum": 2,
+        "mithril": 1
+    }
+}

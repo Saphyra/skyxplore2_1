@@ -1,0 +1,9 @@
+{
+    "id": "cor-02",
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "hullplate": 15,
+        "duranium": 90
+    }
+}

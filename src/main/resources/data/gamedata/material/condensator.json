@@ -1,0 +1,9 @@
+{
+    "id": "condensator",
+    "name": "Kondenz\u00e1tor",
+    "buildable": true,
+    "materials": {
+        "xebryum": 2,
+        "mithril": 1
+    }
+}

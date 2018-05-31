@@ -1,0 +1,9 @@
+{
+    "id": "rla-mrhdla-02",
+    "name": "MRHDLA-02 Rak\u00e9takil\u00f6v\u0151",
+    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa rak\u00e9takil\u00f6v\u0151 nagy sebz\u00e9ssel \u00e9s kis tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "rocketlauncher",
+    "slot": "weapon",
+    "level": 2,
+    "score": 2
+}

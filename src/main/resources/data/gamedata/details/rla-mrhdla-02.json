@@ -1,0 +1,9 @@
+{
+    "id": "rla-mrhdla-02",
+    "attackSpeed": 6,
+    "criticalRate": 500,
+    "range": 4,
+    "hullDamage": 45000,
+    "shieldDamage": 45000,
+    "accuracy": 250
+}

@@ -1,0 +1,14 @@
+{
+    "id": "dex-02",
+    "constructiontime": 5400,
+    "buildprice": 5400,
+    "materials": {
+        "cable": 12,
+        "condensator": 9,
+        "energycell": 12,
+        "hullplate": 18,
+        "mithril": 60,
+        "duranium": 105,
+        "uridium": 75
+    }
+}

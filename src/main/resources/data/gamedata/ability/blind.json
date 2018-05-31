@@ -1,0 +1,11 @@
+{
+    "id": "blind",
+    "name": "Tal\u00e1lati pontoss\u00e1g cs\u00f6kken\u00e9s",
+    "description": "Cs\u00f6kkenti a kijel\u00f6lt ellens\u00e9ges haj\u00f3 fegyvereinek tal\u00e1lati pontoss\u00e1g\u00e1t.",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 15,
+    "effect": {
+        "range": 6
+    }
+}

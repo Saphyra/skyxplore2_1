@@ -1,0 +1,12 @@
+{
+    "id": "repair",
+    "name": "Burkolatjav\u00edt\u00e1s",
+    "description": "Megjav\u00edtja egy sz\u00f6vets\u00e9ges haj\u00f3 burkolat\u00e1t.",
+    "energyusage": 300,
+    "active": 0,
+    "reload": 15,
+    "effect": {
+        "staticrepair": 20000,
+        "relativerepair": 10
+    }
+}

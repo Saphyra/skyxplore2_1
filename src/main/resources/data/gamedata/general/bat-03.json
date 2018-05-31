@@ -1,0 +1,9 @@
+{
+    "id": "bat-03",
+    "name": "BAT-03 Akkumul\u00e1tor",
+    "description": "Energiat\u00e1rol\u00f3 a haj\u00f3k rendszereinek ell\u00e1t\u00e1s\u00e1hoz.",
+    "type": "battery",
+    "slot": "connector",
+    "level": 3,
+    "score": 3
+}

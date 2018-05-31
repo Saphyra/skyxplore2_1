@@ -1,0 +1,12 @@
+{
+    "id": "las-lrmdha-02",
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "cable": 6,
+        "condensator": 3,
+        "energycell": 3,
+        "hullplate": 6,
+        "adamantium": 15
+    }
+}

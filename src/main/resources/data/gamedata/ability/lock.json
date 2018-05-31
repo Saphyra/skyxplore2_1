@@ -1,0 +1,8 @@
+{
+    "id": "lock",
+    "name": "C\u00e9lpont bem\u00e9rve",
+    "description": "A fegyverek a kijel\u00f6lt ellens\u00e9get t\u00e1madj\u00e1k, megker\u00fclve a c\u00e9lpontot v\u00e9d\u0151 haj\u00f3kat.",
+    "energyusage": 200,
+    "active": -1,
+    "reload": 20
+}

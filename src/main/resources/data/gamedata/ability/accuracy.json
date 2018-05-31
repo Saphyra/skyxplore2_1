@@ -1,0 +1,11 @@
+{
+    "id": "accuracy",
+    "name": "Precizit\u00e1s",
+    "description": "N\u00f6veli a fegyverek tal\u00e1lati pontoss\u00e1g\u00e1t.",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 15,
+    "effect": {
+        "accuracy": 200
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "id": "gen-02",
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "cable": 9,
+        "condensator": 6,
+        "energycell": 3,
+        "hullplate": 3,
+        "uridium": 60
+    }
+}

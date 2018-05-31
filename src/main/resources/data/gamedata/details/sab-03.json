@@ -1,0 +1,23 @@
+{
+    "id": "sab-03",
+    "corehull": 2000000,
+    "connector": 36,
+    "defense": {
+        "front": 13,
+        "side": 10,
+        "back": 7
+    },
+    "weapon": {
+        "front": 9,
+        "side": 5,
+        "back": 5
+    },
+    "ability": [
+        "abilityblock",
+        "shieldregenerationblock",
+        "energyregenerationblock",
+        "blind",
+        "freeze",
+        "disableweapons"
+    ]
+}

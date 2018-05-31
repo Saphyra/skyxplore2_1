@@ -1,0 +1,17 @@
+{
+    "id": "ecl-01",
+    "constructiontime": 43200,
+    "buildprice": 43200,
+    "materials": {
+        "cable": 10,
+        "condensator": 15,
+        "energycell": 15,
+        "hullplate": 15,
+        "adamantium": 250,
+        "etherium": 200,
+        "mithril": 150,
+        "duranium": 200,
+        "uridium": 150,
+        "xebryum": 200
+    }
+}

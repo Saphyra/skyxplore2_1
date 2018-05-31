@@ -1,0 +1,23 @@
+{
+    "id": "dre-02",
+    "corehull": 3000000,
+    "connector": 9,
+    "defense": {
+        "front": 7,
+        "side": 10,
+        "back": 3
+    },
+    "weapon": {
+        "front": 4,
+        "side": 6,
+        "back": 2
+    },
+    "ability": [
+        "shieldleech",
+        "rapidfire",
+        "aftermath",
+        "splashdamage",
+        "damageovertime",
+        "evasion"
+    ]
+}

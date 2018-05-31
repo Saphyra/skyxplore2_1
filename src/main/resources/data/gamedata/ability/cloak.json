@@ -1,0 +1,11 @@
+{
+    "id": "cloak",
+    "name": "\u00c1lc\u00e1z\u00f3 berendez\u00e9s",
+    "description": "Elrejti a haj\u00f3t az ellens\u00e9ges radarok el\u0151l",
+    "energyusage": 300,
+    "active": 10,
+    "reload": 30,
+    "effect": {
+        "activation": 3
+    }
+}

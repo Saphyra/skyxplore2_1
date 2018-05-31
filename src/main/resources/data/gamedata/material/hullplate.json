@@ -1,0 +1,9 @@
+{
+    "id": "hullplate",
+    "name": "Burkolatlemez",
+    "buildable": true,
+    "materials": {
+        "duranium": 2,
+        "mithril": 2
+    }
+}

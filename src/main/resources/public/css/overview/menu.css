@@ -1,0 +1,15 @@
+.menucontainer{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 15rem;
+    border-right: 5px ridge white;
+    overflow: auto;
+}
+
+    .menucontainer a{
+        display: block;
+        font-size: 1.5rem;
+        text-align: center;
+    }

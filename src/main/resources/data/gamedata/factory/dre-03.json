@@ -1,0 +1,17 @@
+{
+    "id": "dre-03",
+    "constructiontime": 86400,
+    "buildprice": 86400,
+    "materials": {
+        "cable": 90,
+        "condensator": 90,
+        "energycell": 90,
+        "hullplate": 270,
+        "adamantium": 900,
+        "etherium": 1800,
+        "mithril": 2250,
+        "duranium": 2700,
+        "uridium": 1800,
+        "xebryum": 1800
+    }
+}

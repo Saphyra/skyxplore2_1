@@ -1,0 +1,16 @@
+{
+    "id": "sab-03",
+    "constructiontime": 86400,
+    "buildprice": 86400,
+    "materials": {
+        "cable": 360,
+        "condensator": 225,
+        "energycell": 315,
+        "hullplate": 180,
+        "etherium": 1800,
+        "mithril": 1800,
+        "duranium": 1800,
+        "uridium": 2250,
+        "xebryum": 2700
+    }
+}

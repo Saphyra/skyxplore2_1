@@ -1,0 +1,9 @@
+{
+    "id": "energycell",
+    "name": "Energiacella",
+    "buildable": true,
+    "materials": {
+        "xebryum": 5,
+        "mithril": 2
+    }
+}

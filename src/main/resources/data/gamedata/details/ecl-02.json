@@ -1,0 +1,23 @@
+{
+    "id": "ecl-02",
+    "corehull": 1500000,
+    "connector": 18,
+    "defense": {
+        "front": 6,
+        "side": 3,
+        "back": 3
+    },
+    "weapon": {
+        "front": 18,
+        "side": 7,
+        "back": 4
+    },
+    "ability": [
+        "accuracy",
+        "cloak",
+        "penetration",
+        "lock",
+        "instantdamage",
+        "corehullrepair"
+    ]
+}

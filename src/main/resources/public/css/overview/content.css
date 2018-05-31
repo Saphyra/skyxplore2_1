@@ -1,0 +1,8 @@
+.contentcontainer{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - 15rem);
+    overflow: auto;
+}

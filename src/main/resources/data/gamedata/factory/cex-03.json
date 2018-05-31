@@ -1,0 +1,14 @@
+{
+    "id": "cex-03",
+    "constructiontime": 7200,
+    "buildprice": 7200,
+    "materials": {
+        "cable": 36,
+        "hullplate": 27,
+        "energycell": 18,
+        "mithril": 225,
+        "duranium": 135,
+        "uridium": 90,
+        "xebryum": 180
+    }
+}

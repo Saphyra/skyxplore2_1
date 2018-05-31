@@ -1,0 +1,13 @@
+{
+    "id": "wex-03",
+    "constructiontime": 7200,
+    "buildprice": 7200,
+    "materials": {
+        "cable": 12,
+        "condensator": 36,
+        "energycell": 18,
+        "hullplate": 18,
+        "adamantium": 360,
+        "mithril": 180
+    }
+}

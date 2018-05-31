@@ -1,0 +1,23 @@
+{
+    "id": "def-03",
+    "corehull": 6000000,
+    "connector": 24,
+    "defense": {
+        "front": 22,
+        "side": 14,
+        "back": 10
+    },
+    "weapon": {
+        "front": 6,
+        "side": 2,
+        "back": 2
+    },
+    "ability": [
+        "phalanx",
+        "damagereduction",
+        "teleportation",
+        "shieldovercharge",
+        "dimensiongate",
+        "reflection"
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "shieldrecharge",
+    "name": "Pajzst\u00f6lt\u00e9s",
+    "description": "Visszat\u00f6lti egy sz\u00f6vets\u00e9ges haj\u00f3 pajzsenergi\u00e1j\u00e1t.",
+    "energyusage": 300,
+    "active": 1,
+    "reload": 20,
+    "effect": {
+        "staticrecharge": 10000,
+        "relativerecharge": 10,
+        "range": 4
+    }
+}

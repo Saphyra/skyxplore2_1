@@ -1,0 +1,16 @@
+{
+    "id": "sta-03",
+    "constructiontime": 28800,
+    "buildprice": 28800,
+    "materials": {
+        "cable": 60,
+        "condensator": 45,
+        "energycell": 60,
+        "hullplate": 90,
+        "etherium": 300,
+        "mithril": 600,
+        "duranium": 750,
+        "uridium": 450,
+        "xebryum": 600
+    }
+}

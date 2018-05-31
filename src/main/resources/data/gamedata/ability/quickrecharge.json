@@ -1,0 +1,12 @@
+{
+    "id": "quickrecharge",
+    "name": "Gyors \u00fajrat\u00f6lt\u00e9s",
+    "description": "Cs\u00f6kkenti a k\u00f6zelben tart\u00f3zkod\u00f3 sz\u00f6vets\u00e9gesek k\u00e9pess\u00e9geinek t\u00f6lt\u00e9si idej\u00e9t.",
+    "energyusage": 200,
+    "active": 10,
+    "reload": 20,
+    "effect": {
+        "range": 4,
+        "rechargerate": 50
+    }
+}

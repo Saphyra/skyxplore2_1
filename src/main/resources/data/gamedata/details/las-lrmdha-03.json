@@ -1,0 +1,9 @@
+{
+    "id": "las-lrmdha-03",
+    "attackSpeed": 4,
+    "criticalRate": 150,
+    "range": 2,
+    "hullDamage": 15000,
+    "shieldDamage": 15000,
+    "accuracy": 750
+}

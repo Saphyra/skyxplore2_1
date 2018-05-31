@@ -1,0 +1,11 @@
+{
+    "id": "shieldleech",
+    "name": "Pajzslop\u00e1s",
+    "description": "Az okozott sebz\u00e9s egy r\u00e9sz\u00e9t pajzsenergiak\u00e9nt hasznos\u00edtja \u00fajra.",
+    "energyusage": 300,
+    "active": 10,
+    "reload": 30,
+    "effect": {
+        "leechrate": 50
+    }
+}

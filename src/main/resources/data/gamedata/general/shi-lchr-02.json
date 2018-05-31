@@ -1,0 +1,9 @@
+{
+    "id": "shi-lchr-02",
+    "name": "LCHR-02 Pajzs",
+    "description": "Kis kapacit\u00e1s\u00fa pajzs magas regener\u00e1ci\u00f3val.",
+    "type": "shield",
+    "slot": "defense",
+    "level": 2,
+    "score": 2
+}

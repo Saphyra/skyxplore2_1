@@ -1,0 +1,11 @@
+{
+    "id": "shi-hclr-03",
+    "constructiontime": 8100,
+    "buildprice": 8100,
+    "materials": {
+        "uridium": 135,
+        "cable": 18,
+        "energycell": 27,
+        "hullplate": 18
+    }
+}

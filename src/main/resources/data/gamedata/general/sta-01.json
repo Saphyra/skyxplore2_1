@@ -1,0 +1,9 @@
+{
+    "id": "sta-01",
+    "name": "STA-01 Starter",
+    "description": "Az \u00fajonc pil\u00f3t\u00e1k (\u00e9s \u0151r\u00fclt veter\u00e1nok) els\u0151 sz\u00e1m\u00fa haj\u00f3ja. Kicsi, gyenge, de gyors.",
+    "type": "frigate",
+    "slot": "ship",
+    "level": 1,
+    "score": 4
+}

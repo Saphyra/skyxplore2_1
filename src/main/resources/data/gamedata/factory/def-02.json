@@ -1,0 +1,16 @@
+{
+    "id": "def-02",
+    "constructiontime": 64800,
+    "buildprice": 64800,
+    "materials": {
+        "cable": 45,
+        "condensator": 45,
+        "energycell": 60,
+        "hullplate": 120,
+        "etherium": 300,
+        "mithril": 750,
+        "duranium": 1050,
+        "uridium": 600,
+        "xebryum": 600
+    }
+}

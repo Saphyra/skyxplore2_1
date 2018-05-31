@@ -1,0 +1,11 @@
+{
+    "id": "rif-lrldma-01",
+    "constructiontime": 600,
+    "buildprice": 600,
+    "materials": {
+        "cable": 1,
+        "condensator": 1,
+        "hullplate": 3,
+        "adamantium": 10
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "id": "sab-03",
+    "name": "SAB-03 Saboteur",
+    "description": "Ha szeretsz keresztbe tenni m\u00e1soknak, ez a haj\u00f3 az ide\u00e1lis v\u00e1laszt\u00e1s a sz\u00e1modra. C\u00e9l: az ellens\u00e9g b\u00e9n\u00edt\u00e1sa ahol, \u00e9s ahogyan csak lehets\u00e9ges.",
+    "type": "saboteur",
+    "slot": "ship",
+    "level": 3,
+    "score": 20
+}

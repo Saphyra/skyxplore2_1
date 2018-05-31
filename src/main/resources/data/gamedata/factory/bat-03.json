@@ -1,0 +1,11 @@
+{
+    "id": "bat-03",
+    "constructiontime": 2400,
+    "buildprice": 2400,
+    "materials": {
+        "cable": 18,
+        "hullplate": 9,
+        "energycell": 36,
+        "erherium": 270
+    }
+}

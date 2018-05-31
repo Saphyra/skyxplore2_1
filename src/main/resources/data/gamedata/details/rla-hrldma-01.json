@@ -1,0 +1,9 @@
+{
+    "id": "rla-hrldma-01",
+    "attackSpeed": 6,
+    "criticalRate": 500,
+    "range": 6,
+    "hullDamage": 10000,
+    "shieldDamage": 10000,
+    "accuracy": 500
+}

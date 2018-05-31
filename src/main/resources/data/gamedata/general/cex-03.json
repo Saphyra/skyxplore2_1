@@ -1,0 +1,9 @@
+{
+    "id": "cex-03",
+    "name": "CEX-03 Csatlakoz\u00f3 b\u0151v\u00edt\u0151",
+    "description": "B\u0151v\u00edt\u0151 egys\u00e9g, mely megn\u00f6veli a haj\u00f3 csatlakoz\u00f3inak sz\u00e1m\u00e1t.",
+    "type": "extender",
+    "slot": "connector",
+    "level": 3,
+    "score": 0
+}

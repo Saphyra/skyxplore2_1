@@ -1,0 +1,23 @@
+{
+    "id": "sup-01",
+    "corehull": 2000000,
+    "connector": 18,
+    "defense": {
+        "front": 6,
+        "side": 5,
+        "back": 4
+    },
+    "weapon": {
+        "front": 3,
+        "side": 1,
+        "back": 1
+    },
+    "ability": [
+        "shieldrecharge",
+        "shieldregeneration",
+        "energyrecharge",
+        "energyregeneration",
+        "repair",
+        "quickrecharge"
+    ]
+}

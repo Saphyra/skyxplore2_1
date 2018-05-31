@@ -1,0 +1,16 @@
+{
+    "id": "sup-02",
+    "constructiontime": 64800,
+    "buildprice": 64800,
+    "materials": {
+        "cable": 105,
+        "condensator": 60,
+        "energycell": 105,
+        "hullplate": 75,
+        "etherium": 750,
+        "mithril": 600,
+        "duranium": 600,
+        "uridium": 900,
+        "xebryum": 900
+    }
+}

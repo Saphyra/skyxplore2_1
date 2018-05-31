@@ -1,0 +1,9 @@
+{
+    "id": "shi-hclr-03",
+    "name": "HCLR-03 Pajzs",
+    "description": "Nagy kapacit\u00e1s\u00fa pajzs alacsony regener\u00e1ci\u00f3val.",
+    "type": "shield",
+    "slot": "defense",
+    "level": 3,
+    "score": 3
+}

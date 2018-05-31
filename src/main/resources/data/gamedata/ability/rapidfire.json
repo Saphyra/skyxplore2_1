@@ -1,0 +1,11 @@
+{
+    "id": "rapidfire",
+    "name": "Gyorst\u00fczel\u00e9s",
+    "description": "N\u00f6veli a fegyverek t\u00e1mad\u00e1si sebess\u00e9g\u00e9t.",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 20,
+    "effect": {
+        "attackspeed": 50
+    }
+}

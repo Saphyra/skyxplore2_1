@@ -1,0 +1,11 @@
+{
+    "id": "shieldregeneration",
+    "name": "Pajzsregener\u00e1ci\u00f3 n\u00f6vel\u00e9s",
+    "description": "N\u00f6veli egy sz\u00f6vets\u00e9ges haj\u00f3 pajzsregener\u00e1ci\u00f3j\u00e1t.",
+    "energyusage": 200,
+    "active": 5,
+    "reload": 20,
+    "effect": {
+        "recharge": 5
+    }
+}

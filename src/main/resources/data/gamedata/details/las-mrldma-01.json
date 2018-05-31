@@ -1,0 +1,9 @@
+{
+    "id": "las-mrldma-01",
+    "attackSpeed": 4,
+    "criticalRate": 150,
+    "range": 4,
+    "hullDamage": 5000,
+    "shieldDamage": 5000,
+    "accuracy": 500
+}
