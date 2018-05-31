@@ -1,8 +1,43 @@
 (function CharacterDao(){
     window.characterDao = new function(){
+        this.deleteCharacter = deleteCharacter;
         this.isCharNameExists = isCharNameExists;
         this.getCharacters = getCharacters;
         this.createCharacter = createCharacter;
+    }
+    
+    /*
+    Deletes the character with the given id.
+    Arguments:
+        - characterId: The id of the character to delete.
+    Returns:
+        - True if the deletion was successful.
+        - False otherwise.
+    Throws:
+        - IllegalArgument exception if characterId is null, undefined or not a number.
+        - UnknownBackendError exception if request failed.
+    */
+    function deleteCharacter(characterId){
+        try{
+            if(characterId == undefined || characterId == null){
+                throwException("IllegalArgument", "characterId must not be null or undefined.")
+            }if(typeof characterId != "number"){
+                throwException("IllegalArgument", "characterId must be a number. Given: " + typeof characterId);
+            }
+            
+            const path = "character/";
+            const content = {characterId: characterId};
+            const result = dao.sendRequest("delete", path, content);
+            if(result.status == 200){
+                return true;
+            }else{
+                throwException("UnknownBackendError", result);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*
@@ -20,7 +55,7 @@
                 throwException("IllegalArgument", "charName is undefined.");
             }
             
-            const path = "character/createcharacter";
+            const path = "character";
             const content = {characterName: charName};
             return dao.sendRequest("put", path, content);
         }catch(err){
@@ -102,28 +137,7 @@
     
     
     
-    function deleteCharacter(characterId){
-        try{
-            if(characterId == undefined || characterId == null){
-                throwException("IllegalArgument", "characterId must not be null or undefined.")
-            }if(typeof characterId != "number"){
-                throwException("IllegalArgument", "characterId must be a number. Given: " + typeof characterId);
-            }
-            
-            const path = "api/character/deletecharacter.php";
-            const content = {characterid: characterId};
-            const result = dao.sendRequest("post", path, content);
-            if(result == ""){
-                return true;
-            }else{
-                throwException("UnknownBackendError", result);
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-            return false;
-        }
-    }
+  
     
     function renameCharacter(characterId, newCharacterName){
         try{

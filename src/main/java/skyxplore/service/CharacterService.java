@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.character.CharacterDao;
+import skyxplore.exception.InvalidAccessException;
+import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
 import skyxplore.service.domain.SkyXpCharacter;
 
@@ -21,6 +23,14 @@ public class CharacterService {
         character.setCharacterName(request.getCharacterName());
         character.setUser(userService.getUserById(userId));
         characterDao.save(character);
+    }
+
+    public void deleteCharacter(CharacterDeleteRequest request, Long userId){
+        SkyXpCharacter character = characterDao.findById(request.getCharacterId());
+        if(!userId.equals(character.getUser().getUserId())){
+            throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
+        }
+        characterDao.deleteById(request.getCharacterId());
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(Long userId){

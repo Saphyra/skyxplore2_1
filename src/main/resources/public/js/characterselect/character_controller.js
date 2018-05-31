@@ -40,9 +40,16 @@
         }
     }
     
-    function deleteCharacter(){
+    function deleteCharacter(characterId){
         try{
-            
+            if(confirm("Biztosan törlölni szeretné a karaktert?")){
+                if(characterDao.deleteCharacter(characterId)){
+                    notificationService.showSuccess("Karakter törölve.");
+                }else{
+                    notificationService.showError("Törlés sikertelen.");
+                }
+                pageController.refresh();
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -179,30 +186,6 @@
 
 /*(function CharacterController(){
     
-    function createCharacter(){
-        try{
-            
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
-    
-    function deleteCharacter(characterId){
-        try{
-            if(confirm("Biztosan törlölni szeretné a karaktert?")){
-                if(characterDao.deleteCharacter(characterId)){
-                    notificationService.showSuccess("Karakter törölve.");
-                }else{
-                    notificationService.showError("Törlés sikertelen.");
-                }
-                pageController.refresh();
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
     
     function renameCharacter(){
         try{

@@ -3,11 +3,14 @@ package skyxplore.dataaccess.character;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import skyxplore.dataaccess.character.entity.CharacterEntity;
 import skyxplore.dataaccess.character.entity.converter.CharacterConverter;
 import skyxplore.dataaccess.character.repository.CharacterRepository;
 import skyxplore.dataaccess.user.entity.UserEntity;
 import skyxplore.dataaccess.user.repository.UserRepository;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
+import skyxplore.exception.CharacterNotFoundException;
+import skyxplore.exception.UserNotFoundException;
 import skyxplore.service.domain.SkyXpCharacter;
 
 import java.util.List;
@@ -21,9 +24,24 @@ public class CharacterDao {
     private final UserRepository userRepository;
     private final CharacterConverter characterConverter;
 
+    public void deleteById(Long characterId){
+        characterRepository.deleteById(characterId);
+    }
+
+    public SkyXpCharacter findById(Long characterId){
+        Optional<CharacterEntity> character = characterRepository.findById(characterId);
+        if(character.isPresent()){
+            return characterConverter.convertEntity(character.get());
+        }
+        throw new CharacterNotFoundException("No character found with id" + characterId);
+    }
+
     public List<SkyXpCharacter> findByUserId(Long userId){
         Optional<UserEntity> user = userRepository.findById(userId);
-        return characterConverter.convertEntity(characterRepository.findByUser(user.get()));
+        if(user.isPresent()){
+            return characterConverter.convertEntity(characterRepository.findByUser(user.get()));
+        }
+        throw new UserNotFoundException("No user found with id " + userId);
     }
 
     public SkyXpCharacter findByCharacterName(String characterName){
