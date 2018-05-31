@@ -22,6 +22,10 @@ public class UserService {
     private final UserDao userDao;
     private final UserViewConverter userViewConverter;
 
+    public SkyXpUser getUserById(Long userId){
+        return userDao.findById(userId);
+    }
+
     public SkyXpUser getUserByName(String userName){
         return userDao.findUserByUserName(userName);
     }

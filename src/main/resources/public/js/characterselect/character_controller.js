@@ -2,16 +2,38 @@
     window.characterController = new function(){
         scriptLoader.loadScript("js/common/dao/character_dao.js");
         
+        this.isValid = false;
+        
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
         this.renameCharacter = renameCharacter;
         this.showCharacters = showCharacters;
         this.validateNewCharacterName = validateNewCharacterName;
+        
+        $(document).ready(function(){
+            addListeners();
+        });
     }
     
     function createCharacter(){
         try{
+            const charNameInput = document.getElementById("newcharactername");
+            const charName = charNameInput.value;
             
+            if(charName.length < 3){
+                notificationService.showError("A karakternév túl rövid. (Minimum 3 karakter)");
+            }else if(characterDao.isCharNameExists(charName)){
+                notificationService.showError("Karakternév foglalt.");
+            }else{
+                const result = characterDao.createCharacter(charName);
+                if(result.status == 200){
+                    notificationService.showSuccess("Karakter létrehozva.");
+                    charNameInput.value = "";
+                    pageController.refresh();
+                }else{
+                    notificationService.showError("Karakter létrehozása sikertelen.");
+                }
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -49,18 +71,43 @@
         try{
             const errorField = document.getElementById("invalid_newcharactername");
             const characterName = document.getElementById("newcharactername").value;
-            let isValid = characterName.length >= 3;
-            if(isValid){
-                notificationService.showError(isValid);
-                if(isValid){
-                    errorField.style.display = "none";
+            const sendButton = document.getElementById("newcharacterbutton");
+            this.isValid = characterName.length >= 3;
+            if(this.isValid){
+                if(this.isValid){
+                    $(errorField).fadeOut();
+                    sendButton.disabled = false;
                 }else{
-                    errorField.style.display = "block";
+                    $(errorField).fadeIn()
                     errorField.title = "Karakternév foglalt.";
+                    sendButton.disabled = true;
                 }
             }else{
-                errorField.style.display = "block";
+                $(errorField).fadeIn()
                 errorField.title = "Karakternév túl rövid. (Minimum 3 karakter)";
+                sendButton.disabled = true;
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    /*
+    Adds event listener to newcharactername input field
+    */
+    function addListeners(){
+        try{
+            const newCharacterNameInput = document.getElementById("newcharactername");
+            
+            newCharacterNameInput.onkeyup = function(e){
+                if(e.which == 13 || this.isValid){
+                    createCharacter();
+                }
+                validateNewCharacterName();
+            }
+            newCharacterNameInput.onfocus = function(){
+                validateNewCharacterName();
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -70,24 +117,10 @@
 })();
 
 /*(function CharacterController(){
-    window.characterController = new function(){
-        
-    }
     
     function createCharacter(){
         try{
-            const charNameInput = document.getElementById("newcharactername");
-            const charName = charNameInput.value;
             
-            if(charName == ""){
-                notificationService.showError("A karakternév megadása kötelező!");
-            }else if(characterDao.isCharNameExists(charName)){
-                notificationService.showError("Karakternév foglalt.");
-            }else if(characterDao.createCharacter(charName)){
-                notificationService.showSuccess("Karakter létrehozva.");
-                charNameInput.value = "";
-                pageController.refresh();
-            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

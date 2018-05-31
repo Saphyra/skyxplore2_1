@@ -6,7 +6,10 @@ import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.user.converter.UserConverter;
 import skyxplore.dataaccess.user.entity.UserEntity;
 import skyxplore.dataaccess.user.repository.UserRepository;
+import skyxplore.exception.UserNotFoundException;
 import skyxplore.service.domain.SkyXpUser;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -17,6 +20,14 @@ public class UserDao {
 
     public SkyXpUser findUserByEmail(String email){
         return userConverter.convertEntity(userRepository.findByEmail(email));
+    }
+
+    public SkyXpUser findById(Long userId){
+        Optional<UserEntity> user = userRepository.findById(userId);
+        if(user.isPresent()){
+            return userConverter.convertEntity(user.get());
+        }
+        throw new UserNotFoundException("User not found with id" + userId);
     }
 
     public SkyXpUser findUserByUserName(String userName){

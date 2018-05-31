@@ -14,17 +14,17 @@ import skyxplore.exception.UserNameAlreadyExistsException;
 public class HomeExceptionHandler {
 
     @ExceptionHandler(BadlyConfirmedPasswordException.class)
-    public ResponseEntity handleBadPassword(){
-        return new ResponseEntity("Password missmatch.",HttpStatus.FORBIDDEN);
+    public ResponseEntity<String> handleBadPassword(){
+        return new ResponseEntity<>("Password missmatch.",HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(UserNameAlreadyExistsException.class)
-    public ResponseEntity handleUserNameExists(){
-        return new ResponseEntity("Username already exists.", HttpStatus.CONFLICT);
+    public ResponseEntity<String> handleUserNameExists(){
+        return new ResponseEntity<>("Username already exists.", HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity handleEmailExists(){
-        return new ResponseEntity("Email already exists.", HttpStatus.CONFLICT);
+    public ResponseEntity<String> handleEmailExists(){
+        return new ResponseEntity<>("Email already exists.", HttpStatus.CONFLICT);
     }
 }

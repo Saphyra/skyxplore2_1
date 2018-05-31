@@ -1,6 +1,32 @@
 (function CharacterDao(){
     window.characterDao = new function(){
         this.isCharNameExists = isCharNameExists;
+        this.createCharacter = createCharacter;
+    }
+    
+    /*
+    Saves a new character with the given name.
+    Arguments:
+        - charName: The name of the new character.
+    Returns:
+        - The sent request.
+    Throws:
+        - IllegalArgument exception if charName is null or undefined.
+    */
+    function createCharacter(charName){
+        try{
+            if(charName == undefined){
+                throwException("IllegalArgument", "charName is undefined.");
+            }
+            
+            const path = "character/createcharacter";
+            const content = {characterName: charName};
+            return dao.sendRequest("put", path, content);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*
@@ -50,26 +76,7 @@
         this.renameCharacter = renameCharacter;
     }
     
-    function createCharacter(charName){
-        try{
-            if(charName == undefined){
-                throwException("IllegalArgument", "charName is undefined.");
-            }
-            
-            const path = "api/character/createcharacter.php";
-            const content = {charname: charName};
-            const result = dao.sendRequest("post", path, content);
-            if(result == ""){
-                return true;
-            }else{
-                throwException("UnknownBackendError", result);
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-            return false;
-        }
-    }
+    
     
     function deleteCharacter(characterId){
         try{

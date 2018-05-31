@@ -15,10 +15,18 @@ public class CharacterConverter {
         if(entity == null){
             return null;
         }
-        SkyXpCharacter skyXpCharacter = new SkyXpCharacter();
-        skyXpCharacter.setCharacterId(entity.getCharacterId());
-        skyXpCharacter.setCharacterName(entity.getCharacterName());
-        skyXpCharacter.setUser(userConverter.convertEntity(entity.getUser()));
-        return skyXpCharacter;
+        SkyXpCharacter domain = new SkyXpCharacter();
+        domain.setCharacterId(entity.getCharacterId());
+        domain.setCharacterName(entity.getCharacterName());
+        domain.setUser(userConverter.convertEntity(entity.getUser()));
+        return domain;
+    }
+
+    public CharacterEntity convertDomain(SkyXpCharacter domain){
+        CharacterEntity entity = new CharacterEntity();
+        entity.setCharacterId(domain.getCharacterId());
+        entity.setCharacterName(domain.getCharacterName());
+        entity.setUser(userConverter.convertDomain(domain.getUser()));
+        return entity;
     }
 }

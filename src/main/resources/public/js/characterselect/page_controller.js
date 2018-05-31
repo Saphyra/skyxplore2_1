@@ -1,36 +1,12 @@
 (function PageController(){
     window.pageController = new function(){
-        this.init = init;
         this.refresh = refresh;
         this.renameCharacter = renameCharacter;
         this.setRenameCharacterContainerDisplayStatus = setRenameCharacterContainerDisplayStatus;
         
         $(document).ready(function(){
             pageController.refresh();
-            pageController.init();
         });
-    }
-    
-    /*
-    Adds event listener to newcharactername input field
-    */
-    function init(){
-        try{
-            const newCharacterNameInput = document.getElementById("newcharactername");
-            
-            newCharacterNameInput.onkeyup = function(e){
-                if(e.which == 13){
-                    characterController.createCharacter();
-                }
-                characterController.validateNewCharacterName();
-            }
-            newCharacterNameInput.onfocus = function(){
-                characterController.validateNewCharacterName();
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
     }
     
     /*
