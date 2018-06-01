@@ -2,7 +2,6 @@ package skyxplore.dataaccess.gamedata.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 
@@ -10,14 +9,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-@RequiredArgsConstructor
 @Slf4j
 @Getter
 public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
+    public static final String BASE_DIR = "src/main/resources/data/gamedata/";
+
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final JsonFileFilter jsonFilter = new JsonFileFilter();
 
     private final String source;
+
+    public AbstractGameDataService(String source){
+        this.source = BASE_DIR + source;
+    }
 
     protected void loadFiles(Class<V> clazz){
         File root = new File(source);

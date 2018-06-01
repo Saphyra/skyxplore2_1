@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.gamedata;
+package skyxplore.dataaccess.gamedata.subservice;
 
 import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
 import skyxplore.dataaccess.gamedata.entity.Ability;
