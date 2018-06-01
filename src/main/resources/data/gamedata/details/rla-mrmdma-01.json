@@ -1,9 +1,0 @@
-{
-    "id": "rla-mrmdma-01",
-    "attackSpeed": 6,
-    "criticalRate": 500,
-    "range": 4,
-    "hullDamage": 20000,
-    "shieldDamage": 20000,
-    "accuracy": 500
-}

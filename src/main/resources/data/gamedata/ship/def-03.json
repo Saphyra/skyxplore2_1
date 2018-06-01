@@ -1,0 +1,44 @@
+{
+    "id": "def-03",
+    "corehull": 6000000,
+    "connector": 24,
+    "defense": {
+        "front": 22,
+        "side": 14,
+        "back": 10
+    },
+    "weapon": {
+        "front": 6,
+        "side": 2,
+        "back": 2
+    },
+    "ability": [
+        "phalanx",
+        "damagereduction",
+        "teleportation",
+        "shieldovercharge",
+        "dimensiongate",
+        "reflection"
+    ],
+    "constructiontime": 86400,
+    "buildprice": 86400,
+    "materials": {
+        "cable": 135,
+        "condensator": 135,
+        "energycell": 180,
+        "hullplate": 360,
+        "etherium": 900,
+        "mithril": 2250,
+        "duranium": 3150,
+        "uridium": 1800,
+        "xebryum": 1800
+    },
+    "name": "DEF-03 Defender",
+    "description": "Ezt a haj\u00f3t nagy v\u00e9delme teszi alkalmass\u00e1 a s\u00e9r\u00fcl\u00e9kenyebb sz\u00f6vets\u00e9gesek v\u00e9delmez\u00e9s\u00e9re, hab\u00e1r t\u0171zereje elmarad t\u00e1rsai m\u00f6g\u00f6tt.",
+    "type": "tank",
+    "slot": "ship",
+    "level": 3,
+    "score": 20,
+    "buyprice": 27000000,
+    "sellprice": 9000000
+}

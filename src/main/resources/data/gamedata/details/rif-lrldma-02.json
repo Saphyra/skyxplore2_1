@@ -1,9 +1,0 @@
-{
-    "id": "rif-lrldma-02",
-    "attackSpeed": 2,
-    "criticalRate": 300,
-    "range": 2,
-    "hullDamage": 4500,
-    "shieldDamage": 3000,
-    "accuracy": 500
-}

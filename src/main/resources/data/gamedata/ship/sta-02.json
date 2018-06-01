@@ -1,0 +1,40 @@
+{
+    "id": "sta-02",
+    "corehull": 1500000,
+    "connector": 9,
+    "defense": {
+        "front": 6,
+        "side": 3,
+        "back": 3
+    },
+    "weapon": {
+        "front": 4,
+        "side": 2,
+        "back": 1
+    },
+    "ability": [
+        "invulnerable",
+        "speed"
+    ],
+    "constructiontime": 19200,
+    "buildprice": 19200,
+    "materials": {
+        "cable": 20,
+        "condensator": 15,
+        "energycell": 20,
+        "hullplate": 30,
+        "etherium": 100,
+        "mithril": 200,
+        "duranium": 250,
+        "uridium": 150,
+        "xebryum": 200
+    },
+    "name": "STA-02 Starter",
+    "description": "Az \u00fajonc pil\u00f3t\u00e1k (\u00e9s \u0151r\u00fclt veter\u00e1nok) els\u0151 sz\u00e1m\u00fa haj\u00f3ja. Kicsi, gyenge, de gyors.",
+    "type": "frigate",
+    "slot": "ship",
+    "level": 2,
+    "score": 6,
+    "buyprice": 1500000,
+    "sellprice": 500000
+}

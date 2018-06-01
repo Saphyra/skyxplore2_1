@@ -1,0 +1,24 @@
+{
+    "id": "dex-02",
+    "extendedslot": "defense",
+    "extendednum": 3,
+    "constructiontime": 5400,
+    "buildprice": 5400,
+    "materials": {
+        "cable": 12,
+        "condensator": 9,
+        "energycell": 12,
+        "hullplate": 18,
+        "mithril": 60,
+        "duranium": 105,
+        "uridium": 75
+    },
+    "name": "DEX-02 V\u00e9delem b\u0151v\u00edt\u0151",
+    "description": "B\u0151v\u00edt\u0151 egys\u00e9g, mely megn\u00f6veli a haj\u00f3 v\u00e9delmi moduljainak sz\u00e1m\u00e1t.",
+    "type": "extender",
+    "slot": "connector",
+    "level": 2,
+    "score": 0,
+    "buyprice": 450000,
+    "sellprice": 150000
+}

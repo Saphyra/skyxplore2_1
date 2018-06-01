@@ -1,0 +1,25 @@
+{
+    "id": "rif-lrmdla-03",
+    "attackSpeed": 2,
+    "criticalRate": 300,
+    "range": 2,
+    "hullDamage": 12000,
+    "shieldDamage": 8000,
+    "accuracy": 250,
+    "constructiontime": 5400,
+    "buildprice": 5400,
+    "materials": {
+        "cable": 9,
+        "condensator": 9,
+        "hullplate": 27,
+        "adamantium": 90
+    },
+    "name": "LRMDLA-03 G\u00e9p\u00e1gy\u00fa",
+    "description": "Kis hat\u00f3t\u00e1vols\u00e1g\u00fa g\u00e9p\u00e1gy\u00fa k\u00f6zepes sebz\u00e9ssel \u00e9s kis tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "rifle",
+    "slot": "weapon",
+    "level": 3,
+    "score": 3,
+    "buyprice": 135000,
+    "sellprice": 45000
+}

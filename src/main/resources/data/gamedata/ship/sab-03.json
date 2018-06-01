@@ -1,0 +1,44 @@
+{
+    "id": "sab-03",
+    "corehull": 2000000,
+    "connector": 36,
+    "defense": {
+        "front": 13,
+        "side": 10,
+        "back": 7
+    },
+    "weapon": {
+        "front": 9,
+        "side": 5,
+        "back": 5
+    },
+    "ability": [
+        "abilityblock",
+        "shieldregenerationblock",
+        "energyregenerationblock",
+        "blind",
+        "freeze",
+        "disableweapons"
+    ],
+    "constructiontime": 86400,
+    "buildprice": 86400,
+    "materials": {
+        "cable": 360,
+        "condensator": 225,
+        "energycell": 315,
+        "hullplate": 180,
+        "etherium": 1800,
+        "mithril": 1800,
+        "duranium": 1800,
+        "uridium": 2250,
+        "xebryum": 2700
+    },
+    "name": "SAB-03 Saboteur",
+    "description": "Ha szeretsz keresztbe tenni m\u00e1soknak, ez a haj\u00f3 az ide\u00e1lis v\u00e1laszt\u00e1s a sz\u00e1modra. C\u00e9l: az ellens\u00e9g b\u00e9n\u00edt\u00e1sa ahol, \u00e9s ahogyan csak lehets\u00e9ges.",
+    "type": "saboteur",
+    "slot": "ship",
+    "level": 3,
+    "score": 20,
+    "buyprice": 27000000,
+    "sellprice": 9000000
+}

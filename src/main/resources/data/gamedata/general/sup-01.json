@@ -1,9 +1,0 @@
-{
-    "id": "sup-01",
-    "name": "SUP-01 Supporter",
-    "description": "T\u00e1mogat\u00f3 haj\u00f3, melynek els\u0151dleges feladata a sz\u00f6vets\u00e9gesek ell\u00e1t\u00e1sa.",
-    "type": "support",
-    "slot": "ship",
-    "level": 1,
-    "score": 10
-}

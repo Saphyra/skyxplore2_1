@@ -1,0 +1,26 @@
+{
+    "id": "las-mrmdla-01",
+    "attackSpeed": 4,
+    "criticalRate": 150,
+    "range": 4,
+    "hullDamage": 7500,
+    "shieldDamage": 7500,
+    "accuracy": 250,
+    "constructiontime": 600,
+    "buildprice": 600,
+    "materials": {
+        "cable": 2,
+        "condensator": 1,
+        "energycell": 1,
+        "hullplate": 2,
+        "adamantium": 5
+    },
+    "name": "MRMDLA-01 L\u00e9zer\u00e1gy\u00fa",
+    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa l\u00e9zer\u00e1gy\u00fa k\u00f6zepes sebz\u00e9ssel \u00e9s kis tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "lasercannon",
+    "slot": "weapon",
+    "level": 1,
+    "score": 1,
+    "buyprice": 15000,
+    "sellprice": 5000
+}

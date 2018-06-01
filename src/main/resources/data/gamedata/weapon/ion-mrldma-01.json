@@ -1,0 +1,27 @@
+{
+    "id": "ion-mrldma-01",
+    "attackSpeed": 4,
+    "criticalRate": 500,
+    "range": 4,
+    "hullDamage": 2500,
+    "shieldDamage": 7500,
+    "accuracy": 500,
+    "constructiontime": 600,
+    "buildprice": 600,
+    "materials": {
+        "": "",
+        "cable": 2,
+        "condensator": 2,
+        "energycell": 1,
+        "hullplate": 1,
+        "adamantium": 5
+    },
+    "name": "MRLDMA-01 Ion\u00e1gy\u00fa",
+    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa ion\u00e1gy\u00fa kis sebz\u00e9ssel \u00e9s k\u00f6zepes tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "ioncannon",
+    "slot": "weapon",
+    "level": 1,
+    "score": 1,
+    "buyprice": 15000,
+    "sellprice": 5000
+}

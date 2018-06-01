@@ -1,9 +1,0 @@
-{
-    "id": "sto-03",
-    "constructiontime": 2400,
-    "buildprice": 2400,
-    "materials": {
-        "hullplate": 45,
-        "mithril": 180
-    }
-}

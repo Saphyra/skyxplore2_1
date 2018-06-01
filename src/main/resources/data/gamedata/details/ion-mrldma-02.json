@@ -1,9 +1,0 @@
-{
-    "id": "ion-mrldma-02",
-    "attackSpeed": 4,
-    "criticalRate": 500,
-    "range": 4,
-    "hullDamage": 3750,
-    "shieldDamage": 11250,
-    "accuracy": 500
-}

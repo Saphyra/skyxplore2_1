@@ -1,9 +1,0 @@
-{
-    "id": "gen-02",
-    "name": "GEN-02 Gener\u00e1tor",
-    "description": "Akkumul\u00e1torok t\u00f6lt\u00e9s\u00e9hez sz\u00fcks\u00e9ges energia biztos\u00edt\u00e1sa.",
-    "type": "generator",
-    "slot": "connector",
-    "level": 2,
-    "score": 2
-}

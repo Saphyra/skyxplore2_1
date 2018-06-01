@@ -1,0 +1,22 @@
+{
+    "id": "shi-hclr-02",
+    "capacity": 150000,
+    "regeneration": 3750,
+    "energyUsage": 75,
+    "constructiontime": 2700,
+    "buildprice": 2700,
+    "materials": {
+        "uridium": 45,
+        "cable": 6,
+        "energycell": 9,
+        "hullplate": 6
+    },
+    "name": "HCLR-02 Pajzs",
+    "description": "Nagy kapacit\u00e1s\u00fa pajzs alacsony regener\u00e1ci\u00f3val.",
+    "type": "shield",
+    "slot": "defense",
+    "level": 2,
+    "score": 2,
+    "buyprice": 67500,
+    "sellprice": 22500
+}

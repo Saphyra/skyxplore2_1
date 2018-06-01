@@ -1,0 +1,24 @@
+{
+    "id": "cex-01",
+    "extendedslot": "connector",
+    "extendednum": 5,
+    "constructiontime": 3600,
+    "buildprice": 3600,
+    "materials": {
+        "cable": 4,
+        "hullplate": 3,
+        "energycell": 2,
+        "mithril": 25,
+        "duranium": 15,
+        "uridium": 10,
+        "xebryum": 20
+    },
+    "name": "CEX-01 Csatlakoz\u00f3 b\u0151v\u00edt\u0151",
+    "description": "B\u0151v\u00edt\u0151 egys\u00e9g, mely megn\u00f6veli a haj\u00f3 csatlakoz\u00f3inak sz\u00e1m\u00e1t.",
+    "type": "extender",
+    "slot": "connector",
+    "level": 1,
+    "score": 0,
+    "buyprice": 150000,
+    "sellprice": 50000
+}

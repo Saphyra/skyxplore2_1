@@ -1,0 +1,26 @@
+{
+    "id": "ion-lrhdma-02",
+    "attackSpeed": 4,
+    "criticalRate": 500,
+    "range": 2,
+    "hullDamage": 11250,
+    "shieldDamage": 33750,
+    "accuracy": 500,
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "cable": 6,
+        "condensator": 6,
+        "energycell": 3,
+        "hullplate": 3,
+        "adamantium": 15
+    },
+    "name": "LRHDMA-02 Ion\u00e1gy\u00fa",
+    "description": "Kis hat\u00f3t\u00e1vols\u00e1g\u00fa ion\u00e1gy\u00fa nagy sebz\u00e9ssel \u00e9s k\u00f6zepes tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "ioncannon",
+    "slot": "weapon",
+    "level": 2,
+    "score": 2,
+    "buyprice": 45000,
+    "sellprice": 15000
+}

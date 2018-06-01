@@ -1,0 +1,22 @@
+{
+    "id": "shi-lchr-02",
+    "capacity": 75000,
+    "regeneration": 7500,
+    "energyUsage": 115,
+    "constructiontime": 2700,
+    "buildprice": 2700,
+    "materials": {
+        "uridium": 45,
+        "cable": 6,
+        "energycell": 9,
+        "hullplate": 6
+    },
+    "name": "LCHR-02 Pajzs",
+    "description": "Kis kapacit\u00e1s\u00fa pajzs magas regener\u00e1ci\u00f3val.",
+    "type": "shield",
+    "slot": "defense",
+    "level": 2,
+    "score": 2,
+    "buyprice": 67500,
+    "sellprice": 22500
+}

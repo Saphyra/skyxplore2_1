@@ -1,9 +1,0 @@
-{
-    "id": "arm-03",
-    "constructiontime": 8100,
-    "buildprice": 8100,
-    "materials": {
-        "duranium": 180,
-        "hullplate": 90
-    }
-}

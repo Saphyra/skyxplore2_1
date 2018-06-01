@@ -1,0 +1,25 @@
+{
+    "id": "rla-mrmdma-01",
+    "attackSpeed": 6,
+    "criticalRate": 500,
+    "range": 4,
+    "hullDamage": 20000,
+    "shieldDamage": 20000,
+    "accuracy": 500,
+    "constructiontime": 600,
+    "buildprice": 600,
+    "materials": {
+        "cable": 1,
+        "condensator": 1,
+        "hullplate": 5,
+        "adamantium": 5
+    },
+    "name": "MRMDMA-01 Rak\u00e9takil\u00f6v\u0151",
+    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa rak\u00e9takil\u00f6v\u0151 k\u00f6zepes sebz\u00e9ssel \u00e9s k\u00f6zepes tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "rocketlauncher",
+    "slot": "weapon",
+    "level": 1,
+    "score": 1,
+    "buyprice": 15000,
+    "sellprice": 5000
+}

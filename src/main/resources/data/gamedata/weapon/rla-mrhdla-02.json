@@ -1,0 +1,25 @@
+{
+    "id": "rla-mrhdla-02",
+    "attackSpeed": 6,
+    "criticalRate": 500,
+    "range": 4,
+    "hullDamage": 45000,
+    "shieldDamage": 45000,
+    "accuracy": 250,
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "cable": 3,
+        "condensator": 3,
+        "hullplate": 15,
+        "adamantium": 15
+    },
+    "name": "MRHDLA-02 Rak\u00e9takil\u00f6v\u0151",
+    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa rak\u00e9takil\u00f6v\u0151 nagy sebz\u00e9ssel \u00e9s kis tal\u00e1lati pontoss\u00e1ggal.",
+    "type": "rocketlauncher",
+    "slot": "weapon",
+    "level": 2,
+    "score": 2,
+    "buyprice": 45000,
+    "sellprice": 15000
+}

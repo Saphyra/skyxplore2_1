@@ -1,9 +1,0 @@
-{
-    "id": "rla-lrhdma-03",
-    "attackSpeed": 6,
-    "criticalRate": 500,
-    "range": 2,
-    "hullDamage": 60000,
-    "shieldDamage": 60000,
-    "accuracy": 500
-}

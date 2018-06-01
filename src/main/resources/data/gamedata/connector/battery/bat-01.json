@@ -1,0 +1,20 @@
+{
+    "id": "bat-01",
+    "capacity": 1000,
+    "constructiontime": 1200,
+    "buildprice": 1200,
+    "materials": {
+        "cable": 2,
+        "hullplate": 1,
+        "energycell": 4,
+        "erherium": 30
+    },
+    "name": "BAT-01 Akkumul\u00e1tor",
+    "description": "Energiat\u00e1rol\u00f3 a haj\u00f3k rendszereinek ell\u00e1t\u00e1s\u00e1hoz.",
+    "type": "battery",
+    "slot": "connector",
+    "level": 1,
+    "score": 1,
+    "buyprice": 45000,
+    "sellprice": 15000
+}

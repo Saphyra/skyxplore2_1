@@ -1,0 +1,18 @@
+{
+    "id": "sto-01",
+    "capacity": 100,
+    "constructiontime": 1200,
+    "buildprice": 1200,
+    "materials": {
+        "hullplate": 5,
+        "mithril": 20
+    },
+    "name": "STO-01 Rakt\u00e9r",
+    "description": "Kont\u00e9ner a csatat\u00e9ren szerzett zs\u00e1km\u00e1ny elsz\u00e1ll\u00edt\u00e1s\u00e1ra.",
+    "type": "storage",
+    "slot": "connector",
+    "level": 1,
+    "score": 0,
+    "buyprice": 45000,
+    "sellprice": 15000
+}

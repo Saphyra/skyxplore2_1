@@ -1,0 +1,44 @@
+{
+    "id": "sup-03",
+    "corehull": 4000000,
+    "connector": 36,
+    "defense": {
+        "front": 13,
+        "side": 10,
+        "back": 7
+    },
+    "weapon": {
+        "front": 4,
+        "side": 3,
+        "back": 2
+    },
+    "ability": [
+        "shieldrecharge",
+        "shieldregeneration",
+        "energyrecharge",
+        "energyregeneration",
+        "repair",
+        "quickrecharge"
+    ],
+    "constructiontime": 86400,
+    "buildprice": 86400,
+    "materials": {
+        "cable": 315,
+        "condensator": 180,
+        "energycell": 315,
+        "hullplate": 225,
+        "etherium": 2250,
+        "mithril": 1800,
+        "duranium": 1800,
+        "uridium": 2700,
+        "xebryum": 2700
+    },
+    "name": "SUP-03 Supporter",
+    "description": "T\u00e1mogat\u00f3 haj\u00f3, melynek els\u0151dleges feladata a sz\u00f6vets\u00e9gesek ell\u00e1t\u00e1sa.",
+    "type": "support",
+    "slot": "ship",
+    "level": 3,
+    "score": 20,
+    "buyprice": 27000000,
+    "sellprice": 9000000
+}
