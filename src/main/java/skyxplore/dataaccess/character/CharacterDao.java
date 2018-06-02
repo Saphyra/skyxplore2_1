@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.character.entity.CharacterEntity;
-import skyxplore.dataaccess.character.entity.converter.CharacterConverter;
+import skyxplore.dataaccess.character.converter.CharacterConverter;
 import skyxplore.dataaccess.character.repository.CharacterRepository;
 import skyxplore.dataaccess.user.entity.UserEntity;
 import skyxplore.dataaccess.user.repository.UserRepository;

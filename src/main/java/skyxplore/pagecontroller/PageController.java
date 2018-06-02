@@ -27,6 +27,7 @@ public class PageController {
 
     @GetMapping(OVERVIEW_MAPPING)
     public String overview(){
+        log.info("Request arrived to {}", OVERVIEW_MAPPING);
         return "overview";
     }
 }

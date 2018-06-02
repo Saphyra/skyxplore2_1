@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.character.entity.converter;
+package skyxplore.dataaccess.character.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
