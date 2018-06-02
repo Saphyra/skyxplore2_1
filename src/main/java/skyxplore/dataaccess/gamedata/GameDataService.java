@@ -3,6 +3,7 @@ package skyxplore.dataaccess.gamedata;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.subservice.*;
 
 @Service
@@ -17,6 +18,11 @@ public class GameDataService {
     private final GeneratorService generatorService;
     private final MaterialService materialService;
     private final ShieldService shieldService;
+    private final ShipService shipService;
     private final StorageService storageService;
     private final  WeaponService weaponService;
+
+    public Ship getShip(String id){
+        return shipService.get(id);
+    }
 }

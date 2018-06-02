@@ -3,6 +3,7 @@ package skyxplore.dataaccess.equippedship.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Data
@@ -13,14 +14,11 @@ public class EquippedShipEntity {
     @Column(name = "ship_id")
     private Long shipId;
 
-    @Column(name = "user_id", nullable =  false)
-    private Long userId;
-
-    @Column(name = "ship_name", nullable =  false)
-    private String shipName;
+    @Column(name = "character_id", nullable =  false)
+    private Long characterId;
 
     @Column(name = "ship_type", nullable =  false)
-    private String type;
+    private String shipType;
 
     @Column(name = "corehull", nullable =  false)
     private Integer coreHull;
@@ -28,11 +26,14 @@ public class EquippedShipEntity {
     @Column(name = "connector_slot", nullable =  false)
     private Integer connectorSlot;
 
+    @Column(name = "connector_equipepd", nullable = false)
+    private ArrayList<String> connectorEquipped;
+
     @OneToOne
-    @JoinColumn(name = "defense_slot")
+    @JoinColumn(name = "defense_slot", nullable = false)
     private SlotEntity defenseSlot;
 
     @OneToOne
-    @JoinColumn(name = "weapon_slot")
+    @JoinColumn(name = "weapon_slot", nullable = false)
     private SlotEntity weaponSlot;
 }

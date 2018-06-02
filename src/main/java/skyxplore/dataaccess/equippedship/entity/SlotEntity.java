@@ -31,6 +31,6 @@ public class SlotEntity {
 
     @Column(name = "back_slot", nullable =  false)
     private Integer backSlot;
-    @Column(name = "bacl_equipped", nullable =  false)
+    @Column(name = "back_equipped", nullable =  false)
     private ArrayList<String> backEquipped;
 }

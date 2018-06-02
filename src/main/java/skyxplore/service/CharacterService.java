@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.character.CharacterDao;
+import skyxplore.dataaccess.equippedship.EquippedShipDao;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
 import skyxplore.restcontroller.request.RenameCharacterRequest;
+import skyxplore.service.domain.EquippedShip;
 import skyxplore.service.domain.SkyXpCharacter;
 
 import java.util.List;
@@ -19,12 +21,16 @@ import java.util.List;
 public class CharacterService {
     private final CharacterDao characterDao;
     private final UserService userService;
+    private final NewCharacterShipGenerator newCharacterShipGenerator;
+    private final EquippedShipDao equippedShipDao;
 
     public void createCharacter(CreateCharacterRequest request, Long userId){
         SkyXpCharacter character = new SkyXpCharacter();
         character.setCharacterName(request.getCharacterName());
         character.setUser(userService.getUserById(userId));
-        characterDao.save(character);
+        SkyXpCharacter saved = characterDao.save(character);
+        EquippedShip ship = newCharacterShipGenerator.generateShip(saved.getCharacterId());
+        equippedShipDao.save(ship);
     }
 
     public void deleteCharacter(CharacterDeleteRequest request, Long userId){

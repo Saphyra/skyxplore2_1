@@ -73,7 +73,7 @@ public class AccessTokenService {
         try {
             return Long.valueOf(userIdValue);
         } catch (NumberFormatException e) {
-            throw new BadRequestAuthException("Invalid userId type.");
+            throw new BadRequestAuthException("Invalid userId shipType.");
         }
     }
 
