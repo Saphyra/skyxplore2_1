@@ -6,6 +6,8 @@
     width: calc(100% - 15rem);
     overflow: auto;
     text-align: center;
+    padding: 1rem;
+    overflow: auto;
 }
 
 .contentcontainer table{
@@ -17,5 +19,37 @@
 .contentcontainer table th, .contentcontainer table td{
     border: 2px ridge white;
     padding: 0.25rem;
+    vertical-align: middle;
 }
 
+.slotcontainer{
+    text-align: center;
+}
+
+.slot{
+    border: 3px outset white;
+    margin: 0.25rem;
+    padding: 0.25rem;
+    display: inline-block;
+    width: 8rem;
+    height: 3rem;
+    text-align: center;
+    white-space: initial;
+    vertical-align: top;
+}
+
+.sideslot{
+    width: 9rem;
+}
+
+.frontslot{
+    /*height: 3.5rem;*/
+    /*white-space: nowrap;*/
+}
+
+.sideslot .slot{
+    display: block;
+    margin: auto;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}

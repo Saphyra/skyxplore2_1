@@ -11,7 +11,7 @@
         });
     }
     
-    //TODO documentation
+    //gTODO documentation
     function showSuccess(message){
         try{
             showMessage(message, "green");

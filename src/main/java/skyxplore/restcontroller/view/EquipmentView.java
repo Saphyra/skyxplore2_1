@@ -3,10 +3,10 @@ package skyxplore.restcontroller.view;
 import lombok.Data;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
-import java.util.Set;
+import java.util.Map;
 
 @Data
 public class EquipmentView<T> {
     private T info;
-    private Set<GeneralDescription> data;
+    private Map<String, GeneralDescription> data;
 }

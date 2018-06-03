@@ -11,9 +11,8 @@ import skyxplore.service.domain.EquippedShip;
 import skyxplore.service.domain.EquippedSlot;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -35,26 +34,28 @@ public class GameDataService {
         return shipService.get(id);
     }
 
-    public Set<GeneralDescription> collectEquipmentData(EquippedShip ship) {
-        Set<GeneralDescription> result = new HashSet<>();
-        result.add(getShip(ship.getShipType()));
-        result.addAll(getData(ship.getConnectorEquipped()));
-        result.addAll(getData(ship.getDefenseSlot()));
-        result.addAll(getData(ship.getWeaponSlot()));
+    public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship) {
+        Map<String, GeneralDescription> result = new HashMap<>();
+        result.put(ship.getShipType(), getShip(ship.getShipType()));
+        result.putAll(getData(ship.getConnectorEquipped()));
+        result.putAll(getData(ship.getDefenseSlot()));
+        result.putAll(getData(ship.getWeaponSlot()));
         return result;
     }
 
-    private Set<GeneralDescription> getData(EquippedSlot slot) {
-        Set<GeneralDescription> result = new HashSet<>();
-        result.addAll(getData(slot.getFrontEquipped()));
-        result.addAll(getData(slot.getLeftEquipped()));
-        result.addAll(getData(slot.getRightEquipped()));
-        result.addAll(getData(slot.getBackEquipped()));
+    private Map<String, GeneralDescription> getData(EquippedSlot slot) {
+        Map<String, GeneralDescription> result = new HashMap<>();
+        result.putAll(getData(slot.getFrontEquipped()));
+        result.putAll(getData(slot.getLeftEquipped()));
+        result.putAll(getData(slot.getRightEquipped()));
+        result.putAll(getData(slot.getBackEquipped()));
         return result;
     }
 
-    private Set<GeneralDescription> getData(Collection<String> ids) {
-        return ids.stream().map(this::getData).collect(Collectors.toSet());
+    private Map<String, GeneralDescription> getData(Collection<String> ids) {
+        Map<String, GeneralDescription> result = new HashMap<>();
+        ids.forEach(e -> result.put(e, getData(e)));
+        return result;
     }
 
     private GeneralDescription getData(String id) {
