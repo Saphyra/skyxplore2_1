@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Entity
 @Data
-@Table(name = "defense_slot")
+@Table(name = "equipped_slot")
 public class SlotEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

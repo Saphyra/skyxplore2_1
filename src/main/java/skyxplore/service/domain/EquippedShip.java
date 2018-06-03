@@ -19,5 +19,6 @@ public class EquippedShip {
         if(connectorSlot.equals(connectorEquipped.size())){
             throw new IllegalStateException("Connector slot is full.");
         }
+        connectorEquipped.add(element);
     }
 }

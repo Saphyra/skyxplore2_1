@@ -29,11 +29,11 @@ public class EquippedShipEntity {
     @Column(name = "connector_equipepd", nullable = false)
     private ArrayList<String> connectorEquipped;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "defense_slot", nullable = false)
     private SlotEntity defenseSlot;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "weapon_slot", nullable = false)
     private SlotEntity weaponSlot;
 }

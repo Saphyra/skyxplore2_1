@@ -1,12 +1,14 @@
 package skyxplore.dataaccess.equippedship.converter;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.equippedship.entity.EquippedShipEntity;
 import skyxplore.service.domain.EquippedShip;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EquippedShipConverter {
     private final SlotConverter slotConverter;
 

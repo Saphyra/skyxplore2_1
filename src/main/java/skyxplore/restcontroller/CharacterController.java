@@ -54,6 +54,7 @@ public class CharacterController {
     public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
         log.info("Creating new character with name {}", request.getCharacterName());
         characterService.createCharacter(request, userId);
+        log.info("Character created successfully.");
         characterNameCache.invalidate(request.getCharacterName());
     }
 

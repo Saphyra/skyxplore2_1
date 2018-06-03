@@ -10,6 +10,11 @@
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    
+    
+    <SCRIPT src="js/overview/page_controller.js"></SCRIPT>
+    <SCRIPT src="js/overview/equipment_controller.js"></SCRIPT>
+    
 </HEAD>
 <BODY>
 
@@ -27,7 +32,37 @@
         </SECTION>
         
         <SECTION class='contentcontainer'>
-        
+            <TABLE>
+                <TR>
+                    <TH colspan='5'>
+                        <H2>Felszerelés</H2>
+                    </TH>
+                </TR>
+                
+                <TR>
+                    <TD id='frontweapon' colspan='5'></TD>
+                </TR>
+                <TR>
+                    <TD id='frontdefense' colspan='5'></TD>
+                </TR>
+                
+                <TR>
+                    <TD id='leftweapon'></TD>
+                    <TD id='leftdefense'></TD>
+                    
+                    <TD id='connectors'></TD>
+                    
+                    <TD id='rightdefense'></TD>
+                    <TD id='rightweapon'></TD>
+                </TR>
+                
+                <TR>
+                    <TD id='backweapon' colspan='5'></TD>
+                </TR>
+                <TR>
+                    <TD id='backdefense' colspan='5'></TD>
+                </TR>
+            </TABLE>
         </SECTION>
     </MAIN>
     

@@ -6,4 +6,5 @@ import skyxplore.dataaccess.equippedship.entity.EquippedShipEntity;
 
 @Repository
 public interface EquippedShipRepository extends JpaRepository<EquippedShipEntity, Long> {
+    EquippedShipEntity findByCharacterId(Long characterId);
 }

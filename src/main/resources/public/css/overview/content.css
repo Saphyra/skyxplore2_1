@@ -5,4 +5,17 @@
     right: 0;
     width: calc(100% - 15rem);
     overflow: auto;
+    text-align: center;
 }
+
+.contentcontainer table{
+    border: 3px ridge white;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.contentcontainer table th, .contentcontainer table td{
+    border: 2px ridge white;
+    padding: 0.25rem;
+}
+

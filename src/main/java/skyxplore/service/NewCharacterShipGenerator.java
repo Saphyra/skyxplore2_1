@@ -19,7 +19,7 @@ public class NewCharacterShipGenerator {
     private static final String BATTERY_ID = "bat-01";
     private static final String STORAGE_ID = "sto-01";
 
-    private static final String SHIELD_ID = "shi-hcl-01";
+    private static final String SHIELD_ID = "shi-hclr-01";
     private static final String ARMOR_ID = "arm-01";
 
     private static final String LASER_ID = "las-mrldma-01";
@@ -41,6 +41,7 @@ public class NewCharacterShipGenerator {
         ship.setCharacterId(characterId);
         ship.setShipType(STARTER_SHIP_ID);
         Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
+        ship.setConnectorSlot(shipData.getConnector());
         ship.setCoreHull(shipData.getCoreHull());
         ship.setDefenseSlot(createSlot(shipData.getDefense()));
         ship.setWeaponSlot(createSlot(shipData.getWeapon()));

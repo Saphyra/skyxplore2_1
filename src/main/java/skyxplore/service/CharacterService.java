@@ -29,8 +29,10 @@ public class CharacterService {
         character.setCharacterName(request.getCharacterName());
         character.setUser(userService.getUserById(userId));
         SkyXpCharacter saved = characterDao.save(character);
+        log.info("Assembling a ship for character {}", saved.getCharacterId());
         EquippedShip ship = newCharacterShipGenerator.generateShip(saved.getCharacterId());
         equippedShipDao.save(ship);
+        log.info("Ship created successfully.");
     }
 
     public void deleteCharacter(CharacterDeleteRequest request, Long userId){

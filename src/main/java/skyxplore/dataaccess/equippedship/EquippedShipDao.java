@@ -19,4 +19,10 @@ public class EquippedShipDao {
                 equippedShipRepository.save(equippedShipConverter.convertDomain(ship))
         );
     }
+
+    public EquippedShip getShipByCharacterId(Long characterId){
+        return equippedShipConverter.convertEntity(
+                equippedShipRepository.findByCharacterId(characterId)
+        );
+    }
 }
