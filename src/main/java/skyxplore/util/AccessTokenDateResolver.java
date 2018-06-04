@@ -9,9 +9,11 @@ import java.util.TimeZone;
 @Component
 @Slf4j
 public class AccessTokenDateResolver {
+    public static final Integer EXPIRATION_TIME_IN_MINUTES = 15;
+
     public Calendar getExpirationDate(){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-        calendar.add(Calendar.MINUTE, -15);
+        calendar.add(Calendar.MINUTE, -EXPIRATION_TIME_IN_MINUTES);
         return calendar;
     }
 

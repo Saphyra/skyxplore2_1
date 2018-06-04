@@ -85,15 +85,30 @@
             try{
                 const container = document.getElementById("shipdetails");
                 
-                    const coreHullContainer = document.createElement("DIV");
-                        coreHullContainer.innerHTML = "Magburkolat: " + shipData.coreHull;
-                        coreHullContainer.title = titleService.getTitleForOverview(shipData.shipType);
-                        coreHullContainer.classList.add("border2px");
-                        coreHullContainer.classList.add("bordercoloraaa");
-                        coreHullContainer.classList.add("borderbottomridge");
-                        coreHullContainer.classList.add("fontsize1_25rem");
-                        coreHullContainer.classList.add("padding0_25rem");
-                container.appendChild(coreHullContainer);
+                    const shipDetailsContainer = document.createElement("DIV");
+                        shipDetailsContainer.classList.add("border2px");
+                        shipDetailsContainer.classList.add("bordercoloraaa");
+                        shipDetailsContainer.classList.add("borderbottomridge");
+                        shipDetailsContainer.classList.add("fontsize1_25rem");
+                        shipDetailsContainer.classList.add("padding0_25rem");
+                        shipDetailsContainer.title = titleService.getTitleForOverview(shipData.shipType);
+                        
+                        const coreHullContainer = document.createElement("DIV");
+                            coreHullContainer.innerHTML = "Magburkolat: " + shipData.coreHull;
+                    shipDetailsContainer.appendChild(coreHullContainer);
+                    
+                        const energyContainer = document.createElement("DIV");
+                            const energy = countEnergy(shipData.connectorEquipped);
+                            const energyRegeneration = countEnergyRegen(shipData.connectorEquipped);
+                            energyContainer.innerHTML = "Energia: " + energy + " - Regeneráció: " + energyRegeneration;
+                    shipDetailsContainer.appendChild(energyContainer);
+                    
+                        const storageContainer = document.createElement("DIV");
+                            const storage = countStorage(shipData.connectorEquipped);
+                            storageContainer.innerHTML = "Raktér: " + storage;
+                    shipDetailsContainer.appendChild(storageContainer);
+                    
+                container.appendChild(shipDetailsContainer);
                 
                     const abilityTitle = document.createElement("DIV");
                         abilityTitle.innerHTML = "Képességek";
@@ -122,6 +137,57 @@
             }catch(err){
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;
                 logService.log(message, "error");
+            }
+            
+            function countEnergy(connectors){
+                try{
+                    let result = 0;
+                    for(let cindex in connectors){
+                        const connectorData = cache.get(connectors[cindex]);
+                        if(connectorData.type == "battery"){
+                            result += connectorData.capacity;
+                        }
+                    }
+                    
+                    return result;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                }
+            }
+            
+            function countEnergyRegen(connectors){
+                try{
+                    let result = 0;
+                    for(let cindex in connectors){
+                        const connectorData = cache.get(connectors[cindex]);
+                        if(connectorData.type == "generator"){
+                            result += connectorData.energyrecharge;
+                        }
+                    }
+                    
+                    return result;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                }
+            }
+            
+            function countStorage(connectors){
+                try{
+                    let result = 0;
+                    for(let cindex in connectors){
+                        const connectorData = cache.get(connectors[cindex]);
+                        if(connectorData.type == "storage"){
+                            result += connectorData.capacity;
+                        }
+                    }
+                    
+                    return result;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                }
             }
         }
     }

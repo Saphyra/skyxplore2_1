@@ -42,11 +42,6 @@
     width: 9rem;
 }
 
-.frontslot{
-    /*height: 3.5rem;*/
-    /*white-space: nowrap;*/
-}
-
 .sideslot .slot{
     display: block;
     margin: auto;
