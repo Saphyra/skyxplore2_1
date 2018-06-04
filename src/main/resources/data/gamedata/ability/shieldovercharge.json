@@ -2,6 +2,7 @@
     "id": "shieldovercharge",
     "name": "Pajzsenergia n\u00f6vel\u00e9s",
     "description": "N\u00f6veli a haj\u00f3 pajzsenergi\u00e1j\u00e1t.",
+    "slot": "ability",
     "energyusage": 0,
     "active": 0,
     "reload": -1,

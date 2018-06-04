@@ -2,6 +2,7 @@
     "id": "damageovertime",
     "name": "Folyamatos sebz\u00e9s",
     "description": "A c\u00e9lpont minden k\u00f6rben sebz\u00e9st szenved el.",
+    "slot": "ability",
     "energyusage": 200,
     "active": 5,
     "reload": 10,

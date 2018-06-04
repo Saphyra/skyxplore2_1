@@ -1,5 +1,6 @@
 {
     "id": "adamantium",
     "name": "Adamantium",
+    "slot": "material",
     "buildable": false
 }

@@ -2,6 +2,7 @@
     "id": "instantdamage",
     "name": "Azonnali sebz\u00e9s",
     "description": "Azonnali sebz\u00e9st okoz a bem\u00e9rt ellens\u00e9ges haj\u00f3nak.",
+    "slot": "ability",
     "energyusage": 400,
     "active": 1,
     "reload": 40,

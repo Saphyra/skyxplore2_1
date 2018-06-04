@@ -1,6 +1,7 @@
 {
     "id": "hullplate",
     "name": "Burkolatlemez",
+    "slot": "material",
     "buildable": true,
     "materials": {
         "duranium": 2,

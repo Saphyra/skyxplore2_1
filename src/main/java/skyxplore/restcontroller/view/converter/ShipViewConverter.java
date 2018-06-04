@@ -2,6 +2,7 @@ package skyxplore.restcontroller.view.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.restcontroller.view.ShipView;
 import skyxplore.service.domain.EquippedShip;
 
@@ -9,6 +10,7 @@ import skyxplore.service.domain.EquippedShip;
 @RequiredArgsConstructor
 public class ShipViewConverter {
     private final SlotViewConverter slotViewConverter;
+    private final ShipService shipService;
 
     public ShipView convertDomain(EquippedShip domain){
         ShipView view = new ShipView();
@@ -20,6 +22,7 @@ public class ShipViewConverter {
         view.setConnectorEquipped(domain.getConnectorEquipped());
         view.setDefenseSlot(slotViewConverter.convertDomain(domain.getDefenseSlot()));
         view.setWeaponSlot(slotViewConverter.convertDomain(domain.getWeaponSlot()));
+        view.setAbility(shipService.get(domain.getShipType()).getAbility());
         return view;
     }
 }

@@ -2,6 +2,7 @@
     "id": "corehullrepair",
     "name": "Magburkolat jav\u00edt\u00e1s",
     "description": "K\u00f6r\u00f6nk\u00e9nt jav\u00edtja a magburkolat s\u00e9r\u00fcl\u00e9seit.",
+    "slot": "ability",
     "energyusage": 0,
     "active": -1,
     "reload": 0,

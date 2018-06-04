@@ -2,7 +2,7 @@
     "id": "shi-hclr-01",
     "capacity": 100000,
     "regeneration": 2500,
-    "energyUsage": 50,
+    "energyusage": 50,
     "constructiontime": 900,
     "buildprice": 900,
     "materials": {

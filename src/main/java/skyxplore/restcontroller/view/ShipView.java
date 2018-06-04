@@ -14,4 +14,5 @@ public class ShipView {
     private ArrayList<String> connectorEquipped;
     private SlotView defenseSlot;
     private SlotView weaponSlot;
+    private ArrayList<String> ability;
 }

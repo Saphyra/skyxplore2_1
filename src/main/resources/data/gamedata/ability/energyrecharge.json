@@ -2,6 +2,7 @@
     "id": "energyrecharge",
     "name": "Energiat\u00f6lt\u00e9s",
     "description": "Felt\u00f6lti egy sz\u00f6vets\u00e9ges haj\u00f3 akkumul\u00e1torait.",
+    "slot": "ability",
     "energyusage": 350,
     "active": 1,
     "reload": 15,

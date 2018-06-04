@@ -2,6 +2,7 @@
     "id": "shieldregenerationblock",
     "name": "Pajzsregener\u00e1ci\u00f3 blokkol\u00e1s",
     "description": "A kijel\u00f6lt ellens\u00e9ges haj\u00f3 pajzsregener\u00e1ci\u00f3ja meg\u00e1ll.",
+    "slot": "ability",
     "energyusage": 300,
     "active": 5,
     "reload": 15,

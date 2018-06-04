@@ -2,6 +2,7 @@
     "id": "dimensiongate",
     "name": "Dimenzi\u00f3kapu",
     "description": "\u00c1tmenetileg egy m\u00e1sik dimenzi\u00f3ba k\u00fcld egy sz\u00f6vets\u00e9ges vagy ellens\u00e9ges haj\u00f3t, \u00edgy az se t\u00e1madni, se s\u00e9r\u00fclni nem tud.",
+    "slot": "ability",
     "energyusage": 400,
     "active": 5,
     "reload": 30

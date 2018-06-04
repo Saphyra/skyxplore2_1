@@ -1,6 +1,7 @@
 (function EquipmentController(){
     window.equipmentController = new function(){
         scriptLoader.loadScript("js/common/dao/ship_dao.js");
+        scriptLoader.loadScript("js/common/dataservice/title_service.js");
         
         this.showEquipment = showEquipment;
         
@@ -53,6 +54,7 @@
                     
                     const slotElement = createSlotElement();
                         slotElement.innerHTML = equipmentData.name;
+                        slotElement.title = titleService.getTitleForOverview(equipmentData.id);
                     container.appendChild(slotElement);
                     actual++;
                 }
@@ -83,7 +85,40 @@
             try{
                 const container = document.getElementById("shipdetails");
                 
-                container.appendChild(document.createTextNode(shipData.coreHull));
+                    const coreHullContainer = document.createElement("DIV");
+                        coreHullContainer.innerHTML = "Magburkolat: " + shipData.coreHull;
+                        coreHullContainer.title = titleService.getTitleForOverview(shipData.shipType);
+                        coreHullContainer.classList.add("border2px");
+                        coreHullContainer.classList.add("bordercoloraaa");
+                        coreHullContainer.classList.add("borderbottomridge");
+                        coreHullContainer.classList.add("fontsize1_25rem");
+                        coreHullContainer.classList.add("padding0_25rem");
+                container.appendChild(coreHullContainer);
+                
+                    const abilityTitle = document.createElement("DIV");
+                        abilityTitle.innerHTML = "Képességek";
+                        abilityTitle.classList.add("fontsize1_5rem");
+                container.appendChild(abilityTitle);
+                
+                    const abilityContainer = document.createElement("DIV");
+                        abilityContainer.classList.add("inlineblock");
+                        abilityContainer.classList.add("textalignleft");
+                        
+                        for(let aindex in shipData.ability){
+                            const abilityData = cache.get(shipData.ability[aindex]);
+                            const abilityElement = document.createElement("DIV");
+                                abilityElement.classList.add("border2px");
+                                abilityElement.classList.add("bordercoloraaa");
+                                abilityElement.classList.add("borderridge");
+                                abilityElement.classList.add("fontsize1_25rem");
+                                abilityElement.classList.add("margin0_25rem");
+                                abilityElement.classList.add("padding0_25rem");
+                                abilityElement.innerHTML = abilityData.name;
+                                abilityElement.title = titleService.getTitleForOverview(abilityData.id);
+                            abilityContainer.appendChild(abilityElement);
+                        }
+                        
+                container.appendChild(abilityContainer);
             }catch(err){
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;
                 logService.log(message, "error");

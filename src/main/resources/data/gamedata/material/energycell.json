@@ -1,6 +1,7 @@
 {
     "id": "energycell",
     "name": "Energiacella",
+    "slot": "material",
     "buildable": true,
     "materials": {
         "xebryum": 5,

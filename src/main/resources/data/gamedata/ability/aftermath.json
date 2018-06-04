@@ -2,6 +2,7 @@
     "id": "aftermath",
     "name": "Ut\u00f3hat\u00e1s",
     "description": "Minden tal\u00e1lat ideiglenesen n\u00f6veli a c\u00e9lpont \u00e1ltal elszenvedett sebz\u00e9st. (Passz\u00edv)",
+    "slot": "ability",
     "energyusage": 0,
     "active": -1,
     "reload": 0,

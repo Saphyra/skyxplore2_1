@@ -1,6 +1,7 @@
 {
     "id": "cable",
     "name": "K\u00e1bel",
+    "slot": "material",
     "buildable": true,
     "materials": {
         "xebryum": 2,

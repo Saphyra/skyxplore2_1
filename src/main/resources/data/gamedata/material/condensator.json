@@ -1,6 +1,7 @@
 {
     "id": "condensator",
     "name": "Kondenz\u00e1tor",
+    "slot": "material",
     "buildable": true,
     "materials": {
         "xebryum": 2,

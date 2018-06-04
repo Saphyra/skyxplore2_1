@@ -2,6 +2,7 @@
     "id": "penetration",
     "name": "Pajzs\u00e1t\u00fct\u00e9s",
     "description": "A t\u00e1mad\u00e1sok figyelmen k\u00edv\u00fcl hagyj\u00e1k a c\u00e9lpont pajzs\u00e1t \u00e9s k\u00f6zvetlen\u00fcl a burkolatot sebzik.",
+    "slot": "ability",
     "energyusage": 400,
     "active": 10,
     "reload": 30,

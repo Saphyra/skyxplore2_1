@@ -2,7 +2,7 @@
     "id": "shi-lchr-01",
     "capacity": 50000,
     "regeneration": 5000,
-    "energyUsage": 75,
+    "energyusage": 75,
     "constructiontime": 900,
     "buildprice": 900,
     "materials": {

@@ -2,6 +2,7 @@
     "id": "invulnerable",
     "name": "Sebezhetetlens\u00e9g",
     "description": "Sebezhetetlenn\u00e9 teszi a haj\u00f3t.",
+    "slot": "ability",
     "energyusage": 400,
     "active": 3,
     "reload": 15

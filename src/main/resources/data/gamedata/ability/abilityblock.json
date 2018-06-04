@@ -2,6 +2,7 @@
     "id": "abilityblock",
     "name": "K\u00e9pess\u00e9gblokkol\u00e1s",
     "description": "A megc\u00e9lzott ellens\u00e9ges haj\u00f3 nem haszn\u00e1lhat k\u00e9pess\u00e9geket.",
+    "slot": "ability",
     "energyusage": 200,
     "active": 3,
     "reload": 10,

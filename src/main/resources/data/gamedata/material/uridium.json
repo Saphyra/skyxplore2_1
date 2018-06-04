@@ -1,5 +1,6 @@
 {
     "id": "uridium",
     "name": "Uridium",
+    "slot": "material",
     "buildable": false
 }

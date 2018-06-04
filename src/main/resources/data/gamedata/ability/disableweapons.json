@@ -2,6 +2,7 @@
     "id": "disableweapons",
     "name": "Fegyverle\u00e1ll\u00e1s",
     "description": "Kikapcsolja egy kijel\u00f6lt ellens\u00e9ges haj\u00f3 fegyvereit.",
+    "slot": "ability",
     "energyusage": 400,
     "active": 2,
     "reload": 15,
