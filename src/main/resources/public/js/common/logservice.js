@@ -118,6 +118,8 @@
                 
                 if(message == null){
                     messageContainer.appendChild(createTextNode("null"));
+                }else if(message == undefined){
+                    messageContainer.appendChild(createTextNode("undefined"));
                 }else if(typeof message == "object"){
                     messageContainer.appendChild(parseObject(message));
                 }else{
@@ -170,7 +172,11 @@
                         const key = keys[kindex]
                         const elem = obj[key];
                         const line = document.createElement("LI");
-                            if(typeof elem == "object"){
+                            if(elem == null){
+                                line.appendChild(createTextNode("null"));
+                            }else if(elem == undefined){
+                                line.appendChild(createTextNode("undefined"));
+                            }else if(typeof elem == "object"){
                                 line.appendChild(document.createTextNode(key + ": "));
                                 line.appendChild(parseObject(elem));
                             }else{

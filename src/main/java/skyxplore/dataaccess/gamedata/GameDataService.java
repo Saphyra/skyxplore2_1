@@ -40,6 +40,7 @@ public class GameDataService {
         result.putAll(getData(ship.getConnectorEquipped()));
         result.putAll(getData(ship.getDefenseSlot()));
         result.putAll(getData(ship.getWeaponSlot()));
+        result.putAll(getData(getShip(ship.getShipType()).getAbility()));
         return result;
     }
 
