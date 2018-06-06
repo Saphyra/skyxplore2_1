@@ -1,5 +1,7 @@
 (function PageController(){
     window.pageController = new function(){
+        scriptLoader.loadScript("js/characterselect/character_controller.js");
+        
         this.refresh = refresh;
         this.renameCharacter = renameCharacter;
         this.setRenameCharacterContainerDisplayStatus = setRenameCharacterContainerDisplayStatus;

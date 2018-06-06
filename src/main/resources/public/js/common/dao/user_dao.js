@@ -1,10 +1,68 @@
 (function UserDao(){
     window.userDao = new function(){
+        this.changePassword = changePassword;
         this.isEmailExists = isEmailExists;
         this.isUserNameExists = isUserNameExists;
         this.registrateUser = registrateUser;
     }
     
+    /*
+    Changes the password of the user.
+    Arguments:
+        - password1: the new password of the user.
+        - password2: the confirmation password.
+        - oldPassword: the current password of the user.
+    Returns:
+        - true, if change was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if password1, password2, oldPassword is null or undefined.
+        - UnknownServerError exception if request fails.
+    */
+    function changePassword(password1, password2, oldPassword){
+        try{
+            if(password1 == null || password1 == undefined){
+                throwException("IllegalArgument", "password1 must not be null or undefined.");
+            }
+            if(password2 == null || password2 == undefined){
+                throwException("IllegalArgument", "password2 must not be null or undefined.");
+            }
+            if(oldPassword == null || oldPassword == undefined){
+                throwException("IllegalArgument", "oldPassword must not be null or undefined.");
+            }
+            
+            const path = "user/changepassword";
+            const body = {
+                newPassword: password1,
+                confirmPassword: password2,
+                oldPassword: oldPassword
+            };
+            const result = dao.sendRequest("POST", path, body);
+            
+            if(result.status == 200){
+                return true;
+            }else{
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
+            
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Checks if email already registrated.
+    Arguments:
+        - email: the email address to check.
+    Returns:
+        - false, if email has not been registered.
+        - true otherwise.
+    Throws:
+        - IllegalArgument exception if email is null or undefined.
+        - InvalidResult exception if the response cannot be recognized.
+    */
     function isEmailExists(email){
         try{
             if(email == undefined || email == null){
@@ -12,6 +70,7 @@
             }
             
             const result = dao.sendRequest("GET", "isemailexists?email=" + email);
+            //TODO validate response status
             if(result.responseText === "true"){
                 return true;
             }else if(result.responseText === "false"){
@@ -26,6 +85,17 @@
         }
     }
     
+    /*
+    Checks if username already registrated.
+    Arguments:
+        - userName: the name to check.
+    Returns:
+        - false, if userName has not been registered.
+        - true otherwise.
+    Throws:
+        - IllegalArgument exception if userName is null or undefined.
+        - InvalidResult exception if the response cannot be recognized.
+    */
     function isUserNameExists(userName){
         try{
             if(userName == undefined || userName == null){
@@ -33,6 +103,7 @@
             }
             
             const result = dao.sendRequest("GET", "isusernameexists?username=" + userName);
+            //TODO validate response status
             if(result.responseText === "true"){
                 return true;
             }else if(result.responseText === "false"){
@@ -46,7 +117,18 @@
             return true;
         }
     }
-    
+
+    /*
+    Registrating new user.
+    Arguments:
+        - user: Object that contains the details of the new user.
+    Returns:
+        - true, if registration was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if user is null or undefined.
+        - UnknownServerError if request fails.
+    */
     function registrateUser(user){
         try{
             if(user == null && undefined){

@@ -12,6 +12,7 @@ public class PageController {
     private static final String CHARACTER_SELECT_MAPPING = "/characterselect";
     private static final String INDEX_MAPPING = "/";
     private static final String OVERVIEW_MAPPING = "/overview";
+    private static final String SETTINGS_MAPPING = "/account";
 
     @GetMapping(CHARACTER_SELECT_MAPPING)
     public String characterSelect(){
@@ -29,5 +30,11 @@ public class PageController {
     public String overview(){
         log.info("Request arrived to {}", OVERVIEW_MAPPING);
         return "overview";
+    }
+
+    @GetMapping(SETTINGS_MAPPING)
+    public String settings(){
+        log.info("Request arrived to {}", SETTINGS_MAPPING);
+        return "account";
     }
 }
