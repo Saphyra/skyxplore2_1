@@ -1,6 +1,7 @@
 (function UserDao(){
     window.userDao = new function(){
         this.changePassword = changePassword;
+        this.changeUserName = changeUserName;
         this.isEmailExists = isEmailExists;
         this.isUserNameExists = isUserNameExists;
         this.registrateUser = registrateUser;
@@ -41,10 +42,51 @@
             
             if(result.status == 200){
                 return true;
+                //TODO handle 401
             }else{
                 throwException("UnknownServerError", result.status + " - " + result.responseText);
             }
             
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Changes the username of the user.
+    Arguments:
+        - newUserName: the new username.
+        - password: the password of the user.
+    Returns:
+        - true, if the name changed successfully.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if newUserName or password is null or undefined.
+        - UnknownServerError exception if request fails.
+    */
+    function changeUserName(newUserName, password){
+        try{
+            if(newUserName == null || newUserName == undefined){
+                throwException("IllegalArgument", "newUserName must not be null or undefined.");
+            }
+            if(password == null || password == undefined){
+                throwException("IllegalArgument", "password must not be null or undefined.");
+            }
+            
+            const path = "user/changeusername";
+            const body = {
+                newUserName: newUserName,
+                password: password
+            };
+            const result = dao.sendRequest("POST", path, body);
+            if(result.status == 200){
+                return true;
+                //TODO handle 401
+            }else{
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

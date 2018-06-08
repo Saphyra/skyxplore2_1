@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.exception.*;
 import skyxplore.restcontroller.request.ChangePasswordRequest;
+import skyxplore.restcontroller.request.ChangeUserNameRequest;
 import skyxplore.restcontroller.request.UserRegistrationRequest;
 import skyxplore.dataaccess.user.UserDao;
 import skyxplore.dataaccess.user.entity.Role;
@@ -31,6 +32,23 @@ public class UserService {
         log.info("Changing password of user " + uid);
         userDao.update(user);
         log.info("Password successfully changed.");
+    }
+
+    public void changeUserName(ChangeUserNameRequest request, Long userId){
+        SkyXpUser user = getUserById(userId);
+        if(!userId.equals(user.getUserId())){
+            throw new InvalidAccessException(userId + " wanted to change username of " + user.getUserId());
+        }
+        if(isUserNameExists(request.getNewUserName())){
+            throw new UserNameAlreadyExistsException();
+        }
+        if(!request.getPassword().equals(user.getPassword())){
+            throw new BadCredentialsException("Wrong password");
+        }
+        user.setUsername(request.getNewUserName());
+        log.info("Changing username of user {}", userId);
+        userDao.update(user);
+        log.info("Username successfully changed.");
     }
 
     public SkyXpUser getUserById(Long userId){
