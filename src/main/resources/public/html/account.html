@@ -1,0 +1,110 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD>
+    <TITLE>Account - SkyXplore 2.1</TITLE>
+    <META charset="UTF-8"/>
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+    <LINK rel="stylesheet" href="/css/classes.css">
+    <LINK rel="stylesheet" href="/css/account/account.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    
+    <SCRIPT src="js/account/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+
+    <DIV class="cover">
+        <HEADER>
+            <H1>Account beállítások</H1>
+        </HEADER>
+        
+        <MAIN class="textaligncenter">
+            <SECTION>
+                <H2>Jelszó módosítása</H2>
+                
+                <ARTICLE>
+                    <LABEL>
+                        Új jelszó:
+                        <INPUT type='password' id='newpassword1' placeholder='Új jelszó'>
+                        <DIV id="invalid_newpassword1" class="invalid">X</DIV>
+                    </LABEL>
+                    
+                    <LABEL>
+                        Új jelszó megismétlése:
+                        <INPUT type='password' id='newpassword2' placeholder='Új jelszó megismétlése'>
+                        <DIV id="invalid_newpassword2" class="invalid">X</DIV>
+                    </LABEL>
+                    
+                    <LABEL>
+                        Régi jelszó:
+                        <INPUT type='password' id='newpasswordoldpassword' placeholder='Régi jelszó'>
+                        <DIV id="invalid_newpasswordoldpassword" class="invalid">X</DIV>
+                    </LABEL>
+                </ARTICLE>
+                
+                <BUTTON id='newpasswordbutton' onclick='changePasswordController.changePassword()'>Mentés</BUTTON>
+            </SECTION>
+            
+            <SECTION>
+                <H2>Felhasználónév módosítása</H2>
+                
+                <ARTICLE>
+                    <LABEL>
+                        Új felhasználónév:
+                        <INPUT type='text' id='newusername' placeholder='Új felhasználónév'>
+                        <DIV id="invalid_newusername" class="invalid">X</DIV>
+                    </LABEL>
+                    
+                    <LABEL>
+                        Jelszó:
+                        <INPUT type='password' id='newusernamepassword' placeholder='Jelszó'>
+                        <DIV id="invalid_newusernamepassword" class="invalid">X</DIV>
+                    </LABEL>
+                </ARTICLE>
+                
+                <BUTTON id='newusernamebutton' onclick='changeUserNameController.changeUserName()'>Mentés</BUTTON>
+            </SECTION>
+            
+            <SECTION>
+                <H2>E-mail cím módosítása</H2>
+                
+                <ARTICLE>
+                    <LABEL>
+                        Új felhasználónév:
+                        <INPUT type='email' id='newemail' placeholder='Új e-mail cím'>
+                        <DIV id="invalid_newemail" class="invalid">X</DIV>
+                    </LABEL>
+                    
+                    <LABEL>
+                        Jelszó:
+                        <INPUT type='password' id='newemailpassword' placeholder='Jelszó'>
+                        <DIV id="invalid_newemailpassword" class="invalid">X</DIV>
+                    </LABEL>
+                </ARTICLE>
+                
+                <BUTTON id='newemailbutton' onclick='changeEmailController.changeEmail()'>Mentés</BUTTON>
+            </SECTION>
+            
+            <SECTION>
+                <H2>Account törlése</H2>
+                
+                <ARTICLE>
+                    <LABEL>
+                        Jelszó:
+                        <INPUT type='password' id='deleteaccountpassword' placeholder='Jelszó'>
+                    </LABEL>
+                </ARTICLE>
+                
+                <BUTTON onclick=''>Account törlése</BUTTON>
+            </SECTION>
+        </MAIN>
+        
+        <FOOTER>
+            <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
+            <BUTTON onclick='window.location.href = "characterselect"'>Karakterválasztás</BUTTON>
+        </FOOTER>
+    </DIV>
+
+</BODY>
+</HTML>

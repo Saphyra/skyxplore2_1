@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.filter.AuthFilter;
+import skyxplore.restcontroller.request.ChangeEmailRequest;
 import skyxplore.restcontroller.request.ChangePasswordRequest;
 import skyxplore.restcontroller.request.ChangeUserNameRequest;
 import skyxplore.restcontroller.request.UserRegistrationRequest;
@@ -17,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
+    private static final String CHANGE_EMAIL_MAPPING = "user/changeemail";
     private static final String CHANGE_PASSWORD_MAPPING = "user/changepassword";
     private static final String CHANGE_USERNAME_MAPPING = "user/changeusername";
     private static final String EMAIL_EXISTS_MAPPING = "/isemailexists";
@@ -27,6 +29,12 @@ public class UserController {
     private final Cache<String, Boolean> userNameCache;
     private final Cache<String, Boolean> emailCache;
     private final UserService userService;
+
+    @PostMapping(CHANGE_EMAIL_MAPPING)
+    public void changeEmail(@RequestBody @Valid ChangeEmailRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+        log.info("{} wants to change his email address.", userId);
+        userService.changeEmail(request, userId);
+    }
 
     @PostMapping(CHANGE_PASSWORD_MAPPING)
     public void changePassword(@RequestBody @Valid ChangePasswordRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){

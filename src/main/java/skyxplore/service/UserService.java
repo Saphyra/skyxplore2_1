@@ -3,12 +3,16 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.exception.*;
+import skyxplore.dataaccess.user.UserDao;
+import skyxplore.dataaccess.user.entity.Role;
+import skyxplore.exception.BadCredentialsException;
+import skyxplore.exception.BadlyConfirmedPasswordException;
+import skyxplore.exception.EmailAlreadyExistsException;
+import skyxplore.exception.UserNameAlreadyExistsException;
+import skyxplore.restcontroller.request.ChangeEmailRequest;
 import skyxplore.restcontroller.request.ChangePasswordRequest;
 import skyxplore.restcontroller.request.ChangeUserNameRequest;
 import skyxplore.restcontroller.request.UserRegistrationRequest;
-import skyxplore.dataaccess.user.UserDao;
-import skyxplore.dataaccess.user.entity.Role;
 import skyxplore.restcontroller.view.converter.UserViewConverter;
 import skyxplore.service.domain.SkyXpUser;
 
@@ -22,11 +26,22 @@ public class UserService {
     private final UserDao userDao;
     private final UserViewConverter userViewConverter;
 
+    public void changeEmail(ChangeEmailRequest request, Long userId){
+        SkyXpUser user = getUserById(userId);
+        if(isEmailExists(request.getNewEmail())){
+            throw new EmailAlreadyExistsException();
+        }
+        if(!request.getPassword().equals(user.getPassword())){
+            throw new BadCredentialsException("Wrong password");
+        }
+        user.setEmail(request.getNewEmail());
+        log.info("Changeing email of user {}", userId);
+        userDao.update(user);
+        log.info("Email changed successfully.");
+    }
+
     public void changePassword(ChangePasswordRequest request, Long uid){
         SkyXpUser user = getUserById(uid);
-        if(!uid.equals(user.getUserId())){
-            throw new InvalidAccessException(uid + "wanted to change password of " + user.getUserId());
-        }
         validateChangePasswordRequest(request, user);
         user.setPassword(request.getNewPassword());
         log.info("Changing password of user " + uid);
@@ -36,9 +51,6 @@ public class UserService {
 
     public void changeUserName(ChangeUserNameRequest request, Long userId){
         SkyXpUser user = getUserById(userId);
-        if(!userId.equals(user.getUserId())){
-            throw new InvalidAccessException(userId + " wanted to change username of " + user.getUserId());
-        }
         if(isUserNameExists(request.getNewUserName())){
             throw new UserNameAlreadyExistsException();
         }

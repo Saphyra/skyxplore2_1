@@ -1,10 +1,51 @@
 (function UserDao(){
     window.userDao = new function(){
+        this.changeEmail = changeEmail;
         this.changePassword = changePassword;
         this.changeUserName = changeUserName;
         this.isEmailExists = isEmailExists;
         this.isUserNameExists = isUserNameExists;
         this.registrateUser = registrateUser;
+    }
+    
+    /*
+    Changes the email of the user.
+    Arguments:
+        - newEmail: the new email address.
+        - password: the password of the user.
+    Returns:
+        - true, if the email changed successfully.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if newEmail or password is null or undefined.
+        - UnknownServerError exception if request fails.
+    */
+    function changeEmail(newEmail, password){
+        try{
+            if(newEmail == null || newEmail == undefined){
+                throwException("IllegalArgument", "newEmail must not be null or undefined");
+            }
+            if(password == null || password == undefined){
+                throwException("IllegalArgument", "password must not be null or undefined");
+            }
+            
+            const path = "user/changeemail";
+            const body = {
+                newEmail: newEmail,
+                password: password
+            };
+            const result = dao.sendRequest("POST", path, body);
+            if(result.status == 200){
+                return true;
+                //TODO handle 401
+            }else{
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*
