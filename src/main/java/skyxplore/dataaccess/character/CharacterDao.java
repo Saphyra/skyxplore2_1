@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.character.entity.CharacterEntity;
 import skyxplore.dataaccess.character.converter.CharacterConverter;
 import skyxplore.dataaccess.character.repository.CharacterRepository;
+import skyxplore.dataaccess.equippedship.EquippedShipDao;
 import skyxplore.dataaccess.user.entity.UserEntity;
 import skyxplore.dataaccess.user.repository.UserRepository;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
@@ -24,9 +25,16 @@ public class CharacterDao {
     private final CharacterRepository characterRepository;
     private final UserRepository userRepository;
     private final CharacterConverter characterConverter;
+    private final EquippedShipDao equippedShipDao;
 
     public void deleteById(Long characterId){
+        equippedShipDao.deleteByCharacterId(characterId);
         characterRepository.deleteById(characterId);
+    }
+
+    public void deleteByUserId(Long userId){
+        List<SkyXpCharacter> characters = findByUserId(userId);
+        characters.forEach(e -> deleteById(e.getCharacterId()));
     }
 
     public SkyXpCharacter findById(Long characterId){

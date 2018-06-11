@@ -3,6 +3,7 @@ package skyxplore.dataaccess.user;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import skyxplore.dataaccess.character.CharacterDao;
 import skyxplore.dataaccess.user.converter.RoleConverter;
 import skyxplore.dataaccess.user.converter.UserConverter;
 import skyxplore.dataaccess.user.entity.UserEntity;
@@ -20,8 +21,10 @@ public class UserDao {
     private final UserRepository userRepository;
     private final UserConverter userConverter;
     private final RoleConverter roleConverter;
+    private final CharacterDao characterDao;
 
     public void delete(Long userId){
+        characterDao.deleteByUserId(userId);
         userRepository.deleteById(userId);
     }
 
