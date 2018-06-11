@@ -6,14 +6,31 @@ import com.google.common.cache.CacheLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import skyxplore.dataaccess.accesstoken.AccessTokenDao;
 import skyxplore.service.CharacterService;
 import skyxplore.service.UserService;
+import skyxplore.service.domain.AccessToken;
 
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 @Slf4j
 public class CacheConfig {
+    @Bean(name = "accessTokenCache")
+    public Cache<Long, AccessToken> accessTokenCache(AccessTokenDao accessTokenDao){
+        CacheLoader<Long, AccessToken> loader;
+        loader = new CacheLoader<Long, AccessToken>() {
+            @Override
+            public AccessToken load(Long key) {
+                return accessTokenDao.findByUserId(key);
+            }
+        };
+
+        return CacheBuilder.newBuilder()
+                .expireAfterWrite(2, TimeUnit.SECONDS)
+                .build(loader);
+    }
+
     @Bean(name = "userNameCache")
     public Cache<String, Boolean> userNameCache(UserService userService) {
         CacheLoader<String, Boolean> loader;

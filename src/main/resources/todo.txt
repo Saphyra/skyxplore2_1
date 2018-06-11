@@ -1,2 +1,2 @@
-Cache authenticated user (For 1 sec)
 Refactor db connections -> Character stores userId
+Use entities as domain objects -> No coonverters

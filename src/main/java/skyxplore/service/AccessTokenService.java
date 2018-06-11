@@ -1,20 +1,22 @@
 package skyxplore.service;
 
+import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.restcontroller.request.LoginRequest;
-import skyxplore.service.domain.AccessToken;
+import skyxplore.dataaccess.accesstoken.AccessTokenDao;
 import skyxplore.exception.AccessTokenExpiredException;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadRequestAuthException;
-import skyxplore.dataaccess.accesstoken.AccessTokenDao;
 import skyxplore.filter.AuthFilter;
+import skyxplore.restcontroller.request.LoginRequest;
+import skyxplore.service.domain.AccessToken;
 import skyxplore.service.domain.SkyXpUser;
 import skyxplore.util.AccessTokenDateResolver;
 import skyxplore.util.IdGenerator;
 
 import java.util.Calendar;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class AccessTokenService {
     private final AccessTokenDao accessTokenDao;
     private final UserService userService;
     private final IdGenerator idGenerator;
+    private final Cache<Long, AccessToken> accessTokenCache;
 
     public void deleteOutDatedTokens(){
         Calendar expiration = accessTokenDateResolver.getExpirationDate();
@@ -41,7 +44,7 @@ public class AccessTokenService {
         try {
             Long userId = validate(userIdValue, accessTokenId);
 
-            accessToken = getAccessTokenByUserId(userId);
+            accessToken = accessTokenCache.get(userId);
             if (accessToken == null) {
                 throw new BadCredentialsException("No valid accessToken for user " + userIdValue);
             } else if (isTokenValid(accessToken)) {
@@ -52,6 +55,8 @@ public class AccessTokenService {
         } catch (BadCredentialsException | BadRequestAuthException | AccessTokenExpiredException e) {
             log.info("Authentication failed: {}", e.getMessage());
             return false;
+        } catch (ExecutionException e){
+            throw new RuntimeException(e);
         }
         log.info("Authentication successful.");
         updateTokenExpiration(accessToken);
