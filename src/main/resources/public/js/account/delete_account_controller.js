@@ -1,6 +1,7 @@
 (function DeleteAccountController(){
     window.deleteAccountController = new function(){
         scriptLoader.loadScript("js/common/dao/user_dao.js");
+        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.deleteAccount = deleteAccount;
         this.validateInputs = validateInputs;
@@ -18,9 +19,13 @@
             const validationResult = validateInputs();
             if(validationResult.isValid && confirm("Biztosan törölni szeretné felhasználói fiókját?\nA törölt adatokat már nem lehet visszaállítani.")){
                 const result = userDao.deleteAccount(password);
-                if(result){
+                if(result.status == ResponseStatus.OK){
                     sessionStorage.successMessage = "Account törölve.";
                     window.location.href = "/";
+                }else if(result.status == ResponseStatus.UNAUTHORIZED){
+                    notificationService.showError("Hibás jelszó.");
+                }else{
+                    throwException("UnknownServerError", result.toString());
                 }
             }else{
                 for(let mindex in validationResult.responses){

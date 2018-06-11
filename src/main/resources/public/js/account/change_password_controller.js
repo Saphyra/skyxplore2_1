@@ -1,6 +1,7 @@
 (function ChangePasswordController(){
     window.changePasswordController = new function(){
         scriptLoader.loadScript("js/common/dao/user_dao.js");
+        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.changePassword = changePassword;
         this.validateInputs = validateInputs;
@@ -22,13 +23,19 @@
             
             const validationResult = validateInputs();
             if(validationResult.isValid){
-                const result = userDao.changePassword(password1, password1, oldPassword)
-                if(result){
+                const result = userDao.changePassword(password1, password1, oldPassword);
+                
+                if(result.status == ResponseStatus.OK){
                     notificationService.showSuccess("Jelszó megváltoztatása sikeres.");
-                    password1Input.value = "";
-                    password2Input.value = "";
-                    oldPasswordInput.value = "";
+                }else if(result.status == ResponseStatus.UNAUTHORIZED){
+                    notificationService.showError("Hibás jelszó.");
+                }else{
+                    throwException("UnknownServerError", result.toString());
                 }
+                
+                password1Input.value = "";
+                password2Input.value = "";
+                oldPasswordInput.value = "";
             }else{
                 for(let mindex in validationResult.responses){
                     notificationService.showError(validationResult.responses[mindex]);

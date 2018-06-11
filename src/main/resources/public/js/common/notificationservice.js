@@ -11,7 +11,11 @@
         });
     }
     
-    //gTODO documentation
+    /*
+    Shows a success message.
+    Arguments:
+        - message: the text to show.
+    */
     function showSuccess(message){
         try{
             showMessage(message, "green");
@@ -21,7 +25,11 @@
         }
     }
     
-    //TODO documentation
+    /*
+    Shows an error message.
+    Arguments:
+        - message: the text to show.
+    */
     function showError(message){
         try{
             showMessage(message, "red");
@@ -31,7 +39,12 @@
         }
     }
     
-    //TODO documentation
+    /*
+    Shows a notification message with the given color.
+    Arguments:
+        - message: the text to show.
+        - bgColor: the background color of the notification.
+    */
     function showMessage(message, bgColor){
         try{
             const container = document.getElementById("notificationcontainer") || createContainer();
@@ -45,8 +58,7 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
         }
-        
-        //TODO documentation
+
         function createContainer(){
             try{
                 const container = document.createElement("DIV");
@@ -62,8 +74,7 @@
                 logService.log(message, "error");
             }
         }
-        
-        //TODO documentation
+
         function createMessageElement(message, bgColor){
             try{
                 const wrapper = document.createElement("DIV");
@@ -84,7 +95,10 @@
             }
         }
     }
-    
+
+    /*
+    Shows the messages stored in sessionStorage.
+    */
     function printStoredMessages(){
         try{
             if(sessionStorage.errorMessage != undefined && sessionStorage.errorMessage != null){

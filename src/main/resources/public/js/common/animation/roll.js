@@ -5,7 +5,13 @@
         this.rollOutHorizontal = rollOutHorizontal;
     }
     
-    //TODO documentation
+    /*
+    Adds a roll-in display effect for a given element.
+    Arguments:
+        - element: the element to display
+        - container: the container to append the new element into.
+        - time: the timeout of the roll-in effect.
+    */
     function rollInHorizontal(element, container, time){
         try{
             const width = DOMUtil.getElementWidth(element, container);
@@ -35,7 +41,13 @@
         }
     }
     
-    //TODO documentation
+    /*
+    Adds a roll-out display effect for a given element.
+    Arguments:
+        - element: the element to display
+        - container: the container to append the new element into.
+        - time: the timeout of the roll-out effect.
+    */
     function rollOutHorizontal(element, container, time){
         try{
             const timeout = Math.round(time / element.offsetWidth) * 3;

@@ -1,5 +1,7 @@
 (function UserDao(){
     window.userDao = new function(){
+        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
+        
         this.changeEmail = changeEmail;
         this.changePassword = changePassword;
         this.changeUserName = changeUserName;
@@ -15,11 +17,9 @@
         - newEmail: the new email address.
         - password: the password of the user.
     Returns:
-        - true, if the email changed successfully.
-        - false otherwise.
+        - new Response contains the result of the query.
     Throws:
         - IllegalArgument exception if newEmail or password is null or undefined.
-        - UnknownServerError exception if request fails.
     */
     function changeEmail(newEmail, password){
         try{
@@ -36,12 +36,8 @@
                 password: password
             };
             const result = dao.sendRequest("POST", path, body);
-            if(result.status == 200){
-                return true;
-                //TODO handle 401
-            }else{
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
-            }
+            
+            return new Response(result);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -56,11 +52,9 @@
         - password2: the confirmation password.
         - oldPassword: the current password of the user.
     Returns:
-        - true, if change was successful.
-        - false otherwise.
+        - new Response contains the result of the request.
     Throws:
         - IllegalArgument exception if password1, password2, oldPassword is null or undefined.
-        - UnknownServerError exception if request fails.
     */
     function changePassword(password1, password2, oldPassword){
         try{
@@ -82,13 +76,7 @@
             };
             const result = dao.sendRequest("POST", path, body);
             
-            if(result.status == 200){
-                return true;
-                //TODO handle 401
-            }else{
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
-            }
-            
+            return new Response(result);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -102,11 +90,9 @@
         - newUserName: the new username.
         - password: the password of the user.
     Returns:
-        - true, if the name changed successfully.
-        - false otherwise.
+        - new Response contains the result of the request.
     Throws:
         - IllegalArgument exception if newUserName or password is null or undefined.
-        - UnknownServerError exception if request fails.
     */
     function changeUserName(newUserName, password){
         try{
@@ -123,12 +109,7 @@
                 password: password
             };
             const result = dao.sendRequest("POST", path, body);
-            if(result.status == 200){
-                return true;
-                //TODO handle 401
-            }else{
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
-            }
+            return new Response(result);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -141,11 +122,9 @@
     Arguments:
         - password: The password of the user.
     Returns:
-        - true if deletion was successful.
-        - false otherwise
+        - new Response contains the result of the request.
     Throws:
         - IllegalArgument exception if password is null or undefined.
-        - UnknownServerError exception if request fails.
     */
     function deleteAccount(password){
         try{
@@ -158,12 +137,7 @@
                 password: password
             };
             const result = dao.sendRequest("POST", path, body);
-            if(result.status == 200){
-                return true;
-                //TODO handle 401
-            }else{
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
-            }
+            return new Response(result);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -189,7 +163,11 @@
             }
             
             const result = dao.sendRequest("GET", "isemailexists?email=" + email);
-            //TODO validate response status
+
+            if(result.status != 200){
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
+
             if(result.responseText === "true"){
                 return true;
             }else if(result.responseText === "false"){
@@ -222,7 +200,11 @@
             }
             
             const result = dao.sendRequest("GET", "isusernameexists?username=" + userName);
-            //TODO validate response status
+
+            if(result.status != 200){
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
+
             if(result.responseText === "true"){
                 return true;
             }else if(result.responseText === "false"){
@@ -263,6 +245,21 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return false;
+        }
+    }
+    
+    function Response(response){
+        const statusKey = responseStatusMapper.getKeyOf(response.status);
+        if(statusKey == null){
+            throwException("UnknownServerError", result.status + " - " + result.responseText);
+        }
+        
+        this.statusKey = statusKey;
+        this.status = response.status;
+        this.result = response.responseText;
+        
+        this.toString = function(){
+            return this.status + ": " + this.status + " - " + this.result;
         }
     }
 })();

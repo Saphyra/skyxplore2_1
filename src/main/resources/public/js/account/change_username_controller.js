@@ -1,6 +1,7 @@
 (function ChangeUsernameController(){
     window.changeUserNameController = new function(){
         scriptLoader.loadScript("js/common/dao/user_dao.js");
+        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.lastUsernameValid = false;
         this.lastUsernameQueried = null;
@@ -24,11 +25,17 @@
             const validationResult = validateInputs();
             if(validationResult.isValid){
                 const result = userDao.changeUserName(newUserName, password);
-                if(result){
+                
+                if(result.status == ResponseStatus.OK){
                     notificationService.showSuccess("Felhasználónév megváltoztatása sikeres.");
-                    newUserNameInput.value = "";
-                    passwordInput.value = "";
+                }else if(result.status == ResponseStatus.UNAUTHORIZED){
+                    notificationService.showError("Hibás jelszó.");
+                }else{
+                    throwException("UnknownServerError", result.toString());
                 }
+                
+                newUserNameInput.value = "";
+                passwordInput.value = "";
             }else{
                 for(let mindex in validationResult.responses){
                     notificationService.showError(validationResult.responses[mindex]);
