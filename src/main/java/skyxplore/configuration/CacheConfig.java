@@ -11,18 +11,20 @@ import skyxplore.service.CharacterService;
 import skyxplore.service.UserService;
 import skyxplore.service.domain.AccessToken;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 @Slf4j
 public class CacheConfig {
     @Bean(name = "accessTokenCache")
-    public Cache<Long, AccessToken> accessTokenCache(AccessTokenDao accessTokenDao){
-        CacheLoader<Long, AccessToken> loader;
-        loader = new CacheLoader<Long, AccessToken>() {
+    public Cache<String, Optional<AccessToken>> accessTokenCache(AccessTokenDao accessTokenDao){
+        CacheLoader<String, Optional<AccessToken>> loader;
+        loader = new CacheLoader<String, Optional<AccessToken>>() {
             @Override
-            public AccessToken load(Long key) {
-                return accessTokenDao.findByUserId(key);
+            public Optional<AccessToken> load(String key) {
+                AccessToken accessToken = accessTokenDao.findByUserId(key);
+                return Optional.ofNullable(accessToken);
             }
         };
 

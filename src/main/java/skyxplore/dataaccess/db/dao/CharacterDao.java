@@ -1,18 +1,14 @@
-package skyxplore.dataaccess.character;
+package skyxplore.dataaccess.db.dao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.character.entity.CharacterEntity;
-import skyxplore.dataaccess.character.converter.CharacterConverter;
-import skyxplore.dataaccess.character.repository.CharacterRepository;
-import skyxplore.dataaccess.equippedship.EquippedShipDao;
-import skyxplore.dataaccess.user.entity.UserEntity;
-import skyxplore.dataaccess.user.repository.UserRepository;
-import skyxplore.exception.CharacterNameAlreadyExistsException;
+import skyxplore.dataaccess.db.converter.CharacterConverter;
+import skyxplore.dataaccess.db.entity.CharacterEntity;
+import skyxplore.dataaccess.db.repository.CharacterRepository;
 import skyxplore.exception.CharacterNotFoundException;
-import skyxplore.exception.UserNotFoundException;
 import skyxplore.service.domain.SkyXpCharacter;
+import skyxplore.service.domain.SkyXpUser;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -23,21 +19,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CharacterDao {
     private final CharacterRepository characterRepository;
-    private final UserRepository userRepository;
+    private final UserDao userDao;
     private final CharacterConverter characterConverter;
     private final EquippedShipDao equippedShipDao;
 
-    public void deleteById(Long characterId){
+    public void deleteById(String characterId){
         equippedShipDao.deleteByCharacterId(characterId);
+
+        log.info("Deleting character {}", characterId);
         characterRepository.deleteById(characterId);
     }
 
-    public void deleteByUserId(Long userId){
+    public void deleteByUserId(String userId){
         List<SkyXpCharacter> characters = findByUserId(userId);
         characters.forEach(e -> deleteById(e.getCharacterId()));
     }
 
-    public SkyXpCharacter findById(Long characterId){
+    public SkyXpCharacter findById(String characterId){
         Optional<CharacterEntity> character = characterRepository.findById(characterId);
         if(character.isPresent()){
             return characterConverter.convertEntity(character.get());
@@ -45,12 +43,9 @@ public class CharacterDao {
         throw new CharacterNotFoundException("No character found with id" + characterId);
     }
 
-    public List<SkyXpCharacter> findByUserId(Long userId){
-        Optional<UserEntity> user = userRepository.findById(userId);
-        if(user.isPresent()){
-            return characterConverter.convertEntity(characterRepository.findByUser(user.get()));
-        }
-        throw new UserNotFoundException("No user found with id " + userId);
+    public List<SkyXpCharacter> findByUserId(String userId){
+        SkyXpUser user = userDao.findById(userId);
+        return characterConverter.convertEntity(characterRepository.findByUserId(user.getUserId()));
     }
 
     public SkyXpCharacter findByCharacterName(String characterName){
@@ -58,14 +53,11 @@ public class CharacterDao {
     }
 
     public SkyXpCharacter save(SkyXpCharacter character){
-        if(findByCharacterName(character.getCharacterName()) != null){
-            throw new CharacterNameAlreadyExistsException("Character already exists with name " + character.getCharacterName());
-        }
         return characterConverter.convertEntity(characterRepository.save(characterConverter.convertDomain(character)));
     }
 
     @Transactional
-    public void renameCharacter(Long characterId, String newCharacterName){
+    public void renameCharacter(String characterId, String newCharacterName){
         Optional<CharacterEntity> character = characterRepository.findById(characterId);
         if(character.isPresent()){
             CharacterEntity entity = character.get();

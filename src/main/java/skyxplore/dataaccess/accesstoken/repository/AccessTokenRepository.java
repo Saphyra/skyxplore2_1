@@ -10,12 +10,12 @@ import javax.transaction.Transactional;
 import java.util.Calendar;
 
 public interface AccessTokenRepository extends JpaRepository<AccessTokenEntity, String> {
-    void deleteByUserId(Long userId);
+    void deleteByUserId(String userId);
 
     @Transactional
     @Modifying
     @Query(value = "DELETE AccessTokenEntity a WHERE a.lastAccess < :expiration")
     void deleteExpired(@Param("expiration") Calendar expiration);
 
-    AccessTokenEntity findByUserId(Long userId);
+    AccessTokenEntity findByUserId(String userId);
 }

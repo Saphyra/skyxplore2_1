@@ -9,6 +9,7 @@ public class SlotViewConverter {
     public SlotView convertDomain(EquippedSlot domain){
         SlotView view = new SlotView();
         view.setSlotId(domain.getSlotId());
+        view.setShipId(domain.getShipId());
         view.setFrontSlot(domain.getFrontSlot());
         view.setFrontEquipped(domain.getFrontEquipped());
         view.setLeftSlot(domain.getLeftSlot());

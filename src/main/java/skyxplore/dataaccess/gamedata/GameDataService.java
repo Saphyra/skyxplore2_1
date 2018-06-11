@@ -34,12 +34,12 @@ public class GameDataService {
         return shipService.get(id);
     }
 
-    public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship) {
+    public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship, EquippedSlot defenseSlot, EquippedSlot weaponShot) {
         Map<String, GeneralDescription> result = new HashMap<>();
         result.put(ship.getShipType(), getShip(ship.getShipType()));
         result.putAll(getData(ship.getConnectorEquipped()));
-        result.putAll(getData(ship.getDefenseSlot()));
-        result.putAll(getData(ship.getWeaponSlot()));
+        result.putAll(getData(defenseSlot));
+        result.putAll(getData(weaponShot));
         result.putAll(getData(getShip(ship.getShipType()).getAbility()));
         return result;
     }

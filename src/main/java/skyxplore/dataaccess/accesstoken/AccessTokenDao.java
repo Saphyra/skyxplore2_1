@@ -24,7 +24,7 @@ public class AccessTokenDao {
         accessTokenRepository.deleteById(accessTokenId);
     }
 
-    public void deleteByUserId(Long userId) {
+    public void deleteByUserId(String userId) {
         log.info("Deleting accessToken of user {}", userId);
         accessTokenRepository.deleteByUserId(userId);
     }
@@ -33,7 +33,7 @@ public class AccessTokenDao {
         accessTokenRepository.deleteExpired(expiration);
     }
 
-    public AccessToken findByUserId(Long userId) {
+    public AccessToken findByUserId(String userId) {
         return accessTokenConverter.convertEntity(accessTokenRepository.findByUserId(userId));
     }
 

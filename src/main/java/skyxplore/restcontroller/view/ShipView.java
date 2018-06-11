@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 @Data
 public class ShipView {
-    private Long shipId;
-    private Long characterId;
+    private String shipId;
+    private String characterId;
     private String shipType;
     private Integer coreHull;
     private Integer connectorSlot;

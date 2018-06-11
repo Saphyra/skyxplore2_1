@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class SkyXpCharacter {
-    private Long characterId;
+    private String characterId;
     private String characterName;
-    private SkyXpUser user;
+    private String userId;
+    private String shipId;
 }

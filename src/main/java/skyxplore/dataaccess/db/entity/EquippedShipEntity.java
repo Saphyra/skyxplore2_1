@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.equippedship.entity;
+package skyxplore.dataaccess.db.entity;
 
 import lombok.Data;
 
@@ -10,12 +10,11 @@ import java.util.ArrayList;
 @Table(name = "equipped_ship")
 public class EquippedShipEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ship_id")
-    private Long shipId;
+    @Column(name = "ship_id", length = 50)
+    private String shipId;
 
     @Column(name = "character_id", nullable =  false)
-    private Long characterId;
+    private String characterId;
 
     @Column(name = "ship_type", nullable =  false)
     private String shipType;
@@ -29,11 +28,9 @@ public class EquippedShipEntity {
     @Column(name = "connector_equipepd", nullable = false)
     private ArrayList<String> connectorEquipped;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "defense_slot", nullable = false)
-    private SlotEntity defenseSlot;
+    @Column(name = "defense_slot_id", nullable = false)
+    private String defenseSlotId;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "weapon_slot", nullable = false)
-    private SlotEntity weaponSlot;
+    @Column(name = "weapon_slot_id", nullable = false)
+    private String weaponSlotId;
 }

@@ -1,14 +1,13 @@
-package skyxplore.dataaccess.user.converter;
+package skyxplore.dataaccess.db.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.user.entity.UserEntity;
+import skyxplore.dataaccess.db.entity.UserEntity;
 import skyxplore.service.domain.SkyXpUser;
 
 @Component
 @RequiredArgsConstructor
 public class UserConverter {
-    private final RoleConverter roleConverter;
 
     public SkyXpUser convertEntity(UserEntity entity){
         if(entity == null){
@@ -19,7 +18,7 @@ public class UserConverter {
             user.setUsername(entity.getUsername());
             user.setPassword(entity.getPassword());
             user.setEmail(entity.getEmail());
-            user.setRoles(roleConverter.convertEntity(entity.getRoles()));
+            user.setRoles(entity.getRoles());
         return user;
     }
 
@@ -29,7 +28,7 @@ public class UserConverter {
         entity.setUsername(domain.getUsername());
         entity.setPassword(domain.getPassword());
         entity.setEmail(domain.getEmail());
-        entity.setRoles(roleConverter.convertDomain(domain.getRoles()));
+        entity.setRoles(domain.getRoles());
 
         return entity;
     }

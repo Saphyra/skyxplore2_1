@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.equippedship.entity;
+package skyxplore.dataaccess.db.entity;
 
 import lombok.Data;
 
@@ -10,9 +10,11 @@ import java.util.ArrayList;
 @Table(name = "equipped_slot")
 public class SlotEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "slot_id")
-    private Long slotId;
+    @Column(name = "slot_id", length = 50)
+    private String slotId;
+
+    @Column(name = "ship_id", nullable = false)
+    private String shipId;
 
     @Column(name = "front_slot", nullable =  false)
     private Integer frontSlot;

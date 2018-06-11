@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 @Data
 public class SlotView {
-    private Long slotId;
+    private String slotId;
+    private String shipId;
 
     private Integer frontSlot;
     private ArrayList<String> frontEquipped;

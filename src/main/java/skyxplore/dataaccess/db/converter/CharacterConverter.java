@@ -1,9 +1,8 @@
-package skyxplore.dataaccess.character.converter;
+package skyxplore.dataaccess.db.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.character.entity.CharacterEntity;
-import skyxplore.dataaccess.user.converter.UserConverter;
+import skyxplore.dataaccess.db.entity.CharacterEntity;
 import skyxplore.service.domain.SkyXpCharacter;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class CharacterConverter {
-    private final UserConverter userConverter;
 
     public List<SkyXpCharacter> convertEntity(List<CharacterEntity> entities){
         return entities.stream().map(this::convertEntity).collect(Collectors.toList());
@@ -25,7 +23,8 @@ public class CharacterConverter {
         SkyXpCharacter domain = new SkyXpCharacter();
         domain.setCharacterId(entity.getCharacterId());
         domain.setCharacterName(entity.getCharacterName());
-        domain.setUser(userConverter.convertEntity(entity.getUser()));
+        domain.setShipId(entity.getShipId());
+        domain.setUserId(entity.getUserId());
         return domain;
     }
 
@@ -33,7 +32,8 @@ public class CharacterConverter {
         CharacterEntity entity = new CharacterEntity();
         entity.setCharacterId(domain.getCharacterId());
         entity.setCharacterName(domain.getCharacterName());
-        entity.setUser(userConverter.convertDomain(domain.getUser()));
+        entity.setUserId(domain.getUserId());
+        entity.setShipId(domain.getShipId());
         return entity;
     }
 }

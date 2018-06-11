@@ -1,13 +1,11 @@
-package skyxplore.dataaccess.user;
+package skyxplore.dataaccess.db.dao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.character.CharacterDao;
-import skyxplore.dataaccess.user.converter.RoleConverter;
-import skyxplore.dataaccess.user.converter.UserConverter;
-import skyxplore.dataaccess.user.entity.UserEntity;
-import skyxplore.dataaccess.user.repository.UserRepository;
+import skyxplore.dataaccess.db.converter.UserConverter;
+import skyxplore.dataaccess.db.entity.UserEntity;
+import skyxplore.dataaccess.db.repository.UserRepository;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.service.domain.SkyXpUser;
 
@@ -20,11 +18,9 @@ import java.util.Optional;
 public class UserDao {
     private final UserRepository userRepository;
     private final UserConverter userConverter;
-    private final RoleConverter roleConverter;
-    private final CharacterDao characterDao;
 
-    public void delete(Long userId){
-        characterDao.deleteByUserId(userId);
+    public void delete(String userId){
+        log.info("Deleting user {}", userId);
         userRepository.deleteById(userId);
     }
 
@@ -32,7 +28,7 @@ public class UserDao {
         return userConverter.convertEntity(userRepository.findByEmail(email));
     }
 
-    public SkyXpUser findById(Long userId){
+    public SkyXpUser findById(String userId){
         Optional<UserEntity> user = userRepository.findById(userId);
         if(user.isPresent()){
             return userConverter.convertEntity(user.get());
@@ -58,7 +54,7 @@ public class UserDao {
             entity.setUsername(user.getUsername());
             entity.setEmail(user.getEmail());
             entity.setPassword(user.getPassword());
-            entity.setRoles(roleConverter.convertDomain(user.getRoles()));
+            entity.setRoles(user.getRoles());
         }else{
             throw new UserNotFoundException("User not found with id" + user.getUserId());
         }

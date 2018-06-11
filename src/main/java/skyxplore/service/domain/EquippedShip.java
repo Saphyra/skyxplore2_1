@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 @Data
 public class EquippedShip {
-    private Long shipId;
-    private Long characterId;
+    private String shipId;
+    private String characterId;
     private String shipType;
     private Integer coreHull;
     private Integer connectorSlot;
     private ArrayList<String> connectorEquipped = new ArrayList<>();
-    private EquippedSlot defenseSlot = new EquippedSlot();
-    private EquippedSlot weaponSlot = new EquippedSlot();
+    private String defenseSlotId;
+    private String weaponSlotId;
 
     public void addConnector(String element){
         if(connectorSlot.equals(connectorEquipped.size())){

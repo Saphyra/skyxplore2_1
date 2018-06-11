@@ -3,8 +3,9 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.user.UserDao;
-import skyxplore.dataaccess.user.entity.Role;
+import skyxplore.dataaccess.db.dao.CharacterDao;
+import skyxplore.dataaccess.db.dao.UserDao;
+import skyxplore.dataaccess.db.entity.Role;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
@@ -12,6 +13,7 @@ import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.restcontroller.request.*;
 import skyxplore.restcontroller.view.converter.UserViewConverter;
 import skyxplore.service.domain.SkyXpUser;
+import skyxplore.util.IdGenerator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,10 +22,12 @@ import java.util.HashSet;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
+    private final CharacterDao characterDao;
+    private final IdGenerator idGenerator;
     private final UserDao userDao;
     private final UserViewConverter userViewConverter;
 
-    public void changeEmail(ChangeEmailRequest request, Long userId){
+    public void changeEmail(ChangeEmailRequest request, String userId){
         SkyXpUser user = getUserById(userId);
         if(isEmailExists(request.getNewEmail())){
             throw new EmailAlreadyExistsException();
@@ -37,16 +41,16 @@ public class UserService {
         log.info("Email changed successfully.");
     }
 
-    public void changePassword(ChangePasswordRequest request, Long uid){
-        SkyXpUser user = getUserById(uid);
+    public void changePassword(ChangePasswordRequest request, String userId){
+        SkyXpUser user = getUserById(userId);
         validateChangePasswordRequest(request, user);
         user.setPassword(request.getNewPassword());
-        log.info("Changing password of user " + uid);
+        log.info("Changing password of user " + userId);
         userDao.update(user);
         log.info("Password successfully changed.");
     }
 
-    public void changeUserName(ChangeUserNameRequest request, Long userId){
+    public void changeUserName(ChangeUserNameRequest request, String userId){
         SkyXpUser user = getUserById(userId);
         if(isUserNameExists(request.getNewUserName())){
             throw new UserNameAlreadyExistsException();
@@ -60,15 +64,17 @@ public class UserService {
         log.info("Username successfully changed.");
     }
 
-    public void deleteAccount(AccountDeleteRequest request, Long userId){
+    public void deleteAccount(AccountDeleteRequest request, String userId){
         SkyXpUser user = getUserById(userId);
         if(!request.getPassword().equals(user.getPassword())){
             throw new BadCredentialsException("Wrong password");
         }
+
+        characterDao.deleteByUserId(userId);
         userDao.delete(userId);
     }
 
-    public SkyXpUser getUserById(Long userId){
+    public SkyXpUser getUserById(String userId){
         return userDao.findById(userId);
     }
 
@@ -88,9 +94,11 @@ public class UserService {
         return user != null;
     }
 
-    public Long registrateUser(UserRegistrationRequest request){
+    public String registrateUser(UserRegistrationRequest request){
         validateRegistrationRequest(request);
         SkyXpUser user = new SkyXpUser(request.getUsername(), request.getPassword(), request.getEmail(), new HashSet<Role>(Arrays.asList(Role.USER)));
+        user.setUserId(idGenerator.getRandomId());
+        user.setRoles(new HashSet<>(Arrays.asList(Role.USER)));
         SkyXpUser registratedUser = userDao.registrateUser(user);
         log.info("New userId: {}", registratedUser.getUserId());
         return userViewConverter.convertDomain(registratedUser).getUserId();

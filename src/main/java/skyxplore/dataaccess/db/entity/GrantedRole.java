@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.user.entity;
+package skyxplore.dataaccess.db.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

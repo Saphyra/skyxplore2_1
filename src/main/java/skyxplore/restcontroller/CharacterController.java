@@ -32,7 +32,7 @@ public class CharacterController {
     private final Cache<String, Boolean> characterNameCache;
 
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
-    public void deleteCharacter(@RequestBody @NotNull CharacterDeleteRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
+    public void deleteCharacter(@RequestBody @NotNull CharacterDeleteRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to delete {}", userId, request.getCharacterId());
         characterService.deleteCharacter(request, userId);
         log.info("Character {} is deleted.", request.getCharacterId());
@@ -45,13 +45,13 @@ public class CharacterController {
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)
-    public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
+    public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to know his character list.", userId);
         return characterViewConverter.convertDomain(characterService.getCharactersByUserId(userId));
     }
 
     @PutMapping(CREATE_CHARACTER_MAPPING)
-    public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
+    public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("Creating new character with name {}", request.getCharacterName());
         characterService.createCharacter(request, userId);
         log.info("Character created successfully.");

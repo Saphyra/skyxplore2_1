@@ -14,7 +14,7 @@ public class AccessTokenEntity {
     private String accessTokenId;
 
     @Column(name = "user_id", nullable = false, unique = true)
-    private Long userId;
+    private String userId;
 
     @Column(name = "last_access", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

@@ -7,5 +7,5 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CharacterDeleteRequest {
     @NotNull
-    private Long characterId;
+    private String characterId;
 }

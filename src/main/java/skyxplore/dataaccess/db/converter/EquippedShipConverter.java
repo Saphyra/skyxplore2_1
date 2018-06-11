@@ -1,9 +1,9 @@
-package skyxplore.dataaccess.equippedship.converter;
+package skyxplore.dataaccess.db.converter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.equippedship.entity.EquippedShipEntity;
+import skyxplore.dataaccess.db.entity.EquippedShipEntity;
 import skyxplore.service.domain.EquippedShip;
 
 @Component
@@ -20,8 +20,8 @@ public class EquippedShipConverter {
         entity.setCoreHull(domain.getCoreHull());
         entity.setConnectorSlot(domain.getConnectorSlot());
         entity.setConnectorEquipped(domain.getConnectorEquipped());
-        entity.setDefenseSlot(slotConverter.convertDomain(domain.getDefenseSlot()));
-        entity.setWeaponSlot(slotConverter.convertDomain(domain.getWeaponSlot()));
+        entity.setDefenseSlotId(domain.getDefenseSlotId());
+        entity.setWeaponSlotId(domain.getWeaponSlotId());
         return entity;
     }
 
@@ -33,8 +33,8 @@ public class EquippedShipConverter {
         domain.setCoreHull(entity.getCoreHull());
         domain.setConnectorSlot(entity.getConnectorSlot());
         domain.setConnectorEquipped(entity.getConnectorEquipped());
-        domain.setDefenseSlot(slotConverter.convertEntity(entity.getDefenseSlot()));
-        domain.setWeaponSlot(slotConverter.convertEntity(entity.getWeaponSlot()));
+        domain.setDefenseSlotId(entity.getDefenseSlotId());
+        domain.setWeaponSlotId(entity.getWeaponSlotId());
         return domain;
     }
 }

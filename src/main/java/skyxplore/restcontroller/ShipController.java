@@ -20,7 +20,7 @@ public class ShipController {
     private final EquippedShipService equippedShipService;
 
     @GetMapping(GET_SHIP_DATA_MAPPING)
-    public EquipmentView<ShipView> getShipData(@PathVariable(value = "characterId") Long characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+    public EquipmentView<ShipView> getShipData(@PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("Querying ship data of character {}", characterId);
         return equippedShipService.getShipData(characterId, userId);
     }

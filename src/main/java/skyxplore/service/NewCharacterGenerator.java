@@ -8,11 +8,13 @@ import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.service.domain.EquippedShip;
 import skyxplore.service.domain.EquippedSlot;
+import skyxplore.service.domain.SkyXpCharacter;
+import skyxplore.util.IdGenerator;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class NewCharacterShipGenerator {
+public class NewCharacterGenerator {
     private static final String STARTER_SHIP_ID = "sta-01";
 
     private static final String GENERATOR_ID = "gen-01";
@@ -27,34 +29,26 @@ public class NewCharacterShipGenerator {
     private static final String RIFLE_ID = "rif-lrldma-01";
 
     private final GameDataService gameDataService;
+    private final IdGenerator idGenerator;
 
-    public EquippedShip generateShip(Long characterId) {
-        EquippedShip ship = createEmptyShip(characterId);
-        fillWithConnectors(ship);
-        fillWithDefense(ship.getDefenseSlot());
-        fillWithWeapon(ship.getWeaponSlot());
-        return ship;
+    public SkyXpCharacter createCharacter(String userId, String characterName){
+        SkyXpCharacter character = new SkyXpCharacter();
+        character.setCharacterId(idGenerator.getRandomId());
+        character.setCharacterName(characterName);
+        character.setUserId(userId);
+        return character;
     }
 
-    private EquippedShip createEmptyShip(Long characterId) {
+    public EquippedShip createShip(String characterId){
         EquippedShip ship = new EquippedShip();
+        ship.setShipId(idGenerator.getRandomId());
         ship.setCharacterId(characterId);
         ship.setShipType(STARTER_SHIP_ID);
         Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
         ship.setConnectorSlot(shipData.getConnector());
         ship.setCoreHull(shipData.getCoreHull());
-        ship.setDefenseSlot(createSlot(shipData.getDefense()));
-        ship.setWeaponSlot(createSlot(shipData.getWeapon()));
+        fillWithConnectors(ship);
         return ship;
-    }
-
-    private EquippedSlot createSlot(Slot slot) {
-        EquippedSlot equippedSlot = new EquippedSlot();
-        equippedSlot.setFrontSlot(slot.getFront());
-        equippedSlot.setLeftSlot(slot.getSide());
-        equippedSlot.setRightSlot(slot.getSide());
-        equippedSlot.setBackSlot(slot.getBack());
-        return equippedSlot;
     }
 
     private void fillWithConnectors(EquippedShip ship) {
@@ -64,6 +58,24 @@ public class NewCharacterShipGenerator {
         ship.addConnector(BATTERY_ID);
         ship.addConnector(STORAGE_ID);
         ship.addConnector(STORAGE_ID);
+    }
+
+    public EquippedSlot createDefenseSlot(String shipId){
+        Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
+        EquippedSlot slot = createSlot(shipId, shipData.getDefense());
+        fillWithDefense(slot);
+        return slot;
+    }
+
+    private EquippedSlot createSlot(String shipId, Slot slot) {
+        EquippedSlot equippedSlot = new EquippedSlot();
+        equippedSlot.setSlotId(idGenerator.getRandomId());
+        equippedSlot.setShipId(shipId);
+        equippedSlot.setFrontSlot(slot.getFront());
+        equippedSlot.setLeftSlot(slot.getSide());
+        equippedSlot.setRightSlot(slot.getSide());
+        equippedSlot.setBackSlot(slot.getBack());
+        return equippedSlot;
     }
 
     private void fillWithDefense(EquippedSlot defense) {
@@ -80,6 +92,13 @@ public class NewCharacterShipGenerator {
 
         defense.addBack(SHIELD_ID);
         defense.addBack(ARMOR_ID);
+    }
+
+    public EquippedSlot createWeaponSlot(String shipId){
+        Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
+        EquippedSlot slot = createSlot(shipId, shipData.getDefense());
+        fillWithWeapon(slot);
+        return slot;
     }
 
     private void fillWithWeapon(EquippedSlot weapon){

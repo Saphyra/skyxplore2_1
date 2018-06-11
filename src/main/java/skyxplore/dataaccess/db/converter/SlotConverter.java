@@ -1,8 +1,8 @@
-package skyxplore.dataaccess.equippedship.converter;
+package skyxplore.dataaccess.db.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.equippedship.entity.SlotEntity;
+import skyxplore.dataaccess.db.entity.SlotEntity;
 import skyxplore.service.domain.EquippedSlot;
 
 @Component
@@ -12,6 +12,7 @@ public class SlotConverter {
     public SlotEntity convertDomain(EquippedSlot domain) {
         SlotEntity entity = new SlotEntity();
         entity.setSlotId(domain.getSlotId());
+        entity.setShipId(domain.getShipId());
         entity.setFrontSlot(domain.getFrontSlot());
         entity.setFrontEquipped(domain.getFrontEquipped());
         entity.setLeftSlot(domain.getLeftSlot());
@@ -26,6 +27,7 @@ public class SlotConverter {
     public EquippedSlot convertEntity(SlotEntity entity) {
         EquippedSlot domain = new EquippedSlot();
         domain.setSlotId(entity.getSlotId());
+        domain.setShipId(entity.getShipId());
         domain.setFrontSlot(entity.getFrontSlot());
         domain.setFrontEquipped(entity.getFrontEquipped());
         domain.setLeftSlot(entity.getLeftSlot());

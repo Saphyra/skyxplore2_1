@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RenameCharacterRequest {
     @NotNull
-    private Long characterId;
+    private String characterId;
     @NotNull
     private String newCharacterName;
 }

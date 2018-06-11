@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CharacterView {
-    private Long characterId;
+    private String characterId;
     private String characterName;
 }

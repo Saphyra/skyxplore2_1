@@ -28,26 +28,26 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(CHANGE_EMAIL_MAPPING)
-    public void changeEmail(@RequestBody @Valid ChangeEmailRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+    public void changeEmail(@RequestBody @Valid ChangeEmailRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to change his email address.", userId);
         userService.changeEmail(request, userId);
     }
 
     @PostMapping(CHANGE_PASSWORD_MAPPING)
-    public void changePassword(@RequestBody @Valid ChangePasswordRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+    public void changePassword(@RequestBody @Valid ChangePasswordRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to change his password.", userId);
         userService.changePassword(request, userId);
     }
 
     @PostMapping(CHANGE_USERNAME_MAPPING)
-    public void changeUserName(@RequestBody @Valid ChangeUserNameRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+    public void changeUserName(@RequestBody @Valid ChangeUserNameRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to change his username.", userId);
         userService.changeUserName(request, userId);
         userNameCache.invalidate(request.getNewUserName());
     }
 
     @PostMapping(DELETE_ACCOUNT_MAPPING)
-    public void deleteAccount(@RequestBody @Valid AccountDeleteRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+    public void deleteAccount(@RequestBody @Valid AccountDeleteRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to delete his account");
         userService.deleteAccount(request, userId);
     }
