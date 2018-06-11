@@ -3,6 +3,7 @@
         this.changeEmail = changeEmail;
         this.changePassword = changePassword;
         this.changeUserName = changeUserName;
+        this.deleteAccount = deleteAccount;
         this.isEmailExists = isEmailExists;
         this.isUserNameExists = isUserNameExists;
         this.registrateUser = registrateUser;
@@ -119,6 +120,41 @@
             const path = "user/changeusername";
             const body = {
                 newUserName: newUserName,
+                password: password
+            };
+            const result = dao.sendRequest("POST", path, body);
+            if(result.status == 200){
+                return true;
+                //TODO handle 401
+            }else{
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Deletes all data of the account.
+    Arguments:
+        - password: The password of the user.
+    Returns:
+        - true if deletion was successful.
+        - false otherwise
+    Throws:
+        - IllegalArgument exception if password is null or undefined.
+        - UnknownServerError exception if request fails.
+    */
+    function deleteAccount(password){
+        try{
+            if(password == null || password == undefined){
+                throwException("IllegalArgument", "password must not be null or undefined.");
+            }
+            
+            const path = "user/deleteaccount";
+            const body = {
                 password: password
             };
             const result = dao.sendRequest("POST", path, body);

@@ -9,10 +9,7 @@ import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
-import skyxplore.restcontroller.request.ChangeEmailRequest;
-import skyxplore.restcontroller.request.ChangePasswordRequest;
-import skyxplore.restcontroller.request.ChangeUserNameRequest;
-import skyxplore.restcontroller.request.UserRegistrationRequest;
+import skyxplore.restcontroller.request.*;
 import skyxplore.restcontroller.view.converter.UserViewConverter;
 import skyxplore.service.domain.SkyXpUser;
 
@@ -61,6 +58,14 @@ public class UserService {
         log.info("Changing username of user {}", userId);
         userDao.update(user);
         log.info("Username successfully changed.");
+    }
+
+    public void deleteAccount(AccountDeleteRequest request, Long userId){
+        SkyXpUser user = getUserById(userId);
+        if(!request.getPassword().equals(user.getPassword())){
+            throw new BadCredentialsException("Wrong password");
+        }
+        userDao.delete(userId);
     }
 
     public SkyXpUser getUserById(Long userId){

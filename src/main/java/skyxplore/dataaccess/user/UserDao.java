@@ -21,6 +21,10 @@ public class UserDao {
     private final UserConverter userConverter;
     private final RoleConverter roleConverter;
 
+    public void delete(Long userId){
+        userRepository.deleteById(userId);
+    }
+
     public SkyXpUser findUserByEmail(String email){
         return userConverter.convertEntity(userRepository.findByEmail(email));
     }

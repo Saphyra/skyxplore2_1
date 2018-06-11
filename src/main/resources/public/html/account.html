@@ -93,10 +93,11 @@
                     <LABEL>
                         Jelszó:
                         <INPUT type='password' id='deleteaccountpassword' placeholder='Jelszó'>
+                        <DIV id="invalid_deleteaccountpassword" class="invalid">X</DIV>
                     </LABEL>
                 </ARTICLE>
                 
-                <BUTTON onclick=''>Account törlése</BUTTON>
+                <BUTTON id='deleteaccountbutton' onclick='deleteAccountController.deleteAccount()'>Account törlése</BUTTON>
             </SECTION>
         </MAIN>
         

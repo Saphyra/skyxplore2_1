@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.filter.AuthFilter;
-import skyxplore.restcontroller.request.ChangeEmailRequest;
-import skyxplore.restcontroller.request.ChangePasswordRequest;
-import skyxplore.restcontroller.request.ChangeUserNameRequest;
-import skyxplore.restcontroller.request.UserRegistrationRequest;
+import skyxplore.restcontroller.request.*;
 import skyxplore.service.UserService;
 
 import javax.validation.Valid;
@@ -21,10 +18,10 @@ public class UserController {
     private static final String CHANGE_EMAIL_MAPPING = "user/changeemail";
     private static final String CHANGE_PASSWORD_MAPPING = "user/changepassword";
     private static final String CHANGE_USERNAME_MAPPING = "user/changeusername";
+    private static final String DELETE_ACCOUNT_MAPPING = "user/deleteaccount";
     private static final String EMAIL_EXISTS_MAPPING = "/isemailexists";
     private static final String REGISTRATION_MAPPING = "/registration";
     private static final String USERNAME_EXISTS_MAPPING = "/isusernameexists";
-
 
     private final Cache<String, Boolean> userNameCache;
     private final Cache<String, Boolean> emailCache;
@@ -47,6 +44,12 @@ public class UserController {
         log.info("{} wants to change his username.", userId);
         userService.changeUserName(request, userId);
         userNameCache.invalidate(request.getNewUserName());
+    }
+
+    @PostMapping(DELETE_ACCOUNT_MAPPING)
+    public void deleteAccount(@RequestBody @Valid AccountDeleteRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) Long userId){
+        log.info("{} wants to delete his account");
+        userService.deleteAccount(request, userId);
     }
 
     @GetMapping(EMAIL_EXISTS_MAPPING)

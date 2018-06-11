@@ -6,11 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class ChangeUserNameRequest {
-    @NotNull
-    @Size(min = 3)
-    private String newUserName;
-
+public class AccountDeleteRequest {
     @NotNull
     @Size(min = 1)
     private String password;

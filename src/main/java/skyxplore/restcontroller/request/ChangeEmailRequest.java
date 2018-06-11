@@ -13,6 +13,6 @@ public class ChangeEmailRequest {
     private String newEmail;
 
     @NotNull
-    @Size(min = 3)
+    @Size(min = 1)
     private String password;
 }
