@@ -247,19 +247,4 @@
             return false;
         }
     }
-    
-    function Response(response){
-        const statusKey = responseStatusMapper.getKeyOf(response.status);
-        if(statusKey == null){
-            throwException("UnknownServerError", result.status + " - " + result.responseText);
-        }
-        
-        this.statusKey = statusKey;
-        this.status = response.status;
-        this.result = response.responseText;
-        
-        this.toString = function(){
-            return this.status + ": " + this.status + " - " + this.result;
-        }
-    }
 })();

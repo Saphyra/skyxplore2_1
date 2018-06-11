@@ -37,8 +37,26 @@
     }
 })();
 
+/*
+Enumeration contains response status codes for HttpRequest
+*/
 window.ResponseStatus = new function(){
     this.OK = 200;
     this.BAD_REQUEST = 400;
     this.UNAUTHORIZED = 401;
+}
+
+/*
+Response object contains the response status, statusKey, and text of the qiven request.
+*/
+function Response(response){
+    const statusKey = responseStatusMapper.getKeyOf(response.status);
+    
+    this.statusKey = statusKey;
+    this.status = response.status;
+    this.result = response.responseText;
+    
+    this.toString = function(){
+        return this.status + ": " + this.status + " - " + this.result;
+    }
 }
