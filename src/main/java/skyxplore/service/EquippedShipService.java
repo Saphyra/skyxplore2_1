@@ -3,18 +3,18 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.db.dao.CharacterDao;
-import skyxplore.dataaccess.db.dao.EquippedShipDao;
-import skyxplore.dataaccess.db.dao.SlotDao;
+import skyxplore.dataaccess.db.CharacterDao;
+import skyxplore.dataaccess.db.EquippedShipDao;
+import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.dataaccess.gamedata.GameDataService;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.ShipNotFoundException;
 import skyxplore.restcontroller.view.EquipmentView;
 import skyxplore.restcontroller.view.ShipView;
 import skyxplore.restcontroller.view.converter.ShipViewConverter;
-import skyxplore.service.domain.EquippedShip;
-import skyxplore.service.domain.EquippedSlot;
-import skyxplore.service.domain.SkyXpCharacter;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.domain.character.SkyXpCharacter;
 
 @Service
 @Slf4j

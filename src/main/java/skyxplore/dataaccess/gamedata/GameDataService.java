@@ -7,8 +7,8 @@ import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.*;
 import skyxplore.exception.EquipmentNotFoundException;
-import skyxplore.service.domain.EquippedShip;
-import skyxplore.service.domain.EquippedSlot;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
 
 import java.util.Collection;
 import java.util.HashMap;

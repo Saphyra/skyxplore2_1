@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.restcontroller.view.ShipView;
-import skyxplore.service.domain.EquippedShip;
-import skyxplore.service.domain.EquippedSlot;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
 
 @Component
 @RequiredArgsConstructor

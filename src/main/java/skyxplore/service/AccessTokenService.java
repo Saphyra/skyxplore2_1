@@ -4,15 +4,15 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.accesstoken.AccessTokenDao;
+import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.exception.AccessTokenExpiredException;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadRequestAuthException;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.filter.AuthFilter;
 import skyxplore.restcontroller.request.LoginRequest;
-import skyxplore.service.domain.AccessToken;
-import skyxplore.service.domain.SkyXpUser;
+import skyxplore.domain.accesstoken.AccessToken;
+import skyxplore.domain.user.SkyXpUser;
 import skyxplore.util.AccessTokenDateResolver;
 import skyxplore.util.IdGenerator;
 

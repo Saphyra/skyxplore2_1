@@ -1,0 +1,13 @@
+#menu{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+    border-right: 5px ridge white;
+}
+
+#menu h2{
+    border-bottom: 3px ridge white;
+    padding: 0.25rem;
+}

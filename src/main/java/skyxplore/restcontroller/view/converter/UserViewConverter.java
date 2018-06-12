@@ -2,7 +2,7 @@ package skyxplore.restcontroller.view.converter;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.service.domain.SkyXpUser;
+import skyxplore.domain.user.SkyXpUser;
 import skyxplore.restcontroller.view.UserView;
 
 @Component

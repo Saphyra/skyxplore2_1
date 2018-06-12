@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import skyxplore.restcontroller.request.LoginRequest;
-import skyxplore.service.domain.AccessToken;
+import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.service.AccessTokenService;
 import skyxplore.filter.AuthFilter;
 

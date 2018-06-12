@@ -1,7 +1,7 @@
 package skyxplore.restcontroller.view.converter;
 
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.entity.Role;
+import skyxplore.domain.user.Role;
 import skyxplore.restcontroller.view.RoleView;
 
 import java.util.Set;

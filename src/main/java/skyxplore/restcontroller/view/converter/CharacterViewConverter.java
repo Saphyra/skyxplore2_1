@@ -2,7 +2,7 @@ package skyxplore.restcontroller.view.converter;
 
 import org.springframework.stereotype.Component;
 import skyxplore.restcontroller.view.CharacterView;
-import skyxplore.service.domain.SkyXpCharacter;
+import skyxplore.domain.character.SkyXpCharacter;
 
 import java.util.List;
 import java.util.stream.Collectors;

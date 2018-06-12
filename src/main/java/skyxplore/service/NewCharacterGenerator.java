@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.gamedata.GameDataService;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
-import skyxplore.service.domain.EquippedShip;
-import skyxplore.service.domain.EquippedSlot;
-import skyxplore.service.domain.SkyXpCharacter;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.util.IdGenerator;
 
 import java.util.ArrayList;

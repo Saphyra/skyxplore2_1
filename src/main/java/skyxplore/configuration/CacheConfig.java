@@ -6,10 +6,10 @@ import com.google.common.cache.CacheLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import skyxplore.dataaccess.accesstoken.AccessTokenDao;
+import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.service.CharacterService;
 import skyxplore.service.UserService;
-import skyxplore.service.domain.AccessToken;
+import skyxplore.domain.accesstoken.AccessToken;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
