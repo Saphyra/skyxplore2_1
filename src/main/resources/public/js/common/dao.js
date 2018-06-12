@@ -1,6 +1,11 @@
 (function DAO(){
     window.dao = new function(){
-        this.allowedMethods = ["GET", "POST", "PUT", "DELETE"];
+        this.GET = "GET";
+        this.POST = "POST";
+        this.PUT = "PUT";
+        this.DELETE = "DELETE";
+        
+        this.allowedMethods = [this.GET, this.POST, this.PUT, this.DELETE];
         this.sendRequest = sendRequest;
     }
     
