@@ -13,6 +13,7 @@ public class PageController {
     private static final String INDEX_MAPPING = "/";
     private static final String OVERVIEW_MAPPING = "/overview";
     private static final String SETTINGS_MAPPING = "/account";
+    private static final String SHOP_MAPPING = "/shop";
 
     @GetMapping(CHARACTER_SELECT_MAPPING)
     public String characterSelect(){
@@ -36,5 +37,11 @@ public class PageController {
     public String settings(){
         log.info("Request arrived to {}", SETTINGS_MAPPING);
         return "account";
+    }
+
+    @GetMapping(SHOP_MAPPING)
+    public String shop(){
+        log.info("Request arrived to {}", SHOP_MAPPING);
+        return "shop";
     }
 }

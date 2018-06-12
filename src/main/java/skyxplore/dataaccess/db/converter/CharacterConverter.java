@@ -25,6 +25,8 @@ public class CharacterConverter {
         domain.setCharacterName(entity.getCharacterName());
         domain.setShipId(entity.getShipId());
         domain.setUserId(entity.getUserId());
+        domain.setMoney(entity.getMoney());
+        domain.setEquipments(entity.getEquipments());
         return domain;
     }
 
@@ -34,6 +36,8 @@ public class CharacterConverter {
         entity.setCharacterName(domain.getCharacterName());
         entity.setUserId(domain.getUserId());
         entity.setShipId(domain.getShipId());
+        entity.setMoney(domain.getMoney());
+        entity.setEquipments(domain.getEquipments());
         return entity;
     }
 }

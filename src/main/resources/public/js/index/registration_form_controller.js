@@ -58,11 +58,14 @@
             const arePasswordsValid = validatePasswords();
             const isEmailValid = validateEmail();
             
-            if(isUsernameValid && arePasswordsValid && isEmailValid){
+            const isValid = isUsernameValid && arePasswordsValid && isEmailValid;
+            if(isValid){
                 document.getElementById("registration_button").disabled = false;
             }else{
                 document.getElementById("registration_button").disabled = true;
             }
+            
+            return isValid;
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -262,7 +265,12 @@
     */
     function addListeners(){
         try{
-            $(".registrationinput").on("keyup focusin", function(){registrationController.validate()});
+            $(".registrationinput").on("keyup focusin", function(e){
+                const isValid = registrationController.validate()
+                if(isValid && e.which == 13){
+                    registrationController.sendForm();
+                }
+            });
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

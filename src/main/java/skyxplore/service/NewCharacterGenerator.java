@@ -11,10 +11,14 @@ import skyxplore.service.domain.EquippedSlot;
 import skyxplore.service.domain.SkyXpCharacter;
 import skyxplore.util.IdGenerator;
 
+import java.util.ArrayList;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class NewCharacterGenerator {
+    private static final Integer START_MONEY = 100000;
+
     private static final String STARTER_SHIP_ID = "sta-01";
 
     private static final String GENERATOR_ID = "gen-01";
@@ -36,6 +40,8 @@ public class NewCharacterGenerator {
         character.setCharacterId(idGenerator.getRandomId());
         character.setCharacterName(characterName);
         character.setUserId(userId);
+        character.setMoney(START_MONEY);
+        character.setEquipments(new ArrayList<>());
         return character;
     }
 

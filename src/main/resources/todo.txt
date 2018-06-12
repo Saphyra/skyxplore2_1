@@ -1,2 +1,0 @@
-Refactor db connections -> Character stores userId
-Use entities as domain objects -> No coonverters

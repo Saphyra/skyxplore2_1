@@ -154,10 +154,12 @@
             const errorField = document.getElementById("invalid_newcharactername");
             const characterName = document.getElementById("newcharactername").value;
             const sendButton = document.getElementById("newcharacterbutton");
-            this.isNewCharacterNameValid = characterName.length >= 3;
-            if(this.isNewCharacterNameValid){
-                this.isNewCharacterNameValid = !characterDao.isCharNameExists(characterName);
-                if(this.isNewCharacterNameValid){
+            
+            characterController.isNewCharacterNameValid = characterName.length >= 3;
+            
+            if(characterController.isNewCharacterNameValid){
+                characterController.isNewCharacterNameValid = !characterDao.isCharNameExists(characterName);
+                if(characterController.isNewCharacterNameValid){
                     $(errorField).fadeOut();
                     sendButton.disabled = false;
                 }else{
@@ -210,7 +212,6 @@
         try{
             toNewCharacterInput();
             toRenameCharacterInput();
-            
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -221,10 +222,10 @@
                 const newCharacterNameInput = document.getElementById("newcharactername");
             
                 newCharacterNameInput.onkeyup = function(e){
-                    if(e.which == 13 && this.isNewCharacterNameValid){
+                    validateNewCharacterName();
+                    if(e.which == 13 && characterController.isNewCharacterNameValid){
                         createCharacter();
                     }
-                    validateNewCharacterName();
                 }
                 newCharacterNameInput.onfocus = function(){
                     validateNewCharacterName();

@@ -3,6 +3,7 @@ package skyxplore.dataaccess.db.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "skyxp_character")
@@ -21,4 +22,10 @@ public class CharacterEntity {
 
     @Column(name = "character_name", nullable = false)
     private String characterName;
+
+    @Column(name = "money", nullable = false)
+    private Integer money;
+
+    @Column(name = "equipments", nullable = false)
+    private ArrayList<String> equipments;
 }
