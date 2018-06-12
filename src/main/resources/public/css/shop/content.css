@@ -3,7 +3,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 70%;
+    width: calc(100% - 20rem);
 }
 
 #content h2{

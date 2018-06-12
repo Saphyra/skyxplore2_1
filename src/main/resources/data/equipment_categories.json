@@ -40,7 +40,7 @@
     "name": "Hajó"
   },
   "weapon": {
-    "type": "ship",
+    "type": "weapon",
     "name": "Fegyver"
   }
 }

@@ -52,6 +52,7 @@
             messageElement.onclick = function(){
                 container.removeChild(messageElement);
             }
+            
             animationFacade.rollInHorizontal(messageElement, container, 300);
             setTimeout(function(){animationFacade.rollOutHorizontal(messageElement, container, 300)}, 10000);
         }catch(err){
