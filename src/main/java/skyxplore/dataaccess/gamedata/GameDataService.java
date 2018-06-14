@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.*;
-import skyxplore.exception.EquipmentNotFoundException;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.exception.EquipmentNotFoundException;
+import skyxplore.restcontroller.request.EquipmentCategoryRequest;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,6 +30,50 @@ public class GameDataService {
     private final ShipService shipService;
     private final StorageService storageService;
     private final WeaponService weaponService;
+
+    public Map<String, GeneralDescription> getElementsOfCategory(EquipmentCategoryRequest category) {
+        log.info("Querying equipments of category {}", category);
+        Map<String, GeneralDescription> result = new HashMap<>();
+        switch (category) {
+            case CONNECTOR:
+                result.putAll(batteryService);
+                result.putAll(generatorService);
+                result.putAll(extenderService);
+                result.putAll(coreHullService);
+                result.putAll(storageService);
+                break;
+            case ENERGY:
+                result.putAll(batteryService);
+                result.putAll(generatorService);
+                break;
+            case EXTENDER:
+                result.putAll(extenderService);
+                break;
+            case COREHULL:
+                result.putAll(coreHullService);
+                break;
+            case STORAGE:
+                result.putAll(storageService);
+                break;
+            case DEFENSE:
+                result.putAll(armorService);
+                result.putAll(shieldService);
+                break;
+            case ARMOR:
+                result.putAll(armorService);
+                break;
+            case SHIELD:
+                result.putAll(shieldService);
+                break;
+            case SHIP:
+                result.putAll(shipService);
+                break;
+            case WEAPON:
+                result.putAll(weaponService);
+                break;
+        }
+        return result;
+    }
 
     public Ship getShip(String id) {
         return shipService.get(id);
@@ -63,27 +108,38 @@ public class GameDataService {
         GeneralDescription result = null;
         if (result == null) {
             result = abilityService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = armorService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = batteryService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = coreHullService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = extenderService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = generatorService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = materialService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = shieldService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = shipService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = storageService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             result = weaponService.get(id);
-        }if (result == null) {
+        }
+        if (result == null) {
             throw new EquipmentNotFoundException("Equipment not found with id " + id);
         }
         return result;
