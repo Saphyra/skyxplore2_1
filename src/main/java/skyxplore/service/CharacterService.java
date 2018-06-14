@@ -62,6 +62,14 @@ public class CharacterService {
         return characterDao.findByUserId(userId);
     }
 
+    public Integer getMoneyOfCharacter(String userId, String characterId) {
+        SkyXpCharacter character = characterDao.findById(characterId);
+        if (!userId.equals(character.getUserId())) {
+            throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
+        }
+        return character.getMoney();
+    }
+
     public boolean isCharNameExists(String charName){
         return characterDao.findByCharacterName(charName) != null;
     }

@@ -24,6 +24,7 @@ public class CharacterController {
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
+    private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money/{characterId}";
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/ischarnameexists/{charName}";
     private static final String RENAME_CHARACTER_MAPPING = "character/rename";
 
@@ -48,6 +49,12 @@ public class CharacterController {
     public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to know his character list.", userId);
         return characterViewConverter.convertDomain(characterService.getCharactersByUserId(userId));
+    }
+
+    @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
+    public Integer getMoney(@PathVariable(name = "characterId") @NotNull String characterId, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
+        log.info("{} Queriing money of character {}", userId, characterId);
+        return characterService.getMoneyOfCharacter(userId, characterId);
     }
 
     @PutMapping(CREATE_CHARACTER_MAPPING)

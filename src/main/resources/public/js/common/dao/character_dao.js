@@ -4,6 +4,7 @@
         this.deleteCharacter = deleteCharacter;
         this.isCharNameExists = isCharNameExists;
         this.getCharacters = getCharacters;
+        this.getMoney = getMoney;
         this.renameCharacter = renameCharacter;
     }
     
@@ -123,6 +124,37 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return true;
+        }
+    }
+    
+    /*
+    Returns the money of the character.
+    Arguments:
+        - characterId: the id of the charcater.
+    Returns:
+        - The money of the character.
+        - 0 If exception
+    Throws:
+        - IllegalArgument exception if characterId is null or undefined
+        - UnknownBackendError exception if request failed.
+    */
+    function getMoney(characterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            
+            const path = "character/money/" + characterId;
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == 200){
+                return Number(result.responseText);
+            }else{
+                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return 0;
         }
     }
     
