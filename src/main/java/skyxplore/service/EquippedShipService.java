@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.dataaccess.gamedata.GameDataService;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.ShipNotFoundException;
 import skyxplore.restcontroller.view.EquipmentView;

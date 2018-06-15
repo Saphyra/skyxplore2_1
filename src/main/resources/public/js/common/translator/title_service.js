@@ -45,6 +45,12 @@
                 break;
                 case "connector":
                     switch(data.type){
+                        case "corehull":
+                            title += "\nExtra magburkolat: " + data.capacity;
+                        break;
+                        case "extender":
+                            title += "\nExtra hely: " + data.extendednum;
+                        break;
                         case "generator":
                             title += "\nEnergiatermelés: " + data.energyrecharge;
                         break;

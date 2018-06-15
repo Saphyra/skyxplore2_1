@@ -1,7 +1,7 @@
 (function EquipmentController(){
     window.equipmentController = new function(){
         scriptLoader.loadScript("js/common/dao/ship_dao.js");
-        scriptLoader.loadScript("js/common/dataservice/title_service.js");
+        scriptLoader.loadScript("js/common/translator/title_service.js");
         
         this.showEquipment = showEquipment;
         

@@ -1,5 +1,9 @@
 {
-  "coonnector": {
+  "all": {
+    "type": "all",
+    "name": "Összes"
+  },
+  "connector": {
     "type": "connector",
     "name": "Csatlakozó",
     "elements": {

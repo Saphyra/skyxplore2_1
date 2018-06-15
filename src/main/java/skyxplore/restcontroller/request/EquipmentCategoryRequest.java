@@ -1,6 +1,7 @@
 package skyxplore.restcontroller.request;
 
 public enum EquipmentCategoryRequest {
+    ALL("all"),
     CONNECTOR("connector"),
     ENERGY("energy"),
     EXTENDER("extender"),

@@ -1,12 +1,33 @@
 #content{
     position: absolute;
     top: 0;
-    right: 0;
+    right: 25rem;
     bottom: 0;
-    width: calc(100% - 20rem);
+    left: 20rem;
+    overflow: auto;
 }
 
 #content h2{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
+}
+
+.element{
+    margin: 0.5rem;
+    border: 3px ridge white;
+    border-radius: 5px;
+}
+
+.elementtitlecontainer{
+    border-bottom: 3px ridge white;
+    padding: 0.25rem;
+}
+
+.elementtitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.elementdescription{
+    font-size: 1.25rem;
 }

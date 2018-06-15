@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.gamedata;
+package skyxplore.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +35,17 @@ public class GameDataService {
         log.info("Querying equipments of category {}", category);
         Map<String, GeneralDescription> result = new HashMap<>();
         switch (category) {
+            case ALL:
+                result.putAll(batteryService);
+                result.putAll(generatorService);
+                result.putAll(extenderService);
+                result.putAll(coreHullService);
+                result.putAll(storageService);
+                result.putAll(weaponService);
+                result.putAll(armorService);
+                result.putAll(shieldService);
+                result.putAll(shipService);
+                break;
             case CONNECTOR:
                 result.putAll(batteryService);
                 result.putAll(generatorService);

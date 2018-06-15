@@ -1,0 +1,42 @@
+#basketcontainer{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 25rem;
+    border-left: 5px ridge white;
+    overflow: auto;
+}
+
+#basketcontainer h2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 3px ridge white;
+    padding: 0.25rem;
+}
+
+#basketcontainer h2 div{
+    font-size: 1.5rem;
+}
+
+#basketfooter{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    border-top: 3px ridge white;
+    padding: 0.25rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#basket{
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    right: 0;
+    bottom: 3rem;
+    overflow: auto;
+}
