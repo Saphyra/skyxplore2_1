@@ -14,6 +14,7 @@ import skyxplore.service.CharacterService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -21,6 +22,7 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 @Slf4j
 public class CharacterController {
+    private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment/{characterId}";
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
@@ -31,6 +33,23 @@ public class CharacterController {
     private final CharacterService characterService;
     private final CharacterViewConverter characterViewConverter;
     private final Cache<String, Boolean> characterNameCache;
+
+    @PutMapping(BUY_EQUIPMENTS_MAPPING)
+    public void buyEquipments(
+            @RequestBody HashMap<String, Integer> items,
+            @PathVariable(name = "characterId") String characterId,
+            @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
+        log.info("{} wants to buy {} for character {}", userId, items.toString(), characterId);
+        //TODO impl
+    }
+
+    @PutMapping(CREATE_CHARACTER_MAPPING)
+    public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
+        log.info("Creating new character with name {}", request.getCharacterName());
+        characterService.createCharacter(request, userId);
+        log.info("Character created successfully.");
+        characterNameCache.invalidate(request.getCharacterName());
+    }
 
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
     public void deleteCharacter(@RequestBody @NotNull CharacterDeleteRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
@@ -55,14 +74,6 @@ public class CharacterController {
     public Integer getMoney(@PathVariable(name = "characterId") @NotNull String characterId, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} Queriing money of character {}", userId, characterId);
         return characterService.getMoneyOfCharacter(userId, characterId);
-    }
-
-    @PutMapping(CREATE_CHARACTER_MAPPING)
-    public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
-        log.info("Creating new character with name {}", request.getCharacterName());
-        characterService.createCharacter(request, userId);
-        log.info("Character created successfully.");
-        characterNameCache.invalidate(request.getCharacterName());
     }
 
     @PostMapping(RENAME_CHARACTER_MAPPING)

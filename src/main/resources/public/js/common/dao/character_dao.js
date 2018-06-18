@@ -1,11 +1,24 @@
 (function CharacterDao(){
     window.characterDao = new function(){
+        this.buyItems = buyItems;
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
         this.isCharNameExists = isCharNameExists;
         this.getCharacters = getCharacters;
         this.getMoney = getMoney;
         this.renameCharacter = renameCharacter;
+    }
+    
+    //TODO doc, validation
+    function buyItems(items){
+        try{
+            const path = "character/equipment/" + sessionStorage.characterId;
+            const result = dao.sendRequest(dao.PUT, path, items);
+            return new Response(result);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
     }
     
     /*

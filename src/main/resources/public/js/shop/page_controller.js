@@ -19,11 +19,11 @@
     /*
     Displays the money of the user.
     */
-    function displayMoney(){
+    function displayMoney(needReload){
         try{
             const moneyField = document.getElementById("money");
             
-            moneyField.innerHTML = getMoney();
+            moneyField.innerHTML = getMoney(needReload);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -49,13 +49,14 @@
     
     function refresh(filter, needReload){
         try{
-            filter = filter || "all";
+            filter = filter || contentController.filter || "all";
             if(needReload == null || needReload == undefined){
                 needReload = true;
             }
             
             contentController.displayElements(filter, needReload);
-            displayMoney();
+            basketController.displayBasket();
+            displayMoney(needReload);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

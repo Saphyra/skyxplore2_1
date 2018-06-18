@@ -37,7 +37,7 @@ public class AccessTokenService {
     }
 
     public boolean isAuthenticated(String userIdValue, String accessTokenId) {
-        log.info("Authenticating user {}", userIdValue);
+        log.debug("Authenticating user {}", userIdValue);
         AccessToken accessToken;
         try {
             String userId = validate(userIdValue, accessTokenId);
@@ -54,14 +54,15 @@ public class AccessTokenService {
                 throw new BadCredentialsException("Invalid accessToken for user " + userIdValue);
             }
 
-            SkyXpUser user = userService.getUserById(userId);
+            //Check if user exists
+            userService.getUserById(userId);
         } catch (UserNotFoundException | BadCredentialsException | BadRequestAuthException | AccessTokenExpiredException e) {
             log.info("Authentication failed: {}", e.getMessage());
             return false;
         } catch (ExecutionException e){
             throw new RuntimeException(e);
         }
-        log.info("Authentication successful.");
+        log.debug("Authentication successful.");
         updateTokenExpiration(accessToken);
         return true;
     }

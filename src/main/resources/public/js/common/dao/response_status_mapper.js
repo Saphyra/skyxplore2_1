@@ -50,6 +50,7 @@ window.ResponseStatus = new function(){
 Response object contains the response status, statusKey, and text of the qiven request.
 */
 function Response(response){
+    response = response || {};
     const statusKey = responseStatusMapper.getKeyOf(response.status);
     
     this.statusKey = statusKey;

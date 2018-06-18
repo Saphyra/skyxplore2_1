@@ -1,8 +1,10 @@
+//TODO documentations
 (function BasketController(){
     window.basketController = new function(){
         this.basket = {};
         
         this.addElement = addElement;
+        this.buyItems = buyItems;
         this.displayBasket = displayBasket;
         this.getBasketCost = getBasketCost;
         this.removeElement = removeElement;
@@ -20,6 +22,22 @@
             basketController.basket[elementId]++;
             displayBasket();
             contentController.displayElements(null, false);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function buyItems(){
+        try{
+            const result = characterDao.buyItems(basketController.basket);
+            if(result.status == 200){
+                basketController.basket = {};
+                pageController.refresh(null, true);
+                notificationService.showSuccess("Tárgyak megvásárolva.");
+            }else{
+                throwException("UnknownServerError", result.toString());
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -89,6 +107,7 @@
                 const element = document.createElement("BUTTON");
                     element.innerHTML = "Vásárlás";
                     element.classList.add("fontsize1_5rem");
+                    element.onclick = function(){buyItems()};
                 return element;
             }catch(err){
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;

@@ -4,6 +4,7 @@
         scriptLoader.loadScript("js/common/translator/translator.js");
         
         this.equipments = {};
+        this.filter = null;
         
         this.displayElements = displayElements;
     }
@@ -24,6 +25,7 @@
             if(needReload){
                 contentController.equipments = dataDao.getCategoryEquipments(type);
                 cache.addAll(contentController.equipments);
+                contentController.filter = type;
             }
             
             const equipments = orderCategories(contentController.equipments);
