@@ -54,9 +54,9 @@
                 needReload = true;
             }
             
+            displayMoney(needReload);
             contentController.displayElements(filter, needReload);
             basketController.displayBasket();
-            displayMoney(needReload);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

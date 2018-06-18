@@ -65,14 +65,14 @@
         - True if the deletion was successful.
         - False otherwise.
     Throws:
-        - IllegalArgument exception if characterId is null, undefined or not a number.
+        - IllegalArgument exception if characterId is null, undefined or not a string.
         - UnknownBackendError exception if request failed.
     */
     function deleteCharacter(characterId){
         try{
             if(characterId == undefined || characterId == null){
                 throwException("IllegalArgument", "characterId must not be null or undefined.")
-            }if(typeof characterId != "number"){
+            }if(typeof characterId != "string"){
                 throwException("IllegalArgument", "characterId must be a number. Given: " + typeof characterId);
             }
             

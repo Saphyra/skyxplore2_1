@@ -41,6 +41,7 @@ public class NewCharacterGenerator {
         character.setUserId(userId);
         character.setMoney(START_MONEY);
         character.setEquipments(new ArrayList<>());
+        log.info("Character created: {}", character);
         return character;
     }
 
@@ -53,6 +54,7 @@ public class NewCharacterGenerator {
         ship.setConnectorSlot(shipData.getConnector());
         ship.setCoreHull(shipData.getCoreHull());
         fillWithConnectors(ship);
+        log.info("Ship created: {}", ship);
         return ship;
     }
 
@@ -69,6 +71,7 @@ public class NewCharacterGenerator {
         Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
         EquippedSlot slot = createSlot(shipId, shipData.getDefense());
         fillWithDefense(slot);
+        log.info("Defense slot created: {}", slot);
         return slot;
     }
 
@@ -101,8 +104,9 @@ public class NewCharacterGenerator {
 
     public EquippedSlot createWeaponSlot(String shipId){
         Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
-        EquippedSlot slot = createSlot(shipId, shipData.getDefense());
+        EquippedSlot slot = createSlot(shipId, shipData.getWeapon());
         fillWithWeapon(slot);
+        log.info("Weapon slot created: {}", slot);
         return slot;
     }
 
