@@ -28,7 +28,7 @@
                     const buttonElement = document.createElement("DIV");
                         buttonElement.classList.add("button");
                         buttonElement.innerHTML = item.name;
-                        buttonElement.onclick = function(){contentController.displayElements(item.type)}
+                        buttonElement.onclick = function(){contentController.displayElements(item.type, true)}
                 element.appendChild(buttonElement);
                 
                 if(item.elements){
@@ -72,7 +72,7 @@
                         button.classList.add("button");
                         button.classList.add("childbutton");
                         button.innerHTML = item.name;
-                        button.onclick = function(){contentController.displayElements(item.type)}
+                        button.onclick = function(){contentController.displayElements(item.type, true)}
                     return button;
                 }catch(err){
                     const message = arguments.callee.name + " - " + err.name + ": " + err.message;
