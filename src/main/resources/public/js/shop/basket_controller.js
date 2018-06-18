@@ -1,4 +1,3 @@
-//TODO documentations
 (function BasketController(){
     window.basketController = new function(){
         this.basket = {};
@@ -13,9 +12,20 @@
             displayBasket();
         });
     }
-    
+
+    /*
+    Adds an element to the basket.
+    Arguments:
+        - elementId: the id of the element to add.
+    Throws:
+        - IllegalArgumentException if elementId is null or undefined.
+    */
     function addElement(elementId){
         try{
+            if(elementId == null || elementId == undefined){
+                throwException("IllegalArgument", "elementId must not be null or undefined.");
+            }
+
             if(!basketController.basket[elementId]){
                 basketController.basket[elementId] = 0;
             }
@@ -27,7 +37,10 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Buys the items in the basket.
+    */
     function buyItems(){
         try{
             const result = characterDao.buyItems(basketController.basket);
@@ -43,7 +56,10 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Displays the content of the basket.
+    */
     function displayBasket(){
         try{
             const container = document.getElementById("basket");
@@ -128,7 +144,10 @@
             }
         }
     }
-    
+
+    /*
+    Returns: the sum of all items' cost in the basket.
+    */
     function getBasketCost(){
         try{
             let cost = 0;
@@ -145,9 +164,24 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Removes the specified element from the basket.
+    Arguments:
+        - elementId: the id of the element.
+    Throws:
+        - IllegalArgument exception if elementId is null or undefined.
+        - IllegalState exception if basket does not contain the specified element.
+    */
     function removeElement(elementId){
         try{
+            if(elementId == null || elementId == undefined){
+                throwException("IllegalArgument", "elementId must not be null or undefined.");
+            }
+            if(!basketController.basket[elementId]){
+                throwException("IllegalState", "basket does not contain element with id " + elementId);
+            }
+
             basketController.basket[elementId]--;
             displayBasket();
             contentController.displayElements(null, false);

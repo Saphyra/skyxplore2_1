@@ -40,7 +40,8 @@ public class CharacterController {
             @PathVariable(name = "characterId") String characterId,
             @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to buy {} for character {}", userId, items.toString(), characterId);
-        //TODO impl
+        characterService.buyItems(items, characterId, userId);
+        log.info("Items are bought successfully.");
     }
 
     @PutMapping(CREATE_CHARACTER_MAPPING)
@@ -77,7 +78,7 @@ public class CharacterController {
     }
 
     @PostMapping(RENAME_CHARACTER_MAPPING)
-    public void renameCharacter(@RequestBody @Valid RenameCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) Long userId){
+    public void renameCharacter(@RequestBody @Valid RenameCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to rename character {}", userId, request);
         characterService.renameCharacter(request, userId);
         characterNameCache.invalidate(request.getNewCharacterName());

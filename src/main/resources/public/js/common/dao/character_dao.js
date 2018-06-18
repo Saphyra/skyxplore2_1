@@ -9,9 +9,20 @@
         this.renameCharacter = renameCharacter;
     }
     
-    //TODO doc, validation
+    /*
+    Buys the selected items.
+    Arguments:
+        - items: the type and amount of items to buy.
+    Returns:
+        - Response object represents the result of the request.
+    Throws:
+        - IllegalArgument exception if items is null or undefined.
+    */
     function buyItems(items){
         try{
+            if(items == null || items == undefined){
+                throwException("IllegalArgument", "items must not be null or undefined.");
+            }
             const path = "character/equipment/" + sessionStorage.characterId;
             const result = dao.sendRequest(dao.PUT, path, items);
             return new Response(result);
