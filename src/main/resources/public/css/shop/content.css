@@ -16,6 +16,7 @@
     margin: 0.5rem;
     border: 3px ridge white;
     border-radius: 5px;
+    overflow: auto;
 }
 
 .elementtitlecontainer{
