@@ -2,11 +2,13 @@ package skyxplore.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import skyxplore.domain.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
-public class UserConverter {
+public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
+    @Override
     public SkyXpUser convertEntity(UserEntity entity){
         if(entity == null){
             return null;
@@ -20,6 +22,7 @@ public class UserConverter {
         return user;
     }
 
+    @Override
     public UserEntity convertDomain(SkyXpUser domain){
         UserEntity entity = new UserEntity();
         entity.setUserId(domain.getUserId());

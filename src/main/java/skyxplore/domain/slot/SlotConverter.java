@@ -2,11 +2,13 @@ package skyxplore.domain.slot;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import skyxplore.domain.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
-public class SlotConverter {
+public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
 
+    @Override
     public SlotEntity convertDomain(EquippedSlot domain) {
         SlotEntity entity = new SlotEntity();
         entity.setSlotId(domain.getSlotId());
@@ -22,6 +24,7 @@ public class SlotConverter {
         return entity;
     }
 
+    @Override
     public EquippedSlot convertEntity(SlotEntity entity) {
         EquippedSlot domain = new EquippedSlot();
         domain.setSlotId(entity.getSlotId());

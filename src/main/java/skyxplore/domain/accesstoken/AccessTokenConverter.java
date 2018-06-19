@@ -1,10 +1,12 @@
 package skyxplore.domain.accesstoken;
 
 import org.springframework.stereotype.Component;
+import skyxplore.domain.ConverterBase;
 
 @Component
-public class AccessTokenConverter {
+public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, AccessToken> {
 
+    @Override
     public AccessToken convertEntity(AccessTokenEntity entity){
         if(entity == null){
             return null;
@@ -16,6 +18,7 @@ public class AccessTokenConverter {
         return token;
     }
 
+    @Override
     public AccessTokenEntity convertDomain(AccessToken token){
         if(token == null){
             throw new IllegalArgumentException("token must not be null");

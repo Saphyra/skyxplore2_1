@@ -2,18 +2,13 @@ package skyxplore.domain.character;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import skyxplore.domain.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
-public class CharacterConverter {
+public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
 
-    public List<SkyXpCharacter> convertEntity(List<CharacterEntity> entities){
-        return entities.stream().map(this::convertEntity).collect(Collectors.toList());
-    }
-
+    @Override
     public SkyXpCharacter convertEntity(CharacterEntity entity){
         if(entity == null){
             return null;
@@ -28,6 +23,7 @@ public class CharacterConverter {
         return domain;
     }
 
+    @Override
     public CharacterEntity convertDomain(SkyXpCharacter domain){
         CharacterEntity entity = new CharacterEntity();
         entity.setCharacterId(domain.getCharacterId());
