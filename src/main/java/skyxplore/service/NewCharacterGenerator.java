@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.materials.Materials;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.character.SkyXpCharacter;
@@ -118,5 +120,14 @@ public class NewCharacterGenerator {
         weapon.addLeft(RIFLE_ID);
         weapon.addRight(RIFLE_ID);
         weapon.addBack(RIFLE_ID);
+    }
+
+    public Factory createFactory(String characterId){
+        Factory factory = new Factory();
+        factory.setFactoryId(idGenerator.getRandomId());
+        factory.setCharacterId(characterId);
+        factory.setMaterials(new Materials());
+        log.info("Factory created: {}", factory);
+        return factory;
     }
 }

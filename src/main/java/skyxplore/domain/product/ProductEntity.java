@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "factory")
+@Table(name = "product")
 public class ProductEntity {
     @Id
     @Column(name = "product_id", nullable = false, length = 50)
@@ -19,8 +19,8 @@ public class ProductEntity {
     private String elementId;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "order")
-    private Long order;
+    @Column(name = "product_order")
+    private Long productOrder;
 
     @Column(name = "construction_time", nullable = false)
     private Integer constructionTime;

@@ -1,8 +1,11 @@
 package skyxplore.domain.materials;
 
+import lombok.NoArgsConstructor;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@NoArgsConstructor
 public class Materials extends HashMap<String, Integer> {
 
     public Materials(Map<String, Integer> elements){

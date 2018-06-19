@@ -5,8 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
+import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
@@ -27,6 +29,7 @@ import java.util.Set;
 public class CharacterService {
     private final CharacterDao characterDao;
     private final EquippedShipDao equippedShipDao;
+    private final FactoryDao factoryDao;
     private final GameDataService gameDataService;
     private final NewCharacterGenerator newCharacterGenerator;
     private final SlotDao slotDao;
@@ -72,16 +75,19 @@ public class CharacterService {
         EquippedSlot weaponSlot = newCharacterGenerator.createWeaponSlot(ship.getShipId());
         ship.setWeaponSlotId(weaponSlot.getSlotId());
 
+        Factory factory = newCharacterGenerator.createFactory(character.getCharacterId());
+
         characterDao.save(character);
         equippedShipDao.save(ship);
         slotDao.save(defenseSlot);
         slotDao.save(weaponSlot);
+        factoryDao.save(factory);
     }
 
     @Transactional
     public void deleteCharacter(CharacterDeleteRequest request, String userId) {
         SkyXpCharacter character = findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        characterDao.deleteById(request.getCharacterId());
+        characterDao.deleteById(character.getCharacterId());
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
