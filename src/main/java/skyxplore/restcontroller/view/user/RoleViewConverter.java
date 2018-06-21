@@ -1,8 +1,7 @@
-package skyxplore.restcontroller.view.converter;
+package skyxplore.restcontroller.view.user;
 
 import org.springframework.stereotype.Component;
 import skyxplore.domain.user.Role;
-import skyxplore.restcontroller.view.RoleView;
 
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -1,6 +1,7 @@
-package skyxplore.restcontroller.view;
+package skyxplore.restcontroller.view.ship;
 
 import lombok.Data;
+import skyxplore.restcontroller.view.slot.SlotView;
 
 import java.util.ArrayList;
 

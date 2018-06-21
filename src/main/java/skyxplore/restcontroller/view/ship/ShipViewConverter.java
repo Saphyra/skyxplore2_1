@@ -1,9 +1,9 @@
-package skyxplore.restcontroller.view.converter;
+package skyxplore.restcontroller.view.ship;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
-import skyxplore.restcontroller.view.ShipView;
+import skyxplore.restcontroller.view.slot.SlotViewConverter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 

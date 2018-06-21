@@ -1,4 +1,4 @@
-package skyxplore.restcontroller.view;
+package skyxplore.restcontroller.view.character;
 
 import lombok.Data;
 

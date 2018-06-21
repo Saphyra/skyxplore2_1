@@ -1,7 +1,6 @@
-package skyxplore.restcontroller.view.converter;
+package skyxplore.restcontroller.view.slot;
 
 import org.springframework.stereotype.Component;
-import skyxplore.restcontroller.view.SlotView;
 import skyxplore.domain.slot.EquippedSlot;
 
 @Component

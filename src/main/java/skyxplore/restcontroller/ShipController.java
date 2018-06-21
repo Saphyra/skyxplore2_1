@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import skyxplore.filter.AuthFilter;
 import skyxplore.restcontroller.view.EquipmentView;
-import skyxplore.restcontroller.view.ShipView;
+import skyxplore.restcontroller.view.ship.ShipView;
 import skyxplore.service.EquippedShipService;
 
 @RestController

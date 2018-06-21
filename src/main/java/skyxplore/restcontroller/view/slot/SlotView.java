@@ -1,4 +1,4 @@
-package skyxplore.restcontroller.view;
+package skyxplore.restcontroller.view.slot;
 
 import lombok.Data;
 

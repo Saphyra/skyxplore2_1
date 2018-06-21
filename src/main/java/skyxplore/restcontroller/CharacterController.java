@@ -8,8 +8,8 @@ import skyxplore.filter.AuthFilter;
 import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
 import skyxplore.restcontroller.request.RenameCharacterRequest;
-import skyxplore.restcontroller.view.CharacterView;
-import skyxplore.restcontroller.view.converter.CharacterViewConverter;
+import skyxplore.restcontroller.view.character.CharacterView;
+import skyxplore.restcontroller.view.character.CharacterViewConverter;
 import skyxplore.service.CharacterService;
 
 import javax.validation.Valid;

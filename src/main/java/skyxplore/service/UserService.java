@@ -11,7 +11,7 @@ import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.restcontroller.request.*;
-import skyxplore.restcontroller.view.converter.UserViewConverter;
+import skyxplore.restcontroller.view.user.UserViewConverter;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.util.IdGenerator;
 
@@ -101,6 +101,7 @@ public class UserService {
         user.setRoles(new HashSet<>(Arrays.asList(Role.USER)));
         SkyXpUser registratedUser = userDao.registrateUser(user);
         log.info("New userId: {}", registratedUser.getUserId());
+        //TODO investighate if UserView is necessary
         return userViewConverter.convertDomain(registratedUser).getUserId();
     }
 

@@ -1,7 +1,6 @@
-package skyxplore.restcontroller.view.converter;
+package skyxplore.restcontroller.view.character;
 
 import org.springframework.stereotype.Component;
-import skyxplore.restcontroller.view.CharacterView;
 import skyxplore.domain.character.SkyXpCharacter;
 
 import java.util.List;
