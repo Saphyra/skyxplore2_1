@@ -1,0 +1,9 @@
+#menucontainer{
+    position: relative;
+    text-align: center;
+    border-bottom: 3px ridge white;
+}
+
+#menucontainer button{
+    font-size: 1.25rem;
+}

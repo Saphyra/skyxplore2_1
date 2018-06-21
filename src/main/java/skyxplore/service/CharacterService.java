@@ -112,7 +112,7 @@ public class CharacterService {
         characterDao.renameCharacter(request.getCharacterId(), request.getNewCharacterName());
     }
 
-    private SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
+    public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
         SkyXpCharacter character = characterDao.findById(characterId);
         if (!userId.equals(character.getUserId())) {
             throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);

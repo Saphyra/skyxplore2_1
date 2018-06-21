@@ -44,6 +44,7 @@ window.ResponseStatus = new function(){
     this.OK = 200;
     this.BAD_REQUEST = 400;
     this.UNAUTHORIZED = 401;
+    this.NOT_FOUND = 404;
 }
 
 /*
@@ -58,6 +59,6 @@ function Response(response){
     this.result = response.responseText;
     
     this.toString = function(){
-        return this.status + ": " + this.status + " - " + this.result;
+        return this.status + ": " + this.statusKey + " - " + this.result;
     }
 }

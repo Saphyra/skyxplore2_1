@@ -1,4 +1,4 @@
-#menu{
+#menucontainer{
     position: absolute;
     left: 0;
     top: 0;
@@ -8,7 +8,7 @@
     overflow: auto;
 }
 
-#menu h2{
+#menucontainer h2{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
 }

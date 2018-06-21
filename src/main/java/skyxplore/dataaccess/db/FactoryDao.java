@@ -14,6 +14,10 @@ public class FactoryDao {
     private final FactoryConverter factoryConverter;
     private final FactoryRepository factoryRepository;
 
+    public Factory findByCharacterId(String characterId){
+        return factoryConverter.convertEntity(factoryRepository.findByCharacterId(characterId));
+    }
+
     public void save(Factory factory){
         factoryRepository.save(factoryConverter.convertDomain(factory));
     }
