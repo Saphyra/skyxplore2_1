@@ -19,6 +19,7 @@
             }
             
             materialsController.displayMaterials();
+            contentController.displayElementsOfCategory();
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

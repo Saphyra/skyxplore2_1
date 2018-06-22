@@ -37,6 +37,10 @@
                     
                     const selectButton =  document.createElement("BUTTON");
                         selectButton.innerHTML = category.name;
+                        selectButton.onclick = function(){
+                            contentController.displayElementsOfCategory(category.type);
+                            $("#menu").fadeToggle();
+                        };
                 container.appendChild(selectButton);
                 
                     const openButtonPlaceHolder = document.createElement("DIV");
