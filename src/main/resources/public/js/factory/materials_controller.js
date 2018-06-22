@@ -5,6 +5,9 @@
         this.displayMaterials = displayMaterials;
     }
     
+    /*
+    Queries and displays the materials of the storage.
+    */
     function displayMaterials(){
         try{
             const container = document.getElementById("materials");
@@ -12,11 +15,40 @@
                 
             const materials = orderMaterials(factoryDao.getMaterials());
             
-            logService.log(materials);
+            for(let mindex in materials){
+                container.appendChild(createMaterialElement(materials[mindex]));
+            }
             
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+        }
+        
+        function createMaterialElement(material){
+            try{
+                const container = document.createElement("DIV");
+                    container.title = material.description;
+                    container.classList.add("borderbottomridge");
+                    container.classList.add("border1px");
+                    container.classList.add("bordercoloraaa");
+                    container.classList.add("margintop0_5rem");
+                    
+                    const nameContainer = document.createElement("SPAN");
+                        nameContainer.innerHTML = material.name + ": ";
+                container.appendChild(nameContainer);
+                    
+                    const amountContainer = document.createElement("DIV");
+                        amountContainer.classList.add("inlineblock");
+                        amountContainer.style.minWidth = "3rem";
+                        amountContainer.innerHTML = material.amount;
+                container.appendChild(amountContainer);
+                    
+                return container;
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+                return document.createElement("DIV");
+            }
         }
         
         function orderMaterials(materials){
