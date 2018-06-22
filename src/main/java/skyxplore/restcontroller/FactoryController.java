@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import skyxplore.domain.materials.Materials;
 import skyxplore.filter.AuthFilter;
+import skyxplore.restcontroller.view.material.MaterialView;
 import skyxplore.service.FactoryService;
+
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -19,7 +21,7 @@ public class FactoryController {
     private final FactoryService factoryService;
 
     @GetMapping(GET_MATERIALS_MAPPING)
-    public Materials getMaterials(@PathVariable(name = "characterId") String characterId, @CookieValue(name = AuthFilter.COOKIE_USER_ID) String userId) {
+    public Map<String, MaterialView> getMaterials(@PathVariable(name = "characterId") String characterId, @CookieValue(name = AuthFilter.COOKIE_USER_ID) String userId) {
         log.info("{} wants to know the materials of character {}", userId, characterId);
         return factoryService.getMaterials(characterId, userId);
     }

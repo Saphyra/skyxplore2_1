@@ -10,13 +10,39 @@
             const container = document.getElementById("materials");
                 container.innerHTML = "";
                 
-            const materials = factoryDao.getMaterials();
+            const materials = orderMaterials(factoryDao.getMaterials());
             
             logService.log(materials);
             
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+        }
+        
+        function orderMaterials(materials){
+            try{
+                const result = {};
+                const elementList = [];
+                
+                for(let mindex in materials){
+                    elementList.push(materials[mindex]);
+                }
+                
+                elementList.sort(function(a, b){
+                    return a.name.localeCompare(b.name);
+                })
+                
+                for(let eindex in elementList){
+                    const element = elementList[eindex];
+                    result[element.materialId] = element;
+                }
+                
+                return result;
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+                return {};
+            }
         }
     }
 })();
