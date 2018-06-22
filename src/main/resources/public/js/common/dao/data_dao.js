@@ -3,7 +3,7 @@
         scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.getCategoryEquipments = getCategoryEquipments;
-        this.getEquipmentCategories = getEquipmentCategories;
+        this.getCategories = getCategories;
     }
     
     /*
@@ -39,15 +39,17 @@
     
     /*
     Queries the category data from the server.
+    Arguments:
+        categoryId: the id of the category list.
     Returns:
         - the categories
         - empty list upon fail
     Throws:
         - UnknownBackendError exception if request fails
     */
-    function getEquipmentCategories(){
+    function getCategories(categoryId){
         try{
-            const path = "data/equipment/category";
+            const path = "data/equipment/categories/" + categoryId;
             const result = dao.sendRequest(dao.GET, path);
             
             if(result.status == 200){

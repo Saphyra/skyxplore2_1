@@ -10,6 +10,10 @@
     left: 0;
 }
 
+.backgroundblack{
+    background-color: black;
+}
+
 .backgroundgreen{
     background-color: green;
 }
@@ -144,6 +148,10 @@
     display: inline-block;
 }
 
+.left65percent{
+    left: 65%;
+}
+
 .left5px{
     left: 5px;
 }
@@ -256,8 +264,16 @@
     top: 100%;
 }
 
+.topn1rem{
+    top: -1rem;
+}
+
 .whitespacenowrap{
     white-space: nowrap;
+}
+
+.width2rem{
+    width: 2rem;
 }
 
 .width50percent{

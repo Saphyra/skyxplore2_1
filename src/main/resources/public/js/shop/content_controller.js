@@ -31,7 +31,10 @@
             const equipments = orderCategories(contentController.equipments);
             
             for(let id in equipments){
-                container.appendChild(createElement(equipments[id]));
+                //Filtering elements queried by "all" but has no buyprice
+                if(equipments[id].buyprice != null && equipments[id].buyprice != undefined){
+                    container.appendChild(createElement(equipments[id]));
+                }
             }
             
         }catch(err){

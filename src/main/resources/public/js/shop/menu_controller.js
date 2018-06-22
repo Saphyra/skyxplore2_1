@@ -10,7 +10,7 @@
     function displayMenu(){
         try{
             const container = document.getElementById("menu");
-            const categories = dataDao.getEquipmentCategories();
+            const categories = dataDao.getCategories("shop");
             
             for(let cindex in categories){
                 container.appendChild(createMenuElement(categories[cindex]));

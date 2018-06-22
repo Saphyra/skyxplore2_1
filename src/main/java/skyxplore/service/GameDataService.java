@@ -120,6 +120,10 @@ public class GameDataService {
                 result.putAll(armorService);
                 result.putAll(shieldService);
                 result.putAll(shipService);
+                result.putAll(materialService);
+                break;
+            case MATERIAL:
+                    result.putAll(materialService);
                 break;
             case CONNECTOR:
                 result.putAll(batteryService);

@@ -84,6 +84,8 @@
                     title += "\nBurkolatsebzés: " + data.hullDamage + " - Pajzs sebzés: " + data.shieldDamage;
                     title += "\nPontosság: " + data.accuracy;
                 break;
+                case "material":
+                break;
                 default:
                     logService.log(data, "warn", "Unknown slot");
                 break;

@@ -8,12 +8,16 @@
         this.refresh = refresh;
         
         $(document).ready(function(){
-            refresh();
+            refresh(true);
         });
     }
     
-    function refresh(){
+    function refresh(needReload){
         try{
+            if(needReload){
+                materialsController.loadMaterials();
+            }
+            
             materialsController.displayMaterials();
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

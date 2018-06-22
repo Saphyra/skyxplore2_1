@@ -19,6 +19,9 @@
                 case "weapon":
                     return "Fegyver";
                 break;
+                case "material":
+                    return "Alapanyag";
+                break;
                 default:
                     throwException("IllegalArgument", "Unknown slot: " + slot);
                 break;

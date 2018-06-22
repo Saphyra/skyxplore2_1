@@ -25,24 +25,27 @@
     </HEADER>
     
     <MAIN>
-        <SECTION id='materialscontainer'>
-            <DIV id='menucontainer'>
-                <BUTTON>Kategóriák</BUTTON>
-                
-                <DIV id='menu'></DIV>
-            </DIV>
-            
-            <H2>Alapanyagok</H2>
-            
-            <DIV id='materials'></DIV>
-        </SECTION>
-        
         <SECTION id='content'>
         
         </SECTION>
         
         <SECTION id='queuecontainer'>
             <H2>Gyártósor</H2>
+        </SECTION>
+        
+        <SECTION id='materialscontainer'>
+        
+            <DIV id='menucontainer'>
+                <DIV id='menu_wrapper'>
+                    <BUTTON onclick='$("#menu").fadeToggle();'>Kategóriák</BUTTON>
+                    
+                    <DIV id='menu' style='display: none'></DIV>
+                </DIV>
+            </DIV>
+            
+            <H2>Alapanyagok</H2>
+            
+            <DIV id='materials'></DIV>
         </SECTION>
     </MAIN>
     

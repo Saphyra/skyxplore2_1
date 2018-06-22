@@ -2,7 +2,11 @@
     window.materialsController = new function(){
         scriptLoader.loadScript("js/common/dao/factory_dao.js");
         
+        this.materials = null;
+        this.selectedCategory = "all";
+        
         this.displayMaterials = displayMaterials;
+        this.loadMaterials = loadMaterials;
     }
     
     /*
@@ -13,7 +17,7 @@
             const container = document.getElementById("materials");
                 container.innerHTML = "";
                 
-            const materials = orderMaterials(factoryDao.getMaterials());
+            const materials = materialsController.materials || {};
             
             for(let mindex in materials){
                 container.appendChild(createMaterialElement(materials[mindex]));
@@ -49,6 +53,15 @@
                 logService.log(message, "error");
                 return document.createElement("DIV");
             }
+        }
+    }
+    
+    function loadMaterials(){
+        try{
+            materialsController.materials  = orderMaterials(factoryDao.getMaterials());
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
         }
         
         function orderMaterials(materials){

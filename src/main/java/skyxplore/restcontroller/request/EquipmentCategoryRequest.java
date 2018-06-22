@@ -11,7 +11,8 @@ public enum EquipmentCategoryRequest {
     ARMOR("armor"),
     SHIELD("shield"),
     SHIP("ship"),
-    WEAPON("weapon");
+    WEAPON("weapon"),
+    MATERIAL("material");
 
     private String value;
 
