@@ -1,6 +1,8 @@
 package skyxplore.exception;
 
-public class NotEnoughMoneyException extends RuntimeException {
+import skyxplore.exception.base.ForbiddenException;
+
+public class NotEnoughMoneyException extends ForbiddenException {
     public NotEnoughMoneyException(String message){
         super(message);
     }

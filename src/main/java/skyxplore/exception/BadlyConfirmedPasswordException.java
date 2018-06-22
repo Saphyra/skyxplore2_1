@@ -1,4 +1,9 @@
 package skyxplore.exception;
 
-public class BadlyConfirmedPasswordException extends RuntimeException {
+import skyxplore.exception.base.ForbiddenException;
+
+public class BadlyConfirmedPasswordException extends ForbiddenException {
+    public BadlyConfirmedPasswordException(String message) {
+        super(message);
+    }
 }

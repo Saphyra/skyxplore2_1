@@ -1,4 +1,9 @@
 package skyxplore.exception;
 
-public class UserNameAlreadyExistsException extends RuntimeException{
+import skyxplore.exception.base.ConflictException;
+
+public class UserNameAlreadyExistsException extends ConflictException {
+    public UserNameAlreadyExistsException(String message) {
+        super(message);
+    }
 }

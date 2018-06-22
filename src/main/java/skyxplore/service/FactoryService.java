@@ -7,6 +7,7 @@ import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
+import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.restcontroller.view.material.MaterialView;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class FactoryService {
         characterService.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = factoryDao.findByCharacterId(characterId);
         if (factory == null) {
-            //TODO throw exception - create common not found exception
+            throw new FactoryNotFoundException("Factory not found for character " + characterId);
         }
         Materials materials = factory.getMaterials();
         Map<String, MaterialView> result = fillWithMaterials(materials);

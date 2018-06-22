@@ -1,6 +1,8 @@
 package skyxplore.exception;
 
-public class CharacterNotFoundException extends RuntimeException {
+import skyxplore.exception.base.NotFoundException;
+
+public class CharacterNotFoundException extends NotFoundException {
     public CharacterNotFoundException(String message){
         super(message);
     }

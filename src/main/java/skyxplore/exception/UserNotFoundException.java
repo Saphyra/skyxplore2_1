@@ -1,6 +1,8 @@
 package skyxplore.exception;
 
-public class UserNotFoundException extends RuntimeException{
+import skyxplore.exception.base.NotFoundException;
+
+public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException(String message){
         super(message);
     }

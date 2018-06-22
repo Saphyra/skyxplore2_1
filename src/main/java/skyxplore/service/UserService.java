@@ -30,7 +30,7 @@ public class UserService {
     public void changeEmail(ChangeEmailRequest request, String userId){
         SkyXpUser user = getUserById(userId);
         if(isEmailExists(request.getNewEmail())){
-            throw new EmailAlreadyExistsException();
+            throw new EmailAlreadyExistsException(request.getNewEmail() + " email is already exists.");
         }
         if(!request.getPassword().equals(user.getPassword())){
             throw new BadCredentialsException("Wrong password");
@@ -53,7 +53,7 @@ public class UserService {
     public void changeUserName(ChangeUserNameRequest request, String userId){
         SkyXpUser user = getUserById(userId);
         if(isUserNameExists(request.getNewUserName())){
-            throw new UserNameAlreadyExistsException();
+            throw new UserNameAlreadyExistsException(request.getNewUserName() + " username is already exists.");
         }
         if(!request.getPassword().equals(user.getPassword())){
             throw new BadCredentialsException("Wrong password");
@@ -101,7 +101,7 @@ public class UserService {
         user.setRoles(new HashSet<>(Arrays.asList(Role.USER)));
         SkyXpUser registratedUser = userDao.registrateUser(user);
         log.info("New userId: {}", registratedUser.getUserId());
-        //TODO investighate if UserView is necessary
+        //TODO investigate if UserView is necessary
         return userViewConverter.convertDomain(registratedUser).getUserId();
     }
 
@@ -110,19 +110,19 @@ public class UserService {
             throw new BadCredentialsException("Wrong password.");
         }
         if(!request.getNewPassword().equals(request.getConfirmPassword())){
-            throw new BadlyConfirmedPasswordException();
+            throw new BadlyConfirmedPasswordException("Confirm password does not match.");
         }
     }
 
     private void validateRegistrationRequest(UserRegistrationRequest request){
         if(!request.getPassword().equals(request.getConfirmPassword())){
-            throw new BadlyConfirmedPasswordException();
+            throw new BadlyConfirmedPasswordException("Confirm password does not match");
         }
         if(isUserNameExists(request.getUsername())){
-            throw new UserNameAlreadyExistsException();
+            throw new UserNameAlreadyExistsException(request.getUsername() + " user name is already exists.");
         }
         if(isEmailExists(request.getEmail())){
-            throw new EmailAlreadyExistsException();
+            throw new EmailAlreadyExistsException(request.getEmail() + " email is already exists.");
         }
     }
 }

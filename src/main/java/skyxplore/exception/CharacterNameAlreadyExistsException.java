@@ -1,6 +1,8 @@
 package skyxplore.exception;
 
-public class CharacterNameAlreadyExistsException extends RuntimeException {
+import skyxplore.exception.base.ConflictException;
+
+public class CharacterNameAlreadyExistsException extends ConflictException {
     public CharacterNameAlreadyExistsException(String message){
         super(message);
     }

@@ -1,21 +1,20 @@
-package skyxplore.exceptionhandler;
+package skyxplore.filter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import skyxplore.exception.InvalidAccessException;
+import skyxplore.exception.base.SkyXpException;
 
 @ControllerAdvice
 @Slf4j
-@Order()
-public class GlobalExceptionHandler {
-    @ExceptionHandler(InvalidAccessException.class)
-    public ResponseEntity<String> handleInvalidAccess(InvalidAccessException e){
+public class DefaultExceptionHandler {
+
+    @ExceptionHandler(SkyXpException.class)
+    public ResponseEntity<String> handleSkyXpException(SkyXpException e) {
         log.info(e.getMessage());
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(e.getMessage(), e.getResponseStatus());
     }
 
     @ExceptionHandler(value = RuntimeException.class)

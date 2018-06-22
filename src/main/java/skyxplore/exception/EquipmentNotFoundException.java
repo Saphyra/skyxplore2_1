@@ -1,6 +1,8 @@
 package skyxplore.exception;
 
-public class EquipmentNotFoundException extends RuntimeException {
+import skyxplore.exception.base.NotFoundException;
+
+public class EquipmentNotFoundException extends NotFoundException {
     public EquipmentNotFoundException(String message) {
         super(message);
     }
