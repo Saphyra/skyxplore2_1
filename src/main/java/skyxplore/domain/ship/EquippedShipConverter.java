@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
-import skyxplore.domain.slot.SlotConverter;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
-    private final SlotConverter slotConverter;
 
     @Override
     public EquippedShipEntity convertDomain(EquippedShip domain){

@@ -11,6 +11,7 @@ import skyxplore.restcontroller.view.EquipmentView;
 import skyxplore.restcontroller.view.ship.ShipView;
 import skyxplore.service.EquippedShipService;
 
+@SuppressWarnings("unused")
 @RestController
 @RequiredArgsConstructor
 @Slf4j

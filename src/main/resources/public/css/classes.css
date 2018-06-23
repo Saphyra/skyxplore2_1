@@ -188,6 +188,10 @@
     margin: initial !important;
 }
 
+.marginright0_5rem{
+    margin-right: 0.5rem;
+}
+
 .margintop0_25rem{
     margin-top: 0.25rem;
 }
@@ -274,6 +278,10 @@
 
 .width2rem{
     width: 2rem;
+}
+
+.width4rem{
+    width: 4rem;
 }
 
 .width50percent{

@@ -9,7 +9,6 @@
     "constructiontime": 600,
     "buildprice": 600,
     "materials": {
-        "": "",
         "cable": 2,
         "condensator": 2,
         "energycell": 1,

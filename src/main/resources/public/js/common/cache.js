@@ -65,6 +65,10 @@
                 throwException("IllegalArgument", "key must not be null or undefined");
             }
             
+            if(this.storage[key] == undefined){
+                logService.log(key, "warn", "The following element is not stored in cache: ");
+            }
+            
             return this.storage[key];
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

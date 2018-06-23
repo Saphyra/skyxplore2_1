@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import skyxplore.service.AccessTokenService;
 
+@SuppressWarnings("unused")
 @Slf4j
 @Service
 @EnableScheduling

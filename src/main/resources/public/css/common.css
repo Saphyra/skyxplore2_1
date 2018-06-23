@@ -106,9 +106,11 @@ input, textarea, div[contenteditable='true']{
     border: 3px outset white;
     border-radius: 5px;
     padding: 0.2rem;
-    padding-right: 1rem;
     margin: 0.2rem;
     color: white;
+}
+div[contenteditable='true']{
+    padding-right: 1rem;
 }
 input:focus, textarea:focus, div[contenteditable='true']:focus{
     border-color: red;

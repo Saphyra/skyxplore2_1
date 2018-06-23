@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 @Data
 public class SkyXpCharacter {
     private String characterId;

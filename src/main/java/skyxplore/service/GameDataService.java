@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -58,10 +59,7 @@ public class GameDataService {
     }
 
     private GeneralDescription getData(String id) {
-        GeneralDescription result = null;
-        if (result == null) {
-            result = abilityService.get(id);
-        }
+        GeneralDescription result = abilityService.get(id);
         if (result == null) {
             result = armorService.get(id);
         }

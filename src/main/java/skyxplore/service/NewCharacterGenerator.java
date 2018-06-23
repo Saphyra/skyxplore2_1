@@ -14,6 +14,7 @@ import skyxplore.util.IdGenerator;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("WeakerAccess")
 @Slf4j
 @Component
 @RequiredArgsConstructor

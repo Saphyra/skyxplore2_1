@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import skyxplore.dataaccess.gamedata.subservice.*;
 
+@SuppressWarnings("unused")
 @Configuration
 public class GameDataConfig {
     @Bean

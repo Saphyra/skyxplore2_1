@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+@SuppressWarnings("unused")
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class LoginController {
     public void login(@RequestBody @Valid LoginRequest loginRequest, HttpServletResponse response){
         log.info("Login request arrived.");
         AccessToken accessToken = accessTokenService.login(loginRequest);
-        response.addCookie(createLoginCookie(AuthFilter.COOKIE_USER_ID, accessToken.getUserId().toString()));
+        response.addCookie(createLoginCookie(AuthFilter.COOKIE_USER_ID, accessToken.getUserId()));
         response.addCookie(createLoginCookie(AuthFilter.COOKIE_ACCESS_TOKEN, accessToken.getAccessTokenId()));
         log.info("Access token successfully created, and sent for the client.");
     }

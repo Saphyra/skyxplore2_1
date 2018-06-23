@@ -12,6 +12,7 @@ import skyxplore.service.FactoryService;
 
 import java.util.Map;
 
+@SuppressWarnings("unused")
 @RestController
 @Slf4j
 @RequiredArgsConstructor

@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 @RestController
 @Slf4j
 @RequiredArgsConstructor

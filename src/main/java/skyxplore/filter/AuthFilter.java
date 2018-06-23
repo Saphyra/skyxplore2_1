@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("NullableProblems")
 @Slf4j
 @RequiredArgsConstructor
 public class AuthFilter extends OncePerRequestFilter {
@@ -92,10 +93,6 @@ public class AuthFilter extends OncePerRequestFilter {
         Optional<Cookie> cookie = Arrays.stream(request.getCookies())
                 .filter(c -> c.getName().equals(name))
                 .findAny();
-        if (cookie.isPresent()) {
-            return cookie.get().getValue();
-        } else {
-            return null;
-        }
+        return cookie.map(Cookie::getValue).orElse(null);
     }
 }

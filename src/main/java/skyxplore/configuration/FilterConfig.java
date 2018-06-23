@@ -7,6 +7,7 @@ import skyxplore.service.AccessTokenService;
 import skyxplore.filter.AuthFilter;
 
 @Configuration
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class FilterConfig {
 
     @Bean

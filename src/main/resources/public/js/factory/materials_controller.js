@@ -3,7 +3,6 @@
         scriptLoader.loadScript("js/common/dao/factory_dao.js");
         
         this.materials = null;
-        this.selectedCategory = "all";
         
         this.displayMaterials = displayMaterials;
         this.loadMaterials = loadMaterials;

@@ -17,6 +17,7 @@ import skyxplore.util.IdGenerator;
 import java.util.Arrays;
 import java.util.HashSet;
 
+@SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -92,14 +93,18 @@ public class UserService {
         return user != null;
     }
 
-    public String registrateUser(UserRegistrationRequest request) {
+    public void registrateUser(UserRegistrationRequest request) {
         validateRegistrationRequest(request);
-        SkyXpUser user = new SkyXpUser(request.getUsername(), request.getPassword(), request.getEmail(), new HashSet<Role>(Arrays.asList(Role.USER)));
-        user.setUserId(idGenerator.getRandomId());
+        SkyXpUser user = new SkyXpUser(
+                idGenerator.getRandomId(),
+                request.getUsername(),
+                request.getPassword(),
+                request.getEmail(),
+                new HashSet<>(Arrays.asList(Role.USER))
+        );
         user.setRoles(new HashSet<>(Arrays.asList(Role.USER)));
         SkyXpUser registratedUser = userDao.registrateUser(user);
         log.info("New userId: {}", registratedUser.getUserId());
-        return registratedUser.getUserId();
     }
 
     private void validateChangePasswordRequest(ChangePasswordRequest request, SkyXpUser user) {

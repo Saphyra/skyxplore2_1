@@ -7,6 +7,7 @@ import skyxplore.dataaccess.gamedata.entity.abstractentity.EquipmentDescription;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("Lombok")
 @Data
 @ToString(callSuper = true)
 public class Ship extends EquipmentDescription {

@@ -6,5 +6,6 @@
     "materials": {
         "xebryum": 5,
         "mithril": 2
-    }
+    },
+    "constructiontime": 10
 }

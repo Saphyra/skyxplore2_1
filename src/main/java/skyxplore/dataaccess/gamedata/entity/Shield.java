@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.EquipmentDescription;
 
+@SuppressWarnings("Lombok")
 @Data
 @ToString(callSuper = true)
 public class Shield extends EquipmentDescription {

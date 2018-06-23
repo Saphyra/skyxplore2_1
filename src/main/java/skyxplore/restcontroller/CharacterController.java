@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+@SuppressWarnings("unused")
 @RestController
 @RequiredArgsConstructor
 @Slf4j

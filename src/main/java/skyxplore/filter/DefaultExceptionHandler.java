@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import skyxplore.exception.base.SkyXpException;
 
+@SuppressWarnings("unused")
 @ControllerAdvice
 @Slf4j
 public class DefaultExceptionHandler {
