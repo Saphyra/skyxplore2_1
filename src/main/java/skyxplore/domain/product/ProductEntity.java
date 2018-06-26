@@ -18,6 +18,9 @@ public class ProductEntity {
     @Column(name = "element_id", nullable = false)
     private String elementId;
 
+    @Column(name = "amount", nullable = false)
+    private Integer amount;
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "product_order")
     private Long productOrder;

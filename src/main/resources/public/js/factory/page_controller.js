@@ -6,6 +6,7 @@
         scriptLoader.loadScript("js/factory/queue_controller.js");
         
         this.refresh = refresh;
+        this.money = 0;
         
         $(document).ready(function(){
             refresh(true);

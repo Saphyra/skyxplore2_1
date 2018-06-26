@@ -33,6 +33,7 @@
         
         function createElement(element){
             try{
+                let isBuildable = true;
                 const container = document.createElement("DIV");
                     container.classList.add("contentelement");
                     container.title = titleService.getTitleForOverview(element.id);
@@ -42,24 +43,30 @@
                         nameContainer.innerHTML = element.name;
                 container.appendChild(nameContainer);
                 
-                    const materialsData = orderMaterials(getMaterialsData(element.materials, element.id));
                     const materialsContainer = document.createElement("DIV");
-                    for(let mindex in materialsData){
-                        const materialData = materialsData[mindex].data;
-                        const amount = materialsData[mindex].amount;
-                        const storage = materialsController.materials[materialData.id].amount;
-                        
-                        const materialElement = createMaterialElement(amount > storage ? "red" : "green");
-                            materialElement.title = titleService.getTitleForOverview(materialData.id);
-                            materialElement.innerHTML = materialData.name + ": " + amount + " / " + storage;
-                        materialsContainer.appendChild(materialElement);
-                    }
+                        if(!fillMaterialsContainer(materialsContainer, element, 1)){
+                            isBuildable = false;
+                        }
                 container.appendChild(materialsContainer);
+                
+                    const costContainer = document.createElement("DIV");
+                        costContainer.classList.add("fontsize1_25rem");
+                        costContainer.innerHTML = "Pénz: ";
+                        const cost = document.createElement("SPAN");
+                            cost.innerHTML = element.buildprice;
+                            if(element.buildprice > pageController.money){
+                                isBuildable = false;
+                            }
+                    costContainer.appendChild(cost);
+                container.appendChild(costContainer);
                 
                     const constructionTimeContainer = document.createElement("DIV");
                         constructionTimeContainer.classList.add("fontsize1_25rem");
                         constructionTimeContainer.classList.add("margin0_25rem");
-                        constructionTimeContainer.innerHTML = "Gyártási idő: " + translator.convertTimeStamp(element.constructiontime).toString();
+                        constructionTimeContainer.innerHTML = "Gyártási idő: "
+                        const constructionTime = document.createElement("SPAN");
+                            constructionTime.innerHTML = translator.convertTimeStamp(element.constructiontime).toString();
+                    constructionTimeContainer.appendChild(constructionTime);
                 container.appendChild(constructionTimeContainer);
                 
                     const amountContainer = document.createElement("LABEL");
@@ -75,9 +82,27 @@
                 container.appendChild(amountContainer);
                 
                     const buildButton = document.createElement("BUTTON");
-                        buildButton.classList.add("fontsize1_25rem");
                         buildButton.innerHTML = "Gyártás indítása";
                 container.appendChild(buildButton);
+                
+                buildButton.disabled = !isBuildable;
+                
+                amountInput.onchange = function(){
+                    materialsContainer.innerHTML = "";
+                    isBuildable = true;
+                    if(!fillMaterialsContainer(materialsContainer, element, amountInput.value)){
+                        isBuildable = false;
+                    }
+                    
+                    constructionTime.innerHTML = translator.convertTimeStamp(element.constructiontime * amountInput.value).toString();
+                    cost.innerHTML = element.buildprice * amountInput.value;
+                    
+                    if(element.buildprice * amountInput.value > pageController.money){
+                        isBuildable = false;
+                    }
+                    
+                    buildButton.disabled = !isBuildable;
+                }
                 
                 return container;
             }catch(err){
@@ -86,18 +111,49 @@
                 return document.createElement("DIV");
             }
             
-            function createMaterialElement(color){
-                const materialElement = document.createElement("DIV");
-                    materialElement.classList.add("borderridge");
-                    materialElement.classList.add("border1px");
-                    materialElement.classList.add("bordercoloraaa");
-                    materialElement.classList.add("inlineblock");
-                    materialElement.classList.add("marginright0_5rem");
-                    materialElement.classList.add("margintop0_25rem");
-                    materialElement.classList.add("marginbottom0_25rem");
-                    materialElement.classList.add("padding0_25rem");
-                    materialElement.style.color = color;
-                return materialElement;
+            function fillMaterialsContainer(materialsContainer, element, amount){
+                try{
+                    let isBuildable = true;
+                    const materialsData = orderMaterials(getMaterialsData(element.materials, element.id));
+                    for(let mindex in materialsData){
+                        const result = createMaterialElement(materialsData[mindex], amount);
+                        if(!result.isEnoughInStorage){
+                            isBuildable = false;
+                        }
+                        materialsContainer.appendChild(result.element);
+                    }
+                    return isBuildable
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(materials, "error", message);
+                    return false;
+                }
+                
+                function createMaterialElement(material, amountToBuild){
+                    const materialData = material.data;
+                    const amount = material.amount * amountToBuild;
+                    const storage = materialsController.materials[materialData.id].amount;
+                    
+                    const isEnoughInStorage = storage >= amount;
+                    
+                    const materialElement = document.createElement("DIV");
+                        materialElement.classList.add("borderridge");
+                        materialElement.classList.add("border1px");
+                        materialElement.classList.add("bordercoloraaa");
+                        materialElement.classList.add("inlineblock");
+                        materialElement.classList.add("marginright0_5rem");
+                        materialElement.classList.add("margintop0_25rem");
+                        materialElement.classList.add("marginbottom0_25rem");
+                        materialElement.classList.add("padding0_25rem");
+                        materialElement.style.color = isEnoughInStorage ? "green": "red";
+                        
+                        materialElement.title = titleService.getTitleForOverview(materialData.id);
+                        materialElement.innerHTML = materialData.name + ": " + amount + " / " + storage;
+                    return {
+                        isEnoughInStorage: isEnoughInStorage,
+                        element: materialElement
+                    }
+                }
             }
             
             function getMaterialsData(materials, id){

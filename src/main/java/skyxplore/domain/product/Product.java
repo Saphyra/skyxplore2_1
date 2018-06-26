@@ -9,6 +9,7 @@ public class Product {
     private String productId;
     private String factoryId;
     private String elementId;
+    private Integer amount;
     private Long order;
     private Integer constructionTime;
     private LocalDateTime startTime;

@@ -45,6 +45,7 @@ window.ResponseStatus = new function(){
     this.BAD_REQUEST = 400;
     this.UNAUTHORIZED = 401;
     this.NOT_FOUND = 404;
+    this.INTERNAL_SERVER_ERROR = 500;
 }
 
 /*

@@ -15,4 +15,6 @@ public class Material extends GeneralDescription {
     private HashMap<String, Integer> materials;
     @JsonProperty("constructiontime")
     private int constructionTime;
+    @JsonProperty("buildprice")
+    private int buildPrice = 0;
 }
