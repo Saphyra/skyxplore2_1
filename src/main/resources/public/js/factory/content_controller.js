@@ -58,6 +58,10 @@
                                 isBuildable = false;
                             }
                     costContainer.appendChild(cost);
+                        const current = document.createElement("SPAN");
+                            current.innerHTML = " / " + pageController.money;
+                    costContainer.appendChild(current);
+                    costContainer.style.color = element.buildprice > pageController.money ? "red" : "green";
                 container.appendChild(costContainer);
                 
                     const constructionTimeContainer = document.createElement("DIV");
@@ -95,7 +99,9 @@
                     }
                     
                     constructionTime.innerHTML = translator.convertTimeStamp(element.constructiontime * amountInput.value).toString();
+                    
                     cost.innerHTML = element.buildprice * amountInput.value;
+                    costContainer.style.color = element.buildprice * amountInput.value > pageController.money ? "red" : "green";
                     
                     if(element.buildprice * amountInput.value > pageController.money){
                         isBuildable = false;
