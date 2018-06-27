@@ -14,6 +14,8 @@
     function addToQueue(elementId, amount){
         try{
             const result = factoryDao.addToQueue(sessionStorage.characterId, elementId, amount);
+            
+            pageController.refresh(true);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
