@@ -21,7 +21,7 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         domain.setElementId(entity.getElementId());
         domain.setAmount(entity.getAmount());
         domain.setConstructionTime(entity.getConstructionTime());
-        domain.setOrder(entity.getProductOrder());
+        domain.setAddedAt(entity.getAddedAt());
         domain.setStartTime(dateTimeConverter.convertEntity(entity.getStartTime()));
 
         return domain;
@@ -38,7 +38,7 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         entity.setElementId(domain.getElementId());
         entity.setAmount(domain.getAmount());
         entity.setConstructionTime(domain.getConstructionTime());
-        entity.setProductOrder(domain.getOrder());
+        entity.setAddedAt(domain.getAddedAt());
         entity.setStartTime(dateTimeConverter.convertDomain(domain.getStartTime()));
 
         return entity;

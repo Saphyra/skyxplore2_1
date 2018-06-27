@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = true)
-public abstract class ShopData extends GeneralDescription{
+public abstract class ShopData extends FactoryData{
 
     @JsonProperty("buyprice")
     private Integer buyPrice;

@@ -18,13 +18,15 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class CharacterDao {
-    private final CharacterRepository characterRepository;
-    private final UserDao userDao;
     private final CharacterConverter characterConverter;
+    private final CharacterRepository characterRepository;
     private final EquippedShipDao equippedShipDao;
+    private final FactoryDao factoryDao;
+    private final UserDao userDao;
 
     public void deleteById(String characterId){
         equippedShipDao.deleteByCharacterId(characterId);
+        factoryDao.deleteByCharacterId(characterId);
 
         log.info("Deleting character {}", characterId);
         characterRepository.deleteById(characterId);

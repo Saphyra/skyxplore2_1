@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "product")
+@SequenceGenerator(name ="seq_gen")
 public class ProductEntity {
     @Id
     @Column(name = "product_id", nullable = false, length = 50)
@@ -21,9 +22,9 @@ public class ProductEntity {
     @Column(name = "amount", nullable = false)
     private Integer amount;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "product_order")
-    private Long productOrder;
+
+    @Column(name = "added_at")
+    private Long addedAt;
 
     @Column(name = "construction_time", nullable = false)
     private Integer constructionTime;

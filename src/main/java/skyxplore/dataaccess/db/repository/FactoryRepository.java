@@ -4,5 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import skyxplore.domain.factory.FactoryEntity;
 
 public interface FactoryRepository extends JpaRepository<FactoryEntity, String> {
+    void deleteByCharacterId(String characterId);
     FactoryEntity findByCharacterId(String characterId);
 }

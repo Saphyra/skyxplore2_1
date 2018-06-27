@@ -10,11 +10,17 @@ import java.time.ZoneOffset;
 public class DateTimeConverter extends ConverterBase<Long, LocalDateTime> {
     @Override
     public LocalDateTime convertEntity(Long entity) {
+        if(entity == null){
+            return null;
+        }
         return LocalDateTime.ofEpochSecond(entity, 0, ZoneOffset.UTC);
     }
 
     @Override
     public Long convertDomain(LocalDateTime domain) {
+        if(domain == null){
+            return null;
+        }
         return domain.toEpochSecond(ZoneOffset.UTC);
     }
 }

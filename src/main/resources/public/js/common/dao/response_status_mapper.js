@@ -10,13 +10,16 @@
     Returns:
         - The key of the given status code
     Throws:
-        - IllegalArgument exception if statusCode is null, undefined, or not a number.
+        - IllegalArgument exception if statusCode is undefined.
         - KeyNotFound exception if key not found.
     */
     function getKeyOf(statusCode){
         try{
-            if(statusCode == null || statusCode == undefined){
+            if(statusCode == undefined){
                 throwException("IllegalArgument", "statusCode must not be null or undefined");
+            }
+            if(statusCode == null){
+                return null;
             }
             if(typeof statusCode != "number"){
                 throwException("IllegalArgument", "statusCode must be a number");
@@ -52,7 +55,9 @@ window.ResponseStatus = new function(){
 Response object contains the response status, statusKey, and text of the qiven request.
 */
 function Response(response){
-    response = response || {};
+    response = response || {
+        status: null
+    };
     const statusKey = responseStatusMapper.getKeyOf(response.status);
     
     this.statusKey = statusKey;

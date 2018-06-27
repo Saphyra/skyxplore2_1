@@ -8,12 +8,12 @@ import java.util.HashMap;
 
 @Data
 @ToString(callSuper = true)
-public abstract class FactoryData extends ShopData{
+public abstract class FactoryData extends GeneralDescription{
     @JsonProperty("constructiontime")
     private Integer constructionTime;
 
     @JsonProperty("buildprice")
-    private Integer buildPrice;
+    private Integer buildPrice = 0;
 
     private HashMap<String, Integer> materials;
 }

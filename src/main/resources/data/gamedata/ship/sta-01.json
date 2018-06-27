@@ -16,7 +16,7 @@
         "invulnerable",
         "speed"
     ],
-    "constructiontime": 60,
+    "constructiontime": 3600,
     "buildprice": 0,
     "materials": {},
     "name": "STA-01 Starter",

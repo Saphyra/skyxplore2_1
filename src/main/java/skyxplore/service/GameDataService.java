@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.gamedata.entity.Ship;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
 import skyxplore.dataaccess.gamedata.subservice.*;
@@ -96,12 +97,20 @@ public class GameDataService {
         return result;
     }
 
+    public FactoryData getFactoryData(String elementId){
+        GeneralDescription element = getData(elementId);
+        if(element instanceof FactoryData){
+            return (FactoryData) element;
+        }
+        throw new IllegalArgumentException(elementId + " is not instance of FactoryData");
+    }
+
     public ShopData findBuyable(String elementId){
         GeneralDescription data = getData(elementId);
         if(data instanceof ShopData){
             return (ShopData) data;
         }
-        throw new IllegalArgumentException(elementId + " is not buyable.");
+        throw new IllegalArgumentException(elementId + " is not instance of ShopData.");
     }
 
     public Map<String, GeneralDescription> getElementsOfCategory(EquipmentCategoryRequest category) {

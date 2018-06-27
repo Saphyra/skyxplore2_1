@@ -61,7 +61,7 @@
                         const current = document.createElement("SPAN");
                             current.innerHTML = " / " + pageController.money;
                     costContainer.appendChild(current);
-                    costContainer.style.color = element.buildprice > pageController.money ? "red" : "green";
+                    costContainer.style.color = element.buildprice > pageController.money ? "red" : "lightgreen";
                 container.appendChild(costContainer);
                 
                     const constructionTimeContainer = document.createElement("DIV");
@@ -87,6 +87,9 @@
                 
                     const buildButton = document.createElement("BUTTON");
                         buildButton.innerHTML = "Gyártás indítása";
+                        buildButton.onclick = function(){
+                            queueController.addToQueue(element.id, Number(amountInput.value));
+                        }
                 container.appendChild(buildButton);
                 
                 buildButton.disabled = !isBuildable;
@@ -101,7 +104,7 @@
                     constructionTime.innerHTML = translator.convertTimeStamp(element.constructiontime * amountInput.value).toString();
                     
                     cost.innerHTML = element.buildprice * amountInput.value;
-                    costContainer.style.color = element.buildprice * amountInput.value > pageController.money ? "red" : "green";
+                    costContainer.style.color = element.buildprice * amountInput.value > pageController.money ? "red" : "lightgreen";
                     
                     if(element.buildprice * amountInput.value > pageController.money){
                         isBuildable = false;
@@ -151,7 +154,7 @@
                         materialElement.classList.add("margintop0_25rem");
                         materialElement.classList.add("marginbottom0_25rem");
                         materialElement.classList.add("padding0_25rem");
-                        materialElement.style.color = isEnoughInStorage ? "green": "red";
+                        materialElement.style.color = isEnoughInStorage ? "lightgreen": "red";
                         
                         materialElement.title = titleService.getTitleForOverview(materialData.id);
                         materialElement.innerHTML = materialData.name + ": " + amount + " / " + storage;
