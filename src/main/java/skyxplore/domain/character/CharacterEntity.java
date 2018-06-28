@@ -2,8 +2,10 @@ package skyxplore.domain.character;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "skyxp_character")
@@ -27,5 +29,5 @@ public class CharacterEntity {
     private Integer money;
 
     @Column(name = "equipments", nullable = false)
-    private ArrayList<String> equipments;
+    private String equipments;
 }

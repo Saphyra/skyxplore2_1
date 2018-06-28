@@ -7,6 +7,9 @@ import skyxplore.dataaccess.db.repository.FactoryRepository;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.factory.FactoryConverter;
 import skyxplore.domain.factory.FactoryEntity;
+import skyxplore.exception.FactoryNotFoundException;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +27,15 @@ public class FactoryDao {
 
     public Factory findByCharacterId(String characterId){
         return factoryConverter.convertEntity(factoryRepository.findByCharacterId(characterId));
+    }
+
+    public Factory findById(String factoryId){
+        Optional<FactoryEntity> factory = factoryRepository.findById(factoryId);
+        if(factory.isPresent())
+        {
+            return factoryConverter.convertEntity(factory.get());
+        }
+        throw new FactoryNotFoundException("Factory not found with id " + factoryId);
     }
 
     public void save(Factory factory){

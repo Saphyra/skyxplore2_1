@@ -1,37 +1,54 @@
 package skyxplore.domain.character;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 @Component
 @RequiredArgsConstructor
+@SuppressWarnings("unchecked")
 public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
+    private final ObjectMapper objectMapper;
 
     @Override
-    public SkyXpCharacter convertEntity(CharacterEntity entity){
-        if(entity == null){
+    public SkyXpCharacter convertEntity(CharacterEntity entity) {
+        if (entity == null) {
             return null;
         }
+
         SkyXpCharacter domain = new SkyXpCharacter();
-        domain.setCharacterId(entity.getCharacterId());
-        domain.setCharacterName(entity.getCharacterName());
-        domain.setShipId(entity.getShipId());
-        domain.setUserId(entity.getUserId());
-        domain.setMoney(entity.getMoney());
-        domain.setEquipments(entity.getEquipments());
+
+        try {
+            domain.setCharacterId(entity.getCharacterId());
+            domain.setCharacterName(entity.getCharacterName());
+            domain.setShipId(entity.getShipId());
+            domain.setUserId(entity.getUserId());
+            domain.setMoney(entity.getMoney());
+            domain.setEquipments(objectMapper.readValue(entity.getEquipments(), ArrayList.class));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return domain;
     }
 
     @Override
-    public CharacterEntity convertDomain(SkyXpCharacter domain){
+    public CharacterEntity convertDomain(SkyXpCharacter domain) {
         CharacterEntity entity = new CharacterEntity();
-        entity.setCharacterId(domain.getCharacterId());
-        entity.setCharacterName(domain.getCharacterName());
-        entity.setUserId(domain.getUserId());
-        entity.setShipId(domain.getShipId());
-        entity.setMoney(domain.getMoney());
-        entity.setEquipments(domain.getEquipments());
+        try {
+            entity.setCharacterId(domain.getCharacterId());
+            entity.setCharacterName(domain.getCharacterName());
+            entity.setUserId(domain.getUserId());
+            entity.setShipId(domain.getShipId());
+            entity.setMoney(domain.getMoney());
+            entity.setEquipments(objectMapper.writeValueAsString(domain.getEquipments()));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return entity;
     }
 }

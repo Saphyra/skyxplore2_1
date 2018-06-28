@@ -9,6 +9,7 @@ import skyxplore.restcontroller.view.View;
 import skyxplore.restcontroller.view.product.ProductViewConverter;
 import skyxplore.restcontroller.view.product.ProductViewList;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,20 @@ public class ProductService {
     private final GameDataService gameDataService;
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
+
+    @Transactional
+    public void finishProduct(Product product){
+        log.info("Finishing product {}", product);
+        characterService.addEquipment(
+            factoryService.getCharacterIdOfFactory(product.getFactoryId()),
+            product.getElementId()
+        );
+        productDao.delete(product);
+    }
+
+    public List<Product> getFinishedProducts(){
+        return productDao.getFinishedProducts();
+    }
 
     public View<ProductViewList> getQueue(String userId, String characterId) {
         characterService.findCharacterByIdAuthorized(characterId, userId);

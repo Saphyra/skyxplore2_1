@@ -19,4 +19,5 @@ public class Product {
     private Long addedAt;
     private Integer constructionTime;
     private LocalDateTime startTime;
+    private LocalDateTime endTime;
 }

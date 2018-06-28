@@ -94,6 +94,10 @@ public class FactoryService {
             );
     }
 
+    public String getCharacterIdOfFactory(String factoryId){
+        return factoryDao.findById(factoryId).getCharacterId();
+    }
+
     public Map<String, MaterialView> getMaterials(String characterId, String userId) {
         characterService.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = findFactoryOfCharacterValidated(characterId);

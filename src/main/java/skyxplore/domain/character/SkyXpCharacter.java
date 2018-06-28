@@ -16,6 +16,10 @@ public class SkyXpCharacter {
     private Integer money;
     private ArrayList<String> equipments;
 
+    public void addEquipment(String equipmentId){
+        equipments.add(equipmentId);
+    }
+
     public void addMoney(Integer money) {
         this.money += money;
     }

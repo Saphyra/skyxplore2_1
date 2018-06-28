@@ -35,6 +35,12 @@ public class CharacterService {
     private final NewCharacterGenerator newCharacterGenerator;
     private final SlotDao slotDao;
 
+    public void addEquipment(String characterId, String equipmentId){
+        SkyXpCharacter character = characterDao.findById(characterId);
+        character.addEquipment(equipmentId);
+        characterDao.save(character);
+    }
+
     public void buyItems(Map<String, Integer> items, String characterId, String userId) {
         SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
         Integer cost = validateMoney(items, character);

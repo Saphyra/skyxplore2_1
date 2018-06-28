@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Lazy;
 @Lazy
 @Slf4j
 public class Application implements BeanFactoryPostProcessor {
-    private boolean isLazyInit = true;
+    private boolean isLazyInit = false;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
