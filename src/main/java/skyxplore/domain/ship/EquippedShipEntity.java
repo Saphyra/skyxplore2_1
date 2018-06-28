@@ -2,8 +2,10 @@ package skyxplore.domain.ship;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
@@ -26,7 +28,7 @@ public class EquippedShipEntity {
     private Integer connectorSlot;
 
     @Column(name = "connector_equipepd", nullable = false)
-    private ArrayList<String> connectorEquipped;
+    private String connectorEquipped;
 
     @Column(name = "defense_slot_id", nullable = false)
     private String defenseSlotId;

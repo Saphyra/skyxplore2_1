@@ -1,28 +1,41 @@
 package skyxplore.domain.materials;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 @Component
 @RequiredArgsConstructor
-public class MaterialsConverter extends ConverterBase<HashMap<String, Integer>, Materials> {
+@SuppressWarnings("unchecked")
+public class MaterialsConverter extends ConverterBase<String, Materials> {
+    private final ObjectMapper objectMapper;
 
     @Override
-    public Materials convertEntity(HashMap<String, Integer> entity) {
+    public Materials convertEntity(String entity) {
         if(entity == null){
             return null;
         }
-        return new Materials(entity);
+        try {
+            return new Materials(objectMapper.readValue(entity, HashMap.class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public HashMap<String, Integer> convertDomain(Materials domain) {
+    public String convertDomain(Materials domain) {
         if(domain == null){
             return null;
         }
-        return new HashMap<>(domain);
+        try {
+            return objectMapper.writeValueAsString(domain);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

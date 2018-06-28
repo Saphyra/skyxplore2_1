@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.HashMap;
 
 @Entity
 @Data
@@ -20,5 +19,5 @@ public class FactoryEntity {
     private String characterId;
 
     @Column(name = "materials", nullable = false)
-    private HashMap<String, Integer> materials;
+    private String materials;
 }

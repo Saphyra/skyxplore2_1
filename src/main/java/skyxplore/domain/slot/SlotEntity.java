@@ -2,8 +2,10 @@ package skyxplore.domain.slot;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
@@ -19,20 +21,20 @@ public class SlotEntity {
     @Column(name = "front_slot", nullable =  false)
     private Integer frontSlot;
     @Column(name = "front_equipped", nullable =  false)
-    private ArrayList<String> frontEquipped;
+    private String frontEquipped;
 
     @Column(name = "left_slot", nullable =  false)
     private Integer leftSlot;
     @Column(name = "left_equipped", nullable =  false)
-    private ArrayList<String> leftEquipped;
+    private String leftEquipped;
 
     @Column(name = "right_slot", nullable =  false)
     private Integer rightSlot;
     @Column(name = "right_equipped", nullable =  false)
-    private ArrayList<String> rightEquipped;
+    private String rightEquipped;
 
     @Column(name = "back_slot", nullable =  false)
     private Integer backSlot;
     @Column(name = "back_equipped", nullable =  false)
-    private ArrayList<String> backEquipped;
+    private String backEquipped;
 }
