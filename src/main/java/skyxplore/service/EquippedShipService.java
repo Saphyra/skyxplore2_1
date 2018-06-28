@@ -8,7 +8,7 @@ import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.ShipNotFoundException;
-import skyxplore.restcontroller.view.EquipmentView;
+import skyxplore.restcontroller.view.View;
 import skyxplore.restcontroller.view.ship.ShipView;
 import skyxplore.restcontroller.view.ship.ShipViewConverter;
 import skyxplore.domain.ship.EquippedShip;
@@ -25,7 +25,7 @@ public class EquippedShipService {
     private final ShipViewConverter shipViewConverter;
     private final SlotDao slotDao;
 
-    public EquipmentView<ShipView> getShipData(String characterId, String userId){
+    public View<ShipView> getShipData(String characterId, String userId){
         SkyXpCharacter character = characterDao.findById(characterId);
         if(!character.getUserId().equals(userId)){
             throw new InvalidAccessException("Character with Id " + characterId + " cannot be accessed by user " + userId);
@@ -39,7 +39,7 @@ public class EquippedShipService {
         EquippedSlot defenseSlot = slotDao.getById(ship.getDefenseSlotId());
         EquippedSlot weaponSlot = slotDao.getById(ship.getWeaponSlotId());
 
-        EquipmentView<ShipView> result = new EquipmentView<>();
+        View<ShipView> result = new View<>();
         result.setInfo(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot));
         result.setData(gameDataService.collectEquipmentData(ship, defenseSlot, weaponSlot));
         return result;

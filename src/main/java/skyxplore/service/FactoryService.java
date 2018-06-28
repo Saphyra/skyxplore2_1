@@ -125,4 +125,8 @@ public class FactoryService {
         }
         return factory;
     }
+
+    public String getFactoryIdOfCharacter(String characterId){
+        return factoryDao.findByCharacterId(characterId).getFactoryId();
+    }
 }

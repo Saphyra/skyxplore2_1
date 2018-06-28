@@ -4,6 +4,7 @@
         
         this.addToQueue = addToQueue;
         this.getMaterials = getMaterials;
+        this.getQueue = getQueue;
     }
     
     /*
@@ -62,6 +63,39 @@
                 return JSON.parse(result.responseText);
             }else{
                 throwException("UnknownServerError", new Response(result).toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return {};
+        }
+    }
+    
+    /*
+    Queries the factory queue
+    Arguments
+        - characterId: the id of the character
+    Returns:
+        - the queue
+        - empty object upon fail
+    Throws
+        - IllegalArgument exception if characterId is null or undefined
+        - UnknownServerError exception if request fails.
+    */
+    function getQueue(characterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined");
+            }
+            
+            const path = "factory/queue/" + characterId
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == 200){
+                const response = JSON.parse(result.responseText);
+                cache.addAll(response.data);
+                return response.info
+            }else{
+                throwException("UnknownServerError", result.status + " - " + result.responseText);
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

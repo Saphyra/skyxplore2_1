@@ -2,9 +2,10 @@ package skyxplore.restcontroller.view.slot;
 
 import org.springframework.stereotype.Component;
 import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.restcontroller.view.AbstractViewConverter;
 
 @Component
-public class SlotViewConverter {
+public class SlotViewConverter extends AbstractViewConverter<EquippedSlot, SlotView> {
     public SlotView convertDomain(EquippedSlot domain){
         SlotView view = new SlotView();
         view.setSlotId(domain.getSlotId());

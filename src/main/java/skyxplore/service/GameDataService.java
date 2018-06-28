@@ -15,7 +15,9 @@ import skyxplore.restcontroller.request.EquipmentCategoryRequest;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 @Service
@@ -34,12 +36,16 @@ public class GameDataService {
     private final StorageService storageService;
     private final WeaponService weaponService;
 
-    public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship, EquippedSlot defenseSlot, EquippedSlot weaponShot) {
+    public Map<String, GeneralDescription> collectEquipmentData(List<String> ids){
+        return ids.stream().map(this::getData).collect(Collectors.toMap(GeneralDescription::getId, g -> g));
+    }
+
+    public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {
         Map<String, GeneralDescription> result = new HashMap<>();
         result.put(ship.getShipType(), getShip(ship.getShipType()));
         result.putAll(getData(ship.getConnectorEquipped()));
         result.putAll(getData(defenseSlot));
-        result.putAll(getData(weaponShot));
+        result.putAll(getData(weaponSlot));
         result.putAll(getData(getShip(ship.getShipType()).getAbility()));
         return result;
     }

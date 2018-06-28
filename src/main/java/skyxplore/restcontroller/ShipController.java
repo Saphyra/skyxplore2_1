@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import skyxplore.filter.AuthFilter;
-import skyxplore.restcontroller.view.EquipmentView;
+import skyxplore.restcontroller.view.View;
 import skyxplore.restcontroller.view.ship.ShipView;
 import skyxplore.service.EquippedShipService;
 
@@ -21,7 +21,7 @@ public class ShipController {
     private final EquippedShipService equippedShipService;
 
     @GetMapping(GET_SHIP_DATA_MAPPING)
-    public EquipmentView<ShipView> getShipData(@PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    public View<ShipView> getShipData(@PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("Querying ship data of character {}", characterId);
         return equippedShipService.getShipData(characterId, userId);
     }

@@ -19,9 +19,11 @@
             if(needReload){
                 materialsController.loadMaterials();
                 updateMoney();
+                queueController.loadQueue();
             }
             
             materialsController.displayMaterials();
+            queueController.displayQueue();
             contentController.displayElementsOfCategory();
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

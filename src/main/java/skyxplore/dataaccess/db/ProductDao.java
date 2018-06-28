@@ -7,6 +7,8 @@ import skyxplore.dataaccess.db.repository.ProductRepository;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductConverter;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -16,6 +18,10 @@ public class ProductDao {
 
     public void deleteByFactoryId(String factoryId){
         productRepository.deleteByFactoryId(factoryId);
+    }
+
+    public List<Product> findByFactoryId(String factoryId){
+        return productConverter.convertEntity(productRepository.findByFactoryId(factoryId));
     }
 
     public void save(Product product){
