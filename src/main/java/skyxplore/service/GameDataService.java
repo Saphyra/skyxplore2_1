@@ -65,7 +65,7 @@ public class GameDataService {
         return result;
     }
 
-    private GeneralDescription getData(String id) {
+    public GeneralDescription getData(String id) {
         GeneralDescription result = abilityService.get(id);
         if (result == null) {
             result = armorService.get(id);

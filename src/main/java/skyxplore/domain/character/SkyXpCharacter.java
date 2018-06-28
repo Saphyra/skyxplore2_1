@@ -27,10 +27,14 @@ public class SkyXpCharacter {
     public void buyEquipments(Map<String, Integer> items) {
         Set<String> keys = items.keySet();
         keys.forEach(key -> {
-            for(Integer i = 0; i < items.get(key); i++){
-                equipments.add(key);
-            }
+            addEquipments(key, items.get(key));
         });
+    }
+
+    public void addEquipments(String elementId, Integer amount){
+        for(int i = 0; i < amount; i++){
+            addEquipment(elementId);
+        }
     }
 
     public void spendMoney(Integer money) {

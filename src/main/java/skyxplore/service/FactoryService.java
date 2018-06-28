@@ -94,6 +94,13 @@ public class FactoryService {
             );
     }
 
+    public void addMaterial(String factoryId, String elementId, Integer amount){
+        Factory factory = factoryDao.findById(factoryId);
+        Materials materials = factory.getMaterials();
+        materials.addMaterial(elementId, amount);
+        factoryDao.save(factory);
+    }
+
     public String getCharacterIdOfFactory(String factoryId){
         return factoryDao.findById(factoryId).getCharacterId();
     }

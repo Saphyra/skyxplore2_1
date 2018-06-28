@@ -1,5 +1,6 @@
 package skyxplore.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Component
+@Slf4j
 public class DateTimeConverter extends ConverterBase<Long, LocalDateTime> {
     @Override
     public LocalDateTime convertEntity(Long entity) {
@@ -22,5 +24,9 @@ public class DateTimeConverter extends ConverterBase<Long, LocalDateTime> {
             return null;
         }
         return domain.toEpochSecond(ZoneOffset.UTC);
+    }
+
+    public LocalDateTime now(){
+        return LocalDateTime.now(ZoneOffset.UTC).withNano(0);
     }
 }

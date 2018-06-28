@@ -1,12 +1,14 @@
 package skyxplore.domain.product;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 import skyxplore.util.DateTimeConverter;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductConverter extends ConverterBase<ProductEntity, Product> {
     private final DateTimeConverter dateTimeConverter;
 
@@ -41,7 +43,7 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         entity.setConstructionTime(domain.getConstructionTime());
         entity.setAddedAt(domain.getAddedAt());
         entity.setStartTime(dateTimeConverter.convertDomain(domain.getStartTime()));
-        entity.setStartTime(dateTimeConverter.convertDomain(domain.getEndTime()));
+        entity.setEndTime(dateTimeConverter.convertDomain(domain.getEndTime()));
         return entity;
     }
 }

@@ -13,4 +13,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
 
     @Query("select p from ProductEntity p where p.endTime < :finishTime")
     List<ProductEntity> getFinishedProducts(@Param("finishTime") Long finishTime);
+
+    @Query("select p from ProductEntity p where not exists(select p1 from ProductEntity p1 where p1.factoryId = p.factoryId and p1.startTime is not null) and addedAt = (select min(p1.addedAt) from ProductEntity p1 where p1.factoryId = p.factoryId)")
+    List<ProductEntity> getFirstOfQueue();
 }

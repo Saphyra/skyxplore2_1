@@ -35,9 +35,9 @@ public class CharacterService {
     private final NewCharacterGenerator newCharacterGenerator;
     private final SlotDao slotDao;
 
-    public void addEquipment(String characterId, String equipmentId){
+    public void addEquipment(String characterId, String equipmentId, Integer amount){
         SkyXpCharacter character = characterDao.findById(characterId);
-        character.addEquipment(equipmentId);
+        character.addEquipments(equipmentId, amount);
         characterDao.save(character);
     }
 

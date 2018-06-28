@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
+@SuppressWarnings("WeakerAccess")
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -35,6 +36,10 @@ public class ProductDao {
     public List<Product> getFinishedProducts(){
         LocalDateTime time = LocalDateTime.now(ZoneOffset.UTC);
         return productConverter.convertEntity(productRepository.getFinishedProducts(dateTimeConverter.convertDomain(time)));
+    }
+
+    public List<Product> getFirstOfQueue(){
+        return productConverter.convertEntity(productRepository.getFirstOfQueue());
     }
 
     public void save(Product product){

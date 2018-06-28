@@ -17,28 +17,43 @@ import java.util.List;
 @Service
 @EnableScheduling
 @RequiredArgsConstructor
-public class FinishProducts {
+public class ProductFactoryService {
     private final ProductService productService;
     private final FactoryService factoryService;
     private final CharacterService characterService;
 
     @Scheduled(fixedDelay = 10000L)
-    public void process(){
-        log.info("Processing finished products...");
-
+    public void process() {
         processFinishedProducts();
+        startNextProduct();
     }
 
-    private void processFinishedProducts(){
+    private void processFinishedProducts() {
+        log.info("Processing finished products...");
         List<Product> products = productService.getFinishedProducts();
         log.info("Number of finished products: {}", products.size());
         products.forEach(this::finishProduct);
     }
 
-    private void finishProduct(Product product){
-        try{
+    private void finishProduct(Product product) {
+        try {
             productService.finishProduct(product);
-        }catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startNextProduct() {
+        log.info("Starting the next product in the queue");
+        List<Product> products = productService.getFirstOfQueue();
+        log.info("Items to start: {}", products.size());
+        products.forEach(this::startNextProduct);
+    }
+
+    private void startNextProduct(Product product) {
+        try {
+            productService.startBuilding(product);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
