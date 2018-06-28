@@ -52,6 +52,7 @@ public class FactoryService {
         character.spendMoney(price);
         removeMaterials(factory.getMaterials(), elementData, request.getAmount());
 
+        log.info(factory.getMaterials().toString());
         characterDao.save(character);
         factoryDao.save(factory);
         productDao.save(product);
@@ -127,6 +128,6 @@ public class FactoryService {
     }
 
     public String getFactoryIdOfCharacter(String characterId){
-        return factoryDao.findByCharacterId(characterId).getFactoryId();
+        return findFactoryOfCharacterValidated(characterId).getFactoryId();
     }
 }

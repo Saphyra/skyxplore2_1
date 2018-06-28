@@ -37,7 +37,7 @@ public class GameDataService {
     private final WeaponService weaponService;
 
     public Map<String, GeneralDescription> collectEquipmentData(List<String> ids){
-        return ids.stream().map(this::getData).collect(Collectors.toMap(GeneralDescription::getId, g -> g));
+        return ids.stream().map(this::getData).collect(Collectors.toMap(GeneralDescription::getId, g -> g, (k1, k2) -> k1));
     }
 
     public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {

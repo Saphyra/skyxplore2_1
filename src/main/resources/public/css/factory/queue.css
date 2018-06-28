@@ -12,3 +12,23 @@
     border-bottom: 3px ridge white;
     padding: 0.25rem;
 }
+
+.queueelement{
+    margin: 0.5rem;
+    border: 3px ridge white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.queueelementtitle{
+    border-bottom: 3px ridge white;
+    padding: 0.25rem;
+    font-size: 1.25rem;
+}
+
+.queueprocess{
+    border: 2px ridge white;
+    margin: 0.5rem;
+    padding: 0.25rem;
+    position: relative;
+}
