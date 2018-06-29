@@ -1,6 +1,7 @@
 (function QueueController(){
     window.queueController = new function(){
         scriptLoader.loadScript("js/common/dao/factory_dao.js");
+        scriptLoader.loadScript("js/common/translator/translator.js");
         this.queue = [];
         
         this.addToQueue = addToQueue;
@@ -74,7 +75,30 @@
                     const processContainer = document.createElement("DIV");
                         processContainer.classList.add("queueprocess");
                         if(element.startTime != null){
+                            const processBar = document.createElement("DIV");
+                                processBar.classList.add("processbar");
+                            processContainer.appendChild(processBar);
                             
+                            const textContainer = document.createElement("DIV");
+                                textContainer.classList.add("processbartext");
+                            processContainer.appendChild(textContainer);
+                            
+                            const interval = setInterval(function(){
+                                const timeLeft = countTimeLeft(element.endTime);
+                                
+                                const processRate = 100 - timeLeft / element.constructionTime * 100;
+                                processBar.style.width = processRate + "%";
+                                
+                                textContainer.innerHTML = translator.convertTimeStamp(timeLeft);
+                                
+                                if(timeLeft == 0){
+                                    clearInterval(interval);
+                                    setTimeout(function(){
+                                        loadQueue();
+                                        displayQueue();
+                                    }, 11000);
+                                }
+                            }, 1000);
                         }else{
                             processContainer.innerHTML = "Sorban áll";
                         }
@@ -85,6 +109,18 @@
                 logService.log(message, "error");
                 return document.createElement("DIV");
             }
+            
+            function countTimeLeft(endTime){
+                try{
+                    const now = getActualTimeStamp();
+                    const result = endTime - now;
+                    return result < 0 ? 0 : result;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                    return 0;
+                }
+            }
         }
     }
     
@@ -94,7 +130,7 @@
             
             result.sort(function(a, b){
                 if(a.startTime != null){
-                    return 1;
+                    return -1;
                 }
                 return a.addedAt - b.addedAt;
             })

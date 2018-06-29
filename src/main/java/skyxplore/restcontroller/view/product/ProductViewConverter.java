@@ -24,6 +24,7 @@ public class ProductViewConverter extends AbstractViewConverter<Product, Product
         view.setConstructionTime(domain.getConstructionTime());
         view.setAddedAt(domain.getAddedAt());
         view.setStartTime(dateTimeConverter.convertDomain(domain.getStartTime()));
+        view.setEndTime((dateTimeConverter.convertDomain(domain.getEndTime())));
         return view;
     }
 }

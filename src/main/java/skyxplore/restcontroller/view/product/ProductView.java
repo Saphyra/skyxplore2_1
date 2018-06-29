@@ -11,4 +11,5 @@ public class ProductView {
     private Long addedAt;
     private Integer constructionTime;
     private Long startTime;
+    private Long endTime;
 }

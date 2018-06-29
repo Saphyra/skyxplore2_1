@@ -31,4 +31,24 @@
     margin: 0.5rem;
     padding: 0.25rem;
     position: relative;
+    min-height: 1.75rem;
+}
+
+.processbar{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: darkblue;
+    transition: width 1s;
+    transition-timing-function: linear;
+}
+
+.processbartext{
+    position: absolute;
+    padding: 0.25rem;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
 }

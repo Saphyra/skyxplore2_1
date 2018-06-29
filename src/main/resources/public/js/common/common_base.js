@@ -50,3 +50,7 @@ function throwException(name, message){
     message = message == undefined ? "" : message;
     throw {name: name, message: message};
 }
+
+function getActualTimeStamp(){
+    return Math.floor(new Date().getTime() / 1000);
+}

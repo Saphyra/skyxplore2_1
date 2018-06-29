@@ -80,6 +80,7 @@
     function showCharacters(){
         try{
             const characters = characterDao.getCharacters();
+            characters.sort(function(a, b){return a.characterName.localeCompare(b.characterName);});
             const container = document.getElementById("characters");
                 container.innerHTML = "";
                 
