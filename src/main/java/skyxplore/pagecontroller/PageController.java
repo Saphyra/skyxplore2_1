@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class PageController {
     private static final String CHARACTER_SELECT_MAPPING = "/characterselect";
+    private static final String EQUIPMENT_MAPPING = "/equipment";
     private static final String FACTORY_MAPPING = "/factory";
     private static final String INDEX_MAPPING = "/";
     private static final String OVERVIEW_MAPPING = "/overview";
@@ -21,6 +22,12 @@ public class PageController {
     public String characterSelect(){
         log.info("Request arrived to {}", CHARACTER_SELECT_MAPPING);
         return "characterselect";
+    }
+
+    @GetMapping(EQUIPMENT_MAPPING)
+    public String equipment(){
+        log.info("Request arrived to {}", EQUIPMENT_MAPPING);
+        return "equipment";
     }
 
     @GetMapping(FACTORY_MAPPING)

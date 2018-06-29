@@ -19,8 +19,7 @@ public class Materials extends HashMap<String, Integer> {
     @Override
     public Integer get(Object key){
         if(!containsKey(key)){
-            //TODO change back
-            return 100;
+            return 0;
         }
         return super.get(key);
     }
