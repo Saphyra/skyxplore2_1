@@ -52,6 +52,7 @@
             }
             if(result.status == 200){
                 sessionStorage.successMessage = "Sikeres kijelentkezés!";
+                sessionStorage.removeItem("characterId");
                 window.location.href = "/";
             }else{
                 throwException("UnhandledServer", result.status + " - " + result.responseText);
