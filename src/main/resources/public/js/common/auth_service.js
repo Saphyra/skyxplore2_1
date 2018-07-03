@@ -16,7 +16,7 @@
             - False otherwise.
         Throws:
             - IllegalState exception upon bad result from dao.
-            - UnhandledServer exception upon unknown failure.
+            - UnhandledServerException exception upon unknown failure.
     */
     function login(userName, password){
         try{
@@ -29,7 +29,7 @@
             }else if(result.status == 200){
                 return true;
             }else{
-                throwException("UnhandledServer", result.status + " - " + result.responseText);
+                throwException("UnhandledServerException", result.status + " - " + result.responseText);
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

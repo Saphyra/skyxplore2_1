@@ -1,5 +1,5 @@
 (function AuthDao(){
-    window.authDao = new function(){
+    window.authDao = new function(){ 
         this.login = login;
         this.logout = logout;
     }

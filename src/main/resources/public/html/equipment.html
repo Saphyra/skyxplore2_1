@@ -5,6 +5,9 @@
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/classes.css">
+    
+    <LINK rel="stylesheet" href="/css/equipment/ship.css">
+    <LINK rel="stylesheet" href="/css/equipment/storage.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -19,7 +22,63 @@
     </HEADER>
     
     <MAIN>
+        <SECTION id='ship'>
+            <TABLE>
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='frontweapon' class='frontslot slotcontainer'></DIV>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='frontdefense' class='frontslot slotcontainer'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD rowspan='2'>
+                        <DIV id='leftweapon' class='sideslot slotcontainer'></DIV>
+                    </TD>
+                    <TD rowspan='2'>
+                        <DIV id='leftdefense' class='sideslot slotcontainer'></DIV>
+                    </TD>
+                    
+                    <TD>
+                        <DIV id='shipdetails' class='textaligncenter'></DIV>
+                    </TD>
+                    
+                    <TD rowspan='2'>
+                        <DIV id='rightdefense' class='sideslot slotcontainer'></DIV>
+                    </TD>
+                    <TD rowspan='2'>
+                        <DIV id='rightweapon' class='sideslot slotcontainer'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD>
+                        <DIV id='connectors' class='slotcontainer'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='backdefense' class='frontslot slotcontainer'></DIV>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='backweapon' class='frontslot slotcontainer'></DIV>
+                    </TD>
+                </TR>
+            </TABLE>
+        </SECTION>
         
+        <SECTION id='storage'>
+            <H1>Raktár</H1>
+            
+            <DIV id='equipmentlist'></DIV>
+        </SECTION>
     </MAIN>
     
     <FOOTER>

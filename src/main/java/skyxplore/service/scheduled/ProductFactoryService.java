@@ -22,7 +22,7 @@ public class ProductFactoryService {
     private final FactoryService factoryService;
     private final CharacterService characterService;
 
-    @Scheduled(fixedDelay = 10000L)
+    @Scheduled(fixedDelay = 10500L)
     public void process() {
         processFinishedProducts();
         startNextProduct();
