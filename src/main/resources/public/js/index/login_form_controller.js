@@ -9,7 +9,7 @@
     }
     
     /*
-        Sends the login form.
+    Sends the login form.
     */
     function sendForm(){
         try{

@@ -14,6 +14,8 @@
     Arguments:
         - elementId: the id of the element to add.
         - amount: the amount
+    Throws:
+        - UnknownServerError exception if request fails
     */
     function addToQueue(elementId, amount){
         try{
@@ -29,7 +31,7 @@
             logService.log(message, "error");
         }
     }
-    
+
     function displayQueue(){
         try{
             const container = document.getElementById("queue");
@@ -123,7 +125,10 @@
             }
         }
     }
-    
+
+    /*
+    Queries the queue from the server, and orders by startTime, and addedAt
+    */
     function loadQueue(){
         try{
             const result = factoryDao.getQueue(sessionStorage.characterId);

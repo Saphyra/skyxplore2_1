@@ -54,7 +54,10 @@
             }
         }
     }
-    
+
+    /*
+    Queries the actual materials from the server.
+    */
     function loadMaterials(){
         try{
             materialsController.materials  = orderMaterials(factoryDao.getMaterials());
@@ -62,7 +65,10 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
         }
-        
+
+        /*
+        Orders materials by name.
+        */
         function orderMaterials(materials){
             try{
                 const result = {};

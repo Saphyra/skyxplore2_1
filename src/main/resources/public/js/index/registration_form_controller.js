@@ -15,7 +15,7 @@
     }
     
     /*
-        Sends the registration form.
+    Sends the registration form.
     */
     function sendForm(){
         try{
@@ -50,7 +50,7 @@
     }
     
     /*
-        Validates the input fields.
+    Validates the input fields.
     */
     function validate(){
         try{
@@ -72,10 +72,10 @@
         }
         
         /*
-            Validates the userName.
-            Requirements:
-                - At least 3 character long
-                - Unique
+        Validates the userName.
+        Requirements:
+            - At least 3 character long
+            - Unique
         */
         function validateUserName(){
             try{
@@ -111,10 +111,10 @@
         }
         
         /*
-            Validates the password and confirmPassword.
-            Requirements:
-                - At least 6 character long
-                - Equals
+        Validates the password and confirmPassword.
+        Requirements:
+            - At least 6 character long
+            - Equals
         */
         function validatePasswords(){
             try{
@@ -157,10 +157,10 @@
         }
         
         /*
-            Validates the email.
-            Requirements:
-                - Valid format
-                - Unique
+        Validates the email.
+        Requirements:
+            - Valid format
+            - Unique
         */
         function validateEmail(){
             try{
@@ -220,12 +220,12 @@
         }
         
         /*
-            Shows the error notification.
-            Parameters:
-                - elementName: the elements to show.
-                - message: the error message.
-            Throws:
-                - IllegalArgument: if elementName is null or undefined.
+        Shows the error notification.
+        Parameters:
+            - elementName: the elements to show.
+            - message: the error message.
+        Throws:
+            - IllegalArgument: if elementName is null or undefined.
         */
         function activateErrorElement(elementName, message){
             try{
@@ -241,11 +241,11 @@
         }
         
         /*
-            Hides the error notification.
-            Parameters:
-                - elementName: the element to hide.
-            Throws:
-                - - IllegalArgument: if elementName is null or undefined.
+        Hides the error notification.
+        Parameters:
+            - elementName: the element to hide.
+        Throws:
+            - IllegalArgument: if elementName is null or undefined.
         */
         function deactivateErrorElement(elementName){
             try{
@@ -261,7 +261,7 @@
     }
     
     /*
-        Adds listeners to registrationinput elements.
+    Adds listeners to registrationinput elements.
     */
     function addListeners(){
         try{

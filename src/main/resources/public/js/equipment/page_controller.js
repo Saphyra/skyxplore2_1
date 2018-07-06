@@ -9,7 +9,12 @@
             refresh()
         });
     }
-    
+
+    /*
+    Reloads the content of the page.
+    Arguments:
+        - needReload: If true, queries the actual state of the character.
+    */
     function refresh(needReload){
         try{
             if(needReload == null || needReload == undefined){

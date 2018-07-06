@@ -29,7 +29,14 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Returns the money of the user.
+    Arguments:
+        - needUpdate: if true, queries the actual money from the server
+    Returns:
+        - the stored money of the character.
+    */
     function getMoney(needUpdate){
         try{
             if(needUpdate == null || needUpdate == undefined){
@@ -46,7 +53,13 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Reloads the contents of the page.
+    Arguments:
+        - filter: the specified filter for the displayed elements
+        - needReload: if true, queries the actual state from the server
+    */
     function refresh(filter, needReload){
         try{
             filter = filter || contentController.filter || "all";

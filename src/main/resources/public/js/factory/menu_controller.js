@@ -9,7 +9,10 @@
             createCategoryElements();
         });
     }
-    
+
+    /*
+    Loads the categories from the server.
+    */
     function loadCategories(){
         try{
             menuController.categories = dataDao.getCategories("factory");
@@ -18,7 +21,10 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Displays the category filter buttons.
+    */
     function createCategoryElements(){
         try{
             const container = document.getElementById("menu");

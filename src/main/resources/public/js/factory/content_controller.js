@@ -10,7 +10,10 @@
         
         this.displayElementsOfCategory = displayElementsOfCategory;
     }
-    
+
+    /*
+    Displays the elements of the selected category.
+    */
     function displayElementsOfCategory(category){
         try{
             category = category || contentController.selectedCategory;
@@ -207,7 +210,10 @@
                 }
             }
         }
-        
+
+        /*
+        Orders elements by translated slot name.
+        */
         function orderElements(elements){
             try{
                 const result = {};
@@ -241,10 +247,17 @@
             }
         }
     }
-    
+
+    /*
+    Used for storing category elements.
+    */
     function CategoryCache(){
         const storage = {};
-        
+
+        /*
+        Gets the elements of the given category.
+        Returns stored value, or queries from the server if stored values are not found.
+        */
         this.getElementsOfCategory = function(categoryId){
             try{
                 if(!storage[categoryId]){

@@ -41,7 +41,10 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
         }
-        
+
+        /*
+        Order by: Slot and name
+        */
         function orderCategories(equipments){
             try{
                 const list = [];

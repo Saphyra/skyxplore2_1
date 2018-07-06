@@ -6,7 +6,10 @@
             displayMenu();
         })
     }
-    
+
+    /*
+    Displays the category select menu.
+    */
     function displayMenu(){
         try{
             const container = document.getElementById("menu");

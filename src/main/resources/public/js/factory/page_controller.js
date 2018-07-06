@@ -13,7 +13,12 @@
             refresh(true);
         });
     }
-    
+
+    /*
+    Reloads the content of the page.
+    Arguments:
+        - needReload: If true, queries the actual state from the server, uses stored values otherwise.
+    */
     function refresh(needReload){
         try{
             if(needReload){
@@ -30,7 +35,10 @@
             logService.log(message, "error");
         }
     }
-    
+
+    /*
+    Queries the actual money of the character.
+    */
     function updateMoney(){
         try{
             pageController.money = characterDao.getMoney(sessionStorage.characterId);

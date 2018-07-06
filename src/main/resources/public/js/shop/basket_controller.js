@@ -40,6 +40,8 @@
 
     /*
     Buys the items in the basket.
+    Throws:
+        - UnknownServerError exception if request fails.
     */
     function buyItems(){
         try{
