@@ -5,6 +5,7 @@
     bottom: 0;
     width: calc(100% - 30rem);
     border-right: 3px ridge white;
+    padding: 1rem;
 }
 
 #ship table{

@@ -3,9 +3,10 @@
         this.buyItems = buyItems;
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
-        this.isCharNameExists = isCharNameExists;
         this.getCharacters = getCharacters;
+        this.getEquipmentOfCharacter = getEquipmentOfCharacter;
         this.getMoney = getMoney;
+        this.isCharNameExists = isCharNameExists;
         this.renameCharacter = renameCharacter;
     }
     
@@ -96,12 +97,37 @@
     Returns:
         - List of characters
     Throws:
-        - UnknownBackendError exception if request failed.;
+        - UnknownBackendError exception if request failed.
     */
     function getCharacters(){
         try{
             const path = "character/characters";
             const result = dao.sendRequest("get", path);
+            if(result.status == 200){
+                return JSON.parse(result.responseText);
+            }else{
+                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
+    
+    /*
+    Queries the equipments of the given character.
+    Throws:
+        IllegalArgument exception if characterId is null or undefined.
+        UnknownBackendError exception if request fails.
+    */
+    function getEquipmentOfCharacter(characterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            const path = "character/equipment/" + characterId;
+            const result = dao.sendRequest(dao.GET, path);
             if(result.status == 200){
                 return JSON.parse(result.responseText);
             }else{

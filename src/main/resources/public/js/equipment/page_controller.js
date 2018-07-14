@@ -17,15 +17,22 @@
     */
     function refresh(needReload){
         try{
+            const characterId = sessionStorage.characterId;
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalState", "characterId cannot be found.");
+            }
+            
             if(needReload == null || needReload == undefined){
                 needReload = true;
             }
             
             if(needReload){
-                
+                shipController.loadShipEquipment();
+                equipmentController.loadEquipment();
             }
             
-            
+            shipController.showShipEquipment();
+            equipmentController.showEquipment();
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

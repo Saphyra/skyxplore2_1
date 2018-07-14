@@ -17,6 +17,8 @@ import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
 import skyxplore.restcontroller.request.RenameCharacterRequest;
+import skyxplore.restcontroller.view.View;
+import skyxplore.restcontroller.view.equipment.EquipmentViewList;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -99,6 +101,15 @@ public class CharacterService {
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
         return characterDao.findByUserId(userId);
+    }
+
+    public View<EquipmentViewList> getEquipmentsOfCharacter(String userId, String characterId) {
+        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+
+        View<EquipmentViewList> view = new View<>();
+        view.setInfo(new EquipmentViewList(character.getEquipments()));
+        view.setData(gameDataService.collectEquipmentData(character.getEquipments()));
+        return view;
     }
 
     public Integer getMoneyOfCharacter(String userId, String characterId) {

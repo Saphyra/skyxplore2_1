@@ -8,8 +8,10 @@ import skyxplore.filter.AuthFilter;
 import skyxplore.restcontroller.request.CharacterDeleteRequest;
 import skyxplore.restcontroller.request.CreateCharacterRequest;
 import skyxplore.restcontroller.request.RenameCharacterRequest;
+import skyxplore.restcontroller.view.View;
 import skyxplore.restcontroller.view.character.CharacterView;
 import skyxplore.restcontroller.view.character.CharacterViewConverter;
+import skyxplore.restcontroller.view.equipment.EquipmentViewList;
 import skyxplore.service.CharacterService;
 
 import javax.validation.Valid;
@@ -27,6 +29,7 @@ public class CharacterController {
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
+    private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment/{characterId}";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money/{characterId}";
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/ischarnameexists/{charName}";
     private static final String RENAME_CHARACTER_MAPPING = "character/rename";
@@ -60,22 +63,28 @@ public class CharacterController {
         log.info("Character {} is deleted.", request.getCharacterId());
     }
 
-    @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
-    public boolean isCharNameExists(@PathVariable @NotNull String charName) throws ExecutionException {
-        log.info("Someone wants to know if character with name {} is exists.", charName);
-        return characterNameCache.get(charName);
-    }
-
     @GetMapping(GET_CHARACTERS_MAPPING)
     public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to know his character list.", userId);
         return characterViewConverter.convertDomain(characterService.getCharactersByUserId(userId));
     }
 
+    @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
+    public View<EquipmentViewList> getEquipmentsOfCharacter(@PathVariable @NotNull String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+        log.info("{} wants to know the equipment list of character {}", userId, characterId);
+        return characterService.getEquipmentsOfCharacter(userId, characterId);
+    }
+
     @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
     public Integer getMoney(@PathVariable(name = "characterId") @NotNull String characterId, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} Queriing money of character {}", userId, characterId);
         return characterService.getMoneyOfCharacter(userId, characterId);
+    }
+
+    @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
+    public boolean isCharNameExists(@PathVariable @NotNull String charName) throws ExecutionException {
+        log.info("Someone wants to know if character with name {} is exists.", charName);
+        return characterNameCache.get(charName);
     }
 
     @PostMapping(RENAME_CHARACTER_MAPPING)
