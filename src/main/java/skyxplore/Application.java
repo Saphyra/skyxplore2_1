@@ -20,11 +20,6 @@ public class Application {
 
     private final Properties properties = new Properties();
 
-    {
-
-    }
-
-
     public static void main(String[] args) {
         new Application().init();
         SpringApplication.run(Application.class, args);
