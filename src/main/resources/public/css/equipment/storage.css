@@ -5,3 +5,31 @@
     bottom: 0;
     width: 30rem;
 }
+
+.equipmentslotcontainer{
+    margin: 1rem;
+    
+    text-align: center;
+}
+
+.equipmentslotcontainertitle{
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border: 3px outset white;
+}
+
+.slot:hover, .equipmentslotcontainertitle:hover{
+    border-color: red;
+    cursor: pointer;
+    border-style: inset;
+}
+
+.equipmentslotlistcontainer{
+    border: 3px outset white;
+    border-top: none;
+    text-align: left;
+}
+
+.equipmentlistelement{
+    
+}

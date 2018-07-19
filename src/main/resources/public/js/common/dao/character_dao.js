@@ -129,7 +129,10 @@
             const path = "character/equipment/" + characterId;
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == 200){
-                return JSON.parse(result.responseText);
+                const elements = JSON.parse(result.responseText);
+                
+                cache.addAll(elements.data);
+                return elements.info;
             }else{
                 throwException("UnknownBackendError", result.status + " - " + result.responseText);
             }
