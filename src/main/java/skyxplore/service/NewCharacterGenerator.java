@@ -42,8 +42,8 @@ public class NewCharacterGenerator {
         character.setCharacterId(idGenerator.getRandomId());
         character.setCharacterName(characterName);
         character.setUserId(userId);
-        character.setMoney(START_MONEY);
-        character.setEquipments(new ArrayList<>());
+        character.addMoney(START_MONEY);
+        character.addEquipments(new ArrayList<>());
         log.info("Character created: {}", character);
         return character;
     }

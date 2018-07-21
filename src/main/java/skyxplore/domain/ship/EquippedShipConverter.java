@@ -44,7 +44,7 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
             domain.setShipType(entity.getShipType());
             domain.setCoreHull(entity.getCoreHull());
             domain.setConnectorSlot(entity.getConnectorSlot());
-            domain.setConnectorEquipped(objectMapper.readValue(entity.getConnectorEquipped(), ArrayList.class));
+            domain.addConnectors(objectMapper.readValue(entity.getConnectorEquipped(), ArrayList.class));
             domain.setDefenseSlotId(entity.getDefenseSlotId());
             domain.setWeaponSlotId(entity.getWeaponSlotId());
         } catch (IOException e) {

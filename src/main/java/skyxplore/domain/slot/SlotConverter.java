@@ -42,13 +42,13 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
             domain.setSlotId(entity.getSlotId());
             domain.setShipId(entity.getShipId());
             domain.setFrontSlot(entity.getFrontSlot());
-            domain.setFrontEquipped(objectMapper.readValue(entity.getFrontEquipped(), ArrayList.class));
+            domain.addFrontAll(objectMapper.readValue(entity.getFrontEquipped(), ArrayList.class));
             domain.setLeftSlot(entity.getLeftSlot());
-            domain.setLeftEquipped(objectMapper.readValue(entity.getLeftEquipped(), ArrayList.class));
+            domain.addLeftAll(objectMapper.readValue(entity.getLeftEquipped(), ArrayList.class));
             domain.setRightSlot(entity.getRightSlot());
-            domain.setRightEquipped(objectMapper.readValue(entity.getRightEquipped(), ArrayList.class));
+            domain.addRightAll(objectMapper.readValue(entity.getRightEquipped(), ArrayList.class));
             domain.setBackSlot(entity.getBackSlot());
-            domain.setBackEquipped(objectMapper.readValue(entity.getBackEquipped(), ArrayList.class));
+            domain.addBackAll(objectMapper.readValue(entity.getBackEquipped(), ArrayList.class));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

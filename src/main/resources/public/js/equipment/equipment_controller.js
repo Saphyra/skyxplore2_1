@@ -168,6 +168,12 @@
                     const slotNameContainer = document.createElement("DIV");
                         slotNameContainer.classList.add("equipmentslotcontainertitle");
                         slotNameContainer.innerHTML = translator.translateSlot(slot);
+                        
+                        const toggleButton = document.createElement("DIV");
+                            toggleButton.classList.add("equipmentlisttogglebutton");
+                            toggleButton.innerHTML = "v";
+                    slotNameContainer.appendChild(toggleButton);
+                        
                 container.appendChild(slotNameContainer);
                 
                     const equipmentListContainer = document.createElement("DIV");
@@ -178,6 +184,11 @@
                         }
                         
                 container.appendChild(equipmentListContainer);
+                
+                container.onclick = function(){
+                    $(equipmentListContainer).fadeToggle();
+                }
+                
                 return container;
             }catch(err){
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -191,7 +202,7 @@
                     const container = document.createElement("DIV");
                         container.classList.add("equipmentlistelement");
                         container.classList.add("slot");
-                        container.innerHTML = equipmentData.name;
+                        container.innerHTML = equipmentData.name + "(x" + amount + ")";
                         container.title = titleService.getTitleForOverview(equipmentId);
                     
                     return container;

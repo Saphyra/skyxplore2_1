@@ -16,6 +16,17 @@
     padding: 0.5rem;
     font-size: 1.5rem;
     border: 3px outset white;
+    position: relative;
+}
+
+.equipmentlisttogglebutton{
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    font-size: 1.5rem;
+    border: inherit;
+    border-style: ridge;
+    padding: 0.15rem;
 }
 
 .slot:hover, .equipmentslotcontainertitle:hover{
@@ -28,6 +39,7 @@
     border: 3px outset white;
     border-top: none;
     text-align: left;
+    display: none;
 }
 
 .equipmentlistelement{

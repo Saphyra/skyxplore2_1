@@ -28,8 +28,8 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             domain.setCharacterName(entity.getCharacterName());
             domain.setShipId(entity.getShipId());
             domain.setUserId(entity.getUserId());
-            domain.setMoney(entity.getMoney());
-            domain.setEquipments(objectMapper.readValue(entity.getEquipments(), ArrayList.class));
+            domain.addMoney(entity.getMoney());
+            domain.addEquipments(objectMapper.readValue(entity.getEquipments(), ArrayList.class));
         } catch (IOException e) {
             e.printStackTrace();
         }

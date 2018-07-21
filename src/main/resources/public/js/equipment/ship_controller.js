@@ -53,6 +53,7 @@
         function showSlots(containerId, slotNum, equipped){
             try{
                 const container = document.getElementById(containerId);
+                    container.innerHTML = "";
                 
                 let actual = 0;
                 for(let eindex in equipped){
@@ -61,6 +62,7 @@
                     const slotElement = createSlotElement();
                         slotElement.innerHTML = equipmentData.name;
                         slotElement.title = titleService.getTitleForOverview(equipmentData.id);
+                        slotElement.onclick = function(){equipmentService.unequip(containerId, equipmentData.id);};
                     container.appendChild(slotElement);
                     actual++;
                 }
@@ -90,6 +92,7 @@
         function fillShipDetails(shipData){
             try{
                 const container = document.getElementById("shipdetails");
+                    container.innerHTML = "";
                 
                     const shipDetailsContainer = document.createElement("DIV");
                         shipDetailsContainer.classList.add("border2px");

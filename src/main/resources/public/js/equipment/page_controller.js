@@ -2,6 +2,7 @@
     window.pageController = new function(){
         scriptLoader.loadScript("js/equipment/ship_controller.js")
         scriptLoader.loadScript("js/equipment/equipment_controller.js")
+        scriptLoader.loadScript("js/equipment/equipment_service.js")
         
         this.refresh = refresh;
         
