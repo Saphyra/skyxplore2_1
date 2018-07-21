@@ -1,6 +1,7 @@
 package skyxplore.domain.ship;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class EquippedShipEntity {
     private Integer connectorSlot;
 
     @Column(name = "connector_equipepd", nullable = false)
+    @Type(type = "text")
     private String connectorEquipped;
 
     @Column(name = "defense_slot_id", nullable = false)

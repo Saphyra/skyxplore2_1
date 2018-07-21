@@ -1,6 +1,7 @@
 package skyxplore.domain.character;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,5 +30,6 @@ public class CharacterEntity {
     private Integer money;
 
     @Column(name = "equipments", nullable = false)
+    @Type(type = "text")
     private String equipments;
 }

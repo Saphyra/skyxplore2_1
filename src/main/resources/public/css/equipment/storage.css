@@ -19,27 +19,16 @@
     position: relative;
 }
 
-.equipmentlisttogglebutton{
-    position: absolute;
-    top: 0.25rem;
-    right: 0.25rem;
-    font-size: 1.5rem;
-    border: inherit;
-    border-style: ridge;
-    padding: 0.15rem;
-}
-
-.slot:hover, .equipmentslotcontainertitle:hover{
-    border-color: red;
-    cursor: pointer;
-    border-style: inset;
-}
-
 .equipmentslotlistcontainer{
     border: 3px outset white;
     border-top: none;
     text-align: left;
-    display: none;
+}
+
+.equipmentslotlistcontainer .slot{
+    width: calc(33% - 0.45rem);
+    height: auto;
+    min-height: 3rem;
 }
 
 .equipmentlistelement{

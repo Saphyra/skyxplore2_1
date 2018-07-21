@@ -36,6 +36,12 @@
     vertical-align: top;
 }
 
+.slot:hover{
+    border-color: red;
+    cursor: pointer;
+    border-style: inset;
+}
+
 .sideslot{
     width: 9rem;
 }

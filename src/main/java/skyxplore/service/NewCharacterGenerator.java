@@ -19,7 +19,7 @@ import java.util.ArrayList;
 @Component
 @RequiredArgsConstructor
 public class NewCharacterGenerator {
-    private static final Integer START_MONEY = 100000;
+    private static final Integer START_MONEY = 10000000;
 
     private static final String STARTER_SHIP_ID = "sta-01";
 

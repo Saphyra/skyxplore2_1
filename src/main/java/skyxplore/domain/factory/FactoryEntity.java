@@ -1,6 +1,7 @@
 package skyxplore.domain.factory;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,5 +20,6 @@ public class FactoryEntity {
     private String characterId;
 
     @Column(name = "materials", nullable = false)
+    @Type(type = "text")
     private String materials;
 }
