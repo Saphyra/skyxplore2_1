@@ -9,9 +9,10 @@ import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.exception.BadSlotException;
+import skyxplore.exception.BadSlotNameException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.ShipNotFoundException;
+import skyxplore.restcontroller.request.EquipRequest;
 import skyxplore.restcontroller.request.UnequipRequest;
 import skyxplore.restcontroller.view.View;
 import skyxplore.restcontroller.view.ship.ShipView;
@@ -38,6 +39,42 @@ public class EquippedShipService {
     private final GameDataService gameDataService;
     private final ShipViewConverter shipViewConverter;
     private final SlotDao slotDao;
+
+    @Transactional
+    public void equip(EquipRequest request, String userId, String characterId) {
+        SkyXpCharacter character = getCharacterByIdAuthorized(userId, characterId);
+        EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
+        if (ship == null) {
+            throw new ShipNotFoundException("No ship found with characterId " + characterId);
+        }
+
+        character.removeEquipment(request.getItemId());
+
+        if(request.getEquipTo().contains(CONNECTOR_SLOT_NAME)){
+            ship.addConnector(request.getItemId());
+            equippedShipDao.save(ship);
+        }else{
+            EquippedSlot slot = getSlotByName(ship, request.getEquipTo());
+            addElementToSlot(slot, request);
+            slotDao.save(slot);
+        }
+
+        characterDao.save(character);
+    }
+
+    private void addElementToSlot(EquippedSlot slot, EquipRequest request) {
+        if (request.getEquipTo().contains(FRONT_SLOT_NAME)) {
+            slot.addFront(request.getItemId());
+        } else if (request.getEquipTo().contains(BACK_SLOT_NAME)) {
+            slot.addBack(request.getItemId());
+        } else if (request.getEquipTo().contains(LEFT_SLOT_NAME)) {
+            slot.addLeft(request.getItemId());
+        } else if (request.getEquipTo().contains(RIGHT_SLOT_NAME)) {
+            slot.addRight(request.getItemId());
+        } else {
+            throw new BadSlotNameException(request.getEquipTo());
+        }
+    }
 
     public View<ShipView> getShipData(String characterId, String userId) {
         getCharacterByIdAuthorized(userId, characterId);
@@ -68,7 +105,7 @@ public class EquippedShipService {
             ship.removeConnector(request.getItemId());
             equippedShipDao.save(ship);
         }else{
-            EquippedSlot slot = getSlotToUnequip(ship, request);
+            EquippedSlot slot = getSlotByName(ship, request.getSlot());
             removeElementFromSlot(slot, request);
             slotDao.save(slot);
         }
@@ -76,13 +113,13 @@ public class EquippedShipService {
         characterDao.save(character);
     }
 
-    private EquippedSlot getSlotToUnequip(EquippedShip ship, UnequipRequest request) {
-        if (request.getSlot().contains(DEFENSE_SLOT_NAME)) {
+    private EquippedSlot getSlotByName(EquippedShip ship, String slotName) {
+        if (slotName.contains(DEFENSE_SLOT_NAME)) {
             return slotDao.getById(ship.getDefenseSlotId());
-        } else if (request.getSlot().contains(WEAPON_SLOT_NAME)) {
+        } else if (slotName.contains(WEAPON_SLOT_NAME)) {
             return slotDao.getById(ship.getWeaponSlotId());
         } else {
-            throw new BadSlotException(request.getSlot());
+            throw new BadSlotNameException(slotName);
         }
     }
 
@@ -96,7 +133,7 @@ public class EquippedShipService {
         } else if (request.getSlot().contains(RIGHT_SLOT_NAME)) {
             slot.removeRight(request.getItemId());
         } else {
-            throw new BadSlotException(request.getSlot());
+            throw new BadSlotNameException(request.getSlot());
         }
     }
 

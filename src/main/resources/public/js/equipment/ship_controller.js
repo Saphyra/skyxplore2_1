@@ -70,6 +70,9 @@
                 for(actual; actual < slotNum; actual++){
                     const emptySlot = createSlotElement();
                         emptySlot.innerHTML = "Üres";
+                        emptySlot.classList.add("emptyslot");
+                        emptySlot.classList.add(getSlotOfContainerId(containerId));
+                        emptySlot.setAttribute("inslot", containerId);
                     container.appendChild(emptySlot);
                 }
             }catch(err){
@@ -82,6 +85,27 @@
                     const element = document.createElement("DIV");
                         element.classList.add("slot");
                     return element;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                }
+            }
+            
+            function getSlotOfContainerId(containerId){
+                try{
+                    if(containerId == null || containerId == undefined){
+                        throwException("IllegalArgument", "containerId must not be null or undefined");
+                    }
+                    
+                    if(containerId.includes("weapon")){
+                        return "weapon";
+                    }else if(containerId.includes("defense")){
+                        return "defense";
+                    }else if(containerId.includes("connector")){
+                        return "connector";
+                    }else{
+                        throwException("IllegalArgument", "Unsupported container type: " + containerId)
+                    }
                 }catch(err){
                     const message = arguments.callee.name + " - " + err.name + ": " + err.message;
                     logService.log(message, "error");

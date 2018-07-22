@@ -2,8 +2,52 @@
     window.shipDao = new function(){
         scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
+        this.equip = equip;
         this.getShip = getShip;
         this.unequip = unequip;
+    }
+    
+    /*
+    Equips the selected item.
+    Arguments:
+        - itemId: The id of the item to equip.
+        - equipTo: The id of the slot to equip.
+        - characterId: The id of the character.
+    Returns:
+        - true, if the equipment was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if itemId, equipTo or characterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function equip(itemId, equipTo, characterId){
+        try{
+            if(itemId == null || itemId == undefined){
+                throwException("IllegalArgument", "itemId must not be null or undefined.");
+            }
+            if(equipTo == null || equipTo == undefined){
+                throwException("IllegalArgument", "equipTo must not be null or undefined.");
+            }
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            
+            const path = "ship/equip/" + characterId;
+            const body = {
+                equipTo: equipTo,
+                itemId: itemId
+            };
+            const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == 200){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*

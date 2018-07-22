@@ -1,6 +1,7 @@
 package skyxplore.domain.character;
 
 import lombok.Data;
+import skyxplore.exception.base.BadRequestException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +29,12 @@ public class SkyXpCharacter {
     public void addEquipments(String elementId, Integer amount){
         for(int i = 0; i < amount; i++){
             addEquipment(elementId);
+        }
+    }
+
+    public void removeEquipment(String equipment){
+        if(!equipments.remove(equipment)){
+            throw new BadRequestException("Character's storage does not contain " + equipment);
         }
     }
 

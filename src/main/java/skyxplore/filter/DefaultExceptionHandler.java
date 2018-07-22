@@ -14,13 +14,14 @@ public class DefaultExceptionHandler {
 
     @ExceptionHandler(SkyXpException.class)
     public ResponseEntity<String> handleSkyXpException(SkyXpException e) {
-        log.info(e.getMessage());
+        log.warn(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), e.getResponseStatus());
     }
 
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<String> handle(RuntimeException ex){
-        log.warn("Internal Server Error: {}. Message: {}", ex.getClass().getName(), ex.getMessage());
+        log.error("Internal Server Error: {}. Message: {}", ex.getClass().getName(), ex.getMessage());
         ex.printStackTrace();
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
