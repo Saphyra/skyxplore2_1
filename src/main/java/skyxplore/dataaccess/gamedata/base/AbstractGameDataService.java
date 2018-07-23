@@ -7,12 +7,10 @@ import java.util.HashMap;
 import org.apache.commons.io.FilenameUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
 @Slf4j
-@Getter
 public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
     public static final String BASE_DIR = "src/main/resources/data/gamedata/";
 
