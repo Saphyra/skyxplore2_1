@@ -31,31 +31,6 @@ public class ProductFacade {
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
 
-    @Transactional
-    public void finishProduct(Product product) {
-        log.info("Finishing product {}", product);
-        GeneralDescription elementData = gameDataFacade.getData(product.getElementId());
-        if (elementData instanceof Material) {
-            factoryFacade.addMaterial(product.getFactoryId(), product.getElementId(), product.getAmount());
-        } else {
-            characterFacade.addEquipment(
-                factoryFacade.getCharacterIdOfFactory(product.getFactoryId()),
-                product.getElementId(),
-                product.getAmount()
-            );
-        }
-
-        productDao.delete(product);
-    }
-
-    public List<Product> getFinishedProducts() {
-        return productDao.getFinishedProducts();
-    }
-
-    public List<Product> getFirstOfQueue() {
-        return productDao.getFirstOfQueue();
-    }
-
     public View<ProductViewList> getQueue(String userId, String characterId) {
         characterFacade.findCharacterByIdAuthorized(characterId, userId);
         String factoryId = factoryFacade.getFactoryIdOfCharacter(characterId);
@@ -70,15 +45,5 @@ public class ProductFacade {
         result.setInfo(productViews);
         result.setData(gameDataFacade.collectEquipmentData(elementIds));
         return result;
-    }
-
-    @Transactional
-    public void startBuilding(Product product) {
-        log.info("Start building: {}", product);
-        LocalDateTime startTime = dateTimeConverter.now();
-        LocalDateTime endTime = startTime.plusSeconds(product.getConstructionTime());
-        product.setStartTime(startTime);
-        product.setEndTime(endTime);
-        productDao.save(product);
     }
 }

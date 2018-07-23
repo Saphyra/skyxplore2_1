@@ -28,6 +28,4 @@ public class AccessTokenFacade {
     public void logout(String userId, String accessTokenId) {
         loginService.logout(userId, accessTokenId);
     }
-
-
 }

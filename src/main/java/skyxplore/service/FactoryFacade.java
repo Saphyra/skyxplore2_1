@@ -94,17 +94,6 @@ public class FactoryFacade {
             );
     }
 
-    public void addMaterial(String factoryId, String elementId, Integer amount){
-        Factory factory = factoryDao.findById(factoryId);
-        Materials materials = factory.getMaterials();
-        materials.addMaterial(elementId, amount);
-        factoryDao.save(factory);
-    }
-
-    public String getCharacterIdOfFactory(String factoryId){
-        return factoryDao.findById(factoryId).getCharacterId();
-    }
-
     public Map<String, MaterialView> getMaterials(String characterId, String userId) {
         characterFacade.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
