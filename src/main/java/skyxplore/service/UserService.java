@@ -12,6 +12,7 @@ import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.controller.request.*;
+import skyxplore.exception.UserNotFoundException;
 import skyxplore.util.IdGenerator;
 
 import java.util.Arrays;
@@ -74,7 +75,11 @@ public class UserService {
     }
 
     public SkyXpUser getUserById(String userId) {
-        return userDao.findById(userId);
+        SkyXpUser user = userDao.findById(userId);
+        if(user == null){
+            throw new UserNotFoundException("User not found with id" + userId);
+        }
+        return user;
     }
 
     public SkyXpUser getUserByName(String userName) {
