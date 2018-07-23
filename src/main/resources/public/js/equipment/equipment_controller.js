@@ -195,12 +195,17 @@
                         container.classList.add("slot");
                         container.innerHTML = equipmentData.name + " (x" + amount + ")";
                         container.title = titleService.getTitleForOverview(equipmentId);
-                        container.draggable = true;
-                        container.ondragstart = function(e){
-                            e.dataTransfer.setData("item", equipmentId);
-                            equipmentService.dragStart(e);
+                        if(equipmentData.slot == "ship"){
+                            container.onclick = function(){equipmentService.equipShip(equipmentId)};
+                        }else{
+                            container.draggable = true;
+                            container.ondragstart = function(e){
+                                e.dataTransfer.setData("item", equipmentId);
+                                equipmentService.dragStart(e);
+                            }
+                            container.ondragend = equipmentService.dragEnd;
                         }
-                        container.ondragend = equipmentService.dragEnd;
+                        
                     return container;
                 }catch(err){
                     const message = arguments.callee.name + " - " + err.name + ": " + err.message;

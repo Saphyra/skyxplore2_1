@@ -3,6 +3,7 @@
         scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.equip = equip;
+        this.equipShip = equipShip;
         this.getShip = getShip;
         this.unequip = unequip;
     }
@@ -42,6 +43,41 @@
                 return true;
             }else{
                 return false;
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Sends a ship equip request to the server.
+    Arguments:
+        - itemId: the id of the ship to equip.
+        - characterId: the id of the character.
+    Returns:
+        - true, if the ship equipment was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if itemId or characterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function equipShip(itemId, characterId){
+        try{
+            if(itemId == null || itemId == undefined){
+                throwException("itemId must not be null or undefined.");
+            }
+            if(characterId == null || characterId == undefined){
+                throwException("characterId must not be null or undefined.");
+            }
+            
+            const path = "ship/equipship/" + characterId + "/shipid/" + itemId;
+            const response = dao.sendRequest(dao.POST, path);
+            if(response.status == 200){
+                return true;
+            }else{
+                throwException("UnknownBackendError", new Response(response).toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

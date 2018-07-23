@@ -4,9 +4,14 @@
         
         this.dragEnd = dragEnd;
         this.dragStart = dragStart;
+        this.equipShip = equipShip;
         this.unequip = unequip;
     }
     
+    /*
+    Resets the border of target elements.
+    Removes drag event listeners of the target elements.
+    */
     function dragEnd(e){
         try{
             $(".emptyslot")
@@ -18,6 +23,11 @@
         }
     }
     
+    /*
+    Searches for target elements.
+    Sets the border of the target elements.
+    Adds event listeners to target elements.
+    */
     function dragStart(event){
         try{
             const itemId = event.dataTransfer.getData("item");
@@ -77,6 +87,32 @@
                     return false;
                 }
             }
+        }
+    }
+    
+    /*
+    Sends a ship equipped request.
+    Arguments:
+        - itemId: the id of the ship to equip.
+    Throws:
+        - IllegalArgument exception if itemId is null or undefined.
+    */
+    function equipShip(itemId){
+        try{
+            if(itemId == null || itemId == undefined){
+                throwException("IllegalArgument", "itemId must not be null or undefined.");
+            }
+            
+            if(shipDao.equipShip(itemId, sessionStorage.characterId)){
+                notificationService.showSuccess("Hajó felszerelve.");
+            }else{
+                notificationService.showError("Hiba a hajü felszerelése során.");
+            }
+            
+            pageController.refresh(true);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
         }
     }
     

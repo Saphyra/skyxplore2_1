@@ -16,6 +16,7 @@ import skyxplore.service.EquippedShipService;
 @Slf4j
 public class ShipController {
     private static final String EQUIP_MAPPING = "ship/equip/{characterId}";
+    private static final String EQUIP_SHIP_MAPPING = "ship/equipship/{characterId}/shipid/{shipId}";
     private static final String GET_SHIP_DATA_MAPPING = "ship/{characterId}";
     private static final String UNEQUIP_MAPPING = "ship/unequip/{characterId}";
 
@@ -25,6 +26,12 @@ public class ShipController {
     public void equip(@RequestBody EquipRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to equip {} to character {}", userId, request, characterId);
         equippedShipService.equip(request, userId, characterId);
+    }
+
+    @PostMapping(EQUIP_SHIP_MAPPING)
+    public void equipShip(@PathVariable(value = "characterId") String characterId, @PathVariable("shipId") String shipId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+        log.info("{} wants to equip a new ship {} to character {}", userId, shipId, characterId);
+        equippedShipService.equipShip(userId, characterId, shipId);
     }
 
     @GetMapping(GET_SHIP_DATA_MAPPING)
