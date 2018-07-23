@@ -23,6 +23,7 @@ import skyxplore.domain.product.Product;
 import skyxplore.service.GameDataFacade;
 import skyxplore.util.DateTimeConverter;
 
+@SuppressWarnings("unused")
 @Slf4j
 @Service
 @EnableScheduling

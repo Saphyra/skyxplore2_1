@@ -1,4 +1,4 @@
-package skyxplore.service;
+package skyxplore.service.character;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +10,7 @@ import skyxplore.domain.materials.Materials;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.service.GameDataFacade;
 import skyxplore.util.IdGenerator;
 
 import java.util.ArrayList;
