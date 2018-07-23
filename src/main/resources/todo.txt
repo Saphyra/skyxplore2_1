@@ -3,6 +3,4 @@ Display categories ordered
 Shop & factory implement filters
 Cancel production
 CaracterId not found exception
-Unequip extenders
-Equip extenders
 Equip ship

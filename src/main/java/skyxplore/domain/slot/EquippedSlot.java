@@ -1,6 +1,7 @@
 package skyxplore.domain.slot;
 
 import lombok.Data;
+import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.exception.base.BadRequestException;
 
 import java.util.ArrayList;
@@ -19,6 +20,37 @@ public class EquippedSlot {
     private ArrayList<String> rightEquipped = new ArrayList<>();
     private Integer backSlot;
     private ArrayList<String> backEquipped = new ArrayList<>();
+
+    public void addSlot(Integer extraSlot){
+        frontSlot += extraSlot;
+        backSlot += extraSlot;
+        leftSlot += extraSlot;
+        rightSlot += extraSlot;
+    }
+
+    public void removeSlot(SkyXpCharacter character, Integer removedSlot){
+        frontSlot -= removedSlot;
+        backSlot -= removedSlot;
+        leftSlot -= removedSlot;
+        rightSlot -= removedSlot;
+
+        while(frontSlot < frontEquipped.size()){
+            character.addEquipment(frontEquipped.get(0));
+            frontEquipped.remove(0);
+        }
+        while(backSlot < backEquipped.size()){
+            character.addEquipment(backEquipped.get(0));
+            backEquipped.remove(0);
+        }
+        while(leftSlot < leftEquipped.size()){
+            character.addEquipment(leftEquipped.get(0));
+            leftEquipped.remove(0);
+        }
+        while(rightSlot < rightEquipped.size()){
+            character.addEquipment(rightEquipped.get(0));
+            rightEquipped.remove(0);
+        }
+    }
 
     public void addFront(String element) {
         if (frontSlot.equals(frontEquipped.size())) {

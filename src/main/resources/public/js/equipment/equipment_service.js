@@ -24,8 +24,13 @@
             const itemData = cache.get(itemId);
             
             $(".emptyslot." + itemData.slot)
+                .filter(function(){
+                    return isEquipmentAllowed(itemId);
+                })
                 .css("border-color", "red")
-                .on("dragover", function(e){e.preventDefault()})
+                .on("dragover", function(e){
+                        e.preventDefault()
+                })
                 .on("drop", function(e){
                     e.preventDefault();
                     const itemId = e.originalEvent.dataTransfer.getData("item");
@@ -40,6 +45,38 @@
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+        }
+        
+        function isEquipmentAllowed(itemId){
+            try{
+                const itemData = cache.get(itemId);
+                if(itemData.type && itemData.type == "extender"){
+                    return isExtenderOfTypeEquipped(itemData.extendedslot);
+                }else{
+                    return true;
+                }
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+                return false;
+            }
+            
+            function isExtenderOfTypeEquipped(extenderType){
+                try{
+                    const connectors = shipController.shipData.connectorEquipped;
+                    for(let cindex in connectors){
+                        const connectorData = cache.get(connectors[cindex]);
+                        if(connectorData.type && connectorData.type == "extender" && connectorData.extendedslot == extenderType){
+                            return false;
+                        }
+                    }
+                    return true;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                    return false;
+                }
+            }
         }
     }
     

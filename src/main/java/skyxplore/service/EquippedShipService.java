@@ -6,12 +6,15 @@ import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
+import skyxplore.dataaccess.gamedata.entity.Extender;
+import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.ShipNotFoundException;
+import skyxplore.exception.base.BadRequestException;
 import skyxplore.restcontroller.request.EquipRequest;
 import skyxplore.restcontroller.request.UnequipRequest;
 import skyxplore.restcontroller.view.View;
@@ -19,6 +22,7 @@ import skyxplore.restcontroller.view.ship.ShipView;
 import skyxplore.restcontroller.view.ship.ShipViewConverter;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 @Service
@@ -36,6 +40,7 @@ public class EquippedShipService {
 
     private final CharacterDao characterDao;
     private final EquippedShipDao equippedShipDao;
+    private final ExtenderService extenderService;
     private final GameDataService gameDataService;
     private final ShipViewConverter shipViewConverter;
     private final SlotDao slotDao;
@@ -50,16 +55,49 @@ public class EquippedShipService {
 
         character.removeEquipment(request.getItemId());
 
-        if(request.getEquipTo().contains(CONNECTOR_SLOT_NAME)){
+        if (request.getEquipTo().contains(CONNECTOR_SLOT_NAME)) {
+            if (isExtender(request.getItemId())) {
+                log.info("Equipped item is extender.");
+                checkExtenderEquipable(ship.getConnectorEquipped(), request.getItemId());
+                Extender extender = extenderService.get(request.getItemId());
+                if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
+                    ship.addConnectorSlot(extender.getExtendedNum());
+                } else {
+                    EquippedSlot slot = getSlotByName(ship, extender.getExtendedSlot());
+                    slot.addSlot(extender.getExtendedNum());
+                    slotDao.save(slot);
+                }
+            }
+
             ship.addConnector(request.getItemId());
             equippedShipDao.save(ship);
-        }else{
+        } else {
             EquippedSlot slot = getSlotByName(ship, request.getEquipTo());
             addElementToSlot(slot, request);
             slotDao.save(slot);
         }
 
         characterDao.save(character);
+    }
+
+    private boolean isExtender(String itemId) {
+        return extenderService.get(itemId) != null;
+    }
+
+    private void checkExtenderEquipable(List<String> connectors, String itemId) {
+        Extender extender = extenderService.get(itemId);
+        boolean equipable = connectors.stream().anyMatch(i -> {
+            Extender e = extenderService.get(i);
+            if (e == null) {
+                return false;
+            } else {
+                return e.getExtendedSlot().equals(extender.getExtendedSlot());
+            }
+        });
+
+        if (equipable) {
+            throw new BadRequestException(itemId + " is not equipable. There is already extender equipped for slot " + extender.getExtendedSlot());
+        }
     }
 
     private void addElementToSlot(EquippedSlot slot, EquipRequest request) {
@@ -103,8 +141,17 @@ public class EquippedShipService {
 
         if (request.getSlot().contains(CONNECTOR_SLOT_NAME)) {
             ship.removeConnector(request.getItemId());
+
+            if(isExtender(request.getItemId())){
+                log.info("Unequipping extender...");
+                Extender extender = extenderService.get(request.getItemId());
+                EquippedSlot slot = getSlotByName(ship, extender.getExtendedSlot());
+                slot.removeSlot(character, extender.getExtendedNum());
+                slotDao.save(slot);
+            }
+
             equippedShipDao.save(ship);
-        }else{
+        } else {
             EquippedSlot slot = getSlotByName(ship, request.getSlot());
             removeElementFromSlot(slot, request);
             slotDao.save(slot);

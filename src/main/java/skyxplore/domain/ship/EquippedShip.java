@@ -35,6 +35,10 @@ public class EquippedShip {
         }
     }
 
+    public void addConnectorSlot(Integer extraSlot){
+        connectorSlot += extraSlot;
+    }
+
     public ArrayList<String> getConnectorEquipped() {
         return (ArrayList<String>) connectorEquipped.clone();
     }
