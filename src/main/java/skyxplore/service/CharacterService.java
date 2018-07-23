@@ -45,20 +45,15 @@ public class CharacterService {
 
     public void buyItems(Map<String, Integer> items, String characterId, String userId) {
         SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
-        Integer cost = validateMoney(items, character);
-
-        character.spendMoney(cost);
-        character.buyEquipments(items);
-        log.info("Saving character {}", character);
-        characterDao.save(character);
-    }
-
-    private Integer validateMoney(Map<String, Integer> items, SkyXpCharacter character) {
         Integer cost = countCost(items);
+
         if (cost > character.getMoney()) {
             throw new NotEnoughMoneyException(character.getCharacterId() + " wanted to buy items cost " + cost + ", while he had only " + character.getMoney());
         }
-        return cost;
+
+        character.spendMoney(cost);
+        character.buyEquipments(items);
+        characterDao.save(character);
     }
 
     private Integer countCost(Map<String, Integer> items) {
