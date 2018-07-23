@@ -30,10 +30,7 @@ public class UserDao {
 
     public SkyXpUser findById(String userId){
         Optional<UserEntity> user = userRepository.findById(userId);
-        if(user.isPresent()){
-            return userConverter.convertEntity(user.get());
-        }
-        throw new UserNotFoundException("User not found with id" + userId);
+        return user.map(userConverter::convertEntity).orElse(null);
     }
 
     public SkyXpUser findUserByUserName(String userName){

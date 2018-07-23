@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.service.CharacterService;
-import skyxplore.service.UserService;
+import skyxplore.service.CharacterFacade;
+import skyxplore.service.UserFacade;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -35,12 +35,12 @@ public class CacheConfig {
     }
 
     @Bean(name = "userNameCache")
-    public Cache<String, Boolean> userNameCache(UserService userService) {
+    public Cache<String, Boolean> userNameCache(UserFacade userFacade) {
         CacheLoader<String, Boolean> loader;
         loader = new CacheLoader<String, Boolean>() {
             @Override
             public Boolean load(String key) {
-                return userService.isUserNameExists(key);
+                return userFacade.isUserNameExists(key);
             }
         };
 
@@ -50,12 +50,12 @@ public class CacheConfig {
     }
 
     @Bean(name = "emailCache")
-    public Cache<String, Boolean> emailCache(UserService userService) {
+    public Cache<String, Boolean> emailCache(UserFacade userFacade) {
         CacheLoader<String, Boolean> loader;
         loader = new CacheLoader<String, Boolean>() {
             @Override
             public Boolean load(String key) {
-                return userService.isEmailExists(key);
+                return userFacade.isEmailExists(key);
             }
         };
 
@@ -65,12 +65,12 @@ public class CacheConfig {
     }
 
     @Bean(name = "characterNameCache")
-    public Cache<String, Boolean> characterNameCache(CharacterService characterService){
+    public Cache<String, Boolean> characterNameCache(CharacterFacade characterFacade){
         CacheLoader<String, Boolean> loader;
         loader = new CacheLoader<String, Boolean>() {
             @Override
             public Boolean load(String key) {
-                return characterService.isCharNameExists(key);
+                return characterFacade.isCharNameExists(key);
             }
         };
 

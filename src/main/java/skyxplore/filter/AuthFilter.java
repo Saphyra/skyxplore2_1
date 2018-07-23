@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import skyxplore.exception.BadRequestAuthException;
-import skyxplore.service.AccessTokenService;
+import skyxplore.service.AccessTokenFacade;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -37,7 +37,7 @@ public class AuthFilter extends OncePerRequestFilter {
             "/js/**"
     );
 
-    private final AccessTokenService accessTokenService;
+    private final AccessTokenFacade accessTokenFacade;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -53,7 +53,7 @@ public class AuthFilter extends OncePerRequestFilter {
             log.debug("Needs authentication: {}", path);
             filterChain.doFilter(request, response);
         } else {
-            if ("restcontroller".equals(request.getHeader("Request-Type"))) {
+            if ("controller".equals(request.getHeader("Request-Type"))) {
                 log.info("Sending error. Cause: Unauthorized access.");
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
             } else {
@@ -72,7 +72,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
         String userIdValue = getCookie(request, COOKIE_USER_ID);
         try {
-            accessTokenService.logout(userIdValue, accessTokenId);
+            accessTokenFacade.logout(userIdValue, accessTokenId);
         } catch (BadRequestAuthException e) {
             log.info("Error during logging out: {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
@@ -86,7 +86,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
         String userIdValue = getCookie(request, COOKIE_USER_ID);
 
-        return accessTokenService.isAuthenticated(userIdValue, accessTokenId);
+        return accessTokenFacade.isAuthenticated(userIdValue, accessTokenId);
     }
 
     private String getCookie(HttpServletRequest request, String name) {

@@ -1,0 +1,53 @@
+package skyxplore.service.character;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import skyxplore.controller.view.View;
+import skyxplore.controller.view.equipment.EquipmentViewList;
+import skyxplore.dataaccess.db.CharacterDao;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.exception.InvalidAccessException;
+import skyxplore.service.GameDataFacade;
+
+@SuppressWarnings("WeakerAccess")
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class CharacterQueryService {
+    private final CharacterDao characterDao;
+    private final GameDataFacade gameDataFacade;
+
+    public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
+        SkyXpCharacter character = characterDao.findById(characterId);
+        if (!userId.equals(character.getUserId())) {
+            throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
+        }
+        return character;
+    }
+
+    public List<SkyXpCharacter> getCharactersByUserId(String userId) {
+        return characterDao.findByUserId(userId);
+    }
+
+    public View<EquipmentViewList> getEquipmentsOfCharacter(String userId, String characterId) {
+        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+
+        View<EquipmentViewList> view = new View<>();
+        view.setInfo(new EquipmentViewList(character.getEquipments()));
+        view.setData(gameDataFacade.collectEquipmentData(character.getEquipments()));
+        return view;
+    }
+
+    public Integer getMoneyOfCharacter(String userId, String characterId) {
+        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+        return character.getMoney();
+    }
+
+    public boolean isCharNameExists(String charName) {
+        return characterDao.findByCharacterName(charName) != null;
+    }
+}
