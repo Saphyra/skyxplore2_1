@@ -15,8 +15,8 @@ import skyxplore.domain.product.Product;
 import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.exception.NotEnoughMaterialsException;
 import skyxplore.exception.NotEnoughMoneyException;
-import skyxplore.restcontroller.request.AddToQueueRequest;
-import skyxplore.restcontroller.view.material.MaterialView;
+import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.view.material.MaterialView;
 import skyxplore.util.IdGenerator;
 
 import javax.transaction.Transactional;

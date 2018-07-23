@@ -14,11 +14,11 @@ import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.NotEnoughMoneyException;
-import skyxplore.restcontroller.request.CharacterDeleteRequest;
-import skyxplore.restcontroller.request.CreateCharacterRequest;
-import skyxplore.restcontroller.request.RenameCharacterRequest;
-import skyxplore.restcontroller.view.View;
-import skyxplore.restcontroller.view.equipment.EquipmentViewList;
+import skyxplore.controller.request.CharacterDeleteRequest;
+import skyxplore.controller.request.CreateCharacterRequest;
+import skyxplore.controller.request.RenameCharacterRequest;
+import skyxplore.controller.view.View;
+import skyxplore.controller.view.equipment.EquipmentViewList;
 
 import javax.transaction.Transactional;
 import java.util.List;

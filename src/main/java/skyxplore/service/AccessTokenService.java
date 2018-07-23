@@ -10,7 +10,7 @@ import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadRequestAuthException;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.filter.AuthFilter;
-import skyxplore.restcontroller.request.LoginRequest;
+import skyxplore.controller.request.LoginRequest;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.util.AccessTokenDateResolver;

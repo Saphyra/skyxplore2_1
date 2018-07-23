@@ -11,7 +11,7 @@ import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
-import skyxplore.restcontroller.request.*;
+import skyxplore.controller.request.*;
 import skyxplore.util.IdGenerator;
 
 import java.util.Arrays;

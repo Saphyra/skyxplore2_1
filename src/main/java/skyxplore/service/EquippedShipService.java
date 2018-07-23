@@ -17,11 +17,11 @@ import skyxplore.exception.BadSlotNameException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.exception.ShipNotFoundException;
 import skyxplore.exception.base.BadRequestException;
-import skyxplore.restcontroller.request.EquipRequest;
-import skyxplore.restcontroller.request.UnequipRequest;
-import skyxplore.restcontroller.view.View;
-import skyxplore.restcontroller.view.ship.ShipView;
-import skyxplore.restcontroller.view.ship.ShipViewConverter;
+import skyxplore.controller.request.EquipRequest;
+import skyxplore.controller.request.UnequipRequest;
+import skyxplore.controller.view.View;
+import skyxplore.controller.view.ship.ShipView;
+import skyxplore.controller.view.ship.ShipViewConverter;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;

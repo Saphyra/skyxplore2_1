@@ -11,7 +11,7 @@ import skyxplore.dataaccess.gamedata.subservice.*;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.EquipmentNotFoundException;
-import skyxplore.restcontroller.request.EquipmentCategoryRequest;
+import skyxplore.controller.request.EquipmentCategoryRequest;
 
 import java.util.Collection;
 import java.util.HashMap;

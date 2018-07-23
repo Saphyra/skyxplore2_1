@@ -8,9 +8,9 @@ import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.domain.product.Product;
-import skyxplore.restcontroller.view.View;
-import skyxplore.restcontroller.view.product.ProductViewConverter;
-import skyxplore.restcontroller.view.product.ProductViewList;
+import skyxplore.controller.view.View;
+import skyxplore.controller.view.product.ProductViewConverter;
+import skyxplore.controller.view.product.ProductViewList;
 import skyxplore.util.DateTimeConverter;
 
 import javax.transaction.Transactional;
