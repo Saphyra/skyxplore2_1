@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO explode
 public class GameDataFacade {
     private final AbilityService abilityService;
     private final ArmorService armorService;

@@ -22,6 +22,7 @@ import java.util.HashSet;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO explode
 public class UserFacade {
     private final CharacterDao characterDao;
     private final IdGenerator idGenerator;

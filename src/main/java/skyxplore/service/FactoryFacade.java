@@ -17,6 +17,7 @@ import skyxplore.exception.NotEnoughMaterialsException;
 import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.controller.request.AddToQueueRequest;
 import skyxplore.controller.view.material.MaterialView;
+import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
 
 import javax.transaction.Transactional;
@@ -29,9 +30,10 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO explode
 public class FactoryFacade {
     private final CharacterDao characterDao;
-    private final CharacterFacade characterFacade;
+    private final CharacterQueryService characterQueryService;
     private final FactoryDao factoryDao;
     private final GameDataFacade gameDataFacade;
     private final IdGenerator idGenerator;
@@ -40,7 +42,7 @@ public class FactoryFacade {
 
     @Transactional
     public void addToQueue(String userId, String characterId, AddToQueueRequest request) {
-        SkyXpCharacter character = characterFacade.findCharacterByIdAuthorized(characterId, userId);
+        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
         FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
 
@@ -95,7 +97,7 @@ public class FactoryFacade {
     }
 
     public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        characterFacade.findCharacterByIdAuthorized(characterId, userId);
+        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
         Materials materials = factory.getMaterials();
         Map<String, MaterialView> result = fillWithMaterials(materials);

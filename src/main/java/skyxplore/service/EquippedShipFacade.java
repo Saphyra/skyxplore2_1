@@ -31,6 +31,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO explode
 public class EquippedShipFacade {
     private static final String DEFENSE_SLOT_NAME = "defense";
     private static final String WEAPON_SLOT_NAME = "weapon";

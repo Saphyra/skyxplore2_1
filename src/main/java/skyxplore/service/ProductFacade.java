@@ -1,38 +1,32 @@
 package skyxplore.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.db.ProductDao;
-import skyxplore.dataaccess.gamedata.entity.Material;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.dataaccess.gamedata.subservice.MaterialService;
-import skyxplore.domain.product.Product;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.product.ProductViewConverter;
-import skyxplore.controller.view.product.ProductViewList;
-import skyxplore.util.DateTimeConverter;
-
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import skyxplore.controller.view.View;
+import skyxplore.controller.view.product.ProductViewConverter;
+import skyxplore.controller.view.product.ProductViewList;
+import skyxplore.dataaccess.db.ProductDao;
+import skyxplore.domain.product.Product;
+import skyxplore.service.character.CharacterQueryService;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO explode
 public class ProductFacade {
-    private final CharacterFacade characterFacade;
-    private final DateTimeConverter dateTimeConverter;
+    private final CharacterQueryService characterQueryService;
     private final FactoryFacade factoryFacade;
     private final GameDataFacade gameDataFacade;
-    private final MaterialService materialService;
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
 
     public View<ProductViewList> getQueue(String userId, String characterId) {
-        characterFacade.findCharacterByIdAuthorized(characterId, userId);
+        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         String factoryId = factoryFacade.getFactoryIdOfCharacter(characterId);
 
         List<Product> queue = productDao.findByFactoryId(factoryId);
