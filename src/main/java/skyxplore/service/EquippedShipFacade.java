@@ -31,7 +31,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class EquippedShipService {
+public class EquippedShipFacade {
     private static final String DEFENSE_SLOT_NAME = "defense";
     private static final String WEAPON_SLOT_NAME = "weapon";
     private static final String CONNECTOR_SLOT_NAME = "connector";
@@ -44,7 +44,7 @@ public class EquippedShipService {
     private final CharacterDao characterDao;
     private final EquippedShipDao equippedShipDao;
     private final ExtenderService extenderService;
-    private final GameDataService gameDataService;
+    private final GameDataFacade gameDataFacade;
     private final ShipService shipService;
     private final ShipViewConverter shipViewConverter;
     private final SlotDao slotDao;
@@ -192,7 +192,7 @@ public class EquippedShipService {
 
         View<ShipView> result = new View<>();
         result.setInfo(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot));
-        result.setData(gameDataService.collectEquipmentData(ship, defenseSlot, weaponSlot));
+        result.setData(gameDataFacade.collectEquipmentData(ship, defenseSlot, weaponSlot));
         return result;
     }
 

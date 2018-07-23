@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class GameDataService {
+public class GameDataFacade {
     private final AbilityService abilityService;
     private final ArmorService armorService;
     private final BatteryService batteryService;

@@ -29,20 +29,20 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class FactoryService {
+public class FactoryFacade {
     private final CharacterDao characterDao;
-    private final CharacterService characterService;
+    private final CharacterFacade characterFacade;
     private final FactoryDao factoryDao;
-    private final GameDataService gameDataService;
+    private final GameDataFacade gameDataFacade;
     private final IdGenerator idGenerator;
     private final MaterialService materialService;
     private final ProductDao productDao;
 
     @Transactional
     public void addToQueue(String userId, String characterId, AddToQueueRequest request) {
-        SkyXpCharacter character = characterService.findCharacterByIdAuthorized(characterId, userId);
+        SkyXpCharacter character = characterFacade.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
-        FactoryData elementData = gameDataService.getFactoryData(request.getElementId());
+        FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
 
         int price = elementData.getBuildPrice() * request.getAmount();
         validateMoney(character.getMoney(), price);
@@ -106,7 +106,7 @@ public class FactoryService {
     }
 
     public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        characterService.findCharacterByIdAuthorized(characterId, userId);
+        characterFacade.findCharacterByIdAuthorized(characterId, userId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
         Materials materials = factory.getMaterials();
         Map<String, MaterialView> result = fillWithMaterials(materials);

@@ -12,7 +12,7 @@ import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
-import skyxplore.service.CharacterService;
+import skyxplore.service.CharacterFacade;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -34,7 +34,7 @@ public class CharacterController {
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/ischarnameexists/{charName}";
     private static final String RENAME_CHARACTER_MAPPING = "character/rename";
 
-    private final CharacterService characterService;
+    private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;
     private final Cache<String, Boolean> characterNameCache;
 
@@ -44,14 +44,14 @@ public class CharacterController {
             @PathVariable(name = "characterId") String characterId,
             @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to buy {} for character {}", userId, items.toString(), characterId);
-        characterService.buyItems(items, characterId, userId);
+        characterFacade.buyItems(items, characterId, userId);
         log.info("Items are bought successfully.");
     }
 
     @PutMapping(CREATE_CHARACTER_MAPPING)
     public void createCharacter(@RequestBody @Valid CreateCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("Creating new character with name {}", request.getCharacterName());
-        characterService.createCharacter(request, userId);
+        characterFacade.createCharacter(request, userId);
         log.info("Character created successfully.");
         characterNameCache.invalidate(request.getCharacterName());
     }
@@ -59,26 +59,26 @@ public class CharacterController {
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
     public void deleteCharacter(@RequestBody @NotNull CharacterDeleteRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to delete {}", userId, request.getCharacterId());
-        characterService.deleteCharacter(request, userId);
+        characterFacade.deleteCharacter(request, userId);
         log.info("Character {} is deleted.", request.getCharacterId());
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)
     public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to know his character list.", userId);
-        return characterViewConverter.convertDomain(characterService.getCharactersByUserId(userId));
+        return characterViewConverter.convertDomain(characterFacade.getCharactersByUserId(userId));
     }
 
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
     public View<EquipmentViewList> getEquipmentsOfCharacter(@PathVariable @NotNull String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to know the equipment list of character {}", userId, characterId);
-        return characterService.getEquipmentsOfCharacter(userId, characterId);
+        return characterFacade.getEquipmentsOfCharacter(userId, characterId);
     }
 
     @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
     public Integer getMoney(@PathVariable(name = "characterId") @NotNull String characterId, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} Queriing money of character {}", userId, characterId);
-        return characterService.getMoneyOfCharacter(userId, characterId);
+        return characterFacade.getMoneyOfCharacter(userId, characterId);
     }
 
     @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
@@ -90,7 +90,7 @@ public class CharacterController {
     @PostMapping(RENAME_CHARACTER_MAPPING)
     public void renameCharacter(@RequestBody @Valid RenameCharacterRequest request, @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to rename character {}", userId, request);
-        characterService.renameCharacter(request, userId);
+        characterFacade.renameCharacter(request, userId);
         characterNameCache.invalidate(request.getNewCharacterName());
         log.info("Character renamed successfully.");
     }

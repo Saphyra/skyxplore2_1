@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.filter.AuthFilter;
 import skyxplore.controller.request.*;
-import skyxplore.service.UserService;
+import skyxplore.service.UserFacade;
 
 import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
@@ -26,31 +26,31 @@ public class UserController {
 
     private final Cache<String, Boolean> userNameCache;
     private final Cache<String, Boolean> emailCache;
-    private final UserService userService;
+    private final UserFacade userFacade;
 
     @PostMapping(CHANGE_EMAIL_MAPPING)
     public void changeEmail(@RequestBody @Valid ChangeEmailRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to change his email address.", userId);
-        userService.changeEmail(request, userId);
+        userFacade.changeEmail(request, userId);
     }
 
     @PostMapping(CHANGE_PASSWORD_MAPPING)
     public void changePassword(@RequestBody @Valid ChangePasswordRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to change his password.", userId);
-        userService.changePassword(request, userId);
+        userFacade.changePassword(request, userId);
     }
 
     @PostMapping(CHANGE_USERNAME_MAPPING)
     public void changeUserName(@RequestBody @Valid ChangeUserNameRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to change his username.", userId);
-        userService.changeUserName(request, userId);
+        userFacade.changeUserName(request, userId);
         userNameCache.invalidate(request.getNewUserName());
     }
 
     @PostMapping(DELETE_ACCOUNT_MAPPING)
     public void deleteAccount(@RequestBody @Valid AccountDeleteRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to delete his account");
-        userService.deleteAccount(request, userId);
+        userFacade.deleteAccount(request, userId);
     }
 
     @GetMapping(EMAIL_EXISTS_MAPPING)
@@ -62,7 +62,7 @@ public class UserController {
     @PostMapping(REGISTRATION_MAPPING)
     public void registration(@RequestBody @Valid UserRegistrationRequest request){
         log.info("{} wants to registrate!", request.getUsername());
-        userService.registrateUser(request);
+        userFacade.registrateUser(request);
         userNameCache.invalidate(request.getUsername());
         emailCache.invalidate(request.getEmail());
     }

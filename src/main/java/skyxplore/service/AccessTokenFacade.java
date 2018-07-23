@@ -23,11 +23,11 @@ import java.util.concurrent.ExecutionException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AccessTokenService {
+public class AccessTokenFacade {
 
     private final AccessTokenDateResolver accessTokenDateResolver;
     private final AccessTokenDao accessTokenDao;
-    private final UserService userService;
+    private final UserFacade userFacade;
     private final IdGenerator idGenerator;
     private final Cache<String, Optional<AccessToken>> accessTokenCache;
 
@@ -55,7 +55,7 @@ public class AccessTokenService {
             }
 
             //Check if user exists
-            userService.getUserById(userId);
+            userFacade.getUserById(userId);
         } catch (UserNotFoundException | BadCredentialsException | BadRequestAuthException | AccessTokenExpiredException e) {
             log.info("Authentication failed: {}", e.getMessage());
             return false;
@@ -95,7 +95,7 @@ public class AccessTokenService {
     }
 
     private SkyXpUser getAuthenticatedUser(LoginRequest loginRequest) {
-        SkyXpUser user = userService.getUserByName(loginRequest.getUserName());
+        SkyXpUser user = userFacade.getUserByName(loginRequest.getUserName());
         if (user == null) {
             throw new BadCredentialsException("User cannot be found. Username: " + loginRequest.getUserName());
         }

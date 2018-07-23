@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import skyxplore.service.AccessTokenService;
+import skyxplore.service.AccessTokenFacade;
 
 @SuppressWarnings("unused")
 @Slf4j
@@ -13,12 +13,12 @@ import skyxplore.service.AccessTokenService;
 @EnableScheduling
 @RequiredArgsConstructor
 public class AccessTokenCleanup {
-    private final AccessTokenService accessTokenService;
+    private final AccessTokenFacade accessTokenFacade;
 
     @Scheduled(cron = "0 * * * * *")
     public void deleteOutDatedTokens(){
         log.info("Deleting outdated access tokens...");
-        accessTokenService.deleteOutDatedTokens();
+        accessTokenFacade.deleteOutDatedTokens();
         log.info("Outdated access tokens successfully deleted.");
     }
 }

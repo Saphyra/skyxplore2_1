@@ -29,11 +29,11 @@ import java.util.Set;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CharacterService {
+public class CharacterFacade {
     private final CharacterDao characterDao;
     private final EquippedShipDao equippedShipDao;
     private final FactoryDao factoryDao;
-    private final GameDataService gameDataService;
+    private final GameDataFacade gameDataFacade;
     private final NewCharacterGenerator newCharacterGenerator;
     private final SlotDao slotDao;
 
@@ -64,7 +64,7 @@ public class CharacterService {
     private Integer countCost(Map<String, Integer> items) {
         Set<String> keys = items.keySet();
         return keys.stream()
-                .map(k -> gameDataService.findBuyable(k).getBuyPrice() * items.get(k))
+                .map(k -> gameDataFacade.findBuyable(k).getBuyPrice() * items.get(k))
                 .reduce(0, (a, b) -> a + b);
     }
 
@@ -108,7 +108,7 @@ public class CharacterService {
 
         View<EquipmentViewList> view = new View<>();
         view.setInfo(new EquipmentViewList(character.getEquipments()));
-        view.setData(gameDataService.collectEquipmentData(character.getEquipments()));
+        view.setData(gameDataFacade.collectEquipmentData(character.getEquipments()));
         return view;
     }
 

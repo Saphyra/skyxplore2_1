@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductService {
-    private final CharacterService characterService;
+public class ProductFacade {
+    private final CharacterFacade characterFacade;
     private final DateTimeConverter dateTimeConverter;
-    private final FactoryService factoryService;
-    private final GameDataService gameDataService;
+    private final FactoryFacade factoryFacade;
+    private final GameDataFacade gameDataFacade;
     private final MaterialService materialService;
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
@@ -34,12 +34,12 @@ public class ProductService {
     @Transactional
     public void finishProduct(Product product) {
         log.info("Finishing product {}", product);
-        GeneralDescription elementData = gameDataService.getData(product.getElementId());
+        GeneralDescription elementData = gameDataFacade.getData(product.getElementId());
         if (elementData instanceof Material) {
-            factoryService.addMaterial(product.getFactoryId(), product.getElementId(), product.getAmount());
+            factoryFacade.addMaterial(product.getFactoryId(), product.getElementId(), product.getAmount());
         } else {
-            characterService.addEquipment(
-                factoryService.getCharacterIdOfFactory(product.getFactoryId()),
+            characterFacade.addEquipment(
+                factoryFacade.getCharacterIdOfFactory(product.getFactoryId()),
                 product.getElementId(),
                 product.getAmount()
             );
@@ -57,8 +57,8 @@ public class ProductService {
     }
 
     public View<ProductViewList> getQueue(String userId, String characterId) {
-        characterService.findCharacterByIdAuthorized(characterId, userId);
-        String factoryId = factoryService.getFactoryIdOfCharacter(characterId);
+        characterFacade.findCharacterByIdAuthorized(characterId, userId);
+        String factoryId = factoryFacade.getFactoryIdOfCharacter(characterId);
 
         List<Product> queue = productDao.findByFactoryId(factoryId);
         List<String> elementIds = queue.stream().map(Product::getElementId).collect(Collectors.toList());
@@ -68,7 +68,7 @@ public class ProductService {
 
         View<ProductViewList> result = new View<>();
         result.setInfo(productViews);
-        result.setData(gameDataService.collectEquipmentData(elementIds));
+        result.setData(gameDataFacade.collectEquipmentData(elementIds));
         return result;
     }
 

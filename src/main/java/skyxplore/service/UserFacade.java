@@ -22,7 +22,7 @@ import java.util.HashSet;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserService {
+public class UserFacade {
     private final CharacterDao characterDao;
     private final IdGenerator idGenerator;
     private final UserDao userDao;

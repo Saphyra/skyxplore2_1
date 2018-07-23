@@ -34,7 +34,7 @@ public class NewCharacterGenerator {
     private static final String LAUNCHER_ID = "rla-hrldma-01";
     private static final String RIFLE_ID = "rif-lrldma-01";
 
-    private final GameDataService gameDataService;
+    private final GameDataFacade gameDataFacade;
     private final IdGenerator idGenerator;
 
     public SkyXpCharacter createCharacter(String userId, String characterName){
@@ -53,7 +53,7 @@ public class NewCharacterGenerator {
         ship.setShipId(idGenerator.getRandomId());
         ship.setCharacterId(characterId);
         ship.setShipType(STARTER_SHIP_ID);
-        Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
+        Ship shipData = gameDataFacade.getShip(STARTER_SHIP_ID);
         ship.setConnectorSlot(shipData.getConnector());
         ship.setCoreHull(shipData.getCoreHull());
         fillWithConnectors(ship);
@@ -71,7 +71,7 @@ public class NewCharacterGenerator {
     }
 
     public EquippedSlot createDefenseSlot(String shipId){
-        Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
+        Ship shipData = gameDataFacade.getShip(STARTER_SHIP_ID);
         EquippedSlot slot = createSlot(shipId, shipData.getDefense());
         fillWithDefense(slot);
         log.info("Defense slot created: {}", slot);
@@ -106,7 +106,7 @@ public class NewCharacterGenerator {
     }
 
     public EquippedSlot createWeaponSlot(String shipId){
-        Ship shipData = gameDataService.getShip(STARTER_SHIP_ID);
+        Ship shipData = gameDataFacade.getShip(STARTER_SHIP_ID);
         EquippedSlot slot = createSlot(shipId, shipData.getWeapon());
         fillWithWeapon(slot);
         log.info("Weapon slot created: {}", slot);

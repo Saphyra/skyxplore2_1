@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import skyxplore.controller.request.LoginRequest;
 import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.service.AccessTokenService;
+import skyxplore.service.AccessTokenFacade;
 import skyxplore.filter.AuthFilter;
 
 import javax.servlet.http.Cookie;
@@ -19,12 +19,12 @@ import javax.validation.Valid;
 @Slf4j
 @RequiredArgsConstructor
 public class LoginController {
-    private final AccessTokenService accessTokenService;
+    private final AccessTokenFacade accessTokenFacade;
 
     @PostMapping("login")
     public void login(@RequestBody @Valid LoginRequest loginRequest, HttpServletResponse response){
         log.info("Login request arrived.");
-        AccessToken accessToken = accessTokenService.login(loginRequest);
+        AccessToken accessToken = accessTokenFacade.login(loginRequest);
         response.addCookie(createLoginCookie(AuthFilter.COOKIE_USER_ID, accessToken.getUserId()));
         response.addCookie(createLoginCookie(AuthFilter.COOKIE_ACCESS_TOKEN, accessToken.getAccessTokenId()));
         log.info("Access token successfully created, and sent for the client.");

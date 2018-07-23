@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import skyxplore.domain.product.Product;
-import skyxplore.service.CharacterService;
-import skyxplore.service.FactoryService;
-import skyxplore.service.ProductService;
+import skyxplore.service.CharacterFacade;
+import skyxplore.service.FactoryFacade;
+import skyxplore.service.ProductFacade;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import java.util.List;
 @EnableScheduling
 @RequiredArgsConstructor
 public class ProductFactoryService {
-    private final ProductService productService;
-    private final FactoryService factoryService;
-    private final CharacterService characterService;
+    private final ProductFacade productFacade;
+    private final FactoryFacade factoryFacade;
+    private final CharacterFacade characterFacade;
 
     @Scheduled(fixedDelay = 10500L)
     public void process() {
@@ -30,14 +30,14 @@ public class ProductFactoryService {
 
     private void processFinishedProducts() {
         log.info("Processing finished products...");
-        List<Product> products = productService.getFinishedProducts();
+        List<Product> products = productFacade.getFinishedProducts();
         log.info("Number of finished products: {}", products.size());
         products.forEach(this::finishProduct);
     }
 
     private void finishProduct(Product product) {
         try {
-            productService.finishProduct(product);
+            productFacade.finishProduct(product);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,14 +45,14 @@ public class ProductFactoryService {
 
     private void startNextProduct() {
         log.info("Starting the next product in the queue");
-        List<Product> products = productService.getFirstOfQueue();
+        List<Product> products = productFacade.getFirstOfQueue();
         log.info("Items to start: {}", products.size());
         products.forEach(this::startNextProduct);
     }
 
     private void startNextProduct(Product product) {
         try {
-            productService.startBuilding(product);
+            productFacade.startBuilding(product);
         } catch (Exception e) {
             e.printStackTrace();
         }
