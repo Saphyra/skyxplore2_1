@@ -55,11 +55,8 @@ public class ProductFactoryService {
         if (elementData instanceof Material) {
             addMaterialToFactory(product.getFactoryId(), product.getElementId(), product.getAmount());
         } else {
-            addEquipmentToCharacter(
-                factoryDao.findById(product.getFactoryId()).getCharacterId(),
-                product.getElementId(),
-                product.getAmount()
-            );
+            Factory factory = factoryDao.findById(product.getFactoryId());
+            addEquipmentToCharacter(factory.getCharacterId(), product);
         }
         productDao.delete(product);
     }
@@ -71,9 +68,9 @@ public class ProductFactoryService {
         factoryDao.save(factory);
     }
 
-    private void addEquipmentToCharacter(String characterId, String equipmentId, Integer amount) {
+    private void addEquipmentToCharacter(String characterId, Product product) {
         SkyXpCharacter character = characterDao.findById(characterId);
-        character.addEquipments(equipmentId, amount);
+        character.addEquipments(product.getElementId(), product.getAmount());
         characterDao.save(character);
     }
 

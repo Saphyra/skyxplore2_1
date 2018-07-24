@@ -9,6 +9,7 @@ import skyxplore.dataaccess.db.repository.EquippedShipRepository;
 import skyxplore.exception.ShipNotFoundException;
 import skyxplore.domain.ship.EquippedShip;
 
+@SuppressWarnings("WeakerAccess")
 @Component
 @RequiredArgsConstructor
 @Slf4j

@@ -35,19 +35,6 @@ public class LoginService {
         return accessToken;
     }
 
-    public void logout(String userId, String accessTokenId) {
-        if (userId == null && accessTokenId == null) {
-            log.info("User is not logged in.");
-        } else if (userId == null) {
-            log.info("UserId is null. Deleting by accessTokenId...");
-            accessTokenDao.deleteById(accessTokenId);
-        } else if (accessTokenId == null) {
-            accessTokenDao.deleteByUserId(userId);
-        } else {
-            accessTokenDao.deleteById(accessTokenId);
-        }
-    }
-
     private SkyXpUser getAuthenticatedUser(LoginRequest loginRequest) {
         SkyXpUser user = userFacade.getUserByName(loginRequest.getUserName());
         if (user == null) {
@@ -66,5 +53,18 @@ public class LoginService {
         token.setUserId(user.getUserId());
         token.setLastAccess(accessTokenDateResolver.getActualDate());
         return token;
+    }
+
+    public void logout(String userId, String accessTokenId) {
+        if (userId == null && accessTokenId == null) {
+            log.info("User is not logged in.");
+        } else if (userId == null) {
+            log.info("UserId is null. Deleting by accessTokenId...");
+            accessTokenDao.deleteById(accessTokenId);
+        } else if (accessTokenId == null) {
+            accessTokenDao.deleteByUserId(userId);
+        } else {
+            accessTokenDao.deleteById(accessTokenId);
+        }
     }
 }
