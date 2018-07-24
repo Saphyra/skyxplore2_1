@@ -13,7 +13,6 @@ import skyxplore.service.ship.EquipShipService;
 import skyxplore.service.ship.ShipQueryService;
 import skyxplore.service.ship.UnequipService;
 
-@SuppressWarnings("WeakerAccess")
 @Service
 @Slf4j
 @RequiredArgsConstructor

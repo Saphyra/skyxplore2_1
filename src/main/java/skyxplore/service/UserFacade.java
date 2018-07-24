@@ -49,6 +49,10 @@ public class UserFacade {
         return userQueryService.getUserById(userId);
     }
 
+    public SkyXpUser getUserByName(String userName){
+        return userQueryService.getUserByName(userName);
+    }
+
     public boolean isEmailExists(String email) {
         return userQueryService.isEmailExists(email);
     }

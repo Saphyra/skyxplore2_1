@@ -27,6 +27,10 @@ public class GameDataFacade {
     private final DataQueryService dataQueryService;
     private final EquipmentDataCollectorService equipmentDataCollectorService;
 
+    public GeneralDescription getData(String id){
+        return dataQueryService.getData(id);
+    }
+
     public Map<String, GeneralDescription> collectEquipmentData(List<String> ids) {
         return equipmentDataCollectorService.collectEquipmentData(ids);
     }
