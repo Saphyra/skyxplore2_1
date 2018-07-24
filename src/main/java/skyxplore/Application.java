@@ -14,6 +14,7 @@ import java.util.Properties;
 @SpringBootApplication
 @Slf4j
 public class Application {
+    private static final String DB_URL_KEY = "database.url";
     private static final String DB_PASSWORD_KEY = "spring.datasource.password";
     private static final String DB_USERNAME_KEY = "spring.datasource.username";
     private static final String DATASOURCE_URL_KEY = "spring.datasource.url";
@@ -42,13 +43,14 @@ public class Application {
     private void createDb() {
         try {
             log.info("Creating database...");
+            String dbURL = properties.getProperty(DB_URL_KEY);
             String userName = properties.getProperty(DB_USERNAME_KEY, "root");
             String password = properties.getProperty(DB_PASSWORD_KEY, "");
             String databaseName = parseDatabaseName(properties.getProperty(DATASOURCE_URL_KEY));
             String sql = "CREATE DATABASE IF NOT EXISTS " + databaseName;
             log.info("Username: {}, Password: ***, sql: {}", userName, sql);
 
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", userName, password);
+            Connection conn = DriverManager.getConnection(dbURL, userName, password);
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
         } catch (SQLException e) {
