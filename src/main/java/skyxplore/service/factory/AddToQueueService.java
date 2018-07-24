@@ -58,19 +58,19 @@ public class AddToQueueService {
         productDao.save(product);
     }
 
-    private void validateMoney(int actual, int price){
-        if(actual < price){
+    private void validateMoney(int actual, int price) {
+        if (actual < price) {
             throw new NotEnoughMoneyException("Not enough money. Needed: " + price + ", have: " + actual);
         }
     }
 
-    private void validateMaterials(Materials materials, FactoryData elementData, int amount){
+    private void validateMaterials(Materials materials, FactoryData elementData, int amount) {
         Map<String, Integer> requiredMaterials = elementData.getMaterials();
         Set<String> keys = requiredMaterials.keySet();
-        for(String key : keys){
+        for (String key : keys) {
             int required = requiredMaterials.get(key) * amount;
-            if(materials.get(key) < required){
-                throw new NotEnoughMaterialsException("Not enough " + key +". Needed: " + required + ", have: " + materials.get(key));
+            if (materials.get(key) < required) {
+                throw new NotEnoughMaterialsException("Not enough " + key + ". Needed: " + required + ", have: " + materials.get(key));
             }
         }
     }

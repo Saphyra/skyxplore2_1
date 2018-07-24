@@ -34,7 +34,6 @@ public class RegistrationService {
             request.getEmail(),
             new HashSet<>(Arrays.asList(Role.USER))
         );
-        user.setRoles(new HashSet<>(Arrays.asList(Role.USER)));
         SkyXpUser registratedUser = userDao.registrateUser(user);
         log.info("New userId: {}", registratedUser.getUserId());
     }

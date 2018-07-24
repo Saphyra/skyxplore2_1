@@ -9,12 +9,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.dataaccess.db.FactoryDao;
+import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
 
+@SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -45,15 +47,20 @@ public class FactoryQueryService {
         materialService.keySet().forEach(
             key -> result.put(
                 key,
-                MaterialView.builder()
-                    .materialId(key)
-                    .name(materialService.get(key).getName())
-                    .description(materialService.get(key).getDescription())
-                    .amount(materials.get(key))
-                    .build()
+                createMaterialView(key, materials.get(key))
             )
         );
         return result;
+    }
+
+    private MaterialView createMaterialView(String key, Integer amount) {
+        Material material = materialService.get(key);
+        return MaterialView.builder()
+            .materialId(key)
+            .name(material.getName())
+            .description(material.getDescription())
+            .amount(amount)
+            .build();
     }
 
     public String getFactoryIdOfCharacter(String characterId) {

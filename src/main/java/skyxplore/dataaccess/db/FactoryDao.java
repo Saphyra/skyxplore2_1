@@ -11,6 +11,7 @@ import skyxplore.exception.FactoryNotFoundException;
 
 import java.util.Optional;
 
+@SuppressWarnings("WeakerAccess")
 @Component
 @RequiredArgsConstructor
 @Slf4j
