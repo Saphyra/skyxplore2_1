@@ -26,7 +26,7 @@ public class ShipQueryService {
     private final SlotDao slotDao;
 
     public View<ShipView> getShipData(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(userId, characterId);
+        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
 
         EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
         if (ship == null) {

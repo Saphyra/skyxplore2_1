@@ -34,7 +34,7 @@ public class EquipShipService {
     @Transactional
     //TODO refactor
     public void equipShip(String userId, String characterId, String shipId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(userId, characterId);
+        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
         if (ship == null) {
             throw new ShipNotFoundException("No ship found with characterId " + characterId);
