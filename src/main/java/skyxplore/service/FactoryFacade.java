@@ -18,6 +18,8 @@ import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.controller.request.AddToQueueRequest;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.service.character.CharacterQueryService;
+import skyxplore.service.factory.AddToQueueService;
+import skyxplore.service.factory.FactoryQueryService;
 import skyxplore.util.IdGenerator;
 
 import javax.transaction.Transactional;
@@ -30,106 +32,15 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO explode
 public class FactoryFacade {
-    private final CharacterDao characterDao;
-    private final CharacterQueryService characterQueryService;
-    private final FactoryDao factoryDao;
-    private final GameDataFacade gameDataFacade;
-    private final IdGenerator idGenerator;
-    private final MaterialService materialService;
-    private final ProductDao productDao;
+    private final AddToQueueService addToQueueService;
+    private final FactoryQueryService factoryQueryService;
 
-    @Transactional
     public void addToQueue(String userId, String characterId, AddToQueueRequest request) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
-        Factory factory = findFactoryOfCharacterValidated(characterId);
-        FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
-
-        int price = elementData.getBuildPrice() * request.getAmount();
-        validateMoney(character.getMoney(), price);
-        validateMaterials(factory.getMaterials(), elementData, request.getAmount());
-
-        Product product = createProduct(factory.getFactoryId(), elementData, request.getAmount());
-        character.spendMoney(price);
-        removeMaterials(factory.getMaterials(), elementData, request.getAmount());
-
-        log.info(factory.getMaterials().toString());
-        characterDao.save(character);
-        factoryDao.save(factory);
-        productDao.save(product);
-    }
-
-    private void validateMoney(int actual, int price){
-        if(actual < price){
-            throw new NotEnoughMoneyException("Not enough money. Needed: " + price + ", have: " + actual);
-        }
-    }
-
-    private void validateMaterials(Materials materials, FactoryData elementData, int amount){
-        Map<String, Integer> requiredMaterials = elementData.getMaterials();
-        Set<String> keys = requiredMaterials.keySet();
-        for(String key : keys){
-            int required = requiredMaterials.get(key) * amount;
-            if(materials.get(key) < required){
-                throw new NotEnoughMaterialsException("Not enough " + key +". Needed: " + required + ", have: " + materials.get(key));
-            }
-        }
-    }
-
-    private Product createProduct(String factoryId, FactoryData elementData, Integer amount) {
-        return Product.builder()
-            .productId(idGenerator.getRandomId())
-            .factoryId(factoryId)
-            .elementId(elementData.getId())
-            .amount(amount)
-            .constructionTime(elementData.getConstructionTime() * amount)
-            .addedAt(LocalDateTime.now(ZoneOffset.UTC).toEpochSecond(ZoneOffset.UTC))
-            .build();
-    }
-
-    private void removeMaterials(Materials materials, FactoryData elementData, Integer amount) {
-        elementData.getMaterials().keySet()
-            .forEach(k -> materials.removeMaterial(
-                k,
-                elementData.getMaterials().get(k) * amount)
-            );
+        addToQueueService.addToQueue(userId, characterId, request);
     }
 
     public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
-        Factory factory = findFactoryOfCharacterValidated(characterId);
-        Materials materials = factory.getMaterials();
-        Map<String, MaterialView> result = fillWithMaterials(materials);
-        log.info("Materials successfully queried for character {}", characterId);
-        return result;
-    }
-
-    private Map<String, MaterialView> fillWithMaterials(Materials materials) {
-        Map<String, MaterialView> result = new HashMap<>();
-        materialService.keySet().forEach(
-            key -> result.put(
-                key,
-                MaterialView.builder()
-                    .materialId(key)
-                    .name(materialService.get(key).getName())
-                    .description(materialService.get(key).getDescription())
-                    .amount(materials.get(key))
-                    .build()
-            )
-        );
-        return result;
-    }
-
-    private Factory findFactoryOfCharacterValidated(String characterId) {
-        Factory factory = factoryDao.findByCharacterId(characterId);
-        if (factory == null) {
-            throw new FactoryNotFoundException("Factory not found for character " + characterId);
-        }
-        return factory;
-    }
-
-    public String getFactoryIdOfCharacter(String characterId){
-        return findFactoryOfCharacterValidated(characterId).getFactoryId();
+        return factoryQueryService.getMaterials(characterId, userId);
     }
 }
