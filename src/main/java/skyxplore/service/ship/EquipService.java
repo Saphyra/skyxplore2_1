@@ -31,6 +31,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO refactor
 public class EquipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
@@ -40,7 +41,6 @@ public class EquipService {
     private final SlotDao slotDao;
 
     @Transactional
-    //TODO refactor
     public void equip(EquipRequest request, String userId, String characterId) {
         SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);

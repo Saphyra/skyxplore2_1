@@ -33,12 +33,9 @@ public class ProductQueryService {
         List<Product> queue = productDao.findByFactoryId(factoryId);
         List<String> elementIds = queue.stream().map(Product::getElementId).collect(Collectors.toList());
 
-        ProductViewList productViews = new ProductViewList();
-        productViews.addAll(productViewConverter.convertDomain(queue));
-
-        View<ProductViewList> result = new View<>();
-        result.setInfo(productViews);
-        result.setData(gameDataFacade.collectEquipmentData(elementIds));
-        return result;
+        return new View<>(
+            new ProductViewList(productViewConverter.convertDomain(queue)),
+            gameDataFacade.collectEquipmentData(elementIds)
+        );
     }
 }

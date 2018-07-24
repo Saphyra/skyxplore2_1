@@ -29,6 +29,7 @@ import skyxplore.util.IdGenerator;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO refactor
 public class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;

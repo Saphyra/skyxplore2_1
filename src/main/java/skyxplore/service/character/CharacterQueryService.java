@@ -36,10 +36,10 @@ public class CharacterQueryService {
     public View<EquipmentViewList> getEquipmentsOfCharacter(String userId, String characterId) {
         SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
 
-        View<EquipmentViewList> view = new View<>();
-        view.setInfo(new EquipmentViewList(character.getEquipments()));
-        view.setData(gameDataFacade.collectEquipmentData(character.getEquipments()));
-        return view;
+        return new View<>(
+            new EquipmentViewList(character.getEquipments()),
+            gameDataFacade.collectEquipmentData(character.getEquipments())
+        );
     }
 
     public Integer getMoneyOfCharacter(String userId, String characterId) {

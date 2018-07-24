@@ -36,9 +36,9 @@ public class ShipQueryService {
         EquippedSlot defenseSlot = slotDao.getById(ship.getDefenseSlotId());
         EquippedSlot weaponSlot = slotDao.getById(ship.getWeaponSlotId());
 
-        View<ShipView> result = new View<>();
-        result.setInfo(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot));
-        result.setData(gameDataFacade.collectEquipmentData(ship, defenseSlot, weaponSlot));
-        return result;
+        return new View<>(
+            shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot),
+            gameDataFacade.collectEquipmentData(ship, defenseSlot, weaponSlot)
+        );
     }
 }

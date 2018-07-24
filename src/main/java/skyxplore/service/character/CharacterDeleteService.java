@@ -16,6 +16,7 @@ import skyxplore.domain.character.SkyXpCharacter;
 public class CharacterDeleteService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
+
     @Transactional
     public void deleteCharacter(CharacterDeleteRequest request, String userId) {
         SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
