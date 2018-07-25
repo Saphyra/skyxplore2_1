@@ -45,6 +45,10 @@ public class UserFacade {
         deleteAccountService.deleteAccount(request, userId);
     }
 
+    public SkyXpUser getUserById(String userId){
+        return userQueryService.getUserById(userId);
+    }
+
     public SkyXpUser getUserByName(String userName){
         return userQueryService.getUserByName(userName);
     }
