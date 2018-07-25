@@ -22,49 +22,58 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
-import skyxplore.exception.ShipNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO refactor
 public class UnequipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
     private final EquipUtil equipUtil;
     private final ExtenderService extenderService;
+    private final ShipQueryService shipQueryService;
     private final SlotDao slotDao;
 
 
     @Transactional
     public void unequip(UnequipRequest request, String userId, String characterId) {
         SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
-        EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
-        if (ship == null) {
-            throw new ShipNotFoundException("No ship found with characterId " + characterId);
-        }
+        EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
         if (request.getSlot().contains(CONNECTOR_SLOT_NAME)) {
-            ship.removeConnector(request.getItemId());
-
-            if (equipUtil.isExtender(request.getItemId())) {
-                log.info("Unequipping extender...");
-                Extender extender = extenderService.get(request.getItemId());
-                EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
-                slot.removeSlot(character, extender.getExtendedNum());
-                slotDao.save(slot);
-            }
-
-            equippedShipDao.save(ship);
+            unequipConnector(request, character, ship);
         } else {
-            EquippedSlot slot = equipUtil.getSlotByName(ship, request.getSlot());
-            removeElementFromSlot(slot, request);
-            slotDao.save(slot);
+            unequipFromSlot(request, ship);
         }
+
         character.addEquipment(request.getItemId());
         characterDao.save(character);
+    }
+
+    private void unequipConnector(UnequipRequest request, SkyXpCharacter character, EquippedShip ship) {
+        ship.removeConnector(request.getItemId());
+
+        if (equipUtil.isExtender(request.getItemId())) {
+            log.info("Unequipping extender...");
+            unequipExtender(request, character, ship);
+        }
+
+        equippedShipDao.save(ship);
+    }
+
+    private void unequipExtender(UnequipRequest request, SkyXpCharacter character, EquippedShip ship) {
+        Extender extender = extenderService.get(request.getItemId());
+        EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
+        slot.removeSlot(character, extender.getExtendedNum());
+        slotDao.save(slot);
+    }
+
+    private void unequipFromSlot(UnequipRequest request, EquippedShip ship) {
+        EquippedSlot slot = equipUtil.getSlotByName(ship, request.getSlot());
+        removeElementFromSlot(slot, request);
+        slotDao.save(slot);
     }
 
     private void removeElementFromSlot(EquippedSlot slot, UnequipRequest request) {

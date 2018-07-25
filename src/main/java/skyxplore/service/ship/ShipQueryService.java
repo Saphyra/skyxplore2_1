@@ -25,6 +25,14 @@ public class ShipQueryService {
     private final ShipViewConverter shipViewConverter;
     private final SlotDao slotDao;
 
+    public EquippedShip getShipByCharacterId(String characterId) {
+        EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
+        if (ship == null) {
+            throw new ShipNotFoundException("No ship found with characterId " + characterId);
+        }
+        return ship;
+    }
+
     public View<ShipView> getShipData(String characterId, String userId) {
         characterQueryService.findCharacterByIdAuthorized(characterId, userId);
 

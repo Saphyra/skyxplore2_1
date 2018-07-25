@@ -29,7 +29,6 @@ import skyxplore.util.IdGenerator;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO refactor
 public class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
@@ -53,7 +52,6 @@ public class AddToQueueService {
         character.spendMoney(price);
         removeMaterials(factory.getMaterials(), elementData, request.getAmount());
 
-        log.info(factory.getMaterials().toString());
         characterDao.save(character);
         factoryDao.save(factory);
         productDao.save(product);
