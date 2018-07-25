@@ -24,71 +24,80 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
-import skyxplore.exception.ShipNotFoundException;
 import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO refactor
 public class EquipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
     private final EquipUtil equipUtil;
     private final ExtenderService extenderService;
+    private final ShipQueryService shipQueryService;
     private final SlotDao slotDao;
 
     @Transactional
     public void equip(EquipRequest request, String userId, String characterId) {
         SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
-        EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
-        if (ship == null) {
-            throw new ShipNotFoundException("No ship found with characterId " + characterId);
-        }
+        EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
         character.removeEquipment(request.getItemId());
 
         if (request.getEquipTo().contains(CONNECTOR_SLOT_NAME)) {
-            if (equipUtil.isExtender(request.getItemId())) {
-                log.info("Equipped item is extender.");
-                checkExtenderEquipable(ship.getConnectorEquipped(), request.getItemId());
-                Extender extender = extenderService.get(request.getItemId());
-                if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
-                    ship.addConnectorSlot(extender.getExtendedNum());
-                } else {
-                    EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
-                    slot.addSlot(extender.getExtendedNum());
-                    slotDao.save(slot);
-                }
-            }
-
-            ship.addConnector(request.getItemId());
-            equippedShipDao.save(ship);
+            equipConnector(request, ship);
         } else {
-            EquippedSlot slot = equipUtil.getSlotByName(ship, request.getEquipTo());
-            addElementToSlot(slot, request);
-            slotDao.save(slot);
+            equipToSlot(request, ship);
         }
 
         characterDao.save(character);
     }
 
+    private void equipConnector(EquipRequest request, EquippedShip ship) {
+        if (equipUtil.isExtender(request.getItemId())) {
+            equipExtender(request, ship);
+        }
+
+        ship.addConnector(request.getItemId());
+        equippedShipDao.save(ship);
+    }
+
+    private void equipExtender(EquipRequest request, EquippedShip ship) {
+        log.info("Equipped item is extender.");
+        checkExtenderEquipable(ship.getConnectorEquipped(), request.getItemId());
+        Extender extender = extenderService.get(request.getItemId());
+
+        if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
+            ship.addConnectorSlot(extender.getExtendedNum());
+        } else {
+            EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
+            slot.addSlot(extender.getExtendedNum());
+            slotDao.save(slot);
+        }
+    }
+
     private void checkExtenderEquipable(List<String> connectors, String itemId) {
         Extender extender = extenderService.get(itemId);
-        boolean equipable = connectors.stream().anyMatch(i -> {
+        boolean notEquipable = connectors.stream().anyMatch(i -> {
             Extender e = extenderService.get(i);
             if (e == null) {
-                return false;
+                return true;
             } else {
                 return e.getExtendedSlot().equals(extender.getExtendedSlot());
             }
         });
 
-        if (equipable) {
+        if (notEquipable) {
             throw new BadRequestException(itemId + " is not equipable. There is already extender equipped for slot " + extender.getExtendedSlot());
         }
+    }
+
+    private void equipToSlot(EquipRequest request, EquippedShip ship) {
+        EquippedSlot slot = equipUtil.getSlotByName(ship, request.getEquipTo());
+        addElementToSlot(slot, request);
+        slotDao.save(slot);
     }
 
     private void addElementToSlot(EquippedSlot slot, EquipRequest request) {

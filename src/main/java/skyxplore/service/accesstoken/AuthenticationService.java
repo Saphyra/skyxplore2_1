@@ -14,6 +14,7 @@ import skyxplore.exception.AccessTokenExpiredException;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadRequestAuthException;
 import skyxplore.exception.UserNotFoundException;
+import skyxplore.exception.base.ServerErrorException;
 import skyxplore.filter.AuthFilter;
 import skyxplore.service.UserFacade;
 import skyxplore.util.AccessTokenDateResolver;
@@ -48,7 +49,7 @@ public class AuthenticationService {
     }
 
     private AccessToken getAccessToken(String userId) {
-        AccessToken result = null;
+        AccessToken result;
         try {
             Optional<AccessToken> accessTokenOpt = accessTokenCache.get(userId);
             if (!accessTokenOpt.isPresent()) {
@@ -56,7 +57,7 @@ public class AuthenticationService {
             }
             result = accessTokenOpt.get();
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            throw new ServerErrorException("Exception occured by resolving access token: " + e.getMessage());
         }
         return result;
     }
