@@ -81,11 +81,11 @@ public class EquipService {
     private void checkExtenderEquipable(List<String> connectors, String itemId) {
         Extender extender = extenderService.get(itemId);
         boolean notEquipable = connectors.stream().anyMatch(i -> {
-            Extender e = extenderService.get(i);
-            if (e == null) {
-                return true;
+            Extender equippedConnector = extenderService.get(i);
+            if (equippedConnector == null) {
+                return false;
             } else {
-                return e.getExtendedSlot().equals(extender.getExtendedSlot());
+                return equippedConnector.getExtendedSlot().equals(extender.getExtendedSlot());
             }
         });
 

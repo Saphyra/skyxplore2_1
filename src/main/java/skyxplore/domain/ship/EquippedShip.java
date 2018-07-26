@@ -1,6 +1,8 @@
 package skyxplore.domain.ship;
 
 import lombok.Data;
+import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
+import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.exception.base.BadRequestException;
 
 import java.util.ArrayList;
@@ -31,12 +33,26 @@ public class EquippedShip {
 
     public void removeConnector(String connector) {
         if (!connectorEquipped.remove(connector)) {
-            throw new BadRequestException(connector + " is not equipped currently.");
+            throw new BadRequestException(connector + " is not equipped currently. Equipped elements: " + connectorEquipped.toString());
         }
     }
 
     public void addConnectorSlot(Integer extraSlot){
         connectorSlot += extraSlot;
+    }
+
+    public void removeConnectorSlot(Integer slot, SkyXpCharacter character, ExtenderService extenderService){
+        connectorSlot -= slot;
+
+        while(connectorSlot < connectorEquipped.size()){
+            for(String item : connectorEquipped){
+                if(extenderService.get(item) == null){
+                    removeConnector(item);
+                    character.addEquipment(item);
+                    break;
+                }
+            }
+        }
     }
 
     public ArrayList<String> getConnectorEquipped() {
