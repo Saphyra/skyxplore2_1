@@ -65,9 +65,13 @@ public class UnequipService {
 
     private void unequipExtender(UnequipRequest request, SkyXpCharacter character, EquippedShip ship) {
         Extender extender = extenderService.get(request.getItemId());
-        EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
-        slot.removeSlot(character, extender.getExtendedNum());
-        slotDao.save(slot);
+        if(extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)){
+            ship.removeConnectorSlot(extender.getExtendedNum(), character, extenderService);
+        }else {
+            EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
+            slot.removeSlot(character, extender.getExtendedNum());
+            slotDao.save(slot);
+        }
     }
 
     private void unequipFromSlot(UnequipRequest request, EquippedShip ship) {
