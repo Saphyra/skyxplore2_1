@@ -13,6 +13,7 @@ public class PageController {
     private static final String CHARACTER_SELECT_MAPPING = "/characterselect";
     private static final String EQUIPMENT_MAPPING = "/equipment";
     private static final String FACTORY_MAPPING = "/factory";
+    private static final String HANGAR_MAPPING = "/hangar";
     private static final String INDEX_MAPPING = "/";
     private static final String OVERVIEW_MAPPING = "/overview";
     private static final String SETTINGS_MAPPING = "/account";
@@ -34,6 +35,12 @@ public class PageController {
     public String factory(){
         log.info("Request arrived to {}", FACTORY_MAPPING);
         return "factory";
+    }
+
+    @GetMapping(HANGAR_MAPPING)
+    public String hangar(){
+        log.info("Request arrived to {}", HANGAR_MAPPING);
+        return "hangar";
     }
 
     @GetMapping(INDEX_MAPPING)

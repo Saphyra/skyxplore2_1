@@ -1,0 +1,12 @@
+#maincontainer{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    bottom: 2rem;
+    left: 2rem;
+    border: 3px ridge white;
+}
+
+#maincontainer h2{
+    border-bottom: 3px ridge white;
+}

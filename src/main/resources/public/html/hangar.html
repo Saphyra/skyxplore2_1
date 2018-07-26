@@ -1,0 +1,42 @@
+<HTML xmlns:th="http://www.thymeleaf.org">
+<HEAD>
+    <TITLE>Hangár - SkyXplore 2.1</TITLE>
+    <META charset="UTF-8"/>
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+    <LINK rel="stylesheet" href="/css/classes.css">
+    <LINK rel="stylesheet" href="/css/hangar/hangar.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    
+    <SCRIPT src="js/hangar/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+
+    <DIV class="cover">
+        <HEADER>
+            <H1>Hangár</H1>
+        </HEADER>
+        
+        <MAIN class="textaligncenter">
+            <SECTION id='maincontainer'>
+                <H2>Válassz játékmódot!</H2>
+                
+                <ARTICLE id='modecontainer'>
+                    <DIV class='mode'>
+                        <H3>Arcade</H3>
+                        
+                    </DIV>
+                </ARTICLE>
+            </SECTION>
+        </MAIN>
+        
+        <FOOTER>
+            <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
+            <BUTTON onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
+        </FOOTER>
+    </DIV>
+
+</BODY>
+</HTML>
