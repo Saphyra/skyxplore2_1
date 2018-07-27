@@ -1,14 +1,13 @@
 package skyxplore.dataaccess.gamedata.base;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-
-import org.apache.commons.io.FilenameUtils;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
 @Slf4j
 public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
