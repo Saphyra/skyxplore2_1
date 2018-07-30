@@ -15,8 +15,8 @@
         "hullplate": 1,
         "adamantium": 5
     },
-    "name": "MRLDMA-01 Ion\u00e1gy\u00fa",
-    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa ion\u00e1gy\u00fa kis sebz\u00e9ssel \u00e9s k\u00f6zepes tal\u00e1lati pontoss\u00e1ggal.",
+    "name": "MRLDMA-01 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú kis sebzéssel és közepes találati pontossággal.",
     "type": "ioncannon",
     "slot": "weapon",
     "level": 1,

@@ -14,8 +14,8 @@
         "hullplate": 5,
         "adamantium": 5
     },
-    "name": "HRMDLA-01 Rak\u00e9takil\u00f6v\u0151",
-    "description": "Nagy hat\u00f3t\u00e1vols\u00e1g\u00fa rak\u00e9takil\u00f6v\u0151 k\u00f6zepes sebz\u00e9ssel \u00e9s kis tal\u00e1lati pontoss\u00e1ggal.",
+    "name": "HRMDLA-01 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő közepes sebzéssel és kis találati pontossággal.",
     "type": "rocketlauncher",
     "slot": "weapon",
     "level": 1,

@@ -1,7 +1,7 @@
 {
     "id": "speed",
-    "name": "Gyors\u00edt\u00e1s",
-    "description": "Megn\u00f6veli a haj\u00f3 mozg\u00e1si sebess\u00e9g\u00e9t.",
+    "name": "Gyorsítás",
+    "description": "Megnöveli a hajó mozgási sebességét.",
     "slot": "ability",
     "energyusage": 300,
     "active": 5,

@@ -1,7 +1,7 @@
 {
     "id": "phalanx",
     "name": "Phalanx",
-    "description": "A haj\u00f3 kiterjeszti v\u00e9delm\u00e9t, \u00e9s felfogja a szomsz\u00e9dos sz\u00f6vets\u00e9geseire \u00e9rkez\u0151 sebz\u00e9st.",
+    "description": "A hajó kiterjeszti védelmét, és felfogja a szomszédos szövetségeseire érkező sebzést.",
     "slot": "ability",
     "energyusage": 200,
     "active": 5,

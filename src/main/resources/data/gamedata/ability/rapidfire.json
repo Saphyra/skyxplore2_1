@@ -1,7 +1,7 @@
 {
     "id": "rapidfire",
-    "name": "Gyorst\u00fczel\u00e9s",
-    "description": "N\u00f6veli a fegyverek t\u00e1mad\u00e1si sebess\u00e9g\u00e9t.",
+    "name": "Gyorstüzelés",
+    "description": "Növeli a fegyverek támadási sebességét.",
     "slot": "ability",
     "energyusage": 300,
     "active": 5,

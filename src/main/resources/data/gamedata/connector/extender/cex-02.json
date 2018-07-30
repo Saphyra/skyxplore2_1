@@ -13,8 +13,8 @@
         "uridium": 30,
         "xebryum": 60
     },
-    "name": "CEX-02 Csatlakoz\u00f3 b\u0151v\u00edt\u0151",
-    "description": "B\u0151v\u00edt\u0151 egys\u00e9g, mely megn\u00f6veli a haj\u00f3 csatlakoz\u00f3inak sz\u00e1m\u00e1t.",
+    "name": "CEX-02 Csatlakozó bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó csatlakozóinak számát.",
     "type": "extender",
     "slot": "connector",
     "level": 2,

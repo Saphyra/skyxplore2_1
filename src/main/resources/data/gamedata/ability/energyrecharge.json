@@ -1,7 +1,7 @@
 {
     "id": "energyrecharge",
-    "name": "Energiat\u00f6lt\u00e9s",
-    "description": "Felt\u00f6lti egy sz\u00f6vets\u00e9ges haj\u00f3 akkumul\u00e1torait.",
+    "name": "Energiatöltés",
+    "description": "Feltölti egy szövetséges hajó akkumulátorait.",
     "slot": "ability",
     "energyusage": 350,
     "active": 1,

@@ -13,8 +13,8 @@
         "duranium": 315,
         "uridium": 225
     },
-    "name": "DEX-03 V\u00e9delem b\u0151v\u00edt\u0151",
-    "description": "B\u0151v\u00edt\u0151 egys\u00e9g, mely megn\u00f6veli a haj\u00f3 v\u00e9delmi moduljainak sz\u00e1m\u00e1t.",
+    "name": "DEX-03 Védelem bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó védelmi moduljainak számát.",
     "type": "extender",
     "slot": "connector",
     "level": 3,

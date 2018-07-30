@@ -34,7 +34,7 @@
         "xebryum": 600
     },
     "name": "DEF-02 Defender",
-    "description": "Ezt a haj\u00f3t nagy v\u00e9delme teszi alkalmass\u00e1 a s\u00e9r\u00fcl\u00e9kenyebb sz\u00f6vets\u00e9gesek v\u00e9delmez\u00e9s\u00e9re, hab\u00e1r t\u0171zereje elmarad t\u00e1rsai m\u00f6g\u00f6tt.",
+    "description": "Ezt a hajót nagy védelme teszi alkalmassá a sérülékenyebb szövetségesek védelmezésére, habár tűzereje elmarad társai mögött.",
     "type": "tank",
     "slot": "ship",
     "level": 2,

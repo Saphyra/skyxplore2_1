@@ -1,7 +1,7 @@
 {
     "id": "reflection",
-    "name": "Reflekci\u00f3",
-    "description": "A kapott sebz\u00e9s egy r\u00e9sz\u00e9t a t\u00e1mad\u00f3 f\u00e9l is elszenvedi.",
+    "name": "Reflekció",
+    "description": "A kapott sebzés egy részét a támadó fél is elszenvedi.",
     "slot": "ability",
     "energyusage": 200,
     "active": 5,

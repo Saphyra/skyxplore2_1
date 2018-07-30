@@ -1,7 +1,7 @@
 {
     "id": "evasion",
-    "name": "Kit\u00e9r\u00e9s",
-    "description": "N\u00f6veli a haj\u00f3 kit\u00e9r\u00e9si es\u00e9ly\u00e9t.",
+    "name": "Kitérés",
+    "description": "Növeli a hajó kitérési esélyét.",
     "slot": "ability",
     "energyusage": 200,
     "active": 5,

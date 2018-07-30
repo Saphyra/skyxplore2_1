@@ -12,7 +12,7 @@
         "hullplate": 2
     },
     "name": "LCHR-01 Pajzs",
-    "description": "Kis kapacit\u00e1s\u00fa pajzs magas regener\u00e1ci\u00f3val.",
+    "description": "Kis kapacitású pajzs magas regenerációval.",
     "type": "shield",
     "slot": "defense",
     "level": 1,

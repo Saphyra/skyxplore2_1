@@ -1,7 +1,7 @@
 {
     "id": "freeze",
-    "name": "Mozg\u00e1skorl\u00e1toz\u00e1s",
-    "description": "Le\u00e1ll\u00edtja a kijel\u00f6lt ellens\u00e9ges haj\u00f3 hajt\u00f3m\u0171veit.",
+    "name": "Mozgáskorlátozás",
+    "description": "Leállítja a kijelölt ellenséges hajó hajtóműveit.",
     "slot": "ability",
     "energyusage": 400,
     "active": 3,

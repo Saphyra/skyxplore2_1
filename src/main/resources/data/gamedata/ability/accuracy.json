@@ -1,7 +1,7 @@
 {
     "id": "accuracy",
-    "name": "Precizit\u00e1s",
-    "description": "N\u00f6veli a fegyverek tal\u00e1lati pontoss\u00e1g\u00e1t.",
+    "name": "Precizitás",
+    "description": "Növeli a fegyverek találati pontosságát.",
     "slot": "ability",
     "energyusage": 300,
     "active": 5,

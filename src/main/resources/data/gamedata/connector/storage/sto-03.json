@@ -7,8 +7,8 @@
         "hullplate": 45,
         "mithril": 180
     },
-    "name": "STO-03 Rakt\u00e9r",
-    "description": "Kont\u00e9ner a csatat\u00e9ren szerzett zs\u00e1km\u00e1ny elsz\u00e1ll\u00edt\u00e1s\u00e1ra.",
+    "name": "STO-03 Raktér",
+    "description": "Konténer a csatatéren szerzett zsákmány elszállítására.",
     "type": "storage",
     "slot": "connector",
     "level": 3,

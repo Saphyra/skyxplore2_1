@@ -1,6 +1,6 @@
 {
     "id": "condensator",
-    "name": "Kondenz\u00e1tor",
+    "name": "Kondenzátor",
     "slot": "material",
     "buildable": true,
     "materials": {

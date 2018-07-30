@@ -1,7 +1,7 @@
 {
     "id": "cloak",
-    "name": "\u00c1lc\u00e1z\u00f3 berendez\u00e9s",
-    "description": "Elrejti a haj\u00f3t az ellens\u00e9ges radarok el\u0151l",
+    "name": "Álcázó berendezés",
+    "description": "Elrejti a hajót az ellenséges radarok elől",
     "slot": "ability",
     "energyusage": 300,
     "active": 10,

@@ -1,7 +1,7 @@
 {
     "id": "damagereduction",
-    "name": "Sebz\u00e9scs\u00f6kent\u00e9s",
-    "description": "Cs\u00f6kkenti a haj\u00f3t \u00e9r\u0151 sebz\u00e9s m\u00e9rt\u00e9k\u00e9t",
+    "name": "Sebzéscsökentés",
+    "description": "Csökkenti a hajót érő sebzés mértékét",
     "slot": "ability",
     "energyusage": 300,
     "active": 5,

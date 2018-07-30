@@ -15,8 +15,8 @@
         "hullplate": 6,
         "adamantium": 15
     },
-    "name": "LRMDHA-02 L\u00e9zer\u00e1gy\u00fa",
-    "description": "Kis hat\u00f3t\u00e1vols\u00e1g\u00fa l\u00e9zer\u00e1gy\u00fa k\u00f6zepes sebz\u00e9ssel \u00e9s nagy tal\u00e1lati pontoss\u00e1ggal.",
+    "name": "LRMDHA-02 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú közepes sebzéssel és nagy találati pontossággal.",
     "type": "lasercannon",
     "slot": "weapon",
     "level": 2,

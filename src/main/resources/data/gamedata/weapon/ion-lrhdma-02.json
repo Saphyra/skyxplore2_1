@@ -15,8 +15,8 @@
         "hullplate": 3,
         "adamantium": 15
     },
-    "name": "LRHDMA-02 Ion\u00e1gy\u00fa",
-    "description": "Kis hat\u00f3t\u00e1vols\u00e1g\u00fa ion\u00e1gy\u00fa nagy sebz\u00e9ssel \u00e9s k\u00f6zepes tal\u00e1lati pontoss\u00e1ggal.",
+    "name": "LRHDMA-02 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú nagy sebzéssel és közepes találati pontossággal.",
     "type": "ioncannon",
     "slot": "weapon",
     "level": 2,

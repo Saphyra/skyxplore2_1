@@ -1,7 +1,7 @@
 {
     "id": "repair",
-    "name": "Burkolatjav\u00edt\u00e1s",
-    "description": "Megjav\u00edtja egy sz\u00f6vets\u00e9ges haj\u00f3 burkolat\u00e1t.",
+    "name": "Burkolatjavítás",
+    "description": "Megjavítja egy szövetséges hajó burkolatát.",
     "slot": "ability",
     "energyusage": 300,
     "active": 0,

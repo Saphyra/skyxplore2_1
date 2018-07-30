@@ -14,8 +14,8 @@
         "hullplate": 15,
         "adamantium": 15
     },
-    "name": "MRMDMA-02 Rak\u00e9takil\u00f6v\u0151",
-    "description": "K\u00f6zepes hat\u00f3t\u00e1vols\u00e1g\u00fa rak\u00e9takil\u00f6v\u0151 k\u00f6zepes sebz\u00e9ssel \u00e9s k\u00f6zepes tal\u00e1lati pontoss\u00e1ggal.",
+    "name": "MRMDMA-02 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő közepes sebzéssel és közepes találati pontossággal.",
     "type": "rocketlauncher",
     "slot": "weapon",
     "level": 2,

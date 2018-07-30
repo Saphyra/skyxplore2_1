@@ -1,7 +1,7 @@
 {
     "id": "energyregenerationblock",
-    "name": "Energia regener\u00e1ci\u00f3 blokkol\u00e1s",
-    "description": "A kijel\u00f6lt ellens\u00e9ges haj\u00f3nak nem t\u00f6lt\u0151dik az energi\u00e1ja.",
+    "name": "Energia regeneráció blokkolás",
+    "description": "A kijelölt ellenséges hajónak nem töltődik az energiája.",
     "slot": "ability",
     "energyusage": 200,
     "active": 3,

@@ -12,8 +12,8 @@
         "adamantium": 40,
         "mithril": 20
     },
-    "name": "WEX-01 Fegyver b\u0151v\u00edt\u0151",
-    "description": "N\u00f6veli a haj\u00f3ra szerelhet\u0151 fegyverek sz\u00e1m\u00e1t.",
+    "name": "WEX-01 Fegyver bővítő",
+    "description": "Növeli a hajóra szerelhető fegyverek számát.",
     "type": "extender",
     "slot": "connector",
     "level": 1,

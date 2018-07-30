@@ -1,7 +1,7 @@
 {
     "id": "teleportation",
-    "name": "Teleport\u00e1ci\u00f3",
-    "description": "A haj\u00f3 egy kis t\u00e1vols\u00e1gon bel\u00fcl a kijel\u00f6lt helyre teleport\u00e1l.",
+    "name": "Teleportáció",
+    "description": "A hajó egy kis távolságon belül a kijelölt helyre teleportál.",
     "slot": "ability",
     "energyusage": 400,
     "active": 0,
