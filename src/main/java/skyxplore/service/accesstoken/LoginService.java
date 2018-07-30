@@ -56,15 +56,13 @@ public class LoginService {
     }
 
     public void logout(String userId, String accessTokenId) {
-        if (userId == null && accessTokenId == null) {
-            log.info("User is not logged in.");
-        } else if (userId == null) {
-            log.info("UserId is null. Deleting by accessTokenId...");
-            accessTokenDao.deleteById(accessTokenId);
-        } else if (accessTokenId == null) {
-            accessTokenDao.deleteByUserId(userId);
-        } else {
-            accessTokenDao.deleteById(accessTokenId);
+        log.info("Logging out user {}", userId);
+        AccessToken token = accessTokenDao.findByUserIdOrTokenId(userId, accessTokenId);
+        if(token != null){
+            log.info("Deleting token...");
+            accessTokenDao.delete(token);
+        }else{
+            log.info("Token not found for user ", userId);
         }
     }
 }

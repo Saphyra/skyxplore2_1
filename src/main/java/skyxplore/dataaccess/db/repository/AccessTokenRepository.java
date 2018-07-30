@@ -18,4 +18,6 @@ public interface AccessTokenRepository extends JpaRepository<AccessTokenEntity, 
     void deleteExpired(@Param("expiration") Calendar expiration);
 
     AccessTokenEntity findByUserId(String userId);
+
+    AccessTokenEntity findByUserIdOrAccessTokenId(String userId, String accessTokenId);
 }

@@ -3,9 +3,9 @@ package skyxplore.dataaccess.db;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import skyxplore.dataaccess.db.repository.AccessTokenRepository;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenConverter;
-import skyxplore.dataaccess.db.repository.AccessTokenRepository;
 
 import java.util.Calendar;
 
@@ -33,8 +33,18 @@ public class AccessTokenDao {
         accessTokenRepository.deleteExpired(expiration);
     }
 
+    public AccessToken findByTokenId(String tokenId){
+        return accessTokenRepository.findById(tokenId)
+            .map(accessTokenConverter::convertEntity)
+            .orElse(null);
+    }
+
     public AccessToken findByUserId(String userId) {
         return accessTokenConverter.convertEntity(accessTokenRepository.findByUserId(userId));
+    }
+
+    public AccessToken findByUserIdOrTokenId(String userId, String tokenId){
+        return accessTokenConverter.convertEntity(accessTokenRepository.findByUserIdOrAccessTokenId(userId, tokenId));
     }
 
     public void save(AccessToken accessToken) {

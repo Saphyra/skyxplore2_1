@@ -48,6 +48,9 @@
             
             request.setRequestHeader("Request-Type", "rest");
             request.send(content);
+            if(request.status == 401){
+                authService.logout();
+            }
         }
         catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

@@ -24,34 +24,34 @@
                 <H2>Válassz játékmódot!</H2>
                 
                 <ARTICLE id='modecontainer'>
-                    <DIV class='mode' onclick='pageController.createGame("arcade")'>
+                    <DIV class='mode' onclick='pageController.createLobby("arcade")'>
                         <H3>Arcade</H3>
                         <P>Szabad kóborlás a bolygóközi térben. Döntsd el te, hogy ki az ellenség, és ki a szövetséges, de vigyázz! Veszélyes idegen lények, és kegyetlen kalózok állnak lesben, hogy megszerezzék, ami a tiéd!</P>
                     </DIV>
                     
-                    <DIV class='mode' onclick='pageController.createGame("battleroyale")'>
+                    <DIV class='mode' onclick='pageController.createLobby("battleroyale")'>
                         <H3>Battle Royale</H3>
                         <P>Mindenki mindenki ellen, de vigyázz! Veszélyes sugárzás terjed, és a játszató tér egye kisebb lesz. A végén csak egy maradhat!</P>
                     </DIV>
                     
-                    <DIV class='mode' onclick='pageController.createGame("clanwar")'>
+                    <DIV class='mode' onclick='pageController.createLobby("clanwar")'>
                         <H3>Klánok harca</H3>
                         <P>Két hajótípus csap össze ebben a kaotikus háborúban.</P>
                         <LABEL>Ellenfél: 
                             <SELECT id='clanwarmode'>
-                                <OPTION>Véletlenszerű</OPTION>
-                                <OPTION>Defender</OPTION>
-                                <OPTION>Dreadnought</OPTION>
-                                <OPTION>Eclipse</OPTION>
-                                <OPTION>Saboteur</OPTION>
-                                <OPTION>Starter</OPTION>
-                                <OPTION>Supporter</OPTION>
+                                <OPTION value='random'>Véletlenszerű</OPTION>
+                                <OPTION value='defender'>Defender</OPTION>
+                                <OPTION value='dreadnought'>Dreadnought</OPTION>
+                                <OPTION value='eclipse'>Eclipse</OPTION>
+                                <OPTION value='saboteur'>Saboteur</OPTION>
+                                <OPTION value='starter'>Starter</OPTION>
+                                <OPTION value='supporter'>Supporter</OPTION>
                             </SELECT>
                         </LABEL>
                     </DIV>
                     
-                    <DIV class='mode' onclick='pageController.createGame("teamfight")'>
-                        <H3>Teamfight!</H3>
+                    <DIV class='mode' onclick='pageController.createLobby("teamfight")'>
+                        <H3>Teamfight</H3>
                         <P>Több fős csapatok harcolnak egymással, az utolsó életben maradt mindent visz.</P>
                         <LABEL>Csapatméret:
                             <SELECT id='teamfightsize'>
@@ -64,6 +64,16 @@
                                 <OPTION>50</OPTION>
                             </SELECT>
                         </LABEL>
+                    </DIV>
+                    
+                    <DIV class='mode' onclick='pageController.createLobby("1v1")'>
+                        <H3>1 vs 1!</H3>
+                        <P>Vajon jobb vagy, mint az ellenfeled? Győztes csak egy lehet!</P>
+                    </DIV>
+                    
+                    <DIV class='mode' onclick='pageController.createLobby("tournament")'>
+                        <H3>Bajnokság</H3>
+                        <P>1 vs 1 harcok sorozata, a legtöbb pontot elérő játékos nyeri meg az aréna királya címet.</P>
                     </DIV>
                 </ARTICLE>
             </SECTION>
