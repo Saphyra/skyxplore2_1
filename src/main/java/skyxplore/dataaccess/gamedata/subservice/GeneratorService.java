@@ -10,6 +10,6 @@ public class GeneratorService extends AbstractGameDataService<Generator> {
 
     @Override
     public void init() {
-        super.loadFiles(Generator.class);
+        super.load(Generator.class);
     }
 }

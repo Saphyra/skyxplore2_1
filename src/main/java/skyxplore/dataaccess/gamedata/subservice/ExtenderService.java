@@ -10,6 +10,6 @@ public class ExtenderService extends AbstractGameDataService<Extender> {
 
     @Override
     public void init() {
-        super.loadFiles(Extender.class);
+        super.load(Extender.class);
     }
 }

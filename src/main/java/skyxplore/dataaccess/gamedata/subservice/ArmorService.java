@@ -10,6 +10,6 @@ public class ArmorService extends AbstractGameDataService<Armor> {
 
     @Override
     public void init() {
-        super.loadFiles(Armor.class);
+        super.load(Armor.class);
     }
 }

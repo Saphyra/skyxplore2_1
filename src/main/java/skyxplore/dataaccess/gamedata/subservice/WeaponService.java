@@ -10,6 +10,6 @@ public class WeaponService extends AbstractGameDataService<Weapon> {
 
     @Override
     public void init() {
-        super.loadFiles(Weapon.class);
+        super.load(Weapon.class);
     }
 }

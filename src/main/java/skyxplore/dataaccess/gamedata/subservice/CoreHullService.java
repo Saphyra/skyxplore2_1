@@ -10,6 +10,6 @@ public class CoreHullService extends AbstractGameDataService<CoreHull> {
 
     @Override
     public void init() {
-        super.loadFiles(CoreHull.class);
+        super.load(CoreHull.class);
     }
 }

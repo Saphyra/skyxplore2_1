@@ -4,6 +4,5 @@ Shop & factory implement filters
 Cancel production
 
 Unit tests
-Refactor -> Clean code -> Tooooo long methods
 Javadoc
 Remove ShipId from SkyXpCharacter

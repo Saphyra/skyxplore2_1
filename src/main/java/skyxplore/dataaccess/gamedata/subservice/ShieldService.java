@@ -10,6 +10,6 @@ public class ShieldService extends AbstractGameDataService<Shield> {
 
     @Override
     public void init() {
-        super.loadFiles(Shield.class);
+        super.load(Shield.class);
     }
 }

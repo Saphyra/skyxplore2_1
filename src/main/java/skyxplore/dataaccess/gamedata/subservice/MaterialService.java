@@ -13,6 +13,6 @@ public class MaterialService extends AbstractGameDataService<Material> {
     @Override
     @PostConstruct
     public void init() {
-        super.loadFiles(Material.class);
+        super.load(Material.class);
     }
 }

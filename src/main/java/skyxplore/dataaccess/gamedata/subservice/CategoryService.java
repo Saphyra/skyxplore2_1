@@ -9,6 +9,6 @@ public class CategoryService  extends AbstractGameDataService<String> {
 
     @Override
     public void init() {
-        super.loadFiles(String.class);
+        super.load(String.class);
     }
 }

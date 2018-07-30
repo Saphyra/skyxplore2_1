@@ -10,6 +10,6 @@ public class BatteryService extends AbstractGameDataService<Battery> {
 
     @Override
     public void init() {
-        super.loadFiles(Battery.class);
+        super.load(Battery.class);
     }
 }

@@ -10,6 +10,6 @@ public class ShipService extends AbstractGameDataService<Ship> {
 
     @Override
     public void init() {
-        super.loadFiles(Ship.class);
+        super.load(Ship.class);
     }
 }

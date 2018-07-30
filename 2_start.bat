@@ -1,0 +1,1 @@
+java -jar target/skyxplore-1.0-SNAPSHOT.jar

@@ -1,0 +1,1 @@
+mvn clean package && 2_start.bat

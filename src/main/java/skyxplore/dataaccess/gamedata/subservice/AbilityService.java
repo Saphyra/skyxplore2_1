@@ -10,6 +10,6 @@ public class AbilityService extends AbstractGameDataService<Ability> {
 
     @Override
     public void init(){
-        super.loadFiles(Ability.class);
+        super.load(Ability.class);
     }
 }

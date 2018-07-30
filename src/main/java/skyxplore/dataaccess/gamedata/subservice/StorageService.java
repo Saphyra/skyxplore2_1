@@ -10,6 +10,6 @@ public class StorageService extends AbstractGameDataService<Storage> {
 
     @Override
     public void init() {
-        super.loadFiles(Storage.class);
+        super.load(Storage.class);
     }
 }
