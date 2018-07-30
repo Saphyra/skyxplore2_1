@@ -187,7 +187,7 @@
                     
                     return element;
                 }catch(err){
-                    alert(arguments.callee.name + " - " + err.name + ": " + err.message, "error");
+                    alert(arguments.callee.name + " - " + err.name + ": " + err.message);
                 }
             }
         }
