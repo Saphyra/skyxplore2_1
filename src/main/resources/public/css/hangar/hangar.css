@@ -24,6 +24,7 @@
     border: 3px outset white;
     margin: 1rem;
     vertical-align: top;
+    position: relative;
 }
 
 .mode:hover{
@@ -42,4 +43,14 @@
     font-size: 1.5rem;
     text-align: justify;
     cursor: inherit;
+    margin-bottom: 2rem;
+}
+
+.mode label{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 1.5rem;
 }

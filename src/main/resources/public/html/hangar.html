@@ -24,24 +24,46 @@
                 <H2>Válassz játékmódot!</H2>
                 
                 <ARTICLE id='modecontainer'>
-                    <DIV class='mode'>
+                    <DIV class='mode' onclick='pageController.createGame("arcade")'>
                         <H3>Arcade</H3>
                         <P>Szabad kóborlás a bolygóközi térben. Döntsd el te, hogy ki az ellenség, és ki a szövetséges, de vigyázz! Veszélyes idegen lények, és kegyetlen kalózok állnak lesben, hogy megszerezzék, ami a tiéd!</P>
                     </DIV>
                     
-                    <DIV class='mode'>
+                    <DIV class='mode' onclick='pageController.createGame("battleroyale")'>
                         <H3>Battle Royale</H3>
                         <P>Mindenki mindenki ellen, de vigyázz! Veszélyes sugárzás terjed, és a játszató tér egye kisebb lesz. A végén csak egy maradhat!</P>
                     </DIV>
                     
-                    <DIV class='mode'>
+                    <DIV class='mode' onclick='pageController.createGame("clanwar")'>
                         <H3>Klánok harca</H3>
                         <P>Két hajótípus csap össze ebben a kaotikus háborúban.</P>
+                        <LABEL>Ellenfél: 
+                            <SELECT id='clanwarmode'>
+                                <OPTION>Véletlenszerű</OPTION>
+                                <OPTION>Defender</OPTION>
+                                <OPTION>Dreadnought</OPTION>
+                                <OPTION>Eclipse</OPTION>
+                                <OPTION>Saboteur</OPTION>
+                                <OPTION>Starter</OPTION>
+                                <OPTION>Supporter</OPTION>
+                            </SELECT>
+                        </LABEL>
                     </DIV>
                     
-                    <DIV class='mode'>
+                    <DIV class='mode' onclick='pageController.createGame("teamfight")'>
                         <H3>Teamfight!</H3>
                         <P>Több fős csapatok harcolnak egymással, az utolsó életben maradt mindent visz.</P>
+                        <LABEL>Csapatméret:
+                            <SELECT id='teamfightsize'>
+                                <OPTION>2</OPTION>
+                                <OPTION>3</OPTION>
+                                <OPTION>5</OPTION>
+                                <OPTION>10</OPTION>
+                                <OPTION>25</OPTION>
+                                <OPTION>33</OPTION>
+                                <OPTION>50</OPTION>
+                            </SELECT>
+                        </LABEL>
                     </DIV>
                 </ARTICLE>
             </SECTION>
