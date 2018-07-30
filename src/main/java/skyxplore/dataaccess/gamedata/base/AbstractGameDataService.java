@@ -9,6 +9,7 @@ import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import java.io.*;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.security.CodeSource;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 @Slf4j
+//TODO refactor
 public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
     public static final String RESOURCES_DIR = "data/gamedata/";
     public static final String BASE_DIR = "src/main/resources/" + RESOURCES_DIR;
@@ -65,12 +67,13 @@ public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
                             }
                         }
                         String key = FilenameUtils.removeExtension(entry.getName());
+                        String contentString = new String(builder.toString().getBytes(), Charset.forName("UTF-8"));
 
                         if (clazz == String.class) {
                             String[] splitted = key.split("/");
-                            put(splitted[splitted.length - 1], (V) builder.toString());
+                            put(splitted[splitted.length - 1], (V) contentString);
                         }else{
-                            V content = objectMapper.readValue(builder.toString(), clazz);
+                            V content = objectMapper.readValue(contentString, clazz);
                             if (content instanceof GeneralDescription) {
                                 GeneralDescription d = (GeneralDescription) content;
                                 log.info("Loaded element. Key: {}, Value: {}", key, content);
