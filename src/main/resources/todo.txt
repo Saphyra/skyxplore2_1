@@ -6,3 +6,4 @@ Cancel production
 Unit tests
 Javadoc
 Remove ShipId from SkyXpCharacter
+Replace dao's response with Response object

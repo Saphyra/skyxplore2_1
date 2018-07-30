@@ -53,7 +53,7 @@ public class AuthFilter extends OncePerRequestFilter {
             log.debug("Needs authentication: {}", path);
             filterChain.doFilter(request, response);
         } else {
-            if ("controller".equals(request.getHeader("Request-Type"))) {
+            if ("rest".equals(request.getHeader("Request-Type"))) {
                 log.info("Sending error. Cause: Unauthorized access.");
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
             } else {
