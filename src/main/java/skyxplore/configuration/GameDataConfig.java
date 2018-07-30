@@ -29,6 +29,13 @@ public class GameDataConfig {
     }
 
     @Bean
+    public CategoryService categoryService(){
+        CategoryService categoryService = new CategoryService("categorylist");
+        categoryService.init();
+        return categoryService;
+    }
+
+    @Bean
     public CoreHullService coreHullService(){
         CoreHullService coreHullService = new CoreHullService("connector/corehull");
         coreHullService.init();

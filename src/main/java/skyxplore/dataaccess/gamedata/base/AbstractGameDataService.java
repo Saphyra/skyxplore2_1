@@ -2,6 +2,7 @@ package skyxplore.dataaccess.gamedata.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
@@ -32,15 +33,19 @@ public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
         }
         File[] files = root.listFiles(jsonFilter);
         for (File file : files) {
+            String key = FilenameUtils.removeExtension(file.getName());
             try {
-                String key = FilenameUtils.removeExtension(file.getName());
-                V content = objectMapper.readValue(file, clazz);
-                if (content instanceof GeneralDescription) {
-                    GeneralDescription d = (GeneralDescription) content;
-                    log.info("Loaded element. Key: {}, Value: {}", key, content);
-                    put(d.getId(), content);
+                if (clazz == String.class) {
+                     put(key, (V) FileUtils.readFileToString(file));
                 } else {
-                    throw new RuntimeException(source + " cannot be loaded. Unknown data type.");
+                    V content = objectMapper.readValue(file, clazz);
+                    if (content instanceof GeneralDescription) {
+                        GeneralDescription d = (GeneralDescription) content;
+                        log.info("Loaded element. Key: {}, Value: {}", key, content);
+                        put(d.getId(), content);
+                    } else {
+                        throw new RuntimeException(source + " cannot be loaded. Unknown data type.");
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
