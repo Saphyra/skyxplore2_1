@@ -2,28 +2,36 @@ package skyxplore.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import skyxplore.encryption.UserEncryptor;
 import skyxplore.domain.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
 public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
+    private final UserEncryptor userEncryptor;
 
     @Override
-    public SkyXpUser convertEntity(UserEntity entity){
-        if(entity == null){
+    public SkyXpUser convertEntity(UserEntity entity) {
+        if (entity == null) {
             return null;
         }
+        UserEntity decrypted = userEncryptor.decryptEntity(entity, entity.getUserId());
+
         SkyXpUser user = new SkyXpUser();
-            user.setUserId(entity.getUserId());
-            user.setUsername(entity.getUsername());
-            user.setPassword(entity.getPassword());
-            user.setEmail(entity.getEmail());
-            user.setRoles(entity.getRoles());
+        user.setUserId(decrypted.getUserId());
+        user.setUsername(decrypted.getUsername());
+        user.setPassword(decrypted.getPassword());
+        user.setEmail(decrypted.getEmail());
+        user.setRoles(decrypted.getRoles());
         return user;
     }
 
     @Override
-    public UserEntity convertDomain(SkyXpUser domain){
+    public UserEntity convertDomain(SkyXpUser domain) {
+        if(domain == null){
+            return null;
+        }
+
         UserEntity entity = new UserEntity();
         entity.setUserId(domain.getUserId());
         entity.setUsername(domain.getUsername());
@@ -31,6 +39,6 @@ public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
         entity.setEmail(domain.getEmail());
         entity.setRoles(domain.getRoles());
 
-        return entity;
+        return userEncryptor.encryptEntity(entity, domain.getUserId());
     }
 }

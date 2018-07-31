@@ -3,11 +3,11 @@ package skyxplore.dataaccess.db;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import skyxplore.dataaccess.db.repository.UserRepository;
+import skyxplore.domain.user.SkyXpUser;
 import skyxplore.domain.user.UserConverter;
 import skyxplore.domain.user.UserEntity;
-import skyxplore.dataaccess.db.repository.UserRepository;
 import skyxplore.exception.UserNotFoundException;
-import skyxplore.domain.user.SkyXpUser;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -16,8 +16,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class UserDao {
-    private final UserRepository userRepository;
     private final UserConverter userConverter;
+    private final UserRepository userRepository;
 
     public void delete(String userId){
         log.info("Deleting user {}", userId);

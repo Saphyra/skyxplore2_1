@@ -1,6 +1,9 @@
 package skyxplore.domain.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +14,9 @@ import java.util.HashSet;
 @Entity
 @Table(name = "user")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
     @Id
     @Column(name = "user_id", length = 50)
@@ -27,4 +33,8 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String email;
+
+    public HashSet<Role> getRoles(){
+        return new HashSet<>(roles);
+    }
 }
