@@ -51,14 +51,46 @@
             const result = dao.sendRequest(dao.GET, path);
             
             if(result.status == ResponseStatus.OK){
-                return JSON.parse(result.response);
+                return orderCategories(JSON.parse(result.response));
             }else{
                 throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return [];
+            return {};
+        }
+
+        function orderCategories(categories){
+            try{
+                const list = [];
+                const result = {};
+                
+                for(let type in categories){
+                    list.push({type: type, category: categories[type]});
+                }
+                
+                list.sort(function(a, b){
+                    if(a.category.elements){
+                        a.category.elements = orderCategories(a.category.elements);
+                    }
+                    if(a.type == "all"){
+                        return -1;
+                    }else{
+                        return a.category.name.localeCompare(b.category.name);
+                    }
+                })
+                
+                for(let lindex in list){
+                    result[list[lindex].type] = list[lindex].category;
+                }
+
+                return result;
+            }catch(err){
+                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                 logService.log(message, "error");
+                 return {};
+             }
         }
     }
 })();
