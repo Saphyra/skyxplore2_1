@@ -61,7 +61,7 @@
     function renameCharacter(){
         try{
             const newCharacterName = document.getElementById("renamecharacterinput").value;
-            const characterId = Number(document.getElementById("renamecharacterid").value);
+            const characterId = document.getElementById("renamecharacterid").value;
             
             if(newCharacterName.length < 3){
                 notificationService.showError("Karakternév túl rövid. (Minimum 3 karakter)");

@@ -223,16 +223,14 @@
         - False otherwise.
     Throws:
         - IllegalArgument exception if characterId/newCharacterName is null or undefined.
-        - IllegalArgument exception if characterId is not a number.
         - UnknownBackendError exception if request failed.
     */
     function renameCharacter(characterId, newCharacterName){
         try{
             if(characterId == undefined || characterId == null){
                 throwException("IllegalArgument", "characterId must not be null or undefined.")
-            }if(typeof characterId != "number"){
-                throwException("IllegalArgument", "characterId must be a number. Given: " + typeof characterId);
-            }if(!newCharacterName){
+            }
+            if(!newCharacterName){
                 throwException("IllegalArgument", "newCharacterName is undefined.");
             }
             

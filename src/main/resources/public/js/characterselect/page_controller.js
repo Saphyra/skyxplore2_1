@@ -40,6 +40,7 @@
             if(characterName == null || characterName == undefined){
                 throwException("IllegalArgument", "characterName must not be null or undefined");
             }
+            
             document.getElementById("renamecharacterid").value = characterId;
             const inputField = document.getElementById("renamecharacterinput");
                 inputField.value = characterName;
