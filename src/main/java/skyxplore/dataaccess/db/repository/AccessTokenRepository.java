@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 
 import javax.transaction.Transactional;
-import java.util.Calendar;
 
 public interface AccessTokenRepository extends JpaRepository<AccessTokenEntity, String> {
     void deleteByUserId(String userId);
@@ -15,7 +14,7 @@ public interface AccessTokenRepository extends JpaRepository<AccessTokenEntity, 
     @Transactional
     @Modifying
     @Query(value = "DELETE AccessTokenEntity a WHERE a.lastAccess < :expiration")
-    void deleteExpired(@Param("expiration") Calendar expiration);
+    void deleteExpired(@Param("expiration") Long expiration);
 
     AccessTokenEntity findByUserId(String userId);
 

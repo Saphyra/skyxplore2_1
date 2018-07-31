@@ -1,7 +1,6 @@
 (function DeleteAccountController(){
     window.deleteAccountController = new function(){
         scriptLoader.loadScript("js/common/dao/user_dao.js");
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.deleteAccount = deleteAccount;
         this.validateInputs = validateInputs;

@@ -22,7 +22,7 @@
         - IllegalArgument exception, if method is unsupported.
         - IllegalArgument exception, if path is not a string.
     */
-    function sendRequest(method, path, content){
+    function sendRequest(method, path, content, handleLogout){
         const request = new XMLHttpRequest();
         try{
             if(!method || typeof method !== "string"){
@@ -46,9 +46,13 @@
                 request.setRequestHeader("Content-Type", "application/json");
             }
             
+            if(handleLogout == null || handleLogout == undefined){
+                handleLogout = true;
+            }
+            
             request.setRequestHeader("Request-Type", "rest");
             request.send(content);
-            if(request.status == 401){
+            if(handleLogout && request.status == 401){
                 authService.logout();
             }
         }

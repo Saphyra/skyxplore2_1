@@ -1,7 +1,6 @@
 (function ChangeUsernameController(){
     window.changeUserNameController = new function(){
         scriptLoader.loadScript("js/common/dao/user_dao.js");
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.lastUsernameValid = false;
         this.lastUsernameQueried = null;

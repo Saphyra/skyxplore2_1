@@ -7,8 +7,6 @@ import skyxplore.dataaccess.db.repository.AccessTokenRepository;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenConverter;
 
-import java.util.Calendar;
-
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -29,7 +27,7 @@ public class AccessTokenDao {
         accessTokenRepository.deleteByUserId(userId);
     }
 
-    public void deleteExpired(Calendar expiration) {
+    public void deleteExpired(Long expiration) {
         accessTokenRepository.deleteExpired(expiration);
     }
 

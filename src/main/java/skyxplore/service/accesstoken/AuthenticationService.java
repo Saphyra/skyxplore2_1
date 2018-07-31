@@ -1,13 +1,9 @@
 package skyxplore.service.accesstoken;
 
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
-import org.springframework.stereotype.Service;
-
 import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.exception.AccessTokenExpiredException;
@@ -18,6 +14,9 @@ import skyxplore.exception.base.ServerErrorException;
 import skyxplore.filter.AuthFilter;
 import skyxplore.service.UserFacade;
 import skyxplore.util.AccessTokenDateResolver;
+
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -84,7 +83,7 @@ public class AuthenticationService {
     }
 
     private boolean isTokenExpired(AccessToken token) {
-        return token.getLastAccess().before(accessTokenDateResolver.getExpirationDate());
+        return token.getLastAccess().isBefore(accessTokenDateResolver.getExpirationDate());
     }
 
     private void updateTokenExpiration(AccessToken token) {

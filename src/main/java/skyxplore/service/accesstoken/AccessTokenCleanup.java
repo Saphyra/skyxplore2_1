@@ -1,15 +1,15 @@
 package skyxplore.service.accesstoken;
 
-import java.util.Calendar;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.util.AccessTokenDateResolver;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @SuppressWarnings("unused")
 @Slf4j
@@ -23,8 +23,8 @@ public class AccessTokenCleanup {
     @Scheduled(cron = "0 * * * * *")
     public void deleteOutDatedTokens() {
         log.info("Deleting outdated access tokens...");
-        Calendar expiration = accessTokenDateResolver.getExpirationDate();
-        accessTokenDao.deleteExpired(expiration);
+        LocalDateTime expiration = accessTokenDateResolver.getExpirationDate();
+        accessTokenDao.deleteExpired(expiration.toEpochSecond(ZoneOffset.UTC));
         log.info("Outdated access tokens successfully deleted.");
     }
 }

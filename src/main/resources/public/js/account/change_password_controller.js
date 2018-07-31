@@ -1,7 +1,6 @@
 (function ChangePasswordController(){
     window.changePasswordController = new function(){
         scriptLoader.loadScript("js/common/dao/user_dao.js");
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
         
         this.changePassword = changePassword;
         this.validateInputs = validateInputs;
