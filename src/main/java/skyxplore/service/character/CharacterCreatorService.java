@@ -1,11 +1,8 @@
 package skyxplore.service.character;
 
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.CreateCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
@@ -16,6 +13,8 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
+
+import javax.transaction.Transactional;
 
 @Service
 @Slf4j
@@ -36,7 +35,6 @@ public class CharacterCreatorService {
         SkyXpCharacter character = newCharacterGenerator.createCharacter(userId, request.getCharacterName());
 
         EquippedShip ship = newCharacterGenerator.createShip(character.getCharacterId());
-        character.setShipId(ship.getShipId());
 
         EquippedSlot defenseSlot = newCharacterGenerator.createDefenseSlot(ship.getShipId());
         ship.setDefenseSlotId(defenseSlot.getSlotId());

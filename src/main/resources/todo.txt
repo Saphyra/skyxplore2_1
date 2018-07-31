@@ -5,4 +5,3 @@ Cancel production
 
 Unit tests
 Javadoc
-Remove ShipId from SkyXpCharacter

@@ -26,7 +26,6 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
         try {
             domain.setCharacterId(entity.getCharacterId());
             domain.setCharacterName(entity.getCharacterName());
-            domain.setShipId(entity.getShipId());
             domain.setUserId(entity.getUserId());
             domain.addMoney(entity.getMoney());
             domain.addEquipments(objectMapper.readValue(entity.getEquipments(), ArrayList.class));
@@ -43,7 +42,6 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             entity.setCharacterId(domain.getCharacterId());
             entity.setCharacterName(domain.getCharacterName());
             entity.setUserId(domain.getUserId());
-            entity.setShipId(domain.getShipId());
             entity.setMoney(domain.getMoney());
             entity.setEquipments(objectMapper.writeValueAsString(domain.getEquipments()));
         } catch (JsonProcessingException e) {

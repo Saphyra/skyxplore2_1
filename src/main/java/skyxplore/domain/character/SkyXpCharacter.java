@@ -1,13 +1,13 @@
 package skyxplore.domain.character;
 
+import lombok.Data;
+import skyxplore.exception.NotEnoughMoneyException;
+import skyxplore.exception.base.BadRequestException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-
-import lombok.Data;
-import skyxplore.exception.NotEnoughMoneyException;
-import skyxplore.exception.base.BadRequestException;
 
 @SuppressWarnings({"unused", "unchecked"})
 @Data
@@ -15,7 +15,6 @@ public class SkyXpCharacter {
     private String characterId;
     private String characterName;
     private String userId;
-    private String shipId;
     private Integer money = 0;
     private ArrayList<String> equipments = new ArrayList<>();
 

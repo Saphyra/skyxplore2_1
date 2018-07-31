@@ -20,9 +20,6 @@ public class CharacterEntity {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
-    @Column(name = "ship_id", nullable = false)
-    private String shipId;
-
     @Column(name = "character_name", nullable = false)
     private String characterName;
 
