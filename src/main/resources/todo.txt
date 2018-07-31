@@ -1,5 +1,20 @@
 Shop & factory implement filters
 Cancel production
+Store password encrypted
+
+Create community
+    - Add friends
+    - Remove friends
+    - Send mail
+    - Read mail
+    - Delete mail
+    - Reply mail
+    - Notification for new mails
+
+Lobby
+    - Create lobby
+    - Redirect to lobby page
+    - Invite friends to lobby
 
 Unit tests
 Javadoc
