@@ -2,5 +2,6 @@
     "id": "duranium",
     "name": "Duranium",
     "slot": "material",
-    "buildable": false
+    "buildable": false,
+    "description": ""
 }

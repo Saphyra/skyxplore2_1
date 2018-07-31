@@ -6,6 +6,7 @@ import skyxplore.exception.NotEnoughMaterialsException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 @NoArgsConstructor
@@ -39,5 +40,26 @@ public class Materials extends HashMap<String, Integer> {
         put(key, actual);
         log.info("{} after change: {}", key, get(key));
         return  actual;
+    }
+
+    @Override
+    public Integer put(String key, Integer value){
+        return addMaterial(key, value);
+    }
+
+    @Override
+    public void putAll(Map<? extends String, ? extends Integer> map){
+        Set<?extends String> keySet = map.keySet();
+        keySet.forEach(k -> put(k, map.get(k)));
+    }
+
+    @Override
+    public Integer remove(Object key){
+        throw new UnsupportedOperationException("You cannot remove elements.");
+    }
+
+    @Override
+    public void clear(){
+        throw new UnsupportedOperationException("You cannot remove elements.");
     }
 }
