@@ -1,7 +1,5 @@
 (function ShipDao(){
     window.shipDao = new function(){
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
-        
         this.equip = equip;
         this.equipShip = equipShip;
         this.getShip = getShip;
@@ -39,7 +37,7 @@
                 itemId: itemId
             };
             const response = dao.sendRequest(dao.POST, path, body);
-            if(response.status == 200){
+            if(response.status == ResponseStatus.OK){
                 return true;
             }else{
                 return false;
@@ -74,10 +72,10 @@
             
             const path = "ship/equipship/" + characterId + "/shipid/" + itemId;
             const response = dao.sendRequest(dao.POST, path);
-            if(response.status == 200){
+            if(response.status == ResponseStatus.OK){
                 return true;
             }else{
-                throwException("UnknownBackendError", new Response(response).toString());
+                throwException("UnknownBackendError", response.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -105,12 +103,12 @@
             
             const path = "ship/" + characterId;
             const result = dao.sendRequest("GET", path);
-            if(result.status == 200){
-                const parsed = JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                const parsed = JSON.parse(result.response);
                 cache.addAll(parsed.data);
                 return parsed.info;
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -149,7 +147,7 @@
                 itemId: itemId
             };
             const response = dao.sendRequest(dao.POST, path, body);
-            if(response.status == 200){
+            if(response.status == ResponseStatus.OK){
                 return true;
             }else{
                 throwException("UnknownBackendError", new Response(response).toString());

@@ -28,7 +28,7 @@
                 notificationService.showError("Karakternév foglalt.");
             }else{
                 const result = characterDao.createCharacter(charName);
-                if(result.status == 200){
+                if(result.status == ResponseStatus.OK){
                     notificationService.showSuccess("Karakter létrehozva.");
                     charNameInput.value = "";
                     pageController.refresh();

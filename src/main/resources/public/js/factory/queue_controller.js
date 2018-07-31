@@ -20,7 +20,7 @@
     function addToQueue(elementId, amount){
         try{
             const result = factoryDao.addToQueue(sessionStorage.characterId, elementId, amount);
-            if(result.status == 200){
+            if(result.status == ResponseStatus.OK){
                 notificationService.showSuccess("Megrendelés elküldve.");
             }else{
                 throwException("UnknownServerError", result.toString());

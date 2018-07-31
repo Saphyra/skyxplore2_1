@@ -1,7 +1,5 @@
 (function UserDao(){
     window.userDao = new function(){
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
-        
         this.changeEmail = changeEmail;
         this.changePassword = changePassword;
         this.changeUserName = changeUserName;
@@ -35,13 +33,11 @@
                 newEmail: newEmail,
                 password: password
             };
-            const result = dao.sendRequest("POST", path, body);
-            
-            return new Response(result);
+            return dao.sendRequest("POST", path, body);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return false;
+            return new Response();
         }
     }
     
@@ -74,13 +70,11 @@
                 confirmPassword: password2,
                 oldPassword: oldPassword
             };
-            const result = dao.sendRequest("POST", path, body);
-            
-            return new Response(result);
+            return dao.sendRequest("POST", path, body);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return false;
+            return new Response();
         }
     }
     
@@ -108,12 +102,11 @@
                 newUserName: newUserName,
                 password: password
             };
-            const result = dao.sendRequest("POST", path, body);
-            return new Response(result);
+            return dao.sendRequest("POST", path, body);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return false;
+            return new Response();
         }
     }
     
@@ -136,12 +129,11 @@
             const body = {
                 password: password
             };
-            const result = dao.sendRequest("POST", path, body);
-            return new Response(result);
+            return dao.sendRequest("POST", path, body);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return false;
+            return new Response();
         }
     }
     
@@ -164,16 +156,16 @@
             
             const result = dao.sendRequest("GET", "isemailexists?email=" + email);
 
-            if(result.status != 200){
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            if(result.status != ResponseStatus.OK){
+                throwException("UnknownServerError", result.toString());
             }
 
-            if(result.responseText === "true"){
+            if(result.response === "true"){
                 return true;
-            }else if(result.responseText === "false"){
+            }else if(result.response === "false"){
                 return false;
             }else{
-                throwException("InvalidResult", result);
+                throwException("InvalidResult", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -201,16 +193,16 @@
             
             const result = dao.sendRequest("GET", "isusernameexists?username=" + userName);
 
-            if(result.status != 200){
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
+            if(result.status != ResponseStatus.OK){
+                throwException("UnknownServerError", result.toString());
             }
 
-            if(result.responseText === "true"){
+            if(result.response === "true"){
                 return true;
-            }else if(result.responseText === "false"){
+            }else if(result.response === "false"){
                 return false;
             }else{
-                throwException("InvalidResult", result);
+                throwException("InvalidResult", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -236,10 +228,10 @@
                 throwException("IllegalArgument", "user must not be null or undefined");
             }
             const result =  dao.sendRequest("POST", "registration", user);
-            if(result.status == 200){
+            if(result.status == ResponseStatus.OK){
                 return true;
             }else{
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
+                throwException("UnknownServerError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

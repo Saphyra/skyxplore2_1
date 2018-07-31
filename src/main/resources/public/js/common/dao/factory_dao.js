@@ -1,7 +1,5 @@
 (function FactoryDao(){
     window.factoryDao = new function(){
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
-        
         this.addToQueue = addToQueue;
         this.getMaterials = getMaterials;
         this.getQueue = getQueue;
@@ -39,8 +37,7 @@
                 elementId: elementId,
                 amount: amount
             };
-            const result = dao.sendRequest(dao.PUT, path, content);
-            return new Response(result);
+            return dao.sendRequest(dao.PUT, path, content);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -59,10 +56,10 @@
         try{
             const path = "factory/materials/" + sessionStorage.characterId;
             const result = dao.sendRequest(dao.GET, path);
-            if(result.status == 200){
-                return JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
             }else{
-                throwException("UnknownServerError", new Response(result).toString());
+                throwException("UnknownServerError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -90,12 +87,12 @@
             
             const path = "factory/queue/" + characterId
             const result = dao.sendRequest(dao.GET, path);
-            if(result.status == 200){
-                const response = JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                const response = JSON.parse(result.response);
                 cache.addAll(response.data);
-                return response.info
+                return response.info;
             }else{
-                throwException("UnknownServerError", result.status + " - " + result.responseText);
+                throwException("UnknownServerError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

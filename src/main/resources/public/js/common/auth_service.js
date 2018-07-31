@@ -24,12 +24,12 @@
             if(!result){
                 throwException("IllegalState", "undefined result from dao.");
             }
-            if(result.status == 401){
+            if(result.status == ResponseStatus.UNAUTHORIZED){
                 return false;
-            }else if(result.status == 200){
+            }else if(result.status == ResponseStatus.OK){
                 return true;
             }else{
-                throwException("UnhandledServerException", result.status + " - " + result.responseText);
+                throwException("UnhandledServerException", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -50,12 +50,12 @@
             if(!result){
                 throwException("IllegalState", "undefined result from dao.");
             }
-            if(result.status == 200){
+            if(result.status == ResponseStatus.OK){
                 sessionStorage.successMessage = "Sikeres kijelentkezés!";
                 sessionStorage.removeItem("characterId");
                 window.location.href = "/";
             }else{
-                throwException("UnhandledServer", result.status + " - " + result.responseText);
+                throwException("UnhandledServer", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

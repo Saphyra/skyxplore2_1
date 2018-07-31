@@ -1,7 +1,5 @@
 (function DataDao(){
     window.dataDao = new function(){
-        scriptLoader.loadScript("js/common/dao/response_status_mapper.js");
-        
         this.getCategoryEquipments = getCategoryEquipments;
         this.getCategories = getCategories;
     }
@@ -25,10 +23,10 @@
             
             const path = "data/equipment/category/" + type;
             const result = dao.sendRequest(dao.GET, path);
-            if(result.status == 200){
-                return JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -52,10 +50,10 @@
             const path = "data/equipment/categories/" + categoryId;
             const result = dao.sendRequest(dao.GET, path);
             
-            if(result.status == 200){
-                return JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

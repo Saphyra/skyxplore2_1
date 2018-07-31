@@ -29,10 +29,10 @@
             }
             const path = "game/createlobby/" + characterId;
             const response = dao.sendRequest(dao.POST, path, data);
-            if(response.status == 200){
+            if(response.status == ResponseStatus.OK){
                 return true;
             }else{
-                throwException("UnknownBackendError", new Response(response).toString());
+                throwException("UnknownBackendError", response.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

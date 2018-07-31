@@ -28,6 +28,7 @@
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+            return new Response();
         }
     }
     
@@ -40,7 +41,7 @@
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return false;
+            return new Response();
         }
     }
 })();

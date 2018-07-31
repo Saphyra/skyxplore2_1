@@ -26,10 +26,11 @@
             }
             const path = "character/equipment/" + sessionStorage.characterId;
             const result = dao.sendRequest(dao.PUT, path, items);
-            return new Response(result);
+            return result;
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+            return new Response();
         }
     }
     
@@ -54,7 +55,7 @@
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
-            return false;
+            return new Response();
         }
     }
     
@@ -80,10 +81,10 @@
             const path = "character/";
             const content = {characterId: characterId};
             const result = dao.sendRequest("delete", path, content);
-            if(result.status == 200){
+            if(result.status == ResponseStatus.OK){
                 return true;
             }else{
-                throwException("UnknownBackendError", result);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -103,10 +104,10 @@
         try{
             const path = "character/characters";
             const result = dao.sendRequest("get", path);
-            if(result.status == 200){
-                return JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -128,13 +129,13 @@
             }
             const path = "character/equipment/" + characterId;
             const result = dao.sendRequest(dao.GET, path);
-            if(result.status == 200){
-                const elements = JSON.parse(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                const elements = JSON.parse(result.response);
                 
                 cache.addAll(elements.data);
                 return elements.info;
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -153,6 +154,7 @@
         Throws:
             - IllegalArgument exception if charName is null or undefined.
             - UnknownBackendError exception if request failed.
+            - UnknownResponse exception if response cannot be parsed
     */
     function isCharNameExists(charName){
         try{
@@ -162,16 +164,16 @@
             
             const path = "character/ischarnameexists/" + charName;
             const result = dao.sendRequest("get", path);
-            if(result.status == 200){
-                if(result.responseText == "true"){
+            if(result.status == ResponseStatus.OK){
+                if(result.response == "true"){
                     return true;
-                }else if(result.responseText == "false"){
+                }else if(result.response == "false"){
                     return false;
                 }else{
-                    throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                    throwException("UnknownResponse", result.toString());
                 }
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -199,10 +201,10 @@
             
             const path = "character/money/" + characterId;
             const result = dao.sendRequest(dao.GET, path);
-            if(result.status == 200){
-                return Number(result.responseText);
+            if(result.status == ResponseStatus.OK){
+                return Number(result.response);
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -240,10 +242,10 @@
                 newCharacterName: newCharacterName
             }
             const result = dao.sendRequest("post", path, content);
-            if(result.status == 200){
+            if(result.status == ResponseStatus.OK){
                 return true;
             }else{
-                throwException("UnknownBackendError", result.status + " - " + result.responseText);
+                throwException("UnknownBackendError", result.toString());
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

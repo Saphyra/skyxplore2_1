@@ -46,7 +46,7 @@
     function buyItems(){
         try{
             const result = characterDao.buyItems(basketController.basket);
-            if(result.status == 200){
+            if(result.status == ResponseStatus.OK){
                 basketController.basket = {};
                 pageController.refresh(null, true);
                 notificationService.showSuccess("Tárgyak megvásárolva.");
