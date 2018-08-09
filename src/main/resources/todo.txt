@@ -3,13 +3,38 @@ Cancel production
 Store password encrypted
 
 Create community
-    - Add friends
-    - Remove friends
-    - Send mail
-    - Read mail
-    - Delete mail
-    - Reply mail
+    - page layout
+        - Friends
+            - Add friends
+            - List of friends
+                - Highlight online
+                - View ship
+                - Send mail
+                - Remove friend
+                    - After confirmation
+        - Mails
+            - View mail list
+                - Highlight unread ones
+                - Mark as read when read
+                - 'Mark as read button'
+                - Delete button
+                - Checkbox
+                    - Delete selected
+                    - Mark as read selected
+                    - Mark as unread selected
+            - Read mail
+                - Reply button
+                - Delete button
+            - Send mail
+                - To
+                    - Selectable user (filter by name)
+                - Subject
+                - Body
+                - Save as draft
+        - Block user
+        - Report user
     - Notification for new mails
+        - Overview page
 
 Lobby
     - Create lobby

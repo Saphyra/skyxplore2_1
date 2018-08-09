@@ -2,6 +2,7 @@ package skyxplore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class PageController {
     private static final String CHARACTER_SELECT_MAPPING = "/characterselect";
+    private static final String COMMUNITY_MAPPING = "/community";
     private static final String EQUIPMENT_MAPPING = "/equipment";
     private static final String FACTORY_MAPPING = "/factory";
     private static final String HANGAR_MAPPING = "/hangar";
@@ -23,6 +25,12 @@ public class PageController {
     public String characterSelect(){
         log.info("Request arrived to {}", CHARACTER_SELECT_MAPPING);
         return "characterselect";
+    }
+
+    @GetMapping(COMMUNITY_MAPPING)
+    public String community(){
+        log.info("Request arrived to {}", COMMUNITY_MAPPING);
+        return "community";
     }
 
     @GetMapping(EQUIPMENT_MAPPING)
