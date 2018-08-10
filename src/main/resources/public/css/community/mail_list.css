@@ -1,0 +1,8 @@
+#maillist{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(100% - 30rem);
+    background-color: red;
+}

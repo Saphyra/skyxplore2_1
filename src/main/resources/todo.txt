@@ -12,6 +12,11 @@ Create community
                 - Send mail
                 - Remove friend
                     - After confirmation
+            - Block user
+                - Blocked users
+                    - Allow again
+            - Report user
+                - Report for what?
         - Mails
             - View mail list
                 - Highlight unread ones
@@ -31,8 +36,6 @@ Create community
                 - Subject
                 - Body
                 - Save as draft
-        - Block user
-        - Report user
     - Notification for new mails
         - Overview page
 
