@@ -13,6 +13,7 @@ Create community
                 - Remove friend
                     - After confirmation
             - Block user
+                - Searching for user to block
                 - Blocked users
                     - Allow again
             - Report user

@@ -4,5 +4,17 @@
     right: 0;
     bottom: 0;
     width: calc(100% - 30rem);
-    background-color: red;
+}
+
+#maillistheader{
+    border-bottom: 3px ridge white;
+}
+
+#maillistcontainer{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 4.5rem;
+    overflow: auto;
 }
