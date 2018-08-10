@@ -22,25 +22,27 @@
         <H1>Közösség</H1>
     </HEADER>
 
-    <MAIN id='lists' class="textaligncenter">
+    <MAIN id='lists' class="textaligncenter mainlabel">
         <SECTION id='friendlist'>
             <DIV id='friendlistheader'>
                 <H2>Játékosok</H2>
 
                 <DIV id='friendlistbuttons'>
-                    <BUTTON>Barátok</BUTTON>
-                    <BUTTON>Blokkolva</BUTTON>
+                    <BUTTON onclick='pageController.showFriendList()'>Barátok</BUTTON>
+                    <BUTTON onclick='pageController.showBlockedUsers()'>Blokkolva</BUTTON>
                     <BUTTON>Jelentés</BUTTON>
                 </DIV>
             </DIV>
 
             <DIV id='friendlistcontainer'>
-                <DIV id='listfriends' class='absolute0'>
+                <DIV id='listfriends' class='absolute0 friendlistlabel'>
                     <H3>Barátok</H3>
+                    <DIV class='button' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
                 </DIV>
 
-                <DIV id='blockedusers' class='absolute0'>
+                <DIV id='blockedusers' class='absolute0 friendlistlabel'>
                     <H3>Blokkolt felhasználók</H3>
+                    <DIV class='button'>Játékos blokkolása</DIV>
                 </DIV>
             </DIV>
         </SECTION>
@@ -60,7 +62,11 @@
         </SECTION>
     </MAIN>
 
-    <MAIN id='mail'>
+    <MAIN id='addfriend' class='mainlabel'>
+
+    </MAIN>
+
+    <MAIN id='mail' class='mainlabel'>
 
     </MAIN>
 
