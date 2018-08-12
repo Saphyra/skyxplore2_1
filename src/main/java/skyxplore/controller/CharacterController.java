@@ -28,6 +28,7 @@ public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment/{characterId}";
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character";
+    private static final String FIND_BY_NAME_LIKE_MAPPING = "character/namelike/{charName}";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment/{characterId}";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money/{characterId}";
@@ -61,6 +62,12 @@ public class CharacterController {
         log.info("{} wants to delete {}", userId, request.getCharacterId());
         characterFacade.deleteCharacter(request, userId);
         log.info("Character {} is deleted.", request.getCharacterId());
+    }
+
+    @GetMapping(FIND_BY_NAME_LIKE_MAPPING)
+    public List<CharacterView> findCharacterByNameLike(@PathVariable("charName") String name){
+        log.info("Querying characters by name like {}", name);
+        return characterViewConverter.convertDomain(characterFacade.findCharacterByNameLike(name));
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)

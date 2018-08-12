@@ -1,23 +1,18 @@
 package skyxplore.service;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.CharacterDeleteRequest;
 import skyxplore.controller.request.CreateCharacterRequest;
 import skyxplore.controller.request.RenameCharacterRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.service.character.BuyItemService;
-import skyxplore.service.character.CharacterCreatorService;
-import skyxplore.service.character.CharacterDeleteService;
-import skyxplore.service.character.CharacterQueryService;
-import skyxplore.service.character.CharacterRenameService;
+import skyxplore.service.character.*;
+
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
 @Service
@@ -40,6 +35,10 @@ public class CharacterFacade {
 
     public void deleteCharacter(CharacterDeleteRequest request, String userId) {
         characterDeleteService.deleteCharacter(request, userId);
+    }
+
+    public List<SkyXpCharacter> findCharacterByNameLike(String name) {
+        return characterQueryService.findCharacterByNameLike(name);
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {

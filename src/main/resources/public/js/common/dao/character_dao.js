@@ -3,6 +3,7 @@
         this.buyItems = buyItems;
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
+        this.findByNameLike = findByNameLike;
         this.getCharacters = getCharacters;
         this.getEquipmentOfCharacter = getEquipmentOfCharacter;
         this.getMoney = getMoney;
@@ -92,6 +93,26 @@
             return false;
         }
     }
+    
+    /*
+    Queries the server for names that contain the given name
+    */
+    function findByNameLike(name){
+        try{
+            const path = "character/namelike/" + name;
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
+            }else{
+                throwException("UnknownBackendError", result.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
+    
     
     /*
     Queries all the characters of the user.

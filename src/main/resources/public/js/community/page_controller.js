@@ -1,4 +1,6 @@
 (function PageController(){
+    scriptLoader.loadScript("js/community/friend_search_controller.js")
+    
     window.pageController = new function(){
         this.showAddFriendWindow = showAddFriendWindow;
         this.showBlockedUsers = showBlockedUsers;
@@ -22,16 +24,16 @@
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");
-         }
+        }
      }
 
      function showFriendList(){
-         try{
-             $(".friendlistlabel").hide();
-             $("#listfriends").show();
-         }catch(err){
-              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-              logService.log(message, "error");
-          }
+        try{
+            $(".friendlistlabel").hide();
+            $("#listfriends").show();
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
       }
 })();

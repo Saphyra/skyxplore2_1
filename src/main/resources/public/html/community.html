@@ -64,7 +64,15 @@
     </MAIN>
 
     <MAIN id='addfriend' class='mainlabel'>
-
+        <DIV id='addfriendcontainer'>
+            <H2>Barát felvétele</H2>
+            
+            <DIV class='textaligncenter'>
+                <INPUT type='text' id='friendname' placeholder='Karakter keresése' onkeyup='friendSearchController.search()'>
+            </DIV>
+            
+            <DIV id='usersfoundfornewfriend'></DIV>
+        </DIV>
     </MAIN>
 
     <MAIN id='mail' class='mainlabel'>

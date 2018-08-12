@@ -1,17 +1,16 @@
 package skyxplore.service.character;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.GameDataFacade;
+
+import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -27,6 +26,10 @@ public class CharacterQueryService {
             throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
         }
         return character;
+    }
+
+    public List<SkyXpCharacter> findCharacterByNameLike(String name) {
+        return characterDao.findCharacterByNameLike(name);
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
