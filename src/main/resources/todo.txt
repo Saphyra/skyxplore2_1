@@ -8,6 +8,7 @@ Create community
             - Add friends
                 - Filter own characters
                 - Filter characters already friends
+                - Filter characters blocked (on both side)
             - List of friends
                 - Highlight online
                 - View ship

@@ -4,8 +4,6 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.filter.AuthFilter;
 import skyxplore.controller.request.CharacterDeleteRequest;
 import skyxplore.controller.request.CreateCharacterRequest;
 import skyxplore.controller.request.RenameCharacterRequest;
@@ -13,6 +11,7 @@ import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
+import skyxplore.filter.AuthFilter;
 import skyxplore.service.CharacterFacade;
 
 import javax.validation.Valid;
@@ -21,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnstableApiUsage"})
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -29,7 +28,7 @@ public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment/{characterId}";
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character";
-    private static final String FIND_BY_NAME_LIKE_MAPPING = "character/namelike/{charName}";
+    private static final String FIND_BY_NAME_LIKE_MAPPING = "character/{characterId}/namelike/{charName}";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment/{characterId}";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money/{characterId}";
@@ -39,7 +38,6 @@ public class CharacterController {
     private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;
     private final Cache<String, Boolean> characterNameCache;
-    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
 
     @PutMapping(BUY_EQUIPMENTS_MAPPING)
     public void buyEquipments(
@@ -67,9 +65,9 @@ public class CharacterController {
     }
 
     @GetMapping(FIND_BY_NAME_LIKE_MAPPING)
-    public List<CharacterView> findCharacterByNameLike(@PathVariable("charName") String name) throws ExecutionException {
-        log.info("Querying characters by name like {}", name);
-        return characterViewConverter.convertDomain(characterNameLikeCache.get(name));
+    public List<CharacterView> findCharacterByNameLike(@PathVariable("characterId") String characterId, @PathVariable("charName") String name,@CookieValue(AuthFilter.COOKIE_USER_ID) String userId) throws ExecutionException {
+        log.info("{} querying characters by name like {}", characterId, name);
+        return characterViewConverter.convertDomain(characterFacade.findCharacterByNameLike(name, characterId, userId));
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)

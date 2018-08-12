@@ -97,21 +97,25 @@
     /*
     Queries the server for names that contain the given name.
     Arguments:
+        - characterId: the id of the character to query for.
         - name: the name to search for.
     Returns:
         - The list of users whose name contains the given name.
         - Empty list upon exception
     Throws:
-        - IllegalArgument exception if name is null or undefined.
+        - IllegalArgument exception if characterId or name is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function findByNameLike(name){
+    function findByNameLike(characterId, name){
         try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
             if(name == null || name == undefined){
                 throwException("IllegalArgument", "name must not be null or undefined.");
             }
             
-            const path = "character/namelike/" + name;
+            const path = "character/" + characterId + "/namelike/" + name;
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);

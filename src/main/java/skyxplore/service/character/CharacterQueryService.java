@@ -1,5 +1,6 @@
 package skyxplore.service.character;
 
+import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.GameDataFacade;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -19,6 +22,7 @@ import java.util.List;
 public class CharacterQueryService {
     private final CharacterDao characterDao;
     private final GameDataFacade gameDataFacade;
+    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
 
     public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
         SkyXpCharacter character = characterDao.findById(characterId);
@@ -28,8 +32,26 @@ public class CharacterQueryService {
         return character;
     }
 
-    public List<SkyXpCharacter> findCharacterByNameLike(String name) {
-        return characterDao.findCharacterByNameLike(name);
+    public List<SkyXpCharacter> findCharacterByNameLike(String name, String characterId, String userId) {
+        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+        List<SkyXpCharacter> characters = null;
+        try {
+            characters = characterNameLikeCache.get(name);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return characters.
+            stream().
+            filter(c -> canBeFriend(c, character, userId))
+            .collect(Collectors.toList());
+    }
+
+    private boolean canBeFriend(SkyXpCharacter friend, SkyXpCharacter character, String userId) {
+        if (friend.getUserId().equals(userId)) {
+            return false;
+        }
+
+        return true;
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import skyxplore.dataaccess.db.AccessTokenDao;
+import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.UserFacade;
@@ -78,11 +79,11 @@ public class CacheConfig {
     }
 
     @Bean(name = "characterNameLikeCache")
-    public Cache<String, List<SkyXpCharacter>> characterNameCacheLikeCache(CharacterQueryService characterQueryService) {
+    public Cache<String, List<SkyXpCharacter>> characterNameCacheLikeCache(CharacterDao characterDao) {
         CacheLoader<String, List<SkyXpCharacter>> loader = new CacheLoader<String, List<SkyXpCharacter>>() {
             @Override
             public List<SkyXpCharacter> load(String s) throws Exception {
-                return characterQueryService.findCharacterByNameLike(s);
+                return characterDao.findCharacterByNameLike(s);
             }
         };
 
