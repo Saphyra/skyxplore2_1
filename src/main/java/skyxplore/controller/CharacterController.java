@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.filter.AuthFilter;
 import skyxplore.controller.request.CharacterDeleteRequest;
 import skyxplore.controller.request.CreateCharacterRequest;
@@ -38,6 +39,7 @@ public class CharacterController {
     private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;
     private final Cache<String, Boolean> characterNameCache;
+    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
 
     @PutMapping(BUY_EQUIPMENTS_MAPPING)
     public void buyEquipments(
@@ -65,9 +67,9 @@ public class CharacterController {
     }
 
     @GetMapping(FIND_BY_NAME_LIKE_MAPPING)
-    public List<CharacterView> findCharacterByNameLike(@PathVariable("charName") String name){
+    public List<CharacterView> findCharacterByNameLike(@PathVariable("charName") String name) throws ExecutionException {
         log.info("Querying characters by name like {}", name);
-        return characterViewConverter.convertDomain(characterFacade.findCharacterByNameLike(name));
+        return characterViewConverter.convertDomain(characterNameLikeCache.get(name));
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)

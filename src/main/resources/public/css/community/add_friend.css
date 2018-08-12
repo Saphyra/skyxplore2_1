@@ -34,3 +34,22 @@
     right: 0;
     top: 8rem;
 }
+
+.maybefriend{
+    position: relative;
+    border: 1px ridge white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.maybefriend div{
+    margin-right: 7rem;
+}
+
+.addfriendbutton{
+    position: absolute;
+    right: 0;
+    top: 0;
+}

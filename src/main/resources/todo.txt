@@ -6,6 +6,8 @@ Create community
     - page layout
         - Friends
             - Add friends
+                - Filter own characters
+                - Filter characters already friends
             - List of friends
                 - Highlight online
                 - View ship
