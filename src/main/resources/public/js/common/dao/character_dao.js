@@ -1,5 +1,6 @@
 (function CharacterDao(){
     window.characterDao = new function(){
+        this.addFriend = addFriend;
         this.buyItems = buyItems;
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
@@ -9,6 +10,28 @@
         this.getMoney = getMoney;
         this.isCharNameExists = isCharNameExists;
         this.renameCharacter = renameCharacter;
+    }
+
+    /*
+    Sends an add friend request.
+    Arguments:
+        - characterId: the id of the character who sends the request.
+        - friendCharacterId: the id of the character who becomes friend.
+    Returns:
+        - true, if friend successfully added.
+        - false otherwise.
+    Throws:
+        - IllegalArgumentException if characterId or friendCharacterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function addFriend(characterId, friendCharcterId){
+        try{
+            //TODO implement
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*

@@ -74,6 +74,9 @@
                         const addFriendButton = document.createElement("BUTTON");
                             addFriendButton.classList.add("addfriendbutton");
                             addFriendButton.innerHTML = "Barát felvétele";
+                            addFriendButton.onclick = function(){
+                                friendController.addFriend(character.characterId);
+                            }
                     container.appendChild(addFriendButton);
                         
                     return container;
