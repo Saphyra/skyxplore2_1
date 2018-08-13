@@ -3,17 +3,15 @@ package skyxplore.domain.friend.request;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Builder
 @Table(name = "friend_request")
+@Entity
 public class FriendRequestEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "friend_request_id")
     private Long friendRequestId;
 

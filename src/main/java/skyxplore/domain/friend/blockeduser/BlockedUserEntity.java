@@ -3,17 +3,15 @@ package skyxplore.domain.friend.blockeduser;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Builder
 @Table(name = "blocked_user")
+@Entity
 public class BlockedUserEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "blocked_user_entity_id")
     private Long blockedUserEntityId;
 

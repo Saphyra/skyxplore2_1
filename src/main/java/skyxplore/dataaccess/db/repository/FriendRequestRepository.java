@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import skyxplore.domain.friend.request.FriendRequestEntity;
 
 @Repository
-public interface FriendRequestRepository extends JpaRepository<Long, FriendRequestEntity> {
+public interface FriendRequestRepository extends JpaRepository<FriendRequestEntity, Long> {
 }
