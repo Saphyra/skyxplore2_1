@@ -1,20 +1,18 @@
-(function FriendSearchController(){
-    scriptLoader.loadScript("js/common/dao/character_dao.js");
-    
-    window.friendSearchController = new function(){
+(function BlockUserSearchController(){
+    window.blockUserSearchController = new function(){
         this.search = search;
     }
     
     function search(){
         try{
-            const name = $("#friendname").val();
+            const name = $("#blockusername").val();
             if(name.length >= 3){
-                const characters = sortUsers(friendDao.getCharactersCanBeFriend(sessionStorage.characterId, name));
+                const characters = sortUsers(friendDao.getBlockableCharacters(sessionStorage.characterId, name));
                 showCharacters(characters);
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
+            logService.log(message, "error");           
         }
         
         function sortUsers(users){
@@ -33,7 +31,7 @@
         
         function showCharacters(characters){
             try{
-                const container = document.getElementById("usersfoundfornewfriend");
+                const container = document.getElementById("blockableusersfound");
                     container.innerHTML = "";
                     
                     if(characters.length == 0){
@@ -73,9 +71,9 @@
                         
                         const addFriendButton = document.createElement("BUTTON");
                             addFriendButton.classList.add("addfriendbutton");
-                            addFriendButton.innerHTML = "Barát felvétele";
+                            addFriendButton.innerHTML = "Blokkolás";
                             addFriendButton.onclick = function(){
-                                friendController.addFriend(character.characterId);
+                                blockUserController.block(character.characterId);
                             }
                     container.appendChild(addFriendButton);
                         
@@ -88,4 +86,4 @@
             }
         }
     }
-}());
+})();

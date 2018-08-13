@@ -1,10 +1,13 @@
 (function PageController(){
-    scriptLoader.loadScript("js/community/friend_controller.js")
-    scriptLoader.loadScript("js/community/friend_search_controller.js")
+    scriptLoader.loadScript("js/community/friend_controller.js");
+    scriptLoader.loadScript("js/community/friend_search_controller.js");
+    scriptLoader.loadScript("js/community/block_user_search_controller.js");
+    scriptLoader.loadScript("js/community/block_user_controller.js");
 
     window.pageController = new function(){
         this.refresh = refresh;
         this.showAddFriendWindow = showAddFriendWindow;
+        this.showBlockableUsersWindow = showBlockableUsersWindow;
         this.showBlockedUsers = showBlockedUsers;
         this.showFriendList = showFriendList;
         this.showLists = showLists;
@@ -27,7 +30,17 @@
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");
         }
-     }
+    }
+    
+    function showBlockableUsersWindow(){
+        try{
+            $(".mainlabel").hide();
+            $("#blockuser").show();
+        }catch(err){
+             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+             logService.log(message, "error");
+        }
+    }
 
     function showBlockedUsers(){
         try{
@@ -37,7 +50,7 @@
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");
         }
-     }
+    }
 
     function showFriendList(){
         try{

@@ -7,6 +7,7 @@
     <LINK rel="stylesheet" href="/css/classes.css">
 
     <LINK rel="stylesheet" href="/css/community/add_friend.css">
+    <LINK rel="stylesheet" href="/css/community/block_user.css">
     <LINK rel="stylesheet" href="/css/community/friend_list.css">
     <LINK rel="stylesheet" href="/css/community/mail_list.css">
     <LINK rel="stylesheet" href="/css/community/mail.css">
@@ -43,7 +44,7 @@
 
                 <DIV id='blockedusers' class='absolute0 friendlistlabel'>
                     <H3>Blokkolt felhasználók</H3>
-                    <DIV class='button'>Játékos blokkolása</DIV>
+                    <DIV class='button' onclick='pageController.showBlockableUsersWindow()'>Játékos blokkolása</DIV>
                 </DIV>
             </DIV>
         </SECTION>
@@ -73,6 +74,19 @@
             </DIV>
             
             <DIV id='usersfoundfornewfriend'></DIV>
+        </DIV>
+    </MAIN>
+    
+    <MAIN id='blockuser' class='mainlabel'>
+        <DIV id='blockusercontainer'>
+            <H2>Felhasználó blokkolása</H2>
+            <BUTTON id='blockuserclosebutton' onclick='pageController.showLists()'>X</BUTTON>
+            
+            <DIV class='textaligncenter'>
+                <INPUT type='text' id='blockusername' placeholder='Karakter keresése' onkeyup='blockUserSearchController.search()'>
+            </DIV>
+            
+            <DIV id='blockableusersfound'></DIV>
         </DIV>
     </MAIN>
 

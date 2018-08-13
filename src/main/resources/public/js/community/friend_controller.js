@@ -1,5 +1,5 @@
 (function FriendController(){
-    scriptLoader.loadScript("js/common/dao/friend_dao.js");
+    scriptLoader.loadScript("js/common/dao/community_dao.js");
     
     window.friendController = new function(){
         this.addFriend = addFriend;
@@ -7,7 +7,7 @@
 
     function addFriend(friendId){
         try{
-            const isAdded = friendDao.addFriend(sessionStorage.characterId, friendId);
+            const isAdded = communityDao.addFriend(sessionStorage.characterId, friendId);
             if(isAdded){
                 notificationService.showSuccess("Barátkérelem elküldve.");
             }else{

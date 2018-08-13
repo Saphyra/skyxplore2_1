@@ -28,7 +28,6 @@ public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment/{characterId}";
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character";
-    private static final String FIND_BY_NAME_LIKE_MAPPING = "character/{characterId}/namelike/{charName}";
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment/{characterId}";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money/{characterId}";
@@ -64,11 +63,7 @@ public class CharacterController {
         log.info("Character {} is deleted.", request.getCharacterId());
     }
 
-    @GetMapping(FIND_BY_NAME_LIKE_MAPPING)
-    public List<CharacterView> findCharacterByNameLike(@PathVariable("characterId") String characterId, @PathVariable("charName") String name,@CookieValue(AuthFilter.COOKIE_USER_ID) String userId) throws ExecutionException {
-        log.info("{} querying characters by name like {}", characterId, name);
-        return characterViewConverter.convertDomain(characterFacade.findCharacterByNameLike(name, characterId, userId));
-    }
+
 
     @GetMapping(GET_CHARACTERS_MAPPING)
     public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId){

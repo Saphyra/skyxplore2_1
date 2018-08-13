@@ -3,7 +3,6 @@
         this.buyItems = buyItems;
         this.createCharacter = createCharacter;
         this.deleteCharacter = deleteCharacter;
-        this.findByNameLike = findByNameLike;
         this.getCharacters = getCharacters;
         this.getEquipmentOfCharacter = getEquipmentOfCharacter;
         this.getMoney = getMoney;
@@ -93,42 +92,6 @@
             return false;
         }
     }
-    
-    /*
-    Queries the server for names that contain the given name.
-    Arguments:
-        - characterId: the id of the character to query for.
-        - name: the name to search for.
-    Returns:
-        - The list of users whose name contains the given name.
-        - Empty list upon exception
-    Throws:
-        - IllegalArgument exception if characterId or name is null or undefined.
-        - UnknownBackendError exception if request fails.
-    */
-    function findByNameLike(characterId, name){
-        try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined.");
-            }
-            if(name == null || name == undefined){
-                throwException("IllegalArgument", "name must not be null or undefined.");
-            }
-            
-            const path = "character/" + characterId + "/namelike/" + name;
-            const result = dao.sendRequest(dao.GET, path);
-            if(result.status == ResponseStatus.OK){
-                return JSON.parse(result.response);
-            }else{
-                throwException("UnknownBackendError", result.toString());
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-            return [];
-        }
-    }
-    
     
     /*
     Queries all the characters of the user.

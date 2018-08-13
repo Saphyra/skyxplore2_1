@@ -37,10 +37,6 @@ public class CharacterFacade {
         characterDeleteService.deleteCharacter(request, userId);
     }
 
-    public List<SkyXpCharacter> findCharacterByNameLike(String name, String characterId, String userId) {
-        return characterQueryService.findCharacterByNameLike(name, characterId, userId);
-    }
-
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
         return characterQueryService.getCharactersByUserId(userId);
     }

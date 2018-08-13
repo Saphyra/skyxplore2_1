@@ -11,6 +11,7 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.GameDataFacade;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -32,26 +33,37 @@ public class CharacterQueryService {
         return character;
     }
 
-    public List<SkyXpCharacter> findCharacterByNameLike(String name, String characterId, String userId) {
+    public List<SkyXpCharacter> getBlockableCharacters(String name, String characterId, String userId) {
         SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
-        List<SkyXpCharacter> characters = null;
-        try {
-            characters = characterNameLikeCache.get(name);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        List<SkyXpCharacter> characters = getCharactersOfNameLike(name);
+
         return characters.
-            stream().
-            filter(c -> canBeFriend(c, character, userId))
+            stream()
+            .filter(c -> isOwnCharacter(c, character, userId))
             .collect(Collectors.toList());
     }
 
-    private boolean canBeFriend(SkyXpCharacter friend, SkyXpCharacter character, String userId) {
-        if (friend.getUserId().equals(userId)) {
-            return false;
-        }
+    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId, String userId) {
+        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+        List<SkyXpCharacter> characters = getCharactersOfNameLike(name);
 
-        return true;
+        return characters.
+            stream()
+            .filter(c -> isOwnCharacter(c, character, userId))
+            .collect(Collectors.toList());
+    }
+
+    private List<SkyXpCharacter> getCharactersOfNameLike(String name) {
+        try {
+            return characterNameLikeCache.get(name);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+
+    private boolean isOwnCharacter(SkyXpCharacter friend, SkyXpCharacter character, String userId) {
+        return !friend.getUserId().equals(userId);
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
