@@ -15,10 +15,22 @@ Create community
                 - Send mail
                 - Remove friend
                     - After confirmation
+            - Friend requests
+                - View
+                - Decline
+                - Accept
+                - Block user
+            - Pending requests
+                - View
+                - Cancel
             - Block user
                 - Searching for user to block
                 - Blocked users
                     - Allow again
+                - Dependencies
+                    - Remove existing friendship
+                    - Query possible friends: Users that blocked the query character must not appear
+                    - Add friend: Users that blocked the sender must not be added as friend
             - Report user
                 - Report for what?
         - Mails

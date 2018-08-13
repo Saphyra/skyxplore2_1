@@ -1,0 +1,25 @@
+package skyxplore.domain.friend.request;
+
+import org.springframework.stereotype.Component;
+import skyxplore.domain.ConverterBase;
+
+@Component
+public class FriendRequestConverter extends ConverterBase<FriendRequestEntity, FriendRequest> {
+    @Override
+    public FriendRequest convertEntity(FriendRequestEntity entity) {
+        return FriendRequest.builder()
+            .friendRequestId(entity.getFriendRequestId())
+            .characterId(entity.getCharacterId())
+            .friendId(entity.getFriendId())
+            .build();
+    }
+
+    @Override
+    public FriendRequestEntity convertDomain(FriendRequest domain) {
+        return FriendRequestEntity.builder()
+            .friendRequestId(domain.getFriendRequestId())
+            .characterId(domain.getCharacterId())
+            .friendId(domain.getFriendId())
+            .build();
+    }
+}

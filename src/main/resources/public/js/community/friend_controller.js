@@ -1,15 +1,17 @@
 (function FriendController(){
+    scriptLoader.loadScript("js/common/dao/friend_dao.js");
+    
     window.friendController = new function(){
         this.addFriend = addFriend;
     }
 
     function addFriend(friendId){
         try{
-            const isAdded = characterDao.addFriend(sessionStorage.characterId, friendId);
+            const isAdded = friendDao.addFriend(sessionStorage.characterId, friendId);
             if(isAdded){
-                notificationService.showSuccess("Barát hozzáadva.");
+                notificationService.showSuccess("Barátkérelem elküldve.");
             }else{
-                notificationService.showError("Barát hozzáadása sikertelen.");
+                notificationService.showError("Barátkérelem elküldése sikertelen.");
             }
 
             pageController.refresh(true, true);
