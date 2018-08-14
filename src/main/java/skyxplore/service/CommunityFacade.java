@@ -28,8 +28,8 @@ public class CommunityFacade {
         blockCharacterService.blockCharacter(request, userId);
     }
 
-    public List<SkyXpCharacter> getBlockableCharacters(String name, String characterId, String userId) {
-        return characterQueryService.getBlockableCharacters(name, characterId, userId);
+    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {
+        return characterQueryService.getCharactersCanBeBlocked(name, characterId, userId);
     }
 
     public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId, String userId) {

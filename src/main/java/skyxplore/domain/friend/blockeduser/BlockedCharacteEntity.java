@@ -7,17 +7,17 @@ import javax.persistence.*;
 
 @Data
 @Builder
-@Table(name = "blocked_user")
+@Table(name = "blocked_character")
 @Entity
-public class BlockedUserEntity {
+public class BlockedCharacteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "blocked_user_entity_id")
-    private Long blockedUserEntityId;
+    @Column(name = "blocked_character_entity_id")
+    private Long blockedCharacterEntityId;
 
     @Column(name = "character_id")
     private String characterId;
 
-    @Column(name = "blocked_user_id")
-    private String blockedUserId;
+    @Column(name = "blocked_character_id")
+    private String blockedCharacterId;
 }

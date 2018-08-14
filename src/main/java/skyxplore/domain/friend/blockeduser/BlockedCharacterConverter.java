@@ -1,25 +1,32 @@
 package skyxplore.domain.friend.blockeduser;
 
 import org.springframework.stereotype.Component;
+
 import skyxplore.domain.ConverterBase;
 
 @Component
-public class BlockedCharacterConverter extends ConverterBase<BlockedUserEntity, BlockedUser> {
+public class BlockedCharacterConverter extends ConverterBase<BlockedCharacteEntity, BlockedCharacter> {
     @Override
-    public BlockedUser convertEntity(BlockedUserEntity entity) {
-        return BlockedUser.builder()
-            .blockedUserEntityId(entity.getBlockedUserEntityId())
+    public BlockedCharacter convertEntity(BlockedCharacteEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        return BlockedCharacter.builder()
+            .blockedCharacterEntityId(entity.getBlockedCharacterEntityId())
             .characterId(entity.getCharacterId())
-            .blockedUserId(entity.getBlockedUserId())
+            .blockedCharacterId(entity.getBlockedCharacterId())
             .build();
     }
 
     @Override
-    public BlockedUserEntity convertDomain(BlockedUser domain) {
-        return BlockedUserEntity.builder()
-            .blockedUserEntityId(domain.getBlockedUserEntityId())
+    public BlockedCharacteEntity convertDomain(BlockedCharacter domain) {
+        if (domain == null) {
+            return null;
+        }
+        return BlockedCharacteEntity.builder()
+            .blockedCharacterEntityId(domain.getBlockedCharacterEntityId())
             .characterId(domain.getCharacterId())
-            .blockedUserId(domain.getBlockedUserId())
+            .blockedCharacterId(domain.getBlockedCharacterId())
             .build();
     }
 }
