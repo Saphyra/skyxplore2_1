@@ -16,9 +16,10 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class CommunityFacade {
+    private final BlockCharacterService blockCharacterService;
     private final CharacterQueryService characterQueryService;
     private final FriendService friendService;
-    private final BlockCharacterService blockCharacterService;
+
 
     public void addFriendRequest(AddFriendRequest request, String userId) {
         friendService.addFriendRequest(request, userId);
@@ -26,6 +27,10 @@ public class CommunityFacade {
 
     public void blockCharacter(BlockCharacterRequest request, String userId) {
         blockCharacterService.blockCharacter(request, userId);
+    }
+
+    public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
+        return characterQueryService.getBlockedCharacters(characterId, userId);
     }
 
     public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {

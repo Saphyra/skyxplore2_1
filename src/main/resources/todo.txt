@@ -23,6 +23,7 @@ Create community
                 - Cancel
             - Block user
                 - Blocked users
+                    - View (list)
                     - Allow again
                 - Dependencies
                     - Remove existing friendship

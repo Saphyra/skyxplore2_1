@@ -46,8 +46,7 @@ public class CommunityController {
     @GetMapping(GET_BLOCKED_CHARACTERS_MAPPING)
     public List<CharacterView> getBlockedCharacters(@PathVariable("characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to know his blocked characters list.", characterId);
-        //TODO implement
-        return Collections.emptyList();
+        return characterViewConverter.convertDomain(communityFacade.getBlockedCharacters(characterId, userId));
     }
 
     @GetMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)

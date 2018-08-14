@@ -1,15 +1,9 @@
 package skyxplore.service.character;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
@@ -19,6 +13,11 @@ import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.community.BlockedCharacterQueryService;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -44,6 +43,15 @@ public class CharacterQueryService {
             throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
         }
         return character;
+    }
+
+    public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
+        findCharacterByIdAuthorized(characterId, userId);
+        List<BlockedCharacter> blockedCharacters = blockedCharacterQueryService.getBlockedCharactersOf(characterId);
+        return blockedCharacters
+            .stream()
+            .map(blockedCharacter -> findByCharacterId(blockedCharacter.getBlockedCharacterId()))
+            .collect(Collectors.toList());
     }
 
     public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {

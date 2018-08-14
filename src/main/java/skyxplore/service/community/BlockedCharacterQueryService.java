@@ -1,13 +1,12 @@
 package skyxplore.service.community;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.BlockedCharacterDao;
 import skyxplore.domain.friend.blockeduser.BlockedCharacter;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -26,6 +25,4 @@ public class BlockedCharacterQueryService {
     public List<BlockedCharacter> getBlockedCharactersOf(String characterId) {
         return blockedCharacterDao.getBlockedCharactersOf(characterId);
     }
-
-
 }
