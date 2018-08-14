@@ -7,7 +7,8 @@
     <LINK rel="stylesheet" href="/css/classes.css">
 
     <LINK rel="stylesheet" href="/css/community/add_friend.css">
-    <LINK rel="stylesheet" href="/css/community/block_user.css">
+    <LINK rel="stylesheet" href="/css/community/blocked_character.css">
+    <LINK rel="stylesheet" href="/css/community/community.css">
     <LINK rel="stylesheet" href="/css/community/friend_list.css">
     <LINK rel="stylesheet" href="/css/community/mail_list.css">
     <LINK rel="stylesheet" href="/css/community/mail.css">
@@ -31,20 +32,20 @@
 
                 <DIV id='friendlistbuttons'>
                     <BUTTON onclick='pageController.showFriendList()'>Barátok</BUTTON>
-                    <BUTTON onclick='pageController.showBlockedUsers()'>Blokkolva</BUTTON>
+                    <BUTTON onclick='pageController.showBlockedCharacters()'>Blokkolva</BUTTON>
                     <BUTTON>Jelentés</BUTTON>
                 </DIV>
             </DIV>
 
             <DIV id='friendlistcontainer'>
-                <DIV id='listfriends' class='absolute0 friendlistlabel'>
+                <DIV id='listfriends' class='absolute0 listlabel'>
                     <H3>Barátok</H3>
                     <DIV class='button' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
                 </DIV>
 
-                <DIV id='blockedusers' class='absolute0 friendlistlabel'>
+                <DIV id='blockedcharacters' class='absolute0 listlabel'>
                     <H3>Blokkolt felhasználók</H3>
-                    <DIV class='button' onclick='pageController.showBlockableUsersWindow()'>Játékos blokkolása</DIV>
+                    <DIV class='button' onclick='pageController.showBlockableCharactersWindow()'>Játékos blokkolása</DIV>
                 </DIV>
             </DIV>
         </SECTION>
@@ -77,16 +78,16 @@
         </DIV>
     </MAIN>
     
-    <MAIN id='blockuser' class='mainlabel'>
-        <DIV id='blockusercontainer'>
+    <MAIN id='blockedcharacter' class='mainlabel'>
+        <DIV id='blockcharactercontainer'>
             <H2>Felhasználó blokkolása</H2>
-            <BUTTON id='blockuserclosebutton' onclick='pageController.showLists()'>X</BUTTON>
+            <BUTTON id='blockcharacterclosebutton' onclick='pageController.showLists()'>X</BUTTON>
             
             <DIV class='textaligncenter'>
-                <INPUT type='text' id='blockusername' placeholder='Karakter keresése' onkeyup='blockUserSearchController.search()'>
+                <INPUT type='text' id='blockcharactername' placeholder='Karakter keresése' onkeyup='blockedCharacterSearchController.search()'>
             </DIV>
             
-            <DIV id='blockableusersfound'></DIV>
+            <DIV id='blockablecharactersfound'></DIV>
         </DIV>
     </MAIN>
 

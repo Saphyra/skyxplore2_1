@@ -1,21 +1,39 @@
 (function PageController(){
     scriptLoader.loadScript("js/community/friend_controller.js");
     scriptLoader.loadScript("js/community/friend_search_controller.js");
-    scriptLoader.loadScript("js/community/block_user_search_controller.js");
-    scriptLoader.loadScript("js/community/block_user_controller.js");
+    scriptLoader.loadScript("js/community/blocked_character_search_controller.js");
+    scriptLoader.loadScript("js/community/blocked_character_controller.js");
 
     window.pageController = new function(){
         this.refresh = refresh;
         this.showAddFriendWindow = showAddFriendWindow;
-        this.showBlockableUsersWindow = showBlockableUsersWindow;
-        this.showBlockedUsers = showBlockedUsers;
+        this.showBlockableCharactersWindow = showBlockableCharactersWindow;
+        this.showBlockedCharacters = showBlockedCharacters;
         this.showFriendList = showFriendList;
         this.showLists = showLists;
+        
+        $(document).ready(function(){
+            refresh(true, true);
+        });
     }
 
     function refresh(needReload, windowsBackToDefault){
         try{
-            //TODO implement
+            if(needReload == null || needReload == undefined){
+                needReload = true;
+            }
+            if(windowsBackToDefault == null || windowsBackToDefault == undefined){
+                windowsBackToDefault = false;
+            }
+            
+            if(windowsBackToDefault){
+                showLists();
+            }
+            
+            if(needReload){
+                friendController.loadFriends();
+                blockedCharacterController.loadBlockedCharacters();
+            }
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");
@@ -32,20 +50,20 @@
         }
     }
     
-    function showBlockableUsersWindow(){
+    function showBlockableCharactersWindow(){
         try{
             $(".mainlabel").hide();
-            $("#blockuser").show();
+            $("#blockedcharacter").show();
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");
         }
     }
 
-    function showBlockedUsers(){
+    function showBlockedCharacters(){
         try{
-            $(".friendlistlabel").hide();
-            $("#blockedusers").show();
+            $(".listlabel").hide();
+            $("#blockedcharacters").show();
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");
@@ -54,7 +72,7 @@
 
     function showFriendList(){
         try{
-            $(".friendlistlabel").hide();
+            $(".listlabel").hide();
             $("#listfriends").show();
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

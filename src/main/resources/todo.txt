@@ -13,11 +13,13 @@ Create community
                     - After confirmation
             - Friend requests
                 - View (list)
+                    - Switch button
                 - Decline
                 - Accept
                 - Block user
             - Pending requests
                 - View (list)
+                    - Switch button
                 - Cancel
             - Block user
                 - Blocked users

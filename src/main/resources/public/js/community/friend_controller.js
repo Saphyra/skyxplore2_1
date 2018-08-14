@@ -2,7 +2,10 @@
     scriptLoader.loadScript("js/common/dao/community_dao.js");
     
     window.friendController = new function(){
+        this.friends = null;
+        
         this.addFriend = addFriend;
+        this.loadFriends = loadFriends;
     }
 
     function addFriend(friendId){
@@ -18,6 +21,17 @@
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+        }
+    }
+    
+    function loadFriends(){
+        try{
+            const friendList = communityDao.getFriends(sessionStorage.characterId);
+            logService.log(friendList, "info", "Friends:");
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            friendController.friends = [];
         }
     }
 }());
