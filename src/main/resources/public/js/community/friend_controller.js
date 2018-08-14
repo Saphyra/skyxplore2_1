@@ -7,7 +7,7 @@
 
     function addFriend(friendId){
         try{
-            const isAdded = communityDao.addFriend(sessionStorage.characterId, friendId);
+            const isAdded = communityDao.sendFriendRequest(sessionStorage.characterId, friendId);
             if(isAdded){
                 notificationService.showSuccess("Barátkérelem elküldve.");
             }else{

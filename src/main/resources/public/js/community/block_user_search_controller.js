@@ -7,7 +7,7 @@
         try{
             const name = $("#blockusername").val();
             if(name.length >= 3){
-                const characters = sortUsers(friendDao.getBlockableCharacters(sessionStorage.characterId, name));
+                const characters = sortUsers(communityDao.getBlockableCharacters(sessionStorage.characterId, name));
                 showCharacters(characters);
             }
         }catch(err){

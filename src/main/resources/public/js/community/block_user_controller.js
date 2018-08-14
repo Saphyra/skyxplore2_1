@@ -5,9 +5,9 @@
         this.block = block;
     }
     
-    function block(blockUserName){
+    function block(blockUserId){
         try{
-            const isBlocked = communityDao.blockUser(sessionStorage.characterId, friendId);
+            const isBlocked = communityDao.blockUser(sessionStorage.characterId, blockUserId);
             if(isBlocked){
                 notificationService.showSuccess("Karakter blokkolva.");
             }else{

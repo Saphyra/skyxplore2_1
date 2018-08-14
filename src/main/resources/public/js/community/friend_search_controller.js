@@ -9,7 +9,7 @@
         try{
             const name = $("#friendname").val();
             if(name.length >= 3){
-                const characters = sortUsers(friendDao.getCharactersCanBeFriend(sessionStorage.characterId, name));
+                const characters = sortUsers(communityDao.getCharactersCanBeFriend(sessionStorage.characterId, name));
                 showCharacters(characters);
             }
         }catch(err){

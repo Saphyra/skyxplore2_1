@@ -2,9 +2,11 @@ package skyxplore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.AddFriendRequest;
-import skyxplore.controller.request.BlockUserRequest;
+import skyxplore.controller.request.BlockCharacterRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.filter.AuthFilter;
@@ -12,6 +14,8 @@ import skyxplore.service.CommunityFacade;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import javax.validation.Valid;
 
 @SuppressWarnings("unused")
 @RestController
@@ -27,14 +31,14 @@ public class CommunityController {
     private final CharacterViewConverter characterViewConverter;
 
     @PostMapping(ADD_FRIEND_MAPPING)
-    public void addFriend(@RequestBody AddFriendRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
+    public void addFriend(@Valid @RequestBody AddFriendRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
         log.info("{} wants to add {} as a friend.", request.getCharacterId(), request.getFriendId());
         communityFacade.addFriendRequest(request, userId);
     }
 
     @PostMapping(BLOCK_CHARACTER_MAPPING)
-    public void blockCharacter(@RequestBody BlockUserRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
-        log.info("{} wants to block {}", request.getCharacterId(), request.getBlockedUserId());
+    public void blockCharacter(@Valid @RequestBody BlockCharacterRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+        log.info("{} wants to block {}", request.getCharacterId(), request.getBlockedCharacterId());
         //TODO implement
     }
 

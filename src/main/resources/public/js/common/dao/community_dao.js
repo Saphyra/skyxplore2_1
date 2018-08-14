@@ -10,25 +10,25 @@
     Sends a block user request.
     Arguments:
         - characterId: the id of the character who sends the request.
-        - blockedUserId: the id of the character who becomes blocked.
+        - blokedCharacterId: the id of the character who becomes blocked.
     Returns:
         - true, if character is successfully blocked
         - false otherwise.
     Throws:
-        - IllegalArgument exception if characterId or blockedUserId is null or undefined.
+        - IllegalArgument exception if characterId or blokedCharacterId is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function blockUser(characterId, blockedUserId){
+    function blockUser(characterId, blokedCharacterId){
         try{
             if(characterId == null || characterId == undefined){
                 throwException("IllegalArgument", "characterId must not be null or undefined.");
             }
-            if(friendCharcterId == null || friendCharcterId == undefined){
-                throwException("IllegalArgument", "friendCharcterId must not be null or undefined.");
+            if(blokedCharacterId == null || blokedCharacterId == undefined){
+                throwException("IllegalArgument", "blokedCharacterId must not be null or undefined.");
             }
             
             const path = "blockcharacter/block";
-            const body = {characterId: characterId, blockedUserId: blockedUserId};
+            const body = {characterId: characterId, blockedCharacterId: blokedCharacterId};
             const response = dao.sendRequest(dao.POST, path, body);
             if(response.status == ResponseStatus.OK){
                 return true;
@@ -124,13 +124,13 @@
         - IllegalArgument exception if characterId or friendCharacterId is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function sendFriendRequest(characterId, friendCharcterId){
+    function sendFriendRequest(characterId, friendCharacterId){
         try{
             if(characterId == null || characterId == undefined){
                 throwException("IllegalArgument", "characterId must not be null or undefined.");
             }
-            if(friendCharcterId == null || friendCharcterId == undefined){
-                throwException("IllegalArgument", "friendCharcterId must not be null or undefined.");
+            if(friendCharacterId == null || friendCharacterId == undefined){
+                throwException("IllegalArgument", "friendCharacterId must not be null or undefined.");
             }
             
             const path = "friend/add";
