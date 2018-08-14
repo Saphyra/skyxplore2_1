@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
 @Component
-public class BlockedUserConverter extends ConverterBase<BlockedUserEntity, BlockedUser> {
+public class BlockedCharacterConverter extends ConverterBase<BlockedUserEntity, BlockedUser> {
     @Override
     public BlockedUser convertEntity(BlockedUserEntity entity) {
         return BlockedUser.builder()

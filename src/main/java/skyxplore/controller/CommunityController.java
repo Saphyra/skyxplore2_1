@@ -39,7 +39,7 @@ public class CommunityController {
     @PostMapping(BLOCK_CHARACTER_MAPPING)
     public void blockCharacter(@Valid @RequestBody BlockCharacterRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to block {}", request.getCharacterId(), request.getBlockedCharacterId());
-        //TODO implement
+        communityFacade.blockCharacter(request, userId);
     }
 
     @GetMapping(GET_BLOCKABLE_CHARACTERS)

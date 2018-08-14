@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import skyxplore.domain.friend.blockeduser.BlockedUserEntity;
 
 @Repository
-public interface BlockedUserRepository extends JpaRepository<BlockedUserEntity, Long> {
+public interface BlockedCharacterRepository extends JpaRepository<BlockedUserEntity, Long> {
 }
