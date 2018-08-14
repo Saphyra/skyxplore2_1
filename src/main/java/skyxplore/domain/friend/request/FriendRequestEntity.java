@@ -11,9 +11,7 @@ import javax.persistence.*;
 @Entity
 public class FriendRequestEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "friend_request_id")
-    private Long friendRequestId;
+    private String friendRequestId;
 
     @Column(name = "character_id")
     private String characterId;

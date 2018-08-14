@@ -19,7 +19,13 @@ public class BlockedCharacterQueryService {
         return blockedCharacterDao.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId);
     }
 
+    public List<BlockedCharacter> findByCharacterIdOrBlockedCharacterId(String characterId, String blockedCharacterId) {
+        return blockedCharacterDao.findByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId);
+    }
+
     public List<BlockedCharacter> getBlockedCharactersOf(String characterId) {
         return blockedCharacterDao.getBlockedCharactersOf(characterId);
     }
+
+
 }

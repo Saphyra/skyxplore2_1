@@ -21,15 +21,19 @@ public class BlockedCharacterDao {
         return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId));
     }
 
+    public List<BlockedCharacter> findByCharacterIdOrBlockedCharacterId(String characterId, String blockedCharacterId) {
+        return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId));
+    }
+
+    public List<BlockedCharacter> getBlockedCharactersOf(String characterId) {
+        return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterId(characterId));
+    }
+
     public BlockedCharacter save(BlockedCharacter blockedCharacter) {
         return blockedCharacterConverter.convertEntity(
             blockedCharacterRepository.save(
                 blockedCharacterConverter.convertDomain(blockedCharacter)
             )
         );
-    }
-
-    public List<BlockedCharacter> getBlockedCharactersOf(String characterId) {
-        return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterId(characterId));
     }
 }

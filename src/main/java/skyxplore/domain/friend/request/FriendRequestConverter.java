@@ -7,6 +7,9 @@ import skyxplore.domain.ConverterBase;
 public class FriendRequestConverter extends ConverterBase<FriendRequestEntity, FriendRequest> {
     @Override
     public FriendRequest convertEntity(FriendRequestEntity entity) {
+        if(entity == null){
+            return null;
+        }
         return FriendRequest.builder()
             .friendRequestId(entity.getFriendRequestId())
             .characterId(entity.getCharacterId())
@@ -16,6 +19,9 @@ public class FriendRequestConverter extends ConverterBase<FriendRequestEntity, F
 
     @Override
     public FriendRequestEntity convertDomain(FriendRequest domain) {
+        if(domain == null){
+            return null;
+        }
         return FriendRequestEntity.builder()
             .friendRequestId(domain.getFriendRequestId())
             .characterId(domain.getCharacterId())

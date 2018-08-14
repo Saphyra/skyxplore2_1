@@ -8,7 +8,7 @@ Create community
             - Add friends
                 - Filter own characters
                 - Filter characters already friends
-                - Filter characters blocked (on both side)
+                - Delete friendships upon character deletion
             - List of friends
                 - Highlight online
                 - View ship
@@ -20,6 +20,7 @@ Create community
                 - Decline
                 - Accept
                 - Block user
+                - Delete requests upon character deletion
             - Pending requests
                 - View
                 - Cancel
@@ -31,6 +32,7 @@ Create community
                     - Remove existing friendship
                     - Query possible friends: Users that blocked the query character must not appear
                     - Add friend: Users that blocked the sender must not be added as friend
+                - Delete block records upon character deletion
             - Report user
                 - Report for what?
         - Mails
