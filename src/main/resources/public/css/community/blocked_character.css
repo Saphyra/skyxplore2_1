@@ -42,13 +42,22 @@
     top: 8rem;
 }
 
-.blockablecharacter{
+.blockablecharacter, .blockedcharacterlistitem{
     position: relative;
     border: 1px ridge white;
     margin: 0.5rem;
     padding: 0.5rem;
     font-size: 1.25rem;
     font-weight: bold;
+}
+
+.blockablecharacter:hover, .blockedcharacterlistitem:hover{
+    border-color: red;
+}
+
+.blockedcharacterlistitem div{
+    text-align: left;
+    margin-right: 8rem;
 }
 
 .blockablecharacter div{

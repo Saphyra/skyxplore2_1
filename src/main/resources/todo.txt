@@ -21,13 +21,11 @@ Create community
                 - View (list)
                     - Switch button
                 - Cancel
-            - Block user
-                - Blocked users
-                    - View (list)
+            - Block character
+                - Blocked characters
                     - Allow again
                 - Dependencies
                     - Remove existing friendship
-                    - Query possible friends: Users that blocked the query character must not appear
                     - Add friend: Users that blocked the sender must not be added as friend
                 - Delete block records upon character deletion
             - Report user
