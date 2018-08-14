@@ -1,7 +1,9 @@
 package skyxplore.domain.friend.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,8 +11,11 @@ import javax.persistence.*;
 @Builder
 @Table(name = "friend_request")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class FriendRequestEntity {
     @Id
+    @Column(name = "friend_request_id")
     private String friendRequestId;
 
     @Column(name = "character_id")

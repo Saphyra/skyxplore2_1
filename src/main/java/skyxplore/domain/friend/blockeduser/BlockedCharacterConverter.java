@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
 @Component
-public class BlockedCharacterConverter extends ConverterBase<BlockedCharacteEntity, BlockedCharacter> {
+public class BlockedCharacterConverter extends ConverterBase<BlockedCharacterEntity, BlockedCharacter> {
     @Override
-    public BlockedCharacter convertEntity(BlockedCharacteEntity entity) {
+    public BlockedCharacter convertEntity(BlockedCharacterEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -19,11 +19,11 @@ public class BlockedCharacterConverter extends ConverterBase<BlockedCharacteEnti
     }
 
     @Override
-    public BlockedCharacteEntity convertDomain(BlockedCharacter domain) {
+    public BlockedCharacterEntity convertDomain(BlockedCharacter domain) {
         if (domain == null) {
             return null;
         }
-        return BlockedCharacteEntity.builder()
+        return BlockedCharacterEntity.builder()
             .blockedCharacterEntityId(domain.getBlockedCharacterEntityId())
             .characterId(domain.getCharacterId())
             .blockedCharacterId(domain.getBlockedCharacterId())

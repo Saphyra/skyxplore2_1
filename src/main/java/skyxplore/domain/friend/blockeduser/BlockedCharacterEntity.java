@@ -1,7 +1,9 @@
 package skyxplore.domain.friend.blockeduser;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,7 +11,9 @@ import javax.persistence.*;
 @Builder
 @Table(name = "blocked_character")
 @Entity
-public class BlockedCharacteEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+public class BlockedCharacterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "blocked_character_entity_id")

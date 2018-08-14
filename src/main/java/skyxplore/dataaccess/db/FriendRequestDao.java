@@ -1,5 +1,7 @@
 package skyxplore.dataaccess.db;
 
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,5 +22,9 @@ public class FriendRequestDao {
                 friendRequestConverter.convertDomain(friendRequest)
             )
         );
+    }
+
+    public List<FriendRequest> getByCharacterIdAndFriendId(String characterId, String friendId) {
+        return friendRequestConverter.convertEntity(friendRequestRepository.findByCharacterIdOrFriendId(characterId, friendId));
     }
 }
