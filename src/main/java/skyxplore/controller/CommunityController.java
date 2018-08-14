@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @Slf4j
 @RequiredArgsConstructor
 public class CommunityController {
-    private static final String ADD_FRIEND_MAPPING = "friend/add";
+    private static final String ADD_FRIEND_MAPPING = "friend/request/add";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/{characterId}/namelike/{charName}";
     private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/{characterId}/namelike/{charName}";

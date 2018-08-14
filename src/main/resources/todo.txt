@@ -5,10 +5,6 @@ Store password encrypted
 Create community
     - page layout
         - Friends
-            - Add friends
-                - Filter own characters
-                - Filter characters already friends
-                - Delete friendships upon character deletion
             - List of friends
                 - Highlight online
                 - View ship
@@ -16,16 +12,14 @@ Create community
                 - Remove friend
                     - After confirmation
             - Friend requests
-                - View
+                - View (list)
                 - Decline
                 - Accept
                 - Block user
-                - Delete requests upon character deletion
             - Pending requests
-                - View
+                - View (list)
                 - Cancel
             - Block user
-                - Searching for user to block
                 - Blocked users
                     - Allow again
                 - Dependencies
@@ -35,6 +29,9 @@ Create community
                 - Delete block records upon character deletion
             - Report user
                 - Report for what?
+            - Delete friendships upon character deletion
+            - Delete friend requests upon character deletion
+            - Delete friendships upon character deletion
         - Mails
             - View mail list
                 - Highlight unread ones
