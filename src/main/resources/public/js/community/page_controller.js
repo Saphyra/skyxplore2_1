@@ -32,6 +32,8 @@
             
             if(needReload){
                 friendController.loadFriends();
+                friendController.loadFriendRequests();
+                friendController.loadSentFriendRequests();
                 blockedCharacterController.loadBlockedCharacters();
             }
             

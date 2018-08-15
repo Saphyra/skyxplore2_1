@@ -1,4 +1,4 @@
-package skyxplore.domain.friend.blockeduser;
+package skyxplore.domain.community.blockeduser;
 
 import org.springframework.stereotype.Component;
 

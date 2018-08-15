@@ -8,7 +8,7 @@ import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.friend.blockeduser.BlockedCharacter;
+import skyxplore.domain.community.blockeduser.BlockedCharacter;
 import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.GameDataFacade;

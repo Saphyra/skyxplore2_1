@@ -1,23 +1,23 @@
 package skyxplore.service.community;
 
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.controller.request.AddFriendRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
-import skyxplore.domain.friend.blockeduser.BlockedCharacter;
-import skyxplore.domain.friend.friendrequest.FriendRequest;
+import skyxplore.domain.community.blockeduser.BlockedCharacter;
+import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class FriendService {
+public class FriendshipService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
     private final FriendRequestDao friendRequestDao;

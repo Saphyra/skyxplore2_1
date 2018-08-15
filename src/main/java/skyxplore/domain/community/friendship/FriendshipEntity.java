@@ -1,4 +1,4 @@
-package skyxplore.domain.friend.friendship;
+package skyxplore.domain.community.friendship;
 
 import javax.persistence.Entity;
 

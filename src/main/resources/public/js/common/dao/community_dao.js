@@ -1,36 +1,75 @@
 (function CommunityDao(){    
     window.communityDao = new function(){
+        this.allowBlockedCharacter = allowBlockedCharacter;
         this.blockCharacter = blockCharacter;
         this.getBlockableCharacters = getBlockableCharacters;
         this.getBlockedCharacters = getBlockedCharacters;
         this.getCharactersCanBeFriend = getCharactersCanBeFriend;
         this.getFriends = getFriends;
+        this.getFriendRequests = getFriendRequests;
+        this.getSentFriendRequests = getSentFriendRequests;
         this.sendFriendRequest = sendFriendRequest;
+    }
+    
+    /*
+    Sends an allowBlockedCharacter request.
+    Arguments:
+        - characterId: the id of the character.
+        - blockedCharacterId: the id of the character to allow.
+    Returns:
+        - true, if the blocked character is successfully allowed.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if characterId or blockedCharacterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function allowBlockedCharacter(characterId, blockedCharacterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            if(blockedCharacterId == null || blockedCharacterId == undefined){
+                throwException("IllegalArgument", "blockedCharacterId must not be null or undefined.");
+            }
+            
+            const path = "blockedcharacter/allow";
+            const body = {characterId: characterId, blockedCharacterId: blockedCharacterId};
+            const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*
     Sends a block character request.
     Arguments:
         - characterId: the id of the character who sends the request.
-        - blokedCharacterId: the id of the character who becomes blocked.
+        - blockedCharacterId: the id of the character who becomes blocked.
     Returns:
         - true, if character is successfully blocked
         - false otherwise.
     Throws:
-        - IllegalArgument exception if characterId or blokedCharacterId is null or undefined.
+        - IllegalArgument exception if characterId or blockedCharacterId is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function blockCharacter(characterId, blokedCharacterId){
+    function blockCharacter(characterId, blockedCharacterId){
         try{
             if(characterId == null || characterId == undefined){
                 throwException("IllegalArgument", "characterId must not be null or undefined.");
             }
-            if(blokedCharacterId == null || blokedCharacterId == undefined){
-                throwException("IllegalArgument", "blokedCharacterId must not be null or undefined.");
+            if(blockedCharacterId == null || blockedCharacterId == undefined){
+                throwException("IllegalArgument", "blockedCharacterId must not be null or undefined.");
             }
             
             const path = "blockcharacter/block";
-            const body = {characterId: characterId, blockedCharacterId: blokedCharacterId};
+            const body = {characterId: characterId, blockedCharacterId: blockedCharacterId};
             const response = dao.sendRequest(dao.POST, path, body);
             if(response.status == ResponseStatus.OK){
                 return true;
@@ -163,6 +202,68 @@
             }
             
             const path = "friend/" + characterId;
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
+            }else{
+                throwException("UnknownBackendError", result.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
+    
+    /*
+    Queries the character's friend requests.
+    Arguments:
+        - characterId: the id of the character.
+    Returns:
+        - the list of friend requests.
+        - empty list upon fail.
+    Throws:
+        - IllegalArgument exception if characterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function getFriendRequests(characterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            
+            const path = "friend/" + characterId + "/friendrequest/received";
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
+            }else{
+                throwException("UnknownBackendError", result.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
+    
+    /*
+    Queries the friend requests sent by the character.
+    Arguments:
+        - characterId: the id of the character.
+    Returns:
+        - the list of sent friend requests.
+        - empty list upon fail.
+    Throws:
+        - IllegalArgument exception if characterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function getSentFriendRequests(characterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            
+            const path = "friend/" + characterId + "/friendrequest/sent";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);

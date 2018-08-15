@@ -24,7 +24,7 @@ public class LoginController {
 
     @PostMapping("login")
     public void login(@RequestBody @Valid LoginRequest loginRequest, HttpServletResponse response){
-        log.info("Login request arrived.");
+        log.info("Login friendrequest arrived.");
         AccessToken accessToken = accessTokenFacade.login(loginRequest);
         response.addCookie(createLoginCookie(AuthFilter.COOKIE_USER_ID, accessToken.getUserId()));
         response.addCookie(createLoginCookie(AuthFilter.COOKIE_ACCESS_TOKEN, accessToken.getAccessTokenId()));

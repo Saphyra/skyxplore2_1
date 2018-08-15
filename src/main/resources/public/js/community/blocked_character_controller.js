@@ -4,9 +4,27 @@
     window.blockedCharacterController = new function(){
         this.blockedCharacters = null;
         
+        this.allowBlockedCharacter = allowBlockedCharacter;
         this.block = block;
         this.displayBlockedCharacters = displayBlockedCharacters;
         this.loadBlockedCharacters = loadBlockedCharacters;
+    }
+    
+    function allowBlockedCharacter(blockedCharacter){
+        try{
+            if(confirm("Biztosan visszavonod " + blockedCharacter.characterName + " blokkolását?")){
+                if(communityDao.allowBlockedCharacter(sessionStorage.characterId, blockedCharacter.characterId)){
+                    notificationService.showSuccess("Blokkolás feloldva.");
+                }else{
+                    notificationService.showError("Blokkolás feloldása sikertelen.");
+                }
+                
+                pageController.refresh(true, false);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
     }
     
     function block(blockedCharacterId){
@@ -58,6 +76,7 @@
                     const allowButton = document.createElement("BUTTON");
                         allowButton.classList.add("blockcharacterbutton");
                         allowButton.innerHTML = "Blokkolás feloldása";
+                        allowButton.onclick = function(){allowBlockedCharacter(character);};
                 container.appendChild(allowButton);
                     
                 return container;

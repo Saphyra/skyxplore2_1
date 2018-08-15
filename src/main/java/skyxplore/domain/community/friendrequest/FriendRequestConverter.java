@@ -1,4 +1,4 @@
-package skyxplore.domain.friend.friendrequest;
+package skyxplore.domain.community.friendrequest;
 
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;

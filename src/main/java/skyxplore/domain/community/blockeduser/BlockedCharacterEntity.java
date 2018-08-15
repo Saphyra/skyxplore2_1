@@ -1,4 +1,4 @@
-package skyxplore.domain.friend.blockeduser;
+package skyxplore.domain.community.blockeduser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

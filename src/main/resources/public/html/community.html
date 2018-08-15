@@ -40,7 +40,17 @@
             <DIV id='friendlistcontainer'>
                 <DIV id='listfriends' class='absolute0 listlabel'>
                     <H3>Barátok</H3>
-                    <DIV class='button' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
+                    <DIV>
+                        <BUTTON onclick='pageController.showAddFriendWindow()'>Barát felvétele</BUTTON>
+                        <BUTTON onclick='friendController.showFriendRequests()'>Barátkérelmek</BUTTON>
+                        <BUTTON onclick='friendController.showSentFriendRequests()'>Elküldött barátkérelmek</BUTTON>
+                    </DIV>
+                    
+                    <DIV id='friendlists'>
+                        <DIV id='friends' class='friendlistscontainer'></DIV>
+                        <DIV id='friendrequests' class='friendlistscontainer'></DIV>
+                        <DIV id='sentfriendrequests' class='friendlistscontainer'></DIV>
+                    </DIV>
                 </DIV>
 
                 <DIV id='blockedcharacters' class='absolute0 listlabel'>

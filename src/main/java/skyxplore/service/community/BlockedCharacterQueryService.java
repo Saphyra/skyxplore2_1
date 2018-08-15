@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.BlockedCharacterDao;
-import skyxplore.domain.friend.blockeduser.BlockedCharacter;
+import skyxplore.domain.community.blockeduser.BlockedCharacter;
 
 import java.util.List;
 

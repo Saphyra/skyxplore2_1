@@ -1,21 +1,25 @@
 package skyxplore.dataaccess.db;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.BlockedCharacterRepository;
-import skyxplore.domain.friend.blockeduser.BlockedCharacter;
-import skyxplore.domain.friend.blockeduser.BlockedCharacterConverter;
+import skyxplore.domain.community.blockeduser.BlockedCharacter;
+import skyxplore.domain.community.blockeduser.BlockedCharacterConverter;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class BlockedCharacterDao {
     private final BlockedCharacterRepository blockedCharacterRepository;
     private final BlockedCharacterConverter blockedCharacterConverter;
+
+    public void delete(BlockedCharacter blockedCharacter){
+        blockedCharacterRepository.delete(blockedCharacterConverter.convertDomain(blockedCharacter));
+    }
 
     public BlockedCharacter findByCharacterIdAndBlockedCharacterId(String characterId, String blockedCharacterId) {
         return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId));

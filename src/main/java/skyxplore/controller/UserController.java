@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping(EMAIL_EXISTS_MAPPING)
     public  boolean isEmailExists(@RequestParam(value="email") String email) throws ExecutionException {
-        log.info("Request arrived to {}, request parameter: {}", EMAIL_EXISTS_MAPPING, email);
+        log.info("Request arrived to {}, friendrequest parameter: {}", EMAIL_EXISTS_MAPPING, email);
         return emailCache.get(email);
     }
 
@@ -70,7 +70,7 @@ public class UserController {
 
     @GetMapping(USERNAME_EXISTS_MAPPING)
     public boolean isUsernameExists(@RequestParam(value = "username") String userName) throws ExecutionException {
-        log.info("Request arrived to {}, request parameter: {}", USERNAME_EXISTS_MAPPING, userName);
+        log.info("Request arrived to {}, friendrequest parameter: {}", USERNAME_EXISTS_MAPPING, userName);
         return userNameCache.get(userName);
     }
 }
