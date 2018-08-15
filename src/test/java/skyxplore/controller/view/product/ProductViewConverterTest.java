@@ -11,7 +11,7 @@ import static skyxplore.TestUtils.PRODUCT_CONSTRUCTION_TIME;
 import static skyxplore.TestUtils.PRODUCT_END_TIME;
 import static skyxplore.TestUtils.PRODUCT_ID;
 import static skyxplore.TestUtils.PRODUCT_START_TIME;
-import static skyxplore.TestUtils.PRODUC_END_TIME_EPOCH;
+import static skyxplore.TestUtils.PRODUCT_END_TIME_EPOCH;
 import static skyxplore.TestUtils.PRODUCT_START_TIME_EPOCH;
 import static skyxplore.TestUtils.createProduct;
 
@@ -35,7 +35,7 @@ public class ProductViewConverterTest {
     public void testConvertShouldReturnView(){
         //GIVEN
         when(dateTimeConverter.convertDomain(PRODUCT_START_TIME)).thenReturn(PRODUCT_START_TIME_EPOCH);
-        when(dateTimeConverter.convertDomain(PRODUCT_END_TIME)).thenReturn(PRODUC_END_TIME_EPOCH);
+        when(dateTimeConverter.convertDomain(PRODUCT_END_TIME)).thenReturn(PRODUCT_END_TIME_EPOCH);
         //WHEN
         ProductView view = underTest.convertDomain(createProduct());
         //THEN
@@ -48,6 +48,6 @@ public class ProductViewConverterTest {
         assertEquals(PRODUCT_ADDED_AT, view.getAddedAt());
         assertEquals(PRODUCT_CONSTRUCTION_TIME, view.getConstructionTime());
         assertEquals(PRODUCT_START_TIME_EPOCH, view.getStartTime());
-        assertEquals(PRODUC_END_TIME_EPOCH, view.getEndTime());
+        assertEquals(PRODUCT_END_TIME_EPOCH, view.getEndTime());
     }
 }

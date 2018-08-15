@@ -3,7 +3,6 @@ package skyxplore;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.slot.SlotView;
@@ -54,8 +53,8 @@ public class TestUtils {
     public static final String PRODUCT_ID = "product_id";
     public static final Long PRODUCT_START_TIME_EPOCH = 10000L;
     public static final LocalDateTime PRODUCT_START_TIME = LocalDateTime.ofEpochSecond(PRODUCT_START_TIME_EPOCH, 0, ZoneOffset.UTC);
-    public static final Long PRODUC_END_TIME_EPOCH = 20000L;
-    public static final LocalDateTime PRODUCT_END_TIME = LocalDateTime.ofEpochSecond(PRODUC_END_TIME_EPOCH, 0, ZoneOffset.UTC);
+    public static final Long PRODUCT_END_TIME_EPOCH = 20000L;
+    public static final LocalDateTime PRODUCT_END_TIME = LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC);
 
     //Slot
     public static Integer SLOT_DEFENSE_FRONT = 2;
