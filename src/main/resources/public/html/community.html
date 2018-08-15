@@ -39,11 +39,11 @@
 
             <DIV id='friendlistcontainer'>
                 <DIV id='listfriends' class='absolute0 listlabel'>
-                    <H3>Barátok</H3>
+                    <H3 class='marginbottom0_5rem'>Barátok</H3>
                     <DIV>
-                        <BUTTON onclick='pageController.showAddFriendWindow()'>Barát felvétele</BUTTON>
-                        <BUTTON onclick='friendController.showFriendRequests()'>Barátkérelmek</BUTTON>
-                        <BUTTON onclick='friendController.showSentFriendRequests()'>Elküldött barátkérelmek</BUTTON>
+                        <DIV class='button inline' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
+                        <DIV class='button inline' onclick='friendController.showFriendRequests()'>Barátkérelmek <SPAN id='friendrequestnum'></SPAN></DIV>
+                        <DIV class='button inline' onclick='friendController.showSentFriendRequests()'>Elküldött barátkérelmek <SPAN id='sentfriendrequestnum'></SPAN></DIV>
                     </DIV>
                     
                     <DIV id='friendlists'>
