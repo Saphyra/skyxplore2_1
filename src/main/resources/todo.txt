@@ -60,32 +60,6 @@ Lobby
     - Redirect to lobby page
     - Invite friends to lobby
 
-Unit tests
-    - controllers
-        - Verify call service
-    - dataacces
-        - db
-            - In memory database, query check
-            - https://www.baeldung.com/spring-boot-testing
-        - gamedata
-    - domain
-        - character
-        - material
-        - ship
-        - slot
-    - filter
-    - service
-        - accesstoken
-        - community
-        - factory
-        - game
-        - gamedata
-        - product
-        - ship
-        - user
-        - facades
-    - util
-
 Javadoc
 
 FrontEnd testing
