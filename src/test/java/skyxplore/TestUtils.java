@@ -23,6 +23,10 @@ public class TestUtils {
     //Data
     public static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
+    public static final String DATA_ITEM_FRONT = "item_front";
+    public static final String DATA_ITEM_LEFT = "item_left";
+    public static final String DATA_ITEM_RIGHT = "item_right";
+    public static final String DATA_ITEM_BACK = "item_back";
 
     public static final Integer DARA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
@@ -97,7 +101,7 @@ public class TestUtils {
         return createEquippedSlot(WEAPON_SLOT_ID);
     }
 
-    private static EquippedSlot createEquippedSlot(String slotId){
+    public static EquippedSlot createEquippedSlot(String slotId){
         EquippedSlot slot = new EquippedSlot();
         slot.setSlotId(slotId);
         slot.setShipId(EQUIPPED_SHIP_ID);
@@ -105,6 +109,10 @@ public class TestUtils {
         slot.setLeftSlot(EQUIPPED_SLOT_LEFT_SLOT);
         slot.setRightSlot(EQUIPPED_SLOT_RIGHT_SLOT);
         slot.setBackSlot(EQUIPPED_SLOT_BACK_SLOT);
+        slot.addFront(DATA_ITEM_FRONT);
+        slot.addLeft(DATA_ITEM_LEFT);
+        slot.addRight(DATA_ITEM_RIGHT);
+        slot.addBack(DATA_ITEM_BACK);
         return slot;
     }
 

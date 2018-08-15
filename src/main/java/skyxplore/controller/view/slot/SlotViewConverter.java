@@ -5,7 +5,6 @@ import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.controller.view.AbstractViewConverter;
 
 @Component
-//TODO unit test
 public class SlotViewConverter extends AbstractViewConverter<EquippedSlot, SlotView> {
     public SlotView convertDomain(EquippedSlot domain){
         SlotView view = new SlotView();
