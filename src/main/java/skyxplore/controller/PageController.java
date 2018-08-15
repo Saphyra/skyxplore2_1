@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class PageController {
     private static final String CHARACTER_SELECT_MAPPING = "/characterselect";
     private static final String COMMUNITY_MAPPING = "/community";

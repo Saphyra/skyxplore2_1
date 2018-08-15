@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class UserController {
     private static final String CHANGE_EMAIL_MAPPING = "user/changeemail";
     private static final String CHANGE_PASSWORD_MAPPING = "user/changepassword";

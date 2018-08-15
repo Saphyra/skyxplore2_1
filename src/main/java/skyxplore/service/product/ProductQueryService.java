@@ -19,6 +19,7 @@ import skyxplore.service.factory.FactoryQueryService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ProductQueryService {
     private final CharacterQueryService characterQueryService;
     private final FactoryQueryService factoryQueryService;

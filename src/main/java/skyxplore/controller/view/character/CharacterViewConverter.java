@@ -5,6 +5,7 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.controller.view.AbstractViewConverter;
 
 @Component
+//TODO unit test
 public class CharacterViewConverter extends AbstractViewConverter<SkyXpCharacter, CharacterView> {
 
     @Override

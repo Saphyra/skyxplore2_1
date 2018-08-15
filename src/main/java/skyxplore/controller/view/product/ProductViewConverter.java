@@ -8,6 +8,7 @@ import skyxplore.util.DateTimeConverter;
 
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class ProductViewConverter extends AbstractViewConverter<Product, ProductView> {
     private final DateTimeConverter dateTimeConverter;
 

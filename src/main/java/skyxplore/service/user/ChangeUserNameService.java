@@ -13,6 +13,7 @@ import skyxplore.exception.UserNameAlreadyExistsException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ChangeUserNameService {
     private final UserDao userDao;
     private final UserQueryService userQueryService;

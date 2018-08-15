@@ -10,6 +10,7 @@ import skyxplore.domain.accesstoken.AccessTokenConverter;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class AccessTokenDao {
     private final AccessTokenRepository accessTokenRepository;
     private final AccessTokenConverter accessTokenConverter;

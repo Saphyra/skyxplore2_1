@@ -17,6 +17,7 @@ import skyxplore.exception.BadSlotNameException;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class EquipUtil {
     private final ExtenderService extenderService;
     private final SlotDao slotDao;

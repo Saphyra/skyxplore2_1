@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import skyxplore.domain.friend.blockeduser.BlockedCharacterEntity;
 
 @Repository
+//TODO unit test
 public interface BlockedCharacterRepository extends JpaRepository<BlockedCharacterEntity, Long> {
     List<BlockedCharacterEntity> findByCharacterId(String characterId);
 

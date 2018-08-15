@@ -28,6 +28,7 @@ import skyxplore.util.DateTimeConverter;
 @Service
 @EnableScheduling
 @RequiredArgsConstructor
+//TODO unit test
 public class ProductFactoryService {
     private final CharacterDao characterDao;
     private final DateTimeConverter dateTimeConverter;

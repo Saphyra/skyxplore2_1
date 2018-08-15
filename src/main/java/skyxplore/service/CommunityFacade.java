@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class CommunityFacade {
     private final BlockCharacterService blockCharacterService;
     private final CharacterQueryService characterQueryService;

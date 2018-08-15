@@ -30,6 +30,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class EquipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;

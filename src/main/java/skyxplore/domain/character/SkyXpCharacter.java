@@ -11,6 +11,7 @@ import java.util.Set;
 
 @SuppressWarnings({"unused", "unchecked"})
 @Data
+//TODO unit test
 public class SkyXpCharacter {
     private String characterId;
     private String characterName;

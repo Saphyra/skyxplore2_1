@@ -20,6 +20,7 @@ import skyxplore.util.IdGenerator;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class RegistrationService {
     private final IdGenerator idGenerator;
     private final UserDao userDao;

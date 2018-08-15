@@ -12,6 +12,7 @@ import java.util.ArrayList;
 @Component
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked")
+//TODO unit test
 public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
     private final ObjectMapper objectMapper;
 

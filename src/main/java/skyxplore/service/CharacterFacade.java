@@ -18,6 +18,7 @@ import java.util.Map;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class CharacterFacade {
     private final BuyItemService buyItemService;
     private final CharacterCreatorService characterCreatorService;

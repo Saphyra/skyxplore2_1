@@ -14,6 +14,7 @@ import skyxplore.service.EquippedShipFacade;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ShipController {
     private static final String EQUIP_MAPPING = "ship/equip/{characterId}";
     private static final String EQUIP_SHIP_MAPPING = "ship/equipship/{characterId}/shipid/{shipId}";

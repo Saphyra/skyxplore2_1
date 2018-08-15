@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import skyxplore.domain.ship.EquippedShipEntity;
 
 @Repository
+//TODO unit test
 public interface EquippedShipRepository extends JpaRepository<EquippedShipEntity, String> {
     EquippedShipEntity getByCharacterId(String characterId);
 }

@@ -9,6 +9,7 @@ import skyxplore.controller.view.slot.SlotViewConverter;
 
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class ShipViewConverter {
     private final SlotViewConverter slotViewConverter;
     private final ShipService shipService;

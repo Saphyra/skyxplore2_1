@@ -9,6 +9,7 @@ import skyxplore.service.game.LobbyCreatorService;
 @RequiredArgsConstructor
 @Slf4j
 @Service
+//TODO unit test
 public class GameFacade {
     private final LobbyCreatorService lobbyCreatorService;
 

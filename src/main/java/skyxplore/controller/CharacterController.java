@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment/{characterId}";
     private static final String CREATE_CHARACTER_MAPPING = "character";

@@ -13,6 +13,7 @@ import skyxplore.exception.EmailAlreadyExistsException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ChangeEmailService {
     private final UserQueryService userQueryService;
     private final UserDao userDao;

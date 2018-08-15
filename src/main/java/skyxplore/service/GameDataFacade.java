@@ -21,6 +21,7 @@ import skyxplore.service.gamedata.EquipmentDataCollectorService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class GameDataFacade {
     private final CategoryQueryService categoryQueryService;
     private final DataQueryService dataQueryService;

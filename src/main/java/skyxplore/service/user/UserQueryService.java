@@ -12,6 +12,7 @@ import skyxplore.exception.UserNotFoundException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class UserQueryService {
     private final UserDao userDao;
 

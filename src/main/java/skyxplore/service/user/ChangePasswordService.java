@@ -13,6 +13,7 @@ import skyxplore.exception.BadlyConfirmedPasswordException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ChangePasswordService {
     private final UserDao userDao;
     private final UserQueryService userQueryService;

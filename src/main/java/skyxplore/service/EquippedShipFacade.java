@@ -16,6 +16,7 @@ import skyxplore.service.ship.UnequipService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class EquippedShipFacade {
     public static final String DEFENSE_SLOT_NAME = "defense";
     public static final String WEAPON_SLOT_NAME = "weapon";

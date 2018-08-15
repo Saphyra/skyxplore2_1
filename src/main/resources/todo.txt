@@ -66,7 +66,7 @@ Unit tests
     - dataacces
         - db
             - In memory database, query check
-            https://www.baeldung.com/spring-boot-testing
+            - https://www.baeldung.com/spring-boot-testing
         - gamedata
     - domain
         - character

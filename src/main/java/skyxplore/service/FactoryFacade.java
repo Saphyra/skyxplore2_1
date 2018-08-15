@@ -14,6 +14,7 @@ import skyxplore.service.factory.FactoryQueryService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class FactoryFacade {
     private final AddToQueueService addToQueueService;
     private final FactoryQueryService factoryQueryService;

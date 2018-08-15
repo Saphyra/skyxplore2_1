@@ -27,6 +27,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+
 public class UnequipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
