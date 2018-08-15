@@ -1,4 +1,4 @@
-package skyxplore.domain.friend.request;
+package skyxplore.domain.friend.friendrequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

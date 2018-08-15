@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import skyxplore.controller.request.AddFriendRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.domain.friend.blockeduser.BlockedCharacter;
-import skyxplore.domain.friend.request.FriendRequest;
+import skyxplore.domain.friend.friendrequest.FriendRequest;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
 import skyxplore.service.character.CharacterQueryService;

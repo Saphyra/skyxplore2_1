@@ -51,7 +51,7 @@ public class CommunityController {
         @PathVariable("requestId") String requestId,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
-        log.info("{} wants to accept friend request {}", characterId, requestId);
+        log.info("{} wants to accept friendRequest {}", characterId, requestId);
         //TODO implement
     }
 

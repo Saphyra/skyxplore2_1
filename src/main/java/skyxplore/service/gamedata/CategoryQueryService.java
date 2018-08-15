@@ -36,7 +36,7 @@ public class CategoryQueryService {
     private final WeaponService weaponService;
 
     public Map<String, GeneralDescription> getElementsOfCategory(EquipmentCategoryRequest request) {
-        log.info("Querying equipments of request {}", request);
+        log.info("Querying equipments of friendrequest {}", request);
         Map<String, GeneralDescription> result = new HashMap<>();
         switch (request) {
             case ALL:

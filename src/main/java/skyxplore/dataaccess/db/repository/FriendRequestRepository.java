@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import skyxplore.domain.friend.blockeduser.BlockedCharacterEntity;
-import skyxplore.domain.friend.request.FriendRequestEntity;
+import skyxplore.domain.friend.friendrequest.FriendRequestEntity;
 
 @Repository
 public interface FriendRequestRepository extends JpaRepository<FriendRequestEntity, Long> {

@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.FriendRequestRepository;
-import skyxplore.domain.friend.request.FriendRequest;
-import skyxplore.domain.friend.request.FriendRequestConverter;
+import skyxplore.domain.friend.friendrequest.FriendRequest;
+import skyxplore.domain.friend.friendrequest.FriendRequestConverter;
 
 @Component
 @Slf4j
