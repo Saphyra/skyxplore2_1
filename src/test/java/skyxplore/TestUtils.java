@@ -6,6 +6,7 @@ import skyxplore.domain.character.SkyXpCharacter;
 public class TestUtils {
     public static final String CHARACTER_ID = "character_id";
     public static final String CHARACTER_NAME = "character_name";
+    public static final Integer MONEY = 10;
     public static final String USER_ID = "user_id";
 
     public static SkyXpCharacter createCharacter(){
@@ -13,6 +14,7 @@ public class TestUtils {
         character.setCharacterId(CHARACTER_ID);
         character.setCharacterName(CHARACTER_NAME);
         character.setUserId(USER_ID);
+        character.addMoney(MONEY);
         return character;
     }
 

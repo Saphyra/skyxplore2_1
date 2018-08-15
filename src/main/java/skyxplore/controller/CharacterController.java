@@ -33,7 +33,6 @@ import skyxplore.service.CharacterFacade;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment/{characterId}";
     private static final String CREATE_CHARACTER_MAPPING = "character";
@@ -85,7 +84,6 @@ public class CharacterController {
         return characterViewConverter.convertDomain(characterFacade.getCharactersByUserId(userId));
     }
 
-    //TODO unit test
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
     public View<EquipmentViewList> getEquipmentsOfCharacter(
         @PathVariable @NotNull String characterId,
@@ -94,7 +92,6 @@ public class CharacterController {
         return characterFacade.getEquipmentsOfCharacter(userId, characterId);
     }
 
-    //TODO unit test
     @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
     public Integer getMoney(
         @PathVariable(name = "characterId") String characterId,
@@ -103,14 +100,12 @@ public class CharacterController {
         return characterFacade.getMoneyOfCharacter(userId, characterId);
     }
 
-    //TODO unit test
     @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
     public boolean isCharNameExists(@PathVariable String charName) throws ExecutionException {
         log.info("Someone wants to know if character with name {} is exists.", charName);
         return characterNameCache.get(charName);
     }
 
-    //TODO unit test
     @PostMapping(RENAME_CHARACTER_MAPPING)
     public void renameCharacter(
         @RequestBody @Valid RenameCharacterRequest request,
