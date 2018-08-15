@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class FactoryController {
     private static final String ADD_TO_QUEUE_MAPPING = "factory/{characterId}";
     private static final String GET_MATERIALS_MAPPING = "factory/materials/{characterId}";

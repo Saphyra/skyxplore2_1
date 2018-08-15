@@ -29,7 +29,7 @@ import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.filter.AuthFilter;
 import skyxplore.service.CharacterFacade;
 
-@SuppressWarnings({"unused", "UnstableApiUsage", "WeakerAccess"})
+@SuppressWarnings({"UnstableApiUsage", "WeakerAccess"})
 @RestController
 @RequiredArgsConstructor
 @Slf4j

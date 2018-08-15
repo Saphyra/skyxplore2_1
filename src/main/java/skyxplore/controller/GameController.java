@@ -10,6 +10,7 @@ import skyxplore.service.GameFacade;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
+//TODO unit test
 public class GameController {
     private static final String CREATE_LOBBY_MAPPING = "game/createlobby/{characterId}";
 

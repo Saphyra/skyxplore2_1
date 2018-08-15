@@ -28,6 +28,7 @@ import skyxplore.service.CommunityFacade;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/{characterId}/request/accept/{requestId}";
     private static final String ADD_FRIEND_MAPPING = "friend/request/add";

@@ -17,6 +17,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class GameDataController {
     private static final String EQUIPMENT_CATEGORIES_MAPPING = "data/equipment/categories/{categoryId}";
     private static final String EQUIPMENTS_OF_CATEGORY_MAPPING = "data/equipment/category/{category}";
