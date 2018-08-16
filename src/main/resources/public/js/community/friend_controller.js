@@ -2,13 +2,16 @@
     scriptLoader.loadScript("js/common/dao/community_dao.js");
     
     window.friendController = new function(){
-        this.friends = null;
-        this.friendRequests = null;
+        this.friends = [];
+        this.friendRequests = [];
+        this.sentFriendRequests = [];
         
         this.addFriend = addFriend;
         this.loadFriends = loadFriends;
         this.loadFriendRequests = loadFriendRequests;
         this.loadSentFriendRequests = loadSentFriendRequests;
+        this.showFriendRequestNum = showFriendRequestNum;
+        this.showSentFriendRequestNum = showSentFriendRequestNum;
     }
 
     function addFriend(friendId){
@@ -30,7 +33,7 @@
     function loadFriends(){
         try{
             const friendList = communityDao.getFriends(sessionStorage.characterId);
-            //logService.log(friendList, "info", "Friends:");
+            friendController.friends = orderFriends(friendList);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -41,7 +44,7 @@
     function loadFriendRequests(){
         try{
             const friendRequestList = communityDao.getFriendRequests(sessionStorage.characterId);
-            logService.log(friendRequestList, "info", "FriendRequests:");
+            friendController.friendRequests = orderFriends(friendRequestList);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -52,11 +55,42 @@
     function loadSentFriendRequests(){
         try{
             const friendRequestList = communityDao.getSentFriendRequests(sessionStorage.characterId);
-            logService.log(friendRequestList, "info", "Sent FriendRequests:");
+            friendController.sentFriendRequests = orderFriends(friendRequestList)
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             friendController.friendRequests = [];
+        }
+    }
+    
+    function showFriendRequestNum(){
+        try{
+            document.getElementById("friendrequestnum").innerHTML = friendController.friendRequests.length;
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function showSentFriendRequestNum(){
+        try{
+            document.getElementById("sentfriendrequestnum").innerHTML = friendController.sentFriendRequests.length;
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function orderFriends(friends){
+        try{
+            friends.sort(function(a, b){
+                return a.friendName.localeCompare(b.friendName);
+            });
+            return friends;
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
         }
     }
 }());
