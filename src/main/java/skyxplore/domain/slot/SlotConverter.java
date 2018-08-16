@@ -12,6 +12,7 @@ import java.util.ArrayList;
 @Component
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked")
+//TODO unit test
 public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
     private final ObjectMapper objectMapper;
 

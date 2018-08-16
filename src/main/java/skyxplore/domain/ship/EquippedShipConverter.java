@@ -14,6 +14,7 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 @Slf4j
 @SuppressWarnings("unchecked")
+//TODO unit test
 public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
     private final ObjectMapper objectMapper;
 

@@ -7,6 +7,7 @@ import skyxplore.domain.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
     private final UserEncryptor userEncryptor;
 

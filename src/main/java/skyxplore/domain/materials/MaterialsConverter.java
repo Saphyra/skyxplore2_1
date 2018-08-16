@@ -12,6 +12,7 @@ import java.util.HashMap;
 @Component
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked")
+//TODO unit test
 public class MaterialsConverter extends ConverterBase<String, Materials> {
     private final ObjectMapper objectMapper;
 

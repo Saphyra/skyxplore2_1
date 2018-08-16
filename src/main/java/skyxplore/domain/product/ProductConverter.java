@@ -9,6 +9,7 @@ import skyxplore.util.DateTimeConverter;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ProductConverter extends ConverterBase<ProductEntity, Product> {
     private final DateTimeConverter dateTimeConverter;
 

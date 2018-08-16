@@ -9,6 +9,7 @@ import java.util.Collection;
 
 @Data
 @SuppressWarnings({"unused", "unchecked", "WeakerAccess"})
+//TODO unit test
 public class EquippedSlot {
     private String slotId;
     private String shipId;

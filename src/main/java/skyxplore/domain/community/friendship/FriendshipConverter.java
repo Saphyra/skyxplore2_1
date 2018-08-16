@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
 @Component
+//TODO unit test
 public class FriendshipConverter extends ConverterBase<FriendshipEntity, Friendship> {
     @Override
     public Friendship convertEntity(FriendshipEntity entity) {
