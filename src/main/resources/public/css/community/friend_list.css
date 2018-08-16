@@ -18,8 +18,38 @@
     right: 0;
     top: 4.5rem;
     overflow: auto;
+    padding-top: 1rem;
 }
 
 #blockedcharacters{
     display: none;
+}
+
+.friendlistscontainer{
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.friendlistitem{
+    position: relative;
+    border: 1px ridge white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.friendlistitem:hover{
+    border-color: red;
+}
+
+.friendlistitem div{
+    text-align: left;
+    margin-right: 7rem;
+}
+
+.friendlistitembutton{
+    position: absolute;
+    right: 0;
+    top: 0;
 }

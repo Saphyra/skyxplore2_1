@@ -39,17 +39,28 @@
 
             <DIV id='friendlistcontainer'>
                 <DIV id='listfriends' class='absolute0 listlabel'>
-                    <H3 class='marginbottom0_5rem'>Barátok</H3>
-                    <DIV>
-                        <DIV class='button inline' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
-                        <DIV class='button inline' onclick='friendController.showFriendRequests()'>Barátkérelmek (<SPAN id='friendrequestnum'></SPAN>)</DIV>
-                        <DIV class='button inline' onclick='friendController.showSentFriendRequests()'>Elküldött barátkérelmek (<SPAN id='sentfriendrequestnum'></SPAN>)</DIV>
+                    <DIV class='margintop0_75rem marginbottom0_5rem'>
+                        <DIV class='button inline' onclick='switchTab("friendlistscontainer", "friends")'>Barátok</DIV>
+                        <DIV class='button inline' onclick='switchTab("friendlistscontainer", "friendrequests")'>Barátkérelmek (<SPAN id='friendrequestnum'></SPAN>)</DIV>
+                        <DIV class='button inline' onclick='switchTab("friendlistscontainer", "sentfriendrequests")'>Elküldött barátkérelmek (<SPAN id='sentfriendrequestnum'></SPAN>)</DIV>
                     </DIV>
                     
                     <DIV id='friendlists'>
-                        <DIV id='friends' class='friendlistscontainer'></DIV>
-                        <DIV id='friendrequests' class='friendlistscontainer'></DIV>
-                        <DIV id='sentfriendrequests' class='friendlistscontainer'></DIV>
+                        <DIV id='friends' class='friendlistscontainer'>
+                            <H3 class='marginbottom0_5rem'>Barátlista</H3>
+                            <DIV class='button' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
+                            <DIV id='friendlistitems'></DIV>
+                        </DIV>
+                        
+                        <DIV id='friendrequests' class='friendlistscontainer'>
+                            <H3 class='marginbottom0_5rem'>Barátkérelmek</H3>
+                            <DIV id='friendrequestitems'></DIV>
+                        </DIV>
+                        
+                        <DIV id='sentfriendrequests' class='friendlistscontainer'>
+                            <H3 class='marginbottom0_5rem'>Elküldött barátkérelmek</H3>
+                            <DIV id='sentfriendrequestitems'></DIV>
+                        </DIV>
                     </DIV>
                 </DIV>
 

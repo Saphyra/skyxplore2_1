@@ -27,6 +27,7 @@
             }
             
             if(windowsBackToDefault){
+                switchTab("friendlistscontainer", "friends")
                 showLists();
             }
             
@@ -41,6 +42,9 @@
             
             friendController.showFriendRequestNum();
             friendController.showSentFriendRequestNum();
+            friendController.showFriends();
+            friendController.showFriendRequests();
+            friendController.showSentFriendRequests();
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");

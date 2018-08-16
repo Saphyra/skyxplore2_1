@@ -74,7 +74,19 @@ public class CharacterQueryService {
             .filter(c -> isNotOwnCharacter(c, userId)) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
             .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
+            .filter(c -> isFriend(c, character)) //Filtering friends
+            .filter(c -> isRequestSent(c, character)) //Filtering characters friend request already sent
             .collect(Collectors.toList());
+    }
+
+    private boolean isFriend(SkyXpCharacter c, SkyXpCharacter character) {
+        //TODO implement
+        return true;
+    }
+
+    private boolean isRequestSent(SkyXpCharacter c, SkyXpCharacter character) {
+        //TODO implement
+        return true;
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {

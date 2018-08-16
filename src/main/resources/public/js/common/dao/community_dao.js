@@ -298,7 +298,7 @@
                 throwException("IllegalArgument", "friendCharacterId must not be null or undefined.");
             }
             
-            const path = "friend/request/add";
+            const path = "friend/friendrequest/add";
             const body = {characterId: characterId, friendId: friendCharacterId};
             const response = dao.sendRequest(dao.POST, path, body);
             if(response.status == ResponseStatus.OK){

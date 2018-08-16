@@ -54,3 +54,13 @@ function throwException(name, message){
 function getActualTimeStamp(){
     return Math.floor(new Date().getTime() / 1000);
 }
+
+function switchTab(clazz, id){
+    try{
+        $("." + clazz).hide();
+        $("#" + id).show();
+    }catch(err){
+        const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+        logService.log(message, "error");
+    }
+}
