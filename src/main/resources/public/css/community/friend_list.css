@@ -43,7 +43,7 @@
     border-color: red;
 }
 
-.friendlistitem div{
+.friendlistitem div:first-child{
     text-align: left;
     margin-right: 7rem;
 }

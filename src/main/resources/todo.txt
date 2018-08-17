@@ -11,24 +11,14 @@ Create community
                 - Send mail
                 - Remove friend
                     - After confirmation
-            - Friend requests
-                - Decline
+            - Friend request
                 - Accept
-                - Block user
-            - Pending requests
-                - Cancel
-            - Block character
-                - Blocked characters
-                    - Allow again
-                - Dependencies
-                    - Remove existing friendship
-                    - Add friend: Users that blocked the sender must not be added as friend
-                - Delete block records upon character deletion
             - Report user
                 - Report for what?
             - Delete friendships upon character deletion
             - Delete friend requests upon character deletion
             - Delete friendships upon character deletion
+            - Delete block records upon character deletion
         - Mails
             - View mail list
                 - Highlight unread ones

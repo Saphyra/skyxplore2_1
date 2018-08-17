@@ -7,6 +7,8 @@
         this.sentFriendRequests = [];
         
         this.addFriend = addFriend;
+        this.declineFriendRequest = declineFriendRequest;
+        
         this.loadFriends = loadFriends;
         this.loadFriendRequests = loadFriendRequests;
         this.loadSentFriendRequests = loadSentFriendRequests;
@@ -28,6 +30,23 @@
             }
 
             pageController.refresh(true, true);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function declineFriendRequest(requestId){
+        try{
+            if(confirm("Biztosan elutasítod a barátkérelmet?")){
+                if(communityDao.declineFriendRequest(sessionStorage.characterId, requestId)){
+                    notificationService.showSuccess("Barátkérelem elutasítva.");
+                }else{
+                    notificationService.showError("Barátkérelem elutasítása sikertelen.");
+                }
+                
+                pageController.refresh(true, false);
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -97,20 +116,48 @@
             logService.log(message, "error");
         }
         
-        function createItem(character){
+        function createItem(friendRequest){
             try{
                 const container = document.createElement("DIV");
                     container.classList.add("friendlistitem");
                     
                     const characterNameElement = document.createElement("DIV");
-                        characterNameElement.innerHTML = character.friendName;
+                        characterNameElement.innerHTML = friendRequest.friendName;
                 container.appendChild(characterNameElement);
                 
-                    const allowButton = document.createElement("BUTTON");
-                        allowButton.classList.add("friendlistitembutton");
-                        allowButton.innerHTML = "Elfogadás / Elutasítás";
-                        allowButton.onclick = function(){}; //TODO implement (accept/cancel request)
-                container.appendChild(allowButton);
+                    const buttonWrapper = document.createElement("DIV");
+                        buttonWrapper.classList.add("absolute");
+                        buttonWrapper.classList.add("right0");
+                        buttonWrapper.classList.add("top0");
+                        buttonWrapper.classList.add("textalignright");
+                        
+                        const wrapperSpan = document.createElement("SPAN");
+                            wrapperSpan.classList.add("displaynone");
+                        
+                            const blockButton = document.createElement("BUTTON");
+                                    blockButton.innerHTML = "Blokkolás";
+                                    blockButton.onclick = function(){
+                                        if(confirm("Biztosan blokkolni szeretnéd " + friendRequest.friendName + " karaktert?")){
+                                            blockedCharacterController.block(friendRequest.friendId);
+                                        }
+                                    }
+                            wrapperSpan.appendChild(blockButton);
+                    
+                            const declineButton = document.createElement("BUTTON");
+                                    declineButton.innerHTML = "Elutasítás";
+                                    declineButton.onclick = function(){
+                                        friendController.declineFriendRequest(friendRequest.friendRequestId)
+                                    };
+                            wrapperSpan.appendChild(declineButton);
+                    buttonWrapper.appendChild(wrapperSpan);        
+                        
+                        const allowButton = document.createElement("BUTTON");
+                            allowButton.innerHTML = "Elfogadás";
+                            allowButton.onclick = function(){}; //TODO implement (accept/cancel request)
+                    buttonWrapper.appendChild(allowButton);
+                    
+                    $(buttonWrapper).hover(function(){$(wrapperSpan).fadeIn()}, function(){$(wrapperSpan).fadeOut()});
+                container.appendChild(buttonWrapper);
                     
                 return container;
             }catch(err){
@@ -147,19 +194,21 @@
             logService.log(message, "error");
         }
         
-        function createItem(character){
+        function createItem(friendRequest){
             try{
                 const container = document.createElement("DIV");
                     container.classList.add("friendlistitem");
                     
                     const characterNameElement = document.createElement("DIV");
-                        characterNameElement.innerHTML = character.friendName;
+                        characterNameElement.innerHTML = friendRequest.friendName;
                 container.appendChild(characterNameElement);
                 
                     const allowButton = document.createElement("BUTTON");
                         allowButton.classList.add("friendlistitembutton");
                         allowButton.innerHTML = "Visszavonás";
-                        allowButton.onclick = function(){}; //TODO implement (cancel request)
+                        allowButton.onclick = function(){
+                            friendController.declineFriendRequest(friendRequest.friendRequestId)
+                        };
                 container.appendChild(allowButton);
                     
                 return container;

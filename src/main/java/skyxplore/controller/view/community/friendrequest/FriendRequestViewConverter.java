@@ -18,6 +18,7 @@ public class FriendRequestViewConverter extends AbstractViewConverter<FriendRequ
             return null;
         }
         FriendRequestView view = new FriendRequestView();
+        view.setCharacterId(domain.getCharacterId());
         view.setFriendRequestId(domain.getFriendRequestId());
         view.setFriendId(domain.getFriendId());
         view.setFriendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName());

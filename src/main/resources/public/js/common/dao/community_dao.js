@@ -2,6 +2,7 @@
     window.communityDao = new function(){
         this.allowBlockedCharacter = allowBlockedCharacter;
         this.blockCharacter = blockCharacter;
+        this.declineFriendRequest = declineFriendRequest;
         this.getBlockableCharacters = getBlockableCharacters;
         this.getBlockedCharacters = getBlockedCharacters;
         this.getCharactersCanBeFriend = getCharactersCanBeFriend;
@@ -70,6 +71,40 @@
             
             const path = "blockcharacter/block";
             const body = {characterId: characterId, blockedCharacterId: blockedCharacterId};
+            const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Declines the friend request with the given id.
+    Arguments:
+        - characterId: the id of the character.
+        - friendRequestId: the id of the friend request to decline.
+    Returns:
+        - true, if the request is declined succeú.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if characterId or friendRequestId is null or undefined.
+    */
+    function declineFriendRequest(characterId, friendRequestId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            if(friendRequestId == null || friendRequestId == undefined){
+                throwException("IllegalArgument", "friendRequestId must not be null or undefined.");
+            }
+            const path = "friend/friendrequest/decline";
+            const body = {characterId: characterId, friendRequestId: friendRequestId};
             const response = dao.sendRequest(dao.POST, path, body);
             if(response.status == ResponseStatus.OK){
                 return true;
@@ -232,7 +267,7 @@
                 throwException("IllegalArgument", "characterId must not be null or undefined.");
             }
             
-            const path = "friend/" + characterId + "/friendrequest/received";
+            const path = "friend/friendrequest/received/" + characterId;
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);
@@ -263,7 +298,7 @@
                 throwException("IllegalArgument", "characterId must not be null or undefined.");
             }
             
-            const path = "friend/" + characterId + "/friendrequest/sent";
+            const path = "friend/friendrequest/sent/" + characterId;
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);

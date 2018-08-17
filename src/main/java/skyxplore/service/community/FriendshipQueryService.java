@@ -1,15 +1,16 @@
 package skyxplore.service.community;
 
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
+import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,9 +21,24 @@ public class FriendshipQueryService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
 
+    public List<Friendship> getFriends(String characterId, String userId) {
+        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+        return friendshipDao.getFriendshipsOfCharacter(characterId);
+    }
+
     public List<FriendRequest> getReceivedFriendRequests(String characterId, String userId) {
         characterQueryService.findCharacterByIdAuthorized(characterId, userId);
-        return friendRequestDao.getByFriendId(characterId);
+        return friendRequestDao.getByFriendId(characterId)
+            .stream()
+            .map(this::swapIds)
+            .collect(Collectors.toList());
+    }
+
+    private FriendRequest swapIds(FriendRequest request){
+        String characterId = request.getCharacterId();
+        request.setCharacterId(request.getFriendId());
+        request.setFriendId(characterId);
+        return request;
     }
 
     public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
@@ -31,7 +47,7 @@ public class FriendshipQueryService {
     }
 
     public boolean isFriendshipOrFriendRequestAlreadyExists(String characterId, String friendId) {
-        return friendRequestDao.getByCharacterIdAndFriendId(characterId, friendId).size() > 0
-            || friendshipDao.getByCharacterIdAndFriendId(characterId, friendId).size() > 0;
+        return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0
+            || friendshipDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
     }
 }

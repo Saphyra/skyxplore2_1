@@ -6,16 +6,17 @@ import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.AddFriendRequest;
 import skyxplore.controller.request.AllowBlockedCharacterRequest;
 import skyxplore.controller.request.BlockCharacterRequest;
+import skyxplore.controller.request.DeclineFriendRequestRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.friend.FriendView;
+import skyxplore.controller.view.community.friend.FriendViewConverter;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestViewConverter;
 import skyxplore.filter.AuthFilter;
 import skyxplore.service.CommunityFacade;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -28,18 +29,19 @@ public class CommunityController {
     private static final String ADD_FRIEND_MAPPING = "friend/friendrequest/add";
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
-    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/{characterId}/friendrequest/decline/{requestId}";
+    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend//friendrequest/decline";
     private static final String DELETE_FRIEND_MAPPING = "friend/{characterId}/delete/{friendshipId}";
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter/{characterId}";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/{characterId}/namelike/{charName}";
     private static final String GET_FRIENDS_MAPPING = "friend/{characterId}";
     private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/{characterId}/namelike/{charName}";
-    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/{characterId}/friendrequest/received";
-    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/{characterId}/friendrequest/sent";
+    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//friendrequest/received/{characterId}";
+    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/sent/{characterId}";
 
     private final CommunityFacade communityFacade;
     private final CharacterViewConverter characterViewConverter;
     private final FriendRequestViewConverter friendRequestViewConverter;
+    private final FriendViewConverter friendViewConverter;
 
     @PostMapping(ACCEPT_FRIEND_REQUEST_MAPPING)
     public void acceptFriendRequest(
@@ -74,12 +76,11 @@ public class CommunityController {
 
     @PostMapping(DECLINE_FRIEND_REQUEST_MAPPING)
     public void declineFriendRequestMapping(
-        @PathVariable("characterId") String characterId,
-        @PathVariable("requestId") String requestId,
+        @RequestBody @Valid DeclineFriendRequestRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
-        log.info("{} wants to decline / cancel friendRequest {}", characterId, requestId);
-        //TODO implement
+        log.info("{} wants to decline / cancel friendRequest {}", request.getCharacterId(), request.getFriendRequestId());
+        communityFacade.declineFriendRequest(request, userId);
     }
 
     @DeleteMapping(DELETE_FRIEND_MAPPING)
@@ -114,8 +115,7 @@ public class CommunityController {
     @GetMapping(GET_FRIENDS_MAPPING)
     public List<FriendView> getFriends(@PathVariable("characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
         log.info("{} wants to know his community list.", characterId);
-        //TODO implement
-        return Collections.emptyList();
+        return friendViewConverter.convertDomain(communityFacade.getFriends(characterId, userId));
     }
 
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)

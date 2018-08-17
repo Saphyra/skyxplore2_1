@@ -6,12 +6,14 @@ import org.springframework.stereotype.Component;
 import skyxplore.controller.request.AddFriendRequest;
 import skyxplore.controller.request.AllowBlockedCharacterRequest;
 import skyxplore.controller.request.BlockCharacterRequest;
+import skyxplore.controller.request.DeclineFriendRequestRequest;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
+import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.service.community.BlockCharacterService;
-import skyxplore.service.community.FriendshipService;
 import skyxplore.service.community.FriendshipQueryService;
+import skyxplore.service.community.FriendshipService;
 
 import java.util.List;
 
@@ -38,6 +40,10 @@ public class CommunityFacade {
         blockCharacterService.blockCharacter(request, userId);
     }
 
+    public void declineFriendRequest(DeclineFriendRequestRequest request, String userId) {
+        friendshipService.declineFriendRequest(request, userId);
+    }
+
     public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
         return characterQueryService.getBlockedCharacters(characterId, userId);
     }
@@ -56,5 +62,9 @@ public class CommunityFacade {
 
     public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
         return friendshipQueryService.getSentFriendRequests(characterId, userId);
+    }
+
+    public List<Friendship> getFriends(String characterId, String userId) {
+        return friendshipQueryService.getFriends(characterId, userId);
     }
 }

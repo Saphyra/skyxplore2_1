@@ -152,6 +152,10 @@
     left: 65%;
 }
 
+.left100percent{
+    left: 100%;
+}
+
 .left5px{
     left: 5px;
 }
@@ -258,6 +262,10 @@
 
 .textalignright{
     text-align: right;
+}
+
+.top0{
+    top: 0;
 }
 
 .top2px{
