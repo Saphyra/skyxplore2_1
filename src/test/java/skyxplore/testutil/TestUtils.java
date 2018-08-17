@@ -5,9 +5,11 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.request.ChangeUserNameRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.material.MaterialView;
@@ -21,6 +23,8 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.domain.user.Role;
+import skyxplore.domain.user.SkyXpUser;
 
 @SuppressWarnings("WeakerAccess")
 public class TestUtils {
@@ -92,12 +96,24 @@ public class TestUtils {
     public static Integer SLOT_WEAPON_BACK = 13;
 
     //User
+    public static final String USER_EMAIL = "user_email";
     public static final String USER_ID = "user_id";
+    public static final String USER_FAKE_PASSWORD = "user_fake_password";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_NEW_NAME = "user_new_name";
+    public static final String USER_PASSWORD = "user_password";
 
     public static AddToQueueRequest createAddToQueueRequest(){
         AddToQueueRequest request = new AddToQueueRequest();
         request.setElementId(DATA_ELEMENT);
         request.setAmount(DATA_ELEMENT_AMOUNT);
+        return request;
+    }
+
+    public static ChangeUserNameRequest createChangeUserNameRequest(){
+        ChangeUserNameRequest request = new ChangeUserNameRequest();
+        request.setNewUserName(USER_NEW_NAME);
+        request.setPassword(USER_PASSWORD);
         return request;
     }
 
@@ -230,6 +246,18 @@ public class TestUtils {
         view.setSlotId(slot.getSlotId());
         view.setShipId(slot.getShipId());
         return view;
+    }
+
+    public static SkyXpUser createUser(){
+        SkyXpUser user = new SkyXpUser();
+        user.setUserId(USER_ID);
+        user.setUsername(USER_NAME);
+        user.setPassword(USER_PASSWORD);
+        user.setEmail(USER_EMAIL);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(Role.USER);
+        user.setRoles(roles);
+        return user;
     }
 
     public static Slot createWeaponSlot(){
