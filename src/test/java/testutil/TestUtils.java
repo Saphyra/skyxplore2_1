@@ -1,13 +1,22 @@
-package skyxplore;
+package testutil;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
+import skyxplore.controller.view.material.MaterialView;
+import skyxplore.controller.view.product.ProductView;
+import skyxplore.controller.view.product.ProductViewList;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
@@ -22,10 +31,16 @@ public class TestUtils {
     //Data
     public static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
+    public static final String DATA_DESCRIPTION = "data_description";
+    public static final String DATA_ELEMENT = "element";
+    public static final Integer DATA_ELEMENT_AMOUNT = 13;
     public static final String DATA_ITEM_FRONT = "item_front";
     public static final String DATA_ITEM_LEFT = "item_left";
     public static final String DATA_ITEM_RIGHT = "item_right";
     public static final String DATA_ITEM_BACK = "item_back";
+    public static final String DATA_NAME = "data_name";
+    public static final String DATA_SLOT = "data_slot";
+
 
     public static final Integer DARA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
@@ -44,6 +59,12 @@ public class TestUtils {
 
     //Factory
     public static final String FACTORY_ID = "factory_id";
+
+    //Material
+    public static final String MATERIAL_KEY = "material_id";
+    public static final String MATERIAL_NAME = "material_name";
+    public static final String MATERIAL_DESCRIPTION = "material_description";
+    public static final Integer MATERIAL_AMOUNT = 2;
 
     //Product
     public static final String ELEMENT_ID = "element_id";
@@ -67,6 +88,13 @@ public class TestUtils {
 
     //User
     public static final String USER_ID = "user_id";
+
+    public static AddToQueueRequest createAddToQueueRequest(){
+        AddToQueueRequest request = new AddToQueueRequest();
+        request.setElementId(DATA_ELEMENT);
+        request.setAmount(DATA_ELEMENT_AMOUNT);
+        return request;
+    }
 
     public static SkyXpCharacter createCharacter() {
         SkyXpCharacter character = new SkyXpCharacter();
@@ -128,6 +156,15 @@ public class TestUtils {
         return ship;
     }
 
+    public static MaterialView createMaterialView(){
+        return MaterialView.builder()
+            .materialId(MATERIAL_KEY)
+            .name(MATERIAL_NAME)
+            .description(MATERIAL_DESCRIPTION)
+            .amount(MATERIAL_AMOUNT)
+            .build();
+    }
+
     public static Product createProduct() {
         return Product.builder()
             .productId(PRODUCT_ID)
@@ -139,6 +176,31 @@ public class TestUtils {
             .startTime(PRODUCT_START_TIME)
             .endTime(PRODUCT_END_TIME)
             .build();
+    }
+
+    public static ProductView createProductView(){
+        ProductView view = new ProductView();
+        view.setProductId(PRODUCT_ID);
+        view.setFactoryId(FACTORY_ID);
+        view.setElementId(ELEMENT_ID);
+        view.setAmount(PRODUCT_AMOUNT);
+        view.setAddedAt(PRODUCT_ADDED_AT);
+        view.setConstructionTime(PRODUCT_CONSTRUCTION_TIME);
+        view.setStartTime(PRODUCT_START_TIME_EPOCH);
+        view.setEndTime(PRODUCT_END_TIME_EPOCH);
+        return view;
+    }
+
+    public static ProductViewList createProductViewList(){
+        return new ProductViewList(Arrays.asList(createProductView()));
+    }
+
+    public static View<ProductViewList> createProductViewListView(){
+        ProductViewList productViews = createProductViewList();
+        Map<String, GeneralDescription> data = new HashMap<>();
+        data.put(DATA_ELEMENT, new TestGeneralDescription());
+        View<ProductViewList> view = new View<>(productViews, data);
+        return view;
     }
 
     public static Ship createShip(){

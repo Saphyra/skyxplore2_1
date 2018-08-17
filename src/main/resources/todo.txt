@@ -58,6 +58,7 @@ Lobby
 
 Javadoc
 Merge Date-Time related util classes
+Integration tests
 
 FrontEnd testing
 https://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference

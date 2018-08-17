@@ -5,12 +5,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.TestUtils.CHARACTER_ID;
-import static skyxplore.TestUtils.CHARACTER_NAME;
-import static skyxplore.TestUtils.MONEY;
-import static skyxplore.TestUtils.USER_ID;
-import static skyxplore.TestUtils.createCharacter;
-import static skyxplore.TestUtils.createCharacterView;
+import static testutil.TestUtils.CHARACTER_ID;
+import static testutil.TestUtils.CHARACTER_NAME;
+import static testutil.TestUtils.MONEY;
+import static testutil.TestUtils.USER_ID;
+import static testutil.TestUtils.createCharacter;
+import static testutil.TestUtils.createCharacterView;
 
 import java.util.Arrays;
 import java.util.HashMap;
