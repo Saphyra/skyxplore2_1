@@ -1,14 +1,14 @@
-package skyxplore.controller.view;
+package skyxplore.controller;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static testutil.TestUtils.CHARACTER_ID;
-import static testutil.TestUtils.MATERIAL_KEY;
-import static testutil.TestUtils.USER_ID;
-import static testutil.TestUtils.createAddToQueueRequest;
-import static testutil.TestUtils.createMaterialView;
-import static testutil.TestUtils.createProductViewListView;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.MATERIAL_KEY;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
+import static skyxplore.testutil.TestUtils.createMaterialView;
+import static skyxplore.testutil.TestUtils.createProductViewListView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.FactoryController;
 import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.view.View;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductViewList;
 import skyxplore.service.FactoryFacade;

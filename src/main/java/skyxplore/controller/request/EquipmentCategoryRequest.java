@@ -22,7 +22,7 @@ public enum EquipmentCategoryRequest {
 
     public static EquipmentCategoryRequest fromValue(String value){
         for(EquipmentCategoryRequest element : values()){
-            if(element.value.equals(value)){
+            if(element.value.equalsIgnoreCase(value)){
                 return element;
             }
         }

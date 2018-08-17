@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
-import static testutil.TestUtils.PRODUCT_END_TIME;
-import static testutil.TestUtils.PRODUCT_END_TIME_EPOCH;
+import static skyxplore.testutil.TestUtils.PRODUCT_END_TIME;
+import static skyxplore.testutil.TestUtils.PRODUCT_END_TIME_EPOCH;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DateTimeConverterTest {

@@ -1,4 +1,4 @@
-package testutil;
+package skyxplore.testutil;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -22,7 +22,12 @@ import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 
+@SuppressWarnings("WeakerAccess")
 public class TestUtils {
+    //Category
+    public static final String CATEGORY_ID = "category_id";
+    public static final String CATEGORY_CONTENT = "category_content";
+
     //Character
     public static final String CHARACTER_ID = "character_id";
     public static final String CHARACTER_NAME = "character_name";
@@ -156,6 +161,12 @@ public class TestUtils {
         return ship;
     }
 
+    public static Map<String, GeneralDescription> createGeneralDescriptionMap(){
+        Map<String, GeneralDescription> map = new HashMap<>();
+        map.put(DATA_ELEMENT, new TestGeneralDescription());
+        return map;
+    }
+
     public static MaterialView createMaterialView(){
         return MaterialView.builder()
             .materialId(MATERIAL_KEY)
@@ -197,8 +208,7 @@ public class TestUtils {
 
     public static View<ProductViewList> createProductViewListView(){
         ProductViewList productViews = createProductViewList();
-        Map<String, GeneralDescription> data = new HashMap<>();
-        data.put(DATA_ELEMENT, new TestGeneralDescription());
+        Map<String, GeneralDescription> data = createGeneralDescriptionMap();
         View<ProductViewList> view = new View<>(productViews, data);
         return view;
     }

@@ -10,7 +10,7 @@ import skyxplore.service.GameFacade;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-//TODO unit test
+//TODO unit test (implementation in progress)
 public class GameController {
     private static final String CREATE_LOBBY_MAPPING = "game/createlobby/{characterId}";
 
@@ -19,6 +19,6 @@ public class GameController {
     @PostMapping(CREATE_LOBBY_MAPPING)
     public void createLobby(@RequestBody CreateLobbyRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to create a lobby with parameters {} for character {}", userId, request, characterId);
-        gameFacade.createNewGame(request, userId, characterId);
+        gameFacade.createLobby(request, userId, characterId);
     }
 }

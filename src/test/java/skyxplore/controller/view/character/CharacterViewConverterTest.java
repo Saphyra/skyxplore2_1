@@ -1,9 +1,9 @@
 package skyxplore.controller.view.character;
 
 import static org.junit.Assert.assertEquals;
-import static testutil.TestUtils.CHARACTER_ID;
-import static testutil.TestUtils.CHARACTER_NAME;
-import static testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
+import static skyxplore.testutil.TestUtils.createCharacter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

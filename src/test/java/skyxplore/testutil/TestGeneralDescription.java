@@ -1,13 +1,15 @@
-package testutil;
+package skyxplore.testutil;
 
-import static testutil.TestUtils.DATA_DESCRIPTION;
-import static testutil.TestUtils.DATA_ELEMENT;
-import static testutil.TestUtils.DATA_NAME;
-import static testutil.TestUtils.DATA_SLOT;
+import static skyxplore.testutil.TestUtils.DATA_DESCRIPTION;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.DATA_NAME;
+import static skyxplore.testutil.TestUtils.DATA_SLOT;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class TestGeneralDescription extends GeneralDescription {
     public TestGeneralDescription(){
