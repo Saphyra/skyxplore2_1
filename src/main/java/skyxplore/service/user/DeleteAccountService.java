@@ -13,9 +13,8 @@ import skyxplore.exception.BadCredentialsException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class DeleteAccountService {
-    private final  CharacterDao characterDao;
+    private final CharacterDao characterDao;
     private final UserQueryService userQueryService;
     private final UserDao userDao;
 

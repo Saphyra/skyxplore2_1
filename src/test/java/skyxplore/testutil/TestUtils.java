@@ -1,5 +1,6 @@
 package skyxplore.testutil;
 
+import skyxplore.controller.request.AccountDeleteRequest;
 import skyxplore.controller.request.AddToQueueRequest;
 import skyxplore.controller.request.ChangeEmailRequest;
 import skyxplore.controller.request.ChangeUserNameRequest;
@@ -105,6 +106,12 @@ public class TestUtils {
     public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
     public static final String USER_PASSWORD = "user_password";
+
+    public static AccountDeleteRequest createAccountDeleteRequest(){
+        AccountDeleteRequest request = new AccountDeleteRequest();
+        request.setPassword(USER_PASSWORD);
+        return request;
+    }
 
     public static AddToQueueRequest createAddToQueueRequest(){
         AddToQueueRequest request = new AddToQueueRequest();
