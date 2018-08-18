@@ -7,6 +7,9 @@ Create community
         - Friends
             - List of friends
                 - Highlight online
+                    - provide characterId in cookie
+                    - Store characterId in accessToken
+                    - Authorization: validate characterId in accessToken
                 - View ship
                 - Send mail
             - Report user

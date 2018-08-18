@@ -1,14 +1,7 @@
 package skyxplore.testutil;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
 import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.request.ChangeEmailRequest;
 import skyxplore.controller.request.ChangeUserNameRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
@@ -25,6 +18,10 @@ import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class TestUtils {
@@ -100,6 +97,7 @@ public class TestUtils {
     public static final String USER_ID = "user_id";
     public static final String USER_FAKE_PASSWORD = "user_fake_password";
     public static final String USER_NAME = "user_name";
+    public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
     public static final String USER_PASSWORD = "user_password";
 
@@ -107,6 +105,13 @@ public class TestUtils {
         AddToQueueRequest request = new AddToQueueRequest();
         request.setElementId(DATA_ELEMENT);
         request.setAmount(DATA_ELEMENT_AMOUNT);
+        return request;
+    }
+
+    public static ChangeEmailRequest createChangeEmailRequest(){
+        ChangeEmailRequest request = new ChangeEmailRequest();
+        request.setNewEmail(USER_NEW_EMAIL);
+        request.setPassword(USER_PASSWORD);
         return request;
     }
 
