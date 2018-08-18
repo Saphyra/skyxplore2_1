@@ -6,6 +6,7 @@
         this.friendRequests = [];
         this.sentFriendRequests = [];
         
+        this.acceptFriendRequest = acceptFriendRequest;
         this.addFriend = addFriend;
         this.declineFriendRequest = declineFriendRequest;
         
@@ -20,6 +21,21 @@
         this.showSentFriendRequests = showSentFriendRequests;
     }
 
+    function acceptFriendRequest(friendRequestId){
+        try{
+            if(communityDao.acceptFriendRequest(sessionStorage.characterId, friendRequestId)){
+                notificationService.showSuccess("Barátkérelem elfogadva.");
+            }else{
+                notificationService.showError("Barátkérelem elfogadása sikertelen.");
+            }
+            
+            pageController.refresh(true, false);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
     function addFriend(friendId){
         try{
             const isAdded = communityDao.sendFriendRequest(sessionStorage.characterId, friendId);
@@ -87,7 +103,72 @@
     }
     
     function showFriends(){
-        //TODO implement
+        try{
+            const container = document.getElementById("friendlistitems");
+                container.innerHTML = "";
+                
+                if(friendController.friends.length == 0){
+                    container.innerHTML = "Nincsenek barátok.";
+                }
+                
+                for(let findex in friendController.friends){
+                    container.appendChild(createItem(friendController.friends[findex]));
+                }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+        
+        function createItem(friendship){
+            try{
+                const container = document.createElement("DIV");
+                    container.classList.add("friendlistitem");
+                    
+                    const characterNameElement = document.createElement("DIV");
+                        characterNameElement.innerHTML = friendship.friendName;
+                container.appendChild(characterNameElement);
+                
+                    const buttonWrapper = document.createElement("DIV");
+                        buttonWrapper.classList.add("absolute");
+                        buttonWrapper.classList.add("right0");
+                        buttonWrapper.classList.add("top0");
+                        buttonWrapper.classList.add("textalignright");
+                        
+                        const wrapperSpan = document.createElement("SPAN");
+                            wrapperSpan.classList.add("displaynone");
+                            
+                            const removeFriendButton = document.createElement("BUTTON");
+                                removeFriendButton.innerHTML = "Törlés";
+                                removeFriendButton.onclick = function(){
+                                    //TODO remove friend
+                                }
+                        wrapperSpan.appendChild(removeFriendButton);
+                            
+                            const viewProfileButton = document.createElement("BUTTON");
+                                viewProfileButton.innerHTML = "Profil"
+                                viewProfileButton.onclick = function(){
+                                    //TODO view profile
+                                };
+                        wrapperSpan.appendChild(viewProfileButton);
+                    buttonWrapper.appendChild(wrapperSpan);
+                        
+                        const mailButton = document.createElement("BUTTON");
+                            mailButton.innerHTML = "Üzenet írása";
+                            mailButton.onclick = function(){
+                                //TODO write mail
+                            };
+                    buttonWrapper.appendChild(mailButton);
+                    
+                    $(buttonWrapper).hover(function(){$(wrapperSpan).fadeIn()}, function(){$(wrapperSpan).fadeOut()});
+                container.appendChild(buttonWrapper);
+                
+                return container;
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+                return document.createElement("DIV");
+            }
+        }
     }
     
     function showFriendRequestNum(){
@@ -153,7 +234,7 @@
                         
                         const allowButton = document.createElement("BUTTON");
                             allowButton.innerHTML = "Elfogadás";
-                            allowButton.onclick = function(){}; //TODO implement (accept/cancel request)
+                            allowButton.onclick = function(){friendController.acceptFriendRequest(friendRequest.friendRequestId)};
                     buttonWrapper.appendChild(allowButton);
                     
                     $(buttonWrapper).hover(function(){$(wrapperSpan).fadeIn()}, function(){$(wrapperSpan).fadeOut()});

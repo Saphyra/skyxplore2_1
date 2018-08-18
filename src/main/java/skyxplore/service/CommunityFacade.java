@@ -3,10 +3,7 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.request.AddFriendRequest;
-import skyxplore.controller.request.AllowBlockedCharacterRequest;
-import skyxplore.controller.request.BlockCharacterRequest;
-import skyxplore.controller.request.DeclineFriendRequestRequest;
+import skyxplore.controller.request.*;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
@@ -27,6 +24,9 @@ public class CommunityFacade {
     private final FriendshipService friendshipService;
     private final FriendshipQueryService friendshipQueryService;
 
+    public void acceptFriendRequest(AcceptFriendRequestRequest request, String userId) {
+        friendshipService.acceptFriendRequest(request, userId);
+    }
 
     public void allowBlockedCharacter(AllowBlockedCharacterRequest request, String userId) {
         blockCharacterService.allowBlockedCharacter(request, userId);

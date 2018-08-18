@@ -1,5 +1,6 @@
 (function CommunityDao(){    
     window.communityDao = new function(){
+        this.acceptFriendRequest = acceptFriendRequest;
         this.allowBlockedCharacter = allowBlockedCharacter;
         this.blockCharacter = blockCharacter;
         this.declineFriendRequest = declineFriendRequest;
@@ -10,6 +11,42 @@
         this.getFriendRequests = getFriendRequests;
         this.getSentFriendRequests = getSentFriendRequests;
         this.sendFriendRequest = sendFriendRequest;
+    }
+    
+    /*
+    Accepts the specified friend request.
+    Arguments:
+        - characterId: the id of the character
+        - friendRequestId: the id of the friend request.
+    Returns:
+        - true, if the friend request was accepted successfully.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if characterId or friendRequestId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function acceptFriendRequest(characterId, friendRequestId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            if(friendRequestId == null || friendRequestId == undefined){
+                throwException("IllegalArgument", "friendRequestId must not be null or undefined.");
+            }
+            
+            const path = "friend/friendrequest/accept";
+            const body = {characterId: characterId, friendRequestId: friendRequestId};
+            const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
     
     /*

@@ -3,10 +3,7 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import skyxplore.controller.request.AddFriendRequest;
-import skyxplore.controller.request.AllowBlockedCharacterRequest;
-import skyxplore.controller.request.BlockCharacterRequest;
-import skyxplore.controller.request.DeclineFriendRequestRequest;
+import skyxplore.controller.request.*;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.friend.FriendView;
@@ -25,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 //TODO unit test
 public class CommunityController {
-    private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/{characterId}/friendrequest/accept/{requestId}";
+    private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/friendrequest/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/friendrequest/add";
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
@@ -45,12 +42,11 @@ public class CommunityController {
 
     @PostMapping(ACCEPT_FRIEND_REQUEST_MAPPING)
     public void acceptFriendRequest(
-        @PathVariable("characterId") String characterId,
-        @PathVariable("requestId") String requestId,
+        @RequestBody @Valid AcceptFriendRequestRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
-        log.info("{} wants to accept friendRequest {}", characterId, requestId);
-        //TODO implement
+        log.info("{} wants to accept friendRequest {}", request.getCharacterId(), request.getFriendRequestId());
+        communityFacade.acceptFriendRequest(request, userId);
     }
 
     @PostMapping(ADD_FRIEND_MAPPING)
@@ -115,7 +111,7 @@ public class CommunityController {
     @GetMapping(GET_FRIENDS_MAPPING)
     public List<FriendView> getFriends(@PathVariable("characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
         log.info("{} wants to know his community list.", characterId);
-        return friendViewConverter.convertDomain(communityFacade.getFriends(characterId, userId));
+        return friendViewConverter.convertDomain(communityFacade.getFriends(characterId, userId), characterId);
     }
 
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)

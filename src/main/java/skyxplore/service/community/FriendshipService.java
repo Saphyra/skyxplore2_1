@@ -3,12 +3,14 @@ package skyxplore.service.community;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.controller.request.AcceptFriendRequestRequest;
 import skyxplore.controller.request.AddFriendRequest;
 import skyxplore.controller.request.DeclineFriendRequestRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.blockeduser.BlockedCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
+import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendRequestNotFoundException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
@@ -16,11 +18,13 @@ import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class FriendshipService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
@@ -28,6 +32,26 @@ public class FriendshipService {
     private final FriendshipDao friendshipDao;
     private final FriendshipQueryService friendshipQueryService;
     private final IdGenerator idGenerator;
+
+    @Transactional
+    public void acceptFriendRequest(AcceptFriendRequestRequest request, String userId) {
+        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
+        FriendRequest friendRequest = friendRequestDao.findById(request.getFriendRequestId());
+        if(friendRequest == null){
+            throw new FriendRequestNotFoundException("FriendRequest not found with id " + request.getFriendRequestId());
+        }
+        if(!friendRequest.getFriendId().equals(request.getCharacterId())){
+            throw new UnauthorizedException(request.getCharacterId() + "has no rights to acccept friendRequest " + request.getFriendRequestId());
+        }
+
+        Friendship friendship = Friendship.builder()
+            .friendshipId(idGenerator.getRandomId())
+            .characterId(friendRequest.getCharacterId())
+            .friendId(friendRequest.getFriendId())
+            .build();
+        friendshipDao.save(friendship);
+        friendRequestDao.delete(friendRequest);
+    }
 
     public void addFriendRequest(AddFriendRequest request, String userId) {
         characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);

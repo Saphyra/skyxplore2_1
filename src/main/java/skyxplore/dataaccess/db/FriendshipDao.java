@@ -12,6 +12,7 @@ import java.util.List;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class FriendshipDao {
     private final FriendshipConverter friendshipConverter;
     private final FriendshipRepository friendshipRepository;
@@ -26,5 +27,9 @@ public class FriendshipDao {
 
     public List<Friendship> getFriendshipsOfCharacter(String characterId) {
         return friendshipConverter.convertEntity(friendshipRepository.getFriendshipsOfCharacter(characterId));
+    }
+
+    public void save(Friendship friendship) {
+        friendshipRepository.save(friendshipConverter.convertDomain(friendship));
     }
 }

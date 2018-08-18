@@ -11,13 +11,10 @@ Create community
                 - Send mail
                 - Remove friend
                     - After confirmation
-            - Friend request
-                - Accept
             - Report user
                 - Report for what?
             - Delete friendships upon character deletion
             - Delete friend requests upon character deletion
-            - Delete friendships upon character deletion
             - Delete block records upon character deletion
         - Mails
             - View mail list
@@ -38,7 +35,7 @@ Create community
                 - Subject
                 - Body
                 - Save as draft
-    - Notification for new mails
+    - Notification for new mails, and friend requests
         - Overview page
 
 Lobby

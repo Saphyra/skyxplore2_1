@@ -14,7 +14,7 @@ public class FriendshipConverter extends ConverterBase<FriendshipEntity, Friends
         }
         Friendship friendship = new Friendship();
         friendship.setFriendshipId(entity.getFriendshipId());
-        friendship.setCharacterId(entity.getFriendId());
+        friendship.setCharacterId(entity.getCharacterId());
         friendship.setFriendId(entity.getFriendId());
         return friendship;
     }
