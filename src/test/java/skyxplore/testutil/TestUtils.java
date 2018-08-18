@@ -34,6 +34,11 @@ public class TestUtils {
     public static final String CHARACTER_NAME = "character_name";
     public static final Integer MONEY = 10;
 
+    //CONVERTER
+    public static final String CONVERTER_ENTITY = "converter_entity";
+    public static final Integer CONVERTER_INT_VALUE = 316;
+    public static final String CONVERTER_KEY = "converter_key";
+
     //Data
     public static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
