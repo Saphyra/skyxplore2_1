@@ -9,8 +9,6 @@ Create community
                 - Highlight online
                 - View ship
                 - Send mail
-                - Remove friend
-                    - After confirmation
             - Report user
                 - Report for what?
             - Delete friendships upon character deletion

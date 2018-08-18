@@ -9,6 +9,7 @@
         this.acceptFriendRequest = acceptFriendRequest;
         this.addFriend = addFriend;
         this.declineFriendRequest = declineFriendRequest;
+        this.removeFriend = removeFriend;
         
         this.loadFriends = loadFriends;
         this.loadFriendRequests = loadFriendRequests;
@@ -59,6 +60,23 @@
                     notificationService.showSuccess("Barátkérelem elutasítva.");
                 }else{
                     notificationService.showError("Barátkérelem elutasítása sikertelen.");
+                }
+                
+                pageController.refresh(true, false);
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function removeFriend(friendship){
+        try{
+            if(confirm("Biztosan el akarod távolítani " + friendship.friendName + "-t a barátlistádról?")){
+                if(communityDao.removeFriend(sessionStorage.characterId, friendship.friendshipId)){
+                    notificationService.showSuccess("Barát eltávolítva.");
+                }else{
+                    notificationService.showError("Barát eltávolítása sikertelen.");
                 }
                 
                 pageController.refresh(true, false);
@@ -140,7 +158,7 @@
                             const removeFriendButton = document.createElement("BUTTON");
                                 removeFriendButton.innerHTML = "Törlés";
                                 removeFriendButton.onclick = function(){
-                                    //TODO remove friend
+                                    friendController.removeFriend(friendship);
                                 }
                         wrapperSpan.appendChild(removeFriendButton);
                             

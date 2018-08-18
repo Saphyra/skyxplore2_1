@@ -27,7 +27,7 @@ public class CommunityController {
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
     private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend//friendrequest/decline";
-    private static final String DELETE_FRIEND_MAPPING = "friend/{characterId}/delete/{friendshipId}";
+    private static final String DELETE_FRIEND_MAPPING = "friend";
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter/{characterId}";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/{characterId}/namelike/{charName}";
     private static final String GET_FRIENDS_MAPPING = "friend/{characterId}";
@@ -81,12 +81,11 @@ public class CommunityController {
 
     @DeleteMapping(DELETE_FRIEND_MAPPING)
     public void deleteFriend(
-        @PathVariable("characterId") String characterId,
-        @PathVariable("friendshipId") String friendshipId,
+        @RequestBody @Valid DeleteFriendRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
-        log.info("{} wants to delete friendship {}", characterId, friendshipId);
-        //TODO implement
+        log.info("{} wants to delete friendship {}", request.getCharacterId(), request.getFriendshipId());
+        communityFacade.deleteFriendship(request, userId);
     }
 
     @GetMapping(GET_BLOCKED_CHARACTERS_MAPPING)

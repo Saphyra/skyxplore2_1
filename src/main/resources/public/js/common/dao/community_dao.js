@@ -10,6 +10,7 @@
         this.getFriends = getFriends;
         this.getFriendRequests = getFriendRequests;
         this.getSentFriendRequests = getSentFriendRequests;
+        this.removeFriend = removeFriend;
         this.sendFriendRequest = sendFriendRequest;
     }
     
@@ -346,6 +347,42 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return [];
+        }
+    }
+    
+    /*
+    Sends a delete friendship request.
+    Arguments:
+        - characterId: the id of the character.
+        - friendshipId: the id of the friendship.
+    Returns:
+        - true, if the friendship is successfully deleted.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if characterId or friendshipId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function removeFriend(characterId, friendshipId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            if(friendshipId == null || friendshipId == undefined){
+                throwException("IllegalArgument", "friendshipId must not be null or undefined.");
+            }
+            
+            const path = "friend";
+            const body = {characterId: characterId, friendshipId: friendshipId};
+            const response = dao.sendRequest(dao.DELETE, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
         }
     }
     

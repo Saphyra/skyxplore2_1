@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import skyxplore.controller.request.AcceptFriendRequestRequest;
 import skyxplore.controller.request.AddFriendRequest;
 import skyxplore.controller.request.DeclineFriendRequestRequest;
+import skyxplore.controller.request.DeleteFriendRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.blockeduser.BlockedCharacter;
@@ -37,10 +38,10 @@ public class FriendshipService {
     public void acceptFriendRequest(AcceptFriendRequestRequest request, String userId) {
         characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
         FriendRequest friendRequest = friendRequestDao.findById(request.getFriendRequestId());
-        if(friendRequest == null){
+        if (friendRequest == null) {
             throw new FriendRequestNotFoundException("FriendRequest not found with id " + request.getFriendRequestId());
         }
-        if(!friendRequest.getFriendId().equals(request.getCharacterId())){
+        if (!friendRequest.getFriendId().equals(request.getCharacterId())) {
             throw new UnauthorizedException(request.getCharacterId() + "has no rights to acccept friendRequest " + request.getFriendRequestId());
         }
 
@@ -87,6 +88,16 @@ public class FriendshipService {
             throw new UnauthorizedException(request.getFriendRequestId() + " is not a friendRequest of character " + request.getCharacterId());
         }
         friendRequestDao.delete(friendRequest);
+    }
+
+    public void deleteFriendship(DeleteFriendRequest request, String userId) {
+        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
+        Friendship friendship = friendshipDao.getByFriendshipId(request.getFriendshipId());
+        if (!friendship.getFriendId().equals(request.getCharacterId())
+            && !friendship.getCharacterId().equals(request.getCharacterId())) {
+            throw new UnauthorizedException(request.getCharacterId() + " has no access to friendship " + request.getFriendshipId());
+        }
+        friendshipDao.delete(friendship);
     }
 
     public void removeContactsBetween(String characterId, String blockedCharacterId) {

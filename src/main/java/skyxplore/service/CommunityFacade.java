@@ -44,6 +44,10 @@ public class CommunityFacade {
         friendshipService.declineFriendRequest(request, userId);
     }
 
+    public void deleteFriendship(DeleteFriendRequest request, String userId) {
+        friendshipService.deleteFriendship(request, userId);
+    }
+
     public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
         return characterQueryService.getBlockedCharacters(characterId, userId);
     }
