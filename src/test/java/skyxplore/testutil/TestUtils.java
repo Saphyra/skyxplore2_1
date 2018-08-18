@@ -1,9 +1,6 @@
 package skyxplore.testutil;
 
-import skyxplore.controller.request.AccountDeleteRequest;
-import skyxplore.controller.request.AddToQueueRequest;
-import skyxplore.controller.request.ChangeEmailRequest;
-import skyxplore.controller.request.ChangeUserNameRequest;
+import skyxplore.controller.request.*;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.material.MaterialView;
@@ -275,6 +272,15 @@ public class TestUtils {
         roles.add(Role.USER);
         user.setRoles(roles);
         return user;
+    }
+
+    public static UserRegistrationRequest createUserRegistrationRequest(){
+        UserRegistrationRequest request = new UserRegistrationRequest();
+        request.setUsername(USER_NAME);
+        request.setPassword(USER_PASSWORD);
+        request.setConfirmPassword(USER_PASSWORD);
+        request.setEmail(USER_EMAIL);
+        return request;
     }
 
     public static Slot createWeaponSlot(){

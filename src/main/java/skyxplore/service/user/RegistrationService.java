@@ -1,12 +1,8 @@
 package skyxplore.service.user;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.UserRegistrationRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.Role;
@@ -15,6 +11,9 @@ import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.util.IdGenerator;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @Service
@@ -35,8 +34,8 @@ public class RegistrationService {
             request.getEmail(),
             new HashSet<>(Arrays.asList(Role.USER))
         );
-        SkyXpUser registratedUser = userDao.registrateUser(user);
-        log.info("New userId: {}", registratedUser.getUserId());
+        userDao.registrateUser(user);
+        log.info("New userId: {}", user.getUserId());
     }
 
     private void validateRegistrationRequest(UserRegistrationRequest request) {
