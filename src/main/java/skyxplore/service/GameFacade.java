@@ -3,7 +3,7 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.CreateLobbyRequest;
+import skyxplore.controller.request.character.CreateLobbyRequest;
 import skyxplore.service.game.LobbyCreatorService;
 
 @RequiredArgsConstructor

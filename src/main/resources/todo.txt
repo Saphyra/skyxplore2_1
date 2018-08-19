@@ -18,24 +18,40 @@ Create community
             - Delete friend requests upon character deletion
             - Delete block records upon character deletion
         - Mails
-            - View mail list
-                - Highlight unread ones
-                - Mark as read when read
-                - 'Mark as read button'
-                - Delete button
-                - Checkbox
-                    - Delete selected
-                    - Mark as read selected
-                    - Mark as unread selected
-            - Read mail
-                - Reply button
-                - Delete button
-            - Send mail
-                - To
-                    - Selectable user (filter by name)
-                - Subject
-                - Body
-                - Save as draft
+            - backend
+                - Mail entity
+                    - mailId
+                    - from
+                    - to
+                    - subject
+                    - message
+                    - read (boolean)
+                    - sendTime
+                    - archived (boolean)
+                    - senderDeleted (boolean)
+                    - addresseeDeleted (boolean)
+                - Cleanup job
+                    - Delete non-archived expired
+                    - Delete deleted from both side
+            - frontend
+                - View mail list
+                    - Highlight unread ones
+                    - Mark as read when read
+                    - 'Mark as read button'
+                    - Delete button
+                    - Checkbox
+                        - Delete selected
+                        - Mark as read selected
+                        - Mark as unread selected
+                - Read mail
+                    - Reply button
+                    - Delete button
+                - Send mail
+                    - To
+                        - Selectable user (filter by name)
+                    - Subject
+                    - Body
+                    - Save as draft
     - Notification for new mails, and friend requests
         - Overview page
 
@@ -47,6 +63,10 @@ Lobby
 Javadoc
 Merge Date-Time related util classes
 Integration tests
+Logging
 
 FrontEnd testing
 https://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference
+
+Spring profiles to support multiple data sources
+-Dspring.profiles.active=prod

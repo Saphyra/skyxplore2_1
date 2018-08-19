@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.controller.request.AllowBlockedCharacterRequest;
+import skyxplore.controller.request.community.AllowBlockedCharacterRequest;
 import skyxplore.exception.base.NotFoundException;
 
 public class BlockedCharacterNotFoundException extends NotFoundException {

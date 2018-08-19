@@ -3,7 +3,7 @@ package skyxplore.service.user;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.UserRegistrationRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
@@ -19,7 +19,6 @@ import java.util.HashSet;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class RegistrationService {
     private final IdGenerator idGenerator;
     private final UserDao userDao;

@@ -19,8 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.controller.FactoryController;
-import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductViewList;

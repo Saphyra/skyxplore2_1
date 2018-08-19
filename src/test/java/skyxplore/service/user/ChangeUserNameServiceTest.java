@@ -15,7 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.controller.request.ChangeUserNameRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;

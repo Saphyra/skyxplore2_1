@@ -1,8 +1,8 @@
-package skyxplore.controller.request;
-
-import javax.validation.constraints.NotNull;
+package skyxplore.controller.request.community;
 
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 public class AddFriendRequest {

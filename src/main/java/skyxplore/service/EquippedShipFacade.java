@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.EquipRequest;
-import skyxplore.controller.request.UnequipRequest;
+import skyxplore.controller.request.character.EquipRequest;
+import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.service.ship.EquipService;

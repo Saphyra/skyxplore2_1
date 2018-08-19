@@ -1,14 +1,15 @@
-package skyxplore.controller.request;
+package skyxplore.controller.request.community;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
 @Data
-public class DeclineFriendRequestRequest {
+public class AllowBlockedCharacterRequest {
     @NotNull
     private String characterId;
 
     @NotNull
-    private String friendRequestId;
+    private String blockedCharacterId;
+
 }

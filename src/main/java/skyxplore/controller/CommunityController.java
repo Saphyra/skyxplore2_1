@@ -3,7 +3,7 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import skyxplore.controller.request.*;
+import skyxplore.controller.request.community.*;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.friend.FriendView;

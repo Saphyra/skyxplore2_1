@@ -1,4 +1,4 @@
-package skyxplore.controller.request;
+package skyxplore.controller.request.character;
 
 import lombok.Data;
 

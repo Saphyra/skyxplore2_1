@@ -1,16 +1,15 @@
-package skyxplore.controller.request;
+package skyxplore.controller.request.user;
 
 import lombok.Data;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class ChangeEmailRequest {
-    @Email
+public class ChangeUserNameRequest {
     @NotNull
-    private String newEmail;
+    @Size(min = 3)
+    private String newUserName;
 
     @NotNull
     @Size(min = 1)

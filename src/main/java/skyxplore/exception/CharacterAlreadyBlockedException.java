@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.controller.request.BlockCharacterRequest;
+import skyxplore.controller.request.community.BlockCharacterRequest;
 import skyxplore.exception.base.ConflictException;
 
 public class CharacterAlreadyBlockedException extends ConflictException {

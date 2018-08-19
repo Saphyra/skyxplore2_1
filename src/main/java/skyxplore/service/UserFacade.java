@@ -4,11 +4,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.AccountDeleteRequest;
-import skyxplore.controller.request.ChangeEmailRequest;
-import skyxplore.controller.request.ChangePasswordRequest;
-import skyxplore.controller.request.ChangeUserNameRequest;
-import skyxplore.controller.request.UserRegistrationRequest;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.service.user.ChangeEmailService;
 import skyxplore.service.user.ChangePasswordService;

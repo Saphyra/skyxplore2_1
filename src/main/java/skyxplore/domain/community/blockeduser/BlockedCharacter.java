@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import skyxplore.controller.request.BlockCharacterRequest;
+import skyxplore.controller.request.community.BlockCharacterRequest;
 
 @Data
 @Builder

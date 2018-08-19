@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.controller.request.AddFriendRequest;
+import skyxplore.controller.request.community.AddFriendRequest;
 import skyxplore.exception.base.ConflictException;
 
 public class FriendshipAlreadyExistsException extends ConflictException {

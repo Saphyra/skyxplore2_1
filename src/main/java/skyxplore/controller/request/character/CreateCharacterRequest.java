@@ -1,4 +1,4 @@
-package skyxplore.controller.request;
+package skyxplore.controller.request.character;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CharacterDeleteRequest {
+public class CreateCharacterRequest {
     @NotNull
-    private String characterId;
+    private String characterName;
 }

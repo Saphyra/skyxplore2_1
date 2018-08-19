@@ -1,6 +1,10 @@
 package skyxplore.testutil;
 
-import skyxplore.controller.request.*;
+import skyxplore.controller.request.character.AddToQueueRequest;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.material.MaterialView;

@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.AccountDeleteRequest;
+import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.exception.BadCredentialsException;

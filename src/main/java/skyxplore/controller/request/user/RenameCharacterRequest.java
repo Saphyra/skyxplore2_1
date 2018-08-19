@@ -1,4 +1,4 @@
-package skyxplore.controller.request;
+package skyxplore.controller.request.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

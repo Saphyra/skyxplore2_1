@@ -1,4 +1,4 @@
-package skyxplore.controller.request;
+package skyxplore.controller.request.character;
 
 public enum EquipmentCategoryRequest {
     ALL("all"),

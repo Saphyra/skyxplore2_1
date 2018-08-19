@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.AddToQueueRequest;
+import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductViewList;

@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.GameDataController;
-import skyxplore.controller.request.EquipmentCategoryRequest;
+import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.CategoryService;
 import skyxplore.exception.base.NotFoundException;

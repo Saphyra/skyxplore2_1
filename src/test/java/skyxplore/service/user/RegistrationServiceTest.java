@@ -6,7 +6,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.UserRegistrationRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;

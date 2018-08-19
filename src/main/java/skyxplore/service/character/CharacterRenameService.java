@@ -4,7 +4,7 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.RenameCharacterRequest;
+import skyxplore.controller.request.user.RenameCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
