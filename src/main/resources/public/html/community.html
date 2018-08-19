@@ -77,7 +77,7 @@
                 <H2>Üzenetek</H2>
 
                 <DIV id='maillistbuttons'>
-                    <BUTTON>Üzenet írása</BUTTON>
+                    <BUTTON onclick='switchTab("mainlabel", "mail")'>Üzenet írása</BUTTON>
                 </DIV>
             </DIV>
 
@@ -114,7 +114,41 @@
     </MAIN>
 
     <MAIN id='mail' class='mainlabel'>
-
+        <DIV id='mailcontainer'>
+            <H2>Üzenet írása</H2>
+            <BUTTON id='mailclosebutton' onclick='pageController.showLists()'>X</BUTTON>
+            
+            <TABLE>
+                <TR>
+                    <TD class='width50percent'>
+                        <LABEL id='subjectlabel'>Tárgy: <INPUT type='text' id='subject' placeholder='Tárgy'></LABEL>
+                    </TD>
+                    <TD>
+                        <DIV id='addresseecontainer'>
+                            <LABEL id='addresseelabel'>Címzett: <INPUT type='text' id='addressee' placeholder='Címzett'></LABEL>
+                            <DIV id='addresseelist'>
+                                <DIV>ADDRESSEE</DIV>
+                                <DIV>ADDRESSEE</DIV>
+                                <DIV>ADDRESSEE</DIV>
+                                <DIV>ADDRESSEE</DIV>
+                                <DIV>ADDRESSEE</DIV>
+                                <DIV>ADDRESSEE</DIV>
+                            </DIV>
+                        </DIV>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD colspan='2' class='textaligncenter'>
+                        <TEXTAREA id='message' placeholder='Üzenet'></TEXTAREA>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD colspan='2' class='textaligncenter'>
+                        <BUTTON class='fontsize1_25rem'>Küldés</BUTTON>
+                    </TD>
+                </TR>
+            </TABLE>
+        </DIV>
     </MAIN>
 
     <FOOTER>

@@ -15,6 +15,7 @@ public class Mail {
     private String mailId;
     private String from;
     private String to;
+    private String subject;
     private String message;
     private Boolean read;
     private LocalDateTime sendTime;

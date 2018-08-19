@@ -1,9 +1,10 @@
 (function PageController(){
-    scriptLoader.loadScript("js/community/friend_controller.js");
-    scriptLoader.loadScript("js/community/friend_search_controller.js");
     scriptLoader.loadScript("js/community/blocked_character_search_controller.js");
     scriptLoader.loadScript("js/community/blocked_character_controller.js");
-
+    scriptLoader.loadScript("js/community/friend_controller.js");
+    scriptLoader.loadScript("js/community/friend_search_controller.js");
+    scriptLoader.loadScript("js/community/mail_controller.js");
+    
     window.pageController = new function(){
         this.refresh = refresh;
         this.showAddFriendWindow = showAddFriendWindow;

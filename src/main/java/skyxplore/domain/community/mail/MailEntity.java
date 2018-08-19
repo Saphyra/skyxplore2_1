@@ -22,11 +22,15 @@ public class MailEntity {
     @Column(name = "mail_id")
     private String mailId;
 
-    @Column(name = "from")
+    @Column(name = "mail_from")
     private String from;
 
-    @Column(name = "to")
+    @Column(name = "mail_to")
     private String to;
+
+    @Column(name = "subject")
+    @Type(type = "text")
+    private String subject;
 
     @Column(name = "message")
     @Type(type = "text")
