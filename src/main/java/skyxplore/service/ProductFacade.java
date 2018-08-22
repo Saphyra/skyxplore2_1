@@ -11,7 +11,6 @@ import skyxplore.service.product.ProductQueryService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class ProductFacade {
     private final ProductQueryService productQueryService;
 
