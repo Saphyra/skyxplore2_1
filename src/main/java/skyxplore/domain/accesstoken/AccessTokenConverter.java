@@ -1,14 +1,16 @@
 package skyxplore.domain.accesstoken;
 
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ConverterBase;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import lombok.RequiredArgsConstructor;
+import skyxplore.domain.ConverterBase;
+import skyxplore.util.DateTimeConverter;
 
 @Component
-//TODO unit test
+@RequiredArgsConstructor
 public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, AccessToken> {
+    private final DateTimeConverter dateTimeConverter;
+
 
     @Override
     public AccessToken convertEntity(AccessTokenEntity entity) {
@@ -18,7 +20,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
         AccessToken token = new AccessToken();
         token.setAccessTokenId(entity.getAccessTokenId());
         token.setUserId(entity.getUserId());
-        token.setLastAccess(LocalDateTime.ofEpochSecond(entity.getLastAccess(), 0, ZoneOffset.UTC));
+        token.setLastAccess(dateTimeConverter.convertEntity(entity.getLastAccess()));
         return token;
     }
 
@@ -30,7 +32,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
         AccessTokenEntity entity = new AccessTokenEntity();
         entity.setAccessTokenId(token.getAccessTokenId());
         entity.setUserId(token.getUserId());
-        entity.setLastAccess(token.getLastAccess().toEpochSecond(ZoneOffset.UTC));
+        entity.setLastAccess(dateTimeConverter.convertDomain(token.getLastAccess()));
         return entity;
     }
 }

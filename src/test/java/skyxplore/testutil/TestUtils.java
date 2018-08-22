@@ -1,5 +1,13 @@
 package skyxplore.testutil;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.controller.request.user.ChangeEmailRequest;
@@ -14,6 +22,8 @@ import skyxplore.controller.view.slot.SlotView;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
+import skyxplore.domain.accesstoken.AccessToken;
+import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
@@ -21,12 +31,13 @@ import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.*;
-
 @SuppressWarnings("WeakerAccess")
 public class TestUtils {
+    //ACCESS TOKEN
+    public static final String ACCESS_TOKEN_ID = "access_token_id";
+    public static final Long ACCESS_TOKEN_LAST_ACCESS_EPOCH = 414184L;
+    public static final LocalDateTime ACCESS_TOKEN_LAST_ACCESS = LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC);
+
     //Category
     public static final String CATEGORY_ID = "category_id";
     public static final String CATEGORY_CONTENT = "category_content";
@@ -108,27 +119,43 @@ public class TestUtils {
     public static final String USER_NEW_NAME = "user_new_name";
     public static final String USER_PASSWORD = "user_password";
 
-    public static AccountDeleteRequest createAccountDeleteRequest(){
+    public static AccessToken createAccessToken(){
+        AccessToken token = new AccessToken();
+        token.setAccessTokenId(ACCESS_TOKEN_ID);
+        token.setUserId(USER_ID);
+        token.setLastAccess(ACCESS_TOKEN_LAST_ACCESS);
+        return token;
+    }
+
+    public static AccessTokenEntity createAccessTokenEntity() {
+        AccessTokenEntity entity = new AccessTokenEntity();
+        entity.setAccessTokenId(ACCESS_TOKEN_ID);
+        entity.setUserId(USER_ID);
+        entity.setLastAccess(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
+        return entity;
+    }
+
+    public static AccountDeleteRequest createAccountDeleteRequest() {
         AccountDeleteRequest request = new AccountDeleteRequest();
         request.setPassword(USER_PASSWORD);
         return request;
     }
 
-    public static AddToQueueRequest createAddToQueueRequest(){
+    public static AddToQueueRequest createAddToQueueRequest() {
         AddToQueueRequest request = new AddToQueueRequest();
         request.setElementId(DATA_ELEMENT);
         request.setAmount(DATA_ELEMENT_AMOUNT);
         return request;
     }
 
-    public static ChangeEmailRequest createChangeEmailRequest(){
+    public static ChangeEmailRequest createChangeEmailRequest() {
         ChangeEmailRequest request = new ChangeEmailRequest();
         request.setNewEmail(USER_NEW_EMAIL);
         request.setPassword(USER_PASSWORD);
         return request;
     }
 
-    public static ChangeUserNameRequest createChangeUserNameRequest(){
+    public static ChangeUserNameRequest createChangeUserNameRequest() {
         ChangeUserNameRequest request = new ChangeUserNameRequest();
         request.setNewUserName(USER_NEW_NAME);
         request.setPassword(USER_PASSWORD);
@@ -151,7 +178,7 @@ public class TestUtils {
         return view;
     }
 
-    public static Slot createDefenseSlot(){
+    public static Slot createDefenseSlot() {
         Slot slot = new Slot();
         slot.setFront(SLOT_DEFENSE_FRONT);
         slot.setSide(SLOT_DEFENSE_SIDE);
@@ -159,15 +186,15 @@ public class TestUtils {
         return slot;
     }
 
-    public static EquippedSlot createEquippedDefenseSlot(){
+    public static EquippedSlot createEquippedDefenseSlot() {
         return createEquippedSlot(DEFENSE_SLOT_ID);
     }
 
-    public static EquippedSlot createEquippedWeaponSlot(){
+    public static EquippedSlot createEquippedWeaponSlot() {
         return createEquippedSlot(WEAPON_SLOT_ID);
     }
 
-    public static EquippedSlot createEquippedSlot(String slotId){
+    public static EquippedSlot createEquippedSlot(String slotId) {
         EquippedSlot slot = new EquippedSlot();
         slot.setSlotId(slotId);
         slot.setShipId(EQUIPPED_SHIP_ID);
@@ -182,7 +209,7 @@ public class TestUtils {
         return slot;
     }
 
-    public static EquippedShip createEquippedShip(){
+    public static EquippedShip createEquippedShip() {
         EquippedShip ship = new EquippedShip();
         ship.setShipId(EQUIPPED_SHIP_ID);
         ship.setCharacterId(CHARACTER_ID);
@@ -195,13 +222,13 @@ public class TestUtils {
         return ship;
     }
 
-    public static Map<String, GeneralDescription> createGeneralDescriptionMap(){
+    public static Map<String, GeneralDescription> createGeneralDescriptionMap() {
         Map<String, GeneralDescription> map = new HashMap<>();
         map.put(DATA_ELEMENT, new TestGeneralDescription());
         return map;
     }
 
-    public static MaterialView createMaterialView(){
+    public static MaterialView createMaterialView() {
         return MaterialView.builder()
             .materialId(MATERIAL_KEY)
             .name(MATERIAL_NAME)
@@ -223,7 +250,7 @@ public class TestUtils {
             .build();
     }
 
-    public static ProductView createProductView(){
+    public static ProductView createProductView() {
         ProductView view = new ProductView();
         view.setProductId(PRODUCT_ID);
         view.setFactoryId(FACTORY_ID);
@@ -236,18 +263,18 @@ public class TestUtils {
         return view;
     }
 
-    public static ProductViewList createProductViewList(){
+    public static ProductViewList createProductViewList() {
         return new ProductViewList(Arrays.asList(createProductView()));
     }
 
-    public static View<ProductViewList> createProductViewListView(){
+    public static View<ProductViewList> createProductViewListView() {
         ProductViewList productViews = createProductViewList();
         Map<String, GeneralDescription> data = createGeneralDescriptionMap();
         View<ProductViewList> view = new View<>(productViews, data);
         return view;
     }
 
-    public static Ship createShip(){
+    public static Ship createShip() {
         Ship ship = new Ship();
         ship.setCoreHull(DATA_SHIP_COREHULL);
         ship.setConnector(DARA_SHIP_CONNECTOR_SLOT);
@@ -259,14 +286,14 @@ public class TestUtils {
         return ship;
     }
 
-    public static SlotView createSlotView(EquippedSlot slot){
+    public static SlotView createSlotView(EquippedSlot slot) {
         SlotView view = new SlotView();
         view.setSlotId(slot.getSlotId());
         view.setShipId(slot.getShipId());
         return view;
     }
 
-    public static SkyXpUser createUser(){
+    public static SkyXpUser createUser() {
         SkyXpUser user = new SkyXpUser();
         user.setUserId(USER_ID);
         user.setUsername(USER_NAME);
@@ -278,7 +305,7 @@ public class TestUtils {
         return user;
     }
 
-    public static UserRegistrationRequest createUserRegistrationRequest(){
+    public static UserRegistrationRequest createUserRegistrationRequest() {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setUsername(USER_NAME);
         request.setPassword(USER_PASSWORD);
@@ -287,7 +314,7 @@ public class TestUtils {
         return request;
     }
 
-    public static Slot createWeaponSlot(){
+    public static Slot createWeaponSlot() {
         Slot slot = new Slot();
         slot.setFront(SLOT_WEAPON_FRONT);
         slot.setSide(SLOT_WEAPON_SIDE);
