@@ -1,18 +1,7 @@
 package skyxplore.testutil;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.request.user.AccountDeleteRequest;
-import skyxplore.controller.request.user.ChangeEmailRequest;
-import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.controller.request.user.UserRegistrationRequest;
+import skyxplore.controller.request.user.*;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.material.MaterialView;
@@ -32,6 +21,10 @@ import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
 
 @SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 public class TestUtils {
@@ -66,8 +59,6 @@ public class TestUtils {
     public static final String DATA_ITEM_BACK = "item_back";
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
-
-
     public static final Integer DARA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
 
@@ -123,6 +114,7 @@ public class TestUtils {
     public static final String USER_NAME = "user_name";
     public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
+    public static final String USER_NEW_PASSWORD = "user_new_password";
     public static final String USER_PASSWORD = "user_password";
 
     public static AccessToken createAccessToken() {
@@ -158,6 +150,14 @@ public class TestUtils {
         ChangeEmailRequest request = new ChangeEmailRequest();
         request.setNewEmail(USER_NEW_EMAIL);
         request.setPassword(USER_PASSWORD);
+        return request;
+    }
+
+    public static ChangePasswordRequest createChangePasswordRequest(){
+        ChangePasswordRequest request = new ChangePasswordRequest();
+        request.setNewPassword(USER_NEW_PASSWORD);
+        request.setConfirmPassword(USER_NEW_PASSWORD);
+        request.setOldPassword(USER_PASSWORD);
         return request;
     }
 
