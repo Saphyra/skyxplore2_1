@@ -25,13 +25,15 @@ import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.community.friendship.Friendship;
+import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 public class TestUtils {
     //ACCESS TOKEN
     public static final String ACCESS_TOKEN_ID = "access_token_id";
@@ -84,6 +86,10 @@ public class TestUtils {
     //Factory
     public static final String FACTORY_ID = "factory_id";
 
+    //FRIENDSHIP
+    public static final String FRIEND_ID = "friend_id";
+    public static final String FRIENDSHIP_ID = "friendship_id";
+
     //Material
     public static final String MATERIAL_KEY = "material_id";
     public static final String MATERIAL_NAME = "material_name";
@@ -119,7 +125,7 @@ public class TestUtils {
     public static final String USER_NEW_NAME = "user_new_name";
     public static final String USER_PASSWORD = "user_password";
 
-    public static AccessToken createAccessToken(){
+    public static AccessToken createAccessToken() {
         AccessToken token = new AccessToken();
         token.setAccessTokenId(ACCESS_TOKEN_ID);
         token.setUserId(USER_ID);
@@ -222,6 +228,22 @@ public class TestUtils {
         return ship;
     }
 
+    public static Friendship createFriendship() {
+        Friendship friendship = new Friendship();
+        friendship.setFriendshipId(FRIENDSHIP_ID);
+        friendship.setCharacterId(CHARACTER_ID);
+        friendship.setFriendId(FRIEND_ID);
+        return friendship;
+    }
+
+    public static FriendshipEntity createFriendshipEntity() {
+        FriendshipEntity entity = new FriendshipEntity();
+        entity.setFriendshipId(FRIENDSHIP_ID);
+        entity.setCharacterId(CHARACTER_ID);
+        entity.setFriendId(FRIEND_ID);
+        return entity;
+    }
+
     public static Map<String, GeneralDescription> createGeneralDescriptionMap() {
         Map<String, GeneralDescription> map = new HashMap<>();
         map.put(DATA_ELEMENT, new TestGeneralDescription());
@@ -270,8 +292,7 @@ public class TestUtils {
     public static View<ProductViewList> createProductViewListView() {
         ProductViewList productViews = createProductViewList();
         Map<String, GeneralDescription> data = createGeneralDescriptionMap();
-        View<ProductViewList> view = new View<>(productViews, data);
-        return view;
+        return new View<>(productViews, data);
     }
 
     public static Ship createShip() {
