@@ -54,6 +54,17 @@ public class CharacterQueryService {
             .collect(Collectors.toList());
     }
 
+    public List<SkyXpCharacter> getCharactersCanBeAddressee(String name, String characterId, String userId) {
+        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+        List<SkyXpCharacter> characters = getCharactersOfNameLike(name);
+        return characters.
+            stream()
+            .filter(c -> isNotOwnCharacter(c, userId)) //Filtering own characters
+            .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
+            .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
+            .collect(Collectors.toList());
+    }
+
     public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {
         SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
         List<SkyXpCharacter> characters = getCharactersOfNameLike(name);

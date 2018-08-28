@@ -76,8 +76,11 @@
             <DIV id='maillistheader'>
                 <H2>Üzenetek</H2>
 
-                <DIV id='maillistbuttons'>
-                    <BUTTON onclick='switchTab("mainlabel", "mail")'>Üzenet írása</BUTTON>
+                <DIV id='maillistbuttons'  class='margintop0_75rem marginbottom0_5rem'>
+                    <DIV class='button inline' onclick='switchTab("mainlabel", "mail")'>Üzenet írása</DIV>
+                    <DIV class='button inline' onclick=''>Bejövő (<SPAN id='numberofunreadmails'>0</SPAN>)</DIV>
+                    <DIV class='button inline' onclick=''>Elküldött</DIV>
+                    <DIV class='button inline' onclick=''>Archivált</DIV>
                 </DIV>
             </DIV>
 
@@ -126,14 +129,7 @@
                     <TD>
                         <DIV id='addresseecontainer'>
                             <LABEL id='addresseelabel'>Címzett: <INPUT type='text' id='addressee' placeholder='Címzett'></LABEL>
-                            <DIV id='addresseelist'>
-                                <DIV>ADDRESSEE</DIV>
-                                <DIV>ADDRESSEE</DIV>
-                                <DIV>ADDRESSEE</DIV>
-                                <DIV>ADDRESSEE</DIV>
-                                <DIV>ADDRESSEE</DIV>
-                                <DIV>ADDRESSEE</DIV>
-                            </DIV>
+                            <DIV id='addresseelist' class='displaynone'></DIV>
                         </DIV>
                     </TD>
                 </TR>
@@ -144,7 +140,7 @@
                 </TR>
                 <TR>
                     <TD colspan='2' class='textaligncenter'>
-                        <BUTTON class='fontsize1_25rem'>Küldés</BUTTON>
+                        <BUTTON class='fontsize1_25rem' onclick='newMailController.sendMail()'>Küldés</BUTTON>
                     </TD>
                 </TR>
             </TABLE>

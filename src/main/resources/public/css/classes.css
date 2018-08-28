@@ -57,6 +57,10 @@
     border-width: 5px;
 }
 
+.bordercolorgreen{
+    border-color: green;
+}
+
 .borderbottominset{
     border-bottom-style: inset;
 }

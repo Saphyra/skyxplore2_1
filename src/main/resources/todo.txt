@@ -2,6 +2,8 @@ Shop & factory implement filters
 Cancel production
 Store password encrypted
 
+User & Character name max length limit
+
 Create community
     - page layout
         - Friends

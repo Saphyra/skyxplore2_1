@@ -58,6 +58,25 @@
     border: 3px ridge white;
     border-top: none;
     border-radius: 0px 0px 5px 5px;
+    max-height: 50vh;
+    overflow-y: auto;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+.addressee{
+    margin: 0.25rem;
+    padding: 0.25rem;
+    border: 3px outset white;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.addressee:hover{
+    border-color: red;
+    border-style: inset;
+    cursor: pointer;
 }
 
 #message{

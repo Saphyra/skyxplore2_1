@@ -4,6 +4,7 @@
         this.allowBlockedCharacter = allowBlockedCharacter;
         this.blockCharacter = blockCharacter;
         this.declineFriendRequest = declineFriendRequest;
+        this.getAddressees = getAddressees;
         this.getBlockableCharacters = getBlockableCharacters;
         this.getBlockedCharacters = getBlockedCharacters;
         this.getCharactersCanBeFriend = getCharactersCanBeFriend;
@@ -153,6 +154,43 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return false;
+        }
+    }
+    
+    /*
+    Queries the possible addressees for mail.
+    Arguments:
+        - queryText: the name to query.
+        - characterId: the id of the character.
+    Returns:
+        - the list of addressees.
+        - empty list upon fail.
+    Throws:
+        - IllegalArgument exception if query is empty, null or undefined.
+        - IllegalArgument exception if characterId is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function getAddressees(queryText, characterId){
+        try{
+            if(characterId == null || characterId == undefined){
+                throwException("IllegalArgument", "characterId must not be null or undefined.");
+            }
+            
+            if(queryText == null || queryText == undefined || queryText.length == 0){
+                throwException("IllegalArgument", "queryText must not be null or undefined, and must not be empty.");
+            }
+            
+            const path = "mail/addressee/" + characterId + "/" + queryText;
+            const response = dao.sendRequest(dao.GET, path);
+            if(response.status == ResponseStatus.OK){
+                return JSON.parse(response.response);
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
         }
     }
     
