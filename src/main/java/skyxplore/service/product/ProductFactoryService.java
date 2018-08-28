@@ -28,7 +28,6 @@ import skyxplore.util.DateTimeConverter;
 @Service
 @EnableScheduling
 @RequiredArgsConstructor
-//TODO unit test
 public class ProductFactoryService {
     private final CharacterDao characterDao;
     private final DateTimeConverter dateTimeConverter;
@@ -46,7 +45,13 @@ public class ProductFactoryService {
         log.info("Processing finished products...");
         List<Product> products = productDao.getFinishedProducts();
         log.info("Number of finished products: {}", products.size());
-        products.forEach(this::finishProduct);
+        products.forEach(product -> {
+            try{
+                finishProduct(product);
+            }catch (Exception e){
+                log.error("Error occurred during finishing product {}", product, e);
+            }
+        });
     }
 
     @Transactional
@@ -86,7 +91,7 @@ public class ProductFactoryService {
         try {
             startBuilding(product);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error occurred during starting new product {}", product, e);
         }
     }
 

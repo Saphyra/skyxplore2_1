@@ -6,7 +6,7 @@ import static skyxplore.testutil.TestUtils.CHARACTER_ID;
 import static skyxplore.testutil.TestUtils.DATA_ABILITY;
 import static skyxplore.testutil.TestUtils.DATA_CONNECTOR;
 import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
-import static skyxplore.testutil.TestUtils.DARA_SHIP_CONNECTOR_SLOT;
+import static skyxplore.testutil.TestUtils.DATA_SHIP_CONNECTOR_SLOT;
 import static skyxplore.testutil.TestUtils.DATA_SHIP_COREHULL;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_TYPE;
@@ -65,7 +65,7 @@ public class ShipViewConverterTest {
         assertEquals(CHARACTER_ID, result.getCharacterId());
         assertEquals(EQUIPPED_SHIP_TYPE, result.getShipType());
         assertEquals(DATA_SHIP_COREHULL, result.getCoreHull());
-        assertEquals(DARA_SHIP_CONNECTOR_SLOT, result.getConnectorSlot());
+        assertEquals(DATA_SHIP_CONNECTOR_SLOT, result.getConnectorSlot());
         assertEquals(1, result.getConnectorEquipped().size());
         assertEquals(DATA_CONNECTOR, result.getConnectorEquipped().get(0));
         assertEquals(DEFENSE_SLOT_ID, result.getDefenseSlot().getSlotId());
