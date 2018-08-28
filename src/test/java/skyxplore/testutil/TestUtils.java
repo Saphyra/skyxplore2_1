@@ -50,7 +50,7 @@ public class TestUtils {
     //Character
     public static final String CHARACTER_ID = "character_id";
     public static final String CHARACTER_NAME = "character_name";
-    public static final Integer MONEY = 10;
+    public static final Integer CHARACTER_MONEY = 10;
 
     //CONVERTER
     public static final String CONVERTER_ENTITY = "converter_entity";
@@ -70,8 +70,7 @@ public class TestUtils {
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
 
-
-    public static final Integer DARA_SHIP_CONNECTOR_SLOT = 5;
+    public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
 
     //EquippedShip
@@ -107,8 +106,6 @@ public class TestUtils {
     public static final String MATERIAL_MATERIAL_ID = "material_material_id";
     public static final String MATERIAL_NAME = "material_name";
     public static final String MATERIAL_SLOT = "material_slot";
-
-
 
     //Product
     public static final Long PRODUCT_ADDED_AT = 1000L;
@@ -190,7 +187,7 @@ public class TestUtils {
         character.setCharacterId(CHARACTER_ID);
         character.setCharacterName(CHARACTER_NAME);
         character.setUserId(USER_ID);
-        character.addMoney(MONEY);
+        character.addMoney(CHARACTER_MONEY);
         return character;
     }
 
@@ -238,7 +235,7 @@ public class TestUtils {
         ship.setCharacterId(CHARACTER_ID);
         ship.setShipType(EQUIPPED_SHIP_TYPE);
         ship.setCoreHull(DATA_SHIP_COREHULL);
-        ship.setConnectorSlot(DARA_SHIP_CONNECTOR_SLOT);
+        ship.setConnectorSlot(DATA_SHIP_CONNECTOR_SLOT);
         ship.addConnector(DATA_CONNECTOR);
         ship.setDefenseSlotId(DEFENSE_SLOT_ID);
         ship.setWeaponSlotId(WEAPON_SLOT_ID);
@@ -350,7 +347,7 @@ public class TestUtils {
     public static Ship createShip() {
         Ship ship = new Ship();
         ship.setCoreHull(DATA_SHIP_COREHULL);
-        ship.setConnector(DARA_SHIP_CONNECTOR_SLOT);
+        ship.setConnector(DATA_SHIP_CONNECTOR_SLOT);
         ship.setDefense(createDefenseSlot());
         ship.setWeapon(createWeaponSlot());
         ArrayList<String> list = new ArrayList<>();

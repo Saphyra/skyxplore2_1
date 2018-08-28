@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID;
 import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
-import static skyxplore.testutil.TestUtils.MONEY;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createCharacterView;
@@ -118,12 +118,12 @@ public class CharacterControllerTest {
     @Test
     public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse(){
         //GIVEN
-        when(characterFacade.getMoneyOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(MONEY);
+        when(characterFacade.getMoneyOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
         //WHEN
         Integer money = underTest.getMoney(CHARACTER_ID, USER_ID);
         //THEN
         verify(characterFacade).getMoneyOfCharacter(USER_ID, CHARACTER_ID);
-        assertEquals(MONEY, money);
+        assertEquals(CHARACTER_MONEY, money);
     }
 
     @Test
