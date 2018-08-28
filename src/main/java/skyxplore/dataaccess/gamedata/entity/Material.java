@@ -11,5 +11,4 @@ import java.util.HashMap;
 @ToString(callSuper = true)
 public class Material extends FactoryData {
     private boolean buildable;
-    private HashMap<String, Integer> materials;
 }

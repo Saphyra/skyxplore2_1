@@ -19,6 +19,7 @@ import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductView;
 import skyxplore.controller.view.product.ProductViewList;
 import skyxplore.controller.view.slot.SlotView;
+import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
@@ -27,6 +28,8 @@ import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
@@ -84,24 +87,38 @@ public class TestUtils {
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
 
     //Factory
-    public static final String FACTORY_ID = "factory_id";
+    public static final String FACTORY_ID_1 = "factory_id_1";
+    public static final String FACTORY_ID_2 = "factory_id_2";
+    public static final String FACTORY_ID_3 = "factory_id_3";
 
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
     public static final String FRIENDSHIP_ID = "friendship_id";
 
     //Material
-    public static final String MATERIAL_KEY = "material_id";
-    public static final String MATERIAL_NAME = "material_name";
-    public static final String MATERIAL_DESCRIPTION = "material_description";
     public static final Integer MATERIAL_AMOUNT = 2;
+    public static final Boolean MATERIAL_BUILDABLE = true;
+    public static final Integer MATERIAL_BUILDPRICE = 100;
+    public static final Integer MATERIAL_CONSTRUCTION_TIME = 20;
+    public static final String MATERIAL_DESCRIPTION = "material_description";
+    public static final String MATERIAL_ID = "material_id";
+    public static final String MATERIAL_KEY = "material_id";
+    public static final Integer MATERIAL_MATERIAL_AMOUNT = 3;
+    public static final String MATERIAL_MATERIAL_ID = "material_material_id";
+    public static final String MATERIAL_NAME = "material_name";
+    public static final String MATERIAL_SLOT = "material_slot";
+
+
 
     //Product
-    public static final String ELEMENT_ID = "element_id";
     public static final Long PRODUCT_ADDED_AT = 1000L;
     public static final Integer PRODUCT_AMOUNT = 5;
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
-    public static final String PRODUCT_ID = "product_id";
+    public static final String PRODUCT_ELEMENT_ID_EQUIPMENT = "element_id_equipment";
+    public static final String PRODUCT_ELEMENT_ID_MATERIAL = "element_id_material";
+    public static final String PRODUCT_ID_1 = "product_id_1";
+    public static final String PRODUCT_ID_2 = "product_id_2";
+    public static final String PRODUCT_ID_3 = "product_id_3";
     public static final Long PRODUCT_START_TIME_EPOCH = 10000L;
     public static final LocalDateTime PRODUCT_START_TIME = LocalDateTime.ofEpochSecond(PRODUCT_START_TIME_EPOCH, 0, ZoneOffset.UTC);
     public static final Long PRODUCT_END_TIME_EPOCH = 20000L;
@@ -228,6 +245,20 @@ public class TestUtils {
         return ship;
     }
 
+    public static Factory createFactory(String factoryId){
+        Factory factory = createFactory();
+        factory.setFactoryId(factoryId);
+        return factory;
+    }
+
+    public static Factory createFactory(){
+        Factory factory = new Factory();
+        factory.setFactoryId(FACTORY_ID_1);
+        factory.setCharacterId(CHARACTER_ID);
+        factory.setMaterials(new Materials());
+        return factory;
+    }
+
     public static Friendship createFriendship() {
         Friendship friendship = new Friendship();
         friendship.setFriendshipId(FRIENDSHIP_ID);
@@ -250,6 +281,21 @@ public class TestUtils {
         return map;
     }
 
+    public static Material createMaterial(){
+        Material material = new Material();
+        material.setBuildable(MATERIAL_BUILDABLE);
+        HashMap<String, Integer> materials = new HashMap<>();
+        materials.put(MATERIAL_MATERIAL_ID, MATERIAL_MATERIAL_AMOUNT);
+        material.setMaterials(materials);
+        material.setConstructionTime(MATERIAL_CONSTRUCTION_TIME);
+        material.setBuildPrice(MATERIAL_BUILDPRICE);
+        material.setId(MATERIAL_ID);
+        material.setName(MATERIAL_NAME);
+        material.setDescription(MATERIAL_DESCRIPTION);
+        material.setSlot(MATERIAL_SLOT);
+        return material;
+    }
+
     public static MaterialView createMaterialView() {
         return MaterialView.builder()
             .materialId(MATERIAL_KEY)
@@ -259,11 +305,17 @@ public class TestUtils {
             .build();
     }
 
+    public static Product createProduct(String productId){
+        Product product = createProduct();
+        product.setProductId(productId);
+        return product;
+    }
+
     public static Product createProduct() {
         return Product.builder()
-            .productId(PRODUCT_ID)
-            .factoryId(FACTORY_ID)
-            .elementId(ELEMENT_ID)
+            .productId(PRODUCT_ID_1)
+            .factoryId(FACTORY_ID_1)
+            .elementId(PRODUCT_ELEMENT_ID_EQUIPMENT)
             .amount(PRODUCT_AMOUNT)
             .addedAt(PRODUCT_ADDED_AT)
             .constructionTime(PRODUCT_CONSTRUCTION_TIME)
@@ -274,9 +326,9 @@ public class TestUtils {
 
     public static ProductView createProductView() {
         ProductView view = new ProductView();
-        view.setProductId(PRODUCT_ID);
-        view.setFactoryId(FACTORY_ID);
-        view.setElementId(ELEMENT_ID);
+        view.setProductId(PRODUCT_ID_1);
+        view.setFactoryId(FACTORY_ID_1);
+        view.setElementId(PRODUCT_ELEMENT_ID_EQUIPMENT);
         view.setAmount(PRODUCT_AMOUNT);
         view.setAddedAt(PRODUCT_ADDED_AT);
         view.setConstructionTime(PRODUCT_CONSTRUCTION_TIME);
