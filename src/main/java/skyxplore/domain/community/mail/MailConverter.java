@@ -3,13 +3,13 @@ package skyxplore.domain.community.mail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
 //TODO unit test
 public class MailConverter extends ConverterBase<MailEntity, Mail> {
-    private final DateTimeConverter dateTimeConverter;
+    private final DateTimeUtil dateTimeUtil;
 
     @Override
     public Mail convertEntity(MailEntity entity) {
@@ -24,7 +24,7 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
             .subject(entity.getSubject())
             .message(entity.getMessage())
             .read(entity.getRead())
-            .sendTime(dateTimeConverter.convertEntity(entity.getSendTime()))
+            .sendTime(dateTimeUtil.convertEntity(entity.getSendTime()))
             .archived(entity.getArchived())
             .deletedBySender(entity.getDeletedBySender())
             .deletedByAddressee(entity.getDeletedByAddressee())
@@ -44,7 +44,7 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
             .subject(domain.getSubject())
             .message(domain.getMessage())
             .read(domain.getRead())
-            .sendTime(dateTimeConverter.convertDomain(domain.getSendTime()))
+            .sendTime(dateTimeUtil.convertDomain(domain.getSendTime()))
             .archived(domain.getArchived())
             .deletedBySender(domain.getDeletedBySender())
             .deletedByAddressee(domain.getDeletedByAddressee())

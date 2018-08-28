@@ -10,14 +10,14 @@ import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.UserFacade;
-import skyxplore.util.AccessTokenDateResolver;
+import skyxplore.util.DateTimeUtil;
 import skyxplore.util.IdGenerator;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class LoginService {
-    private final AccessTokenDateResolver accessTokenDateResolver;
+    private final DateTimeUtil accessTokenDateResolver;
     private final AccessTokenDao accessTokenDao;
     private final IdGenerator idGenerator;
     private final UserFacade userFacade;

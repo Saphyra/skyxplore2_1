@@ -9,10 +9,21 @@ import java.time.ZoneOffset;
 
 @Component
 @Slf4j
-public class DateTimeConverter extends ConverterBase<Long, LocalDateTime> {
+public class DateTimeUtil extends ConverterBase<Long, LocalDateTime> {
+    public static final Integer EXPIRATION_TIME_IN_MINUTES = 15;
+
+    public LocalDateTime getExpirationDate() {
+        LocalDateTime expirationDate = getActualDate();
+        return expirationDate.minusMinutes(EXPIRATION_TIME_IN_MINUTES);
+    }
+
+    public LocalDateTime getActualDate() {
+        return LocalDateTime.now(ZoneOffset.UTC);
+    }
+
     @Override
     public LocalDateTime convertEntity(Long entity) {
-        if(entity == null){
+        if (entity == null) {
             return null;
         }
         return LocalDateTime.ofEpochSecond(entity, 0, ZoneOffset.UTC);
@@ -20,13 +31,13 @@ public class DateTimeConverter extends ConverterBase<Long, LocalDateTime> {
 
     @Override
     public Long convertDomain(LocalDateTime domain) {
-        if(domain == null){
+        if (domain == null) {
             return null;
         }
         return domain.toEpochSecond(ZoneOffset.UTC);
     }
 
-    public LocalDateTime now(){
+    public LocalDateTime now() {
         return LocalDateTime.now(ZoneOffset.UTC).withNano(0);
     }
 }

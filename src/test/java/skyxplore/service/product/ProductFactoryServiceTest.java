@@ -40,7 +40,7 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.product.Product;
 import skyxplore.service.GameDataFacade;
 import skyxplore.testutil.TestGeneralDescription;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductFactoryServiceTest {
@@ -50,7 +50,7 @@ public class ProductFactoryServiceTest {
     private CharacterDao characterDao;
 
     @Mock
-    private DateTimeConverter dateTimeConverter;
+    private DateTimeUtil dateTimeUtil;
 
     @Mock
     private GameDataFacade gameDataFacade;
@@ -117,7 +117,7 @@ public class ProductFactoryServiceTest {
         when(productDao.getFirstOfQueue()).thenReturn(productsToStart);
 
         //===STARTING EXCEPTIONAL PRODUCT===
-        when(dateTimeConverter.now()).thenReturn(PRODUCT_START_TIME);
+        when(dateTimeUtil.now()).thenReturn(PRODUCT_START_TIME);
         doThrow(new RuntimeException()).when(productDao).save(exceptionalProduct);
         //WHEN
         underTest.process();
@@ -137,7 +137,7 @@ public class ProductFactoryServiceTest {
         verify(productDao).delete(finishedMaterialProduct);
         verify(productDao).delete(finishedEquipmentProduct);
         verify(productDao).getFirstOfQueue();
-        verify(dateTimeConverter, times(2)).now();
+        verify(dateTimeUtil, times(2)).now();
         verify(productDao).save(exceptionalProduct);
         verify(productDao).save(productToStart);
         assertEquals(PRODUCT_START_TIME, productToStart.getStartTime());

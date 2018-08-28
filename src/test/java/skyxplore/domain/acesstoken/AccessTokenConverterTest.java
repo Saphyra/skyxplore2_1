@@ -20,12 +20,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenConverter;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessTokenConverterTest {
     @Mock
-    private DateTimeConverter dateTimeConverter;
+    private DateTimeUtil dateTimeUtil;
 
     @InjectMocks
     private AccessTokenConverter underTest;
@@ -44,11 +44,11 @@ public class AccessTokenConverterTest {
     public void testConvertEntityShouldConvert() {
         //GIVEN
         AccessTokenEntity entity = createAccessTokenEntity();
-        when(dateTimeConverter.convertEntity(ACCESS_TOKEN_LAST_ACCESS_EPOCH)).thenReturn(ACCESS_TOKEN_LAST_ACCESS);
+        when(dateTimeUtil.convertEntity(ACCESS_TOKEN_LAST_ACCESS_EPOCH)).thenReturn(ACCESS_TOKEN_LAST_ACCESS);
         //WHEN
         AccessToken result = underTest.convertEntity(entity);
         //THEN
-        verify(dateTimeConverter).convertEntity(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
+        verify(dateTimeUtil).convertEntity(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
         assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());
         assertEquals(USER_ID, result.getUserId());
         assertEquals(ACCESS_TOKEN_LAST_ACCESS, result.getLastAccess());
@@ -68,11 +68,11 @@ public class AccessTokenConverterTest {
     public void testConvertDomainShouldConvert() {
         //GIVEN
         AccessToken accessToken = createAccessToken();
-        when(dateTimeConverter.convertDomain(ACCESS_TOKEN_LAST_ACCESS)).thenReturn(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
+        when(dateTimeUtil.convertDomain(ACCESS_TOKEN_LAST_ACCESS)).thenReturn(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
         //WHEN
         AccessTokenEntity result = underTest.convertDomain(accessToken);
         //THEN
-        verify(dateTimeConverter).convertDomain(ACCESS_TOKEN_LAST_ACCESS);
+        verify(dateTimeUtil).convertDomain(ACCESS_TOKEN_LAST_ACCESS);
         assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());
         assertEquals(USER_ID, result.getUserId());
         assertEquals(ACCESS_TOKEN_LAST_ACCESS_EPOCH, result.getLastAccess());

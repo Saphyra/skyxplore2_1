@@ -21,12 +21,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductViewConverterTest {
     @Mock
-    private DateTimeConverter dateTimeConverter;
+    private DateTimeUtil dateTimeUtil;
 
     @InjectMocks
     private ProductViewConverter underTest;
@@ -34,13 +34,13 @@ public class ProductViewConverterTest {
     @Test
     public void testConvertShouldReturnView(){
         //GIVEN
-        when(dateTimeConverter.convertDomain(PRODUCT_START_TIME)).thenReturn(PRODUCT_START_TIME_EPOCH);
-        when(dateTimeConverter.convertDomain(PRODUCT_END_TIME)).thenReturn(PRODUCT_END_TIME_EPOCH);
+        when(dateTimeUtil.convertDomain(PRODUCT_START_TIME)).thenReturn(PRODUCT_START_TIME_EPOCH);
+        when(dateTimeUtil.convertDomain(PRODUCT_END_TIME)).thenReturn(PRODUCT_END_TIME_EPOCH);
         //WHEN
         ProductView view = underTest.convertDomain(createProduct());
         //THEN
-        verify(dateTimeConverter).convertDomain(PRODUCT_START_TIME);
-        verify(dateTimeConverter).convertDomain(PRODUCT_END_TIME);
+        verify(dateTimeUtil).convertDomain(PRODUCT_START_TIME);
+        verify(dateTimeUtil).convertDomain(PRODUCT_END_TIME);
         assertEquals(PRODUCT_ID_1, view.getProductId());
         assertEquals(FACTORY_ID_1, view.getFactoryId());
         assertEquals(PRODUCT_ELEMENT_ID_EQUIPMENT, view.getElementId());

@@ -1,21 +1,31 @@
 package skyxplore.util;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.assertTrue;
 import static skyxplore.testutil.TestUtils.PRODUCT_END_TIME;
 import static skyxplore.testutil.TestUtils.PRODUCT_END_TIME_EPOCH;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DateTimeConverterTest {
+public class DateTimeUtilTest {
+    private LocalDateTime now;
+
     @InjectMocks
-    private DateTimeConverter underTest;
+    private DateTimeUtil underTest;
+
+    @Before
+    public void setUp(){
+        now = LocalDateTime.now(ZoneOffset.UTC);
+    }
 
     @Test
     public void testConvertEntityShouldReturnDomain(){
@@ -51,5 +61,13 @@ public class DateTimeConverterTest {
         Long result = underTest.convertDomain(domain);
         //THEN
         assertNull(result);
+    }
+
+    @Test
+    public void testGetExpirationDateShouldReturn(){
+        //WHEN
+        LocalDateTime result = underTest.getExpirationDate();
+        //THEN
+        assertTrue(result.isBefore(now));
     }
 }

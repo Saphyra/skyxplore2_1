@@ -50,7 +50,6 @@ Lobby
     - Invite friends to lobby
 
 Javadoc
-Merge Date-Time related util classes
 Integration tests
 Logging
 Converter.convertDomain should throw exception when null

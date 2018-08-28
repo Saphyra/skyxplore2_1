@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 //TODO unit test
 public class ProductConverter extends ConverterBase<ProductEntity, Product> {
-    private final DateTimeConverter dateTimeConverter;
+    private final DateTimeUtil dateTimeUtil;
 
     @Override
     public Product convertEntity(ProductEntity entity) {
@@ -25,8 +25,8 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         domain.setAmount(entity.getAmount());
         domain.setConstructionTime(entity.getConstructionTime());
         domain.setAddedAt(entity.getAddedAt());
-        domain.setStartTime(dateTimeConverter.convertEntity(entity.getStartTime()));
-        domain.setEndTime(dateTimeConverter.convertEntity(entity.getEndTime()));
+        domain.setStartTime(dateTimeUtil.convertEntity(entity.getStartTime()));
+        domain.setEndTime(dateTimeUtil.convertEntity(entity.getEndTime()));
 
         return domain;
     }
@@ -43,8 +43,8 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         entity.setAmount(domain.getAmount());
         entity.setConstructionTime(domain.getConstructionTime());
         entity.setAddedAt(domain.getAddedAt());
-        entity.setStartTime(dateTimeConverter.convertDomain(domain.getStartTime()));
-        entity.setEndTime(dateTimeConverter.convertDomain(domain.getEndTime()));
+        entity.setStartTime(dateTimeUtil.convertDomain(domain.getStartTime()));
+        entity.setEndTime(dateTimeUtil.convertDomain(domain.getEndTime()));
         return entity;
     }
 }

@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.product.Product;
 import skyxplore.controller.view.AbstractViewConverter;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
 public class ProductViewConverter extends AbstractViewConverter<Product, ProductView> {
-    private final DateTimeConverter dateTimeConverter;
+    private final DateTimeUtil dateTimeUtil;
 
     @Override
     public ProductView convertDomain(Product domain) {
@@ -23,8 +23,8 @@ public class ProductViewConverter extends AbstractViewConverter<Product, Product
         view.setAmount(domain.getAmount());
         view.setConstructionTime(domain.getConstructionTime());
         view.setAddedAt(domain.getAddedAt());
-        view.setStartTime(dateTimeConverter.convertDomain(domain.getStartTime()));
-        view.setEndTime((dateTimeConverter.convertDomain(domain.getEndTime())));
+        view.setStartTime(dateTimeUtil.convertDomain(domain.getStartTime()));
+        view.setEndTime((dateTimeUtil.convertDomain(domain.getEndTime())));
         return view;
     }
 }

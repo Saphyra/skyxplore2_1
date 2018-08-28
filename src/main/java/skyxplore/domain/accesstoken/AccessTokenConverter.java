@@ -4,12 +4,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import skyxplore.domain.ConverterBase;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
 public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, AccessToken> {
-    private final DateTimeConverter dateTimeConverter;
+    private final DateTimeUtil dateTimeUtil;
 
 
     @Override
@@ -20,7 +20,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
         AccessToken token = new AccessToken();
         token.setAccessTokenId(entity.getAccessTokenId());
         token.setUserId(entity.getUserId());
-        token.setLastAccess(dateTimeConverter.convertEntity(entity.getLastAccess()));
+        token.setLastAccess(dateTimeUtil.convertEntity(entity.getLastAccess()));
         return token;
     }
 
@@ -32,7 +32,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
         AccessTokenEntity entity = new AccessTokenEntity();
         entity.setAccessTokenId(token.getAccessTokenId());
         entity.setUserId(token.getUserId());
-        entity.setLastAccess(dateTimeConverter.convertDomain(token.getLastAccess()));
+        entity.setLastAccess(dateTimeUtil.convertDomain(token.getLastAccess()));
         return entity;
     }
 }
