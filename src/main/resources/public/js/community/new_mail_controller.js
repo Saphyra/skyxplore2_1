@@ -35,12 +35,16 @@
             }else if(messageField.value.length == 0){
                 notificationService.showError("Az üzenet kitöltése kötelező!")
             }else{
-                notificationService.showSuccess("Üzenet elküldve.");
-                subjectField.value = "";
-                addresseeField.value = "";
-                newMailController.invalidateAddressee();
-                messageField.value = "";
-                pageController.showLists();
+                if(communityDao.sendMail(sessionStorage.characterId, newMailController.addresseeId, subjectField.value, messageField.value)){
+                    notificationService.showSuccess("Üzenet elküldve.");
+                    subjectField.value = "";
+                    addresseeField.value = "";
+                    newMailController.invalidateAddressee();
+                    messageField.value = "";
+                    pageController.refresh(true, true);
+                }else{
+                    notificationService.showError("Üzenet küldése sikertelen.");
+                }
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

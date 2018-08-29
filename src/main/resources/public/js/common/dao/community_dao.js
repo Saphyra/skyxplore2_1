@@ -13,6 +13,7 @@
         this.getSentFriendRequests = getSentFriendRequests;
         this.removeFriend = removeFriend;
         this.sendFriendRequest = sendFriendRequest;
+        this.sendMail = sendMail;
     }
     
     /*
@@ -448,6 +449,42 @@
             const path = "friend/friendrequest/add";
             const body = {characterId: characterId, friendId: friendCharacterId};
             const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Sends a mail.
+    Arguments:
+        - characterId: id of the sender.
+        - addresseeId: id of the recipient.
+        - subject: subject of the mail.
+        - message: text content of the mail.
+    Returns:
+        - true, if the message is successfully sent.
+        - false otherwise
+    Throws:
+        - IllegalArgument exception if any of the arguments is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function sendMail(characterId, addresseeId, subject, message){
+        try{
+            const path = "mail/send";
+            const body = {
+                characterId: characterId,
+                addresseeId: addresseeId,
+                subject: subject,
+                message: message
+            };
+            const response = dao.sendRequest(dao.PUT, path, body);
             if(response.status == ResponseStatus.OK){
                 return true;
             }else{
