@@ -1,24 +1,28 @@
 package skyxplore.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.user.RenameCharacterRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.service.character.*;
-
-import java.util.List;
-import java.util.Map;
+import skyxplore.service.character.BuyItemService;
+import skyxplore.service.character.CharacterCreatorService;
+import skyxplore.service.character.CharacterDeleteService;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.service.character.CharacterRenameService;
 
 @SuppressWarnings("WeakerAccess")
-@Service
+@Component
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class CharacterFacade {
     private final BuyItemService buyItemService;
     private final CharacterCreatorService characterCreatorService;
@@ -44,10 +48,6 @@ public class CharacterFacade {
 
     public View<EquipmentViewList> getEquipmentsOfCharacter(String userId, String characterId) {
         return characterQueryService.getEquipmentsOfCharacter(userId, characterId);
-    }
-
-    public boolean isCharNameExists(String charName) {
-        return characterQueryService.isCharNameExists(charName);
     }
 
     public Integer getMoneyOfCharacter(String userId, String characterId) {

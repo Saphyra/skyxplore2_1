@@ -1,6 +1,8 @@
 package skyxplore.testutil;
 
 import skyxplore.controller.request.character.AddToQueueRequest;
+import skyxplore.controller.request.character.CharacterDeleteRequest;
+import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
@@ -43,6 +45,7 @@ public class TestUtils {
     //Character
     public static final String CHARACTER_ID = "character_id";
     public static final String CHARACTER_NAME = "character_name";
+    public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
 
     //CONVERTER
@@ -193,11 +196,19 @@ public class TestUtils {
         return character;
     }
 
+    public static CharacterDeleteRequest createCharacterDeleteRequest(){
+        return new CharacterDeleteRequest(CHARACTER_ID);
+    }
+
     public static CharacterView createCharacterView(SkyXpCharacter character) {
         CharacterView view = new CharacterView();
         view.setCharacterId(character.getCharacterId());
         view.setCharacterName(character.getCharacterName());
         return view;
+    }
+
+    public static CreateCharacterRequest createCreateCharacterRequest(){
+        return new CreateCharacterRequest(CHARACTER_NAME);
     }
 
     public static Slot createDefenseSlot() {
@@ -344,6 +355,10 @@ public class TestUtils {
         ProductViewList productViews = createProductViewList();
         Map<String, GeneralDescription> data = createGeneralDescriptionMap();
         return new View<>(productViews, data);
+    }
+
+    public static RenameCharacterRequest createRenameCharacterRequest(){
+        return new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NEW_NAME);
     }
 
     public static Ship createShip() {
