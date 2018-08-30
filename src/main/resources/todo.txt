@@ -9,7 +9,6 @@ CharacterId transfer simplicity
         - add allowed uris
         - remove unnecessary parameters
     - eliminate unnecessary checks
-    - remove characterId from accessToken when returning to characterselect page
 
 Create community
     - page layout
