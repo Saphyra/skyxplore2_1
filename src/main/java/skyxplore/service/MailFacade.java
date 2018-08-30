@@ -6,12 +6,14 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import skyxplore.controller.request.community.DeleteMailRequest;
+import skyxplore.controller.request.community.MarkMailReadRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.service.community.MailDeleteService;
 import skyxplore.service.community.MailQueryService;
 import skyxplore.service.community.MailSenderService;
+import skyxplore.service.community.MailStatusUpdaterService;
 
 @Component
 @RequiredArgsConstructor
@@ -20,6 +22,7 @@ public class MailFacade {
     private final CharacterQueryService characterQueryService;
     private final MailDeleteService mailDeleteService;
     private final MailSenderService mailSenderService;
+    private final MailStatusUpdaterService mailStatusUpdaterService;
     private final MailQueryService mailQueryService;
 
     public void deleteMails(DeleteMailRequest request, String userId) {
@@ -36,5 +39,9 @@ public class MailFacade {
 
     public void sendMail(SendMailRequest request, String userId) {
         mailSenderService.sendMail(request, userId);
+    }
+
+    public void setMailReadStatus(MarkMailReadRequest request, String userId, Boolean newStatus) {
+        mailStatusUpdaterService.updateReadStatus(request, userId, newStatus);
     }
 }

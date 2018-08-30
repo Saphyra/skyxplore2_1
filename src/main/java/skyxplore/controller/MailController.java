@@ -64,7 +64,7 @@ public class MailController {
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
         log.info("{} wants to mark mails {} as read.", request.getCharacterId(), request.getMailIds());
-        //TODO implement
+        mailFacade.setMailReadStatus(request, userId, true);
     }
 
     @PostMapping(MARK_MAILS_UNREAD_MAPPING)
@@ -73,7 +73,7 @@ public class MailController {
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
         log.info("{} wants to mark mails {} as unread.", request.getCharacterId(), request.getMailIds());
-        //TODO implement
+        mailFacade.setMailReadStatus(request, userId, false);
     }
 
     @PutMapping(SEND_MAIL_MAPPING)

@@ -29,9 +29,6 @@ public class MailDeleteService {
     private void processDeletion(SkyXpCharacter character, String mailId) {
         try {
             Mail mail = mailQueryService.findMailById(mailId);
-            if (mail == null) {
-                throw new MailNotFoundException("Mail not found with id " + mailId);
-            }
 
             if (mail.getTo().equals(character.getCharacterId())) {
                 mail.setDeletedByAddressee(true);
