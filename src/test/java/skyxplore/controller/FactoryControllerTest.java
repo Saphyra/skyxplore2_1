@@ -1,30 +1,24 @@
 package skyxplore.controller;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
-import static skyxplore.testutil.TestUtils.MATERIAL_KEY;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
-import static skyxplore.testutil.TestUtils.createMaterialView;
-import static skyxplore.testutil.TestUtils.createProductViewListView;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductViewList;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryControllerTest {
@@ -42,9 +36,9 @@ public class FactoryControllerTest {
         //GIVEN
         AddToQueueRequest request = createAddToQueueRequest();
         //WHEN
-        underTest.addToQueue(CHARACTER_ID, request, USER_ID);
+        underTest.addToQueue(request, CHARACTER_ID);
         //THEN
-        verify(factoryFacade).addToQueue(USER_ID, CHARACTER_ID, request);
+        verify(factoryFacade).addToQueue(CHARACTER_ID, request);
     }
 
     @Test

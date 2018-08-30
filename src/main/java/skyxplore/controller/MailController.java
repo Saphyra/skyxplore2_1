@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 //TODO unit test
+//TODO eliminate characterIds in path
 public class MailController {
     private static final String DELETE_MAILS_MAPPING = "mail/delete/";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";

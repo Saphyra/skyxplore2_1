@@ -1,16 +1,8 @@
 package skyxplore.service.factory;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Map;
-import java.util.Set;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.FactoryDao;
@@ -26,6 +18,12 @@ import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
 
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Map;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -39,8 +37,8 @@ public class AddToQueueService {
     private final ProductDao productDao;
 
     @Transactional
-    public void addToQueue(String userId, String characterId, AddToQueueRequest request) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public void addToQueue(String characterId, AddToQueueRequest request) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Factory factory = factoryQueryService.findFactoryOfCharacterValidated(characterId);
         FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
 

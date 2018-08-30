@@ -18,7 +18,7 @@
                 data = $("#teamfightsize").val();
             }
             
-            if(gameDao.createLobby(sessionStorage.characterId, {gameMode: gameMode, data: data})){
+            if(gameDao.createLobby({gameMode: gameMode, data: data})){
                 //TODO redirect to lobby
                 notificationService.showSuccess("Lobby created");
             }else{

@@ -15,6 +15,7 @@ import skyxplore.service.EquippedShipFacade;
 @RequiredArgsConstructor
 @Slf4j
 //TODO unit test
+//TODO eliminate characterIds in path
 public class ShipController {
     private static final String EQUIP_MAPPING = "ship/equip/{characterId}";
     private static final String EQUIP_SHIP_MAPPING = "ship/equipship/{characterId}/shipid/{shipId}";

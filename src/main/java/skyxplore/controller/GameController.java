@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.character.CreateLobbyRequest;
-import skyxplore.filter.AuthFilter;
+import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.GameFacade;
 
 @RequiredArgsConstructor
@@ -12,13 +12,15 @@ import skyxplore.service.GameFacade;
 @Slf4j
 //TODO unit test (implementation in progress)
 public class GameController {
-    private static final String CREATE_LOBBY_MAPPING = "game/createlobby/{characterId}";
+    private static final String CREATE_LOBBY_MAPPING = "game/createlobby";
 
     private final GameFacade gameFacade;
 
     @PostMapping(CREATE_LOBBY_MAPPING)
-    public void createLobby(@RequestBody CreateLobbyRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
-        log.info("{} wants to create a lobby with parameters {} for character {}", userId, request, characterId);
-        gameFacade.createLobby(request, userId, characterId);
+    public void createLobby(
+        @RequestBody CreateLobbyRequest request,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId){
+        log.info("{} wants to create a lobby with parameters {}", characterId,  request);
+        gameFacade.createLobby(request, characterId);
     }
 }

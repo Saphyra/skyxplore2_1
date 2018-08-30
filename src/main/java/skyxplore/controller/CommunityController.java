@@ -21,6 +21,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 //TODO unit test
+//TODO eliminate characterIds in path
 public class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/friendrequest/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/friendrequest/add";

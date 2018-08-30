@@ -19,7 +19,7 @@
     */
     function addToQueue(elementId, amount){
         try{
-            const result = factoryDao.addToQueue(sessionStorage.characterId, elementId, amount);
+            const result = factoryDao.addToQueue(elementId, amount);
             if(result.status == ResponseStatus.OK){
                 notificationService.showSuccess("Megrendelés elküldve.");
             }else{

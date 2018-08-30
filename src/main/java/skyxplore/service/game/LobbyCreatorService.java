@@ -10,7 +10,7 @@ import skyxplore.controller.request.character.CreateLobbyRequest;
 @RequiredArgsConstructor
 public class LobbyCreatorService {
 
-    public void createLobby(CreateLobbyRequest request, String userId, String characterId) {
-
+    public void createLobby(CreateLobbyRequest request, String characterId) {
+        //TODO implement
     }
 }

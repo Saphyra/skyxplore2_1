@@ -3,6 +3,8 @@ Cancel production
 Store password encrypted
 
 User & Character name max length limit
+Character name must not contain special characters
+Email FE validation: validate special characters
 
 CharacterId transfer simplicity
     - update endpoints

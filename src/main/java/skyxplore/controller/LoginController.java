@@ -26,7 +26,7 @@ public class LoginController {
     private final CookieUtil cookieUtil;
 
     @PostMapping(LOGIN_MAPPING)
-    public void login(@RequestBody @Valid LoginRequest loginRequest, HttpServletResponse response){
+    public void login(@RequestBody @Valid LoginRequest loginRequest, HttpServletResponse response) {
         log.info("Login request arrived.");
         AccessToken accessToken = accessTokenFacade.login(loginRequest);
         cookieUtil.setCookie(response, AuthFilter.COOKIE_USER_ID, accessToken.getUserId());
@@ -34,14 +34,12 @@ public class LoginController {
         log.info("Access token successfully created, and sent for the client.");
     }
 
-
-
     @PostMapping(SELECT_CHARACTER_MAPPING)
     public void selectCharacter(
         @PathVariable("characterId") String characterId,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId,
         HttpServletResponse response
-    ){
+    ) {
         log.info("{} selected character {}", userId, characterId);
         accessTokenFacade.selectCharacter(characterId, userId);
         cookieUtil.setCookie(response, CharacterAuthFilter.COOKIE_CHARACTER_ID, characterId);

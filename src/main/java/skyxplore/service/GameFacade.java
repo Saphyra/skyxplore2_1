@@ -13,7 +13,7 @@ import skyxplore.service.game.LobbyCreatorService;
 public class GameFacade {
     private final LobbyCreatorService lobbyCreatorService;
 
-    public void createLobby(CreateLobbyRequest request, String userId, String characterId) {
-        lobbyCreatorService.createLobby(request, userId, characterId);
+    public void createLobby(CreateLobbyRequest request, String characterId) {
+        lobbyCreatorService.createLobby(request, characterId);
     }
 }
