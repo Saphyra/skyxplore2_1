@@ -16,6 +16,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.PageController;
+import skyxplore.exception.CharacterNotFoundException;
+import skyxplore.exception.InvalidAccessException;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.util.CookieUtil;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -36,6 +40,9 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/images/**",
         "/js/**"
     );
+
+    private final CharacterQueryService characterQueryService;
+    private final CookieUtil cookieUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -58,12 +65,27 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
             }
         }
     }
+
     private boolean isAllowedPath(String path) {
         return allowedUris.stream().anyMatch(allowedPath -> pathMatcher.match(allowedPath, path));
     }
 
     private boolean isAuthenticated(HttpServletRequest request) {
-        //TODO implement
-        return false;
+        String userId = cookieUtil.getCookie(request, AuthFilter.COOKIE_USER_ID);
+        String characterId = cookieUtil.getCookie(request, COOKIE_CHARACTER_ID);
+
+        if (userId == null || characterId == null) {
+            log.warn("Cookies not found.");
+            return false;
+        }
+
+        try{
+            characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+        }catch (CharacterNotFoundException | InvalidAccessException e){
+            log.warn("Character authentication failed.", e);
+            return false;
+        }
+
+        return true;
     }
 }

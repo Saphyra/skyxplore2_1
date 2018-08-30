@@ -5,9 +5,11 @@ Store password encrypted
 User & Character name max length limit
 
 CharacterId transfer simplicity
-    - provide characterId in cookie
-    - Store characterId in accessToken
-    - Authorization: validate characterId in accessToken (new filter)
+    - update endpoints
+        - add allowed uris
+        - remove unnecessary parameters
+    - eliminate unnecessary checks
+    - remove characterId from accessToken when returning to characterselect page
 
 Create community
     - page layout

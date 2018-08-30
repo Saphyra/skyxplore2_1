@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.PageController;
 import skyxplore.exception.BadRequestAuthException;
 import skyxplore.service.AccessTokenFacade;
+import skyxplore.util.CookieUtil;
 
 @SuppressWarnings("NullableProblems")
 @Slf4j
@@ -44,6 +45,7 @@ public class AuthFilter extends OncePerRequestFilter {
     );
 
     private final AccessTokenFacade accessTokenFacade;
+    private final CookieUtil cookieUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -75,8 +77,8 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Logging out...");
-        String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
-        String userIdValue = getCookie(request, COOKIE_USER_ID);
+        String accessTokenId = cookieUtil.getCookie(request, COOKIE_ACCESS_TOKEN);
+        String userIdValue = cookieUtil.getCookie(request, COOKIE_USER_ID);
         try {
             accessTokenFacade.logout(userIdValue, accessTokenId);
         } catch (BadRequestAuthException e) {
@@ -89,20 +91,16 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private boolean isAuthenticated(HttpServletRequest request) {
         log.debug("Authenticating...");
-        String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
-        String userIdValue = getCookie(request, COOKIE_USER_ID);
+        String accessTokenId = cookieUtil.getCookie(request, COOKIE_ACCESS_TOKEN);
+        String userIdValue = cookieUtil.getCookie(request, COOKIE_USER_ID);
 
         if(accessTokenId == null || userIdValue == null){
+            log.warn("Cookies not found.");
             return false;
         }
 
         return accessTokenFacade.isAuthenticated(userIdValue, accessTokenId);
     }
 
-    private String getCookie(HttpServletRequest request, String name) {
-        Optional<Cookie> cookie = Arrays.stream(request.getCookies())
-                .filter(c -> c.getName().equals(name))
-                .findAny();
-        return cookie.map(Cookie::getValue).orElse(null);
-    }
+
 }
