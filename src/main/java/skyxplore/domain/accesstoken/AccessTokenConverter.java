@@ -21,6 +21,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
         token.setAccessTokenId(entity.getAccessTokenId());
         token.setUserId(entity.getUserId());
         token.setLastAccess(dateTimeUtil.convertEntity(entity.getLastAccess()));
+        token.setCharacterId(entity.getCharacterId());
         return token;
     }
 
@@ -33,6 +34,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
         entity.setAccessTokenId(token.getAccessTokenId());
         entity.setUserId(token.getUserId());
         entity.setLastAccess(dateTimeUtil.convertDomain(token.getLastAccess()));
+        entity.setCharacterId(token.getCharacterId());
         return entity;
     }
 }

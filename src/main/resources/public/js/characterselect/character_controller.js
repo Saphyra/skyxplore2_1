@@ -107,8 +107,12 @@
                         nameCell.classList.add("textaligncenter");
                         nameCell.title = "Játék indítása";
                         nameCell.onclick = function(){
-                            sessionStorage.characterId = character.characterId;
-                            window.location.href = "overview";
+                            if(characterDao.selectCharacter(character.characterId))){
+                                sessionStorage.characterId = character.characterId;
+                                window.location.href = "overview";
+                            }else{
+                                notificationService.showError("Hiba a karakter kiválasztása során.");
+                            }
                         };
                 container.appendChild(nameCell);
                     

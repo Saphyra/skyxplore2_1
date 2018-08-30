@@ -7,6 +7,7 @@
         this.getEquipmentOfCharacter = getEquipmentOfCharacter;
         this.getMoney = getMoney;
         this.isCharNameExists = isCharNameExists;
+        this.selectCharacter = selectCharacter;
         this.renameCharacter = renameCharacter;
     }
     
@@ -212,7 +213,14 @@
             return 0;
         }
     }
-    
+
+    /*
+
+    */
+    function selectCharacter(characterId){
+        //TODO implement
+    }
+
     /*
     Sends a rename character request.
     Arguments:

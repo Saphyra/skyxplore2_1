@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 //TODO unit test
 public class PageController {
-    private static final String CHARACTER_SELECT_MAPPING = "/characterselect";
+    public static final String CHARACTER_SELECT_MAPPING = "/characterselect";
     private static final String COMMUNITY_MAPPING = "/community";
     private static final String EQUIPMENT_MAPPING = "/equipment";
     private static final String FACTORY_MAPPING = "/factory";
     private static final String HANGAR_MAPPING = "/hangar";
-    private static final String INDEX_MAPPING = "/";
+    public static final String INDEX_MAPPING = "/";
     private static final String OVERVIEW_MAPPING = "/overview";
     private static final String SETTINGS_MAPPING = "/account";
     private static final String SHOP_MAPPING = "/shop";

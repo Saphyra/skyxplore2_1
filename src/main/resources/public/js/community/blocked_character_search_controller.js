@@ -1,5 +1,7 @@
 (function BlockedCharacterSearchController(){
     window.blockedCharacterSearchController = new function(){
+        scriptLoader.loadScript("js/common/dao/community_dao.js");
+
         this.search = search;
     }
     

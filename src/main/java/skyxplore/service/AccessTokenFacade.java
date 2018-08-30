@@ -10,6 +10,7 @@ import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.accesstoken.AuthenticationService;
+import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.accesstoken.LoginService;
 
 @Service
@@ -18,6 +19,7 @@ import skyxplore.service.accesstoken.LoginService;
 //TODO unit test
 public class AccessTokenFacade {
     private final AuthenticationService authenticationService;
+    private final CharacterSelectService characterSelectService;
     private final LoginService loginService;
 
     public boolean isAuthenticated(String userId, String accessTokenId) {
@@ -35,5 +37,9 @@ public class AccessTokenFacade {
 
     public void logout(String userId, String accessTokenId) {
         loginService.logout(userId, accessTokenId);
+    }
+
+    public void selectCharacter(String characterId, String userId) {
+        characterSelectService.selectCharacter(characterId, userId);
     }
 }

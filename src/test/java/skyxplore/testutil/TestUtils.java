@@ -141,6 +141,7 @@ public class TestUtils {
         token.setAccessTokenId(ACCESS_TOKEN_ID);
         token.setUserId(USER_ID);
         token.setLastAccess(ACCESS_TOKEN_LAST_ACCESS);
+        token.setCharacterId(CHARACTER_ID);
         return token;
     }
 
@@ -149,6 +150,7 @@ public class TestUtils {
         entity.setAccessTokenId(ACCESS_TOKEN_ID);
         entity.setUserId(USER_ID);
         entity.setLastAccess(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
+        entity.setCharacterId(CHARACTER_ID);
         return entity;
     }
 

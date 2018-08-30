@@ -1,5 +1,6 @@
 (function FriendSearchController(){
     scriptLoader.loadScript("js/common/dao/character_dao.js");
+    scriptLoader.loadScript("js/common/dao/community_dao.js");
     
     window.friendSearchController = new function(){
         this.search = search;
