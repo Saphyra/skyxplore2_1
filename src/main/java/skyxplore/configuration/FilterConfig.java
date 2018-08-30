@@ -11,15 +11,10 @@ import skyxplore.filter.AuthFilter;
 public class FilterConfig {
 
     @Bean
-    public FilterRegistrationBean<AuthFilter> authFilterBean (AccessTokenFacade authService){
+    public FilterRegistrationBean<AuthFilter> authFilterBean (AuthFilter authFilterBean){
         FilterRegistrationBean<AuthFilter> authFilter = new FilterRegistrationBean<>();
-        authFilter.setFilter(loginFilter(authService));
+        authFilter.setFilter(authFilterBean);
         authFilter.setOrder(1);
         return authFilter;
-    }
-
-    @Bean
-    public AuthFilter loginFilter(AccessTokenFacade authService){
-        return new AuthFilter(authService);
     }
 }

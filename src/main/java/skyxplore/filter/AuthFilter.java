@@ -2,6 +2,8 @@ package skyxplore.filter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import skyxplore.exception.BadRequestAuthException;
@@ -20,6 +22,7 @@ import java.util.Optional;
 @SuppressWarnings("NullableProblems")
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class AuthFilter extends OncePerRequestFilter {
     public static final String COOKIE_USER_ID = "userid";
     public static final String COOKIE_ACCESS_TOKEN = "accesstoken";
