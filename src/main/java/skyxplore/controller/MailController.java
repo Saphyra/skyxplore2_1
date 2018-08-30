@@ -55,8 +55,7 @@ public class MailController {
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
         log.info("{} wants to know the number of his unread mails.");
-        //TODO implement
-        return 0;
+        return mailFacade.getNumberOfUnreadMails(characterId, userId);
     }
 
     @PostMapping(MARK_MAILS_READ_MAPPING)

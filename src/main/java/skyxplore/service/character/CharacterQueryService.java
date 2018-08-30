@@ -39,6 +39,9 @@ public class CharacterQueryService {
 
     public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
         SkyXpCharacter character = characterDao.findById(characterId);
+        if(character == null){
+            throw new CharacterNotFoundException("Character not found with id " + characterId);
+        }
         if (!userId.equals(character.getUserId())) {
             throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
         }

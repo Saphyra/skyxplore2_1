@@ -86,6 +86,10 @@ public class AuthFilter extends OncePerRequestFilter {
         String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
         String userIdValue = getCookie(request, COOKIE_USER_ID);
 
+        if(accessTokenId == null || userIdValue == null){
+            return false;
+        }
+
         return accessTokenFacade.isAuthenticated(userIdValue, accessTokenId);
     }
 
