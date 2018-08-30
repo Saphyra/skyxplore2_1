@@ -37,12 +37,6 @@ Create community
                 - Read mail
                     - Reply button
                     - Delete button
-                - Send mail
-                    - To
-                        - Selectable user (filter by name)
-                    - Subject
-                    - Body
-                    - Save as draft
     - Notification for new mails, and friend requests
         - Overview page
 

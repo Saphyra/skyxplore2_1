@@ -47,10 +47,7 @@ public class CharacterDao {
 
     public SkyXpCharacter findById(String characterId) {
         Optional<CharacterEntity> character = characterRepository.findById(characterId);
-        if (character.isPresent()) {
-            return characterConverter.convertEntity(character.get());
-        }
-        throw new CharacterNotFoundException("No character found with id" + characterId);
+        return character.map(characterConverter::convertEntity).orElse(null);
     }
 
     public List<SkyXpCharacter> findByUserId(String userId) {

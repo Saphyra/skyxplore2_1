@@ -3,6 +3,8 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.filter.AuthFilter;
@@ -10,6 +12,7 @@ import skyxplore.service.MailFacade;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -32,7 +35,11 @@ public class MailController {
     }
 
     @PutMapping(SEND_MAIL_MAPPING)
-    public void sendMail(){
+    public void sendMail(
+        @RequestBody SendMailRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+    ){
         log.info("Sending mail...");
+        mailFacade.sendMail(request, userId);
     }
 }
