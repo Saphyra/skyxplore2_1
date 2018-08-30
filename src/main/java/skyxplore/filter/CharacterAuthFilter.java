@@ -1,25 +1,23 @@
 package skyxplore.filter;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.PageController;
 import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.CookieUtil;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -38,7 +36,11 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/isemailexists",
         "/css/**",
         "/images/**",
-        "/js/**"
+        "/js/**",
+        "/characterselect",
+        "/character/characters",
+        "/account",
+        "/user/*"
     );
 
     private final CharacterQueryService characterQueryService;

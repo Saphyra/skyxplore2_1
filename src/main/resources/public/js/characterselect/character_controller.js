@@ -107,7 +107,7 @@
                         nameCell.classList.add("textaligncenter");
                         nameCell.title = "Játék indítása";
                         nameCell.onclick = function(){
-                            if(characterDao.selectCharacter(character.characterId))){
+                            if(characterDao.selectCharacter(character.characterId)){
                                 sessionStorage.characterId = character.characterId;
                                 window.location.href = "overview";
                             }else{
