@@ -16,4 +16,8 @@ public class MailDao {
     public void save(Mail mail){
         mailRepository.save(mailConverter.convertDomain(mail));
     }
+
+    public Mail findById(String mailId) {
+        return mailRepository.findById(mailId).map(mailConverter::convertEntity).orElse(null);
+    }
 }

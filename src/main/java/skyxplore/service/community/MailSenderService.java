@@ -14,15 +14,15 @@ import skyxplore.util.IdGenerator;
 @RequiredArgsConstructor
 @Service
 //TODO unit test
-public class MailService {
+public class MailSenderService {
     private final CharacterQueryService characterQueryService;
     private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
     private final MailDao mailDao;
 
     public void sendMail(SendMailRequest request, String userId) {
-        SkyXpCharacter sender = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        SkyXpCharacter addressee = characterQueryService.findByCharacterId(request.getAddresseeId());
+        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
+        characterQueryService.findByCharacterId(request.getAddresseeId());
         Mail mail = createMail(request);
         mailDao.save(mail);
     }

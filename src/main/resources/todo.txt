@@ -26,6 +26,7 @@ Create community
                 - Cleanup job
                     - Delete non-archived expired
                     - Delete deleted from both side
+                - Set deleted user's email (set his flag deleted)
             - frontend
                 - Subject length limit
                 - Message length limit

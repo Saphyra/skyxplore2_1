@@ -20,23 +20,23 @@ import java.util.List;
 @RequiredArgsConstructor
 //TODO unit test
 public class MailController {
-    private static final String DELETE_MAIL_MAPPING = "mail/delete/";
+    private static final String DELETE_MAILS_MAPPING = "mail/delete/";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread/{characterId}";
-    private static final String MARK_MAIL_READ_MAPPING = "mail/markread/";
-    private static final String MARK_MAIL_UNREAD_MAPPING = "mail/markunread/";
+    private static final String MARK_MAILS_READ_MAPPING = "mail/markread/";
+    private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread/";
     private static final String SEND_MAIL_MAPPING = "mail/send";
 
     private final CharacterViewConverter characterViewConverter;
     private final MailFacade mailFacade;
 
-    @DeleteMapping(DELETE_MAIL_MAPPING)
-    public void deleteMail(
+    @DeleteMapping(DELETE_MAILS_MAPPING)
+    public void deleteMails(
         @RequestBody DeleteMailRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
         log.info("{} wants to delete mails {}", request.getCharacterId(), request.getMailIds());
-        //TODO implement
+        mailFacade.deleteMails(request, userId);
     }
 
     @GetMapping(GET_ADDRESSEES_MAPPING)
@@ -59,8 +59,8 @@ public class MailController {
         return 0;
     }
 
-    @PostMapping(MARK_MAIL_READ_MAPPING)
-    public void markMailRead(
+    @PostMapping(MARK_MAILS_READ_MAPPING)
+    public void markMailsRead(
         @RequestBody MarkMailReadRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
@@ -68,8 +68,8 @@ public class MailController {
         //TODO implement
     }
 
-    @PostMapping(MARK_MAIL_UNREAD_MAPPING)
-    public void markMailUnRead(
+    @PostMapping(MARK_MAILS_UNREAD_MAPPING)
+    public void markMailsUnRead(
         @RequestBody MarkMailReadRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ){
