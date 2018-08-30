@@ -4,14 +4,16 @@ Store password encrypted
 
 User & Character name max length limit
 
+CharacterId transfer simplicity
+    - provide characterId in cookie
+    - Store characterId in accessToken
+    - Authorization: validate characterId in accessToken (new filter)
+
 Create community
     - page layout
         - Friends
             - List of friends
                 - Highlight online
-                    - provide characterId in cookie
-                    - Store characterId in accessToken
-                    - Authorization: validate characterId in accessToken
                 - View ship
                 - Send mail
             - Report user
@@ -25,6 +27,8 @@ Create community
                     - Delete non-archived expired
                     - Delete deleted from both side
             - frontend
+                - Subject length limit
+                - Message length limit
                 - View mail list
                     - Highlight unread ones
                     - Mark as read when read
