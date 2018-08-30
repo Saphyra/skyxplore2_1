@@ -2,6 +2,8 @@
     window.characterController = new function(){
         scriptLoader.loadScript("js/common/dao/character_dao.js");
         
+        this.selectCharacter = selectCharacter;
+        
         this.isNewCharacterNameValid = false;
         this.isRenameCharacterNameValid = false;
         
@@ -15,6 +17,20 @@
         $(document).ready(function(){
             addListeners();
         });
+    }
+    
+    function selectCharacter(characterId){
+        try{
+            if(characterDao.selectCharacter(characterId)){
+                sessionStorage.characterId = characterId;
+                window.location.href = "overview";
+            }else{
+                notificationService.showError("Hiba a karakter kiválasztása során.");
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
     }
     
     function createCharacter(){
@@ -107,12 +123,7 @@
                         nameCell.classList.add("textaligncenter");
                         nameCell.title = "Játék indítása";
                         nameCell.onclick = function(){
-                            if(characterDao.selectCharacter(character.characterId)){
-                                sessionStorage.characterId = character.characterId;
-                                window.location.href = "overview";
-                            }else{
-                                notificationService.showError("Hiba a karakter kiválasztása során.");
-                            }
+                            characterController.selectCharacter(character.characterId);
                         };
                 container.appendChild(nameCell);
                     

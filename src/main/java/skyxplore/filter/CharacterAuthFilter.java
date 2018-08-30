@@ -40,7 +40,9 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/characterselect",
         "/character/characters",
         "/account",
-        "/user/*"
+        "/user/*",
+        "/character/select/*",
+        "/character/ischarnameexists/*"
     );
 
     private final CharacterQueryService characterQueryService;
@@ -60,7 +62,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         } else {
             if ("rest".equals(request.getHeader("Request-Type"))) {
                 log.info("Sending error. Cause: Unauthorized character access.");
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Authentication failed.");
             } else {
                 log.info("Redirect to characterSelect page. Cause: Unauthorized character access.");
                 response.sendRedirect(PageController.CHARACTER_SELECT_MAPPING);

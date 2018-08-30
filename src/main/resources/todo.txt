@@ -1,6 +1,6 @@
 Shop & factory implement filters
 Cancel production
-Store password encrypted
+Store password && sensitive data encrypted
 
 User & Character name max length limit
 Character name must not contain special characters

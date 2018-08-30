@@ -215,10 +215,34 @@
     }
 
     /*
-
+    Notificates the server about the character selection.
+    Arguments:
+        - characterId: the id of the selected character.
+    Returns:
+        - true, if the selection was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if characterId is null or undefined.
+        - UnknownBackendError exception if request fails.
     */
     function selectCharacter(characterId){
-        //TODO implement
+        try{
+            if(characterId == undefined || characterId == null){
+                throwException("IllegalArgument", "characterId must not be null or undefined.")
+            }
+            
+            const path = "character/select/" + characterId;
+            const response = dao.sendRequest(dao.POST, path);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
     }
 
     /*
