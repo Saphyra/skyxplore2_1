@@ -45,8 +45,6 @@ Create community
                 - Read mail
                     - Reply button
                     - Delete button
-    - Notification for new mails, and friend requests
-        - Overview page
 
 Lobby
     - Create lobby

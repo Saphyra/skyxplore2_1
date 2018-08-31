@@ -22,8 +22,7 @@ public class MailQueryService {
         return mail;
     }
 
-    public Integer getNumberOfUnreadMails(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public Integer getNumberOfUnreadMails(String characterId) {
         return mailDao.getUnreadMails(characterId).size();
     }
 }

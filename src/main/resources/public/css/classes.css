@@ -97,6 +97,10 @@
     border-style: ridge;
 }
 
+.colorred{
+    color: red;
+}
+
 .cursornodrop{
     cursor: no-drop;
 }

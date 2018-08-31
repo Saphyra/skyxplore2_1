@@ -33,8 +33,8 @@ public class MailFacade {
         return characterQueryService.getCharactersCanBeAddressee(name, characterId, userId);
     }
 
-    public Integer getNumberOfUnreadMails(String characterId, String userId) {
-        return mailQueryService.getNumberOfUnreadMails(characterId, userId);
+    public Integer getNumberOfUnreadMails(String characterId) {
+        return mailQueryService.getNumberOfUnreadMails(characterId);
     }
 
     public void sendMail(SendMailRequest request, String userId) {

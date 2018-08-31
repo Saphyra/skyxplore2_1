@@ -60,15 +60,19 @@ public class CommunityFacade {
         return characterQueryService.getCharactersCanBeFriend(name, characterId, userId);
     }
 
-    public List<FriendRequest> getReceivedFriendRequests(String characterId, String userId) {
-        return friendshipQueryService.getReceivedFriendRequests(characterId, userId);
+    public List<Friendship> getFriends(String characterId, String userId) {
+        return friendshipQueryService.getFriends(characterId, userId);
+    }
+
+    public Integer getNumberOfFriendRequests(String characterId) {
+        return friendshipQueryService.getNumberOfFriendRequests(characterId);
+    }
+
+    public List<FriendRequest> getReceivedFriendRequests(String characterId) {
+        return friendshipQueryService.getReceivedFriendRequests(characterId);
     }
 
     public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
         return friendshipQueryService.getSentFriendRequests(characterId, userId);
-    }
-
-    public List<Friendship> getFriends(String characterId, String userId) {
-        return friendshipQueryService.getFriends(characterId, userId);
     }
 }

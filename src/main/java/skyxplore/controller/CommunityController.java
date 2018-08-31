@@ -11,6 +11,7 @@ import skyxplore.controller.view.community.friend.FriendViewConverter;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestViewConverter;
 import skyxplore.filter.AuthFilter;
+import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.CommunityFacade;
 
 import javax.validation.Valid;
@@ -30,10 +31,11 @@ public class CommunityController {
     private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend//friendrequest/decline";
     private static final String DELETE_FRIEND_MAPPING = "friend";
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter/{characterId}";
+    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/{characterId}/namelike/{charName}";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/{characterId}/namelike/{charName}";
     private static final String GET_FRIENDS_MAPPING = "friend/{characterId}";
-    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/{characterId}/namelike/{charName}";
-    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//friendrequest/received/{characterId}";
+    private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/num";
+    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//friendrequest/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/sent/{characterId}";
 
     private final CommunityFacade communityFacade;
@@ -114,13 +116,20 @@ public class CommunityController {
         return friendViewConverter.convertDomain(communityFacade.getFriends(characterId, userId), characterId);
     }
 
+    @GetMapping(GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING)
+    public Integer getNumberOfFriendRequests(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ){
+        log.info("{} wants to know the number of his friend requests.");
+        return communityFacade.getNumberOfFriendRequests(characterId);
+    }
+
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)
     public List<FriendRequestView> getReceivedFriendRequests(
-        @PathVariable("characterId") String characterId,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ){
         log.info("{} wants to know his received friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(communityFacade.getReceivedFriendRequests(characterId, userId));
+        return friendRequestViewConverter.convertDomain(communityFacade.getReceivedFriendRequests(characterId));
     }
 
     @GetMapping(GET_SENT_FRIEND_REQUESTS_MAPPING)

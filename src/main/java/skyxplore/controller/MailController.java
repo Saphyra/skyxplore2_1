@@ -10,6 +10,7 @@ import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.filter.AuthFilter;
+import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.MailFacade;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 public class MailController {
     private static final String DELETE_MAILS_MAPPING = "mail/delete/";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
-    private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread/{characterId}";
+    private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
     private static final String MARK_MAILS_READ_MAPPING = "mail/markread/";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread/";
     private static final String SEND_MAIL_MAPPING = "mail/send";
@@ -52,11 +53,10 @@ public class MailController {
 
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
     public Integer getNumberOfUnreadMails(
-        @PathVariable("characterId") String characterId,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ){
         log.info("{} wants to know the number of his unread mails.");
-        return mailFacade.getNumberOfUnreadMails(characterId, userId);
+        return mailFacade.getNumberOfUnreadMails(characterId);
     }
 
     @PostMapping(MARK_MAILS_READ_MAPPING)

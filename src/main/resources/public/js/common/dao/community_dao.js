@@ -10,6 +10,8 @@
         this.getCharactersCanBeFriend = getCharactersCanBeFriend;
         this.getFriends = getFriends;
         this.getFriendRequests = getFriendRequests;
+        this.getNumberOfFriendRequests = getNumberOfFriendRequests;
+        this.getNumberOfUnreadMails = getNumberOfUnreadMails;
         this.getSentFriendRequests = getSentFriendRequests;
         this.removeFriend = removeFriend;
         this.sendFriendRequest = sendFriendRequest;
@@ -329,22 +331,16 @@
     
     /*
     Queries the character's friend requests.
-    Arguments:
-        - characterId: the id of the character.
     Returns:
         - the list of friend requests.
         - empty list upon fail.
     Throws:
-        - IllegalArgument exception if characterId is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function getFriendRequests(characterId){
+    function getFriendRequests(){
         try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined.");
-            }
             
-            const path = "friend/friendrequest/received/" + characterId;
+            const path = "friend/friendrequest/received";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);
@@ -355,6 +351,54 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return [];
+        }
+    }
+    
+    /*
+    Queries the server for the number of received friend requests.
+    Returns:
+        - the number of friend requests.
+        - 0 upon fail.
+    Throws:
+        - UnknownBackendError exception if request fails.
+    */
+    function getNumberOfFriendRequests(){
+        try{
+            const path = "friend/friendrequest/num";
+            const response = dao.sendRequest(dao.GET, path);
+            if(response.status == ResponseStatus.OK){
+                return Number(response.response);
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return 0;
+        }
+    }
+    
+    /*
+    Queries the server for number of unread mails.
+    Returns:
+        - the number of unread mails.
+        - 0 upon fail.
+    Throws:
+        UnknownBackendError exception if request fails.
+    */
+    function getNumberOfUnreadMails(){
+        try{
+            const path = "mail/unread";
+            const response = dao.sendRequest(dao.GET, path);
+            if(response.status == ResponseStatus.OK){
+                return Number(response.response);
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return 0;
         }
     }
     

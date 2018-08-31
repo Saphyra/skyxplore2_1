@@ -26,8 +26,12 @@ public class FriendshipQueryService {
         return friendshipDao.getFriendshipsOfCharacter(characterId);
     }
 
-    public List<FriendRequest> getReceivedFriendRequests(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public Integer getNumberOfFriendRequests(String characterId) {
+        return getReceivedFriendRequests(characterId).size();
+    }
+
+    public List<FriendRequest> getReceivedFriendRequests(String characterId) {
+        characterQueryService.findByCharacterId(characterId);
         return friendRequestDao.getByFriendId(characterId)
             .stream()
             .map(this::swapIds)
