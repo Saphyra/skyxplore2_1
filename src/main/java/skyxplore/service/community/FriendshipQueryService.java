@@ -21,8 +21,7 @@ public class FriendshipQueryService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
 
-    public List<Friendship> getFriends(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public List<Friendship> getFriends(String characterId) {
         return friendshipDao.getFriendshipsOfCharacter(characterId);
     }
 

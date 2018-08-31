@@ -7,6 +7,9 @@ import skyxplore.dataaccess.db.repository.AccessTokenRepository;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenConverter;
 
+import java.util.Optional;
+
+@SuppressWarnings("unused")
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -52,5 +55,9 @@ public class AccessTokenDao {
 
     public void update(AccessToken token) {
         save(token);
+    }
+
+    public Optional<AccessToken> findByCharacterId(String characterId) {
+        return Optional.ofNullable(accessTokenConverter.convertEntity(accessTokenRepository.findByCharacterId(characterId)));
     }
 }

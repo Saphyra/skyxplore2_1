@@ -39,6 +39,10 @@
     font-weight: bold;
 }
 
+.activefriend{
+    border-color: lightgreen;
+}
+
 .friendlistitem:hover{
     border-color: red;
 }

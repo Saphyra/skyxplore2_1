@@ -33,7 +33,7 @@ public class CommunityController {
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter/{characterId}";
     private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/{characterId}/namelike/{charName}";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/{characterId}/namelike/{charName}";
-    private static final String GET_FRIENDS_MAPPING = "friend/{characterId}";
+    private static final String GET_FRIENDS_MAPPING = "friend";
     private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/num";
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//friendrequest/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/sent/{characterId}";
@@ -111,9 +111,10 @@ public class CommunityController {
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)
-    public List<FriendView> getFriends(@PathVariable("characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
+    public List<FriendView> getFriends(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his community list.", characterId);
-        return friendViewConverter.convertDomain(communityFacade.getFriends(characterId, userId), characterId);
+        return friendViewConverter.convertDomain(communityFacade.getFriends(characterId), characterId);
     }
 
     @GetMapping(GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING)

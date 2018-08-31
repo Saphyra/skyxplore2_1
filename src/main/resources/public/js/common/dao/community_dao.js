@@ -300,22 +300,15 @@
     
     /*
     Queries the character's friends.
-    Arguments:
-        - characterId: the id of the character.
     Returns:
         - the list of friends.
         - empty list upon fail.
     Throws:
-        - IllegalArgument exception if characterId is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function getFriends(characterId){
+    function getFriends(){
         try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined.");
-            }
-            
-            const path = "friend/" + characterId;
+            const path = "friend";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);

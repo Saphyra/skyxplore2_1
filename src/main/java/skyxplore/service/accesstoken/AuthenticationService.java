@@ -91,4 +91,8 @@ public class AuthenticationService {
         token.setLastAccess(accessTokenDateResolver.getActualDate());
         accessTokenDao.update(token);
     }
+
+    public Boolean isCharacterActive(String characterId) {
+        return accessTokenDao.findByCharacterId(characterId).isPresent();
+    }
 }

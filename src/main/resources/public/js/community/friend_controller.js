@@ -141,6 +141,9 @@
             try{
                 const container = document.createElement("DIV");
                     container.classList.add("friendlistitem");
+                    if(friendship.active){
+                        container.classList.add("activefriend");
+                    }
                     
                     const characterNameElement = document.createElement("DIV");
                         characterNameElement.innerHTML = friendship.friendName;
@@ -322,7 +325,12 @@
     function orderFriends(friends){
         try{
             friends.sort(function(a, b){
-                return a.friendName.localeCompare(b.friendName);
+                if(a.active == b.active){
+                    return a.friendName.localeCompare(b.friendName);
+                }
+                if(a.active == true){
+                    return 1;
+                }
             });
             return friends;
         }catch(err){
