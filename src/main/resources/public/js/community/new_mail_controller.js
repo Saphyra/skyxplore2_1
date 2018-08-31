@@ -1,6 +1,7 @@
 (function NewMailController(){
     window.newMailController = new function(){
         scriptLoader.loadScript("js/common/dao/community_dao.js");
+        
         this.invalidateAddressee = invalidateAddressee;
         this.sendMail = sendMail;
         this.setAddressee = setAddressee;

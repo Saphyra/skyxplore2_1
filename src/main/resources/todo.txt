@@ -17,7 +17,6 @@ Create community
         - Friends
             - List of friends
                 - View ship
-                - Send mail
             - Report user
                 - Report for what?
             - Delete friendships upon character deletion

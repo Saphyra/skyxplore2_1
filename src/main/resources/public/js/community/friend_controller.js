@@ -176,7 +176,11 @@
                         const mailButton = document.createElement("BUTTON");
                             mailButton.innerHTML = "Üzenet írása";
                             mailButton.onclick = function(){
-                                //TODO write mail
+                                newMailController.setAddressee({
+                                    characterId: friendship.friendId,
+                                    characterName: friendship.friendName
+                                });
+                                switchTab("mainlabel", "mail");
                             };
                     buttonWrapper.appendChild(mailButton);
                     
