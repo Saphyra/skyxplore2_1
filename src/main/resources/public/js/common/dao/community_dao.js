@@ -1,6 +1,7 @@
 (function CommunityDao(){    
     window.communityDao = new function(){
         this.acceptFriendRequest = acceptFriendRequest;
+        this.archiveMails = archiveMails;
         this.allowBlockedCharacter = allowBlockedCharacter;
         this.blockCharacter = blockCharacter;
         this.declineFriendRequest = declineFriendRequest;
@@ -46,6 +47,37 @@
             const path = "friend/friendrequest/accept";
             const body = {characterId: characterId, friendRequestId: friendRequestId};
             const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Sets archive status of the selected mails as archived.
+    Arguments:
+        - mailIds: the ids of the mails.
+    Returns:
+        - true, if the update was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if mailIds is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function archiveMails(mailIds){
+        try{
+            if(mailIds == null || mailIds == undefined){
+                throwException("IllegalArgument", "mailIds must not be null or undefined.");
+            }
+            
+            const path = "mail/archive";
+            const response = dao.sendRequest(dao.POST, path, mailIds);
             if(response.status == ResponseStatus.OK){
                 return true;
             }else{

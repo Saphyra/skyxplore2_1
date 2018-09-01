@@ -21,6 +21,7 @@ import java.util.List;
 //TODO unit test
 //TODO eliminate characterIds in path
 public class MailController {
+    private static final String ARCHIVE_MAILS_MAPPING = "mail/archive";
     private static final String DELETE_MAILS_MAPPING = "mail/delete";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
     private static final String GET_MAILS_MAPPING = "mail";
@@ -33,11 +34,20 @@ public class MailController {
     private final MailFacade mailFacade;
     private final MailViewConverter mailViewConverter;
 
+    @PostMapping(ARCHIVE_MAILS_MAPPING)
+    public void archiveMails(
+        @RequestBody List<String> mailIds,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ) {
+        log.info("{} wants to archive mails {}", characterId, mailIds);
+        mailFacade.archiveMails(characterId, mailIds, true);
+    }
+
     @DeleteMapping(DELETE_MAILS_MAPPING)
     public void deleteMails(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to delete mails {}", characterId, mailIds);
         mailFacade.deleteMails(characterId, mailIds);
     }
@@ -55,7 +65,7 @@ public class MailController {
     @GetMapping(GET_MAILS_MAPPING)
     public List<MailView> getMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to know his mails.");
         return mailViewConverter.convertDomain(mailFacade.getMails(characterId));
     }
@@ -63,7 +73,7 @@ public class MailController {
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
     public Integer getNumberOfUnreadMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to know the number of his unread mails.");
         return mailFacade.getNumberOfUnreadMails(characterId);
     }
@@ -72,7 +82,7 @@ public class MailController {
     public void markMailsRead(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to mark mails {} as read.", characterId, mailIds);
         mailFacade.setMailReadStatus(mailIds, characterId, true);
     }
@@ -81,7 +91,7 @@ public class MailController {
     public void markMailsUnRead(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to mark mails {} as unread.", characterId, mailIds);
         mailFacade.setMailReadStatus(mailIds, characterId, false);
     }
@@ -90,7 +100,7 @@ public class MailController {
     public void sendMail(
         @RequestBody SendMailRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
-    ){
+    ) {
         log.info("Sending mail...");
         mailFacade.sendMail(request, userId);
     }

@@ -20,16 +20,36 @@ public class MailStatusUpdaterService {
     private final MailDao mailDao;
     private final MailQueryService mailQueryService;
 
-    public void updateReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
+    public void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        mailIds.forEach(mailId ->setMailReadStatus(mailId, character, newStatus));
+        mailIds.forEach(mailId -> setArchiveStatus(character, mailId, archiveStatus));
     }
 
-    private void setMailReadStatus(String mailId, SkyXpCharacter character, Boolean readStatus){
-        try{
+    private void setArchiveStatus(SkyXpCharacter character, String mailId, Boolean archiveStatus) {
+        try {
             Mail mail = mailQueryService.findMailById(mailId);
 
-            if(!mail.getTo().equals(character.getCharacterId())){
+            if (!mail.getTo().equals(character.getCharacterId())) {
+                throw new InvalidMailAccessException(character.getCharacterId() + " cannot change read status of mail " + mailId);
+            }
+
+            mail.setArchived(archiveStatus);
+            mailDao.save(mail);
+        } catch (Exception e) {
+            log.error("Error updating archive status of  mail {} by character.", mailId, character.getCharacterId(), e);
+        }
+    }
+
+    public void updateReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        mailIds.forEach(mailId -> setMailReadStatus(mailId, character, newStatus));
+    }
+
+    private void setMailReadStatus(String mailId, SkyXpCharacter character, Boolean readStatus) {
+        try {
+            Mail mail = mailQueryService.findMailById(mailId);
+
+            if (!mail.getTo().equals(character.getCharacterId())) {
                 throw new InvalidMailAccessException(character.getCharacterId() + " cannot change read status of mail " + mailId);
             }
 

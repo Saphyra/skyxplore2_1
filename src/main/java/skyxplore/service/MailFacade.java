@@ -23,6 +23,10 @@ public class MailFacade {
     private final MailStatusUpdaterService mailStatusUpdaterService;
     private final MailQueryService mailQueryService;
 
+    public void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
+        mailStatusUpdaterService.archiveMails(characterId, mailIds, archiveStatus);
+    }
+
     public void deleteMails(String characterId, List<String> mailIds) {
         mailDeleteService.deleteMails(characterId, mailIds);
     }

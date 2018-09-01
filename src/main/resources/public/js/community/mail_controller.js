@@ -150,7 +150,12 @@
                                 const archiveButton = document.createElement("BUTTON");
                                     archiveButton.innerHTML = "Archiválás";
                                     archiveButton.onclick = function(e){
-                                        //TODO implement
+                                        if(communityDao.archiveMails([mail.mailId])){
+                                            notificationService.showSuccess("Üzenet archiválva.");
+                                        }else{
+                                            notificationService.showError("Üzenet archiválása sikertelen.");
+                                        }
+                                        refresh();
                                         e.stopPropagation();
                                     }
                             buttonCell.appendChild(archiveButton);
