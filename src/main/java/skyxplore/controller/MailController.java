@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.community.DeleteMailRequest;
-import skyxplore.controller.request.community.MarkMailReadRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
@@ -27,8 +26,8 @@ public class MailController {
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
     private static final String GET_MAILS_MAPPING = "mail";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
-    private static final String MARK_MAILS_READ_MAPPING = "mail/markread/";
-    private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread/";
+    private static final String MARK_MAILS_READ_MAPPING = "mail/markread";
+    private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread";
     private static final String SEND_MAIL_MAPPING = "mail/send";
 
     private final CharacterViewConverter characterViewConverter;
@@ -72,20 +71,20 @@ public class MailController {
 
     @PostMapping(MARK_MAILS_READ_MAPPING)
     public void markMailsRead(
-        @RequestBody MarkMailReadRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @RequestBody List<String> mailIds,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ){
-        log.info("{} wants to mark mails {} as read.", request.getCharacterId(), request.getMailIds());
-        mailFacade.setMailReadStatus(request, userId, true);
+        log.info("{} wants to mark mails {} as read.", characterId, mailIds);
+        mailFacade.setMailReadStatus(mailIds, characterId, true);
     }
 
     @PostMapping(MARK_MAILS_UNREAD_MAPPING)
     public void markMailsUnRead(
-        @RequestBody MarkMailReadRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @RequestBody List<String> mailIds,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ){
-        log.info("{} wants to mark mails {} as unread.", request.getCharacterId(), request.getMailIds());
-        mailFacade.setMailReadStatus(request, userId, false);
+        log.info("{} wants to mark mails {} as unread.", characterId, mailIds);
+        mailFacade.setMailReadStatus(mailIds, characterId, false);
     }
 
     @PutMapping(SEND_MAIL_MAPPING)

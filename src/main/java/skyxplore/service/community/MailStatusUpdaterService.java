@@ -1,15 +1,15 @@
 package skyxplore.service.community;
 
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.community.MarkMailReadRequest;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.InvalidMailAccessException;
 import skyxplore.service.character.CharacterQueryService;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -20,9 +20,9 @@ public class MailStatusUpdaterService {
     private final MailDao mailDao;
     private final MailQueryService mailQueryService;
 
-    public void updateReadStatus(MarkMailReadRequest request, String userId, Boolean newStatus) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        request.getMailIds().forEach(mailId ->setMailReadStatus(mailId, character, newStatus));
+    public void updateReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        mailIds.forEach(mailId ->setMailReadStatus(mailId, character, newStatus));
     }
 
     private void setMailReadStatus(String mailId, SkyXpCharacter character, Boolean readStatus){

@@ -14,6 +14,7 @@
         this.getNumberOfFriendRequests = getNumberOfFriendRequests;
         this.getNumberOfUnreadMails = getNumberOfUnreadMails;
         this.getSentFriendRequests = getSentFriendRequests;
+        this.markMailsRead = markMailsRead;
         this.removeFriend = removeFriend;
         this.sendFriendRequest = sendFriendRequest;
         this.sendMail = sendMail;
@@ -447,6 +448,30 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             return [];
+        }
+    }
+    
+    /*
+    Marks the given mails as read.
+    Arguments:
+        - mailIds: the ids of the mails to mark read.
+    Throws:
+        - IllegalArgument exception if mailIds is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function markMailsRead(mailIds){
+        try{
+            if(mailIds == null || mailIds == undefined){
+                throwException("IllegalArgument", "mailIds must not be null or undefined.");
+            }
+            const path = "mail/markread";
+            const response = dao.sendRequest(dao.POST, path, mailIds);
+            if(response.status != ResponseStatus.OK){
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
         }
     }
     

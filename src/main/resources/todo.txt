@@ -31,7 +31,6 @@ Create community
             - Subject length limit
             - Message length limit
             - View mail list
-                - Mark as read when read
                 - Checkbox
                     - Delete selected
                     - Mark as read selected
@@ -41,7 +40,7 @@ Create community
                 - Reply button
                 - Delete button
                 - Archive button
-                - 'Mark as read button'
+                - 'Mark as read' button
 
 Lobby
     - Create lobby

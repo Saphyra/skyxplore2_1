@@ -79,6 +79,11 @@
                 
                 mailHeader.onclick = function(){
                     $(mailBody).fadeToggle();
+                    if(!mail.read){
+                        communityDao.markMailsRead([mail.mailId]);
+                        container.classList.remove("unreadmail");
+                        displayNumberOfUnreadMails();
+                    }
                 }
                 return container;
             }catch(err){
