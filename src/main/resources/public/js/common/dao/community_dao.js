@@ -16,6 +16,7 @@
         this.getNumberOfUnreadMails = getNumberOfUnreadMails;
         this.getSentFriendRequests = getSentFriendRequests;
         this.markMailsRead = markMailsRead;
+        this.markMailsUnread = markMailsUnread;
         this.removeFriend = removeFriend;
         this.sendFriendRequest = sendFriendRequest;
         this.sendMail = sendMail;
@@ -497,6 +498,30 @@
                 throwException("IllegalArgument", "mailIds must not be null or undefined.");
             }
             const path = "mail/markread";
+            const response = dao.sendRequest(dao.POST, path, mailIds);
+            if(response.status != ResponseStatus.OK){
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    /*
+    Marks the given mails as unread.
+    Arguments:
+        - mailIds: the ids of the mails to mark unread.
+    Throws:
+        - IllegalArgument exception if mailIds is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function markMailsUnread(mailIds){
+        try{
+            if(mailIds == null || mailIds == undefined){
+                throwException("IllegalArgument", "mailIds must not be null or undefined.");
+            }
+            const path = "mail/markunread";
             const response = dao.sendRequest(dao.POST, path, mailIds);
             if(response.status != ResponseStatus.OK){
                 throwException("UnknownBackendError", response.toString());

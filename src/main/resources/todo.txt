@@ -37,9 +37,7 @@ Create community
                     - Mark as unread selected
                     - Archive selected
             - Read mail
-                - Delete button
                 - Archive button
-                - 'Mark as read' button
             - View sent mails
                 - Delete
             - View archived mails

@@ -49,6 +49,7 @@
             friendController.showFriendRequests();
             friendController.showSentFriendRequests();
             
+            mailController.displayNumberOfUnreadMails();
             mailController.showMails();
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;

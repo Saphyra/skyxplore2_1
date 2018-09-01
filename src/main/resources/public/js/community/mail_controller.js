@@ -5,12 +5,22 @@
         
         this.mails = [];
         
+        this.displayNumberOfUnreadMails = displayNumberOfUnreadMails;
         this.loadMails = loadMails;
         this.showMails = showMails;
         
-        $(document).ready(function(){
+        this.refresh = refresh;
+    }
+    
+    function refresh(){
+        try{
             displayNumberOfUnreadMails();
-        });
+            loadMails();
+            showMails();
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
     }
     
     function loadMails(){
@@ -65,7 +75,7 @@
                     
                     const mailHeader = document.createElement("DIV");
                         mailHeader.classList.add("mailheader");
-                        mailHeader.appendChild(createMailHeaderTable(mail));
+                        mailHeader.appendChild(createMailHeaderTable(mail, container));
                 container.appendChild(mailHeader);
                 
                     const mailBody = document.createElement("DIV");
@@ -102,7 +112,7 @@
                 return document.createElement("DIV");
             }
             
-            function createMailHeaderTable(mail){
+            function createMailHeaderTable(mail, container){
                 try{
                     const table = document.createElement("TABLE");
                     
@@ -149,13 +159,15 @@
                                     if(mail.read){
                                         markButton.innerHTML = "Megjelölés olvasatlanként";
                                         markButton.onclick = function(e){
-                                            //TODO implement
+                                            communityDao.markMailsUnread([mail.mailId]);
+                                            refresh();
                                             e.stopPropagation();
                                         }
                                     }else{
                                         markButton.innerHTML = "Megjelölés olvasottként";
                                         markButton.onclick = function(e){
-                                            //TODO implement
+                                            communityDao.markMailsRead([mail.mailId]);
+                                            refresh();
                                             e.stopPropagation();
                                         }
                                     }
@@ -185,6 +197,8 @@
             const numberOfUnreadMails = communityDao.getNumberOfUnreadMails();
             if(numberOfUnreadMails > 0){
                 document.getElementById("numberofunreadmails").innerHTML = " (" + numberOfUnreadMails + ")";
+            }else{
+                document.getElementById("numberofunreadmails").innerHTML = "";
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
