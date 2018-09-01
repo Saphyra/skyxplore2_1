@@ -3,7 +3,6 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import skyxplore.controller.request.community.DeleteMailRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
@@ -22,7 +21,7 @@ import java.util.List;
 //TODO unit test
 //TODO eliminate characterIds in path
 public class MailController {
-    private static final String DELETE_MAILS_MAPPING = "mail/delete/";
+    private static final String DELETE_MAILS_MAPPING = "mail/delete";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
     private static final String GET_MAILS_MAPPING = "mail";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
@@ -36,11 +35,11 @@ public class MailController {
 
     @DeleteMapping(DELETE_MAILS_MAPPING)
     public void deleteMails(
-        @RequestBody DeleteMailRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @RequestBody List<String> mailIds,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ){
-        log.info("{} wants to delete mails {}", request.getCharacterId(), request.getMailIds());
-        mailFacade.deleteMails(request, userId);
+        log.info("{} wants to delete mails {}", characterId, mailIds);
+        mailFacade.deleteMails(characterId, mailIds);
     }
 
     @GetMapping(GET_ADDRESSEES_MAPPING)

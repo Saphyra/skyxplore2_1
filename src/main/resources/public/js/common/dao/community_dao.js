@@ -4,6 +4,7 @@
         this.allowBlockedCharacter = allowBlockedCharacter;
         this.blockCharacter = blockCharacter;
         this.declineFriendRequest = declineFriendRequest;
+        this.deleteMails = deleteMails;
         this.getAddressees = getAddressees;
         this.getBlockableCharacters = getBlockableCharacters;
         this.getBlockedCharacters = getBlockedCharacters;
@@ -150,6 +151,37 @@
             const path = "friend/friendrequest/decline";
             const body = {characterId: characterId, friendRequestId: friendRequestId};
             const response = dao.sendRequest(dao.POST, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Deletes the given mails.
+    Arguments:
+        - the ids of the mails to delete.
+    Returns:
+        - true, if deletion was successful.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if mailIds is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function deleteMails(mailIds){
+        try{
+            if(mailIds == null || mailIds == undefined){
+                throwException("IllegalArgument", "mailIds must not be null or undefined.");
+            }
+            
+            const path = "mail/delete";
+            const response = dao.sendRequest(dao.DELETE, path, mailIds);
             if(response.status == ResponseStatus.OK){
                 return true;
             }else{

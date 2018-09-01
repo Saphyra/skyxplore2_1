@@ -1,16 +1,15 @@
 package skyxplore.service.community;
 
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.community.DeleteMailRequest;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.InvalidMailAccessException;
-import skyxplore.exception.MailNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -21,13 +20,14 @@ public class MailDeleteService {
     private final MailDao mailDao;
     private final MailQueryService mailQueryService;
 
-    public void deleteMails(DeleteMailRequest request, String userId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        request.getMailIds().forEach(mailId -> processDeletion(character, mailId));
+    public void deleteMails(String characterId, List<String> mailIds) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        mailIds.forEach(mailId -> processDeletion(character, mailId));
     }
 
     private void processDeletion(SkyXpCharacter character, String mailId) {
         try {
+            log.info("deleting mail {} by charatcer {}", mailId, character.getCharacterId());
             Mail mail = mailQueryService.findMailById(mailId);
 
             if (mail.getTo().equals(character.getCharacterId())) {

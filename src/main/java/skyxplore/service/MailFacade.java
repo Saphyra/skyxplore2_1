@@ -2,7 +2,6 @@ package skyxplore.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.request.community.DeleteMailRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
@@ -24,8 +23,8 @@ public class MailFacade {
     private final MailStatusUpdaterService mailStatusUpdaterService;
     private final MailQueryService mailQueryService;
 
-    public void deleteMails(DeleteMailRequest request, String userId) {
-        mailDeleteService.deleteMails(request, userId);
+    public void deleteMails(String characterId, List<String> mailIds) {
+        mailDeleteService.deleteMails(characterId, mailIds);
     }
 
     public List<SkyXpCharacter> getAddressees(String characterId, String userId, String name) {

@@ -124,28 +124,39 @@
                                 
                                 const deleteButton = document.createElement("BUTTON");
                                     deleteButton.innerHTML = "Törlés";
-                                    deleteButton.onclick = function(){
-                                        //TODO implement
+                                    deleteButton.onclick = function(e){
+                                        e.stopPropagation();
+                                        if(confirm("Biztosan törli a kiválszott üzeneteket?")){
+                                            if(communityDao.deleteMails([mail.mailId])){
+                                                notificationService.showSuccess("Üzenet törölve.");
+                                            }else{
+                                                notificationService.showError("Üzenet törlése sikertelen.");
+                                            }
+                                            pageController.refresh(true, false);
+                                        }
                                     }
                             buttonCell.appendChild(deleteButton);
                             
                                 const archiveButton = document.createElement("BUTTON");
                                     archiveButton.innerHTML = "Archiválás";
-                                    archiveButton.onclick = function(){
+                                    archiveButton.onclick = function(e){
                                         //TODO implement
+                                        e.stopPropagation();
                                     }
                             buttonCell.appendChild(archiveButton);
                             
                                 const markButton = document.createElement("BUTTON");
                                     if(mail.read){
                                         markButton.innerHTML = "Megjelölés olvasatlanként";
-                                        markButton.onclick = function(){
+                                        markButton.onclick = function(e){
                                             //TODO implement
+                                            e.stopPropagation();
                                         }
                                     }else{
                                         markButton.innerHTML = "Megjelölés olvasottként";
-                                        markButton.onclick = function(){
+                                        markButton.onclick = function(e){
                                             //TODO implement
+                                            e.stopPropagation();
                                         }
                                     }
                             buttonCell.appendChild(markButton);
