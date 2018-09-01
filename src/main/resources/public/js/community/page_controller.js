@@ -38,6 +38,7 @@
                 friendController.loadFriendRequests();
                 friendController.loadSentFriendRequests();
                 blockedCharacterController.loadBlockedCharacters();
+                mailController.loadMails();
             }
             
             blockedCharacterController.displayBlockedCharacters();
@@ -47,6 +48,8 @@
             friendController.showFriends();
             friendController.showFriendRequests();
             friendController.showSentFriendRequests();
+            
+            mailController.showMails();
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");

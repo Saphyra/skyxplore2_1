@@ -1,13 +1,12 @@
 package skyxplore.dataaccess.db;
 
-import java.util.Collection;
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.MailRepository;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailConverter;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -26,5 +25,9 @@ public class MailDao {
 
     public List<Mail> getUnreadMails(String characterId) {
         return mailConverter.convertEntity(mailRepository.getUnreadMails(characterId));
+    }
+
+    public List<Mail> getMails(String characterId) {
+        return mailConverter.convertEntity(mailRepository.getMails(characterId));
     }
 }

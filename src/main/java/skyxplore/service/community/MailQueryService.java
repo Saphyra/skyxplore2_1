@@ -1,12 +1,13 @@
 package skyxplore.service.community;
 
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.MailNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,10 @@ public class MailQueryService {
             throw new MailNotFoundException("Mail not found with id " + mailId);
         }
         return mail;
+    }
+
+    public List<Mail> getMails(String characterId) {
+        return mailDao.getMails(characterId);
     }
 
     public Integer getNumberOfUnreadMails(String characterId) {

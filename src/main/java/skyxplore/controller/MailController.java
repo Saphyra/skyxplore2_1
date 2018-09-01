@@ -3,12 +3,13 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
 import skyxplore.controller.request.community.DeleteMailRequest;
 import skyxplore.controller.request.community.MarkMailReadRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
+import skyxplore.controller.view.community.mail.MailView;
+import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.filter.AuthFilter;
 import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.MailFacade;
@@ -24,6 +25,7 @@ import java.util.List;
 public class MailController {
     private static final String DELETE_MAILS_MAPPING = "mail/delete/";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
+    private static final String GET_MAILS_MAPPING = "mail";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
     private static final String MARK_MAILS_READ_MAPPING = "mail/markread/";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread/";
@@ -31,6 +33,7 @@ public class MailController {
 
     private final CharacterViewConverter characterViewConverter;
     private final MailFacade mailFacade;
+    private final MailViewConverter mailViewConverter;
 
     @DeleteMapping(DELETE_MAILS_MAPPING)
     public void deleteMails(
@@ -49,6 +52,14 @@ public class MailController {
     ) {
         log.info("{} wants to know his possible addressees", characterId);
         return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, userId, name));
+    }
+
+    @GetMapping(GET_MAILS_MAPPING)
+    public List<MailView> getMails(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ){
+        log.info("{} wants to know his mails.");
+        return mailViewConverter.convertDomain(mailFacade.getMails(characterId));
     }
 
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
