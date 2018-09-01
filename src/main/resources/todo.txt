@@ -41,6 +41,11 @@ Create community
                 - Delete button
                 - Archive button
                 - 'Mark as read' button
+            - View sent mails
+                - Delete
+            - View archived mails
+                - Unarchive
+                - Delete
 
 Lobby
     - Create lobby

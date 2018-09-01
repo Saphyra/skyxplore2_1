@@ -26,7 +26,7 @@
         function orderMails(mails){
             try{
                 mails.sort(function(a, b){
-                    return a.sendTime - b.sendTime;
+                    return b.sendTime - a.sendTime;
                 });
                 return mails;
             }catch(err){

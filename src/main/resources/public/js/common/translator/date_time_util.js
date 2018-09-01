@@ -7,11 +7,12 @@
         try{
             const date = new Date(0);
                 date.setUTCSeconds(epoch);
-                
-                const months = (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
-                const days = (date.getDay() + 1) < 10 ? "0" + (date.getDay() + 1) : (date.getDay() + 1);
-                const hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-                const seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+            
+            const months = (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
+            const days = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            const hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            const seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+            
             return date.getFullYear()
                 + "/" + months
                 + "/" + days
