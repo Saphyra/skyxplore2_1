@@ -37,7 +37,6 @@ Create community
                     - Mark as unread selected
                     - Archive selected
             - Read mail
-                - Reply button
                 - Delete button
                 - Archive button
                 - 'Mark as read' button

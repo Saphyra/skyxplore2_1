@@ -304,6 +304,18 @@
     width: 4rem;
 }
 
+.width10rem{
+    width: 10rem;
+}
+
+.width11rem{
+    width: 11rem;
+}
+
+.width16rem{
+    width: 16rem;
+}
+
 .width50percent{
     width: 50%;
 }
@@ -314,10 +326,6 @@
 
 .width100percent{
     width: 100%;
-}
-
-.width10rem{
-    width: 10rem;
 }
 
 .width60vw{

@@ -75,6 +75,15 @@
                             message.disabled = true;
                             message.value = mail.message;
                     mailBody.appendChild(message);
+                    
+                        const replyButton = document.createElement("BUTTON");
+                            replyButton.innerHTML = "Válaszolás";
+                            replyButton.onclick = function(){
+                                document.getElementById("subject").value = "Re: " + mail.subject;
+                                newMailController.setAddressee({characterId: mail.from, characterName: mail.fromName});
+                                switchTab("mainlabel", "mail");
+                            }
+                    mailBody.appendChild(replyButton);
                 container.appendChild(mailBody);
                 
                 mailHeader.onclick = function(){
@@ -83,6 +92,7 @@
                         communityDao.markMailsRead([mail.mailId]);
                         container.classList.remove("unreadmail");
                         displayNumberOfUnreadMails();
+                        mail.read = true;
                     }
                 }
                 return container;
@@ -103,8 +113,44 @@
                         
                             const sendTimeCell = document.createElement("TD");
                                 sendTimeCell.classList.add("textalignright");
-                                sendTimeCell.innerHTML = "Elküldve: " + dateTimeUtil.formatEpoch(mail.sendTime);
+                                sendTimeCell.classList.add("width11rem");
+                                sendTimeCell.innerHTML = dateTimeUtil.formatEpoch(mail.sendTime);
                         row1.appendChild(sendTimeCell);
+                        
+                            const buttonCell = document.createElement("TD");
+                                buttonCell.rowSpan = 2;
+                                buttonCell.classList.add("textaligncenter");
+                                buttonCell.classList.add("width2rem");
+                                
+                                const deleteButton = document.createElement("BUTTON");
+                                    deleteButton.innerHTML = "Törlés";
+                                    deleteButton.onclick = function(){
+                                        //TODO implement
+                                    }
+                            buttonCell.appendChild(deleteButton);
+                            
+                                const archiveButton = document.createElement("BUTTON");
+                                    archiveButton.innerHTML = "Archiválás";
+                                    archiveButton.onclick = function(){
+                                        //TODO implement
+                                    }
+                            buttonCell.appendChild(archiveButton);
+                            
+                                const markButton = document.createElement("BUTTON");
+                                    if(mail.read){
+                                        markButton.innerHTML = "Megjelölés olvasatlanként";
+                                        markButton.onclick = function(){
+                                            //TODO implement
+                                        }
+                                    }else{
+                                        markButton.innerHTML = "Megjelölés olvasottként";
+                                        markButton.onclick = function(){
+                                            //TODO implement
+                                        }
+                                    }
+                            buttonCell.appendChild(markButton);
+                                
+                        row1.appendChild(buttonCell);
                     table.appendChild(row1);
                     
                         const row2 = document.createElement("TR");
