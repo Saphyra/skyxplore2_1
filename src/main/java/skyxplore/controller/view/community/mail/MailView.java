@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class MailView {
     private String mailId;
     private String from;
+    private String fromName;
     private String subject;
     private String message;
     private Boolean read;

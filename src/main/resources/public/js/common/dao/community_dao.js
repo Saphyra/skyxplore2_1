@@ -10,6 +10,7 @@
         this.getCharactersCanBeFriend = getCharactersCanBeFriend;
         this.getFriends = getFriends;
         this.getFriendRequests = getFriendRequests;
+        this.getMails = getMails;
         this.getNumberOfFriendRequests = getNumberOfFriendRequests;
         this.getNumberOfUnreadMails = getNumberOfUnreadMails;
         this.getSentFriendRequests = getSentFriendRequests;
@@ -347,6 +348,29 @@
         }
     }
     
+    /*
+    Queries the character's received mails.
+    Returns:
+        - the mails of character
+        - empty list upon fail
+    Throws
+        - UnknownBackendError exception when request fails.
+    */
+    function getMails(){
+        try{
+            const path = "mail";
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
+            }else{
+                throwException("UnknownBackendError", result.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
     /*
     Queries the server for the number of received friend requests.
     Returns:

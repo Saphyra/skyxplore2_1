@@ -13,36 +13,35 @@ CharacterId transfer simplicity
     - eliminate unnecessary checks
 
 Create community
-    - page layout
-        - Friends
-            - List of friends
-                - View ship
-            - Report user
-                - Report for what?
-            - Delete friendships upon character deletion
-            - Delete friend requests upon character deletion
-            - Delete block records upon character deletion
-        - Mails
-            - backend
-                - Cleanup job
-                    - Delete non-archived expired
-                    - Delete deleted from both side
-                - Set deleted user's email (set his flag deleted)
-            - frontend
-                - Subject length limit
-                - Message length limit
-                - View mail list
-                    - Highlight unread ones
-                    - Mark as read when read
-                    - 'Mark as read button'
-                    - Delete button
-                    - Checkbox
-                        - Delete selected
-                        - Mark as read selected
-                        - Mark as unread selected
-                - Read mail
-                    - Reply button
-                    - Delete button
+    - Friends
+        - List of friends
+            - View ship
+        - Report user
+            - Report for what?
+        - Delete friendships upon character deletion
+        - Delete friend requests upon character deletion
+        - Delete block records upon character deletion
+    - Mails
+        - backend
+            - Cleanup job
+                - Delete non-archived expired
+                - Delete deleted from both side
+            - Set deleted user's email (set his flag deleted)
+        - frontend
+            - Subject length limit
+            - Message length limit
+            - View mail list
+                - Mark as read when read
+                - Checkbox
+                    - Delete selected
+                    - Mark as read selected
+                    - Mark as unread selected
+                    - Archive selected
+            - Read mail
+                - Reply button
+                - Delete button
+                - Archive button
+                - 'Mark as read button'
 
 Lobby
     - Create lobby

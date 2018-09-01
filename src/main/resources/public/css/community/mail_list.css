@@ -18,3 +18,71 @@
     top: 4.5rem;
     overflow: auto;
 }
+
+.maillistcontainer{
+    position: relative;
+    height: 100%;
+}
+
+.maillistitemcontainer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 2rem;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.mailitem{
+    border: 2px ridge white;
+    margin: 0.5rem;
+}
+
+.mailitem:hover{
+    border-color: red;
+}
+
+.unreadmail{
+    border-color: lightgreen;
+}
+
+.mailheader{
+    cursor: pointer;
+    border-bottom: 2px ridge white;
+}
+
+.mailheader *{
+    cursor: pointer;
+}
+
+.mailheader table{
+    width: 100%;
+    padding: 0.25rem;
+}
+
+.mailheader table td{
+    padding: 0.25rem;
+    font-size: 1.25rem;
+}
+
+.mailbody{
+    display: none;
+    padding: 0.25rem;
+}
+
+.mailbody textarea{
+    background: transparent;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 2px solid white;
+    resize: none;
+    padding: 0.25rem;
+    font-size: 1.25rem;
+    height: 15rem;
+}
+
+.mailbody textarea:disabled{
+    cursor: initial;
+}
