@@ -40,6 +40,7 @@
                 blockedCharacterController.loadBlockedCharacters();
                 mailController.loadMails();
                 mailController.loadSentMails();
+                mailController.loadArchivedMails();
             }
             
             blockedCharacterController.displayBlockedCharacters();
@@ -53,6 +54,7 @@
             mailController.displayNumberOfUnreadMails();
             mailController.showMails();
             mailController.showSentMails();
+            mailController.showArchivedMails();
         }catch(err){
              const message = arguments.callee.name + " - " + err.name + ": " + err.message;
              logService.log(message, "error");

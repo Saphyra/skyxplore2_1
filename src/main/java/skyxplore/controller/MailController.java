@@ -24,12 +24,14 @@ public class MailController {
     private static final String ARCHIVE_MAILS_MAPPING = "mail/archive";
     private static final String DELETE_MAILS_MAPPING = "mail/delete";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
+    private static final String GET_ARCHIVED_MAILS_MAPPING = "mail/archived";
     private static final String GET_MAILS_MAPPING = "mail";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
     private static final String GET_SENT_MAILS_MAPPING = "mail/sent";
     private static final String MARK_MAILS_READ_MAPPING = "mail/markread";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread";
     private static final String SEND_MAIL_MAPPING = "mail/send";
+    private static final String UNARCHIVE_MAILS_MAPPING = "mail/unarchive";
 
     private final CharacterViewConverter characterViewConverter;
     private final MailFacade mailFacade;
@@ -63,11 +65,19 @@ public class MailController {
         return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, userId, name));
     }
 
+    @GetMapping(GET_ARCHIVED_MAILS_MAPPING)
+    public List<MailView> getArchivedMails(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ){
+        log.info("{} wants to know his archived mails.");
+        return mailViewConverter.convertDomain(mailFacade.getArchivedMails(characterId));
+    }
+
     @GetMapping(GET_MAILS_MAPPING)
     public List<MailView> getMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
-        log.info("{} wants to know his mails.");
+        log.info("{} wants to know his mails.", characterId);
         return mailViewConverter.convertDomain(mailFacade.getMails(characterId));
     }
 
@@ -112,5 +122,14 @@ public class MailController {
     ) {
         log.info("Sending mail...");
         mailFacade.sendMail(request, userId);
+    }
+
+    @PostMapping(UNARCHIVE_MAILS_MAPPING)
+    public void unarchiveMails(
+        @RequestBody List<String> mailIds,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ){
+        log.info("{} wants to unarchive mails {}", characterId, mailIds);
+        mailFacade.archiveMails(characterId, mailIds, false);
     }
 }

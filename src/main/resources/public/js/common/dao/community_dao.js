@@ -7,6 +7,7 @@
         this.declineFriendRequest = declineFriendRequest;
         this.deleteMails = deleteMails;
         this.getAddressees = getAddressees;
+        this.getArchivedMails = getArchivedMails;
         this.getBlockableCharacters = getBlockableCharacters;
         this.getBlockedCharacters = getBlockedCharacters;
         this.getCharactersCanBeFriend = getCharactersCanBeFriend;
@@ -22,6 +23,7 @@
         this.removeFriend = removeFriend;
         this.sendFriendRequest = sendFriendRequest;
         this.sendMail = sendMail;
+        this.unarchiveMails = unarchiveMails;
     }
     
     /*
@@ -252,6 +254,30 @@
             }
             
             const path = "mail/addressee/" + characterId + "/" + queryText;
+            const response = dao.sendRequest(dao.GET, path);
+            if(response.status == ResponseStatus.OK){
+                return JSON.parse(response.response);
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
+    
+    /*
+    Queries the archived mails of the character.
+    Returns:
+        - list of archived mails.
+        - empty list upon fails.
+    Throws:
+        - UnknownBackendError exception if request fails.
+    */
+    function getArchivedMails(){
+        try{
+            const path = "mail/archived";
             const response = dao.sendRequest(dao.GET, path);
             if(response.status == ResponseStatus.OK){
                 return JSON.parse(response.response);
@@ -685,6 +711,36 @@
                 message: message
             };
             const response = dao.sendRequest(dao.PUT, path, body);
+            if(response.status == ResponseStatus.OK){
+                return true;
+            }else{
+                throwException("UnknownBackendError", response.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return false;
+        }
+    }
+    
+    /*
+    Restores the selected mails.
+    Arguments:
+        - mailIds: the ids of the mails to restore.
+    Returns:
+        - true, if mails successfully restored.
+        - false otherwise.
+    Throws:
+        - IllegalArgument exception if mailIds is null or undefined.
+        - UnknownBackendError exception if request fails.
+    */
+    function unarchiveMails(mailIds){
+        try{
+            if(mailIds == null || mailIds == undefined){
+                throwException("IllegalArgument", "mailIds must not be null or undefined.");
+            }
+            const path = "mail/unarchive";
+            const response = dao.sendRequest(dao.POST, path, mailIds);
             if(response.status == ResponseStatus.OK){
                 return true;
             }else{

@@ -15,7 +15,7 @@ public class MailDao {
     private final MailConverter mailConverter;
     private final MailRepository mailRepository;
 
-    public void save(Mail mail){
+    public void save(Mail mail) {
         mailRepository.save(mailConverter.convertDomain(mail));
     }
 
@@ -23,8 +23,8 @@ public class MailDao {
         return mailRepository.findById(mailId).map(mailConverter::convertEntity).orElse(null);
     }
 
-    public List<Mail> getUnreadMails(String characterId) {
-        return mailConverter.convertEntity(mailRepository.getUnreadMails(characterId));
+    public List<Mail> getArchivedMails(String characterId) {
+        return mailConverter.convertEntity(mailRepository.getArchivedMails(characterId));
     }
 
     public List<Mail> getMails(String characterId) {
@@ -33,5 +33,9 @@ public class MailDao {
 
     public List<Mail> getSentMails(String characterId) {
         return mailConverter.convertEntity(mailRepository.getSentMails(characterId));
+    }
+
+    public List<Mail> getUnreadMails(String characterId) {
+        return mailConverter.convertEntity(mailRepository.getUnreadMails(characterId));
     }
 }

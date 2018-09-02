@@ -3,6 +3,7 @@
         scriptLoader.loadScript("js/common/dao/community_dao.js");
         scriptLoader.loadScript("js/common/translator/date_time_util.js");
         
+        this.archivedMails = [];
         this.mails = [];
         this.sentMails = [];
         
@@ -12,6 +13,9 @@
         
         this.loadSentMails = loadSentMails;
         this.showSentMails = showSentMails;
+        
+        this.loadArchivedMails = loadArchivedMails;
+        this.showArchivedMails = showArchivedMails;
         
         this.refresh = refresh;
     }
@@ -24,6 +28,9 @@
             
             showMails();
             showSentMails();
+            
+            loadArchivedMails();
+            showArchivedMails();
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -296,6 +303,129 @@
                                         }
                                     }
                             buttonCell.appendChild(deleteButton);
+                        row1.appendChild(buttonCell);
+                    table.appendChild(row1);
+                    
+                        const row2 = document.createElement("TR");
+                            const subjectCell = document.createElement("TD");
+                                subjectCell.colSpan = 2;
+                                subjectCell.innerHTML = "Tárgy: " + mail.subject;
+                        row2.appendChild(subjectCell);
+                    table.appendChild(row2);
+                    return table;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                    return document.createElement("TABLE");
+                }
+            }
+        }
+    }
+    
+    function loadArchivedMails(){
+        try{
+            const mails = communityDao.getArchivedMails();
+            mailController.archivedMails = orderMails(mails);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            mailController.archivedMails = [];
+        }
+    }
+    
+    function showArchivedMails(){
+        try{
+            const container = document.getElementById("archivedmaillist");
+                container.innerHTML = "";
+                
+            if(mailController.archivedMails.length == 0){
+                container.innerHTML = "Nincs archivált üzenet.";
+            }
+            
+            for(let mindex in mailController.archivedMails){
+                container.appendChild(createItem(mailController.archivedMails[mindex]));
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+        
+        function createItem(mail){
+            try{
+                const container = document.createElement("DIV");
+                    container.classList.add("mailitem");
+                    
+                    const mailHeader = document.createElement("DIV");
+                        mailHeader.classList.add("mailheader");
+                        mailHeader.appendChild(createMailHeaderTable(mail, container));
+                container.appendChild(mailHeader);
+                
+                    const mailBody = document.createElement("DIV");
+                        mailBody.classList.add("mailbody");
+                        
+                        const message = document.createElement("TEXTAREA");
+                            message.disabled = true;
+                            message.value = mail.message;
+                    mailBody.appendChild(message);
+                container.appendChild(mailBody);
+                
+                mailHeader.onclick = function(){
+                    $(mailBody).fadeToggle();
+                }
+                return container;
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+                return document.createElement("DIV");
+            }
+            
+            function createMailHeaderTable(mail, container){
+                try{
+                    const table = document.createElement("TABLE");
+                    
+                        const row1 = document.createElement("TR");
+                            const fromCell = document.createElement("TD");
+                                fromCell.innerHTML = "Feladó: " + mail.fromName;
+                        row1.appendChild(fromCell);
+                        
+                            const sendTimeCell = document.createElement("TD");
+                                sendTimeCell.classList.add("textalignright");
+                                sendTimeCell.classList.add("width11rem");
+                                sendTimeCell.innerHTML = dateTimeUtil.formatEpoch(mail.sendTime);
+                        row1.appendChild(sendTimeCell);
+                        
+                            const buttonCell = document.createElement("TD");
+                                buttonCell.rowSpan = 2;
+                                buttonCell.classList.add("textaligncenter");
+                                buttonCell.classList.add("width2rem");
+                                
+                                const deleteButton = document.createElement("BUTTON");
+                                    deleteButton.innerHTML = "Törlés";
+                                    deleteButton.onclick = function(e){
+                                        e.stopPropagation();
+                                        if(confirm("Biztosan törli a kiválszott üzeneteket?")){
+                                            if(communityDao.deleteMails([mail.mailId])){
+                                                notificationService.showSuccess("Üzenet törölve.");
+                                            }else{
+                                                notificationService.showError("Üzenet törlése sikertelen.");
+                                            }
+                                            pageController.refresh(true, false);
+                                        }
+                                    }
+                            buttonCell.appendChild(deleteButton);
+                            
+                                const unArchiveButton = document.createElement("BUTTON");
+                                    unArchiveButton.innerHTML = "Visszaállítás";
+                                    unArchiveButton.onclick = function(e){
+                                        if(communityDao.unarchiveMails([mail.mailId])){
+                                            notificationService.showSuccess("Üzenet visszaállítása.");
+                                        }else{
+                                            notificationService.showError("Üzenet visszaállítása sikertelen.");
+                                        }
+                                        refresh();
+                                        e.stopPropagation();
+                                    }
+                            buttonCell.appendChild(unArchiveButton);
                         row1.appendChild(buttonCell);
                     table.appendChild(row1);
                     

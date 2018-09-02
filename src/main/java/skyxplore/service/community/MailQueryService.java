@@ -23,6 +23,10 @@ public class MailQueryService {
         return mail;
     }
 
+    public List<Mail> getArchivedMails(String characterId) {
+        return mailDao.getArchivedMails(characterId);
+    }
+
     public List<Mail> getMails(String characterId) {
         return mailDao.getMails(characterId);
     }

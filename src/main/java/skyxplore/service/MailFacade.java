@@ -35,6 +35,10 @@ public class MailFacade {
         return characterQueryService.getCharactersCanBeAddressee(name, characterId, userId);
     }
 
+    public List<Mail> getArchivedMails(String characterId) {
+        return mailQueryService.getArchivedMails(characterId);
+    }
+
     public List<Mail> getMails(String characterId) {
         return mailQueryService.getMails(characterId);
     }

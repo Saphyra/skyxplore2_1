@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface MailRepository extends JpaRepository<MailEntity, String> {
+    @Query("SELECT m FROM MailEntity m WHERE m.to = :characterId AND m.archived = true AND m.deletedByAddressee = false")
+    List<MailEntity> getArchivedMails(@Param("characterId") String characterId);
+
     @Query("SELECT m FROM MailEntity m WHERE m.to = :characterId AND m.archived = false AND m.deletedByAddressee = false")
     List<MailEntity> getMails(@Param("characterId") String characterId);
 
