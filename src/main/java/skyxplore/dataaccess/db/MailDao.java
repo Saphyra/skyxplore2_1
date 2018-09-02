@@ -15,8 +15,16 @@ public class MailDao {
     private final MailConverter mailConverter;
     private final MailRepository mailRepository;
 
-    public void save(Mail mail) {
-        mailRepository.save(mailConverter.convertDomain(mail));
+    public void deleteBothSideDeleted() {
+        mailRepository.deleteBothSideDeleted();
+    }
+
+    public void deleteByCharacterId(String characterId) {
+        mailRepository.deleteByCharacterId(characterId);
+    }
+
+    public void deleteExpired(Long expiration) {
+        mailRepository.deleteExpired(expiration);
     }
 
     public Mail findById(String mailId) {
@@ -37,5 +45,9 @@ public class MailDao {
 
     public List<Mail> getUnreadMails(String characterId) {
         return mailConverter.convertEntity(mailRepository.getUnreadMails(characterId));
+    }
+
+    public void save(Mail mail) {
+        mailRepository.save(mailConverter.convertDomain(mail));
     }
 }

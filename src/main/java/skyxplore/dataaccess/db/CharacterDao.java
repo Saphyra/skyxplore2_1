@@ -17,16 +17,25 @@ import java.util.Optional;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class CharacterDao {
+    private final BlockedCharacterDao blockedCharacterDao;
     private final CharacterConverter characterConverter;
     private final CharacterRepository characterRepository;
     private final EquippedShipDao equippedShipDao;
     private final FactoryDao factoryDao;
+    private final FriendRequestDao friendRequestDao;
+    private final FriendshipDao friendshipDao;
+    private final MailDao mailDao;
     private final UserDao userDao;
 
     public void deleteById(String characterId) {
         equippedShipDao.deleteByCharacterId(characterId);
         factoryDao.deleteByCharacterId(characterId);
+        friendRequestDao.deleteByCharacterId(characterId);
+        friendshipDao.deleteByCharacterId(characterId);
+        blockedCharacterDao.deleteByCharacterId(characterId);
+        mailDao.deleteByCharacterId(characterId);
 
         log.info("Deleting character {}", characterId);
         characterRepository.deleteById(characterId);

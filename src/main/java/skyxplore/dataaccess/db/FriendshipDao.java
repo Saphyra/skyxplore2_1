@@ -23,6 +23,10 @@ public class FriendshipDao {
         friendshipRepository.delete(friendshipConverter.convertDomain(friendship));
     }
 
+    public void deleteByCharacterId(String characterId) {
+        friendshipRepository.deleteByCharacterId(characterId);
+    }
+
     public List<Friendship> getByCharacterIdOrFriendId(String characterId, String friendId) {
         return friendshipConverter.convertEntity(friendshipRepository.getByCharacterIdOrFriendId(characterId, friendId));
     }

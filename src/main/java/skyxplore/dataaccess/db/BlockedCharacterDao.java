@@ -21,6 +21,10 @@ public class BlockedCharacterDao {
         blockedCharacterRepository.delete(blockedCharacterConverter.convertDomain(blockedCharacter));
     }
 
+    public void deleteByCharacterId(String characterId) {
+        blockedCharacterRepository.deleteByCharacterId(characterId);
+    }
+
     public BlockedCharacter findByCharacterIdAndBlockedCharacterId(String characterId, String blockedCharacterId) {
         return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId));
     }

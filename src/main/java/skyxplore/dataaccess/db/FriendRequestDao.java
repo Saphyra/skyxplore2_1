@@ -23,6 +23,10 @@ public class FriendRequestDao {
         friendRequestRepository.delete(friendRequestConverter.convertDomain(friendRequest));
     }
 
+    public void deleteByCharacterId(String characterId) {
+        friendRequestRepository.deleteByCharacterId(characterId);
+    }
+
     public FriendRequest findById(String friendRequestId) {
         Optional<FriendRequestEntity> friendRequestEntity = friendRequestRepository.findById(friendRequestId);
         return friendRequestEntity.map(friendRequestConverter::convertEntity).orElse(null);

@@ -1,18 +1,24 @@
 package skyxplore.dataaccess.db.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import skyxplore.domain.community.blockeduser.BlockedCharacterEntity;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 //TODO unit test
 public interface BlockedCharacterRepository extends JpaRepository<BlockedCharacterEntity, Long> {
-    List<BlockedCharacterEntity> findByCharacterId(String characterId);
+    @Modifying
+    @Transactional
+    @Query("DELETE BlockedCharacterEntity b WHERE b.characterId = :characterId OR b.blockedCharacterId = :characterId")
+    void deleteByCharacterId(String characterId);
+
+    List<BlockedCharacterEntity> findByCharacterId(@Param("characterId") String characterId);
 
     BlockedCharacterEntity findByCharacterIdAndBlockedCharacterId(String characterId, String blockedCharacterId);
 
