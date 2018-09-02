@@ -30,4 +30,8 @@ public class MailDao {
     public List<Mail> getMails(String characterId) {
         return mailConverter.convertEntity(mailRepository.getMails(characterId));
     }
+
+    public List<Mail> getSentMails(String characterId) {
+        return mailConverter.convertEntity(mailRepository.getSentMails(characterId));
+    }
 }

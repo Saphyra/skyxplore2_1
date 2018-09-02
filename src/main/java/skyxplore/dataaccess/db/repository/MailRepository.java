@@ -13,6 +13,9 @@ public interface MailRepository extends JpaRepository<MailEntity, String> {
     @Query("SELECT m FROM MailEntity m WHERE m.to = :characterId AND m.archived = false AND m.deletedByAddressee = false")
     List<MailEntity> getMails(@Param("characterId") String characterId);
 
-    @Query("SELECT m FROM MailEntity m WHERE m.to = :characterId AND m.read = false AND m.deletedByAddressee = false")
+    @Query("SELECT m FROM MailEntity m WHERE m.to = :characterId AND m.read = false AND m.archived = false AND m.deletedByAddressee = false")
     List<MailEntity> getUnreadMails(@Param("characterId") String characterId);
+
+    @Query("SELECT m FROM MailEntity m WHERE m.from = :characterId AND m.deletedBySender = false")
+    List<MailEntity> getSentMails(@Param("characterId") String characterId);
 }

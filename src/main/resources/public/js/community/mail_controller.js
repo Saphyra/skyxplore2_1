@@ -4,10 +4,14 @@
         scriptLoader.loadScript("js/common/translator/date_time_util.js");
         
         this.mails = [];
+        this.sentMails = [];
         
         this.displayNumberOfUnreadMails = displayNumberOfUnreadMails;
         this.loadMails = loadMails;
         this.showMails = showMails;
+        
+        this.loadSentMails = loadSentMails;
+        this.showSentMails = showSentMails;
         
         this.refresh = refresh;
     }
@@ -16,7 +20,24 @@
         try{
             displayNumberOfUnreadMails();
             loadMails();
+            loadSentMails();
+            
             showMails();
+            showSentMails();
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
+    function displayNumberOfUnreadMails(){
+        try{
+            const numberOfUnreadMails = communityDao.getNumberOfUnreadMails();
+            if(numberOfUnreadMails > 0){
+                document.getElementById("numberofunreadmails").innerHTML = " (" + numberOfUnreadMails + ")";
+            }else{
+                document.getElementById("numberofunreadmails").innerHTML = "";
+            }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -31,19 +52,6 @@
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
             mailController.mails = [];
-        }
-        
-        function orderMails(mails){
-            try{
-                mails.sort(function(a, b){
-                    return b.sendTime - a.sendTime;
-                });
-                return mails;
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-                return [];
-            }
         }
     }
     
@@ -197,17 +205,126 @@
         }
     }
     
-    function displayNumberOfUnreadMails(){
+    function loadSentMails(){
         try{
-            const numberOfUnreadMails = communityDao.getNumberOfUnreadMails();
-            if(numberOfUnreadMails > 0){
-                document.getElementById("numberofunreadmails").innerHTML = " (" + numberOfUnreadMails + ")";
-            }else{
-                document.getElementById("numberofunreadmails").innerHTML = "";
+            const mails = communityDao.getSentMails();
+            mailController.sentMails = orderMails(mails);
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            mailController.sentMails = [];
+        }
+    }
+    
+    function showSentMails(){
+        try{
+            const container = document.getElementById("sentmaillist");
+                container.innerHTML = "";
+                
+            if(mailController.sentMails.length == 0){
+                container.innerHTML = "Nincs elküldött üzenet.";
+            }
+            
+            for(let mindex in mailController.sentMails){
+                container.appendChild(createItem(mailController.sentMails[mindex]));
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
+        }
+        
+        function createItem(mail){
+            try{
+                const container = document.createElement("DIV");
+                    container.classList.add("mailitem");
+                    
+                    const mailHeader = document.createElement("DIV");
+                        mailHeader.classList.add("mailheader");
+                        mailHeader.appendChild(createMailHeaderTable(mail, container));
+                container.appendChild(mailHeader);
+                
+                    const mailBody = document.createElement("DIV");
+                        mailBody.classList.add("mailbody");
+                        
+                        const message = document.createElement("TEXTAREA");
+                            message.disabled = true;
+                            message.value = mail.message;
+                    mailBody.appendChild(message);
+                container.appendChild(mailBody);
+                
+                mailHeader.onclick = function(){
+                    $(mailBody).fadeToggle();
+                }
+                return container;
+            }catch(err){
+                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                logService.log(message, "error");
+                return document.createElement("DIV");
+            }
+            
+            function createMailHeaderTable(mail, container){
+                try{
+                    const table = document.createElement("TABLE");
+                    
+                        const row1 = document.createElement("TR");
+                            const fromCell = document.createElement("TD");
+                                fromCell.innerHTML = "Címzett: " + mail.toName;
+                        row1.appendChild(fromCell);
+                        
+                            const sendTimeCell = document.createElement("TD");
+                                sendTimeCell.classList.add("textalignright");
+                                sendTimeCell.classList.add("width11rem");
+                                sendTimeCell.innerHTML = dateTimeUtil.formatEpoch(mail.sendTime);
+                        row1.appendChild(sendTimeCell);
+                        
+                            const buttonCell = document.createElement("TD");
+                                buttonCell.rowSpan = 2;
+                                buttonCell.classList.add("textaligncenter");
+                                buttonCell.classList.add("width2rem");
+                                
+                                const deleteButton = document.createElement("BUTTON");
+                                    deleteButton.innerHTML = "Törlés";
+                                    deleteButton.onclick = function(e){
+                                        e.stopPropagation();
+                                        if(confirm("Biztosan törli a kiválszott üzeneteket?")){
+                                            if(communityDao.deleteMails([mail.mailId])){
+                                                notificationService.showSuccess("Üzenet törölve.");
+                                            }else{
+                                                notificationService.showError("Üzenet törlése sikertelen.");
+                                            }
+                                            pageController.refresh(true, false);
+                                        }
+                                    }
+                            buttonCell.appendChild(deleteButton);
+                        row1.appendChild(buttonCell);
+                    table.appendChild(row1);
+                    
+                        const row2 = document.createElement("TR");
+                            const subjectCell = document.createElement("TD");
+                                subjectCell.colSpan = 2;
+                                subjectCell.innerHTML = "Tárgy: " + mail.subject;
+                        row2.appendChild(subjectCell);
+                    table.appendChild(row2);
+                    return table;
+                }catch(err){
+                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                    logService.log(message, "error");
+                    return document.createElement("TABLE");
+                }
+            }
+        }
+    }
+    
+    function orderMails(mails){
+        try{
+            mails.sort(function(a, b){
+                return b.sendTime - a.sendTime;
+            });
+            return mails;
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
         }
     }
 })();

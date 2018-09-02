@@ -26,6 +26,7 @@ public class MailController {
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
     private static final String GET_MAILS_MAPPING = "mail";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
+    private static final String GET_SENT_MAILS_MAPPING = "mail/sent";
     private static final String MARK_MAILS_READ_MAPPING = "mail/markread";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread";
     private static final String SEND_MAIL_MAPPING = "mail/send";
@@ -74,8 +75,16 @@ public class MailController {
     public Integer getNumberOfUnreadMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
-        log.info("{} wants to know the number of his unread mails.");
+        log.info("{} wants to know the number of his unread mails.", characterId);
         return mailFacade.getNumberOfUnreadMails(characterId);
+    }
+
+    @GetMapping(GET_SENT_MAILS_MAPPING)
+    public List<MailView> getSentMails(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ) {
+        log.info("{} wants to know his sent mails.", characterId);
+        return mailViewConverter.convertDomain(mailFacade.getSentMails(characterId));
     }
 
     @PostMapping(MARK_MAILS_READ_MAPPING)

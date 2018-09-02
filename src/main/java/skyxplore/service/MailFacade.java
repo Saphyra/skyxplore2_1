@@ -43,6 +43,10 @@ public class MailFacade {
         return mailQueryService.getNumberOfUnreadMails(characterId);
     }
 
+    public List<Mail> getSentMails(String characterId) {
+        return mailQueryService.getSentMails(characterId);
+    }
+
     public void sendMail(SendMailRequest request, String userId) {
         mailSenderService.sendMail(request, userId);
     }

@@ -36,8 +36,6 @@ Create community
                     - Mark as read selected
                     - Mark as unread selected
                     - Archive selected
-            - View sent mails
-                - Delete
             - View archived mails
                 - Unarchive
                 - Delete

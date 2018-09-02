@@ -78,9 +78,9 @@
 
                 <DIV id='maillistbuttons'  class='margintop0_75rem marginbottom0_5rem'>
                     <DIV class='button inline' onclick='switchTab("mainlabel", "mail")'>Üzenet írása</DIV>
-                    <DIV class='button inline' onclick=''>Bejövő<SPAN id='numberofunreadmails' class='colorred'></SPAN></DIV>
-                    <DIV class='button inline' onclick=''>Elküldött</DIV>
-                    <DIV class='button inline' onclick=''>Archivált</DIV>
+                    <DIV class='button inline' onclick='switchTab("maillistcontainer", "incomingmaillistcontainer")'>Bejövő<SPAN id='numberofunreadmails' class='colorred'></SPAN></DIV>
+                    <DIV class='button inline' onclick='switchTab("maillistcontainer", "sentmaillistcontainer")'>Elküldött</DIV>
+                    <DIV class='button inline' onclick='switchTab("maillistcontainer", "archivedmaillistcontainer")'>Archivált</DIV>
                 </DIV>
             </DIV>
 
@@ -88,6 +88,16 @@
                 <DIV id='incomingmaillistcontainer' class='maillistcontainer'>
                     <H2>Bejövő üzenetek</H2>
                     <DIV id='incomingmaillist' class='maillistitemcontainer'></DIV>
+                </DIV>
+                
+                <DIV id='sentmaillistcontainer' class='maillistcontainer displaynone'>
+                    <H2>Elküldött üzenetek</H2>
+                    <DIV id='sentmaillist' class='maillistitemcontainer'></DIV>
+                </DIV>
+                
+                <DIV id='archivedmaillistcontainer' class='maillistcontainer displaynone'>
+                    <H2>Archivált üzenetek</H2>
+                    <DIV id='archivedmaillist' class='maillistitemcontainer'></DIV>
                 </DIV>
             </DIV>
         </SECTION>

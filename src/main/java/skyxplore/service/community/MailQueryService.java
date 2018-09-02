@@ -30,4 +30,8 @@ public class MailQueryService {
     public Integer getNumberOfUnreadMails(String characterId) {
         return mailDao.getUnreadMails(characterId).size();
     }
+
+    public List<Mail> getSentMails(String characterId) {
+        return mailDao.getSentMails(characterId);
+    }
 }

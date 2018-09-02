@@ -16,6 +16,7 @@
         this.getNumberOfFriendRequests = getNumberOfFriendRequests;
         this.getNumberOfUnreadMails = getNumberOfUnreadMails;
         this.getSentFriendRequests = getSentFriendRequests;
+        this.getSentMails = getSentMails;
         this.markMailsRead = markMailsRead;
         this.markMailsUnread = markMailsUnread;
         this.removeFriend = removeFriend;
@@ -503,6 +504,30 @@
             }
             
             const path = "friend/friendrequest/sent/" + characterId;
+            const result = dao.sendRequest(dao.GET, path);
+            if(result.status == ResponseStatus.OK){
+                return JSON.parse(result.response);
+            }else{
+                throwException("UnknownBackendError", result.toString());
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+            return [];
+        }
+    }
+    
+    /*
+    Queries the sent mails of the character.
+    Returns:
+        - list of mails.
+        - empty list upon fail.
+    Throws:
+        - UnknownBackendError exception if request fails.
+    */
+    function getSentMails(){
+        try{
+            const path = "mail/sent";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);
