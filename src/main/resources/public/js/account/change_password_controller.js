@@ -79,18 +79,19 @@
             if(password1.length < 6){
                 response.isValid = false;
                 newPassword1Valid = false;
-                const errorMessage = "Új jelszó túl rövid!";
+                const errorMessage = "Új jelszó túl rövid! (Minimum 6 karakter)";
                 response.responses.push(errorMessage);
                 invalidPassword1.title = errorMessage;
                 $(invalidPassword1).fadeIn();
             }
-            if(password2.length < 6){
+            
+            if(password1.length > 30){
                 response.isValid = false;
-                newPassword2Valid = false;
-                const errorMessage = "Új jelszó megerősítése túl rövid!";
+                newPassword1Valid = false;
+                const errorMessage = "Új jelszó túl hosszú! (Maximum 30 karakter)";
                 response.responses.push(errorMessage);
-                invalidPassword2.title = errorMessage;
-                $(invalidPassword2).fadeIn();
+                invalidPassword1.title = errorMessage;
+                $(invalidPassword1).fadeIn();
             }
             
             if(newPassword1Valid && newPassword2Valid){

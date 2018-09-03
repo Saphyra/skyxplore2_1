@@ -40,6 +40,8 @@
             
             if(charName.length < 3){
                 notificationService.showError("A karakternév túl rövid. (Minimum 3 karakter)");
+            }else if(charName.length > 30){
+                notificationService.showError("A karakternév túl hosszú. (Maximum 30 karakter)");
             }else if(characterDao.isCharNameExists(charName)){
                 notificationService.showError("Karakternév foglalt.");
             }else{
@@ -81,6 +83,8 @@
             
             if(newCharacterName.length < 3){
                 notificationService.showError("Karakternév túl rövid. (Minimum 3 karakter)");
+            }else if(newCharacterName.length > 30){
+                notificationService.showError("Karakternév túl hosszú. (Maximum 30 karakter)");
             }else if(characterDao.isCharNameExists(newCharacterName)){
                 notificationService.showError("Karakternév foglalt.");
             }else if(characterDao.renameCharacter(characterId, newCharacterName)){

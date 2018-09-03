@@ -25,7 +25,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.controller.request.user.RenameCharacterRequest;
+import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;

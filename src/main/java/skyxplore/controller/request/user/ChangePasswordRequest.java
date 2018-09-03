@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 @Data
 public class ChangePasswordRequest {
     @NotNull
-    @Size(min = 6)
+    @Size(min = 6, max = 30)
     private String newPassword;
 
     @NotNull
@@ -16,6 +16,6 @@ public class ChangePasswordRequest {
     private String confirmPassword;
 
     @NotNull
-    @Size(min = 6)
+    @Size(min = 1)
     private String oldPassword;
 }

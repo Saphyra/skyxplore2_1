@@ -68,6 +68,13 @@
                 response.responses.push(errorMessage);
                 invalidNewUsername.title = errorMessage;
                 $(invalidNewUsername).fadeIn();
+            }else if(newUserName.length > 30){
+                response.isValid = false;
+                this.lastUsernameValid = false;
+                const errorMessage = "Túl hosszú felhasználónév. (Maximum 30 karakter)";
+                response.responses.push(errorMessage);
+                invalidNewUsername.title = errorMessage;
+                $(invalidNewUsername).fadeIn();
             }else if(newUserName != this.lastUsernameQueried){
                 const isUserNameExists = userDao.isUserNameExists(newUserName);
                 this.lastUsernameQueried = newUserName;

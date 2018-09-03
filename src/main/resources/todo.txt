@@ -9,8 +9,6 @@ Cancel production
 Store password && sensitive data encrypted
 Credentials in separate table
 
-User & Character name max length limit
-Character name must not contain special characters
 Email FE validation: validate special characters
 
 CharacterId transfer simplicity

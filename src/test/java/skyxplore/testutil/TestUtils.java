@@ -3,6 +3,7 @@ package skyxplore.testutil;
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
+import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
