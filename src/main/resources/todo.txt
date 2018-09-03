@@ -2,6 +2,7 @@ FrontEnd:
     Asynchronous queries, and page loading
     Loading only the necessary content
     Loading content only when opening the tab
+    Subdirectories & smaller classes
 
 Shop & factory implement filters
 Cancel production
@@ -24,14 +25,6 @@ Create community
             - View ship
         - Report user
             - Report for what?
-    - Mails
-        - frontend
-            - View mail list
-                - Checkbox
-                    - Delete selected
-                    - Mark as read selected
-                    - Mark as unread selected
-                    - Archive selected
 
 Lobby
     - Create lobby

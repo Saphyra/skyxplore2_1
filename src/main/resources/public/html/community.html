@@ -89,7 +89,7 @@
                     <H2>Bejövő üzenetek</H2>
                     
                     <DIV class='actionwithselectedmails'>
-                        <BUTTON>Mindet kiválaszt</BUTTON>
+                        <BUTTON onclick='mailController.selectAll("receivedmailselected")'>Mindet kiválaszt</BUTTON>
                         <SELECT id='actionwithreceivedmails'>
                             <OPTION value='none'>Művelet választása</OPTION>
                             <OPTION value='delete'>Kiválasztottak törlése</OPTION>
@@ -97,7 +97,7 @@
                             <OPTION value='markasread'>Kiválasztottak olvasottnak jelölése</OPTION>
                             <OPTION value='markasunread'>Kiválasztottak olvasatlannak jelölése</OPTION>
                         </SELECT>
-                        <BUTTON>Végrehajt</BUTTON>
+                        <BUTTON onclick='mailController.processOnSelected("actionwithreceivedmails","receivedmailselected")'>Végrehajt</BUTTON>
                     </DIV>
                     
                     <DIV id='incomingmaillist' class='maillistitemcontainer'></DIV>
@@ -107,8 +107,12 @@
                     <H2>Elküldött üzenetek</H2>
                     
                     <DIV class='actionwithselectedmails'>
-                        <BUTTON>Mindet kiválaszt</BUTTON>
-                        <BUTTON>Kiválasztottak törlése</BUTTON>
+                        <BUTTON onclick='mailController.selectAll("sentmailselected")'>Mindet kiválaszt</BUTTON>
+                        <SELECT id='actionwithdeletedmails'>
+                            <OPTION value='none'>Művelet választása</OPTION>
+                            <OPTION value='delete'>Kiválasztottak törlése</OPTION>
+                        </SELECT>
+                        <BUTTON onclick='mailController.processOnSelected("actionwithdeletedmails", "sentmailselected")'>Végrehajt</BUTTON>
                     </DIV>
                     
                     <DIV id='sentmaillist' class='maillistitemcontainer'></DIV>
@@ -118,13 +122,13 @@
                     <H2>Archivált üzenetek</H2>
                     
                     <DIV class='actionwithselectedmails'>
-                        <BUTTON>Mindet kiválaszt</BUTTON>
-                        <SELECT id='actionwithreceivedmails'>
+                        <BUTTON onclick='mailController.selectAll("archivedmailselected")'>Mindet kiválaszt</BUTTON>
+                        <SELECT id='actionwitharchivedmails'>
                             <OPTION value='none'>Művelet választása</OPTION>
                             <OPTION value='delete'>Kiválasztottak törlése</OPTION>
                             <OPTION value='unarchive'>Kiválasztottak visszaállítása</OPTION>
                         </SELECT>
-                        <BUTTON>Végrehajt</BUTTON>
+                        <BUTTON onclick='mailController.processOnSelected("actionwitharchivedmails", "archivedmailselected")'>Végrehajt</BUTTON>
                     </DIV>
                     
                     <DIV id='archivedmaillist' class='maillistitemcontainer'></DIV>

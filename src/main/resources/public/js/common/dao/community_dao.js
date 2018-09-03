@@ -585,6 +585,7 @@
             if(response.status != ResponseStatus.OK){
                 throwException("UnknownBackendError", response.toString());
             }
+            return true;
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -609,6 +610,7 @@
             if(response.status != ResponseStatus.OK){
                 throwException("UnknownBackendError", response.toString());
             }
+            return true;
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
