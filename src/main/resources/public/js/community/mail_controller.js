@@ -132,6 +132,20 @@
                     const table = document.createElement("TABLE");
                     
                         const row1 = document.createElement("TR");
+                            const checkboxCell = document.createElement("TD");
+                                checkboxCell.onclick = function(e){e.stopPropagation()};
+                                checkboxCell.rowSpan = 2;
+                                checkboxCell.classList.add("textaligncenter");
+                                checkboxCell.classList.add("width2rem");
+                                
+                                const checkbox = document.createElement("INPUT");
+                                    checkbox.type = "checkbox";
+                                    checkbox.name = "receivedmailselected";
+                                    checkbox.value = mail.mailId;
+                                    checkbox.onclick = function(e){e.stopPropagation()};
+                            checkboxCell.appendChild(checkbox);
+                        row1.appendChild(checkboxCell);
+                            
                             const fromCell = document.createElement("TD");
                                 fromCell.innerHTML = "Feladó: " + mail.fromName;
                         row1.appendChild(fromCell);
@@ -274,6 +288,20 @@
                     const table = document.createElement("TABLE");
                     
                         const row1 = document.createElement("TR");
+                            const checkboxCell = document.createElement("TD");
+                                checkboxCell.onclick = function(e){e.stopPropagation()};
+                                checkboxCell.rowSpan = 2;
+                                checkboxCell.classList.add("textaligncenter");
+                                checkboxCell.classList.add("width2rem");
+                                
+                                const checkbox = document.createElement("INPUT");
+                                    checkbox.type = "checkbox";
+                                    checkbox.name = "sentmailselected";
+                                    checkbox.value = mail.mailId;
+                                    checkbox.onclick = function(e){e.stopPropagation()};
+                            checkboxCell.appendChild(checkbox);
+                        row1.appendChild(checkboxCell);
+                            
                             const fromCell = document.createElement("TD");
                                 fromCell.innerHTML = "Címzett: " + mail.toName;
                         row1.appendChild(fromCell);
@@ -384,6 +412,20 @@
                     const table = document.createElement("TABLE");
                     
                         const row1 = document.createElement("TR");
+                            const checkboxCell = document.createElement("TD");
+                                checkboxCell.onclick = function(e){e.stopPropagation()};
+                                checkboxCell.rowSpan = 2;
+                                checkboxCell.classList.add("textaligncenter");
+                                checkboxCell.classList.add("width2rem");
+                                
+                                const checkbox = document.createElement("INPUT");
+                                    checkbox.type = "checkbox";
+                                    checkbox.name = "archivedmailselected";
+                                    checkbox.value = mail.mailId;
+                                    checkbox.onclick = function(e){e.stopPropagation()};
+                            checkboxCell.appendChild(checkbox);
+                        row1.appendChild(checkboxCell);
+                        
                             const fromCell = document.createElement("TD");
                                 fromCell.innerHTML = "Feladó: " + mail.fromName;
                         row1.appendChild(fromCell);
@@ -418,7 +460,7 @@
                                     unArchiveButton.innerHTML = "Visszaállítás";
                                     unArchiveButton.onclick = function(e){
                                         if(communityDao.unarchiveMails([mail.mailId])){
-                                            notificationService.showSuccess("Üzenet visszaállítása.");
+                                            notificationService.showSuccess("Üzenet visszaállítva.");
                                         }else{
                                             notificationService.showError("Üzenet visszaállítása sikertelen.");
                                         }
