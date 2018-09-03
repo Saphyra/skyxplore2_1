@@ -87,16 +87,46 @@
             <DIV id='maillistcontainer'>
                 <DIV id='incomingmaillistcontainer' class='maillistcontainer'>
                     <H2>Bejövő üzenetek</H2>
+                    
+                    <DIV class='actionwithselectedmails'>
+                        <BUTTON>Mindet kiválaszt</BUTTON>
+                        <SELECT id='actionwithreceivedmails'>
+                            <OPTION value='none'>Művelet választása</OPTION>
+                            <OPTION value='delete'>Kiválasztottak törlése</OPTION>
+                            <OPTION value='archive'>Kiválasztottak archiválása</OPTION>
+                            <OPTION value='markasread'>Kiválasztottak olvasottnak jelölése</OPTION>
+                            <OPTION value='markasunread'>Kiválasztottak olvasatlannak jelölése</OPTION>
+                        </SELECT>
+                        <BUTTON>Végrehajt</BUTTON>
+                    </DIV>
+                    
                     <DIV id='incomingmaillist' class='maillistitemcontainer'></DIV>
                 </DIV>
                 
                 <DIV id='sentmaillistcontainer' class='maillistcontainer displaynone'>
                     <H2>Elküldött üzenetek</H2>
+                    
+                    <DIV class='actionwithselectedmails'>
+                        <BUTTON>Mindet kiválaszt</BUTTON>
+                        <BUTTON>Kiválasztottak törlése</BUTTON>
+                    </DIV>
+                    
                     <DIV id='sentmaillist' class='maillistitemcontainer'></DIV>
                 </DIV>
                 
                 <DIV id='archivedmaillistcontainer' class='maillistcontainer displaynone'>
                     <H2>Archivált üzenetek</H2>
+                    
+                    <DIV class='actionwithselectedmails'>
+                        <BUTTON>Mindet kiválaszt</BUTTON>
+                        <SELECT id='actionwithreceivedmails'>
+                            <OPTION value='none'>Művelet választása</OPTION>
+                            <OPTION value='delete'>Kiválasztottak törlése</OPTION>
+                            <OPTION value='unarchive'>Kiválasztottak visszaállítása</OPTION>
+                        </SELECT>
+                        <BUTTON>Végrehajt</BUTTON>
+                    </DIV>
+                    
                     <DIV id='archivedmaillist' class='maillistitemcontainer'></DIV>
                 </DIV>
             </DIV>
