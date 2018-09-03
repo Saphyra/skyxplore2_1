@@ -1,6 +1,12 @@
+FrontEnd:
+    Asynchronous queries, and page loading
+    Loading only the necessary content
+    Loading content only when opening the tab
+
 Shop & factory implement filters
 Cancel production
 Store password && sensitive data encrypted
+Credentials in separate table
 
 User & Character name max length limit
 Character name must not contain special characters
@@ -20,8 +26,6 @@ Create community
             - Report for what?
     - Mails
         - frontend
-            - Subject length limit
-            - Message length limit
             - View mail list
                 - Checkbox
                     - Delete selected

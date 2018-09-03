@@ -34,8 +34,12 @@
                 notificationService.showError("A címzett megadása kötelező!");
             }else if(subjectField.value.length == 0){
                 notificationService.showError("A tárgy kitöltése kötelező!");
+            }else if(subjectField.value.length > 100){
+                notificationService.showError("A tárgy túl hosszú (Max 100 karakter).")
             }else if(messageField.value.length == 0){
                 notificationService.showError("Az üzenet kitöltése kötelező!")
+            }else if(messageField.value.length > 4000){
+                notificationService.showError("Az üzenet túl hosszú (Max 4000 karakter).")
             }else{
                 if(communityDao.sendMail(sessionStorage.characterId, newMailController.addresseeId, subjectField.value, messageField.value)){
                     notificationService.showSuccess("Üzenet elküldve.");
