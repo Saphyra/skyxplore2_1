@@ -4,9 +4,8 @@ FrontEnd:
     Loading content only when opening the tab
     Subdirectories & smaller classes
 
-Shop & factory implement filters
-Cancel production
 Store password && sensitive data encrypted
+    - https://www.mkyong.com/java/java-symmetric-key-cryptography-example/
 Credentials in separate table
 
 Email FE validation: validate special characters
@@ -16,6 +15,9 @@ CharacterId transfer simplicity
         - add allowed uris
         - remove unnecessary parameters
     - eliminate unnecessary checks
+
+Shop & factory implement filters
+Cancel production
 
 Create community
     - Friends
