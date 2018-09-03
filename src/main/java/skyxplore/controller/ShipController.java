@@ -1,5 +1,7 @@
 package skyxplore.controller;
 
+import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class ShipController {
     private final EquippedShipFacade equippedShipFacade;
 
     @PostMapping(EQUIP_MAPPING)
-    public void equip(@RequestBody EquipRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    public void equip(@RequestBody @Valid EquipRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to equip {} to character {}", userId, request, characterId);
         equippedShipFacade.equip(request, userId, characterId);
     }
@@ -43,7 +45,7 @@ public class ShipController {
     }
 
     @PostMapping(UNEQUIP_MAPPING)
-    public void unequip(@RequestBody UnequipRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    public void unequip(@RequestBody @Valid UnequipRequest request, @PathVariable(value = "characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
         log.info("{} wants to unequip {} from character {}'s ship", userId, request, characterId);
         equippedShipFacade.unequip(request, userId, characterId);
     }

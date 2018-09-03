@@ -14,6 +14,8 @@ import skyxplore.service.MailFacade;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @SuppressWarnings("unused")
 @Slf4j
 @RestController
@@ -117,7 +119,7 @@ public class MailController {
 
     @PutMapping(SEND_MAIL_MAPPING)
     public void sendMail(
-        @RequestBody SendMailRequest request,
+        @RequestBody @Valid SendMailRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ) {
         log.info("Sending mail...");
