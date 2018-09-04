@@ -20,13 +20,13 @@ public class ProductEntity {
     private String elementId;
 
     @Column(name = "amount", nullable = false)
-    private Integer amount;
+    private String amount;
 
     @Column(name = "added_at")
     private Long addedAt;
 
     @Column(name = "construction_time", nullable = false)
-    private Integer constructionTime;
+    private String constructionTime;
 
     @Column(name = "start_time")
     private Long startTime;

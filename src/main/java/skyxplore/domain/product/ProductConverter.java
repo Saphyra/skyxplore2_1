@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 import skyxplore.encryption.IntegerEncryptor;
+import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 @Component
@@ -14,6 +15,7 @@ import skyxplore.util.DateTimeUtil;
 public class ProductConverter extends ConverterBase<ProductEntity, Product> {
     private final DateTimeUtil dateTimeUtil;
     private final IntegerEncryptor integerEncryptor;
+    private final StringEncryptor stringEncryptor;
 
     @Override
     public Product convertEntity(ProductEntity entity) {
@@ -23,9 +25,9 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         Product domain = new Product();
         domain.setProductId(entity.getProductId());
         domain.setFactoryId(entity.getFactoryId());
-        domain.setElementId(entity.getElementId());
-        domain.setAmount(entity.getAmount());
-        domain.setConstructionTime(entity.getConstructionTime());
+        domain.setElementId(stringEncryptor.decryptEntity(entity.getElementId(), entity.getProductId()));
+        domain.setAmount(integerEncryptor.decrypt(entity.getAmount(), entity.getProductId()));
+        domain.setConstructionTime(integerEncryptor.decrypt(entity.getConstructionTime(), entity.getProductId()));
         domain.setAddedAt(entity.getAddedAt());
         domain.setStartTime(dateTimeUtil.convertEntity(entity.getStartTime()));
         domain.setEndTime(dateTimeUtil.convertEntity(entity.getEndTime()));
@@ -41,9 +43,9 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         ProductEntity entity = new ProductEntity();
         entity.setProductId(domain.getProductId());
         entity.setFactoryId(domain.getFactoryId());
-        entity.setElementId(domain.getElementId());
-        entity.setAmount(domain.getAmount());
-        entity.setConstructionTime(domain.getConstructionTime());
+        entity.setElementId(stringEncryptor.encryptEntity(domain.getElementId(), domain.getProductId()));
+        entity.setAmount(integerEncryptor.encrypt(domain.getAmount(), domain.getProductId()));
+        entity.setConstructionTime(integerEncryptor.encrypt(domain.getConstructionTime(), domain.getProductId()));
         entity.setAddedAt(domain.getAddedAt());
         entity.setStartTime(dateTimeUtil.convertDomain(domain.getStartTime()));
         entity.setEndTime(dateTimeUtil.convertDomain(domain.getEndTime()));

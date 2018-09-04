@@ -7,15 +7,14 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 //TODO unit test
-//TODO implement
 public class IntegerEncryptor{
     private final StringEncryptor stringEncryptor;
 
-    protected String encrypt(Integer entity, String key) {
-        return null;
+    public String encrypt(Integer entity, String key) {
+        return stringEncryptor.encrypt(entity.toString(), key);
     }
 
-    protected Integer decrypt(String entity, String key) {
-        return null;
+    public Integer decrypt(String entity, String key) {
+        return Integer.valueOf(stringEncryptor.decrypt(entity, key));
     }
 }
