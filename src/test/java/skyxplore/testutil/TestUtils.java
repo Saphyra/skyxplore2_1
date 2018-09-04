@@ -20,6 +20,7 @@ import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
+import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
@@ -49,10 +50,16 @@ public class TestUtils {
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
 
-    //CONVERTER
+    //Converter
     public static final String CONVERTER_ENTITY = "converter_entity";
     public static final Integer CONVERTER_INT_VALUE = 316;
     public static final String CONVERTER_KEY = "converter_key";
+
+    //Credentials
+    public static final String USER_FAKE_PASSWORD = "user_fake_password";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_NEW_PASSWORD = "user_new_password";
+    public static final String USER_PASSWORD = "user_password";
 
     //Data
     public static final String DATA_ABILITY = "ability";
@@ -130,12 +137,8 @@ public class TestUtils {
     //User
     public static final String USER_EMAIL = "user_email";
     public static final String USER_ID = "user_id";
-    public static final String USER_FAKE_PASSWORD = "user_fake_password";
-    public static final String USER_NAME = "user_name";
     public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
-    public static final String USER_NEW_PASSWORD = "user_new_password";
-    public static final String USER_PASSWORD = "user_password";
 
     public static AccessToken createAccessToken() {
         AccessToken token = new AccessToken();
@@ -212,6 +215,10 @@ public class TestUtils {
 
     public static CreateCharacterRequest createCreateCharacterRequest(){
         return new CreateCharacterRequest(CHARACTER_NAME);
+    }
+
+    public static Credentials createCredentials(){
+        return new Credentials(USER_ID, USER_NAME, USER_PASSWORD);
     }
 
     public static Slot createDefenseSlot() {
@@ -386,8 +393,6 @@ public class TestUtils {
     public static SkyXpUser createUser() {
         SkyXpUser user = new SkyXpUser();
         user.setUserId(USER_ID);
-        user.setUsername(USER_NAME);
-        user.setPassword(USER_PASSWORD);
         user.setEmail(USER_EMAIL);
         HashSet<Role> roles = new HashSet<>();
         roles.add(Role.USER);

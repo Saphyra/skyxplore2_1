@@ -7,6 +7,7 @@ import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.USER_NEW_NAME;
 import static skyxplore.testutil.TestUtils.createChangeUserNameRequest;
+import static skyxplore.testutil.TestUtils.createCredentials;
 import static skyxplore.testutil.TestUtils.createUser;
 
 import org.junit.Test;
@@ -17,17 +18,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.request.user.ChangeUserNameRequest;
 import skyxplore.dataaccess.db.UserDao;
+import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
+import skyxplore.service.credentials.CredentialsService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeUserNameServiceTest {
     @Mock
-    private UserDao userDao;
-
-    @Mock
-    private UserQueryService userQueryService;
+    private CredentialsService credentialsService;
 
     @InjectMocks
     private ChangeUserNameService underTest;
@@ -35,7 +35,7 @@ public class ChangeUserNameServiceTest {
     @Test(expected = UserNameAlreadyExistsException.class)
     public void testChangeUserNameShouldThrowExceptionWhenUserNameExists() {
         //GIVEN
-        when(userQueryService.isUserNameExists(USER_NEW_NAME)).thenReturn(true);
+        when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(true);
         //WHEN
         underTest.changeUserName(createChangeUserNameRequest(), USER_ID);
     }
@@ -46,10 +46,10 @@ public class ChangeUserNameServiceTest {
         ChangeUserNameRequest request = createChangeUserNameRequest();
         request.setPassword(USER_FAKE_PASSWORD);
 
-        SkyXpUser user = createUser();
+        Credentials credentials = createCredentials();
 
-        when(userQueryService.getUserById(USER_ID)).thenReturn(user);
-        when(userQueryService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
         //WHEN
         underTest.changeUserName(request, USER_ID);
     }
@@ -59,16 +59,16 @@ public class ChangeUserNameServiceTest {
         //GIVEN
         ChangeUserNameRequest request = createChangeUserNameRequest();
 
-        SkyXpUser user = createUser();
+        Credentials credentials = createCredentials();
 
-        when(userQueryService.getUserById(USER_ID)).thenReturn(user);
-        when(userQueryService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
         //WHEN
         underTest.changeUserName(request, USER_ID);
         //THEN
-        verify(userQueryService).getUserById(USER_ID);
-        verify(userQueryService).isUserNameExists(USER_NEW_NAME);
-        verify(userDao).update(user);
-        assertEquals(USER_NEW_NAME, user.getUsername());
+        verify(credentialsService).getByUserId(USER_ID);
+        verify(credentialsService).isUserNameExists(USER_NEW_NAME);
+        verify(credentialsService).save(credentials);
+        assertEquals(USER_NEW_NAME, credentials.getUserName());
     }
 }

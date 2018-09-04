@@ -6,14 +6,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
+import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
+import skyxplore.exception.base.UnauthorizedException;
+import skyxplore.service.credentials.CredentialsService;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ChangeEmailService {
+    private final CredentialsService credentialsService;
     private final UserQueryService userQueryService;
     private final UserDao userDao;
 
@@ -22,7 +26,12 @@ public class ChangeEmailService {
         if (userQueryService.isEmailExists(request.getNewEmail())) {
             throw new EmailAlreadyExistsException(request.getNewEmail() + " email is already exists.");
         }
-        if (!request.getPassword().equals(user.getPassword())) {
+
+        Credentials credentials = credentialsService.getByUserId(userId);
+        if(credentials == null){
+            throw new UnauthorizedException("No credentials found with userId " + userId);
+        }
+        if (!request.getPassword().equals(credentials.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }
         user.setEmail(request.getNewEmail());

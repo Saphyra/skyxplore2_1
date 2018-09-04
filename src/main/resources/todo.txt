@@ -1,14 +1,12 @@
+==========Continuous==========
+
 FrontEnd:
     Asynchronous queries, and page loading
     Loading only the necessary content
     Loading content only when opening the tab
     Subdirectories & smaller classes
 
-Store password && sensitive data encrypted
-    - https://www.mkyong.com/java/java-symmetric-key-cryptography-example/
-Credentials in separate table
-
-Email FE validation: validate special characters
+==========Continuous tasks / cleanups==========
 
 CharacterId transfer simplicity
     - update endpoints
@@ -16,8 +14,15 @@ CharacterId transfer simplicity
         - remove unnecessary parameters
     - eliminate unnecessary checks
 
+==========Tasks==========
+
+Store password && sensitive data encrypted
+    - https://www.mkyong.com/java/java-symmetric-key-cryptography-example/
+
 Shop & factory implement filters
 Cancel production
+
+Email FE validation: validate special characters
 
 Create community
     - Friends

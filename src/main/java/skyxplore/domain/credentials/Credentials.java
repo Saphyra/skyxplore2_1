@@ -1,16 +1,14 @@
-package skyxplore.domain.user;
+package skyxplore.domain.credentials;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class SkyXpUser {
+public class Credentials {
     private String userId;
-    private String email;
-    private HashSet<Role> roles;
+    private String userName;
+    private String password;
 }

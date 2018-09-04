@@ -3,6 +3,8 @@ package skyxplore.dataaccess.db;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import skyxplore.dataaccess.db.repository.CredentialsRepository;
 import skyxplore.dataaccess.db.repository.UserRepository;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.domain.user.UserConverter;
@@ -18,10 +20,13 @@ import java.util.Optional;
 public class UserDao {
     private final UserConverter userConverter;
     private final UserRepository userRepository;
+    private final CredentialsDao credentialsDao;
 
+    @Transactional
     public void delete(String userId){
         log.info("Deleting user {}", userId);
         userRepository.deleteById(userId);
+        credentialsDao.delete(userId);
     }
 
     public SkyXpUser findUserByEmail(String email){
@@ -31,10 +36,6 @@ public class UserDao {
     public SkyXpUser findById(String userId){
         Optional<UserEntity> user = userRepository.findById(userId);
         return user.map(userConverter::convertEntity).orElse(null);
-    }
-
-    public SkyXpUser findUserByUserName(String userName){
-        return userConverter.convertEntity(userRepository.findByUsername(userName));
     }
 
     public SkyXpUser registrateUser(SkyXpUser user){
@@ -48,9 +49,7 @@ public class UserDao {
         if(actual.isPresent()){
             UserEntity entity = actual.get();
             entity.setUserId(user.getUserId());
-            entity.setUsername(user.getUsername());
             entity.setEmail(user.getEmail());
-            entity.setPassword(user.getPassword());
             entity.setRoles(user.getRoles());
         }else{
             throw new UserNotFoundException("User not found with id" + user.getUserId());
