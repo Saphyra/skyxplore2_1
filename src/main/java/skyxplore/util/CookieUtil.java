@@ -14,7 +14,11 @@ import java.util.Optional;
 //TODO unit test
 public class CookieUtil {
     public String getCookie(HttpServletRequest request, String name) {
-        Optional<Cookie> cookie = Arrays.stream(request.getCookies())
+        Cookie[] cookieArray = request.getCookies();
+        if(cookieArray == null){
+            return null;
+        }
+        Optional<Cookie> cookie = Arrays.stream(cookieArray)
             .filter(c -> c.getName().equals(name))
             .findAny();
         return cookie.map(Cookie::getValue).orElse(null);
