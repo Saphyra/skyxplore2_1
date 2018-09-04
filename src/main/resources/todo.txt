@@ -17,7 +17,7 @@ CharacterId transfer simplicity
 
 ==========Tasks==========
 
-Store password && sensitive data encrypted
+Store sensitive data encrypted
     - https://www.mkyong.com/java/java-symmetric-key-cryptography-example/
 
 Shop & factory implement filters

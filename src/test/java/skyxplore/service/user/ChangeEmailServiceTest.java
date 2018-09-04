@@ -9,6 +9,7 @@ import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.SkyXpUser;
+import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
@@ -20,6 +21,9 @@ import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeEmailServiceTest {
+    @Mock
+    private PasswordService passwordService;
+
     @Mock
     private  CredentialsService credentialsService;
 
@@ -50,6 +54,7 @@ public class ChangeEmailServiceTest {
 
         when(userQueryService.isEmailExists(USER_NEW_EMAIL)).thenReturn(false);
         when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(passwordService.authenticate(USER_FAKE_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(false);
         //WHEN
         underTest.changeEmail(request, USER_ID);
     }
@@ -65,9 +70,11 @@ public class ChangeEmailServiceTest {
         when(userQueryService.isEmailExists(USER_NEW_EMAIL)).thenReturn(false);
         when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
         when(userQueryService.getUserById(USER_ID)).thenReturn(user);
+        when(passwordService.authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(true);
         //WHEN
         underTest.changeEmail(request, USER_ID);
         //THEN
+        verify(passwordService).authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
         verify(userQueryService).isEmailExists(USER_NEW_EMAIL);
         verify(credentialsService).getByUserId(USER_ID);
         verify(userDao).update(user);

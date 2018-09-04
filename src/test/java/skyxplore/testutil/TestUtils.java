@@ -60,6 +60,7 @@ public class TestUtils {
     public static final String USER_NAME = "user_name";
     public static final String USER_NEW_PASSWORD = "user_new_password";
     public static final String USER_PASSWORD = "user_password";
+    public static final String CREDENTIALS_HASHED_PASSWORD = "credentials_hashed_password";
 
     //Data
     public static final String DATA_ABILITY = "ability";
@@ -218,7 +219,7 @@ public class TestUtils {
     }
 
     public static Credentials createCredentials(){
-        return new Credentials(USER_ID, USER_NAME, USER_PASSWORD);
+        return new Credentials(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
     public static Slot createDefenseSlot() {

@@ -11,6 +11,7 @@ import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
+import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
@@ -30,6 +31,9 @@ public class RegistrationServiceTest {
 
     @Mock
     private IdGenerator idGenerator;
+
+    @Mock
+    private PasswordService passwordService;
 
     @Mock
     private UserDao userDao;
@@ -75,6 +79,7 @@ public class RegistrationServiceTest {
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(false);
         when(userQueryService.isEmailExists(USER_EMAIL)).thenReturn(false);
         when(idGenerator.getRandomId()).thenReturn(USER_ID);
+        when(passwordService.hashPassword(USER_PASSWORD)).thenReturn(CREDENTIALS_HASHED_PASSWORD);
         //WHEN
         underTest.registrateUser(request);
         //THEN
@@ -87,7 +92,7 @@ public class RegistrationServiceTest {
 
         ArgumentCaptor<Credentials> credentialsCaptor = ArgumentCaptor.forClass(Credentials.class);
         verify(credentialsService).save(credentialsCaptor.capture());
-        assertEquals(USER_PASSWORD, credentialsCaptor.getValue().getPassword());
+        assertEquals(CREDENTIALS_HASHED_PASSWORD, credentialsCaptor.getValue().getPassword());
         assertEquals(USER_NAME, credentialsCaptor.getValue().getUserName());
     }
 }

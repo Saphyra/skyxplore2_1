@@ -8,6 +8,7 @@ import skyxplore.controller.request.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.credentials.Credentials;
+import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 import skyxplore.util.DateTimeUtil;
@@ -18,19 +19,20 @@ import skyxplore.util.IdGenerator;
 @RequiredArgsConstructor
 public class LoginService {
     private final AccessTokenDao accessTokenDao;
+    private final PasswordService passwordService;
     private final CredentialsService credentialsService;
     private final DateTimeUtil accessTokenDateResolver;
     private final IdGenerator idGenerator;
 
     public AccessToken login(LoginRequest loginRequest) {
-        Credentials user = getCredentials(loginRequest);
-        log.info("{} authentication successful.", user.getUserId());
-        AccessToken accessToken = accessTokenDao.findByUserId(user.getUserId());
+        Credentials credentials = getCredentials(loginRequest);
+        log.info("{} authentication successful.", credentials.getUserId());
+        AccessToken accessToken = accessTokenDao.findByUserId(credentials.getUserId());
         if (accessToken != null) {
             log.info("Access token already exists. Deleting...");
             accessTokenDao.delete(accessToken);
         }
-        accessToken = createAccessToken(user);
+        accessToken = createAccessToken(credentials);
         accessTokenDao.save(accessToken);
         return accessToken;
     }
@@ -38,8 +40,7 @@ public class LoginService {
     private Credentials getCredentials(LoginRequest loginRequest) {
         Credentials credentials = credentialsService.getCredentialsByName(loginRequest.getUserName());
 
-
-        if (!credentials.getPassword().equals(loginRequest.getPassword())) {
+        if (!passwordService.authenticate(loginRequest.getPassword(), credentials.getPassword())) {
             throw new BadCredentialsException("Password is incorrect.");
         }
         return credentials;
