@@ -1,5 +1,4 @@
-==========Continuous==========
-
+==========Conventions==========
 FrontEnd:
     Asynchronous queries, and page loading
     Loading only the necessary content
