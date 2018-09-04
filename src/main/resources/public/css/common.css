@@ -90,6 +90,7 @@ button, .button, a, select{
     padding: 0.2rem;
     cursor: pointer;
     color: white;
+    white-space: nowrap;
 }
 
 button:hover, .button:hover, a:hover{

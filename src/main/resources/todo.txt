@@ -1,5 +1,54 @@
+==========Conventions==========
+FrontEnd:
+    Asynchronous queries, and page loading
+    Loading only the necessary content
+    Loading content only when opening the tab
+    Subdirectories & smaller classes
+
+Converter.convertDomain should throw exception when null
+
+==========Continuous tasks / cleanups==========
+
+CharacterId transfer simplicity
+    - update endpoints
+        - add allowed uris
+        - remove unnecessary parameters
+    - eliminate unnecessary checks
+
+==========Tasks==========
+
+Store sensitive data encrypted
+    - CharacterName, UserName, email cannot be encrypted, due to exist query
+    - TO ENCRYPT
+        - ship shiptype
+        - ship corehull
+        - ship connectorSlot
+        - ship connectorEquipped
+        - slot
+
 Shop & factory implement filters
 Cancel production
 
-Unit tests
+Email FE validation: validate special characters
+
+Create community
+    - Friends
+        - List of friends
+            - View ship
+        - Report user
+            - Report for what?
+
+Lobby
+    - Create lobby
+    - Redirect to lobby page
+    - Invite friends to lobby
+
 Javadoc
+Integration tests
+Logging
+
+FrontEnd testing
+https://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference
+
+Spring profiles to support multiple data sources
+-Dspring.profiles.active=prod

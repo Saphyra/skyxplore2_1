@@ -1,0 +1,62 @@
+#addfriend{
+    display: none;
+    top: 3.1rem;
+    bottom: 3rem;
+}
+
+#addfriendcontainer{
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    border: 3px ridge white;
+}
+
+#addfriendcontainer h2{
+    text-align: center;
+    border-bottom: 3px ridge white;
+    padding: 0.5rem;
+}
+
+#addfriendclosebutton{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.25rem;
+}
+
+#friendname{
+    font-size: 1.25rem;
+    width: calc(100% - 2rem);
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#usersfoundfornewfriend{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 8rem;
+}
+
+.maybefriend{
+    position: relative;
+    border: 1px ridge white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.maybefriend div{
+    margin-right: 7rem;
+}
+
+.addfriendbutton{
+    position: absolute;
+    right: 0;
+    top: 0;
+}

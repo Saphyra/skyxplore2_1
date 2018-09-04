@@ -24,7 +24,7 @@ public class CharacterEntity {
     private String characterName;
 
     @Column(name = "money", nullable = false)
-    private Integer money;
+    private String money;
 
     @Column(name = "equipments", nullable = false)
     @Type(type = "text")

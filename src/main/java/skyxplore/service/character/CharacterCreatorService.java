@@ -3,7 +3,7 @@ package skyxplore.service.character;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.CreateCharacterRequest;
+import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.FactoryDao;

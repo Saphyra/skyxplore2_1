@@ -4,8 +4,8 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import skyxplore.controller.request.user.*;
 import skyxplore.filter.AuthFilter;
-import skyxplore.controller.request.*;
 import skyxplore.service.UserFacade;
 
 import javax.validation.Valid;
@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class UserController {
     private static final String CHANGE_EMAIL_MAPPING = "user/changeemail";
     private static final String CHANGE_PASSWORD_MAPPING = "user/changepassword";

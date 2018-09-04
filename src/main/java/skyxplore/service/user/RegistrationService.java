@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.UserRegistrationRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.dataaccess.db.UserDao;
+import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
+import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
+import skyxplore.service.credentials.CredentialsService;
 import skyxplore.util.IdGenerator;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
@@ -21,7 +24,9 @@ import skyxplore.util.IdGenerator;
 @RequiredArgsConstructor
 @Slf4j
 public class RegistrationService {
+    private final CredentialsService credentialsService;
     private final IdGenerator idGenerator;
+    private final PasswordService passwordService;
     private final UserDao userDao;
     private final UserQueryService userQueryService;
 
@@ -29,20 +34,20 @@ public class RegistrationService {
         validateRegistrationRequest(request);
         SkyXpUser user = new SkyXpUser(
             idGenerator.getRandomId(),
-            request.getUsername(),
-            request.getPassword(),
             request.getEmail(),
             new HashSet<>(Arrays.asList(Role.USER))
         );
-        SkyXpUser registratedUser = userDao.registrateUser(user);
-        log.info("New userId: {}", registratedUser.getUserId());
+        userDao.registrateUser(user);
+        String passwordToken = passwordService.hashPassword(request.getPassword());
+        credentialsService.save(new Credentials(user.getUserId(), request.getUsername(), passwordToken));
+        log.info("New userId: {}", user.getUserId());
     }
 
     private void validateRegistrationRequest(UserRegistrationRequest request) {
         if (!request.getPassword().equals(request.getConfirmPassword())) {
             throw new BadlyConfirmedPasswordException("Confirm password does not match");
         }
-        if (userQueryService.isUserNameExists(request.getUsername())) {
+        if (credentialsService.isUserNameExists(request.getUsername())) {
             throw new UserNameAlreadyExistsException(request.getUsername() + " user name is already exists.");
         }
         if (userQueryService.isEmailExists(request.getEmail())) {

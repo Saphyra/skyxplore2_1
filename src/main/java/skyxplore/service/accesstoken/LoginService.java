@@ -7,47 +7,46 @@ import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.domain.user.SkyXpUser;
+import skyxplore.domain.credentials.Credentials;
+import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
-import skyxplore.service.UserFacade;
-import skyxplore.util.AccessTokenDateResolver;
+import skyxplore.service.credentials.CredentialsService;
+import skyxplore.util.DateTimeUtil;
 import skyxplore.util.IdGenerator;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class LoginService {
-    private final AccessTokenDateResolver accessTokenDateResolver;
     private final AccessTokenDao accessTokenDao;
+    private final PasswordService passwordService;
+    private final CredentialsService credentialsService;
+    private final DateTimeUtil accessTokenDateResolver;
     private final IdGenerator idGenerator;
-    private final UserFacade userFacade;
 
     public AccessToken login(LoginRequest loginRequest) {
-        SkyXpUser user = getAuthenticatedUser(loginRequest);
-        log.info("{} authentication successful.", user.getUserId());
-        AccessToken accessToken = accessTokenDao.findByUserId(user.getUserId());
+        Credentials credentials = getCredentials(loginRequest);
+        log.info("{} authentication successful.", credentials.getUserId());
+        AccessToken accessToken = accessTokenDao.findByUserId(credentials.getUserId());
         if (accessToken != null) {
             log.info("Access token already exists. Deleting...");
             accessTokenDao.delete(accessToken);
         }
-        accessToken = createAccessToken(user);
+        accessToken = createAccessToken(credentials);
         accessTokenDao.save(accessToken);
         return accessToken;
     }
 
-    private SkyXpUser getAuthenticatedUser(LoginRequest loginRequest) {
-        SkyXpUser user = userFacade.getUserByName(loginRequest.getUserName());
-        if (user == null) {
-            throw new BadCredentialsException("User cannot be found. Username: " + loginRequest.getUserName());
-        }
+    private Credentials getCredentials(LoginRequest loginRequest) {
+        Credentials credentials = credentialsService.getCredentialsByName(loginRequest.getUserName());
 
-        if (!user.getPassword().equals(loginRequest.getPassword())) {
+        if (!passwordService.authenticate(loginRequest.getPassword(), credentials.getPassword())) {
             throw new BadCredentialsException("Password is incorrect.");
         }
-        return user;
+        return credentials;
     }
 
-    private AccessToken createAccessToken(SkyXpUser user) {
+    private AccessToken createAccessToken(Credentials user) {
         AccessToken token = new AccessToken();
         token.setAccessTokenId(idGenerator.getRandomId());
         token.setUserId(user.getUserId());

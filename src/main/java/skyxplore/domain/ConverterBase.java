@@ -16,7 +16,7 @@ public abstract class ConverterBase<E, D> implements Converter<E, D> {
     @Override
     public List<E> convertDomain(List<D> domain) {
         if(domain == null){
-            return null;
+            throw new IllegalArgumentException("domain must not be null.");
         }
         return domain.stream().map(this::convertDomain).collect(Collectors.toList());
     }

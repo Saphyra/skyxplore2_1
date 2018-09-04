@@ -57,6 +57,10 @@
     border-width: 5px;
 }
 
+.bordercolorgreen{
+    border-color: green;
+}
+
 .borderbottominset{
     border-bottom-style: inset;
 }
@@ -91,6 +95,10 @@
 
 .borderridge{
     border-style: ridge;
+}
+
+.colorred{
+    color: red;
 }
 
 .cursornodrop{
@@ -152,6 +160,10 @@
     left: 65%;
 }
 
+.left100percent{
+    left: 100%;
+}
+
 .left5px{
     left: 5px;
 }
@@ -198,6 +210,10 @@
 
 .margintop0_5rem{
     margin-top: 0.5rem;
+}
+
+.margintop0_75rem{
+    margin-top: 0.75rem;
 }
 
 .margintop1rem{
@@ -256,6 +272,10 @@
     text-align: right;
 }
 
+.top0{
+    top: 0;
+}
+
 .top2px{
     top: 2px;
 }
@@ -284,6 +304,18 @@
     width: 4rem;
 }
 
+.width10rem{
+    width: 10rem;
+}
+
+.width11rem{
+    width: 11rem;
+}
+
+.width16rem{
+    width: 16rem;
+}
+
 .width50percent{
     width: 50%;
 }
@@ -294,10 +326,6 @@
 
 .width100percent{
     width: 100%;
-}
-
-.width10rem{
-    width: 10rem;
 }
 
 .width60vw{

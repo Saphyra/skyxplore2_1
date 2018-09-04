@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.UnequipRequest;
+import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
@@ -27,6 +27,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+
 public class UnequipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;

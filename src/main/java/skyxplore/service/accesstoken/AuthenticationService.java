@@ -13,7 +13,7 @@ import skyxplore.exception.UserNotFoundException;
 import skyxplore.exception.base.ServerErrorException;
 import skyxplore.filter.AuthFilter;
 import skyxplore.service.UserFacade;
-import skyxplore.util.AccessTokenDateResolver;
+import skyxplore.util.DateTimeUtil;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -21,9 +21,10 @@ import java.util.concurrent.ExecutionException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class AuthenticationService {
     private final AccessTokenDao accessTokenDao;
-    private final AccessTokenDateResolver accessTokenDateResolver;
+    private final DateTimeUtil accessTokenDateResolver;
     private final Cache<String, Optional<AccessToken>> accessTokenCache;
     private final UserFacade userFacade;
 
@@ -90,5 +91,9 @@ public class AuthenticationService {
         log.debug("Token expiration date refreshed");
         token.setLastAccess(accessTokenDateResolver.getActualDate());
         accessTokenDao.update(token);
+    }
+
+    public Boolean isCharacterActive(String characterId) {
+        return accessTokenDao.findByCharacterId(characterId).isPresent();
     }
 }

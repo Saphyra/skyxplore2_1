@@ -86,6 +86,9 @@
                 if(userName.length < 3){
                     errorMessage = "Felhasználónév túl rövid (Minimum 3 karakter).";
                     this.lastUserNameValid = false;
+                }else if(userName.length > 30){
+                    errorMessage = "Felhasználónév túl hosszú (Maximum 30 karakter).";
+                    this.lastUserNameValid = false;
                 }else{
                     if(this.lasUserNameQueried !== userName){
                         this.lastUserNameValid = !userDao.isUserNameExists(userName);
@@ -131,9 +134,9 @@
                     passwordResult = false;
                 }
                 
-                if(confirmPassword.length < 6){
-                    activateErrorElement(confirmPasswordErrorElementName, "Megerősítő jelszó túl rövid (Minimum 6 karakter).");
-                    confirmPasswordResult = false;
+                if(password.length > 30){
+                    activateErrorElement(passwordErrorElementName, "Jelszó túl hosszú (Maximum 30 karakter).");
+                    passwordResult = false;
                 }
                 
                 if(passwordResult && confirmPasswordResult && confirmPassword != password){

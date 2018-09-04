@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.EquipmentCategoryRequest;
+import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.ArmorService;
 import skyxplore.dataaccess.gamedata.subservice.BatteryService;
@@ -36,7 +36,7 @@ public class CategoryQueryService {
     private final WeaponService weaponService;
 
     public Map<String, GeneralDescription> getElementsOfCategory(EquipmentCategoryRequest request) {
-        log.info("Querying equipments of request {}", request);
+        log.info("Querying equipments of friendrequest {}", request);
         Map<String, GeneralDescription> result = new HashMap<>();
         switch (request) {
             case ALL:

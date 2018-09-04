@@ -20,4 +20,7 @@ public class AccessTokenEntity {
 
     @Column(name = "last_access", nullable = false)
     private Long lastAccess;
+
+    @Column(name = "character_id")
+    private String characterId;
 }

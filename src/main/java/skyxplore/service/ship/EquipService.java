@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.EquipRequest;
+import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
@@ -30,6 +30,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class EquipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;

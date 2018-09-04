@@ -4,34 +4,35 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.ChangePasswordRequest;
-import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.user.SkyXpUser;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.domain.credentials.Credentials;
+import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadlyConfirmedPasswordException;
+import skyxplore.service.credentials.CredentialsService;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ChangePasswordService {
-    private final UserDao userDao;
-    private final UserQueryService userQueryService;
+    private final CredentialsService credentialsService;
+    private final PasswordService passwordService;
 
     public void changePassword(ChangePasswordRequest request, String userId) {
-        SkyXpUser user = userQueryService.getUserById(userId);
-        validateChangePasswordRequest(request, user);
-        user.setPassword(request.getNewPassword());
+        Credentials credentials = credentialsService.getByUserId(userId);
+        validateChangePasswordRequest(request, credentials);
+        credentials.setPassword(passwordService.hashPassword(request.getNewPassword()));
         log.info("Changing password of user " + userId);
-        userDao.update(user);
+        credentialsService.save(credentials);
         log.info("Password successfully changed.");
     }
 
-    private void validateChangePasswordRequest(ChangePasswordRequest request, SkyXpUser user) {
-        if (!user.getPassword().equals(request.getOldPassword())) {
-            throw new BadCredentialsException("Wrong password.");
-        }
+    private void validateChangePasswordRequest(ChangePasswordRequest request, Credentials credentials) {
         if (!request.getNewPassword().equals(request.getConfirmPassword())) {
             throw new BadlyConfirmedPasswordException("Confirm password does not match.");
+        }
+        if (!passwordService.authenticate(request.getOldPassword(), credentials.getPassword())) {
+            throw new BadCredentialsException("Wrong password.");
         }
     }
 }

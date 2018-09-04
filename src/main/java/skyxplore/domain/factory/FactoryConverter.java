@@ -7,6 +7,7 @@ import skyxplore.domain.materials.MaterialsConverter;
 
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     private final MaterialsConverter materialsConverter;
 
@@ -18,7 +19,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
         Factory domain = new Factory();
         domain.setFactoryId(entity.getFactoryId());
         domain.setCharacterId(entity.getCharacterId());
-        domain.setMaterials(materialsConverter.convertEntity(entity.getMaterials()));
+        domain.setMaterials(materialsConverter.convertEntity(entity.getMaterials(), entity.getFactoryId()));
 
         return domain;
     }
@@ -26,12 +27,12 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     @Override
     public FactoryEntity convertDomain(Factory domain) {
         if(domain == null){
-            return null;
+            throw new IllegalArgumentException("domain must not be null.");
         }
         FactoryEntity entity = new FactoryEntity();
         entity.setFactoryId(domain.getFactoryId());
         entity.setCharacterId(domain.getCharacterId());
-        entity.setMaterials(materialsConverter.convertDomain(domain.getMaterials()));
+        entity.setMaterials(materialsConverter.convertDomain(domain.getMaterials(), domain.getFactoryId()));
 
         return entity;
     }

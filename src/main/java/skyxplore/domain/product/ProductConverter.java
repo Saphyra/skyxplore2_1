@@ -4,13 +4,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.encryption.IntegerEncryptor;
+import skyxplore.encryption.StringEncryptor;
+import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class ProductConverter extends ConverterBase<ProductEntity, Product> {
-    private final DateTimeConverter dateTimeConverter;
+    private final DateTimeUtil dateTimeUtil;
+    private final IntegerEncryptor integerEncryptor;
+    private final StringEncryptor stringEncryptor;
 
     @Override
     public Product convertEntity(ProductEntity entity) {
@@ -20,30 +25,30 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         Product domain = new Product();
         domain.setProductId(entity.getProductId());
         domain.setFactoryId(entity.getFactoryId());
-        domain.setElementId(entity.getElementId());
-        domain.setAmount(entity.getAmount());
-        domain.setConstructionTime(entity.getConstructionTime());
+        domain.setElementId(stringEncryptor.decryptEntity(entity.getElementId(), entity.getProductId()));
+        domain.setAmount(integerEncryptor.decrypt(entity.getAmount(), entity.getProductId()));
+        domain.setConstructionTime(integerEncryptor.decrypt(entity.getConstructionTime(), entity.getProductId()));
         domain.setAddedAt(entity.getAddedAt());
-        domain.setStartTime(dateTimeConverter.convertEntity(entity.getStartTime()));
-        domain.setEndTime(dateTimeConverter.convertEntity(entity.getEndTime()));
+        domain.setStartTime(dateTimeUtil.convertEntity(entity.getStartTime()));
+        domain.setEndTime(dateTimeUtil.convertEntity(entity.getEndTime()));
 
         return domain;
     }
 
     @Override
     public ProductEntity convertDomain(Product domain) {
-        if (domain == null) {
-            return null;
+        if(domain == null){
+            throw new IllegalArgumentException("domain must not be null.");
         }
         ProductEntity entity = new ProductEntity();
         entity.setProductId(domain.getProductId());
         entity.setFactoryId(domain.getFactoryId());
-        entity.setElementId(domain.getElementId());
-        entity.setAmount(domain.getAmount());
-        entity.setConstructionTime(domain.getConstructionTime());
+        entity.setElementId(stringEncryptor.encryptEntity(domain.getElementId(), domain.getProductId()));
+        entity.setAmount(integerEncryptor.encrypt(domain.getAmount(), domain.getProductId()));
+        entity.setConstructionTime(integerEncryptor.encrypt(domain.getConstructionTime(), domain.getProductId()));
         entity.setAddedAt(domain.getAddedAt());
-        entity.setStartTime(dateTimeConverter.convertDomain(domain.getStartTime()));
-        entity.setEndTime(dateTimeConverter.convertDomain(domain.getEndTime()));
+        entity.setStartTime(dateTimeUtil.convertDomain(domain.getStartTime()));
+        entity.setEndTime(dateTimeUtil.convertDomain(domain.getEndTime()));
         return entity;
     }
 }

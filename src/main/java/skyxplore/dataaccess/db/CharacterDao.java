@@ -17,55 +17,65 @@ import java.util.Optional;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class CharacterDao {
+    private final BlockedCharacterDao blockedCharacterDao;
     private final CharacterConverter characterConverter;
     private final CharacterRepository characterRepository;
     private final EquippedShipDao equippedShipDao;
     private final FactoryDao factoryDao;
+    private final FriendRequestDao friendRequestDao;
+    private final FriendshipDao friendshipDao;
+    private final MailDao mailDao;
     private final UserDao userDao;
 
-    public void deleteById(String characterId){
+    public void deleteById(String characterId) {
         equippedShipDao.deleteByCharacterId(characterId);
         factoryDao.deleteByCharacterId(characterId);
+        friendRequestDao.deleteByCharacterId(characterId);
+        friendshipDao.deleteByCharacterId(characterId);
+        blockedCharacterDao.deleteByCharacterId(characterId);
+        mailDao.deleteByCharacterId(characterId);
 
         log.info("Deleting character {}", characterId);
         characterRepository.deleteById(characterId);
     }
 
-    public void deleteByUserId(String userId){
+    public void deleteByUserId(String userId) {
         List<SkyXpCharacter> characters = findByUserId(userId);
         characters.forEach(e -> deleteById(e.getCharacterId()));
     }
 
-    public SkyXpCharacter findById(String characterId){
-        Optional<CharacterEntity> character = characterRepository.findById(characterId);
-        if(character.isPresent()){
-            return characterConverter.convertEntity(character.get());
-        }
-        throw new CharacterNotFoundException("No character found with id" + characterId);
+    public SkyXpCharacter findByCharacterName(String characterName) {
+        return characterConverter.convertEntity(characterRepository.findByCharacterName(characterName));
     }
 
-    public List<SkyXpCharacter> findByUserId(String userId){
+    public List<SkyXpCharacter> findCharacterByNameLike(String name) {
+        return characterConverter.convertEntity(characterRepository.findByCharacterNameContaining(name));
+    }
+
+    public SkyXpCharacter findById(String characterId) {
+        Optional<CharacterEntity> character = characterRepository.findById(characterId);
+        return character.map(characterConverter::convertEntity).orElse(null);
+    }
+
+    public List<SkyXpCharacter> findByUserId(String userId) {
         SkyXpUser user = userDao.findById(userId);
         return characterConverter.convertEntity(characterRepository.findByUserId(user.getUserId()));
     }
 
-    public SkyXpCharacter findByCharacterName(String characterName){
-        return characterConverter.convertEntity(characterRepository.findByCharacterName(characterName));
-    }
-
-    public SkyXpCharacter save(SkyXpCharacter character){
-        return characterConverter.convertEntity(characterRepository.save(characterConverter.convertDomain(character)));
-    }
-
     @Transactional
-    public void renameCharacter(String characterId, String newCharacterName){
+    public void renameCharacter(String characterId, String newCharacterName) {
         Optional<CharacterEntity> character = characterRepository.findById(characterId);
-        if(character.isPresent()){
+        if (character.isPresent()) {
             CharacterEntity entity = character.get();
             entity.setCharacterName(newCharacterName);
-        }else{
+        } else {
             throw new CharacterNotFoundException("Character not found with id " + characterId);
         }
+    }
+
+    public SkyXpCharacter save(SkyXpCharacter character) {
+        return characterConverter.convertEntity(characterRepository.save(characterConverter.convertDomain(character)));
     }
 }

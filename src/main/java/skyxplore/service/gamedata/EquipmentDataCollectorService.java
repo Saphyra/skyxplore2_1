@@ -19,6 +19,7 @@ import skyxplore.domain.slot.EquippedSlot;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class EquipmentDataCollectorService {
     private final DataQueryService dataQueryService;
     private final ShipService shipService;

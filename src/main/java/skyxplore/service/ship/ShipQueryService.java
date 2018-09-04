@@ -18,6 +18,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class ShipQueryService {
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;

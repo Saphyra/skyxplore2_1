@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @SuppressWarnings({"unchecked", "unused", "WeakerAccess"})
 @Data
+//TODO unit test
 public class EquippedShip {
     private String shipId;
     private String characterId;

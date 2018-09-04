@@ -21,7 +21,7 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.service.GameDataFacade;
-import skyxplore.util.DateTimeConverter;
+import skyxplore.util.DateTimeUtil;
 
 @SuppressWarnings("unused")
 @Slf4j
@@ -30,7 +30,7 @@ import skyxplore.util.DateTimeConverter;
 @RequiredArgsConstructor
 public class ProductFactoryService {
     private final CharacterDao characterDao;
-    private final DateTimeConverter dateTimeConverter;
+    private final DateTimeUtil dateTimeUtil;
     private final GameDataFacade gameDataFacade;
     private final FactoryDao factoryDao;
     private final ProductDao productDao;
@@ -45,7 +45,13 @@ public class ProductFactoryService {
         log.info("Processing finished products...");
         List<Product> products = productDao.getFinishedProducts();
         log.info("Number of finished products: {}", products.size());
-        products.forEach(this::finishProduct);
+        products.forEach(product -> {
+            try{
+                finishProduct(product);
+            }catch (Exception e){
+                log.error("Error occurred during finishing product {}", product, e);
+            }
+        });
     }
 
     @Transactional
@@ -85,14 +91,14 @@ public class ProductFactoryService {
         try {
             startBuilding(product);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error occurred during starting new product {}", product, e);
         }
     }
 
     @Transactional
     private void startBuilding(Product product) {
         log.info("Start building: {}", product);
-        LocalDateTime startTime = dateTimeConverter.now();
+        LocalDateTime startTime = dateTimeUtil.now();
         LocalDateTime endTime = startTime.plusSeconds(product.getConstructionTime());
         product.setStartTime(startTime);
         product.setEndTime(endTime);

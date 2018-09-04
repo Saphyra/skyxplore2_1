@@ -7,7 +7,6 @@
     
     /*
     Arguments:
-        - characterId: the id of the character
         - elementId: the id of the element to add
         - amount: amount to add
     Returns
@@ -17,11 +16,8 @@
         - IllegalArgument exception is elementId is null or undefined.
         - IllegalArgument exception is amount is null, undefined, or not a number.
     */
-    function addToQueue(characterId, elementId, amount){
+    function addToQueue(elementId, amount){
         try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined");
-            }
             if(elementId == null || elementId == undefined){
                 throwException("IllegalArgument", "elementId must not be null or undefined");
             }
@@ -32,7 +28,7 @@
                 throwException("IllegalArgument", "amount must be a number. Actual: " + typeof amount);
             }
             
-            const path = "factory/" + characterId
+            const path = "factory";
             const content = {
                 elementId: elementId,
                 amount: amount

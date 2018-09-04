@@ -11,8 +11,6 @@ import java.util.HashSet;
 @Data
 public class SkyXpUser {
     private String userId;
-    private String username;
-    private String password;
     private String email;
     private HashSet<Role> roles;
 }

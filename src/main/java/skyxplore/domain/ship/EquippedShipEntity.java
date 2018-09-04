@@ -23,10 +23,10 @@ public class EquippedShipEntity {
     private String shipType;
 
     @Column(name = "corehull", nullable =  false)
-    private Integer coreHull;
+    private String coreHull;
 
     @Column(name = "connector_slot", nullable =  false)
-    private Integer connectorSlot;
+    private String connectorSlot;
 
     @Column(name = "connector_equipepd", nullable = false)
     @Type(type = "text")

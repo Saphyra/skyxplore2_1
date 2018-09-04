@@ -2,6 +2,8 @@
     window.characterController = new function(){
         scriptLoader.loadScript("js/common/dao/character_dao.js");
         
+        this.selectCharacter = selectCharacter;
+        
         this.isNewCharacterNameValid = false;
         this.isRenameCharacterNameValid = false;
         
@@ -17,6 +19,20 @@
         });
     }
     
+    function selectCharacter(characterId){
+        try{
+            if(characterDao.selectCharacter(characterId)){
+                sessionStorage.characterId = characterId;
+                window.location.href = "overview";
+            }else{
+                notificationService.showError("Hiba a karakter kiválasztása során.");
+            }
+        }catch(err){
+            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+            logService.log(message, "error");
+        }
+    }
+    
     function createCharacter(){
         try{
             const charNameInput = document.getElementById("newcharactername");
@@ -24,6 +40,8 @@
             
             if(charName.length < 3){
                 notificationService.showError("A karakternév túl rövid. (Minimum 3 karakter)");
+            }else if(charName.length > 30){
+                notificationService.showError("A karakternév túl hosszú. (Maximum 30 karakter)");
             }else if(characterDao.isCharNameExists(charName)){
                 notificationService.showError("Karakternév foglalt.");
             }else{
@@ -65,6 +83,8 @@
             
             if(newCharacterName.length < 3){
                 notificationService.showError("Karakternév túl rövid. (Minimum 3 karakter)");
+            }else if(newCharacterName.length > 30){
+                notificationService.showError("Karakternév túl hosszú. (Maximum 30 karakter)");
             }else if(characterDao.isCharNameExists(newCharacterName)){
                 notificationService.showError("Karakternév foglalt.");
             }else if(characterDao.renameCharacter(characterId, newCharacterName)){
@@ -107,8 +127,7 @@
                         nameCell.classList.add("textaligncenter");
                         nameCell.title = "Játék indítása";
                         nameCell.onclick = function(){
-                            sessionStorage.characterId = character.characterId;
-                            window.location.href = "overview";
+                            characterController.selectCharacter(character.characterId);
                         };
                 container.appendChild(nameCell);
                     

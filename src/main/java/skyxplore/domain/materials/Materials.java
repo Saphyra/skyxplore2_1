@@ -26,7 +26,7 @@ public class Materials extends HashMap<String, Integer> {
     }
 
     public Integer addMaterial(String key, Integer value){
-        return put(key, get(key) + value);
+        return super.put(key, get(key) + value);
     }
 
     public Integer removeMaterial(String key, Integer amount){

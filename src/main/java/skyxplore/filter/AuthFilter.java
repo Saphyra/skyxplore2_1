@@ -1,25 +1,32 @@
 package skyxplore.filter;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.OncePerRequestFilter;
-import skyxplore.exception.BadRequestAuthException;
-import skyxplore.service.AccessTokenFacade;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import skyxplore.controller.PageController;
+import skyxplore.exception.BadRequestAuthException;
+import skyxplore.service.AccessTokenFacade;
+import skyxplore.util.CookieUtil;
 
 @SuppressWarnings("NullableProblems")
 @Slf4j
 @RequiredArgsConstructor
+@Component
+//TODO unit test
 public class AuthFilter extends OncePerRequestFilter {
     public static final String COOKIE_USER_ID = "userid";
     public static final String COOKIE_ACCESS_TOKEN = "accesstoken";
@@ -38,6 +45,7 @@ public class AuthFilter extends OncePerRequestFilter {
     );
 
     private final AccessTokenFacade accessTokenFacade;
+    private final CookieUtil cookieUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -58,7 +66,7 @@ public class AuthFilter extends OncePerRequestFilter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
             } else {
                 log.info("Redirect to login page. Cause: Unauthorized access.");
-                response.sendRedirect("/");
+                response.sendRedirect(PageController.INDEX_MAPPING);
             }
         }
     }
@@ -69,8 +77,8 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Logging out...");
-        String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
-        String userIdValue = getCookie(request, COOKIE_USER_ID);
+        String accessTokenId = cookieUtil.getCookie(request, COOKIE_ACCESS_TOKEN);
+        String userIdValue = cookieUtil.getCookie(request, COOKIE_USER_ID);
         try {
             accessTokenFacade.logout(userIdValue, accessTokenId);
         } catch (BadRequestAuthException e) {
@@ -83,16 +91,16 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private boolean isAuthenticated(HttpServletRequest request) {
         log.debug("Authenticating...");
-        String accessTokenId = getCookie(request, COOKIE_ACCESS_TOKEN);
-        String userIdValue = getCookie(request, COOKIE_USER_ID);
+        String accessTokenId = cookieUtil.getCookie(request, COOKIE_ACCESS_TOKEN);
+        String userIdValue = cookieUtil.getCookie(request, COOKIE_USER_ID);
+
+        if(accessTokenId == null || userIdValue == null){
+            log.warn("Cookies not found.");
+            return false;
+        }
 
         return accessTokenFacade.isAuthenticated(userIdValue, accessTokenId);
     }
 
-    private String getCookie(HttpServletRequest request, String name) {
-        Optional<Cookie> cookie = Arrays.stream(request.getCookies())
-                .filter(c -> c.getName().equals(name))
-                .findAny();
-        return cookie.map(Cookie::getValue).orElse(null);
-    }
+
 }

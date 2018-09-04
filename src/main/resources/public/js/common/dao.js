@@ -54,6 +54,8 @@
             request.send(content);
             if(handleLogout && request.status == 401){
                 authService.logout();
+            }else if(request.status == 403){
+                window.location.href = "characterselect";
             }
         }
         catch(err){
@@ -135,5 +137,6 @@ window.ResponseStatus = new function(){
     this.BAD_REQUEST = 400;
     this.UNAUTHORIZED = 401;
     this.NOT_FOUND = 404;
+    this.CONFLICT = 409;
     this.INTERNAL_SERVER_ERROR = 500;
 }
