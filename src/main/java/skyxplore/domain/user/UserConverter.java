@@ -2,26 +2,24 @@ package skyxplore.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.encryption.UserEncryptor;
+
 import skyxplore.domain.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
 //TODO unit test
 public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
-    private final UserEncryptor userEncryptor;
 
     @Override
     public SkyXpUser convertEntity(UserEntity entity) {
         if (entity == null) {
             return null;
         }
-        UserEntity decrypted = userEncryptor.decryptEntity(entity, entity.getUserId());
 
         SkyXpUser user = new SkyXpUser();
-        user.setUserId(decrypted.getUserId());
-        user.setEmail(decrypted.getEmail());
-        user.setRoles(decrypted.getRoles());
+        user.setUserId(entity.getUserId());
+        user.setEmail(entity.getEmail());
+        user.setRoles(entity.getRoles());
         return user;
     }
 
@@ -36,6 +34,6 @@ public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
         entity.setEmail(domain.getEmail());
         entity.setRoles(domain.getRoles());
 
-        return userEncryptor.encryptEntity(entity, domain.getUserId());
+        return entity;
     }
 }

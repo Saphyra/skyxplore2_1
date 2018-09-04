@@ -18,7 +18,7 @@ CharacterId transfer simplicity
 ==========Tasks==========
 
 Store sensitive data encrypted
-    - https://www.mkyong.com/java/java-symmetric-key-cryptography-example/
+    - CharacterName, UserName, email cannot be encrypted, due to exist query
 
 Shop & factory implement filters
 Cancel production
