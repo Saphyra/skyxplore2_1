@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
+import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 //TODO unit test
 public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
     private final ObjectMapper objectMapper;
+    private final StringEncryptor stringEncryptor;
 
     @Override
     public SkyXpCharacter convertEntity(CharacterEntity entity) {
@@ -28,8 +30,8 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             domain.setCharacterId(entity.getCharacterId());
             domain.setCharacterName(entity.getCharacterName());
             domain.setUserId(entity.getUserId());
-            domain.addMoney(entity.getMoney());
-            domain.addEquipments(objectMapper.readValue(entity.getEquipments(), ArrayList.class));
+            domain.addMoney(Integer.valueOf(stringEncryptor.decryptEntity(entity.getMoney(), entity.getCharacterId())));
+            domain.addEquipments(objectMapper.readValue(stringEncryptor.decryptEntity(entity.getEquipments(), entity.getCharacterId()), ArrayList.class));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,8 +48,8 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             entity.setCharacterId(domain.getCharacterId());
             entity.setCharacterName(domain.getCharacterName());
             entity.setUserId(domain.getUserId());
-            entity.setMoney(domain.getMoney());
-            entity.setEquipments(objectMapper.writeValueAsString(domain.getEquipments()));
+            entity.setMoney(stringEncryptor.encryptEntity(domain.getMoney().toString(), domain.getCharacterId()));
+            entity.setEquipments(stringEncryptor.encryptEntity(objectMapper.writeValueAsString(domain.getEquipments()), domain.getCharacterId()));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

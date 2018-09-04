@@ -20,7 +20,6 @@ CharacterId transfer simplicity
 Store sensitive data encrypted
     - CharacterName, UserName, email cannot be encrypted, due to exist query
     - TO ENCRYPT
-        - character money
         - factory materials
         - product elementId
         - product amount
