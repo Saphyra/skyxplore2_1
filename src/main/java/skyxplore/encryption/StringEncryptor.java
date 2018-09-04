@@ -1,7 +1,10 @@
-package skyxplore.encryption.base;
+package skyxplore.encryption;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import skyxplore.encryption.base.DefaultEncryptor;
+import skyxplore.encryption.base.Encryptor;
+
 import org.springframework.stereotype.Component;
 
 import javax.crypto.BadPaddingException;

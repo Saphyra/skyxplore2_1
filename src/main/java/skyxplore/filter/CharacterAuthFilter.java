@@ -15,6 +15,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +43,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/character/characters",
         "/account",
         "/user/*",
+        "/character",
         "/character/select/*",
         "/character/ischarnameexists/*"
     );
@@ -49,7 +52,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
     private final CookieUtil cookieUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
         log.debug("CharacterAuthFilter");
         String path = request.getRequestURI();
         log.debug("processing path {}", path);

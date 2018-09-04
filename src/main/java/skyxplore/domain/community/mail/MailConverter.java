@@ -3,6 +3,7 @@ package skyxplore.domain.community.mail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
+import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 @Component
@@ -10,6 +11,7 @@ import skyxplore.util.DateTimeUtil;
 //TODO unit test
 public class MailConverter extends ConverterBase<MailEntity, Mail> {
     private final DateTimeUtil dateTimeUtil;
+    private final StringEncryptor stringEncryptor;
 
     @Override
     public Mail convertEntity(MailEntity entity) {
@@ -21,8 +23,8 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
             .mailId(entity.getMailId())
             .from(entity.getFrom())
             .to(entity.getTo())
-            .subject(entity.getSubject())
-            .message(entity.getMessage())
+            .subject(stringEncryptor.decryptEntity(entity.getSubject(), entity.getMailId()))
+            .message(stringEncryptor.decryptEntity(entity.getMessage(), entity.getMailId()))
             .read(entity.getRead())
             .sendTime(dateTimeUtil.convertEntity(entity.getSendTime()))
             .archived(entity.getArchived())
@@ -41,8 +43,8 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
             .mailId(domain.getMailId())
             .from(domain.getFrom())
             .to(domain.getTo())
-            .subject(domain.getSubject())
-            .message(domain.getMessage())
+            .subject(stringEncryptor.encryptEntity(domain.getSubject(), domain.getMailId()))
+            .message(stringEncryptor.encryptEntity(domain.getMessage(), domain.getMailId()))
             .read(domain.getRead())
             .sendTime(dateTimeUtil.convertDomain(domain.getSendTime()))
             .archived(domain.getArchived())
