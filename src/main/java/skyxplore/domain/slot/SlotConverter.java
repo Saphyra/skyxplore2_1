@@ -18,6 +18,9 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
 
     @Override
     public SlotEntity convertDomain(EquippedSlot domain) {
+        if(domain == null){
+            throw new IllegalArgumentException("domain must not be null.");
+        }
         SlotEntity entity = new SlotEntity();
         try {
             entity.setSlotId(domain.getSlotId());

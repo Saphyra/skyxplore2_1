@@ -33,8 +33,8 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
 
     @Override
     public ProductEntity convertDomain(Product domain) {
-        if (domain == null) {
-            return null;
+        if(domain == null){
+            throw new IllegalArgumentException("domain must not be null.");
         }
         ProductEntity entity = new ProductEntity();
         entity.setProductId(domain.getProductId());

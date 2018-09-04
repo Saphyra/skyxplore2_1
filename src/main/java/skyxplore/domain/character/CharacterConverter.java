@@ -38,6 +38,9 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
 
     @Override
     public CharacterEntity convertDomain(SkyXpCharacter domain) {
+        if(domain == null){
+            throw new IllegalArgumentException("domain must not be null.");
+        }
         CharacterEntity entity = new CharacterEntity();
         try {
             entity.setCharacterId(domain.getCharacterId());

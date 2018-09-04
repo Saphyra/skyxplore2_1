@@ -20,6 +20,9 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
 
     @Override
     public EquippedShipEntity convertDomain(EquippedShip domain) {
+        if(domain == null){
+            throw new IllegalArgumentException("domain must not be null.");
+        }
         EquippedShipEntity entity = new EquippedShipEntity();
         try {
             entity.setCharacterId(domain.getCharacterId());

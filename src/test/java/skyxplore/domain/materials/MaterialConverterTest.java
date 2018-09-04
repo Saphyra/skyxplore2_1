@@ -49,14 +49,12 @@ public class MaterialConverterTest {
         assertTrue(result.containsValue(CONVERTER_INT_VALUE));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testConvertDomainShouldReturnNullWhenNull(){
         //GIVEN
         Materials entity = null;
         //WHEN
-        String result = underTest.convertDomain(entity);
-        //THEN
-        assertNull(result);
+        underTest.convertDomain(entity);
     }
 
     @Test

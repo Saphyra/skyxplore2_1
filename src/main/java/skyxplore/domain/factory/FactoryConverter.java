@@ -27,7 +27,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     @Override
     public FactoryEntity convertDomain(Factory domain) {
         if(domain == null){
-            return null;
+            throw new IllegalArgumentException("domain must not be null.");
         }
         FactoryEntity entity = new FactoryEntity();
         entity.setFactoryId(domain.getFactoryId());

@@ -30,7 +30,7 @@ public class MaterialsConverter extends ConverterBase<String, Materials> {
     @Override
     public String convertDomain(Materials domain) {
         if(domain == null){
-            return null;
+            throw new IllegalArgumentException("domain must not be null.");
         }
         try {
             return objectMapper.writeValueAsString(domain);

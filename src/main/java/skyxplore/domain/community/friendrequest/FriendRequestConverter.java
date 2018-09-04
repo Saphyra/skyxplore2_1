@@ -21,7 +21,7 @@ public class FriendRequestConverter extends ConverterBase<FriendRequestEntity, F
     @Override
     public FriendRequestEntity convertDomain(FriendRequest domain) {
         if(domain == null){
-            return null;
+            throw new IllegalArgumentException("domain must not be null.");
         }
         return FriendRequestEntity.builder()
             .friendRequestId(domain.getFriendRequestId())

@@ -5,6 +5,8 @@ FrontEnd:
     Loading content only when opening the tab
     Subdirectories & smaller classes
 
+Converter.convertDomain should throw exception when null
+
 ==========Continuous tasks / cleanups==========
 
 CharacterId transfer simplicity
@@ -38,7 +40,6 @@ Lobby
 Javadoc
 Integration tests
 Logging
-Converter.convertDomain should throw exception when null
 
 FrontEnd testing
 https://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference

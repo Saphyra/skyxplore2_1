@@ -18,7 +18,7 @@ public class CredentialsConverter extends ConverterBase<CredentialsEntity, Crede
     @Override
     public CredentialsEntity convertDomain(Credentials domain) {
         if(domain == null){
-            return null;
+            throw new IllegalArgumentException("domain must not be null.");
         }
         return new CredentialsEntity(domain.getUserId(), domain.getUserName(), domain.getPassword());
     }
