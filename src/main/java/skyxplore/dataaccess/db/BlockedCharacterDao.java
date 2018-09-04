@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.BlockedCharacterRepository;
-import skyxplore.domain.community.blockeduser.BlockedCharacter;
-import skyxplore.domain.community.blockeduser.BlockedCharacterConverter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacterConverter;
 
 import java.util.List;
 

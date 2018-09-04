@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import skyxplore.controller.request.community.AllowBlockedCharacterRequest;
 import skyxplore.controller.request.community.BlockCharacterRequest;
 import skyxplore.dataaccess.db.BlockedCharacterDao;
-import skyxplore.domain.community.blockeduser.BlockedCharacter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.exception.BlockedCharacterNotFoundException;
 import skyxplore.exception.CharacterAlreadyBlockedException;
 import skyxplore.exception.base.BadRequestException;

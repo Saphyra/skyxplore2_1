@@ -9,7 +9,7 @@ import skyxplore.controller.request.community.DeclineFriendRequestRequest;
 import skyxplore.controller.request.community.DeleteFriendRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
-import skyxplore.domain.community.blockeduser.BlockedCharacter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.exception.CharacterBlockedException;
