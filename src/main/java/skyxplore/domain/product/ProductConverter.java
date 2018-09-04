@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
+import skyxplore.encryption.IntegerEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 @Component
@@ -12,6 +13,7 @@ import skyxplore.util.DateTimeUtil;
 //TODO unit test
 public class ProductConverter extends ConverterBase<ProductEntity, Product> {
     private final DateTimeUtil dateTimeUtil;
+    private final IntegerEncryptor integerEncryptor;
 
     @Override
     public Product convertEntity(ProductEntity entity) {

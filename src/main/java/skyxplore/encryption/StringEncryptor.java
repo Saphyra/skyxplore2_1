@@ -2,6 +2,7 @@ package skyxplore.encryption;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import skyxplore.encryption.base.AbstractEncryptor;
 import skyxplore.encryption.base.DefaultEncryptor;
 import skyxplore.encryption.base.Encryptor;
 
@@ -19,16 +20,17 @@ import java.security.NoSuchAlgorithmException;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class StringEncryptor implements Encryptor<String> {
+//TODO unit test
+public class StringEncryptor extends AbstractEncryptor<String> {
 
     @Override
-    public String encryptEntity(String entity, String key) {
+    protected String encrypt(String entity, String key) {
         DefaultEncryptor encryption = new DefaultEncryptor(key);
         return encryption.encrypt(entity);
     }
 
     @Override
-    public String decryptEntity(String entity, String key) {
+    protected String decrypt(String entity, String key) {
         DefaultEncryptor decryption = new DefaultEncryptor(key);
         return decryption.decrypt(entity);
     }

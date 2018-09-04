@@ -19,7 +19,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
         Factory domain = new Factory();
         domain.setFactoryId(entity.getFactoryId());
         domain.setCharacterId(entity.getCharacterId());
-        domain.setMaterials(materialsConverter.convertEntity(entity.getMaterials()));
+        domain.setMaterials(materialsConverter.convertEntity(entity.getMaterials(), entity.getFactoryId()));
 
         return domain;
     }
@@ -32,7 +32,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
         FactoryEntity entity = new FactoryEntity();
         entity.setFactoryId(domain.getFactoryId());
         entity.setCharacterId(domain.getCharacterId());
-        entity.setMaterials(materialsConverter.convertDomain(domain.getMaterials()));
+        entity.setMaterials(materialsConverter.convertDomain(domain.getMaterials(), domain.getFactoryId()));
 
         return entity;
     }
