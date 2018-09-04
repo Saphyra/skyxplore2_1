@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
+import skyxplore.encryption.IntegerEncryptor;
+import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,21 +18,26 @@ import java.util.ArrayList;
 @SuppressWarnings("unchecked")
 //TODO unit test
 public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
+    private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
+    private final StringEncryptor stringEncryptor;
 
     @Override
     public EquippedShipEntity convertDomain(EquippedShip domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         EquippedShipEntity entity = new EquippedShipEntity();
         try {
             entity.setCharacterId(domain.getCharacterId());
             entity.setShipId(domain.getShipId());
-            entity.setShipType(domain.getShipType());
-            entity.setCoreHull(domain.getCoreHull());
-            entity.setConnectorSlot(domain.getConnectorSlot());
-            entity.setConnectorEquipped(objectMapper.writeValueAsString(domain.getConnectorEquipped()));
+            entity.setShipType(stringEncryptor.encryptEntity(domain.getShipType(), domain.getShipId()));
+            entity.setCoreHull(integerEncryptor.encrypt(domain.getCoreHull(), domain.getShipId()));
+            entity.setConnectorSlot(integerEncryptor.encrypt(domain.getConnectorSlot(), domain.getShipId()));
+            entity.setConnectorEquipped(stringEncryptor.encryptEntity(
+                objectMapper.writeValueAsString(domain.getConnectorEquipped()),
+                domain.getShipId())
+            );
             entity.setDefenseSlotId(domain.getDefenseSlotId());
             entity.setWeaponSlotId(domain.getWeaponSlotId());
         } catch (JsonProcessingException e) {
@@ -45,10 +52,16 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
         try {
             domain.setCharacterId(entity.getCharacterId());
             domain.setShipId(entity.getShipId());
-            domain.setShipType(entity.getShipType());
-            domain.setCoreHull(entity.getCoreHull());
-            domain.setConnectorSlot(entity.getConnectorSlot());
-            domain.addConnectors(objectMapper.readValue(entity.getConnectorEquipped(), ArrayList.class));
+            domain.setShipType(stringEncryptor.decryptEntity(entity.getShipType(), entity.getShipId()));
+            domain.setCoreHull(integerEncryptor.decrypt(entity.getCoreHull(), entity.getShipId()));
+            domain.setConnectorSlot(integerEncryptor.decrypt(entity.getConnectorSlot(), entity.getShipId()));
+            domain.addConnectors(objectMapper.readValue(
+                stringEncryptor.decryptEntity(
+                    entity.getConnectorEquipped(),
+                    entity.getShipId()
+                ),
+                ArrayList.class)
+            );
             domain.setDefenseSlotId(entity.getDefenseSlotId());
             domain.setWeaponSlotId(entity.getWeaponSlotId());
         } catch (IOException e) {
