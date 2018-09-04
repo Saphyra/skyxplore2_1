@@ -12,6 +12,8 @@ import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -21,6 +23,7 @@ public class DeleteAccountService {
     private final CredentialsService credentialsService;
     private final UserDao userDao;
 
+    @Transactional
     public void deleteAccount(AccountDeleteRequest request, String userId) {
         Credentials credentials = credentialsService.getByUserId(userId);
         if (!passwordService.authenticate(request.getPassword(), credentials.getPassword())) {

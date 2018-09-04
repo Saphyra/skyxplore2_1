@@ -16,7 +16,7 @@ public interface BlockedCharacterRepository extends JpaRepository<BlockedCharact
     @Modifying
     @Transactional
     @Query("DELETE BlockedCharacterEntity b WHERE b.characterId = :characterId OR b.blockedCharacterId = :characterId")
-    void deleteByCharacterId(String characterId);
+    void deleteByCharacterId(@Param("characterId") String characterId);
 
     List<BlockedCharacterEntity> findByCharacterId(@Param("characterId") String characterId);
 

@@ -20,7 +20,7 @@ public interface MailRepository extends JpaRepository<MailEntity, String> {
 
     @Transactional
     @Modifying
-    @Query("DELETE MailEntity m WHERE m.to = :characterId OR m.from = :characterID")
+    @Query("DELETE MailEntity m WHERE m.to = :characterId OR m.from = :characterId")
     void deleteByCharacterId(@Param("characterId") String characterId);
 
     @Transactional
