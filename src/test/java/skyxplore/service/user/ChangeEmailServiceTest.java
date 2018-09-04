@@ -7,9 +7,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
+import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
+import skyxplore.service.credentials.CredentialsService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -18,6 +20,9 @@ import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeEmailServiceTest {
+    @Mock
+    private  CredentialsService credentialsService;
+
     @Mock
     private  UserQueryService userQueryService;
 
@@ -41,10 +46,10 @@ public class ChangeEmailServiceTest {
         ChangeEmailRequest request = createChangeEmailRequest();
         request.setPassword(USER_FAKE_PASSWORD);
 
-        SkyXpUser user = createUser();
+        Credentials credentials = createCredentials();
 
         when(userQueryService.isEmailExists(USER_NEW_EMAIL)).thenReturn(false);
-        when(userQueryService.getUserById(USER_ID)).thenReturn(user);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
         //WHEN
         underTest.changeEmail(request, USER_ID);
     }
@@ -55,14 +60,16 @@ public class ChangeEmailServiceTest {
         ChangeEmailRequest request = createChangeEmailRequest();
 
         SkyXpUser user = createUser();
+        Credentials credentials = createCredentials();
 
         when(userQueryService.isEmailExists(USER_NEW_EMAIL)).thenReturn(false);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
         when(userQueryService.getUserById(USER_ID)).thenReturn(user);
         //WHEN
         underTest.changeEmail(request, USER_ID);
         //THEN
         verify(userQueryService).isEmailExists(USER_NEW_EMAIL);
-        verify(userQueryService).getUserById(USER_ID);
+        verify(credentialsService).getByUserId(USER_ID);
         verify(userDao).update(user);
         assertEquals(USER_NEW_EMAIL, user.getEmail());
     }

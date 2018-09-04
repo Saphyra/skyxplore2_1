@@ -20,8 +20,6 @@ public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
         SkyXpUser user = new SkyXpUser();
         user.setUserId(decrypted.getUserId());
-        user.setUsername(decrypted.getUsername());
-        user.setPassword(decrypted.getPassword());
         user.setEmail(decrypted.getEmail());
         user.setRoles(decrypted.getRoles());
         return user;
@@ -35,8 +33,6 @@ public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
         UserEntity entity = new UserEntity();
         entity.setUserId(domain.getUserId());
-        entity.setUsername(domain.getUsername());
-        entity.setPassword(domain.getPassword());
         entity.setEmail(domain.getEmail());
         entity.setRoles(domain.getRoles());
 
