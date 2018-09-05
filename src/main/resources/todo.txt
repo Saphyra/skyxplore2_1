@@ -6,6 +6,8 @@ FrontEnd:
     Subdirectories & smaller classes
 
 Converter.convertDomain should throw exception when null
+Logging:
+    - Controller: before and after service call
 
 ==========Continuous tasks / cleanups==========
 

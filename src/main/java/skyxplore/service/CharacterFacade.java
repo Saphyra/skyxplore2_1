@@ -30,8 +30,9 @@ public class CharacterFacade {
     private final CharacterQueryService characterQueryService;
     private final CharacterRenameService characterRenameService;
 
-    public void buyItems(Map<String, Integer> items, String characterId, String userId) {
-        buyItemService.buyItems(items, characterId, userId);
+    //TODO unit test
+    public void buyItems(Map<String, Integer> items, String characterId) {
+        buyItemService.buyItems(items, characterId);
     }
 
     public void createCharacter(CreateCharacterRequest request, String userId) {
@@ -46,12 +47,14 @@ public class CharacterFacade {
         return characterQueryService.getCharactersByUserId(userId);
     }
 
-    public View<EquipmentViewList> getEquipmentsOfCharacter(String userId, String characterId) {
-        return characterQueryService.getEquipmentsOfCharacter(userId, characterId);
+    //TODO unit test
+    public View<EquipmentViewList> getEquipmentsOfCharacter(String characterId) {
+        return characterQueryService.getEquipmentsOfCharacter(characterId);
     }
 
-    public Integer getMoneyOfCharacter(String userId, String characterId) {
-        return characterQueryService.getMoneyOfCharacter(userId, characterId);
+    //TODO unit test
+    public Integer getMoneyOfCharacter(String characterId) {
+        return characterQueryService.getMoneyOfCharacter(characterId);
     }
 
     public void renameCharacter(RenameCharacterRequest request, String userId) {

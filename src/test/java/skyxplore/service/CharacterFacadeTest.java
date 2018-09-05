@@ -60,9 +60,9 @@ public class CharacterFacadeTest {
         //GIVEN
         Map<String, Integer> map = new HashMap<>();
         //WHEN
-        underTest.buyItems(map, CHARACTER_ID, USER_ID);
+        underTest.buyItems(map, CHARACTER_ID);
         //THEN
-        verify(buyItemService).buyItems(map, CHARACTER_ID, USER_ID);
+        verify(buyItemService).buyItems(map, CHARACTER_ID);
     }
 
     @Test
@@ -106,22 +106,22 @@ public class CharacterFacadeTest {
             new EquipmentViewList(Arrays.asList(DATA_ELEMENT)),
             new HashMap<>()
         );
-        when(characterQueryService.getEquipmentsOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(view);
+        when(characterQueryService.getEquipmentsOfCharacter(CHARACTER_ID)).thenReturn(view);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(USER_ID, CHARACTER_ID);
+        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID);
         //THEN
-        verify(characterQueryService).getEquipmentsOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterQueryService).getEquipmentsOfCharacter(CHARACTER_ID);
         assertEquals(view, result);
     }
 
     @Test
     public void testGetMoneyOfCharacterShouldCallServiceAndReturn(){
         //GIVEN
-        when(characterQueryService.getMoneyOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
+        when(characterQueryService.getMoneyOfCharacter(CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
         //WHEN
-        Integer result = underTest.getMoneyOfCharacter(USER_ID, CHARACTER_ID);
+        Integer result = underTest.getMoneyOfCharacter(CHARACTER_ID);
         //THEN
-        verify(characterQueryService).getMoneyOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterQueryService).getMoneyOfCharacter(CHARACTER_ID);
         assertEquals(CHARACTER_MONEY, result);
     }
 

@@ -20,8 +20,9 @@ public class BuyItemService {
     private final CharacterQueryService characterQueryService;
     private final GameDataFacade gameDataFacade;
 
-    public void buyItems(Map<String, Integer> items, String characterId, String userId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    //TODO unit test
+    public void buyItems(Map<String, Integer> items, String characterId) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Integer cost = countCost(items);
         character.buyEquipments(items, cost);
         characterDao.save(character);

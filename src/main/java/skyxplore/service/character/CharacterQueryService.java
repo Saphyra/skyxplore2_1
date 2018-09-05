@@ -125,8 +125,9 @@ public class CharacterQueryService {
         return characterDao.findByUserId(userId);
     }
 
-    public View<EquipmentViewList> getEquipmentsOfCharacter(String userId, String characterId) {
-        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+    //TODO unit test
+    public View<EquipmentViewList> getEquipmentsOfCharacter(String characterId) {
+        SkyXpCharacter character = findByCharacterId(characterId);
 
         return new View<>(
             new EquipmentViewList(character.getEquipments()),
@@ -134,8 +135,9 @@ public class CharacterQueryService {
         );
     }
 
-    public Integer getMoneyOfCharacter(String userId, String characterId) {
-        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
+    //TODO unit test
+    public Integer getMoneyOfCharacter(String characterId) {
+        SkyXpCharacter character = findByCharacterId(characterId);
         return character.getMoney();
     }
 

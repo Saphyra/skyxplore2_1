@@ -25,6 +25,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.google.common.cache.Cache;
+import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
@@ -54,9 +55,9 @@ public class CharacterControllerTest {
         //GIVEN
         HashMap<String, Integer> inputMap = new HashMap<>();
         //WHEN
-        underTest.buyEquipments(inputMap, CHARACTER_ID, USER_ID);
+        underTest.buyEquipments(inputMap, CHARACTER_ID);
         //THEN
-        verify(characterFacade).buyItems(inputMap, CHARACTER_ID, USER_ID);
+        verify(characterFacade).buyItems(inputMap, CHARACTER_ID);
     }
 
     @Test
@@ -107,22 +108,22 @@ public class CharacterControllerTest {
             new EquipmentViewList(),
             new HashMap<>()
         );
-        when(characterFacade.getEquipmentsOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(view);
+        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID)).thenReturn(view);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID, USER_ID);
+        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID);
         //THEN
-        verify(characterFacade).getEquipmentsOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterFacade).getEquipmentsOfCharacter(CHARACTER_ID);
         assertEquals(view, result);
     }
 
     @Test
     public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse(){
         //GIVEN
-        when(characterFacade.getMoneyOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
+        when(characterFacade.getMoneyOfCharacter(CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
         //WHEN
-        Integer money = underTest.getMoney(CHARACTER_ID, USER_ID);
+        Integer money = underTest.getMoney(CHARACTER_ID);
         //THEN
-        verify(characterFacade).getMoneyOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterFacade).getMoneyOfCharacter(CHARACTER_ID);
         assertEquals(CHARACTER_MONEY, money);
     }
 
@@ -131,7 +132,7 @@ public class CharacterControllerTest {
         //GIVEN
         when(characterNameCache.get(CHARACTER_NAME)).thenReturn(true);
         //WHEN
-        boolean result = underTest.isCharNameExists(CHARACTER_NAME);
+        boolean result = underTest.isCharNameExists(new OneStringParamRequest(CHARACTER_NAME));
         //THEN
         verify(characterNameCache).get(CHARACTER_NAME);
         assertTrue(result);
