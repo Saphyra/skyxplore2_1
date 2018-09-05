@@ -5,9 +5,11 @@ FrontEnd:
     Loading content only when opening the tab
     Subdirectories & smaller classes
 
-Converter.convertDomain should throw exception when null
-Logging:
-    - Controller: before and after service call
+BackEnd
+    Converter.convertDomain should throw exception when null
+    Logging:
+        - Controller: before and after service call
+    Use Optionals
 
 ==========Continuous tasks / cleanups==========
 
