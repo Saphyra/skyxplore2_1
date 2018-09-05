@@ -1,11 +1,10 @@
 package skyxplore.service.community;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import skyxplore.controller.request.community.AllowBlockedCharacterRequest;
-import skyxplore.controller.request.community.BlockCharacterRequest;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.db.BlockedCharacterDao;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.exception.BlockedCharacterNotFoundException;
@@ -23,34 +22,26 @@ public class BlockCharacterService {
     private final CharacterQueryService characterQueryService;
     private final FriendshipService friendshipService;
 
-    public void allowBlockedCharacter(AllowBlockedCharacterRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        BlockedCharacter blockedCharacter = blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(
-            request.getCharacterId(),
-            request.getBlockedCharacterId()
-        );
-        if(blockedCharacter == null){
-            throw new BlockedCharacterNotFoundException(request);
+    public void allowBlockedCharacter(String blockedCharacterId, String characterId) {
+        BlockedCharacter blockedCharacter = blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId);
+        if (blockedCharacter == null) {
+            throw new BlockedCharacterNotFoundException(characterId, blockedCharacterId);
         }
         blockedCharacterDao.delete(blockedCharacter);
     }
 
     @Transactional
-    public void blockCharacter(BlockCharacterRequest request, String userId) {
-        if(request.getCharacterId().equals(request.getBlockedCharacterId())){
+    public void blockCharacter(String blockedCharacterId, String characterId) {
+        if (characterId.equals(blockedCharacterId)) {
             throw new BadRequestException("You cannot block yourself.");
         }
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        characterQueryService.findByCharacterId(request.getBlockedCharacterId());
-        if (blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(
-            request.getCharacterId(),
-            request.getBlockedCharacterId()
-        ) != null) {
-            throw new CharacterAlreadyBlockedException(request);
+        characterQueryService.findByCharacterId(blockedCharacterId);
+        if (blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId) != null) {
+            throw new CharacterAlreadyBlockedException(blockedCharacterId, characterId);
         }
 
-        BlockedCharacter blockedCharacter = new BlockedCharacter(request);
-        friendshipService.removeContactsBetween(request.getCharacterId(), request.getBlockedCharacterId());
+        BlockedCharacter blockedCharacter = new BlockedCharacter(characterId, blockedCharacterId);
+        friendshipService.removeContactsBetween(characterId, blockedCharacterId);
         blockedCharacterDao.save(blockedCharacter);
     }
 }

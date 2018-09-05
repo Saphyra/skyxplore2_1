@@ -23,6 +23,7 @@ Shop & factory implement filters
 Cancel production
 
 Email FE validation: validate special characters
+Split CommunityDao to MailDao
 
 Create community
     - Friends
@@ -30,6 +31,9 @@ Create community
             - View ship
         - Report user
             - Report for what?
+
+Error reporting
+    - Exceptions to save
 
 Lobby
     - Create lobby

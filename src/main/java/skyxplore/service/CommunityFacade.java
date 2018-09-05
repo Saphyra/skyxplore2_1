@@ -24,20 +24,20 @@ public class CommunityFacade {
     private final FriendshipService friendshipService;
     private final FriendshipQueryService friendshipQueryService;
 
-    public void acceptFriendRequest(AcceptFriendRequestRequest request, String userId) {
-        friendshipService.acceptFriendRequest(request, userId);
+    public void acceptFriendRequest(String friendRequestId, String characterId) {
+        friendshipService.acceptFriendRequest(friendRequestId, characterId);
     }
 
-    public void allowBlockedCharacter(AllowBlockedCharacterRequest request, String userId) {
-        blockCharacterService.allowBlockedCharacter(request, userId);
+    public void allowBlockedCharacter(String blockedCharacterId, String characterId) {
+        blockCharacterService.allowBlockedCharacter(blockedCharacterId, characterId);
     }
 
-    public void addFriendRequest(AddFriendRequest request, String userId) {
-        friendshipService.addFriendRequest(request, userId);
+    public void addFriendRequest(String friendId, String characterId) {
+        friendshipService.addFriendRequest(friendId, characterId);
     }
 
-    public void blockCharacter(BlockCharacterRequest request, String userId) {
-        blockCharacterService.blockCharacter(request, userId);
+    public void blockCharacter(String blockedCharacterId, String characterId) {
+        blockCharacterService.blockCharacter(blockedCharacterId, characterId);
     }
 
     public void declineFriendRequest(DeclineFriendRequestRequest request, String userId) {

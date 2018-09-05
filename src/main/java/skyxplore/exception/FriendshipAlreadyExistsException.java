@@ -1,6 +1,5 @@
 package skyxplore.exception;
 
-import skyxplore.controller.request.community.AddFriendRequest;
 import skyxplore.exception.base.ConflictException;
 
 public class FriendshipAlreadyExistsException extends ConflictException {
@@ -8,7 +7,7 @@ public class FriendshipAlreadyExistsException extends ConflictException {
         super(message);
     }
 
-    public FriendshipAlreadyExistsException(AddFriendRequest request) {
-        super("Friendship already exists (or pending) between " + request.getCharacterId() + " and " + request.getFriendId());
+    public FriendshipAlreadyExistsException(String friendId, String characterId) {
+        super("Friendship already exists (or pending) between " + characterId + " and " + friendId);
     }
 }

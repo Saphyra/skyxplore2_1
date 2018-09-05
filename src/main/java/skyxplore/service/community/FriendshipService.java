@@ -1,10 +1,13 @@
 package skyxplore.service.community;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.controller.request.community.AcceptFriendRequestRequest;
-import skyxplore.controller.request.community.AddFriendRequest;
 import skyxplore.controller.request.community.DeclineFriendRequestRequest;
 import skyxplore.controller.request.community.DeleteFriendRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
@@ -19,9 +22,6 @@ import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
 
-import javax.transaction.Transactional;
-import java.util.List;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -35,14 +35,13 @@ public class FriendshipService {
     private final IdGenerator idGenerator;
 
     @Transactional
-    public void acceptFriendRequest(AcceptFriendRequestRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        FriendRequest friendRequest = friendRequestDao.findById(request.getFriendRequestId());
+    public void acceptFriendRequest(String friendRequestId, String characterId) {
+        FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
         if (friendRequest == null) {
-            throw new FriendRequestNotFoundException("FriendRequest not found with id " + request.getFriendRequestId());
+            throw new FriendRequestNotFoundException("FriendRequest not found with id " + friendRequestId);
         }
-        if (!friendRequest.getFriendId().equals(request.getCharacterId())) {
-            throw new UnauthorizedException(request.getCharacterId() + "has no rights to acccept friendRequest " + request.getFriendRequestId());
+        if (!friendRequest.getFriendId().equals(characterId)) {
+            throw new UnauthorizedException(characterId + "has no rights to acccept friendRequest " + friendRequestId);
         }
 
         Friendship friendship = Friendship.builder()
@@ -54,25 +53,21 @@ public class FriendshipService {
         friendRequestDao.delete(friendRequest);
     }
 
-    public void addFriendRequest(AddFriendRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        characterQueryService.findByCharacterId(request.getFriendId());
-        List<BlockedCharacter> blockedCharacter = blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(
-            request.getCharacterId(),
-            request.getFriendId()
-        );
+    public void addFriendRequest(String friendId, String characterId) {
+        characterQueryService.findByCharacterId(friendId);
+        List<BlockedCharacter> blockedCharacter = blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, friendId);
 
         if (!blockedCharacter.isEmpty()) {
-            throw new CharacterBlockedException(request.getFriendId() + " is blocked.");
+            throw new CharacterBlockedException(friendId + " is blocked.");
         }
-        if (friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(request.getCharacterId(), request.getFriendId())) {
-            throw new FriendshipAlreadyExistsException(request);
+        if (friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(characterId, friendId)) {
+            throw new FriendshipAlreadyExistsException(friendId, characterId);
         }
 
         FriendRequest friendRequest = new FriendRequest();
         friendRequest.setFriendRequestId(idGenerator.getRandomId());
-        friendRequest.setCharacterId(request.getCharacterId());
-        friendRequest.setFriendId(request.getFriendId());
+        friendRequest.setCharacterId(characterId);
+        friendRequest.setFriendId(friendId);
 
         friendRequestDao.save(friendRequest);
     }

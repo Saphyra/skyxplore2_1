@@ -40,6 +40,9 @@ public class TestUtils {
     public static final Long ACCESS_TOKEN_LAST_ACCESS_EPOCH = 414184L;
     public static final LocalDateTime ACCESS_TOKEN_LAST_ACCESS = LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC);
 
+    //Blocked Character
+    public static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
+
     //Category
     public static final String CATEGORY_ID = "category_id";
     public static final String CATEGORY_CONTENT = "category_content";
@@ -98,6 +101,9 @@ public class TestUtils {
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
     public static final String FRIENDSHIP_ID = "friendship_id";
+
+    //Friend Request
+    public static final String FRIEND_REQUEST_ID = "friend_request_id";
 
     //Material
     public static final Integer MATERIAL_AMOUNT = 2;
