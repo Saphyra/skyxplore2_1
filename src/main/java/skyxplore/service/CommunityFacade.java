@@ -48,8 +48,8 @@ public class CommunityFacade {
         friendshipService.deleteFriendship(request, userId);
     }
 
-    public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
-        return characterQueryService.getBlockedCharacters(characterId, userId);
+    public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
+        return characterQueryService.getBlockedCharacters(characterId);
     }
 
     public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {
@@ -72,7 +72,7 @@ public class CommunityFacade {
         return friendshipQueryService.getReceivedFriendRequests(characterId);
     }
 
-    public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
-        return friendshipQueryService.getSentFriendRequests(characterId, userId);
+    public List<FriendRequest> getSentFriendRequests(String characterId) {
+        return friendshipQueryService.getSentFriendRequests(characterId);
     }
 }

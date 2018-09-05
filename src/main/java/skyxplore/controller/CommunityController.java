@@ -1,9 +1,25 @@
 package skyxplore.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-import skyxplore.controller.request.community.*;
+import skyxplore.controller.request.OneStringParamRequest;
+import skyxplore.controller.request.community.AcceptFriendRequestRequest;
+import skyxplore.controller.request.community.AddFriendRequest;
+import skyxplore.controller.request.community.AllowBlockedCharacterRequest;
+import skyxplore.controller.request.community.BlockCharacterRequest;
+import skyxplore.controller.request.community.DeclineFriendRequestRequest;
+import skyxplore.controller.request.community.DeleteFriendRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.friend.FriendView;
@@ -14,29 +30,25 @@ import skyxplore.filter.AuthFilter;
 import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.CommunityFacade;
 
-import javax.validation.Valid;
-import java.util.List;
-
 @SuppressWarnings("unused")
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 //TODO unit test
-//TODO eliminate characterIds in path
 public class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/friendrequest/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/friendrequest/add";
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
-    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend//friendrequest/decline";
+    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/friendrequest/decline";
     private static final String DELETE_FRIEND_MAPPING = "friend";
-    private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter/{characterId}";
-    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/{characterId}/namelike/{charName}";
-    private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/{characterId}/namelike/{charName}";
+    private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";
+    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/namelike";
+    private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/namelike";
     private static final String GET_FRIENDS_MAPPING = "friend";
     private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/num";
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//friendrequest/received";
-    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/sent/{characterId}";
+    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/sent";
 
     private final CommunityFacade communityFacade;
     private final CharacterViewConverter characterViewConverter;
@@ -92,22 +104,31 @@ public class CommunityController {
     }
 
     @GetMapping(GET_BLOCKED_CHARACTERS_MAPPING)
-    public List<CharacterView> getBlockedCharacters(@PathVariable("characterId") String characterId, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
+    public List<CharacterView> getBlockedCharacters(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+    ) {
         log.info("{} wants to know his blocked characters list.", characterId);
-        return characterViewConverter.convertDomain(communityFacade.getBlockedCharacters(characterId, userId));
+        return characterViewConverter.convertDomain(communityFacade.getBlockedCharacters(characterId));
     }
 
     @GetMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)
-    public List<CharacterView> getCharactersCanBeBlocked(@PathVariable("characterId") String characterId, @PathVariable("charName") String name, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
-        log.info("{} querying blockable characters by name like {}", characterId, name);
-        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeBlocked(name, characterId, userId));
+    public List<CharacterView> getCharactersCanBeBlocked(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId,
+        @RequestBody @Valid OneStringParamRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        ) {
+        log.info("{} querying blockable characters by name like {}", characterId, request.getValue());
+        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeBlocked(request.getValue(), characterId, userId));
     }
 
 
     @GetMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
-    public List<CharacterView> getCharactersCanBeFriend(@PathVariable("characterId") String characterId, @PathVariable("charName") String name, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
-        log.info("{} querying possible community characters by name like {}", characterId, name);
-        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeFriend(name, characterId, userId));
+    public List<CharacterView> getCharactersCanBeFriend(
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId,
+        @RequestBody @Valid OneStringParamRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId) {
+        log.info("{} querying possible community characters by name like {}", characterId, request.getValue());
+        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeFriend(request.getValue(), characterId, userId));
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)
@@ -135,10 +156,9 @@ public class CommunityController {
 
     @GetMapping(GET_SENT_FRIEND_REQUESTS_MAPPING)
     public List<FriendRequestView> getSentFriendRequests(
-        @PathVariable("characterId") String characterId,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ){
         log.info("{} wants to know his sent friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(communityFacade.getSentFriendRequests(characterId, userId));
+        return friendRequestViewConverter.convertDomain(communityFacade.getSentFriendRequests(characterId));
     }
 }

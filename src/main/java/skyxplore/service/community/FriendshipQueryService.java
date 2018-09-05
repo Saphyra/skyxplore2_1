@@ -1,16 +1,17 @@
 package skyxplore.service.community;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.character.CharacterQueryService;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -37,15 +38,14 @@ public class FriendshipQueryService {
             .collect(Collectors.toList());
     }
 
-    private FriendRequest swapIds(FriendRequest request){
+    private FriendRequest swapIds(FriendRequest request) {
         String characterId = request.getCharacterId();
         request.setCharacterId(request.getFriendId());
         request.setFriendId(characterId);
         return request;
     }
 
-    public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public List<FriendRequest> getSentFriendRequests(String characterId) {
         return friendRequestDao.getByCharacterId(characterId);
     }
 

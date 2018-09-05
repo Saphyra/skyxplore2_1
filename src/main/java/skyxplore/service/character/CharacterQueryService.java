@@ -48,8 +48,7 @@ public class CharacterQueryService {
         return character;
     }
 
-    public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
-        findCharacterByIdAuthorized(characterId, userId);
+    public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
         List<BlockedCharacter> blockedCharacters = blockedCharacterQueryService.getBlockedCharactersOf(characterId);
         return blockedCharacters
             .stream()
