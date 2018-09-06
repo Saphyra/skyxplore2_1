@@ -40,12 +40,12 @@ public class CommunityFacade {
         blockCharacterService.blockCharacter(blockedCharacterId, characterId);
     }
 
-    public void declineFriendRequest(DeclineFriendRequestRequest request, String userId) {
-        friendshipService.declineFriendRequest(request, userId);
+    public void declineFriendRequest(String friendRequestId, String characterId) {
+        friendshipService.declineFriendRequest(friendRequestId, characterId);
     }
 
-    public void deleteFriendship(DeleteFriendRequest request, String userId) {
-        friendshipService.deleteFriendship(request, userId);
+    public void deleteFriendship(String friendshipId, String characterId) {
+        friendshipService.deleteFriendship(friendshipId, characterId);
     }
 
     public List<SkyXpCharacter> getBlockedCharacters(String characterId) {

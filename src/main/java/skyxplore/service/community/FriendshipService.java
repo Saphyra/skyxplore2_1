@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.community.DeclineFriendRequestRequest;
-import skyxplore.controller.request.community.DeleteFriendRequest;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
@@ -72,25 +70,23 @@ public class FriendshipService {
         friendRequestDao.save(friendRequest);
     }
 
-    public void declineFriendRequest(DeclineFriendRequestRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        FriendRequest friendRequest = friendRequestDao.findById(request.getFriendRequestId());
+    public void declineFriendRequest(String friendRequestId, String characterId) {
+        FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
         if (friendRequest == null) {
-            throw new FriendRequestNotFoundException("Friend request not found with id " + request.getFriendRequestId());
+            throw new FriendRequestNotFoundException("Friend request not found with id " + friendRequestId);
         }
-        if (!friendRequest.getCharacterId().equals(request.getCharacterId())
-            && !friendRequest.getFriendId().equals(request.getCharacterId())) {
-            throw new UnauthorizedException(request.getFriendRequestId() + " is not a friendRequest of character " + request.getCharacterId());
+        if (!friendRequest.getCharacterId().equals(characterId)
+            && !friendRequest.getFriendId().equals(characterId)) {
+            throw new UnauthorizedException(friendRequestId + " is not a friendRequest of character " + characterId);
         }
         friendRequestDao.delete(friendRequest);
     }
 
-    public void deleteFriendship(DeleteFriendRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
-        Friendship friendship = friendshipDao.getByFriendshipId(request.getFriendshipId());
-        if (!friendship.getFriendId().equals(request.getCharacterId())
-            && !friendship.getCharacterId().equals(request.getCharacterId())) {
-            throw new UnauthorizedException(request.getCharacterId() + " has no access to friendship " + request.getFriendshipId());
+    public void deleteFriendship(String friendshipId, String characterId) {
+        Friendship friendship = friendshipDao.getByFriendshipId(friendshipId);
+        if (!friendship.getFriendId().equals(characterId)
+            && !friendship.getCharacterId().equals(characterId)) {
+            throw new UnauthorizedException(characterId + " has no access to friendship " + friendshipId);
         }
         friendshipDao.delete(friendship);
     }

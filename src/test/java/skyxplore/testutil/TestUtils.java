@@ -1,12 +1,26 @@
 package skyxplore.testutil;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.request.user.*;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
+import skyxplore.controller.view.community.friend.FriendView;
+import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductView;
 import skyxplore.controller.view.product.ProductViewList;
@@ -18,6 +32,7 @@ import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.credentials.Credentials;
@@ -28,10 +43,6 @@ import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
-
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.*;
 
 @SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 public class TestUtils {
@@ -52,6 +63,7 @@ public class TestUtils {
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
+    public static final String FRIEND_NAME = "friend_name";
 
     //Converter
     public static final String CONVERTER_ENTITY = "converter_entity";
@@ -185,7 +197,7 @@ public class TestUtils {
         return request;
     }
 
-    public static ChangePasswordRequest createChangePasswordRequest(){
+    public static ChangePasswordRequest createChangePasswordRequest() {
         ChangePasswordRequest request = new ChangePasswordRequest();
         request.setNewPassword(USER_NEW_PASSWORD);
         request.setConfirmPassword(USER_NEW_PASSWORD);
@@ -209,7 +221,7 @@ public class TestUtils {
         return character;
     }
 
-    public static CharacterDeleteRequest createCharacterDeleteRequest(){
+    public static CharacterDeleteRequest createCharacterDeleteRequest() {
         return new CharacterDeleteRequest(CHARACTER_ID);
     }
 
@@ -220,11 +232,11 @@ public class TestUtils {
         return view;
     }
 
-    public static CreateCharacterRequest createCreateCharacterRequest(){
+    public static CreateCharacterRequest createCreateCharacterRequest() {
         return new CreateCharacterRequest(CHARACTER_NAME);
     }
 
-    public static Credentials createCredentials(){
+    public static Credentials createCredentials() {
         return new Credentials(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
@@ -272,18 +284,35 @@ public class TestUtils {
         return ship;
     }
 
-    public static Factory createFactory(String factoryId){
+    public static Factory createFactory(String factoryId) {
         Factory factory = createFactory();
         factory.setFactoryId(factoryId);
         return factory;
     }
 
-    public static Factory createFactory(){
+    public static Factory createFactory() {
         Factory factory = new Factory();
         factory.setFactoryId(FACTORY_ID_1);
         factory.setCharacterId(CHARACTER_ID);
         factory.setMaterials(new Materials());
         return factory;
+    }
+
+    public static FriendRequest createFriendRequest() {
+        return FriendRequest.builder()
+            .friendRequestId(FRIEND_REQUEST_ID)
+            .friendId(FRIEND_ID)
+            .characterId(CHARACTER_ID)
+            .build();
+    }
+
+    public static FriendRequestView createFriendRequestView(){
+        FriendRequestView view = new FriendRequestView();
+        view.setCharacterId(CHARACTER_ID);
+        view.setFriendRequestId(FRIEND_REQUEST_ID);
+        view.setFriendId(FRIEND_ID);
+        view.setFriendName(FRIEND_NAME);
+        return view;
     }
 
     public static Friendship createFriendship() {
@@ -302,13 +331,22 @@ public class TestUtils {
         return entity;
     }
 
+    public static FriendView createFriendView() {
+        FriendView view = new FriendView();
+        view.setFriendId(FRIENDSHIP_ID);
+        view.setFriendId(FRIEND_ID);
+        view.setFriendName(FRIEND_NAME);
+        view.setActive(false);
+        return view;
+    }
+
     public static Map<String, GeneralDescription> createGeneralDescriptionMap() {
         Map<String, GeneralDescription> map = new HashMap<>();
         map.put(DATA_ELEMENT, new TestGeneralDescription());
         return map;
     }
 
-    public static Material createMaterial(){
+    public static Material createMaterial() {
         Material material = new Material();
         material.setBuildable(MATERIAL_BUILDABLE);
         HashMap<String, Integer> materials = new HashMap<>();
@@ -332,7 +370,7 @@ public class TestUtils {
             .build();
     }
 
-    public static Product createProduct(String productId){
+    public static Product createProduct(String productId) {
         Product product = createProduct();
         product.setProductId(productId);
         return product;
@@ -374,7 +412,7 @@ public class TestUtils {
         return new View<>(productViews, data);
     }
 
-    public static RenameCharacterRequest createRenameCharacterRequest(){
+    public static RenameCharacterRequest createRenameCharacterRequest() {
         return new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NEW_NAME);
     }
 
