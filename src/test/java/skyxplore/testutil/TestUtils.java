@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import skyxplore.controller.request.LoginRequest;
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
@@ -344,6 +345,13 @@ public class TestUtils {
         Map<String, GeneralDescription> map = new HashMap<>();
         map.put(DATA_ELEMENT, new TestGeneralDescription());
         return map;
+    }
+
+    public static LoginRequest createLoginRequest(){
+        LoginRequest request = new LoginRequest();
+        request.setUserName(USER_NAME);
+        request.setPassword(USER_PASSWORD);
+        return request;
     }
 
     public static Material createMaterial() {

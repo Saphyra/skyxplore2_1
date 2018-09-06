@@ -13,11 +13,10 @@ import skyxplore.util.CookieUtil;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("WeakerAccess")
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class LoginController {
     private static final String LOGIN_MAPPING = "login";
     private static final String SELECT_CHARACTER_MAPPING = "character/select/{characterId}";
