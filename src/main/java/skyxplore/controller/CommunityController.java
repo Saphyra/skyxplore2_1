@@ -29,19 +29,19 @@ import skyxplore.service.CommunityFacade;
 @Slf4j
 @RequiredArgsConstructor
 public class CommunityController {
-    private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/friendrequest/accept";
-    private static final String ADD_FRIEND_MAPPING = "friend/friendrequest/add";
+    private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
+    private static final String ADD_FRIEND_MAPPING = "friend/request/add";
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
-    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/friendrequest/decline";
+    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request/decline";
     private static final String DELETE_FRIEND_MAPPING = "friend";
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";
     private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/namelike";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/namelike";
     private static final String GET_FRIENDS_MAPPING = "friend";
-    private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/num";
-    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//friendrequest/received";
-    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/friendrequest/sent";
+    private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/request/num";
+    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//request/received";
+    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
 
     private final CommunityFacade communityFacade;
     private final CharacterViewConverter characterViewConverter;
