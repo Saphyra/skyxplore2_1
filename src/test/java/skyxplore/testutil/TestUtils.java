@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import skyxplore.controller.request.LoginRequest;
@@ -22,6 +23,7 @@ import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
+import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductView;
 import skyxplore.controller.view.product.ProductViewList;
@@ -36,6 +38,7 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
+import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
@@ -117,6 +120,17 @@ public class TestUtils {
 
     //Friend Request
     public static final String FRIEND_REQUEST_ID = "friend_request_id";
+
+    //Mail
+    public static final String MAIL_ID_1 = "mail_id_1";
+    public static final String MAIL_FROM_ID = "mail_from_id";
+    public static final String MAIL_TO_ID = "mail_to_id";
+    public static final String MAIL_FROM_NAME = "mail_from_name";
+    public static final String MAIL_TO_NAME = "mail_to_name";
+    public static final String MAIL_SUBJECT = "mail_subject";
+    public static final String MAIL_MESSAGE = "mail_message";
+    public static final Long MAIL_SEND_TIME_EPOCH = 654612L;
+    public static final LocalDateTime MAIL_SEND_TIME = LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC);
 
     //Material
     public static final Integer MATERIAL_AMOUNT = 2;
@@ -307,7 +321,7 @@ public class TestUtils {
             .build();
     }
 
-    public static FriendRequestView createFriendRequestView(){
+    public static FriendRequestView createFriendRequestView() {
         FriendRequestView view = new FriendRequestView();
         view.setCharacterId(CHARACTER_ID);
         view.setFriendRequestId(FRIEND_REQUEST_ID);
@@ -347,11 +361,43 @@ public class TestUtils {
         return map;
     }
 
-    public static LoginRequest createLoginRequest(){
+    public static LoginRequest createLoginRequest() {
         LoginRequest request = new LoginRequest();
         request.setUserName(USER_NAME);
         request.setPassword(USER_PASSWORD);
         return request;
+    }
+
+    public static Mail createMail(){
+        return Mail.builder()
+            .mailId(MAIL_ID_1)
+            .from(MAIL_FROM_ID)
+            .to(MAIL_TO_ID)
+            .subject(MAIL_SUBJECT)
+            .message(MAIL_MESSAGE)
+            .read(false)
+            .sendTime(MAIL_SEND_TIME)
+            .archived(false)
+            .deletedByAddressee(false)
+            .deletedBySender(false)
+            .build();
+    }
+
+    public static List<String> createMailIdList(String... mailIds) {
+        return Arrays.asList(mailIds);
+    }
+
+    public static MailView createMailView(){
+        return MailView.builder()
+            .mailId(MAIL_ID_1)
+            .from(MAIL_FROM_ID)
+            .to(MAIL_TO_ID)
+            .fromName(MAIL_FROM_NAME)
+            .toName(MAIL_TO_NAME)
+            .subject(MAIL_SUBJECT)
+            .read(false)
+            .sendTime(MAIL_SEND_TIME_EPOCH)
+            .build();
     }
 
     public static Material createMaterial() {

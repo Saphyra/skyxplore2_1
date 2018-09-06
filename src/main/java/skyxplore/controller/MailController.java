@@ -3,6 +3,8 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
@@ -20,18 +22,16 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-//TODO unit test
-//TODO eliminate characterIds in path
 public class MailController {
     private static final String ARCHIVE_MAILS_MAPPING = "mail/archive";
     private static final String DELETE_MAILS_MAPPING = "mail/delete";
-    private static final String GET_ADDRESSEES_MAPPING = "mail/addressee/{characterId}/{name}";
+    private static final String GET_ADDRESSEES_MAPPING = "mail/addressee";
     private static final String GET_ARCHIVED_MAILS_MAPPING = "mail/archived";
     private static final String GET_MAILS_MAPPING = "mail";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
     private static final String GET_SENT_MAILS_MAPPING = "mail/sent";
-    private static final String MARK_MAILS_READ_MAPPING = "mail/markread";
-    private static final String MARK_MAILS_UNREAD_MAPPING = "mail/markunread";
+    private static final String MARK_MAILS_READ_MAPPING = "mail/mark/read";
+    private static final String MARK_MAILS_UNREAD_MAPPING = "mail/mark/unread";
     private static final String SEND_MAIL_MAPPING = "mail/send";
     private static final String UNARCHIVE_MAILS_MAPPING = "mail/unarchive";
 
@@ -57,14 +57,14 @@ public class MailController {
         mailFacade.deleteMails(characterId, mailIds);
     }
 
-    @GetMapping(GET_ADDRESSEES_MAPPING)
+    @PostMapping(GET_ADDRESSEES_MAPPING)
     public List<CharacterView> getAddressees(
-        @PathVariable("characterId") String characterId,
-        @PathVariable("name") String name,
+        @RequestBody OneStringParamRequest name,
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to know his possible addressees", characterId);
-        return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, userId, name));
+        return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, userId, name.getValue()));
     }
 
     @GetMapping(GET_ARCHIVED_MAILS_MAPPING)
@@ -76,6 +76,7 @@ public class MailController {
     }
 
     @GetMapping(GET_MAILS_MAPPING)
+    //TODO unit test
     public List<MailView> getMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -84,6 +85,7 @@ public class MailController {
     }
 
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
+    //TODO unit test
     public Integer getNumberOfUnreadMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -92,6 +94,7 @@ public class MailController {
     }
 
     @GetMapping(GET_SENT_MAILS_MAPPING)
+    //TODO unit test
     public List<MailView> getSentMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -100,6 +103,7 @@ public class MailController {
     }
 
     @PostMapping(MARK_MAILS_READ_MAPPING)
+    //TODO unit test
     public void markMailsRead(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
@@ -109,6 +113,7 @@ public class MailController {
     }
 
     @PostMapping(MARK_MAILS_UNREAD_MAPPING)
+    //TODO unit test
     public void markMailsUnRead(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
@@ -118,6 +123,7 @@ public class MailController {
     }
 
     @PutMapping(SEND_MAIL_MAPPING)
+    //TODO unit test
     public void sendMail(
         @RequestBody @Valid SendMailRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
@@ -127,6 +133,7 @@ public class MailController {
     }
 
     @PostMapping(UNARCHIVE_MAILS_MAPPING)
+    //TODO unit test
     public void unarchiveMails(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
