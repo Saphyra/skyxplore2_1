@@ -1,12 +1,11 @@
 package skyxplore.service;
 
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import skyxplore.controller.request.LoginRequest;
 import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.exception.UserNotFoundException;
-import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.accesstoken.AuthenticationService;
 import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.accesstoken.LoginService;
@@ -29,12 +28,7 @@ public class AccessTokenFacade {
     }
 
     public AccessToken login(LoginRequest loginRequest) {
-        try{
-            return loginService.login(loginRequest);
-        }catch (UserNotFoundException e){
-            throw new UnauthorizedException(e.getMessage());
-        }
-
+        return loginService.login(loginRequest);
     }
 
     public void logout(String userId, String accessTokenId) {
