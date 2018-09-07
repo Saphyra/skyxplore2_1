@@ -8,7 +8,6 @@ import skyxplore.service.character.CharacterQueryService;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class FriendRequestViewConverter extends AbstractViewConverter<FriendRequest, FriendRequestView> {
     private final CharacterQueryService characterQueryService;
 
