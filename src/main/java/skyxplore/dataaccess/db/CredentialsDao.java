@@ -1,40 +1,36 @@
 package skyxplore.dataaccess.db;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CredentialsRepository;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.credentials.CredentialsConverter;
-import skyxplore.domain.credentials.CredentialsEntity;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
-//TODO unit test
 public class CredentialsDao {
     private final CredentialsRepository credentialsRepository;
     private final CredentialsConverter credentialsConverter;
 
+    //TODO unit test
     public void delete(String userId) {
-        Optional<CredentialsEntity> optional = credentialsRepository.findById(userId);
-        optional.ifPresent(credentialsRepository::delete);
-
+        credentialsRepository.deleteById(userId);
     }
 
+    //TODO unit test
     public void save(Credentials credentials) {
         credentialsRepository.save(credentialsConverter.convertDomain(credentials));
     }
 
+    //TODO unit test
     public Credentials getCredentialsByName(String userName) {
         return credentialsConverter.convertEntity(credentialsRepository.getByUserName(userName));
     }
 
+    //TODO unit test
     public Credentials getByUserId(String userId) {
-        Optional<CredentialsEntity> optional = credentialsRepository.findById(userId);
-        return optional.map(credentialsConverter::convertEntity).orElse(null);
+        return credentialsRepository.findById(userId).map(credentialsConverter::convertEntity).orElse(null);
     }
 }
