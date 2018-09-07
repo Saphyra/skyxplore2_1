@@ -1,27 +1,9 @@
 package skyxplore.testutil;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
 import skyxplore.controller.request.LoginRequest;
-import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
-import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.controller.request.character.EquipRequest;
-import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.request.character.UnequipRequest;
+import skyxplore.controller.request.character.*;
 import skyxplore.controller.request.community.SendMailRequest;
-import skyxplore.controller.request.user.AccountDeleteRequest;
-import skyxplore.controller.request.user.ChangeEmailRequest;
-import skyxplore.controller.request.user.ChangePasswordRequest;
-import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.controller.request.user.UserRegistrationRequest;
+import skyxplore.controller.request.user.*;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.community.friend.FriendView;
@@ -38,6 +20,8 @@ import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacterEntity;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
@@ -51,6 +35,10 @@ import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
+
 @SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 public class TestUtils {
     //ACCESS TOKEN
@@ -59,6 +47,7 @@ public class TestUtils {
     public static final LocalDateTime ACCESS_TOKEN_LAST_ACCESS = LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC);
 
     //Blocked Character
+    public static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
     public static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
 
     //Category
@@ -212,6 +201,22 @@ public class TestUtils {
         request.setElementId(DATA_ELEMENT);
         request.setAmount(DATA_ELEMENT_AMOUNT);
         return request;
+    }
+
+    public static BlockedCharacter createBlockedCharacter(){
+        return BlockedCharacter.builder()
+            .blockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID)
+            .blockedCharacterId(BLOCKED_CHARACTER_ID)
+            .characterId(CHARACTER_ID)
+            .build();
+    }
+
+    public static BlockedCharacterEntity createBlockedCharacterEntity(){
+        BlockedCharacterEntity entity = new BlockedCharacterEntity();
+        entity.setBlockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID);
+        entity.setBlockedCharacterId(BLOCKED_CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID);
+        return entity;
     }
 
     public static ChangeEmailRequest createChangeEmailRequest() {

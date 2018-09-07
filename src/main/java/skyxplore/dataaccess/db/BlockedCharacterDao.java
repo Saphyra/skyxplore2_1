@@ -12,12 +12,11 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class BlockedCharacterDao {
-    private final BlockedCharacterRepository blockedCharacterRepository;
     private final BlockedCharacterConverter blockedCharacterConverter;
+    private final BlockedCharacterRepository blockedCharacterRepository;
 
-    public void delete(BlockedCharacter blockedCharacter){
+    public void delete(BlockedCharacter blockedCharacter) {
         blockedCharacterRepository.delete(blockedCharacterConverter.convertDomain(blockedCharacter));
     }
 
@@ -37,11 +36,7 @@ public class BlockedCharacterDao {
         return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterId(characterId));
     }
 
-    public BlockedCharacter save(BlockedCharacter blockedCharacter) {
-        return blockedCharacterConverter.convertEntity(
-            blockedCharacterRepository.save(
-                blockedCharacterConverter.convertDomain(blockedCharacter)
-            )
-        );
+    public void save(BlockedCharacter blockedCharacter) {
+        blockedCharacterRepository.save(blockedCharacterConverter.convertDomain(blockedCharacter));
     }
 }
