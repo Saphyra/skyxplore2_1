@@ -12,6 +12,7 @@ import static skyxplore.testutil.TestUtils.createCharacterView;
 import static skyxplore.testutil.TestUtils.createMail;
 import static skyxplore.testutil.TestUtils.createMailIdList;
 import static skyxplore.testutil.TestUtils.createMailView;
+import static skyxplore.testutil.TestUtils.createSendMailRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.request.OneStringParamRequest;
+import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.mail.MailView;
@@ -99,5 +101,91 @@ public class MailControllerTest {
         verify(mailFacade).getArchivedMails(CHARACTER_ID);
         verify(mailViewConverter).convertDomain(mailList);
         assertEquals(viewList, result);
+    }
+
+    @Test
+    public void testGetMailsShouldCallFacadeAndReturnView(){
+        //GIVEN
+        Mail mail = createMail();
+        List<Mail> mailList = Arrays.asList(mail);
+        when(mailFacade.getMails(CHARACTER_ID)).thenReturn(mailList);
+
+        MailView view = createMailView();
+        List<MailView> viewList = Arrays.asList(view);
+        when(mailViewConverter.convertDomain(mailList)).thenReturn(viewList);
+        //WHEN
+        List<MailView> result = underTest.getMails(CHARACTER_ID);
+        //THEN
+        verify(mailFacade).getMails(CHARACTER_ID);
+        verify(mailViewConverter).convertDomain(mailList);
+        assertEquals(viewList, result);
+    }
+
+    @Test
+    public void testGetNumberOfUnreadMailsShouldCallFacadeAndReturn(){
+        //GIVEN
+        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(2);
+        //WHEN
+        Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID);
+        //THEN
+        assertEquals(new Integer(2), result);
+    }
+
+    @Test
+    public void testGetSentMailsShouldCallFacadeAndReturnView(){
+        //GIVEN
+        Mail mail = createMail();
+        List<Mail> mailList = Arrays.asList(mail);
+        when(mailFacade.getSentMails(CHARACTER_ID)).thenReturn(mailList);
+
+        MailView view = createMailView();
+        List<MailView> viewList = Arrays.asList(view);
+        when(mailViewConverter.convertDomain(mailList)).thenReturn(viewList);
+        //WHEN
+        List<MailView> result = underTest.getSentMails(CHARACTER_ID);
+        //THEN
+        verify(mailFacade).getSentMails(CHARACTER_ID);
+        verify(mailViewConverter).convertDomain(mailList);
+        assertEquals(viewList, result);
+    }
+
+    @Test
+    public void testMarkMailsReadShouldCallFacade(){
+        //GIVEN
+        List<String> mailIds = Arrays.asList(MAIL_ID_1);
+        //WHEN
+        underTest.markMailsRead(mailIds, CHARACTER_ID);
+        //THEN
+        verify(mailFacade).setMailReadStatus(mailIds, CHARACTER_ID, true);
+    }
+
+    @Test
+    public void testMarkMailsUnreadShouldCallFacade(){
+        //GIVEN
+        List<String> mailIds = Arrays.asList(MAIL_ID_1);
+        //WHEN
+        underTest.markMailsUnread(mailIds, CHARACTER_ID);
+        //THEN
+        verify(mailFacade).setMailReadStatus(mailIds, CHARACTER_ID, false);
+    }
+
+    @Test
+    public void testSendMailShouldCallFacade(){
+        //GIVEN
+        SendMailRequest request = createSendMailRequest();
+        //WHEN
+        underTest.sendMail(request, CHARACTER_ID);
+        //THEN
+        verify(mailFacade).sendMail(request, CHARACTER_ID);
+    }
+
+    @Test
+    public void testUnarchiveMailsShouldCallFacade(){
+        //GIVEN
+        List<String> mailIds = Arrays.asList(MAIL_ID_1);
+        //WHEN
+        underTest.unarchiveMails(mailIds, CHARACTER_ID);
+        //THEN
+        verify(mailFacade).archiveMails(CHARACTER_ID, mailIds, false);
     }
 }

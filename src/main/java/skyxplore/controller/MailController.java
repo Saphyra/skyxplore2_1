@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("WeakerAccess")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -76,7 +76,6 @@ public class MailController {
     }
 
     @GetMapping(GET_MAILS_MAPPING)
-    //TODO unit test
     public List<MailView> getMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -85,7 +84,6 @@ public class MailController {
     }
 
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
-    //TODO unit test
     public Integer getNumberOfUnreadMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -94,7 +92,6 @@ public class MailController {
     }
 
     @GetMapping(GET_SENT_MAILS_MAPPING)
-    //TODO unit test
     public List<MailView> getSentMails(
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -103,7 +100,6 @@ public class MailController {
     }
 
     @PostMapping(MARK_MAILS_READ_MAPPING)
-    //TODO unit test
     public void markMailsRead(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
@@ -113,8 +109,7 @@ public class MailController {
     }
 
     @PostMapping(MARK_MAILS_UNREAD_MAPPING)
-    //TODO unit test
-    public void markMailsUnRead(
+    public void markMailsUnread(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -123,17 +118,15 @@ public class MailController {
     }
 
     @PutMapping(SEND_MAIL_MAPPING)
-    //TODO unit test
     public void sendMail(
         @RequestBody @Valid SendMailRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Sending mail...");
-        mailFacade.sendMail(request, userId);
+        mailFacade.sendMail(request, characterId);
     }
 
     @PostMapping(UNARCHIVE_MAILS_MAPPING)
-    //TODO unit test
     public void unarchiveMails(
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId

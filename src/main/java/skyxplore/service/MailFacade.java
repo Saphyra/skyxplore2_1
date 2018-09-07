@@ -51,8 +51,8 @@ public class MailFacade {
         return mailQueryService.getSentMails(characterId);
     }
 
-    public void sendMail(SendMailRequest request, String userId) {
-        mailSenderService.sendMail(request, userId);
+    public void sendMail(SendMailRequest request, String characterId) {
+        mailSenderService.sendMail(request, characterId);
     }
 
     public void setMailReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {

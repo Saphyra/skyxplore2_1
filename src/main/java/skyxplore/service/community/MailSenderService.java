@@ -20,17 +20,16 @@ public class MailSenderService {
     private final IdGenerator idGenerator;
     private final MailDao mailDao;
 
-    public void sendMail(SendMailRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
+    public void sendMail(SendMailRequest request, String characterId) {
         characterQueryService.findByCharacterId(request.getAddresseeId());
-        Mail mail = createMail(request);
+        Mail mail = createMail(request, characterId);
         mailDao.save(mail);
     }
 
-    private Mail createMail(SendMailRequest request) {
+    private Mail createMail(SendMailRequest request, String characterId) {
         Mail mail = new Mail();
         mail.setMailId(idGenerator.getRandomId());
-        mail.setFrom(request.getCharacterId());
+        mail.setFrom(characterId);
         mail.setTo(request.getAddresseeId());
         mail.setSubject(request.getSubject());
         mail.setMessage(request.getMessage());

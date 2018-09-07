@@ -8,9 +8,6 @@ import javax.validation.constraints.Size;
 @Data
 public class SendMailRequest {
     @NotNull
-    private String characterId;
-
-    @NotNull
     private String addresseeId;
 
     @NotNull

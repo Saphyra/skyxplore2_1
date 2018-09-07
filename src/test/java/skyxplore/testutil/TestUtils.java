@@ -14,6 +14,7 @@ import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
+import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.controller.request.user.ChangePasswordRequest;
@@ -129,6 +130,7 @@ public class TestUtils {
     public static final String MAIL_TO_NAME = "mail_to_name";
     public static final String MAIL_SUBJECT = "mail_subject";
     public static final String MAIL_MESSAGE = "mail_message";
+    public static final String MAILS_ADDRESSEE_ID = "mail_addressee_id";
     public static final Long MAIL_SEND_TIME_EPOCH = 654612L;
     public static final LocalDateTime MAIL_SEND_TIME = LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC);
 
@@ -468,6 +470,14 @@ public class TestUtils {
 
     public static RenameCharacterRequest createRenameCharacterRequest() {
         return new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NEW_NAME);
+    }
+
+    public static SendMailRequest createSendMailRequest(){
+        SendMailRequest request = new SendMailRequest();
+        request.setAddresseeId(MAILS_ADDRESSEE_ID);
+        request.setSubject(MAIL_SUBJECT);
+        request.setMessage(MAIL_MESSAGE);
+        return request;
     }
 
     public static Ship createShip() {
