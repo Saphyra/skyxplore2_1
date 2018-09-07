@@ -34,8 +34,8 @@ public class ShipQueryService {
         return ship;
     }
 
-    public View<ShipView> getShipData(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public View<ShipView> getShipData(String characterId) {
+        characterQueryService.findByCharacterId(characterId);
 
         EquippedShip ship = equippedShipDao.getShipByCharacterId(characterId);
         if (ship == null) {

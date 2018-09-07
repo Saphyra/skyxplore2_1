@@ -39,8 +39,8 @@ public class UnequipService {
 
 
     @Transactional
-    public void unequip(UnequipRequest request, String userId, String characterId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public void unequip(UnequipRequest request, String characterId) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
         if (request.getSlot().contains(CONNECTOR_SLOT_NAME)) {
@@ -66,9 +66,9 @@ public class UnequipService {
 
     private void unequipExtender(UnequipRequest request, SkyXpCharacter character, EquippedShip ship) {
         Extender extender = extenderService.get(request.getItemId());
-        if(extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)){
+        if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
             ship.removeConnectorSlot(extender.getExtendedNum(), character, extenderService);
-        }else {
+        } else {
             EquippedSlot slot = equipUtil.getSlotByName(ship, extender.getExtendedSlot());
             slot.removeSlot(character, extender.getExtendedNum());
             slotDao.save(slot);

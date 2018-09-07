@@ -34,8 +34,8 @@ public class EquipShipService {
     private final SlotDao slotDao;
 
     @Transactional
-    public void equipShip(String userId, String characterId, String itemId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public void equipShip(String characterId, String itemId) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
         Ship shipToEquip = getShip(itemId);

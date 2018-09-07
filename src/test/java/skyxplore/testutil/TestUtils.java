@@ -13,7 +13,9 @@ import skyxplore.controller.request.LoginRequest;
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
+import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
+import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.controller.request.user.ChangeEmailRequest;
@@ -97,6 +99,11 @@ public class TestUtils {
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
+
+    //Equip
+    public static final String EQUIP_ITEM_ID = "equip_item_id";
+    public static final String EQUIP_TO = "equip_to";
+    public static final String UNEQUIP_FROM = "unequip_from";
 
     //EquippedShip
     public static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
@@ -301,6 +308,13 @@ public class TestUtils {
         return ship;
     }
 
+    public static EquipRequest createEquipRequest() {
+        EquipRequest request = new EquipRequest();
+        request.setItemId(EQUIP_ITEM_ID);
+        request.setEquipTo(EQUIP_TO);
+        return request;
+    }
+
     public static Factory createFactory(String factoryId) {
         Factory factory = createFactory();
         factory.setFactoryId(factoryId);
@@ -370,7 +384,7 @@ public class TestUtils {
         return request;
     }
 
-    public static Mail createMail(){
+    public static Mail createMail() {
         return Mail.builder()
             .mailId(MAIL_ID_1)
             .from(MAIL_FROM_ID)
@@ -389,7 +403,7 @@ public class TestUtils {
         return Arrays.asList(mailIds);
     }
 
-    public static MailView createMailView(){
+    public static MailView createMailView() {
         return MailView.builder()
             .mailId(MAIL_ID_1)
             .from(MAIL_FROM_ID)
@@ -472,7 +486,7 @@ public class TestUtils {
         return new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NEW_NAME);
     }
 
-    public static SendMailRequest createSendMailRequest(){
+    public static SendMailRequest createSendMailRequest() {
         SendMailRequest request = new SendMailRequest();
         request.setAddresseeId(MAILS_ADDRESSEE_ID);
         request.setSubject(MAIL_SUBJECT);
@@ -497,6 +511,13 @@ public class TestUtils {
         view.setSlotId(slot.getSlotId());
         view.setShipId(slot.getShipId());
         return view;
+    }
+
+    public static UnequipRequest createUnequipRequest() {
+        UnequipRequest request = new UnequipRequest();
+        request.setItemId(EQUIP_ITEM_ID);
+        request.setSlot(UNEQUIP_FROM);
+        return request;
     }
 
     public static SkyXpUser createUser() {
