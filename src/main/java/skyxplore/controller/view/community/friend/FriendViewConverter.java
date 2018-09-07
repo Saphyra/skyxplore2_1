@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class FriendViewConverter extends AbstractViewConverter<Friendship, FriendView> {
     private final AccessTokenFacade accessTokenFacade;
     private final CharacterQueryService characterQueryService;
