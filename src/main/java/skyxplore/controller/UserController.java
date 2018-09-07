@@ -11,7 +11,7 @@ import skyxplore.service.UserFacade;
 import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnstableApiUsage"})
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -30,45 +30,64 @@ public class UserController {
     private final UserFacade userFacade;
 
     @PostMapping(CHANGE_EMAIL_MAPPING)
-    public void changeEmail(@RequestBody @Valid ChangeEmailRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    //TODO unit test
+    public void changeEmail(
+        @RequestBody @Valid ChangeEmailRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+    ){
         log.info("{} wants to change his email address.", userId);
         userFacade.changeEmail(request, userId);
     }
 
     @PostMapping(CHANGE_PASSWORD_MAPPING)
-    public void changePassword(@RequestBody @Valid ChangePasswordRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    //TODO unit test
+    public void changePassword(
+        @RequestBody @Valid ChangePasswordRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+    ){
         log.info("{} wants to change his password.", userId);
         userFacade.changePassword(request, userId);
     }
 
     @PostMapping(CHANGE_USERNAME_MAPPING)
-    public void changeUserName(@RequestBody @Valid ChangeUserNameRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    //TODO unit test
+    public void changeUserName(
+        @RequestBody @Valid ChangeUserNameRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+    ){
         log.info("{} wants to change his username.", userId);
         userFacade.changeUserName(request, userId);
         userNameCache.invalidate(request.getNewUserName());
     }
 
     @PostMapping(DELETE_ACCOUNT_MAPPING)
-    public void deleteAccount(@RequestBody @Valid AccountDeleteRequest request, @CookieValue(AuthFilter.COOKIE_USER_ID) String userId){
+    //TODO unit test
+    public void deleteAccount(
+        @RequestBody @Valid AccountDeleteRequest request,
+        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+    ){
         log.info("{} wants to delete his account");
         userFacade.deleteAccount(request, userId);
     }
 
     @GetMapping(EMAIL_EXISTS_MAPPING)
+    //TODO unit test
     public  boolean isEmailExists(@RequestParam(value="email") String email) throws ExecutionException {
         log.info("Request arrived to {}, request parameter: {}", EMAIL_EXISTS_MAPPING, email);
         return emailCache.get(email);
     }
 
     @PostMapping(REGISTRATION_MAPPING)
+    //TODO unit test
     public void registration(@RequestBody @Valid UserRegistrationRequest request){
-        log.info("{} wants to registrate!", request.getUsername());
+        log.info("{} wants to register!", request.getUsername());
         userFacade.registrateUser(request);
         userNameCache.invalidate(request.getUsername());
         emailCache.invalidate(request.getEmail());
     }
 
     @GetMapping(USERNAME_EXISTS_MAPPING)
+    //TODO unit test
     public boolean isUsernameExists(@RequestParam(value = "username") String userName) throws ExecutionException {
         log.info("Request arrived to {}, request parameter: {}", USERNAME_EXISTS_MAPPING, userName);
         return userNameCache.get(userName);
