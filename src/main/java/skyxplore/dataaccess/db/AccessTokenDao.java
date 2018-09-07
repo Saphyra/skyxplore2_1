@@ -7,13 +7,11 @@ import skyxplore.dataaccess.db.repository.AccessTokenRepository;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenConverter;
 
-import java.util.Optional;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("WeakerAccess")
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class AccessTokenDao {
     private final AccessTokenRepository accessTokenRepository;
     private final AccessTokenConverter accessTokenConverter;
@@ -35,7 +33,11 @@ public class AccessTokenDao {
         accessTokenRepository.deleteExpired(expiration);
     }
 
-    public AccessToken findByTokenId(String tokenId){
+    public AccessToken findByCharacterId(String characterId) {
+        return accessTokenConverter.convertEntity(accessTokenRepository.findByCharacterId(characterId));
+    }
+
+    public AccessToken findByTokenId(String tokenId) {
         return accessTokenRepository.findById(tokenId)
             .map(accessTokenConverter::convertEntity)
             .orElse(null);
@@ -45,19 +47,11 @@ public class AccessTokenDao {
         return accessTokenConverter.convertEntity(accessTokenRepository.findByUserId(userId));
     }
 
-    public AccessToken findByUserIdOrTokenId(String userId, String tokenId){
+    public AccessToken findByUserIdOrTokenId(String userId, String tokenId) {
         return accessTokenConverter.convertEntity(accessTokenRepository.findByUserIdOrAccessTokenId(userId, tokenId));
     }
 
     public void save(AccessToken accessToken) {
         accessTokenRepository.save(accessTokenConverter.convertDomain(accessToken));
-    }
-
-    public void update(AccessToken token) {
-        save(token);
-    }
-
-    public Optional<AccessToken> findByCharacterId(String characterId) {
-        return Optional.ofNullable(accessTokenConverter.convertEntity(accessTokenRepository.findByCharacterId(characterId)));
     }
 }

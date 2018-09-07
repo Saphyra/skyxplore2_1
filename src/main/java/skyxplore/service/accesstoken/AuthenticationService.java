@@ -90,10 +90,10 @@ public class AuthenticationService {
     private void updateTokenExpiration(AccessToken token) {
         log.debug("Token expiration date refreshed");
         token.setLastAccess(accessTokenDateResolver.getActualDate());
-        accessTokenDao.update(token);
+        accessTokenDao.save(token);
     }
 
     public Boolean isCharacterActive(String characterId) {
-        return accessTokenDao.findByCharacterId(characterId).isPresent();
+        return accessTokenDao.findByCharacterId(characterId) != null;
     }
 }
