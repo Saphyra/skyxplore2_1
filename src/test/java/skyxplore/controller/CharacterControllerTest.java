@@ -1,30 +1,13 @@
 package skyxplore.controller;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
-import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
-import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.createCharacter;
-import static skyxplore.testutil.TestUtils.createCharacterView;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
+import com.google.common.cache.Cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import com.google.common.cache.Cache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
@@ -35,6 +18,17 @@ import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {
@@ -141,11 +135,11 @@ public class CharacterControllerTest {
     @Test
     public void testRenameCharacterShouldCallFacadeAndInvalidateCache(){
         //GIVEN
-        RenameCharacterRequest request = new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NAME);
+        RenameCharacterRequest request = createRenameCharacterRequest();
         //WHEN
-        underTest.renameCharacter(request, USER_ID);
+        underTest.renameCharacter(request, CHARACTER_ID);
         //THEN
-        verify(characterFacade).renameCharacter(request, USER_ID);
-        verify(characterNameCache).invalidate(CHARACTER_NAME);
+        verify(characterFacade).renameCharacter(request, CHARACTER_ID);
+        verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
     }
 }

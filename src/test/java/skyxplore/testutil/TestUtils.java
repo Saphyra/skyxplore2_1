@@ -19,6 +19,7 @@ import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
+import skyxplore.domain.character.CharacterEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacterEntity;
@@ -59,7 +60,9 @@ public class TestUtils {
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
+    public static final String CHARACTER_MONEY_STRING = "character_money_string";
     public static final String FRIEND_NAME = "friend_name";
+    public static final String CHARACTER_EQUIPMENTS = "character_equipments";
 
     //Converter
     public static final String CONVERTER_ENTITY = "converter_entity";
@@ -203,7 +206,7 @@ public class TestUtils {
         return request;
     }
 
-    public static BlockedCharacter createBlockedCharacter(){
+    public static BlockedCharacter createBlockedCharacter() {
         return BlockedCharacter.builder()
             .blockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID)
             .blockedCharacterId(BLOCKED_CHARACTER_ID)
@@ -211,7 +214,7 @@ public class TestUtils {
             .build();
     }
 
-    public static BlockedCharacterEntity createBlockedCharacterEntity(){
+    public static BlockedCharacterEntity createBlockedCharacterEntity() {
         BlockedCharacterEntity entity = new BlockedCharacterEntity();
         entity.setBlockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID);
         entity.setBlockedCharacterId(BLOCKED_CHARACTER_ID);
@@ -252,6 +255,16 @@ public class TestUtils {
 
     public static CharacterDeleteRequest createCharacterDeleteRequest() {
         return new CharacterDeleteRequest(CHARACTER_ID);
+    }
+
+    public static CharacterEntity createCharacterEntity() {
+        CharacterEntity entity = new CharacterEntity();
+        entity.setCharacterId(CHARACTER_ID);
+        entity.setUserId(USER_ID);
+        entity.setCharacterName(CHARACTER_NAME);
+        entity.setMoney(CHARACTER_MONEY_STRING);
+        entity.setEquipments(CHARACTER_EQUIPMENTS);
+        return entity;
     }
 
     public static CharacterView createCharacterView(SkyXpCharacter character) {
@@ -488,7 +501,7 @@ public class TestUtils {
     }
 
     public static RenameCharacterRequest createRenameCharacterRequest() {
-        return new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NEW_NAME);
+        return new RenameCharacterRequest(CHARACTER_NEW_NAME);
     }
 
     public static SendMailRequest createSendMailRequest() {
