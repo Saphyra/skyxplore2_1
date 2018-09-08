@@ -24,6 +24,7 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacterEntity;
 import skyxplore.domain.community.friendrequest.FriendRequest;
+import skyxplore.domain.community.friendrequest.FriendRequestEntity;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.community.mail.Mail;
@@ -283,7 +284,7 @@ public class TestUtils {
         return new Credentials(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
-    public static CredentialsEntity createCredentialsEntity(){
+    public static CredentialsEntity createCredentialsEntity() {
         return new CredentialsEntity(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
@@ -354,6 +355,14 @@ public class TestUtils {
 
     public static FriendRequest createFriendRequest() {
         return FriendRequest.builder()
+            .friendRequestId(FRIEND_REQUEST_ID)
+            .friendId(FRIEND_ID)
+            .characterId(CHARACTER_ID)
+            .build();
+    }
+
+    public static FriendRequestEntity createFriendRequestEntity() {
+        return FriendRequestEntity.builder()
             .friendRequestId(FRIEND_REQUEST_ID)
             .friendId(FRIEND_ID)
             .characterId(CHARACTER_ID)
