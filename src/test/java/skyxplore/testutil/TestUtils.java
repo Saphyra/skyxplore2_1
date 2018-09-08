@@ -28,6 +28,7 @@ import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.CredentialsEntity;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
@@ -280,6 +281,10 @@ public class TestUtils {
 
     public static Credentials createCredentials() {
         return new Credentials(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
+    }
+
+    public static CredentialsEntity createCredentialsEntity(){
+        return new CredentialsEntity(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
     public static Slot createDefenseSlot() {

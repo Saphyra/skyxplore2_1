@@ -11,26 +11,22 @@ import skyxplore.domain.credentials.CredentialsConverter;
 @RequiredArgsConstructor
 @Component
 public class CredentialsDao {
-    private final CredentialsRepository credentialsRepository;
     private final CredentialsConverter credentialsConverter;
+    private final CredentialsRepository credentialsRepository;
 
-    //TODO unit test
     public void delete(String userId) {
         credentialsRepository.deleteById(userId);
     }
 
-    //TODO unit test
-    public void save(Credentials credentials) {
-        credentialsRepository.save(credentialsConverter.convertDomain(credentials));
+    public Credentials getByUserId(String userId) {
+        return credentialsRepository.findById(userId).map(credentialsConverter::convertEntity).orElse(null);
     }
 
-    //TODO unit test
     public Credentials getCredentialsByName(String userName) {
         return credentialsConverter.convertEntity(credentialsRepository.getByUserName(userName));
     }
 
-    //TODO unit test
-    public Credentials getByUserId(String userId) {
-        return credentialsRepository.findById(userId).map(credentialsConverter::convertEntity).orElse(null);
+    public void save(Credentials credentials) {
+        credentialsRepository.save(credentialsConverter.convertDomain(credentials));
     }
 }

@@ -6,10 +6,16 @@ FrontEnd:
     Subdirectories & smaller classes
 
 BackEnd
-    Converter.convertDomain should throw exception when null
+    Converter:
+        - convertDomain should throw exception when null
+        - convertEntity should return optional
+
     Logging:
         - Controller: before and after service call
     Use Optionals
+    Repository:
+        - getBy...: returns list
+        - findBy...: returns single
 
 ==========Continuous tasks / cleanups==========
 
