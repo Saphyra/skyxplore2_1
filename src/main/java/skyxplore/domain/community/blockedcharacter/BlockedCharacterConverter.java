@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
 @Component
-//TODO unit test
 public class BlockedCharacterConverter extends ConverterBase<BlockedCharacterEntity, BlockedCharacter> {
     @Override
     public BlockedCharacter convertEntity(BlockedCharacterEntity entity) {
