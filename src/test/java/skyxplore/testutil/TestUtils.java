@@ -28,6 +28,7 @@ import skyxplore.domain.community.friendrequest.FriendRequestEntity;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.community.mail.Mail;
+import skyxplore.domain.community.mail.MailEntity;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.credentials.CredentialsEntity;
 import skyxplore.domain.factory.Factory;
@@ -425,6 +426,21 @@ public class TestUtils {
             .message(MAIL_MESSAGE)
             .read(false)
             .sendTime(MAIL_SEND_TIME)
+            .archived(false)
+            .deletedByAddressee(false)
+            .deletedBySender(false)
+            .build();
+    }
+
+    public static MailEntity createMailEntity(){
+        return MailEntity.builder()
+            .mailId(MAIL_ID_1)
+            .from(MAIL_FROM_ID)
+            .to(MAIL_TO_ID)
+            .subject(MAIL_SUBJECT)
+            .message(MAIL_MESSAGE)
+            .read(false)
+            .sendTime(MAIL_SEND_TIME_EPOCH)
             .archived(false)
             .deletedByAddressee(false)
             .deletedBySender(false)
