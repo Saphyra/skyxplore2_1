@@ -11,7 +11,6 @@ import java.util.Set;
 
 @SuppressWarnings({"unused", "unchecked"})
 @Data
-//TODO unit test
 public class SkyXpCharacter {
     private String characterId;
     private String characterName;
@@ -50,7 +49,7 @@ public class SkyXpCharacter {
     }
 
     public void spendMoney(Integer money) {
-        if(this.money < money){
+        if (this.money < money) {
             throw new NotEnoughMoneyException(characterId + " wanted to buy items cost " + money + ", while he had only " + this.money);
         }
         this.money -= money;

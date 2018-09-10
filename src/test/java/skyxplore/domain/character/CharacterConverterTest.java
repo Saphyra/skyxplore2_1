@@ -49,11 +49,11 @@ public class CharacterConverterTest {
         CharacterEntity entity = createCharacterEntity();
         when(integerEncryptor.decrypt(CHARACTER_ENCRYPTED_MONEY, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
 
-        when(stringEncryptor.decryptEntity(CHARACTER_ENCRYPTED_EQUIPMENTS, CHARACTER_ID)).thenReturn(CHARACTER_EQUIPMENTS);
+        when(stringEncryptor.decryptEntity(CHARACTER_ENCRYPTED_EQUIPMENTS, CHARACTER_ID)).thenReturn(CHARACTER_EQUIPMENT);
 
         ArrayList<String> equipmentList = new ArrayList<>();
-        equipmentList.add(CHARACTER_EQUIPMENTS);
-        when(objectMapper.readValue(CHARACTER_EQUIPMENTS, ArrayList.class)).thenReturn(equipmentList);
+        equipmentList.add(CHARACTER_EQUIPMENT);
+        when(objectMapper.readValue(CHARACTER_EQUIPMENT, ArrayList.class)).thenReturn(equipmentList);
         //WHEN
         SkyXpCharacter result = underTest.convertEntity(entity);
         //THEN
@@ -79,8 +79,8 @@ public class CharacterConverterTest {
 
         when(integerEncryptor.encrypt(CHARACTER_MONEY, CHARACTER_ID)).thenReturn(CHARACTER_ENCRYPTED_MONEY);
 
-        when(objectMapper.writeValueAsString(character.getEquipments())).thenReturn(CHARACTER_EQUIPMENTS);
-        when(stringEncryptor.encryptEntity(CHARACTER_EQUIPMENTS, CHARACTER_ID)).thenReturn(CHARACTER_ENCRYPTED_EQUIPMENTS);
+        when(objectMapper.writeValueAsString(character.getEquipments())).thenReturn(CHARACTER_EQUIPMENT);
+        when(stringEncryptor.encryptEntity(CHARACTER_EQUIPMENT, CHARACTER_ID)).thenReturn(CHARACTER_ENCRYPTED_EQUIPMENTS);
         //WHEN
         CharacterEntity result = underTest.convertDomain(character);
         //THEN
