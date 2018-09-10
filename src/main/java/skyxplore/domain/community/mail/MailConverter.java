@@ -8,7 +8,6 @@ import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class MailConverter extends ConverterBase<MailEntity, Mail> {
     private final DateTimeUtil dateTimeUtil;
     private final StringEncryptor stringEncryptor;
