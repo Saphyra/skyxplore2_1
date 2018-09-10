@@ -30,14 +30,6 @@ public class AccessTokenDaoTest {
     private AccessTokenDao underTest;
 
     @Test
-    public void testDeleteShouldCallRepository(){
-        //WHEN
-        underTest.delete(createAccessToken());
-        //THEN
-        verify(accessTokenRepository).deleteById(ACCESS_TOKEN_ID);
-    }
-
-    @Test
     public void testDeleteByIdShouldCallRepository(){
         //WHEN
         underTest.deleteById(ACCESS_TOKEN_ID);
@@ -66,7 +58,7 @@ public class AccessTokenDaoTest {
         //GIVEN
         when(accessTokenRepository.findById(ACCESS_TOKEN_ID)).thenReturn(Optional.empty());
         //WHEN
-        AccessToken result = underTest.findByTokenId(ACCESS_TOKEN_ID);
+        AccessToken result = underTest.findById(ACCESS_TOKEN_ID);
         //THEN
         assertNull(result);
     }
@@ -96,7 +88,7 @@ public class AccessTokenDaoTest {
         AccessToken accessToken = createAccessToken();
         when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
         //WHEN
-        AccessToken result = underTest.findByTokenId(ACCESS_TOKEN_ID);
+        AccessToken result = underTest.findById(ACCESS_TOKEN_ID);
         //THEN
         verify(accessTokenRepository).findById(ACCESS_TOKEN_ID);
         verify(accessTokenConverter).convertEntity(entity);

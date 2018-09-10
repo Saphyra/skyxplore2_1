@@ -1,13 +1,10 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import skyxplore.dataaccess.db.repository.CredentialsRepository;
 import skyxplore.dataaccess.db.repository.UserRepository;
+import skyxplore.domain.Converter;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.domain.user.UserConverter;
 import skyxplore.domain.user.UserEntity;
 import skyxplore.exception.UserNotFoundException;
 
@@ -15,37 +12,33 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
-public class UserDao {
-    private final UserConverter userConverter;
-    private final UserRepository userRepository;
+public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepository>{
     private final CredentialsDao credentialsDao;
+
+    public UserDao(
+        Converter<UserEntity, SkyXpUser> converter,
+        UserRepository repository,
+        CredentialsDao credentialsDao
+    ) {
+        super(converter, repository);
+        this.credentialsDao = credentialsDao;
+    }
 
     @Transactional
     public void delete(String userId){
         log.info("Deleting user {}", userId);
-        userRepository.deleteById(userId);
-        credentialsDao.delete(userId);
+        repository.deleteById(userId);
+        credentialsDao.deleteById(userId);
     }
 
     public SkyXpUser findUserByEmail(String email){
-        return userConverter.convertEntity(userRepository.findByEmail(email));
-    }
-
-    public SkyXpUser findById(String userId){
-        Optional<UserEntity> user = userRepository.findById(userId);
-        return user.map(userConverter::convertEntity).orElse(null);
-    }
-
-    public SkyXpUser registrateUser(SkyXpUser user){
-        UserEntity registrated = userRepository.save(userConverter.convertDomain(user));
-        return userConverter.convertEntity(registrated);
+        return converter.convertEntity(repository.findByEmail(email));
     }
 
     @Transactional
     public void update(SkyXpUser user){
-        Optional<UserEntity> actual = userRepository.findById(user.getUserId());
+        Optional<UserEntity> actual = repository.findById(user.getUserId());
         if(actual.isPresent()){
             UserEntity entity = actual.get();
             entity.setUserId(user.getUserId());

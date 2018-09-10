@@ -67,7 +67,7 @@ public class CharacterController {
         @RequestBody @NotNull CharacterDeleteRequest request,
         @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId
     ) {
-        log.info("{} wants to delete {}", userId, request.getCharacterId());
+        log.info("{} wants to deleteById {}", userId, request.getCharacterId());
         characterFacade.deleteCharacter(request, userId);
         log.info("Character {} is deleted.", request.getCharacterId());
     }

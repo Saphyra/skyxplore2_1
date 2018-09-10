@@ -98,7 +98,7 @@ public class CommunityController {
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
-        log.info("{} wants to delete friendship {}", characterId, request.getValue());
+        log.info("{} wants to deleteById friendship {}", characterId, request.getValue());
         communityFacade.deleteFriendship(request.getValue(), characterId);
     }
 

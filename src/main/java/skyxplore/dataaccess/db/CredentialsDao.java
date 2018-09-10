@@ -1,32 +1,25 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CredentialsRepository;
+import skyxplore.domain.Converter;
 import skyxplore.domain.credentials.Credentials;
-import skyxplore.domain.credentials.CredentialsConverter;
+import skyxplore.domain.credentials.CredentialsEntity;
 
 @Slf4j
-@RequiredArgsConstructor
 @Component
-public class CredentialsDao {
-    private final CredentialsConverter credentialsConverter;
-    private final CredentialsRepository credentialsRepository;
+public class CredentialsDao extends AbstractDao<CredentialsEntity, Credentials, String, CredentialsRepository>{
 
-    public void delete(String userId) {
-        credentialsRepository.deleteById(userId);
+    public CredentialsDao(Converter<CredentialsEntity, Credentials> converter, CredentialsRepository repository) {
+        super(converter, repository);
     }
 
     public Credentials getByUserId(String userId) {
-        return credentialsRepository.findById(userId).map(credentialsConverter::convertEntity).orElse(null);
+        return repository.findById(userId).map(converter::convertEntity).orElse(null);
     }
 
     public Credentials getCredentialsByName(String userName) {
-        return credentialsConverter.convertEntity(credentialsRepository.getByUserName(userName));
-    }
-
-    public void save(Credentials credentials) {
-        credentialsRepository.save(credentialsConverter.convertDomain(credentials));
+        return converter.convertEntity(repository.getByUserName(userName));
     }
 }

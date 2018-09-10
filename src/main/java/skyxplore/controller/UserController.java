@@ -62,7 +62,7 @@ public class UserController {
         @RequestBody @Valid AccountDeleteRequest request,
         @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
     ) {
-        log.info("{} wants to delete his account");
+        log.info("{} wants to deleteById his account");
         userFacade.deleteAccount(request, userId);
     }
 

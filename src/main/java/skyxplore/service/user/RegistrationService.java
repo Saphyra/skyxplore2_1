@@ -37,7 +37,7 @@ public class RegistrationService {
             request.getEmail(),
             new HashSet<>(Arrays.asList(Role.USER))
         );
-        userDao.registrateUser(user);
+        userDao.save(user);
         String passwordToken = passwordService.hashPassword(request.getPassword());
         credentialsService.save(new Credentials(user.getUserId(), request.getUsername(), passwordToken));
         log.info("New userId: {}", user.getUserId());

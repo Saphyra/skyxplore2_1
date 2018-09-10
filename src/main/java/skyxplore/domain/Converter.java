@@ -8,4 +8,5 @@ public interface Converter<E, D> {
 
     E convertDomain(D domain);
     List<E> convertDomain(List<D> domain);
+
 }

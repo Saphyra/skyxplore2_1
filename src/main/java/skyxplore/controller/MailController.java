@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class MailController {
     private static final String ARCHIVE_MAILS_MAPPING = "mail/archive";
-    private static final String DELETE_MAILS_MAPPING = "mail/delete";
+    private static final String DELETE_MAILS_MAPPING = "mail/deleteById";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee";
     private static final String GET_ARCHIVED_MAILS_MAPPING = "mail/archived";
     private static final String GET_MAILS_MAPPING = "mail";
@@ -53,7 +53,7 @@ public class MailController {
         @RequestBody List<String> mailIds,
         @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
     ) {
-        log.info("{} wants to delete mails {}", characterId, mailIds);
+        log.info("{} wants to deleteById mails {}", characterId, mailIds);
         mailFacade.deleteMails(characterId, mailIds);
     }
 

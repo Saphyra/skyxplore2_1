@@ -84,7 +84,7 @@ public class RegistrationServiceTest {
         underTest.registrateUser(request);
         //THEN
         ArgumentCaptor<SkyXpUser> userCaptor = ArgumentCaptor.forClass(SkyXpUser.class);
-        verify(userDao).registrateUser(userCaptor.capture());
+        verify(userDao).save(userCaptor.capture());
         assertEquals(USER_ID, userCaptor.getValue().getUserId());
         assertEquals(USER_EMAIL, userCaptor.getValue().getEmail());
         assertEquals(1, userCaptor.getValue().getRoles().size());

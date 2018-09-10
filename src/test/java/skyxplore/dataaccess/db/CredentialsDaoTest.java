@@ -32,7 +32,7 @@ public class CredentialsDaoTest {
     @Test
     public void testDeleteShouldCallRepository(){
         //WHEN
-        underTest.delete(USER_ID);
+        underTest.deleteById(USER_ID);
         //THEN
         verify(credentialsRepository).deleteById(USER_ID);
     }

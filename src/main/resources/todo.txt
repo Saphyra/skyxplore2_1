@@ -17,15 +17,8 @@ BackEnd
         - getBy...: returns list
         - findBy...: returns single
 
-==========Continuous tasks / cleanups==========
-
-CharacterId transfer simplicity
-    - update endpoints
-        - add allowed uris
-        - remove unnecessary parameters
-    - eliminate unnecessary checks
-
 ==========Tasks==========
+Replace Optional return types
 
 Shop & factory implement filters
 Cancel production
