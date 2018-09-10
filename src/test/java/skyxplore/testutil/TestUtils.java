@@ -63,8 +63,9 @@ public class TestUtils {
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
-    public static final String CHARACTER_MONEY_STRING = "character_money_string";
+    public static final String CHARACTER_ENCRYPTED_MONEY = "character_encrypted_money";
     public static final String FRIEND_NAME = "friend_name";
+    public static final String CHARACTER_ENCRYPTED_EQUIPMENTS = "character_encrypted_equipments";
     public static final String CHARACTER_EQUIPMENTS = "character_equipments";
 
     //Converter
@@ -253,6 +254,7 @@ public class TestUtils {
         character.setCharacterName(CHARACTER_NAME);
         character.setUserId(USER_ID);
         character.addMoney(CHARACTER_MONEY);
+        character.addEquipment(CHARACTER_EQUIPMENTS);
         return character;
     }
 
@@ -265,8 +267,8 @@ public class TestUtils {
         entity.setCharacterId(CHARACTER_ID);
         entity.setUserId(USER_ID);
         entity.setCharacterName(CHARACTER_NAME);
-        entity.setMoney(CHARACTER_MONEY_STRING);
-        entity.setEquipments(CHARACTER_EQUIPMENTS);
+        entity.setMoney(CHARACTER_ENCRYPTED_MONEY);
+        entity.setEquipments(CHARACTER_ENCRYPTED_EQUIPMENTS);
         return entity;
     }
 
