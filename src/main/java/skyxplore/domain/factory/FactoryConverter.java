@@ -7,7 +7,6 @@ import skyxplore.domain.materials.MaterialsConverter;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     private final MaterialsConverter materialsConverter;
 

@@ -32,6 +32,7 @@ import skyxplore.domain.community.mail.MailEntity;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.credentials.CredentialsEntity;
 import skyxplore.domain.factory.Factory;
+import skyxplore.domain.factory.FactoryEntity;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.ship.EquippedShip;
@@ -117,6 +118,7 @@ public class TestUtils {
     public static final String FACTORY_ID_1 = "factory_id_1";
     public static final String FACTORY_ID_2 = "factory_id_2";
     public static final String FACTORY_ID_3 = "factory_id_3";
+    public static final String FACTORY_MATERIALS = "factory_materials";
 
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
@@ -354,8 +356,16 @@ public class TestUtils {
         Factory factory = new Factory();
         factory.setFactoryId(FACTORY_ID_1);
         factory.setCharacterId(CHARACTER_ID);
-        factory.setMaterials(new Materials());
+        factory.setMaterials(createMaterials());
         return factory;
+    }
+
+    public static FactoryEntity createFactoryEntity(){
+        FactoryEntity entity = new FactoryEntity();
+        entity.setFactoryId(FACTORY_ID_1);
+        entity.setCharacterId(CHARACTER_ID);
+        entity.setMaterials(FACTORY_MATERIALS);
+        return entity;
     }
 
     public static FriendRequest createFriendRequest() {
@@ -481,6 +491,12 @@ public class TestUtils {
         material.setDescription(MATERIAL_DESCRIPTION);
         material.setSlot(MATERIAL_SLOT);
         return material;
+    }
+
+    public static Materials createMaterials(){
+        Materials materials = new Materials();
+        materials.addMaterial(MATERIAL_KEY, MATERIAL_AMOUNT);
+        return materials;
     }
 
     public static MaterialView createMaterialView() {
