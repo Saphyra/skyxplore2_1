@@ -37,6 +37,7 @@ import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.factory.Factory;
+import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.service.GameDataFacade;
 import skyxplore.testutil.TestGeneralDescription;
@@ -91,6 +92,7 @@ public class ProductFactoryServiceTest {
         when(gameDataFacade.getData(PRODUCT_ELEMENT_ID_MATERIAL)).thenReturn(material);
 
         Factory factoryForMaterialProduct = createFactory(FACTORY_ID_1);
+        factoryForMaterialProduct.setMaterials(new Materials());
         when(factoryDao.findById(FACTORY_ID_1)).thenReturn(factoryForMaterialProduct);
 
         //===FINISH EXCEPTIONAL PRODUCT===
@@ -103,6 +105,7 @@ public class ProductFactoryServiceTest {
         when(characterDao.findById(CHARACTER_ID)).thenReturn(character);
 
         Factory factoryForEquipmentProduct = createFactory(FACTORY_ID_3);
+        factoryForEquipmentProduct.setMaterials(new Materials());
         when(factoryDao.findById(FACTORY_ID_3)).thenReturn(factoryForEquipmentProduct);
 
         //===PRODUCTS TO START===

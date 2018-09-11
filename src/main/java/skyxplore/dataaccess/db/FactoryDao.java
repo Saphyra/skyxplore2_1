@@ -10,7 +10,6 @@ import skyxplore.domain.factory.FactoryEntity;
 @SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
-//TODO unit test
 public class FactoryDao extends AbstractDao<FactoryEntity, Factory, String, FactoryRepository> {
     private final ProductDao productDao;
 
