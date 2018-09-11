@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 
 @Component
-//TODO unit test
 public class CredentialsConverter extends ConverterBase<CredentialsEntity, Credentials> {
     @Override
     public Credentials convertEntity(CredentialsEntity entity) {
