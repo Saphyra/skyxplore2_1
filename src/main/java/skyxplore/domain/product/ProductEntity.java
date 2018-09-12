@@ -1,6 +1,9 @@
 package skyxplore.domain.product;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -8,6 +11,9 @@ import javax.persistence.*;
 @Data
 @Table(name = "product")
 @SequenceGenerator(name = "seq_gen")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductEntity {
     @Id
     @Column(name = "product_id", nullable = false, length = 50)

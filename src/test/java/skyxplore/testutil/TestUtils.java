@@ -35,6 +35,7 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.factory.FactoryEntity;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
+import skyxplore.domain.product.ProductEntity;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
@@ -157,9 +158,12 @@ public class TestUtils {
     //Product
     public static final Long PRODUCT_ADDED_AT = 1000L;
     public static final Integer PRODUCT_AMOUNT = 5;
+    public static final String  PRODUCT_ENCRYPTED_AMOUNT = "product_encrypted_amount";
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
+    public static final String PRODUCT_ENCRYPTED_CONSTRUCTION_TIME = "product_encrypted_construction_time";
     public static final String PRODUCT_ELEMENT_ID_EQUIPMENT = "element_id_equipment";
     public static final String PRODUCT_ELEMENT_ID_MATERIAL = "element_id_material";
+    public static final String PRODUCT_ENCRYPTED_ELEMENT_ID = "product_encrypted_element_id";
     public static final String PRODUCT_ID_1 = "product_id_1";
     public static final String PRODUCT_ID_2 = "product_id_2";
     public static final String PRODUCT_ID_3 = "product_id_3";
@@ -524,6 +528,19 @@ public class TestUtils {
             .constructionTime(PRODUCT_CONSTRUCTION_TIME)
             .startTime(PRODUCT_START_TIME)
             .endTime(PRODUCT_END_TIME)
+            .build();
+    }
+
+    public static ProductEntity createProductEntity(){
+        return ProductEntity.builder()
+            .productId(PRODUCT_ID_1)
+            .factoryId(FACTORY_ID_1)
+            .elementId(PRODUCT_ENCRYPTED_ELEMENT_ID)
+            .amount(PRODUCT_ENCRYPTED_AMOUNT)
+            .addedAt(PRODUCT_ADDED_AT)
+            .constructionTime(PRODUCT_ENCRYPTED_CONSTRUCTION_TIME)
+            .startTime(PRODUCT_START_TIME_EPOCH)
+            .endTime(PRODUCT_END_TIME_EPOCH)
             .build();
     }
 
