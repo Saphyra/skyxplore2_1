@@ -37,6 +37,7 @@ import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductEntity;
 import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
@@ -315,6 +316,27 @@ public class TestUtils {
         return createEquippedSlot(WEAPON_SLOT_ID);
     }
 
+    public static EquippedShip createEquippedShip() {
+        EquippedShip ship = new EquippedShip();
+        ship.setShipId(EQUIPPED_SHIP_ID);
+        ship.setCharacterId(CHARACTER_ID);
+        ship.setShipType(EQUIPPED_SHIP_TYPE);
+        ship.setCoreHull(DATA_SHIP_COREHULL);
+        ship.setConnectorSlot(DATA_SHIP_CONNECTOR_SLOT);
+        ship.addConnector(DATA_CONNECTOR);
+        ship.setDefenseSlotId(DEFENSE_SLOT_ID);
+        ship.setWeaponSlotId(WEAPON_SLOT_ID);
+        return ship;
+    }
+
+    public static EquippedShipEntity createEquippedShipEntity(){
+        EquippedShipEntity entity = new EquippedShipEntity();
+        entity.setShipId(EQUIPPED_SHIP_ID);
+        entity.setCharacterId(CHARACTER_ID);
+        //TODO finish
+        return entity;
+    }
+
     public static EquippedSlot createEquippedSlot(String slotId) {
         EquippedSlot slot = new EquippedSlot();
         slot.setSlotId(slotId);
@@ -328,19 +350,6 @@ public class TestUtils {
         slot.addRight(DATA_ITEM_RIGHT);
         slot.addBack(DATA_ITEM_BACK);
         return slot;
-    }
-
-    public static EquippedShip createEquippedShip() {
-        EquippedShip ship = new EquippedShip();
-        ship.setShipId(EQUIPPED_SHIP_ID);
-        ship.setCharacterId(CHARACTER_ID);
-        ship.setShipType(EQUIPPED_SHIP_TYPE);
-        ship.setCoreHull(DATA_SHIP_COREHULL);
-        ship.setConnectorSlot(DATA_SHIP_CONNECTOR_SLOT);
-        ship.addConnector(DATA_CONNECTOR);
-        ship.setDefenseSlotId(DEFENSE_SLOT_ID);
-        ship.setWeaponSlotId(WEAPON_SLOT_ID);
-        return ship;
     }
 
     public static EquipRequest createEquipRequest() {
