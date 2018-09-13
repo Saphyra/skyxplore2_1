@@ -1,22 +1,22 @@
 package skyxplore.domain.ship;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 import skyxplore.encryption.IntegerEncryptor;
 import skyxplore.encryption.StringEncryptor;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 @SuppressWarnings("unchecked")
-//TODO unit test
 public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
@@ -48,6 +48,9 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
 
     @Override
     public EquippedShip convertEntity(EquippedShipEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         EquippedShip domain = new EquippedShip();
         try {
             domain.setCharacterId(entity.getCharacterId());

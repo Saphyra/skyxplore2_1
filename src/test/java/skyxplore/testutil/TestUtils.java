@@ -107,6 +107,11 @@ public class TestUtils {
     //EquippedShip
     public static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
     public static final String EQUIPPED_SHIP_TYPE = "equipped_ship_type";
+    public static final String EQUIPPED_SHIP_CONNECTOR_EQUIPPED = "equipped_ship_connector_equipped";
+    public static final String EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE = "equipped_ship_encrypted_type";
+    public static final String EQUIPPED_SHIP_ENCRYPTED_COREHULL = "equipped_ship_encrypted_corehull";
+    public static final String EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT = "equipped_ship_encrypted_connector_slot";
+    public static final String EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED = "equipped_ship_encrypted_connector_equipped";
 
     //EquippedSlot
     public static final String DEFENSE_SLOT_ID = "defense_slot_id";
@@ -333,7 +338,12 @@ public class TestUtils {
         EquippedShipEntity entity = new EquippedShipEntity();
         entity.setShipId(EQUIPPED_SHIP_ID);
         entity.setCharacterId(CHARACTER_ID);
-        //TODO finish
+        entity.setShipType(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE);
+        entity.setCoreHull(EQUIPPED_SHIP_ENCRYPTED_COREHULL);
+        entity.setConnectorSlot(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT);
+        entity.setConnectorEquipped(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED);
+        entity.setDefenseSlotId(DEFENSE_SLOT_ID);
+        entity.setWeaponSlotId(WEAPON_SLOT_ID);
         return entity;
     }
 
