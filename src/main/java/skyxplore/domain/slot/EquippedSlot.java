@@ -9,7 +9,6 @@ import java.util.Collection;
 
 @Data
 @SuppressWarnings({"unused", "unchecked", "WeakerAccess"})
-//TODO unit test
 public class EquippedSlot {
     private String slotId;
     private String shipId;
@@ -29,6 +28,7 @@ public class EquippedSlot {
         rightSlot += extraSlot;
     }
 
+    //TODO unit test
     public void removeSlot(SkyXpCharacter character, Integer removedSlot){
         frontSlot -= removedSlot;
         backSlot -= removedSlot;
@@ -53,6 +53,7 @@ public class EquippedSlot {
         }
     }
 
+    //TODO unit test
     public void addFront(String element) {
         if (frontSlot.equals(frontEquipped.size())) {
             throw new BadRequestException("Front slot is full.");
@@ -60,16 +61,19 @@ public class EquippedSlot {
         frontEquipped.add(element);
     }
 
+    //TODO unit test
     public void addFrontAll(Collection<String> elements){
         elements.forEach(this::addFront);
     }
 
+    //TODO unit test
     public void removeFront(String element){
         if(!frontEquipped.remove(element)){
             throw new BadRequestException("Front slot does not contain element " + element);
         }
     }
 
+    //TODO unit test
     public void addLeft(String element) {
         if (leftSlot.equals(leftEquipped.size())) {
             throw new BadRequestException("Left slot is full.");
@@ -77,16 +81,19 @@ public class EquippedSlot {
         leftEquipped.add(element);
     }
 
+    //TODO unit test
     public void addLeftAll(Collection<String> elements){
         elements.forEach(this::addLeft);
     }
 
+    //TODO unit test
     public void removeLeft(String element){
         if(!leftEquipped.remove(element)){
             throw new BadRequestException("Left slot does not contain element " + element);
         }
     }
 
+    //TODO unit test
     public void addRight(String element) {
         if (rightSlot.equals(rightEquipped.size())) {
             throw new BadRequestException("Right slot is full.");
@@ -94,16 +101,19 @@ public class EquippedSlot {
         rightEquipped.add(element);
     }
 
+    //TODO unit test
     public void addRightAll(Collection<String> elements){
         elements.forEach(this::addRight);
     }
 
+    //TODO unit test
     public void removeRight(String element){
         if(!rightEquipped.remove(element)){
             throw new BadRequestException("Right slot does not contain element " + element);
         }
     }
 
+    //TODO unit test
     public void addBack(String element){
         if(backSlot.equals(backEquipped.size())){
             throw new BadRequestException("Back slot is full.");
@@ -111,16 +121,19 @@ public class EquippedSlot {
         backEquipped.add(element);
     }
 
+    //TODO unit test
     public void addBackAll(Collection<String> elements){
         elements.forEach(this::addBack);
     }
 
+    //TODO unit test
     public void removeBack(String element){
         if(!backEquipped.remove(element)){
             throw new BadRequestException("Back slot does not contain element " + element);
         }
     }
 
+    //TODO unit test
     public ArrayList<String> getFrontEquipped(){
         return (ArrayList<String>) frontEquipped.clone();
     }
@@ -129,6 +142,7 @@ public class EquippedSlot {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
+    //TODO unit test
     public ArrayList<String> getBackEquipped(){
         return (ArrayList<String>) backEquipped.clone();
     }
@@ -137,6 +151,7 @@ public class EquippedSlot {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
+    //TODO unit test
     public ArrayList<String> getLeftEquipped(){
         return (ArrayList<String>) leftEquipped.clone();
     }
@@ -145,6 +160,7 @@ public class EquippedSlot {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
+    //TODO unit test
     public ArrayList<String> getRightEquipped(){
         return (ArrayList<String>) rightEquipped.clone();
     }
