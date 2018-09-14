@@ -114,6 +114,7 @@ public class TestUtils {
     public static final String EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED = "equipped_ship_encrypted_connector_equipped";
 
     //EquippedSlot
+    public static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
     public static final String DEFENSE_SLOT_ID = "defense_slot_id";
     public static final Integer EQUIPPED_SLOT_FRONT_SLOT = 2;
     public static final Integer EQUIPPED_SLOT_LEFT_SLOT = 2;
@@ -347,9 +348,15 @@ public class TestUtils {
         return entity;
     }
 
-    public static EquippedSlot createEquippedSlot(String slotId) {
-        EquippedSlot slot = new EquippedSlot();
+    public static EquippedSlot createEquippedSlot(String slotId){
+        EquippedSlot slot = createEquippedSlot();
         slot.setSlotId(slotId);
+        return slot;
+    }
+
+    public static EquippedSlot createEquippedSlot() {
+        EquippedSlot slot = new EquippedSlot();
+        slot.setSlotId(EQUIPPED_SLOT_ID);
         slot.setShipId(EQUIPPED_SHIP_ID);
         slot.setFrontSlot(EQUIPPED_SLOT_FRONT_SLOT);
         slot.setLeftSlot(EQUIPPED_SLOT_LEFT_SLOT);
