@@ -1,20 +1,20 @@
 package skyxplore.domain.slot;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import skyxplore.domain.ConverterBase;
 import skyxplore.encryption.IntegerEncryptor;
 import skyxplore.encryption.StringEncryptor;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 @Component
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked")
-//TODO unit test
 public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
@@ -64,7 +64,12 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
     }
 
     @Override
+    //TODO unit test
     public EquippedSlot convertEntity(SlotEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
         EquippedSlot domain = new EquippedSlot();
         try {
             domain.setSlotId(entity.getSlotId());

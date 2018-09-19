@@ -39,6 +39,7 @@ import skyxplore.domain.product.ProductEntity;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.domain.slot.SlotEntity;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 
@@ -120,6 +121,9 @@ public class TestUtils {
     public static final Integer EQUIPPED_SLOT_LEFT_SLOT = 2;
     public static final Integer EQUIPPED_SLOT_RIGHT_SLOT = 2;
     public static final Integer EQUIPPED_SLOT_BACK_SLOT = 2;
+    public static final String EQUIPPED_SLOT_ENCRYPTED_SLOT = "equipped_slot_encrypted_slot";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_SLOT_ITEM = "equipped_slot_encrypted_slot_item";
+    public static final String EQUIPPED_SLOT_DATA_ITEM_STRING = "equipped_slot_data_item_string";
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
 
     //Factory
@@ -615,6 +619,12 @@ public class TestUtils {
         list.add(DATA_ABILITY);
         ship.setAbility(list);
         return ship;
+    }
+
+    public static SlotEntity createSlotEntity(){
+        SlotEntity entity = new SlotEntity();
+        //TODO fill with data
+        return entity;
     }
 
     public static SlotView createSlotView(EquippedSlot slot) {
