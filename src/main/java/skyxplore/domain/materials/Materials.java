@@ -11,6 +11,7 @@ import java.util.Set;
 @SuppressWarnings("WeakerAccess")
 @NoArgsConstructor
 @Slf4j
+//TODO unit test
 public class Materials extends HashMap<String, Integer> {
 
     public Materials(Map<String, Integer> elements){
