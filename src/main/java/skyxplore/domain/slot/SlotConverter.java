@@ -64,7 +64,6 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
     }
 
     @Override
-    //TODO unit test
     public EquippedSlot convertEntity(SlotEntity entity) {
         if (entity == null) {
             return null;

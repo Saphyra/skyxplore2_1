@@ -125,6 +125,14 @@ public class TestUtils {
     public static final String EQUIPPED_SLOT_ENCRYPTED_SLOT_ITEM = "equipped_slot_encrypted_slot_item";
     public static final String EQUIPPED_SLOT_DATA_ITEM_STRING = "equipped_slot_data_item_string";
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_SLOT = "equipped_slot_encrypted_front_slot";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_SLOT = "equipped_slot_encrypted_left_slot";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_SLOT = "equipped_slot_encrypted_right_slot";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_BACK_SLOT = "equipped_slot_encrypted_back_slot";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_ITEM = "equipped_slot_encrypted_front_item";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_ITEM = "equipped_slot_encrypted_left_item";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_ITEM = "equipped_slot_encrypted_right_item";
+    public static final String EQUIPPED_SLOT_ENCRYPTED_BACK_ITEM = "equipped_slot_encrypted_back_item";
 
     //Factory
     public static final String FACTORY_ID_1 = "factory_id_1";
@@ -623,7 +631,16 @@ public class TestUtils {
 
     public static SlotEntity createSlotEntity(){
         SlotEntity entity = new SlotEntity();
-        //TODO fill with data
+        entity.setSlotId(EQUIPPED_SLOT_ID);
+        entity.setShipId(EQUIPPED_SHIP_ID);
+        entity.setFrontSlot(EQUIPPED_SLOT_ENCRYPTED_FRONT_SLOT);
+        entity.setLeftSlot(EQUIPPED_SLOT_ENCRYPTED_LEFT_SLOT);
+        entity.setRightSlot(EQUIPPED_SLOT_ENCRYPTED_RIGHT_SLOT);
+        entity.setBackSlot(EQUIPPED_SLOT_ENCRYPTED_BACK_SLOT);
+        entity.setFrontEquipped(EQUIPPED_SLOT_ENCRYPTED_FRONT_ITEM);
+        entity.setLeftEquipped(EQUIPPED_SLOT_ENCRYPTED_LEFT_ITEM);
+        entity.setRightEquipped(EQUIPPED_SLOT_ENCRYPTED_RIGHT_ITEM);
+        entity.setBackEquipped(EQUIPPED_SLOT_ENCRYPTED_BACK_ITEM);
         return entity;
     }
 

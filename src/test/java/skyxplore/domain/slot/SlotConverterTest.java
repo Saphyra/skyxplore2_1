@@ -9,14 +9,17 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_DATA_ITEM_STRING;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ENCRYPTED_SLOT;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ENCRYPTED_SLOT_ITEM;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_FRONT_SLOT;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createEquippedSlot;
 import static skyxplore.testutil.TestUtils.createSlotEntity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -46,7 +49,7 @@ public class SlotConverterTest {
     private SlotConverter underTest;
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
+    public void testConvertDomainShouldThrowExceptionWhenNull() {
         //GIVEN
         EquippedSlot slot = null;
         //WHEN
@@ -80,7 +83,7 @@ public class SlotConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldReturnNullWhenNull(){
+    public void testConvertEntityShouldReturnNullWhenNull() {
         //GIVEN
         SlotEntity entity = null;
         //WHEN
@@ -90,11 +93,29 @@ public class SlotConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldDecryptAndConvert(){
+    public void testConvertEntityShouldDecryptAndConvert() throws IOException {
         //GIVEN
         SlotEntity entity = createSlotEntity();
+        when(integerEncryptor.decrypt(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_FRONT_SLOT);
+        when(stringEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_DATA_ITEM_STRING);
+        ArrayList<String> list = new ArrayList<>();
+        list.add(DATA_ELEMENT);
+        when(objectMapper.readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, ArrayList.class)).thenReturn(list);
         //WHEN
         EquippedSlot result = underTest.convertEntity(entity);
         //THEN
+        verify(integerEncryptor, times(4)).decrypt(anyString(), eq(EQUIPPED_SLOT_ID));
+        verify(stringEncryptor, times(4)).decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID));
+        verify(objectMapper, times(4)).readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, ArrayList.class);
+        assertEquals(EQUIPPED_SLOT_ID, result.getSlotId());
+        assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
+        assertEquals(EQUIPPED_SLOT_FRONT_SLOT, result.getFrontSlot());
+        assertEquals(EQUIPPED_SLOT_FRONT_SLOT, result.getLeftSlot());
+        assertEquals(EQUIPPED_SLOT_FRONT_SLOT, result.getRightSlot());
+        assertEquals(EQUIPPED_SLOT_FRONT_SLOT, result.getBackSlot());
+        assertEquals(list, result.getFrontEquipped());
+        assertEquals(list, result.getLeftEquipped());
+        assertEquals(list, result.getRightEquipped());
+        assertEquals(list, result.getBackEquipped());
     }
 }
