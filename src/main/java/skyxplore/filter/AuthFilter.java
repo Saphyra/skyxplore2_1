@@ -1,35 +1,31 @@
 package skyxplore.filter;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.PageController;
-import skyxplore.exception.BadRequestAuthException;
 import skyxplore.service.AccessTokenFacade;
 import skyxplore.util.CookieUtil;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 @Slf4j
 @RequiredArgsConstructor
 @Component
-//TODO unit test
 public class AuthFilter extends OncePerRequestFilter {
     public static final String COOKIE_USER_ID = "userid";
     public static final String COOKIE_ACCESS_TOKEN = "accesstoken";
+    static final String REQUEST_TYPE_HEADER = "Request-Type";
+    static final String REST_TYPE_REQUEST = "rest";
 
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
     private static final List<String> allowedUris = Arrays.asList(
@@ -61,7 +57,7 @@ public class AuthFilter extends OncePerRequestFilter {
             log.debug("Needs authentication: {}", path);
             filterChain.doFilter(request, response);
         } else {
-            if ("rest".equals(request.getHeader("Request-Type"))) {
+            if (REST_TYPE_REQUEST.equals(request.getHeader(REQUEST_TYPE_HEADER))) {
                 log.info("Sending error. Cause: Unauthorized access.");
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
             } else {
@@ -79,13 +75,7 @@ public class AuthFilter extends OncePerRequestFilter {
         log.info("Logging out...");
         String accessTokenId = cookieUtil.getCookie(request, COOKIE_ACCESS_TOKEN);
         String userIdValue = cookieUtil.getCookie(request, COOKIE_USER_ID);
-        try {
-            accessTokenFacade.logout(userIdValue, accessTokenId);
-        } catch (BadRequestAuthException e) {
-            log.info("Error during logging out: {}", e.getMessage());
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-            return;
-        }
+        accessTokenFacade.logout(userIdValue, accessTokenId);
         log.info("Successfully logged out.");
     }
 
