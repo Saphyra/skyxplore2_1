@@ -50,8 +50,8 @@ public class EquippedShipConverterTest {
         EquippedShipEntity equippedShipEntity = createEquippedShipEntity();
 
         when(stringEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_TYPE);
-        when(integerEncryptor.decrypt(EQUIPPED_SHIP_ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID)).thenReturn(DATA_SHIP_COREHULL);
-        when(integerEncryptor.decrypt(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(DATA_SHIP_CONNECTOR_SLOT);
+        when(integerEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID)).thenReturn(DATA_SHIP_COREHULL);
+        when(integerEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(DATA_SHIP_CONNECTOR_SLOT);
         when(stringEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_CONNECTOR_EQUIPPED);
         ArrayList<String> connectors = new ArrayList<>();
         connectors.add(EQUIPPED_SHIP_CONNECTOR_EQUIPPED);
@@ -60,8 +60,8 @@ public class EquippedShipConverterTest {
         EquippedShip result = underTest.convertEntity(equippedShipEntity);
         //THEN
         verify(stringEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE, EQUIPPED_SHIP_ID);
-        verify(integerEncryptor).decrypt(EQUIPPED_SHIP_ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID);
-        verify(integerEncryptor).decrypt(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID);
+        verify(integerEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID);
+        verify(integerEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID);
         verify(stringEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID);
         verify(objectMapper).readValue(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, ArrayList.class);
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
@@ -88,16 +88,16 @@ public class EquippedShipConverterTest {
         EquippedShip equippedShip = createEquippedShip();
 
         when(stringEncryptor.encryptEntity(EQUIPPED_SHIP_TYPE, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE);
-        when(integerEncryptor.encrypt(DATA_SHIP_COREHULL, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_ENCRYPTED_COREHULL);
-        when(integerEncryptor.encrypt(DATA_SHIP_CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT);
+        when(integerEncryptor.encryptEntity(DATA_SHIP_COREHULL, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_ENCRYPTED_COREHULL);
+        when(integerEncryptor.encryptEntity(DATA_SHIP_CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT);
         when(objectMapper.writeValueAsString(any(ArrayList.class))).thenReturn(EQUIPPED_SHIP_CONNECTOR_EQUIPPED);
         when(stringEncryptor.encryptEntity(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED);
         //WHEN
         EquippedShipEntity result = underTest.convertDomain(equippedShip);
         //THEN
         verify(stringEncryptor).encryptEntity(EQUIPPED_SHIP_TYPE, EQUIPPED_SHIP_ID);
-        verify(integerEncryptor).encrypt(DATA_SHIP_COREHULL, EQUIPPED_SHIP_ID);
-        verify(integerEncryptor).encrypt(DATA_SHIP_CONNECTOR_SLOT, EQUIPPED_SHIP_ID);
+        verify(integerEncryptor).encryptEntity(DATA_SHIP_COREHULL, EQUIPPED_SHIP_ID);
+        verify(integerEncryptor).encryptEntity(DATA_SHIP_CONNECTOR_SLOT, EQUIPPED_SHIP_ID);
         verify(stringEncryptor).encryptEntity(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID);
         verify(objectMapper).writeValueAsString(any(ArrayList.class));
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());

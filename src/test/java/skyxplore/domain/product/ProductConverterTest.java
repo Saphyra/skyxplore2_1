@@ -59,8 +59,8 @@ public class ProductConverterTest {
         ProductEntity entity = createProductEntity();
 
         when(stringEncryptor.decryptEntity(PRODUCT_ENCRYPTED_ELEMENT_ID, PRODUCT_ID_1)).thenReturn(PRODUCT_ELEMENT_ID_EQUIPMENT);
-        when(integerEncryptor.decrypt(PRODUCT_ENCRYPTED_AMOUNT, PRODUCT_ID_1)).thenReturn(PRODUCT_AMOUNT);
-        when(integerEncryptor.decrypt(PRODUCT_ENCRYPTED_CONSTRUCTION_TIME, PRODUCT_ID_1)).thenReturn(PRODUCT_CONSTRUCTION_TIME);
+        when(integerEncryptor.decryptEntity(PRODUCT_ENCRYPTED_AMOUNT, PRODUCT_ID_1)).thenReturn(PRODUCT_AMOUNT);
+        when(integerEncryptor.decryptEntity(PRODUCT_ENCRYPTED_CONSTRUCTION_TIME, PRODUCT_ID_1)).thenReturn(PRODUCT_CONSTRUCTION_TIME);
         when(dateTimeUtil.convertEntity(PRODUCT_START_TIME_EPOCH)).thenReturn(PRODUCT_START_TIME);
         when(dateTimeUtil.convertEntity(PRODUCT_END_TIME_EPOCH)).thenReturn(PRODUCT_END_TIME);
         //WHEN
@@ -90,8 +90,8 @@ public class ProductConverterTest {
         Product product = createProduct();
 
         when(stringEncryptor.encryptEntity(PRODUCT_ELEMENT_ID_EQUIPMENT, PRODUCT_ID_1)).thenReturn(PRODUCT_ENCRYPTED_ELEMENT_ID);
-        when(integerEncryptor.encrypt(PRODUCT_AMOUNT, PRODUCT_ID_1)).thenReturn(PRODUCT_ENCRYPTED_AMOUNT);
-        when(integerEncryptor.encrypt(PRODUCT_CONSTRUCTION_TIME, PRODUCT_ID_1)).thenReturn(PRODUCT_ENCRYPTED_CONSTRUCTION_TIME);
+        when(integerEncryptor.encryptEntity(PRODUCT_AMOUNT, PRODUCT_ID_1)).thenReturn(PRODUCT_ENCRYPTED_AMOUNT);
+        when(integerEncryptor.encryptEntity(PRODUCT_CONSTRUCTION_TIME, PRODUCT_ID_1)).thenReturn(PRODUCT_ENCRYPTED_CONSTRUCTION_TIME);
         when(dateTimeUtil.convertDomain(PRODUCT_START_TIME)).thenReturn(PRODUCT_START_TIME_EPOCH);
         when(dateTimeUtil.convertDomain(PRODUCT_END_TIME)).thenReturn(PRODUCT_END_TIME_EPOCH);
 

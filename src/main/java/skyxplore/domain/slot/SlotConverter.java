@@ -29,28 +29,28 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
         try {
             entity.setSlotId(domain.getSlotId());
             entity.setShipId(domain.getShipId());
-            entity.setFrontSlot(integerEncryptor.encrypt(domain.getFrontSlot(), domain.getSlotId()));
+            entity.setFrontSlot(integerEncryptor.encryptEntity(domain.getFrontSlot(), domain.getSlotId()));
             entity.setFrontEquipped(
                 stringEncryptor.encryptEntity(
                     objectMapper.writeValueAsString(domain.getFrontEquipped()),
                     domain.getSlotId()
                 )
             );
-            entity.setLeftSlot(integerEncryptor.encrypt(domain.getLeftSlot(), domain.getSlotId()));
+            entity.setLeftSlot(integerEncryptor.encryptEntity(domain.getLeftSlot(), domain.getSlotId()));
             entity.setLeftEquipped(
                 stringEncryptor.encryptEntity(
                     objectMapper.writeValueAsString(domain.getLeftEquipped()),
                     domain.getSlotId()
                 )
             );
-            entity.setRightSlot(integerEncryptor.encrypt(domain.getRightSlot(), domain.getSlotId()));
+            entity.setRightSlot(integerEncryptor.encryptEntity(domain.getRightSlot(), domain.getSlotId()));
             entity.setRightEquipped(
                 stringEncryptor.encryptEntity(
                     objectMapper.writeValueAsString(domain.getRightEquipped()),
                     domain.getSlotId()
                 )
             );
-            entity.setBackSlot(integerEncryptor.encrypt(domain.getBackSlot(), domain.getSlotId()));
+            entity.setBackSlot(integerEncryptor.encryptEntity(domain.getBackSlot(), domain.getSlotId()));
             entity.setBackEquipped(
                 stringEncryptor.encryptEntity(
                     objectMapper.writeValueAsString(domain.getBackEquipped()),
@@ -73,7 +73,7 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
         try {
             domain.setSlotId(entity.getSlotId());
             domain.setShipId(entity.getShipId());
-            domain.setFrontSlot(integerEncryptor.decrypt(entity.getFrontSlot(), entity.getSlotId()));
+            domain.setFrontSlot(integerEncryptor.decryptEntity(entity.getFrontSlot(), entity.getSlotId()));
             domain.addFront(
                 objectMapper.readValue(
                     stringEncryptor.decryptEntity(
@@ -83,7 +83,7 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
                     ArrayList.class
                 )
             );
-            domain.setLeftSlot(integerEncryptor.decrypt(entity.getLeftSlot(), entity.getSlotId()));
+            domain.setLeftSlot(integerEncryptor.decryptEntity(entity.getLeftSlot(), entity.getSlotId()));
             domain.addLeft(
                 objectMapper.readValue(
                     stringEncryptor.decryptEntity(
@@ -93,7 +93,7 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
                     ArrayList.class
                 )
             );
-            domain.setRightSlot(integerEncryptor.decrypt(entity.getRightSlot(), entity.getSlotId()));
+            domain.setRightSlot(integerEncryptor.decryptEntity(entity.getRightSlot(), entity.getSlotId()));
             domain.addRight(
                 objectMapper.readValue(
                     stringEncryptor.decryptEntity(
@@ -102,7 +102,7 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
                     ),
                     ArrayList.class)
             );
-            domain.setBackSlot(integerEncryptor.decrypt(entity.getBackSlot(), entity.getSlotId()));
+            domain.setBackSlot(integerEncryptor.decryptEntity(entity.getBackSlot(), entity.getSlotId()));
             domain.addBack(
                 objectMapper.readValue(
                     stringEncryptor.decryptEntity(

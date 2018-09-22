@@ -25,8 +25,8 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         domain.setProductId(entity.getProductId());
         domain.setFactoryId(entity.getFactoryId());
         domain.setElementId(stringEncryptor.decryptEntity(entity.getElementId(), entity.getProductId()));
-        domain.setAmount(integerEncryptor.decrypt(entity.getAmount(), entity.getProductId()));
-        domain.setConstructionTime(integerEncryptor.decrypt(entity.getConstructionTime(), entity.getProductId()));
+        domain.setAmount(integerEncryptor.decryptEntity(entity.getAmount(), entity.getProductId()));
+        domain.setConstructionTime(integerEncryptor.decryptEntity(entity.getConstructionTime(), entity.getProductId()));
         domain.setAddedAt(entity.getAddedAt());
         domain.setStartTime(dateTimeUtil.convertEntity(entity.getStartTime()));
         domain.setEndTime(dateTimeUtil.convertEntity(entity.getEndTime()));
@@ -43,8 +43,8 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
         entity.setProductId(domain.getProductId());
         entity.setFactoryId(domain.getFactoryId());
         entity.setElementId(stringEncryptor.encryptEntity(domain.getElementId(), domain.getProductId()));
-        entity.setAmount(integerEncryptor.encrypt(domain.getAmount(), domain.getProductId()));
-        entity.setConstructionTime(integerEncryptor.encrypt(domain.getConstructionTime(), domain.getProductId()));
+        entity.setAmount(integerEncryptor.encryptEntity(domain.getAmount(), domain.getProductId()));
+        entity.setConstructionTime(integerEncryptor.encryptEntity(domain.getConstructionTime(), domain.getProductId()));
         entity.setAddedAt(domain.getAddedAt());
         entity.setStartTime(dateTimeUtil.convertDomain(domain.getStartTime()));
         entity.setEndTime(dateTimeUtil.convertDomain(domain.getEndTime()));

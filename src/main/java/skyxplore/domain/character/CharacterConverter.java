@@ -31,7 +31,7 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             domain.setCharacterId(entity.getCharacterId());
             domain.setCharacterName(entity.getCharacterName());
             domain.setUserId(entity.getUserId());
-            domain.addMoney(integerEncryptor.decrypt(
+            domain.addMoney(integerEncryptor.decryptEntity(
                 entity.getMoney(),
                 entity.getCharacterId())
             );
@@ -60,7 +60,7 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             entity.setCharacterId(domain.getCharacterId());
             entity.setCharacterName(domain.getCharacterName());
             entity.setUserId(domain.getUserId());
-            entity.setMoney(integerEncryptor.encrypt(
+            entity.setMoney(integerEncryptor.encryptEntity(
                 domain.getMoney(),
                 domain.getCharacterId())
             );

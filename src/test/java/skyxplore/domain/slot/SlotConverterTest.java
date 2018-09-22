@@ -61,13 +61,13 @@ public class SlotConverterTest {
         //GIVEN
         EquippedSlot slot = createEquippedSlot();
 
-        when(integerEncryptor.encrypt(anyInt(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_ENCRYPTED_SLOT);
+        when(integerEncryptor.encryptEntity(anyInt(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_ENCRYPTED_SLOT);
         when(objectMapper.writeValueAsString(any(ArrayList.class))).thenReturn(EQUIPPED_SLOT_DATA_ITEM_STRING);
         when(stringEncryptor.encryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_ENCRYPTED_SLOT_ITEM);
         //WHEN
         SlotEntity result = underTest.convertDomain(slot);
         //THEN
-        verify(integerEncryptor, times(4)).encrypt(anyInt(), eq(EQUIPPED_SLOT_ID));
+        verify(integerEncryptor, times(4)).encryptEntity(anyInt(), eq(EQUIPPED_SLOT_ID));
         verify(stringEncryptor, times(4)).encryptEntity(anyString(), eq(EQUIPPED_SLOT_ID));
         verify(objectMapper, times(4)).writeValueAsString(any(ArrayList.class));
         assertEquals(EQUIPPED_SLOT_ID, result.getSlotId());
@@ -96,7 +96,7 @@ public class SlotConverterTest {
     public void testConvertEntityShouldDecryptAndConvert() throws IOException {
         //GIVEN
         SlotEntity entity = createSlotEntity();
-        when(integerEncryptor.decrypt(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_FRONT_SLOT);
+        when(integerEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_FRONT_SLOT);
         when(stringEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_DATA_ITEM_STRING);
         ArrayList<String> list = new ArrayList<>();
         list.add(DATA_ELEMENT);
@@ -104,7 +104,7 @@ public class SlotConverterTest {
         //WHEN
         EquippedSlot result = underTest.convertEntity(entity);
         //THEN
-        verify(integerEncryptor, times(4)).decrypt(anyString(), eq(EQUIPPED_SLOT_ID));
+        verify(integerEncryptor, times(4)).decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID));
         verify(stringEncryptor, times(4)).decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID));
         verify(objectMapper, times(4)).readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, ArrayList.class);
         assertEquals(EQUIPPED_SLOT_ID, result.getSlotId());

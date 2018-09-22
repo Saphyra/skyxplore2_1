@@ -32,8 +32,8 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
             entity.setCharacterId(domain.getCharacterId());
             entity.setShipId(domain.getShipId());
             entity.setShipType(stringEncryptor.encryptEntity(domain.getShipType(), domain.getShipId()));
-            entity.setCoreHull(integerEncryptor.encrypt(domain.getCoreHull(), domain.getShipId()));
-            entity.setConnectorSlot(integerEncryptor.encrypt(domain.getConnectorSlot(), domain.getShipId()));
+            entity.setCoreHull(integerEncryptor.encryptEntity(domain.getCoreHull(), domain.getShipId()));
+            entity.setConnectorSlot(integerEncryptor.encryptEntity(domain.getConnectorSlot(), domain.getShipId()));
             entity.setConnectorEquipped(stringEncryptor.encryptEntity(
                 objectMapper.writeValueAsString(domain.getConnectorEquipped()),
                 domain.getShipId())
@@ -56,8 +56,8 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
             domain.setCharacterId(entity.getCharacterId());
             domain.setShipId(entity.getShipId());
             domain.setShipType(stringEncryptor.decryptEntity(entity.getShipType(), entity.getShipId()));
-            domain.setCoreHull(integerEncryptor.decrypt(entity.getCoreHull(), entity.getShipId()));
-            domain.setConnectorSlot(integerEncryptor.decrypt(entity.getConnectorSlot(), entity.getShipId()));
+            domain.setCoreHull(integerEncryptor.decryptEntity(entity.getCoreHull(), entity.getShipId()));
+            domain.setConnectorSlot(integerEncryptor.decryptEntity(entity.getConnectorSlot(), entity.getShipId()));
             domain.addConnectors(objectMapper.readValue(
                 stringEncryptor.decryptEntity(
                     entity.getConnectorEquipped(),
