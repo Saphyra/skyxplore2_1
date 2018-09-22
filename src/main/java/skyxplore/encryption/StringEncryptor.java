@@ -2,25 +2,13 @@ package skyxplore.encryption;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import skyxplore.encryption.base.AbstractEncryptor;
 import skyxplore.encryption.base.DefaultEncryptor;
-import skyxplore.encryption.base.Encryptor;
-
-import org.springframework.stereotype.Component;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class StringEncryptor extends AbstractEncryptor<String> {
 
     @Override
