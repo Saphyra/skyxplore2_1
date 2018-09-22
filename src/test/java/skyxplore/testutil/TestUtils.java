@@ -162,6 +162,8 @@ public class TestUtils {
     public static final LocalDateTime MAIL_SEND_TIME = LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC);
 
     //Material
+    public static final String MATERIAL_ENCRYPTED_ENTITY = "material_encrypted_entity";
+    public static final String MATERIAL_ENTITY = "material_entity";
     public static final Integer MATERIAL_AMOUNT = 2;
     public static final Boolean MATERIAL_BUILDABLE = true;
     public static final Integer MATERIAL_BUILDPRICE = 100;
