@@ -42,6 +42,7 @@ import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.slot.SlotEntity;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
+import skyxplore.domain.user.UserEntity;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -662,6 +663,16 @@ public class TestUtils {
 
     public static SkyXpUser createUser() {
         SkyXpUser user = new SkyXpUser();
+        user.setUserId(USER_ID);
+        user.setEmail(USER_EMAIL);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(Role.USER);
+        user.setRoles(roles);
+        return user;
+    }
+
+    public static UserEntity createUserEntity(){
+        UserEntity user = new UserEntity();
         user.setUserId(USER_ID);
         user.setEmail(USER_EMAIL);
         HashSet<Role> roles = new HashSet<>();
