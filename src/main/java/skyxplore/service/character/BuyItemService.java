@@ -1,16 +1,13 @@
 package skyxplore.service.character;
 
-import java.util.Map;
-import java.util.Set;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.service.GameDataFacade;
+
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -20,7 +17,6 @@ public class BuyItemService {
     private final CharacterQueryService characterQueryService;
     private final GameDataFacade gameDataFacade;
 
-    //TODO unit test
     public void buyItems(Map<String, Integer> items, String characterId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Integer cost = countCost(items);
@@ -29,8 +25,7 @@ public class BuyItemService {
     }
 
     private Integer countCost(Map<String, Integer> items) {
-        Set<String> keys = items.keySet();
-        return keys.stream()
+        return items.keySet().stream()
             .map(k -> gameDataFacade.findBuyable(k).getBuyPrice() * items.get(k))
             .reduce(0, (a, b) -> a + b);
     }

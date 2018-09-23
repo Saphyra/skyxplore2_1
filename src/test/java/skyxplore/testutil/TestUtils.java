@@ -100,6 +100,7 @@ public class TestUtils {
     public static final String DATA_ITEM_BACK = "item_back";
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
+    public static final Integer DATA_BUYPRICE = 2;
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
