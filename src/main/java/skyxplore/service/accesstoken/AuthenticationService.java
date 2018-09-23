@@ -11,12 +11,14 @@ import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadRequestAuthException;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.exception.base.ServerErrorException;
-import skyxplore.filter.AuthFilter;
 import skyxplore.service.UserFacade;
 import skyxplore.util.DateTimeUtil;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+
+import static skyxplore.filter.FilterHelper.COOKIE_ACCESS_TOKEN;
+import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @Service
 @RequiredArgsConstructor
@@ -64,10 +66,10 @@ public class AuthenticationService {
 
     private void validateArguments(String userId, String accessTokenId) {
         if (userId == null) {
-            throw new BadRequestAuthException("Required cookies not found:" + AuthFilter.COOKIE_USER_ID);
+            throw new BadRequestAuthException("Required cookies not found:" + COOKIE_USER_ID);
         }
         if (accessTokenId == null) {
-            throw new BadRequestAuthException("Required cookie not found:" + AuthFilter.COOKIE_ACCESS_TOKEN);
+            throw new BadRequestAuthException("Required cookie not found:" + COOKIE_ACCESS_TOKEN);
         }
     }
 

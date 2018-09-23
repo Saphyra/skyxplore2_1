@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -30,7 +32,7 @@ public class CookieCleanupFilter extends OncePerRequestFilter {
 
         if (pathMatcher.match(PageController.CHARACTER_SELECT_MAPPING, path)) {
             log.info("Cleaning up characterCookie...");
-            cookieUtil.setCookie(response, CharacterAuthFilter.COOKIE_CHARACTER_ID, "");
+            cookieUtil.setCookie(response, COOKIE_CHARACTER_ID, "");
         }
 
         filterChain.doFilter(request, response);

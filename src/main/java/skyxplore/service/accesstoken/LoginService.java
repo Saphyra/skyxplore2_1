@@ -17,6 +17,7 @@ import skyxplore.util.IdGenerator;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+//TODO unit test
 public class LoginService {
     private final AccessTokenDao accessTokenDao;
     private final PasswordService passwordService;

@@ -78,6 +78,12 @@ public class TestUtils {
     public static final Integer CONVERTER_INT_VALUE = 316;
     public static final String CONVERTER_KEY = "converter_key";
 
+    //Cookie
+    public static final String USER_ID_COOKIE = "user_id_cookie";
+    public static final String ACCESS_TOKEN_COOKIE = "access_token_cookie";
+    public static final String CHARACTER_ID_COOKIE = "character_iid_cookie";
+    public static final String AUTHENTICATED_PATH = "authenticated_path";
+
     //Credentials
     public static final String USER_FAKE_PASSWORD = "user_fake_password";
     public static final String USER_NAME = "user_name";

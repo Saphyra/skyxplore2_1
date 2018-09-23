@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.PageController;
 import skyxplore.service.AccessTokenFacade;
 import skyxplore.util.CookieUtil;
 
@@ -16,18 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-import static skyxplore.filter.AuthFilter.*;
+import static org.mockito.Mockito.*;
+import static skyxplore.controller.PageController.INDEX_MAPPING;
+import static skyxplore.filter.FilterHelper.*;
+import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthFilterTest {
-    private static final String USER_ID_COOKIE = "user_id_cookie";
-    private static final String ACCESS_TOKEN_COOKIE = "access_token_cookie";
-    private static final String AUTHENTICATED_PATH = "authenticated_path";
+
     @Mock
     private AccessTokenFacade accessTokenFacade;
 
@@ -42,6 +37,9 @@ public class AuthFilterTest {
 
     @Mock
     private FilterChain filterChain;
+
+    @Mock
+    private FilterHelper filterHelper;
 
     @InjectMocks
     private AuthFilter underTest;
@@ -88,6 +86,7 @@ public class AuthFilterTest {
         verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
         verifyNoMoreInteractions(accessTokenFacade);
         verifyNoMoreInteractions(filterChain);
+        verify(filterHelper).handleUnauthorized(request, response, INDEX_MAPPING);
     }
 
     @Test
@@ -101,6 +100,7 @@ public class AuthFilterTest {
         verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
         verifyNoMoreInteractions(accessTokenFacade);
         verifyNoMoreInteractions(filterChain);
+        verify(filterHelper).handleUnauthorized(request, response, INDEX_MAPPING);
     }
 
     @Test
@@ -117,7 +117,7 @@ public class AuthFilterTest {
     }
 
     @Test
-    public void testShouldRedirectToLoginPageWhenNotAuthenticated() throws ServletException, IOException {
+    public void testShouldCallFilterHelperWhenNotAuthenticated() throws ServletException, IOException {
         //GIVEN
         when(accessTokenFacade.isAuthenticated(USER_ID_COOKIE, ACCESS_TOKEN_COOKIE)).thenReturn(false);
         //WHEN
@@ -127,21 +127,5 @@ public class AuthFilterTest {
         verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
         verify(accessTokenFacade).isAuthenticated(USER_ID_COOKIE, ACCESS_TOKEN_COOKIE);
         verifyNoMoreInteractions(filterChain);
-        verify(response).sendRedirect(PageController.INDEX_MAPPING);
-    }
-
-    @Test
-    public void testShouldSendErrorWhenNotAuthenticated() throws ServletException, IOException {
-        //GIVEN
-        when(accessTokenFacade.isAuthenticated(USER_ID_COOKIE, ACCESS_TOKEN_COOKIE)).thenReturn(false);
-        when(request.getHeader(REQUEST_TYPE_HEADER)).thenReturn(REST_TYPE_REQUEST);
-        //WHEN
-        underTest.doFilterInternal(request, response, filterChain);
-        //THEN
-        verify(cookieUtil).getCookie(request, COOKIE_ACCESS_TOKEN);
-        verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
-        verify(accessTokenFacade).isAuthenticated(USER_ID_COOKIE, ACCESS_TOKEN_COOKIE);
-        verifyNoMoreInteractions(filterChain);
-        verify(response).sendError(eq(HttpServletResponse.SC_UNAUTHORIZED), anyString());
     }
 }

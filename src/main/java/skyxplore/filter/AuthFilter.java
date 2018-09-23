@@ -17,31 +17,30 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static skyxplore.filter.FilterHelper.COOKIE_ACCESS_TOKEN;
+import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+
 @SuppressWarnings("NullableProblems")
 @Slf4j
 @RequiredArgsConstructor
 @Component
 public class AuthFilter extends OncePerRequestFilter {
-    public static final String COOKIE_USER_ID = "userid";
-    public static final String COOKIE_ACCESS_TOKEN = "accesstoken";
-    static final String REQUEST_TYPE_HEADER = "Request-Type";
-    static final String REST_TYPE_REQUEST = "rest";
-
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
     private static final List<String> allowedUris = Arrays.asList(
-            "/",
-            "/**/favicon.ico",
-            "/login",
-            "/registration",
-            "/isusernameexists",
-            "/isemailexists",
-            "/css/**",
-            "/images/**",
-            "/js/**"
+        "/",
+        "/**/favicon.ico",
+        "/login",
+        "/registration",
+        "/isusernameexists",
+        "/isemailexists",
+        "/css/**",
+        "/images/**",
+        "/js/**"
     );
 
     private final AccessTokenFacade accessTokenFacade;
     private final CookieUtil cookieUtil;
+    private final FilterHelper filterHelper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -57,17 +56,11 @@ public class AuthFilter extends OncePerRequestFilter {
             log.debug("Needs authentication: {}", path);
             filterChain.doFilter(request, response);
         } else {
-            if (REST_TYPE_REQUEST.equals(request.getHeader(REQUEST_TYPE_HEADER))) {
-                log.info("Sending error. Cause: Unauthorized access.");
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
-            } else {
-                log.info("Redirect to login page. Cause: Unauthorized access.");
-                response.sendRedirect(PageController.INDEX_MAPPING);
-            }
+            filterHelper.handleUnauthorized(request, response, PageController.INDEX_MAPPING);
         }
     }
 
-    private boolean isAllowedPath(String path){
+    private boolean isAllowedPath(String path) {
         return allowedUris.stream().anyMatch(allowedPath -> pathMatcher.match(allowedPath, path));
     }
 
@@ -84,13 +77,11 @@ public class AuthFilter extends OncePerRequestFilter {
         String accessTokenId = cookieUtil.getCookie(request, COOKIE_ACCESS_TOKEN);
         String userIdValue = cookieUtil.getCookie(request, COOKIE_USER_ID);
 
-        if(accessTokenId == null || userIdValue == null){
+        if (accessTokenId == null || userIdValue == null) {
             log.warn("Cookies not found.");
             return false;
         }
 
         return accessTokenFacade.isAuthenticated(userIdValue, accessTokenId);
     }
-
-
 }

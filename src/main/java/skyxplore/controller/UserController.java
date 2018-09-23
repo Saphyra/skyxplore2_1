@@ -3,14 +3,18 @@ package skyxplore.controller;
 import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
-import skyxplore.filter.AuthFilter;
 import skyxplore.service.UserFacade;
 
 import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
+
+import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("ALL")
 @RestController
@@ -32,7 +36,7 @@ public class UserController {
     @PostMapping(CHANGE_EMAIL_MAPPING)
     public void changeEmail(
         @RequestBody @Valid ChangeEmailRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to change his email address.", userId);
         userFacade.changeEmail(request, userId);
@@ -41,7 +45,7 @@ public class UserController {
     @PostMapping(CHANGE_PASSWORD_MAPPING)
     public void changePassword(
         @RequestBody @Valid ChangePasswordRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to change his password.", userId);
         userFacade.changePassword(request, userId);
@@ -50,7 +54,7 @@ public class UserController {
     @PostMapping(CHANGE_USERNAME_MAPPING)
     public void changeUserName(
         @RequestBody @Valid ChangeUserNameRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to change his username.", userId);
         userFacade.changeUserName(request, userId);
@@ -60,7 +64,7 @@ public class UserController {
     @PostMapping(DELETE_ACCOUNT_MAPPING)
     public void deleteAccount(
         @RequestBody @Valid AccountDeleteRequest request,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to deleteById his account");
         userFacade.deleteAccount(request, userId);

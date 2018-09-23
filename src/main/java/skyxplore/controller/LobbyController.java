@@ -1,13 +1,17 @@
 package skyxplore.controller;
 
-import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import skyxplore.controller.request.character.CreateLobbyRequest;
-import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.GameFacade;
+
+import javax.validation.Valid;
+
+import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,7 +25,7 @@ public class LobbyController {
     @PostMapping(CREATE_LOBBY_MAPPING)
     public void createLobby(
         @RequestBody @Valid CreateLobbyRequest request,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId){
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId){
         log.info("{} wants to create a lobby with parameters {}", characterId,  request);
         gameFacade.createLobby(request, characterId);
     }

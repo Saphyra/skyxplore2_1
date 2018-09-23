@@ -4,7 +4,6 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
@@ -13,8 +12,6 @@ import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
-import skyxplore.filter.AuthFilter;
-import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.CharacterFacade;
 
 import javax.validation.Valid;
@@ -22,6 +19,9 @@ import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings({"UnstableApiUsage", "WeakerAccess"})
 @RestController
@@ -44,7 +44,7 @@ public class CharacterController {
     @PutMapping(BUY_EQUIPMENTS_MAPPING)
     public void buyEquipments(
         @RequestBody HashMap<String, Integer> items,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ){
         log.info("{} wants to buy {}",characterId, items.toString());
         characterFacade.buyItems(items, characterId);
@@ -54,7 +54,7 @@ public class CharacterController {
     @PutMapping(CREATE_CHARACTER_MAPPING)
     public void createCharacter(
         @RequestBody @Valid CreateCharacterRequest request,
-        @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
         log.info("Creating new character with name {}", request.getCharacterName());
         characterFacade.createCharacter(request, userId);
@@ -65,7 +65,7 @@ public class CharacterController {
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
     public void deleteCharacter(
         @RequestBody @NotNull CharacterDeleteRequest request,
-        @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to deleteById {}", userId, request.getCharacterId());
         characterFacade.deleteCharacter(request, userId);
@@ -73,14 +73,14 @@ public class CharacterController {
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)
-    public List<CharacterView> getCharacters(@CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId) {
+    public List<CharacterView> getCharacters(@CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to know his character list.", userId);
         return characterViewConverter.convertDomain(characterFacade.getCharactersByUserId(userId));
     }
 
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
     public View<EquipmentViewList> getEquipmentsOfCharacter(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
         ) {
         log.info("{} wants to know his equipments.", characterId);
         return characterFacade.getEquipmentsOfCharacter(characterId);
@@ -88,7 +88,7 @@ public class CharacterController {
 
     @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
     public Integer getMoney(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his money.", characterId);
         return characterFacade.getMoneyOfCharacter(characterId);
@@ -103,7 +103,7 @@ public class CharacterController {
     @PostMapping(RENAME_CHARACTER_MAPPING)
     public void renameCharacter(
         @RequestBody @Valid RenameCharacterRequest request,
-        @CookieValue(value = AuthFilter.COOKIE_USER_ID) String userId) {
+        @CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to rename character {}", userId, request);
         characterFacade.renameCharacter(request, userId);
         characterNameCache.invalidate(request.getNewCharacterName());

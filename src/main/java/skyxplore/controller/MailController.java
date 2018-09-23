@@ -3,20 +3,19 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
-import skyxplore.filter.AuthFilter;
-import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.MailFacade;
 
+import javax.validation.Valid;
 import java.util.List;
 
-import javax.validation.Valid;
+import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -42,7 +41,7 @@ public class MailController {
     @PostMapping(ARCHIVE_MAILS_MAPPING)
     public void archiveMails(
         @RequestBody List<String> mailIds,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to archive mails {}", characterId, mailIds);
         mailFacade.archiveMails(characterId, mailIds, true);
@@ -51,7 +50,7 @@ public class MailController {
     @DeleteMapping(DELETE_MAILS_MAPPING)
     public void deleteMails(
         @RequestBody List<String> mailIds,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to deleteById mails {}", characterId, mailIds);
         mailFacade.deleteMails(characterId, mailIds);
@@ -60,8 +59,8 @@ public class MailController {
     @PostMapping(GET_ADDRESSEES_MAPPING)
     public List<CharacterView> getAddressees(
         @RequestBody OneStringParamRequest name,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId,
-        @CookieValue(AuthFilter.COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
+        @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to know his possible addressees", characterId);
         return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, userId, name.getValue()));
@@ -69,7 +68,7 @@ public class MailController {
 
     @GetMapping(GET_ARCHIVED_MAILS_MAPPING)
     public List<MailView> getArchivedMails(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ){
         log.info("{} wants to know his archived mails.");
         return mailViewConverter.convertDomain(mailFacade.getArchivedMails(characterId));
@@ -77,7 +76,7 @@ public class MailController {
 
     @GetMapping(GET_MAILS_MAPPING)
     public List<MailView> getMails(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his mails.", characterId);
         return mailViewConverter.convertDomain(mailFacade.getMails(characterId));
@@ -85,7 +84,7 @@ public class MailController {
 
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
     public Integer getNumberOfUnreadMails(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know the number of his unread mails.", characterId);
         return mailFacade.getNumberOfUnreadMails(characterId);
@@ -93,7 +92,7 @@ public class MailController {
 
     @GetMapping(GET_SENT_MAILS_MAPPING)
     public List<MailView> getSentMails(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his sent mails.", characterId);
         return mailViewConverter.convertDomain(mailFacade.getSentMails(characterId));
@@ -102,7 +101,7 @@ public class MailController {
     @PostMapping(MARK_MAILS_READ_MAPPING)
     public void markMailsRead(
         @RequestBody List<String> mailIds,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to mark mails {} as read.", characterId, mailIds);
         mailFacade.setMailReadStatus(mailIds, characterId, true);
@@ -111,7 +110,7 @@ public class MailController {
     @PostMapping(MARK_MAILS_UNREAD_MAPPING)
     public void markMailsUnread(
         @RequestBody List<String> mailIds,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to mark mails {} as unread.", characterId, mailIds);
         mailFacade.setMailReadStatus(mailIds, characterId, false);
@@ -120,7 +119,7 @@ public class MailController {
     @PutMapping(SEND_MAIL_MAPPING)
     public void sendMail(
         @RequestBody @Valid SendMailRequest request,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Sending mail...");
         mailFacade.sendMail(request, characterId);
@@ -129,7 +128,7 @@ public class MailController {
     @PostMapping(UNARCHIVE_MAILS_MAPPING)
     public void unarchiveMails(
         @RequestBody List<String> mailIds,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ){
         log.info("{} wants to unarchive mails {}", characterId, mailIds);
         mailFacade.archiveMails(characterId, mailIds, false);

@@ -1,22 +1,17 @@
 package skyxplore.controller;
 
-import javax.validation.Valid;
-
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
-import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.service.EquippedShipFacade;
+
+import javax.validation.Valid;
+
+import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @RestController
@@ -33,7 +28,7 @@ public class ShipController {
     @PostMapping(EQUIP_MAPPING)
     public void equip(
         @RequestBody @Valid EquipRequest request,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to equip {}", request, characterId);
         equippedShipFacade.equip(request, characterId);
@@ -41,7 +36,7 @@ public class ShipController {
 
     @PostMapping(EQUIP_SHIP_MAPPING)
     public void equipShip(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId,
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
         @PathVariable("shipId") String shipId
     ) {
         log.info("{} wants to equip a new ship {}", shipId, characterId);
@@ -50,7 +45,7 @@ public class ShipController {
 
     @GetMapping(GET_SHIP_DATA_MAPPING)
     public View<ShipView> getShipData(
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Querying ship data of character {}", characterId);
         return equippedShipFacade.getShipData(characterId);
@@ -59,7 +54,7 @@ public class ShipController {
     @PostMapping(UNEQUIP_MAPPING)
     public void unequip(
         @RequestBody @Valid UnequipRequest request,
-        @CookieValue(CharacterAuthFilter.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to unequip {}", characterId, request);
         equippedShipFacade.unequip(request, characterId);
