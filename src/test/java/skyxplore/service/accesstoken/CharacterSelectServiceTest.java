@@ -1,0 +1,60 @@
+package skyxplore.service.accesstoken;
+
+import com.google.common.cache.Cache;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.AccessTokenDao;
+import skyxplore.domain.accesstoken.AccessToken;
+import skyxplore.exception.base.UnauthorizedException;
+import skyxplore.service.character.CharacterQueryService;
+
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createAccessToken;
+
+@RunWith(MockitoJUnitRunner.class)
+public class CharacterSelectServiceTest {
+    @Mock
+    private Cache<String, Optional<AccessToken>> accessTokenCache;
+
+    @Mock
+    private AccessTokenDao accessTokenDao;
+
+    @Mock
+    private CharacterQueryService characterQueryService;
+
+    @InjectMocks
+    private CharacterSelectService underTest;
+
+    @Test(expected = UnauthorizedException.class)
+    public void testSelectCharacterShouldThrowExceptionWhenAccessTokenNotFound() throws ExecutionException {
+        //GIVEN
+        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.empty());
+        //WHEN
+        underTest.selectCharacter(CHARACTER_ID, USER_ID);
+    }
+
+    @Test
+    public void testSelectCharacterShouldUpdateAccessToken() throws ExecutionException {
+        //GIVEN
+        AccessToken accessToken = createAccessToken();
+        accessToken.setCharacterId(null);
+        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.of(accessToken));
+        //WHEN
+        underTest.selectCharacter(CHARACTER_ID, USER_ID);
+        //THEN
+        verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID, USER_ID);
+        verify(accessTokenCache).invalidate(USER_ID);
+        verify(accessTokenDao).save(accessToken);
+        assertEquals(CHARACTER_ID, accessToken.getCharacterId());
+    }
+}
