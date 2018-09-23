@@ -78,12 +78,6 @@ public class TestUtils {
     public static final Integer CONVERTER_INT_VALUE = 316;
     public static final String CONVERTER_KEY = "converter_key";
 
-    //Cookie
-    public static final String USER_ID_COOKIE = "user_id_cookie";
-    public static final String ACCESS_TOKEN_COOKIE = "access_token_cookie";
-    public static final String CHARACTER_ID_COOKIE = "character_iid_cookie";
-    public static final String AUTHENTICATED_PATH = "authenticated_path";
-
     //Credentials
     public static final String USER_FAKE_PASSWORD = "user_fake_password";
     public static final String USER_NAME = "user_name";
@@ -146,6 +140,13 @@ public class TestUtils {
     public static final String FACTORY_ID_2 = "factory_id_2";
     public static final String FACTORY_ID_3 = "factory_id_3";
     public static final String FACTORY_MATERIALS = "factory_materials";
+
+    //Filter
+    public static final String USER_ID_COOKIE = "user_id_cookie";
+    public static final String ACCESS_TOKEN_COOKIE = "access_token_cookie";
+    public static final String CHARACTER_ID_COOKIE = "character_iid_cookie";
+    public static final String AUTHENTICATED_PATH = "authenticated_path";
+    public static final String REDIRECTION_PATH = "redirection_path";
 
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";

@@ -9,7 +9,6 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-//TODO unit test
 public class FilterHelper {
     public static final String COOKIE_ACCESS_TOKEN = "accesstoken";
     public static final String COOKIE_CHARACTER_ID = "characterid";
