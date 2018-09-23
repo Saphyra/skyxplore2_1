@@ -54,6 +54,8 @@ public class TestUtils {
     public static final String ACCESS_TOKEN_ID = "access_token_id";
     public static final Long ACCESS_TOKEN_LAST_ACCESS_EPOCH = 414184L;
     public static final LocalDateTime ACCESS_TOKEN_LAST_ACCESS = LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC);
+    public static final Long ACCESS_TOKEN_EXPIRATION_EPOCH = 1642L;
+    public static final LocalDateTime ACCESS_TOKEN_EXPIRATION = LocalDateTime.ofEpochSecond(ACCESS_TOKEN_EXPIRATION_EPOCH, 0, ZoneOffset.UTC);
 
     //Blocked Character
     public static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;

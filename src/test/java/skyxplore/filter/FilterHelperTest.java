@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.filter.FilterHelper.REQUEST_TYPE_HEADER;
@@ -35,7 +37,7 @@ public class FilterHelperTest {
         //WHEN
         underTest.handleUnauthorized(request, response, REDIRECTION_PATH);
         //THEN
-        verify(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        verify(response).sendError(eq(HttpServletResponse.SC_UNAUTHORIZED), anyString());
     }
 
     @Test

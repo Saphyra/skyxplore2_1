@@ -17,13 +17,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class AccessTokenCleanup {
     private final AccessTokenDao accessTokenDao;
-    private final DateTimeUtil accessTokenDateResolver;
     private final DateTimeUtil dateTimeUtil;
 
     @Scheduled(cron = "0 * * * * *")
     public void deleteOutDatedTokens() {
         log.info("Deleting outdated access tokens...");
-        LocalDateTime expiration = accessTokenDateResolver.getExpirationDate();
+        LocalDateTime expiration = dateTimeUtil.getExpirationDate();
         accessTokenDao.deleteExpired(dateTimeUtil.convertDomain(expiration));
         log.info("Outdated access tokens successfully deleted.");
     }
