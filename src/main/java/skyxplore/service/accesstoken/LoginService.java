@@ -17,12 +17,11 @@ import skyxplore.util.IdGenerator;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-//TODO unit test
 public class LoginService {
     private final AccessTokenDao accessTokenDao;
     private final PasswordService passwordService;
     private final CredentialsService credentialsService;
-    private final DateTimeUtil accessTokenDateResolver;
+    private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
 
     public AccessToken login(LoginRequest loginRequest) {
@@ -51,7 +50,7 @@ public class LoginService {
         AccessToken token = new AccessToken();
         token.setAccessTokenId(idGenerator.getRandomId());
         token.setUserId(user.getUserId());
-        token.setLastAccess(accessTokenDateResolver.now());
+        token.setLastAccess(dateTimeUtil.now());
         return token;
     }
 
