@@ -15,7 +15,6 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class BlockCharacterService {
     private final BlockedCharacterDao blockedCharacterDao;
     private final BlockedCharacterQueryService blockedCharacterQueryService;
