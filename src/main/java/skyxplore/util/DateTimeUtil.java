@@ -13,12 +13,8 @@ public class DateTimeUtil extends ConverterBase<Long, LocalDateTime> {
     public static final Integer EXPIRATION_TIME_IN_MINUTES = 15;
 
     public LocalDateTime getExpirationDate() {
-        LocalDateTime expirationDate = getActualDate();
+        LocalDateTime expirationDate = now();
         return expirationDate.minusMinutes(EXPIRATION_TIME_IN_MINUTES);
-    }
-
-    public LocalDateTime getActualDate() {
-        return LocalDateTime.now(ZoneOffset.UTC);
     }
 
     @Override

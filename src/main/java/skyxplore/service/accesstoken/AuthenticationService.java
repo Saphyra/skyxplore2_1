@@ -23,10 +23,9 @@ import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class AuthenticationService {
     private final AccessTokenDao accessTokenDao;
-    private final DateTimeUtil accessTokenDateResolver;
+    private final DateTimeUtil dateTimeUtil;
     private final Cache<String, Optional<AccessToken>> accessTokenCache;
     private final UserFacade userFacade;
 
@@ -73,10 +72,7 @@ public class AuthenticationService {
         }
     }
 
-    private void validateToken(AccessToken accessToken, String tokenId){
-        if (accessToken == null) {
-            throw new BadRequestAuthException("Acces token not found.");
-        }
+    private void validateToken(AccessToken accessToken, String tokenId) {
         if (isTokenExpired(accessToken)) {
             throw new AccessTokenExpiredException("Access token expired.");
         }
@@ -86,12 +82,12 @@ public class AuthenticationService {
     }
 
     private boolean isTokenExpired(AccessToken token) {
-        return token.getLastAccess().isBefore(accessTokenDateResolver.getExpirationDate());
+        return token.getLastAccess().isBefore(dateTimeUtil.getExpirationDate());
     }
 
     private void updateTokenExpiration(AccessToken token) {
         log.debug("Token expiration date refreshed");
-        token.setLastAccess(accessTokenDateResolver.getActualDate());
+        token.setLastAccess(dateTimeUtil.now());
         accessTokenDao.save(token);
     }
 

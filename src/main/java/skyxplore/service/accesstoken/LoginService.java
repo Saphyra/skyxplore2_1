@@ -51,7 +51,7 @@ public class LoginService {
         AccessToken token = new AccessToken();
         token.setAccessTokenId(idGenerator.getRandomId());
         token.setUserId(user.getUserId());
-        token.setLastAccess(accessTokenDateResolver.getActualDate());
+        token.setLastAccess(accessTokenDateResolver.now());
         return token;
     }
 
