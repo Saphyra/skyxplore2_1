@@ -3,7 +3,6 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.request.community.*;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
@@ -52,12 +51,12 @@ public class CommunityFacade {
         return characterQueryService.getBlockedCharacters(characterId);
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {
-        return characterQueryService.getCharactersCanBeBlocked(name, characterId, userId);
+    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId) {
+        return characterQueryService.getCharactersCanBeBlocked(name, characterId);
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId, String userId) {
-        return characterQueryService.getCharactersCanBeFriend(name, characterId, userId);
+    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId) {
+        return characterQueryService.getCharactersCanBeFriend(name, characterId);
     }
 
     public List<Friendship> getFriends(String characterId) {

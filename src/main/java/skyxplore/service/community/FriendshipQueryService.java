@@ -1,17 +1,16 @@
 package skyxplore.service.community;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.character.CharacterQueryService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -47,6 +46,14 @@ public class FriendshipQueryService {
 
     public List<FriendRequest> getSentFriendRequests(String characterId) {
         return friendRequestDao.getByCharacterId(characterId);
+    }
+
+    public boolean isFriendshipAlreadyExists(String characterId, String friendId){
+        return friendshipDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
+    }
+
+    public boolean isFriendRequestAlreadyExists(String characterId, String friendId){
+        return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
     }
 
     public boolean isFriendshipOrFriendRequestAlreadyExists(String characterId, String friendId) {

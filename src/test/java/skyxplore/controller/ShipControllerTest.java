@@ -3,7 +3,7 @@ package skyxplore.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.EQUIP_ITEM_ID;
 import static skyxplore.testutil.TestUtils.createEquipRequest;
 import static skyxplore.testutil.TestUtils.createGeneralDescriptionMap;
@@ -34,17 +34,17 @@ public class ShipControllerTest {
         //GIVEN
         EquipRequest equipRequest = createEquipRequest();
         //WHEN
-        underTest.equip(equipRequest, CHARACTER_ID);
+        underTest.equip(equipRequest, CHARACTER_ID_1);
         //THEN
-        verify(equippedShipFacade).equip(equipRequest, CHARACTER_ID);
+        verify(equippedShipFacade).equip(equipRequest, CHARACTER_ID_1);
     }
 
     @Test
     public void testEquipShipShouldCallFacade(){
         //WHEN
-        underTest.equipShip(CHARACTER_ID, EQUIP_ITEM_ID);
+        underTest.equipShip(CHARACTER_ID_1, EQUIP_ITEM_ID);
         //THEN
-        verify(equippedShipFacade).equipShip(CHARACTER_ID, EQUIP_ITEM_ID);
+        verify(equippedShipFacade).equipShip(CHARACTER_ID_1, EQUIP_ITEM_ID);
     }
 
     @Test
@@ -54,9 +54,9 @@ public class ShipControllerTest {
             new ShipView(),
             createGeneralDescriptionMap()
         );
-        when(equippedShipFacade.getShipData(CHARACTER_ID)).thenReturn(view);
+        when(equippedShipFacade.getShipData(CHARACTER_ID_1)).thenReturn(view);
         //WHEN
-        View<ShipView> result = underTest.getShipData(CHARACTER_ID);
+        View<ShipView> result = underTest.getShipData(CHARACTER_ID_1);
         //THEN
         assertEquals(view, result);
     }
@@ -66,8 +66,8 @@ public class ShipControllerTest {
         //GIVEN
         UnequipRequest unequipRequest = createUnequipRequest();
         //WHEN
-        underTest.unequip(unequipRequest, CHARACTER_ID);
+        underTest.unequip(unequipRequest, CHARACTER_ID_1);
         //THEN
-        verify(equippedShipFacade).unequip(unequipRequest, CHARACTER_ID);
+        verify(equippedShipFacade).unequip(unequipRequest, CHARACTER_ID_1);
     }
 }

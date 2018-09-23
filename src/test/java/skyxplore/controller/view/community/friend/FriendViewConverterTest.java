@@ -43,7 +43,7 @@ public class FriendViewConverterTest {
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
         when(accessTokenFacade.isCharacterActive(FRIEND_ID)).thenReturn(true);
         //WHEN
-        List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID);
+        List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID_1);
         //THEN
         verify(characterQueryService).findByCharacterId(FRIEND_ID);
         verify(accessTokenFacade).isCharacterActive(FRIEND_ID);
@@ -59,7 +59,7 @@ public class FriendViewConverterTest {
     public void testConvertDomainShouldSwapIdsAndConvert() {
         //GIVEN
         Friendship friendship = createFriendship();
-        friendship.setFriendId(CHARACTER_ID);
+        friendship.setFriendId(CHARACTER_ID_1);
         friendship.setCharacterId(FRIEND_ID);
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
@@ -69,7 +69,7 @@ public class FriendViewConverterTest {
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
         when(accessTokenFacade.isCharacterActive(FRIEND_ID)).thenReturn(true);
         //WHEN
-        List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID);
+        List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID_1);
         //THEN
         verify(characterQueryService).findByCharacterId(FRIEND_ID);
         verify(accessTokenFacade).isCharacterActive(FRIEND_ID);

@@ -31,8 +31,8 @@ public class MailFacade {
         mailDeleteService.deleteMails(characterId, mailIds);
     }
 
-    public List<SkyXpCharacter> getAddressees(String characterId, String userId, String name) {
-        return characterQueryService.getCharactersCanBeAddressee(name, characterId, userId);
+    public List<SkyXpCharacter> getAddressees(String characterId, String name) {
+        return characterQueryService.getCharactersCanBeAddressee(name, characterId);
     }
 
     public List<Mail> getArchivedMails(String characterId) {

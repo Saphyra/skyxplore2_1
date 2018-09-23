@@ -53,15 +53,15 @@ public class CharacterDaoTest {
     @Test
     public void testDeleteByIdShouldCallRepositoryAndDaos(){
         //WHEN
-        underTest.deleteById(CHARACTER_ID);
+        underTest.deleteById(CHARACTER_ID_1);
         //THEN
-        verify(equippedShipDao).deleteByCharacterId(CHARACTER_ID);
-        verify(factoryDao).deleteByCharacterId(CHARACTER_ID);
-        verify(friendRequestDao).deleteByCharacterId(CHARACTER_ID);
-        verify(friendshipDao).deleteByCharacterId(CHARACTER_ID);
-        verify(blockedCharacterDao).deleteByCharacterId(CHARACTER_ID);
-        verify(mailDao).deleteByCharacterId(CHARACTER_ID);
-        verify(characterRepository).deleteById(CHARACTER_ID);
+        verify(equippedShipDao).deleteByCharacterId(CHARACTER_ID_1);
+        verify(factoryDao).deleteByCharacterId(CHARACTER_ID_1);
+        verify(friendRequestDao).deleteByCharacterId(CHARACTER_ID_1);
+        verify(friendshipDao).deleteByCharacterId(CHARACTER_ID_1);
+        verify(blockedCharacterDao).deleteByCharacterId(CHARACTER_ID_1);
+        verify(mailDao).deleteByCharacterId(CHARACTER_ID_1);
+        verify(characterRepository).deleteById(CHARACTER_ID_1);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class CharacterDaoTest {
         underTest.deleteByUserId(USER_ID);
         //THEN
         verify(characterRepository).findByUserId(USER_ID);
-        verify(characterRepository).deleteById(CHARACTER_ID);
+        verify(characterRepository).deleteById(CHARACTER_ID_1);
     }
 
     @Test
@@ -118,9 +118,9 @@ public class CharacterDaoTest {
     @Test
     public void testFindByIdShouldReturnNull(){
         //GIVEN
-        when(characterRepository.findById(CHARACTER_ID)).thenReturn(Optional.empty());
+        when(characterRepository.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
         //WHEN
-        SkyXpCharacter result = underTest.findById(CHARACTER_ID);
+        SkyXpCharacter result = underTest.findById(CHARACTER_ID_1);
         //THEN
         assertNull(result);
     }
@@ -129,14 +129,14 @@ public class CharacterDaoTest {
     public void testFindByIdShouldCallRepositoryAndReturnDomain(){
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
-        when(characterRepository.findById(CHARACTER_ID)).thenReturn(Optional.of(entity));
+        when(characterRepository.findById(CHARACTER_ID_1)).thenReturn(Optional.of(entity));
 
         SkyXpCharacter character = createCharacter();
         when(characterConverter.convertEntity(entity)).thenReturn(character);
         //WHEN
-        SkyXpCharacter result = underTest.findById(CHARACTER_ID);
+        SkyXpCharacter result = underTest.findById(CHARACTER_ID_1);
         //THEN
-        verify(characterRepository).findById(CHARACTER_ID);
+        verify(characterRepository).findById(CHARACTER_ID_1);
         verify(characterConverter).convertEntity(entity);
         assertEquals(character, result);
     }

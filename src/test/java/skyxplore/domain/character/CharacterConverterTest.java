@@ -47,9 +47,9 @@ public class CharacterConverterTest {
     public void testConvertEntityShouldConvertAndDecrypt() throws IOException {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
-        when(integerEncryptor.decryptEntity(CHARACTER_ENCRYPTED_MONEY, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
+        when(integerEncryptor.decryptEntity(CHARACTER_ENCRYPTED_MONEY, CHARACTER_ID_1)).thenReturn(CHARACTER_MONEY);
 
-        when(stringEncryptor.decryptEntity(CHARACTER_ENCRYPTED_EQUIPMENTS, CHARACTER_ID)).thenReturn(CHARACTER_EQUIPMENT);
+        when(stringEncryptor.decryptEntity(CHARACTER_ENCRYPTED_EQUIPMENTS, CHARACTER_ID_1)).thenReturn(CHARACTER_EQUIPMENT);
 
         ArrayList<String> equipmentList = new ArrayList<>();
         equipmentList.add(CHARACTER_EQUIPMENT);
@@ -57,7 +57,7 @@ public class CharacterConverterTest {
         //WHEN
         SkyXpCharacter result = underTest.convertEntity(entity);
         //THEN
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(CHARACTER_NAME, result.getCharacterName());
         assertEquals(USER_ID, result.getUserId());
         assertEquals(CHARACTER_MONEY, result.getMoney());
@@ -77,14 +77,14 @@ public class CharacterConverterTest {
         //GIVEN
         SkyXpCharacter character = createCharacter();
 
-        when(integerEncryptor.encryptEntity(CHARACTER_MONEY, CHARACTER_ID)).thenReturn(CHARACTER_ENCRYPTED_MONEY);
+        when(integerEncryptor.encryptEntity(CHARACTER_MONEY, CHARACTER_ID_1)).thenReturn(CHARACTER_ENCRYPTED_MONEY);
 
         when(objectMapper.writeValueAsString(character.getEquipments())).thenReturn(CHARACTER_EQUIPMENT);
-        when(stringEncryptor.encryptEntity(CHARACTER_EQUIPMENT, CHARACTER_ID)).thenReturn(CHARACTER_ENCRYPTED_EQUIPMENTS);
+        when(stringEncryptor.encryptEntity(CHARACTER_EQUIPMENT, CHARACTER_ID_1)).thenReturn(CHARACTER_ENCRYPTED_EQUIPMENTS);
         //WHEN
         CharacterEntity result = underTest.convertDomain(character);
         //THEN
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(USER_ID, result.getUserId());
         assertEquals(CHARACTER_NAME, result.getCharacterName());
         assertEquals(CHARACTER_ENCRYPTED_MONEY, result.getMoney());

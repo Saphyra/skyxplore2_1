@@ -49,9 +49,9 @@ public class CharacterControllerTest {
         //GIVEN
         HashMap<String, Integer> inputMap = new HashMap<>();
         //WHEN
-        underTest.buyEquipments(inputMap, CHARACTER_ID);
+        underTest.buyEquipments(inputMap, CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).buyItems(inputMap, CHARACTER_ID);
+        verify(characterFacade).buyItems(inputMap, CHARACTER_ID_1);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CharacterControllerTest {
     @Test
     public void testDeleteCharacterShouldCallFacade() {
         //GIVEN
-        CharacterDeleteRequest request = new CharacterDeleteRequest(CHARACTER_ID);
+        CharacterDeleteRequest request = new CharacterDeleteRequest(CHARACTER_ID_1);
         //WHEN
         underTest.deleteCharacter(request, USER_ID);
         //THEN
@@ -102,22 +102,22 @@ public class CharacterControllerTest {
             new EquipmentViewList(),
             new HashMap<>()
         );
-        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID)).thenReturn(view);
+        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(view);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID);
+        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).getEquipmentsOfCharacter(CHARACTER_ID);
+        verify(characterFacade).getEquipmentsOfCharacter(CHARACTER_ID_1);
         assertEquals(view, result);
     }
 
     @Test
     public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse(){
         //GIVEN
-        when(characterFacade.getMoneyOfCharacter(CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
+        when(characterFacade.getMoneyOfCharacter(CHARACTER_ID_1)).thenReturn(CHARACTER_MONEY);
         //WHEN
-        Integer money = underTest.getMoney(CHARACTER_ID);
+        Integer money = underTest.getMoney(CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).getMoneyOfCharacter(CHARACTER_ID);
+        verify(characterFacade).getMoneyOfCharacter(CHARACTER_ID_1);
         assertEquals(CHARACTER_MONEY, money);
     }
 
@@ -137,9 +137,9 @@ public class CharacterControllerTest {
         //GIVEN
         RenameCharacterRequest request = createRenameCharacterRequest();
         //WHEN
-        underTest.renameCharacter(request, CHARACTER_ID);
+        underTest.renameCharacter(request, CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).renameCharacter(request, CHARACTER_ID);
+        verify(characterFacade).renameCharacter(request, CHARACTER_ID_1);
         verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
     }
 }

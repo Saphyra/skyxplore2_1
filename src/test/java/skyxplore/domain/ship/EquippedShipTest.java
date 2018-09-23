@@ -38,7 +38,7 @@ public class EquippedShipTest {
     public void init() {
         underTest = new EquippedShip();
         underTest.setShipId(EQUIPPED_SHIP_ID);
-        underTest.setCharacterId(CHARACTER_ID);
+        underTest.setCharacterId(CHARACTER_ID_1);
         underTest.setShipType(EQUIPPED_SHIP_TYPE);
         underTest.setCoreHull(DATA_SHIP_COREHULL);
         underTest.setConnectorSlot(DATA_SHIP_CONNECTOR_SLOT);

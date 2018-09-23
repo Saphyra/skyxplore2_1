@@ -33,7 +33,7 @@ public class BlockedCharacterConverterTest {
         //THEN
         assertEquals(BLOCKED_CHARACTER_ENTITY_ID, result.getBlockedCharacterEntityId());
         assertEquals(BLOCKED_CHARACTER_ID, result.getBlockedCharacterId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -53,6 +53,6 @@ public class BlockedCharacterConverterTest {
         //THEN
         assertEquals(BLOCKED_CHARACTER_ENTITY_ID, result.getBlockedCharacterEntityId());
         assertEquals(BLOCKED_CHARACTER_ID, result.getBlockedCharacterId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 }

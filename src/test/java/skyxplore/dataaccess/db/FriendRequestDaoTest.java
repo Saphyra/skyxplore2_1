@@ -49,9 +49,9 @@ public class FriendRequestDaoTest {
     @Test
     public void testDeleteByCharacterIdShouldCallRepository(){
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.deleteByCharacterId(CHARACTER_ID_1);
         //THEN
-        verify(friendRequestRepository).deleteByCharacterId(CHARACTER_ID);
+        verify(friendRequestRepository).deleteByCharacterId(CHARACTER_ID_1);
     }
 
     @Test
@@ -85,15 +85,15 @@ public class FriendRequestDaoTest {
         //GIVEN
         FriendRequestEntity entity = createFriendRequestEntity();
         List<FriendRequestEntity> entityList = Arrays.asList(entity);
-        when(friendRequestRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entityList);
+        when(friendRequestRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(entityList);
 
         FriendRequest request = createFriendRequest();
         List<FriendRequest> requestList = Arrays.asList(request);
         when(friendRequestConverter.convertEntity(entityList)).thenReturn(requestList);
         //WHEN
-        List<FriendRequest> result = underTest.getByCharacterId(CHARACTER_ID);
+        List<FriendRequest> result = underTest.getByCharacterId(CHARACTER_ID_1);
         //THEN
-        verify(friendRequestRepository).findByCharacterId(CHARACTER_ID);
+        verify(friendRequestRepository).findByCharacterId(CHARACTER_ID_1);
         verify(friendRequestConverter).convertEntity(entityList);
         assertEquals(requestList, result);
     }
@@ -103,15 +103,15 @@ public class FriendRequestDaoTest {
         //GIVEN
         FriendRequestEntity entity = createFriendRequestEntity();
         List<FriendRequestEntity> entityList = Arrays.asList(entity);
-        when(friendRequestRepository.findByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).thenReturn(entityList);
+        when(friendRequestRepository.findByCharacterIdOrFriendId(CHARACTER_ID_1, FRIEND_ID)).thenReturn(entityList);
 
         FriendRequest request = createFriendRequest();
         List<FriendRequest> requestList = Arrays.asList(request);
         when(friendRequestConverter.convertEntity(entityList)).thenReturn(requestList);
         //WHEN
-        List<FriendRequest> result = underTest.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID);
+        List<FriendRequest> result = underTest.getByCharacterIdOrFriendId(CHARACTER_ID_1, FRIEND_ID);
         //THEN
-        verify(friendRequestRepository).findByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID);
+        verify(friendRequestRepository).findByCharacterIdOrFriendId(CHARACTER_ID_1, FRIEND_ID);
         verify(friendRequestConverter).convertEntity(entityList);
         assertEquals(requestList, result);
     }

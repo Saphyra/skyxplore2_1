@@ -3,7 +3,7 @@ package skyxplore.domain.factory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_MATERIALS;
 import static skyxplore.testutil.TestUtils.createFactory;
@@ -48,7 +48,7 @@ public class FactoryConverterTest {
         Factory result = underTest.convertEntity(entity);
         //THEN
         assertEquals(FACTORY_ID_1, result.getFactoryId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(materials, result.getMaterials());
     }
 
@@ -69,7 +69,7 @@ public class FactoryConverterTest {
         FactoryEntity result = underTest.convertDomain(factory);
         //THEN
         assertEquals(FACTORY_ID_1, result.getFactoryId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(FACTORY_MATERIALS, result.getMaterials());
     }
 }

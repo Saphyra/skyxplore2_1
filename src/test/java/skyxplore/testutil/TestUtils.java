@@ -67,7 +67,13 @@ public class TestUtils {
     public static final String CATEGORY_CONTENT = "category_content";
 
     //Character
-    public static final String CHARACTER_ID = "character_id";
+    public static final String CHARACTER_ID_1 = "character_id_1";
+    public static final String CHARACTER_ID_2 = "character_id_2";
+    public static final String CHARACTER_ID_3 = "character_id_3";
+    public static final String CHARACTER_ID_4 = "character_id_4";
+    public static final String CHARACTER_ID_5 = "character_id_5";
+    public static final String CHARACTER_ID_6 = "character_id_6";
+    public static final String CHARACTER_ID_7 = "character_id_7";
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
@@ -217,6 +223,7 @@ public class TestUtils {
     //User
     public static final String USER_EMAIL = "user_email";
     public static final String USER_ID = "user_id";
+    public static final String USER_FAKE_ID = "user_fake_id";
     public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
 
@@ -225,7 +232,7 @@ public class TestUtils {
         token.setAccessTokenId(ACCESS_TOKEN_ID);
         token.setUserId(USER_ID);
         token.setLastAccess(ACCESS_TOKEN_LAST_ACCESS);
-        token.setCharacterId(CHARACTER_ID);
+        token.setCharacterId(CHARACTER_ID_1);
         return token;
     }
 
@@ -234,7 +241,7 @@ public class TestUtils {
         entity.setAccessTokenId(ACCESS_TOKEN_ID);
         entity.setUserId(USER_ID);
         entity.setLastAccess(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
-        entity.setCharacterId(CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID_1);
         return entity;
     }
 
@@ -255,7 +262,7 @@ public class TestUtils {
         return BlockedCharacter.builder()
             .blockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID)
             .blockedCharacterId(BLOCKED_CHARACTER_ID)
-            .characterId(CHARACTER_ID)
+            .characterId(CHARACTER_ID_1)
             .build();
     }
 
@@ -263,7 +270,7 @@ public class TestUtils {
         BlockedCharacterEntity entity = new BlockedCharacterEntity();
         entity.setBlockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID);
         entity.setBlockedCharacterId(BLOCKED_CHARACTER_ID);
-        entity.setCharacterId(CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID_1);
         return entity;
     }
 
@@ -291,7 +298,7 @@ public class TestUtils {
 
     public static SkyXpCharacter createCharacter() {
         SkyXpCharacter character = new SkyXpCharacter();
-        character.setCharacterId(CHARACTER_ID);
+        character.setCharacterId(CHARACTER_ID_1);
         character.setCharacterName(CHARACTER_NAME);
         character.setUserId(USER_ID);
         character.addMoney(CHARACTER_MONEY);
@@ -300,12 +307,12 @@ public class TestUtils {
     }
 
     public static CharacterDeleteRequest createCharacterDeleteRequest() {
-        return new CharacterDeleteRequest(CHARACTER_ID);
+        return new CharacterDeleteRequest(CHARACTER_ID_1);
     }
 
     public static CharacterEntity createCharacterEntity() {
         CharacterEntity entity = new CharacterEntity();
-        entity.setCharacterId(CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID_1);
         entity.setUserId(USER_ID);
         entity.setCharacterName(CHARACTER_NAME);
         entity.setMoney(CHARACTER_ENCRYPTED_MONEY);
@@ -351,7 +358,7 @@ public class TestUtils {
     public static EquippedShip createEquippedShip() {
         EquippedShip ship = new EquippedShip();
         ship.setShipId(EQUIPPED_SHIP_ID);
-        ship.setCharacterId(CHARACTER_ID);
+        ship.setCharacterId(CHARACTER_ID_1);
         ship.setShipType(EQUIPPED_SHIP_TYPE);
         ship.setCoreHull(DATA_SHIP_COREHULL);
         ship.setConnectorSlot(DATA_SHIP_CONNECTOR_SLOT);
@@ -364,7 +371,7 @@ public class TestUtils {
     public static EquippedShipEntity createEquippedShipEntity(){
         EquippedShipEntity entity = new EquippedShipEntity();
         entity.setShipId(EQUIPPED_SHIP_ID);
-        entity.setCharacterId(CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID_1);
         entity.setShipType(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE);
         entity.setCoreHull(EQUIPPED_SHIP_ENCRYPTED_COREHULL);
         entity.setConnectorSlot(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT);
@@ -411,7 +418,7 @@ public class TestUtils {
     public static Factory createFactory() {
         Factory factory = new Factory();
         factory.setFactoryId(FACTORY_ID_1);
-        factory.setCharacterId(CHARACTER_ID);
+        factory.setCharacterId(CHARACTER_ID_1);
         factory.setMaterials(createMaterials());
         return factory;
     }
@@ -419,7 +426,7 @@ public class TestUtils {
     public static FactoryEntity createFactoryEntity(){
         FactoryEntity entity = new FactoryEntity();
         entity.setFactoryId(FACTORY_ID_1);
-        entity.setCharacterId(CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID_1);
         entity.setMaterials(FACTORY_MATERIALS);
         return entity;
     }
@@ -428,7 +435,7 @@ public class TestUtils {
         return FriendRequest.builder()
             .friendRequestId(FRIEND_REQUEST_ID)
             .friendId(FRIEND_ID)
-            .characterId(CHARACTER_ID)
+            .characterId(CHARACTER_ID_1)
             .build();
     }
 
@@ -436,13 +443,13 @@ public class TestUtils {
         return FriendRequestEntity.builder()
             .friendRequestId(FRIEND_REQUEST_ID)
             .friendId(FRIEND_ID)
-            .characterId(CHARACTER_ID)
+            .characterId(CHARACTER_ID_1)
             .build();
     }
 
     public static FriendRequestView createFriendRequestView() {
         FriendRequestView view = new FriendRequestView();
-        view.setCharacterId(CHARACTER_ID);
+        view.setCharacterId(CHARACTER_ID_1);
         view.setFriendRequestId(FRIEND_REQUEST_ID);
         view.setFriendId(FRIEND_ID);
         view.setFriendName(FRIEND_NAME);
@@ -452,7 +459,7 @@ public class TestUtils {
     public static Friendship createFriendship() {
         Friendship friendship = new Friendship();
         friendship.setFriendshipId(FRIENDSHIP_ID);
-        friendship.setCharacterId(CHARACTER_ID);
+        friendship.setCharacterId(CHARACTER_ID_1);
         friendship.setFriendId(FRIEND_ID);
         return friendship;
     }
@@ -460,7 +467,7 @@ public class TestUtils {
     public static FriendshipEntity createFriendshipEntity() {
         FriendshipEntity entity = new FriendshipEntity();
         entity.setFriendshipId(FRIENDSHIP_ID);
-        entity.setCharacterId(CHARACTER_ID);
+        entity.setCharacterId(CHARACTER_ID_1);
         entity.setFriendId(FRIEND_ID);
         return entity;
     }

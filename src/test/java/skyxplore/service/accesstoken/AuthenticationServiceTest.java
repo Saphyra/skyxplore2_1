@@ -113,18 +113,18 @@ public class AuthenticationServiceTest {
     @Test
     public void testIsCharacterActiveShouldReturnTrueWhenActive(){
         //GIVEN
-        when(accessTokenDao.findByCharacterId(CHARACTER_ID)).thenReturn(createAccessToken());
+        when(accessTokenDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(createAccessToken());
         //WHEN
-        assertTrue(underTest.isCharacterActive(CHARACTER_ID));
-        verify(accessTokenDao).findByCharacterId(CHARACTER_ID);
+        assertTrue(underTest.isCharacterActive(CHARACTER_ID_1));
+        verify(accessTokenDao).findByCharacterId(CHARACTER_ID_1);
     }
 
     @Test
     public void testIsCharacterActiveShouldReturnFalseWhenNotActive(){
         //GIVEN
-        when(accessTokenDao.findByCharacterId(CHARACTER_ID)).thenReturn(null);
+        when(accessTokenDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(null);
         //WHEN
-        assertFalse(underTest.isCharacterActive(CHARACTER_ID));
-        verify(accessTokenDao).findByCharacterId(CHARACTER_ID);
+        assertFalse(underTest.isCharacterActive(CHARACTER_ID_1));
+        verify(accessTokenDao).findByCharacterId(CHARACTER_ID_1);
     }
 }

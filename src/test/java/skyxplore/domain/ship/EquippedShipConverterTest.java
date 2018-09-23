@@ -65,7 +65,7 @@ public class EquippedShipConverterTest {
         verify(stringEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID);
         verify(objectMapper).readValue(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, ArrayList.class);
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(EQUIPPED_SHIP_TYPE, result.getShipType());
         assertEquals(DATA_SHIP_COREHULL, result.getCoreHull());
         assertEquals(DATA_SHIP_CONNECTOR_SLOT, result.getConnectorSlot());
@@ -101,7 +101,7 @@ public class EquippedShipConverterTest {
         verify(stringEncryptor).encryptEntity(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID);
         verify(objectMapper).writeValueAsString(any(ArrayList.class));
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE, result.getShipType());
         assertEquals(EQUIPPED_SHIP_ENCRYPTED_COREHULL, result.getCoreHull());
         assertEquals(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, result.getConnectorSlot());

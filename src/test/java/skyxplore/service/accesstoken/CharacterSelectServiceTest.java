@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createAccessToken;
 
@@ -40,7 +40,7 @@ public class CharacterSelectServiceTest {
         //GIVEN
         when(accessTokenCache.get(USER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.selectCharacter(CHARACTER_ID, USER_ID);
+        underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
     }
 
     @Test
@@ -50,11 +50,11 @@ public class CharacterSelectServiceTest {
         accessToken.setCharacterId(null);
         when(accessTokenCache.get(USER_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
-        underTest.selectCharacter(CHARACTER_ID, USER_ID);
+        underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID, USER_ID);
+        verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID);
         verify(accessTokenCache).invalidate(USER_ID);
         verify(accessTokenDao).save(accessToken);
-        assertEquals(CHARACTER_ID, accessToken.getCharacterId());
+        assertEquals(CHARACTER_ID_1, accessToken.getCharacterId());
     }
 }

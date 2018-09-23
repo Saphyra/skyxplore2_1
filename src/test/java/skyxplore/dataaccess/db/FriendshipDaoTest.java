@@ -49,9 +49,9 @@ public class FriendshipDaoTest {
     @Test
     public void testDeleteByCharacterIdShouldCallRepository() {
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.deleteByCharacterId(CHARACTER_ID_1);
         //THEN
-        verify(friendshipRepository).deleteByCharacterId(CHARACTER_ID);
+        verify(friendshipRepository).deleteByCharacterId(CHARACTER_ID_1);
     }
 
     @Test
@@ -59,15 +59,15 @@ public class FriendshipDaoTest {
         //GIVEN
         FriendshipEntity entity = createFriendshipEntity();
         List<FriendshipEntity> entityList = Arrays.asList(entity);
-        when(friendshipRepository.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).thenReturn(entityList);
+        when(friendshipRepository.getByCharacterIdOrFriendId(CHARACTER_ID_1, FRIEND_ID)).thenReturn(entityList);
 
         Friendship friendship = createFriendship();
         List<Friendship> friendshipList = Arrays.asList(friendship);
         when(friendshipConverter.convertEntity(entityList)).thenReturn(friendshipList);
         //WHEN
-        List<Friendship> result = underTest.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID);
+        List<Friendship> result = underTest.getByCharacterIdOrFriendId(CHARACTER_ID_1, FRIEND_ID);
         //THEN
-        verify(friendshipRepository).getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID);
+        verify(friendshipRepository).getByCharacterIdOrFriendId(CHARACTER_ID_1, FRIEND_ID);
         verify(friendshipConverter).convertEntity(entityList);
         assertEquals(friendshipList, result);
     }
@@ -104,15 +104,15 @@ public class FriendshipDaoTest {
         //GIVEN
         FriendshipEntity entity = createFriendshipEntity();
         List<FriendshipEntity> entityList = Arrays.asList(entity);
-        when(friendshipRepository.getFriendshipsOfCharacter(CHARACTER_ID)).thenReturn(entityList);
+        when(friendshipRepository.getFriendshipsOfCharacter(CHARACTER_ID_1)).thenReturn(entityList);
 
         Friendship friendship = createFriendship();
         List<Friendship> friendshipList = Arrays.asList(friendship);
         when(friendshipConverter.convertEntity(entityList)).thenReturn(friendshipList);
         //WHEN
-        List<Friendship> result = underTest.getFriendshipsOfCharacter(CHARACTER_ID);
+        List<Friendship> result = underTest.getFriendshipsOfCharacter(CHARACTER_ID_1);
         //THEN
-        verify(friendshipRepository).getFriendshipsOfCharacter(CHARACTER_ID);
+        verify(friendshipRepository).getFriendshipsOfCharacter(CHARACTER_ID_1);
         verify(friendshipConverter).convertEntity(entityList);
         assertEquals(friendshipList, result);
     }

@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -59,11 +58,10 @@ public class MailController {
     @PostMapping(GET_ADDRESSEES_MAPPING)
     public List<CharacterView> getAddressees(
         @RequestBody OneStringParamRequest name,
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
-        @CookieValue(COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his possible addressees", characterId);
-        return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, userId, name.getValue()));
+        return characterViewConverter.convertDomain(mailFacade.getAddressees(characterId, name.getValue()));
     }
 
     @GetMapping(GET_ARCHIVED_MAILS_MAPPING)

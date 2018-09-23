@@ -16,7 +16,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @RestController
@@ -107,20 +106,19 @@ public class CommunityController {
     @GetMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)
     public List<CharacterView> getCharactersCanBeBlocked(
         @RequestBody @Valid OneStringParamRequest request,
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
-        @CookieValue(COOKIE_USER_ID) String userId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} querying blockable characters by name like {}", characterId, request.getValue());
-        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeBlocked(request.getValue(), characterId, userId));
+        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeBlocked(request.getValue(), characterId));
     }
 
     @GetMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
     public List<CharacterView> getCharactersCanBeFriend(
         @RequestBody @Valid OneStringParamRequest request,
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
-        @CookieValue(COOKIE_USER_ID) String userId) {
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId
+    ) {
         log.info("{} querying possible community characters by name like {}", characterId, request.getValue());
-        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeFriend(request.getValue(), characterId, userId));
+        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeFriend(request.getValue(), characterId));
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)

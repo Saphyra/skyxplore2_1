@@ -36,7 +36,7 @@ public class FriendRequestViewConverterTest {
         FriendRequestView result = underTest.convertDomain(friendRequest);
         //THEN
         verify(characterQueryService).findByCharacterId(FRIEND_ID);
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(FRIEND_REQUEST_ID, result.getFriendRequestId());
         assertEquals(FRIEND_ID, result.getFriendId());
         assertEquals(FRIEND_NAME, result.getFriendName());

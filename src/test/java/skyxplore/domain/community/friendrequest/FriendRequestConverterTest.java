@@ -33,7 +33,7 @@ public class FriendRequestConverterTest {
         //THEN
         assertEquals(FRIEND_REQUEST_ID, result.getFriendRequestId());
         assertEquals(FRIEND_ID, result.getFriendId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -53,6 +53,6 @@ public class FriendRequestConverterTest {
         //THEN
         assertEquals(FRIEND_REQUEST_ID, result.getFriendRequestId());
         assertEquals(FRIEND_ID, result.getFriendId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 }

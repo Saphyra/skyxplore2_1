@@ -32,19 +32,19 @@ public class AccessTokenFacadeTest {
     @Test
     public void testIsAuthenticatedShouldCallServiceAndReturn(){
         //GIVEN
-        when(authenticationService.isAuthenticated(USER_ID, CHARACTER_ID)).thenReturn(true);
+        when(authenticationService.isAuthenticated(USER_ID, CHARACTER_ID_1)).thenReturn(true);
         //WHEN
-        assertTrue(underTest.isAuthenticated(USER_ID, CHARACTER_ID));
-        verify(authenticationService).isAuthenticated(USER_ID, CHARACTER_ID);
+        assertTrue(underTest.isAuthenticated(USER_ID, CHARACTER_ID_1));
+        verify(authenticationService).isAuthenticated(USER_ID, CHARACTER_ID_1);
     }
 
     @Test
     public void testIsCharacterActiveShouldCallServiceAndReturn(){
         //GIVEN
-        when(authenticationService.isCharacterActive(CHARACTER_ID)).thenReturn(true);
+        when(authenticationService.isCharacterActive(CHARACTER_ID_1)).thenReturn(true);
         //WHEN
-        assertTrue(underTest.isCharacterActive(CHARACTER_ID));
-        verify(authenticationService).isCharacterActive(CHARACTER_ID);
+        assertTrue(underTest.isCharacterActive(CHARACTER_ID_1));
+        verify(authenticationService).isCharacterActive(CHARACTER_ID_1);
     }
 
     @Test
@@ -68,9 +68,9 @@ public class AccessTokenFacadeTest {
     @Test
     public void testSelectCharacterShouldCallService(){
         //WHEN
-        underTest.selectCharacter(CHARACTER_ID, USER_ID);
+        underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(characterSelectService).selectCharacter(CHARACTER_ID, USER_ID);
+        verify(characterSelectService).selectCharacter(CHARACTER_ID_1, USER_ID);
     }
 
 }

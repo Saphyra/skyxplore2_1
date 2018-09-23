@@ -67,14 +67,14 @@ public class AccessTokenDaoTest {
     public void testFindByCharacterIdShouldReturnDomain(){
         //GIVEN
         AccessTokenEntity entity = createAccessTokenEntity();
-        when(accessTokenRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entity);
+        when(accessTokenRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(entity);
 
         AccessToken accessToken = createAccessToken();
         when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
         //WHEN
-        AccessToken result = underTest.findByCharacterId(CHARACTER_ID);
+        AccessToken result = underTest.findByCharacterId(CHARACTER_ID_1);
         //THEN
-        verify(accessTokenRepository).findByCharacterId(CHARACTER_ID);
+        verify(accessTokenRepository).findByCharacterId(CHARACTER_ID_1);
         verify(accessTokenConverter).convertEntity(entity);
         assertEquals(accessToken, result);
     }

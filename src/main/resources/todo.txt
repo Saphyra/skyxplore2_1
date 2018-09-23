@@ -25,6 +25,7 @@ Cancel production
 
 Email FE validation: validate special characters
 Split CommunityDao to MailDao
+Split packages of type
 
 Create community
     - Friends

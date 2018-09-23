@@ -49,9 +49,9 @@ public class LoginControllerTest {
     @Test
     public void testSelectCharacterShouldCallFacadeAndSetCookie(){
         //WHEN
-        underTest.selectCharacter(CHARACTER_ID, USER_ID, httpServletResponse);
+        underTest.selectCharacter(CHARACTER_ID_1, USER_ID, httpServletResponse);
         //THEN
-        verify(accessTokenFacade).selectCharacter(CHARACTER_ID, USER_ID);
-        verify(cookieUtil).setCookie(httpServletResponse, COOKIE_CHARACTER_ID, CHARACTER_ID);
+        verify(accessTokenFacade).selectCharacter(CHARACTER_ID_1, USER_ID);
+        verify(cookieUtil).setCookie(httpServletResponse, COOKIE_CHARACTER_ID, CHARACTER_ID_1);
     }
 }

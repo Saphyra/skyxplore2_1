@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.MAIL_ID_1;
 import static skyxplore.testutil.TestUtils.MAIL_SEND_TIME_EPOCH;
 import static skyxplore.testutil.TestUtils.createMail;
@@ -48,9 +48,9 @@ public class MailDaoTest {
     @Test
     public void testDeleteByCharacterIdShouldCallRepository() {
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.deleteByCharacterId(CHARACTER_ID_1);
         //THEN
-        verify(mailRepository).deleteByCharacterId(CHARACTER_ID);
+        verify(mailRepository).deleteByCharacterId(CHARACTER_ID_1);
     }
 
     @Test
@@ -92,15 +92,15 @@ public class MailDaoTest {
         //GIVEN
         MailEntity entity = createMailEntity();
         List<MailEntity> entityList = Arrays.asList(entity);
-        when(mailRepository.getArchivedMails(CHARACTER_ID)).thenReturn(entityList);
+        when(mailRepository.getArchivedMails(CHARACTER_ID_1)).thenReturn(entityList);
 
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailConverter.convertEntity(entityList)).thenReturn(mailList);
         //WHEN
-        List<Mail> result = underTest.getArchivedMails(CHARACTER_ID);
+        List<Mail> result = underTest.getArchivedMails(CHARACTER_ID_1);
         //THEN
-        verify(mailRepository).getArchivedMails(CHARACTER_ID);
+        verify(mailRepository).getArchivedMails(CHARACTER_ID_1);
         verify(mailConverter).convertEntity(entityList);
         assertEquals(mailList, result);
     }
@@ -110,15 +110,15 @@ public class MailDaoTest {
         //GIVEN
         MailEntity entity = createMailEntity();
         List<MailEntity> entityList = Arrays.asList(entity);
-        when(mailRepository.getMails(CHARACTER_ID)).thenReturn(entityList);
+        when(mailRepository.getMails(CHARACTER_ID_1)).thenReturn(entityList);
 
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailConverter.convertEntity(entityList)).thenReturn(mailList);
         //WHEN
-        List<Mail> result = underTest.getMails(CHARACTER_ID);
+        List<Mail> result = underTest.getMails(CHARACTER_ID_1);
         //THEN
-        verify(mailRepository).getMails(CHARACTER_ID);
+        verify(mailRepository).getMails(CHARACTER_ID_1);
         verify(mailConverter).convertEntity(entityList);
         assertEquals(mailList, result);
     }
@@ -128,15 +128,15 @@ public class MailDaoTest {
         //GIVEN
         MailEntity entity = createMailEntity();
         List<MailEntity> entityList = Arrays.asList(entity);
-        when(mailRepository.getSentMails(CHARACTER_ID)).thenReturn(entityList);
+        when(mailRepository.getSentMails(CHARACTER_ID_1)).thenReturn(entityList);
 
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailConverter.convertEntity(entityList)).thenReturn(mailList);
         //WHEN
-        List<Mail> result = underTest.getSentMails(CHARACTER_ID);
+        List<Mail> result = underTest.getSentMails(CHARACTER_ID_1);
         //THEN
-        verify(mailRepository).getSentMails(CHARACTER_ID);
+        verify(mailRepository).getSentMails(CHARACTER_ID_1);
         verify(mailConverter).convertEntity(entityList);
         assertEquals(mailList, result);
     }
@@ -146,15 +146,15 @@ public class MailDaoTest {
         //GIVEN
         MailEntity entity = createMailEntity();
         List<MailEntity> entityList = Arrays.asList(entity);
-        when(mailRepository.getUnreadMails(CHARACTER_ID)).thenReturn(entityList);
+        when(mailRepository.getUnreadMails(CHARACTER_ID_1)).thenReturn(entityList);
 
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailConverter.convertEntity(entityList)).thenReturn(mailList);
         //WHEN
-        List<Mail> result = underTest.getUnreadMails(CHARACTER_ID);
+        List<Mail> result = underTest.getUnreadMails(CHARACTER_ID_1);
         //THEN
-        verify(mailRepository).getUnreadMails(CHARACTER_ID);
+        verify(mailRepository).getUnreadMails(CHARACTER_ID_1);
         verify(mailConverter).convertEntity(entityList);
         assertEquals(mailList, result);
     }

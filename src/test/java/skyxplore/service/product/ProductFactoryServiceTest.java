@@ -5,7 +5,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_2;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_3;
@@ -102,7 +102,7 @@ public class ProductFactoryServiceTest {
         GeneralDescription generalDescription = new TestGeneralDescription();
         when(gameDataFacade.getData(PRODUCT_ELEMENT_ID_EQUIPMENT)).thenReturn(generalDescription);
 
-        when(characterDao.findById(CHARACTER_ID)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
 
         Factory factoryForEquipmentProduct = createFactory(FACTORY_ID_3);
         factoryForEquipmentProduct.setMaterials(new Materials());
@@ -134,7 +134,7 @@ public class ProductFactoryServiceTest {
         verify(gameDataFacade).getData(PRODUCT_EXCEPTIONAL_ELEMENT);
         verify(gameDataFacade).getData(PRODUCT_ELEMENT_ID_EQUIPMENT);
         verify(factoryDao).findById(FACTORY_ID_3);
-        verify(characterDao).findById(CHARACTER_ID);
+        verify(characterDao).findById(CHARACTER_ID_1);
         verify(character).addEquipments(PRODUCT_ELEMENT_ID_EQUIPMENT, PRODUCT_AMOUNT);
         verify(characterDao).save(character);
         verify(productDao).delete(finishedMaterialProduct);

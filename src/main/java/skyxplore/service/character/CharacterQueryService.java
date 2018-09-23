@@ -13,6 +13,7 @@ import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.community.BlockedCharacterQueryService;
+import skyxplore.service.community.FriendshipQueryService;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,9 +26,10 @@ import java.util.stream.Collectors;
 @Service
 public class CharacterQueryService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
+    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
     private final CharacterDao characterDao;
     private final GameDataFacade gameDataFacade;
-    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
+    private final FriendshipQueryService friendshipQueryService;
 
     public SkyXpCharacter findByCharacterId(String characterId) {
         SkyXpCharacter character = characterDao.findById(characterId);
@@ -38,10 +40,7 @@ public class CharacterQueryService {
     }
 
     public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
-        SkyXpCharacter character = characterDao.findById(characterId);
-        if(character == null){
-            throw new CharacterNotFoundException("Character not found with id " + characterId);
-        }
+        SkyXpCharacter character = findByCharacterId(characterId);
         if (!userId.equals(character.getUserId())) {
             throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
         }
@@ -49,42 +48,33 @@ public class CharacterQueryService {
     }
 
     public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
-        List<BlockedCharacter> blockedCharacters = blockedCharacterQueryService.getBlockedCharactersOf(characterId);
-        return blockedCharacters
-            .stream()
+        return blockedCharacterQueryService.getBlockedCharactersOf(characterId).stream()
             .map(blockedCharacter -> findByCharacterId(blockedCharacter.getBlockedCharacterId()))
             .collect(Collectors.toList());
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeAddressee(String name, String characterId, String userId) {
-        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
-        List<SkyXpCharacter> characters = getCharactersOfNameLike(name);
-        return characters.
-            stream()
-            .filter(c -> isNotOwnCharacter(c, userId)) //Filtering own characters
+    public List<SkyXpCharacter> getCharactersCanBeAddressee(String name, String characterId) {
+        SkyXpCharacter character = findByCharacterId(characterId);
+        return getCharactersOfNameLike(name).stream()
+            .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
             .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
             .collect(Collectors.toList());
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {
-        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
-        List<SkyXpCharacter> characters = getCharactersOfNameLike(name);
-        return characters.
-            stream()
-            .filter(c -> isNotOwnCharacter(c, userId)) //Filtering own characters
+    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId ) {
+        SkyXpCharacter character = findByCharacterId(characterId);
+        return getCharactersOfNameLike(name).stream()
+            .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
             .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
             .collect(Collectors.toList());
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId, String userId) {
-        SkyXpCharacter character = findCharacterByIdAuthorized(characterId, userId);
-        List<SkyXpCharacter> characters = getCharactersOfNameLike(name);
-
-        return characters.
-            stream()
-            .filter(c -> isNotOwnCharacter(c, userId)) //Filtering own characters
+    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId) {
+        SkyXpCharacter character = findByCharacterId(characterId);
+        return getCharactersOfNameLike(name).stream()
+            .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
             .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
             .filter(c -> isFriend(c, character)) //Filtering friends
@@ -93,13 +83,11 @@ public class CharacterQueryService {
     }
 
     private boolean isFriend(SkyXpCharacter c, SkyXpCharacter character) {
-        //TODO implement
-        return true;
+        return !friendshipQueryService.isFriendshipAlreadyExists(c.getCharacterId(), character.getCharacterId());
     }
 
     private boolean isRequestSent(SkyXpCharacter c, SkyXpCharacter character) {
-        //TODO implement
-        return true;
+        return !friendshipQueryService.isFriendRequestAlreadyExists(c.getCharacterId(), character.getCharacterId());
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {
@@ -112,7 +100,7 @@ public class CharacterQueryService {
     }
 
     private boolean isNotOwnCharacter(SkyXpCharacter character, String userId) {
-        return !character.getUserId().equals(userId);
+        return !userId.equals(character.getUserId());
     }
 
     private boolean isNotBlocked(SkyXpCharacter character, SkyXpCharacter ownedCharacter) {
@@ -124,7 +112,6 @@ public class CharacterQueryService {
         return characterDao.findByUserId(userId);
     }
 
-    //TODO unit test
     public View<EquipmentViewList> getEquipmentsOfCharacter(String characterId) {
         SkyXpCharacter character = findByCharacterId(characterId);
 
@@ -134,7 +121,6 @@ public class CharacterQueryService {
         );
     }
 
-    //TODO unit test
     public Integer getMoneyOfCharacter(String characterId) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return character.getMoney();

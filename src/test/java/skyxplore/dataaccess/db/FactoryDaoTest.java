@@ -3,7 +3,7 @@ package skyxplore.dataaccess.db;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.createFactory;
 import static skyxplore.testutil.TestUtils.createFactoryEntity;
@@ -37,26 +37,26 @@ public class FactoryDaoTest {
     public void testDeleteByCharacterIdShouldCallDeleteMethods(){
         //GIVEN
         FactoryEntity factoryEntity = createFactoryEntity();
-        when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(factoryEntity);
+        when(factoryRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(factoryEntity);
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.deleteByCharacterId(CHARACTER_ID_1);
         //THEN
         verify(productDao).deleteByFactoryId(FACTORY_ID_1);
-        verify(factoryRepository).deleteByCharacterId(CHARACTER_ID);
+        verify(factoryRepository).deleteByCharacterId(CHARACTER_ID_1);
     }
 
     @Test
     public void testFindByCharacterIdShouldCallRepositoryAndReturnDomain(){
         //GIVEN
         FactoryEntity entity = createFactoryEntity();
-        when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entity);
+        when(factoryRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(entity);
 
         Factory factory = createFactory();
         when(factoryConverter.convertEntity(entity)).thenReturn(factory);
         //WHEN
-        Factory result = underTest.findByCharacterId(CHARACTER_ID);
+        Factory result = underTest.findByCharacterId(CHARACTER_ID_1);
         //THEN
-        verify(factoryRepository).findByCharacterId(CHARACTER_ID);
+        verify(factoryRepository).findByCharacterId(CHARACTER_ID_1);
         verify(factoryConverter).convertEntity(entity);
         assertEquals(factory, result);
     }

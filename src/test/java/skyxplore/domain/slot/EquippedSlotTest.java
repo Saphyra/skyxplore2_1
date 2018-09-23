@@ -27,7 +27,7 @@ public class EquippedSlotTest {
     @Before
     public void init() {
         character = new SkyXpCharacter();
-        character.setCharacterId(CHARACTER_ID);
+        character.setCharacterId(CHARACTER_ID_1);
 
         underTest = new EquippedSlot();
         underTest.setSlotId(EQUIPPED_SLOT_ID);
