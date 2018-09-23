@@ -7,7 +7,6 @@ import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.service.character.CharacterQueryService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +14,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class FriendshipQueryService {
-    private final CharacterQueryService characterQueryService;
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
 
@@ -30,9 +27,7 @@ public class FriendshipQueryService {
     }
 
     public List<FriendRequest> getReceivedFriendRequests(String characterId) {
-        characterQueryService.findByCharacterId(characterId);
-        return friendRequestDao.getByFriendId(characterId)
-            .stream()
+        return friendRequestDao.getByFriendId(characterId).stream()
             .map(this::swapIds)
             .collect(Collectors.toList());
     }
@@ -57,7 +52,7 @@ public class FriendshipQueryService {
     }
 
     public boolean isFriendshipOrFriendRequestAlreadyExists(String characterId, String friendId) {
-        return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0
-            || friendshipDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
+        return isFriendRequestAlreadyExists(characterId, friendId)
+            || isFriendshipAlreadyExists(characterId, friendId);
     }
 }
