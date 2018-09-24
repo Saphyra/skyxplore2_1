@@ -20,6 +20,7 @@ public class MailSenderService {
     private final IdGenerator idGenerator;
     private final MailDao mailDao;
 
+    //TODO check user block status
     public void sendMail(SendMailRequest request, String characterId) {
         characterQueryService.findByCharacterId(request.getAddresseeId());
         Mail mail = createMail(request, characterId);

@@ -7,6 +7,8 @@ import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
+import skyxplore.exception.FriendRequestNotFoundException;
+import skyxplore.exception.FriendshipNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,24 @@ import java.util.stream.Collectors;
 public class FriendshipQueryService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
+
+    //TODO unit test
+    public FriendRequest findFriendRequestById(String friendRequestId) {
+        FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
+        if (friendRequest == null) {
+            throw new FriendRequestNotFoundException("FriendRequest not found with id " + friendRequestId);
+        }
+        return friendRequest;
+    }
+
+    //TODO unit test
+    public Friendship findFriendshipById(String friendshipId) {
+        Friendship friendship = friendshipDao.findById(friendshipId);
+        if(friendship == null){
+            throw new FriendshipNotFoundException("Friendship not found with id " + friendshipId);
+        }
+        return friendship;
+    }
 
     public List<Friendship> getFriends(String characterId) {
         return friendshipDao.getFriendshipsOfCharacter(characterId);

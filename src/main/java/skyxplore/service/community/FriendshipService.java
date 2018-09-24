@@ -23,7 +23,6 @@ import skyxplore.util.IdGenerator;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class FriendshipService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
@@ -34,10 +33,7 @@ public class FriendshipService {
 
     @Transactional
     public void acceptFriendRequest(String friendRequestId, String characterId) {
-        FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
-        if (friendRequest == null) {
-            throw new FriendRequestNotFoundException("FriendRequest not found with id " + friendRequestId);
-        }
+        FriendRequest friendRequest = friendshipQueryService.findFriendRequestById(friendRequestId);
         if (!friendRequest.getFriendId().equals(characterId)) {
             throw new UnauthorizedException(characterId + "has no rights to acccept friendRequest " + friendRequestId);
         }
@@ -82,8 +78,9 @@ public class FriendshipService {
         friendRequestDao.delete(friendRequest);
     }
 
+    //TODO unit test
     public void deleteFriendship(String friendshipId, String characterId) {
-        Friendship friendship = friendshipDao.getByFriendshipId(friendshipId);
+        Friendship friendship = friendshipQueryService.findFriendshipById(friendshipId);
         if (!friendship.getFriendId().equals(characterId)
             && !friendship.getCharacterId().equals(characterId)) {
             throw new UnauthorizedException(characterId + " has no access to friendship " + friendshipId);
@@ -91,6 +88,7 @@ public class FriendshipService {
         friendshipDao.delete(friendship);
     }
 
+    //TODO unit test
     public void removeContactsBetween(String characterId, String blockedCharacterId) {
         friendRequestDao.getByCharacterIdOrFriendId(characterId, blockedCharacterId).forEach(friendRequestDao::delete);
         friendshipDao.getByCharacterIdOrFriendId(characterId, blockedCharacterId).forEach(friendshipDao::delete);
