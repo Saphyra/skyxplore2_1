@@ -17,7 +17,6 @@ import skyxplore.service.character.CharacterQueryService;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-//TODO unit test
 public class MailDeleteService {
     private final CharacterQueryService characterQueryService;
     private final MailDao mailDao;
