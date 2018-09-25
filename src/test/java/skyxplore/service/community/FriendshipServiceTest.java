@@ -3,12 +3,14 @@ package skyxplore.service.community;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.BLOCKED_CHARACTER_ID;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_2;
 import static skyxplore.testutil.TestUtils.FRIENDSHIP_ID;
 import static skyxplore.testutil.TestUtils.FRIEND_ID;
 import static skyxplore.testutil.TestUtils.FRIEND_REQUEST_ID;
 import static skyxplore.testutil.TestUtils.createFriendRequest;
+import static skyxplore.testutil.TestUtils.createFriendship;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -135,7 +137,7 @@ public class FriendshipServiceTest {
 
     @Test(expected = UnauthorizedException.class)
     public void testDeclineFriendRequestShouldThrowExceptionWhenWrongId() {
-        //GVEN
+        //GIVEN
         FriendRequest friendRequest = createFriendRequest();
         when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
         //WHEN
@@ -154,4 +156,39 @@ public class FriendshipServiceTest {
         verify(friendRequestDao).delete(friendRequest);
     }
 
+    @Test(expected = UnauthorizedException.class)
+    public void testDeleteFriendshipShouldThrowExceptionWhenWrongId() {
+        //GIVEN
+        Friendship friendship = createFriendship();
+        when(friendshipQueryService.findFriendshipById(FRIENDSHIP_ID)).thenReturn(friendship);
+        //WHEN
+        underTest.deleteFriendship(FRIENDSHIP_ID, CHARACTER_ID_2);
+    }
+
+    @Test
+    public void testDeleteFriendshipShouldDelete() {
+        //GIVEN
+        Friendship friendship = createFriendship();
+        when(friendshipQueryService.findFriendshipById(FRIENDSHIP_ID)).thenReturn(friendship);
+        //WHEN
+        underTest.deleteFriendship(FRIENDSHIP_ID, CHARACTER_ID_1);
+        //THEN
+        verify(friendshipQueryService).findFriendshipById(FRIENDSHIP_ID);
+        verify(friendshipDao).delete(friendship);
+    }
+
+    @Test
+    public void testRemoveContactsBetweenShouldDelete(){
+        //GIVEN
+        Friendship friendship = createFriendship();
+        when(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(friendship));
+
+        FriendRequest friendRequest = createFriendRequest();
+        when(friendRequestDao.getByCharacterIdOrFriendId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(friendRequest));
+        //WHEN
+        underTest.removeContactsBetween(CHARACTER_ID_1, BLOCKED_CHARACTER_ID);
+        //THEN
+        verify(friendshipDao).delete(friendship);
+        verify(friendRequestDao).delete(friendRequest);
+    }
 }

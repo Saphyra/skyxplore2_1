@@ -78,7 +78,6 @@ public class FriendshipService {
         friendRequestDao.delete(friendRequest);
     }
 
-    //TODO unit test
     public void deleteFriendship(String friendshipId, String characterId) {
         Friendship friendship = friendshipQueryService.findFriendshipById(friendshipId);
         if (!friendship.getFriendId().equals(characterId)
@@ -88,7 +87,6 @@ public class FriendshipService {
         friendshipDao.delete(friendship);
     }
 
-    //TODO unit test
     public void removeContactsBetween(String characterId, String blockedCharacterId) {
         friendRequestDao.getByCharacterIdOrFriendId(characterId, blockedCharacterId).forEach(friendRequestDao::delete);
         friendshipDao.getByCharacterIdOrFriendId(characterId, blockedCharacterId).forEach(friendshipDao::delete);
