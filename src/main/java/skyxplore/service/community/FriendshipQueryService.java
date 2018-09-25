@@ -20,7 +20,6 @@ public class FriendshipQueryService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
 
-    //TODO unit test
     public FriendRequest findFriendRequestById(String friendRequestId) {
         FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
         if (friendRequest == null) {
@@ -29,7 +28,6 @@ public class FriendshipQueryService {
         return friendRequest;
     }
 
-    //TODO unit test
     public Friendship findFriendshipById(String friendshipId) {
         Friendship friendship = friendshipDao.findById(friendshipId);
         if(friendship == null){

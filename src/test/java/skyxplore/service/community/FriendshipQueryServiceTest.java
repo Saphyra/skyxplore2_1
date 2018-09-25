@@ -9,6 +9,8 @@ import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
+import skyxplore.exception.FriendRequestNotFoundException;
+import skyxplore.exception.FriendshipNotFoundException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,6 +32,44 @@ public class FriendshipQueryServiceTest {
 
     @InjectMocks
     private FriendshipQueryService underTest;
+
+    @Test(expected = FriendRequestNotFoundException.class)
+    public void testFindFriendRequestByIdShouldThrowExceptionWhenNull(){
+        //GIVEN
+        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(null);
+        //WHEN
+        underTest.findFriendRequestById(FRIEND_REQUEST_ID);
+    }
+
+    @Test
+    public void testFindFriendRequestShouldCallDao(){
+        //GIVEN
+        FriendRequest request = createFriendRequest();
+        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(request);
+        //WHEN
+        FriendRequest result = underTest.findFriendRequestById(FRIEND_REQUEST_ID);
+        //THEN
+        assertEquals(request, result);
+    }
+
+    @Test(expected = FriendshipNotFoundException.class)
+    public void testFindFriendshipByIdShouldThrowExceptionWhenNull(){
+        //GIVEN
+        when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(null);
+        //WHEN
+        underTest.findFriendshipById(FRIEND_REQUEST_ID);
+    }
+
+    @Test
+    public void testFindFriendshipShouldCallDao(){
+        //GIVEN
+        Friendship friendship = createFriendship();
+        when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(friendship);
+        //WHEN
+        Friendship result = underTest.findFriendshipById(FRIEND_REQUEST_ID);
+        //THEN
+        assertEquals(friendship, result);
+    }
 
     @Test
     public void testGetFriendsShouldCallDao() {
