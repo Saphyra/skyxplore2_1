@@ -1,12 +1,8 @@
 package skyxplore.service.factory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.gamedata.entity.Material;
@@ -16,11 +12,13 @@ import skyxplore.domain.materials.Materials;
 import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class FactoryQueryService {
     private final CharacterQueryService characterQueryService;
     private final FactoryDao factoryDao;
