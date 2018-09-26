@@ -33,8 +33,8 @@ public class FactoryQueryService {
         return factory;
     }
 
-    public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public Map<String, MaterialView> getMaterials(String characterId) {
+        characterQueryService.findByCharacterId(characterId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
         Materials materials = factory.getMaterials();
         Map<String, MaterialView> result = fillWithMaterials(materials);

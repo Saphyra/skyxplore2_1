@@ -47,11 +47,11 @@ public class FactoryControllerTest {
         MaterialView view = createMaterialView();
         Map<String,MaterialView> map = new HashMap<>();
         map.put(MATERIAL_KEY, view);
-        when(factoryFacade.getMaterials(CHARACTER_ID_1, USER_ID)).thenReturn(map);
+        when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(map);
         //WHEN
-        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1, USER_ID);
+        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
-        verify(factoryFacade).getMaterials(CHARACTER_ID_1, USER_ID);
+        verify(factoryFacade).getMaterials(CHARACTER_ID_1);
         assertEquals(1, result.size());
         assertEquals(view, result.get(MATERIAL_KEY));
     }

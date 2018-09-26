@@ -22,7 +22,7 @@ public class FactoryFacade {
         addToQueueService.addToQueue(characterId, request);
     }
 
-    public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        return factoryQueryService.getMaterials(characterId, userId);
+    public Map<String, MaterialView> getMaterials(String characterId) {
+        return factoryQueryService.getMaterials(characterId);
     }
 }
