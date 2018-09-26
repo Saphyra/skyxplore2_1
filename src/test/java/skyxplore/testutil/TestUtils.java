@@ -16,6 +16,7 @@ import skyxplore.controller.view.slot.SlotView;
 import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
@@ -199,6 +200,7 @@ public class TestUtils {
     public static final Integer PRODUCT_AMOUNT = 5;
     public static final String  PRODUCT_ENCRYPTED_AMOUNT = "product_encrypted_amount";
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
+    public static final Integer PRODUCT_BUILD_PRICE = 50;
     public static final String PRODUCT_ENCRYPTED_CONSTRUCTION_TIME = "product_encrypted_construction_time";
     public static final String PRODUCT_ELEMENT_ID_EQUIPMENT = "element_id_equipment";
     public static final String PRODUCT_ELEMENT_ID_MATERIAL = "element_id_material";
@@ -421,6 +423,18 @@ public class TestUtils {
         factory.setCharacterId(CHARACTER_ID_1);
         factory.setMaterials(createMaterials());
         return factory;
+    }
+
+    public static FactoryData createFactoryData(){
+        TestFactoryData factoryData = new TestFactoryData();
+        factoryData.setId(DATA_ELEMENT);
+        factoryData.setName(DATA_NAME);
+        factoryData.setDescription(DATA_DESCRIPTION);
+        factoryData.setSlot(DATA_SLOT);
+        factoryData.setConstructionTime(PRODUCT_CONSTRUCTION_TIME);
+        factoryData.setBuildPrice(PRODUCT_BUILD_PRICE);
+        factoryData.setMaterials(createMaterials());
+        return factoryData;
     }
 
     public static FactoryEntity createFactoryEntity(){

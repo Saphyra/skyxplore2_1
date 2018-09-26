@@ -16,21 +16,20 @@ import skyxplore.exception.NotEnoughMaterialsException;
 import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
+import skyxplore.util.DateTimeUtil;
 import skyxplore.util.IdGenerator;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
+    private final DateTimeUtil dateTimeUtil;
     private final FactoryDao factoryDao;
     private final FactoryQueryService factoryQueryService;
     private final GameDataFacade gameDataFacade;
@@ -80,7 +79,7 @@ public class AddToQueueService {
             .elementId(elementData.getId())
             .amount(amount)
             .constructionTime(elementData.getConstructionTime() * amount)
-            .addedAt(LocalDateTime.now(ZoneOffset.UTC).toEpochSecond(ZoneOffset.UTC))
+            .addedAt(dateTimeUtil.convertDomain(dateTimeUtil.now()))
             .build();
     }
 
