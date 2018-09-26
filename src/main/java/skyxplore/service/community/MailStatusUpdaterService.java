@@ -14,12 +14,12 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class MailStatusUpdaterService {
     private final CharacterQueryService characterQueryService;
     private final MailDao mailDao;
     private final MailQueryService mailQueryService;
 
+    //TODO unit test
     public void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         mailIds.forEach(mailId -> setArchiveStatus(character, mailId, archiveStatus));
@@ -40,11 +40,13 @@ public class MailStatusUpdaterService {
         }
     }
 
+    //TODO unit test
     public void updateReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         mailIds.forEach(mailId -> setMailReadStatus(mailId, character, newStatus));
     }
 
+    //TODO unit test
     private void setMailReadStatus(String mailId, SkyXpCharacter character, Boolean readStatus) {
         try {
             Mail mail = mailQueryService.findMailById(mailId);
