@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-//TODO unit test
 public class PasswordService {
 
     private static final String ID = "$31$";
