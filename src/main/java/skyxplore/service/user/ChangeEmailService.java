@@ -34,7 +34,7 @@ public class ChangeEmailService {
         }
         user.setEmail(request.getNewEmail());
         log.info("Changeing email of user {}", userId);
-        userDao.update(user);
+        userDao.save(user);
         log.info("Email changed successfully.");
     }
 }

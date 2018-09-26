@@ -77,7 +77,7 @@ public class ChangeEmailServiceTest {
         verify(passwordService).authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
         verify(userQueryService).isEmailExists(USER_NEW_EMAIL);
         verify(credentialsService).getByUserId(USER_ID);
-        verify(userDao).update(user);
+        verify(userDao).save(user);
         assertEquals(USER_NEW_EMAIL, user.getEmail());
     }
 }

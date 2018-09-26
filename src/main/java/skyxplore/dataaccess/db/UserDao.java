@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Component
 @Slf4j
-//TODO unit test
 public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepository>{
     private final CredentialsDao credentialsDao;
 
@@ -35,18 +34,5 @@ public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepo
 
     public SkyXpUser findUserByEmail(String email){
         return converter.convertEntity(repository.findByEmail(email));
-    }
-
-    @Transactional
-    public void update(SkyXpUser user){
-        Optional<UserEntity> actual = repository.findById(user.getUserId());
-        if(actual.isPresent()){
-            UserEntity entity = actual.get();
-            entity.setUserId(user.getUserId());
-            entity.setEmail(user.getEmail());
-            entity.setRoles(user.getRoles());
-        }else{
-            throw new UserNotFoundException("User not found with id" + user.getUserId());
-        }
     }
 }
