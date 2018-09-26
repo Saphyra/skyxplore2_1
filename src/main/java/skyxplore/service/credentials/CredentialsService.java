@@ -11,7 +11,6 @@ import skyxplore.exception.BadCredentialsException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class CredentialsService {
     private final CredentialsDao credentialsDao;
 
@@ -38,6 +37,4 @@ public class CredentialsService {
     public void save(Credentials credentials) {
         credentialsDao.save(credentials);
     }
-
-
 }
