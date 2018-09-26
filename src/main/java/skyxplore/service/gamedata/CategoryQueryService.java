@@ -23,6 +23,7 @@ import skyxplore.dataaccess.gamedata.subservice.WeaponService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class CategoryQueryService {
     private final ArmorService armorService;
     private final BatteryService batteryService;

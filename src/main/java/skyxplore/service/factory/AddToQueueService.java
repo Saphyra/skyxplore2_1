@@ -27,6 +27,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;

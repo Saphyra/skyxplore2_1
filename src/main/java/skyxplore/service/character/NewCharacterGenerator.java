@@ -20,6 +20,7 @@ import skyxplore.util.IdGenerator;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class NewCharacterGenerator {
     private static final Integer START_MONEY = 10000000;
 

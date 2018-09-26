@@ -20,6 +20,7 @@ import skyxplore.service.character.CharacterQueryService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class FactoryQueryService {
     private final CharacterQueryService characterQueryService;
     private final FactoryDao factoryDao;

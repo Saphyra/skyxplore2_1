@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Component
 @Slf4j
+//TODO unit test
 public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepository>{
     private final CredentialsDao credentialsDao;
 

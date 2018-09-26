@@ -12,6 +12,7 @@ import skyxplore.exception.CharacterNameAlreadyExistsException;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class CharacterRenameService {
     private final CharacterDao characterDao;
     private final Cache<String, Boolean> characterNameCache;

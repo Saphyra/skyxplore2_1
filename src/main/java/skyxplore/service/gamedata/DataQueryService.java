@@ -24,6 +24,7 @@ import skyxplore.exception.EquipmentNotFoundException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class DataQueryService {
     private final AbilityService abilityService;
     private final ArmorService armorService;
