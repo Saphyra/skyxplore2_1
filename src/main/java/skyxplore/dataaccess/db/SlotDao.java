@@ -12,7 +12,6 @@ import skyxplore.domain.slot.SlotEntity;
 
 @Component
 @Slf4j
-//TODO unit test
 public class SlotDao extends AbstractDao<SlotEntity, EquippedSlot, String, SlotRepository> {
 
     public SlotDao(Converter<SlotEntity, EquippedSlot> converter, SlotRepository repository) {
