@@ -1,20 +1,27 @@
 package skyxplore.controller;
 
+import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+
+import java.util.Map;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductViewList;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
-
-import javax.validation.Valid;
-import java.util.Map;
-
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("unused")
 @RestController
@@ -34,14 +41,14 @@ public class FactoryController {
         @RequestBody @Valid AddToQueueRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
-        log.info("Character {} wants to add material {}", characterId,  request);
+        log.info("Character {} wants to add material {}", characterId, request);
         factoryFacade.addToQueue(characterId, request);
     }
 
     @GetMapping(GET_MATERIALS_MAPPING)
-    public Map<String, MaterialView> getMaterials(@PathVariable("characterId") String characterId, @CookieValue(COOKIE_USER_ID) String userId) {
-        log.info("{} wants to know the materials of character {}", userId, characterId);
-        return factoryFacade.getMaterials(characterId, userId);
+    public Map<String, MaterialView> getMaterials(@PathVariable("characterId") String characterId) {
+        log.info("{} wants to know his materials", characterId);
+        return factoryFacade.getMaterials(characterId);
     }
 
     @GetMapping(GET_QUEUE_MAPPING)
