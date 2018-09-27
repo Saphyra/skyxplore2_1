@@ -77,12 +77,10 @@ public class CharacterFacadeTest {
 
     @Test
     public void testDeleteCharacterShouldCallService() {
-        //GIVEN
-        CharacterDeleteRequest request = createCharacterDeleteRequest();
         //WHEN
-        underTest.deleteCharacter(request, USER_ID);
+        underTest.deleteCharacter(CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(characterDeleteService).deleteCharacter(request, USER_ID);
+        verify(characterDeleteService).deleteCharacter(CHARACTER_ID_1, USER_ID);
     }
 
     @Test

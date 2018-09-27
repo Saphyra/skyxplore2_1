@@ -64,12 +64,12 @@ public class CharacterController {
 
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
     public void deleteCharacter(
-        @RequestBody @NotNull CharacterDeleteRequest request,
+        @RequestBody @NotNull OneStringParamRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
-        log.info("{} wants to deleteById {}", userId, request.getCharacterId());
-        characterFacade.deleteCharacter(request, userId);
-        log.info("Character {} is deleted.", request.getCharacterId());
+        log.info("{} wants to deleteById {}", userId, request.getValue());
+        characterFacade.deleteCharacter(request.getValue(), userId);
+        log.info("Character {} is deleted.", request.getValue());
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)

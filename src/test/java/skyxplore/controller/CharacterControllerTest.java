@@ -68,11 +68,11 @@ public class CharacterControllerTest {
     @Test
     public void testDeleteCharacterShouldCallFacade() {
         //GIVEN
-        CharacterDeleteRequest request = new CharacterDeleteRequest(CHARACTER_ID_1);
+        OneStringParamRequest request = new OneStringParamRequest(CHARACTER_ID_1);
         //WHEN
         underTest.deleteCharacter(request, USER_ID);
         //THEN
-        verify(characterFacade).deleteCharacter(request, USER_ID);
+        verify(characterFacade).deleteCharacter(CHARACTER_ID_1, USER_ID);
     }
 
     @Test

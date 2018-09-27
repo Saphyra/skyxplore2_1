@@ -33,8 +33,8 @@ public class CharacterFacade {
         characterCreatorService.createCharacter(request, userId);
     }
 
-    public void deleteCharacter(CharacterDeleteRequest request, String userId) {
-        characterDeleteService.deleteCharacter(request, userId);
+    public void deleteCharacter(String characterId, String userId) {
+        characterDeleteService.deleteCharacter(characterId, userId);
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
