@@ -13,7 +13,6 @@ import skyxplore.domain.character.SkyXpCharacter;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class CharacterDeleteService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
