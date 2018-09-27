@@ -19,7 +19,6 @@ import javax.transaction.Transactional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class CharacterCreatorService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
