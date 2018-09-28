@@ -11,7 +11,6 @@ import skyxplore.exception.ShipNotFoundException;
 @SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
-//TODO unit test
 public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShip, String, EquippedShipRepository>{
     private final SlotDao slotDao;
 
