@@ -60,11 +60,11 @@ public class FactoryControllerTest {
     public void testGetQueueShouldCallFacadeAndReturnResult(){
         //GIVEN
         View<ProductViewList> view = createProductViewListView();
-        when(productFacade.getQueue(USER_ID, CHARACTER_ID_1)).thenReturn(view);
+        when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(view);
         //WHEN
-        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1, USER_ID);
+        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1);
         //THEN
-        verify(productFacade).getQueue(USER_ID, CHARACTER_ID_1);
+        verify(productFacade).getQueue(CHARACTER_ID_1);
         assertEquals(view, result);
     }
 }

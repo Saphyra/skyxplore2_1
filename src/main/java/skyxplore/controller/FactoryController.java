@@ -30,8 +30,8 @@ import skyxplore.service.ProductFacade;
 
 public class FactoryController {
     private static final String ADD_TO_QUEUE_MAPPING = "factory";
-    private static final String GET_MATERIALS_MAPPING = "factory/materials/{characterId}";
-    private static final String GET_QUEUE_MAPPING = "factory/queue/{characterId}";
+    private static final String GET_MATERIALS_MAPPING = "factory/materials";
+    private static final String GET_QUEUE_MAPPING = "factory/queue";
 
     private final FactoryFacade factoryFacade;
     private final ProductFacade productFacade;
@@ -46,14 +46,14 @@ public class FactoryController {
     }
 
     @GetMapping(GET_MATERIALS_MAPPING)
-    public Map<String, MaterialView> getMaterials(@PathVariable("characterId") String characterId) {
+    public Map<String, MaterialView> getMaterials(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his materials", characterId);
         return factoryFacade.getMaterials(characterId);
     }
 
     @GetMapping(GET_QUEUE_MAPPING)
-    public View<ProductViewList> getQueue(@PathVariable("characterId") String characterId, @CookieValue(COOKIE_USER_ID) String userId) {
-        log.info("{} wants to know queue of character {}", userId, characterId);
-        return productFacade.getQueue(userId, characterId);
+    public View<ProductViewList> getQueue(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
+        log.info("{} wants to know his queue", characterId);
+        return productFacade.getQueue(characterId);
     }
 }

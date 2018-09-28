@@ -29,11 +29,11 @@ public class ProductFacadeTest {
     public void testGetQueueShouldCallService() {
         //GIVEN
         View<ProductViewList> productView = createProductViewListView();
-        when(productQueryService.getQueue(USER_ID, CHARACTER_ID_1)).thenReturn(productView);
+        when(productQueryService.getQueue(CHARACTER_ID_1)).thenReturn(productView);
         //WHEN
-        View<ProductViewList> result = underTest.getQueue(USER_ID, CHARACTER_ID_1);
+        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1);
         //THEN
-        verify(productQueryService).getQueue(USER_ID, CHARACTER_ID_1);
+        verify(productQueryService).getQueue(CHARACTER_ID_1);
         assertEquals(productView, result);
     }
 
