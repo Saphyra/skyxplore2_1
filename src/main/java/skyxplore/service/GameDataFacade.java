@@ -1,12 +1,8 @@
 package skyxplore.service;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
@@ -17,11 +13,13 @@ import skyxplore.service.gamedata.CategoryQueryService;
 import skyxplore.service.gamedata.DataQueryService;
 import skyxplore.service.gamedata.EquipmentDataCollectorService;
 
+import java.util.List;
+import java.util.Map;
+
 @SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class GameDataFacade {
     private final CategoryQueryService categoryQueryService;
     private final DataQueryService dataQueryService;

@@ -198,7 +198,7 @@ public class TestUtils {
     //Product
     public static final Long PRODUCT_ADDED_AT = 1000L;
     public static final Integer PRODUCT_AMOUNT = 5;
-    public static final String  PRODUCT_ENCRYPTED_AMOUNT = "product_encrypted_amount";
+    public static final String PRODUCT_ENCRYPTED_AMOUNT = "product_encrypted_amount";
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
     public static final Integer PRODUCT_BUILD_PRICE = 50;
     public static final String PRODUCT_ENCRYPTED_CONSTRUCTION_TIME = "product_encrypted_construction_time";
@@ -370,7 +370,7 @@ public class TestUtils {
         return ship;
     }
 
-    public static EquippedShipEntity createEquippedShipEntity(){
+    public static EquippedShipEntity createEquippedShipEntity() {
         EquippedShipEntity entity = new EquippedShipEntity();
         entity.setShipId(EQUIPPED_SHIP_ID);
         entity.setCharacterId(CHARACTER_ID_1);
@@ -383,7 +383,7 @@ public class TestUtils {
         return entity;
     }
 
-    public static EquippedSlot createEquippedSlot(String slotId){
+    public static EquippedSlot createEquippedSlot(String slotId) {
         EquippedSlot slot = createEquippedSlot();
         slot.setSlotId(slotId);
         return slot;
@@ -425,7 +425,7 @@ public class TestUtils {
         return factory;
     }
 
-    public static FactoryData createFactoryData(){
+    public static FactoryData createFactoryData() {
         TestFactoryData factoryData = new TestFactoryData();
         factoryData.setId(DATA_ELEMENT);
         factoryData.setName(DATA_NAME);
@@ -437,7 +437,7 @@ public class TestUtils {
         return factoryData;
     }
 
-    public static FactoryEntity createFactoryEntity(){
+    public static FactoryEntity createFactoryEntity() {
         FactoryEntity entity = new FactoryEntity();
         entity.setFactoryId(FACTORY_ID_1);
         entity.setCharacterId(CHARACTER_ID_1);
@@ -495,9 +495,15 @@ public class TestUtils {
         return view;
     }
 
+    public static GeneralDescription createGeneralDescription() {
+        GeneralDescription generalDescription = new TestGeneralDescription();
+        generalDescription.setId(DATA_ELEMENT);
+        return generalDescription;
+    }
+
     public static Map<String, GeneralDescription> createGeneralDescriptionMap() {
         Map<String, GeneralDescription> map = new HashMap<>();
-        map.put(DATA_ELEMENT, new TestGeneralDescription());
+        map.put(DATA_ELEMENT, createGeneralDescription());
         return map;
     }
 
@@ -523,7 +529,7 @@ public class TestUtils {
             .build();
     }
 
-    public static MailEntity createMailEntity(){
+    public static MailEntity createMailEntity() {
         return MailEntity.builder()
             .mailId(MAIL_ID_1)
             .from(MAIL_FROM_ID)
@@ -570,7 +576,7 @@ public class TestUtils {
         return material;
     }
 
-    public static Materials createMaterials(){
+    public static Materials createMaterials() {
         Materials materials = new Materials();
         materials.addMaterial(MATERIAL_KEY, MATERIAL_AMOUNT);
         return materials;
@@ -604,7 +610,7 @@ public class TestUtils {
             .build();
     }
 
-    public static ProductEntity createProductEntity(){
+    public static ProductEntity createProductEntity() {
         return ProductEntity.builder()
             .productId(PRODUCT_ID_1)
             .factoryId(FACTORY_ID_1)
@@ -664,7 +670,7 @@ public class TestUtils {
         return ship;
     }
 
-    public static SlotEntity createSlotEntity(){
+    public static SlotEntity createSlotEntity() {
         SlotEntity entity = new SlotEntity();
         entity.setSlotId(EQUIPPED_SLOT_ID);
         entity.setShipId(EQUIPPED_SHIP_ID);
@@ -703,7 +709,7 @@ public class TestUtils {
         return user;
     }
 
-    public static UserEntity createUserEntity(){
+    public static UserEntity createUserEntity() {
         UserEntity user = new UserEntity();
         user.setUserId(USER_ID);
         user.setEmail(USER_EMAIL);
