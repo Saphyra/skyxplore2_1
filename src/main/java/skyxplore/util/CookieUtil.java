@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class CookieUtil {
     public String getCookie(HttpServletRequest request, String name) {
         Cookie[] cookieArray = request.getCookies();
