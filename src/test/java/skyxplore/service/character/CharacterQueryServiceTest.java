@@ -1,11 +1,11 @@
 package skyxplore.service.character;
 
-import com.google.common.cache.Cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.CharacterNameLikeCache;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
@@ -36,7 +36,7 @@ public class CharacterQueryServiceTest {
     private BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
+    private CharacterNameLikeCache characterNameLikeCache;
 
     @Mock
     private CharacterDao characterDao;

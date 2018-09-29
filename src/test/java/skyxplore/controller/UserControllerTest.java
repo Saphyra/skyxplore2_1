@@ -1,12 +1,12 @@
 package skyxplore.controller;
 
-import com.google.common.cache.Cache;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.EmailCache;
+import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.service.UserFacade;
@@ -21,21 +21,16 @@ import static skyxplore.testutil.TestUtils.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
     @Mock
-    private Cache<String, Boolean> userNameCache;
+    private UserNameCache userNameCache;
 
     @Mock
-    private Cache<String, Boolean> emailCache;
+    private EmailCache emailCache;
 
     @Mock
     private UserFacade userFacade;
 
     @InjectMocks
     private UserController underTest;
-
-    @Before
-    public void init(){
-        underTest = new UserController(userNameCache, emailCache, userFacade);
-    }
 
     @Test
     public void testChangeEmailShouldCallFacade(){

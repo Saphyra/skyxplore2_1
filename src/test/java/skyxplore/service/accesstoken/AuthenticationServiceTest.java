@@ -1,12 +1,12 @@
 package skyxplore.service.accesstoken;
 
-import com.google.common.cache.Cache;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.AccessTokenCache;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.exception.UserNotFoundException;
@@ -32,7 +32,7 @@ public class AuthenticationServiceTest {
     private DateTimeUtil dateTimeUtil;
 
     @Mock
-    private Cache<String, Optional<AccessToken>> accessTokenCache;
+    private AccessTokenCache accessTokenCache;
 
     @Mock
     private UserFacade userFacade;

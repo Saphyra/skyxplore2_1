@@ -1,15 +1,14 @@
 package skyxplore.controller;
 
 
-import com.google.common.cache.Cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
@@ -39,7 +38,7 @@ public class CharacterControllerTest {
     private CharacterViewConverter characterViewConverter;
 
     @Mock
-    private Cache<String, Boolean> characterNameCache;
+    private CharacterNameCache characterNameCache;
 
     @InjectMocks
     private CharacterController underTest;

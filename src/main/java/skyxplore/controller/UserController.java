@@ -1,9 +1,10 @@
 package skyxplore.controller;
 
-import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import skyxplore.cache.EmailCache;
+import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.service.UserFacade;
@@ -26,8 +27,8 @@ public class UserController {
     private static final String REGISTRATION_MAPPING = "user/register";
     private static final String USERNAME_EXISTS_MAPPING = "user/name/exist";
 
-    private final Cache<String, Boolean> userNameCache;
-    private final Cache<String, Boolean> emailCache;
+    private final UserNameCache userNameCache;
+    private final EmailCache emailCache;
     private final UserFacade userFacade;
 
     @PostMapping(CHANGE_EMAIL_MAPPING)

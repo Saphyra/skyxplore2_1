@@ -1,24 +1,20 @@
 package skyxplore.service.character;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
-import static skyxplore.testutil.TestUtils.CHARACTER_NEW_NAME;
-import static skyxplore.testutil.TestUtils.createCharacter;
-import static skyxplore.testutil.TestUtils.createRenameCharacterRequest;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import com.google.common.cache.Cache;
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterRenameServiceTest {
@@ -26,7 +22,7 @@ public class CharacterRenameServiceTest {
     private  CharacterDao characterDao;
 
     @Mock
-    private  Cache<String, Boolean> characterNameCache;
+    private CharacterNameCache characterNameCache;
 
     @Mock
     private  CharacterQueryService characterQueryService;

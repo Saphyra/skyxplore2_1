@@ -1,9 +1,9 @@
 package skyxplore.service.character;
 
-import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.cache.CharacterNameLikeCache;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
@@ -17,7 +17,7 @@ import skyxplore.service.community.FriendshipQueryService;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 public class CharacterQueryService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
-    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
+    private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
     private final GameDataFacade gameDataFacade;
     private final FriendshipQueryService friendshipQueryService;
@@ -62,7 +62,7 @@ public class CharacterQueryService {
             .collect(Collectors.toList());
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId ) {
+    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
@@ -91,12 +91,7 @@ public class CharacterQueryService {
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {
-        try {
-            return characterNameLikeCache.get(name);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return Collections.emptyList();
+        return Optional.ofNullable(characterNameLikeCache.get(name)).orElse(Collections.emptyList());
     }
 
     private boolean isNotOwnCharacter(SkyXpCharacter character, String userId) {
