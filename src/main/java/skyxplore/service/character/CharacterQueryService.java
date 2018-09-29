@@ -1,9 +1,9 @@
 package skyxplore.service.character;
 
-import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.cache.CharacterNameLikeCache;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 public class CharacterQueryService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
-    private final Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
+    private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
     private final GameDataFacade gameDataFacade;
     private final FriendshipQueryService friendshipQueryService;
@@ -91,7 +91,7 @@ public class CharacterQueryService {
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {
-        return Optional.ofNullable(characterNameLikeCache.getIfPresent(name)).orElse(Collections.emptyList());
+        return Optional.ofNullable(characterNameLikeCache.get(name)).orElse(Collections.emptyList());
     }
 
     private boolean isNotOwnCharacter(SkyXpCharacter character, String userId) {

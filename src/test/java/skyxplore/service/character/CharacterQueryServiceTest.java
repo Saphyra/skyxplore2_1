@@ -1,11 +1,11 @@
 package skyxplore.service.character;
 
-import com.google.common.cache.Cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.CharacterNameLikeCache;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
@@ -36,7 +36,7 @@ public class CharacterQueryServiceTest {
     private BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private Cache<String, List<SkyXpCharacter>> characterNameLikeCache;
+    private CharacterNameLikeCache characterNameLikeCache;
 
     @Mock
     private CharacterDao characterDao;
@@ -148,7 +148,7 @@ public class CharacterQueryServiceTest {
         canBeAddressee.setCharacterId(CHARACTER_ID_4);
         canBeAddressee.setUserId(null);
 
-        when(characterNameLikeCache.getIfPresent(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee));
+        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee));
 
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
@@ -165,7 +165,7 @@ public class CharacterQueryServiceTest {
         assertEquals(1, result.size());
         assertTrue(result.contains(canBeAddressee));
         verify(characterDao).findById(CHARACTER_ID_1);
-        verify(characterNameLikeCache).getIfPresent(CHARACTER_NAME);
+        verify(characterNameLikeCache).get(CHARACTER_NAME);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class CharacterQueryServiceTest {
         canBeAddressee.setCharacterId(CHARACTER_ID_4);
         canBeAddressee.setUserId(null);
 
-        when(characterNameLikeCache.getIfPresent(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee));
+        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee));
 
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
@@ -206,7 +206,7 @@ public class CharacterQueryServiceTest {
         assertEquals(1, result.size());
         assertTrue(result.contains(canBeAddressee));
         verify(characterDao).findById(CHARACTER_ID_1);
-        verify(characterNameLikeCache).getIfPresent(CHARACTER_NAME);
+        verify(characterNameLikeCache).get(CHARACTER_NAME);
     }
 
     @Test
@@ -238,7 +238,7 @@ public class CharacterQueryServiceTest {
         friendRequestCharacter.setCharacterId(CHARACTER_ID_7);
         friendRequestCharacter.setUserId(null);
 
-        when(characterNameLikeCache.getIfPresent(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee, friendCharacter, friendRequestCharacter));
+        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee, friendCharacter, friendRequestCharacter));
 
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
@@ -258,7 +258,7 @@ public class CharacterQueryServiceTest {
         assertEquals(1, result.size());
         assertTrue(result.contains(canBeAddressee));
         verify(characterDao).findById(CHARACTER_ID_1);
-        verify(characterNameLikeCache).getIfPresent(CHARACTER_NAME);
+        verify(characterNameLikeCache).get(CHARACTER_NAME);
     }
 
     @Test
