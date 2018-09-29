@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
@@ -124,11 +123,11 @@ public class CharacterControllerTest {
     @Test
     public void testIsCharNameExistsShouldCallCacheAndReturnResponse() throws ExecutionException {
         //GIVEN
-        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(true);
+        when(characterNameCache.getIfPresent(CHARACTER_NAME)).thenReturn(true);
         //WHEN
         boolean result = underTest.isCharNameExists(new OneStringParamRequest(CHARACTER_NAME));
         //THEN
-        verify(characterNameCache).get(CHARACTER_NAME);
+        verify(characterNameCache).getIfPresent(CHARACTER_NAME);
         assertTrue(result);
     }
 

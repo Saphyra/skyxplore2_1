@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
@@ -97,7 +96,7 @@ public class CharacterController {
     @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
     public boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) throws ExecutionException {
         log.info("Someone wants to know if character with name {} is exists.", request);
-        return characterNameCache.get(request.getValue());
+        return characterNameCache.getIfPresent(request.getValue());
     }
 
     @PostMapping(RENAME_CHARACTER_MAPPING)

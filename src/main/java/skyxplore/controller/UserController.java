@@ -70,7 +70,7 @@ public class UserController {
     @PostMapping(EMAIL_EXISTS_MAPPING)
     public boolean isEmailExists(@RequestBody @Valid OneStringParamRequest email) throws ExecutionException {
         log.info("Request arrived to {}, request parameter: {}", EMAIL_EXISTS_MAPPING, email.getValue());
-        return emailCache.get(email.getValue());
+        return emailCache.getIfPresent(email.getValue());
     }
 
     @PostMapping(REGISTRATION_MAPPING)
@@ -84,6 +84,6 @@ public class UserController {
     @PostMapping(USERNAME_EXISTS_MAPPING)
     public boolean isUsernameExists(@RequestBody @Valid OneStringParamRequest userName) throws ExecutionException {
         log.info("Request arrived to {}, request parameter: {}", USERNAME_EXISTS_MAPPING, userName.getValue());
-        return userNameCache.get(userName.getValue());
+        return userNameCache.getIfPresent(userName.getValue());
     }
 }

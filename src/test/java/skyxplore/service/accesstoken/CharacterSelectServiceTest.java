@@ -38,7 +38,7 @@ public class CharacterSelectServiceTest {
     @Test(expected = UnauthorizedException.class)
     public void testSelectCharacterShouldThrowExceptionWhenAccessTokenNotFound() throws ExecutionException {
         //GIVEN
-        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.empty());
+        when(accessTokenCache.getIfPresent(USER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
     }
@@ -48,7 +48,7 @@ public class CharacterSelectServiceTest {
         //GIVEN
         AccessToken accessToken = createAccessToken();
         accessToken.setCharacterId(null);
-        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.of(accessToken));
+        when(accessTokenCache.getIfPresent(USER_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
         underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
         //THEN

@@ -45,7 +45,7 @@ public class AuthenticationServiceTest {
     @Before
     public void setUp() throws ExecutionException {
         accessToken = createAccessToken();
-        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.of(accessToken));
+        when(accessTokenCache.getIfPresent(USER_ID)).thenReturn(Optional.of(accessToken));
         when(dateTimeUtil.getExpirationDate()).thenReturn(LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH - 1, 0, ZoneOffset.UTC));
     }
 
@@ -62,10 +62,10 @@ public class AuthenticationServiceTest {
     @Test
     public void testIsAuthenticatedShouldReturnFalseWhenAccessTokenIsNotFound() throws ExecutionException {
         //GIVEN
-        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.empty());
+        when(accessTokenCache.getIfPresent(USER_ID)).thenReturn(Optional.empty());
         //THEN
         assertFalse(underTest.isAuthenticated(USER_ID, ACCESS_TOKEN_ID));
-        verify(accessTokenCache).get(USER_ID);
+        verify(accessTokenCache).getIfPresent(USER_ID);
     }
 
     @Test
@@ -74,14 +74,14 @@ public class AuthenticationServiceTest {
         when(dateTimeUtil.getExpirationDate()).thenReturn(LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH + 1, 0, ZoneOffset.UTC));
         //WHEN
         assertFalse(underTest.isAuthenticated(USER_ID, ACCESS_TOKEN_ID));
-        verify(accessTokenCache).get(USER_ID);
+        verify(accessTokenCache).getIfPresent(USER_ID);
         verify(dateTimeUtil).getExpirationDate();
     }
 
     @Test
     public void testIsAuthenticatedShouldReturnFalseWhenWrongAccessTokenId() throws ExecutionException {
         assertFalse(underTest.isAuthenticated(USER_ID, ACCESS_TOKEN_FAKE_ID));
-        verify(accessTokenCache).get(USER_ID);
+        verify(accessTokenCache).getIfPresent(USER_ID);
         verify(dateTimeUtil).getExpirationDate();
     }
 
@@ -91,7 +91,7 @@ public class AuthenticationServiceTest {
         when(userFacade.getUserById(USER_ID)).thenThrow(new UserNotFoundException("asd"));
         //WHEN
         assertFalse(underTest.isAuthenticated(USER_ID, ACCESS_TOKEN_ID));
-        verify(accessTokenCache).get(USER_ID);
+        verify(accessTokenCache).getIfPresent(USER_ID);
         verify(dateTimeUtil).getExpirationDate();
         verify(userFacade).getUserById(USER_ID);
     }
@@ -102,7 +102,7 @@ public class AuthenticationServiceTest {
         when(dateTimeUtil.now()).thenReturn(ACCESS_TOKEN_EXPIRATION);
         //WHEN
         assertTrue(underTest.isAuthenticated(USER_ID, ACCESS_TOKEN_ID));
-        verify(accessTokenCache).get(USER_ID);
+        verify(accessTokenCache).getIfPresent(USER_ID);
         verify(dateTimeUtil).getExpirationDate();
         verify(userFacade).getUserById(USER_ID);
         verify(dateTimeUtil).now();

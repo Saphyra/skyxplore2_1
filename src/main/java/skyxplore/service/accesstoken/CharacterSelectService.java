@@ -10,7 +10,6 @@ import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -22,14 +21,10 @@ public class CharacterSelectService {
 
     public void selectCharacter(String characterId, String userId) {
         AccessToken accessToken = null;
-        try {
-            accessToken = accessTokenCache.get(userId)
-                .orElseThrow(
-                    () -> new UnauthorizedException("Accesstoken not found with userId " + userId)
-                );
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        accessToken = accessTokenCache.getIfPresent(userId)
+            .orElseThrow(
+                () -> new UnauthorizedException("Accesstoken not found with userId " + userId)
+            );
         characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         accessToken.setCharacterId(characterId);
         accessTokenCache.invalidate(accessToken.getUserId());

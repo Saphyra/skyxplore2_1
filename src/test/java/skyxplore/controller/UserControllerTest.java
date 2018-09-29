@@ -81,11 +81,11 @@ public class UserControllerTest {
     @Test
     public void testIsEmailExistsShouldCallCacheAndReturn() throws ExecutionException {
         //GIVEN
-        when(emailCache.get(USER_EMAIL)).thenReturn(true);
+        when(emailCache.getIfPresent(USER_EMAIL)).thenReturn(true);
         //WHEN
         boolean result = underTest.isEmailExists(new OneStringParamRequest(USER_EMAIL));
         //THEN
-        verify(emailCache).get(USER_EMAIL);
+        verify(emailCache).getIfPresent(USER_EMAIL);
         assertTrue(result);
     }
 
@@ -104,11 +104,11 @@ public class UserControllerTest {
     @Test
     public void testIsUserNameExistsShouldCallFacadeAndReturn() throws ExecutionException {
         //GIVEN
-        when(userNameCache.get(USER_NAME)).thenReturn(true);
+        when(userNameCache.getIfPresent(USER_NAME)).thenReturn(true);
         //WHEN
         boolean result = underTest.isUsernameExists(new OneStringParamRequest(USER_NAME));
         //THEN
         assertTrue(result);
-        verify(userNameCache).get(USER_NAME);
+        verify(userNameCache).getIfPresent(USER_NAME);
     }
 }

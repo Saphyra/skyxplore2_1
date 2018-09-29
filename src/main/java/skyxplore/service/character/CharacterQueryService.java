@@ -17,7 +17,7 @@ import skyxplore.service.community.FriendshipQueryService;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
@@ -62,7 +62,7 @@ public class CharacterQueryService {
             .collect(Collectors.toList());
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId ) {
+    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
@@ -91,12 +91,7 @@ public class CharacterQueryService {
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {
-        try {
-            return characterNameLikeCache.get(name);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return Collections.emptyList();
+        return Optional.ofNullable(characterNameLikeCache.getIfPresent(name)).orElse(Collections.emptyList());
     }
 
     private boolean isNotOwnCharacter(SkyXpCharacter character, String userId) {
