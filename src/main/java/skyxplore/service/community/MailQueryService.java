@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.MailNotFoundException;
-import skyxplore.service.character.CharacterQueryService;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+//TODO unit test
 public class MailQueryService {
-    private final CharacterQueryService characterQueryService;
     private final MailDao mailDao;
 
     public Mail findMailById(String mailId) {

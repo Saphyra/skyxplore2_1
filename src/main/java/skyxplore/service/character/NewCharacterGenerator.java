@@ -1,11 +1,8 @@
 package skyxplore.service.character;
 
-import java.util.ArrayList;
-
-import org.springframework.stereotype.Component;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
@@ -20,22 +17,21 @@ import skyxplore.util.IdGenerator;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class NewCharacterGenerator {
-    private static final Integer START_MONEY = 10000000;
+    public static final Integer START_MONEY = 10000000;
 
-    private static final String STARTER_SHIP_ID = "sta-01";
+    public static final String STARTER_SHIP_ID = "sta-01";
 
-    private static final String GENERATOR_ID = "gen-01";
-    private static final String BATTERY_ID = "bat-01";
-    private static final String STORAGE_ID = "sto-01";
+    public static final String GENERATOR_ID = "gen-01";
+    public static final String BATTERY_ID = "bat-01";
+    public static final String STORAGE_ID = "sto-01";
 
-    private static final String SHIELD_ID = "shi-hclr-01";
-    private static final String ARMOR_ID = "arm-01";
+    public static final String SHIELD_ID = "shi-hclr-01";
+    public static final String ARMOR_ID = "arm-01";
 
-    private static final String LASER_ID = "las-mrldma-01";
-    private static final String LAUNCHER_ID = "rla-hrldma-01";
-    private static final String RIFLE_ID = "rif-lrldma-01";
+    public static final String LASER_ID = "las-mrldma-01";
+    public static final String LAUNCHER_ID = "rla-hrldma-01";
+    public static final String RIFLE_ID = "rif-lrldma-01";
 
     private final IdGenerator idGenerator;
     private final ShipService shipService;
@@ -46,7 +42,6 @@ public class NewCharacterGenerator {
         character.setCharacterName(characterName);
         character.setUserId(userId);
         character.addMoney(START_MONEY);
-        character.addEquipments(new ArrayList<>());
         log.info("Character created: {}", character);
         return character;
     }
