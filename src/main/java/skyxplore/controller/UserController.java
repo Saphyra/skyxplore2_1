@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.service.UserFacade;
@@ -26,7 +27,7 @@ public class UserController {
     private static final String REGISTRATION_MAPPING = "user";
     private static final String USERNAME_EXISTS_MAPPING = "user/name/exist";
 
-    private final Cache<String, Boolean> userNameCache;
+    private final UserNameCache userNameCache;
     private final Cache<String, Boolean> emailCache;
     private final UserFacade userFacade;
 
@@ -84,6 +85,6 @@ public class UserController {
     @PostMapping(USERNAME_EXISTS_MAPPING)
     public boolean isUsernameExists(@RequestBody @Valid OneStringParamRequest userName) throws ExecutionException {
         log.info("Request arrived to {}, request parameter: {}", USERNAME_EXISTS_MAPPING, userName.getValue());
-        return userNameCache.getIfPresent(userName.getValue());
+        return userNameCache.get(userName.getValue());
     }
 }

@@ -1,12 +1,12 @@
 package skyxplore.controller;
 
 import com.google.common.cache.Cache;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.service.UserFacade;
@@ -21,7 +21,7 @@ import static skyxplore.testutil.TestUtils.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
     @Mock
-    private Cache<String, Boolean> userNameCache;
+    private UserNameCache userNameCache;
 
     @Mock
     private Cache<String, Boolean> emailCache;
@@ -31,11 +31,6 @@ public class UserControllerTest {
 
     @InjectMocks
     private UserController underTest;
-
-    @Before
-    public void init(){
-        underTest = new UserController(userNameCache, emailCache, userFacade);
-    }
 
     @Test
     public void testChangeEmailShouldCallFacade(){
@@ -104,11 +99,11 @@ public class UserControllerTest {
     @Test
     public void testIsUserNameExistsShouldCallFacadeAndReturn() throws ExecutionException {
         //GIVEN
-        when(userNameCache.getIfPresent(USER_NAME)).thenReturn(true);
+        when(userNameCache.get(USER_NAME)).thenReturn(true);
         //WHEN
         boolean result = underTest.isUsernameExists(new OneStringParamRequest(USER_NAME));
         //THEN
         assertTrue(result);
-        verify(userNameCache).getIfPresent(USER_NAME);
+        verify(userNameCache).get(USER_NAME);
     }
 }

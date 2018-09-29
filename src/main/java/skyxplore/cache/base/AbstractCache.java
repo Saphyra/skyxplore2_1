@@ -4,12 +4,14 @@ package skyxplore.cache.base;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 @AllArgsConstructor
+@NoArgsConstructor
 public abstract class AbstractCache<K, T> {
     @Setter
     protected Cache<K, T> cache = CacheBuilder.newBuilder().build();

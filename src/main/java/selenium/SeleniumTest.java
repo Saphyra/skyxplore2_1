@@ -1,14 +1,9 @@
 package selenium;
 
-import org.junit.Ignore;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SeleniumTest {
-
-    @Test
-    @Ignore
     public void test() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver.exe").getPath());
         WebDriver driver = new ChromeDriver();

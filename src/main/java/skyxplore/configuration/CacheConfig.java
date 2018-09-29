@@ -10,7 +10,6 @@ import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.UserFacade;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.service.credentials.CredentialsService;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,19 +18,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @SuppressWarnings({"unused", "NullableProblems", "UnstableApiUsage"})
 public class CacheConfig {
-    @Bean(name = "userNameCache")
-    public Cache<String, Boolean> userNameCache(CredentialsService credentialsService) {
-        CacheLoader<String, Boolean> loader = new CacheLoader<String, Boolean>() {
-            @Override
-            public Boolean load(String key) {
-                return credentialsService.isUserNameExists(key);
-            }
-        };
-
-        return CacheBuilder.newBuilder()
-            .expireAfterWrite(1, TimeUnit.MINUTES)
-            .build(loader);
-    }
 
     @Bean(name = "emailCache")
     public Cache<String, Boolean> emailCache(UserFacade userFacade) {
