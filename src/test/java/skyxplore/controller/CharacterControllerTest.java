@@ -1,13 +1,13 @@
 package skyxplore.controller;
 
 
-import com.google.common.cache.Cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
@@ -38,7 +38,7 @@ public class CharacterControllerTest {
     private CharacterViewConverter characterViewConverter;
 
     @Mock
-    private Cache<String, Boolean> characterNameCache;
+    private CharacterNameCache characterNameCache;
 
     @InjectMocks
     private CharacterController underTest;
@@ -123,11 +123,11 @@ public class CharacterControllerTest {
     @Test
     public void testIsCharNameExistsShouldCallCacheAndReturnResponse() throws ExecutionException {
         //GIVEN
-        when(characterNameCache.getIfPresent(CHARACTER_NAME)).thenReturn(true);
+        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(true);
         //WHEN
         boolean result = underTest.isCharNameExists(new OneStringParamRequest(CHARACTER_NAME));
         //THEN
-        verify(characterNameCache).getIfPresent(CHARACTER_NAME);
+        verify(characterNameCache).get(CHARACTER_NAME);
         assertTrue(result);
     }
 

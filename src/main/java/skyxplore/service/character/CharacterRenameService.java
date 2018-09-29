@@ -1,9 +1,9 @@
 package skyxplore.service.character;
 
-import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
@@ -14,7 +14,7 @@ import skyxplore.exception.CharacterNameAlreadyExistsException;
 @RequiredArgsConstructor
 public class CharacterRenameService {
     private final CharacterDao characterDao;
-    private final Cache<String, Boolean> characterNameCache;
+    private final CharacterNameCache characterNameCache;
     private final CharacterQueryService characterQueryService;
 
     public void renameCharacter(RenameCharacterRequest request, String characterId) {

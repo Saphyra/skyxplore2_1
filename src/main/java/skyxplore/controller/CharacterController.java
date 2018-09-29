@@ -1,9 +1,9 @@
 package skyxplore.controller;
 
-import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
@@ -38,7 +38,7 @@ public class CharacterController {
 
     private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;
-    private final Cache<String, Boolean> characterNameCache;
+    private final CharacterNameCache characterNameCache;
 
     @PutMapping(BUY_EQUIPMENTS_MAPPING)
     public void buyEquipments(
@@ -96,7 +96,7 @@ public class CharacterController {
     @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
     public boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) throws ExecutionException {
         log.info("Someone wants to know if character with name {} is exists.", request);
-        return characterNameCache.getIfPresent(request.getValue());
+        return characterNameCache.get(request.getValue());
     }
 
     @PostMapping(RENAME_CHARACTER_MAPPING)

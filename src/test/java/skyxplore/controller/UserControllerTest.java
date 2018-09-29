@@ -1,11 +1,11 @@
 package skyxplore.controller;
 
-import com.google.common.cache.Cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.EmailCache;
 import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
@@ -24,7 +24,7 @@ public class UserControllerTest {
     private UserNameCache userNameCache;
 
     @Mock
-    private Cache<String, Boolean> emailCache;
+    private EmailCache emailCache;
 
     @Mock
     private UserFacade userFacade;
@@ -76,11 +76,11 @@ public class UserControllerTest {
     @Test
     public void testIsEmailExistsShouldCallCacheAndReturn() throws ExecutionException {
         //GIVEN
-        when(emailCache.getIfPresent(USER_EMAIL)).thenReturn(true);
+        when(emailCache.get(USER_EMAIL)).thenReturn(true);
         //WHEN
         boolean result = underTest.isEmailExists(new OneStringParamRequest(USER_EMAIL));
         //THEN
-        verify(emailCache).getIfPresent(USER_EMAIL);
+        verify(emailCache).get(USER_EMAIL);
         assertTrue(result);
     }
 
