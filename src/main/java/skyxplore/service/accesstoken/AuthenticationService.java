@@ -1,9 +1,9 @@
 package skyxplore.service.accesstoken;
 
-import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.cache.AccessTokenCache;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.exception.AccessTokenExpiredException;
@@ -12,8 +12,6 @@ import skyxplore.exception.BadRequestAuthException;
 import skyxplore.exception.UserNotFoundException;
 import skyxplore.service.UserFacade;
 import skyxplore.util.DateTimeUtil;
-
-import java.util.Optional;
 
 import static skyxplore.filter.FilterHelper.COOKIE_ACCESS_TOKEN;
 import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
@@ -24,7 +22,7 @@ import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 public class AuthenticationService {
     private final AccessTokenDao accessTokenDao;
     private final DateTimeUtil dateTimeUtil;
-    private final Cache<String, Optional<AccessToken>> accessTokenCache;
+    private final AccessTokenCache accessTokenCache;
     private final UserFacade userFacade;
 
     public boolean isAuthenticated(String userId, String accessTokenId) {
@@ -48,13 +46,7 @@ public class AuthenticationService {
     }
 
     private AccessToken getAccessToken(String userId) {
-        AccessToken result;
-        Optional<AccessToken> accessTokenOpt = accessTokenCache.getIfPresent(userId);
-        if (!accessTokenOpt.isPresent()) {
-            throw new BadCredentialsException("No valid accessToken for user " + userId);
-        }
-        result = accessTokenOpt.get();
-        return result;
+        return accessTokenCache.get(userId).orElseThrow(() -> new BadCredentialsException("No valid accessToken for user " + userId));
     }
 
     private void validateArguments(String userId, String accessTokenId) {

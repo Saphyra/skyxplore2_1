@@ -6,37 +6,19 @@ import com.google.common.cache.CacheLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.UserFacade;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.service.credentials.CredentialsService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 @Slf4j
 @SuppressWarnings({"unused", "NullableProblems", "UnstableApiUsage"})
 public class CacheConfig {
-    @Bean(name = "accessTokenCache")
-    public Cache<String, Optional<AccessToken>> accessTokenCache(AccessTokenDao accessTokenDao) {
-        CacheLoader<String, Optional<AccessToken>> loader = new CacheLoader<String, Optional<AccessToken>>() {
-            @Override
-            public Optional<AccessToken> load(String key) {
-                AccessToken accessToken = accessTokenDao.findByUserId(key);
-                return Optional.ofNullable(accessToken);
-            }
-        };
-
-        return CacheBuilder.newBuilder()
-            .expireAfterWrite(2, TimeUnit.SECONDS)
-            .build(loader);
-    }
-
     @Bean(name = "userNameCache")
     public Cache<String, Boolean> userNameCache(CredentialsService credentialsService) {
         CacheLoader<String, Boolean> loader = new CacheLoader<String, Boolean>() {
