@@ -154,7 +154,11 @@
                 throwException("IllegalArgument", "email must not be null or undefined.");
             }
             
-            const result = dao.sendRequest("GET", "isemailexists?email=" + email);
+            const path = "user/email/exist";
+            const body = {
+                value: email
+            }
+            const result = dao.sendRequest(dao.POST, path, body);
 
             if(result.status != ResponseStatus.OK){
                 throwException("UnknownServerError", result.toString());
@@ -190,8 +194,11 @@
             if(userName == undefined || userName == null){
                 throwException("IllegalArgument", "userName must not be null or undefined.");
             }
-            
-            const result = dao.sendRequest("GET", "isusernameexists?username=" + userName);
+            const path = "user/name/exist";
+            const body = {
+                value: userName
+            }
+            const result = dao.sendRequest(dao.POST, path, body);
 
             if(result.status != ResponseStatus.OK){
                 throwException("UnknownServerError", result.toString());
