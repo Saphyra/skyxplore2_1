@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-//TODO unit test
 public class BlockedCharacterQueryService {
     private final BlockedCharacterDao blockedCharacterDao;
 
