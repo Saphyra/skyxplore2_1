@@ -1,14 +1,8 @@
 package skyxplore.service.ship;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
@@ -17,14 +11,16 @@ import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-
 import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
+
+import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class EquipShipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
