@@ -21,7 +21,6 @@ import skyxplore.service.user.UserQueryService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class UserFacade {
     private final ChangeEmailService changeEmailService;
     private final ChangePasswordService changePasswordService;
