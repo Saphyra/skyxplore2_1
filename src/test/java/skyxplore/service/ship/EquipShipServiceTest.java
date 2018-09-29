@@ -71,7 +71,7 @@ public class EquipShipServiceTest {
     }
 
     @Test
-    public void testEquipShipShouldTEquip(){
+    public void testEquipShipShouldEquip(){
         //GIVEN
         Ship ship = new Ship();
         ship.setId(EQUIPPED_SHIP_TYPE);
