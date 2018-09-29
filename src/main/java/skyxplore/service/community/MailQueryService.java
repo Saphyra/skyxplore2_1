@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-//TODO unit test
 public class MailQueryService {
     private final MailDao mailDao;
 

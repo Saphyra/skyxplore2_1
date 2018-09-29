@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @EnableScheduling
 @RequiredArgsConstructor
 public class MailCleanupService {
-    static final Integer EXPIRATION_IN_DAYS = 30;
+    private static final Integer EXPIRATION_IN_DAYS = 30;
 
     private final DateTimeUtil dateTimeUtil;
     private final MailDao mailDao;
