@@ -1,9 +1,8 @@
 package skyxplore.service.user;
 
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.encryption.base.PasswordService;

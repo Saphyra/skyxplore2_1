@@ -136,6 +136,7 @@ window.ResponseStatus = new function(){
     this.OK = 200;
     this.BAD_REQUEST = 400;
     this.UNAUTHORIZED = 401;
+    this.FORBIDDEN = 403
     this.NOT_FOUND = 404;
     this.CONFLICT = 409;
     this.INTERNAL_SERVER_ERROR = 500;

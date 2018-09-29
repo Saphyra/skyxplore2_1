@@ -6,7 +6,7 @@
         this.deleteAccount = deleteAccount;
         this.isEmailExists = isEmailExists;
         this.isUserNameExists = isUserNameExists;
-        this.registrateUser = registrateUser;
+        this.registerUser = registerUser;
     }
     
     /*
@@ -28,12 +28,12 @@
                 throwException("IllegalArgument", "password must not be null or undefined");
             }
             
-            const path = "user/changeemail";
+            const path = "user/email/change";
             const body = {
                 newEmail: newEmail,
                 password: password
             };
-            return dao.sendRequest("POST", path, body);
+            return dao.sendRequest("POST", path, body, false);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -64,13 +64,13 @@
                 throwException("IllegalArgument", "oldPassword must not be null or undefined.");
             }
             
-            const path = "user/changepassword";
+            const path = "user/password/change";
             const body = {
                 newPassword: password1,
                 confirmPassword: password2,
                 oldPassword: oldPassword
             };
-            return dao.sendRequest("POST", path, body);
+            return dao.sendRequest("POST", path, body, false);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -97,12 +97,12 @@
                 throwException("IllegalArgument", "password must not be null or undefined.");
             }
             
-            const path = "user/changeusername";
+            const path = "user/name/change";
             const body = {
                 newUserName: newUserName,
                 password: password
             };
-            return dao.sendRequest("POST", path, body);
+            return dao.sendRequest("POST", path, body, false);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -125,11 +125,11 @@
                 throwException("IllegalArgument", "password must not be null or undefined.");
             }
             
-            const path = "user/deleteaccount";
+            const path = "user";
             const body = {
                 password: password
             };
-            return dao.sendRequest("POST", path, body);
+            return dao.sendRequest(dao.DELETE, path, body, false);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -229,12 +229,12 @@
         - IllegalArgument exception if user is null or undefined.
         - UnknownServerError if request fails.
     */
-    function registrateUser(user){
+    function registerUser(user){
         try{
             if(user == null && undefined){
                 throwException("IllegalArgument", "user must not be null or undefined");
             }
-            const result =  dao.sendRequest("POST", "registration", user);
+            const result =  dao.sendRequest(dao.POST, "user/register", user);
             if(result.status == ResponseStatus.OK){
                 return true;
             }else{

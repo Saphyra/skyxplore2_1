@@ -1,30 +1,21 @@
 package skyxplore.service.user;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CREDENTIALS_HASHED_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NEW_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_PASSWORD;
-import static skyxplore.testutil.TestUtils.createChangePasswordRequest;
-import static skyxplore.testutil.TestUtils.createCredentials;
-import static skyxplore.testutil.TestUtils.createUser;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.domain.credentials.Credentials;
-import skyxplore.domain.user.SkyXpUser;
 import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.service.credentials.CredentialsService;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangePasswordServiceTest {
