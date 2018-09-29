@@ -15,7 +15,6 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class MailFacade {
     private final CharacterQueryService characterQueryService;
     private final MailDeleteService mailDeleteService;
