@@ -1,17 +1,8 @@
 package skyxplore.service.ship;
 
-import static skyxplore.service.EquippedShipFacade.BACK_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.LEFT_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.RIGHT_SLOT_NAME;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
@@ -24,10 +15,13 @@ import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
 import skyxplore.service.character.CharacterQueryService;
 
+import javax.transaction.Transactional;
+
+import static skyxplore.service.EquippedShipFacade.*;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class UnequipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;

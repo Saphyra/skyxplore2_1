@@ -12,13 +12,12 @@ import skyxplore.exception.UserNotFoundException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class UserQueryService {
     private final UserDao userDao;
 
     public SkyXpUser getUserById(String userId) {
         SkyXpUser user = userDao.findById(userId);
-        if(user == null){
+        if (user == null) {
             throw new UserNotFoundException("User not found with id" + userId);
         }
         return user;
@@ -26,7 +25,6 @@ public class UserQueryService {
 
     public boolean isEmailExists(String email) {
         log.info("Someone wants to know is email {} is exists.", email);
-        SkyXpUser user = userDao.findUserByEmail(email);
-        return user != null;
+        return userDao.findUserByEmail(email) != null;
     }
 }
