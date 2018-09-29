@@ -33,7 +33,7 @@ public class CommunityController {
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/namelike";
     private static final String GET_FRIENDS_MAPPING = "friend";
     private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/request/num";
-    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend//request/received";
+    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/request/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
 
     private final CommunityFacade communityFacade;
@@ -103,7 +103,7 @@ public class CommunityController {
         return characterViewConverter.convertDomain(communityFacade.getBlockedCharacters(characterId));
     }
 
-    @GetMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)
+    @PostMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)
     public List<CharacterView> getCharactersCanBeBlocked(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
@@ -112,7 +112,7 @@ public class CommunityController {
         return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeBlocked(request.getValue(), characterId));
     }
 
-    @GetMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
+    @PostMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
     public List<CharacterView> getCharactersCanBeFriend(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId

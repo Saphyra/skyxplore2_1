@@ -41,7 +41,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/user/**",
         "/character",
         "/character/select/*",
-        "/character/ischarnameexists/*"
+        "/character/name/exist"
     );
 
     private final CharacterQueryService characterQueryService;

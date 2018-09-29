@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
@@ -34,7 +33,7 @@ public class CharacterController {
     private static final String GET_CHARACTERS_MAPPING = "character/characters";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
-    private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name/exists";
+    private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name/exist";
     private static final String RENAME_CHARACTER_MAPPING = "character/rename";
 
     private final CharacterFacade characterFacade;
@@ -94,7 +93,7 @@ public class CharacterController {
         return characterFacade.getMoneyOfCharacter(characterId);
     }
 
-    @GetMapping(IS_CHAR_NAME_EXISTS_MAPPING)
+    @PostMapping(IS_CHAR_NAME_EXISTS_MAPPING)
     public boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) throws ExecutionException {
         log.info("Someone wants to know if character with name {} is exists.", request);
         return characterNameCache.get(request.getValue());

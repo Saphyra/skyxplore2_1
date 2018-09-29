@@ -25,7 +25,7 @@
             if(items == null || items == undefined){
                 throwException("IllegalArgument", "items must not be null or undefined.");
             }
-            const path = "character/equipment/" + sessionStorage.characterId;
+            const path = "character/equipment";
             const result = dao.sendRequest(dao.PUT, path, items);
             return result;
         }catch(err){
@@ -120,15 +120,11 @@
     /*
     Queries the equipments of the given character.
     Throws:
-        IllegalArgument exception if characterId is null or undefined.
         UnknownBackendError exception if request fails.
     */
-    function getEquipmentOfCharacter(characterId){
+    function getEquipmentOfCharacter(){
         try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined.");
-            }
-            const path = "character/equipment/" + characterId;
+            const path = "character/equipment";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 const elements = JSON.parse(result.response);
@@ -163,8 +159,11 @@
                 throwException("IllegalArgument", "charName must not be null or undefined.");
             }
             
-            const path = "character/ischarnameexists/" + charName;
-            const result = dao.sendRequest("get", path);
+            const path = "character/name/exist";
+            const body = {
+                value: charName
+            }
+            const result = dao.sendRequest(dao.POST, path, body);
             if(result.status == ResponseStatus.OK){
                 if(result.response == "true"){
                     return true;
@@ -185,22 +184,15 @@
     
     /*
     Returns the money of the character.
-    Arguments:
-        - characterId: the id of the charcater.
     Returns:
         - The money of the character.
         - 0 If exception
     Throws:
-        - IllegalArgument exception if characterId is null or undefined
         - UnknownBackendError exception if request failed.
     */
-    function getMoney(characterId){
+    function getMoney(){
         try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined.");
-            }
-            
-            const path = "character/money/" + characterId;
+            const path = "character/money";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return Number(result.response);

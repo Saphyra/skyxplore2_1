@@ -11,15 +11,14 @@
     Arguments:
         - itemId: The id of the item to equip.
         - equipTo: The id of the slot to equip.
-        - characterId: The id of the character.
     Returns:
         - true, if the equipment was successful.
         - false otherwise.
     Throws:
-        - IllegalArgument exception if itemId, equipTo or characterId is null or undefined.
+        - IllegalArgument exception if itemId, equipTo is null or undefined.
         - UnknownBackendError exception if request fails.
     */
-    function equip(itemId, equipTo, characterId){
+    function equip(itemId, equipTo){
         try{
             if(itemId == null || itemId == undefined){
                 throwException("IllegalArgument", "itemId must not be null or undefined.");
@@ -27,11 +26,8 @@
             if(equipTo == null || equipTo == undefined){
                 throwException("IllegalArgument", "equipTo must not be null or undefined.");
             }
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined.");
-            }
             
-            const path = "ship/equip/" + characterId;
+            const path = "ship/equip";
             const body = {
                 equipTo: equipTo,
                 itemId: itemId
@@ -101,7 +97,7 @@
                 throwException("IllegalArgument", "characterId must not be null or undefined");
             }
             
-            const path = "ship/" + characterId;
+            const path = "ship";
             const result = dao.sendRequest("GET", path);
             if(result.status == ResponseStatus.OK){
                 const parsed = JSON.parse(result.response);
@@ -121,27 +117,23 @@
     Arguments:
         slot: the ship's slot.
         itemId: the id of the item to unequip.
-        characterId: the id of the character.
     Returns:
         true, if the item is successfully unequipped.
         false otherwise.
     Throws
-        IllegalArgument exception if slot, itemId, or characterId is null or undefined.
+        IllegalArgument exception if slot, itemId is null or undefined.
         UnknownBackendError if request fails.
     */
-    function unequip(slot, itemId, characterId){
+    function unequip(slot, itemId){
         try{
             if(slot == null || slot == undefined){
                 throwException("IllegalArgument", "slot must not be null or undefined.");
-            }
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined");
             }
             if(itemId == null || itemId == undefined){
                 throwException("IllegalArgument", "itemId must not be null or undefined");
             }
             
-            const path = "ship/unequip/" + characterId;
+            const path = "ship/unequip";
             const body = {
                 slot: slot,
                 itemId: itemId
