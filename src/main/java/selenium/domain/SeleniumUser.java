@@ -18,10 +18,22 @@ public class SeleniumUser {
 
     public static SeleniumUser create(){
         SeleniumUser user = new SeleniumUser();
-        user.setUserName(crop(USER_NAME_PREFIX + randomUID(), USER_NAME_MAX_LENGTH));
-        user.setPassword(crop(randomUID(), PASSWORD_MAX_LENGTH));
-        user.setEmail(randomUID() + USER_EMAIL_SUFFIX);
+        user.setUserName(createRandomUserName());
+        user.setPassword(createRandomPassword());
+        user.setEmail(createRandomEmail());
         return user;
+    }
+
+    public static String createRandomUserName(){
+        return crop(USER_NAME_PREFIX + randomUID(), USER_NAME_MAX_LENGTH);
+    }
+
+    public static String createRandomPassword(){
+        return crop(randomUID(), PASSWORD_MAX_LENGTH);
+    }
+
+    public static String createRandomEmail(){
+        return randomUID() + USER_EMAIL_SUFFIX;
     }
 
     public SeleniumUser cloneUser() {

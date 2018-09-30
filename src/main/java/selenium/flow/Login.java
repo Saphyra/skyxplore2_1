@@ -6,12 +6,18 @@ import org.openqa.selenium.WebElement;
 import selenium.domain.SeleniumUser;
 import selenium.page.IndexPage;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static selenium.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.util.LinkUtil.HOST;
+import static selenium.util.LocatorUtil.getNotificationElementsLocator;
 
 @Slf4j
 public class Login {
+    private static final String NOTIFICATION_LOGIN_FAILED = "Hibás felhasználónév vagy jelszó.";
+
     private final WebDriver driver;
     private final IndexPage indexPage;
 
@@ -41,5 +47,17 @@ public class Login {
 
     private void validateSuccessfulLogin() {
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
+    }
+
+    public void loginFailure(SeleniumUser user) {
+        assertEquals(HOST, driver.getCurrentUrl());
+        sendRequest(user);
+        validateLoginFailure();
+    }
+
+    private void validateLoginFailure(){
+        assertEquals(HOST, driver.getCurrentUrl());
+        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
+        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_LOGIN_FAILED)));
     }
 }

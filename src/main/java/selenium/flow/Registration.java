@@ -45,16 +45,26 @@ public class Registration {
 
     private void fillRegistrationForm(SeleniumUser user) {
         WebElement userNameElement = indexPage.getRegistrationUserNameField();
+        userNameElement.clear();
         userNameElement.sendKeys(user.getUserName());
 
         WebElement passwordElement = indexPage.getRegistrationPasswordField();
+        passwordElement.clear();
         passwordElement.sendKeys(user.getPassword());
 
         WebElement confirmPasswordElement = indexPage.getRegistrationConfirmPasswordField();
+        confirmPasswordElement.clear();
         confirmPasswordElement.sendKeys(user.getPassword());
 
         WebElement emailElement = indexPage.getRegistrationEmailField();
+        emailElement.clear();
         emailElement.sendKeys(user.getEmail());
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidUserNameField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidPasswordField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidConfirmPasswordField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidEmailField()));
     }
 
     private void sendForm() {

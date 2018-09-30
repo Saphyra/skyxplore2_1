@@ -1,9 +1,12 @@
 package selenium.cases.registration.testcase;
 
 import lombok.Builder;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.cases.registration.RegistrationTest;
-import selenium.cases.registration.RegistrationVerificator;
+import selenium.util.FieldValidator;
 import selenium.domain.SeleniumUser;
 import selenium.page.IndexPage;
 
@@ -27,8 +30,9 @@ public class RegistrationUserNameTest {
     private static final String ERROR_MESSAGE_TOO_LONG_USER_NAME = "Felhasználónév túl hosszú (Maximum 30 karakter).";
     private static final String ERROR_MESSAGE_EXISTING_USER_NAME = "Felhasználónév foglalt.";
 
+    private final WebDriver driver;
     private final IndexPage indexPage;
-    private final RegistrationVerificator registrationVerificator;
+    private final FieldValidator fieldValidator;
     private final RegistrationTest registrationTest;
     private final SeleniumUser currentUser;
     private final SeleniumUser newUser;
@@ -45,10 +49,11 @@ public class RegistrationUserNameTest {
         WebElement userNameField = indexPage.getRegistrationUserNameField();
         userNameField.sendKeys(crop(newUser.getUserName(), USER_NAME_MIN_LENGTH - 1));
 
-        registrationVerificator.verifyRegistrationError(
+        fieldValidator.verifyError(
             indexPage.getInvalidUserNameField(),
             ERROR_MESSAGE_TOO_SHORT_USER_NAME,
-            userNameField
+            userNameField,
+            indexPage.getRegisterButton()
         );
     }
 
@@ -58,10 +63,11 @@ public class RegistrationUserNameTest {
         WebElement userNameField = indexPage.getRegistrationUserNameField();
         userNameField.sendKeys(TOO_LONG_USER_NAME);
 
-        registrationVerificator.verifyRegistrationError(
+        fieldValidator.verifyError(
             indexPage.getInvalidUserNameField(),
             ERROR_MESSAGE_TOO_LONG_USER_NAME,
-            userNameField
+            userNameField,
+            indexPage.getRegisterButton()
         );
     }
 
@@ -71,10 +77,11 @@ public class RegistrationUserNameTest {
         WebElement userNameField = indexPage.getRegistrationUserNameField();
         userNameField.sendKeys(currentUser.getUserName());
 
-        registrationVerificator.verifyRegistrationError(
+        fieldValidator.verifyError(
             indexPage.getInvalidUserNameField(),
             ERROR_MESSAGE_EXISTING_USER_NAME,
-            userNameField
+            userNameField,
+            indexPage.getRegisterButton()
         );
     }
 
@@ -89,5 +96,10 @@ public class RegistrationUserNameTest {
 
         WebElement emailElement = indexPage.getRegistrationEmailField();
         emailElement.sendKeys(newUser.getEmail());
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidPasswordField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidConfirmPasswordField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(indexPage.getInvalidEmailField()));
     }
 }

@@ -8,19 +8,22 @@ import selenium.domain.SeleniumUser;
 import selenium.flow.Logout;
 import selenium.flow.Registration;
 import selenium.page.IndexPage;
+import selenium.util.FieldValidator;
+
+import static selenium.util.LinkUtil.HOST;
 
 public class RegistrationTest {
     private final WebDriver driver;
     private final IndexPage indexPage;
     private final SeleniumUser currentUser;
     private final SeleniumUser newUser = SeleniumUser.create();
-    private final RegistrationVerificator registrationVerificator;
+    private final FieldValidator fieldValidator;
 
     private RegistrationTest(WebDriver driver, SeleniumUser user) {
         this.driver = driver;
         this.currentUser = user;
         this.indexPage = new IndexPage(driver);
-        this.registrationVerificator = new RegistrationVerificator(driver, indexPage);
+        this.fieldValidator = new FieldValidator(driver, HOST);
     }
 
     public static void run(WebDriver driver) {
@@ -36,33 +39,36 @@ public class RegistrationTest {
 
     private void validateUserName() {
         RegistrationUserNameTest test = RegistrationUserNameTest.builder()
+            .driver(driver)
             .currentUser(currentUser)
             .indexPage(indexPage)
             .newUser(newUser)
             .registrationTest(this)
-            .registrationVerificator(registrationVerificator)
+            .fieldValidator(fieldValidator)
             .build();
         test.validateUserName();
     }
 
     private void validatePasswords() {
         RegistrationPasswordTest test = RegistrationPasswordTest.builder()
+            .driver(driver)
             .currentUser(currentUser)
             .indexPage(indexPage)
             .newUser(newUser)
             .registrationTest(this)
-            .registrationVerificator(registrationVerificator)
+            .fieldValidator(fieldValidator)
             .build();
         test.validatePasswords();
     }
 
     private void validateEmail() {
         RegistrationEmailTest test = RegistrationEmailTest.builder()
+            .driver(driver)
             .currentUser(currentUser)
             .indexPage(indexPage)
             .newUser(newUser)
             .registrationTest(this)
-            .registrationVerificator(registrationVerificator)
+            .fieldValidator(fieldValidator)
             .build();
         test.validateEmail();
     }
