@@ -8,7 +8,6 @@ import static selenium.util.IdCollection.NOTIFICATION_CONTROLLER_ID;
 
 public class LocatorUtil {
     public static final String LOGOUT_BUTTON_SELECTOR = "footer button:first-child";
-    public static final String ACCOUNT_BUTTON_SELECTOR = "footer button:nth-child(2)";
 
     public static By getNotificationElementsLocator() {
         StringBuilder builder = new StringBuilder();

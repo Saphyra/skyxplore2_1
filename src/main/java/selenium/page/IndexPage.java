@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 
 @RequiredArgsConstructor
 public class IndexPage {
+    public static final String ELEMENT_LOGIN_USER_NAME = "login_username";
+    public static final String ELEMENT_LOGIN_PASSWORD = "login_password";
+
     public static final String ELEMENT_REGISTRATION_USER_NAME = "registration_username";
     public static final String ELEMENT_INVALID_USER_NAME = "invalid_username";
 
@@ -22,6 +25,18 @@ public class IndexPage {
     public static final String ELEMENT_REEGISTRATION_BUTTON = "registration_button";
 
     private final WebDriver driver;
+
+    public WebElement getLoginUserNameField() {
+        return driver.findElement(By.id(ELEMENT_LOGIN_USER_NAME));
+    }
+
+    public WebElement getLoginPasswordField() {
+        return driver.findElement(By.id(ELEMENT_LOGIN_PASSWORD));
+    }
+
+    public WebElement getLoginButton(){
+        return driver.findElement(By.id("login_button"));
+    }
 
     public WebElement getRegistrationUserNameField(){
         return driver.findElement(By.id(ELEMENT_REGISTRATION_USER_NAME));

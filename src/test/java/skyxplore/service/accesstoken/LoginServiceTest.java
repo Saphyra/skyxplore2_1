@@ -6,6 +6,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.AccessTokenCache;
 import skyxplore.controller.request.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
@@ -24,6 +25,9 @@ import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginServiceTest {
+    @Mock
+    private AccessTokenCache accessTokenCache;
+
     @Mock
     private AccessTokenDao accessTokenDao;
 
@@ -89,7 +93,6 @@ public class LoginServiceTest {
         assertNull(argumentCaptor.getValue().getCharacterId());
     }
 
-
     @Test
     public void testLogoutShouldDeleteTokenIfExists(){
         //GIVEN
@@ -98,6 +101,7 @@ public class LoginServiceTest {
         //WHEN
         underTest.logout(USER_ID, ACCESS_TOKEN_ID);
         //THEN
+        verify(accessTokenCache).invalidate(USER_ID);
         verify(accessTokenDao).findByUserIdOrTokenId(USER_ID, ACCESS_TOKEN_ID);
         verify(accessTokenDao).delete(accessToken);
     }

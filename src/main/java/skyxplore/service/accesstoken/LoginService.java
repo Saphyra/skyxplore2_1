@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import skyxplore.cache.AccessTokenCache;
 import skyxplore.controller.request.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
@@ -18,6 +19,7 @@ import skyxplore.util.IdGenerator;
 @Service
 @RequiredArgsConstructor
 public class LoginService {
+    private final AccessTokenCache accessTokenCache;
     private final AccessTokenDao accessTokenDao;
     private final PasswordService passwordService;
     private final CredentialsService credentialsService;
@@ -59,6 +61,7 @@ public class LoginService {
         AccessToken token = accessTokenDao.findByUserIdOrTokenId(userId, accessTokenId);
         if(token != null){
             log.info("Deleting token...");
+            accessTokenCache.invalidate(token.getUserId());
             accessTokenDao.delete(token);
         }else{
             log.info("Token not found for user ", userId);

@@ -23,4 +23,12 @@ public class SeleniumUser {
         user.setEmail(randomUID() + USER_EMAIL_SUFFIX);
         return user;
     }
+
+    public SeleniumUser cloneUser() {
+        SeleniumUser clone = new SeleniumUser();
+        clone.setUserName(userName);
+        clone.setPassword(password);
+        clone.setEmail(email);
+        return clone;
+    }
 }
