@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
-import selenium.cases.RegistrationAndAccountTest;
-import selenium.cases.RegistrationEdgeCasesTest;
+import selenium.cases.account.AccountTest;
+import selenium.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
 import static selenium.util.LinkUtil.HOST;
@@ -27,13 +27,13 @@ public class SeleniumTestApplication {
     }
 
     @Test
-    public void testRegistrationAndAccount() {
-        RegistrationAndAccountTest.run(driver);
+    public void testRegistration(){
+        RegistrationTest.run(driver);
     }
 
     @Test
-    public void testRegistrationEdgeCases(){
-        RegistrationEdgeCasesTest.run(driver);
+    public void testAccount() {
+        AccountTest.run(driver);
     }
 
     @After

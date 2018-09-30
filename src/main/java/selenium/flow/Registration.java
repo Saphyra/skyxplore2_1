@@ -22,8 +22,12 @@ public class Registration {
     private final IndexPage indexPage;
 
     public Registration(WebDriver driver){
+        this(driver, new IndexPage(driver));
+    }
+
+    public Registration(WebDriver driver, IndexPage indexPage){
         this.driver = driver;
-        indexPage = new IndexPage(driver);
+        this.indexPage = indexPage;
     }
 
     public SeleniumUser registerUser(){
