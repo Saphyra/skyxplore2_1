@@ -26,6 +26,12 @@ public class Registration {
         indexPage = new IndexPage(driver);
     }
 
+    public SeleniumUser registerUser(){
+        SeleniumUser user = SeleniumUser.create();
+        registerUser(user);
+        return user;
+    }
+
     public void registerUser(SeleniumUser user) {
         assertEquals(HOST, driver.getCurrentUrl());
         fillRegistrationForm(user);

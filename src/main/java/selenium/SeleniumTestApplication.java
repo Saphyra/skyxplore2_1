@@ -5,10 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.boot.SpringApplication;
 import selenium.cases.RegistrationAndAccountTest;
+import selenium.cases.RegistrationEdgeCasesTest;
 import skyxplore.Application;
 
 import static selenium.util.LinkUtil.HOST;
+import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {
 
@@ -28,9 +31,15 @@ public class SeleniumTestApplication {
         RegistrationAndAccountTest.run(driver);
     }
 
+    @Test
+    public void testRegistrationEdgeCases(){
+        RegistrationEdgeCasesTest.run(driver);
+    }
+
     @After
     public void tearDown() throws InterruptedException {
-        //Thread.sleep(5000);
+        Thread.sleep(5000);
+        SpringApplication.exit(APP_CTX);
         driver.close();
         driver.quit();
     }

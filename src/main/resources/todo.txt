@@ -49,10 +49,7 @@ Integration tests
 Logging
 
 FrontEnd testing
-- Registration edge cases (invalid input)
-    - check
-        - Button is disabled
-        - Cannot send by enter
+    - Login with bad credentials
 
 Spring profiles to support multiple data sources
 -Dspring.profiles.active=prod
