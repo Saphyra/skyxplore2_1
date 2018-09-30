@@ -1,31 +1,37 @@
-package test;
+package selenium;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import selenium.cases.RegistrationAndAccountTest;
 import skyxplore.Application;
 
+import static selenium.util.LinkUtil.HOST;
+
 public class SeleniumTestApplication {
+
     private WebDriver driver;
 
     @Before
     public void init() {
         Application.main(new String[0]);
-        System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("resources/chromedriver.exe").getPath());
+        System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver.exe").getPath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("localhost:8080");
+        driver.get(HOST);
     }
 
     @Test
-    public void test() {
-
+    public void testRegistrationAndAccount() {
+        RegistrationAndAccountTest.run(driver);
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws InterruptedException {
+        //Thread.sleep(5000);
         driver.close();
+        driver.quit();
     }
 }
