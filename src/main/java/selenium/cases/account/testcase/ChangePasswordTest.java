@@ -189,7 +189,7 @@ public class ChangePasswordTest {
         verifySuccessfulNotification();
     }
 
-    public void verifySuccessfulNotification(){
+    private void verifySuccessfulNotification(){
         List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
         assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE)));
     }
