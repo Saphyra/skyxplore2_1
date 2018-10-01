@@ -61,6 +61,13 @@ public class AccountTest {
             .otherUser(otherUser)
             .fieldValidator(fieldValidator)
             .build();
+
+        testCase.validateTooShortPassword();
+        testCase.validateTooLongPassword();
+        testCase.validateConfirmPassword();
+        testCase.validateEmptyCurrentPassword();
+        testCase.validateBadPassword();
+        testCase.validateHappyPath();
     }
 
     private void testChangeUserName() {

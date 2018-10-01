@@ -18,6 +18,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.domain.SeleniumUser.createRandomPassword;
 import static selenium.domain.SeleniumUser.createRandomUserName;
+import static selenium.util.DOMUtil.ATTRIBUTE_VALUE;
 import static selenium.util.LocatorUtil.getNotificationElementsLocator;
 import static selenium.util.StringUtil.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
@@ -54,14 +55,14 @@ public class ChangeUserNameTest {
     private final FieldValidator fieldValidator;
 
     public void validateTooShortUserName() {
-        WebElement userNameField = accountPage.getNewUserNameField();
+        WebElement userNameField = accountPage.getChangeUserNameField();
 
         setUpForUserNameTest();
 
         userNameField.sendKeys(crop(user.getUserName(), USER_NAME_MIN_LENGTH - 1));
 
         fieldValidator.verifyError(
-            accountPage.getInvalidNewUserNameField(),
+            accountPage.getInvalidChangeUserNameField(),
             ERROR_MESSAGE_USER_NAME_TOO_SHORT,
             userNameField,
             accountPage.getChangeUserNameButton()
@@ -69,14 +70,14 @@ public class ChangeUserNameTest {
     }
 
     public void validateTooLongUserName() {
-        WebElement userNameField = accountPage.getNewUserNameField();
+        WebElement userNameField = accountPage.getChangeUserNameField();
 
         setUpForUserNameTest();
 
         userNameField.sendKeys(TOO_LONG_USER_NAME);
 
         fieldValidator.verifyError(
-            accountPage.getInvalidNewUserNameField(),
+            accountPage.getInvalidChangeUserNameField(),
             ERROR_MESSAGE_USER_NAME_TOO_LONG,
             userNameField,
             accountPage.getChangeUserNameButton()
@@ -84,14 +85,14 @@ public class ChangeUserNameTest {
     }
 
     public void validateExistingUserName() {
-        WebElement userNameField = accountPage.getNewUserNameField();
+        WebElement userNameField = accountPage.getChangeUserNameField();
 
         setUpForUserNameTest();
 
         userNameField.sendKeys(otherUser.getUserName());
 
         fieldValidator.verifyError(
-            accountPage.getInvalidNewUserNameField(),
+            accountPage.getInvalidChangeUserNameField(),
             ERROR_MESSAGE_USER_NAME_EXISTS,
             userNameField,
             accountPage.getChangeUserNameButton()
@@ -99,15 +100,15 @@ public class ChangeUserNameTest {
     }
 
     public void validateEmptyPassword() {
-        WebElement changePasswordField = accountPage.getNewUserNamePasswordField();
+        WebElement changePasswordField = accountPage.getChangeUserNamePasswordField();
         changePasswordField.clear();
 
-        WebElement userNameField = accountPage.getNewUserNameField();
+        WebElement userNameField = accountPage.getChangeUserNameField();
         userNameField.clear();
         userNameField.sendKeys(createRandomUserName());
 
         fieldValidator.verifyError(
-            accountPage.getInvalidNewUserNamePasswordField(),
+            accountPage.getInvalidChangeUserNamePasswordField(),
             ERROR_MESSAGE_EMPTY_PASSWORD,
             userNameField,
             accountPage.getChangeUserNameButton()
@@ -115,20 +116,20 @@ public class ChangeUserNameTest {
     }
 
     public void validateBadPassword() {
-        WebElement userNameField = accountPage.getNewUserNameField();
+        WebElement userNameField = accountPage.getChangeUserNameField();
         userNameField.clear();
         userNameField.sendKeys(createRandomUserName());
 
-        WebElement changePasswordField = accountPage.getNewUserNamePasswordField();
+        WebElement changePasswordField = accountPage.getChangeUserNamePasswordField();
         changePasswordField.clear();
         changePasswordField.sendKeys(createRandomPassword());
 
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewUserNameField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewUserNamePasswordField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNameField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNamePasswordField()));
 
-        assertFalse(accountPage.getInvalidNewUserNameField().isDisplayed());
-        assertFalse(accountPage.getInvalidNewUserNamePasswordField().isDisplayed());
+        assertFalse(accountPage.getInvalidChangeUserNameField().isDisplayed());
+        assertFalse(accountPage.getInvalidChangeUserNamePasswordField().isDisplayed());
 
         WebElement submitButton = accountPage.getChangeUserNameButton();
         assertTrue(submitButton.isEnabled());
@@ -136,32 +137,31 @@ public class ChangeUserNameTest {
 
         List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
         assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_BAD_PASSWORD)));
+
+        assertTrue(accountPage.getChangeUserNamePasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
     }
 
     private void setUpForUserNameTest() {
-        accountPage.getNewUserNameField().clear();
+        accountPage.getChangeUserNameField().clear();
 
-        WebElement passwordField = accountPage.getNewUserNamePasswordField();
+        WebElement passwordField = accountPage.getChangeUserNamePasswordField();
         passwordField.clear();
         passwordField.sendKeys(user.getPassword());
     }
 
     public void validateHappyPath() {
-        WebElement userNameField = accountPage.getNewUserNameField();
+        WebElement userNameField = accountPage.getChangeUserNameField();
         userNameField.clear();
         user.setUserName(createRandomUserName());
         userNameField.sendKeys(user.getUserName());
 
-        WebElement passwordField = accountPage.getNewUserNamePasswordField();
+        WebElement passwordField = accountPage.getChangeUserNamePasswordField();
         passwordField.clear();
         passwordField.sendKeys(user.getPassword());
 
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewUserNameField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewUserNamePasswordField()));
-
-        assertFalse(accountPage.getInvalidNewUserNameField().isDisplayed());
-        assertFalse(accountPage.getInvalidNewUserNamePasswordField().isDisplayed());
+        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNameField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNamePasswordField()));
 
         WebElement submitButton = accountPage.getChangeUserNameButton();
         assertTrue(submitButton.isEnabled());
@@ -179,15 +179,16 @@ public class ChangeUserNameTest {
         login.login(user);
 
         navigate.toAccountPage();
-        accountPage.getNewUserNameField().sendKeys(originalUser.getUserName());
-        accountPage.getNewUserNamePasswordField().sendKeys(originalUser.getPassword());
+
+        accountPage.getChangeUserNameField().sendKeys(originalUser.getUserName());
+        accountPage.getChangeUserNamePasswordField().sendKeys(originalUser.getPassword());
 
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewUserNameField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewUserNamePasswordField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNameField()));
+        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNamePasswordField()));
 
-        assertFalse(accountPage.getInvalidNewUserNameField().isDisplayed());
-        assertFalse(accountPage.getInvalidNewUserNamePasswordField().isDisplayed());
+        assertFalse(accountPage.getInvalidChangeUserNameField().isDisplayed());
+        assertFalse(accountPage.getInvalidChangeUserNamePasswordField().isDisplayed());
 
         accountPage.getChangeUserNameButton().click();
 

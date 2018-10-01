@@ -7,16 +7,35 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RequiredArgsConstructor
 public class FieldValidator {
     private final WebDriver driver;
     private final String page;
 
-    public void verifyError(WebElement errorField, String errorMessage, WebElement target, WebElement sendButton) {
+    public void verifyError(
+        WebElement errorField,
+        String errorMessage,
+        WebElement target,
+        WebElement sendButton
+    ) {
+        verifyError(
+            errorField,
+            errorMessage,
+            target,
+            sendButton,
+            (WebElement) null
+        );
+    }
+
+    public void verifyError(
+        WebElement errorField,
+        String errorMessage,
+        WebElement target,
+        WebElement sendButton,
+        WebElement... inactiveErrorFields
+    ) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOf(errorField));
         assertTrue(errorField.isDisplayed());
@@ -25,6 +44,14 @@ public class FieldValidator {
         verifySendingFormNotPossible(target);
 
         assertFalse(sendButton.isEnabled());
+
+        for (WebElement inactiveErrorField : inactiveErrorFields) {
+            if (inactiveErrorField == null) {
+                continue;
+            }
+            wait.until(ExpectedConditions.invisibilityOf(inactiveErrorField));
+            assertFalse(inactiveErrorField.isDisplayed());
+        }
     }
 
     private void verifySendingFormNotPossible(WebElement target) {
