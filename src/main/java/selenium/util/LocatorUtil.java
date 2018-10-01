@@ -13,7 +13,7 @@ public class LocatorUtil {
         StringBuilder builder = new StringBuilder();
         builder.append("#")
             .append(NOTIFICATION_CONTROLLER_ID)
-            .append(" DIV");
+            .append(" > DIV");
         return By.cssSelector(builder.toString());
     }
 

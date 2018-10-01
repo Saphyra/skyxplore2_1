@@ -8,8 +8,9 @@ import selenium.domain.SeleniumUser;
 import selenium.flow.Logout;
 import selenium.flow.Registration;
 import selenium.page.IndexPage;
-import selenium.util.FieldValidator;
+import selenium.validator.FieldValidator;
 
+import static selenium.util.DOMUtil.cleanNotifications;
 import static selenium.util.LinkUtil.HOST;
 
 public class RegistrationTest {
@@ -73,6 +74,8 @@ public class RegistrationTest {
     }
 
     public void cleanUp() {
+        cleanNotifications(driver);
+
         indexPage.getRegistrationUserNameField().clear();
         indexPage.getRegistrationPasswordField().clear();
         indexPage.getRegistrationConfirmPasswordField().clear();

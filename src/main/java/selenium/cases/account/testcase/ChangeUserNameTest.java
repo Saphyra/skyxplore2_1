@@ -10,16 +10,15 @@ import selenium.flow.Login;
 import selenium.flow.Logout;
 import selenium.flow.Navigate;
 import selenium.page.AccountPage;
-import selenium.util.FieldValidator;
-
-import java.util.List;
+import selenium.validator.FieldValidator;
+import selenium.validator.NotificationValidator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.domain.SeleniumUser.createRandomPassword;
 import static selenium.domain.SeleniumUser.createRandomUserName;
 import static selenium.util.DOMUtil.ATTRIBUTE_VALUE;
-import static selenium.util.LocatorUtil.getNotificationElementsLocator;
+import static selenium.util.DOMUtil.cleanNotifications;
 import static selenium.util.StringUtil.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
@@ -53,6 +52,7 @@ public class ChangeUserNameTest {
     private final SeleniumUser originalUser;
     private final SeleniumUser otherUser;
     private final FieldValidator fieldValidator;
+    private final NotificationValidator notificationValidator;
 
     public void validateTooShortUserName() {
         WebElement userNameField = accountPage.getChangeUserNameField();
@@ -135,21 +135,20 @@ public class ChangeUserNameTest {
         assertTrue(submitButton.isEnabled());
         submitButton.click();
 
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_BAD_PASSWORD)));
-
+        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
         assertTrue(accountPage.getChangeUserNamePasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
     }
 
     private void setUpForUserNameTest() {
-        accountPage.getChangeUserNameField().clear();
+        clearAll();
 
         WebElement passwordField = accountPage.getChangeUserNamePasswordField();
-        passwordField.clear();
         passwordField.sendKeys(user.getPassword());
     }
 
     public void validateHappyPath() {
+        clearAll();
+        
         WebElement userNameField = accountPage.getChangeUserNameField();
         userNameField.clear();
         user.setUserName(createRandomUserName());
@@ -170,9 +169,15 @@ public class ChangeUserNameTest {
         verifyUserNameChange();
     }
 
+    private void clearAll() {
+        accountPage.getChangeUserNameField().clear();
+        accountPage.getChangeUserNamePasswordField().clear();
+
+        cleanNotifications(driver);
+    }
+
     private void verifyUserNameChange() {
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_SUCCESSFUL_USER_NAME_CHANGE)));
+        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_USER_NAME_CHANGE);
 
         logout.logOut();
         login.loginFailure(originalUser);
@@ -192,7 +197,6 @@ public class ChangeUserNameTest {
 
         accountPage.getChangeUserNameButton().click();
 
-        List<WebElement> newNotifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(newNotifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_SUCCESSFUL_USER_NAME_CHANGE)));
+        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_USER_NAME_CHANGE);
     }
 }

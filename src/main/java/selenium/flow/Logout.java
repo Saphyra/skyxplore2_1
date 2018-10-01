@@ -5,11 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.util.LocatorUtil;
-
-import java.util.List;
+import selenium.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static selenium.util.LinkUtil.HOST;
 import static selenium.util.LocatorUtil.getNotificationElementsLocator;
 
@@ -17,9 +15,11 @@ public class Logout {
     public static final String SUCCESSFUL_LOGOUT_NOTIFICATION = "Sikeres kijelentkezés!";
 
     private final WebDriver driver;
+    private final NotificationValidator notificationValidator;
 
     public Logout(WebDriver driver) {
         this.driver = driver;
+        this.notificationValidator = new NotificationValidator(driver);
     }
 
     public void logOut(){
@@ -34,7 +34,6 @@ public class Logout {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getNotificationElementsLocator()));
 
         assertEquals(HOST, driver.getCurrentUrl());
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(SUCCESSFUL_LOGOUT_NOTIFICATION)));
+        notificationValidator.verifyOnlyOneNotification(SUCCESSFUL_LOGOUT_NOTIFICATION);
     }
 }

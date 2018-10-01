@@ -10,7 +10,8 @@ import selenium.flow.Logout;
 import selenium.flow.Navigate;
 import selenium.flow.Registration;
 import selenium.page.AccountPage;
-import selenium.util.FieldValidator;
+import selenium.validator.FieldValidator;
+import selenium.validator.NotificationValidator;
 
 import static selenium.util.LinkUtil.ACCOUNT;
 
@@ -25,6 +26,7 @@ public class AccountTest {
     private final SeleniumUser originalUser;
     private final SeleniumUser otherUser;
     private final FieldValidator fieldValidator;
+    private final NotificationValidator notificationValidator;
 
     public AccountTest(WebDriver driver, SeleniumUser originalUser, SeleniumUser otherUser) {
         this.driver = driver;
@@ -35,6 +37,7 @@ public class AccountTest {
         this.originalUser = originalUser;
         this.otherUser = otherUser;
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
+        this.notificationValidator = new NotificationValidator(driver);
     }
 
     public static void run(WebDriver driver) {
@@ -60,6 +63,7 @@ public class AccountTest {
             .originalUser(originalUser)
             .otherUser(otherUser)
             .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
             .build();
 
         testCase.validateTooShortPassword();
@@ -82,6 +86,7 @@ public class AccountTest {
             .originalUser(originalUser)
             .otherUser(otherUser)
             .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
             .build();
 
         testCase.validateTooShortUserName();

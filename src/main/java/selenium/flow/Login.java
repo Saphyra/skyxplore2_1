@@ -5,14 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.domain.SeleniumUser;
 import selenium.page.IndexPage;
-
-import java.util.List;
+import selenium.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static selenium.util.DOMUtil.cleanNotifications;
 import static selenium.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.util.LinkUtil.HOST;
-import static selenium.util.LocatorUtil.getNotificationElementsLocator;
 
 @Slf4j
 public class Login {
@@ -20,10 +18,12 @@ public class Login {
 
     private final WebDriver driver;
     private final IndexPage indexPage;
+    private final NotificationValidator notificationValidator;
 
     public Login(WebDriver driver) {
         this.driver = driver;
         indexPage = new IndexPage(driver);
+        notificationValidator = new NotificationValidator(driver);
     }
 
     public void login(SeleniumUser user){
@@ -50,6 +50,7 @@ public class Login {
     }
 
     public void loginFailure(SeleniumUser user) {
+        cleanNotifications(driver);
         assertEquals(HOST, driver.getCurrentUrl());
         sendRequest(user);
         validateLoginFailure();
@@ -57,7 +58,6 @@ public class Login {
 
     private void validateLoginFailure(){
         assertEquals(HOST, driver.getCurrentUrl());
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_LOGIN_FAILED)));
+        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_LOGIN_FAILED);
     }
 }

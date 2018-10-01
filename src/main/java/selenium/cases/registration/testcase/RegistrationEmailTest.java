@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.cases.registration.RegistrationTest;
 import selenium.domain.SeleniumUser;
 import selenium.page.IndexPage;
-import selenium.util.FieldValidator;
+import selenium.validator.FieldValidator;
 
 @Builder
 public class RegistrationEmailTest {

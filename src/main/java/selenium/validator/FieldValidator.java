@@ -1,4 +1,4 @@
-package selenium.util;
+package selenium.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.Keys;

@@ -6,11 +6,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.domain.SeleniumUser;
 import selenium.page.IndexPage;
-
-import java.util.List;
+import selenium.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static selenium.util.DOMUtil.cleanNotifications;
 import static selenium.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.util.LinkUtil.HOST;
 import static selenium.util.LocatorUtil.getNotificationElementsLocator;
@@ -20,6 +19,7 @@ public class Registration {
 
     private final WebDriver driver;
     private final IndexPage indexPage;
+    private final NotificationValidator notificationValidator;
 
     public Registration(WebDriver driver){
         this(driver, new IndexPage(driver));
@@ -28,6 +28,7 @@ public class Registration {
     public Registration(WebDriver driver, IndexPage indexPage){
         this.driver = driver;
         this.indexPage = indexPage;
+        this.notificationValidator = new NotificationValidator(driver);
     }
 
     public SeleniumUser registerUser(){
@@ -38,6 +39,7 @@ public class Registration {
 
     public void registerUser(SeleniumUser user) {
         assertEquals(HOST, driver.getCurrentUrl());
+        cleanNotifications(driver);
         fillRegistrationForm(user);
         sendForm();
         validateRegistration();
@@ -76,7 +78,6 @@ public class Registration {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getNotificationElementsLocator()));
 
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(SUCCESSFUL_REGISTRATION_NOTIFICATION)));
+        notificationValidator.verifyOnlyOneNotification(SUCCESSFUL_REGISTRATION_NOTIFICATION);
     }
 }

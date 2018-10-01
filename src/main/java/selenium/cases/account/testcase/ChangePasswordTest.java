@@ -10,13 +10,12 @@ import selenium.flow.Login;
 import selenium.flow.Logout;
 import selenium.flow.Navigate;
 import selenium.page.AccountPage;
-import selenium.util.FieldValidator;
-
-import java.util.List;
+import selenium.validator.FieldValidator;
+import selenium.validator.NotificationValidator;
 
 import static org.junit.Assert.assertTrue;
 import static selenium.util.DOMUtil.ATTRIBUTE_VALUE;
-import static selenium.util.LocatorUtil.getNotificationElementsLocator;
+import static selenium.util.DOMUtil.cleanNotifications;
 import static selenium.util.StringUtil.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
@@ -50,6 +49,7 @@ public class ChangePasswordTest {
     private final SeleniumUser originalUser;
     private final SeleniumUser otherUser;
     private final FieldValidator fieldValidator;
+    private final NotificationValidator notificationValidator;
 
     public void validateTooShortPassword() {
         setUpForNewPasswordTest();
@@ -139,8 +139,7 @@ public class ChangePasswordTest {
 
         sendForm();
 
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_BAD_PASSWORD)));
+        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
 
         assertTrue(accountPage.getNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
         assertTrue(accountPage.getNewConfirmPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
@@ -190,8 +189,7 @@ public class ChangePasswordTest {
     }
 
     private void verifySuccessfulNotification(){
-        List<WebElement> notifications = driver.findElements(getNotificationElementsLocator());
-        assertTrue(notifications.stream().anyMatch(w -> w.getText().equals(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE)));
+        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE);
     }
 
     private void sendForm(){
@@ -220,6 +218,8 @@ public class ChangePasswordTest {
     }
 
     private void clearAll() {
+        cleanNotifications(driver);
+
         accountPage.getNewPasswordField().clear();
         accountPage.getNewConfirmPasswordField().clear();
         accountPage.getCurrentNewPasswordField().clear();

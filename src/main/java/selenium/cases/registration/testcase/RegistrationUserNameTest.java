@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.cases.registration.RegistrationTest;
-import selenium.util.FieldValidator;
+import selenium.validator.FieldValidator;
 import selenium.domain.SeleniumUser;
 import selenium.page.IndexPage;
 
