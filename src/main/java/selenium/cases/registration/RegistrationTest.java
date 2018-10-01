@@ -34,7 +34,6 @@ public class RegistrationTest {
         testCase.validateUserName();
         testCase.validatePasswords();
         testCase.validateEmail();
-        testCase.validateSuccessfulRegistration();
     }
 
     private void validateUserName() {
@@ -78,10 +77,5 @@ public class RegistrationTest {
         indexPage.getRegistrationPasswordField().clear();
         indexPage.getRegistrationConfirmPasswordField().clear();
         indexPage.getRegistrationEmailField().clear();
-    }
-
-    private void validateSuccessfulRegistration(){
-        cleanUp();
-        new Registration(driver).registerUser(newUser);
     }
 }
