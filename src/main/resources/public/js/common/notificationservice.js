@@ -53,8 +53,18 @@
                 container.removeChild(messageElement);
             }
             
-            animationFacade.rollInHorizontal(messageElement, container, 300);
-            setTimeout(function(){animationFacade.rollOutHorizontal(messageElement, container, 300)}, 10000);
+            animationFacade.rollInHorizontal(messageElement, container, 300)
+            .then(function(){
+                return new Promise(function(resolve, rejejct){
+                    setTimeout(function(){resolve();}, 10000)
+                });
+            })
+            .then(function(){
+                return animationFacade.rollOutHorizontal(messageElement, container, 300);
+            })
+            .then(function(){
+                container.removeChild(messageElement);
+            });
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

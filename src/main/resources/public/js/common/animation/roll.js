@@ -17,24 +17,27 @@
             const width = DOMUtil.getElementWidth(element, container);
                 element.style.overflow = "hidden";
                 element.style.width = 0;
+            container.appendChild(element);
                 
                 const timeout = Math.round(time / width) * 3;
                 
                 let actualWidth = 0;
-                const interval = setInterval(function(){
-                    try{
-                        actualWidth += 3;
-                        element.style.width = actualWidth + "px";
-                        if(actualWidth >= width){
-                            clearInterval(interval);
+                return new Promise(function(resolve, reject){
+                    const interval = setInterval(function(){
+                        try{
+                            actualWidth += 3;
+                            element.style.width = actualWidth + "px";
+                            if(actualWidth >= width){
+                                clearInterval(interval);
+                                resolve()
+                            }
+                        }catch(err){
+                            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
+                            logService.log(message, "error");
+                            reject()
                         }
-                    }catch(err){
-                        const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                        logService.log(message, "error");
-                    }
-                }, timeout);
-                
-            container.appendChild(element);
+                    }, timeout);
+                });
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
@@ -53,14 +56,16 @@
             const timeout = Math.round(time / element.offsetWidth) * 3;
             
             let actualWidth = element.offsetWidth;
-            const interval = setInterval(function(){
+            return new Promise(function(resolve, reject){
+                const interval = setInterval(function(){
                 actualWidth -= 3;
                 element.style.width = actualWidth + "px";
                 if(actualWidth <= 0){
                     clearInterval(interval);
+                    resolve();
                 }
             }, timeout);
-            
+            });
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");
