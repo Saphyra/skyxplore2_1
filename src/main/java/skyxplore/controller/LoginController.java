@@ -3,7 +3,7 @@ package skyxplore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import skyxplore.controller.request.LoginRequest;
+import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.service.AccessTokenFacade;
 import skyxplore.util.CookieUtil;

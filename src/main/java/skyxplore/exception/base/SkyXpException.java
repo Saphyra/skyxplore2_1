@@ -5,10 +5,10 @@ import org.springframework.http.HttpStatus;
 
 @SuppressWarnings({"WeakerAccess", "Lombok"})
 @Data
-public class SkyXpException extends RuntimeException {
+public abstract class SkyXpException extends RuntimeException {
     private final HttpStatus responseStatus;
 
-    public SkyXpException(HttpStatus responseStatus, String message){
+    protected SkyXpException(HttpStatus responseStatus, String message){
         super(message);
         this.responseStatus = responseStatus;
     }

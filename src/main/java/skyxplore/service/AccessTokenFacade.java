@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.LoginRequest;
+import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.service.accesstoken.AuthenticationService;
 import skyxplore.service.accesstoken.CharacterSelectService;

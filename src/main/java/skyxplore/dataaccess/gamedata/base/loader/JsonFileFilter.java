@@ -1,4 +1,4 @@
-package skyxplore.dataaccess.gamedata.base;
+package skyxplore.dataaccess.gamedata.base.loader;
 
 import org.apache.commons.io.FilenameUtils;
 

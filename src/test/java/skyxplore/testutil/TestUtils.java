@@ -1,6 +1,6 @@
 package skyxplore.testutil;
 
-import skyxplore.controller.request.LoginRequest;
+import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.controller.request.character.*;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.request.user.*;

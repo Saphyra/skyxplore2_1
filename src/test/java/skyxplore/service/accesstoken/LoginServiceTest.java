@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.cache.AccessTokenCache;
-import skyxplore.controller.request.LoginRequest;
+import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.credentials.Credentials;

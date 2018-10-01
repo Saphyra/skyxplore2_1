@@ -8,7 +8,7 @@ import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
-public abstract class AbstractLoader<T> implements ContentLoader<T> {
+public abstract class AbstractLoader<T> implements ContentLoader {
     protected static final ObjectMapper objectMapper = new ObjectMapper();
 
     protected void putGeneralDescription(T content, AbstractGameDataService<T> gameDataService, String path) {

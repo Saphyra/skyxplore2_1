@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.LoginRequest;
+import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.service.accesstoken.AuthenticationService;
 import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.accesstoken.LoginService;

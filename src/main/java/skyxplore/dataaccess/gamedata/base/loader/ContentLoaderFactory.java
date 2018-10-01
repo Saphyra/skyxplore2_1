@@ -1,9 +1,9 @@
 package skyxplore.dataaccess.gamedata.base.loader;
 
-import java.io.File;
-
 import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
 import skyxplore.dataaccess.gamedata.base.ContentLoader;
+
+import java.io.File;
 
 public class ContentLoaderFactory<T> {
     public ContentLoader getInstance(Class<T> clazz, AbstractGameDataService<T> gameDataService) {

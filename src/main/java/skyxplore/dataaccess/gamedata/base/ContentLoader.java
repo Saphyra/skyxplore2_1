@@ -1,5 +1,5 @@
 package skyxplore.dataaccess.gamedata.base;
 
-public interface ContentLoader<T> {
+public interface ContentLoader {
     void load();
 }

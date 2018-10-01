@@ -8,7 +8,6 @@ import org.apache.commons.io.FilenameUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
-import skyxplore.dataaccess.gamedata.base.JsonFileFilter;
 
 @SuppressWarnings({"WeakerAccess", "ConstantConditions", "unchecked"})
 @Slf4j
