@@ -14,12 +14,16 @@ import static selenium.util.LinkUtil.HOST;
 import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {
+    private static final String ARG_PROFILE = "-Dspring.profiles.active=test";
+    private static final String[] ARGS = new String[]{
+        ARG_PROFILE
+    };
 
     private WebDriver driver;
 
     @Before
     public void init() {
-        Application.main(new String[0]);
+        Application.main(ARGS);
         System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver.exe").getPath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
