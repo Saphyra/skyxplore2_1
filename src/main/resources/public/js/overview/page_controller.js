@@ -2,6 +2,7 @@
     window.pageController = new function(){
         scriptLoader.loadScript("js/overview/equipment_controller.js");
         scriptLoader.loadScript("js/common/dao/community_dao.js");
+        scriptLoader.loadScript("js/common/dao/mail_dao.js");
         
         $(document).ready(function(){
             displayNotifications();
@@ -23,7 +24,7 @@
         function getNumberOfNotifications(){
             try{
                 const friendRequestNum = communityDao.getNumberOfFriendRequests();
-                const unreadMailNum = communityDao.getNumberOfUnreadMails();
+                const unreadMailNum = mailDao.getNumberOfUnreadMails();
                 return friendRequestNum + unreadMailNum;
             }catch(err){
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;

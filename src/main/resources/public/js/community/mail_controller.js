@@ -1,6 +1,6 @@
 (function MailController(){
     window.mailController = new function(){
-        scriptLoader.loadScript("js/common/dao/community_dao.js");
+        scriptLoader.loadScript("js/common/dao/mail_dao.js");
         scriptLoader.loadScript("js/common/translator/date_time_util.js");
         
         this.selectAll = selectAll;

@@ -24,7 +24,6 @@ Shop & factory implement filters
 Cancel production
 
 Email FE validation: validate special characters
-Split CommunityDao to MailDao
 Split packages of type
 Configurations to config file
 
@@ -47,9 +46,3 @@ Lobby
 Javadoc
 Integration tests
 Logging
-
-FrontEnd testing
-    - Login with bad credentials
-
-Spring profiles to support multiple data sources
--Dspring.profiles.active=prod
