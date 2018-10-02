@@ -2,6 +2,7 @@ package selenium.cases.account;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
+import selenium.cases.account.testcase.ChangeEmailTest;
 import selenium.cases.account.testcase.ChangePasswordTest;
 import selenium.cases.account.testcase.ChangeUserNameTest;
 import selenium.domain.SeleniumUser;
@@ -49,6 +50,7 @@ public class AccountTest {
         AccountTest test = new AccountTest(driver, user, otherUser);
         test.testChangePassword();
         test.testChangeUserName();
+        test.testChangeEmail();
     }
 
     private void testChangePassword() {
@@ -95,6 +97,25 @@ public class AccountTest {
         testCase.validateEmptyPassword();
         testCase.validateBadPassword();
         testCase.validateHappyPath();
+    }
+
+    private void testChangeEmail() {
+        init();
+        ChangeEmailTest testCase = ChangeEmailTest.builder()
+            .driver(driver)
+            .accountPage(accountPage)
+            .user(originalUser.cloneUser())
+            .originalUser(originalUser)
+            .otherUser(otherUser)
+            .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
+            .build();
+
+        testCase.testInvalidEmail();
+        testCase.testExistingEmail();
+        testCase.testEmptyPassword();
+        testCase.testBadPassword();
+        testCase.testHappyPath();
     }
 
     private void init(){

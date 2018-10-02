@@ -75,7 +75,7 @@
             
             if(response.isValid && !this.lastEmailValid){
                 response.isValid = false;
-                const errorMessage = "E-mal cím már regisztrálva van.";
+                const errorMessage = "E-mail cím már regisztrálva van.";
                 response.responses.push(errorMessage);
                 invalidEmail.title = errorMessage;
                 $(invalidEmail).fadeIn();

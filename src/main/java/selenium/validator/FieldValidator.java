@@ -41,9 +41,8 @@ public class FieldValidator {
         assertTrue(errorField.isDisplayed());
 
         assertEquals(errorMessage, errorField.getAttribute("title"));
-        verifySendingFormNotPossible(target);
-
         assertFalse(sendButton.isEnabled());
+        verifySendingFormNotPossible(target, sendButton);
 
         for (WebElement inactiveErrorField : inactiveErrorFields) {
             if (inactiveErrorField == null) {
@@ -54,8 +53,9 @@ public class FieldValidator {
         }
     }
 
-    private void verifySendingFormNotPossible(WebElement target) {
+    private void verifySendingFormNotPossible(WebElement target, WebElement sendButton) {
         target.sendKeys(Keys.ENTER);
+        sendButton.click();
         assertEquals(page, driver.getCurrentUrl());
     }
 }

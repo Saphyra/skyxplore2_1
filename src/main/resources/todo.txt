@@ -24,6 +24,8 @@ Shop & factory implement filters
 Cancel production
 
 Email FE validation: validate special characters
+Common validator service
+
 Split packages of type
 Configurations to config file
 

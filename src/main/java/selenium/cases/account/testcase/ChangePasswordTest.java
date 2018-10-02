@@ -23,12 +23,6 @@ import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD
 @Builder
 public class ChangePasswordTest {
     private static final String TOO_LONG_PASSWORD;
-    private static final String ERROR_MESSAGE_PASSWORD_TOO_LONG = "Új jelszó túl hosszú! (Maximum 30 karakter)";
-    private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A jelszavak nem egyeznek.";
-    private static final String ERROR_MESSAGE_EMPTY_CURRENT_PASSWORD = "Jelszó megadása kötelező!";
-
-    private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
-    private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
 
     static {
         StringBuilder builder = new StringBuilder();
@@ -37,6 +31,13 @@ public class ChangePasswordTest {
         }
         TOO_LONG_PASSWORD = builder.toString();
     }
+
+    private static final String ERROR_MESSAGE_PASSWORD_TOO_LONG = "Új jelszó túl hosszú! (Maximum 30 karakter)";
+    private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A jelszavak nem egyeznek.";
+    private static final String ERROR_MESSAGE_EMPTY_CURRENT_PASSWORD = "Jelszó megadása kötelező!";
+
+    private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
+    private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
 
     private static final String ERROR_MESSAGE_PASSWORD_TOO_SHORT = "Új jelszó túl rövid! (Minimum 6 karakter)";
 
@@ -52,7 +53,7 @@ public class ChangePasswordTest {
     private final NotificationValidator notificationValidator;
 
     public void validateTooShortPassword() {
-        setUpForNewPasswordTest();
+        setUpForChangePasswordTest();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
 
@@ -69,7 +70,7 @@ public class ChangePasswordTest {
     }
 
     public void validateTooLongPassword() {
-        setUpForNewPasswordTest();
+        setUpForChangePasswordTest();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
         newPasswordField.sendKeys(TOO_LONG_PASSWORD);
@@ -84,7 +85,7 @@ public class ChangePasswordTest {
         );
     }
 
-    public void validateConfirmPassword(){
+    public void validateConfirmPassword() {
         clearAll();
         accountPage.getCurrentNewPasswordField().sendKeys(originalUser.getPassword());
 
@@ -110,8 +111,8 @@ public class ChangePasswordTest {
         );
     }
 
-    public void validateEmptyCurrentPassword(){
-        setUpForCurrentNewPasswordTest();
+    public void validateEmptyCurrentPassword() {
+        setUpForCurrentPasswordTest();
 
         fieldValidator.verifyError(
             accountPage.getCurrentInvalidNewPasswordField(),
@@ -123,7 +124,7 @@ public class ChangePasswordTest {
         );
     }
 
-    public void validateBadPassword(){
+    public void validateBadPassword() {
         clearAll();
 
         String newPassword = SeleniumUser.createRandomPassword();
@@ -146,7 +147,7 @@ public class ChangePasswordTest {
         assertTrue(accountPage.getCurrentNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
     }
 
-    public void validateHappyPath(){
+    public void validateHappyPath() {
         clearAll();
 
         String newPassword = SeleniumUser.createRandomPassword();
@@ -188,11 +189,11 @@ public class ChangePasswordTest {
         verifySuccessfulNotification();
     }
 
-    private void verifySuccessfulNotification(){
+    private void verifySuccessfulNotification() {
         notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE);
     }
 
-    private void sendForm(){
+    private void sendForm() {
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewPasswordField()));
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewConfirmPasswordField()));
@@ -203,13 +204,13 @@ public class ChangePasswordTest {
         changePasswordButton.click();
     }
 
-    private void setUpForNewPasswordTest() {
+    private void setUpForChangePasswordTest() {
         clearAll();
 
         accountPage.getCurrentNewPasswordField().sendKeys(originalUser.getPassword());
     }
 
-    private void setUpForCurrentNewPasswordTest() {
+    private void setUpForCurrentPasswordTest() {
         clearAll();
         String password = SeleniumUser.createRandomPassword();
 

@@ -19,8 +19,14 @@ public class AccountPage {
     private static final String ELEMENT_CHANGE_USER_NAME_PASSWORD = "newusernamepassword";
     private static final String ELEMENT_INVALID_CHANGE_USER_NAME_PASSWORD = "invalid_newusernamepassword";
 
+    private static final String ELEMENT_CHANGE_EMAIL_FIELD = "newemail";
+    private static final String ELEMENT_INVALID_CHANGE_EMAIL_FIELD = "invalid_newemail";
+    private static final String ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD = "newemailpassword";
+    private static final String ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD = "invalid_newemailpassword";
+
     private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "newpasswordbutton";
     private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "newusernamebutton";
+    private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "newemailbutton";
 
     private final WebDriver driver;
 
@@ -64,11 +70,31 @@ public class AccountPage {
         return driver.findElement(By.id(ELEMENT_INVALID_CHANGE_USER_NAME_PASSWORD));
     }
 
+    public WebElement getChangeEmailField() {
+        return driver.findElement(By.id(ELEMENT_CHANGE_EMAIL_FIELD));
+    }
+
+    public WebElement getInvalidChangeEmailField() {
+        return driver.findElement(By.id(ELEMENT_INVALID_CHANGE_EMAIL_FIELD));
+    }
+
+    public WebElement getChangeEmailPasswordField(){
+        return driver.findElement(By.id(ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD));
+    }
+
+    public WebElement getInvalidChangeEmailPasswordField(){
+        return driver.findElement(By.id(ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD));
+    }
+
     public WebElement getChangePasswordButton(){
         return driver.findElement(By.id(ELEMENT_CHANGE_PASSWORD_BUTTON));
     }
 
     public WebElement getChangeUserNameButton() {
         return driver.findElement(By.id(ELEMENT_CHANGE_USER_NAME_BUTTON));
+    }
+
+    public WebElement getChangeEmailButton() {
+        return driver.findElement(By.id(ELEMENT_CHANGE_EMAIL_BUTTON));
     }
 }
