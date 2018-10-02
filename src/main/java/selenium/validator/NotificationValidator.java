@@ -24,7 +24,6 @@ public class NotificationValidator {
     public void verifyNotificationVisibility(String text){
         List<WebElement> notifications = getNotifications();
         verifyContains(notifications, text);
-
     }
 
     private List<WebElement> getNotifications() {

@@ -24,33 +24,37 @@ public class AccountPage {
     private static final String ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD = "newemailpassword";
     private static final String ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD = "invalid_newemailpassword";
 
+    private static final String ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD = "deleteaccountpassword";
+    private static final String ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD = "invalid_deleteaccountpassword";
+
     private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "newpasswordbutton";
     private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "newusernamebutton";
     private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "newemailbutton";
+    private static final String ELEMENT_DELETE_ACCOUNT_BUTTON = "deleteaccountbutton";
 
     private final WebDriver driver;
 
-    public WebElement getNewPasswordField(){
+    public WebElement getNewPasswordField() {
         return driver.findElement(By.id(ELEMENT_NEW_PASSWORD_FIELD));
     }
 
-    public WebElement getInvalidNewPasswordField(){
+    public WebElement getInvalidNewPasswordField() {
         return driver.findElement(By.id(ELEMENT_INVALID_NEW_PASSWORD_FIELD));
     }
 
-    public WebElement getNewConfirmPasswordField(){
+    public WebElement getNewConfirmPasswordField() {
         return driver.findElement(By.id(ELEMENT_NEW_CONFIRM_PASSWORD_FIELD));
     }
 
-    public WebElement getInvalidNewConfirmPasswordField(){
+    public WebElement getInvalidNewConfirmPasswordField() {
         return driver.findElement(By.id(ELEMENT_INVALID_NEW_CONFIRM_PASSWORD_FIELD));
     }
 
-    public WebElement getCurrentNewPasswordField(){
+    public WebElement getCurrentNewPasswordField() {
         return driver.findElement(By.id(ELEMENT_CURRENT_NEW_PASSWORD_FIELD));
     }
 
-    public WebElement getCurrentInvalidNewPasswordField(){
+    public WebElement getCurrentInvalidNewPasswordField() {
         return driver.findElement(By.id(ELEMENT_CURRENT_INVALID_NEW_PASSWORD_FIELD));
     }
 
@@ -78,16 +82,24 @@ public class AccountPage {
         return driver.findElement(By.id(ELEMENT_INVALID_CHANGE_EMAIL_FIELD));
     }
 
-    public WebElement getChangeEmailPasswordField(){
+    public WebElement getChangeEmailPasswordField() {
         return driver.findElement(By.id(ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD));
     }
 
-    public WebElement getInvalidChangeEmailPasswordField(){
+    public WebElement getInvalidChangeEmailPasswordField() {
         return driver.findElement(By.id(ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD));
     }
 
-    public WebElement getChangePasswordButton(){
+    public WebElement getChangePasswordButton() {
         return driver.findElement(By.id(ELEMENT_CHANGE_PASSWORD_BUTTON));
+    }
+
+    public WebElement getDeleteAccountPasswordField() {
+        return driver.findElement(By.id(ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD));
+    }
+
+    public WebElement getInvalidDeleteAccountPasswordField(){
+        return driver.findElement(By.id(ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD));
     }
 
     public WebElement getChangeUserNameButton() {
@@ -96,5 +108,9 @@ public class AccountPage {
 
     public WebElement getChangeEmailButton() {
         return driver.findElement(By.id(ELEMENT_CHANGE_EMAIL_BUTTON));
+    }
+
+    public WebElement getDeleteAccountButton() {
+        return driver.findElement(By.id(ELEMENT_DELETE_ACCOUNT_BUTTON));
     }
 }

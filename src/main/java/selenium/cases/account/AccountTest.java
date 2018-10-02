@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import selenium.cases.account.testcase.ChangeEmailTest;
 import selenium.cases.account.testcase.ChangePasswordTest;
 import selenium.cases.account.testcase.ChangeUserNameTest;
+import selenium.cases.account.testcase.DeleteAccountTest;
 import selenium.domain.SeleniumUser;
 import selenium.flow.Login;
 import selenium.flow.Logout;
@@ -51,7 +52,9 @@ public class AccountTest {
         test.testChangePassword();
         test.testChangeUserName();
         test.testChangeEmail();
+        test.deleteAccount();
     }
+
 
     private void testChangePassword() {
         init();
@@ -111,11 +114,28 @@ public class AccountTest {
             .notificationValidator(notificationValidator)
             .build();
 
-        testCase.testInvalidEmail();
-        testCase.testExistingEmail();
-        testCase.testEmptyPassword();
-        testCase.testBadPassword();
-        testCase.testHappyPath();
+        testCase.validateInvalidEmail();
+        testCase.validateExistingEmail();
+        testCase.validateEmptyPassword();
+        testCase.validateBadPassword();
+        testCase.validateHappyPath();
+    }
+
+    private void deleteAccount() {
+        init();
+        DeleteAccountTest testCase = DeleteAccountTest.builder()
+            .driver(driver)
+            .accountPage(accountPage)
+            .originalUser(originalUser)
+            .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
+            .login(login)
+            .build();
+
+        testCase.validateEmptyPassword();
+        testCase.validateCancel();
+        testCase.validateBadPassword();
+        testCase.validateSuccess();
     }
 
     private void init(){

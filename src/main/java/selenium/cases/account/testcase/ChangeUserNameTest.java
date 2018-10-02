@@ -116,12 +116,12 @@ public class ChangeUserNameTest {
     }
 
     public void validateBadPassword() {
+        clearAll();
+
         WebElement userNameField = accountPage.getChangeUserNameField();
-        userNameField.clear();
         userNameField.sendKeys(createRandomUserName());
 
         WebElement changePasswordField = accountPage.getChangeUserNamePasswordField();
-        changePasswordField.clear();
         changePasswordField.sendKeys(createRandomPassword());
 
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);

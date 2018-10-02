@@ -36,7 +36,7 @@ public class ChangeEmailTest {
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
 
-    public void testInvalidEmail() {
+    public void validateInvalidEmail() {
         setUpForEmailTest();
 
         WebElement emailField = accountPage.getChangeEmailField();
@@ -51,7 +51,7 @@ public class ChangeEmailTest {
         );
     }
 
-    public void testExistingEmail() {
+    public void validateExistingEmail() {
         setUpForEmailTest();
 
         setUpForEmailTest();
@@ -68,7 +68,7 @@ public class ChangeEmailTest {
         );
     }
 
-    public void testEmptyPassword() {
+    public void validateEmptyPassword() {
         setUpForPasswordTest();
 
         accountPage.getChangeEmailPasswordField().clear();
@@ -82,7 +82,7 @@ public class ChangeEmailTest {
         );
     }
 
-    public void testBadPassword() {
+    public void validateBadPassword() {
         setUpForPasswordTest();
 
         WebElement passwordField = accountPage.getChangeEmailPasswordField();
@@ -103,7 +103,7 @@ public class ChangeEmailTest {
         assertTrue(accountPage.getChangeEmailPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
     }
 
-    public void testHappyPath() {
+    public void validateHappyPath() {
         clearAll();
 
         user.setEmail(SeleniumUser.createRandomEmail());
