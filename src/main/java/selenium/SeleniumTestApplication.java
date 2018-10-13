@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import selenium.cases.account.AccountTest;
+import selenium.cases.characterselect.CharacterSelectTest;
 import selenium.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
@@ -38,6 +39,11 @@ public class SeleniumTestApplication {
     @Test
     public void testAccount() {
         AccountTest.run(driver);
+    }
+
+    @Test
+    public void testCharacterSelect(){
+        CharacterSelectTest.run(driver);
     }
 
     @After
