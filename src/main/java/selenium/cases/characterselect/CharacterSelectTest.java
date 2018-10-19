@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import selenium.domain.SeleniumCharacter;
-import selenium.flow.Navigate;
 import selenium.flow.Registration;
 import selenium.page.CharacterSelectPage;
 import selenium.validator.FieldValidator;
@@ -22,7 +21,6 @@ public class CharacterSelectTest {
     private final SeleniumCharacter otherCharacter;
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
-    private final Navigate navigate;
 
     private CharacterSelectTest(WebDriver driver) {
         this.driver = driver;
@@ -30,7 +28,6 @@ public class CharacterSelectTest {
         this.otherCharacter = SeleniumCharacter.create();
         this.fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
         this.notificationValidator = new NotificationValidator(driver);
-        this.navigate = new Navigate(driver);
     }
 
     public static void run(WebDriver driver) {
@@ -52,13 +49,13 @@ public class CharacterSelectTest {
 
     private void init() {
         new Registration(driver).registerUser();
-        createCharacter();
+        createCharacter(otherCharacter);
     }
 
-    private void createCharacter() {
+    private void createCharacter(SeleniumCharacter character) {
         WebElement characterNameField = characterSelectPage.getNewCharacterNameField();
         characterNameField.clear();
-        characterNameField.sendKeys(otherCharacter.getCharacterName());
+        characterNameField.sendKeys(character.getCharacterName());
 
         WebElement createCharacterButton = characterSelectPage.getCreateCharacterButton();
         fieldValidator.verifySuccess(
@@ -68,15 +65,15 @@ public class CharacterSelectTest {
 
         createCharacterButton.click();
 
-        verifyCharacterCreation();
+        verifyCharacterCreation(character);
     }
 
-    private void verifyCharacterCreation() {
+    private void verifyCharacterCreation(SeleniumCharacter character) {
         notificationValidator.verifyNotificationVisibility("Karakter létrehozva.");
 
         List<WebElement> characters = characterSelectPage.getCharacterList();
         assertTrue(characters.stream()
-            .anyMatch(webElement -> webElement.getText().equals(otherCharacter.getCharacterName()))
+            .anyMatch(webElement -> webElement.getText().equals(character.getCharacterName()))
         );
     }
 }
