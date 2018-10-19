@@ -1,21 +1,22 @@
 package selenium;
 
+import static selenium.util.LinkUtil.HOST;
+import static skyxplore.Application.APP_CTX;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
+
 import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
 import selenium.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
-import static selenium.util.LinkUtil.HOST;
-import static skyxplore.Application.APP_CTX;
-
 public class SeleniumTestApplication {
-    private static final String ARG_PROFILE = "-Dspring.profiles.active=test";
+    private static final String ARG_PROFILE = "--spring.profiles.active=test";
     private static final String[] ARGS = new String[]{
         ARG_PROFILE
     };
