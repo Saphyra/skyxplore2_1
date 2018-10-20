@@ -2,6 +2,7 @@ package selenium.cases.characterselect;
 
 import org.openqa.selenium.WebDriver;
 import selenium.cases.characterselect.testcase.CharacterNameTest;
+import selenium.cases.characterselect.testcase.DeleteCharacterTest;
 import selenium.cases.characterselect.testcase.RenameCharacterTest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.CreateCharacter;
@@ -33,11 +34,8 @@ public class CharacterSelectTest {
         testCase.init();
         testCase.validateCharacterName();
         testCase.validateRenameCharacter();
+        testCase.testDeleteCharacter();
         /*
-        Rename character
-            - too short
-            - too long
-            - existing
         Delete character
         Select character
          */
@@ -72,6 +70,18 @@ public class CharacterSelectTest {
         test.testTooLongCharacterName();
         test.testExistingCharacterName();
         test.testRename();
+    }
+
+    private void testDeleteCharacter() {
+        DeleteCharacterTest test = DeleteCharacterTest.builder()
+            .driver(driver)
+            .characterSelectPage(characterSelectPage)
+            .notificationValidator(notificationValidator)
+            .build();
+
+        test.setUp();
+        test.testNotDeleteWhenCancel();
+        test.testDelete();
     }
 
     private void init() {

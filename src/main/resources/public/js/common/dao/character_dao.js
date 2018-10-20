@@ -79,9 +79,8 @@
                 throwException("IllegalArgument", "characterId must be a number. Given: " + typeof characterId);
             }
             
-            const path = "character/";
-            const content = {characterId: characterId};
-            const result = dao.sendRequest("delete", path, content);
+            const path = "character/delete/" + characterId;
+            const result = dao.sendRequest("delete", path);
             if(result.status == ResponseStatus.OK){
                 return true;
             }else{
