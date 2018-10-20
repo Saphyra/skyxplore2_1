@@ -50,7 +50,7 @@ public class SeleniumTestApplication {
 
     @After
     public void tearDown() throws InterruptedException {
-        Thread.sleep(6000);
+        //Thread.sleep(6000);
         SpringApplication.exit(APP_CTX);
         driver.close();
         driver.quit();

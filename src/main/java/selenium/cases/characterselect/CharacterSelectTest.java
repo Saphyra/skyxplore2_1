@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import selenium.cases.characterselect.testcase.CharacterNameTest;
 import selenium.cases.characterselect.testcase.DeleteCharacterTest;
 import selenium.cases.characterselect.testcase.RenameCharacterTest;
+import selenium.cases.characterselect.testcase.SelectCharacterTest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.CreateCharacter;
 import selenium.flow.Registration;
@@ -34,11 +35,8 @@ public class CharacterSelectTest {
         testCase.init();
         testCase.validateCharacterName();
         testCase.validateRenameCharacter();
-        testCase.testDeleteCharacter();
-        /*
-        Delete character
-        Select character
-         */
+        testCase.validateDeleteCharacter();
+        testCase.validateSelectCharacter();
     }
 
     private void validateCharacterName() {
@@ -72,7 +70,7 @@ public class CharacterSelectTest {
         test.testRename();
     }
 
-    private void testDeleteCharacter() {
+    private void validateDeleteCharacter() {
         DeleteCharacterTest test = DeleteCharacterTest.builder()
             .driver(driver)
             .characterSelectPage(characterSelectPage)
@@ -82,6 +80,15 @@ public class CharacterSelectTest {
         test.setUp();
         test.testNotDeleteWhenCancel();
         test.testDelete();
+    }
+
+    private void validateSelectCharacter() {
+        SelectCharacterTest testCase = SelectCharacterTest.builder()
+            .driver(driver)
+            .characterSelectPage(characterSelectPage)
+            .build();
+
+        testCase.testSelectCharacter();
     }
 
     private void init() {
