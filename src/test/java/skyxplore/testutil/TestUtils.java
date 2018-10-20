@@ -647,7 +647,7 @@ public class TestUtils {
     }
 
     public static RenameCharacterRequest createRenameCharacterRequest() {
-        return new RenameCharacterRequest(CHARACTER_NEW_NAME);
+        return new RenameCharacterRequest(CHARACTER_NEW_NAME, CHARACTER_ID_1);
     }
 
     public static SendMailRequest createSendMailRequest() {

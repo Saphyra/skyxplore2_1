@@ -12,6 +12,9 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class RenameCharacterRequest {
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 3, max = 30)
     private String newCharacterName;
+
+    @NotNull
+    private String characterId;
 }

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static skyxplore.controller.CharacterController.RENAME_CHARACTER_MAPPING;
 import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
 import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
 
@@ -41,7 +42,8 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/user/**",
         "/character",
         "/character/select/*",
-        "/character/name/exist"
+        "/character/name/exist",
+        "/" + RENAME_CHARACTER_MAPPING
     );
 
     private final CharacterQueryService characterQueryService;

@@ -1,17 +1,15 @@
 package selenium.cases.characterselect;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import selenium.cases.characterselect.testcase.CharacterNameTest;
+import selenium.cases.characterselect.testcase.RenameCharacterTest;
 import selenium.domain.SeleniumCharacter;
+import selenium.flow.CreateCharacter;
 import selenium.flow.Registration;
 import selenium.page.CharacterSelectPage;
 import selenium.validator.FieldValidator;
 import selenium.validator.NotificationValidator;
 
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
 import static selenium.util.LinkUtil.CHARACTER_SELECT;
 
 public class CharacterSelectTest {
@@ -34,11 +32,8 @@ public class CharacterSelectTest {
         CharacterSelectTest testCase = new CharacterSelectTest(driver);
         testCase.init();
         testCase.validateCharacterName();
+        testCase.validateRenameCharacter();
         /*
-        Validate charactername
-            - too short
-            - too long
-            - existing
         Rename character
             - too short
             - too long
@@ -60,35 +55,27 @@ public class CharacterSelectTest {
         test.testTooShortCharacterName();
         test.testTooLongCharacterName();
         test.testExistingCharacterName();
+        test.cleanUp();
+    }
+
+    private void validateRenameCharacter() {
+        RenameCharacterTest test = RenameCharacterTest.builder()
+            .driver(driver)
+            .characterSelectPage(characterSelectPage)
+            .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
+            .registeredCharacter(registeredCharacter)
+            .build();
+
+        test.init();
+        test.testTooShortCharacterName();
+        test.testTooLongCharacterName();
+        test.testExistingCharacterName();
+        test.testRename();
     }
 
     private void init() {
         new Registration(driver).registerUser();
-        createCharacter(registeredCharacter);
-    }
-
-    private void createCharacter(SeleniumCharacter character) {
-        WebElement characterNameField = characterSelectPage.getNewCharacterNameField();
-        characterNameField.clear();
-        characterNameField.sendKeys(character.getCharacterName());
-
-        WebElement createCharacterButton = characterSelectPage.getCreateCharacterButton();
-        fieldValidator.verifySuccess(
-            characterSelectPage.getInvalidNewCharacterNameField(),
-            createCharacterButton
-        );
-
-        createCharacterButton.click();
-
-        verifyCharacterCreation(character);
-    }
-
-    private void verifyCharacterCreation(SeleniumCharacter character) {
-        notificationValidator.verifyNotificationVisibility("Karakter létrehozva.");
-
-        List<WebElement> characters = characterSelectPage.getCharacterList();
-        assertTrue(characters.stream()
-            .anyMatch(webElement -> webElement.getText().equals(character.getCharacterName()))
-        );
+        new CreateCharacter(driver).createCharacter(registeredCharacter);
     }
 }

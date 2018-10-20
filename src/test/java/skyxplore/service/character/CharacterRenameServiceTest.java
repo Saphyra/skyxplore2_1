@@ -48,12 +48,12 @@ public class CharacterRenameServiceTest {
         when(characterQueryService.isCharNameExists(CHARACTER_NEW_NAME)).thenReturn(false);
 
         SkyXpCharacter character = createCharacter();
-        when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
+        when(characterQueryService.findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID)).thenReturn(character);
         //WHEN
-        underTest.renameCharacter(renameCharacterRequest, CHARACTER_ID_1);
+        underTest.renameCharacter(renameCharacterRequest, USER_ID);
         //THEN
         verify(characterQueryService).isCharNameExists(CHARACTER_NEW_NAME);
-        verify(characterQueryService).findByCharacterId(CHARACTER_ID_1);
+        verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID);
         verify(characterDao).save(character);
         verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
         assertEquals(CHARACTER_NEW_NAME, character.getCharacterName());

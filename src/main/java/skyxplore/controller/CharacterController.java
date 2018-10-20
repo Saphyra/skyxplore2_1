@@ -34,7 +34,7 @@ public class CharacterController {
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name/exist";
-    private static final String RENAME_CHARACTER_MAPPING = "character/rename";
+    public static final String RENAME_CHARACTER_MAPPING = "character/rename";
 
     private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;

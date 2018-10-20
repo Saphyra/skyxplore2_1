@@ -205,21 +205,21 @@
             
             this.isRenameCharacterNameValid = characterName.length >= 3;
             
-            
-            if(this.isRenameCharacterNameValid){
-                this.isRenameCharacterNameValid = !characterDao.isCharNameExists(characterName);
-                if(this.isRenameCharacterNameValid){
-                    $(errorField).fadeOut();
-                    sendButton.classList.remove("disabled");
-                }else{
-                    $(errorField).fadeIn()
-                    errorField.title = "Karakternév foglalt.";
-                    sendButton.classList.add("disabled");
-                }
-            }else{
+            if(characterName.length < 3){
                 $(errorField).fadeIn()
                 errorField.title = "Karakternév túl rövid. (Minimum 3 karakter)";
-                sendButton.classList.add("disabled");
+                sendButton.disabled = true;
+            }else if(characterName.length > 30){
+                $(errorField).fadeIn()
+                errorField.title = "Karakternév túl hosszú. (Maximum 30 karakter)";
+                sendButton.disabled = true;
+            }else if(characterDao.isCharNameExists(characterName)){
+                $(errorField).fadeIn()
+                errorField.title = "Karakternév foglalt.";
+                sendButton.disabled = true;
+            }else{
+                $(errorField).fadeOut();
+                sendButton.disabled = false;
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;

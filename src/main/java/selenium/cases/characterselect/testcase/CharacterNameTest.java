@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.domain.SeleniumCharacter;
 import selenium.page.CharacterSelectPage;
+import selenium.util.DOMUtil;
 import selenium.validator.FieldValidator;
 import selenium.validator.NotificationValidator;
 
@@ -75,5 +76,9 @@ public class CharacterNameTest {
 
     private void init() {
         characterSelectPage.getNewCharacterNameField().clear();
+    }
+
+    public void cleanUp(){
+        DOMUtil.cleanNotifications(driver);
     }
 }
