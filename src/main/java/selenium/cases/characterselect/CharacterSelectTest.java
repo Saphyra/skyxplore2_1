@@ -1,31 +1,31 @@
 package selenium.cases.characterselect;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.util.LinkUtil.CHARACTER_SELECT;
-
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import selenium.cases.characterselect.testcase.CharacterNameTest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.Registration;
 import selenium.page.CharacterSelectPage;
 import selenium.validator.FieldValidator;
 import selenium.validator.NotificationValidator;
 
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
+import static selenium.util.LinkUtil.CHARACTER_SELECT;
+
 public class CharacterSelectTest {
 
     private final WebDriver driver;
     private final CharacterSelectPage characterSelectPage;
-    private final SeleniumCharacter otherCharacter;
+    private final SeleniumCharacter registeredCharacter;
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
 
     private CharacterSelectTest(WebDriver driver) {
         this.driver = driver;
         this.characterSelectPage = new CharacterSelectPage(driver);
-        this.otherCharacter = SeleniumCharacter.create();
+        this.registeredCharacter = SeleniumCharacter.create();
         this.fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
         this.notificationValidator = new NotificationValidator(driver);
     }
@@ -33,6 +33,7 @@ public class CharacterSelectTest {
     public static void run(WebDriver driver) {
         CharacterSelectTest testCase = new CharacterSelectTest(driver);
         testCase.init();
+        testCase.validateCharacterName();
         /*
         Validate charactername
             - too short
@@ -47,9 +48,23 @@ public class CharacterSelectTest {
          */
     }
 
+    private void validateCharacterName() {
+        CharacterNameTest test = CharacterNameTest.builder()
+            .driver(driver)
+            .characterSelectPage(characterSelectPage)
+            .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
+            .registeredCharacter(registeredCharacter)
+            .build();
+
+        test.testTooShortCharacterName();
+        test.testTooLongCharacterName();
+        test.testExistingCharacterName();
+    }
+
     private void init() {
         new Registration(driver).registerUser();
-        createCharacter(otherCharacter);
+        createCharacter(registeredCharacter);
     }
 
     private void createCharacter(SeleniumCharacter character) {

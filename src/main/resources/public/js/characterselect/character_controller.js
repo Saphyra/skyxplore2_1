@@ -175,22 +175,21 @@
             const characterName = document.getElementById("newcharactername").value;
             const sendButton = document.getElementById("newcharacterbutton");
             
-            characterController.isNewCharacterNameValid = characterName.length >= 3;
-            
-            if(characterController.isNewCharacterNameValid){
-                characterController.isNewCharacterNameValid = !characterDao.isCharNameExists(characterName);
-                if(characterController.isNewCharacterNameValid){
-                    $(errorField).fadeOut();
-                    sendButton.disabled = false;
-                }else{
-                    $(errorField).fadeIn()
-                    errorField.title = "Karakternév foglalt.";
-                    sendButton.disabled = true;
-                }
-            }else{
+            if(characterName.length < 3){
                 $(errorField).fadeIn()
                 errorField.title = "Karakternév túl rövid. (Minimum 3 karakter)";
                 sendButton.disabled = true;
+            }else if(characterName.length > 30){
+                $(errorField).fadeIn()
+                errorField.title = "Karakternév túl hosszú. (Maximum 30 karakter)";
+                sendButton.disabled = true;
+            }else if(characterDao.isCharNameExists(characterName)){
+                $(errorField).fadeIn()
+                errorField.title = "Karakternév foglalt.";
+                sendButton.disabled = true;
+            }else{
+                $(errorField).fadeOut();
+                sendButton.disabled = false;
             }
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -203,7 +202,10 @@
             const errorField = document.getElementById("invalid_renamecharactername");
             const characterName = document.getElementById("renamecharacterinput").value;
             const sendButton = document.getElementById("renamecharacterbutton");
+            
             this.isRenameCharacterNameValid = characterName.length >= 3;
+            
+            
             if(this.isRenameCharacterNameValid){
                 this.isRenameCharacterNameValid = !characterDao.isCharNameExists(characterName);
                 if(this.isRenameCharacterNameValid){
