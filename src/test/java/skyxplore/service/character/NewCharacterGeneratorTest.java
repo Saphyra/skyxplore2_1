@@ -5,13 +5,20 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.configuration.CharacterGeneratorConfig;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.util.IdGenerator;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,7 +30,13 @@ import static skyxplore.testutil.TestUtils.*;
 @RunWith(MockitoJUnitRunner.class)
 public class NewCharacterGeneratorTest {
     @Mock
+    private CharacterGeneratorConfig config;
+
+    @Mock
     private IdGenerator idGenerator;
+
+    @Mock
+    private MaterialService materialService;
 
     @Mock
     private ShipService shipService;
@@ -35,14 +48,16 @@ public class NewCharacterGeneratorTest {
     public void testCreateCharacterShouldCreate() {
         //GIVEN
         when(idGenerator.getRandomId()).thenReturn(CHARACTER_ID_1);
+        when(config.getStartMoney()).thenReturn(CHARACTER_MONEY);
         //WHEN
         SkyXpCharacter result = underTest.createCharacter(USER_ID, CHARACTER_NAME);
         //THEN
         verify(idGenerator).getRandomId();
+        verify(config).getStartMoney();
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(CHARACTER_NAME, result.getCharacterName());
         assertEquals(USER_ID, result.getUserId());
-        assertEquals(START_MONEY, result.getMoney());
+        assertEquals(CHARACTER_MONEY, result.getMoney());
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 
@@ -132,5 +147,24 @@ public class NewCharacterGeneratorTest {
         assertTrue(result.getLeftEquipped().contains(RIFLE_ID));
         assertTrue(result.getRightEquipped().contains(RIFLE_ID));
         assertTrue(result.getBackEquipped().contains(RIFLE_ID));
+    }
+
+    @Test
+    public void testCreateFactoryShouldCreate() {
+        //GIVEN
+        when(idGenerator.getRandomId()).thenReturn(FACTORY_ID_1);
+        Set<String> materialIds = new HashSet<>(Arrays.asList(MATERIAL_ID));
+        when(materialService.keySet()).thenReturn(materialIds);
+        when(config.getStartMaterials()).thenReturn(MATERIAL_MATERIAL_AMOUNT);
+        //WHEN
+        Factory result = underTest.createFactory(CHARACTER_ID_1);
+        //THEN
+        verify(idGenerator).getRandomId();
+        verify(materialService).keySet();
+        verify(config).getStartMaterials();
+        assertEquals(FACTORY_ID_1, result.getFactoryId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
+        assertTrue(result.getMaterials().containsKey(MATERIAL_ID));
+        assertEquals(MATERIAL_MATERIAL_AMOUNT, result.getMaterials().get(MATERIAL_ID));
     }
 }

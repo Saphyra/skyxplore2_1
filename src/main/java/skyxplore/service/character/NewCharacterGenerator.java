@@ -3,8 +3,10 @@ package skyxplore.service.character;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import skyxplore.configuration.CharacterGeneratorConfig;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.factory.Factory;
@@ -18,8 +20,6 @@ import skyxplore.util.IdGenerator;
 @Component
 @RequiredArgsConstructor
 public class NewCharacterGenerator {
-    public static final Integer START_MONEY = 10000000;
-
     public static final String STARTER_SHIP_ID = "sta-01";
 
     public static final String GENERATOR_ID = "gen-01";
@@ -33,7 +33,9 @@ public class NewCharacterGenerator {
     public static final String LAUNCHER_ID = "rla-hrldma-01";
     public static final String RIFLE_ID = "rif-lrldma-01";
 
+    private final CharacterGeneratorConfig config;
     private final IdGenerator idGenerator;
+    private final MaterialService materialService;
     private final ShipService shipService;
 
     public SkyXpCharacter createCharacter(String userId, String characterName) {
@@ -41,7 +43,7 @@ public class NewCharacterGenerator {
         character.setCharacterId(idGenerator.getRandomId());
         character.setCharacterName(characterName);
         character.setUserId(userId);
-        character.addMoney(START_MONEY);
+        character.addMoney(config.getStartMoney());
         log.info("Character created: {}", character);
         return character;
     }
@@ -125,8 +127,14 @@ public class NewCharacterGenerator {
         Factory factory = new Factory();
         factory.setFactoryId(idGenerator.getRandomId());
         factory.setCharacterId(characterId);
-        factory.setMaterials(new Materials());
+        factory.setMaterials(createMaterials());
         log.info("Factory created: {}", factory);
         return factory;
+    }
+
+    private Materials createMaterials() {
+        Materials materials = new Materials();
+        materialService.keySet().forEach(materialId ->materials.addMaterial(materialId, config.getStartMaterials()));
+        return materials;
     }
 }
