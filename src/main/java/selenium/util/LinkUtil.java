@@ -6,4 +6,5 @@ public class LinkUtil {
     public static final String ACCOUNT = HOST + "account";
     public static final String CHARACTER_SELECT = HOST + "characterselect";
     public static final String OVERVIEW = HOST + "overview";
+    public static final String FACTORY = HOST + "factory";
 }

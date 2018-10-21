@@ -9,10 +9,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OverviewPage {
     private static final String ELEMENT_CHARACTER_SELECT_PAGE_BUTTON = "footer button:nth-child(2)";
+    private static final String ELEMENT_FACTORY_PAGE_BUTTON = ".menucontainer a:nth-child(2)";
 
     private final WebDriver driver;
 
     public WebElement getCharacterSelectPageButton() {
         return driver.findElement(By.cssSelector(ELEMENT_CHARACTER_SELECT_PAGE_BUTTON));
+    }
+
+    public WebElement getFactoryButton() {
+        return driver.findElement(By.cssSelector(ELEMENT_FACTORY_PAGE_BUTTON));
     }
 }

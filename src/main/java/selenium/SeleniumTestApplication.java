@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
+import selenium.cases.factory.FactoryTest;
 import selenium.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
@@ -48,9 +49,15 @@ public class SeleniumTestApplication {
         CharacterSelectTest.run(driver);
     }
 
+    @Test
+    public void testFactory(){
+        FactoryTest.run(driver);
+    }
+
     @After
     public void tearDown() throws InterruptedException {
-        //Thread.sleep(6000);
+        //Thread.sleep(60000);
+        Thread.sleep(6000);
         SpringApplication.exit(APP_CTX);
         driver.close();
         driver.quit();

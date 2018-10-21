@@ -97,7 +97,7 @@
                 
                 buildButton.disabled = !isBuildable;
                 
-                amountInput.onchange = function(){
+                $(amountInput).on("change keyup", function(){
                     materialsContainer.innerHTML = "";
                     isBuildable = true;
                     if(!fillMaterialsContainer(materialsContainer, element, amountInput.value)){
@@ -114,7 +114,7 @@
                     }
                     
                     buildButton.disabled = !isBuildable;
-                }
+                });
                 
                 return container;
             }catch(err){
