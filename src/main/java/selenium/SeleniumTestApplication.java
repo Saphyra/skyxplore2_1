@@ -13,6 +13,7 @@ import selenium.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
 import static selenium.util.LinkUtil.HOST;
+import static selenium.util.LinkUtil.HOST_LOCAL;
 import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {
@@ -29,7 +30,10 @@ public class SeleniumTestApplication {
 
     @Before
     public void init() {
-        Application.main(ARGS);
+        if(HOST.equals(HOST_LOCAL)){
+            Application.main(ARGS);
+        }
+
         System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver.exe").getPath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -59,8 +63,10 @@ public class SeleniumTestApplication {
     @After
     public void tearDown() throws InterruptedException {
         //Thread.sleep(60000);
-        Thread.sleep(6000);
-        SpringApplication.exit(APP_CTX);
+        //Thread.sleep(6000);
+        if(APP_CTX != null){
+            SpringApplication.exit(APP_CTX);
+        }
         driver.close();
         driver.quit();
     }

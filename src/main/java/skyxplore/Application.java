@@ -8,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 @Slf4j
 public class Application {
-    public static ConfigurableApplicationContext APP_CTX;
+    public static ConfigurableApplicationContext APP_CTX = null;
 
     public static void main(String[] args) {
         APP_CTX = SpringApplication.run(Application.class, args);
