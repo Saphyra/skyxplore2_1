@@ -17,10 +17,12 @@ import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {
     private static final String ARG_PROFILE = "--spring.profiles.active=test";
+    private static final String SKYXPLORE_LOG_LEVEL = "--logging.level.skyxplore=WARN";
     private static final String LOG_LEVEL_DEBUG = "--logging.level.skyxplore.filter=DEBUG";
     private static final String[] ARGS = new String[]{
         //LOG_LEVEL_DEBUG,
-        ARG_PROFILE
+        ARG_PROFILE,
+        SKYXPLORE_LOG_LEVEL
     };
 
     private WebDriver driver;
