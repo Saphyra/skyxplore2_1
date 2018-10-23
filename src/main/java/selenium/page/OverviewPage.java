@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class OverviewPage {
     private static final String ELEMENT_CHARACTER_SELECT_PAGE_BUTTON = "footer button:nth-child(2)";
     private static final String ELEMENT_FACTORY_PAGE_BUTTON = ".menucontainer a:nth-child(2)";
+    private static final String ELEMENT_SHOP_PAGE_BUTTON = ".menucontainer a:nth-child(3)";
 
     private final WebDriver driver;
 
@@ -19,5 +20,9 @@ public class OverviewPage {
 
     public WebElement getFactoryButton() {
         return driver.findElement(By.cssSelector(ELEMENT_FACTORY_PAGE_BUTTON));
+    }
+
+    public WebElement getShopButton() {
+        return driver.findElement(By.cssSelector(ELEMENT_SHOP_PAGE_BUTTON));
     }
 }

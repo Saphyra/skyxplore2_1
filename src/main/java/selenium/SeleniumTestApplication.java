@@ -10,6 +10,7 @@ import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
 import selenium.cases.factory.FactoryTest;
 import selenium.cases.registration.RegistrationTest;
+import selenium.cases.shop.ShopTest;
 import skyxplore.Application;
 
 import static selenium.util.LinkUtil.HOST;
@@ -30,7 +31,7 @@ public class SeleniumTestApplication {
 
     @Before
     public void init() {
-        if(HOST.equals(HOST_LOCAL)){
+        if (HOST.equals(HOST_LOCAL)) {
             Application.main(ARGS);
         }
 
@@ -41,7 +42,7 @@ public class SeleniumTestApplication {
     }
 
     @Test
-    public void testRegistration(){
+    public void testRegistration() {
         RegistrationTest.run(driver);
     }
 
@@ -51,20 +52,25 @@ public class SeleniumTestApplication {
     }
 
     @Test
-    public void testCharacterSelect(){
+    public void testCharacterSelect() {
         CharacterSelectTest.run(driver);
     }
 
     @Test
-    public void testFactory(){
+    public void testFactory() {
         FactoryTest.run(driver);
+    }
+
+    @Test
+    public void testShop() {
+        ShopTest.run(driver);
     }
 
     @After
     public void tearDown() throws InterruptedException {
         //Thread.sleep(60000);
-        //Thread.sleep(6000);
-        if(APP_CTX != null){
+        Thread.sleep(6000);
+        if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);
         }
         driver.close();

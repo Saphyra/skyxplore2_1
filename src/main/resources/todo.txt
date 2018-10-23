@@ -29,7 +29,6 @@ Common validator service
 Split packages of type
 Configurations to config file
 
-
 Create community
     - Friends
         - List of friends
