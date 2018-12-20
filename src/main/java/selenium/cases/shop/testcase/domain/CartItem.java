@@ -70,4 +70,8 @@ public class CartItem {
     public String toString() {
         return element.getText();
     }
+
+    public void removeFromCart() {
+        element.findElement(By.cssSelector("button:first-of-type")).click();
+    }
 }

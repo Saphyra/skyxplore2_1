@@ -3,6 +3,7 @@ package selenium.cases.shop.testcase;
 import org.openqa.selenium.WebDriver;
 
 import lombok.extern.slf4j.Slf4j;
+import selenium.cases.shop.testcase.domain.CartItem;
 import selenium.cases.shop.testcase.domain.ShopItem;
 import selenium.cases.shop.testcase.helper.CartVerifier;
 import selenium.cases.shop.testcase.helper.ItemSearcher;
@@ -31,10 +32,6 @@ public class CartTest {
 
         addToCart(CHEAP_ITEM_ID_2);
         cartVerifier.verifyCosts(CHEAP_ITEM_ID_2, 1);
-
-        //Add different elements
-        //Verify: item is in cart with the correct amount
-        //Verify: total cost displayed properly
     }
 
     private void addToCart(String itemId) {
@@ -46,9 +43,24 @@ public class CartTest {
         //Remove one
         //Remove more
 
+        removeFromCart(CHEAP_ITEM_ID_1);
+        cartVerifier.verifyCosts(CHEAP_ITEM_ID_1, 1);
+
+        removeFromCart(CHEAP_ITEM_ID_1);
+        cartVerifier.verifyNotInCart(CHEAP_ITEM_ID_1);
+
+        removeFromCart(CHEAP_ITEM_ID_2);
+        cartVerifier.verifyNotInCart(CHEAP_ITEM_ID_2);
+
+        cartVerifier.verifyEmptyCart();
         //Verify: item is in cart with the correct amount
         //Verify: total cost displayed properly
         //Verify: empty cart message appears when empty
+    }
+
+    private void removeFromCart(String itemId) {
+        CartItem item = itemSearcher.searchCartItemById(itemId);
+        item.removeFromCart();
     }
 
     public void cannotAddMoreWhenTooExpensive() {

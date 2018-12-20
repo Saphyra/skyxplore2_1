@@ -14,18 +14,18 @@ import selenium.cases.shop.testcase.domain.ShopItem;
 public class ItemSearcher {
     private final WebDriver driver;
 
+    public List<CartItem> searchAllCartItems() {
+        return driver.findElements(By.cssSelector("#basket > .basketelement")).stream()
+            .map(CartItem::new)
+            .collect(Collectors.toList());
+    }
+
     public ShopItem searchShopItemById(String itemId) {
         return driver.findElements(By.cssSelector("#content > .element")).stream()
             .map(ShopItem::new)
             .filter(shopItem -> itemId.equalsIgnoreCase(shopItem.getId()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("No ShopItem found with id " + itemId));
-    }
-
-    public List<CartItem> searchAllCartItems() {
-        return driver.findElements(By.cssSelector("#basket > .basketelement")).stream()
-            .map(CartItem::new)
-            .collect(Collectors.toList());
     }
 
     public CartItem searchCartItemById(String itemId) {
