@@ -2,6 +2,9 @@ package selenium.cases.shop.testcase;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,28 +19,29 @@ public class CartTest {
     private final WebDriver driver;
     private final ItemSearcher itemSearcher;
 
-    public CartTest(WebDriver driver){
+    public CartTest(WebDriver driver) {
         this.driver = driver;
         this.itemSearcher = new ItemSearcher(driver);
     }
 
-    public void testAddToCart(){
-        //Add one element
-        //Add more elements
+    public void testAddToCart() {
         addToCart(CHEAP_ITEM_ID);
         verifyAmountInCart(CHEAP_ITEM_ID, 1);
         verifyItemCost(CHEAP_ITEM_ID, 1);
+        verifyCartTotalCost();
 
         addToCart(CHEAP_ITEM_ID);
         verifyAmountInCart(CHEAP_ITEM_ID, 2);
         verifyItemCost(CHEAP_ITEM_ID, 2);
+        verifyCartTotalCost();
 
+
+        //Add different elements
         //Verify: item is in cart with the correct amount
         //Verify: total cost displayed properly
-
     }
 
-    private void addToCart(String itemId){
+    private void addToCart(String itemId) {
         ShopItem shopItem = itemSearcher.searchShopItemById(itemId);
         shopItem.addToCart();
     }
@@ -57,6 +61,16 @@ public class CartTest {
 
         int totalCost = cartItem.getTotalCost();
         assertEquals(total, totalCost);
+    }
+
+    private void verifyCartTotalCost() {
+        List<CartItem> cartItems = itemSearcher.searchAllCartItems();
+        int cartCost = cartItems.stream()
+            .mapToInt(CartItem::getTotalCost)
+            .sum();
+
+        int totalCartCost = Integer.valueOf(driver.findElement(By.id("cost")).getText());
+        assertEquals(cartCost, totalCartCost);
     }
 
     public void testRemoveFromCart() {
