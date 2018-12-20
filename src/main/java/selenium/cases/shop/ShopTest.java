@@ -1,6 +1,8 @@
 package selenium.cases.shop;
 
 import org.openqa.selenium.WebDriver;
+
+import selenium.cases.shop.testcase.CartTest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.CreateCharacter;
 import selenium.flow.Navigate;
@@ -18,15 +20,18 @@ public class ShopTest {
 
     public static void run(WebDriver driver){
         /*
-        Add to cart
-        Remove from cart
-        Cannot add too expensive
+        Filters
         Buy all
         Exists in equipment
          */
 
         ShopTest testCase = new ShopTest(driver);
         testCase.init();
+
+        CartTest cartTest = new CartTest(driver);
+        cartTest.testAddToCart();
+        cartTest.testRemoveFromCart();
+        cartTest.cannotAddMoreWhenTooExpensive();
     }
 
     private void init() {
