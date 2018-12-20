@@ -16,6 +16,7 @@ import selenium.cases.shop.testcase.domain.CartItem;
 public class CartVerifier {
     private final WebDriver driver;
     private final ItemSearcher itemSearcher;
+    private final CostCounter costCounter;
 
     public void verifyCosts(String itemId, int amount) {
         verifyAmountInCart(itemId, amount);
@@ -41,12 +42,9 @@ public class CartVerifier {
     }
 
     private void verifyCartTotalCost() {
-        List<CartItem> cartItems = itemSearcher.searchAllCartItems();
-        int cartCost = cartItems.stream()
-            .mapToInt(CartItem::getTotalCost)
-            .sum();
+        int cartCost = costCounter.sumCartItemCosts();
 
-        int totalCartCost = Integer.valueOf(driver.findElement(By.id("cost")).getText());
+        int totalCartCost = costCounter.getCartTotalCost();
         assertEquals(cartCost, totalCartCost);
     }
 
