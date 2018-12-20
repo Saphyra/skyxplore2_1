@@ -9,7 +9,7 @@ import selenium.cases.shop.testcase.domain.CartItem;
 @RequiredArgsConstructor
 public class CostCounter {
     private final WebDriver driver;
-    private final ItemSearcher itemSearcher;
+    private final ElementSearcher elementSearcher;
 
     public int getCurrentMoney(){
         return Integer.valueOf(driver.findElement(By.id("money")).getText());
@@ -20,7 +20,7 @@ public class CostCounter {
     }
 
     public int sumCartItemCosts() {
-        return itemSearcher.searchAllCartItems().stream()
+        return elementSearcher.searchAllCartItems().stream()
             .mapToInt(CartItem::getTotalCost)
             .sum();
     }

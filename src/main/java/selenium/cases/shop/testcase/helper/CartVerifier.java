@@ -1,21 +1,20 @@
 package selenium.cases.shop.testcase.helper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
 import selenium.cases.shop.testcase.domain.CartItem;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class CartVerifier {
     private final WebDriver driver;
-    private final ItemSearcher itemSearcher;
+    private final ElementSearcher elementSearcher;
     private final CostCounter costCounter;
 
     public void verifyCosts(String itemId, int amount) {
@@ -25,15 +24,15 @@ public class CartVerifier {
     }
 
     private void verifyAmountInCart(String itemId, int amount) {
-        CartItem cartItem = itemSearcher.searchCartItemById(itemId);
+        CartItem cartItem = elementSearcher.searchCartItemById(itemId);
         assertEquals(amount, cartItem.getAmount());
     }
 
     private void verifyItemCost(String itemId, int amount) {
-        int costPerItem = itemSearcher.searchShopItemById(itemId).getCost();
+        int costPerItem = elementSearcher.searchShopItemById(itemId).getCost();
         int total = costPerItem * amount;
 
-        CartItem cartItem = itemSearcher.searchCartItemById(itemId);
+        CartItem cartItem = elementSearcher.searchCartItemById(itemId);
         int costPerItemType = cartItem.getCostPerItem();
         assertEquals(costPerItem, costPerItemType);
 
@@ -50,7 +49,7 @@ public class CartVerifier {
 
     public void verifyNotInCart(String itemId) {
         assertTrue(
-            itemSearcher.searchAllCartItems().stream()
+            elementSearcher.searchAllCartItems().stream()
                 .noneMatch(cartItem -> itemId.equalsIgnoreCase(cartItem.getId()))
         );
     }

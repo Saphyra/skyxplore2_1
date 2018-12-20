@@ -1,15 +1,14 @@
 package selenium.cases.shop.testcase;
 
-import static org.junit.Assert.assertFalse;
-
-import org.openqa.selenium.WebDriver;
-
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
 import selenium.cases.shop.testcase.domain.CartItem;
 import selenium.cases.shop.testcase.domain.ShopItem;
 import selenium.cases.shop.testcase.helper.CartVerifier;
 import selenium.cases.shop.testcase.helper.CostCounter;
-import selenium.cases.shop.testcase.helper.ItemSearcher;
+import selenium.cases.shop.testcase.helper.ElementSearcher;
+
+import static org.junit.Assert.assertFalse;
 
 @Slf4j
 public class CartTest {
@@ -18,15 +17,15 @@ public class CartTest {
     private static final String EXPENSIVE_ITEM_ID = "cex-02";
 
     private final WebDriver driver;
-    private final ItemSearcher itemSearcher;
+    private final ElementSearcher elementSearcher;
     private final CartVerifier cartVerifier;
     private final CostCounter costCounter;
 
     public CartTest(WebDriver driver) {
         this.driver = driver;
-        this.itemSearcher = new ItemSearcher(driver);
-        this.costCounter = new CostCounter(driver, itemSearcher);
-        this.cartVerifier = new CartVerifier(driver, itemSearcher, costCounter);
+        this.elementSearcher = new ElementSearcher(driver);
+        this.costCounter = new CostCounter(driver, elementSearcher);
+        this.cartVerifier = new CartVerifier(driver, elementSearcher, costCounter);
     }
 
     public void testAddToCart() {
@@ -41,7 +40,7 @@ public class CartTest {
     }
 
     private void addToCart(String itemId) {
-        ShopItem shopItem = itemSearcher.searchShopItemById(itemId);
+        ShopItem shopItem = elementSearcher.searchShopItemById(itemId);
         shopItem.addToCart();
     }
 
@@ -59,21 +58,25 @@ public class CartTest {
     }
 
     private void removeFromCart(String itemId) {
-        CartItem item = itemSearcher.searchCartItemById(itemId);
+        CartItem item = elementSearcher.searchCartItemById(itemId);
         item.removeFromCart();
     }
 
-    public void cannotAddMoreWhenTooExpensive() {
-        int cost = itemSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getCost();
+    public void testCannotAddMoreWhenTooExpensive() {
+        int cost = elementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getCost();
 
         do {
             addToCart(EXPENSIVE_ITEM_ID);
         } while (canAddMore(cost));
 
-        assertFalse(itemSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getAddToCartButton().isEnabled());
+        assertFalse(elementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getAddToCartButton().isEnabled());
     }
 
     private boolean canAddMore(int cost) {
         return costCounter.getCartTotalCost() + cost <= costCounter.getCurrentMoney();
+    }
+
+    public void init() {
+        driver.navigate().refresh();
     }
 }
