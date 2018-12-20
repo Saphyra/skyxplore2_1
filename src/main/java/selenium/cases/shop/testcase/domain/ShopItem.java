@@ -13,6 +13,7 @@ public class ShopItem {
 
     private String id;
     private WebElement addToCartButton;
+    private Integer cost;
 
     public String getId() {
         if(id == null){
@@ -39,8 +40,16 @@ public class ShopItem {
         return addToCartButton;
     }
 
+    public int getCost() {
+        if(cost == null){
+            cost = Integer.valueOf(element.findElement(By.cssSelector("div:nth-child(2) div:first-child")).getText().split(" ")[1]);
+        }
+        return cost;
+    }
+
     @Override
     public String toString(){
         return element.getText();
     }
+
 }

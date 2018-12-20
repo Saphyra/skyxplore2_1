@@ -1,8 +1,11 @@
 package selenium.cases.shop.testcase;
 
+import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
 
 import lombok.extern.slf4j.Slf4j;
+import selenium.cases.shop.testcase.domain.CartItem;
 import selenium.cases.shop.testcase.domain.ShopItem;
 import selenium.cases.shop.testcase.helper.ItemSearcher;
 
@@ -22,6 +25,12 @@ public class CartTest {
         //Add one element
         //Add more elements
         addToCart(CHEAP_ITEM_ID);
+        verifyAmountInCart(CHEAP_ITEM_ID, 1);
+        verifyItemCost(CHEAP_ITEM_ID, 1);
+
+        addToCart(CHEAP_ITEM_ID);
+        verifyAmountInCart(CHEAP_ITEM_ID, 2);
+        verifyItemCost(CHEAP_ITEM_ID, 2);
 
         //Verify: item is in cart with the correct amount
         //Verify: total cost displayed properly
@@ -29,8 +38,25 @@ public class CartTest {
     }
 
     private void addToCart(String itemId){
-        ShopItem shopItem = itemSearcher.searchItemById(itemId);
+        ShopItem shopItem = itemSearcher.searchShopItemById(itemId);
         shopItem.addToCart();
+    }
+
+    private void verifyAmountInCart(String itemId, int amount) {
+        CartItem cartItem = itemSearcher.searchCartItemById(itemId);
+        assertEquals(amount, cartItem.getAmount());
+    }
+
+    private void verifyItemCost(String itemId, int amount) {
+        int costPerItem = itemSearcher.searchShopItemById(itemId).getCost();
+        int total = costPerItem * amount;
+
+        CartItem cartItem = itemSearcher.searchCartItemById(itemId);
+        int costPerItemType = cartItem.getCostPerItem();
+        assertEquals(costPerItem, costPerItemType);
+
+        int totalCost = cartItem.getTotalCost();
+        assertEquals(total, totalCost);
     }
 
     public void testRemoveFromCart() {
