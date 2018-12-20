@@ -1,40 +1,36 @@
 package selenium.cases.shop.testcase;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import lombok.extern.slf4j.Slf4j;
-import selenium.cases.shop.testcase.domain.CartItem;
 import selenium.cases.shop.testcase.domain.ShopItem;
+import selenium.cases.shop.testcase.helper.CartVerifier;
 import selenium.cases.shop.testcase.helper.ItemSearcher;
 
 @Slf4j
 public class CartTest {
-    private static final String CHEAP_ITEM_ID = "bat-01";
+    private static final String CHEAP_ITEM_ID_1 = "bat-01";
+    private static final String CHEAP_ITEM_ID_2 = "cex-01";
 
     private final WebDriver driver;
     private final ItemSearcher itemSearcher;
+    private final CartVerifier cartVerifier;
 
     public CartTest(WebDriver driver) {
         this.driver = driver;
         this.itemSearcher = new ItemSearcher(driver);
+        this.cartVerifier = new CartVerifier(driver, itemSearcher);
     }
 
     public void testAddToCart() {
-        addToCart(CHEAP_ITEM_ID);
-        verifyAmountInCart(CHEAP_ITEM_ID, 1);
-        verifyItemCost(CHEAP_ITEM_ID, 1);
-        verifyCartTotalCost();
+        addToCart(CHEAP_ITEM_ID_1);
+        cartVerifier.verifyCosts(CHEAP_ITEM_ID_1, 1);
 
-        addToCart(CHEAP_ITEM_ID);
-        verifyAmountInCart(CHEAP_ITEM_ID, 2);
-        verifyItemCost(CHEAP_ITEM_ID, 2);
-        verifyCartTotalCost();
+        addToCart(CHEAP_ITEM_ID_1);
+        cartVerifier.verifyCosts(CHEAP_ITEM_ID_1, 2);
 
+        addToCart(CHEAP_ITEM_ID_2);
+        cartVerifier.verifyCosts(CHEAP_ITEM_ID_2, 1);
 
         //Add different elements
         //Verify: item is in cart with the correct amount
@@ -44,33 +40,6 @@ public class CartTest {
     private void addToCart(String itemId) {
         ShopItem shopItem = itemSearcher.searchShopItemById(itemId);
         shopItem.addToCart();
-    }
-
-    private void verifyAmountInCart(String itemId, int amount) {
-        CartItem cartItem = itemSearcher.searchCartItemById(itemId);
-        assertEquals(amount, cartItem.getAmount());
-    }
-
-    private void verifyItemCost(String itemId, int amount) {
-        int costPerItem = itemSearcher.searchShopItemById(itemId).getCost();
-        int total = costPerItem * amount;
-
-        CartItem cartItem = itemSearcher.searchCartItemById(itemId);
-        int costPerItemType = cartItem.getCostPerItem();
-        assertEquals(costPerItem, costPerItemType);
-
-        int totalCost = cartItem.getTotalCost();
-        assertEquals(total, totalCost);
-    }
-
-    private void verifyCartTotalCost() {
-        List<CartItem> cartItems = itemSearcher.searchAllCartItems();
-        int cartCost = cartItems.stream()
-            .mapToInt(CartItem::getTotalCost)
-            .sum();
-
-        int totalCartCost = Integer.valueOf(driver.findElement(By.id("cost")).getText());
-        assertEquals(cartCost, totalCartCost);
     }
 
     public void testRemoveFromCart() {
