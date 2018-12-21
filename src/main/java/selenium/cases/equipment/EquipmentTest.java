@@ -2,29 +2,61 @@ package selenium.cases.equipment;
 
 import org.openqa.selenium.WebDriver;
 
+import selenium.cases.equipment.testcase.UnEquipTest;
+import selenium.cases.equipment.testcase.helper.ElementSearcher;
+import selenium.cases.equipment.testcase.helper.EquipmentVerifier;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.BuyItem;
 import selenium.flow.CreateCharacter;
 import selenium.flow.Navigate;
 import selenium.flow.Registration;
 import selenium.flow.SelectCharacter;
+import selenium.validator.NotificationValidator;
 
 public class EquipmentTest {
-    private static final String SHIP_ID = "sta-01";
+    private static final String SHIP_ID = "sta-02";
 
     private final WebDriver driver;
     private final Navigate navigate;
     private final BuyItem buyItem;
+    private final NotificationValidator notificationValidator;
+    private final ElementSearcher elementSearcher;
+    private final EquipmentVerifier equipmentVerifier;
 
     private EquipmentTest(WebDriver driver) {
         this.driver = driver;
         this.navigate = new Navigate(driver);
         this.buyItem = new BuyItem(driver);
+        this.notificationValidator = new NotificationValidator(driver);
+        this.elementSearcher = new ElementSearcher(driver);
+        this.equipmentVerifier = new EquipmentVerifier(elementSearcher);
     }
 
     public static void run(WebDriver driver){
         EquipmentTest testCase = new EquipmentTest(driver);
         testCase.init();
+        testCase.testUnEquip();
+        testCase.testEquip();
+        testCase.testEquipShip();
+        testCase.testEquipConnector();
+        testCase.testUnequipConnector();
+    }
+
+    private void testUnEquip() {
+        UnEquipTest unEquipTest = new UnEquipTest(elementSearcher, notificationValidator, equipmentVerifier);
+        unEquipTest.testUnEquip();
+    }
+
+    private void testEquip() {
+    }
+
+    private void testEquipShip() {
+    }
+
+    private void testEquipConnector() {
+    }
+
+    private void testUnequipConnector() {
     }
 
     private void init() {

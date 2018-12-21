@@ -2,24 +2,24 @@ package selenium.cases.shop.testcase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.cases.shop.testcase.helper.ElementSearcher;
+import selenium.helper.ShopElementSearcher;
 
 import static org.junit.Assert.assertTrue;
 
 public class FilterTest {
-    private final ElementSearcher elementSearcher;
+    private final ShopElementSearcher shopElementSearcher;
 
     public FilterTest(WebDriver driver){
-        this.elementSearcher = new ElementSearcher(driver);
+        this.shopElementSearcher = new ShopElementSearcher(driver);
     }
 
     public void testFilters() {
-        int startElementCount = elementSearcher.searchAllShopItems().size();
+        int startElementCount = shopElementSearcher.searchAllShopItems().size();
 
-        WebElement categoryButton = elementSearcher.findFirstCategoryButton();
+        WebElement categoryButton = shopElementSearcher.findFirstCategoryButton();
         categoryButton.click();
 
-        int filteredElementCount = elementSearcher.searchAllShopItems().size();
+        int filteredElementCount = shopElementSearcher.searchAllShopItems().size();
 
         assertTrue(filteredElementCount < startElementCount);
     }

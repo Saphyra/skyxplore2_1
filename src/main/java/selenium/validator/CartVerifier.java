@@ -1,20 +1,23 @@
-package selenium.cases.shop.testcase.helper;
-
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.cases.shop.testcase.domain.CartItem;
-
-import java.util.List;
+package selenium.validator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.domain.CartItem;
+import selenium.helper.CostCounter;
+import selenium.helper.ShopElementSearcher;
+
 @RequiredArgsConstructor
 public class CartVerifier {
     private final WebDriver driver;
-    private final ElementSearcher elementSearcher;
+    private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
 
     public void verifyCosts(String itemId, int amount) {
@@ -24,15 +27,15 @@ public class CartVerifier {
     }
 
     private void verifyAmountInCart(String itemId, int amount) {
-        CartItem cartItem = elementSearcher.searchCartItemById(itemId);
+        CartItem cartItem = shopElementSearcher.searchCartItemById(itemId);
         assertEquals(amount, cartItem.getAmount());
     }
 
     private void verifyItemCost(String itemId, int amount) {
-        int costPerItem = elementSearcher.searchShopItemById(itemId).getCost();
+        int costPerItem = shopElementSearcher.searchShopItemById(itemId).getCost();
         int total = costPerItem * amount;
 
-        CartItem cartItem = elementSearcher.searchCartItemById(itemId);
+        CartItem cartItem = shopElementSearcher.searchCartItemById(itemId);
         int costPerItemType = cartItem.getCostPerItem();
         assertEquals(costPerItem, costPerItemType);
 
@@ -49,7 +52,7 @@ public class CartVerifier {
 
     public void verifyNotInCart(String itemId) {
         assertTrue(
-            elementSearcher.searchAllCartItems().stream()
+            shopElementSearcher.searchAllCartItems().stream()
                 .noneMatch(cartItem -> itemId.equalsIgnoreCase(cartItem.getId()))
         );
     }

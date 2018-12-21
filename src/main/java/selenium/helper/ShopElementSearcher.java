@@ -1,17 +1,18 @@
-package selenium.cases.shop.testcase.helper;
-
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.cases.shop.testcase.domain.CartItem;
-import selenium.cases.shop.testcase.domain.ShopItem;
+package selenium.helper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.domain.CartItem;
+import selenium.domain.ShopItem;
+
 @RequiredArgsConstructor
-public class ElementSearcher {
+public class ShopElementSearcher {
     private final WebDriver driver;
 
     public List<CartItem> searchAllCartItems() {

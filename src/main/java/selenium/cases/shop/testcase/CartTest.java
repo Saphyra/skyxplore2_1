@@ -2,11 +2,11 @@ package selenium.cases.shop.testcase;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import selenium.cases.shop.testcase.domain.CartItem;
-import selenium.cases.shop.testcase.domain.ShopItem;
-import selenium.cases.shop.testcase.helper.CartVerifier;
-import selenium.cases.shop.testcase.helper.CostCounter;
-import selenium.cases.shop.testcase.helper.ElementSearcher;
+import selenium.domain.CartItem;
+import selenium.domain.ShopItem;
+import selenium.validator.CartVerifier;
+import selenium.helper.CostCounter;
+import selenium.helper.ShopElementSearcher;
 
 import static org.junit.Assert.assertFalse;
 
@@ -17,15 +17,15 @@ public class CartTest {
     private static final String EXPENSIVE_ITEM_ID = "cex-02";
 
     private final WebDriver driver;
-    private final ElementSearcher elementSearcher;
+    private final ShopElementSearcher shopElementSearcher;
     private final CartVerifier cartVerifier;
     private final CostCounter costCounter;
 
     public CartTest(WebDriver driver) {
         this.driver = driver;
-        this.elementSearcher = new ElementSearcher(driver);
-        this.costCounter = new CostCounter(driver, elementSearcher);
-        this.cartVerifier = new CartVerifier(driver, elementSearcher, costCounter);
+        this.shopElementSearcher = new ShopElementSearcher(driver);
+        this.costCounter = new CostCounter(driver, shopElementSearcher);
+        this.cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter);
     }
 
     public void testAddToCart() {
@@ -40,7 +40,7 @@ public class CartTest {
     }
 
     private void addToCart(String itemId) {
-        ShopItem shopItem = elementSearcher.searchShopItemById(itemId);
+        ShopItem shopItem = shopElementSearcher.searchShopItemById(itemId);
         shopItem.addToCart();
     }
 
@@ -58,18 +58,18 @@ public class CartTest {
     }
 
     private void removeFromCart(String itemId) {
-        CartItem item = elementSearcher.searchCartItemById(itemId);
+        CartItem item = shopElementSearcher.searchCartItemById(itemId);
         item.removeFromCart();
     }
 
     public void testCannotAddMoreWhenTooExpensive() {
-        int cost = elementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getCost();
+        int cost = shopElementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getCost();
 
         do {
             addToCart(EXPENSIVE_ITEM_ID);
         } while (canAddMore(cost));
 
-        assertFalse(elementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getAddToCartButton().isEnabled());
+        assertFalse(shopElementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getAddToCartButton().isEnabled());
     }
 
     private boolean canAddMore(int cost) {

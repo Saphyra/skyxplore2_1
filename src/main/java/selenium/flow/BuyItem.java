@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import selenium.cases.shop.testcase.domain.ShopItem;
-import selenium.cases.shop.testcase.helper.CartVerifier;
-import selenium.cases.shop.testcase.helper.CostCounter;
-import selenium.cases.shop.testcase.helper.ElementSearcher;
+import selenium.domain.ShopItem;
+import selenium.validator.CartVerifier;
+import selenium.helper.CostCounter;
+import selenium.helper.ShopElementSearcher;
 import selenium.validator.NotificationValidator;
 
 @RequiredArgsConstructor
@@ -17,27 +17,27 @@ import selenium.validator.NotificationValidator;
 public class BuyItem {
     public static final String SHOPPING_SUCCESSFUL_MESSAGE = "Tárgyak megvásárolva.";
 
-    private final ElementSearcher elementSearcher;
+    private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
     private final CartVerifier cartVerifier;
     private final NotificationValidator notificationValidator;
 
     public BuyItem(WebDriver driver){
-        this.elementSearcher = new ElementSearcher(driver);
-        this.costCounter = new CostCounter(driver, elementSearcher);
-        this.cartVerifier = new CartVerifier(driver, elementSearcher, costCounter);
+        this.shopElementSearcher = new ShopElementSearcher(driver);
+        this.costCounter = new CostCounter(driver, shopElementSearcher);
+        this.cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter);
         this.notificationValidator = new NotificationValidator(driver);
     }
 
     public void buyItem(String itemId, int amount){
-        ShopItem equipmentToBuy = elementSearcher.searchShopItemById(itemId);
+        ShopItem equipmentToBuy = shopElementSearcher.searchShopItemById(itemId);
         int cost = equipmentToBuy.getCost();
         int currentMoney = costCounter.getCurrentMoney();
 
         equipmentToBuy.addToCart();
         cartVerifier.verifyCosts(itemId, 1);
 
-        elementSearcher.getBuyButton().click();
+        shopElementSearcher.getBuyButton().click();
 
         int newBalance = costCounter.getCurrentMoney();
 
