@@ -1,4 +1,4 @@
-package selenium.cases.shop.testcase.domain;
+package selenium.domain;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

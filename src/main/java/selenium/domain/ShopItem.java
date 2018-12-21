@@ -1,4 +1,4 @@
-package selenium.cases.shop.testcase.domain;
+package selenium.domain;
 
 import static org.junit.Assert.assertTrue;
 
