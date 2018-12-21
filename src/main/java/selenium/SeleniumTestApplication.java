@@ -8,9 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
+import selenium.cases.equipment.EquipmentTest;
 import selenium.cases.factory.FactoryTest;
 import selenium.cases.registration.RegistrationTest;
 import selenium.cases.shop.ShopTest;
+import selenium.util.Util;
 import skyxplore.Application;
 
 import static selenium.util.LinkUtil.HOST;
@@ -66,10 +68,14 @@ public class SeleniumTestApplication {
         ShopTest.run(driver);
     }
 
+    @Test
+    public void testEquipment(){
+        EquipmentTest.run(driver);
+    }
+
     @After
     public void tearDown() throws InterruptedException {
-        //Thread.sleep(60000);
-        Thread.sleep(6000);
+        Util.sleep(0);
         if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);
         }
