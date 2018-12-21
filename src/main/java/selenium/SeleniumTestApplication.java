@@ -1,11 +1,16 @@
 package selenium;
 
+import static selenium.util.LinkUtil.HOST;
+import static selenium.util.LinkUtil.HOST_LOCAL;
+import static skyxplore.Application.APP_CTX;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
+
 import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
 import selenium.cases.equipment.EquipmentTest;
@@ -14,10 +19,6 @@ import selenium.cases.registration.RegistrationTest;
 import selenium.cases.shop.ShopTest;
 import selenium.util.Util;
 import skyxplore.Application;
-
-import static selenium.util.LinkUtil.HOST;
-import static selenium.util.LinkUtil.HOST_LOCAL;
-import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {
     private static final String ARG_PROFILE = "--spring.profiles.active=test";
@@ -75,7 +76,7 @@ public class SeleniumTestApplication {
 
     @After
     public void tearDown() throws InterruptedException {
-        Util.sleep(0);
+        Util.sleep(6000);
         if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);
         }
