@@ -2,10 +2,14 @@ package selenium.cases.equipment.testcase.domain;
 
 import org.openqa.selenium.WebElement;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @RequiredArgsConstructor
+@ToString
 public class UnequippedEquipment {
+    @Getter
     private final WebElement element;
 
     public String getId() {

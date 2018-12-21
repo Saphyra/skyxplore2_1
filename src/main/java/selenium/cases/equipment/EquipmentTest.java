@@ -1,7 +1,9 @@
 package selenium.cases.equipment;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
+import selenium.cases.equipment.testcase.EquipTest;
 import selenium.cases.equipment.testcase.UnEquipTest;
 import selenium.cases.equipment.testcase.helper.ElementSearcher;
 import selenium.cases.equipment.testcase.helper.EquipmentVerifier;
@@ -14,7 +16,7 @@ import selenium.flow.SelectCharacter;
 import selenium.validator.NotificationValidator;
 
 public class EquipmentTest {
-    private static final String SHIP_ID = "sta-02";
+    public static final String TEST_SHIP_ID = "sta-02";
 
     private final WebDriver driver;
     private final Navigate navigate;
@@ -22,7 +24,6 @@ public class EquipmentTest {
     private final NotificationValidator notificationValidator;
     private final ElementSearcher elementSearcher;
     private final EquipmentVerifier equipmentVerifier;
-
     private EquipmentTest(WebDriver driver) {
         this.driver = driver;
         this.navigate = new Navigate(driver);
@@ -35,19 +36,21 @@ public class EquipmentTest {
     public static void run(WebDriver driver){
         EquipmentTest testCase = new EquipmentTest(driver);
         testCase.init();
-        testCase.testUnEquip();
-        testCase.testEquip();
+        String unequippedItemId = testCase.testUnEquip();
+        testCase.testEquip(unequippedItemId);
         testCase.testEquipShip();
         testCase.testEquipConnector();
         testCase.testUnequipConnector();
     }
 
-    private void testUnEquip() {
+    private String testUnEquip() {
         UnEquipTest unEquipTest = new UnEquipTest(elementSearcher, notificationValidator, equipmentVerifier);
-        unEquipTest.testUnEquip();
+        return unEquipTest.testUnEquip();
     }
 
-    private void testEquip() {
+    private void testEquip(String unequippedItemId) {
+        EquipTest equipTest = new EquipTest(elementSearcher, driver, notificationValidator);
+        equipTest.testEquip(unequippedItemId);
     }
 
     private void testEquipShip() {
@@ -65,7 +68,7 @@ public class EquipmentTest {
         new CreateCharacter(driver).createCharacter(testCharacter);
         new SelectCharacter(driver).selectCharacter(testCharacter);
         navigate.toShop();
-        buyItem.buyItem(SHIP_ID, 1);
+        buyItem.buyItem(TEST_SHIP_ID, 1);
         navigate.toEquipmentPage();
     }
 }

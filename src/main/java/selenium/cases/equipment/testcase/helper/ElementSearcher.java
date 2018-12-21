@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import lombok.RequiredArgsConstructor;
 import selenium.cases.equipment.testcase.domain.ContainerId;
@@ -50,5 +51,15 @@ public class ElementSearcher {
             .filter(unequippedEquipment -> itemId.equalsIgnoreCase(unequippedEquipment.getId()))
             .findAny()
             .orElseThrow(() -> new RuntimeException("Unequipped equipment not found with id " + itemId));
+    }
+
+    public List<WebElement> getEmptySlotsOfContainer(ContainerId containerId) {
+        return driver.findElements(By.cssSelector(String.format("#%s div.emptyslot", containerId.getId())));
+    }
+
+    public WebElement getEmptySlotFromContainer(ContainerId containerId) {
+        return getEmptySlotsOfContainer(containerId).stream()
+            .findAny()
+            .orElseThrow(() -> new RuntimeException("No empty slot found in container " + containerId.name()));
     }
 }

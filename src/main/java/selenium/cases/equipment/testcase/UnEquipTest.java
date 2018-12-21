@@ -16,12 +16,13 @@ public class UnEquipTest {
     private final NotificationValidator notificationValidator;
     private final EquipmentVerifier equipmentVerifier;
 
-    public void testUnEquip() {
+    public String testUnEquip() {
         int emptySlotCountBeforeUnequip = elementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
         EquippedEquipment equipment = elementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
         equipment.unequip();
 
         verifySuccess(emptySlotCountBeforeUnequip, equipment);
+        return equipment.getId();
     }
 
 
