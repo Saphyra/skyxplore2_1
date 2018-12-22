@@ -1,19 +1,18 @@
 package selenium.cases.equipment.testcase.helper;
 
-import static java.lang.Math.toIntExact;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.cases.equipment.testcase.domain.ContainerId;
+import selenium.cases.equipment.testcase.domain.EquippedEquipment;
+import selenium.cases.equipment.testcase.domain.UnequippedEquipment;
 
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.cases.equipment.testcase.domain.ContainerId;
-import selenium.cases.equipment.testcase.domain.EquippedEquipment;
-import selenium.cases.equipment.testcase.domain.UnequippedEquipment;
+import static java.lang.Math.toIntExact;
 
 @RequiredArgsConstructor
 public class ElementSearcher {
@@ -28,8 +27,14 @@ public class ElementSearcher {
     }
 
     public int countEmptySlotsInContainer(ContainerId containerId) {
-        return toIntExact(findEquippedEquipmentsOfContainer(ContainerId.FRONT_WEAPON).stream()
-            .filter(ElementSearcher.IS_EMPTY_SLOT)
+        return toIntExact(findEquippedEquipmentsOfContainer(containerId).stream()
+            .filter(IS_EMPTY_SLOT::test)
+            .count());
+    }
+
+    public int countNonEmptySlotsInContainer(ContainerId containerId) {
+        return toIntExact(findEquippedEquipmentsOfContainer(containerId).stream()
+            .filter(equippedEquipment -> !IS_EMPTY_SLOT.test(equippedEquipment))
             .count());
     }
 

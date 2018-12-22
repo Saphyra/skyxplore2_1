@@ -19,7 +19,7 @@ import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
 @Slf4j
 public class ShipController {
     private static final String EQUIP_MAPPING = "ship/equip";
-    private static final String EQUIP_SHIP_MAPPING = "ship/equipship/shipid/{shipId}";
+    private static final String EQUIP_SHIP_MAPPING = "ship/equipship/{shipId}";
     private static final String GET_SHIP_DATA_MAPPING = "ship";
     private static final String UNEQUIP_MAPPING = "ship/unequip";
 

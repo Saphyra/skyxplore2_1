@@ -66,7 +66,7 @@
                 throwException("characterId must not be null or undefined.");
             }
             
-            const path = "ship/equipship/" + characterId + "/shipid/" + itemId;
+            const path = "ship/equipship/" + itemId;
             const response = dao.sendRequest(dao.POST, path);
             if(response.status == ResponseStatus.OK){
                 return true;

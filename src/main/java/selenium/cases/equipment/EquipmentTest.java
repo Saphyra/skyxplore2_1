@@ -1,6 +1,7 @@
 package selenium.cases.equipment;
 
 import org.openqa.selenium.WebDriver;
+import selenium.cases.equipment.testcase.EquipShipTest;
 import selenium.cases.equipment.testcase.EquipTest;
 import selenium.cases.equipment.testcase.UnEquipTest;
 import selenium.cases.equipment.testcase.helper.ElementSearcher;
@@ -52,6 +53,8 @@ public class EquipmentTest {
     }
 
     private void testEquipShip() {
+        EquipShipTest equipShipTest = new EquipShipTest(elementSearcher, notificationValidator);
+        equipShipTest.testEquipShip();
     }
 
     private void testEquipConnector() {
