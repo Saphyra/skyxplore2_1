@@ -1,16 +1,11 @@
 package selenium;
 
-import static selenium.util.LinkUtil.HOST;
-import static selenium.util.LinkUtil.HOST_LOCAL;
-import static skyxplore.Application.APP_CTX;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
-
 import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
 import selenium.cases.equipment.EquipmentTest;
@@ -20,14 +15,20 @@ import selenium.cases.shop.ShopTest;
 import selenium.util.Util;
 import skyxplore.Application;
 
+import static selenium.util.LinkUtil.HOST;
+import static selenium.util.LinkUtil.HOST_LOCAL;
+import static skyxplore.Application.APP_CTX;
+
 public class SeleniumTestApplication {
     private static final String ARG_PROFILE = "--spring.profiles.active=test";
-    private static final String SKYXPLORE_LOG_LEVEL = "--logging.level.skyxplore=WARN";
+    private static final String SKYXPLORE_LOG_LEVEL = "--logging.level=WARN";
+    private static final String SELENIUM_LOG_LEVEL = "--logging.level.selenium=INFO";
     private static final String LOG_LEVEL_DEBUG = "--logging.level.skyxplore.filter=DEBUG";
     private static final String[] ARGS = new String[]{
         //LOG_LEVEL_DEBUG,
         ARG_PROFILE,
-        SKYXPLORE_LOG_LEVEL
+        SKYXPLORE_LOG_LEVEL,
+        SELENIUM_LOG_LEVEL
     };
 
     private WebDriver driver;

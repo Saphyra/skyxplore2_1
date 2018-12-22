@@ -1,8 +1,6 @@
 package selenium.cases.equipment;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-
 import selenium.cases.equipment.testcase.EquipTest;
 import selenium.cases.equipment.testcase.UnEquipTest;
 import selenium.cases.equipment.testcase.helper.ElementSearcher;
@@ -57,9 +55,11 @@ public class EquipmentTest {
     }
 
     private void testEquipConnector() {
+        //TODO fix
     }
 
     private void testUnequipConnector() {
+        //TODO fix
     }
 
     private void init() {
