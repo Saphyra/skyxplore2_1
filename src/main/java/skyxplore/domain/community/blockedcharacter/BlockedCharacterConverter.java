@@ -2,7 +2,7 @@ package skyxplore.domain.community.blockedcharacter;
 
 import org.springframework.stereotype.Component;
 
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
 public class BlockedCharacterConverter extends ConverterBase<BlockedCharacterEntity, BlockedCharacter> {

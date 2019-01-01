@@ -1,9 +1,9 @@
 package skyxplore.dataaccess.db;
 
+import com.github.saphyra.converter.Converter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CharacterRepository;
-import skyxplore.domain.Converter;
 import skyxplore.domain.character.CharacterEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 

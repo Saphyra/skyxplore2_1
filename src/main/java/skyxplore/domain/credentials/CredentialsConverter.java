@@ -2,7 +2,7 @@ package skyxplore.domain.credentials;
 
 import org.springframework.stereotype.Component;
 
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
 public class CredentialsConverter extends ConverterBase<CredentialsEntity, Credentials> {

@@ -1,9 +1,8 @@
 package skyxplore.domain.accesstoken;
 
-import org.springframework.stereotype.Component;
-
+import com.github.saphyra.converter.ConverterBase;
 import lombok.RequiredArgsConstructor;
-import skyxplore.domain.ConverterBase;
+import org.springframework.stereotype.Component;
 import skyxplore.util.DateTimeUtil;
 
 @Component

@@ -2,7 +2,7 @@ package skyxplore.domain.community.mail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 

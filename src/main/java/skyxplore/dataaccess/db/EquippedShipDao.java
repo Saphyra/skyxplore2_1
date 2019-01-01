@@ -3,7 +3,7 @@ package skyxplore.dataaccess.db;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.EquippedShipRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.exception.ShipNotFoundException;

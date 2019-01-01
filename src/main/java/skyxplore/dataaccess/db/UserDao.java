@@ -3,7 +3,7 @@ package skyxplore.dataaccess.db;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.UserRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.domain.user.UserEntity;
 import skyxplore.exception.UserNotFoundException;

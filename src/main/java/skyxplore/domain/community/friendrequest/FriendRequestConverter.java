@@ -1,7 +1,7 @@
 package skyxplore.domain.community.friendrequest;
 
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
 public class FriendRequestConverter extends ConverterBase<FriendRequestEntity, FriendRequest> {

@@ -3,7 +3,7 @@ package skyxplore.dataaccess.db;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.FriendRequestRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendrequest.FriendRequestEntity;
 

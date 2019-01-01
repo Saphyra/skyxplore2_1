@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.db.repository.SlotRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.slot.SlotEntity;
 

@@ -2,7 +2,7 @@ package skyxplore.domain.factory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 import skyxplore.domain.materials.MaterialsConverter;
 
 @Component

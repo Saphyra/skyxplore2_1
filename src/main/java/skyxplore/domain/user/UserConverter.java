@@ -3,7 +3,7 @@ package skyxplore.domain.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
 @RequiredArgsConstructor

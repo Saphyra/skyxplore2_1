@@ -2,7 +2,7 @@ package skyxplore.domain.community.friendship;
 
 import org.springframework.stereotype.Component;
 
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
 public class FriendshipConverter extends ConverterBase<FriendshipEntity, Friendship> {

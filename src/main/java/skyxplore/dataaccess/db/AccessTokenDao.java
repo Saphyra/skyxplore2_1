@@ -3,7 +3,7 @@ package skyxplore.dataaccess.db;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.AccessTokenRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 

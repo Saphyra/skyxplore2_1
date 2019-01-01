@@ -3,7 +3,7 @@ package skyxplore.dataaccess.db;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.FactoryRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.factory.FactoryEntity;
 

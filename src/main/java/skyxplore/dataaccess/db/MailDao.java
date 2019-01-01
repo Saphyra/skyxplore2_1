@@ -2,7 +2,7 @@ package skyxplore.dataaccess.db;
 
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.MailRepository;
-import skyxplore.domain.Converter;
+import com.github.saphyra.converter.Converter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
 
