@@ -37,14 +37,6 @@ public class UserConverterTest {
         assertTrue(result.getRoles().contains(Role.USER));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        SkyXpUser user = null;
-        //WHEN
-        underTest.convertDomain(user);
-    }
-
     @Test
     public void testConvertDomainShouldConvert(){
         //GIVEN

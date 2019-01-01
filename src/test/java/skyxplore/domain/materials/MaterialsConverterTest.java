@@ -52,11 +52,6 @@ public class MaterialsConverterTest {
         assertEquals(map, result);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        underTest.convertDomain(null, null);
-    }
-
     @Test
     public void testConvertDomainShouldConvertAndEncrypt() throws JsonProcessingException {
         //GIVEN

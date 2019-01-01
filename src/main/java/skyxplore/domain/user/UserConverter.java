@@ -10,7 +10,7 @@ import com.github.saphyra.converter.ConverterBase;
 public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
     @Override
-    public SkyXpUser convertEntity(UserEntity entity) {
+    public SkyXpUser processEntityConversion(UserEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -23,7 +23,7 @@ public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
     }
 
     @Override
-    public UserEntity convertDomain(SkyXpUser domain) {
+    public UserEntity processDomainConversion(SkyXpUser domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

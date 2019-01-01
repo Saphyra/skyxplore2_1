@@ -13,7 +13,7 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
     private final StringEncryptor stringEncryptor;
 
     @Override
-    public Mail convertEntity(MailEntity entity) {
+    public Mail processEntityConversion(MailEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -33,7 +33,7 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
     }
 
     @Override
-    public MailEntity convertDomain(Mail domain) {
+    public MailEntity processDomainConversion(Mail domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

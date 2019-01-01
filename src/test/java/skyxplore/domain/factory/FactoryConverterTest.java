@@ -1,5 +1,13 @@
 package skyxplore.domain.factory;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.domain.materials.Materials;
+import skyxplore.domain.materials.MaterialsConverter;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
@@ -9,15 +17,6 @@ import static skyxplore.testutil.TestUtils.FACTORY_MATERIALS;
 import static skyxplore.testutil.TestUtils.createFactory;
 import static skyxplore.testutil.TestUtils.createFactoryEntity;
 import static skyxplore.testutil.TestUtils.createMaterials;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.domain.materials.Materials;
-import skyxplore.domain.materials.MaterialsConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryConverterTest {
@@ -50,14 +49,6 @@ public class FactoryConverterTest {
         assertEquals(FACTORY_ID_1, result.getFactoryId());
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(materials, result.getMaterials());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        Factory factory = null;
-        //WHEN
-        underTest.convertDomain(factory);
     }
 
     @Test

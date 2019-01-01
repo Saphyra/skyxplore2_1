@@ -36,14 +36,6 @@ public class BlockedCharacterConverterTest {
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull() {
-        //GIVEN
-        BlockedCharacter character = null;
-        //WHEN
-        underTest.convertDomain(character);
-    }
-
     @Test
     public void testConvertDomainShouldConvert() {
         //GIVEN

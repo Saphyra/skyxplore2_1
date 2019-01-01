@@ -1,5 +1,14 @@
 package skyxplore.domain.product;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.encryption.IntegerEncryptor;
+import skyxplore.encryption.StringEncryptor;
+import skyxplore.util.DateTimeUtil;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
@@ -18,16 +27,6 @@ import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME;
 import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME_EPOCH;
 import static skyxplore.testutil.TestUtils.createProduct;
 import static skyxplore.testutil.TestUtils.createProductEntity;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
-import skyxplore.util.DateTimeUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductConverterTest {
@@ -74,14 +73,6 @@ public class ProductConverterTest {
         assertEquals(PRODUCT_CONSTRUCTION_TIME, result.getConstructionTime());
         assertEquals(PRODUCT_START_TIME, result.getStartTime());
         assertEquals(PRODUCT_END_TIME, result.getEndTime());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        Product product = null;
-        //WHEN
-        underTest.convertDomain(product);
     }
 
     @Test

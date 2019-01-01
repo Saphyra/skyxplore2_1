@@ -11,7 +11,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     private final MaterialsConverter materialsConverter;
 
     @Override
-    public Factory convertEntity(FactoryEntity entity) {
+    public Factory processEntityConversion(FactoryEntity entity) {
         if(entity == null){
             return null;
         }
@@ -24,7 +24,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     }
 
     @Override
-    public FactoryEntity convertDomain(Factory domain) {
+    public FactoryEntity processDomainConversion(Factory domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

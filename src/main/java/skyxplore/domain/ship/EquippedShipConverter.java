@@ -1,17 +1,16 @@
 package skyxplore.domain.ship;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.converter.ConverterBase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.converter.ConverterBase;
+import org.springframework.stereotype.Component;
 import skyxplore.encryption.IntegerEncryptor;
 import skyxplore.encryption.StringEncryptor;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
     private final StringEncryptor stringEncryptor;
 
     @Override
-    public EquippedShipEntity convertDomain(EquippedShip domain) {
+    public EquippedShipEntity processDomainConversion(EquippedShip domain) {
         if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
@@ -47,7 +46,7 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
     }
 
     @Override
-    public EquippedShip convertEntity(EquippedShipEntity entity) {
+    public EquippedShip processEntityConversion(EquippedShipEntity entity) {
         if (entity == null) {
             return null;
         }

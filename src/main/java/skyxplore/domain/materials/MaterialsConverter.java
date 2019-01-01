@@ -26,7 +26,7 @@ public class MaterialsConverter extends ConverterBase<String, Materials> {
     }
 
     @Override
-    public Materials convertEntity(String entity) {
+    public Materials processEntityConversion(String entity) {
         if(entity == null){
             return null;
         }
@@ -38,7 +38,7 @@ public class MaterialsConverter extends ConverterBase<String, Materials> {
     }
 
     @Override
-    public String convertDomain(Materials domain) {
+    public String processDomainConversion(Materials domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

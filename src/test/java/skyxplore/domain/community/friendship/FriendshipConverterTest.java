@@ -1,5 +1,10 @@
 package skyxplore.domain.community.friendship;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
@@ -7,11 +12,6 @@ import static skyxplore.testutil.TestUtils.FRIENDSHIP_ID;
 import static skyxplore.testutil.TestUtils.FRIEND_ID;
 import static skyxplore.testutil.TestUtils.createFriendship;
 import static skyxplore.testutil.TestUtils.createFriendshipEntity;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipConverterTest {
@@ -38,14 +38,6 @@ public class FriendshipConverterTest {
         assertEquals(FRIENDSHIP_ID, result.getFriendshipId());
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(FRIEND_ID, result.getFriendId());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        Friendship friendship = null;
-        //WHEN
-        underTest.convertDomain(friendship);
     }
 
     @Test

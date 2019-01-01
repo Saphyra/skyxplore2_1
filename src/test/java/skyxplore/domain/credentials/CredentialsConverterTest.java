@@ -1,5 +1,10 @@
 package skyxplore.domain.credentials;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static skyxplore.testutil.TestUtils.CREDENTIALS_HASHED_PASSWORD;
@@ -7,11 +12,6 @@ import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.USER_NAME;
 import static skyxplore.testutil.TestUtils.createCredentials;
 import static skyxplore.testutil.TestUtils.createCredentialsEntity;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CredentialsConverterTest {
@@ -40,16 +40,8 @@ public class CredentialsConverterTest {
         assertEquals(CREDENTIALS_HASHED_PASSWORD, result.getPassword());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        Credentials credentials = null;
-        //WHEN
-        underTest.convertDomain(credentials);
-    }
-
     @Test
-    public void testConvertDomainShouldCOnvert(){
+    public void testConvertDomainShouldConvert(){
         //GIVEN
         Credentials credentials = createCredentials();
         //WHEN

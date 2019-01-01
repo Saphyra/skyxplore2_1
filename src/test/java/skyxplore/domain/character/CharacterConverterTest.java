@@ -64,14 +64,6 @@ public class CharacterConverterTest {
         assertEquals(equipmentList, result.getEquipments());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        SkyXpCharacter character = null;
-        //WHEN
-        underTest.convertDomain(character);
-    }
-
     @Test
     public void testConvertDomainShouldEncryptAndConvert() throws JsonProcessingException {
         //GIVEN

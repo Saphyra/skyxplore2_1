@@ -1,5 +1,18 @@
 package skyxplore.domain.slot;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.encryption.IntegerEncryptor;
+import skyxplore.encryption.StringEncryptor;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,20 +32,6 @@ import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createEquippedSlot;
 import static skyxplore.testutil.TestUtils.createSlotEntity;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
-
 @RunWith(MockitoJUnitRunner.class)
 public class SlotConverterTest {
 
@@ -48,13 +47,6 @@ public class SlotConverterTest {
     @InjectMocks
     private SlotConverter underTest;
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull() {
-        //GIVEN
-        EquippedSlot slot = null;
-        //WHEN
-        underTest.convertDomain(slot);
-    }
 
     @Test
     public void testConvertDomainShouldEncryptAndConvert() throws JsonProcessingException {

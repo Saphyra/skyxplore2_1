@@ -36,14 +36,6 @@ public class FriendRequestConverterTest {
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull(){
-        //GIVEN
-        FriendRequest request = null;
-        //WHEN
-        underTest.convertDomain(request);
-    }
-
     @Test
     public void testConvertDomainShouldConvert(){
         //GIVEN

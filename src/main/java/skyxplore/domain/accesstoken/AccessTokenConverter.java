@@ -12,7 +12,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
 
 
     @Override
-    public AccessToken convertEntity(AccessTokenEntity entity) {
+    public AccessToken processEntityConversion(AccessTokenEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -25,7 +25,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
     }
 
     @Override
-    public AccessTokenEntity convertDomain(AccessToken token) {
+    public AccessTokenEntity processDomainConversion(AccessToken token) {
         if (token == null) {
             throw new IllegalArgumentException("token must not be null");
         }

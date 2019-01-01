@@ -58,14 +58,6 @@ public class MailConverterTest {
         assertFalse(result.getDeletedByAddressee());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull() {
-        //GIVEN
-        Mail mail = null;
-        //WHEN
-        underTest.convertDomain(mail);
-    }
-
     @Test
     public void testConvertDomainShouldEncryptAndConvert(){
         //GIVEN

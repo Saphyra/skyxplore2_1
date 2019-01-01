@@ -74,14 +74,6 @@ public class EquippedShipConverterTest {
         assertEquals(WEAPON_SLOT_ID, result.getWeaponSlotId());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConvertDomainShouldThrowExceptionWhenNull() {
-        //GIVEN
-        EquippedShip equippedShip = null;
-        //WHEN
-        underTest.convertDomain(equippedShip);
-    }
-
     @Test
     public void testConvertDomainShouldEncryptAndConvert() throws JsonProcessingException {
         //GIVEN

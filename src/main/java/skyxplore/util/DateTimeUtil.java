@@ -18,7 +18,7 @@ public class DateTimeUtil extends ConverterBase<Long, LocalDateTime> {
     }
 
     @Override
-    public LocalDateTime convertEntity(Long entity) {
+    public LocalDateTime processEntityConversion(Long entity) {
         if (entity == null) {
             return null;
         }
@@ -26,7 +26,7 @@ public class DateTimeUtil extends ConverterBase<Long, LocalDateTime> {
     }
 
     @Override
-    public Long convertDomain(LocalDateTime domain) {
+    public Long processDomainConversion(LocalDateTime domain) {
         if (domain == null) {
             return null;
         }

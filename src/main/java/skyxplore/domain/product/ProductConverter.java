@@ -17,7 +17,7 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
     private final StringEncryptor stringEncryptor;
 
     @Override
-    public Product convertEntity(ProductEntity entity) {
+    public Product processEntityConversion(ProductEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -35,7 +35,7 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
     }
 
     @Override
-    public ProductEntity convertDomain(Product domain) {
+    public ProductEntity processDomainConversion(Product domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

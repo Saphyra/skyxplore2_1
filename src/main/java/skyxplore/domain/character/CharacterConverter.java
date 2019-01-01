@@ -20,7 +20,7 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
     private final StringEncryptor stringEncryptor;
 
     @Override
-    public SkyXpCharacter convertEntity(CharacterEntity entity) {
+    public SkyXpCharacter processEntityConversion(CharacterEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -51,7 +51,7 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
     }
 
     @Override
-    public CharacterEntity convertDomain(SkyXpCharacter domain) {
+    public CharacterEntity processDomainConversion(SkyXpCharacter domain) {
         if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
