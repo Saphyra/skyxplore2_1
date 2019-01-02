@@ -1,16 +1,10 @@
 package skyxplore.service.product;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.db.ProductDao;
@@ -21,7 +15,13 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.service.GameDataFacade;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.service.factory.FactoryQueryService;
 import skyxplore.util.DateTimeUtil;
+
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @SuppressWarnings("unused")
 @Slf4j
@@ -29,8 +29,10 @@ import skyxplore.util.DateTimeUtil;
 @EnableScheduling
 @RequiredArgsConstructor
 public class ProductFactoryService {
+    private final CharacterQueryService characterQueryService;
     private final CharacterDao characterDao;
     private final DateTimeUtil dateTimeUtil;
+    private final FactoryQueryService factoryQueryService;
     private final GameDataFacade gameDataFacade;
     private final FactoryDao factoryDao;
     private final ProductDao productDao;
@@ -61,21 +63,21 @@ public class ProductFactoryService {
         if (elementData instanceof Material) {
             addMaterialToFactory(product.getFactoryId(), product.getElementId(), product.getAmount());
         } else {
-            Factory factory = factoryDao.findById(product.getFactoryId());
+            Factory factory = factoryQueryService.findByFactoryId(product.getFactoryId());
             addEquipmentToCharacter(factory.getCharacterId(), product);
         }
         productDao.delete(product);
     }
 
     private void addMaterialToFactory(String factoryId, String elementId, Integer amount) {
-        Factory factory = factoryDao.findById(factoryId);
+        Factory factory = factoryQueryService.findByFactoryId(factoryId);
         Materials materials = factory.getMaterials();
         materials.addMaterial(elementId, amount);
         factoryDao.save(factory);
     }
 
     private void addEquipmentToCharacter(String characterId, Product product) {
-        SkyXpCharacter character = characterDao.findById(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         character.addEquipments(product.getElementId(), product.getAmount());
         characterDao.save(character);
     }

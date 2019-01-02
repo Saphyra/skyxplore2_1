@@ -13,10 +13,15 @@ import skyxplore.domain.accesstoken.AccessTokenEntity;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createAccessToken;
+import static skyxplore.testutil.TestUtils.createAccessTokenEntity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessTokenDaoTest {
@@ -58,9 +63,9 @@ public class AccessTokenDaoTest {
         //GIVEN
         when(accessTokenRepository.findById(ACCESS_TOKEN_ID)).thenReturn(Optional.empty());
         //WHEN
-        AccessToken result = underTest.findById(ACCESS_TOKEN_ID);
+        Optional<AccessToken> result = underTest.findById(ACCESS_TOKEN_ID);
         //THEN
-        assertNull(result);
+        assertFalse(result.isPresent());
     }
 
     @Test
@@ -88,11 +93,12 @@ public class AccessTokenDaoTest {
         AccessToken accessToken = createAccessToken();
         when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
         //WHEN
-        AccessToken result = underTest.findById(ACCESS_TOKEN_ID);
+        Optional<AccessToken> result = underTest.findById(ACCESS_TOKEN_ID);
         //THEN
         verify(accessTokenRepository).findById(ACCESS_TOKEN_ID);
         verify(accessTokenConverter).convertEntity(entity);
-        assertEquals(accessToken, result);
+        assertTrue(result.isPresent());
+        assertEquals(accessToken, result.get());
     }
 
     @Test

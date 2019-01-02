@@ -12,13 +12,15 @@ import skyxplore.domain.character.SkyXpCharacter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.createCharacterEntity;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
@@ -113,32 +115,6 @@ public class CharacterDaoTest {
         verify(characterRepository).findByCharacterNameContaining(CHARACTER_NAME);
         verify(characterConverter).convertEntity(entityList);
         assertEquals(characters, result);
-    }
-
-    @Test
-    public void testFindByIdShouldReturnNull(){
-        //GIVEN
-        when(characterRepository.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
-        //WHEN
-        SkyXpCharacter result = underTest.findById(CHARACTER_ID_1);
-        //THEN
-        assertNull(result);
-    }
-
-    @Test
-    public void testFindByIdShouldCallRepositoryAndReturnDomain(){
-        //GIVEN
-        CharacterEntity entity = createCharacterEntity();
-        when(characterRepository.findById(CHARACTER_ID_1)).thenReturn(Optional.of(entity));
-
-        SkyXpCharacter character = createCharacter();
-        when(characterConverter.convertEntity(entity)).thenReturn(character);
-        //WHEN
-        SkyXpCharacter result = underTest.findById(CHARACTER_ID_1);
-        //THEN
-        verify(characterRepository).findById(CHARACTER_ID_1);
-        verify(characterConverter).convertEntity(entity);
-        assertEquals(character, result);
     }
 
     @Test

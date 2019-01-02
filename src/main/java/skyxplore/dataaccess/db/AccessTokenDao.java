@@ -1,9 +1,10 @@
 package skyxplore.dataaccess.db;
 
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.AccessTokenRepository;
-import com.github.saphyra.converter.Converter;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 
@@ -11,7 +12,7 @@ import skyxplore.domain.accesstoken.AccessTokenEntity;
 @SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
-public class AccessTokenDao extends AbstractDao<AccessTokenEntity, AccessToken, String, AccessTokenRepository>{
+public class AccessTokenDao extends AbstractDao<AccessTokenEntity, AccessToken, String, AccessTokenRepository> {
 
     public AccessTokenDao(Converter<AccessTokenEntity, AccessToken> converter, AccessTokenRepository repository) {
         super(converter, repository);

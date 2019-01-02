@@ -1,9 +1,10 @@
 package skyxplore.dataaccess.db;
 
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.ProductRepository;
-import com.github.saphyra.converter.Converter;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductEntity;
 import skyxplore.util.DateTimeUtil;

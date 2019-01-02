@@ -11,6 +11,7 @@ import skyxplore.exception.MailNotFoundException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -28,7 +29,7 @@ public class MailQueryServiceTest {
     @Test(expected = MailNotFoundException.class)
     public void testFindByMailIdShouldThrowException() {
         //GIVEN
-        when(mailDao.findById(MAIL_ID_1)).thenReturn(null);
+        when(mailDao.findById(MAIL_ID_1)).thenReturn(Optional.empty());
         //WHEN
         underTest.findMailById(MAIL_ID_1);
     }
@@ -37,7 +38,7 @@ public class MailQueryServiceTest {
     public void testFindByMailId() {
         //GIVEN
         Mail mail = createMail();
-        when(mailDao.findById(MAIL_ID_1)).thenReturn(mail);
+        when(mailDao.findById(MAIL_ID_1)).thenReturn(Optional.of(mail));
         //WHEN
         Mail result = underTest.findMailById(MAIL_ID_1);
         //THEN

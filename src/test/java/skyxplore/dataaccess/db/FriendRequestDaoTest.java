@@ -12,13 +12,14 @@ import skyxplore.domain.community.friendrequest.FriendRequestEntity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.FRIEND_ID;
+import static skyxplore.testutil.TestUtils.createFriendRequest;
+import static skyxplore.testutil.TestUtils.createFriendRequestEntity;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
@@ -52,32 +53,6 @@ public class FriendRequestDaoTest {
         underTest.deleteByCharacterId(CHARACTER_ID_1);
         //THEN
         verify(friendRequestRepository).deleteByCharacterId(CHARACTER_ID_1);
-    }
-
-    @Test
-    public void testFindByIdShouldReturnNull(){
-        //GIVEN
-        when(friendRequestRepository.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
-        //WHEN
-        FriendRequest result = underTest.findById(FRIEND_REQUEST_ID);
-        //THEN
-        assertNull(result);
-    }
-
-    @Test
-    public void testFindByIdShouldCallRepositoryAndReturnDomain(){
-        //GIVEN
-        FriendRequestEntity entity = createFriendRequestEntity();
-        when(friendRequestRepository.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.of(entity));
-
-        FriendRequest request = createFriendRequest();
-        when(friendRequestConverter.convertEntity(entity)).thenReturn(request);
-        //WHEN
-        FriendRequest result = underTest.findById(FRIEND_REQUEST_ID);
-        //THEN
-        verify(friendRequestRepository).findById(FRIEND_REQUEST_ID);
-        verify(friendRequestConverter).convertEntity(entity);
-        assertEquals(request, result);
     }
 
     @Test

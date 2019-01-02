@@ -9,6 +9,8 @@ import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.UserNotFoundException;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -26,7 +28,7 @@ public class UserQueryServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void testGetUserByIdShouldThrowExceptionWhenNotFound(){
         //GIVEN
-        when(userDao.findById(USER_ID)).thenReturn(null);
+        when(userDao.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.getUserById(USER_ID);
     }
@@ -35,7 +37,7 @@ public class UserQueryServiceTest {
     public void testGetUserByIdShouldQueryAndReturn(){
         //GIVEN
         SkyXpUser user = createUser();
-        when(userDao.findById(USER_ID)).thenReturn(user);
+        when(userDao.findById(USER_ID)).thenReturn(Optional.of(user));
         //WHEN
         SkyXpUser result = underTest.getUserById(USER_ID);
         //THEN

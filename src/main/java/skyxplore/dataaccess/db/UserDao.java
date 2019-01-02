@@ -1,19 +1,18 @@
 package skyxplore.dataaccess.db;
 
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.UserRepository;
-import com.github.saphyra.converter.Converter;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.domain.user.UserEntity;
-import skyxplore.exception.UserNotFoundException;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Component
 @Slf4j
-public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepository>{
+public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepository> {
     private final CredentialsDao credentialsDao;
 
     public UserDao(

@@ -15,6 +15,7 @@ import skyxplore.exception.FriendshipNotFoundException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
@@ -36,7 +37,7 @@ public class FriendshipQueryServiceTest {
     @Test(expected = FriendRequestNotFoundException.class)
     public void testFindFriendRequestByIdShouldThrowExceptionWhenNull(){
         //GIVEN
-        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(null);
+        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.findFriendRequestById(FRIEND_REQUEST_ID);
     }
@@ -45,7 +46,7 @@ public class FriendshipQueryServiceTest {
     public void testFindFriendRequestShouldCallDao(){
         //GIVEN
         FriendRequest request = createFriendRequest();
-        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(request);
+        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.of(request));
         //WHEN
         FriendRequest result = underTest.findFriendRequestById(FRIEND_REQUEST_ID);
         //THEN
@@ -55,7 +56,7 @@ public class FriendshipQueryServiceTest {
     @Test(expected = FriendshipNotFoundException.class)
     public void testFindFriendshipByIdShouldThrowExceptionWhenNull(){
         //GIVEN
-        when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(null);
+        when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.findFriendshipById(FRIEND_REQUEST_ID);
     }
@@ -64,7 +65,7 @@ public class FriendshipQueryServiceTest {
     public void testFindFriendshipShouldCallDao(){
         //GIVEN
         Friendship friendship = createFriendship();
-        when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(friendship);
+        when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.of(friendship));
         //WHEN
         Friendship result = underTest.findFriendshipById(FRIEND_REQUEST_ID);
         //THEN

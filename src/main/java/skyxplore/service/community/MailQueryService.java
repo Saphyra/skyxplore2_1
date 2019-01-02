@@ -14,11 +14,8 @@ public class MailQueryService {
     private final MailDao mailDao;
 
     public Mail findMailById(String mailId) {
-        Mail mail = mailDao.findById(mailId);
-        if (mail == null) {
-            throw new MailNotFoundException("Mail not found with id " + mailId);
-        }
-        return mail;
+        return mailDao.findById(mailId)
+            .orElseThrow(() -> new MailNotFoundException("Mail not found with id " + mailId));
     }
 
     public List<Mail> getArchivedMails(String characterId) {

@@ -32,11 +32,8 @@ public class CharacterQueryService {
     private final FriendshipQueryService friendshipQueryService;
 
     public SkyXpCharacter findByCharacterId(String characterId) {
-        SkyXpCharacter character = characterDao.findById(characterId);
-        if (character == null) {
-            throw new CharacterNotFoundException("Character not found with id " + characterId);
-        }
-        return character;
+        return characterDao.findById(characterId)
+            .orElseThrow(() -> new CharacterNotFoundException("Character not found with id " + characterId));
     }
 
     public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {

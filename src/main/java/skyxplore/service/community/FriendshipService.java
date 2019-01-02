@@ -1,24 +1,21 @@
 package skyxplore.service.community;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.exception.CharacterBlockedException;
-import skyxplore.exception.FriendRequestNotFoundException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
 import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -67,10 +64,7 @@ public class FriendshipService {
     }
 
     public void declineFriendRequest(String friendRequestId, String characterId) {
-        FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
-        if (friendRequest == null) {
-            throw new FriendRequestNotFoundException("Friend request not found with id " + friendRequestId);
-        }
+        FriendRequest friendRequest = friendshipQueryService.findFriendRequestById(friendRequestId);
         if (!friendRequest.getCharacterId().equals(characterId)
             && !friendRequest.getFriendId().equals(characterId)) {
             throw new UnauthorizedException(friendRequestId + " is not a friendRequest of character " + characterId);

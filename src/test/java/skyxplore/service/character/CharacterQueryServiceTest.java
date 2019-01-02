@@ -21,31 +21,45 @@ import skyxplore.service.community.FriendshipQueryService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_2;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_3;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_4;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_5;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_6;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_7;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
+import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
+import static skyxplore.testutil.TestUtils.USER_FAKE_ID;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createBlockedCharacter;
+import static skyxplore.testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.createGeneralDescriptionMap;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterQueryServiceTest {
     @Mock
-    private BlockedCharacterQueryService blockedCharacterQueryService;
+    private  BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private CharacterNameLikeCache characterNameLikeCache;
+    private  CharacterNameLikeCache characterNameLikeCache;
 
     @Mock
-    private CharacterDao characterDao;
+    private  CharacterDao characterDao;
 
     @Mock
-    private GameDataFacade gameDataFacade;
+    private  GameDataFacade gameDataFacade;
 
     @Mock
-    private FriendshipQueryService friendshipQueryService;
+    private  FriendshipQueryService friendshipQueryService;
 
     @InjectMocks
     private CharacterQueryService underTest;
@@ -53,7 +67,7 @@ public class CharacterQueryServiceTest {
     @Test(expected = CharacterNotFoundException.class)
     public void testFindByCharacterIdShouldThrowExceptionWhenNotFound(){
         //GIVEN
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(null);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
         //WHEN
         underTest.findByCharacterId(CHARACTER_ID_1);
     }
@@ -62,7 +76,7 @@ public class CharacterQueryServiceTest {
     public void testFindByCharacterIdShouldReturnCharacter(){
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
         //WHEN
         SkyXpCharacter result = underTest.findByCharacterId(CHARACTER_ID_1);
         //THEN
@@ -73,7 +87,7 @@ public class CharacterQueryServiceTest {
     @Test(expected = CharacterNotFoundException.class)
     public void testFindCharacterByIdAuthorizesShouldThrowExceptionWhenNotFound(){
         //GIVEN
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(null);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
         //WHEN
         underTest.findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID);
     }
@@ -82,7 +96,7 @@ public class CharacterQueryServiceTest {
     public void testFindCharacterByIdAuthorizesShouldThrowExceptionWhenWrongUserId(){
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
         //WHEN
         underTest.findCharacterByIdAuthorized(CHARACTER_ID_1, USER_FAKE_ID);
     }
@@ -91,7 +105,7 @@ public class CharacterQueryServiceTest {
     public void testFindCharacterByIdAuthorizedShouldReturn(){
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
         //WHEN
         SkyXpCharacter result = underTest.findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID);
         //THEN
@@ -115,8 +129,8 @@ public class CharacterQueryServiceTest {
 
         SkyXpCharacter character2 = createCharacter();
         character2.setCharacterId(CHARACTER_ID_3);
-        when(characterDao.findById(CHARACTER_ID_2)).thenReturn(character1);
-        when(characterDao.findById(CHARACTER_ID_3)).thenReturn(character2);
+        when(characterDao.findById(CHARACTER_ID_2)).thenReturn(Optional.of(character1));
+        when(characterDao.findById(CHARACTER_ID_3)).thenReturn(Optional.of(character2));
         //WHEN
         List<SkyXpCharacter> result = underTest.getBlockedCharacters(CHARACTER_ID_1);
         //THEN
@@ -131,7 +145,7 @@ public class CharacterQueryServiceTest {
     public void testGetCharactersCanBeAddresseeShouldReturnFilteredMatchingCharacters() throws ExecutionException {
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
 
         SkyXpCharacter ownCharacter = createCharacter();
         ownCharacter.setCharacterId(CHARACTER_ID_5);
@@ -172,7 +186,7 @@ public class CharacterQueryServiceTest {
     public void testGetCharactersCanBeBlockedShouldReturnFilteredMatchingCharacters() throws ExecutionException {
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
 
         SkyXpCharacter ownCharacter = createCharacter();
         ownCharacter.setCharacterId(CHARACTER_ID_5);
@@ -213,7 +227,7 @@ public class CharacterQueryServiceTest {
     public void testGetCharactersCanBeFriendShouldReturnFilteredMatchingCharacters() throws ExecutionException {
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
 
         SkyXpCharacter ownCharacter = createCharacter();
         ownCharacter.setCharacterId(CHARACTER_ID_5);
@@ -277,7 +291,7 @@ public class CharacterQueryServiceTest {
     public void testGetEquipmentsOfCharacterShouldReturn(){
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
 
         Map<String, GeneralDescription> equipmentDataMap = createGeneralDescriptionMap();
         when(gameDataFacade.collectEquipmentData(character.getEquipments())).thenReturn(equipmentDataMap);
@@ -294,7 +308,7 @@ public class CharacterQueryServiceTest {
     public void testGetMoneyOfCharacter(){
         //GIVEN
         SkyXpCharacter character = createCharacter();
-        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(character);
+        when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
         //WHEN
         Integer result = underTest.getMoneyOfCharacter(CHARACTER_ID_1);
         //THEN

@@ -65,4 +65,9 @@ public class FactoryQueryService {
     public String getFactoryIdOfCharacter(String characterId) {
         return findFactoryOfCharacterValidated(characterId).getFactoryId();
     }
+
+    public Factory findByFactoryId(String factoryId) {
+        return factoryDao.findById(factoryId)
+            .orElseThrow(() -> new FactoryNotFoundException("Factory not found with factoryId " + factoryId));
+    }
 }

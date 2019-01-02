@@ -1,9 +1,10 @@
 package skyxplore.dataaccess.db;
 
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.EquippedShipRepository;
-import com.github.saphyra.converter.Converter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.exception.ShipNotFoundException;
@@ -11,7 +12,7 @@ import skyxplore.exception.ShipNotFoundException;
 @SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
-public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShip, String, EquippedShipRepository>{
+public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShip, String, EquippedShipRepository> {
     private final SlotDao slotDao;
 
     public EquippedShipDao(

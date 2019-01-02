@@ -16,11 +16,8 @@ public class UserQueryService {
     private final UserDao userDao;
 
     public SkyXpUser getUserById(String userId) {
-        SkyXpUser user = userDao.findById(userId);
-        if (user == null) {
-            throw new UserNotFoundException("User not found with id" + userId);
-        }
-        return user;
+        return userDao.findById(userId)
+            .orElseThrow(() -> new UserNotFoundException("User not found with id" + userId));
     }
 
     public boolean isEmailExists(String email) {

@@ -21,19 +21,13 @@ public class FriendshipQueryService {
     private final FriendshipDao friendshipDao;
 
     public FriendRequest findFriendRequestById(String friendRequestId) {
-        FriendRequest friendRequest = friendRequestDao.findById(friendRequestId);
-        if (friendRequest == null) {
-            throw new FriendRequestNotFoundException("FriendRequest not found with id " + friendRequestId);
-        }
-        return friendRequest;
+        return friendRequestDao.findById(friendRequestId)
+            .orElseThrow(() -> new FriendRequestNotFoundException("FriendRequest not found with id " + friendRequestId));
     }
 
     public Friendship findFriendshipById(String friendshipId) {
-        Friendship friendship = friendshipDao.findById(friendshipId);
-        if(friendship == null){
-            throw new FriendshipNotFoundException("Friendship not found with id " + friendshipId);
-        }
-        return friendship;
+        return friendshipDao.findById(friendshipId)
+            .orElseThrow(() -> new FriendshipNotFoundException("Friendship not found with id " + friendshipId));
     }
 
     public List<Friendship> getFriends(String characterId) {
@@ -61,11 +55,11 @@ public class FriendshipQueryService {
         return friendRequestDao.getByCharacterId(characterId);
     }
 
-    public boolean isFriendshipAlreadyExists(String characterId, String friendId){
+    public boolean isFriendshipAlreadyExists(String characterId, String friendId) {
         return friendshipDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
     }
 
-    public boolean isFriendRequestAlreadyExists(String characterId, String friendId){
+    public boolean isFriendRequestAlreadyExists(String characterId, String friendId) {
         return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
     }
 

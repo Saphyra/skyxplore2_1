@@ -1,15 +1,16 @@
 package skyxplore.dataaccess.db;
 
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CredentialsRepository;
-import com.github.saphyra.converter.Converter;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.credentials.CredentialsEntity;
 
 @Slf4j
 @Component
-public class CredentialsDao extends AbstractDao<CredentialsEntity, Credentials, String, CredentialsRepository>{
+public class CredentialsDao extends AbstractDao<CredentialsEntity, Credentials, String, CredentialsRepository> {
 
     public CredentialsDao(Converter<CredentialsEntity, Credentials> converter, CredentialsRepository repository) {
         super(converter, repository);

@@ -15,6 +15,7 @@ import skyxplore.service.character.CharacterQueryService;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -89,5 +90,25 @@ public class FactoryQueryServiceTest {
         when(factoryDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(factory);
         //WHEN
         assertEquals(FACTORY_ID_1, underTest.getFactoryIdOfCharacter(CHARACTER_ID_1));
+    }
+
+    @Test(expected = FactoryNotFoundException.class)
+    public void testFindByFactoryIdShouldThrowExceptionWhenNotFound(){
+        //GIVEN
+        when(factoryDao.findById(FACTORY_ID_1)).thenReturn(Optional.empty());
+        //WHEN
+        underTest.findByFactoryId(FACTORY_ID_1);
+    }
+
+    @Test
+    public void testFindByFactoryIdShouldReturn(){
+        //GIVEN
+        Factory factory = createFactory();
+        when(factoryDao.findById(FACTORY_ID_1)).thenReturn(Optional.of(factory));
+        //WHEN
+        Factory result = underTest.findByFactoryId(FACTORY_ID_1);
+        //THEN
+        verify(factoryDao).findById(FACTORY_ID_1);
+        assertEquals(factory, result);
     }
 }

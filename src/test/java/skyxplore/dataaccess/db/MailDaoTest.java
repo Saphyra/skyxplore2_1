@@ -1,7 +1,22 @@
 package skyxplore.dataaccess.db;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.repository.MailRepository;
+import skyxplore.domain.community.mail.Mail;
+import skyxplore.domain.community.mail.MailConverter;
+import skyxplore.domain.community.mail.MailEntity;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
@@ -9,21 +24,6 @@ import static skyxplore.testutil.TestUtils.MAIL_ID_1;
 import static skyxplore.testutil.TestUtils.MAIL_SEND_TIME_EPOCH;
 import static skyxplore.testutil.TestUtils.createMail;
 import static skyxplore.testutil.TestUtils.createMailEntity;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.repository.MailRepository;
-import skyxplore.domain.community.mail.Mail;
-import skyxplore.domain.community.mail.MailConverter;
-import skyxplore.domain.community.mail.MailEntity;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
@@ -66,9 +66,9 @@ public class MailDaoTest {
         //GIVEN
         when(mailRepository.findById(MAIL_ID_1)).thenReturn(Optional.empty());
         //WHEN
-        Mail result = underTest.findById(MAIL_ID_1);
+        Optional<Mail> result = underTest.findById(MAIL_ID_1);
         //THEN
-        assertNull(result);
+        assertFalse(result.isPresent());
     }
 
     @Test
@@ -80,11 +80,12 @@ public class MailDaoTest {
         Mail mail = createMail();
         when(mailConverter.convertEntity(entity)).thenReturn(mail);
         //WHEN
-        Mail result = underTest.findById(MAIL_ID_1);
+        Optional<Mail> result = underTest.findById(MAIL_ID_1);
         //THEN
         verify(mailRepository).findById(MAIL_ID_1);
         verify(mailConverter).convertEntity(entity);
-        assertEquals(mail, result);
+        assertTrue(result.isPresent());
+        assertEquals(mail, result.get());
     }
 
     @Test

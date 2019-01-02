@@ -1,5 +1,25 @@
 package skyxplore.service.community;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.FriendRequestDao;
+import skyxplore.dataaccess.db.FriendshipDao;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import skyxplore.domain.community.friendrequest.FriendRequest;
+import skyxplore.domain.community.friendship.Friendship;
+import skyxplore.exception.CharacterBlockedException;
+import skyxplore.exception.FriendshipAlreadyExistsException;
+import skyxplore.exception.base.UnauthorizedException;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.util.IdGenerator;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,28 +31,6 @@ import static skyxplore.testutil.TestUtils.FRIEND_ID;
 import static skyxplore.testutil.TestUtils.FRIEND_REQUEST_ID;
 import static skyxplore.testutil.TestUtils.createFriendRequest;
 import static skyxplore.testutil.TestUtils.createFriendship;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.FriendRequestDao;
-import skyxplore.dataaccess.db.FriendshipDao;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.exception.CharacterBlockedException;
-import skyxplore.exception.FriendRequestNotFoundException;
-import skyxplore.exception.FriendshipAlreadyExistsException;
-import skyxplore.exception.base.UnauthorizedException;
-import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.IdGenerator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipServiceTest {
@@ -127,19 +125,11 @@ public class FriendshipServiceTest {
         assertEquals(FRIEND_ID, argumentCaptor.getValue().getFriendId());
     }
 
-    @Test(expected = FriendRequestNotFoundException.class)
-    public void testDeclineFriendRequestShouldThrowExceptionWhenNotFound() {
-        //GIVEN
-        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(null);
-        //WHEN
-        underTest.declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID_1);
-    }
-
     @Test(expected = UnauthorizedException.class)
     public void testDeclineFriendRequestShouldThrowExceptionWhenWrongId() {
         //GIVEN
         FriendRequest friendRequest = createFriendRequest();
-        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
+        when(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
         //WHEN
         underTest.declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID_2);
     }
@@ -148,11 +138,10 @@ public class FriendshipServiceTest {
     public void testDeclineFriendRequestShouldDelete() {
         //GIVEN
         FriendRequest friendRequest = createFriendRequest();
-        when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
+        when(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
         //WHEN
         underTest.declineFriendRequest(FRIEND_REQUEST_ID, FRIEND_ID);
         //tTHEN
-        verify(friendRequestDao).findById(FRIEND_REQUEST_ID);
         verify(friendRequestDao).delete(friendRequest);
     }
 
