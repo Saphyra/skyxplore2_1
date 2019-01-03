@@ -1,5 +1,6 @@
 package skyxplore.service.ship;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,16 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
-import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static skyxplore.service.EquippedShipFacade.*;
+import static skyxplore.service.EquippedShipFacade.BACK_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.LEFT_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.RIGHT_SLOT_NAME;
 
 @Service
 @Slf4j

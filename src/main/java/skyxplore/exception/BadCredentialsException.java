@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.UnauthorizedException;
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 
 public class BadCredentialsException extends UnauthorizedException {
     public BadCredentialsException(String message){

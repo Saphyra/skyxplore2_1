@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.ForbiddenException;
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 
 public class BadlyConfirmedPasswordException extends ForbiddenException {
     public BadlyConfirmedPasswordException(String message) {

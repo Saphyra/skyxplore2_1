@@ -1,5 +1,6 @@
 package skyxplore.domain.ship;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +10,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.gamedata.entity.Extender;
 import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.exception.base.BadRequestException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,15 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_CONNECTOR;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.DATA_SHIP_CONNECTOR_SLOT;
+import static skyxplore.testutil.TestUtils.DATA_SHIP_COREHULL;
+import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_TYPE;
+import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipTest {

@@ -1,5 +1,6 @@
 package skyxplore.service.ship;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
 
 import javax.transaction.Transactional;

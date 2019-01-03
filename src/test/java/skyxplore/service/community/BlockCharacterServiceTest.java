@@ -1,5 +1,6 @@
 package skyxplore.service.community;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -10,13 +11,14 @@ import skyxplore.dataaccess.db.BlockedCharacterDao;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.exception.BlockedCharacterNotFoundException;
 import skyxplore.exception.CharacterAlreadyBlockedException;
-import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.BLOCKED_CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.createBlockedCharacter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockCharacterServiceTest {

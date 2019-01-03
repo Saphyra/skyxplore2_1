@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 
 public class BadSlotNameException extends BadRequestException {
     public BadSlotNameException(String slotId) {

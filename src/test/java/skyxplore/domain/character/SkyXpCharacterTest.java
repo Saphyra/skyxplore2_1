@@ -1,19 +1,23 @@
 package skyxplore.domain.character;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.exception.NotEnoughMoneyException;
-import skyxplore.exception.base.BadRequestException;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static skyxplore.testutil.TestUtils.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static skyxplore.testutil.TestUtils.CHARACTER_ENCRYPTED_EQUIPMENTS;
+import static skyxplore.testutil.TestUtils.CHARACTER_EQUIPMENT;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCharacterTest {

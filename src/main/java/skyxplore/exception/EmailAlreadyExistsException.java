@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.ConflictException;
+import com.github.saphyra.exceptionhandling.exception.ConflictException;
 
 public class EmailAlreadyExistsException extends ConflictException {
     public EmailAlreadyExistsException(String message) {

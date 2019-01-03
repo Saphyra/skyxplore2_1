@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.NotFoundException;
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 
 public class FactoryNotFoundException extends NotFoundException {
     public FactoryNotFoundException(String message) {

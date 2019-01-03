@@ -1,5 +1,6 @@
 package skyxplore.service.ship;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,6 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
-import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.ArrayList;
@@ -28,7 +28,11 @@ import static org.mockito.Mockito.when;
 import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
 import static skyxplore.service.EquippedShipFacade.DEFENSE_SLOT_NAME;
 import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.DATA_SLOT;
+import static skyxplore.testutil.TestUtils.EQUIP_ITEM_ID;
+import static skyxplore.testutil.TestUtils.createEquipRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipServiceTest {

@@ -1,5 +1,6 @@
 package skyxplore.service.accesstoken;
 
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -8,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.cache.AccessTokenCache;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.Optional;
@@ -17,7 +17,9 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createAccessToken;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterSelectServiceTest {

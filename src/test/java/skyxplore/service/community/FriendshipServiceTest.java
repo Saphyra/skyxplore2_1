@@ -1,5 +1,6 @@
 package skyxplore.service.community;
 
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -13,7 +14,6 @@ import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
-import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.IdGenerator;
 

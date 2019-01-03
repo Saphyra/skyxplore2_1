@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.ConflictException;
+import com.github.saphyra.exceptionhandling.exception.ConflictException;
 
 public class CharacterNameAlreadyExistsException extends ConflictException {
     public CharacterNameAlreadyExistsException(String message){

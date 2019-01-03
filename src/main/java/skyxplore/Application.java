@@ -1,6 +1,7 @@
 package skyxplore;
 
 import com.github.saphyra.encryption.EnableEncryption;
+import com.github.saphyra.exceptionhandling.EnableExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 @Slf4j
 @EnableEncryption
+@EnableExceptionHandler
 public class Application {
     public static ConfigurableApplicationContext APP_CTX = null;
 

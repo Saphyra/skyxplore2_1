@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.ForbiddenException;
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 
 public class NotEnoughMaterialsException extends ForbiddenException {
     public NotEnoughMaterialsException(String message) {

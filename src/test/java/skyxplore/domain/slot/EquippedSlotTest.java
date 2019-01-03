@@ -1,5 +1,6 @@
 package skyxplore.domain.slot;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.exception.base.BadRequestException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_CONNECTOR;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ID;
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedSlotTest {

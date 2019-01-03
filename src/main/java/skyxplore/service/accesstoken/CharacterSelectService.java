@@ -1,12 +1,12 @@
 package skyxplore.service.accesstoken;
 
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.cache.AccessTokenCache;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.exception.base.UnauthorizedException;
 import skyxplore.service.character.CharacterQueryService;
 
 @Service
@@ -20,7 +20,7 @@ public class CharacterSelectService {
     public void selectCharacter(String characterId, String userId) {
         AccessToken accessToken = accessTokenCache.get(userId)
             .orElseThrow(
-                () -> new UnauthorizedException("Accesstoken not found with userId " + userId)
+                () -> new UnauthorizedException("AccessToken not found with userId " + userId)
             );
         characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         accessToken.setCharacterId(characterId);
