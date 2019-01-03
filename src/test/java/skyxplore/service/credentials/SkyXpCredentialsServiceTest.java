@@ -50,7 +50,7 @@ public class SkyXpCredentialsServiceTest {
     @Test(expected = BadCredentialsException.class)
     public void testGetCredentialsByNameShouldThrowExceptionWhenNotFound() {
         //GIVEN
-        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(null);
+        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.empty());
         //WHEN
         underTest.getCredentialsByName(USER_NAME);
     }

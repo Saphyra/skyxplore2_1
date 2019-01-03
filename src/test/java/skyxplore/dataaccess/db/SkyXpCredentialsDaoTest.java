@@ -72,12 +72,12 @@ public class SkyXpCredentialsDaoTest {
         when(credentialsRepository.getByUserName(USER_NAME)).thenReturn(entity);
 
         SkyXpCredentials skyXpCredentials = createCredentials();
-        when(credentialsConverter.convertEntity(entity)).thenReturn(skyXpCredentials);
+        when(credentialsConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpCredentials));
         //WHEN
         Optional<SkyXpCredentials> result = underTest.getCredentialsByName(USER_NAME);
         //THEN
         verify(credentialsRepository).getByUserName(USER_NAME);
-        verify(credentialsConverter).convertEntity(entity);
+        verify(credentialsConverter).convertEntityToOptional(entity);
         assertTrue(result.isPresent());
         assertEquals(skyXpCredentials, result.get());
     }

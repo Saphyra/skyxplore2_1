@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class AuthDaoImpl implements AuthDao {
     private final AccessTokenConverter accessTokenConverter;
     private final AccessTokenDao accessTokenDao;
