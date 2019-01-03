@@ -23,15 +23,12 @@ public class CredentialsService {
     }
 
     public SkyXpCredentials getCredentialsByName(String userName) {
-        SkyXpCredentials skyXpCredentials = credentialsDao.getCredentialsByName(userName);
-        if (skyXpCredentials == null) {
-            throw new BadCredentialsException("SkyXpCredentials cannot be found. Username: " + userName);
-        }
-        return skyXpCredentials;
+        return credentialsDao.getCredentialsByName(userName)
+            .orElseThrow(() -> new BadCredentialsException("SkyXpCredentials cannot be found. Username: " + userName));
     }
 
     public boolean isUserNameExists(String userName) {
-        return credentialsDao.getCredentialsByName(userName) != null;
+        return credentialsDao.getCredentialsByName(userName).isPresent();
     }
 
     public void save(SkyXpCredentials skyXpCredentials) {

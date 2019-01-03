@@ -8,6 +8,8 @@ import skyxplore.dataaccess.db.repository.CredentialsRepository;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.credentials.CredentialsEntity;
 
+import java.util.Optional;
+
 @Slf4j
 @Component
 public class CredentialsDao extends AbstractDao<CredentialsEntity, SkyXpCredentials, String, CredentialsRepository> {
@@ -20,7 +22,7 @@ public class CredentialsDao extends AbstractDao<CredentialsEntity, SkyXpCredenti
         return repository.findById(userId).map(converter::convertEntity).orElse(null);
     }
 
-    public SkyXpCredentials getCredentialsByName(String userName) {
-        return converter.convertEntity(repository.getByUserName(userName));
+    public Optional<SkyXpCredentials> getCredentialsByName(String userName) {
+        return converter.convertEntityToOptional(repository.getByUserName(userName));
     }
 }

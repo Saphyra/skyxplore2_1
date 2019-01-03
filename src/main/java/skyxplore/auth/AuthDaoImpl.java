@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.dataaccess.db.CredentialsDao;
 import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.credentials.SkyXpCredentials;
 
 import java.time.OffsetDateTime;
 import java.util.Optional;
@@ -30,8 +29,8 @@ public class AuthDaoImpl implements AuthDao {
 
     @Override
     public Optional<User> findUserByUserName(String userName) {
-        SkyXpCredentials credentials = credentialsDao.getCredentialsByName(userName);
-        return userConverter.convertEntity(userDao.findById(credentials.getUserId()));
+        return credentialsDao.getCredentialsByName(userName)
+            .flatMap(skyXpCredentials -> userConverter.convertEntity(userDao.findById(skyXpCredentials.getUserId())));
     }
 
     @Override

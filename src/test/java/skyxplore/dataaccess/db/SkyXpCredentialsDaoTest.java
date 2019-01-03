@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.*;
@@ -73,11 +74,12 @@ public class SkyXpCredentialsDaoTest {
         SkyXpCredentials skyXpCredentials = createCredentials();
         when(credentialsConverter.convertEntity(entity)).thenReturn(skyXpCredentials);
         //WHEN
-        SkyXpCredentials result = underTest.getCredentialsByName(USER_NAME);
+        Optional<SkyXpCredentials> result = underTest.getCredentialsByName(USER_NAME);
         //THEN
         verify(credentialsRepository).getByUserName(USER_NAME);
         verify(credentialsConverter).convertEntity(entity);
-        assertEquals(skyXpCredentials, result);
+        assertTrue(result.isPresent());
+        assertEquals(skyXpCredentials, result.get());
     }
 
     @Test
