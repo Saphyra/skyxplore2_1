@@ -21,6 +21,7 @@ import skyxplore.service.CharacterFacade;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
@@ -121,7 +122,7 @@ public class CharacterControllerTest {
     @Test
     public void testIsCharNameExistsShouldCallCacheAndReturnResponse() throws ExecutionException {
         //GIVEN
-        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(true);
+        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(Optional.of(true));
         //WHEN
         boolean result = underTest.isCharNameExists(new OneStringParamRequest(CHARACTER_NAME));
         //THEN

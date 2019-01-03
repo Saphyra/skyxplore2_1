@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -142,7 +141,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetCharactersCanBeAddresseeShouldReturnFilteredMatchingCharacters() throws ExecutionException {
+    public void testGetCharactersCanBeAddresseeShouldReturnFilteredMatchingCharacters() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -162,7 +161,7 @@ public class CharacterQueryServiceTest {
         canBeAddressee.setCharacterId(CHARACTER_ID_4);
         canBeAddressee.setUserId(null);
 
-        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee));
+        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Optional.of(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee)));
 
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
@@ -183,7 +182,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetCharactersCanBeBlockedShouldReturnFilteredMatchingCharacters() throws ExecutionException {
+    public void testGetCharactersCanBeBlockedShouldReturnFilteredMatchingCharacters() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -203,7 +202,7 @@ public class CharacterQueryServiceTest {
         canBeAddressee.setCharacterId(CHARACTER_ID_4);
         canBeAddressee.setUserId(null);
 
-        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee));
+        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Optional.of(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee)));
 
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
@@ -224,7 +223,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetCharactersCanBeFriendShouldReturnFilteredMatchingCharacters() throws ExecutionException {
+    public void testGetCharactersCanBeFriendShouldReturnFilteredMatchingCharacters() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -252,7 +251,7 @@ public class CharacterQueryServiceTest {
         friendRequestCharacter.setCharacterId(CHARACTER_ID_7);
         friendRequestCharacter.setUserId(null);
 
-        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee, friendCharacter, friendRequestCharacter));
+        when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Optional.of(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee, friendCharacter, friendRequestCharacter)));
 
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);

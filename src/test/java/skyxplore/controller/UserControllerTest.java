@@ -11,6 +11,7 @@ import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.user.*;
 import skyxplore.service.UserFacade;
 
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertTrue;
@@ -76,7 +77,7 @@ public class UserControllerTest {
     @Test
     public void testIsEmailExistsShouldCallCacheAndReturn() throws ExecutionException {
         //GIVEN
-        when(emailCache.get(USER_EMAIL)).thenReturn(true);
+        when(emailCache.get(USER_EMAIL)).thenReturn(Optional.of(true));
         //WHEN
         boolean result = underTest.isEmailExists(new OneStringParamRequest(USER_EMAIL));
         //THEN
@@ -99,7 +100,7 @@ public class UserControllerTest {
     @Test
     public void testIsUserNameExistsShouldCallFacadeAndReturn() throws ExecutionException {
         //GIVEN
-        when(userNameCache.get(USER_NAME)).thenReturn(true);
+        when(userNameCache.get(USER_NAME)).thenReturn(Optional.of(true));
         //WHEN
         boolean result = underTest.isUsernameExists(new OneStringParamRequest(USER_NAME));
         //THEN

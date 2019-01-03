@@ -1,10 +1,11 @@
 package skyxplore.cache;
 
+import com.github.saphyra.cache.AbstractCache;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.stereotype.Component;
-import skyxplore.cache.base.AbstractCache;
 import skyxplore.service.user.UserQueryService;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -20,7 +21,7 @@ public class EmailCache extends AbstractCache<String, Boolean> {
     }
 
     @Override
-    public Boolean get(String key) {
+    public Optional<Boolean> get(String key) {
         return get(key, () -> userQueryService.isEmailExists(key));
     }
 }

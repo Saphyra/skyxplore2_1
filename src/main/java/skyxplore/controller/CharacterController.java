@@ -2,7 +2,14 @@ package skyxplore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
@@ -16,7 +23,6 @@ import skyxplore.service.CharacterFacade;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
 import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
@@ -93,9 +99,9 @@ public class CharacterController {
     }
 
     @PostMapping(IS_CHAR_NAME_EXISTS_MAPPING)
-    public boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) throws ExecutionException {
+    public boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) {
         log.info("Someone wants to know if character with name {} is exists.", request);
-        return characterNameCache.get(request.getValue());
+        return characterNameCache.get(request.getValue()).orElse(true);
     }
 
     @PostMapping(RENAME_CHARACTER_MAPPING)

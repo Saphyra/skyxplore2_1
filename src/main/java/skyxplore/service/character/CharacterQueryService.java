@@ -17,7 +17,6 @@ import skyxplore.service.community.FriendshipQueryService;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
@@ -88,7 +87,7 @@ public class CharacterQueryService {
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {
-        return Optional.ofNullable(characterNameLikeCache.get(name)).orElse(Collections.emptyList());
+        return characterNameLikeCache.get(name).orElse(Collections.emptyList());
     }
 
     private boolean isNotOwnCharacter(SkyXpCharacter character, String userId) {

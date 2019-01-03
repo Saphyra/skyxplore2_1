@@ -49,5 +49,4 @@ public class FilterHelperTest {
         //THEN
         verify(response).sendRedirect(REDIRECTION_PATH);
     }
-
 }
