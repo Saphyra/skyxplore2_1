@@ -1,21 +1,27 @@
 package skyxplore.dataaccess.db;
 
-import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.AccessTokenRepository;
-import skyxplore.domain.accesstoken.AccessToken;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
+import skyxplore.domain.accesstoken.SkyXpAccessTokenConverter;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
+import skyxplore.util.DateTimeUtil;
+
+import java.time.OffsetDateTime;
+import java.util.Optional;
 
 
 @SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
-public class AccessTokenDao extends AbstractDao<AccessTokenEntity, AccessToken, String, AccessTokenRepository> {
+public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessToken, String, AccessTokenRepository> {
+    private final DateTimeUtil dateTimeUtil;
 
-    public AccessTokenDao(Converter<AccessTokenEntity, AccessToken> converter, AccessTokenRepository repository) {
+    public AccessTokenDao(SkyXpAccessTokenConverter converter, AccessTokenRepository repository, DateTimeUtil dateTimeUtil) {
         super(converter, repository);
+        this.dateTimeUtil = dateTimeUtil;
     }
 
     public void deleteByUserId(String userId) {
@@ -23,19 +29,19 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, AccessToken, 
         repository.deleteByUserId(userId);
     }
 
-    public void deleteExpired(Long expiration) {
-        repository.deleteExpired(expiration);
+    public void deleteExpired(OffsetDateTime expiration) {
+        repository.deleteExpired(dateTimeUtil.convertDomain(expiration));
     }
 
-    public AccessToken findByCharacterId(String characterId) {
-        return converter.convertEntity(repository.findByCharacterId(characterId));
+    public Optional<SkyXpAccessToken> findByCharacterId(String characterId) {
+        return converter.convertEntityToOptional(repository.findByCharacterId(characterId));
     }
 
-    public AccessToken findByUserId(String userId) {
-        return converter.convertEntity(repository.findByUserId(userId));
+    public Optional<SkyXpAccessToken> findByUserId(String userId) {
+        return converter.convertEntityToOptional(repository.findByUserId(userId));
     }
 
-    public AccessToken findByUserIdOrTokenId(String userId, String tokenId) {
-        return converter.convertEntity(repository.findByUserIdOrAccessTokenId(userId, tokenId));
+    public Optional<SkyXpAccessToken> findByUserIdOrTokenId(String userId, String tokenId) {
+        return converter.convertEntityToOptional(repository.findByUserIdOrAccessTokenId(userId, tokenId));
     }
 }

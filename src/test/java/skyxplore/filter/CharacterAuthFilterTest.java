@@ -18,8 +18,8 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 import static skyxplore.controller.PageController.CHARACTER_SELECT_MAPPING;
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,7 +40,7 @@ public class CharacterAuthFilterTest {
     private FilterChain filterChain;
 
     @Mock
-    private FilterHelper filterHelper;
+    private CustomFilterHelper customFilterHelper;
 
     @InjectMocks
     private CharacterAuthFilter underTest;
@@ -72,7 +72,7 @@ public class CharacterAuthFilterTest {
         //THEN
         verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
         verify(cookieUtil).getCookie(request, COOKIE_CHARACTER_ID);
-        verify(filterHelper).handleUnauthorized(request, response, CHARACTER_SELECT_MAPPING);
+        verify(customFilterHelper).handleUnauthorized(request, response, CHARACTER_SELECT_MAPPING);
         verifyNoMoreInteractions(characterQueryService);
         verifyNoMoreInteractions(filterChain);
     }
@@ -86,7 +86,7 @@ public class CharacterAuthFilterTest {
         //THEN
         verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
         verify(cookieUtil).getCookie(request, COOKIE_CHARACTER_ID);
-        verify(filterHelper).handleUnauthorized(request, response, CHARACTER_SELECT_MAPPING);
+        verify(customFilterHelper).handleUnauthorized(request, response, CHARACTER_SELECT_MAPPING);
         verifyNoMoreInteractions(characterQueryService);
         verifyNoMoreInteractions(filterChain);
     }
@@ -100,7 +100,7 @@ public class CharacterAuthFilterTest {
         //THEN
         verify(cookieUtil).getCookie(request, COOKIE_USER_ID);
         verify(cookieUtil).getCookie(request, COOKIE_CHARACTER_ID);
-        verify(filterHelper).handleUnauthorized(request, response, CHARACTER_SELECT_MAPPING);
+        verify(customFilterHelper).handleUnauthorized(request, response, CHARACTER_SELECT_MAPPING);
         verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID_COOKIE, USER_ID_COOKIE);
         verifyNoMoreInteractions(filterChain);
     }

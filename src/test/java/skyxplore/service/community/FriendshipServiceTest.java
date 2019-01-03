@@ -1,6 +1,7 @@
 package skyxplore.service.community;
 
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.util.IdGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -15,7 +16,6 @@ import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.IdGenerator;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -72,7 +72,7 @@ public class FriendshipServiceTest {
         friendRequest.setCharacterId(FRIEND_ID);
         when(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
 
-        when(idGenerator.getRandomId()).thenReturn(FRIENDSHIP_ID);
+        when(idGenerator.generateRandomId()).thenReturn(FRIENDSHIP_ID);
         //WHEN
         underTest.acceptFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID_1);
         //THEN
@@ -109,7 +109,7 @@ public class FriendshipServiceTest {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, FRIEND_ID)).thenReturn(Collections.emptyList());
         when(friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID_1, FRIEND_ID)).thenReturn(false);
-        when(idGenerator.getRandomId()).thenReturn(FRIEND_REQUEST_ID);
+        when(idGenerator.generateRandomId()).thenReturn(FRIEND_REQUEST_ID);
         //WHEN
         underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID_1);
         //THEN

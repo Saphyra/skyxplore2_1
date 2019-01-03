@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @Builder
@@ -18,7 +18,7 @@ public class Mail {
     private String subject;
     private String message;
     private Boolean read;
-    private LocalDateTime sendTime;
+    private OffsetDateTime sendTime;
     private Boolean archived;
     private Boolean deletedBySender;
     private Boolean deletedByAddressee;

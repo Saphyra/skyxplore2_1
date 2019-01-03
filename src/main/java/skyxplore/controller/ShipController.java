@@ -11,7 +11,7 @@ import skyxplore.service.EquippedShipFacade;
 
 import javax.validation.Valid;
 
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @RestController

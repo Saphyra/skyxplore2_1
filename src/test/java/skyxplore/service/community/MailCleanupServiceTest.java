@@ -8,7 +8,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.util.DateTimeUtil;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -31,7 +31,7 @@ public class MailCleanupServiceTest {
     public void testDeleteExpiredMails(){
         //GIVEN
         when(dateTimeUtil.now()).thenReturn(MAIL_SEND_TIME);
-        when(dateTimeUtil.convertDomain(any(LocalDateTime.class))).thenReturn(MAIL_SEND_TIME_EPOCH);
+        when(dateTimeUtil.convertDomain(any(OffsetDateTime.class))).thenReturn(MAIL_SEND_TIME_EPOCH);
         //WHEN
         underTest.deleteExpiredMails();
         //THEN

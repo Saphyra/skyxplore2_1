@@ -24,8 +24,8 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings({"UnstableApiUsage", "WeakerAccess"})
 @RestController

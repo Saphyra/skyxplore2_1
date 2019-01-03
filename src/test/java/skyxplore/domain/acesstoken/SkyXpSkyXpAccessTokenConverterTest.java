@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.domain.accesstoken.AccessTokenConverter;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
+import skyxplore.domain.accesstoken.SkyXpAccessTokenConverter;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.util.DateTimeUtil;
 
@@ -22,19 +22,19 @@ import static skyxplore.testutil.TestUtils.createAccessToken;
 import static skyxplore.testutil.TestUtils.createAccessTokenEntity;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccessTokenConverterTest {
+public class SkyXpSkyXpAccessTokenConverterTest {
     @Mock
     private DateTimeUtil dateTimeUtil;
 
     @InjectMocks
-    private AccessTokenConverter underTest;
+    private SkyXpAccessTokenConverter underTest;
 
     @Test
     public void testConvertEntityShouldReturnNullWhenNull() {
         //GIVEN
         AccessTokenEntity entity = null;
         //WHEN
-        AccessToken result = underTest.convertEntity(entity);
+        SkyXpAccessToken result = underTest.convertEntity(entity);
         //THEN
         assertNull(result);
     }
@@ -45,7 +45,7 @@ public class AccessTokenConverterTest {
         AccessTokenEntity entity = createAccessTokenEntity();
         when(dateTimeUtil.convertEntity(ACCESS_TOKEN_LAST_ACCESS_EPOCH)).thenReturn(ACCESS_TOKEN_LAST_ACCESS);
         //WHEN
-        AccessToken result = underTest.convertEntity(entity);
+        SkyXpAccessToken result = underTest.convertEntity(entity);
         //THEN
         verify(dateTimeUtil).convertEntity(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
         assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());
@@ -56,10 +56,10 @@ public class AccessTokenConverterTest {
     @Test
     public void testConvertDomainShouldConvert() {
         //GIVEN
-        AccessToken accessToken = createAccessToken();
+        SkyXpAccessToken skyXpAccessToken = createAccessToken();
         when(dateTimeUtil.convertDomain(ACCESS_TOKEN_LAST_ACCESS)).thenReturn(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
         //WHEN
-        AccessTokenEntity result = underTest.convertDomain(accessToken);
+        AccessTokenEntity result = underTest.convertDomain(skyXpAccessToken);
         //THEN
         verify(dateTimeUtil).convertDomain(ACCESS_TOKEN_LAST_ACCESS);
         assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());

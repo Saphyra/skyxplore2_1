@@ -7,7 +7,7 @@ import com.github.saphyra.converter.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
-public class UserConverter extends ConverterBase<UserEntity, SkyXpUser> {
+public class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
     @Override
     public SkyXpUser processEntityConversion(UserEntity entity) {

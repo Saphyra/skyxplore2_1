@@ -5,22 +5,22 @@ import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CredentialsRepository;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.credentials.CredentialsEntity;
 
 @Slf4j
 @Component
-public class CredentialsDao extends AbstractDao<CredentialsEntity, Credentials, String, CredentialsRepository> {
+public class CredentialsDao extends AbstractDao<CredentialsEntity, SkyXpCredentials, String, CredentialsRepository> {
 
-    public CredentialsDao(Converter<CredentialsEntity, Credentials> converter, CredentialsRepository repository) {
+    public CredentialsDao(Converter<CredentialsEntity, SkyXpCredentials> converter, CredentialsRepository repository) {
         super(converter, repository);
     }
 
-    public Credentials getByUserId(String userId) {
+    public SkyXpCredentials getByUserId(String userId) {
         return repository.findById(userId).map(converter::convertEntity).orElse(null);
     }
 
-    public Credentials getCredentialsByName(String userName) {
+    public SkyXpCredentials getCredentialsByName(String userName) {
         return converter.convertEntity(repository.getByUserName(userName));
     }
 }

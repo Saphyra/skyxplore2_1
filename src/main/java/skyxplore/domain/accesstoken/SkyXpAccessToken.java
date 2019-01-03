@@ -2,12 +2,12 @@ package skyxplore.domain.accesstoken;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
-public class AccessToken {
+public class SkyXpAccessToken {
     private String accessTokenId;
     private String userId;
-    private LocalDateTime lastAccess;
+    private OffsetDateTime lastAccess;
     private String characterId;
 }

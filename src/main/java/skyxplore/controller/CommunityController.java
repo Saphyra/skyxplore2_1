@@ -15,7 +15,7 @@ import skyxplore.service.CommunityFacade;
 import javax.validation.Valid;
 import java.util.List;
 
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @RestController
@@ -133,7 +133,7 @@ public class CommunityController {
     public Integer getNumberOfFriendRequests(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
-        log.info("{} wants to know the number of his friend requests.");
+        log.info("{} wants to know the number of his friend requests.", characterId);
         return communityFacade.getNumberOfFriendRequests(characterId);
     }
 

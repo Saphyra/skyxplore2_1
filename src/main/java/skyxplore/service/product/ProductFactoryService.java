@@ -20,7 +20,7 @@ import skyxplore.service.factory.FactoryQueryService;
 import skyxplore.util.DateTimeUtil;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -100,8 +100,8 @@ public class ProductFactoryService {
     @Transactional
     private void startBuilding(Product product) {
         log.info("Start building: {}", product);
-        LocalDateTime startTime = dateTimeUtil.now();
-        LocalDateTime endTime = startTime.plusSeconds(product.getConstructionTime());
+        OffsetDateTime startTime = dateTimeUtil.now();
+        OffsetDateTime endTime = startTime.plusSeconds(product.getConstructionTime());
         product.setStartTime(startTime);
         product.setEndTime(endTime);
         productDao.save(product);

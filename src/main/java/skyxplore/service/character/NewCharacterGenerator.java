@@ -1,5 +1,6 @@
 package skyxplore.service.character;
 
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,6 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.util.IdGenerator;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -40,7 +40,7 @@ public class NewCharacterGenerator {
 
     public SkyXpCharacter createCharacter(String userId, String characterName) {
         SkyXpCharacter character = new SkyXpCharacter();
-        character.setCharacterId(idGenerator.getRandomId());
+        character.setCharacterId(idGenerator.generateRandomId());
         character.setCharacterName(characterName);
         character.setUserId(userId);
         character.addMoney(config.getStartMoney());
@@ -50,7 +50,7 @@ public class NewCharacterGenerator {
 
     public EquippedShip createShip(String characterId) {
         EquippedShip ship = new EquippedShip();
-        ship.setShipId(idGenerator.getRandomId());
+        ship.setShipId(idGenerator.generateRandomId());
         ship.setCharacterId(characterId);
         ship.setShipType(STARTER_SHIP_ID);
         Ship shipData = shipService.get(STARTER_SHIP_ID);
@@ -80,7 +80,7 @@ public class NewCharacterGenerator {
 
     private EquippedSlot createSlot(String shipId, Slot slot) {
         EquippedSlot equippedSlot = new EquippedSlot();
-        equippedSlot.setSlotId(idGenerator.getRandomId());
+        equippedSlot.setSlotId(idGenerator.generateRandomId());
         equippedSlot.setShipId(shipId);
         equippedSlot.setFrontSlot(slot.getFront());
         equippedSlot.setLeftSlot(slot.getSide());
@@ -125,7 +125,7 @@ public class NewCharacterGenerator {
 
     public Factory createFactory(String characterId) {
         Factory factory = new Factory();
-        factory.setFactoryId(idGenerator.getRandomId());
+        factory.setFactoryId(idGenerator.generateRandomId());
         factory.setCharacterId(characterId);
         factory.setMaterials(createMaterials());
         log.info("Factory created: {}", factory);

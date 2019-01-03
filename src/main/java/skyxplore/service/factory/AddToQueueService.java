@@ -1,5 +1,6 @@
 package skyxplore.service.factory;
 
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.DateTimeUtil;
-import skyxplore.util.IdGenerator;
 
 import javax.transaction.Transactional;
 import java.util.Map;
@@ -74,7 +74,7 @@ public class AddToQueueService {
 
     private Product createProduct(String factoryId, FactoryData elementData, Integer amount) {
         return Product.builder()
-            .productId(idGenerator.getRandomId())
+            .productId(idGenerator.generateRandomId())
             .factoryId(factoryId)
             .elementId(elementData.getId())
             .amount(amount)

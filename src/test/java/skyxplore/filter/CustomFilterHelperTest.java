@@ -14,12 +14,12 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.filter.FilterHelper.REQUEST_TYPE_HEADER;
-import static skyxplore.filter.FilterHelper.REST_TYPE_REQUEST;
+import static skyxplore.filter.CustomFilterHelper.REQUEST_TYPE_HEADER;
+import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
 import static skyxplore.testutil.TestUtils.REDIRECTION_PATH;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FilterHelperTest {
+public class CustomFilterHelperTest {
 
     @Mock
     private HttpServletRequest request;
@@ -28,7 +28,7 @@ public class FilterHelperTest {
     private HttpServletResponse response;
 
     @InjectMocks
-    private FilterHelper underTest;
+    private CustomFilterHelper underTest;
 
     @Test
     public void testHandleUnauthorizedShouldSendErrorWhenRest() throws IOException {

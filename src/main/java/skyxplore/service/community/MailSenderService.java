@@ -1,15 +1,14 @@
 package skyxplore.service.community;
 
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.DateTimeUtil;
-import skyxplore.util.IdGenerator;
 
 @RequiredArgsConstructor
 @Service
@@ -35,7 +34,7 @@ public class MailSenderService {
 
     private Mail createMail(SendMailRequest request, String characterId) {
         Mail mail = new Mail();
-        mail.setMailId(idGenerator.getRandomId());
+        mail.setMailId(idGenerator.generateRandomId());
         mail.setFrom(characterId);
         mail.setTo(request.getAddresseeId());
         mail.setSubject(request.getSubject());

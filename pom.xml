@@ -22,8 +22,14 @@
     <dependencies>
         <dependency>
             <groupId>com.github.saphyra</groupId>
+            <artifactId>auth-service</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.saphyra</groupId>
             <artifactId>cache</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
 
         <dependency>
@@ -48,6 +54,12 @@
             <groupId>com.github.saphyra</groupId>
             <artifactId>exception-handling</artifactId>
             <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.saphyra</groupId>
+            <artifactId>util</artifactId>
+            <version>1.2.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->

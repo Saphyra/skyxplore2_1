@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static skyxplore.controller.PageController.CHARACTER_SELECT_MAPPING;
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 import static skyxplore.testutil.TestUtils.AUTHENTICATED_PATH;
 
 @RunWith(MockitoJUnitRunner.class)

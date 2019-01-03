@@ -14,7 +14,7 @@ import static skyxplore.testutil.TestUtils.createCredentials;
 import static skyxplore.testutil.TestUtils.createCredentialsEntity;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CredentialsConverterTest {
+public class SkyXpCredentialsConverterTest {
     @InjectMocks
     private CredentialsConverter underTest;
 
@@ -23,7 +23,7 @@ public class CredentialsConverterTest {
         //GIVEN
         CredentialsEntity entity = null;
         //WHEN
-        Credentials result = underTest.convertEntity(entity);
+        SkyXpCredentials result = underTest.convertEntity(entity);
         //THEN
         assertNull(result);
     }
@@ -33,7 +33,7 @@ public class CredentialsConverterTest {
         //GIVEN
         CredentialsEntity entity = createCredentialsEntity();
         //WHEN
-        Credentials result = underTest.convertEntity(entity);
+        SkyXpCredentials result = underTest.convertEntity(entity);
         //THEN
         assertEquals(USER_ID, result.getUserId());
         assertEquals(USER_NAME, result.getUserName());
@@ -43,9 +43,9 @@ public class CredentialsConverterTest {
     @Test
     public void testConvertDomainShouldConvert(){
         //GIVEN
-        Credentials credentials = createCredentials();
+        SkyXpCredentials skyXpCredentials = createCredentials();
         //WHEN
-        CredentialsEntity result = underTest.convertDomain(credentials);
+        CredentialsEntity result = underTest.convertDomain(skyXpCredentials);
         //THEN
         assertEquals(USER_ID, result.getUserId());
         assertEquals(USER_NAME, result.getUserName());

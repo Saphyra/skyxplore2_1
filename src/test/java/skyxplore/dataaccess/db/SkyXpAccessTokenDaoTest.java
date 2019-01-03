@@ -6,10 +6,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.db.repository.AccessTokenRepository;
-import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.domain.accesstoken.AccessTokenConverter;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
+import skyxplore.domain.accesstoken.SkyXpAccessTokenConverter;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
+import skyxplore.util.DateTimeUtil;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -24,12 +27,15 @@ import static skyxplore.testutil.TestUtils.createAccessToken;
 import static skyxplore.testutil.TestUtils.createAccessTokenEntity;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccessTokenDaoTest {
+public class SkyXpAccessTokenDaoTest {
     @Mock
     private AccessTokenRepository accessTokenRepository;
 
     @Mock
-    private AccessTokenConverter accessTokenConverter;
+    private SkyXpAccessTokenConverter skyXpAccessTokenConverter;
+
+    @Mock
+    private DateTimeUtil dateTimeUtil;
 
     @InjectMocks
     private AccessTokenDao underTest;
@@ -52,8 +58,11 @@ public class AccessTokenDaoTest {
 
     @Test
     public void testDeleteExpiredShouldCallRepository(){
+        //GIVEN
+        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
+        when(dateTimeUtil.convertDomain(now)).thenReturn(0L);
         //WHEN
-        underTest.deleteExpired(0L);
+        underTest.deleteExpired(now);
         //THEN
         verify(accessTokenRepository).deleteExpired(0L);
     }
@@ -63,7 +72,7 @@ public class AccessTokenDaoTest {
         //GIVEN
         when(accessTokenRepository.findById(ACCESS_TOKEN_ID)).thenReturn(Optional.empty());
         //WHEN
-        Optional<AccessToken> result = underTest.findById(ACCESS_TOKEN_ID);
+        Optional<SkyXpAccessToken> result = underTest.findById(ACCESS_TOKEN_ID);
         //THEN
         assertFalse(result.isPresent());
     }
@@ -74,14 +83,15 @@ public class AccessTokenDaoTest {
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(entity);
 
-        AccessToken accessToken = createAccessToken();
-        when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
+        SkyXpAccessToken skyXpAccessToken = createAccessToken();
+        when(skyXpAccessTokenConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpAccessToken));
         //WHEN
-        AccessToken result = underTest.findByCharacterId(CHARACTER_ID_1);
+        Optional<SkyXpAccessToken> result = underTest.findByCharacterId(CHARACTER_ID_1);
         //THEN
         verify(accessTokenRepository).findByCharacterId(CHARACTER_ID_1);
-        verify(accessTokenConverter).convertEntity(entity);
-        assertEquals(accessToken, result);
+        verify(skyXpAccessTokenConverter).convertEntityToOptional(entity);
+        assertTrue(result.isPresent());
+        assertEquals(skyXpAccessToken, result.get());
     }
 
     @Test
@@ -90,15 +100,15 @@ public class AccessTokenDaoTest {
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findById(ACCESS_TOKEN_ID)).thenReturn(Optional.of(entity));
 
-        AccessToken accessToken = createAccessToken();
-        when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
+        SkyXpAccessToken skyXpAccessToken = createAccessToken();
+        when(skyXpAccessTokenConverter.convertEntity(entity)).thenReturn(skyXpAccessToken);
         //WHEN
-        Optional<AccessToken> result = underTest.findById(ACCESS_TOKEN_ID);
+        Optional<SkyXpAccessToken> result = underTest.findById(ACCESS_TOKEN_ID);
         //THEN
         verify(accessTokenRepository).findById(ACCESS_TOKEN_ID);
-        verify(accessTokenConverter).convertEntity(entity);
+        verify(skyXpAccessTokenConverter).convertEntity(entity);
         assertTrue(result.isPresent());
-        assertEquals(accessToken, result.get());
+        assertEquals(skyXpAccessToken, result.get());
     }
 
     @Test
@@ -107,14 +117,15 @@ public class AccessTokenDaoTest {
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findByUserId(USER_ID)).thenReturn(entity);
 
-        AccessToken accessToken = createAccessToken();
-        when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
+        SkyXpAccessToken skyXpAccessToken = createAccessToken();
+        when(skyXpAccessTokenConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpAccessToken));
         //WHEN
-        AccessToken result = underTest.findByUserId(USER_ID);
+        Optional<SkyXpAccessToken> result = underTest.findByUserId(USER_ID);
         //THEN
         verify(accessTokenRepository).findByUserId(USER_ID);
-        verify(accessTokenConverter).convertEntity(entity);
-        assertEquals(accessToken, result);
+        verify(skyXpAccessTokenConverter).convertEntityToOptional(entity);
+        assertTrue(result.isPresent());
+        assertEquals(skyXpAccessToken, result.get());
     }
 
     @Test
@@ -123,23 +134,24 @@ public class AccessTokenDaoTest {
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findByUserIdOrAccessTokenId(USER_ID, ACCESS_TOKEN_ID)).thenReturn(entity);
 
-        AccessToken accessToken = createAccessToken();
-        when(accessTokenConverter.convertEntity(entity)).thenReturn(accessToken);
+        SkyXpAccessToken skyXpAccessToken = createAccessToken();
+        when(skyXpAccessTokenConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpAccessToken));
         //WHEN
-        AccessToken result = underTest.findByUserIdOrTokenId(USER_ID, ACCESS_TOKEN_ID);
+        Optional<SkyXpAccessToken> result = underTest.findByUserIdOrTokenId(USER_ID, ACCESS_TOKEN_ID);
         //THEN
         verify(accessTokenRepository).findByUserIdOrAccessTokenId(USER_ID, ACCESS_TOKEN_ID);
-        verify(accessTokenConverter).convertEntity(entity);
-        assertEquals(accessToken, result);
+        verify(skyXpAccessTokenConverter).convertEntityToOptional(entity);
+        assertTrue(result.isPresent());
+        assertEquals(skyXpAccessToken, result.get());
     }
 
     @Test
-    public void testSaceShouldCallRepositors(){
+    public void testSaveShouldCallRepository(){
         //GIVEN
-        AccessToken token = createAccessToken();
+        SkyXpAccessToken token = createAccessToken();
 
         AccessTokenEntity entity = createAccessTokenEntity();
-        when(accessTokenConverter.convertDomain(token)).thenReturn(entity);
+        when(skyXpAccessTokenConverter.convertDomain(token)).thenReturn(entity);
         //WHEN
         underTest.save(token);
         //THEN

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
@@ -18,16 +18,16 @@ public class ChangeUserNameService {
     private final CredentialsService credentialsService;
 
     public void changeUserName(ChangeUserNameRequest request, String userId) {
-        Credentials credentials = credentialsService.getByUserId(userId);
+        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
         if (credentialsService.isUserNameExists(request.getNewUserName())) {
             throw new UserNameAlreadyExistsException(request.getNewUserName() + " username is already exists.");
         }
-        if (!passwordService.authenticate(request.getPassword(), credentials.getPassword())) {
+        if (!passwordService.authenticate(request.getPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }
-        credentials.setUserName(request.getNewUserName());
+        skyXpCredentials.setUserName(request.getNewUserName());
         log.info("Changing username of user {}", userId);
-        credentialsService.save(credentials);
+        credentialsService.save(skyXpCredentials);
         log.info("Username successfully changed.");
     }
 }

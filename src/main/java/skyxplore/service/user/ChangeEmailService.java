@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
@@ -27,8 +27,8 @@ public class ChangeEmailService {
             throw new EmailAlreadyExistsException(request.getNewEmail() + " email is already exists.");
         }
 
-        Credentials credentials = credentialsService.getByUserId(userId);
-        if (!passwordService.authenticate(request.getPassword(), credentials.getPassword())) {
+        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        if (!passwordService.authenticate(request.getPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }
         user.setEmail(request.getNewEmail());

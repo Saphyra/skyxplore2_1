@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
@@ -48,9 +48,9 @@ public class ChangeUserNameServiceTest {
         ChangeUserNameRequest request = createChangeUserNameRequest();
         request.setPassword(USER_FAKE_PASSWORD);
 
-        Credentials credentials = createCredentials();
+        SkyXpCredentials skyXpCredentials = createCredentials();
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
         when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
         when(passwordService.authenticate(USER_FAKE_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(false);
         //WHEN
@@ -62,9 +62,9 @@ public class ChangeUserNameServiceTest {
         //GIVEN
         ChangeUserNameRequest request = createChangeUserNameRequest();
 
-        Credentials credentials = createCredentials();
+        SkyXpCredentials skyXpCredentials = createCredentials();
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
         when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
         when(passwordService.authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(true);
         //WHEN
@@ -73,7 +73,7 @@ public class ChangeUserNameServiceTest {
         verify(passwordService).authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
         verify(credentialsService).getByUserId(USER_ID);
         verify(credentialsService).isUserNameExists(USER_NEW_NAME);
-        verify(credentialsService).save(credentials);
-        assertEquals(USER_NEW_NAME, credentials.getUserName());
+        verify(credentialsService).save(skyXpCredentials);
+        assertEquals(USER_NEW_NAME, skyXpCredentials.getUserName());
     }
 }

@@ -9,8 +9,7 @@ import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductEntity;
 import skyxplore.util.DateTimeUtil;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
@@ -37,7 +36,7 @@ public class ProductDao extends AbstractDao<ProductEntity, Product, String, Prod
     }
 
     public List<Product> getFinishedProducts() {
-        LocalDateTime time = LocalDateTime.now(ZoneOffset.UTC);
+        OffsetDateTime time = dateTimeUtil.now();
         return converter.convertEntity(repository.getFinishedProducts(dateTimeUtil.convertDomain(time)));
     }
 

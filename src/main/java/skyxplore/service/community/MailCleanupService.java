@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.util.DateTimeUtil;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @SuppressWarnings("unused")
 @Slf4j
@@ -30,8 +30,8 @@ public class MailCleanupService {
     }
 
     private Long getExpiration() {
-        LocalDateTime now = dateTimeUtil.now();
-        LocalDateTime expiration = now.minusDays(EXPIRATION_IN_DAYS);
-        return dateTimeUtil.convertDomain(expiration);
+        OffsetDateTime now = dateTimeUtil.now();
+        OffsetDateTime expiration = now.minusDays(EXPIRATION_IN_DAYS);
+        return dateTimeUtil.convertDomain(dateTimeUtil.now().minusDays(EXPIRATION_IN_DAYS));
     }
 }

@@ -1,5 +1,6 @@
 package skyxplore.service.factory;
 
+import com.github.saphyra.util.IdGenerator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,6 @@ import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.DateTimeUtil;
-import skyxplore.util.IdGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,19 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT_AMOUNT;
+import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
+import static skyxplore.testutil.TestUtils.MATERIAL_AMOUNT;
+import static skyxplore.testutil.TestUtils.MATERIAL_ID;
+import static skyxplore.testutil.TestUtils.PRODUCT_AMOUNT;
+import static skyxplore.testutil.TestUtils.PRODUCT_BUILD_PRICE;
+import static skyxplore.testutil.TestUtils.PRODUCT_CONSTRUCTION_TIME;
+import static skyxplore.testutil.TestUtils.PRODUCT_ID_1;
+import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME;
+import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME_EPOCH;
+import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddToQueueServiceTest {
@@ -119,7 +131,7 @@ public class AddToQueueServiceTest {
         materials.put(MATERIAL_ID, MATERIAL_AMOUNT);
         when(factoryData.getMaterials()).thenReturn(materials);
 
-        when(idGenerator.getRandomId()).thenReturn(PRODUCT_ID_1);
+        when(idGenerator.generateRandomId()).thenReturn(PRODUCT_ID_1);
         when(factoryData.getId()).thenReturn(DATA_ELEMENT);
         when(factoryData.getConstructionTime()).thenReturn(PRODUCT_CONSTRUCTION_TIME);
         when(dateTimeUtil.now()).thenReturn(PRODUCT_START_TIME);

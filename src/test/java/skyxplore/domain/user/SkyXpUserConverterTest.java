@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
 import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserConverterTest {
+public class SkyXpUserConverterTest {
     @InjectMocks
-    private UserConverter underTest;
+    private SkyXpUserConverter underTest;
 
     @Test
     public void testConvertEntityShouldReturnNullWhenNull(){

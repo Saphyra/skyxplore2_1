@@ -9,13 +9,13 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-public class FilterHelper {
+public class CustomFilterHelper {
     public static final String COOKIE_ACCESS_TOKEN = "accesstoken";
     public static final String COOKIE_CHARACTER_ID = "characterid";
     public static final String COOKIE_USER_ID = "userid";
 
-    static final String REQUEST_TYPE_HEADER = "Request-Type";
-    static final String REST_TYPE_REQUEST = "rest";
+    public static final String REQUEST_TYPE_HEADER = "Request-Type";
+    public static final String REST_TYPE_REQUEST = "rest";
 
     public void handleUnauthorized(HttpServletRequest request, HttpServletResponse response, String redirection) throws IOException {
         if (REST_TYPE_REQUEST.equals(request.getHeader(REQUEST_TYPE_HEADER))) {

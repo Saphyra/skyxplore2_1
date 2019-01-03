@@ -7,16 +7,16 @@ import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, AccessToken> {
+public class SkyXpAccessTokenConverter extends ConverterBase<AccessTokenEntity, SkyXpAccessToken> {
     private final DateTimeUtil dateTimeUtil;
 
 
     @Override
-    public AccessToken processEntityConversion(AccessTokenEntity entity) {
+    public SkyXpAccessToken processEntityConversion(AccessTokenEntity entity) {
         if (entity == null) {
             return null;
         }
-        AccessToken token = new AccessToken();
+        SkyXpAccessToken token = new SkyXpAccessToken();
         token.setAccessTokenId(entity.getAccessTokenId());
         token.setUserId(entity.getUserId());
         token.setLastAccess(dateTimeUtil.convertEntity(entity.getLastAccess()));
@@ -25,7 +25,7 @@ public class AccessTokenConverter extends ConverterBase<AccessTokenEntity, Acces
     }
 
     @Override
-    public AccessTokenEntity processDomainConversion(AccessToken token) {
+    public AccessTokenEntity processDomainConversion(SkyXpAccessToken token) {
         if (token == null) {
             throw new IllegalArgumentException("token must not be null");
         }

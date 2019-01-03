@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Credentials {
+public class SkyXpCredentials {
     private String userId;
     private String userName;
     private String password;

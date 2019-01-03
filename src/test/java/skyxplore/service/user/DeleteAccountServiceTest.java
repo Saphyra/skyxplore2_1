@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 
@@ -58,8 +58,8 @@ public class DeleteAccountServiceTest {
     public void testDeleteAccountShouldDelete() {
         //GIVEN
         AccountDeleteRequest request = createAccountDeleteRequest();
-        Credentials credentials = createCredentials();
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        SkyXpCredentials skyXpCredentials = createCredentials();
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
         when(passwordService.authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(true);
         //WHEN
         underTest.deleteAccount(request, USER_ID);

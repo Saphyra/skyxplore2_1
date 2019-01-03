@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.dataaccess.db.repository.UserRepository;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.domain.user.UserConverter;
+import skyxplore.domain.user.SkyXpUserConverter;
 import skyxplore.domain.user.UserEntity;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,7 +25,7 @@ public class UserDaoTest {
     private UserRepository userRepository;
 
     @Mock
-    private UserConverter userConverter;
+    private SkyXpUserConverter skyXpUserConverter;
 
     @Mock
     private CredentialsDao credentialsDao;
@@ -49,12 +49,12 @@ public class UserDaoTest {
         when(userRepository.findByEmail(USER_EMAIL)).thenReturn(userEntity);
 
         SkyXpUser user = createUser();
-        when(userConverter.convertEntity(userEntity)).thenReturn(user);
+        when(skyXpUserConverter.convertEntity(userEntity)).thenReturn(user);
         //WHEN
         SkyXpUser result = underTest.findUserByEmail(USER_EMAIL);
         //THEN
         verify(userRepository).findByEmail(USER_EMAIL);
-        verify(userConverter).convertEntity(userEntity);
+        verify(skyXpUserConverter).convertEntity(userEntity);
         assertEquals(user, result);
     }
 }

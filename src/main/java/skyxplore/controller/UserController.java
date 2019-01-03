@@ -12,7 +12,7 @@ import skyxplore.service.UserFacade;
 import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
 
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("ALL")
 @RestController

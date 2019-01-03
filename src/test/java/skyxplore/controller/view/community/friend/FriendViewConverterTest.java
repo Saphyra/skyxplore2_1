@@ -5,13 +5,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.AccessTokenDao;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.service.AccessTokenFacade;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,7 +25,7 @@ import static skyxplore.testutil.TestUtils.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FriendViewConverterTest {
     @Mock
-    private AccessTokenFacade accessTokenFacade;
+    private AccessTokenDao accessTokenDao;
 
     @Mock
     private CharacterQueryService characterQueryService;
@@ -41,12 +43,11 @@ public class FriendViewConverterTest {
         friend.setCharacterName(FRIEND_NAME);
 
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
-        when(accessTokenFacade.isCharacterActive(FRIEND_ID)).thenReturn(true);
+        when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(new SkyXpAccessToken()));
         //WHEN
         List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID_1);
         //THEN
         verify(characterQueryService).findByCharacterId(FRIEND_ID);
-        verify(accessTokenFacade).isCharacterActive(FRIEND_ID);
         assertEquals(1, result.size());
         FriendView view = result.get(0);
         assertEquals(FRIENDSHIP_ID, view.getFriendshipId());
@@ -67,12 +68,11 @@ public class FriendViewConverterTest {
         friend.setCharacterName(FRIEND_NAME);
 
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
-        when(accessTokenFacade.isCharacterActive(FRIEND_ID)).thenReturn(true);
+        when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(new SkyXpAccessToken()));
         //WHEN
         List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID_1);
         //THEN
         verify(characterQueryService).findByCharacterId(FRIEND_ID);
-        verify(accessTokenFacade).isCharacterActive(FRIEND_ID);
         assertEquals(1, result.size());
         FriendView view = result.get(0);
         assertEquals(FRIENDSHIP_ID, view.getFriendshipId());

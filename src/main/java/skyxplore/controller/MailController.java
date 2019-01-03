@@ -14,7 +14,7 @@ import skyxplore.service.MailFacade;
 import javax.validation.Valid;
 import java.util.List;
 
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j

@@ -37,7 +37,7 @@
     */
     function logout(){
         try{
-            return dao.sendRequest("DELETE", "logout");
+            return dao.sendRequest("DELETE", "logout", null, false);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

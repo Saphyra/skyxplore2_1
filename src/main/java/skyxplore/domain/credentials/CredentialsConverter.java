@@ -5,17 +5,17 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.converter.ConverterBase;
 
 @Component
-public class CredentialsConverter extends ConverterBase<CredentialsEntity, Credentials> {
+public class CredentialsConverter extends ConverterBase<CredentialsEntity, SkyXpCredentials> {
     @Override
-    public Credentials processEntityConversion(CredentialsEntity entity) {
+    public SkyXpCredentials processEntityConversion(CredentialsEntity entity) {
         if(entity == null){
             return null;
         }
-        return new Credentials(entity.getUserId(), entity.getUserName(), entity.getPassword());
+        return new SkyXpCredentials(entity.getUserId(), entity.getUserName(), entity.getPassword());
     }
 
     @Override
-    public CredentialsEntity processDomainConversion(Credentials domain) {
+    public CredentialsEntity processDomainConversion(SkyXpCredentials domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

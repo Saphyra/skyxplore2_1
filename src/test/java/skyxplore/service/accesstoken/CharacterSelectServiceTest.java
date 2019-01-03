@@ -6,13 +6,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.cache.AccessTokenCache;
 import skyxplore.dataaccess.db.AccessTokenDao;
-import skyxplore.domain.accesstoken.AccessToken;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -24,9 +22,6 @@ import static skyxplore.testutil.TestUtils.createAccessToken;
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterSelectServiceTest {
     @Mock
-    private AccessTokenCache accessTokenCache;
-
-    @Mock
     private AccessTokenDao accessTokenDao;
 
     @Mock
@@ -36,25 +31,24 @@ public class CharacterSelectServiceTest {
     private CharacterSelectService underTest;
 
     @Test(expected = UnauthorizedException.class)
-    public void testSelectCharacterShouldThrowExceptionWhenAccessTokenNotFound() throws ExecutionException {
+    public void testSelectCharacterShouldThrowExceptionWhenAccessTokenNotFound() {
         //GIVEN
-        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.empty());
+        when(accessTokenDao.findByUserId(USER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
     }
 
     @Test
-    public void testSelectCharacterShouldUpdateAccessToken() throws ExecutionException {
+    public void testSelectCharacterShouldUpdateAccessToken() {
         //GIVEN
-        AccessToken accessToken = createAccessToken();
-        accessToken.setCharacterId(null);
-        when(accessTokenCache.get(USER_ID)).thenReturn(Optional.of(accessToken));
+        SkyXpAccessToken skyXpAccessToken = createAccessToken();
+        skyXpAccessToken.setCharacterId(null);
+        when(accessTokenDao.findByUserId(USER_ID)).thenReturn(Optional.of(skyXpAccessToken));
         //WHEN
         underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
         //THEN
         verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID);
-        verify(accessTokenCache).invalidate(USER_ID);
-        verify(accessTokenDao).save(accessToken);
-        assertEquals(CHARACTER_ID_1, accessToken.getCharacterId());
+        verify(accessTokenDao).save(skyXpAccessToken);
+        assertEquals(CHARACTER_ID_1, skyXpAccessToken.getCharacterId());
     }
 }

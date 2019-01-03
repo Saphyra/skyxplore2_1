@@ -1,5 +1,23 @@
 package skyxplore.service.community;
 
+import com.github.saphyra.util.IdGenerator;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.controller.request.community.SendMailRequest;
+import skyxplore.dataaccess.db.MailDao;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import skyxplore.domain.community.mail.Mail;
+import skyxplore.exception.CharacterBlockedException;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.util.DateTimeUtil;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
@@ -12,25 +30,6 @@ import static skyxplore.testutil.TestUtils.MAIL_SEND_TIME;
 import static skyxplore.testutil.TestUtils.MAIL_SUBJECT;
 import static skyxplore.testutil.TestUtils.createBlockedCharacter;
 import static skyxplore.testutil.TestUtils.createSendMailRequest;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.controller.request.community.SendMailRequest;
-import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
-import skyxplore.domain.community.mail.Mail;
-import skyxplore.exception.CharacterBlockedException;
-import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.DateTimeUtil;
-import skyxplore.util.IdGenerator;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
@@ -70,7 +69,7 @@ public class MailSenderServiceTest {
 
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, MAILS_ADDRESSEE_ID)).thenReturn(Collections.emptyList());
 
-        when(idGenerator.getRandomId()).thenReturn(MAIL_ID_1);
+        when(idGenerator.generateRandomId()).thenReturn(MAIL_ID_1);
         when(dateTimeUtil.now()).thenReturn(MAIL_SEND_TIME);
         //WHEN
         underTest.sendMail(request, CHARACTER_ID_1);

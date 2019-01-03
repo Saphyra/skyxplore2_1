@@ -1,5 +1,6 @@
 package skyxplore.service.character;
 
+import com.github.saphyra.util.IdGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,7 +15,6 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.util.IdGenerator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,8 +24,27 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.service.character.NewCharacterGenerator.*;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.service.character.NewCharacterGenerator.ARMOR_ID;
+import static skyxplore.service.character.NewCharacterGenerator.BATTERY_ID;
+import static skyxplore.service.character.NewCharacterGenerator.GENERATOR_ID;
+import static skyxplore.service.character.NewCharacterGenerator.LASER_ID;
+import static skyxplore.service.character.NewCharacterGenerator.LAUNCHER_ID;
+import static skyxplore.service.character.NewCharacterGenerator.RIFLE_ID;
+import static skyxplore.service.character.NewCharacterGenerator.SHIELD_ID;
+import static skyxplore.service.character.NewCharacterGenerator.STARTER_SHIP_ID;
+import static skyxplore.service.character.NewCharacterGenerator.STORAGE_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
+import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
+import static skyxplore.testutil.TestUtils.DATA_SHIP_COREHULL;
+import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
+import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
+import static skyxplore.testutil.TestUtils.MATERIAL_ID;
+import static skyxplore.testutil.TestUtils.MATERIAL_MATERIAL_AMOUNT;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
+import static skyxplore.testutil.TestUtils.createShip;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NewCharacterGeneratorTest {
@@ -47,12 +66,12 @@ public class NewCharacterGeneratorTest {
     @Test
     public void testCreateCharacterShouldCreate() {
         //GIVEN
-        when(idGenerator.getRandomId()).thenReturn(CHARACTER_ID_1);
+        when(idGenerator.generateRandomId()).thenReturn(CHARACTER_ID_1);
         when(config.getStartMoney()).thenReturn(CHARACTER_MONEY);
         //WHEN
         SkyXpCharacter result = underTest.createCharacter(USER_ID, CHARACTER_NAME);
         //THEN
-        verify(idGenerator).getRandomId();
+        verify(idGenerator).generateRandomId();
         verify(config).getStartMoney();
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(CHARACTER_NAME, result.getCharacterName());
@@ -64,7 +83,7 @@ public class NewCharacterGeneratorTest {
     @Test
     public void testCreateShip() {
         //GIVEN
-        when(idGenerator.getRandomId()).thenReturn(EQUIPPED_SHIP_ID);
+        when(idGenerator.generateRandomId()).thenReturn(EQUIPPED_SHIP_ID);
 
         Ship ship = createShip();
         ship.setConnector(6);
@@ -72,7 +91,7 @@ public class NewCharacterGeneratorTest {
         //WHEN
         EquippedShip result = underTest.createShip(CHARACTER_ID_1);
         //THEN
-        verify(idGenerator).getRandomId();
+        verify(idGenerator).generateRandomId();
         verify(shipService).get(STARTER_SHIP_ID);
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
@@ -94,11 +113,11 @@ public class NewCharacterGeneratorTest {
         defenseSlot.setBack(2);
         ship.setDefense(defenseSlot);
         when(shipService.get(STARTER_SHIP_ID)).thenReturn(ship);
-        when(idGenerator.getRandomId()).thenReturn(DEFENSE_SLOT_ID);
+        when(idGenerator.generateRandomId()).thenReturn(DEFENSE_SLOT_ID);
         //WHEN
         EquippedSlot result = underTest.createDefenseSlot(EQUIPPED_SHIP_ID);
         //THEN
-        verify(idGenerator).getRandomId();
+        verify(idGenerator).generateRandomId();
         verify(shipService).get(STARTER_SHIP_ID);
 
         assertEquals((Integer) 4, result.getFrontSlot());
@@ -129,11 +148,11 @@ public class NewCharacterGeneratorTest {
         weaponSlot.setBack(1);
         ship.setWeapon(weaponSlot);
         when(shipService.get(STARTER_SHIP_ID)).thenReturn(ship);
-        when(idGenerator.getRandomId()).thenReturn(WEAPON_SLOT_ID);
+        when(idGenerator.generateRandomId()).thenReturn(WEAPON_SLOT_ID);
         //WHEN
         EquippedSlot result = underTest.createWeaponSlot(EQUIPPED_SHIP_ID);
         //THEN
-        verify(idGenerator).getRandomId();
+        verify(idGenerator).generateRandomId();
         verify(shipService).get(STARTER_SHIP_ID);
 
         assertEquals((Integer) 3, result.getFrontSlot());
@@ -152,14 +171,14 @@ public class NewCharacterGeneratorTest {
     @Test
     public void testCreateFactoryShouldCreate() {
         //GIVEN
-        when(idGenerator.getRandomId()).thenReturn(FACTORY_ID_1);
+        when(idGenerator.generateRandomId()).thenReturn(FACTORY_ID_1);
         Set<String> materialIds = new HashSet<>(Arrays.asList(MATERIAL_ID));
         when(materialService.keySet()).thenReturn(materialIds);
         when(config.getStartMaterials()).thenReturn(MATERIAL_MATERIAL_AMOUNT);
         //WHEN
         Factory result = underTest.createFactory(CHARACTER_ID_1);
         //THEN
-        verify(idGenerator).getRandomId();
+        verify(idGenerator).generateRandomId();
         verify(materialService).keySet();
         verify(config).getStartMaterials();
         assertEquals(FACTORY_ID_1, result.getFactoryId());

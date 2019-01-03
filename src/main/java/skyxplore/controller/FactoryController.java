@@ -1,7 +1,6 @@
 package skyxplore.controller;
 
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

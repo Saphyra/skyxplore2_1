@@ -21,8 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static skyxplore.controller.CharacterController.RENAME_CHARACTER_MAPPING;
-import static skyxplore.filter.FilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.FilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -33,6 +33,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/",
         "/**/favicon.ico",
         "/login",
+        "/logout",
         "/css/**",
         "/images/**",
         "/js/**",
@@ -49,7 +50,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
 
     private final CharacterQueryService characterQueryService;
     private final CookieUtil cookieUtil;
-    private final FilterHelper filterHelper;
+    private final CustomFilterHelper customFilterHelper;
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
@@ -63,7 +64,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
             log.debug("Authentication successful");
             filterChain.doFilter(request, response);
         } else {
-            filterHelper.handleUnauthorized(request, response, PageController.CHARACTER_SELECT_MAPPING);
+            customFilterHelper.handleUnauthorized(request, response, PageController.CHARACTER_SELECT_MAPPING);
         }
     }
 

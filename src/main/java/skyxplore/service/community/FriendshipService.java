@@ -1,6 +1,7 @@
 package skyxplore.service.community;
 
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.IdGenerator;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -36,7 +36,7 @@ public class FriendshipService {
         }
 
         Friendship friendship = Friendship.builder()
-            .friendshipId(idGenerator.getRandomId())
+            .friendshipId(idGenerator.generateRandomId())
             .characterId(friendRequest.getCharacterId())
             .friendId(friendRequest.getFriendId())
             .build();
@@ -56,7 +56,7 @@ public class FriendshipService {
         }
 
         FriendRequest friendRequest = new FriendRequest();
-        friendRequest.setFriendRequestId(idGenerator.getRandomId());
+        friendRequest.setFriendRequestId(idGenerator.generateRandomId());
         friendRequest.setCharacterId(characterId);
         friendRequest.setFriendId(friendId);
 

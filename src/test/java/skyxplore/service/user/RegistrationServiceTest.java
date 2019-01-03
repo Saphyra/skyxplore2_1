@@ -1,6 +1,7 @@
 package skyxplore.service.user;
 
 import com.github.saphyra.encryption.impl.PasswordService;
+import com.github.saphyra.util.IdGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -9,14 +10,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
-import skyxplore.util.IdGenerator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -84,7 +84,7 @@ public class RegistrationServiceTest {
         UserRegistrationRequest request = createUserRegistrationRequest();
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(false);
         when(userQueryService.isEmailExists(USER_EMAIL)).thenReturn(false);
-        when(idGenerator.getRandomId()).thenReturn(USER_ID);
+        when(idGenerator.generateRandomId()).thenReturn(USER_ID);
         when(passwordService.hashPassword(USER_PASSWORD)).thenReturn(CREDENTIALS_HASHED_PASSWORD);
         //WHEN
         underTest.registrateUser(request);
@@ -96,7 +96,7 @@ public class RegistrationServiceTest {
         assertEquals(1, userCaptor.getValue().getRoles().size());
         assertTrue(userCaptor.getValue().getRoles().contains(Role.USER));
 
-        ArgumentCaptor<Credentials> credentialsCaptor = ArgumentCaptor.forClass(Credentials.class);
+        ArgumentCaptor<SkyXpCredentials> credentialsCaptor = ArgumentCaptor.forClass(SkyXpCredentials.class);
         verify(credentialsService).save(credentialsCaptor.capture());
         assertEquals(CREDENTIALS_HASHED_PASSWORD, credentialsCaptor.getValue().getPassword());
         assertEquals(USER_NAME, credentialsCaptor.getValue().getUserName());

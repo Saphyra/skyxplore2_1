@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.db.repository.CredentialsRepository;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.credentials.CredentialsConverter;
 import skyxplore.domain.credentials.CredentialsEntity;
 
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CredentialsDaoTest {
+public class SkyXpCredentialsDaoTest {
     @Mock
     private CredentialsConverter credentialsConverter;
 
@@ -42,7 +42,7 @@ public class CredentialsDaoTest {
         //GIVEN
         when(credentialsRepository.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
-        Credentials result = underTest.getByUserId(USER_ID);
+        SkyXpCredentials result = underTest.getByUserId(USER_ID);
         //THEN
         verify(credentialsRepository).findById(USER_ID);
         assertNull(result);
@@ -54,14 +54,14 @@ public class CredentialsDaoTest {
         CredentialsEntity entity = createCredentialsEntity();
         when(credentialsRepository.findById(USER_ID)).thenReturn(Optional.of(entity));
 
-        Credentials credentials = createCredentials();
-        when(credentialsConverter.convertEntity(entity)).thenReturn(credentials);
+        SkyXpCredentials skyXpCredentials = createCredentials();
+        when(credentialsConverter.convertEntity(entity)).thenReturn(skyXpCredentials);
         //WHEN
-        Credentials result = underTest.getByUserId(USER_ID);
+        SkyXpCredentials result = underTest.getByUserId(USER_ID);
         //THEN
         verify(credentialsRepository).findById(USER_ID);
         verify(credentialsConverter).convertEntity(entity);
-        assertEquals(credentials, result);
+        assertEquals(skyXpCredentials, result);
     }
 
     @Test
@@ -70,27 +70,27 @@ public class CredentialsDaoTest {
         CredentialsEntity entity = createCredentialsEntity();
         when(credentialsRepository.getByUserName(USER_NAME)).thenReturn(entity);
 
-        Credentials credentials = createCredentials();
-        when(credentialsConverter.convertEntity(entity)).thenReturn(credentials);
+        SkyXpCredentials skyXpCredentials = createCredentials();
+        when(credentialsConverter.convertEntity(entity)).thenReturn(skyXpCredentials);
         //WHEN
-        Credentials result = underTest.getCredentialsByName(USER_NAME);
+        SkyXpCredentials result = underTest.getCredentialsByName(USER_NAME);
         //THEN
         verify(credentialsRepository).getByUserName(USER_NAME);
         verify(credentialsConverter).convertEntity(entity);
-        assertEquals(credentials, result);
+        assertEquals(skyXpCredentials, result);
     }
 
     @Test
     public void testSaveShouldCallRepository(){
         //GIVEN
-        Credentials credentials = createCredentials();
+        SkyXpCredentials skyXpCredentials = createCredentials();
 
         CredentialsEntity entity = createCredentialsEntity();
-        when(credentialsConverter.convertDomain(credentials)).thenReturn(entity);
+        when(credentialsConverter.convertDomain(skyXpCredentials)).thenReturn(entity);
         //WHEN
-        underTest.save(credentials);
+        underTest.save(skyXpCredentials);
         //THEN
-        verify(credentialsConverter).convertDomain(credentials);
+        verify(credentialsConverter).convertDomain(skyXpCredentials);
         verify(credentialsRepository).save(entity);
     }
 }

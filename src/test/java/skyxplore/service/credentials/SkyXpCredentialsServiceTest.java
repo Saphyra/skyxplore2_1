@@ -15,11 +15,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.dataaccess.db.CredentialsDao;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CredentialsServiceTest {
+public class SkyXpCredentialsServiceTest {
     @Mock
     private CredentialsDao credentialsDao;
 
@@ -37,13 +37,13 @@ public class CredentialsServiceTest {
     @Test
     public void testGetByUserIdShouldCallDaoAndReturn(){
         //GIVEN
-        Credentials credentials = createCredentials();
-        when(credentialsDao.getByUserId(USER_ID)).thenReturn(credentials);
+        SkyXpCredentials skyXpCredentials = createCredentials();
+        when(credentialsDao.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
         //WHEN
-        Credentials result = underTest.getByUserId(USER_ID);
+        SkyXpCredentials result = underTest.getByUserId(USER_ID);
         //THEN
         verify(credentialsDao).getByUserId(USER_ID);
-        assertEquals(credentials, result);
+        assertEquals(skyXpCredentials, result);
     }
 
     @Test(expected = BadCredentialsException.class)
@@ -57,13 +57,13 @@ public class CredentialsServiceTest {
     @Test
     public void testGetCredentialsByNameShouldCallDaoAndReturn(){
         //GIVEN
-        Credentials credentials = createCredentials();
-        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(credentials);
+        SkyXpCredentials skyXpCredentials = createCredentials();
+        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(skyXpCredentials);
         //WHEN
-        Credentials result = underTest.getCredentialsByName(USER_NAME);
+        SkyXpCredentials result = underTest.getCredentialsByName(USER_NAME);
         //THEN
         verify(credentialsDao).getCredentialsByName(USER_NAME);
-        assertEquals(credentials, result);
+        assertEquals(skyXpCredentials, result);
     }
 
     @Test
@@ -80,10 +80,10 @@ public class CredentialsServiceTest {
     @Test
     public void testSaveShouldCallDao(){
         //GIVEN
-        Credentials credentials = createCredentials();
+        SkyXpCredentials skyXpCredentials = createCredentials();
         //WHEN
-        underTest.save(credentials);
+        underTest.save(skyXpCredentials);
         //THEN
-        verify(credentialsDao).save(credentials);
+        verify(credentialsDao).save(skyXpCredentials);
     }
 }
