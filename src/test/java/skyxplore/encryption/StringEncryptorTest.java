@@ -1,11 +1,14 @@
 package skyxplore.encryption;
 
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StringEncryptorTest {
@@ -29,7 +32,7 @@ public class StringEncryptorTest {
     public void testShouldEncryptAndDecrypt(){
         String encrypted = underTest.encryptEntity(TEST_ENTITY, KEY);
         assertNotEquals(TEST_ENTITY, encrypted);
-        String decrypted = underTest.decrypt(encrypted, KEY);
+        String decrypted = underTest.decryptEntity(encrypted, KEY);
         assertEquals(TEST_ENTITY, decrypted);
     }
 }

@@ -1,9 +1,9 @@
 package skyxplore.domain.community.mail;
 
+import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import com.github.saphyra.converter.ConverterBase;
-import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 @Component

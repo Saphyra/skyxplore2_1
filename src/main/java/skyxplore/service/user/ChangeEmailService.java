@@ -1,14 +1,13 @@
 package skyxplore.service.user;
 
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;

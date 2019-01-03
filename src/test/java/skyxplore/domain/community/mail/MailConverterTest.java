@@ -1,18 +1,28 @@
 package skyxplore.domain.community.mail;
 
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.MAIL_ENCRYPTED_MESSAGE;
+import static skyxplore.testutil.TestUtils.MAIL_ENCRYPTED_SUBJECT;
+import static skyxplore.testutil.TestUtils.MAIL_FROM_ID;
+import static skyxplore.testutil.TestUtils.MAIL_ID_1;
+import static skyxplore.testutil.TestUtils.MAIL_MESSAGE;
+import static skyxplore.testutil.TestUtils.MAIL_SEND_TIME;
+import static skyxplore.testutil.TestUtils.MAIL_SEND_TIME_EPOCH;
+import static skyxplore.testutil.TestUtils.MAIL_SUBJECT;
+import static skyxplore.testutil.TestUtils.MAIL_TO_ID;
+import static skyxplore.testutil.TestUtils.createMail;
+import static skyxplore.testutil.TestUtils.createMailEntity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailConverterTest {

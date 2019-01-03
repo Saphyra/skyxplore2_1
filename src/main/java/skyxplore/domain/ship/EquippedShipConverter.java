@@ -3,11 +3,11 @@ package skyxplore.domain.ship;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.ArrayList;

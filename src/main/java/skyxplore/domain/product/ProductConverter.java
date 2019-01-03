@@ -1,11 +1,11 @@
 package skyxplore.domain.product;
 
+import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import com.github.saphyra.converter.ConverterBase;
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 @Component

@@ -2,22 +2,37 @@ package skyxplore.domain.ship;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_SHIP_CONNECTOR_SLOT;
+import static skyxplore.testutil.TestUtils.DATA_SHIP_COREHULL;
+import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_CONNECTOR_EQUIPPED;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ENCRYPTED_COREHULL;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_TYPE;
+import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
+import static skyxplore.testutil.TestUtils.createEquippedShip;
+import static skyxplore.testutil.TestUtils.createEquippedShipEntity;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)

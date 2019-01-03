@@ -2,13 +2,13 @@ package skyxplore.domain.character;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +16,15 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ENCRYPTED_EQUIPMENTS;
+import static skyxplore.testutil.TestUtils.CHARACTER_ENCRYPTED_MONEY;
+import static skyxplore.testutil.TestUtils.CHARACTER_EQUIPMENT;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
+import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.createCharacterEntity;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)

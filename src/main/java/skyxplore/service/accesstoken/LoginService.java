@@ -1,15 +1,14 @@
 package skyxplore.service.accesstoken;
 
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.cache.AccessTokenCache;
 import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.credentials.Credentials;
-import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 import skyxplore.util.DateTimeUtil;

@@ -1,14 +1,15 @@
 package skyxplore.encryption.base;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_PASSWORD;
-
+import com.github.saphyra.encryption.impl.PasswordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
+import static skyxplore.testutil.TestUtils.USER_PASSWORD;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PasswordServiceTest {

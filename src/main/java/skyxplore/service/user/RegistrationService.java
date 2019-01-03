@@ -1,23 +1,22 @@
 package skyxplore.service.user;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.Credentials;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
 import skyxplore.util.IdGenerator;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @Service

@@ -1,5 +1,6 @@
 package skyxplore.service.accesstoken;
 
+import com.github.saphyra.encryption.impl.PasswordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -11,7 +12,6 @@ import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.accesstoken.AccessToken;
 import skyxplore.domain.credentials.Credentials;
-import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 import skyxplore.util.DateTimeUtil;
@@ -21,7 +21,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_FAKE_ID;
+import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_ID;
+import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_LAST_ACCESS;
+import static skyxplore.testutil.TestUtils.CREDENTIALS_HASHED_PASSWORD;
+import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.USER_NAME;
+import static skyxplore.testutil.TestUtils.USER_PASSWORD;
+import static skyxplore.testutil.TestUtils.createAccessToken;
+import static skyxplore.testutil.TestUtils.createCredentials;
+import static skyxplore.testutil.TestUtils.createLoginRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginServiceTest {

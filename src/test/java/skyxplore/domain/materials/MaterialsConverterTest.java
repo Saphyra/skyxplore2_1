@@ -2,12 +2,12 @@ package skyxplore.domain.materials;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,7 +16,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
+import static skyxplore.testutil.TestUtils.MATERIAL_AMOUNT;
+import static skyxplore.testutil.TestUtils.MATERIAL_ENCRYPTED_ENTITY;
+import static skyxplore.testutil.TestUtils.MATERIAL_ENTITY;
+import static skyxplore.testutil.TestUtils.MATERIAL_ID;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MaterialsConverterTest {
