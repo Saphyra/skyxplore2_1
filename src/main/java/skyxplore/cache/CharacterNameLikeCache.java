@@ -26,6 +26,6 @@ public class CharacterNameLikeCache extends AbstractCache<String, List<SkyXpChar
 
     @Override
     public Optional<List<SkyXpCharacter>> get(String key) {
-        return get(key, () -> characterDao.findCharacterByNameLike(key));
+        return get(key, () -> Optional.of(characterDao.findCharacterByNameLike(key)));
     }
 }

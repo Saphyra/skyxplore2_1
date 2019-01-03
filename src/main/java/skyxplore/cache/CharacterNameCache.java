@@ -22,6 +22,6 @@ public class CharacterNameCache extends AbstractCache<String, Boolean> {
 
     @Override
     public Optional<Boolean> get(String key) {
-        return get(key, () -> characterQueryService.isCharNameExists(key));
+        return get(key, () -> Optional.of(characterQueryService.isCharNameExists(key)));
     }
 }
