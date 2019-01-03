@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static skyxplore.controller.PageController.INDEX_MAPPING;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
@@ -29,12 +30,12 @@ public class PropertySourceImpl implements PropertySource {
 
     @Override
     public String getUnauthorizedRedirection() {
-        return "/";
+        return INDEX_MAPPING;
     }
 
     @Override
     public String getForbiddenRedirection() {
-        return "/";
+        return INDEX_MAPPING;
     }
 
     @Override

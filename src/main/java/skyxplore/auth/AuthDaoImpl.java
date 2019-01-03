@@ -23,7 +23,6 @@ public class AuthDaoImpl implements AuthDao {
     private final UserDao userDao;
     private final UserConverter userConverter;
 
-
     @Override
     public Optional<User> findUserById(String userId) {
         return userConverter.convertEntity(userDao.findById(userId));

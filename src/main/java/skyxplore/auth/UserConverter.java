@@ -13,9 +13,7 @@ import java.util.HashSet;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class UserConverter extends ConverterBase<SkyXpUser, User> {
-
     private final CredentialsDao credentialsDao;
 
     @Override

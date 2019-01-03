@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class AccessTokenConverter extends ConverterBase<SkyXpAccessToken, AccessToken> {
     private final AccessTokenDao accessTokenDao;
 
