@@ -48,9 +48,6 @@ public class CommunityTest {
 
         /*
         Add friend test
-            - Cancel friend request
-                - Request disappears both side
-                - New friendRequest can be sent.
             - Accept friend request
                 - Friendship appears
                 - SeleniumFriendRequest disappears

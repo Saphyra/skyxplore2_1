@@ -116,6 +116,13 @@ public class FriendshipTest {
         searchForPossibleFriends(account2.getCharacter1().getCharacterName());
         verifySearchResult(Collections.emptyList(), Arrays.asList(account2.getCharacter1()));
 
+        goToCommunityPageOf(account2, account2.getCharacter1(), 0);
+        verifyFriendRequestNotifications(0);
+
+        communityPage.getFriendsPageButton().click();
+        searchForPossibleFriends(account1.getCharacter1().getCharacterName());
+        verifySearchResult(Collections.emptyList(), Arrays.asList(account1.getCharacter1()));
+
         return this;
     }
 
