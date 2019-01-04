@@ -41,7 +41,7 @@ public class CommunityPage {
 
     public List<SentFriendRequest> getSentFriendRequests() {
         return driver.findElements(By.cssSelector("#sentfriendrequestitems > div.friendlistitem")).stream()
-            .map(SentFriendRequest::new)
+            .map(element -> new SentFriendRequest(driver, element))
             .collect(Collectors.toList());
     }
 
@@ -63,5 +63,9 @@ public class CommunityPage {
         return driver.findElements(By.cssSelector("#friendrequestitems > div.friendlistitem")).stream()
             .map(SeleniumFriendRequest::new)
             .collect(Collectors.toList());
+    }
+
+    public WebElement getFriendsPageButton() {
+        return driver.findElement(By.cssSelector("#listfriends div:first-child div:nth-child(1)"));
     }
 }

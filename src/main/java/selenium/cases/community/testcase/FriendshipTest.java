@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import selenium.cases.community.domain.PossibleFriend;
 import selenium.cases.community.domain.SeleniumAccount;
 import selenium.cases.community.domain.SeleniumFriendRequest;
+import selenium.cases.community.domain.SentFriendRequest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.Login;
 import selenium.flow.Navigate;
@@ -90,11 +91,31 @@ public class FriendshipTest {
         List<SeleniumFriendRequest> friendRequests = communityPage.getFriendRequests();
         assertTrue(
             friendRequests.stream()
-            .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
+                .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
         );
     }
 
     public FriendshipTest testCancelFriendRequest() {
+        SeleniumAccount account1 = seleniumAccountSupplier.get();
+        SeleniumAccount account2 = seleniumAccountSupplier.get();
+
+        goToCommunityPageOf(account1, account1.getCharacter1());
+
+        sendFriendRequestTo(account2.getCharacter1());
+
+        communityPage.getSentFriendRequestsPageButton().click();
+
+        SentFriendRequest friendRequest = communityPage.getSentFriendRequests().stream()
+            .filter(sentFriendRequest -> sentFriendRequest.getCharacterName().equals(account2.getCharacter1().getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("SentFriendRequest not found."));
+
+        friendRequest.cancel();
+
+        communityPage.getFriendsPageButton().click();
+        searchForPossibleFriends(account2.getCharacter1().getCharacterName());
+        verifySearchResult(Collections.emptyList(), Arrays.asList(account2.getCharacter1()));
+
         return this;
     }
 
