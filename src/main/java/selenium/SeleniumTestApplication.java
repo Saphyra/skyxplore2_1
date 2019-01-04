@@ -47,37 +47,37 @@ public class SeleniumTestApplication {
     }
 
     @Test
-    public void testRegistration() {
+    public void test01_Registration() {
         RegistrationTest.run(driver);
     }
 
     @Test
-    public void testAccount() {
+    public void test02_Account() {
         AccountTest.run(driver);
     }
 
     @Test
-    public void testCharacterSelect() {
+    public void test03_CharacterSelect() {
         CharacterSelectTest.run(driver);
     }
 
     @Test
-    public void testFactory() {
+    public void test04_Factory() {
         FactoryTest.run(driver);
     }
 
     @Test
-    public void testShop() {
+    public void test05_Shop() {
         ShopTest.run(driver);
     }
 
     @Test
-    public void testEquipment() {
+    public void test06_Equipment() {
         EquipmentTest.run(driver);
     }
 
     @Test
-    public void testCommunity() {
+    public void test07_Community() {
         CommunityTest.run(driver);
     }
 

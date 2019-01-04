@@ -11,4 +11,5 @@ public class LinkUtil {
     public static final String OVERVIEW = HOST + "overview";
     public static final String FACTORY = HOST + "factory";
     public static final String SHOP = HOST + "shop";
+    public static final String COMMUNITY = HOST + "community";
 }

@@ -19,15 +19,17 @@ public class Login {
     private final WebDriver driver;
     private final IndexPage indexPage;
     private final NotificationValidator notificationValidator;
+    private final Navigate navigate;
 
     public Login(WebDriver driver) {
         this.driver = driver;
         indexPage = new IndexPage(driver);
         notificationValidator = new NotificationValidator(driver);
+        navigate = new Navigate(driver);
     }
 
     public void login(SeleniumUser user){
-        assertEquals(HOST, driver.getCurrentUrl());
+        navigate.toIndexPage();
         sendRequest(user);
         validateSuccessfulLogin();
     }

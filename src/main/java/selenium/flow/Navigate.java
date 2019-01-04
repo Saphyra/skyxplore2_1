@@ -23,28 +23,29 @@ public class Navigate {
 
     public void toAccountPage() {
         new CharacterSelectPage(driver).getAccountPageButton().click();
-        assertEquals(ACCOUNT, driver.getCurrentUrl());
+
+        verifyURL(ACCOUNT);
     }
 
     public void toCharacterSelectPage() {
         assertEquals(OVERVIEW, driver.getCurrentUrl());
         new OverviewPage(driver).getCharacterSelectPageButton().click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(CHARACTER_SELECT));
-        assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
+
+        verifyURL(CHARACTER_SELECT);
     }
 
     public void toFactory() {
         assertEquals(OVERVIEW, driver.getCurrentUrl());
         new OverviewPage(driver).getFactoryButton().click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(FACTORY));
-        assertEquals(FACTORY, driver.getCurrentUrl());
+
+        verifyURL(FACTORY);
     }
 
     public void toShop() {
         assertEquals(OVERVIEW, driver.getCurrentUrl());
         new OverviewPage(driver).getShopButton().click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(SHOP));
-        assertEquals(SHOP, driver.getCurrentUrl());
+
+        verifyURL(SHOP);
     }
 
     public void toEquipmentPage() {
@@ -52,16 +53,18 @@ public class Navigate {
         switch (url) {
             case SHOP:
                 getOverviewButton().click();
-                new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(OVERVIEW));
+                verifyURL(OVERVIEW);
                 toEquipmentPage();
                 break;
             case OVERVIEW:
                 new OverviewPage(driver).getEquipmentButton().click();
-                new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(EQUIPMENT));
                 break;
             default:
                 throw new RuntimeException("Unknown source page: " + url);
         }
+
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(EQUIPMENT));
+        assertEquals(EQUIPMENT, driver.getCurrentUrl());
     }
 
     public WebElement getOverviewButton() {
@@ -77,7 +80,20 @@ public class Navigate {
             driver.navigate().to(HOST);
         }
 
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(HOST));
-        assertEquals(HOST, driver.getCurrentUrl());
+        verifyURL(HOST);
+    }
+
+    public void toCommunityPage() {
+        assertEquals(OVERVIEW, driver.getCurrentUrl());
+        Optional.ofNullable(driver.findElement(By.cssSelector("footer button:nth-child(3)")))
+            .orElseThrow(() -> new RuntimeException("Community button not found."))
+            .click();
+
+        verifyURL(COMMUNITY);
+    }
+
+    private void verifyURL(String url){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(url));
+        assertEquals(url, driver.getCurrentUrl());
     }
 }

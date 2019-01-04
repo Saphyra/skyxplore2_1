@@ -2,11 +2,16 @@ package selenium.cases.community;
 
 import org.openqa.selenium.WebDriver;
 import selenium.cases.community.domain.SeleniumAccount;
+import selenium.cases.community.testcase.FriendshipTest;
 import selenium.domain.SeleniumCharacter;
 import selenium.domain.SeleniumUser;
 import selenium.flow.CreateCharacter;
+import selenium.flow.Login;
 import selenium.flow.Navigate;
 import selenium.flow.Registration;
+import selenium.flow.SelectCharacter;
+
+import java.util.function.Supplier;
 
 public class CommunityTest {
 
@@ -14,20 +19,23 @@ public class CommunityTest {
     private final Navigate navigate;
     private final Registration registration;
     private final CreateCharacter createCharacter;
+    private final SelectCharacter selectCharacter;
+    private final Login login;
 
-    private SeleniumAccount account1;
-    private SeleniumAccount account2;
+    private final Supplier<SeleniumAccount> seleniumAccountSupplier = this::registerAccount;
 
     private CommunityTest(WebDriver driver) {
         this.driver = driver;
         this.navigate = new Navigate(driver);
         this.registration = new Registration(driver);
         this.createCharacter = new CreateCharacter(driver);
+        this.selectCharacter = new SelectCharacter(driver);
+        this.login = new Login(driver);
     }
 
     public static void run(WebDriver driver) {
         CommunityTest testCase = new CommunityTest(driver);
-        testCase.init();
+        testCase.testFriendship();
 
         /*
         Add friend test
@@ -72,9 +80,17 @@ public class CommunityTest {
          */
     }
 
-    private void init() {
-        account1 = registerAccount();
-        account2 = registerAccount();
+    private void testFriendship() {
+        FriendshipTest.builder()
+            .seleniumAccountSupplier(seleniumAccountSupplier)
+            .navigate(navigate)
+            .selectCharacter(selectCharacter)
+            .login(login)
+            .build()
+            .testFilter()
+            .testSendFriendRequest()
+            .testCancelFriendRequest()
+            .testAcceptFriendRequest();
     }
 
     private SeleniumAccount registerAccount() {
