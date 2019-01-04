@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.cases.community.domain.PossibleFriend;
-import selenium.cases.community.domain.SeleniumFriendRequest;
-import selenium.cases.community.domain.SentFriendRequest;
+import selenium.domain.PossibleFriend;
+import selenium.domain.SeleniumFriendRequest;
+import selenium.domain.SentFriendRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;

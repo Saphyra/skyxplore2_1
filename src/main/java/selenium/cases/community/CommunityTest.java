@@ -1,7 +1,7 @@
 package selenium.cases.community;
 
 import org.openqa.selenium.WebDriver;
-import selenium.cases.community.domain.SeleniumAccount;
+import selenium.domain.SeleniumAccount;
 import selenium.cases.community.testcase.FriendshipTest;
 import selenium.domain.SeleniumCharacter;
 import selenium.domain.SeleniumUser;

@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.cases.equipment.testcase.domain.ContainerId;
-import selenium.cases.equipment.testcase.domain.UnequippedEquipment;
+import selenium.domain.ContainerId;
+import selenium.domain.UnequippedEquipment;
 import selenium.cases.equipment.testcase.helper.ElementSearcher;
 import selenium.validator.NotificationValidator;
 

@@ -1,4 +1,4 @@
-package selenium.cases.community.domain;
+package selenium.domain;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;

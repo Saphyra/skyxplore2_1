@@ -1,7 +1,7 @@
 package selenium.cases.equipment.testcase;
 
 import lombok.RequiredArgsConstructor;
-import selenium.cases.equipment.testcase.domain.ContainerId;
+import selenium.domain.ContainerId;
 import selenium.cases.equipment.testcase.helper.ElementSearcher;
 import selenium.validator.NotificationValidator;
 

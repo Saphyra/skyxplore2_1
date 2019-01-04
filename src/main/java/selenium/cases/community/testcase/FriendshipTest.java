@@ -2,10 +2,10 @@ package selenium.cases.community.testcase;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
-import selenium.cases.community.domain.PossibleFriend;
-import selenium.cases.community.domain.SeleniumAccount;
-import selenium.cases.community.domain.SeleniumFriendRequest;
-import selenium.cases.community.domain.SentFriendRequest;
+import selenium.domain.PossibleFriend;
+import selenium.domain.SeleniumAccount;
+import selenium.domain.SeleniumFriendRequest;
+import selenium.domain.SentFriendRequest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.Login;
 import selenium.flow.Navigate;

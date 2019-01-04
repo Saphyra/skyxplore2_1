@@ -3,8 +3,8 @@ package selenium.cases.equipment.testcase;
 import static org.junit.Assert.assertEquals;
 
 import lombok.RequiredArgsConstructor;
-import selenium.cases.equipment.testcase.domain.ContainerId;
-import selenium.cases.equipment.testcase.domain.EquippedEquipment;
+import selenium.domain.ContainerId;
+import selenium.domain.EquippedEquipment;
 import selenium.cases.equipment.testcase.helper.ElementSearcher;
 import selenium.cases.equipment.testcase.helper.EquipmentVerifier;
 import selenium.validator.NotificationValidator;

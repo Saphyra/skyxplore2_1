@@ -1,4 +1,4 @@
-package selenium.cases.equipment.testcase.domain;
+package selenium.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
