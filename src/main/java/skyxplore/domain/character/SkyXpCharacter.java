@@ -1,7 +1,10 @@
 package skyxplore.domain.character;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import skyxplore.exception.NotEnoughMoneyException;
 
 import java.util.ArrayList;
@@ -11,6 +14,9 @@ import java.util.Set;
 
 @SuppressWarnings({"unused", "unchecked"})
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SkyXpCharacter {
     private String characterId;
     private String characterName;

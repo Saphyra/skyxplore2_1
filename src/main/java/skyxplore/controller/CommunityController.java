@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @RestController
@@ -53,10 +54,11 @@ public class CommunityController {
     @PostMapping(ADD_FRIEND_MAPPING)
     public void addFriend(
         @Valid @RequestBody OneStringParamRequest request,
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
+        @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to add {} as a community.", characterId, request.getValue());
-        communityFacade.addFriendRequest(request.getValue(), characterId);
+        communityFacade.addFriendRequest(request.getValue(), characterId, userId);
     }
 
     @PostMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)

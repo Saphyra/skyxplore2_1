@@ -1,5 +1,21 @@
 package skyxplore.service;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.community.friendrequest.FriendRequest;
+import skyxplore.domain.community.friendship.Friendship;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.service.community.BlockCharacterService;
+import skyxplore.service.community.FriendshipQueryService;
+import skyxplore.service.community.FriendshipService;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -10,26 +26,10 @@ import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
 import static skyxplore.testutil.TestUtils.FRIENDSHIP_ID;
 import static skyxplore.testutil.TestUtils.FRIEND_ID;
 import static skyxplore.testutil.TestUtils.FRIEND_REQUEST_ID;
+import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createFriendRequest;
 import static skyxplore.testutil.TestUtils.createFriendship;
-
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.service.character.CharacterQueryService;
-import skyxplore.service.community.BlockCharacterService;
-import skyxplore.service.community.FriendshipQueryService;
-import skyxplore.service.community.FriendshipService;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
@@ -68,9 +68,9 @@ public class CommunityFacadeTest {
     @Test
     public void testAddFriendRequestShouldCallService() {
         //WHEN
-        underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID_1);
+        underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(friendshipService).addFriendRequest(FRIEND_ID, CHARACTER_ID_1);
+        verify(friendshipService).addFriendRequest(FRIEND_ID, CHARACTER_ID_1, USER_ID);
     }
 
     @Test

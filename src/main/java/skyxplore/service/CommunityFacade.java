@@ -30,8 +30,8 @@ public class CommunityFacade {
         blockCharacterService.allowBlockedCharacter(blockedCharacterId, characterId);
     }
 
-    public void addFriendRequest(String friendId, String characterId) {
-        friendshipService.addFriendRequest(friendId, characterId);
+    public void addFriendRequest(String friendId, String characterId, String userId) {
+        friendshipService.addFriendRequest(friendId, characterId, userId);
     }
 
     public void blockCharacter(String blockedCharacterId, String characterId) {

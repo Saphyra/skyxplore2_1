@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import selenium.cases.community.domain.PossibleFriend;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -23,7 +25,9 @@ public class CommunityPage {
         return driver.findElement(By.id("friendname"));
     }
 
-    public List<WebElement> getCharactersCanBeFriendList() {
-        return driver.findElements(By.cssSelector("#usersfoundfornewfriend > div.maybefriend"));
+    public List<PossibleFriend> getCharactersCanBeFriendList() {
+        return driver.findElements(By.cssSelector("#usersfoundfornewfriend > div.maybefriend")).stream()
+            .map(PossibleFriend::new)
+            .collect(Collectors.toList());
     }
 }

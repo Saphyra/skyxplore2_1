@@ -54,9 +54,9 @@ public class CommunityControllerTest {
     @Test
     public void testAddFriendShouldCallFacade() {
         //WHEN
-        underTest.addFriend(new OneStringParamRequest(FRIEND_ID), CHARACTER_ID_1);
+        underTest.addFriend(new OneStringParamRequest(FRIEND_ID), CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(communityFacade).addFriendRequest(FRIEND_ID, CHARACTER_ID_1);
+        verify(communityFacade).addFriendRequest(FRIEND_ID, CHARACTER_ID_1, USER_ID);
     }
 
     @Test

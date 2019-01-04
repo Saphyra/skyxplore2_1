@@ -42,10 +42,6 @@ public class CommunityTest {
 
         /*
         Add friend test
-            - Selectable characters
-                - Own character(s) do not appear
-                - Search by name
-                    - Only matching ones appear
             - Send friend request
                 - Character 1: Request appears at sent
                 - Character 2: Request appears at new ones

@@ -1,5 +1,6 @@
 package skyxplore.service.community;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,8 @@ public class FriendshipService {
         friendRequestDao.delete(friendRequest);
     }
 
-    public void addFriendRequest(String friendId, String characterId) {
+    public void addFriendRequest(String friendId, String characterId, String userId) {
+        //Check if character with the given characterId exists
         characterQueryService.findByCharacterId(friendId);
         List<BlockedCharacter> blockedCharacter = blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, friendId);
 
@@ -54,6 +56,9 @@ public class FriendshipService {
         if (friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(characterId, friendId)) {
             throw new FriendshipAlreadyExistsException(friendId, characterId);
         }
+        if (isOwnCharacter(friendId, userId)) {
+            throw new BadRequestException("You cannot add your user's characters as friend.");
+        }
 
         FriendRequest friendRequest = new FriendRequest();
         friendRequest.setFriendRequestId(idGenerator.generateRandomId());
@@ -61,6 +66,11 @@ public class FriendshipService {
         friendRequest.setFriendId(friendId);
 
         friendRequestDao.save(friendRequest);
+    }
+
+    private boolean isOwnCharacter(String characterId, String userId) {
+        return characterQueryService.getCharactersByUserId(userId).stream()
+            .anyMatch(skyXpCharacter -> skyXpCharacter.getCharacterId().equals(characterId));
     }
 
     public void declineFriendRequest(String friendRequestId, String characterId) {

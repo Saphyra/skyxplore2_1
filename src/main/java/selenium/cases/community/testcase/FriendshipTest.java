@@ -1,8 +1,8 @@
 package selenium.cases.community.testcase;
 
 import lombok.Builder;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import selenium.cases.community.domain.PossibleFriend;
 import selenium.cases.community.domain.SeleniumAccount;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.Login;
@@ -76,9 +76,9 @@ public class FriendshipTest {
     }
 
     private void verifySearchResult(List<SeleniumCharacter> shouldNotContain, List<SeleniumCharacter> shouldContain) {
-        List<WebElement> searchResult = communityPage.getCharactersCanBeFriendList();
+        List<PossibleFriend> searchResult = communityPage.getCharactersCanBeFriendList();
         List<String> characterNames = searchResult.stream()
-            .map(element -> element.findElement(By.cssSelector("div:first-child")).getText())
+            .map(PossibleFriend::getCharacterName)
             .collect(Collectors.toList());
 
         shouldNotContain.forEach(character -> assertTrue(characterNames.stream().noneMatch(s -> s.equals(character.getCharacterName()))));

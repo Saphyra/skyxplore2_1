@@ -33,7 +33,7 @@
                 throwException("IllegalArgument", "friendRequestId must not be null or undefined.");
             }
             
-            const path = "friend/friendrequest/accept";
+            const path = "friend/request/accept";
             const body = {
                 value: friendRequestId
             };
@@ -133,7 +133,7 @@
             if(friendRequestId == null || friendRequestId == undefined){
                 throwException("IllegalArgument", "friendRequestId must not be null or undefined.");
             }
-            const path = "friend/friendrequest/decline";
+            const path = "friend/request/decline";
             const body = {
                 value: friendRequestId
             };
@@ -395,7 +395,7 @@
                 throwException("IllegalArgument", "friendCharacterId must not be null or undefined.");
             }
             
-            const path = "friend/friendrequest/add";
+            const path = "friend/request/add";
             const body = {
                 value: friendCharacterId
             };
