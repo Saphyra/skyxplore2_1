@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class CommunityPage {
     private final WebDriver driver;
@@ -19,5 +21,9 @@ public class CommunityPage {
 
     public WebElement getFriendNameInputField() {
         return driver.findElement(By.id("friendname"));
+    }
+
+    public List<WebElement> getCharactersCanBeFriendList() {
+        return driver.findElements(By.cssSelector("#usersfoundfornewfriend > div.maybefriend"));
     }
 }
