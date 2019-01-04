@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.cases.community.domain.PossibleFriend;
+import selenium.cases.community.domain.SeleniumFriendRequest;
 import selenium.cases.community.domain.SentFriendRequest;
 
 import java.util.List;
@@ -48,5 +49,19 @@ public class CommunityPage {
         WebElement closeButton = driver.findElement(By.id("addfriendclosebutton"));
         assertTrue(closeButton.isDisplayed());
         closeButton.click();
+    }
+
+    public int getNumberOfFriendRequests() {
+        return Integer.valueOf(driver.findElement(By.id("friendrequestnum")).getText());
+    }
+
+    public WebElement getFriendRequestsPageButton() {
+        return driver.findElement(By.cssSelector("#listfriends div:first-child div:nth-child(2)"));
+    }
+
+    public List<SeleniumFriendRequest> getFriendRequests() {
+        return driver.findElements(By.cssSelector("#friendrequestitems > div.friendlistitem")).stream()
+            .map(SeleniumFriendRequest::new)
+            .collect(Collectors.toList());
     }
 }

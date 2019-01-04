@@ -11,6 +11,7 @@ import selenium.flow.Navigate;
 import selenium.flow.Registration;
 import selenium.flow.SelectCharacter;
 import selenium.page.CommunityPage;
+import selenium.page.OverviewPage;
 import selenium.validator.NotificationValidator;
 
 import java.util.function.Supplier;
@@ -25,6 +26,7 @@ public class CommunityTest {
     private final Login login;
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
+    private final OverviewPage overviewPage;
 
     private final Supplier<SeleniumAccount> seleniumAccountSupplier = this::registerAccount;
 
@@ -37,6 +39,7 @@ public class CommunityTest {
         this.login = new Login(driver);
         this.communityPage = new CommunityPage(driver);
         this.notificationValidator = new NotificationValidator(driver);
+        this.overviewPage = new OverviewPage(driver);
     }
 
     public static void run(WebDriver driver) {
@@ -45,17 +48,12 @@ public class CommunityTest {
 
         /*
         Add friend test
-            - Send friend request
-                - Character 1: Request appears at sent
-                - Character 2: Request appears at new ones
-                    - Notifications shown
-                - Characters do not appear at selectable characters (from both side)
             - Cancel friend request
                 - Request disappears both side
                 - New friendRequest can be sent.
             - Accept friend request
                 - Friendship appears
-                - FriendRequest disappears
+                - SeleniumFriendRequest disappears
                 - Characters do not appear at selectable characters (from both side)
         Send Mail test
             - Selectable characters
@@ -90,6 +88,7 @@ public class CommunityTest {
             .navigate(navigate)
             .selectCharacter(selectCharacter)
             .communityPage(communityPage)
+            .overviewPage(overviewPage)
             .login(login)
             .build()
             .testFilter()

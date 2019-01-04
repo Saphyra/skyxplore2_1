@@ -30,4 +30,8 @@ public class OverviewPage {
     public WebElement getShopButton() {
         return driver.findElement(By.cssSelector(ELEMENT_SHOP_PAGE_BUTTON));
     }
+
+    public WebElement getNotificationNumberElement() {
+        return driver.findElement(By.id("notificationnum"));
+    }
 }

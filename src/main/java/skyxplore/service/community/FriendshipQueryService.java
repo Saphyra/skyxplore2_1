@@ -22,7 +22,7 @@ public class FriendshipQueryService {
 
     public FriendRequest findFriendRequestById(String friendRequestId) {
         return friendRequestDao.findById(friendRequestId)
-            .orElseThrow(() -> new FriendRequestNotFoundException("FriendRequest not found with id " + friendRequestId));
+            .orElseThrow(() -> new FriendRequestNotFoundException("SeleniumFriendRequest not found with id " + friendRequestId));
     }
 
     public Friendship findFriendshipById(String friendshipId) {

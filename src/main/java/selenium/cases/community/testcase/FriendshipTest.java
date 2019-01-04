@@ -4,11 +4,13 @@ import lombok.Builder;
 import org.openqa.selenium.WebElement;
 import selenium.cases.community.domain.PossibleFriend;
 import selenium.cases.community.domain.SeleniumAccount;
+import selenium.cases.community.domain.SeleniumFriendRequest;
 import selenium.domain.SeleniumCharacter;
 import selenium.flow.Login;
 import selenium.flow.Navigate;
 import selenium.flow.SelectCharacter;
 import selenium.page.CommunityPage;
+import selenium.page.OverviewPage;
 import selenium.validator.NotificationValidator;
 
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static selenium.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
 
@@ -29,13 +32,13 @@ public class FriendshipTest {
     private final SelectCharacter selectCharacter;
     private final Login login;
     private final CommunityPage communityPage;
+    private final OverviewPage overviewPage;
 
     public FriendshipTest testFilter() {
         SeleniumAccount account1 = seleniumAccountSupplier.get();
         SeleniumAccount account2 = seleniumAccountSupplier.get();
 
-        goToCommunityPageOf(account1);
-        openAddFriendPage();
+        goToCommunityPageOf(account1, account1.getCharacter1());
 
         searchForPossibleFriends(CHARACTER_NAME_PREFIX);
         verifySearchResult(account1.getCharacters(), account2.getCharacters());
@@ -53,13 +56,23 @@ public class FriendshipTest {
         SeleniumAccount account1 = seleniumAccountSupplier.get();
         SeleniumAccount account2 = seleniumAccountSupplier.get();
 
-        goToCommunityPageOf(account1);
+        goToCommunityPageOf(account1, account1.getCharacter1());
 
         sendFriendRequestTo(account2.getCharacter1());
 
         verifyCannotSendFriendRequest(account2.getCharacter1());
         communityPage.closeAddFriendPage();
         verifyFriendRequestInList(account2.getCharacter1());
+
+        goToCommunityPageOf(account2, account2.getCharacter1(), 1);
+
+        verifyFriendRequestNotifications(1);
+
+        searchForPossibleFriends(account1.getCharacter1().getCharacterName());
+        verifySearchResult(Arrays.asList(account1.getCharacter1()), Collections.emptyList());
+
+        communityPage.closeAddFriendPage();
+        verifyFriendRequestArrived(account1.getCharacter1());
 
         return this;
     }
@@ -70,7 +83,15 @@ public class FriendshipTest {
             communityPage.getSentFriendRequests().stream()
                 .anyMatch(sentFriendRequest -> sentFriendRequest.getCharacterName().equals(character.getCharacterName()))
         );
+    }
 
+    private void verifyFriendRequestArrived(SeleniumCharacter character) {
+        communityPage.getFriendRequestsPageButton().click();
+        List<SeleniumFriendRequest> friendRequests = communityPage.getFriendRequests();
+        assertTrue(
+            friendRequests.stream()
+            .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
+        );
     }
 
     public FriendshipTest testCancelFriendRequest() {
@@ -81,19 +102,28 @@ public class FriendshipTest {
         return this;
     }
 
-    private void goToCommunityPageOf(SeleniumAccount account1) {
-        login.login(account1.getUser());
-        selectCharacter.selectCharacter(account1.getCharacter1());
+    private void goToCommunityPageOf(SeleniumAccount account, SeleniumCharacter character) {
+        goToCommunityPageOf(account, character, 0);
+    }
+
+    private void goToCommunityPageOf(SeleniumAccount account, SeleniumCharacter character, int numberOfNotifications) {
+        login.login(account.getUser());
+        selectCharacter.selectCharacter(character);
+        verifyNotificationNum(numberOfNotifications);
         navigate.toCommunityPage();
     }
 
-    private void openAddFriendPage() {
-        communityPage.getAddFriendButton().click();
-        assertTrue(communityPage.getAddFriendContainer().isDisplayed());
+    private void verifyNotificationNum(int numberOfNotifications) {
+        WebElement notificationElement = overviewPage.getNotificationNumberElement();
+        String notificationText = notificationElement.getText();
+        int displayedNumber = 0;
+        if (!notificationText.isEmpty()) {
+            displayedNumber = Integer.valueOf(notificationText.split("\\(")[1].split("\\)")[0]);
+        }
+        assertEquals(numberOfNotifications, displayedNumber);
     }
 
     private void sendFriendRequestTo(SeleniumCharacter character) {
-        openAddFriendPage();
         searchForPossibleFriends(character.getCharacterName());
 
         communityPage.getCharactersCanBeFriendList().stream()
@@ -104,14 +134,21 @@ public class FriendshipTest {
     }
 
     private void searchForPossibleFriends(String characterName) {
+        if (!communityPage.getAddFriendContainer().isDisplayed()) {
+            openAddFriendPage();
+        }
+
         WebElement friendNameInputField = communityPage.getFriendNameInputField();
         friendNameInputField.clear();
         friendNameInputField.sendKeys(characterName);
     }
 
-    private void verifyCannotSendFriendRequest(SeleniumCharacter character) {
-        openAddFriendPage();
+    private void openAddFriendPage() {
+        communityPage.getAddFriendButton().click();
+        assertTrue(communityPage.getAddFriendContainer().isDisplayed());
+    }
 
+    private void verifyCannotSendFriendRequest(SeleniumCharacter character) {
         searchForPossibleFriends(character.getCharacterName());
         verifySearchResult(
             Arrays.asList(character),
@@ -127,5 +164,9 @@ public class FriendshipTest {
 
         shouldNotContain.forEach(character -> assertTrue(characterNames.stream().noneMatch(s -> s.equals(character.getCharacterName()))));
         shouldContain.forEach(character -> assertTrue(characterNames.stream().anyMatch(s -> s.equals(character.getCharacterName()))));
+    }
+
+    private void verifyFriendRequestNotifications(int numberOfWantedNotifications) {
+        assertEquals(numberOfWantedNotifications, communityPage.getNumberOfFriendRequests());
     }
 }
