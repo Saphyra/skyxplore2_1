@@ -5,9 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.cases.community.domain.PossibleFriend;
+import selenium.cases.community.domain.SentFriendRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -29,5 +32,21 @@ public class CommunityPage {
         return driver.findElements(By.cssSelector("#usersfoundfornewfriend > div.maybefriend")).stream()
             .map(PossibleFriend::new)
             .collect(Collectors.toList());
+    }
+
+    public WebElement getSentFriendRequestsPageButton() {
+        return driver.findElement(By.cssSelector("#listfriends div:first-child div:nth-child(3)"));
+    }
+
+    public List<SentFriendRequest> getSentFriendRequests() {
+        return driver.findElements(By.cssSelector("#sentfriendrequestitems > div.friendlistitem")).stream()
+            .map(SentFriendRequest::new)
+            .collect(Collectors.toList());
+    }
+
+    public void closeAddFriendPage() {
+        WebElement closeButton = driver.findElement(By.id("addfriendclosebutton"));
+        assertTrue(closeButton.isDisplayed());
+        closeButton.click();
     }
 }

@@ -11,6 +11,7 @@ import selenium.flow.Navigate;
 import selenium.flow.Registration;
 import selenium.flow.SelectCharacter;
 import selenium.page.CommunityPage;
+import selenium.validator.NotificationValidator;
 
 import java.util.function.Supplier;
 
@@ -23,6 +24,7 @@ public class CommunityTest {
     private final SelectCharacter selectCharacter;
     private final Login login;
     private final CommunityPage communityPage;
+    private final NotificationValidator notificationValidator;
 
     private final Supplier<SeleniumAccount> seleniumAccountSupplier = this::registerAccount;
 
@@ -34,6 +36,7 @@ public class CommunityTest {
         this.selectCharacter = new SelectCharacter(driver);
         this.login = new Login(driver);
         this.communityPage = new CommunityPage(driver);
+        this.notificationValidator = new NotificationValidator(driver);
     }
 
     public static void run(WebDriver driver) {
@@ -82,6 +85,7 @@ public class CommunityTest {
 
     private void testFriendship() {
         FriendshipTest.builder()
+            .notificationValidator(notificationValidator)
             .seleniumAccountSupplier(seleniumAccountSupplier)
             .navigate(navigate)
             .selectCharacter(selectCharacter)
