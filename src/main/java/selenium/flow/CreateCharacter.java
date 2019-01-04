@@ -27,7 +27,11 @@ public class CreateCharacter {
         notificationValidator = new NotificationValidator(driver);
     }
 
-    public void createCharacter(SeleniumCharacter character) {
+    public SeleniumCharacter createCharacter(){
+        return createCharacter(SeleniumCharacter.create());
+    }
+
+    public SeleniumCharacter createCharacter(SeleniumCharacter character) {
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
 
         WebElement characterNameField = characterSelectPage.getNewCharacterNameField();
@@ -43,6 +47,8 @@ public class CreateCharacter {
         createCharacterButton.click();
 
         verifyCharacterCreation(character);
+
+        return character;
     }
 
     private void verifyCharacterCreation(SeleniumCharacter character) {

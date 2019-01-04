@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import selenium.cases.account.AccountTest;
 import selenium.cases.characterselect.CharacterSelectTest;
+import selenium.cases.community.CommunityTest;
 import selenium.cases.equipment.EquipmentTest;
 import selenium.cases.factory.FactoryTest;
 import selenium.cases.registration.RegistrationTest;
@@ -71,8 +72,13 @@ public class SeleniumTestApplication {
     }
 
     @Test
-    public void testEquipment(){
+    public void testEquipment() {
         EquipmentTest.run(driver);
+    }
+
+    @Test
+    public void testCommunity() {
+        CommunityTest.run(driver);
     }
 
     @After

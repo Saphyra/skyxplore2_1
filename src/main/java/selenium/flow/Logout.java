@@ -23,8 +23,7 @@ public class Logout {
     }
 
     public void logOut(){
-        WebElement logoutButton = LocatorUtil.getLogoutButton(driver);
-        logoutButton.click();
+        LocatorUtil.getLogoutButton(driver).ifPresent(WebElement::click);
 
         validateLogout();
     }

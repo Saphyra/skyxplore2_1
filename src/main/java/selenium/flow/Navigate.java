@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.page.CharacterSelectPage;
 import selenium.page.OverviewPage;
+import selenium.util.LocatorUtil;
 
 import java.util.Optional;
 
@@ -66,5 +67,17 @@ public class Navigate {
     public WebElement getOverviewButton() {
         return Optional.ofNullable(driver.findElement(By.cssSelector("footer button:nth-child(2)")))
             .orElseThrow(() -> new RuntimeException("Go to Overview button not found."));
+    }
+
+    public void toIndexPage() {
+        Optional<WebElement> logoutButton = LocatorUtil.getLogoutButton(driver);
+        if (logoutButton.isPresent()) {
+            logoutButton.get().click();
+        } else {
+            driver.navigate().to(HOST);
+        }
+
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(HOST));
+        assertEquals(HOST, driver.getCurrentUrl());
     }
 }
