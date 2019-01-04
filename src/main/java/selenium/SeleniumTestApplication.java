@@ -83,7 +83,7 @@ public class SeleniumTestApplication {
 
     @After
     public void tearDown() {
-        Util.sleep(0);
+        Util.sleep(6000);
         if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);
         }

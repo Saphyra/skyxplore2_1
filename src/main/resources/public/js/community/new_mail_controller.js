@@ -82,7 +82,7 @@
                     return;
                 }
                 
-                const addressees = orderCharacters(communityDao.getAddressees(queryText, sessionStorage.characterId));
+                const addressees = orderCharacters(mailDao.getAddressees(queryText, sessionStorage.characterId));
                 if(addressees.length == 0){
                     container.innerHTML = "Nem található címzett.";
                 }

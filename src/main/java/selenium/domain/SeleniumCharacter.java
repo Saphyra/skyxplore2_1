@@ -12,7 +12,7 @@ import static skyxplore.controller.request.character.CreateCharacterRequest.CHAR
 @NoArgsConstructor
 @AllArgsConstructor
 public class SeleniumCharacter {
-    private static final String CHARACTER_NAME_PREFIX = "character-";
+    public static final String CHARACTER_NAME_PREFIX = "character-";
 
     private String characterName;
 

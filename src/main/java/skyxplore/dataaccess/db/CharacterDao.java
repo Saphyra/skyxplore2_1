@@ -1,10 +1,10 @@
 package skyxplore.dataaccess.db;
 
-import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CharacterRepository;
+import skyxplore.domain.character.CharacterConverter;
 import skyxplore.domain.character.CharacterEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 
@@ -21,7 +21,7 @@ public class CharacterDao extends AbstractDao<CharacterEntity, SkyXpCharacter, S
     private final MailDao mailDao;
 
     public CharacterDao(
-        Converter<CharacterEntity, SkyXpCharacter> converter,
+        CharacterConverter converter,
         CharacterRepository repository,
         BlockedCharacterDao blockedCharacterDao,
         EquippedShipDao equippedShipDao,

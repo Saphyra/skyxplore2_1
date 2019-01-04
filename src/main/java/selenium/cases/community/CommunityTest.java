@@ -10,6 +10,7 @@ import selenium.flow.Login;
 import selenium.flow.Navigate;
 import selenium.flow.Registration;
 import selenium.flow.SelectCharacter;
+import selenium.page.CommunityPage;
 
 import java.util.function.Supplier;
 
@@ -21,6 +22,7 @@ public class CommunityTest {
     private final CreateCharacter createCharacter;
     private final SelectCharacter selectCharacter;
     private final Login login;
+    private final CommunityPage communityPage;
 
     private final Supplier<SeleniumAccount> seleniumAccountSupplier = this::registerAccount;
 
@@ -31,6 +33,7 @@ public class CommunityTest {
         this.createCharacter = new CreateCharacter(driver);
         this.selectCharacter = new SelectCharacter(driver);
         this.login = new Login(driver);
+        this.communityPage = new CommunityPage(driver);
     }
 
     public static void run(WebDriver driver) {
@@ -85,6 +88,7 @@ public class CommunityTest {
             .seleniumAccountSupplier(seleniumAccountSupplier)
             .navigate(navigate)
             .selectCharacter(selectCharacter)
+            .communityPage(communityPage)
             .login(login)
             .build()
             .testFilter()
