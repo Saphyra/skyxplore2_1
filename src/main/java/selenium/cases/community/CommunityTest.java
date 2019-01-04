@@ -49,7 +49,7 @@ public class CommunityTest {
             - Send friend request
                 - Character 1: Request appears at sent
                 - Character 2: Request appears at new ones
-                    - - Notifications shown
+                    - Notifications shown
                 - Characters do not appear at selectable characters (from both side)
             - Cancel friend request
                 - Request disappears both side
@@ -57,6 +57,7 @@ public class CommunityTest {
             - Accept friend request
                 - Friendship appears
                 - FriendRequest disappears
+                - Characters do not appear at selectable characters (from both side)
         Send Mail test
             - Selectable characters
                 - Search by name

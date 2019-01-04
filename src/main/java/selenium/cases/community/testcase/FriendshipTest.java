@@ -10,9 +10,11 @@ import selenium.flow.Navigate;
 import selenium.flow.SelectCharacter;
 import selenium.page.CommunityPage;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertTrue;
 import static selenium.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
@@ -37,7 +39,15 @@ public class FriendshipTest {
 
         WebElement friendNameInputField = communityPage.getFriendNameInputField();
         friendNameInputField.sendKeys(CHARACTER_NAME_PREFIX);
-        verifyDoesNotContainOwnCharacters(account1.getCharacters(), account2.getCharacters());
+        verifySearchResult(account1.getCharacters(), account2.getCharacters());
+
+        friendNameInputField.clear();
+        friendNameInputField.sendKeys(account2.getCharacter1().getCharacterName());
+
+        verifySearchResult(
+            Stream.concat(account1.getCharacters().stream(), Stream.of(account2.getCharacter2())).collect(Collectors.toList()),
+            Arrays.asList(account2.getCharacter1())
+        );
 
         return this;
     }
@@ -59,7 +69,7 @@ public class FriendshipTest {
         assertTrue(communityPage.getAddFriendContainer().isDisplayed());
     }
 
-    private void verifyDoesNotContainOwnCharacters(List<SeleniumCharacter> shouldNotContain, List<SeleniumCharacter> shouldContain) {
+    private void verifySearchResult(List<SeleniumCharacter> shouldNotContain, List<SeleniumCharacter> shouldContain) {
         List<WebElement> searchResult = communityPage.getCharactersCanBeFriendList();
         List<String> characterNames = searchResult.stream()
             .map(element -> element.findElement(By.cssSelector("div:first-child")).getText())
