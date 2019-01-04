@@ -78,23 +78,6 @@ public class FriendshipTest {
         return this;
     }
 
-    private void verifyFriendRequestInList(SeleniumCharacter character) {
-        communityPage.getSentFriendRequestsPageButton().click();
-        assertTrue(
-            communityPage.getSentFriendRequests().stream()
-                .anyMatch(sentFriendRequest -> sentFriendRequest.getCharacterName().equals(character.getCharacterName()))
-        );
-    }
-
-    private void verifyFriendRequestArrived(SeleniumCharacter character) {
-        communityPage.getFriendRequestsPageButton().click();
-        List<SeleniumFriendRequest> friendRequests = communityPage.getFriendRequests();
-        assertTrue(
-            friendRequests.stream()
-                .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
-        );
-    }
-
     public FriendshipTest testCancelFriendRequest() {
         SeleniumAccount account1 = seleniumAccountSupplier.get();
         SeleniumAccount account2 = seleniumAccountSupplier.get();
@@ -127,6 +110,10 @@ public class FriendshipTest {
     }
 
     public FriendshipTest testAcceptFriendRequest() {
+        return this;
+    }
+
+    public FriendshipTest testDeclineFriendRequest() {
         return this;
     }
 
@@ -196,5 +183,22 @@ public class FriendshipTest {
 
     private void verifyFriendRequestNotifications(int numberOfWantedNotifications) {
         assertEquals(numberOfWantedNotifications, communityPage.getNumberOfFriendRequests());
+    }
+
+    private void verifyFriendRequestInList(SeleniumCharacter character) {
+        communityPage.getSentFriendRequestsPageButton().click();
+        assertTrue(
+            communityPage.getSentFriendRequests().stream()
+                .anyMatch(sentFriendRequest -> sentFriendRequest.getCharacterName().equals(character.getCharacterName()))
+        );
+    }
+
+    private void verifyFriendRequestArrived(SeleniumCharacter character) {
+        communityPage.getFriendRequestsPageButton().click();
+        List<SeleniumFriendRequest> friendRequests = communityPage.getFriendRequests();
+        assertTrue(
+            friendRequests.stream()
+                .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
+        );
     }
 }
