@@ -282,7 +282,7 @@
     function getFriendRequests(){
         try{
             
-            const path = "friend/friendrequest/received";
+            const path = "friend/request/received";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);
@@ -330,7 +330,7 @@
     */
     function getSentFriendRequests(){
         try{
-            const path = "friend/friendrequest/sent";
+            const path = "friend/request/sent";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);

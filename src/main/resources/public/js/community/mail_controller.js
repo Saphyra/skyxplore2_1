@@ -137,7 +137,7 @@
     
     function displayNumberOfUnreadMails(){
         try{
-            const numberOfUnreadMails = communityDao.getNumberOfUnreadMails();
+            const numberOfUnreadMails = mailDao.getNumberOfUnreadMails();
             if(numberOfUnreadMails > 0){
                 document.getElementById("numberofunreadmails").innerHTML = " (" + numberOfUnreadMails + ")";
             }else{
@@ -151,7 +151,7 @@
     
     function loadMails(){
         try{
-            const mails = communityDao.getMails();
+            const mails = mailDao.getMails();
             mailController.mails = orderMails(mails);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -326,7 +326,7 @@
     
     function loadSentMails(){
         try{
-            const mails = communityDao.getSentMails();
+            const mails = mailDao.getSentMails();
             mailController.sentMails = orderMails(mails);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -450,7 +450,7 @@
     
     function loadArchivedMails(){
         try{
-            const mails = communityDao.getArchivedMails();
+            const mails = mailDao.getArchivedMails();
             mailController.archivedMails = orderMails(mails);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
