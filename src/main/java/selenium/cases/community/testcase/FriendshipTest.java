@@ -31,19 +31,13 @@ public class FriendshipTest {
         SeleniumAccount account1 = seleniumAccountSupplier.get();
         SeleniumAccount account2 = seleniumAccountSupplier.get();
 
-        login.login(account1.getUser());
-        selectCharacter.selectCharacter(account1.getCharacter1());
-        navigate.toCommunityPage();
-
+        goToCommunityPageOf(account1);
         openAddFriendPage();
 
-        WebElement friendNameInputField = communityPage.getFriendNameInputField();
-        friendNameInputField.sendKeys(CHARACTER_NAME_PREFIX);
+        searchForPossibleFriends(CHARACTER_NAME_PREFIX);
         verifySearchResult(account1.getCharacters(), account2.getCharacters());
 
-        friendNameInputField.clear();
-        friendNameInputField.sendKeys(account2.getCharacter1().getCharacterName());
-
+        searchForPossibleFriends(account2.getCharacter1().getCharacterName());
         verifySearchResult(
             Stream.concat(account1.getCharacters().stream(), Stream.of(account2.getCharacter2())).collect(Collectors.toList()),
             Arrays.asList(account2.getCharacter1())
@@ -64,9 +58,21 @@ public class FriendshipTest {
         return this;
     }
 
+    private void goToCommunityPageOf(SeleniumAccount account1) {
+        login.login(account1.getUser());
+        selectCharacter.selectCharacter(account1.getCharacter1());
+        navigate.toCommunityPage();
+    }
+
     private void openAddFriendPage() {
         communityPage.getAddFriendButton().click();
         assertTrue(communityPage.getAddFriendContainer().isDisplayed());
+    }
+
+    private void searchForPossibleFriends(String characterName) {
+        WebElement friendNameInputField = communityPage.getFriendNameInputField();
+        friendNameInputField.clear();
+        friendNameInputField.sendKeys(characterName);
     }
 
     private void verifySearchResult(List<SeleniumCharacter> shouldNotContain, List<SeleniumCharacter> shouldContain) {
