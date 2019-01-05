@@ -31,7 +31,7 @@ public class ChangePasswordTest {
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         this.navigate = new Navigate(driver);
-        this.changePasswordTestSetup = new ChangePasswordTestSetup(driver, accountPage);
+        this.changePasswordTestSetup = new ChangePasswordTestSetup(driver, accountPage, registration, navigate);
     }
 
     public void runTests() {

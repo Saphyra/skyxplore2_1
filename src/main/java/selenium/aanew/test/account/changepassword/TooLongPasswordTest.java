@@ -2,7 +2,6 @@ package selenium.aanew.test.account.changepassword;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
@@ -32,9 +31,7 @@ public class TooLongPasswordTest {
     private final FieldValidator fieldValidator;
 
     public void validateTooLongPassword() {
-        SeleniumUser user = registration.registerUser();
-        navigate.toAccountPage();
-        changePasswordTestSetup.setUpForChangePasswordTest(user);
+        changePasswordTestSetup.setUpForChangePasswordTest();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
         newPasswordField.sendKeys(TOO_LONG_PASSWORD);

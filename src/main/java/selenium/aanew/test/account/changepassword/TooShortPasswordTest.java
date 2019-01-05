@@ -25,9 +25,7 @@ public class TooShortPasswordTest {
     private final ChangePasswordTestSetup changePasswordTestSetup;
 
     public void validateTooShortPassword() {
-        SeleniumUser user = registration.registerUser();
-        navigate.toAccountPage();
-        changePasswordTestSetup.setUpForChangePasswordTest(user);
+        SeleniumUser user = changePasswordTestSetup.setUpForChangePasswordTest();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
 
