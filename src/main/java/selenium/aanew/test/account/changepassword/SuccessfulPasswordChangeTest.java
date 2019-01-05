@@ -10,9 +10,6 @@ import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.util.DOMUtil.ATTRIBUTE_VALUE;
-
 @Builder
 public class SuccessfulPasswordChangeTest {
     private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
@@ -46,9 +43,7 @@ public class SuccessfulPasswordChangeTest {
     private void verifyPasswordChange(SeleniumUser originalUser, SeleniumUser changed) {
         verifySuccessfulNotification();
 
-        assertTrue(accountPage.getNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-        assertTrue(accountPage.getNewConfirmPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-        assertTrue(accountPage.getCurrentNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
+        changePasswordTestHelper.verifyInputFieldsAreEmpty();
 
         logout.logOut();
         login.loginFailure(originalUser);

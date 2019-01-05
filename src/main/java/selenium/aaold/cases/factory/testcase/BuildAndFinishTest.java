@@ -13,9 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.util.Util.sleep;
-import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.Util.validateIfPresent;
 
 @Builder
 @Slf4j

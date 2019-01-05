@@ -5,17 +5,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.aanew.logic.domain.SeleniumUser;
-import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.logic.page.IndexPage;
+import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;
-import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.aanew.logic.util.LinkUtil.HOST;
 import static selenium.aanew.logic.util.LocatorUtil.getNotificationElementsLocator;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 public class Registration {
-    public static final String SUCCESSFUL_REGISTRATION_NOTIFICATION = "Sikeres regisztráció!";
+    private static final String SUCCESSFUL_REGISTRATION_NOTIFICATION = "Sikeres regisztráció!";
 
     private final WebDriver driver;
     private final IndexPage indexPage;

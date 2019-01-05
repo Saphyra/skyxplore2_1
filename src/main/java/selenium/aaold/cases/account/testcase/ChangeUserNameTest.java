@@ -17,9 +17,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.domain.SeleniumUser.createRandomPassword;
 import static selenium.aanew.logic.domain.SeleniumUser.createRandomUserName;
-import static selenium.aanew.logic.util.DOMUtil.ATTRIBUTE_VALUE;
-import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
-import static selenium.aanew.logic.util.StringUtil.crop;
+import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
+import static selenium.aanew.logic.util.Util.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
 

@@ -9,7 +9,7 @@ import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
-import static selenium.aanew.logic.util.StringUtil.crop;
+import static selenium.aanew.logic.util.Util.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
 
 @Builder

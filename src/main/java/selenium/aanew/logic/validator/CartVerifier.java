@@ -15,6 +15,9 @@ import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class CartVerifier {
+    private static final String SELECTOR_CART_ITEMS = "#basket div";
+    private static final String TEXT_CART_IS_EMPTY = "A kosár üres!";
+
     private final WebDriver driver;
     private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
@@ -57,9 +60,9 @@ public class CartVerifier {
     }
 
     public void verifyEmptyCart() {
-        List<WebElement> elements = driver.findElements(By.cssSelector("#basket div"));
+        List<WebElement> elements = driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS));
         assertEquals(1, elements.size());
-        assertEquals("A kosár üres!", elements.get(0).getText());
+        assertEquals(TEXT_CART_IS_EMPTY, elements.get(0).getText());
         verifyCartTotalCost();
     }
 }

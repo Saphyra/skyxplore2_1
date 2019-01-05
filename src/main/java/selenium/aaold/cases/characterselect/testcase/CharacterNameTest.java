@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumCharacter;
 import selenium.aanew.logic.page.CharacterSelectPage;
-import selenium.aanew.logic.util.DOMUtil;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
 
-import static selenium.aanew.logic.util.StringUtil.crop;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
+import static selenium.aanew.logic.util.Util.crop;
 import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
@@ -79,6 +79,6 @@ public class CharacterNameTest {
     }
 
     public void cleanUp(){
-        DOMUtil.cleanNotifications(driver);
+        cleanNotifications(driver);
     }
 }

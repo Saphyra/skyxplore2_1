@@ -10,9 +10,12 @@ import selenium.aanew.logic.flow.CreateCharacter;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.NotificationValidator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
-import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.Util.validateIfPresent;
 
 @Builder
 public class DeleteCharacterTest {

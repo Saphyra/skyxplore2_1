@@ -13,6 +13,8 @@ import static selenium.aanew.logic.util.LocatorUtil.getNotificationElementsLocat
 
 @RequiredArgsConstructor
 public class NotificationValidator {
+    private static final String SELECTOR_NOTIFICATION_TEXT = ":first-child";
+
     private final WebDriver driver;
 
     public void verifyOnlyOneNotification(String text){
@@ -31,6 +33,9 @@ public class NotificationValidator {
     }
 
     private void verifyContains(List<WebElement> elements, String text){
-        assertTrue(elements.stream().anyMatch(w -> w.findElement(By.cssSelector(":first-child")).getText().equals(text)));
+        assertTrue(
+            elements.stream()
+                .anyMatch(w -> w.findElement(By.cssSelector(SELECTOR_NOTIFICATION_TEXT)).getText().equals(text))
+        );
     }
 }

@@ -14,6 +14,7 @@ public class FactoryPage {
     private static final String ELEMENT_PRODUCT_CONTAINER = ".contentelement:first-child";
     private static final String ELEMENT_MATERIAL_CONTAINER = "#materials > div";
     private static final String ELEMENT_QUEUE = "#queue > div";
+
     private final WebDriver driver;
 
     public WebElement getProductContainer() {

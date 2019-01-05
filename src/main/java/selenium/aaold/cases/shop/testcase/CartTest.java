@@ -69,7 +69,7 @@ public class CartTest {
             addToCart(EXPENSIVE_ITEM_ID);
         } while (canAddMore(cost));
 
-        assertFalse(shopElementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getAddToCartButton().isEnabled());
+        assertFalse(shopElementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).canAddToCart());
     }
 
     private boolean canAddMore(int cost) {

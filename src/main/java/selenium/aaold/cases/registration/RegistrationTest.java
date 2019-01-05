@@ -2,16 +2,16 @@ package selenium.aaold.cases.registration;
 
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.flow.Logout;
 import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aaold.cases.registration.testcase.RegistrationEmailTest;
 import selenium.aaold.cases.registration.testcase.RegistrationPasswordTest;
 import selenium.aaold.cases.registration.testcase.RegistrationUserNameTest;
-import selenium.aanew.logic.flow.Logout;
-import selenium.aanew.logic.page.IndexPage;
 
-import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
 import static selenium.aanew.logic.util.LinkUtil.HOST;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 public class RegistrationTest {
     private final WebDriver driver;

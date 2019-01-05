@@ -14,14 +14,17 @@ import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.util.StringUtil.crop;
-import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.Util.crop;
+import static selenium.aanew.logic.util.Util.validateIfPresent;
 import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 @Builder
 public class RenameCharacterTest {
     private static final String TOO_LONG_CHARACTER_NAME;
+    private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
+    private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
+    private static final String SELECTOR_RENAME_CHARACTER_BUTTON = "button:first-child";
 
     static {
         StringBuilder builder = new StringBuilder();
@@ -108,12 +111,12 @@ public class RenameCharacterTest {
 
         assertTrue(
             characterSelectPage.getCharacterList().stream()
-                .map(element -> element.findElement(By.cssSelector("td:first-child")))
+                .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
                 .anyMatch(webElement -> webElement.getText().equals(renamedCharacter.getCharacterName()))
         );
 
         assertFalse(characterSelectPage.getCharacterList().stream()
-            .map(element -> element.findElement(By.cssSelector("td:first-child")))
+            .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
             .anyMatch(webElement -> webElement.getText().equals(testCharacter.getCharacterName()))
         );
     }
@@ -130,12 +133,12 @@ public class RenameCharacterTest {
     private void openRenameCharacterWindow(SeleniumCharacter testCharacter) {
         validateIfPresent(
             characterSelectPage.getCharacterList().stream()
-                .filter(element -> element.findElement(By.cssSelector("td:first-child"))
+                .filter(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME))
                     .getText()
                     .equals(testCharacter.getCharacterName())
                 )
-                .map(element -> element.findElement(By.cssSelector("td:nth-child(2)")))
-                .map(element -> element.findElement(By.cssSelector("button:first-child")))
+                .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_MODIFICATION_MENU)))
+                .map(element -> element.findElement(By.cssSelector(SELECTOR_RENAME_CHARACTER_BUTTON)))
                 .findFirst()
         ).ifPresent(WebElement::click);
 

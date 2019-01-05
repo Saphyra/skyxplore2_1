@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static selenium.aanew.logic.util.StringUtil.crop;
-import static selenium.aanew.logic.util.UserUtil.randomUID;
+import static selenium.aanew.logic.util.Util.crop;
+import static selenium.aanew.logic.util.Util.randomUID;
 import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 
 @Data

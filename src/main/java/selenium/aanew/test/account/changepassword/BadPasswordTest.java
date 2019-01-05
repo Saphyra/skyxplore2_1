@@ -7,9 +7,6 @@ import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.util.DOMUtil.ATTRIBUTE_VALUE;
-
 @Builder
 public class BadPasswordTest {
     private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
@@ -19,7 +16,7 @@ public class BadPasswordTest {
     private final NotificationValidator notificationValidator;
 
     public void testBadPassword() {
-        SeleniumUser user = changePasswordTestHelper.registerAndNavigateToAccount();
+        changePasswordTestHelper.registerAndNavigateToAccount();
 
         String newPassword = SeleniumUser.createRandomPassword();
 
@@ -36,8 +33,6 @@ public class BadPasswordTest {
 
         notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
 
-        assertTrue(accountPage.getNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-        assertTrue(accountPage.getNewConfirmPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-        assertTrue(accountPage.getCurrentNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
+        changePasswordTestHelper.verifyInputFieldsAreEmpty();
     }
 }

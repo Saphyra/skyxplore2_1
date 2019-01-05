@@ -12,8 +12,8 @@ import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.util.DOMUtil.ATTRIBUTE_VALUE;
-import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
+import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 @Builder
 public class ChangeEmailTest {

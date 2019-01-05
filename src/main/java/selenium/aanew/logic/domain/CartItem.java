@@ -7,71 +7,41 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CartItem {
+    private static final String SELECTOR_TITLE = ".basketelementtitle";
+    private static final String SELECTOR_COST = "div:nth-child(2)";
+    private static final String SELECTOR_REMOVE_FROM_CART = "button:first-of-type";
+    private static final String REGEX_TOTAL_COST = " = ";
+    private static final String REGEX_COST_PER_ITEM = " ";
+    private static final String REGEX_AMOUNT = " x ";
+    private static final String REGEX_GET_ID = " ";
+
     private final WebElement element;
 
-    private String id;
-    private String titleText;
-    private WebElement costElement;
-    private Integer costPerItem;
-    private Integer totalCost;
-
     public String getId() {
-        if (id == null) {
-            parseId();
-        }
-        return id;
-    }
-
-    private void parseId() {
-        id = getTitleText().split(" ")[0].toLowerCase();
+        return getTitleText().split(REGEX_GET_ID)[0].toLowerCase();
     }
 
     private String getTitleText() {
-        if (titleText == null) {
-            titleText = element.findElement(By.cssSelector(".basketelementtitle")).getText();
-        }
-        return titleText;
+        return element.findElement(By.cssSelector(SELECTOR_TITLE)).getText();
     }
 
     public int getAmount() {
-        return Integer.valueOf(getTitleText().split(" x ")[1]);
+        return Integer.valueOf(getTitleText().split(REGEX_AMOUNT)[1]);
     }
 
     public int getCostPerItem() {
-        if (costPerItem == null) {
-            costPerItem = parseCostPerItem();
-        }
-        return costPerItem;
-    }
-
-    private Integer parseCostPerItem() {
-        return Integer.valueOf(getCostElement().getText().split(" ")[1]);
+        return Integer.valueOf(getCostElement().getText().split(REGEX_COST_PER_ITEM)[1]);
     }
 
     private WebElement getCostElement() {
-        if (costElement == null) {
-            costElement = element.findElement(By.cssSelector("div:nth-child(2)"));
-        }
-        return costElement;
+        return element.findElement(By.cssSelector(SELECTOR_COST));
     }
 
     public int getTotalCost() {
-        if(totalCost == null){
-            totalCost = parseTotalCost();
-        }
-        return totalCost;
-    }
-
-    private Integer parseTotalCost() {
-        return Integer.valueOf(getCostElement().getText().split(" = ")[1]);
-    }
-
-    @Override
-    public String toString() {
-        return element.getText();
+        return Integer.valueOf(getCostElement().getText().split(REGEX_TOTAL_COST)[1]);
     }
 
     public void removeFromCart() {
-        element.findElement(By.cssSelector("button:first-of-type")).click();
+        element.findElement(By.cssSelector(SELECTOR_REMOVE_FROM_CART)).click();
     }
 }

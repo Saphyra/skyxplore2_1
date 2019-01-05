@@ -8,15 +8,18 @@ import selenium.aanew.logic.domain.CartItem;
 
 @RequiredArgsConstructor
 public class CostCounter {
+    private static final String SELECTOR_CURRENT_MONEY = "money";
+    private static final String SELECTOR_CART_TOTAL_COST = "cost";
+
     private final WebDriver driver;
     private final ShopElementSearcher shopElementSearcher;
 
-    public int getCurrentMoney(){
-        return Integer.valueOf(driver.findElement(By.id("money")).getText());
+    public int getCurrentMoney() {
+        return Integer.valueOf(driver.findElement(By.id(SELECTOR_CURRENT_MONEY)).getText());
     }
 
     public int getCartTotalCost() {
-        return Integer.valueOf(driver.findElement(By.id("cost")).getText());
+        return Integer.valueOf(driver.findElement(By.id(SELECTOR_CART_TOTAL_COST)).getText());
     }
 
     public int sumCartItemCosts() {

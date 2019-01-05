@@ -12,6 +12,7 @@ public class OverviewPage {
     private static final String ELEMENT_EQUIPMENT_PAGE_BUTTON = ".menucontainer a:nth-child(1)";
     private static final String ELEMENT_FACTORY_PAGE_BUTTON = ".menucontainer a:nth-child(2)";
     private static final String ELEMENT_SHOP_PAGE_BUTTON = ".menucontainer a:nth-child(3)";
+    private static final String SELECTOR_NOTIFICATION_NUMBER = "notificationnum";
 
     private final WebDriver driver;
 
@@ -32,6 +33,6 @@ public class OverviewPage {
     }
 
     public WebElement getNotificationNumberElement() {
-        return driver.findElement(By.id("notificationnum"));
+        return driver.findElement(By.id(SELECTOR_NOTIFICATION_NUMBER));
     }
 }

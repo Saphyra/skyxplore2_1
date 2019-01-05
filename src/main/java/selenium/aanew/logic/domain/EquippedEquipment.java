@@ -2,10 +2,11 @@ package selenium.aanew.logic.domain;
 
 import org.openqa.selenium.WebElement;
 
-import lombok.Getter;
-
 public class EquippedEquipment {
-    @Getter
+    private static final String REGEX_GET_ID = " ";
+    private static final String ATTRIBUTE_CLASS = "class";
+    private static final String VALUE_EMPTY_SLOT = "emptyslot";
+
     private final WebElement element;
     private final String text;
 
@@ -19,6 +20,10 @@ public class EquippedEquipment {
     }
 
     public String getId() {
-        return text.split(" ")[0];
+        return text.split(REGEX_GET_ID)[0];
+    }
+
+    public boolean isEmpty() {
+        return element.getAttribute(ATTRIBUTE_CLASS).contains(VALUE_EMPTY_SLOT);
     }
 }

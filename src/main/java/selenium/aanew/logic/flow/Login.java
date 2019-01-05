@@ -8,9 +8,9 @@ import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;
-import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.aanew.logic.util.LinkUtil.HOST;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 @Slf4j
 public class Login {

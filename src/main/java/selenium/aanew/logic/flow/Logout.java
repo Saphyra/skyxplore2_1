@@ -12,7 +12,7 @@ import static selenium.aanew.logic.util.LinkUtil.HOST;
 import static selenium.aanew.logic.util.LocatorUtil.getNotificationElementsLocator;
 
 public class Logout {
-    public static final String SUCCESSFUL_LOGOUT_NOTIFICATION = "Sikeres kijelentkezés!";
+    private static final String SUCCESSFUL_LOGOUT_NOTIFICATION = "Sikeres kijelentkezés!";
 
     private final WebDriver driver;
     private final NotificationValidator notificationValidator;

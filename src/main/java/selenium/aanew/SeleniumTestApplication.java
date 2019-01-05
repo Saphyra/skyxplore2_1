@@ -23,6 +23,8 @@ public abstract class SeleniumTestApplication {
         SKYXPLORE_LOG_LEVEL,
         SELENIUM_LOG_LEVEL
     };
+    private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
+    private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
 
     protected WebDriver driver;
 
@@ -32,7 +34,7 @@ public abstract class SeleniumTestApplication {
             Application.main(ARGS);
         }
 
-        System.setProperty("webdriver.chrome.driver", getClass().getClassLoader().getResource("chromedriver.exe").getPath());
+        System.setProperty(CHROME_DRIVER_PROPERTY_NAME, getClass().getClassLoader().getResource(CHROME_DRIVER_EXE_LOCATION).getPath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(HOST);

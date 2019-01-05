@@ -11,33 +11,40 @@ import selenium.aanew.logic.validator.NotificationValidator;
 
 @RequiredArgsConstructor
 public class SeleniumFriendRequest {
+    private static final String SELECTOR_CHARACTER_NAME = "div:first-child";
+    private static final String SELECTOR_BUTTON_CONTAINER = "div:last-child > span:first-child";
+    private static final String SELECTOR_DECLINE_BUTTON = "button:nth-child(2)";
+    private static final String NOTIFICATION_FRIEND_REQUEST_DECLINED = "Barátkérelem elutasítva.";
+    private static final String SELECTOR_ACCEPT_BUTTON = "div:last-child > button:last-child";
+    private static final String NOTIFICATION_FRIEND_REQUEST_ACCEPTED = "Barátkérelem elfogadva.";
+
     private final WebDriver driver;
     private final WebElement element;
 
     public String getCharacterName() {
-        return element.findElement(By.cssSelector("div:first-child")).getText();
+        return element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)).getText();
     }
 
     public void decline() {
         WebElement acceptButton = getAcceptButton();
-        WebElement buttonContainer = element.findElement(By.cssSelector("div:last-child > span:first-child"));
+        WebElement buttonContainer = element.findElement(By.cssSelector(SELECTOR_BUTTON_CONTAINER));
 
         Actions actions = new Actions(driver);
         actions.moveToElement(acceptButton);
         actions.perform();
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(buttonContainer));
-        buttonContainer.findElement(By.cssSelector("button:nth-child(2)")).click();
+        buttonContainer.findElement(By.cssSelector(SELECTOR_DECLINE_BUTTON)).click();
 
         driver.switchTo().alert().accept();
-        new NotificationValidator(driver).verifyNotificationVisibility("Barátkérelem elutasítva.");
+        new NotificationValidator(driver).verifyNotificationVisibility(NOTIFICATION_FRIEND_REQUEST_DECLINED);
     }
 
     private WebElement getAcceptButton() {
-        return element.findElement(By.cssSelector("div:last-child > button:last-child"));
+        return element.findElement(By.cssSelector(SELECTOR_ACCEPT_BUTTON));
     }
 
     public void accept() {
         getAcceptButton().click();
-        new NotificationValidator(driver).verifyNotificationVisibility("Barátkérelem elfogadva.");
+        new NotificationValidator(driver).verifyNotificationVisibility(NOTIFICATION_FRIEND_REQUEST_ACCEPTED);
     }
 }

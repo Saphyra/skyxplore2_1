@@ -1,28 +1,32 @@
 package selenium.aanew.logic.helper;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
 import selenium.aanew.logic.domain.CartItem;
 import selenium.aanew.logic.domain.ShopItem;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 public class ShopElementSearcher {
+    private static final String SELECTOR_CART_ITEMS = "#basket > .basketelement";
+    private static final String SELECTOR_SHOP_ITEMS = "#content > .element";
+    private static final String SELECTOR_FIRST_CATEGORY_BUTTON = "#menu .menuitem";
+    private static final String SELECTOR_BUY_BUTTON = "#basket > button:first-of-type";
+
     private final WebDriver driver;
 
     public List<CartItem> searchAllCartItems() {
-        return driver.findElements(By.cssSelector("#basket > .basketelement")).stream()
+        return driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS)).stream()
             .map(CartItem::new)
             .collect(Collectors.toList());
     }
 
     public List<ShopItem> searchAllShopItems() {
-        return driver.findElements(By.cssSelector("#content > .element")).stream()
+        return driver.findElements(By.cssSelector(SELECTOR_SHOP_ITEMS)).stream()
             .map(ShopItem::new)
             .collect(Collectors.toList());
     }
@@ -42,12 +46,12 @@ public class ShopElementSearcher {
     }
 
     public WebElement findFirstCategoryButton() {
-        return driver.findElements(By.cssSelector("#menu .menuitem")).stream()
+        return driver.findElements(By.cssSelector(SELECTOR_FIRST_CATEGORY_BUTTON)).stream()
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Category select menu buttons not found."));
     }
 
     public WebElement getBuyButton() {
-        return driver.findElement(By.cssSelector("#basket > button:first-of-type"));
+        return driver.findElement(By.cssSelector(SELECTOR_BUY_BUTTON));
     }
 }

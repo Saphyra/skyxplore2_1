@@ -10,7 +10,7 @@ import selenium.aanew.logic.page.CharacterSelectPage;
 
 import static org.junit.Assert.assertEquals;
 import static selenium.aanew.logic.util.LinkUtil.OVERVIEW;
-import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.Util.validateIfPresent;
 
 @Builder
 public class SelectCharacterTest {

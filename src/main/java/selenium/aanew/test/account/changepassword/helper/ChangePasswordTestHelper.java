@@ -11,6 +11,7 @@ import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 
 import static org.junit.Assert.assertTrue;
+import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
 
 @RequiredArgsConstructor
 public class ChangePasswordTestHelper {
@@ -42,5 +43,11 @@ public class ChangePasswordTestHelper {
         WebElement changePasswordButton = accountPage.getChangePasswordButton();
         assertTrue(changePasswordButton.isEnabled());
         changePasswordButton.click();
+    }
+
+    public void verifyInputFieldsAreEmpty(){
+        assertTrue(accountPage.getNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
+        assertTrue(accountPage.getNewConfirmPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
+        assertTrue(accountPage.getCurrentNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
     }
 }

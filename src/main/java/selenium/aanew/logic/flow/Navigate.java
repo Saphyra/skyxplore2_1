@@ -15,6 +15,9 @@ import static org.junit.Assert.assertEquals;
 import static selenium.aanew.logic.util.LinkUtil.*;
 
 public class Navigate {
+    private static final String SELECTOR_OVERVIEW_BUTTON = "footer button:nth-child(2)";
+    private static final String SELECTOR_COMMUNITY_PAGE_BUTTON = "footer button:nth-child(3)";
+
     private final WebDriver driver;
 
     public Navigate(WebDriver driver) {
@@ -68,7 +71,7 @@ public class Navigate {
     }
 
     public WebElement getOverviewButton() {
-        return Optional.ofNullable(driver.findElement(By.cssSelector("footer button:nth-child(2)")))
+        return Optional.ofNullable(driver.findElement(By.cssSelector(SELECTOR_OVERVIEW_BUTTON)))
             .orElseThrow(() -> new RuntimeException("Go to Overview button not found."));
     }
 
@@ -85,14 +88,14 @@ public class Navigate {
 
     public void toCommunityPage() {
         assertEquals(OVERVIEW, driver.getCurrentUrl());
-        Optional.ofNullable(driver.findElement(By.cssSelector("footer button:nth-child(3)")))
+        Optional.ofNullable(driver.findElement(By.cssSelector(SELECTOR_COMMUNITY_PAGE_BUTTON)))
             .orElseThrow(() -> new RuntimeException("Community button not found."))
             .click();
 
         verifyURL(COMMUNITY);
     }
 
-    private void verifyURL(String url){
+    private void verifyURL(String url) {
         new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(url));
         assertEquals(url, driver.getCurrentUrl());
     }

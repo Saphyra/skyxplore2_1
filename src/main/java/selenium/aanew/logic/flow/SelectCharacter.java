@@ -8,9 +8,11 @@ import selenium.aanew.logic.page.CharacterSelectPage;
 
 import static org.junit.Assert.assertEquals;
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
-import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.Util.validateIfPresent;
 
 public class SelectCharacter {
+    private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
+
     private final WebDriver driver;
     private final CharacterSelectPage characterSelectPage;
 
@@ -22,7 +24,7 @@ public class SelectCharacter {
     public void selectCharacter(SeleniumCharacter character) {
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
         validateIfPresent(characterSelectPage.getCharacterList().stream()
-            .map(element -> element.findElement(By.cssSelector("td:first-child")))
+            .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
             .filter(webElement -> webElement.getText().equals(character.getCharacterName()))
             .findFirst())
             .ifPresent(WebElement::click);

@@ -8,47 +8,32 @@ import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class ShopItem {
+    private static final String SELECTOR_TITLE = ".elementtitle";
+    private static final String REGEX_ID = " ";
+    private static final String SELECTOR_ADD_TO_CART_BUTTON = "div:nth-child(2) button";
+    private static final String SELECTOR_COST = "div:nth-child(2) div:first-child";
+    private static final String REGEX_COST = " ";
+
     private final WebElement element;
 
-    private String id;
-    private WebElement addToCartButton;
-    private Integer cost;
-
     public String getId() {
-        if(id == null){
-            parseId();
-        }
-
-        return id;
-    }
-
-    private void parseId() {
-        id = element.findElement(By.cssSelector(".elementtitle")).getText().split(" ")[0].toLowerCase();
+        return element.findElement(By.cssSelector(SELECTOR_TITLE)).getText().split(REGEX_ID)[0].toLowerCase();
     }
 
     public void addToCart() {
-        WebElement addToCartButton = getAddToCartButton();
-        assertTrue(addToCartButton.isEnabled());
-        addToCartButton.click();
-    }
-
-    public WebElement getAddToCartButton() {
-        if(addToCartButton == null){
-            addToCartButton = element.findElement(By.cssSelector("div:nth-child(2) button"));
-        }
-        return addToCartButton;
+        assertTrue(canAddToCart());
+        getAddToCartButton().click();
     }
 
     public int getCost() {
-        if(cost == null){
-            cost = Integer.valueOf(element.findElement(By.cssSelector("div:nth-child(2) div:first-child")).getText().split(" ")[1]);
-        }
-        return cost;
+        return Integer.valueOf(element.findElement(By.cssSelector(SELECTOR_COST)).getText().split(REGEX_COST)[1]);
     }
 
-    @Override
-    public String toString(){
-        return element.getText();
+    public boolean canAddToCart() {
+        return getAddToCartButton().isEnabled();
     }
 
+    private WebElement getAddToCartButton() {
+        return element.findElement(By.cssSelector(SELECTOR_ADD_TO_CART_BUTTON));
+    }
 }

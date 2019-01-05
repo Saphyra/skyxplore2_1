@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
 
 public class CreateCharacter {
+    private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
     private static final String NOTIFICATION_CHARACTER_CREATED = "Karakter létrehozva.";
 
     private final WebDriver driver;
@@ -20,14 +21,14 @@ public class CreateCharacter {
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
 
-    public CreateCharacter(WebDriver driver){
+    public CreateCharacter(WebDriver driver) {
         this.driver = driver;
         characterSelectPage = new CharacterSelectPage(driver);
         fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
         notificationValidator = new NotificationValidator(driver);
     }
 
-    public SeleniumCharacter createCharacter(){
+    public SeleniumCharacter createCharacter() {
         return createCharacter(SeleniumCharacter.create());
     }
 
@@ -56,7 +57,7 @@ public class CreateCharacter {
 
         assertTrue(
             characterSelectPage.getCharacterList().stream()
-                .map(element -> element.findElement(By.cssSelector("td:first-child")))
+                .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
                 .anyMatch(webElement -> webElement.getText().equals(character.getCharacterName()))
         );
     }

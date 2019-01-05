@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aaold.cases.registration.RegistrationTest;
-import selenium.aanew.logic.page.IndexPage;
 
-import static selenium.aanew.logic.util.StringUtil.crop;
+import static selenium.aanew.logic.util.Util.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
 

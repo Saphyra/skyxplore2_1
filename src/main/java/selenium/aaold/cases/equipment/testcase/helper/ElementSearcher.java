@@ -16,7 +16,7 @@ import static java.lang.Math.toIntExact;
 
 @RequiredArgsConstructor
 public class ElementSearcher {
-    private static final Predicate<EquippedEquipment> IS_EMPTY_SLOT = equippedEquipment -> equippedEquipment.getElement().getAttribute("class").contains("emptyslot");
+    private static final Predicate<EquippedEquipment> IS_EMPTY_SLOT = EquippedEquipment::isEmpty;
 
     private final WebDriver driver;
 
@@ -28,7 +28,7 @@ public class ElementSearcher {
 
     public int countEmptySlotsInContainer(ContainerId containerId) {
         return toIntExact(findEquippedEquipmentsOfContainer(containerId).stream()
-            .filter(IS_EMPTY_SLOT::test)
+            .filter(IS_EMPTY_SLOT)
             .count());
     }
 

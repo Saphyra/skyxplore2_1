@@ -7,17 +7,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Optional;
 
-import static selenium.aanew.logic.util.IdCollection.NOTIFICATION_CONTROLLER_ID;
-
 public class LocatorUtil {
-    public static final String LOGOUT_BUTTON_SELECTOR = "footer button:first-child";
+    private static final String LOGOUT_BUTTON_SELECTOR = "footer button:first-child";
+    private static final String SELECTOR_NOTIFICATIONS = "#notificationcontainer > DIV";
 
     public static By getNotificationElementsLocator() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("#")
-            .append(NOTIFICATION_CONTROLLER_ID)
-            .append(" > DIV");
-        return By.cssSelector(builder.toString());
+        return By.cssSelector(SELECTOR_NOTIFICATIONS);
     }
 
     public static Optional<WebElement> getLogoutButton(WebDriver driver) {

@@ -2,8 +2,8 @@ package selenium.aanew.logic.domain;
 
 import lombok.Data;
 
-import static selenium.aanew.logic.util.StringUtil.crop;
-import static selenium.aanew.logic.util.UserUtil.randomUID;
+import static selenium.aanew.logic.util.Util.crop;
+import static selenium.aanew.logic.util.Util.randomUID;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 
