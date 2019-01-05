@@ -7,7 +7,7 @@ import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
+import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
 import static selenium.aanew.logic.util.StringUtil.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
@@ -20,10 +20,10 @@ public class TooShortPasswordTest {
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
     private final Navigate navigate;
-    private final ChangePasswordTestSetup changePasswordTestSetup;
+    private final ChangePasswordTestHelper changePasswordTestHelper;
 
-    public void validateTooShortPassword() {
-        SeleniumUser user = changePasswordTestSetup.setUpWithCurrentPassword();
+    public void testTooShortPassword() {
+        SeleniumUser user = changePasswordTestHelper.setUpWithCurrentPassword();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
 

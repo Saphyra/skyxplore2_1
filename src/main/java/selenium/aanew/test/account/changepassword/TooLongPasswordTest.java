@@ -6,7 +6,7 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
+import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 
@@ -24,14 +24,14 @@ public class TooLongPasswordTest {
 
     private static final String ERROR_MESSAGE_PASSWORD_TOO_LONG = "Új jelszó túl hosszú! (Maximum 30 karakter)";
 
-    private final ChangePasswordTestSetup changePasswordTestSetup;
+    private final ChangePasswordTestHelper changePasswordTestHelper;
     private final Registration registration;
     private final Navigate navigate;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
 
-    public void validateTooLongPassword() {
-        changePasswordTestSetup.setUpWithCurrentPassword();
+    public void testTooLongPassword() {
+        changePasswordTestHelper.setUpWithCurrentPassword();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
         newPasswordField.sendKeys(TOO_LONG_PASSWORD);

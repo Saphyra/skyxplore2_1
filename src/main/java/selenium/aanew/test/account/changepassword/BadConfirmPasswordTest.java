@@ -5,20 +5,18 @@ import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
+import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
 @Builder
-public class ConfirmPasswordTest {
+public class BadConfirmPasswordTest {
     private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A jelszavak nem egyeznek.";
 
-    private final ChangePasswordTestSetup changePasswordTestSetup;
+    private final ChangePasswordTestHelper changePasswordTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
 
-    public void validateConfirmPassword() {
-        SeleniumUser user = changePasswordTestSetup.registerAndNavigateToAccount();
-
-        accountPage.getCurrentNewPasswordField().sendKeys(user.getPassword());
+    public void testBadConfirmPassword() {
+        changePasswordTestHelper.setUpWithCurrentPassword();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
         newPasswordField.sendKeys(SeleniumUser.createRandomPassword());

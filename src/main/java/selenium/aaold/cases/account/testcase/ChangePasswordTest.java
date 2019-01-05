@@ -24,28 +24,7 @@ public class ChangePasswordTest {
     private final NotificationValidator notificationValidator;
 /*
 
-    public void validateBadPassword() {
-        clearAll();
 
-        String newPassword = SeleniumUser.createRandomPassword();
-
-        WebElement newPasswordField = accountPage.getNewPasswordField();
-        newPasswordField.sendKeys(newPassword);
-
-        WebElement confirmPasswordField = accountPage.getNewConfirmPasswordField();
-        confirmPasswordField.sendKeys(newPassword);
-
-        WebElement currentPasswordField = accountPage.getCurrentNewPasswordField();
-        currentPasswordField.sendKeys(SeleniumUser.createRandomPassword());
-
-        sendForm();
-
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
-
-        assertTrue(accountPage.getNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-        assertTrue(accountPage.getNewConfirmPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-        assertTrue(accountPage.getCurrentNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-    }
 
     public void validateHappyPath() {
         clearAll();
@@ -93,16 +72,7 @@ public class ChangePasswordTest {
         notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE);
     }
 
-    private void sendForm() {
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewPasswordField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidNewConfirmPasswordField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getCurrentInvalidNewPasswordField()));
 
-        WebElement changePasswordButton = accountPage.getChangePasswordButton();
-        assertTrue(changePasswordButton.isEnabled());
-        changePasswordButton.click();
-    }
 
     private void setUpForCurrentPasswordTest() {
         clearAll();
