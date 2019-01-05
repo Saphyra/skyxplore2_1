@@ -36,7 +36,11 @@ public abstract class SeleniumTestApplication {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(HOST);
+
+        init();
     }
+
+    protected abstract void init();
 
     @After
     public void tearDown() {

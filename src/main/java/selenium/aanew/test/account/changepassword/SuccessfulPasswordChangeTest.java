@@ -1,52 +1,49 @@
-package selenium.aaold.cases.account.testcase;
+package selenium.aanew.test.account.changepassword;
 
 import lombok.Builder;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Login;
 import selenium.aanew.logic.flow.Logout;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.page.AccountPage;
-import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
+
+import static org.junit.Assert.assertTrue;
+import static selenium.aanew.logic.util.DOMUtil.ATTRIBUTE_VALUE;
 
 @Builder
-public class ChangePasswordTest {
-    private final WebDriver driver;
-    private final Navigate navigate;
-    private final Login login;
-    private final Logout logout;
+public class SuccessfulPasswordChangeTest {
+    private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
+
+    private final ChangePasswordTestHelper changePasswordTestHelper;
     private final AccountPage accountPage;
-    private final SeleniumUser user;
-    private final SeleniumUser originalUser;
-    private final SeleniumUser otherUser;
-    private final FieldValidator fieldValidator;
+    private final Logout logout;
+    private final Login login;
+    private final Navigate navigate;
     private final NotificationValidator notificationValidator;
-/*
 
-
-
-    public void validateHappyPath() {
-        clearAll();
-
-        String newPassword = SeleniumUser.createRandomPassword();
-        user.setPassword(newPassword);
+    public void testSuccessfulPasswordChange() {
+        SeleniumUser user = changePasswordTestHelper.registerAndNavigateToAccount();
+        SeleniumUser changed = user.cloneUser();
+        changed.setPassword(SeleniumUser.createRandomPassword());
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
-        newPasswordField.sendKeys(newPassword);
+        newPasswordField.sendKeys(changed.getPassword());
 
         WebElement confirmPasswordField = accountPage.getNewConfirmPasswordField();
-        confirmPasswordField.sendKeys(newPassword);
+        confirmPasswordField.sendKeys(changed.getPassword());
 
         WebElement currentPasswordField = accountPage.getCurrentNewPasswordField();
-        currentPasswordField.sendKeys(originalUser.getPassword());
+        currentPasswordField.sendKeys(user.getPassword());
 
-        sendForm();
+        changePasswordTestHelper.sendForm();
 
-        verifyPasswordChange();
+        verifyPasswordChange(user, changed);
     }
 
-    private void verifyPasswordChange() {
+    private void verifyPasswordChange(SeleniumUser originalUser, SeleniumUser changed) {
         verifySuccessfulNotification();
 
         assertTrue(accountPage.getNewPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
@@ -55,15 +52,16 @@ public class ChangePasswordTest {
 
         logout.logOut();
         login.loginFailure(originalUser);
-        login.login(user);
+
+        login.login(changed);
 
         navigate.toAccountPage();
 
         accountPage.getNewPasswordField().sendKeys(originalUser.getPassword());
         accountPage.getNewConfirmPasswordField().sendKeys(originalUser.getPassword());
-        accountPage.getCurrentNewPasswordField().sendKeys(user.getPassword());
+        accountPage.getCurrentNewPasswordField().sendKeys(changed.getPassword());
 
-        sendForm();
+        changePasswordTestHelper.sendForm();
 
         verifySuccessfulNotification();
     }
@@ -71,16 +69,4 @@ public class ChangePasswordTest {
     private void verifySuccessfulNotification() {
         notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE);
     }
-
-
-
-    private void setUpForCurrentPasswordTest() {
-        clearAll();
-        String password = SeleniumUser.createRandomPassword();
-
-        accountPage.getNewPasswordField().sendKeys(password);
-        accountPage.getNewConfirmPasswordField().sendKeys(password);
-    }
-
-*/
 }

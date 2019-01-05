@@ -1,6 +1,9 @@
 package selenium.aanew.test.account;
 
-import org.openqa.selenium.WebDriver;
+import org.junit.Test;
+import selenium.aanew.SeleniumTestApplication;
+import selenium.aanew.logic.flow.Login;
+import selenium.aanew.logic.flow.Logout;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
@@ -9,46 +12,37 @@ import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.test.account.changepassword.BadConfirmPasswordTest;
 import selenium.aanew.test.account.changepassword.BadPasswordTest;
 import selenium.aanew.test.account.changepassword.EmptyCurrentPasswordTest;
+import selenium.aanew.test.account.changepassword.SuccessfulPasswordChangeTest;
 import selenium.aanew.test.account.changepassword.TooLongPasswordTest;
 import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestHelper;
 
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 
-public class ChangePasswordTest {
-    private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
+public class ChangePasswordTest extends SeleniumTestApplication {
+    private Registration registration;
+    private AccountPage accountPage;
+    private FieldValidator fieldValidator;
+    private Navigate navigate;
+    private ChangePasswordTestHelper changePasswordTestHelper;
+    private NotificationValidator notificationValidator;
+    private Logout logout;
+    private Login login;
 
-    private final WebDriver driver;
-    private final Registration registration;
-    private final AccountPage accountPage;
-    private final FieldValidator fieldValidator;
-    private final Navigate navigate;
-    private final ChangePasswordTestHelper changePasswordTestHelper;
-    private final NotificationValidator notificationValidator;
-
-    public ChangePasswordTest(WebDriver driver) {
-        this.driver = driver;
+    @Override
+    protected void init() {
         this.registration = new Registration(driver);
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         this.navigate = new Navigate(driver);
         this.changePasswordTestHelper = new ChangePasswordTestHelper(driver, accountPage, registration, navigate);
         this.notificationValidator = new NotificationValidator(driver);
+        this.logout = new Logout(driver);
+        this.login = new Login(driver);
     }
 
-    public void runTests() {
-        tooShortPasswordTest();
-        tooLongPasswordTest();
-        badConfirmPasswordTest();
-        emptyCurrentPasswordTest();
-        badPasswordTest();
-
-        /*
-
-        validateHappyPath();*/
-    }
-
-    private void tooShortPasswordTest() {
+    @Test
+    public void testTooShortPassword() {
         TooShortPasswordTest.builder()
             .driver(driver)
             .accountPage(accountPage)
@@ -59,7 +53,8 @@ public class ChangePasswordTest {
             .testTooShortPassword();
     }
 
-    private void tooLongPasswordTest() {
+    @Test
+    public void testTooLongPassword() {
         TooLongPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
             .registration(registration)
@@ -70,7 +65,8 @@ public class ChangePasswordTest {
             .testTooLongPassword();
     }
 
-    private void badConfirmPasswordTest() {
+    @Test
+    public void testBadConfirmPassword() {
         BadConfirmPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
@@ -79,7 +75,8 @@ public class ChangePasswordTest {
             .testBadConfirmPassword();
     }
 
-    private void emptyCurrentPasswordTest() {
+    @Test
+    public void testEmptyCurrentPassword() {
         EmptyCurrentPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
@@ -88,12 +85,26 @@ public class ChangePasswordTest {
             .testEmptyCurrentPassword();
     }
 
-    private void badPasswordTest() {
+    @Test
+    public void testBadPassword() {
         BadPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
             .build()
             .testBadPassword();
+    }
+
+    @Test
+    public void testSuccessfulPasswordChange() {
+        SuccessfulPasswordChangeTest.builder()
+            .changePasswordTestHelper(changePasswordTestHelper)
+            .accountPage(accountPage)
+            .logout(logout)
+            .login(login)
+            .navigate(navigate)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testSuccessfulPasswordChange();
     }
 }
