@@ -1,0 +1,84 @@
+package selenium.aaold.cases.registration;
+
+import org.openqa.selenium.WebDriver;
+import selenium.aanew.domain.SeleniumUser;
+import selenium.aanew.flow.Registration;
+import selenium.aanew.validator.FieldValidator;
+import selenium.aaold.cases.registration.testcase.RegistrationEmailTest;
+import selenium.aaold.cases.registration.testcase.RegistrationPasswordTest;
+import selenium.aaold.cases.registration.testcase.RegistrationUserNameTest;
+import selenium.aanew.flow.Logout;
+import selenium.aanew.page.IndexPage;
+
+import static selenium.aanew.util.DOMUtil.cleanNotifications;
+import static selenium.aanew.util.LinkUtil.HOST;
+
+public class RegistrationTest {
+    private final WebDriver driver;
+    private final IndexPage indexPage;
+    private final SeleniumUser currentUser;
+    private final SeleniumUser newUser = SeleniumUser.create();
+    private final FieldValidator fieldValidator;
+
+    private RegistrationTest(WebDriver driver, SeleniumUser user) {
+        this.driver = driver;
+        this.currentUser = user;
+        this.indexPage = new IndexPage(driver);
+        this.fieldValidator = new FieldValidator(driver, HOST);
+    }
+
+    public static void run(WebDriver driver) {
+        SeleniumUser currentUser = new Registration(driver).registerUser();
+        new Logout(driver).logOut();
+
+        RegistrationTest testCase = new RegistrationTest(driver, currentUser);
+        testCase.validateUserName();
+        testCase.validatePasswords();
+        testCase.validateEmail();
+    }
+
+    private void validateUserName() {
+        RegistrationUserNameTest test = RegistrationUserNameTest.builder()
+            .driver(driver)
+            .currentUser(currentUser)
+            .indexPage(indexPage)
+            .newUser(newUser)
+            .registrationTest(this)
+            .fieldValidator(fieldValidator)
+            .build();
+        test.validateUserName();
+    }
+
+    private void validatePasswords() {
+        RegistrationPasswordTest test = RegistrationPasswordTest.builder()
+            .driver(driver)
+            .currentUser(currentUser)
+            .indexPage(indexPage)
+            .newUser(newUser)
+            .registrationTest(this)
+            .fieldValidator(fieldValidator)
+            .build();
+        test.validatePasswords();
+    }
+
+    private void validateEmail() {
+        RegistrationEmailTest test = RegistrationEmailTest.builder()
+            .driver(driver)
+            .currentUser(currentUser)
+            .indexPage(indexPage)
+            .newUser(newUser)
+            .registrationTest(this)
+            .fieldValidator(fieldValidator)
+            .build();
+        test.validateEmail();
+    }
+
+    public void cleanUp() {
+        cleanNotifications(driver);
+
+        indexPage.getRegistrationUserNameField().clear();
+        indexPage.getRegistrationPasswordField().clear();
+        indexPage.getRegistrationConfirmPasswordField().clear();
+        indexPage.getRegistrationEmailField().clear();
+    }
+}
