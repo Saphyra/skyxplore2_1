@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
 
@@ -63,7 +64,7 @@ public class FriendshipTest {
 
         verifyCannotSendFriendRequest(account2.getCharacter1());
         communityPage.closeAddFriendPage();
-        verifyFriendRequestInList(account2.getCharacter1());
+        verifySentFriendRequestInList(account2.getCharacter1());
 
         goToCommunityPageOf(account2, account2.getCharacter1(), 1);
 
@@ -126,6 +127,33 @@ public class FriendshipTest {
             .findFirst()
             .orElseThrow(() -> new RuntimeException("FriendRequest not found."))
             .decline();
+
+        assertFalse(
+            communityPage.getFriendRequests().stream()
+                .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(account1.getCharacter1().getCharacterName()))
+        );
+
+        communityPage.getFriendsPageButton().click();
+        searchForPossibleFriends(account1.getCharacter1().getCharacterName());
+        verifySearchResult(
+            Collections.emptyList(),
+            Arrays.asList(account1.getCharacter1())
+        );
+
+        goToCommunityPageOf(account1, account1.getCharacter1());
+
+        searchForPossibleFriends(account2.getCharacter1().getCharacterName());
+        verifySearchResult(
+            Collections.emptyList(),
+            Arrays.asList(account2.getCharacter1())
+        );
+        communityPage.closeAddFriendPage();
+
+        communityPage.getSentFriendRequestsPageButton().click();
+        assertFalse(
+            communityPage.getSentFriendRequests().stream()
+                .anyMatch(sentFriendRequest -> sentFriendRequest.getCharacterName().equals(account2.getCharacter1().getCharacterName()))
+        );
 
         return this;
     }
@@ -202,7 +230,7 @@ public class FriendshipTest {
         assertEquals(numberOfWantedNotifications, communityPage.getNumberOfFriendRequests());
     }
 
-    private void verifyFriendRequestInList(SeleniumCharacter character) {
+    private void verifySentFriendRequestInList(SeleniumCharacter character) {
         communityPage.getSentFriendRequestsPageButton().click();
         assertTrue(
             communityPage.getSentFriendRequests().stream()
