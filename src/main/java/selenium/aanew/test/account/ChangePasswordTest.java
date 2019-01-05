@@ -3,25 +3,15 @@ package selenium.aanew.test.account;
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
-import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.account.changepassword.TooLongPasswordTest;
+import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
+import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
 import selenium.page.AccountPage;
 
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
-import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 
 public class ChangePasswordTest {
-    private static final String TOO_LONG_PASSWORD;
-
-    static {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i <= PASSWORD_MAX_LENGTH + 1; i++) {
-            builder.append("a");
-        }
-        TOO_LONG_PASSWORD = builder.toString();
-    }
-
-    private static final String ERROR_MESSAGE_PASSWORD_TOO_LONG = "Új jelszó túl hosszú! (Maximum 30 karakter)";
     private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A jelszavak nem egyeznek.";
     private static final String ERROR_MESSAGE_EMPTY_CURRENT_PASSWORD = "Jelszó megadása kötelező!";
 
@@ -33,6 +23,7 @@ public class ChangePasswordTest {
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
     private final Navigate navigate;
+    private final ChangePasswordTestSetup changePasswordTestSetup;
 
     public ChangePasswordTest(WebDriver driver) {
         this.driver = driver;
@@ -40,24 +31,40 @@ public class ChangePasswordTest {
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         this.navigate = new Navigate(driver);
+        this.changePasswordTestSetup = new ChangePasswordTestSetup(driver, accountPage);
     }
 
     public void runTests() {
-        TooShortPasswordTest.builder()
-            .driver(driver)
-            .registration(registration)
-            .accountPage(accountPage)
-            .fieldValidator(fieldValidator)
-            .navigate(navigate)
-            .build()
-            .validateTooShortPassword();
+        tooShortPasswordTest();
+        tooLongPasswordTest();
 
-        /*validateTooLongPassword();
+        /*
         validateConfirmPassword();
         validateEmptyCurrentPassword();
         validateBadPassword();
         validateHappyPath();*/
     }
 
+    private void tooShortPasswordTest() {
+        TooShortPasswordTest.builder()
+            .driver(driver)
+            .registration(registration)
+            .accountPage(accountPage)
+            .fieldValidator(fieldValidator)
+            .navigate(navigate)
+            .changePasswordTestSetup(changePasswordTestSetup)
+            .build()
+            .validateTooShortPassword();
+    }
 
+    private void tooLongPasswordTest() {
+        TooLongPasswordTest.builder()
+            .changePasswordTestSetup(changePasswordTestSetup)
+            .registration(registration)
+            .navigate(navigate)
+            .accountPage(accountPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .validateTooLongPassword();
+    }
 }

@@ -23,21 +23,7 @@ public class ChangePasswordTest {
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
 /*
-    public void validateTooLongPassword() {
-        setUpForChangePasswordTest();
 
-        WebElement newPasswordField = accountPage.getNewPasswordField();
-        newPasswordField.sendKeys(TOO_LONG_PASSWORD);
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidNewPasswordField(),
-            ERROR_MESSAGE_PASSWORD_TOO_LONG,
-            newPasswordField,
-            accountPage.getChangePasswordButton(),
-            accountPage.getInvalidNewConfirmPasswordField(),
-            accountPage.getCurrentInvalidNewPasswordField()
-        );
-    }
 
     public void validateConfirmPassword() {
         clearAll();
