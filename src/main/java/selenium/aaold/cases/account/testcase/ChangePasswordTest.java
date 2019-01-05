@@ -24,19 +24,6 @@ public class ChangePasswordTest {
     private final NotificationValidator notificationValidator;
 /*
 
-    public void validateEmptyCurrentPassword() {
-        setUpForCurrentPasswordTest();
-
-        fieldValidator.verifyError(
-            accountPage.getCurrentInvalidNewPasswordField(),
-            ERROR_MESSAGE_EMPTY_CURRENT_PASSWORD,
-            accountPage.getCurrentNewPasswordField(),
-            accountPage.getChangePasswordButton(),
-            accountPage.getInvalidNewPasswordField(),
-            accountPage.getInvalidNewConfirmPasswordField()
-        );
-    }
-
     public void validateBadPassword() {
         clearAll();
 

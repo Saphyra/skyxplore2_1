@@ -6,6 +6,7 @@ import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.test.account.changepassword.ConfirmPasswordTest;
+import selenium.aanew.test.account.changepassword.EmptyCurrentPasswordTest;
 import selenium.aanew.test.account.changepassword.TooLongPasswordTest;
 import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
@@ -13,7 +14,6 @@ import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 
 public class ChangePasswordTest {
-    private static final String ERROR_MESSAGE_EMPTY_CURRENT_PASSWORD = "Jelszó megadása kötelező!";
 
     private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
     private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
@@ -31,16 +31,16 @@ public class ChangePasswordTest {
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         this.navigate = new Navigate(driver);
-        this.changePasswordTestSetup = new ChangePasswordTestSetup(driver, accountPage, registration, navigate);
+        this.changePasswordTestSetup = new ChangePasswordTestSetup(accountPage, registration, navigate);
     }
 
     public void runTests() {
         tooShortPasswordTest();
         tooLongPasswordTest();
         validateConfirmPassword();
+        validateEmptyCurrentPassword();
 
         /*
-        validateEmptyCurrentPassword();
         validateBadPassword();
         validateHappyPath();*/
     }
@@ -74,5 +74,14 @@ public class ChangePasswordTest {
             .fieldValidator(fieldValidator)
             .build()
             .validateConfirmPassword();
+    }
+
+    private void validateEmptyCurrentPassword() {
+        EmptyCurrentPasswordTest.builder()
+            .changePasswordTestSetup(changePasswordTestSetup)
+            .accountPage(accountPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .validateEmptyCurrentPassword();
     }
 }
