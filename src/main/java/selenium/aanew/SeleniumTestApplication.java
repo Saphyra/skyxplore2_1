@@ -5,11 +5,11 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
-import selenium.aanew.util.Util;
+import selenium.aanew.logic.util.Util;
 import skyxplore.Application;
 
-import static selenium.aanew.util.LinkUtil.HOST;
-import static selenium.aanew.util.LinkUtil.HOST_LOCAL;
+import static selenium.aanew.logic.util.LinkUtil.HOST;
+import static selenium.aanew.logic.util.LinkUtil.HOST_LOCAL;
 import static skyxplore.Application.APP_CTX;
 
 public abstract class SeleniumTestApplication {

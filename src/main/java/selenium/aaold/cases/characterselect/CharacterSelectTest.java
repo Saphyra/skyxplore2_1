@@ -1,18 +1,18 @@
 package selenium.aaold.cases.characterselect;
 
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.flow.Registration;
-import selenium.aanew.validator.FieldValidator;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aaold.cases.characterselect.testcase.CharacterNameTest;
 import selenium.aaold.cases.characterselect.testcase.DeleteCharacterTest;
 import selenium.aaold.cases.characterselect.testcase.RenameCharacterTest;
 import selenium.aaold.cases.characterselect.testcase.SelectCharacterTest;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.flow.CreateCharacter;
-import selenium.aanew.page.CharacterSelectPage;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.page.CharacterSelectPage;
 
-import static selenium.aanew.util.LinkUtil.CHARACTER_SELECT;
+import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
 
 public class CharacterSelectTest {
 

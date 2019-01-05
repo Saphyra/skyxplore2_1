@@ -5,15 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.aanew.domain.SeleniumUser;
-import selenium.aanew.validator.FieldValidator;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.page.AccountPage;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.util.DOMUtil.ATTRIBUTE_VALUE;
-import static selenium.aanew.util.DOMUtil.cleanNotifications;
+import static selenium.aanew.logic.util.DOMUtil.ATTRIBUTE_VALUE;
+import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
 
 @Builder
 public class ChangeEmailTest {

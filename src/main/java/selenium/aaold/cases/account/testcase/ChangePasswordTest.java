@@ -2,12 +2,12 @@ package selenium.aaold.cases.account.testcase;
 
 import lombok.Builder;
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.domain.SeleniumUser;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.validator.FieldValidator;
-import selenium.aanew.validator.NotificationValidator;
-import selenium.aanew.flow.Login;
-import selenium.aanew.flow.Logout;
+import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.logic.flow.Login;
+import selenium.aanew.logic.flow.Logout;
 import selenium.page.AccountPage;
 
 @Builder

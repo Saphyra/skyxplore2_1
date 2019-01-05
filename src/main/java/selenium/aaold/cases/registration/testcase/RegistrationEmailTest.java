@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.aanew.domain.SeleniumUser;
-import selenium.aanew.validator.FieldValidator;
+import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aaold.cases.registration.RegistrationTest;
-import selenium.aanew.page.IndexPage;
+import selenium.aanew.logic.page.IndexPage;
 
 @Builder
 public class RegistrationEmailTest {

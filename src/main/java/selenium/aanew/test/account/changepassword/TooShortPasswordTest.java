@@ -4,14 +4,14 @@ import lombok.Builder;
 import lombok.NonNull;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.domain.SeleniumUser;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.flow.Registration;
-import selenium.aanew.validator.FieldValidator;
+import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.validator.FieldValidator;
 import selenium.page.AccountPage;
 
-import static selenium.aanew.util.DOMUtil.cleanNotifications;
-import static selenium.aanew.util.StringUtil.crop;
+import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
+import static selenium.aanew.logic.util.StringUtil.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
 
 @Builder

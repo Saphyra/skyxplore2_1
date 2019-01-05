@@ -2,11 +2,11 @@ package selenium.aaold.cases.shop.testcase;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.domain.CartItem;
-import selenium.aanew.domain.ShopItem;
-import selenium.aanew.validator.CartVerifier;
-import selenium.aanew.helper.CostCounter;
-import selenium.aanew.helper.ShopElementSearcher;
+import selenium.aanew.logic.domain.CartItem;
+import selenium.aanew.logic.domain.ShopItem;
+import selenium.aanew.logic.validator.CartVerifier;
+import selenium.aanew.logic.helper.CostCounter;
+import selenium.aanew.logic.helper.ShopElementSearcher;
 
 import static org.junit.Assert.assertFalse;
 

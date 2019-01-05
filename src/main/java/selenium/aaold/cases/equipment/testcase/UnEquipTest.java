@@ -3,11 +3,11 @@ package selenium.aaold.cases.equipment.testcase;
 import static org.junit.Assert.assertEquals;
 
 import lombok.RequiredArgsConstructor;
-import selenium.aanew.domain.ContainerId;
-import selenium.aanew.domain.EquippedEquipment;
+import selenium.aanew.logic.domain.ContainerId;
+import selenium.aanew.logic.domain.EquippedEquipment;
 import selenium.aaold.cases.equipment.testcase.helper.ElementSearcher;
 import selenium.aaold.cases.equipment.testcase.helper.EquipmentVerifier;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
 
 @RequiredArgsConstructor
 public class UnEquipTest {

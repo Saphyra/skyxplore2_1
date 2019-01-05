@@ -1,13 +1,13 @@
 package selenium.aanew.test.account;
 
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.flow.Registration;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
-import selenium.aanew.validator.FieldValidator;
+import selenium.aanew.logic.validator.FieldValidator;
 import selenium.page.AccountPage;
 
-import static selenium.aanew.util.LinkUtil.ACCOUNT;
+import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 
 public class ChangePasswordTest {

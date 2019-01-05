@@ -2,7 +2,7 @@ package selenium.aaold.cases.shop.testcase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.helper.ShopElementSearcher;
+import selenium.aanew.logic.helper.ShopElementSearcher;
 
 import static org.junit.Assert.assertTrue;
 

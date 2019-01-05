@@ -2,17 +2,17 @@ package selenium.aaold.cases.community.testcase;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.validator.NotificationValidator;
-import selenium.aanew.domain.PossibleFriend;
-import selenium.aanew.domain.SeleniumAccount;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.domain.SeleniumFriendRequest;
-import selenium.aanew.domain.SentFriendRequest;
-import selenium.aanew.flow.Login;
-import selenium.aanew.flow.SelectCharacter;
-import selenium.aanew.page.CommunityPage;
-import selenium.aanew.page.OverviewPage;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.logic.domain.PossibleFriend;
+import selenium.aanew.logic.domain.SeleniumAccount;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.domain.SeleniumFriendRequest;
+import selenium.aanew.logic.domain.SentFriendRequest;
+import selenium.aanew.logic.flow.Login;
+import selenium.aanew.logic.flow.SelectCharacter;
+import selenium.aanew.logic.page.CommunityPage;
+import selenium.aanew.logic.page.OverviewPage;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
+import static selenium.aanew.logic.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
 
 @Builder
 public class FriendshipTest {

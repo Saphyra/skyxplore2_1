@@ -13,11 +13,11 @@ import selenium.aaold.cases.equipment.EquipmentTest;
 import selenium.aaold.cases.factory.FactoryTest;
 import selenium.aaold.cases.registration.RegistrationTest;
 import selenium.aaold.cases.shop.ShopTest;
-import selenium.aanew.util.Util;
+import selenium.aanew.logic.util.Util;
 import skyxplore.Application;
 
-import static selenium.aanew.util.LinkUtil.HOST;
-import static selenium.aanew.util.LinkUtil.HOST_LOCAL;
+import static selenium.aanew.logic.util.LinkUtil.HOST;
+import static selenium.aanew.logic.util.LinkUtil.HOST_LOCAL;
 import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {

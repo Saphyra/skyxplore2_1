@@ -5,14 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.flow.CreateCharacter;
-import selenium.aanew.page.CharacterSelectPage;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.page.CharacterSelectPage;
+import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.*;
-import static selenium.aanew.util.LinkUtil.CHARACTER_SELECT;
-import static selenium.aanew.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
+import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
 
 @Builder
 public class DeleteCharacterTest {

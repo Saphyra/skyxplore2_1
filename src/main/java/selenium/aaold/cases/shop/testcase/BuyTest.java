@@ -2,8 +2,8 @@ package selenium.aaold.cases.shop.testcase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.flow.BuyItem;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.BuyItem;
 
 import static org.junit.Assert.assertTrue;
 

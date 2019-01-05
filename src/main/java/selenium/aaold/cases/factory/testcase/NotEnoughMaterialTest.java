@@ -3,7 +3,7 @@ package selenium.aaold.cases.factory.testcase;
 import lombok.Builder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.page.FactoryPage;
+import selenium.aanew.logic.page.FactoryPage;
 
 import static org.junit.Assert.assertFalse;
 

@@ -1,18 +1,18 @@
 package selenium.aaold.cases.community;
 
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.domain.SeleniumUser;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.flow.Registration;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aaold.cases.community.testcase.FriendshipTest;
-import selenium.aanew.domain.SeleniumAccount;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.flow.CreateCharacter;
-import selenium.aanew.flow.Login;
-import selenium.aanew.flow.SelectCharacter;
-import selenium.aanew.page.CommunityPage;
-import selenium.aanew.page.OverviewPage;
+import selenium.aanew.logic.domain.SeleniumAccount;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.flow.Login;
+import selenium.aanew.logic.flow.SelectCharacter;
+import selenium.aanew.logic.page.CommunityPage;
+import selenium.aanew.logic.page.OverviewPage;
 
 import java.util.function.Supplier;
 

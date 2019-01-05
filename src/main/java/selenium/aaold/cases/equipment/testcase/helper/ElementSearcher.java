@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.domain.ContainerId;
-import selenium.aanew.domain.EquippedEquipment;
-import selenium.aanew.domain.UnequippedEquipment;
+import selenium.aanew.logic.domain.ContainerId;
+import selenium.aanew.logic.domain.EquippedEquipment;
+import selenium.aanew.logic.domain.UnequippedEquipment;
 
 import java.util.List;
 import java.util.function.Predicate;

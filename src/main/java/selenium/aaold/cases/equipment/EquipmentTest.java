@@ -1,18 +1,18 @@
 package selenium.aaold.cases.equipment;
 
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.flow.Registration;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aaold.cases.equipment.testcase.EquipShipTest;
 import selenium.aaold.cases.equipment.testcase.EquipTest;
 import selenium.aaold.cases.equipment.testcase.UnEquipTest;
 import selenium.aaold.cases.equipment.testcase.helper.ElementSearcher;
 import selenium.aaold.cases.equipment.testcase.helper.EquipmentVerifier;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.flow.BuyItem;
-import selenium.aanew.flow.CreateCharacter;
-import selenium.aanew.flow.SelectCharacter;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.BuyItem;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.flow.SelectCharacter;
 
 public class EquipmentTest {
     public static final String TEST_SHIP_ID = "sta-02";

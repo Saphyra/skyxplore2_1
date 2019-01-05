@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.domain.ContainerId;
-import selenium.aanew.domain.UnequippedEquipment;
+import selenium.aanew.logic.domain.ContainerId;
+import selenium.aanew.logic.domain.UnequippedEquipment;
 import selenium.aaold.cases.equipment.testcase.helper.ElementSearcher;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;
 

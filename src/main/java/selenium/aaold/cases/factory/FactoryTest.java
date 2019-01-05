@@ -1,15 +1,15 @@
 package selenium.aaold.cases.factory;
 
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.flow.Navigate;
-import selenium.aanew.flow.Registration;
-import selenium.aanew.validator.NotificationValidator;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aaold.cases.factory.testcase.BuildAndFinishTest;
 import selenium.aaold.cases.factory.testcase.NotEnoughMaterialTest;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.flow.CreateCharacter;
-import selenium.aanew.flow.SelectCharacter;
-import selenium.aanew.page.FactoryPage;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.flow.SelectCharacter;
+import selenium.aanew.logic.page.FactoryPage;
 
 public class FactoryTest {
 

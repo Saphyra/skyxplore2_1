@@ -4,13 +4,13 @@ import lombok.Builder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.aanew.domain.SeleniumCharacter;
-import selenium.aanew.flow.CreateCharacter;
-import selenium.aanew.page.CharacterSelectPage;
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.page.CharacterSelectPage;
 
 import static org.junit.Assert.assertEquals;
-import static selenium.aanew.util.LinkUtil.OVERVIEW;
-import static selenium.aanew.util.ValidationUtil.validateIfPresent;
+import static selenium.aanew.logic.util.LinkUtil.OVERVIEW;
+import static selenium.aanew.logic.util.ValidationUtil.validateIfPresent;
 
 @Builder
 public class SelectCharacterTest {
