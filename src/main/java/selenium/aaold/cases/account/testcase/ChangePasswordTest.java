@@ -24,33 +24,6 @@ public class ChangePasswordTest {
     private final NotificationValidator notificationValidator;
 /*
 
-
-    public void validateConfirmPassword() {
-        clearAll();
-        accountPage.getCurrentNewPasswordField().sendKeys(originalUser.getPassword());
-
-        WebElement newPasswordField = accountPage.getNewPasswordField();
-        newPasswordField.sendKeys(SeleniumUser.createRandomPassword());
-
-        WebElement newConfirmPasswordField = accountPage.getNewConfirmPasswordField();
-        newConfirmPasswordField.sendKeys(SeleniumUser.createRandomPassword());
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidNewPasswordField(),
-            ERROR_MESSAGE_BAD_CONFIRM_PASSWORD,
-            newPasswordField,
-            accountPage.getChangePasswordButton(),
-            accountPage.getCurrentInvalidNewPasswordField()
-        );
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidNewConfirmPasswordField(),
-            ERROR_MESSAGE_BAD_CONFIRM_PASSWORD,
-            newConfirmPasswordField,
-            accountPage.getChangePasswordButton()
-        );
-    }
-
     public void validateEmptyCurrentPassword() {
         setUpForCurrentPasswordTest();
 

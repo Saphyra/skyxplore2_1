@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Navigate;
-import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
@@ -19,13 +18,12 @@ public class TooShortPasswordTest {
 
     private final WebDriver driver;
     private final AccountPage accountPage;
-    private final Registration registration;
     private final FieldValidator fieldValidator;
     private final Navigate navigate;
     private final ChangePasswordTestSetup changePasswordTestSetup;
 
     public void validateTooShortPassword() {
-        SeleniumUser user = changePasswordTestSetup.setUpForChangePasswordTest();
+        SeleniumUser user = changePasswordTestSetup.setUpWithCurrentPassword();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
 

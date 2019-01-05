@@ -5,6 +5,7 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.account.changepassword.ConfirmPasswordTest;
 import selenium.aanew.test.account.changepassword.TooLongPasswordTest;
 import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
@@ -12,7 +13,6 @@ import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 
 public class ChangePasswordTest {
-    private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A jelszavak nem egyeznek.";
     private static final String ERROR_MESSAGE_EMPTY_CURRENT_PASSWORD = "Jelszó megadása kötelező!";
 
     private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
@@ -37,9 +37,9 @@ public class ChangePasswordTest {
     public void runTests() {
         tooShortPasswordTest();
         tooLongPasswordTest();
+        validateConfirmPassword();
 
         /*
-        validateConfirmPassword();
         validateEmptyCurrentPassword();
         validateBadPassword();
         validateHappyPath();*/
@@ -48,7 +48,6 @@ public class ChangePasswordTest {
     private void tooShortPasswordTest() {
         TooShortPasswordTest.builder()
             .driver(driver)
-            .registration(registration)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
             .navigate(navigate)
@@ -66,5 +65,14 @@ public class ChangePasswordTest {
             .fieldValidator(fieldValidator)
             .build()
             .validateTooLongPassword();
+    }
+
+    private void validateConfirmPassword() {
+        ConfirmPasswordTest.builder()
+            .changePasswordTestSetup(changePasswordTestSetup)
+            .accountPage(accountPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .validateConfirmPassword();
     }
 }

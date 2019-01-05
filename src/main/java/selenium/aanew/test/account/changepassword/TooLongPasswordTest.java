@@ -31,7 +31,7 @@ public class TooLongPasswordTest {
     private final FieldValidator fieldValidator;
 
     public void validateTooLongPassword() {
-        changePasswordTestSetup.setUpForChangePasswordTest();
+        changePasswordTestSetup.setUpWithCurrentPassword();
 
         WebElement newPasswordField = accountPage.getNewPasswordField();
         newPasswordField.sendKeys(TOO_LONG_PASSWORD);
