@@ -109,11 +109,28 @@ public class FriendshipTest {
         return this;
     }
 
-    public FriendshipTest testAcceptFriendRequest() {
+    public FriendshipTest testDeclineFriendRequest() {
+        SeleniumAccount account1 = seleniumAccountSupplier.get();
+        SeleniumAccount account2 = seleniumAccountSupplier.get();
+
+        goToCommunityPageOf(account1, account1.getCharacter1());
+
+        sendFriendRequestTo(account2.getCharacter1());
+
+        goToCommunityPageOf(account2, account2.getCharacter1(), 1);
+
+        communityPage.getFriendRequestsPageButton().click();
+        List<SeleniumFriendRequest> friendRequests = communityPage.getFriendRequests();
+        friendRequests.stream()
+            .filter(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(account1.getCharacter1().getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("FriendRequest not found."))
+            .decline();
+
         return this;
     }
 
-    public FriendshipTest testDeclineFriendRequest() {
+    public FriendshipTest testAcceptFriendRequest() {
         return this;
     }
 

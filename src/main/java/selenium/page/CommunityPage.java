@@ -61,7 +61,7 @@ public class CommunityPage {
 
     public List<SeleniumFriendRequest> getFriendRequests() {
         return driver.findElements(By.cssSelector("#friendrequestitems > div.friendlistitem")).stream()
-            .map(SeleniumFriendRequest::new)
+            .map(element -> new SeleniumFriendRequest(driver, element))
             .collect(Collectors.toList());
     }
 
