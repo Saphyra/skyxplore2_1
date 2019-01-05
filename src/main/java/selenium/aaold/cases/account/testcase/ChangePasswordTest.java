@@ -3,12 +3,12 @@ package selenium.aaold.cases.account.testcase;
 import lombok.Builder;
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.domain.SeleniumUser;
-import selenium.aanew.logic.flow.Navigate;
-import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.logic.flow.Login;
 import selenium.aanew.logic.flow.Logout;
-import selenium.page.AccountPage;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.page.AccountPage;
+import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
 
 @Builder
 public class ChangePasswordTest {

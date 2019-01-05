@@ -1,4 +1,4 @@
-package selenium.page;
+package selenium.aanew.logic.page;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;

@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
-import selenium.page.AccountPage;
 
 import static selenium.aanew.logic.util.StringUtil.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MIN_LENGTH;

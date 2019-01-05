@@ -3,11 +3,11 @@ package selenium.aanew.test.account;
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.test.account.changepassword.TooLongPasswordTest;
 import selenium.aanew.test.account.changepassword.TooShortPasswordTest;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
-import selenium.page.AccountPage;
 
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 

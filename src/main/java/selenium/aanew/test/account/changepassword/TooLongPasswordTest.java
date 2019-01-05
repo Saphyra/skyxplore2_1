@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.test.account.changepassword.helper.ChangePasswordTestSetup;
 
@@ -27,7 +28,7 @@ public class TooLongPasswordTest {
     private final ChangePasswordTestSetup changePasswordTestSetup;
     private final Registration registration;
     private final Navigate navigate;
-    private final selenium.page.AccountPage accountPage;
+    private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
 
     public void validateTooLongPassword() {

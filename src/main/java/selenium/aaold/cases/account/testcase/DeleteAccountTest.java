@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.flow.Login;
 import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aanew.logic.flow.Login;
-import selenium.page.AccountPage;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;

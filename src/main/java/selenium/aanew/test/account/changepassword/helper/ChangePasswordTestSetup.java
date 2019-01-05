@@ -3,14 +3,14 @@ package selenium.aanew.test.account.changepassword.helper;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.page.AccountPage;
 
 import static selenium.aanew.logic.util.DOMUtil.cleanNotifications;
 
 @RequiredArgsConstructor
 public class ChangePasswordTestSetup {
     private final WebDriver driver;
-    //TODO import fix
-    private final selenium.page.AccountPage accountPage;
+    private final AccountPage accountPage;
 
     public void setUpForChangePasswordTest(SeleniumUser user) {
         clearAll();

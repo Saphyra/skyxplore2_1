@@ -3,16 +3,16 @@ package selenium.aaold.cases.account;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.domain.SeleniumUser;
+import selenium.aanew.logic.flow.Login;
+import selenium.aanew.logic.flow.Logout;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aaold.cases.account.testcase.ChangeEmailTest;
 import selenium.aaold.cases.account.testcase.ChangeUserNameTest;
 import selenium.aaold.cases.account.testcase.DeleteAccountTest;
-import selenium.aanew.logic.flow.Login;
-import selenium.aanew.logic.flow.Logout;
-import selenium.page.AccountPage;
 
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 
