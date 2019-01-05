@@ -24,7 +24,7 @@
 
     function acceptFriendRequest(friendRequestId){
         try{
-            if(communityDao.acceptFriendRequest(sessionStorage.characterId, friendRequestId)){
+            if(communityDao.acceptFriendRequest(friendRequestId)){
                 notificationService.showSuccess("Barátkérelem elfogadva.");
             }else{
                 notificationService.showError("Barátkérelem elfogadása sikertelen.");

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import selenium.domain.Friend;
 import selenium.domain.PossibleFriend;
 import selenium.domain.SeleniumFriendRequest;
 import selenium.domain.SentFriendRequest;
@@ -67,5 +68,11 @@ public class CommunityPage {
 
     public WebElement getFriendsPageButton() {
         return driver.findElement(By.cssSelector("#listfriends div:first-child div:nth-child(1)"));
+    }
+
+    public List<Friend> getFriends() {
+        return driver.findElements(By.cssSelector("#friendlistitems > div.friendlistitem")).stream()
+            .map(Friend::new)
+            .collect(Collectors.toList());
     }
 }

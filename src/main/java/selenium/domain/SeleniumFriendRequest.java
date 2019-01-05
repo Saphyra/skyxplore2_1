@@ -35,4 +35,9 @@ public class SeleniumFriendRequest {
     private WebElement getAcceptButton() {
         return element.findElement(By.cssSelector("div:last-child > button:last-child"));
     }
+
+    public void accept() {
+        getAcceptButton().click();
+        new NotificationValidator(driver).verifyNotificationVisibility("Barátkérelem elfogadva.");
+    }
 }
