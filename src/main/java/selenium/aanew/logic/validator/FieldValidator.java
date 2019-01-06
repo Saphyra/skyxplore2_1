@@ -13,7 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class FieldValidator {
-    public static final String ATTRIBUTE_TITLE = "title";
+    private static final String ATTRIBUTE_TITLE = "title";
+
     private final WebDriver driver;
     private final String page;
 

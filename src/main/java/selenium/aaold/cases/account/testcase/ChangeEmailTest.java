@@ -10,18 +10,15 @@ import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
 import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 @Builder
 public class ChangeEmailTest {
-    private static final String INVALID_EMAIL = "aa.a";
-
     //TODO restore after fixing FE validation
     //private static final String INVALID_EMAIL = "aa.a@";
-    private static final String ERROR_MESSAGE_INVALID_EMAIL = "Érvénytelen e-mail cím";
+
     private static final String ERROR_MESSAGE_EMAIL_ALREADY_EXISTS = "E-mail cím már regisztrálva van.";
     private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
 
@@ -36,20 +33,7 @@ public class ChangeEmailTest {
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
 
-    public void validateInvalidEmail() {
-        setUpForEmailTest();
-
-        WebElement emailField = accountPage.getChangeEmailField();
-        emailField.sendKeys(INVALID_EMAIL);
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidChangeEmailField(),
-            ERROR_MESSAGE_INVALID_EMAIL,
-            emailField,
-            accountPage.getChangeEmailButton(),
-            accountPage.getInvalidChangeEmailPasswordField()
-        );
-    }
+    /*
 
     public void validateExistingEmail() {
         setUpForEmailTest();
@@ -111,7 +95,7 @@ public class ChangeEmailTest {
         changeEmail(user.getEmail(), originalUser.getPassword());
         clearAll();
         changeEmail(originalUser.getEmail(), originalUser.getPassword());
-    }
+    }*/
 
     private void changeEmail(String email, String password) {
         WebElement emailField = accountPage.getChangeEmailField();

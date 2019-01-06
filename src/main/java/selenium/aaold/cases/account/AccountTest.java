@@ -10,7 +10,6 @@ import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aaold.cases.account.testcase.ChangeEmailTest;
 import selenium.aaold.cases.account.testcase.ChangeUserNameTest;
 import selenium.aaold.cases.account.testcase.DeleteAccountTest;
 
@@ -49,7 +48,6 @@ public class AccountTest {
 
         AccountTest test = new AccountTest(driver, user, otherUser);
         test.testChangeUserName();
-        test.testChangeEmail();
         test.deleteAccount();
     }
 
@@ -71,25 +69,6 @@ public class AccountTest {
         testCase.validateTooShortUserName();
         testCase.validateTooLongUserName();
         testCase.validateExistingUserName();
-        testCase.validateEmptyPassword();
-        testCase.validateBadPassword();
-        testCase.validateHappyPath();
-    }
-
-    private void testChangeEmail() {
-        init();
-        ChangeEmailTest testCase = ChangeEmailTest.builder()
-            .driver(driver)
-            .accountPage(accountPage)
-            .user(originalUser.cloneUser())
-            .originalUser(originalUser)
-            .otherUser(otherUser)
-            .fieldValidator(fieldValidator)
-            .notificationValidator(notificationValidator)
-            .build();
-
-        testCase.validateInvalidEmail();
-        testCase.validateExistingEmail();
         testCase.validateEmptyPassword();
         testCase.validateBadPassword();
         testCase.validateHappyPath();
