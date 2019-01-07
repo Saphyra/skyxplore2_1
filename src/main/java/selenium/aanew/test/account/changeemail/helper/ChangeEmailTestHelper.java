@@ -23,4 +23,10 @@ public class ChangeEmailTestHelper {
         accountPage.getChangeEmailPasswordField().sendKeys(user.getPassword());
         return user;
     }
+
+    public SeleniumUser setUpWithRandomEmail(){
+        SeleniumUser user = registerAndNavigateToAccount();
+        accountPage.getChangeEmailField().sendKeys(SeleniumUser.createRandomEmail());
+        return user;
+    }
 }
