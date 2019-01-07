@@ -11,6 +11,7 @@ import selenium.aanew.test.account.changeemail.BadPasswordTest;
 import selenium.aanew.test.account.changeemail.EmptyPasswordTest;
 import selenium.aanew.test.account.changeemail.ExistingEmailTest;
 import selenium.aanew.test.account.changeemail.InvalidEmailTest;
+import selenium.aanew.test.account.changeemail.SuccessfulEmailChangeTest;
 import selenium.aanew.test.account.changeemail.helper.ChangeEmailTestHelper;
 
 import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
@@ -29,11 +30,8 @@ public class ChangeEmailTest extends SeleniumTestApplication {
         accountPage = new AccountPage(driver);
         registration = new Registration(driver);
         navigate = new Navigate(driver);
-        changeEmailTestHelper = new ChangeEmailTestHelper(accountPage, registration, navigate);
+        changeEmailTestHelper = new ChangeEmailTestHelper(accountPage, registration, navigate, driver);
         notificationValidator = new NotificationValidator(driver);
-        /*
-        testCase.validateHappyPath();
-         */
     }
 
     @Test
@@ -72,10 +70,19 @@ public class ChangeEmailTest extends SeleniumTestApplication {
         BadPasswordTest.builder()
             .accountPage(accountPage)
             .changeEmailTestHelper(changeEmailTestHelper)
-            .driver(driver)
             .fieldValidator(fieldValidator)
             .notificationValidator(notificationValidator)
             .build()
             .testBadPassword();
+    }
+
+    @Test
+    public void successfulEmailChangeTest(){
+        SuccessfulEmailChangeTest.builder()
+            .accountPage(accountPage)
+            .changeEmailTestHelper(changeEmailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testSuccessfulEmailChange();
     }
 }
