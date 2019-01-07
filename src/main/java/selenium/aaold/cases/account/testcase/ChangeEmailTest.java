@@ -19,7 +19,7 @@ public class ChangeEmailTest {
     //TODO restore after fixing FE validation
     //private static final String INVALID_EMAIL = "aa.a@";
 
-    private static final String ERROR_MESSAGE_EMAIL_ALREADY_EXISTS = "E-mail cím már regisztrálva van.";
+
     private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
 
     private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
@@ -35,22 +35,6 @@ public class ChangeEmailTest {
 
     /*
 
-    public void validateExistingEmail() {
-        setUpForEmailTest();
-
-        setUpForEmailTest();
-
-        WebElement emailField = accountPage.getChangeEmailField();
-        emailField.sendKeys(otherUser.getEmail());
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidChangeEmailField(),
-            ERROR_MESSAGE_EMAIL_ALREADY_EXISTS,
-            emailField,
-            accountPage.getChangeEmailButton(),
-            accountPage.getInvalidChangeEmailPasswordField()
-        );
-    }
 
     public void validateEmptyPassword() {
         setUpForPasswordTest();

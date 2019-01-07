@@ -6,6 +6,7 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.account.changeemail.ExistingEmailTest;
 import selenium.aanew.test.account.changeemail.InvalidEmailTest;
 import selenium.aanew.test.account.changeemail.helper.ChangeEmailTestHelper;
 
@@ -41,5 +42,16 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .build()
             .testInvalidEmail();
+    }
+
+    @Test
+    public void testExistingEmail(){
+        ExistingEmailTest.builder()
+            .registration(registration)
+            .changeEmailTestHelper(changeEmailTestHelper)
+            .accountPage(accountPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testExistingEmail();
     }
 }
