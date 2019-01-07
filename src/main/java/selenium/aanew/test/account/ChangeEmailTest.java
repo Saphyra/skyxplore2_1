@@ -6,6 +6,8 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.account.changeemail.BadPasswordTest;
 import selenium.aanew.test.account.changeemail.EmptyPasswordTest;
 import selenium.aanew.test.account.changeemail.ExistingEmailTest;
 import selenium.aanew.test.account.changeemail.InvalidEmailTest;
@@ -19,6 +21,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
     private AccountPage accountPage;
     private Registration registration;
     private Navigate navigate;
+    private NotificationValidator notificationValidator;
 
     @Override
     protected void init() {
@@ -27,9 +30,8 @@ public class ChangeEmailTest extends SeleniumTestApplication {
         registration = new Registration(driver);
         navigate = new Navigate(driver);
         changeEmailTestHelper = new ChangeEmailTestHelper(accountPage, registration, navigate);
+        notificationValidator = new NotificationValidator(driver);
         /*
-        testCase.validateEmptyPassword();
-        testCase.validateBadPassword();
         testCase.validateHappyPath();
          */
     }
@@ -63,5 +65,17 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .fieldValidator(fieldValidator)
             .build()
             .testEmptyPassword();
+    }
+
+    @Test
+    public void badPasswordTest(){
+        BadPasswordTest.builder()
+            .accountPage(accountPage)
+            .changeEmailTestHelper(changeEmailTestHelper)
+            .driver(driver)
+            .fieldValidator(fieldValidator)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testBadPassword();
     }
 }

@@ -1,10 +1,13 @@
 package selenium.aanew.test.account.changeemail.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
+
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class ChangeEmailTestHelper {
@@ -28,5 +31,11 @@ public class ChangeEmailTestHelper {
         SeleniumUser user = registerAndNavigateToAccount();
         accountPage.getChangeEmailField().sendKeys(SeleniumUser.createRandomEmail());
         return user;
+    }
+
+    public void submitForm(){
+        WebElement submitButton = accountPage.getChangeEmailButton();
+        assertTrue(submitButton.isEnabled());
+        submitButton.click();
     }
 }

@@ -21,8 +21,6 @@ public class ChangeEmailTest {
 
 
     private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
-
-    private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
     private static final String NOTIFICATION_SUCCESSFUL_EMAIL_CHANGE = "E-mail cím sikeresen megváltoztatva.";
 
     private final WebDriver driver;
@@ -35,41 +33,6 @@ public class ChangeEmailTest {
 
     /*
 
-
-    public void validateEmptyPassword() {
-        setUpForPasswordTest();
-
-        accountPage.getChangeEmailPasswordField().clear();
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidChangeEmailPasswordField(),
-            ERROR_MESSAGE_EMPTY_PASSWORD,
-            accountPage.getChangeEmailPasswordField(),
-            accountPage.getChangeEmailButton(),
-            accountPage.getInvalidChangeEmailField()
-        );
-    }
-
-    public void validateBadPassword() {
-        setUpForPasswordTest();
-
-        WebElement passwordField = accountPage.getChangeEmailPasswordField();
-        passwordField.sendKeys(SeleniumUser.createRandomPassword());
-
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeEmailField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeEmailPasswordField()));
-
-        assertFalse(accountPage.getInvalidChangeEmailField().isDisplayed());
-        assertFalse(accountPage.getInvalidChangeEmailPasswordField().isDisplayed());
-
-        WebElement submitButton = accountPage.getChangeEmailButton();
-        assertTrue(submitButton.isEnabled());
-        submitButton.click();
-
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
-        assertTrue(accountPage.getChangeEmailPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-    }
 
     public void validateHappyPath() {
         clearAll();
