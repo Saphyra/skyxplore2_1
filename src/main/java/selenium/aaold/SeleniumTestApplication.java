@@ -1,24 +1,24 @@
 package selenium.aaold;
 
+import static selenium.aanew.logic.util.LinkUtil.HOST;
+import static selenium.aanew.logic.util.LinkUtil.HOST_LOCAL;
+import static skyxplore.Application.APP_CTX;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
-import selenium.aaold.cases.account.AccountTest;
+
+import selenium.aanew.logic.util.Util;
 import selenium.aaold.cases.characterselect.CharacterSelectTest;
 import selenium.aaold.cases.community.CommunityTest;
 import selenium.aaold.cases.equipment.EquipmentTest;
 import selenium.aaold.cases.factory.FactoryTest;
 import selenium.aaold.cases.registration.RegistrationTest;
 import selenium.aaold.cases.shop.ShopTest;
-import selenium.aanew.logic.util.Util;
 import skyxplore.Application;
-
-import static selenium.aanew.logic.util.LinkUtil.HOST;
-import static selenium.aanew.logic.util.LinkUtil.HOST_LOCAL;
-import static skyxplore.Application.APP_CTX;
 
 public class SeleniumTestApplication {
     private static final String ARG_PROFILE = "--spring.profiles.active=test";
@@ -49,11 +49,6 @@ public class SeleniumTestApplication {
     @Test
     public void test01_Registration() {
         RegistrationTest.run(driver);
-    }
-
-    @Test
-    public void test02_Account() {
-        AccountTest.run(driver);
     }
 
     @Test
