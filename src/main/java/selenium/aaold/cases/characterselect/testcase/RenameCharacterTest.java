@@ -14,10 +14,8 @@ import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.util.Util.crop;
 import static selenium.aanew.logic.util.Util.validateIfPresent;
 import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
-import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 @Builder
 public class RenameCharacterTest {
@@ -34,7 +32,7 @@ public class RenameCharacterTest {
         TOO_LONG_CHARACTER_NAME = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_SHORT = "Karakternév túl rövid. (Minimum 3 karakter)";
+
     private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG = "Karakternév túl hosszú. (Maximum 30 karakter)";
     private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "Karakternév foglalt.";
 
@@ -47,19 +45,6 @@ public class RenameCharacterTest {
     private final SeleniumCharacter testCharacter = SeleniumCharacter.create();
     private final SeleniumCharacter renamedCharacter = SeleniumCharacter.create();
     private final NotificationValidator notificationValidator;
-
-    public void testTooShortCharacterName() {
-        clear();
-        WebElement renameCharacterField = characterSelectPage.getRenameCharacterNameField();
-        renameCharacterField.sendKeys(crop(SeleniumCharacter.createRandomCharacterName(), CHARACTER_NAME_MIN_LENGTH - 1));
-
-        fieldValidator.verifyError(
-            characterSelectPage.getInvalidRenameCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_TOO_SHORT,
-            renameCharacterField,
-            characterSelectPage.getRenameCharacterButton()
-        );
-    }
 
     public void testTooLongCharacterName() {
         clear();

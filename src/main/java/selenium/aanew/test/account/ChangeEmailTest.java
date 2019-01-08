@@ -21,7 +21,6 @@ public class ChangeEmailTest extends SeleniumTestApplication {
     private FieldValidator fieldValidator;
     private AccountPage accountPage;
     private Registration registration;
-    private Navigate navigate;
     private NotificationValidator notificationValidator;
 
     @Override
@@ -29,7 +28,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         accountPage = new AccountPage(driver);
         registration = new Registration(driver);
-        navigate = new Navigate(driver);
+        Navigate navigate = new Navigate(driver);
         changeEmailTestHelper = new ChangeEmailTestHelper(accountPage, registration, navigate, driver);
         notificationValidator = new NotificationValidator(driver);
     }
