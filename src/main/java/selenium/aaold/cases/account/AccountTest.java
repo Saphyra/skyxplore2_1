@@ -1,7 +1,10 @@
 package selenium.aaold.cases.account;
 
-import lombok.extern.slf4j.Slf4j;
+import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
+
 import org.openqa.selenium.WebDriver;
+
+import lombok.extern.slf4j.Slf4j;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Login;
 import selenium.aanew.logic.flow.Logout;
@@ -10,10 +13,7 @@ import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aaold.cases.account.testcase.ChangeUserNameTest;
 import selenium.aaold.cases.account.testcase.DeleteAccountTest;
-
-import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 
 @Slf4j
 public class AccountTest {
@@ -47,31 +47,7 @@ public class AccountTest {
         SeleniumUser user = registration.registerUser();
 
         AccountTest test = new AccountTest(driver, user, otherUser);
-        test.testChangeUserName();
         test.deleteAccount();
-    }
-
-    private void testChangeUserName() {
-        init();
-        ChangeUserNameTest testCase = ChangeUserNameTest.builder()
-            .driver(driver)
-            .navigate(navigate)
-            .login(login)
-            .logout(logout)
-            .accountPage(accountPage)
-            .user(originalUser.cloneUser())
-            .originalUser(originalUser)
-            .otherUser(otherUser)
-            .fieldValidator(fieldValidator)
-            .notificationValidator(notificationValidator)
-            .build();
-
-        testCase.validateTooShortUserName();
-        testCase.validateTooLongUserName();
-        testCase.validateExistingUserName();
-        testCase.validateEmptyPassword();
-        testCase.validateBadPassword();
-        testCase.validateHappyPath();
     }
 
     private void deleteAccount() {

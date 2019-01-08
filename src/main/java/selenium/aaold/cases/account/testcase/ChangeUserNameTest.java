@@ -1,10 +1,19 @@
 package selenium.aaold.cases.account.testcase;
 
-import lombok.Builder;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static selenium.aanew.logic.domain.SeleniumUser.createRandomPassword;
+import static selenium.aanew.logic.domain.SeleniumUser.createRandomUserName;
+import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
+import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import lombok.Builder;
 import selenium.aanew.logic.domain.SeleniumUser;
 import selenium.aanew.logic.flow.Login;
 import selenium.aanew.logic.flow.Logout;
@@ -12,16 +21,6 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.domain.SeleniumUser.createRandomPassword;
-import static selenium.aanew.logic.domain.SeleniumUser.createRandomUserName;
-import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
-import static selenium.aanew.logic.util.Util.cleanNotifications;
-import static selenium.aanew.logic.util.Util.crop;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
 
 @Builder
 public class ChangeUserNameTest {
@@ -34,8 +33,6 @@ public class ChangeUserNameTest {
         }
         TOO_LONG_USER_NAME = builder.toString();
     }
-
-    private static final String ERROR_MESSAGE_USER_NAME_TOO_SHORT = "Túl rövid felhasználónév. (Minimum 3 karakter)";
     private static final String ERROR_MESSAGE_USER_NAME_TOO_LONG = "Túl hosszú felhasználónév. (Maximum 30 karakter)";
     private static final String ERROR_MESSAGE_USER_NAME_EXISTS = "Felhasználónév foglalt.";
     private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
@@ -53,21 +50,6 @@ public class ChangeUserNameTest {
     private final SeleniumUser otherUser;
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
-
-    public void validateTooShortUserName() {
-        WebElement userNameField = accountPage.getChangeUserNameField();
-
-        setUpForUserNameTest();
-
-        userNameField.sendKeys(crop(user.getUserName(), USER_NAME_MIN_LENGTH - 1));
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidChangeUserNameField(),
-            ERROR_MESSAGE_USER_NAME_TOO_SHORT,
-            userNameField,
-            accountPage.getChangeUserNameButton()
-        );
-    }
 
     public void validateTooLongUserName() {
         WebElement userNameField = accountPage.getChangeUserNameField();
