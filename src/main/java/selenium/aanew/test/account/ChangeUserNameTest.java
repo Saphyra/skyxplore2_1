@@ -9,6 +9,7 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.account.changeusername.EmptyPasswordTest;
 import selenium.aanew.test.account.changeusername.ExistingUserNameTest;
 import selenium.aanew.test.account.changeusername.TooLongUserNameTest;
 import selenium.aanew.test.account.changeusername.TooShortUserNameTest;
@@ -23,9 +24,6 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         /*
-        testCase.validateTooLongUserName();
-        testCase.validateExistingUserName();
-        testCase.validateEmptyPassword();
         testCase.validateBadPassword();
         testCase.validateHappyPath();
          */
@@ -65,5 +63,15 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .registration(registration)
             .build()
             .testExistingUserName();
+    }
+
+    @Test
+    public void testEmptyPassword(){
+        EmptyPasswordTest.builder()
+            .changeUserNameTestHelper(changeUserNameTestHelper)
+            .accountPage(accountPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testEmptyPassword();
     }
 }

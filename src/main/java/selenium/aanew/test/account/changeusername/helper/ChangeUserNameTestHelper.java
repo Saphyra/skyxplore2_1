@@ -23,4 +23,9 @@ public class ChangeUserNameTestHelper {
         navigate.toAccountPage();
         return user;
     }
+
+    public void setUpWithRandomUserName() {
+        registerAndNavigateToAccount();
+        accountPage.getChangeUserNameField().sendKeys(SeleniumUser.createRandomUserName());
+    }
 }

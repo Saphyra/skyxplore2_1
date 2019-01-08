@@ -23,8 +23,6 @@ import selenium.aanew.logic.validator.NotificationValidator;
 
 @Builder
 public class ChangeUserNameTest {
-    private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
-
     private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
     private static final String NOTIFICATION_SUCCESSFUL_USER_NAME_CHANGE = "Felhasználónév megváltoztatása sikeres.";
 
@@ -38,22 +36,6 @@ public class ChangeUserNameTest {
     private final SeleniumUser otherUser;
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
-
-    public void validateEmptyPassword() {
-        WebElement changePasswordField = accountPage.getChangeUserNamePasswordField();
-        changePasswordField.clear();
-
-        WebElement userNameField = accountPage.getChangeUserNameField();
-        userNameField.clear();
-        userNameField.sendKeys(createRandomUserName());
-
-        fieldValidator.verifyError(
-            accountPage.getInvalidChangeUserNamePasswordField(),
-            ERROR_MESSAGE_EMPTY_PASSWORD,
-            userNameField,
-            accountPage.getChangeUserNameButton()
-        );
-    }
 
     public void validateBadPassword() {
         clearAll();
