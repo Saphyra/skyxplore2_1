@@ -1,17 +1,16 @@
 package selenium.aaold.cases.characterselect.testcase;
 
-import lombok.Builder;
+import static selenium.aanew.logic.util.Util.cleanNotifications;
+import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import lombok.Builder;
 import selenium.aanew.logic.domain.SeleniumCharacter;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-
-import static selenium.aanew.logic.util.Util.cleanNotifications;
-import static selenium.aanew.logic.util.Util.crop;
-import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
-import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 @Builder
 public class CharacterNameTest {
@@ -25,7 +24,7 @@ public class CharacterNameTest {
         TOO_LONG_CHARACTER_NAME = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_SHORT = "Karakternév túl rövid. (Minimum 3 karakter)";
+
     private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG = "Karakternév túl hosszú. (Maximum 30 karakter)";
     private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "Karakternév foglalt.";
 
@@ -34,19 +33,6 @@ public class CharacterNameTest {
     private final FieldValidator fieldValidator;
     private final SeleniumCharacter registeredCharacter;
     private final NotificationValidator notificationValidator;
-
-    public void testTooShortCharacterName() {
-        init();
-        WebElement newCharacterNameField = characterSelectPage.getNewCharacterNameField();
-        newCharacterNameField.sendKeys(crop(SeleniumCharacter.createRandomCharacterName(), CHARACTER_NAME_MIN_LENGTH - 1));
-
-        fieldValidator.verifyError(
-            characterSelectPage.getInvalidNewCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_TOO_SHORT,
-            newCharacterNameField,
-            characterSelectPage.getCreateCharacterButton()
-        );
-    }
 
     public void testTooLongCharacterName(){
         init();

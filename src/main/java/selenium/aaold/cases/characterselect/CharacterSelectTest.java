@@ -1,18 +1,18 @@
 package selenium.aaold.cases.characterselect;
 
+import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
+
 import org.openqa.selenium.WebDriver;
+
+import selenium.aanew.logic.domain.SeleniumCharacter;
+import selenium.aanew.logic.flow.CreateCharacter;
 import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aaold.cases.characterselect.testcase.CharacterNameTest;
 import selenium.aaold.cases.characterselect.testcase.DeleteCharacterTest;
 import selenium.aaold.cases.characterselect.testcase.RenameCharacterTest;
 import selenium.aaold.cases.characterselect.testcase.SelectCharacterTest;
-import selenium.aanew.logic.domain.SeleniumCharacter;
-import selenium.aanew.logic.flow.CreateCharacter;
-import selenium.aanew.logic.page.CharacterSelectPage;
-
-import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
 
 public class CharacterSelectTest {
 
@@ -33,25 +33,9 @@ public class CharacterSelectTest {
     public static void run(WebDriver driver) {
         CharacterSelectTest testCase = new CharacterSelectTest(driver);
         testCase.init();
-        testCase.validateCharacterName();
         testCase.validateRenameCharacter();
         testCase.validateDeleteCharacter();
         testCase.validateSelectCharacter();
-    }
-
-    private void validateCharacterName() {
-        CharacterNameTest test = CharacterNameTest.builder()
-            .driver(driver)
-            .characterSelectPage(characterSelectPage)
-            .fieldValidator(fieldValidator)
-            .notificationValidator(notificationValidator)
-            .registeredCharacter(registeredCharacter)
-            .build();
-
-        test.testTooShortCharacterName();
-        test.testTooLongCharacterName();
-        test.testExistingCharacterName();
-        test.cleanUp();
     }
 
     private void validateRenameCharacter() {
