@@ -5,6 +5,8 @@ import static selenium.aanew.logic.util.LinkUtil.ACCOUNT;
 import org.junit.Test;
 
 import selenium.aanew.SeleniumTestApplication;
+import selenium.aanew.logic.flow.Login;
+import selenium.aanew.logic.flow.Logout;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
@@ -13,6 +15,7 @@ import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.test.account.changeusername.BadPasswordTest;
 import selenium.aanew.test.account.changeusername.EmptyPasswordTest;
 import selenium.aanew.test.account.changeusername.ExistingUserNameTest;
+import selenium.aanew.test.account.changeusername.SuccessfulUserNameChangeTest;
 import selenium.aanew.test.account.changeusername.TooLongUserNameTest;
 import selenium.aanew.test.account.changeusername.TooShortUserNameTest;
 import selenium.aanew.test.account.changeusername.helper.ChangeUserNameTestHelper;
@@ -23,6 +26,8 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     private ChangeUserNameTestHelper changeUserNameTestHelper;
     private Registration registration;
     private NotificationValidator notificationValidator;
+    private Login login;
+    private Logout logout;
 
     @Override
     protected void init() {
@@ -35,6 +40,8 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
         registration = new Registration(driver);
         this.changeUserNameTestHelper = new ChangeUserNameTestHelper(driver, registration, accountPage, new Navigate(driver));
         this.notificationValidator = new NotificationValidator(driver);
+        this.login = new Login(driver);
+        this.logout = new Logout(driver);
     }
 
     @Test
@@ -69,7 +76,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testEmptyPassword(){
+    public void testEmptyPassword() {
         EmptyPasswordTest.builder()
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .accountPage(accountPage)
@@ -79,12 +86,24 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBadPassword(){
+    public void testBadPassword() {
         BadPasswordTest.builder()
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
             .build()
             .testBadPassword();
+    }
+
+    @Test
+    public void testSuccessfulUserNameChange() {
+        SuccessfulUserNameChangeTest.builder()
+            .changeUserNameTestHelper(changeUserNameTestHelper)
+            .accountPage(accountPage)
+            .notificationValidator(notificationValidator)
+            .login(login)
+            .logout(logout)
+            .build()
+            .testSuccessfulUserNameChange();
     }
 }
