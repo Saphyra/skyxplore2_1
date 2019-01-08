@@ -8,6 +8,7 @@ import selenium.aanew.SeleniumTestApplication;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.characterselect.createcharacter.TooLongCharacterNameTest;
 import selenium.aanew.test.characterselect.createcharacter.TooShortCharacterNameTest;
 import selenium.aanew.test.characterselect.createcharacter.helper.CreateCharacterTestHelper;
 
@@ -37,5 +38,15 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .fieldValidator(fieldValidator)
             .build()
             .testTooShortCharacterName();
+    }
+
+    @Test
+    public void testTooLongCharacterName(){
+        TooLongCharacterNameTest.builder()
+            .createCharacterTestHelper(createCharacterTestHelper)
+            .characterSelectPage(characterSelectPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testTooLongCharacterName();
     }
 }
