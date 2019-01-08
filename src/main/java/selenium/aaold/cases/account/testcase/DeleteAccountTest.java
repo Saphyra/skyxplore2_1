@@ -3,7 +3,6 @@ package selenium.aaold.cases.account.testcase;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
 import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 import org.openqa.selenium.WebDriver;
@@ -23,7 +22,7 @@ import selenium.aanew.logic.validator.NotificationValidator;
 public class DeleteAccountTest {
 
 
-    private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
+
     private static final String NOTIFICATION_ACCOUNT_DELETED = "Account törölve.";
 
     private final WebDriver driver;
@@ -33,36 +32,6 @@ public class DeleteAccountTest {
     private final SeleniumUser originalUser;
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
-
-    public void validateCancel() {
-        clearAll();
-        WebElement passwordField = accountPage.getDeleteAccountPasswordField();
-        passwordField.sendKeys(SeleniumUser.createRandomPassword());
-
-        verifyFormSubmittable();
-
-        accountPage.getDeleteAccountButton().click();
-
-        verifyAlert();
-        driver.switchTo().alert().dismiss();
-
-        assertTrue(accountPage.getDeleteAccountPasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-    }
-
-    public void validateBadPassword() {
-        clearAll();
-        WebElement passwordField = accountPage.getDeleteAccountPasswordField();
-        passwordField.sendKeys(SeleniumUser.createRandomPassword());
-
-        verifyFormSubmittable();
-
-        accountPage.getDeleteAccountButton().click();
-
-        verifyAlert();
-        driver.switchTo().alert().accept();
-        
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
-    }
 
     public void validateSuccess() {
         clearAll();
