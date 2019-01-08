@@ -9,6 +9,7 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.account.changeusername.TooLongUserNameTest;
 import selenium.aanew.test.account.changeusername.TooShortUserNameTest;
 import selenium.aanew.test.account.changeusername.helper.ChangeUserNameTestHelper;
 
@@ -40,5 +41,15 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .build()
             .testTooShortUserName();
+    }
+
+    @Test
+    public void testTooLongUserName(){
+        TooLongUserNameTest.builder()
+            .accountPage(accountPage)
+            .changeUserNameTestHelper(changeUserNameTestHelper)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testTooLongUserName();
     }
 }
