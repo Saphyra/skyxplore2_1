@@ -15,22 +15,15 @@ import selenium.aanew.logic.validator.NotificationValidator;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.util.Util.validateIfPresent;
-import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 
 @Builder
 public class RenameCharacterTest {
-    private static final String TOO_LONG_CHARACTER_NAME;
+
     private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
     private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
     private static final String SELECTOR_RENAME_CHARACTER_BUTTON = "button:first-child";
 
-    static {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i <= CHARACTER_NAME_MAX_LENGTH + 1; i++) {
-            builder.append("a");
-        }
-        TOO_LONG_CHARACTER_NAME = builder.toString();
-    }
+
 
 
     private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG = "Karakternév túl hosszú. (Maximum 30 karakter)";
@@ -45,19 +38,6 @@ public class RenameCharacterTest {
     private final SeleniumCharacter testCharacter = SeleniumCharacter.create();
     private final SeleniumCharacter renamedCharacter = SeleniumCharacter.create();
     private final NotificationValidator notificationValidator;
-
-    public void testTooLongCharacterName() {
-        clear();
-        WebElement renameCharacterField = characterSelectPage.getRenameCharacterNameField();
-        renameCharacterField.sendKeys(TOO_LONG_CHARACTER_NAME);
-
-        fieldValidator.verifyError(
-            characterSelectPage.getInvalidRenameCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG,
-            renameCharacterField,
-            characterSelectPage.getRenameCharacterButton()
-        );
-    }
 
     public void testExistingCharacterName() {
         clear();

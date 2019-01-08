@@ -6,6 +6,7 @@ import selenium.aanew.logic.flow.CreateCharacter;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.characterselect.renamecharacter.TooLongCharacterNameTest;
 import selenium.aanew.test.characterselect.renamecharacter.TooShortCharacterNameTest;
 import selenium.aanew.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
 
@@ -19,8 +20,6 @@ public class RenameCharacterTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         /*
-        test.testTooShortCharacterName();
-        test.testTooLongCharacterName();
         test.testExistingCharacterName();
         test.testRename();
          */
@@ -42,5 +41,15 @@ public class RenameCharacterTest extends SeleniumTestApplication {
             .fieldValidator(fieldValidator)
             .build()
             .testTooShortCharacterName();
+    }
+
+    @Test
+    public void testTooLongCharacterName(){
+        TooLongCharacterNameTest.builder()
+            .renameCharacterTestHelper(renameCharacterTestHelper)
+            .characterSelectPage(characterSelectPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testTooLongCharacterName();
     }
 }
