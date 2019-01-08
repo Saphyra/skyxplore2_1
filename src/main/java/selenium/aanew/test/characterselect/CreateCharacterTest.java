@@ -9,6 +9,7 @@ import selenium.aanew.logic.flow.CreateCharacter;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.characterselect.createcharacter.ExistingCharacterNameTest;
 import selenium.aanew.test.characterselect.createcharacter.SuccessfulCharacterCreationTest;
 import selenium.aanew.test.characterselect.createcharacter.TooLongCharacterNameTest;
 import selenium.aanew.test.characterselect.createcharacter.TooShortCharacterNameTest;
@@ -18,20 +19,12 @@ public class CreateCharacterTest extends SeleniumTestApplication {
     private CreateCharacterTestHelper createCharacterTestHelper;
     private CharacterSelectPage characterSelectPage;
     private FieldValidator fieldValidator;
-    private CreateCharacter createCharacter;
 
     @Override
     protected void init() {
-        /*
-        test.testTooLongCharacterName();
-        test.testExistingCharacterName();
-        testSuccessful()
-         */
-
         characterSelectPage = new CharacterSelectPage(driver);
-        createCharacterTestHelper = new CreateCharacterTestHelper(new Registration(driver));
+        createCharacterTestHelper = new CreateCharacterTestHelper(new Registration(driver), new CreateCharacter(driver));
         fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
-        createCharacter = new CreateCharacter(driver);
     }
 
     @Test
@@ -55,10 +48,19 @@ public class CreateCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    public void testExistingCharacterName() {
+        ExistingCharacterNameTest.builder()
+            .createCharacterTestHelper(createCharacterTestHelper)
+            .characterSelectPage(characterSelectPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testExistingCharacterName();
+    }
+
+    @Test
     public void testSuccessfulCharacterCreation() {
         SuccessfulCharacterCreationTest.builder()
             .createCharacterTestHelper(createCharacterTestHelper)
-            .createCharacter(createCharacter)
             .build()
             .testSuccessfulCharacterCreation();
     }

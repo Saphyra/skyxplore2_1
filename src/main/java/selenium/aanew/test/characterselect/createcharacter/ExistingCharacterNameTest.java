@@ -1,34 +1,27 @@
-package selenium.aaold.cases.characterselect.testcase;
+package selenium.aanew.test.characterselect.createcharacter;
 
-import static selenium.aanew.logic.util.Util.cleanNotifications;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
 import selenium.aanew.logic.domain.SeleniumCharacter;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.characterselect.createcharacter.helper.CreateCharacterTestHelper;
 
 @Builder
-public class CharacterNameTest {
-
-
-
-
+public class ExistingCharacterNameTest {
     private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "Karakternév foglalt.";
 
-    private final WebDriver driver;
+    private final CreateCharacterTestHelper createCharacterTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
-    private final SeleniumCharacter registeredCharacter;
-    private final NotificationValidator notificationValidator;
 
     public void testExistingCharacterName() {
-        init();
+        createCharacterTestHelper.registerUser();
+        SeleniumCharacter character = createCharacterTestHelper.createCharacter();
+
         WebElement newCharacterNameField = characterSelectPage.getNewCharacterNameField();
-        newCharacterNameField.sendKeys(registeredCharacter.getCharacterName());
+        newCharacterNameField.sendKeys(character.getCharacterName());
 
         fieldValidator.verifyError(
             characterSelectPage.getInvalidNewCharacterNameField(),
@@ -36,13 +29,5 @@ public class CharacterNameTest {
             newCharacterNameField,
             characterSelectPage.getCreateCharacterButton()
         );
-    }
-
-    private void init() {
-        characterSelectPage.getNewCharacterNameField().clear();
-    }
-
-    public void cleanUp(){
-        cleanNotifications(driver);
     }
 }
