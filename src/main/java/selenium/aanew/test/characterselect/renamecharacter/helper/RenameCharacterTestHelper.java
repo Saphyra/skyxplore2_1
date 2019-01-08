@@ -20,13 +20,17 @@ public class RenameCharacterTestHelper {
     private final CharacterSelectPage characterSelectPage;
 
     public SeleniumCharacter initAndOpenRenamePage() {
-        registration.registerUser();
-        SeleniumCharacter character = createCharacter.createCharacter();
+        SeleniumCharacter character = registerAndCreateCharacter();
         openRenameCharacterWindow(character);
         return character;
     }
 
-    private void openRenameCharacterWindow(SeleniumCharacter testCharacter) {
+    public SeleniumCharacter registerAndCreateCharacter() {
+        registration.registerUser();
+        return createCharacter.createCharacter();
+    }
+
+    public void openRenameCharacterWindow(SeleniumCharacter testCharacter) {
         characterSelectPage.getCharacterList().stream()
             .filter(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME))
                 .getText()
@@ -39,5 +43,9 @@ public class RenameCharacterTestHelper {
             .click();
 
         assertTrue(characterSelectPage.getRenameCharacterWindow().isDisplayed());
+    }
+
+    public SeleniumCharacter createCharacter() {
+        return createCharacter.createCharacter();
     }
 }

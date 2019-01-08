@@ -23,12 +23,6 @@ public class RenameCharacterTest {
     private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
     private static final String SELECTOR_RENAME_CHARACTER_BUTTON = "button:first-child";
 
-
-
-
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG = "Karakternév túl hosszú. (Maximum 30 karakter)";
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "Karakternév foglalt.";
-
     private static final String NOTIFICATION_CHARACTER_RENAMED = "Karakter átnevezve.";
 
     private final WebDriver driver;
@@ -39,18 +33,6 @@ public class RenameCharacterTest {
     private final SeleniumCharacter renamedCharacter = SeleniumCharacter.create();
     private final NotificationValidator notificationValidator;
 
-    public void testExistingCharacterName() {
-        clear();
-        WebElement renameCharacterField = characterSelectPage.getRenameCharacterNameField();
-        renameCharacterField.sendKeys(registeredCharacter.getCharacterName());
-
-        fieldValidator.verifyError(
-            characterSelectPage.getInvalidRenameCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS,
-            renameCharacterField,
-            characterSelectPage.getRenameCharacterButton()
-        );
-    }
 
     public void testRename() {
         clear();
