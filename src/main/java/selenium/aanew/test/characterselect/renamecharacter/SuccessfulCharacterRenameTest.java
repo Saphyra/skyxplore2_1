@@ -1,7 +1,6 @@
 package selenium.aanew.test.characterselect.renamecharacter;
 
 import lombok.Builder;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumCharacter;
 import selenium.aanew.logic.page.CharacterSelectPage;
@@ -37,17 +36,11 @@ public class SuccessfulCharacterRenameTest {
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_CHARACTER_RENAMED);
 
         assertTrue(
-            characterWithNameExists(newName)
+            characterSelectPage.isCharacterExists(newName)
         );
 
         assertFalse(
-            characterWithNameExists(character.getCharacterName())
+            characterSelectPage.isCharacterExists(character.getCharacterName())
         );
-    }
-
-    private boolean characterWithNameExists(String characterName) {
-        return characterSelectPage.getCharacterList().stream()
-            .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
-            .anyMatch(webElement -> webElement.getText().equals(characterName));
     }
 }

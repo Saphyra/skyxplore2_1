@@ -7,7 +7,6 @@ import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aaold.cases.characterselect.testcase.DeleteCharacterTest;
 import selenium.aaold.cases.characterselect.testcase.SelectCharacterTest;
 
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
@@ -31,20 +30,7 @@ public class CharacterSelectTest {
     public static void run(WebDriver driver) {
         CharacterSelectTest testCase = new CharacterSelectTest(driver);
         testCase.init();
-        testCase.validateDeleteCharacter();
         testCase.validateSelectCharacter();
-    }
-
-    private void validateDeleteCharacter() {
-        DeleteCharacterTest test = DeleteCharacterTest.builder()
-            .driver(driver)
-            .characterSelectPage(characterSelectPage)
-            .notificationValidator(notificationValidator)
-            .build();
-
-        test.setUp();
-        test.testNotDeleteWhenCancel();
-        test.testDelete();
     }
 
     private void validateSelectCharacter() {

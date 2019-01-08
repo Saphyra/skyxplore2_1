@@ -10,7 +10,6 @@ import selenium.aanew.logic.page.CharacterSelectPage;
 
 import static org.junit.Assert.assertEquals;
 import static selenium.aanew.logic.util.LinkUtil.OVERVIEW;
-import static selenium.aanew.logic.util.Util.validateIfPresent;
 
 @Builder
 public class SelectCharacterTest {
@@ -21,10 +20,9 @@ public class SelectCharacterTest {
     public void testSelectCharacter() {
         new CreateCharacter(driver).createCharacter(testCharacter);
 
-        validateIfPresent(characterSelectPage.getCharacterList().stream()
+        characterSelectPage.getCharacterRow(testCharacter.getCharacterName())
             .map(element -> element.findElement(By.cssSelector("td:first-child")))
             .filter(webElement -> webElement.getText().equals(testCharacter.getCharacterName()))
-            .findFirst())
             .ifPresent(WebElement::click);
 
         assertEquals(OVERVIEW, driver.getCurrentUrl());

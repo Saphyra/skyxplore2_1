@@ -38,14 +38,9 @@ public class RenameCharacterTestHelper {
     }
 
     public void openRenameCharacterWindow(SeleniumCharacter testCharacter) {
-        characterSelectPage.getCharacterList().stream()
-            .filter(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME))
-                .getText()
-                .equals(testCharacter.getCharacterName())
-            )
+        characterSelectPage.getCharacterRow(testCharacter.getCharacterName())
             .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_MODIFICATION_MENU)))
             .map(element -> element.findElement(By.cssSelector(SELECTOR_RENAME_CHARACTER_BUTTON)))
-            .findFirst()
             .orElseThrow(() -> new RuntimeException("Character not found"))
             .click();
 

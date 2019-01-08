@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
@@ -14,7 +15,8 @@ import static selenium.aanew.logic.util.LinkUtil.CHARACTER_SELECT;
 public class CharacterSelectPage {
     private static final String ACCOUNT_BUTTON_SELECTOR = "footer button:nth-child(2)";
 
-    private static final String CHARACTERS_SELECTOR = "#characters tr";
+    private static final String SELECTOR_CHARACTERS = "#characters tr";
+    private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
 
     private static final String ELEMENT_RENAME_CHARACTER_WINDOW = "renamecharactercontainer";
 
@@ -49,8 +51,20 @@ public class CharacterSelectPage {
         return driver.findElement(By.id(ELEMENT_INVALID_NEW_CHARACTER_NAME));
     }
 
-    public List<WebElement> getCharacterList() {
-        return driver.findElements(By.cssSelector(CHARACTERS_SELECTOR));
+    private List<WebElement> getCharacterList() {
+        return driver.findElements(By.cssSelector(SELECTOR_CHARACTERS));
+    }
+
+    public Optional<WebElement> getCharacterRow(String characterName) {
+        return getCharacterList().stream()
+            .filter(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME))
+                .getText()
+                .equals(characterName)
+            ).findFirst();
+    }
+
+    public boolean isCharacterExists(String characterName) {
+        return getCharacterRow(characterName).isPresent();
     }
 
     public WebElement getRenameCharacterNameField() {

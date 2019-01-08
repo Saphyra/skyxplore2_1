@@ -1,6 +1,5 @@
 package selenium.aanew.logic.flow;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.SeleniumCharacter;
@@ -55,10 +54,6 @@ public class CreateCharacter {
     private void verifyCharacterCreation(SeleniumCharacter character) {
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_CHARACTER_CREATED);
 
-        assertTrue(
-            characterSelectPage.getCharacterList().stream()
-                .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
-                .anyMatch(webElement -> webElement.getText().equals(character.getCharacterName()))
-        );
+        assertTrue(characterSelectPage.isCharacterExists(character.getCharacterName()));
     }
 }
