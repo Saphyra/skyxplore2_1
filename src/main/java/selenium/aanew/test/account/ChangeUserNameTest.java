@@ -9,6 +9,8 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.AccountPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.account.changeusername.BadPasswordTest;
 import selenium.aanew.test.account.changeusername.EmptyPasswordTest;
 import selenium.aanew.test.account.changeusername.ExistingUserNameTest;
 import selenium.aanew.test.account.changeusername.TooLongUserNameTest;
@@ -20,18 +22,19 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     private FieldValidator fieldValidator;
     private ChangeUserNameTestHelper changeUserNameTestHelper;
     private Registration registration;
+    private NotificationValidator notificationValidator;
 
     @Override
     protected void init() {
         /*
-        testCase.validateBadPassword();
         testCase.validateHappyPath();
          */
 
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         registration = new Registration(driver);
-        this.changeUserNameTestHelper = new ChangeUserNameTestHelper(registration, accountPage, new Navigate(driver));
+        this.changeUserNameTestHelper = new ChangeUserNameTestHelper(driver, registration, accountPage, new Navigate(driver));
+        this.notificationValidator = new NotificationValidator(driver);
     }
 
     @Test
@@ -73,5 +76,15 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .fieldValidator(fieldValidator)
             .build()
             .testEmptyPassword();
+    }
+
+    @Test
+    public void testBadPassword(){
+        BadPasswordTest.builder()
+            .changeUserNameTestHelper(changeUserNameTestHelper)
+            .accountPage(accountPage)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testBadPassword();
     }
 }

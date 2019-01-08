@@ -2,9 +2,7 @@ package selenium.aaold.cases.account.testcase;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static selenium.aanew.logic.domain.SeleniumUser.createRandomPassword;
 import static selenium.aanew.logic.domain.SeleniumUser.createRandomUserName;
-import static selenium.aanew.logic.util.Util.ATTRIBUTE_VALUE;
 import static selenium.aanew.logic.util.Util.cleanNotifications;
 
 import org.openqa.selenium.WebDriver;
@@ -23,7 +21,7 @@ import selenium.aanew.logic.validator.NotificationValidator;
 
 @Builder
 public class ChangeUserNameTest {
-    private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
+
     private static final String NOTIFICATION_SUCCESSFUL_USER_NAME_CHANGE = "Felhasználónév megváltoztatása sikeres.";
 
     private final WebDriver driver;
@@ -36,30 +34,6 @@ public class ChangeUserNameTest {
     private final SeleniumUser otherUser;
     private final FieldValidator fieldValidator;
     private final NotificationValidator notificationValidator;
-
-    public void validateBadPassword() {
-        clearAll();
-
-        WebElement userNameField = accountPage.getChangeUserNameField();
-        userNameField.sendKeys(createRandomUserName());
-
-        WebElement changePasswordField = accountPage.getChangeUserNamePasswordField();
-        changePasswordField.sendKeys(createRandomPassword());
-
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNameField()));
-        webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNamePasswordField()));
-
-        assertFalse(accountPage.getInvalidChangeUserNameField().isDisplayed());
-        assertFalse(accountPage.getInvalidChangeUserNamePasswordField().isDisplayed());
-
-        WebElement submitButton = accountPage.getChangeUserNameButton();
-        assertTrue(submitButton.isEnabled());
-        submitButton.click();
-
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
-        assertTrue(accountPage.getChangeUserNamePasswordField().getAttribute(ATTRIBUTE_VALUE).isEmpty());
-    }
 
     private void setUpForUserNameTest() {
         clearAll();
