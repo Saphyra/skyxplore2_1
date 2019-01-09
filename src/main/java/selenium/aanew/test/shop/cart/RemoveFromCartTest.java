@@ -9,7 +9,6 @@ import selenium.aanew.test.shop.util.ShopTestInitializer;
 public class RemoveFromCartTest {
     private static final String CHEAP_ITEM_ID_1 = "bat-01";
     private static final String CHEAP_ITEM_ID_2 = "cex-01";
-    private static final String EXPENSIVE_ITEM_ID = "cex-02";
 
     private final CartVerifier cartVerifier;
     private final ShopTestHelper shopTestHelper;
