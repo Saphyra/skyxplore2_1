@@ -11,7 +11,6 @@ import selenium.aaold.cases.community.CommunityTest;
 import selenium.aaold.cases.equipment.EquipmentTest;
 import selenium.aaold.cases.factory.FactoryTest;
 import selenium.aaold.cases.registration.RegistrationTest;
-import selenium.aaold.cases.shop.ShopTest;
 import skyxplore.Application;
 
 import static selenium.aanew.logic.util.LinkUtil.HOST;
@@ -52,11 +51,6 @@ public class SeleniumTestApplication {
     @Test
     public void test04_Factory() {
         FactoryTest.run(driver);
-    }
-
-    @Test
-    public void test05_Shop() {
-        ShopTest.run(driver);
     }
 
     @Test
