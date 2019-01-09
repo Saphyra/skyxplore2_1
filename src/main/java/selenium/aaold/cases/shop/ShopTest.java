@@ -2,13 +2,9 @@ package selenium.aaold.cases.shop;
 
 import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.flow.Navigate;
-import selenium.aanew.logic.flow.Registration;
 import selenium.aaold.cases.shop.testcase.BuyTest;
 import selenium.aaold.cases.shop.testcase.CartTest;
 import selenium.aaold.cases.shop.testcase.FilterTest;
-import selenium.aanew.logic.domain.SeleniumCharacter;
-import selenium.aanew.logic.flow.CreateCharacter;
-import selenium.aanew.logic.flow.SelectCharacter;
 
 public class ShopTest {
     private final WebDriver driver;
@@ -47,10 +43,6 @@ public class ShopTest {
     }
 
     private void init() {
-        new Registration(driver).registerUser();
-        SeleniumCharacter testCharacter = SeleniumCharacter.create();
-        new CreateCharacter(driver).createCharacter(testCharacter);
-        new SelectCharacter(driver).selectCharacter(testCharacter);
-        navigate.toShop();
+
     }
 }
