@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class RenameCharacterTestHelper {
-    private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
     private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
     private static final String SELECTOR_RENAME_CHARACTER_BUTTON = "button:first-child";
 

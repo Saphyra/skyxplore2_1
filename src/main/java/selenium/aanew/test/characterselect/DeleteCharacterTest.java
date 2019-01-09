@@ -12,7 +12,6 @@ import selenium.aanew.logic.validator.NotificationValidator;
 import static org.junit.Assert.assertFalse;
 
 public class DeleteCharacterTest extends SeleniumTestApplication {
-    private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
     private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
     private static final String SELECTOR_DELETE_CHARACTER_BUTTON = "button:nth-child(2)";
     private static final String NOTIFICATION_CHARACTER_DELETED = "Karakter törölve.";
