@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import selenium.aanew.logic.flow.Navigate;
 import selenium.aaold.cases.shop.testcase.BuyTest;
 import selenium.aaold.cases.shop.testcase.CartTest;
-import selenium.aaold.cases.shop.testcase.FilterTest;
 
 public class ShopTest {
     private final WebDriver driver;
@@ -18,14 +17,8 @@ public class ShopTest {
     public static void run(WebDriver driver) {
         ShopTest testCase = new ShopTest(driver);
         testCase.init();
-        testCase.runFilterTests();
         testCase.runCartTests();
         testCase.runBuyTests();
-    }
-
-    private void runFilterTests() {
-        FilterTest filterTest = new FilterTest(driver);
-        filterTest.testFilters();
     }
 
     private void runCartTests() {
