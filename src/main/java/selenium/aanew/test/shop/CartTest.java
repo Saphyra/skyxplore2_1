@@ -10,6 +10,7 @@ import selenium.aanew.logic.helper.CostCounter;
 import selenium.aanew.logic.helper.ShopElementSearcher;
 import selenium.aanew.logic.validator.CartVerifier;
 import selenium.aanew.test.shop.cart.AddToCartTest;
+import selenium.aanew.test.shop.cart.RemoveFromCartTest;
 import selenium.aanew.test.shop.util.ShopTestHelper;
 import selenium.aanew.test.shop.util.ShopTestInitializer;
 
@@ -39,5 +40,15 @@ public class CartTest extends SeleniumTestApplication {
             .shopTestInitializer(shopTestInitializer)
             .build()
             .testAddToCart();
+    }
+
+    @Test
+    public void testRemoveFromCart(){
+        RemoveFromCartTest.builder()
+            .cartVerifier(cartVerifier)
+            .shopTestHelper(shopTestHelper)
+            .shopTestInitializer(shopTestInitializer)
+            .build()
+            .testRemoveFromCart();
     }
 }
