@@ -4,6 +4,7 @@ import org.junit.Test;
 import selenium.aanew.SeleniumTestApplication;
 import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.FieldValidator;
+import selenium.aanew.test.registration.password.ConfirmPasswordTest;
 import selenium.aanew.test.registration.password.TooLongPasswordTest;
 import selenium.aanew.test.registration.password.TooShortPasswordTest;
 import selenium.aanew.test.registration.password.helper.PasswordTestHelper;
@@ -40,5 +41,15 @@ public class PasswordTest extends SeleniumTestApplication {
             .indexPage(indexPage)
             .build()
             .testTooLongPassword();
+    }
+
+    @Test
+    public void testConfirmPassword(){
+        ConfirmPasswordTest.builder()
+            .passwordTestHelper(passwordTestHelper)
+            .indexPage(indexPage)
+            .fieldValidator(fieldValidator)
+            .build()
+            .testConfirmPassword();
     }
 }

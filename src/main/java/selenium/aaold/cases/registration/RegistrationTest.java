@@ -6,7 +6,6 @@ import selenium.aanew.logic.flow.Logout;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aaold.cases.registration.testcase.RegistrationPasswordTest;
 import selenium.aaold.cases.registration.testcase.RegistrationUserNameTest;
 
 import static selenium.aanew.logic.util.LinkUtil.HOST;
@@ -32,7 +31,6 @@ public class RegistrationTest {
 
         RegistrationTest testCase = new RegistrationTest(driver, currentUser);
         testCase.validateUserName();
-        testCase.validatePasswords();
     }
 
     private void validateUserName() {
@@ -45,18 +43,6 @@ public class RegistrationTest {
             .fieldValidator(fieldValidator)
             .build();
         test.validateUserName();
-    }
-
-    private void validatePasswords() {
-        RegistrationPasswordTest test = RegistrationPasswordTest.builder()
-            .driver(driver)
-            .currentUser(currentUser)
-            .indexPage(indexPage)
-            .newUser(newUser)
-            .registrationTest(this)
-            .fieldValidator(fieldValidator)
-            .build();
-        test.validatePasswords();
     }
 
     public void cleanUp() {
