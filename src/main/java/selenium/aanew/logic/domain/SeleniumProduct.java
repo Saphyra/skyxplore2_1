@@ -1,4 +1,4 @@
-package selenium.aaold.cases.factory.testcase;
+package selenium.aanew.logic.domain;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,8 @@ public class SeleniumProduct {
     private static final String ELEMENT_MATERIAL_COST = "div:nth-child(2) div:first-child";
     private static final String ELEMENT_BUILD_BUTTON = "button";
     private static final String ELEMENT_MATERIAL_FIELDS = "div:nth-child(2) div";
+    private static final String SELECTOR_NAME = ".contentelementtitle";
+
     private final WebElement webElement;
 
     public void fillAmountField(int amount) {
@@ -54,6 +56,6 @@ public class SeleniumProduct {
     }
 
     public String getName() {
-        return webElement.findElement(By.cssSelector(".contentelementtitle")).getText();
+        return webElement.findElement(By.cssSelector(SELECTOR_NAME)).getText();
     }
 }

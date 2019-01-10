@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import selenium.aanew.logic.util.Util;
 import selenium.aaold.cases.community.CommunityTest;
-import selenium.aaold.cases.factory.FactoryTest;
 import selenium.aaold.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
@@ -45,11 +44,6 @@ public class SeleniumTestApplication {
     @Test
     public void test01_Registration() {
         RegistrationTest.run(driver);
-    }
-
-    @Test
-    public void test04_Factory() {
-        FactoryTest.run(driver);
     }
 
     @Test

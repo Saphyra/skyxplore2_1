@@ -1,12 +1,17 @@
-package selenium.aaold.cases.factory.testcase;
+package selenium.aanew.test.factory;
 
-import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import selenium.aanew.SeleniumTestApplication;
+import selenium.aanew.logic.domain.SeleniumProduct;
+import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
+import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.page.FactoryPage;
 import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.factory.util.FactoryTestHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,24 +24,39 @@ import static org.junit.Assert.assertTrue;
 import static selenium.aanew.logic.util.Util.sleep;
 import static selenium.aanew.logic.util.Util.validateIfPresent;
 
-@Builder
-@Slf4j
-public class BuildAndFinishTest {
+public class BuildAndFinishTest extends SeleniumTestApplication {
     private static final int AMOUNT_TO_PRODUCE = 3;
 
     private static final String ELEMENT_MATERIAL_NAME = "span";
     private static final String ELEMENT_MATERIAL_AMOUNT = "div";
     private static final String NOTIFICATION_PRODUCT_BUILDING_STARTED = "Megrendelés elküldve.";
     private static final String LABEL_QUEUE_EMPTY = "A gyártósor üres.";
+    private static final String SELECTOR_QUEUE_ITEM_NAME = "div:first-child";
+    private static final String SELECTOR_PROCESS_BAR_TEXT = ".queueprocess .processbartext";
 
-    private final WebDriver driver;
-    private final FactoryPage factoryPage;
-    private final NotificationValidator notificationValidator;
+    private FactoryTestHelper factoryTestHelper;
+    private FactoryPage factoryPage;
+    private NotificationValidator notificationValidator;
 
     private final Map<String, Integer> startMaterialAmounts = new HashMap<>();
     private final Map<String, Integer> usedMaterials = new HashMap<>();
 
+    @Override
+    protected void init() {
+        factoryTestHelper = new FactoryTestHelper(
+            new Registration(driver),
+            new CreateCharacter(driver),
+            new SelectCharacter(driver),
+            new Navigate(driver)
+        );
+        factoryPage = new FactoryPage(driver);
+        notificationValidator = new NotificationValidator(driver);
+    }
+
+    @Test
     public void testBuildAndFinish() {
+        factoryTestHelper.registerAndGoToFactoryPage();
+
         startMaterialAmounts.putAll(getActualMaterialAmounts());
 
         SeleniumProduct product = new SeleniumProduct(factoryPage.getProductContainer());
@@ -104,7 +124,7 @@ public class BuildAndFinishTest {
     }
 
     private void verifyMaterialInQueue(WebElement element, String builtProductName) {
-        String elementTitle = element.findElement(By.cssSelector("div:first-child")).getText();
+        String elementTitle = element.findElement(By.cssSelector(SELECTOR_QUEUE_ITEM_NAME)).getText();
         assertEquals(builtProductName, elementTitle.split(" x ")[0]);
         assertEquals((Integer) AMOUNT_TO_PRODUCE, Integer.valueOf(elementTitle.split(" x ")[1]));
     }
@@ -120,23 +140,25 @@ public class BuildAndFinishTest {
         WebElement element = getElementOfQueue();
         verifyMaterialInQueue(element, builtProductName);
 
-        assertNotNull(element.findElement(By.cssSelector(".queueprocess .processbartext")));
+        assertNotNull(element.findElement(By.cssSelector(SELECTOR_PROCESS_BAR_TEXT)));
     }
 
     private void verifyProductFinished(String builtProductName) {
         List<WebElement> queue = factoryPage.getQueue();
         assertEquals(1, queue.size());
         assertEquals(LABEL_QUEUE_EMPTY, queue.get(0).getText());
-        
+
 
         validateIfPresent(getActualMaterialAmounts().entrySet().stream()
             .filter(entry -> entry.getKey().equals(builtProductName))
             .findFirst())
-            .ifPresent(entry ->{
+            .ifPresent(entry -> {
                 int startValue = startMaterialAmounts.get(entry.getKey());
                 int actualValue = entry.getValue();
                 int expected = startValue + AMOUNT_TO_PRODUCE;
                 assertEquals(expected, actualValue);
             });
     }
+
+
 }
