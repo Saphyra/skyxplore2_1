@@ -12,12 +12,6 @@ import selenium.aanew.logic.page.IndexPage;
 
 @Builder
 public class RegistrationEmailTest {
-    private static final String INVALID_EMAIL = "aa.a";
-
-    //TODO restore after fixing FE validation
-    //private static final String INVALID_EMAIL = "aa.a@";
-
-    private static final String ERROR_MESSAGE_INVALID_EMAIL = "Érvénytelen e-mail cím.";
     private static final String ERROR_MESSAGE_EXISTING_EMAIL = "Már van regisztrált felhasználó a megadott e-mail címmel.";
 
     private final WebDriver driver;
@@ -28,22 +22,7 @@ public class RegistrationEmailTest {
     private final SeleniumUser newUser;
 
     public void validateEmail(){
-        validateInvalidEmail();
         validateExistingEmail();
-    }
-
-    private void validateInvalidEmail() {
-        setUpForEmailValidation();
-
-        WebElement emailField = indexPage.getRegistrationEmailField();
-        emailField.sendKeys(INVALID_EMAIL);
-
-        fieldValidator.verifyError(
-            indexPage.getInvalidEmailField(),
-            ERROR_MESSAGE_INVALID_EMAIL,
-            emailField,
-            indexPage.getRegisterButton()
-        );
     }
 
     private void validateExistingEmail() {
