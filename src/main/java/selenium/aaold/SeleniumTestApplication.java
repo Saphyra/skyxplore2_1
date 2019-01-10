@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.SpringApplication;
 import selenium.aanew.logic.util.Util;
 import selenium.aaold.cases.community.CommunityTest;
-import selenium.aaold.cases.registration.RegistrationTest;
 import skyxplore.Application;
 
 import static selenium.aanew.logic.util.LinkUtil.HOST;
@@ -39,11 +38,6 @@ public class SeleniumTestApplication {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(HOST);
-    }
-
-    @Test
-    public void test01_Registration() {
-        RegistrationTest.run(driver);
     }
 
     @Test
