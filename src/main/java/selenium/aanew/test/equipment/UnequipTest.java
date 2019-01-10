@@ -9,7 +9,7 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aanew.test.equipment.util.ElementSearcher;
+import selenium.aanew.test.equipment.util.EquipmentElementSearcher;
 import selenium.aanew.test.equipment.util.EquipmentTestHelper;
 
 import static org.junit.Assert.assertEquals;
@@ -19,17 +19,17 @@ public class UnequipTest extends SeleniumTestApplication {
 
     private EquipmentTestHelper equipmentTestHelper;
     private NotificationValidator notificationValidator;
-    private ElementSearcher elementSearcher;
+    private EquipmentElementSearcher equipmentElementSearcher;
 
     @Override
     protected void init() {
-        elementSearcher = new ElementSearcher(driver);
+        equipmentElementSearcher = new EquipmentElementSearcher(driver);
         equipmentTestHelper = new EquipmentTestHelper(
             new Registration(driver),
             new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver),
-            elementSearcher
+            equipmentElementSearcher
         );
         notificationValidator = new NotificationValidator(driver);
     }
@@ -38,9 +38,9 @@ public class UnequipTest extends SeleniumTestApplication {
     public void testUnEquip() {
         equipmentTestHelper.registerAndGoToEquipmentPage();
 
-        int emptySlotCountBeforeUnequip = elementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
+        int emptySlotCountBeforeUnequip = equipmentElementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
 
-        EquippedEquipment equipment = elementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
+        EquippedEquipment equipment = equipmentElementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
         equipment.unequip();
 
         verifySuccess(emptySlotCountBeforeUnequip, equipment);
@@ -49,7 +49,7 @@ public class UnequipTest extends SeleniumTestApplication {
 
     private void verifySuccess(int emptySlotCountBeforeUnequip, EquippedEquipment equipment) {
         notificationValidator.verifyNotificationVisibility(UNEQUIP_SUCCESFUL_MESSAGE);
-        int emptySlotCountAfterUnequip = elementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
+        int emptySlotCountAfterUnequip = equipmentElementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
         assertEquals(emptySlotCountBeforeUnequip + 1, emptySlotCountAfterUnequip);
 
         equipmentTestHelper.verifyItemInStorage(equipment.getId(), 1);

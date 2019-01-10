@@ -11,26 +11,26 @@ import selenium.aanew.logic.flow.Navigate;
 import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aanew.test.equipment.util.ElementSearcher;
+import selenium.aanew.test.equipment.util.EquipmentElementSearcher;
 import selenium.aanew.test.equipment.util.EquipmentTestHelper;
 
 import static org.junit.Assert.assertEquals;
 
 public class EquipTest extends SeleniumTestApplication {
-    private ElementSearcher elementSearcher;
+    private EquipmentElementSearcher equipmentElementSearcher;
     private NotificationValidator notificationValidator;
     private EquipmentTestHelper equipmentTestHelper;
 
 
     @Override
     protected void init() {
-        elementSearcher = new ElementSearcher(driver);
+        equipmentElementSearcher = new EquipmentElementSearcher(driver);
         equipmentTestHelper = new EquipmentTestHelper(
             new Registration(driver),
             new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver),
-            elementSearcher
+            equipmentElementSearcher
         );
         notificationValidator = new NotificationValidator(driver);
     }
@@ -39,17 +39,17 @@ public class EquipTest extends SeleniumTestApplication {
     public void testEquip() {
         equipmentTestHelper.registerAndGoToEquipmentPage();
 
-        EquippedEquipment equipment = elementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
+        EquippedEquipment equipment = equipmentElementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
         equipment.unequip();
 
-        String unequippedItemId = elementSearcher.getAllUnequippedEquipments().stream()
+        String unequippedItemId = equipmentElementSearcher.getAllUnequippedEquipments().stream()
             .findFirst()
             .orElseThrow(() -> new RuntimeException("No unequippedItem found."))
             .getId();
 
-        int emptySlotCountBefore = elementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
-        UnequippedEquipment unequippedEquipment = elementSearcher.getUnequippedEquipmentById(unequippedItemId);
-        WebElement emptySlot = elementSearcher.getEmptySlotFromContainer(ContainerId.FRONT_WEAPON);
+        int emptySlotCountBefore = equipmentElementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
+        UnequippedEquipment unequippedEquipment = equipmentElementSearcher.getUnequippedEquipmentById(unequippedItemId);
+        WebElement emptySlot = equipmentElementSearcher.getEmptySlotFromContainer(ContainerId.FRONT_WEAPON);
 
         //TODO fix
         //verifyEquipmentSuccessful(emptySlotCountBefore);
@@ -58,6 +58,6 @@ public class EquipTest extends SeleniumTestApplication {
     private void verifyEquipmentSuccessful(int emptySlotCountBefore) {
         notificationValidator.verifyNotificationVisibility("Felszerelve.");
 
-        assertEquals(emptySlotCountBefore - 1, elementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON));
+        assertEquals(emptySlotCountBefore - 1, equipmentElementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON));
     }
 }

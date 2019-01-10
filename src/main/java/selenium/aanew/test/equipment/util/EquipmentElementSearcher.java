@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 import static java.lang.Math.toIntExact;
 
 @RequiredArgsConstructor
-public class ElementSearcher {
+public class EquipmentElementSearcher {
     private static final Predicate<EquippedEquipment> IS_EMPTY_SLOT = EquippedEquipment::isEmpty;
     private static final String PREFIX_SELECTOR_SLOT = "#%s .slot";
     private static final String SELECTOR_UNEQUIPPED_ITEMS = "#equipmentlist div.equipmentlistelement";
-    private static final String PREFICT_SELECTOR_EMPTY_SLOT = "#%s div.emptyslot";
+    private static final String PREFIX_SELECTOR_EMPTY_SLOT = "#%s div.emptyslot";
 
     private final WebDriver driver;
 
@@ -62,7 +62,7 @@ public class ElementSearcher {
     }
 
     public List<WebElement> getEmptySlotsOfContainer(ContainerId containerId) {
-        return driver.findElements(By.cssSelector(String.format(PREFICT_SELECTOR_EMPTY_SLOT, containerId.getId())));
+        return driver.findElements(By.cssSelector(String.format(PREFIX_SELECTOR_EMPTY_SLOT, containerId.getId())));
     }
 
     public WebElement getEmptySlotFromContainer(ContainerId containerId) {
