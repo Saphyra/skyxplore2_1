@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.aanew.logic.domain.ContainerId;
 import selenium.aanew.logic.domain.UnequippedEquipment;
-import selenium.aaold.cases.equipment.testcase.helper.ElementSearcher;
+import selenium.aanew.test.equipment.util.ElementSearcher;
 import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;

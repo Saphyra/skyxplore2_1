@@ -2,7 +2,7 @@ package selenium.aaold.cases.equipment.testcase;
 
 import lombok.RequiredArgsConstructor;
 import selenium.aanew.logic.domain.ContainerId;
-import selenium.aaold.cases.equipment.testcase.helper.ElementSearcher;
+import selenium.aanew.test.equipment.util.ElementSearcher;
 import selenium.aanew.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertEquals;

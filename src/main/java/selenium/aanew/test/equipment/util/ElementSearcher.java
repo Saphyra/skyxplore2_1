@@ -1,4 +1,4 @@
-package selenium.aaold.cases.equipment.testcase.helper;
+package selenium.aanew.test.equipment.util;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
@@ -17,11 +17,14 @@ import static java.lang.Math.toIntExact;
 @RequiredArgsConstructor
 public class ElementSearcher {
     private static final Predicate<EquippedEquipment> IS_EMPTY_SLOT = EquippedEquipment::isEmpty;
+    private static final String PREFIX_SELECTOR_SLOT = "#%s .slot";
+    private static final String SELECTOR_UNEQUIPPED_ITEMS = "#equipmentlist div.equipmentlistelement";
+    private static final String PREFICT_SELECTOR_EMPTY_SLOT = "#%s div.emptyslot";
 
     private final WebDriver driver;
 
     public List<EquippedEquipment> findEquippedEquipmentsOfContainer(ContainerId containerId) {
-        return driver.findElements(By.cssSelector(String.format("#%s .slot", containerId.getId()))).stream()
+        return driver.findElements(By.cssSelector(String.format(PREFIX_SELECTOR_SLOT, containerId.getId()))).stream()
             .map(EquippedEquipment::new)
             .collect(Collectors.toList());
     }
@@ -46,7 +49,7 @@ public class ElementSearcher {
     }
 
     public List<UnequippedEquipment> getAllUnequippedEquipments() {
-        return driver.findElements(By.cssSelector("#equipmentlist div.equipmentlistelement")).stream()
+        return driver.findElements(By.cssSelector(SELECTOR_UNEQUIPPED_ITEMS)).stream()
             .map(UnequippedEquipment::new)
             .collect(Collectors.toList());
     }
@@ -59,7 +62,7 @@ public class ElementSearcher {
     }
 
     public List<WebElement> getEmptySlotsOfContainer(ContainerId containerId) {
-        return driver.findElements(By.cssSelector(String.format("#%s div.emptyslot", containerId.getId())));
+        return driver.findElements(By.cssSelector(String.format(PREFICT_SELECTOR_EMPTY_SLOT, containerId.getId())));
     }
 
     public WebElement getEmptySlotFromContainer(ContainerId containerId) {

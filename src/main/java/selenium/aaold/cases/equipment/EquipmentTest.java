@@ -1,18 +1,16 @@
 package selenium.aaold.cases.equipment;
 
 import org.openqa.selenium.WebDriver;
-import selenium.aanew.logic.flow.Navigate;
-import selenium.aanew.logic.flow.Registration;
-import selenium.aanew.logic.validator.NotificationValidator;
-import selenium.aaold.cases.equipment.testcase.EquipShipTest;
-import selenium.aaold.cases.equipment.testcase.EquipTest;
-import selenium.aaold.cases.equipment.testcase.UnEquipTest;
-import selenium.aaold.cases.equipment.testcase.helper.ElementSearcher;
-import selenium.aaold.cases.equipment.testcase.helper.EquipmentVerifier;
 import selenium.aanew.logic.domain.SeleniumCharacter;
 import selenium.aanew.logic.flow.BuyItem;
 import selenium.aanew.logic.flow.CreateCharacter;
+import selenium.aanew.logic.flow.Navigate;
+import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.flow.SelectCharacter;
+import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.equipment.util.ElementSearcher;
+import selenium.aaold.cases.equipment.testcase.EquipShipTest;
+import selenium.aaold.cases.equipment.testcase.EquipTest;
 
 public class EquipmentTest {
     public static final String TEST_SHIP_ID = "sta-02";
@@ -22,30 +20,22 @@ public class EquipmentTest {
     private final BuyItem buyItem;
     private final NotificationValidator notificationValidator;
     private final ElementSearcher elementSearcher;
-    private final EquipmentVerifier equipmentVerifier;
     private EquipmentTest(WebDriver driver) {
         this.driver = driver;
         this.navigate = new Navigate(driver);
         this.buyItem = new BuyItem(driver);
         this.notificationValidator = new NotificationValidator(driver);
         this.elementSearcher = new ElementSearcher(driver);
-        this.equipmentVerifier = new EquipmentVerifier(elementSearcher);
     }
 
     public static void run(WebDriver driver){
         EquipmentTest testCase = new EquipmentTest(driver);
         testCase.init();
-        String unequippedItemId = testCase.testUnEquip();
-        testCase.testEquip(unequippedItemId);
         testCase.testEquipShip();
         testCase.testEquipConnector();
         testCase.testUnequipConnector();
     }
 
-    private String testUnEquip() {
-        UnEquipTest unEquipTest = new UnEquipTest(elementSearcher, notificationValidator, equipmentVerifier);
-        return unEquipTest.testUnEquip();
-    }
 
     private void testEquip(String unequippedItemId) {
         EquipTest equipTest = new EquipTest(elementSearcher, driver, notificationValidator);
