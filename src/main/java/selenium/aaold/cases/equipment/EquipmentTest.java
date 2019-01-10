@@ -10,7 +10,6 @@ import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.test.equipment.util.ElementSearcher;
 import selenium.aaold.cases.equipment.testcase.EquipShipTest;
-import selenium.aaold.cases.equipment.testcase.EquipTest;
 
 public class EquipmentTest {
     public static final String TEST_SHIP_ID = "sta-02";
@@ -36,11 +35,6 @@ public class EquipmentTest {
         testCase.testUnequipConnector();
     }
 
-
-    private void testEquip(String unequippedItemId) {
-        EquipTest equipTest = new EquipTest(elementSearcher, driver, notificationValidator);
-        equipTest.testEquip(unequippedItemId);
-    }
 
     private void testEquipShip() {
         EquipShipTest equipShipTest = new EquipShipTest(elementSearcher, notificationValidator);
