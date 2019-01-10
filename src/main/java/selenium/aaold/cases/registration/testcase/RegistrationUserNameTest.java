@@ -10,22 +10,9 @@ import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aaold.cases.registration.RegistrationTest;
 
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
-
 @Builder
 public class RegistrationUserNameTest {
-    private static final String TOO_LONG_USER_NAME;
 
-    static {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i <= USER_NAME_MAX_LENGTH + 1; i++) {
-            builder.append("a");
-        }
-        TOO_LONG_USER_NAME = builder.toString();
-    }
-
-
-    private static final String ERROR_MESSAGE_TOO_LONG_USER_NAME = "Felhasználónév túl hosszú (Maximum 30 karakter).";
     private static final String ERROR_MESSAGE_EXISTING_USER_NAME = "Felhasználónév foglalt.";
 
     private final WebDriver driver;
@@ -43,15 +30,7 @@ public class RegistrationUserNameTest {
     private void validateTooLongUserName() {
         setUpForUserNameValidation();
 
-        WebElement userNameField = indexPage.getRegistrationUserNameField();
-        userNameField.sendKeys(TOO_LONG_USER_NAME);
 
-        fieldValidator.verifyError(
-            indexPage.getInvalidUserNameField(),
-            ERROR_MESSAGE_TOO_LONG_USER_NAME,
-            userNameField,
-            indexPage.getRegisterButton()
-        );
     }
 
     private void validateExistingUserName() {
