@@ -10,9 +10,7 @@ import selenium.aanew.logic.page.IndexPage;
 import selenium.aanew.logic.validator.FieldValidator;
 import selenium.aaold.cases.registration.RegistrationTest;
 
-import static selenium.aanew.logic.util.Util.crop;
 import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
 
 @Builder
 public class RegistrationUserNameTest {
@@ -26,7 +24,7 @@ public class RegistrationUserNameTest {
         TOO_LONG_USER_NAME = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_TOO_SHORT_USER_NAME = "Felhasználónév túl rövid (Minimum 3 karakter).";
+
     private static final String ERROR_MESSAGE_TOO_LONG_USER_NAME = "Felhasználónév túl hosszú (Maximum 30 karakter).";
     private static final String ERROR_MESSAGE_EXISTING_USER_NAME = "Felhasználónév foglalt.";
 
@@ -38,23 +36,8 @@ public class RegistrationUserNameTest {
     private final SeleniumUser newUser;
 
     public void validateUserName() {
-        validateTooShortUserName();
         validateTooLongUserName();
         validateExistingUserName();
-    }
-
-    private void validateTooShortUserName() {
-        setUpForUserNameValidation();
-
-        WebElement userNameField = indexPage.getRegistrationUserNameField();
-        userNameField.sendKeys(crop(newUser.getUserName(), USER_NAME_MIN_LENGTH - 1));
-
-        fieldValidator.verifyError(
-            indexPage.getInvalidUserNameField(),
-            ERROR_MESSAGE_TOO_SHORT_USER_NAME,
-            userNameField,
-            indexPage.getRegisterButton()
-        );
     }
 
     private void validateTooLongUserName() {
