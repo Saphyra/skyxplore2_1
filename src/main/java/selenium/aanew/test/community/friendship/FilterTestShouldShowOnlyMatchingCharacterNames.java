@@ -25,7 +25,7 @@ public class FilterTestShouldShowOnlyMatchingCharacterNames {
 
         SeleniumAccount otherAccount = accounts.get(1);
 
-        friendshipTestHelper.searchForPossibleFriends(otherAccount.getCharacter(0).getCharacterName());
+        friendshipTestHelper.searchForPossibleFriends(otherAccount.getCharacter(0));
         friendshipTestHelper.verifySearchResult(
             Stream.concat(account.getCharacters().stream(), Stream.of(otherAccount.getCharacter(1))).collect(Collectors.toList()),
             Arrays.asList(accounts.get(1).getCharacter(0))

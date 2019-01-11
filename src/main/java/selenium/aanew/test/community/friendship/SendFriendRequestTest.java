@@ -27,7 +27,7 @@ public class SendFriendRequestTest {
 
 
         SeleniumCharacter otherCharacter = accounts.get(1).getCharacter(0);
-        friendshipTestHelper.sendFriendRequestTo(otherCharacter.getCharacterName());
+        friendshipTestHelper.sendFriendRequestTo(otherCharacter);
 
         friendshipTestHelper.verifyCannotSendFriendRequestTo(otherCharacter);
 

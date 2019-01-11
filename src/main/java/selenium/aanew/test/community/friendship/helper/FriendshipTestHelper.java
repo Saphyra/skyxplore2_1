@@ -20,31 +20,39 @@ public class FriendshipTestHelper {
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
 
-    public void sendFriendRequestTo(String characterName){
-        searchForPossibleFriends(characterName);
+    public void sendFriendRequestTo(SeleniumCharacter character) {
+        searchForPossibleFriends(character);
 
         communityPage.getCharactersCanBeFriendList().stream()
-            .filter(p -> p.getCharacterName().equals(characterName))
+            .filter(p -> p.getCharacterName().equals(character.getCharacterName()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Friend not found in search result."))
             .addFriend(notificationValidator);
     }
 
-    public void searchForPossibleFriends(String characterName) {
+    public void searchForPossibleFriends(SeleniumCharacter character) {
         if (!communityPage.getAddFriendContainer().isDisplayed()) {
             openAddFriendPage();
         }
 
         WebElement friendNameInputField = communityPage.getFriendNameInputField();
         friendNameInputField.clear();
-        friendNameInputField.sendKeys(characterName);
+        friendNameInputField.sendKeys(character.getCharacterName());
     }
 
     public void verifyCannotSendFriendRequestTo(SeleniumCharacter character) {
-        searchForPossibleFriends(character.getCharacterName());
+        searchForPossibleFriends(character);
         verifySearchResult(
             Arrays.asList(character),
             Collections.emptyList()
+        );
+    }
+
+    public void verifyFriendRequestCanBeSentTo(SeleniumCharacter character) {
+        searchForPossibleFriends(character);
+        verifySearchResult(
+            Collections.emptyList(),
+            Arrays.asList(character)
         );
     }
 
@@ -62,14 +70,6 @@ public class FriendshipTestHelper {
         assertTrue(
             friendRequests.stream()
                 .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
-        );
-    }
-
-    private void verifyCannotSendFriendRequest(SeleniumCharacter character) {
-        searchForPossibleFriends(character.getCharacterName());
-        verifySearchResult(
-            Arrays.asList(character),
-            Collections.emptyList()
         );
     }
 

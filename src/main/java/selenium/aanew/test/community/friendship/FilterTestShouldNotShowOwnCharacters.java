@@ -2,6 +2,7 @@ package selenium.aanew.test.community.friendship;
 
 import lombok.Builder;
 import selenium.aanew.logic.domain.SeleniumAccount;
+import selenium.aanew.logic.domain.SeleniumCharacter;
 import selenium.aanew.test.community.friendship.helper.FriendshipTestHelper;
 import selenium.aanew.test.community.util.CommunityTestHelper;
 import selenium.aanew.test.community.util.CommunityTestInitializer;
@@ -22,7 +23,7 @@ public class FilterTestShouldNotShowOwnCharacters {
         SeleniumAccount account = accounts.get(0);
         communityTestHelper.goToCommunityPageOf(account, account.getCharacter(0));
 
-        friendshipTestHelper.searchForPossibleFriends(CHARACTER_NAME_PREFIX);
+        friendshipTestHelper.searchForPossibleFriends(new SeleniumCharacter(CHARACTER_NAME_PREFIX));
         friendshipTestHelper.verifySearchResult(account.getCharacters(), accounts.get(1).getCharacters());
     }
 }
