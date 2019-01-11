@@ -25,7 +25,6 @@ public class SendFriendRequestTest {
         SeleniumAccount account = accounts.get(0);
         communityTestHelper.goToCommunityPageOf(account, account.getCharacter(0));
 
-
         SeleniumCharacter otherCharacter = accounts.get(1).getCharacter(0);
         friendshipTestHelper.sendFriendRequestTo(otherCharacter);
 

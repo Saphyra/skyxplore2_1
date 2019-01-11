@@ -12,6 +12,7 @@ import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.page.CommunityPage;
 import selenium.aanew.logic.page.OverviewPage;
 import selenium.aanew.logic.validator.NotificationValidator;
+import selenium.aanew.test.community.friendship.AcceptFriendRequestTest;
 import selenium.aanew.test.community.friendship.CancelFriendRequestTest;
 import selenium.aanew.test.community.friendship.DeclineFriendRequestTest;
 import selenium.aanew.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
@@ -99,5 +100,16 @@ public class FriendshipTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .build()
             .testDeclineFriendRequest();
+    }
+
+    @Test
+    public void testAcceptFriendRequest(){
+        AcceptFriendRequestTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .build()
+            .testAcceptFriendRequest();
     }
 }
