@@ -11,16 +11,20 @@ import selenium.aanew.logic.flow.Registration;
 import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.page.CommunityPage;
 import selenium.aanew.logic.page.OverviewPage;
+import selenium.aanew.logic.validator.NotificationValidator;
 import selenium.aanew.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
 import selenium.aanew.test.community.friendship.FilterTestShouldShowOnlyMatchingCharacterNames;
-import selenium.aanew.test.community.friendship.helper.FilterTestHelper;
+import selenium.aanew.test.community.friendship.SendFriendRequestTest;
+import selenium.aanew.test.community.friendship.helper.FriendshipTestHelper;
 import selenium.aanew.test.community.util.CommunityTestHelper;
 import selenium.aanew.test.community.util.CommunityTestInitializer;
 
 public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
     private CommunityTestHelper communityTestHelper;
-    private FilterTestHelper filterTestHelper;
+    private FriendshipTestHelper friendshipTestHelper;
+    private NotificationValidator notificationValidator;
+    private CommunityPage communityPage;
 
     @Override
     protected void init() {
@@ -37,26 +41,39 @@ public class FriendshipTest extends SeleniumTestApplication {
             new Logout(driver)
         );
 
-        filterTestHelper = new FilterTestHelper(new CommunityPage(driver));
+        communityPage = new CommunityPage(driver);
+        notificationValidator = new NotificationValidator(driver);
+        friendshipTestHelper = new FriendshipTestHelper(communityPage, notificationValidator);
     }
 
     @Test
-    public void testFilterShouldNotShowOwnCharacters(){
+    public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
-            .filterTestHelper(filterTestHelper)
+            .friendshipTestHelper(friendshipTestHelper)
             .build()
             .testFilterShouldNotShowOwnCharacters();
     }
 
     @Test
-    public void testFilterShouldShowOnlyMatchingCharacterNames(){
+    public void testFilterShouldShowOnlyMatchingCharacterNames() {
         FilterTestShouldShowOnlyMatchingCharacterNames.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
-            .filterTestHelper(filterTestHelper)
+            .friendshipTestHelper(friendshipTestHelper)
             .build()
             .testFilterShouldShowOnlyMatchingCharacterNames();
+    }
+
+    @Test
+    public void testSendFriendRequest() {
+        SendFriendRequestTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .build()
+            .testSendFriendRequest();
     }
 }
