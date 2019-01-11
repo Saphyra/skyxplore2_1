@@ -3,8 +3,8 @@ package selenium.aaold.cases.community.testcase;
 import lombok.Builder;
 
 @Builder
-public class FriendshipTest {
-    /*private final NotificationValidator notificationValidator;
+public class FriendshipTest {/*
+    private final NotificationValidator notificationValidator;
     private final Supplier<SeleniumAccount> seleniumAccountSupplier;
     private final Navigate navigate;
     private final SelectCharacter selectCharacter;
@@ -14,11 +14,6 @@ public class FriendshipTest {
 
 
     public FriendshipTest testSendFriendRequest() {
-        SeleniumAccount account1 = seleniumAccountSupplier.get();
-        SeleniumAccount account2 = seleniumAccountSupplier.get();
-
-        goToCommunityPageOf(account1, account1.getCharacter1());
-
         sendFriendRequestTo(account2.getCharacter1());
 
         verifyCannotSendFriendRequest(account2.getCharacter1());

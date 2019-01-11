@@ -12,6 +12,7 @@ import selenium.aanew.logic.flow.SelectCharacter;
 import selenium.aanew.logic.page.CommunityPage;
 import selenium.aanew.logic.page.OverviewPage;
 import selenium.aanew.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
+import selenium.aanew.test.community.friendship.FilterTestShouldShowOnlyMatchingCharacterNames;
 import selenium.aanew.test.community.friendship.helper.FilterTestHelper;
 import selenium.aanew.test.community.util.CommunityTestHelper;
 import selenium.aanew.test.community.util.CommunityTestInitializer;
@@ -47,5 +48,15 @@ public class FriendshipTest extends SeleniumTestApplication {
             .filterTestHelper(filterTestHelper)
             .build()
             .testFilterShouldNotShowOwnCharacters();
+    }
+
+    @Test
+    public void testFilterShouldShowOnlyMatchingCharacterNames(){
+        FilterTestShouldShowOnlyMatchingCharacterNames.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .filterTestHelper(filterTestHelper)
+            .build()
+            .testFilterShouldShowOnlyMatchingCharacterNames();
     }
 }
