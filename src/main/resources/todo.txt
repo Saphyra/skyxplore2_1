@@ -1,3 +1,34 @@
+===Community Test===
+Add friend test
+    - Accept friend request
+        - Friendship appears
+        - SeleniumFriendRequest disappears
+        - Characters do not appear at selectable characters (from both side)
+Send Mail test
+    - Selectable characters
+        - Search by name
+            - Only matching ones appear
+    - Send mail
+        - Mail appears at sent ones
+        - Character 2 gets a new mail
+            - Notifications shown
+        - Character 2 reads the mail
+            - Notifications disappear
+    - Archive mail
+        - Mail moved to archived
+    - Delete mail
+        - Mail disappears
+        - Other character still see the mail
+Block character test
+    - block character
+        - Existing friendship disappears
+        - Cannot send friendRequest
+        - Cannot send mail
+    - unblock character
+        - Friend request can be sent
+        - Mail can be sent
+
+
 ==========Conventions==========
 FrontEnd:
     Asynchronous queries, and page loading

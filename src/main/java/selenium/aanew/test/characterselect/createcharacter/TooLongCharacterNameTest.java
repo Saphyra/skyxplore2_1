@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import lombok.Builder;
 import selenium.aanew.logic.page.CharacterSelectPage;
 import selenium.aanew.logic.validator.FieldValidator;
-import selenium.aanew.test.characterselect.createcharacter.helper.CreateCharacterTestHelper;
+import selenium.aanew.test.characterselect.common.CharacterSelectTestHelper;
 
 @Builder
 public class TooLongCharacterNameTest {
@@ -22,12 +22,12 @@ public class TooLongCharacterNameTest {
         TOO_LONG_CHARACTER_NAME = builder.toString();
     }
 
-    private final CreateCharacterTestHelper createCharacterTestHelper;
+    private final CharacterSelectTestHelper characterSelectTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
 
     public void testTooLongCharacterName() {
-        createCharacterTestHelper.registerUser();
+        characterSelectTestHelper.registerUser();
 
         WebElement newCharacterNameField = characterSelectPage.getNewCharacterNameField();
         newCharacterNameField.sendKeys(TOO_LONG_CHARACTER_NAME);

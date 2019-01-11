@@ -1,12 +1,11 @@
 package selenium.aanew.logic.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Data
 @Builder
@@ -14,10 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 public class SeleniumAccount {
     private SeleniumUser user;
-    private SeleniumCharacter character1;
-    private SeleniumCharacter character2;
+    private List<SeleniumCharacter> characters;
 
-    public List<SeleniumCharacter> getCharacters() {
-        return Arrays.asList(character1, character2);
+    public SeleniumCharacter getCharacter(int index) {
+        return characters.get(index);
     }
 }

@@ -1,15 +1,15 @@
 package selenium.aanew.test.characterselect.createcharacter;
 
 import lombok.Builder;
-import selenium.aanew.test.characterselect.createcharacter.helper.CreateCharacterTestHelper;
+import selenium.aanew.test.characterselect.common.CharacterSelectTestHelper;
 
 @Builder
 public class SuccessfulCharacterCreationTest {
-    private final CreateCharacterTestHelper createCharacterTestHelper;
+    private final CharacterSelectTestHelper characterSelectTestHelper;
 
     public void testSuccessfulCharacterCreation() {
-        createCharacterTestHelper.registerUser();
+        characterSelectTestHelper.registerUser();
 
-        createCharacterTestHelper.createCharacter();
+        characterSelectTestHelper.createCharacter();
     }
 }
