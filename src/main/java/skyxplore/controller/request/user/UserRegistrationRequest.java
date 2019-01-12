@@ -26,6 +26,7 @@ public class UserRegistrationRequest {
 
     @Email
     @NotNull
+    @Size(min = 1)
     private String email;
 
     @Override
