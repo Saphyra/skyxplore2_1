@@ -1,7 +1,6 @@
 package skyxplore.auth;
 
 import com.github.saphyra.authservice.PropertySource;
-import com.github.saphyra.authservice.domain.Role;
 import org.springframework.stereotype.Component;
 import skyxplore.filter.CustomFilterHelper;
 
@@ -9,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import static skyxplore.controller.PageController.INDEX_MAPPING;
@@ -64,7 +64,7 @@ public class PropertySourceImpl implements PropertySource {
     }
 
     @Override
-    public Map<String, Set<Role>> getRoleSettings() {
+    public Map<String, Set<String>> getRoleSettings() {
         return new HashMap<>();
     }
 
@@ -81,5 +81,15 @@ public class PropertySourceImpl implements PropertySource {
     @Override
     public int getFilterOrder() {
         return 1;
+    }
+
+    @Override
+    public String getSuccessfulLoginRedirection() {
+        return "characterselect";
+    }
+
+    @Override
+    public Optional<String> getLogoutRedirection() {
+        return Optional.empty();
     }
 }
