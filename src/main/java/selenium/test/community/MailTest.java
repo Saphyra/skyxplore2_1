@@ -11,6 +11,7 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
+import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.helper.MailTestHelper;
 import selenium.test.community.util.CommunityTestHelper;
 import selenium.test.community.util.CommunityTestInitializer;
@@ -49,5 +50,16 @@ public class MailTest extends SeleniumTestApplication {
             .mailTestHelper(mailTestHelper)
             .build()
             .testFilterShouldNotShowOwnCharacters();
+    }
+
+    @Test
+    public void testFilterShouldShowMatchingCharacters(){
+        FilterTestShouldShowMatchingCharacters.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testFilterShouldShowMatchingCharacters();
     }
 }
