@@ -221,7 +221,7 @@
             if(mailIds == null || mailIds == undefined){
                 throwException("IllegalArgument", "mailIds must not be null or undefined.");
             }
-            const path = "mail/markread";
+            const path = "mail/mark/read";
             const response = dao.sendRequest(dao.POST, path, mailIds);
             if(response.status != ResponseStatus.OK){
                 throwException("UnknownBackendError", response.toString());
@@ -246,7 +246,7 @@
             if(mailIds == null || mailIds == undefined){
                 throwException("IllegalArgument", "mailIds must not be null or undefined.");
             }
-            const path = "mail/markunread";
+            const path = "mail/mark/unread";
             const response = dao.sendRequest(dao.POST, path, mailIds);
             if(response.status != ResponseStatus.OK){
                 throwException("UnknownBackendError", response.toString());

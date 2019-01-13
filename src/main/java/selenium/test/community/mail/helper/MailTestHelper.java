@@ -1,6 +1,7 @@
 package selenium.test.community.mail.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebElement;
 import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -34,5 +35,16 @@ public class MailTestHelper {
         return communityPage.getSentMails().stream()
             .map(Mail::new)
             .collect(Collectors.toList());
+    }
+
+    public int getNumberOfUnreadMails() {
+        WebElement element = communityPage.getNumberOfUnreadMails();
+        return element.getText().isEmpty() ? 0 : parseNumberOfUnreadMails(element.getText());
+    }
+
+    private Integer parseNumberOfUnreadMails(String text) {
+        String split1 = text.trim().substring(1);
+        String split2 = split1.split("\\)")[0];
+        return Integer.valueOf(split2);
     }
 }

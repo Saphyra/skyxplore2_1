@@ -16,7 +16,11 @@ public class SendMailHelper {
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
 
-    public void sendMailTo(SeleniumCharacter character){
+    public void sendMailTo(SeleniumCharacter character) {
+        if (!communityPage.getSendMailContainer().isDisplayed()) {
+            communityPage.getWriteNewMailButton().click();
+        }
+
         setSubject();
         setMessage();
         setAddressee(character);
@@ -48,16 +52,16 @@ public class SendMailHelper {
         return this;
     }
 
-    public void verifyCannotSendMail(String notification){
+    public void verifyCannotSendMail(String notification) {
         sendMail();
         notificationValidator.verifyOnlyOneNotification(notification);
-        assertTrue(communityPage.getMailContainer().isDisplayed());
+        assertTrue(communityPage.getSendMailContainer().isDisplayed());
     }
 
-    public void verifyMailSent(String notification){
+    public void verifyMailSent(String notification) {
         sendMail();
         notificationValidator.verifyOnlyOneNotification(notification);
-        assertFalse(communityPage.getMailContainer().isDisplayed());
+        assertFalse(communityPage.getSendMailContainer().isDisplayed());
     }
 
     private void sendMail() {

@@ -1,9 +1,5 @@
 ===Community Test===
 Send Mail test
-    - Read mail
-        - Mail no longer unread
-        - Character 2 reads the mail
-            - Notifications disappear
     - Archive mail
         - Mail moved to archived
     - Delete mail

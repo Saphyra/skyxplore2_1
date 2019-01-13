@@ -3,6 +3,7 @@ package selenium.logic.util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,5 +36,10 @@ public class Util {
     public static <T> Optional<T> validateIfPresent(Optional<T> optional) {
         assertTrue(optional.isPresent());
         return optional;
+    }
+
+    public static boolean hasClass(WebElement element, String clazz){
+        String[] classes = element.getAttribute("class").split(" ");
+        return Arrays.asList(classes).contains(clazz);
     }
 }

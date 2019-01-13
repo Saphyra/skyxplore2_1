@@ -34,11 +34,12 @@ public class CommunityPage {
     private static final String SELECTOR_SUBJECT = "subject";
     private static final String SELECTOR_MESSAGE = "message";
     private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
-    private static final String SELECTOR_MAIL_CONTAINER = "mailcontainer";
+    private static final String SELECTOR_MAIL_CONTAINER = "mail";
     private static final String SELECTOR_RECEIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(2)";
     private static final String SELECTOR_RECEIVED_MAILS = "#incomingmaillist .mailitem";
     private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(3)";
     private static final String SELECTOR_SENT_MAILS = "#sentmaillist .mailitem";
+    public static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
 
     private final WebDriver driver;
 
@@ -130,7 +131,7 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_SEND_MAIL_BUTTON));
     }
 
-    public WebElement getMailContainer() {
+    public WebElement getSendMailContainer() {
         return driver.findElement(By.id(SELECTOR_MAIL_CONTAINER));
     }
 
@@ -148,5 +149,9 @@ public class CommunityPage {
 
     public List<WebElement> getSentMails() {
         return driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
+    }
+
+    public WebElement getNumberOfUnreadMails() {
+        return driver.findElement(By.id(SELECTOR_NUMBER_OF_UNREAD_MAILS));
     }
 }
