@@ -1,11 +1,7 @@
 ===Community Test===
 Send Mail test
-    - Send mail
-        - Mail cannot be sent when wrong fields
-            - Changed addressee
-        - Mail appears at sent ones
-        - Character 2 gets a new mail
-            - Notifications shown
+    - Read mail
+        - Mail no longer unread
         - Character 2 reads the mail
             - Notifications disappear
     - Archive mail

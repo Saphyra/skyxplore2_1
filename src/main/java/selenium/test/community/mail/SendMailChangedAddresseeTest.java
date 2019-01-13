@@ -38,6 +38,5 @@ public class SendMailChangedAddresseeTest {
         addresseeField.sendKeys(SeleniumCharacter.createRandomCharacterName());
 
         sendMailHelper.verifyCannotSendMail(NOTIFICATION_ADDRESSEE_IS_EMPTY);
-
     }
 }

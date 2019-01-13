@@ -5,6 +5,9 @@ import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 @RequiredArgsConstructor
 public class SendMailHelper {
     public static final String DEFAULT_MESSAGE = "message";
@@ -12,6 +15,13 @@ public class SendMailHelper {
 
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
+
+    public void sendMailTo(SeleniumCharacter character){
+        setSubject();
+        setMessage();
+        setAddressee(character);
+        sendMail();
+    }
 
     public SendMailHelper setSubject(String subject) {
         communityPage.getMailSubjectField().sendKeys(subject);
@@ -39,8 +49,19 @@ public class SendMailHelper {
     }
 
     public void verifyCannotSendMail(String notification){
-        communityPage.getSendMailButton().click();
+        sendMail();
         notificationValidator.verifyOnlyOneNotification(notification);
+        assertTrue(communityPage.getMailContainer().isDisplayed());
+    }
+
+    public void verifyMailSent(String notification){
+        sendMail();
+        notificationValidator.verifyOnlyOneNotification(notification);
+        assertFalse(communityPage.getMailContainer().isDisplayed());
+    }
+
+    private void sendMail() {
+        communityPage.getSendMailButton().click();
     }
 
     public SendMailHelper setSubject() {

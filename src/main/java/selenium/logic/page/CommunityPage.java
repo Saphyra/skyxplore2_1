@@ -33,7 +33,12 @@ public class CommunityPage {
     private static final String SELECTOR_ADDRESSEES = "#addresseelist .addressee";
     private static final String SELECTOR_SUBJECT = "subject";
     private static final String SELECTOR_MESSAGE = "message";
-    public static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
+    private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
+    private static final String SELECTOR_MAIL_CONTAINER = "mailcontainer";
+    private static final String SELECTOR_RECEIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(2)";
+    private static final String SELECTOR_RECEIVED_MAILS = "#incomingmaillist .mailitem";
+    private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(3)";
+    private static final String SELECTOR_SENT_MAILS = "#sentmaillist .mailitem";
 
     private final WebDriver driver;
 
@@ -123,5 +128,25 @@ public class CommunityPage {
 
     public WebElement getSendMailButton() {
         return driver.findElement(By.cssSelector(SELECTOR_SEND_MAIL_BUTTON));
+    }
+
+    public WebElement getMailContainer() {
+        return driver.findElement(By.id(SELECTOR_MAIL_CONTAINER));
+    }
+
+    public WebElement getReceivedMailsPageButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_RECEIVED_MAILS_PAGE_BUTTON));
+    }
+
+    public List<WebElement> getReceivedMails() {
+        return driver.findElements(By.cssSelector(SELECTOR_RECEIVED_MAILS));
+    }
+
+    public WebElement getSentMailsButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_SENT_MAILS_PAGE_BUTTON));
+    }
+
+    public List<WebElement> getSentMails() {
+        return driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
     }
 }

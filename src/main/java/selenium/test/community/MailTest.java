@@ -17,6 +17,7 @@ import selenium.test.community.mail.SendMailChangedAddresseeTest;
 import selenium.test.community.mail.SendMailEmptyAddresseeTest;
 import selenium.test.community.mail.SendMailEmptyMessageTest;
 import selenium.test.community.mail.SendMailEmptySubjectTest;
+import selenium.test.community.mail.SuccessfullySentMailTest;
 import selenium.test.community.mail.helper.MailTestHelper;
 import selenium.test.community.mail.helper.SendMailHelper;
 import selenium.test.community.util.CommunityTestHelper;
@@ -113,5 +114,17 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .build()
             .testSendMailChangedAddressee();
+    }
+
+    @Test
+    public void testSuccessfullySentMail(){
+        SuccessfullySentMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testSuccessfullySentMail();
     }
 }

@@ -41,7 +41,7 @@
             }else if(messageField.value.length > 4000){
                 notificationService.showError("Az üzenet túl hosszú (Max 4000 karakter).")
             }else{
-                if(communityDao.sendMail(sessionStorage.characterId, newMailController.addresseeId, subjectField.value, messageField.value)){
+                if(mailDao.sendMail(newMailController.addresseeId, subjectField.value, messageField.value)){
                     notificationService.showSuccess("Üzenet elküldve.");
                     subjectField.value = "";
                     addresseeField.value = "";
