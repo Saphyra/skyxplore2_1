@@ -28,6 +28,8 @@ public class CommunityPage {
     private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(1)";
     private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
+    public static final String SELECTOR_WRITE_MAIL_BUTTON = "#maillistbuttons div:first-child";
+    public static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
 
     private final WebDriver driver;
 
@@ -86,6 +88,20 @@ public class CommunityPage {
     public List<Friend> getFriends() {
         return driver.findElements(By.cssSelector(SELECTOR_FRIENDS)).stream()
             .map(Friend::new)
+            .collect(Collectors.toList());
+    }
+
+    public WebElement getWriteNewMailButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_WRITE_MAIL_BUTTON));
+    }
+
+    public WebElement getAddresseeInputField() {
+        return driver.findElement(By.id(SELECTOR_ADDRESSEE_INPUT_FIELD));
+    }
+
+    public List<String> getAddressees() {
+        return driver.findElements(By.cssSelector("#addresseelist .addressee")).stream()
+            .map(WebElement::getText)
             .collect(Collectors.toList());
     }
 }

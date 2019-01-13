@@ -1,14 +1,14 @@
 ===Community Test===
-Add friend test
-    - Accept friend request
-        - Friendship appears
-        - SeleniumFriendRequest disappears
-        - Characters do not appear at selectable characters (from both side)
 Send Mail test
     - Selectable characters
         - Search by name
             - Only matching ones appear
     - Send mail
+        - Mail cannot be sent when wrong fields
+            - Empty title
+            - Empty body
+            - Empty addressee
+            - Changed addressee
         - Mail appears at sent ones
         - Character 2 gets a new mail
             - Notifications shown
