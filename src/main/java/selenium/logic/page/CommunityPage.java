@@ -56,7 +56,7 @@ public class CommunityPage {
     }
 
     public List<PossibleFriend> getCharactersCanBeFriendList() {
-        return getAddresseeElements().stream()
+        return driver.findElements(By.cssSelector(SELECTOR_CHARACTERS_CAN_BE_FRIEND)).stream()
             .map(PossibleFriend::new)
             .collect(Collectors.toList());
     }
