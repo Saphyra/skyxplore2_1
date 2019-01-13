@@ -8,6 +8,7 @@ import selenium.logic.validator.NotificationValidator;
 @RequiredArgsConstructor
 public class SendMailHelper {
     public static final String DEFAULT_MESSAGE = "message";
+    public static final String DEFAULT_SUBJECT = "subject";
 
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
@@ -40,5 +41,10 @@ public class SendMailHelper {
     public void verifyCannotSendMail(String notification){
         communityPage.getSendMailButton().click();
         notificationValidator.verifyOnlyOneNotification(notification);
+    }
+
+    public SendMailHelper setSubject() {
+        setSubject(DEFAULT_SUBJECT);
+        return this;
     }
 }

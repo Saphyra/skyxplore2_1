@@ -13,6 +13,7 @@ import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
+import selenium.test.community.mail.SendMailEmptyMessageTest;
 import selenium.test.community.mail.SendMailEmptySubjectTest;
 import selenium.test.community.mail.helper.MailTestHelper;
 import selenium.test.community.mail.helper.SendMailHelper;
@@ -77,5 +78,16 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .build()
             .testSendMailEmptySubject();
+    }
+
+    @Test
+    public void testSendMailEmptyMessage(){
+        SendMailEmptyMessageTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .build()
+            .testSendMailEmptyMessage();
     }
 }
