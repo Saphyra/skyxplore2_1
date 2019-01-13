@@ -2,8 +2,6 @@
 Send Mail test
     - Send mail
         - Mail cannot be sent when wrong fields
-            - Empty body
-            - Empty addressee
             - Changed addressee
         - Mail appears at sent ones
         - Character 2 gets a new mail
