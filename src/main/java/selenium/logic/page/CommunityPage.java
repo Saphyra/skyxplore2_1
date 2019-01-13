@@ -28,8 +28,12 @@ public class CommunityPage {
     private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(1)";
     private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
-    public static final String SELECTOR_WRITE_MAIL_BUTTON = "#maillistbuttons div:first-child";
-    public static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
+    private static final String SELECTOR_WRITE_MAIL_BUTTON = "#maillistbuttons div:first-child";
+    private static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
+    private static final String SELECTOR_ADDRESSEES = "#addresseelist .addressee";
+    private static final String SELECTOR_SUBJECT = "subject";
+    private static final String SELECTOR_MESSAGE = "message";
+    public static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
 
     private final WebDriver driver;
 
@@ -46,7 +50,7 @@ public class CommunityPage {
     }
 
     public List<PossibleFriend> getCharactersCanBeFriendList() {
-        return driver.findElements(By.cssSelector(SELECTOR_CHARACTERS_CAN_BE_FRIEND)).stream()
+        return getAddresseeElements().stream()
             .map(PossibleFriend::new)
             .collect(Collectors.toList());
     }
@@ -100,8 +104,24 @@ public class CommunityPage {
     }
 
     public List<String> getAddressees() {
-        return driver.findElements(By.cssSelector("#addresseelist .addressee")).stream()
+        return getAddresseeElements().stream()
             .map(WebElement::getText)
             .collect(Collectors.toList());
+    }
+
+    public List<WebElement> getAddresseeElements() {
+        return driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
+    }
+
+    public WebElement getMailSubjectField() {
+        return driver.findElement(By.id(SELECTOR_SUBJECT));
+    }
+
+    public WebElement getMessageField() {
+        return driver.findElement(By.id(SELECTOR_MESSAGE));
+    }
+
+    public WebElement getSendMailButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_SEND_MAIL_BUTTON));
     }
 }

@@ -1,11 +1,7 @@
 ===Community Test===
 Send Mail test
-    - Selectable characters
-        - Search by name
-            - Only matching ones appear
     - Send mail
         - Mail cannot be sent when wrong fields
-            - Empty title
             - Empty body
             - Empty addressee
             - Changed addressee
