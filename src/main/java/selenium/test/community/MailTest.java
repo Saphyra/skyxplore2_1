@@ -11,6 +11,7 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
+import selenium.test.community.mail.ArchiveMailTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.ReadMailTest;
@@ -139,5 +140,17 @@ public class MailTest extends SeleniumTestApplication {
             .mailTestHelper(mailTestHelper)
             .build()
             .testReadMail();
+    }
+
+    @Test
+    public void testArchiveMail(){
+        ArchiveMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testArchiveMail();
     }
 }

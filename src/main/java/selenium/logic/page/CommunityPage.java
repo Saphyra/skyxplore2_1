@@ -39,7 +39,9 @@ public class CommunityPage {
     private static final String SELECTOR_RECEIVED_MAILS = "#incomingmaillist .mailitem";
     private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(3)";
     private static final String SELECTOR_SENT_MAILS = "#sentmaillist .mailitem";
-    public static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
+    private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
+    private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(4)";
+    private static final String SELECTOR_ARCHIVED_MAILS = "#archivedmaillist .mailitem";
 
     private final WebDriver driver;
 
@@ -153,5 +155,13 @@ public class CommunityPage {
 
     public WebElement getNumberOfUnreadMails() {
         return driver.findElement(By.id(SELECTOR_NUMBER_OF_UNREAD_MAILS));
+    }
+
+    public WebElement getArchivedMailsPageButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON));
+    }
+
+    public List<WebElement> getArchivedMails() {
+        return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
     }
 }

@@ -11,6 +11,7 @@ import static selenium.logic.util.Util.hasClass;
 public class Mail {
     private static final String SELECTOR_SENDER = ".mailheader tr:first-child td:nth-child(2)";
     private static final String CLASS_MAIL_UNREAD = "unreadmail";
+    private static final String SELECTOR_ARCHIVE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
 
     @Getter
     private final WebElement element;
@@ -29,5 +30,9 @@ public class Mail {
 
     public void read() {
         element.click();
+    }
+
+    public void archive() {
+        element.findElement(By.cssSelector(SELECTOR_ARCHIVE_BUTTON)).click();
     }
 }

@@ -26,7 +26,6 @@ public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
     private CommunityTestHelper communityTestHelper;
     private FriendshipTestHelper friendshipTestHelper;
-    private NotificationValidator notificationValidator;
     private CommunityPage communityPage;
 
     @Override
@@ -45,8 +44,7 @@ public class FriendshipTest extends SeleniumTestApplication {
         );
 
         communityPage = new CommunityPage(driver);
-        notificationValidator = new NotificationValidator(driver);
-        friendshipTestHelper = new FriendshipTestHelper(communityPage, notificationValidator);
+        friendshipTestHelper = new FriendshipTestHelper(communityPage, new NotificationValidator(driver));
     }
 
     @Test

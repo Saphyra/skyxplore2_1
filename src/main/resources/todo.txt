@@ -1,7 +1,7 @@
 ===Community Test===
 Send Mail test
     - Archive mail
-        - Mail moved to archived
+        - Bulk archive
     - Delete mail
         - Mail disappears
         - Other character still see the mail

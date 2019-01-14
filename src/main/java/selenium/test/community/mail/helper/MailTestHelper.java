@@ -37,6 +37,13 @@ public class MailTestHelper {
             .collect(Collectors.toList());
     }
 
+    public List<Mail> getArchivedMails() {
+        communityPage.getArchivedMailsPageButton().click();
+        return communityPage.getArchivedMails().stream()
+            .map(Mail::new)
+            .collect(Collectors.toList());
+    }
+
     public int getNumberOfUnreadMails() {
         WebElement element = communityPage.getNumberOfUnreadMails();
         return element.getText().isEmpty() ? 0 : parseNumberOfUnreadMails(element.getText());
