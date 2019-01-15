@@ -17,6 +17,7 @@ public class Mail {
     private static final String SELECTOR_ARCHIVE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
     private static final String SELECTOR_SELECT_FIELD = "tr:first-child td:first-child input";
     private static final String SELECTOR_SUBJECT = "tr:nth-child(2) td:first-child";
+    private static final String SELECTOR_RESTORE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
 
     @Getter
     private final WebElement element;
@@ -49,5 +50,9 @@ public class Mail {
 
     public String getSubject() {
         return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split(": ")[1];
+    }
+
+    public void restore() {
+        element.findElement(By.cssSelector(SELECTOR_RESTORE_BUTTON)).click();
     }
 }

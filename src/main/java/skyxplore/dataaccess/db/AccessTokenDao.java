@@ -9,6 +9,7 @@ import skyxplore.domain.accesstoken.SkyXpAccessTokenConverter;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.util.DateTimeUtil;
 
+import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessTo
         this.dateTimeUtil = dateTimeUtil;
     }
 
+    @Transactional
     public void deleteByUserId(String userId) {
         log.info("Deleting accessToken of user {}", userId);
         repository.deleteByUserId(userId);

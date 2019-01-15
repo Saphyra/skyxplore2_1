@@ -16,6 +16,7 @@ import selenium.test.community.mail.BulkArchiveMailTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.ReadMailTest;
+import selenium.test.community.mail.RestoreMailTest;
 import selenium.test.community.mail.SendMailChangedAddresseeTest;
 import selenium.test.community.mail.SendMailEmptyAddresseeTest;
 import selenium.test.community.mail.SendMailEmptyMessageTest;
@@ -165,5 +166,17 @@ public class MailTest extends SeleniumTestApplication {
             .mailTestHelper(mailTestHelper)
             .build()
             .testBulkArchiveMail();
+    }
+
+    @Test
+    public void testRestoreMail(){
+        RestoreMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testRestoreMail();
     }
 }

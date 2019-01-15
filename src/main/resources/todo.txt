@@ -1,10 +1,18 @@
 ===Community Test===
 Send Mail test
-    - Archive mail
-        - Bulk archive
+    - Restore mail
+        - reappear in received list
+        - bulk restore
     - Delete mail
+        - delete by sender
+        - delete by addressee
+        - bulk delete
         - Mail disappears
         - Other character still see the mail
+    - Mark as read / mark as unread
+        - bulk
+        - normal
+
 Block character test
     - block character
         - Existing friendship disappears
