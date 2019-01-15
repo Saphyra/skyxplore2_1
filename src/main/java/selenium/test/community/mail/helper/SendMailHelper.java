@@ -28,21 +28,31 @@ public class SendMailHelper {
     }
 
     public SendMailHelper setSubject(String subject) {
+        if (!communityPage.getSendMailContainer().isDisplayed()) {
+            communityPage.getWriteNewMailButton().click();
+        }
         communityPage.getMailSubjectField().sendKeys(subject);
         return this;
     }
 
     public SendMailHelper setMessage() {
+
         setMessage(DEFAULT_MESSAGE);
         return this;
     }
 
     public SendMailHelper setMessage(String message) {
+        if (!communityPage.getSendMailContainer().isDisplayed()) {
+            communityPage.getWriteNewMailButton().click();
+        }
         communityPage.getMessageField().sendKeys(message);
         return this;
     }
 
     public SendMailHelper setAddressee(SeleniumCharacter addressee) {
+        if (!communityPage.getSendMailContainer().isDisplayed()) {
+            communityPage.getWriteNewMailButton().click();
+        }
         communityPage.getAddresseeInputField().sendKeys(addressee.getCharacterName());
         communityPage.getAddresseeElements().stream()
             .filter(element -> element.getText().equals(addressee.getCharacterName()))
@@ -64,7 +74,7 @@ public class SendMailHelper {
         assertFalse(communityPage.getSendMailContainer().isDisplayed());
     }
 
-    private void sendMail() {
+    public void sendMail() {
         communityPage.getSendMailButton().click();
     }
 

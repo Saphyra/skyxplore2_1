@@ -42,6 +42,8 @@ public class CommunityPage {
     private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
     private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(4)";
     private static final String SELECTOR_ARCHIVED_MAILS = "#archivedmaillist .mailitem";
+    private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS = "actionwithreceivedmails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS = "#incomingmaillistcontainer .actionwithselectedmails button:last-child";
 
     private final WebDriver driver;
 
@@ -163,5 +165,13 @@ public class CommunityPage {
 
     public List<WebElement> getArchivedMails() {
         return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
+    }
+
+    public WebElement getBulkEditSelectInputFieldForReceivedMails() {
+        return driver.findElement(By.id(SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS));
+    }
+
+    public WebElement getExecuteBulkEditButtonForReceivedMails() {
+        return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS));
     }
 }

@@ -1,6 +1,7 @@
 package selenium.test.community.mail.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumCharacter;
@@ -9,6 +10,7 @@ import selenium.logic.page.CommunityPage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -53,5 +55,14 @@ public class MailTestHelper {
         String split1 = text.trim().substring(1);
         String split2 = split1.split("\\)")[0];
         return Integer.valueOf(split2);
+    }
+
+    public void selectBulkArchiveOption() {
+        WebElement bulkSelectInput = communityPage.getBulkEditSelectInputFieldForReceivedMails();
+        bulkSelectInput.click();
+
+        bulkSelectInput.findElement(By.cssSelector("option[value='archive']")).click();
+
+        assertEquals("archive", bulkSelectInput.getAttribute("value"));
     }
 }
