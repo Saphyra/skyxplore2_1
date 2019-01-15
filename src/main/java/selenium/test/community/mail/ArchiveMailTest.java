@@ -5,6 +5,7 @@ import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
+import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.helper.MailTestHelper;
 import selenium.test.community.mail.helper.SendMailHelper;
 import selenium.test.community.util.CommunityTestHelper;
@@ -23,6 +24,7 @@ public class ArchiveMailTest {
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
+    private final NotificationValidator notificationValidator;
 
     public void testArchiveMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -40,7 +42,7 @@ public class ArchiveMailTest {
         Mail mail = findMail(character)
             .orElseThrow(() -> new RuntimeException("Mail not found"));
 
-        mail.archive();
+        mail.archive(notificationValidator);
 
         assertFalse(findMail(character).isPresent());
 

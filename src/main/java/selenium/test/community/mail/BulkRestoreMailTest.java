@@ -1,6 +1,7 @@
 package selenium.test.community.mail;
 
 import lombok.Builder;
+import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -12,11 +13,11 @@ import selenium.test.community.util.CommunityTestInitializer;
 
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 @Builder
-public class RestoreMailTest {
+public class BulkRestoreMailTest {
+    private static final String NOTIFICATION_MAILS_RESTORED = "Üzenetek visszaállítva.";
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -24,7 +25,7 @@ public class RestoreMailTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testRestoreMail() {
+    public void testBulkRestoreMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -34,29 +35,24 @@ public class RestoreMailTest {
         SeleniumAccount otherAccount = accounts.get(1);
         SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
         sendMailHelper.sendMailTo(otherCharacter);
+        sendMailHelper.sendMailTo(otherCharacter);
 
-        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
+        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getReceivedMails().stream()
-            .filter(m -> m.getSender().equals(character.getCharacterName()))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("Mail not found"))
-            .archive(notificationValidator);
+        List<Mail> mails;
+        do {
+            mails = mailTestHelper.getReceivedMails();
+            mails.stream().findFirst().orElseThrow(() -> new RuntimeException("Mail not found.")).archive(notificationValidator);
+        } while (mails.size() > 1);
 
-        mailTestHelper.getArchivedMails().stream()
-            .filter(m -> m.getSender().equals(character.getCharacterName()))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("Archived Mail not found"))
-            .restore(notificationValidator);
+        mailTestHelper.getArchivedMails().forEach(Mail::select);
+        mailTestHelper.selectBulkRestoreOption();
 
-        assertFalse(
-            mailTestHelper.getArchivedMails().stream()
-                .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
-        );
+        communityPage.getExecuteBulkEditButtonForArchivedMails().click();
 
-        assertTrue(
-            mailTestHelper.getReceivedMails().stream()
-                .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
-        );
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
+        assertEquals(0, mailTestHelper.getArchivedMails().size());
+
+        assertEquals(2, mailTestHelper.getReceivedMails().size());
     }
 }

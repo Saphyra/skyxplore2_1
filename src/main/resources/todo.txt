@@ -1,8 +1,5 @@
 ===Community Test===
 Send Mail test
-    - Restore mail
-        - reappear in received list
-        - bulk restore
     - Delete mail
         - delete by sender
         - delete by addressee

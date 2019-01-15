@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import selenium.logic.validator.NotificationValidator;
 
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.Util.hasClass;
@@ -18,6 +19,8 @@ public class Mail {
     private static final String SELECTOR_SELECT_FIELD = "tr:first-child td:first-child input";
     private static final String SELECTOR_SUBJECT = "tr:nth-child(2) td:first-child";
     private static final String SELECTOR_RESTORE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
+    private static final String NOTIFICATION_MAIL_ARCHIVED = "Üzenet archiválva.";
+    private static final String NOTIFICATION_MAIL_RESTORED = "Üzenet visszaállítva.";
 
     @Getter
     private final WebElement element;
@@ -38,8 +41,9 @@ public class Mail {
         element.click();
     }
 
-    public void archive() {
+    public void archive(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_ARCHIVE_BUTTON)).click();
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAIL_ARCHIVED);
     }
 
     public void select() {
@@ -52,7 +56,8 @@ public class Mail {
         return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split(": ")[1];
     }
 
-    public void restore() {
+    public void restore(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_RESTORE_BUTTON)).click();
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAIL_RESTORED);
     }
 }

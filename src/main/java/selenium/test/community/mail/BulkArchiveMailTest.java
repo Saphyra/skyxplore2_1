@@ -6,6 +6,7 @@ import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
+import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.helper.MailTestHelper;
 import selenium.test.community.mail.helper.SendMailHelper;
 import selenium.test.community.util.CommunityTestHelper;
@@ -20,12 +21,14 @@ import static org.junit.Assert.assertTrue;
 @Slf4j
 public class BulkArchiveMailTest {
     private static final String OTHER_SUBJECT = "other_subject";
+    private static final String NOTIFICATION_MAILS_ARCHIVED = "Üzenetek archiválva.";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
+    private final NotificationValidator notificationValidator;
 
     public void testBulkArchiveMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -51,6 +54,7 @@ public class BulkArchiveMailTest {
         mailTestHelper.selectBulkArchiveOption();
 
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_ARCHIVED);
 
         List<Mail> archivedMails = mailTestHelper.getArchivedMails();
         assertEquals(2, archivedMails.size());

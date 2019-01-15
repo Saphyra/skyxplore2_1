@@ -65,4 +65,15 @@ public class MailTestHelper {
 
         assertEquals("archive", bulkSelectInput.getAttribute("value"));
     }
+
+    public void selectBulkRestoreOption() {
+        communityPage.getArchivedMailsPageButton().click();
+        WebElement bulkRestoreInput = communityPage.getBulkRestoreInputField();
+        bulkRestoreInput.click();
+
+        bulkRestoreInput.findElement(By.cssSelector("option[value='unarchive']")).click();
+
+        assertEquals("unarchive", bulkRestoreInput.getAttribute("value"));
+
+    }
 }

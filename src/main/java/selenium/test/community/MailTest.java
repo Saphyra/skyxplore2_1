@@ -13,6 +13,7 @@ import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.ArchiveMailTest;
 import selenium.test.community.mail.BulkArchiveMailTest;
+import selenium.test.community.mail.BulkRestoreMailTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.ReadMailTest;
@@ -33,6 +34,7 @@ public class MailTest extends SeleniumTestApplication {
     private CommunityPage communityPage;
     private MailTestHelper mailTestHelper;
     private SendMailHelper sendMailHelper;
+    private NotificationValidator notificationValidator;
 
     @Override
     protected void init() {
@@ -51,7 +53,8 @@ public class MailTest extends SeleniumTestApplication {
 
         communityPage = new CommunityPage(driver);
         mailTestHelper = new MailTestHelper(communityPage);
-        sendMailHelper = new SendMailHelper(communityPage, new NotificationValidator(driver));
+        notificationValidator = new NotificationValidator(driver);
+        sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
     }
 
     @Test
@@ -152,31 +155,47 @@ public class MailTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
             .build()
             .testArchiveMail();
     }
 
     @Test
-    public void testBulkArchiveMail(){
+    public void testBulkArchiveMail() {
         BulkArchiveMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
             .build()
             .testBulkArchiveMail();
     }
 
     @Test
-    public void testRestoreMail(){
+    public void testRestoreMail() {
         RestoreMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
             .build()
             .testRestoreMail();
+    }
+
+    @Test
+    public void testBulkRestoreMail() {
+        BulkRestoreMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testBulkRestoreMail();
     }
 }
