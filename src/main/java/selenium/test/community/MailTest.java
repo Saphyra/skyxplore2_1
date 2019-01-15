@@ -12,6 +12,7 @@ import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.ArchiveMailTest;
+import selenium.test.community.mail.BulkArchiveMailTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.ReadMailTest;
@@ -53,7 +54,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testFilterShouldNotShowOwnCharacters(){
+    public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -64,7 +65,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testFilterShouldShowMatchingCharacters(){
+    public void testFilterShouldShowMatchingCharacters() {
         FilterTestShouldShowMatchingCharacters.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -75,7 +76,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testSendMailEmptySubject(){
+    public void testSendMailEmptySubject() {
         SendMailEmptySubjectTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -86,7 +87,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testSendMailEmptyMessage(){
+    public void testSendMailEmptyMessage() {
         SendMailEmptyMessageTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -97,7 +98,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testSendMailEmptyAddressee(){
+    public void testSendMailEmptyAddressee() {
         SendMailEmptyAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -108,7 +109,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testSendMailChangedAddressee(){
+    public void testSendMailChangedAddressee() {
         SendMailChangedAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -119,7 +120,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testSuccessfullySentMail(){
+    public void testSuccessfullySentMail() {
         SuccessfullySentMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -131,7 +132,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testReadMail(){
+    public void testReadMail() {
         ReadMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -143,7 +144,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testArchiveMail(){
+    public void testArchiveMail() {
         ArchiveMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -152,5 +153,17 @@ public class MailTest extends SeleniumTestApplication {
             .mailTestHelper(mailTestHelper)
             .build()
             .testArchiveMail();
+    }
+
+    @Test
+    public void testBulkArchiveMail(){
+        BulkArchiveMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testBulkArchiveMail();
     }
 }
