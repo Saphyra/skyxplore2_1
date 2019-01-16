@@ -3,6 +3,7 @@ Send Mail test
     - Delete mail
         - delete by sender
         - delete by addressee
+        - delete archived
         - bulk delete
         - Mail disappears
         - Other character still see the mail
