@@ -1,6 +1,6 @@
 package selenium.test.community.mail;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -16,9 +16,7 @@ import selenium.test.community.util.CommunityTestHelper;
 import selenium.test.community.util.CommunityTestInitializer;
 
 @Builder
-public class BulkRestoreMailTest {
-    private static final String NOTIFICATION_MAILS_RESTORED = "Üzenetek visszaállítva.";
-
+public class DeleteBySenderTest {
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -26,7 +24,7 @@ public class BulkRestoreMailTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testBulkRestoreMail() {
+    public void testDeleteBySender() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -36,24 +34,13 @@ public class BulkRestoreMailTest {
         SeleniumAccount otherAccount = accounts.get(1);
         SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
         sendMailHelper.sendMailTo(otherCharacter);
-        sendMailHelper.sendMailTo(otherCharacter);
 
-        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
+        Mail mail = mailTestHelper.getSentMails().stream()
+            .findAny()
+            .orElseThrow(() -> new RuntimeException("Sent Mail not found"));
 
-        List<Mail> mails;
-        do {
-            mails = mailTestHelper.getReceivedMails();
-            mails.stream().findFirst().orElseThrow(() -> new RuntimeException("Mail not found.")).archive(notificationValidator);
-        } while (mails.size() > 1);
+        mail.delete(notificationValidator);
 
-        mailTestHelper.getArchivedMails().forEach(Mail::select);
-        mailTestHelper.selectBulkRestoreOption();
-
-        communityPage.getExecuteBulkEditButtonForArchivedMails().click();
-
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
-        assertEquals(0, mailTestHelper.getArchivedMails().size());
-
-        assertEquals(2, mailTestHelper.getReceivedMails().size());
+        assertTrue(mailTestHelper.getSentMails().isEmpty());
     }
 }

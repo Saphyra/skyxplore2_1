@@ -1,8 +1,21 @@
 package skyxplore.controller;
 
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
@@ -11,18 +24,13 @@ import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.service.MailFacade;
 
-import javax.validation.Valid;
-import java.util.List;
-
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-
 @SuppressWarnings("WeakerAccess")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 public class MailController {
     private static final String ARCHIVE_MAILS_MAPPING = "mail/archive";
-    private static final String DELETE_MAILS_MAPPING = "mail/deleteById";
+    private static final String DELETE_MAILS_MAPPING = "mail";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee";
     private static final String GET_ARCHIVED_MAILS_MAPPING = "mail/archived";
     private static final String GET_MAILS_MAPPING = "mail";

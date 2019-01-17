@@ -1,22 +1,25 @@
 package selenium.test.community.mail.helper;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Mail;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CommunityPage;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Mail;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
+
 @RequiredArgsConstructor
 public class MailTestHelper {
     private final CommunityPage communityPage;
+    private final WebDriver driver;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
         List<String> searchResult = communityPage.getAddressees();
@@ -28,21 +31,21 @@ public class MailTestHelper {
     public List<Mail> getReceivedMails() {
         communityPage.getReceivedMailsPageButton().click();
         return communityPage.getReceivedMails().stream()
-            .map(Mail::new)
+            .map(element -> new Mail(element, driver))
             .collect(Collectors.toList());
     }
 
     public List<Mail> getSentMails() {
         communityPage.getSentMailsButton().click();
         return communityPage.getSentMails().stream()
-            .map(Mail::new)
+            .map(element -> new Mail(element, driver))
             .collect(Collectors.toList());
     }
 
     public List<Mail> getArchivedMails() {
         communityPage.getArchivedMailsPageButton().click();
         return communityPage.getArchivedMails().stream()
-            .map(Mail::new)
+            .map(element -> new Mail(element, driver))
             .collect(Collectors.toList());
     }
 

@@ -61,7 +61,7 @@
                 throwException("IllegalArgument", "mailIds must not be null or undefined.");
             }
             
-            const path = "mail/delete";
+            const path = "mail";
             const response = dao.sendRequest(dao.DELETE, path, mailIds);
             if(response.status == ResponseStatus.OK){
                 return true;

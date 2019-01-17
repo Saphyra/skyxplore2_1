@@ -14,6 +14,7 @@ import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.ArchiveMailTest;
 import selenium.test.community.mail.BulkArchiveMailTest;
 import selenium.test.community.mail.BulkRestoreMailTest;
+import selenium.test.community.mail.DeleteBySenderTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.ReadMailTest;
@@ -52,7 +53,7 @@ public class MailTest extends SeleniumTestApplication {
         );
 
         communityPage = new CommunityPage(driver);
-        mailTestHelper = new MailTestHelper(communityPage);
+        mailTestHelper = new MailTestHelper(communityPage, driver);
         notificationValidator = new NotificationValidator(driver);
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
     }
@@ -197,5 +198,18 @@ public class MailTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .build()
             .testBulkRestoreMail();
+    }
+
+    @Test
+    public void testDeleteBySender(){
+        DeleteBySenderTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testDeleteBySender();
     }
 }
