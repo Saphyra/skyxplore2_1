@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
+
 import lombok.Builder;
 import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
@@ -17,7 +19,10 @@ import selenium.test.community.util.CommunityTestHelper;
 import selenium.test.community.util.CommunityTestInitializer;
 
 @Builder
-public class DeleteBySenderTest {
+public class BulkDeleteBySenderTest {
+    private static final String NOTIFICATION_MAILS_DELETED = "Üzenetek törölve.";
+
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -25,7 +30,7 @@ public class DeleteBySenderTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testDeleteBySender() {
+    public void testBulkDeleteBySender() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -35,16 +40,19 @@ public class DeleteBySenderTest {
         SeleniumAccount otherAccount = accounts.get(1);
         SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
         sendMailHelper.sendMailTo(otherCharacter);
+        sendMailHelper.sendMailTo(otherCharacter);
 
-        Mail mail = mailTestHelper.getSentMails().stream()
-            .findAny()
-            .orElseThrow(() -> new RuntimeException("Sent Mail not found"));
+        mailTestHelper.getSentMails().forEach(Mail::select);
 
-        mail.delete(notificationValidator);
+        mailTestHelper.selectBulkDeleteOptionForSentMails();
+        communityPage.getExecuteBulkEditButtonForSentMails().click();
+
+        driver.switchTo().alert().accept();
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
 
         assertTrue(mailTestHelper.getSentMails().isEmpty());
 
-        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
-        assertEquals(1, mailTestHelper.getReceivedMails().size());
+        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
+        assertEquals(2, mailTestHelper.getReceivedMails().size());
     }
 }

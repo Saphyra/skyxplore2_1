@@ -77,6 +77,15 @@ public class MailTestHelper {
         bulkRestoreInput.findElement(By.cssSelector("option[value='unarchive']")).click();
 
         assertEquals("unarchive", bulkRestoreInput.getAttribute("value"));
+    }
 
+    public void selectBulkDeleteOptionForSentMails() {
+        communityPage.getSentMailsButton().click();
+        WebElement bulkDeleteInput = communityPage.getBulkDeleteInputFieldForSentMails();
+        bulkDeleteInput.click();
+
+        bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();
+
+        assertEquals("delete", bulkDeleteInput.getAttribute("value"));
     }
 }

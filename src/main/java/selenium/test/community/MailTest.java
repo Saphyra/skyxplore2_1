@@ -1,6 +1,7 @@
 package selenium.test.community;
 
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -13,6 +14,7 @@ import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.ArchiveMailTest;
 import selenium.test.community.mail.BulkArchiveMailTest;
+import selenium.test.community.mail.BulkDeleteBySenderTest;
 import selenium.test.community.mail.BulkRestoreMailTest;
 import selenium.test.community.mail.DeleteBySenderTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
@@ -201,7 +203,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testDeleteBySender(){
+    public void testDeleteBySender() {
         DeleteBySenderTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -211,5 +213,19 @@ public class MailTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .build()
             .testDeleteBySender();
+    }
+
+    @Test
+    public void testBulkDeleteBySender() {
+        BulkDeleteBySenderTest.builder()
+            .driver(driver)
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testBulkDeleteBySender();
     }
 }

@@ -75,7 +75,7 @@
                 case "delete":
                     if(confirm("Biztosan törli a kiválasztott üzeneteket?")){
                         if(mailDao.deleteMails(mailIds)){
-                            notificationService.showSuccess("Üzenetek törölve");
+                            notificationService.showSuccess("Üzenetek törölve.");
                         }else{
                             notificationService.showError("Üzenetek törlése sikertelen.");
                         }

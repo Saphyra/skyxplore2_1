@@ -1,18 +1,19 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -46,6 +47,8 @@ public class CommunityPage {
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS = "#incomingmaillistcontainer .actionwithselectedmails button:last-child";
     private static final String SELECTOR_BULK_RESTORE_INPUT_FIELD = "actionwitharchivedmails";
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS = "#archivedmaillistcontainer .actionwithselectedmails button:last-child";
+    private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "actionwithdeletedmails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS = "#sentmaillistcontainer .actionwithselectedmails button:last-child";
 
     private final WebDriver driver;
 
@@ -183,5 +186,13 @@ public class CommunityPage {
 
     public WebElement getExecuteBulkEditButtonForArchivedMails() {
         return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS));
+    }
+
+    public WebElement getBulkDeleteInputFieldForSentMails() {
+        return driver.findElement(By.id(SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS));
+    }
+
+    public WebElement getExecuteBulkEditButtonForSentMails() {
+        return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS));
     }
 }
