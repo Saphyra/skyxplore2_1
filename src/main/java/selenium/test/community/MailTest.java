@@ -14,6 +14,7 @@ import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.mail.ArchiveMailTest;
 import selenium.test.community.mail.BulkArchiveMailTest;
+import selenium.test.community.mail.BulkDeleteByAddresseeTest;
 import selenium.test.community.mail.BulkDeleteBySenderTest;
 import selenium.test.community.mail.BulkRestoreMailTest;
 import selenium.test.community.mail.DeleteByAddresseeTest;
@@ -231,7 +232,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testDeleteByAddressee(){
+    public void testDeleteByAddressee() {
         DeleteByAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -241,5 +242,19 @@ public class MailTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .build()
             .testDeleteByAddressee();
+    }
+
+    @Test
+    public void testBulkDeleteByAddressee() {
+        BulkDeleteByAddresseeTest.builder()
+            .driver(driver)
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testBulkDeleteByAddressee();
     }
 }

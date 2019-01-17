@@ -1,11 +1,8 @@
 ===Community Test===
 Send Mail test
     - Delete mail
-        - delete by addressee
         - delete archived
         - bulk delete
-        - Mail disappears
-        - Other character still see the mail
     - Mark as read / mark as unread
         - bulk
         - normal

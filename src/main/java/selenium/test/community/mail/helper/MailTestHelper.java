@@ -36,7 +36,7 @@ public class MailTestHelper {
     }
 
     public List<Mail> getSentMails() {
-        communityPage.getSentMailsButton().click();
+        communityPage.getSentMailsPageButton().click();
         return communityPage.getSentMails().stream()
             .map(element -> new Mail(element, driver))
             .collect(Collectors.toList());
@@ -61,7 +61,7 @@ public class MailTestHelper {
     }
 
     public void selectBulkArchiveOption() {
-        WebElement bulkSelectInput = communityPage.getBulkEditSelectInputFieldForReceivedMails();
+        WebElement bulkSelectInput = communityPage.getBulkEditInputFieldForReceivedMails();
         bulkSelectInput.click();
 
         bulkSelectInput.findElement(By.cssSelector("option[value='archive']")).click();
@@ -80,8 +80,18 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForSentMails() {
-        communityPage.getSentMailsButton().click();
+        communityPage.getSentMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkDeleteInputFieldForSentMails();
+        bulkDeleteInput.click();
+
+        bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();
+
+        assertEquals("delete", bulkDeleteInput.getAttribute("value"));
+    }
+
+    public void selectBulkDeleteOptionForReceivedMails() {
+        communityPage.getReceivedMailsPageButton().click();
+        WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForReceivedMails();
         bulkDeleteInput.click();
 
         bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();

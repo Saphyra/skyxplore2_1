@@ -152,7 +152,7 @@ public class CommunityPage {
         return driver.findElements(By.cssSelector(SELECTOR_RECEIVED_MAILS));
     }
 
-    public WebElement getSentMailsButton() {
+    public WebElement getSentMailsPageButton() {
         return driver.findElement(By.cssSelector(SELECTOR_SENT_MAILS_PAGE_BUTTON));
     }
 
@@ -172,7 +172,7 @@ public class CommunityPage {
         return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
     }
 
-    public WebElement getBulkEditSelectInputFieldForReceivedMails() {
+    public WebElement getBulkEditInputFieldForReceivedMails() {
         return driver.findElement(By.id(SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS));
     }
 
