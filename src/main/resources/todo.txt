@@ -1,7 +1,6 @@
 ===Community Test===
 Send Mail test
     - Delete mail
-        - delete by sender
         - delete by addressee
         - delete archived
         - bulk delete
