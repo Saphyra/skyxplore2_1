@@ -17,6 +17,7 @@ import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 
 @RequiredArgsConstructor
+//TODO refactor - extract constants
 public class MailTestHelper {
     private final CommunityPage communityPage;
     private final WebDriver driver;
@@ -107,5 +108,15 @@ public class MailTestHelper {
         bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();
 
         assertEquals("delete", bulkDeleteInput.getAttribute("value"));
+    }
+
+    public void selectBulkMarkAsReadOption() {
+        communityPage.getReceivedMailsPageButton().click();
+        WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
+        inputField.click();
+
+        inputField.findElement(By.cssSelector("option[value='markasread']")).click();
+
+        assertEquals("markasread", inputField.getAttribute("value"));
     }
 }

@@ -17,6 +17,7 @@ import selenium.test.community.mail.BulkArchiveMailTest;
 import selenium.test.community.mail.BulkDeleteArchivedMailsTest;
 import selenium.test.community.mail.BulkDeleteByAddresseeTest;
 import selenium.test.community.mail.BulkDeleteBySenderTest;
+import selenium.test.community.mail.BulkMarkMailsAsReadTest;
 import selenium.test.community.mail.BulkRestoreMailTest;
 import selenium.test.community.mail.DeleteArchivedMailTest;
 import selenium.test.community.mail.DeleteByAddresseeTest;
@@ -298,5 +299,17 @@ public class MailTest extends SeleniumTestApplication {
             .mailTestHelper(mailTestHelper)
             .build()
             .testMarkMailAsRead();
+    }
+
+    @Test
+    public void testBulkMarkMailsAsRead(){
+        BulkMarkMailsAsReadTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testBulkMarkMailsAsRead();
     }
 }
