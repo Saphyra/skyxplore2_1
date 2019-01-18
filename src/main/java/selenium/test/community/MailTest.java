@@ -17,6 +17,7 @@ import selenium.test.community.mail.BulkArchiveMailTest;
 import selenium.test.community.mail.BulkDeleteByAddresseeTest;
 import selenium.test.community.mail.BulkDeleteBySenderTest;
 import selenium.test.community.mail.BulkRestoreMailTest;
+import selenium.test.community.mail.DeleteArchivedMailTest;
 import selenium.test.community.mail.DeleteByAddresseeTest;
 import selenium.test.community.mail.DeleteBySenderTest;
 import selenium.test.community.mail.FilterTestShouldNotShowOwnCharacters;
@@ -256,5 +257,18 @@ public class MailTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .build()
             .testBulkDeleteByAddressee();
+    }
+
+    @Test
+    public void testDeleteArchivedMail(){
+        DeleteArchivedMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testDeleteArchivedMail();
     }
 }
