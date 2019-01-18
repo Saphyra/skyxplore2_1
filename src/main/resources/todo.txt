@@ -1,8 +1,5 @@
 ===Community Test===
 Send Mail test
-    - Delete mail
-        - delete archived
-        - bulk delete
     - Mark as read / mark as unread
         - bulk
         - normal

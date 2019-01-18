@@ -1,8 +1,11 @@
 package selenium.test.community.mail;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+
+import org.openqa.selenium.WebDriver;
 
 import lombok.Builder;
 import selenium.logic.domain.Mail;
@@ -16,9 +19,10 @@ import selenium.test.community.util.CommunityTestHelper;
 import selenium.test.community.util.CommunityTestInitializer;
 
 @Builder
-public class BulkRestoreMailTest {
-    private static final String NOTIFICATION_MAILS_RESTORED = "Üzenetek visszaállítva.";
+public class BulkDeleteArchivedMailsTest {
+    private static final String NOTIFICATION_MAILS_DELETED = "Üzenetek törölve.";
 
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -26,7 +30,7 @@ public class BulkRestoreMailTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testBulkRestoreMail() {
+    public void testBulkDeleteArchivedMails() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -45,13 +49,17 @@ public class BulkRestoreMailTest {
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
         mailTestHelper.getArchivedMails().forEach(Mail::select);
-        mailTestHelper.selectBulkRestoreOption();
 
+        mailTestHelper.selectBulkDeleteOptionForArchivedMails();
         communityPage.getExecuteBulkEditButtonForArchivedMails().click();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
-        assertEquals(0, mailTestHelper.getArchivedMails().size());
+        driver.switchTo().alert().accept();
 
-        assertEquals(2, mailTestHelper.getReceivedMails().size());
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
+
+        assertTrue(mailTestHelper.getArchivedMails().isEmpty());
+
+        communityTestHelper.goToCommunityPageOf(account, character);
+        assertEquals(2, mailTestHelper.getSentMails().size());
     }
 }

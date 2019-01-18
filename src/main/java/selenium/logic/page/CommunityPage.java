@@ -180,7 +180,7 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS));
     }
 
-    public WebElement getBulkRestoreInputField() {
+    public WebElement getBulkEditInputFieldForArchivedMails() {
         return driver.findElement(By.id(SELECTOR_BULK_RESTORE_INPUT_FIELD));
     }
 
@@ -188,7 +188,7 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS));
     }
 
-    public WebElement getBulkDeleteInputFieldForSentMails() {
+    public WebElement getBulkEditInputFieldForSentMails() {
         return driver.findElement(By.id(SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS));
     }
 
