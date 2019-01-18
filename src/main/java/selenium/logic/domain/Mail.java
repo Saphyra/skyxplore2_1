@@ -25,6 +25,8 @@ public class Mail {
     private static final String NOTIFICATION_MAIL_RESTORED = "Üzenet visszaállítva.";
     private static final String SELECTOR_DELETE_BUTTON = "tr:first-child td:nth-child(4) button:first-child";
     private static final String NOTIFICATION_MAIL_DELETED = "Üzenet törölve.";
+    private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
+    private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
 
     @Getter
     private final WebElement element;
@@ -70,5 +72,13 @@ public class Mail {
         element.findElement(By.cssSelector(SELECTOR_DELETE_BUTTON)).click();
         driver.switchTo().alert().accept();
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAIL_DELETED);
+    }
+
+    public void markAsRead() {
+        element.findElement(By.cssSelector(SELECTOR_MARK_AS_READ_BUTTON)).click();
+    }
+
+    public void markAsUnread() {
+        element.findElement(By.cssSelector(SELECTOR_MARK_AS_UNREAD_BUTTON)).click();
     }
 }
