@@ -1,8 +1,11 @@
 package selenium.test.community.mail;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+
+import org.openqa.selenium.WebDriver;
 
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
@@ -14,14 +17,15 @@ import selenium.test.community.util.CommunityTestHelper;
 import selenium.test.community.util.CommunityTestInitializer;
 
 @Builder
-public class MarkMailAsReadTest {
+public class MarkMailAsUnreadTest {
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
 
-    public void testMarkMailAsRead() {
+    public void testMarkMailAsUnread() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -34,8 +38,12 @@ public class MarkMailAsReadTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        mailTestHelper.getMail().markAsRead();
-
+        mailTestHelper.getMail().read();
         assertTrue(mailTestHelper.getMail().isRead());
+
+        driver.navigate().refresh();
+
+        mailTestHelper.getMail().markAsUnread();
+        assertFalse(mailTestHelper.getMail().isRead());
     }
 }

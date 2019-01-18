@@ -119,4 +119,10 @@ public class MailTestHelper {
 
         assertEquals("markasread", inputField.getAttribute("value"));
     }
+
+    public Mail getMail() {
+        return getReceivedMails().stream()
+            .findAny()
+            .orElseThrow(() -> new RuntimeException("Mail not found"));
+    }
 }
