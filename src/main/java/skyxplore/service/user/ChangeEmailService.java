@@ -1,14 +1,13 @@
 package skyxplore.service.user;
 
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.credentials.Credentials;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.encryption.base.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
@@ -28,13 +27,13 @@ public class ChangeEmailService {
             throw new EmailAlreadyExistsException(request.getNewEmail() + " email is already exists.");
         }
 
-        Credentials credentials = credentialsService.getByUserId(userId);
-        if (!passwordService.authenticate(request.getPassword(), credentials.getPassword())) {
+        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        if (!passwordService.authenticate(request.getPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }
         user.setEmail(request.getNewEmail());
         log.info("Changeing email of user {}", userId);
-        userDao.update(user);
+        userDao.save(user);
         log.info("Email changed successfully.");
     }
 }

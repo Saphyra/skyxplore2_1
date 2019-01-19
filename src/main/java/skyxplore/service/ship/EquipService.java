@@ -1,19 +1,9 @@
 package skyxplore.service.ship;
 
-import static skyxplore.service.EquippedShipFacade.BACK_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.LEFT_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.RIGHT_SLOT_NAME;
-
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
@@ -24,13 +14,20 @@ import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
-import skyxplore.exception.base.BadRequestException;
 import skyxplore.service.character.CharacterQueryService;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+import static skyxplore.service.EquippedShipFacade.BACK_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.LEFT_SLOT_NAME;
+import static skyxplore.service.EquippedShipFacade.RIGHT_SLOT_NAME;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class EquipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
@@ -41,8 +38,8 @@ public class EquipService {
     private final SlotDao slotDao;
 
     @Transactional
-    public void equip(EquipRequest request, String userId, String characterId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public void equip(EquipRequest request, String characterId) {
+        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
         character.removeEquipment(request.getItemId());
@@ -67,8 +64,8 @@ public class EquipService {
 
     private void equipExtender(EquipRequest request, EquippedShip ship) {
         log.info("Equipped item is extender.");
-        checkExtenderEquipable(ship.getConnectorEquipped(), request.getItemId());
         Extender extender = extenderService.get(request.getItemId());
+        checkExtenderEquipable(ship.getConnectorEquipped(), request.getItemId(), extender);
 
         if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
             ship.addConnectorSlot(extender.getExtendedNum());
@@ -79,8 +76,7 @@ public class EquipService {
         }
     }
 
-    private void checkExtenderEquipable(List<String> connectors, String itemId) {
-        Extender extender = extenderService.get(itemId);
+    private void checkExtenderEquipable(List<String> connectors, String itemId, Extender extender) {
         boolean notEquipable = connectors.stream().anyMatch(i -> {
             Extender equippedConnector = extenderService.get(i);
             if (equippedConnector == null) {

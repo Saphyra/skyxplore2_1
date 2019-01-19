@@ -36,13 +36,15 @@
                 email: email
             };
             
-            const result = userDao.registrateUser(user);
+            const result = userDao.registerUser(user);
             if(result){
                 sessionStorage.successMessage = "Sikeres regisztráció!";
                 loginController.login(userName, password);
             }else{
                 notificationService.showError("Sikertelen regisztráció.");
             }
+            passwordInput.value = "";
+            confirmPasswordInput.value = "";
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
             logService.log(message, "error");

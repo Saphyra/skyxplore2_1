@@ -1,47 +1,35 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.BlockedCharacterRepository;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacterConverter;
+import skyxplore.domain.community.blockedcharacter.BlockedCharacterEntity;
 
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
-//TODO unit test
-public class BlockedCharacterDao {
-    private final BlockedCharacterRepository blockedCharacterRepository;
-    private final BlockedCharacterConverter blockedCharacterConverter;
-
-    public void delete(BlockedCharacter blockedCharacter){
-        blockedCharacterRepository.delete(blockedCharacterConverter.convertDomain(blockedCharacter));
+public class BlockedCharacterDao extends AbstractDao<BlockedCharacterEntity, BlockedCharacter, Long, BlockedCharacterRepository> {
+    public BlockedCharacterDao(Converter<BlockedCharacterEntity, BlockedCharacter> converter, BlockedCharacterRepository repository) {
+        super(converter, repository);
     }
 
     public void deleteByCharacterId(String characterId) {
-        blockedCharacterRepository.deleteByCharacterId(characterId);
+        repository.deleteByCharacterId(characterId);
     }
 
     public BlockedCharacter findByCharacterIdAndBlockedCharacterId(String characterId, String blockedCharacterId) {
-        return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId));
+        return converter.convertEntity(repository.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId));
     }
 
     public List<BlockedCharacter> findByCharacterIdOrBlockedCharacterId(String characterId, String blockedCharacterId) {
-        return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId));
+        return converter.convertEntity(repository.findByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId));
     }
 
     public List<BlockedCharacter> getBlockedCharactersOf(String characterId) {
-        return blockedCharacterConverter.convertEntity(blockedCharacterRepository.findByCharacterId(characterId));
-    }
-
-    public BlockedCharacter save(BlockedCharacter blockedCharacter) {
-        return blockedCharacterConverter.convertEntity(
-            blockedCharacterRepository.save(
-                blockedCharacterConverter.convertDomain(blockedCharacter)
-            )
-        );
+        return converter.convertEntity(repository.findByCharacterId(characterId));
     }
 }

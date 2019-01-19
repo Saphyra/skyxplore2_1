@@ -9,7 +9,6 @@ import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class MailViewConverter extends AbstractViewConverter<Mail, MailView> {
     private final CharacterQueryService characterQueryService;
     private final DateTimeUtil dateTimeUtil;

@@ -3,7 +3,6 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.request.community.*;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
@@ -17,47 +16,46 @@ import java.util.List;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class CommunityFacade {
     private final BlockCharacterService blockCharacterService;
     private final CharacterQueryService characterQueryService;
     private final FriendshipService friendshipService;
     private final FriendshipQueryService friendshipQueryService;
 
-    public void acceptFriendRequest(AcceptFriendRequestRequest request, String userId) {
-        friendshipService.acceptFriendRequest(request, userId);
+    public void acceptFriendRequest(String friendRequestId, String characterId) {
+        friendshipService.acceptFriendRequest(friendRequestId, characterId);
     }
 
-    public void allowBlockedCharacter(AllowBlockedCharacterRequest request, String userId) {
-        blockCharacterService.allowBlockedCharacter(request, userId);
+    public void allowBlockedCharacter(String blockedCharacterId, String characterId) {
+        blockCharacterService.allowBlockedCharacter(blockedCharacterId, characterId);
     }
 
-    public void addFriendRequest(AddFriendRequest request, String userId) {
-        friendshipService.addFriendRequest(request, userId);
+    public void addFriendRequest(String friendId, String characterId, String userId) {
+        friendshipService.addFriendRequest(friendId, characterId, userId);
     }
 
-    public void blockCharacter(BlockCharacterRequest request, String userId) {
-        blockCharacterService.blockCharacter(request, userId);
+    public void blockCharacter(String blockedCharacterId, String characterId) {
+        blockCharacterService.blockCharacter(blockedCharacterId, characterId);
     }
 
-    public void declineFriendRequest(DeclineFriendRequestRequest request, String userId) {
-        friendshipService.declineFriendRequest(request, userId);
+    public void declineFriendRequest(String friendRequestId, String characterId) {
+        friendshipService.declineFriendRequest(friendRequestId, characterId);
     }
 
-    public void deleteFriendship(DeleteFriendRequest request, String userId) {
-        friendshipService.deleteFriendship(request, userId);
+    public void deleteFriendship(String friendshipId, String characterId) {
+        friendshipService.deleteFriendship(friendshipId, characterId);
     }
 
-    public List<SkyXpCharacter> getBlockedCharacters(String characterId, String userId) {
-        return characterQueryService.getBlockedCharacters(characterId, userId);
+    public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
+        return characterQueryService.getBlockedCharacters(characterId);
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId, String userId) {
-        return characterQueryService.getCharactersCanBeBlocked(name, characterId, userId);
+    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId) {
+        return characterQueryService.getCharactersCanBeBlocked(name, characterId);
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId, String userId) {
-        return characterQueryService.getCharactersCanBeFriend(name, characterId, userId);
+    public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId) {
+        return characterQueryService.getCharactersCanBeFriend(name, characterId);
     }
 
     public List<Friendship> getFriends(String characterId) {
@@ -72,7 +70,7 @@ public class CommunityFacade {
         return friendshipQueryService.getReceivedFriendRequests(characterId);
     }
 
-    public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
-        return friendshipQueryService.getSentFriendRequests(characterId, userId);
+    public List<FriendRequest> getSentFriendRequests(String characterId) {
+        return friendshipQueryService.getSentFriendRequests(characterId);
     }
 }

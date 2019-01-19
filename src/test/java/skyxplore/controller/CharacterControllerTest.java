@@ -1,31 +1,14 @@
 package skyxplore.controller;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
-import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
-import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.createCharacter;
-import static skyxplore.testutil.TestUtils.createCharacterView;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import com.google.common.cache.Cache;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
+import skyxplore.cache.CharacterNameCache;
+import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
@@ -34,6 +17,18 @@ import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {
@@ -44,7 +39,7 @@ public class CharacterControllerTest {
     private CharacterViewConverter characterViewConverter;
 
     @Mock
-    private Cache<String, Boolean> characterNameCache;
+    private CharacterNameCache characterNameCache;
 
     @InjectMocks
     private CharacterController underTest;
@@ -54,9 +49,9 @@ public class CharacterControllerTest {
         //GIVEN
         HashMap<String, Integer> inputMap = new HashMap<>();
         //WHEN
-        underTest.buyEquipments(inputMap, CHARACTER_ID, USER_ID);
+        underTest.buyEquipments(inputMap, CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).buyItems(inputMap, CHARACTER_ID, USER_ID);
+        verify(characterFacade).buyItems(inputMap, CHARACTER_ID_1);
     }
 
     @Test
@@ -72,12 +67,10 @@ public class CharacterControllerTest {
 
     @Test
     public void testDeleteCharacterShouldCallFacade() {
-        //GIVEN
-        CharacterDeleteRequest request = new CharacterDeleteRequest(CHARACTER_ID);
         //WHEN
-        underTest.deleteCharacter(request, USER_ID);
+        underTest.deleteCharacter(CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(characterFacade).deleteCharacter(request, USER_ID);
+        verify(characterFacade).deleteCharacter(CHARACTER_ID_1, USER_ID);
     }
 
     @Test
@@ -107,31 +100,31 @@ public class CharacterControllerTest {
             new EquipmentViewList(),
             new HashMap<>()
         );
-        when(characterFacade.getEquipmentsOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(view);
+        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(view);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID, USER_ID);
+        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).getEquipmentsOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterFacade).getEquipmentsOfCharacter(CHARACTER_ID_1);
         assertEquals(view, result);
     }
 
     @Test
     public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse(){
         //GIVEN
-        when(characterFacade.getMoneyOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
+        when(characterFacade.getMoneyOfCharacter(CHARACTER_ID_1)).thenReturn(CHARACTER_MONEY);
         //WHEN
-        Integer money = underTest.getMoney(CHARACTER_ID, USER_ID);
+        Integer money = underTest.getMoney(CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).getMoneyOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterFacade).getMoneyOfCharacter(CHARACTER_ID_1);
         assertEquals(CHARACTER_MONEY, money);
     }
 
     @Test
     public void testIsCharNameExistsShouldCallCacheAndReturnResponse() throws ExecutionException {
         //GIVEN
-        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(true);
+        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(Optional.of(true));
         //WHEN
-        boolean result = underTest.isCharNameExists(CHARACTER_NAME);
+        boolean result = underTest.isCharNameExists(new OneStringParamRequest(CHARACTER_NAME));
         //THEN
         verify(characterNameCache).get(CHARACTER_NAME);
         assertTrue(result);
@@ -140,11 +133,11 @@ public class CharacterControllerTest {
     @Test
     public void testRenameCharacterShouldCallFacadeAndInvalidateCache(){
         //GIVEN
-        RenameCharacterRequest request = new RenameCharacterRequest(CHARACTER_ID, CHARACTER_NAME);
+        RenameCharacterRequest request = createRenameCharacterRequest();
         //WHEN
-        underTest.renameCharacter(request, USER_ID);
+        underTest.renameCharacter(request, CHARACTER_ID_1);
         //THEN
-        verify(characterFacade).renameCharacter(request, USER_ID);
-        verify(characterNameCache).invalidate(CHARACTER_NAME);
+        verify(characterFacade).renameCharacter(request, CHARACTER_ID_1);
+        verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
     }
 }

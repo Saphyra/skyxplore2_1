@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import skyxplore.controller.request.community.BlockCharacterRequest;
 
 @Data
 @Builder
@@ -15,8 +14,8 @@ public class BlockedCharacter {
     private String characterId;
     private String blockedCharacterId;
 
-    public BlockedCharacter(BlockCharacterRequest request){
-        this.characterId = request.getCharacterId();
-        this.blockedCharacterId = request.getBlockedCharacterId();
+    public BlockedCharacter(String characterId, String blockedCharacterId){
+        this.characterId = characterId;
+        this.blockedCharacterId = blockedCharacterId;
     }
 }

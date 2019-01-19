@@ -11,7 +11,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCharacterRequest {
+    public static final int CHARACTER_NAME_MIN_LENGTH = 3;
+    public static final int CHARACTER_NAME_MAX_LENGTH = 30;
+
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = CHARACTER_NAME_MIN_LENGTH, max = CHARACTER_NAME_MAX_LENGTH)
     private String characterName;
 }

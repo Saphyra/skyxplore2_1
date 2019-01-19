@@ -3,7 +3,7 @@ package skyxplore.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
 import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
 import static skyxplore.testutil.TestUtils.USER_ID;
@@ -60,9 +60,9 @@ public class CharacterFacadeTest {
         //GIVEN
         Map<String, Integer> map = new HashMap<>();
         //WHEN
-        underTest.buyItems(map, CHARACTER_ID, USER_ID);
+        underTest.buyItems(map, CHARACTER_ID_1);
         //THEN
-        verify(buyItemService).buyItems(map, CHARACTER_ID, USER_ID);
+        verify(buyItemService).buyItems(map, CHARACTER_ID_1);
     }
 
     @Test
@@ -77,12 +77,10 @@ public class CharacterFacadeTest {
 
     @Test
     public void testDeleteCharacterShouldCallService() {
-        //GIVEN
-        CharacterDeleteRequest request = createCharacterDeleteRequest();
         //WHEN
-        underTest.deleteCharacter(request, USER_ID);
+        underTest.deleteCharacter(CHARACTER_ID_1, USER_ID);
         //THEN
-        verify(characterDeleteService).deleteCharacter(request, USER_ID);
+        verify(characterDeleteService).deleteCharacter(CHARACTER_ID_1, USER_ID);
     }
 
     @Test
@@ -106,22 +104,22 @@ public class CharacterFacadeTest {
             new EquipmentViewList(Arrays.asList(DATA_ELEMENT)),
             new HashMap<>()
         );
-        when(characterQueryService.getEquipmentsOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(view);
+        when(characterQueryService.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(view);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(USER_ID, CHARACTER_ID);
+        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
         //THEN
-        verify(characterQueryService).getEquipmentsOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterQueryService).getEquipmentsOfCharacter(CHARACTER_ID_1);
         assertEquals(view, result);
     }
 
     @Test
     public void testGetMoneyOfCharacterShouldCallServiceAndReturn(){
         //GIVEN
-        when(characterQueryService.getMoneyOfCharacter(USER_ID, CHARACTER_ID)).thenReturn(CHARACTER_MONEY);
+        when(characterQueryService.getMoneyOfCharacter(CHARACTER_ID_1)).thenReturn(CHARACTER_MONEY);
         //WHEN
-        Integer result = underTest.getMoneyOfCharacter(USER_ID, CHARACTER_ID);
+        Integer result = underTest.getMoneyOfCharacter(CHARACTER_ID_1);
         //THEN
-        verify(characterQueryService).getMoneyOfCharacter(USER_ID, CHARACTER_ID);
+        verify(characterQueryService).getMoneyOfCharacter(CHARACTER_ID_1);
         assertEquals(CHARACTER_MONEY, result);
     }
 

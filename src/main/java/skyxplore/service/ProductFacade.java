@@ -14,7 +14,7 @@ import skyxplore.service.product.ProductQueryService;
 public class ProductFacade {
     private final ProductQueryService productQueryService;
 
-    public View<ProductViewList> getQueue(String userId, String characterId) {
-        return productQueryService.getQueue(userId, characterId);
+    public View<ProductViewList> getQueue(String characterId) {
+        return productQueryService.getQueue(characterId);
     }
 }

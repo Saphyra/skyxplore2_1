@@ -1,6 +1,6 @@
 (function NewMailController(){
     window.newMailController = new function(){
-        scriptLoader.loadScript("js/common/dao/community_dao.js");
+        scriptLoader.loadScript("js/common/dao/mail_dao.js");
         
         this.invalidateAddressee = invalidateAddressee;
         this.sendMail = sendMail;
@@ -41,7 +41,7 @@
             }else if(messageField.value.length > 4000){
                 notificationService.showError("Az üzenet túl hosszú (Max 4000 karakter).")
             }else{
-                if(communityDao.sendMail(sessionStorage.characterId, newMailController.addresseeId, subjectField.value, messageField.value)){
+                if(mailDao.sendMail(newMailController.addresseeId, subjectField.value, messageField.value)){
                     notificationService.showSuccess("Üzenet elküldve.");
                     subjectField.value = "";
                     addresseeField.value = "";
@@ -82,7 +82,7 @@
                     return;
                 }
                 
-                const addressees = orderCharacters(communityDao.getAddressees(queryText, sessionStorage.characterId));
+                const addressees = orderCharacters(mailDao.getAddressees(queryText, sessionStorage.characterId));
                 if(addressees.length == 0){
                     container.innerHTML = "Nem található címzett.";
                 }

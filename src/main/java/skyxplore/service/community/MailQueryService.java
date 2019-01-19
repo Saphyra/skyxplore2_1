@@ -5,22 +5,17 @@ import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.MailNotFoundException;
-import skyxplore.service.character.CharacterQueryService;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class MailQueryService {
-    private final CharacterQueryService characterQueryService;
     private final MailDao mailDao;
 
     public Mail findMailById(String mailId) {
-        Mail mail = mailDao.findById(mailId);
-        if (mail == null) {
-            throw new MailNotFoundException("Mail not found with id " + mailId);
-        }
-        return mail;
+        return mailDao.findById(mailId)
+            .orElseThrow(() -> new MailNotFoundException("Mail not found with id " + mailId));
     }
 
     public List<Mail> getArchivedMails(String characterId) {

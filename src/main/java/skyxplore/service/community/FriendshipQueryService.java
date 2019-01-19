@@ -7,7 +7,8 @@ import skyxplore.dataaccess.db.FriendRequestDao;
 import skyxplore.dataaccess.db.FriendshipDao;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.service.character.CharacterQueryService;
+import skyxplore.exception.FriendRequestNotFoundException;
+import skyxplore.exception.FriendshipNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +16,19 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class FriendshipQueryService {
-    private final CharacterQueryService characterQueryService;
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
+
+    public FriendRequest findFriendRequestById(String friendRequestId) {
+        return friendRequestDao.findById(friendRequestId)
+            .orElseThrow(() -> new FriendRequestNotFoundException("SeleniumFriendRequest not found with id " + friendRequestId));
+    }
+
+    public Friendship findFriendshipById(String friendshipId) {
+        return friendshipDao.findById(friendshipId)
+            .orElseThrow(() -> new FriendshipNotFoundException("Friendship not found with id " + friendshipId));
+    }
 
     public List<Friendship> getFriends(String characterId) {
         return friendshipDao.getFriendshipsOfCharacter(characterId);
@@ -30,27 +39,32 @@ public class FriendshipQueryService {
     }
 
     public List<FriendRequest> getReceivedFriendRequests(String characterId) {
-        characterQueryService.findByCharacterId(characterId);
-        return friendRequestDao.getByFriendId(characterId)
-            .stream()
+        return friendRequestDao.getByFriendId(characterId).stream()
             .map(this::swapIds)
             .collect(Collectors.toList());
     }
 
-    private FriendRequest swapIds(FriendRequest request){
+    private FriendRequest swapIds(FriendRequest request) {
         String characterId = request.getCharacterId();
         request.setCharacterId(request.getFriendId());
         request.setFriendId(characterId);
         return request;
     }
 
-    public List<FriendRequest> getSentFriendRequests(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public List<FriendRequest> getSentFriendRequests(String characterId) {
         return friendRequestDao.getByCharacterId(characterId);
     }
 
+    public boolean isFriendshipAlreadyExists(String characterId, String friendId) {
+        return friendshipDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
+    }
+
+    public boolean isFriendRequestAlreadyExists(String characterId, String friendId) {
+        return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
+    }
+
     public boolean isFriendshipOrFriendRequestAlreadyExists(String characterId, String friendId) {
-        return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0
-            || friendshipDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
+        return isFriendRequestAlreadyExists(characterId, friendId)
+            || isFriendshipAlreadyExists(characterId, friendId);
     }
 }

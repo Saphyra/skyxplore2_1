@@ -1,54 +1,36 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.FriendRequestRepository;
 import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendrequest.FriendRequestConverter;
 import skyxplore.domain.community.friendrequest.FriendRequestEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
-//TODO unit test
-public class FriendRequestDao {
-    private final FriendRequestRepository friendRequestRepository;
-    private final FriendRequestConverter friendRequestConverter;
+public class FriendRequestDao extends AbstractDao<FriendRequestEntity, FriendRequest, String, FriendRequestRepository> {
 
-    public void delete(FriendRequest friendRequest){
-        friendRequestRepository.delete(friendRequestConverter.convertDomain(friendRequest));
+    public FriendRequestDao(Converter<FriendRequestEntity, FriendRequest> converter, FriendRequestRepository repository) {
+        super(converter, repository);
     }
 
     public void deleteByCharacterId(String characterId) {
-        friendRequestRepository.deleteByCharacterId(characterId);
-    }
-
-    public FriendRequest findById(String friendRequestId) {
-        Optional<FriendRequestEntity> friendRequestEntity = friendRequestRepository.findById(friendRequestId);
-        return friendRequestEntity.map(friendRequestConverter::convertEntity).orElse(null);
+        repository.deleteByCharacterId(characterId);
     }
 
     public List<FriendRequest> getByCharacterId(String characterId) {
-        return friendRequestConverter.convertEntity(friendRequestRepository.findByCharacterId(characterId));
+        return converter.convertEntity(repository.findByCharacterId(characterId));
     }
 
     public List<FriendRequest> getByCharacterIdOrFriendId(String characterId, String friendId) {
-        return friendRequestConverter.convertEntity(friendRequestRepository.findByCharacterIdOrFriendId(characterId, friendId));
+        return converter.convertEntity(repository.findByCharacterIdOrFriendId(characterId, friendId));
     }
 
     public List<FriendRequest> getByFriendId(String characterId) {
-        return friendRequestConverter.convertEntity(friendRequestRepository.getByFriendId(characterId));
-    }
-
-    public FriendRequest save(FriendRequest friendRequest) {
-        return friendRequestConverter.convertEntity(
-            friendRequestRepository.save(
-                friendRequestConverter.convertDomain(friendRequest)
-            )
-        );
+        return converter.convertEntity(repository.getByFriendId(characterId));
     }
 }

@@ -19,20 +19,19 @@ import skyxplore.service.factory.FactoryQueryService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class ProductQueryService {
-    private final CharacterQueryService characterQueryService;
     private final FactoryQueryService factoryQueryService;
     private final GameDataFacade gameDataFacade;
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
 
-    public View<ProductViewList> getQueue(String userId, String characterId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public View<ProductViewList> getQueue(String characterId) {
         String factoryId = factoryQueryService.getFactoryIdOfCharacter(characterId);
 
         List<Product> queue = productDao.findByFactoryId(factoryId);
-        List<String> elementIds = queue.stream().map(Product::getElementId).collect(Collectors.toList());
+        List<String> elementIds = queue.stream()
+            .map(Product::getElementId)
+            .collect(Collectors.toList());
 
         return new View<>(
             new ProductViewList(productViewConverter.convertDomain(queue)),

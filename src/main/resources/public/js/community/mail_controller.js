@@ -1,6 +1,6 @@
 (function MailController(){
     window.mailController = new function(){
-        scriptLoader.loadScript("js/common/dao/community_dao.js");
+        scriptLoader.loadScript("js/common/dao/mail_dao.js");
         scriptLoader.loadScript("js/common/translator/date_time_util.js");
         
         this.selectAll = selectAll;
@@ -64,7 +64,7 @@
                     notificationService.showError("Válassza ki a végrerhajtani kívánt műveletet!");
                 break;
                 case "archive":
-                    if(communityDao.archiveMails(mailIds)){
+                    if(mailDao.archiveMails(mailIds)){
                         notificationService.showSuccess("Üzenetek archiválva.");
                     }else{
                         notificationService.showError("Üzenetek archiválása sikertelen.");
@@ -74,8 +74,8 @@
                 break;
                 case "delete":
                     if(confirm("Biztosan törli a kiválasztott üzeneteket?")){
-                        if(communityDao.deleteMails(mailIds)){
-                            notificationService.showSuccess("Üzenetek törölve");
+                        if(mailDao.deleteMails(mailIds)){
+                            notificationService.showSuccess("Üzenetek törölve.");
                         }else{
                             notificationService.showError("Üzenetek törlése sikertelen.");
                         }
@@ -84,7 +84,7 @@
                     }
                 break;
                 case "markasread":
-                    if(communityDao.markMailsRead(mailIds)){
+                    if(mailDao.markMailsRead(mailIds)){
                         notificationService.showSuccess("Üzenetek olvasottnak jelölve.");
                     }else{
                         notificationService.showError("Üzenetek olvasottnak jelölése sikertelen.");
@@ -93,7 +93,7 @@
                     refresh();
                 break;
                 case "markasunread":
-                    if(communityDao.markMailsUnread(mailIds)){
+                    if(mailDao.markMailsUnread(mailIds)){
                         notificationService.showSuccess("Üzenetek olvasatlannak jelölve.");
                     }else{
                         notificationService.showError("Üzenetek olvasatlannak jelölése sikertelen.");
@@ -102,7 +102,7 @@
                     refresh();
                 break;
                 case "unarchive":
-                    if(communityDao.unarchiveMails(mailIds)){
+                    if(mailDao.unarchiveMails(mailIds)){
                         notificationService.showSuccess("Üzenetek visszaállítva.");
                     }else{
                         notificationService.showError("Üzenetek visszaállítása sikertelen.");
@@ -137,7 +137,7 @@
     
     function displayNumberOfUnreadMails(){
         try{
-            const numberOfUnreadMails = communityDao.getNumberOfUnreadMails();
+            const numberOfUnreadMails = mailDao.getNumberOfUnreadMails();
             if(numberOfUnreadMails > 0){
                 document.getElementById("numberofunreadmails").innerHTML = " (" + numberOfUnreadMails + ")";
             }else{
@@ -151,7 +151,7 @@
     
     function loadMails(){
         try{
-            const mails = communityDao.getMails();
+            const mails = mailDao.getMails();
             mailController.mails = orderMails(mails);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -212,7 +212,7 @@
                 mailHeader.onclick = function(){
                     $(mailBody).fadeToggle();
                     if(!mail.read){
-                        communityDao.markMailsRead([mail.mailId]);
+                        mailDao.markMailsRead([mail.mailId]);
                         container.classList.remove("unreadmail");
                         displayNumberOfUnreadMails();
                         mail.read = true;
@@ -264,7 +264,7 @@
                                     deleteButton.onclick = function(e){
                                         e.stopPropagation();
                                         if(confirm("Biztosan törli a kiválszott üzeneteket?")){
-                                            if(communityDao.deleteMails([mail.mailId])){
+                                            if(mailDao.deleteMails([mail.mailId])){
                                                 notificationService.showSuccess("Üzenet törölve.");
                                             }else{
                                                 notificationService.showError("Üzenet törlése sikertelen.");
@@ -277,7 +277,7 @@
                                 const archiveButton = document.createElement("BUTTON");
                                     archiveButton.innerHTML = "Archiválás";
                                     archiveButton.onclick = function(e){
-                                        if(communityDao.archiveMails([mail.mailId])){
+                                        if(mailDao.archiveMails([mail.mailId])){
                                             notificationService.showSuccess("Üzenet archiválva.");
                                         }else{
                                             notificationService.showError("Üzenet archiválása sikertelen.");
@@ -291,14 +291,14 @@
                                     if(mail.read){
                                         markButton.innerHTML = "Megjelölés olvasatlanként";
                                         markButton.onclick = function(e){
-                                            communityDao.markMailsUnread([mail.mailId]);
+                                            mailDao.markMailsUnread([mail.mailId]);
                                             refresh();
                                             e.stopPropagation();
                                         }
                                     }else{
                                         markButton.innerHTML = "Megjelölés olvasottként";
                                         markButton.onclick = function(e){
-                                            communityDao.markMailsRead([mail.mailId]);
+                                            mailDao.markMailsRead([mail.mailId]);
                                             refresh();
                                             e.stopPropagation();
                                         }
@@ -326,7 +326,7 @@
     
     function loadSentMails(){
         try{
-            const mails = communityDao.getSentMails();
+            const mails = mailDao.getSentMails();
             mailController.sentMails = orderMails(mails);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -420,7 +420,7 @@
                                     deleteButton.onclick = function(e){
                                         e.stopPropagation();
                                         if(confirm("Biztosan törli a kiválszott üzeneteket?")){
-                                            if(communityDao.deleteMails([mail.mailId])){
+                                            if(mailDao.deleteMails([mail.mailId])){
                                                 notificationService.showSuccess("Üzenet törölve.");
                                             }else{
                                                 notificationService.showError("Üzenet törlése sikertelen.");
@@ -450,7 +450,7 @@
     
     function loadArchivedMails(){
         try{
-            const mails = communityDao.getArchivedMails();
+            const mails = mailDao.getArchivedMails();
             mailController.archivedMails = orderMails(mails);
         }catch(err){
             const message = arguments.callee.name + " - " + err.name + ": " + err.message;
@@ -544,7 +544,7 @@
                                     deleteButton.onclick = function(e){
                                         e.stopPropagation();
                                         if(confirm("Biztosan törli a kiválszott üzeneteket?")){
-                                            if(communityDao.deleteMails([mail.mailId])){
+                                            if(mailDao.deleteMails([mail.mailId])){
                                                 notificationService.showSuccess("Üzenet törölve.");
                                             }else{
                                                 notificationService.showError("Üzenet törlése sikertelen.");
@@ -557,7 +557,7 @@
                                 const unArchiveButton = document.createElement("BUTTON");
                                     unArchiveButton.innerHTML = "Visszaállítás";
                                     unArchiveButton.onclick = function(e){
-                                        if(communityDao.unarchiveMails([mail.mailId])){
+                                        if(mailDao.unarchiveMails([mail.mailId])){
                                             notificationService.showSuccess("Üzenet visszaállítva.");
                                         }else{
                                             notificationService.showError("Üzenet visszaállítása sikertelen.");

@@ -1,12 +1,8 @@
 package skyxplore.service.factory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.gamedata.entity.Material;
@@ -15,6 +11,9 @@ import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
 @Service
@@ -33,8 +32,8 @@ public class FactoryQueryService {
         return factory;
     }
 
-    public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+    public Map<String, MaterialView> getMaterials(String characterId) {
+        characterQueryService.findByCharacterId(characterId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
         Materials materials = factory.getMaterials();
         Map<String, MaterialView> result = fillWithMaterials(materials);
@@ -65,5 +64,10 @@ public class FactoryQueryService {
 
     public String getFactoryIdOfCharacter(String characterId) {
         return findFactoryOfCharacterValidated(characterId).getFactoryId();
+    }
+
+    public Factory findByFactoryId(String factoryId) {
+        return factoryDao.findById(factoryId)
+            .orElseThrow(() -> new FactoryNotFoundException("Factory not found with factoryId " + factoryId));
     }
 }

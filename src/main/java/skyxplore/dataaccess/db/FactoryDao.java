@@ -1,45 +1,35 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.FactoryRepository;
 import skyxplore.domain.factory.Factory;
-import skyxplore.domain.factory.FactoryConverter;
 import skyxplore.domain.factory.FactoryEntity;
-import skyxplore.exception.FactoryNotFoundException;
-
-import java.util.Optional;
 
 @SuppressWarnings("WeakerAccess")
 @Component
-@RequiredArgsConstructor
 @Slf4j
-public class FactoryDao {
-    private final FactoryConverter factoryConverter;
-    private final FactoryRepository factoryRepository;
+public class FactoryDao extends AbstractDao<FactoryEntity, Factory, String, FactoryRepository> {
     private final ProductDao productDao;
 
-    public void deleteByCharacterId(String characterId){
-        FactoryEntity factoryEntity = factoryRepository.findByCharacterId(characterId);
+    public FactoryDao(
+        Converter<FactoryEntity, Factory> converter,
+        FactoryRepository repository,
+        ProductDao productDao
+    ) {
+        super(converter, repository);
+        this.productDao = productDao;
+    }
+
+    public void deleteByCharacterId(String characterId) {
+        FactoryEntity factoryEntity = repository.findByCharacterId(characterId);
         productDao.deleteByFactoryId(factoryEntity.getFactoryId());
-        factoryRepository.deleteByCharacterId(characterId);
+        repository.deleteByCharacterId(characterId);
     }
 
-    public Factory findByCharacterId(String characterId){
-        return factoryConverter.convertEntity(factoryRepository.findByCharacterId(characterId));
-    }
-
-    public Factory findById(String factoryId){
-        Optional<FactoryEntity> factory = factoryRepository.findById(factoryId);
-        if(factory.isPresent())
-        {
-            return factoryConverter.convertEntity(factory.get());
-        }
-        throw new FactoryNotFoundException("Factory not found with id " + factoryId);
-    }
-
-    public void save(Factory factory){
-        factoryRepository.save(factoryConverter.convertDomain(factory));
+    public Factory findByCharacterId(String characterId) {
+        return converter.convertEntity(repository.findByCharacterId(characterId));
     }
 }

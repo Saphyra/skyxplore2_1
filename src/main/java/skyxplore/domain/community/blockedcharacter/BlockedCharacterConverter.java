@@ -2,13 +2,12 @@ package skyxplore.domain.community.blockedcharacter;
 
 import org.springframework.stereotype.Component;
 
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
-//TODO unit test
 public class BlockedCharacterConverter extends ConverterBase<BlockedCharacterEntity, BlockedCharacter> {
     @Override
-    public BlockedCharacter convertEntity(BlockedCharacterEntity entity) {
+    public BlockedCharacter processEntityConversion(BlockedCharacterEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -20,7 +19,7 @@ public class BlockedCharacterConverter extends ConverterBase<BlockedCharacterEnt
     }
 
     @Override
-    public BlockedCharacterEntity convertDomain(BlockedCharacter domain) {
+    public BlockedCharacterEntity processDomainConversion(BlockedCharacter domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

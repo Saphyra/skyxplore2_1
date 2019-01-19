@@ -8,13 +8,17 @@ import javax.validation.constraints.Size;
 
 @Data
 public class UserRegistrationRequest {
+    public static final int USER_NAME_MAX_LENGTH = 30;
+    public static final int USER_NAME_MIN_LENGTH = 3;
+    public static final int PASSWORD_MAX_LENGTH = 30;
+    public static final int PASSWORD_MIN_LENGTH = 6;
 
     @NotNull
-    @Size(min=3, max = 30)
+    @Size(min=USER_NAME_MIN_LENGTH, max = USER_NAME_MAX_LENGTH)
     private String username;
 
     @NotNull
-    @Size(min=6, max = 30)
+    @Size(min=PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
     @NotNull
@@ -22,6 +26,7 @@ public class UserRegistrationRequest {
 
     @Email
     @NotNull
+    @Size(min = 1)
     private String email;
 
     @Override

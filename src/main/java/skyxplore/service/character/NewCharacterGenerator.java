@@ -1,58 +1,56 @@
 package skyxplore.service.character;
 
-import java.util.ArrayList;
-
-import org.springframework.stereotype.Component;
-
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import skyxplore.configuration.CharacterGeneratorConfig;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.util.IdGenerator;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class NewCharacterGenerator {
-    private static final Integer START_MONEY = 10000000;
+    public static final String STARTER_SHIP_ID = "sta-01";
 
-    private static final String STARTER_SHIP_ID = "sta-01";
+    public static final String GENERATOR_ID = "gen-01";
+    public static final String BATTERY_ID = "bat-01";
+    public static final String STORAGE_ID = "sto-01";
 
-    private static final String GENERATOR_ID = "gen-01";
-    private static final String BATTERY_ID = "bat-01";
-    private static final String STORAGE_ID = "sto-01";
+    public static final String SHIELD_ID = "shi-hclr-01";
+    public static final String ARMOR_ID = "arm-01";
 
-    private static final String SHIELD_ID = "shi-hclr-01";
-    private static final String ARMOR_ID = "arm-01";
+    public static final String LASER_ID = "las-mrldma-01";
+    public static final String LAUNCHER_ID = "rla-hrldma-01";
+    public static final String RIFLE_ID = "rif-lrldma-01";
 
-    private static final String LASER_ID = "las-mrldma-01";
-    private static final String LAUNCHER_ID = "rla-hrldma-01";
-    private static final String RIFLE_ID = "rif-lrldma-01";
-
+    private final CharacterGeneratorConfig config;
     private final IdGenerator idGenerator;
+    private final MaterialService materialService;
     private final ShipService shipService;
 
     public SkyXpCharacter createCharacter(String userId, String characterName) {
         SkyXpCharacter character = new SkyXpCharacter();
-        character.setCharacterId(idGenerator.getRandomId());
+        character.setCharacterId(idGenerator.generateRandomId());
         character.setCharacterName(characterName);
         character.setUserId(userId);
-        character.addMoney(START_MONEY);
-        character.addEquipments(new ArrayList<>());
+        character.addMoney(config.getStartMoney());
         log.info("Character created: {}", character);
         return character;
     }
 
     public EquippedShip createShip(String characterId) {
         EquippedShip ship = new EquippedShip();
-        ship.setShipId(idGenerator.getRandomId());
+        ship.setShipId(idGenerator.generateRandomId());
         ship.setCharacterId(characterId);
         ship.setShipType(STARTER_SHIP_ID);
         Ship shipData = shipService.get(STARTER_SHIP_ID);
@@ -82,7 +80,7 @@ public class NewCharacterGenerator {
 
     private EquippedSlot createSlot(String shipId, Slot slot) {
         EquippedSlot equippedSlot = new EquippedSlot();
-        equippedSlot.setSlotId(idGenerator.getRandomId());
+        equippedSlot.setSlotId(idGenerator.generateRandomId());
         equippedSlot.setShipId(shipId);
         equippedSlot.setFrontSlot(slot.getFront());
         equippedSlot.setLeftSlot(slot.getSide());
@@ -127,10 +125,16 @@ public class NewCharacterGenerator {
 
     public Factory createFactory(String characterId) {
         Factory factory = new Factory();
-        factory.setFactoryId(idGenerator.getRandomId());
+        factory.setFactoryId(idGenerator.generateRandomId());
         factory.setCharacterId(characterId);
-        factory.setMaterials(new Materials());
+        factory.setMaterials(createMaterials());
         log.info("Factory created: {}", factory);
         return factory;
+    }
+
+    private Materials createMaterials() {
+        Materials materials = new Materials();
+        materialService.keySet().forEach(materialId ->materials.addMaterial(materialId, config.getStartMaterials()));
+        return materials;
     }
 }

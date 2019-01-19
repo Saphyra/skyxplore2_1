@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.controller.view.AbstractViewConverter;
+import skyxplore.dataaccess.db.AccessTokenDao;
 import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.service.AccessTokenFacade;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.List;
@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class FriendViewConverter extends AbstractViewConverter<Friendship, FriendView> {
-    private final AccessTokenFacade accessTokenFacade;
+    private final AccessTokenDao accessTokenDao;
     private final CharacterQueryService characterQueryService;
 
     @Override
@@ -25,7 +24,7 @@ public class FriendViewConverter extends AbstractViewConverter<Friendship, Frien
         view.setFriendshipId(domain.getFriendshipId());
         view.setFriendId(domain.getFriendId());
         view.setFriendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName());
-        view.setActive(accessTokenFacade.isCharacterActive(domain.getFriendId()));
+        view.setActive(accessTokenDao.findByCharacterId(domain.getFriendId()).isPresent());
         return view;
     }
 

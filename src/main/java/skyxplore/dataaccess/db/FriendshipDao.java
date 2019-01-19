@@ -1,46 +1,36 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.FriendshipRepository;
 import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.domain.community.friendship.FriendshipConverter;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
-//TODO unit test
-public class FriendshipDao {
-    private final FriendshipConverter friendshipConverter;
-    private final FriendshipRepository friendshipRepository;
+public class FriendshipDao extends AbstractDao<FriendshipEntity, Friendship, String, FriendshipRepository> {
 
-    public void delete(Friendship friendship) {
-        friendshipRepository.delete(friendshipConverter.convertDomain(friendship));
+    public FriendshipDao(Converter<FriendshipEntity, Friendship> converter, FriendshipRepository repository) {
+        super(converter, repository);
     }
 
     public void deleteByCharacterId(String characterId) {
-        friendshipRepository.deleteByCharacterId(characterId);
+        repository.deleteByCharacterId(characterId);
     }
 
     public List<Friendship> getByCharacterIdOrFriendId(String characterId, String friendId) {
-        return friendshipConverter.convertEntity(friendshipRepository.getByCharacterIdOrFriendId(characterId, friendId));
+        return converter.convertEntity(repository.getByCharacterIdOrFriendId(characterId, friendId));
     }
 
     public Friendship getByFriendshipId(String friendshipId) {
-        Optional<FriendshipEntity> entity = friendshipRepository.findById(friendshipId);
-        return entity.map(friendshipConverter::convertEntity).orElse(null);
+        return repository.findById(friendshipId).map(converter::convertEntity).orElse(null);
     }
 
     public List<Friendship> getFriendshipsOfCharacter(String characterId) {
-        return friendshipConverter.convertEntity(friendshipRepository.getFriendshipsOfCharacter(characterId));
-    }
-
-    public void save(Friendship friendship) {
-        friendshipRepository.save(friendshipConverter.convertDomain(friendship));
+        return converter.convertEntity(repository.getFriendshipsOfCharacter(characterId));
     }
 }

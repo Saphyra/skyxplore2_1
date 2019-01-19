@@ -1,48 +1,46 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.ProductRepository;
 import skyxplore.domain.product.Product;
-import skyxplore.domain.product.ProductConverter;
+import skyxplore.domain.product.ProductEntity;
 import skyxplore.util.DateTimeUtil;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 @Component
-@RequiredArgsConstructor
 @Slf4j
-public class ProductDao {
+public class ProductDao extends AbstractDao<ProductEntity, Product, String, ProductRepository> {
     private final DateTimeUtil dateTimeUtil;
-    private final ProductConverter productConverter;
-    private final ProductRepository productRepository;
 
-    public void  delete(Product product){
-        productRepository.deleteById(product.getProductId());
+    public ProductDao(
+        Converter<ProductEntity, Product> converter,
+        ProductRepository repository,
+        DateTimeUtil dateTimeUtil
+    ) {
+        super(converter, repository);
+        this.dateTimeUtil = dateTimeUtil;
     }
 
-    public void deleteByFactoryId(String factoryId){
-        productRepository.deleteByFactoryId(factoryId);
+    public void deleteByFactoryId(String factoryId) {
+        repository.deleteByFactoryId(factoryId);
     }
 
-    public List<Product> findByFactoryId(String factoryId){
-        return productConverter.convertEntity(productRepository.findByFactoryId(factoryId));
+    public List<Product> findByFactoryId(String factoryId) {
+        return converter.convertEntity(repository.findByFactoryId(factoryId));
     }
 
-    public List<Product> getFinishedProducts(){
-        LocalDateTime time = LocalDateTime.now(ZoneOffset.UTC);
-        return productConverter.convertEntity(productRepository.getFinishedProducts(dateTimeUtil.convertDomain(time)));
+    public List<Product> getFinishedProducts() {
+        OffsetDateTime time = dateTimeUtil.now();
+        return converter.convertEntity(repository.getFinishedProducts(dateTimeUtil.convertDomain(time)));
     }
 
-    public List<Product> getFirstOfQueue(){
-        return productConverter.convertEntity(productRepository.getFirstOfQueue());
-    }
-
-    public void save(Product product){
-        productRepository.save(productConverter.convertDomain(product));
+    public List<Product> getFirstOfQueue() {
+        return converter.convertEntity(repository.getFirstOfQueue());
     }
 }

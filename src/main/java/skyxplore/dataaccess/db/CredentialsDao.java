@@ -1,40 +1,28 @@
 package skyxplore.dataaccess.db;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.CredentialsRepository;
-import skyxplore.domain.credentials.Credentials;
-import skyxplore.domain.credentials.CredentialsConverter;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.credentials.CredentialsEntity;
 
+import java.util.Optional;
+
 @Slf4j
-@RequiredArgsConstructor
 @Component
-//TODO unit test
-public class CredentialsDao {
-    private final CredentialsRepository credentialsRepository;
-    private final CredentialsConverter credentialsConverter;
+public class CredentialsDao extends AbstractDao<CredentialsEntity, SkyXpCredentials, String, CredentialsRepository> {
 
-    public void delete(String userId) {
-        Optional<CredentialsEntity> optional = credentialsRepository.findById(userId);
-        optional.ifPresent(credentialsRepository::delete);
-
+    public CredentialsDao(Converter<CredentialsEntity, SkyXpCredentials> converter, CredentialsRepository repository) {
+        super(converter, repository);
     }
 
-    public void save(Credentials credentials) {
-        credentialsRepository.save(credentialsConverter.convertDomain(credentials));
+    public SkyXpCredentials getByUserId(String userId) {
+        return repository.findById(userId).map(converter::convertEntity).orElse(null);
     }
 
-    public Credentials getCredentialsByName(String userName) {
-        return credentialsConverter.convertEntity(credentialsRepository.getByUserName(userName));
-    }
-
-    public Credentials getByUserId(String userId) {
-        Optional<CredentialsEntity> optional = credentialsRepository.findById(userId);
-        return optional.map(credentialsConverter::convertEntity).orElse(null);
+    public Optional<SkyXpCredentials> getCredentialsByName(String userName) {
+        return converter.convertEntityToOptional(repository.getByUserName(userName));
     }
 }

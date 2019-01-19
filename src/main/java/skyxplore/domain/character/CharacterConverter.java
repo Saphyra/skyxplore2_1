@@ -2,11 +2,11 @@ package skyxplore.domain.character;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ConverterBase;
-import skyxplore.encryption.IntegerEncryptor;
-import skyxplore.encryption.StringEncryptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,14 +14,13 @@ import java.util.ArrayList;
 @Component
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked")
-//TODO unit test
 public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
     private final StringEncryptor stringEncryptor;
 
     @Override
-    public SkyXpCharacter convertEntity(CharacterEntity entity) {
+    public SkyXpCharacter processEntityConversion(CharacterEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -32,8 +31,19 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             domain.setCharacterId(entity.getCharacterId());
             domain.setCharacterName(entity.getCharacterName());
             domain.setUserId(entity.getUserId());
-            domain.addMoney(integerEncryptor.decrypt(entity.getMoney(), entity.getCharacterId()));
-            domain.addEquipments(objectMapper.readValue(stringEncryptor.decryptEntity(entity.getEquipments(), entity.getCharacterId()), ArrayList.class));
+            domain.addMoney(integerEncryptor.decryptEntity(
+                entity.getMoney(),
+                entity.getCharacterId())
+            );
+            domain.addEquipments(
+                objectMapper.readValue(
+                    stringEncryptor.decryptEntity(
+                        entity.getEquipments(),
+                        entity.getCharacterId()
+                    ),
+                    ArrayList.class
+                )
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,8 +51,8 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
     }
 
     @Override
-    public CharacterEntity convertDomain(SkyXpCharacter domain) {
-        if(domain == null){
+    public CharacterEntity processDomainConversion(SkyXpCharacter domain) {
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         CharacterEntity entity = new CharacterEntity();
@@ -50,8 +60,16 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
             entity.setCharacterId(domain.getCharacterId());
             entity.setCharacterName(domain.getCharacterName());
             entity.setUserId(domain.getUserId());
-            entity.setMoney(integerEncryptor.encrypt(domain.getMoney(), domain.getCharacterId()));
-            entity.setEquipments(stringEncryptor.encryptEntity(objectMapper.writeValueAsString(domain.getEquipments()), domain.getCharacterId()));
+            entity.setMoney(integerEncryptor.encryptEntity(
+                domain.getMoney(),
+                domain.getCharacterId())
+            );
+            entity.setEquipments(
+                stringEncryptor.encryptEntity(
+                    objectMapper.writeValueAsString(domain.getEquipments()),
+                    domain.getCharacterId()
+                )
+            );
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

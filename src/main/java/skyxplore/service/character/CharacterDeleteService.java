@@ -18,8 +18,8 @@ public class CharacterDeleteService {
     private final CharacterQueryService characterQueryService;
 
     @Transactional
-    public void deleteCharacter(CharacterDeleteRequest request, String userId) {
-        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
+    public void deleteCharacter(String characterId, String userId) {
+        SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         characterDao.deleteById(character.getCharacterId());
     }
 }

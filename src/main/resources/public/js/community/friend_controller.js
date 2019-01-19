@@ -24,7 +24,7 @@
 
     function acceptFriendRequest(friendRequestId){
         try{
-            if(communityDao.acceptFriendRequest(sessionStorage.characterId, friendRequestId)){
+            if(communityDao.acceptFriendRequest(friendRequestId)){
                 notificationService.showSuccess("Barátkérelem elfogadva.");
             }else{
                 notificationService.showError("Barátkérelem elfogadása sikertelen.");
@@ -39,7 +39,7 @@
     
     function addFriend(friendId){
         try{
-            const isAdded = communityDao.sendFriendRequest(sessionStorage.characterId, friendId);
+            const isAdded = communityDao.sendFriendRequest(friendId);
             if(isAdded){
                 notificationService.showSuccess("Barátkérelem elküldve.");
             }else{
@@ -56,7 +56,7 @@
     function declineFriendRequest(requestId){
         try{
             if(confirm("Biztosan elutasítod a barátkérelmet?")){
-                if(communityDao.declineFriendRequest(sessionStorage.characterId, requestId)){
+                if(communityDao.declineFriendRequest(requestId)){
                     notificationService.showSuccess("Barátkérelem elutasítva.");
                 }else{
                     notificationService.showError("Barátkérelem elutasítása sikertelen.");

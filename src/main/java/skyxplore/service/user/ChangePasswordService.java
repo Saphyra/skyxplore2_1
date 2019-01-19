@@ -1,12 +1,11 @@
 package skyxplore.service.user;
 
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangePasswordRequest;
-import skyxplore.domain.credentials.Credentials;
-import skyxplore.encryption.base.PasswordService;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.service.credentials.CredentialsService;
@@ -19,19 +18,19 @@ public class ChangePasswordService {
     private final PasswordService passwordService;
 
     public void changePassword(ChangePasswordRequest request, String userId) {
-        Credentials credentials = credentialsService.getByUserId(userId);
-        validateChangePasswordRequest(request, credentials);
-        credentials.setPassword(passwordService.hashPassword(request.getNewPassword()));
+        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        validateChangePasswordRequest(request, skyXpCredentials);
+        skyXpCredentials.setPassword(passwordService.hashPassword(request.getNewPassword()));
         log.info("Changing password of user " + userId);
-        credentialsService.save(credentials);
+        credentialsService.save(skyXpCredentials);
         log.info("Password successfully changed.");
     }
 
-    private void validateChangePasswordRequest(ChangePasswordRequest request, Credentials credentials) {
+    private void validateChangePasswordRequest(ChangePasswordRequest request, SkyXpCredentials skyXpCredentials) {
         if (!request.getNewPassword().equals(request.getConfirmPassword())) {
             throw new BadlyConfirmedPasswordException("Confirm password does not match.");
         }
-        if (!passwordService.authenticate(request.getOldPassword(), credentials.getPassword())) {
+        if (!passwordService.authenticate(request.getOldPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }
     }

@@ -13,7 +13,6 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class FactoryFacade {
     private final AddToQueueService addToQueueService;
     private final FactoryQueryService factoryQueryService;
@@ -22,7 +21,7 @@ public class FactoryFacade {
         addToQueueService.addToQueue(characterId, request);
     }
 
-    public Map<String, MaterialView> getMaterials(String characterId, String userId) {
-        return factoryQueryService.getMaterials(characterId, userId);
+    public Map<String, MaterialView> getMaterials(String characterId) {
+        return factoryQueryService.getMaterials(characterId);
     }
 }

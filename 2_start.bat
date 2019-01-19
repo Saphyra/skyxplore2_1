@@ -1,1 +1,1 @@
-java -jar target/skyxplore-1.0-SNAPSHOT.jar
+java -Dspring.profiles.active=test -Dserver.port=9001 -jar target/skyxplore-1.0-SNAPSHOT.jar

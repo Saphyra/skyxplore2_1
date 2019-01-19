@@ -1,5 +1,6 @@
 package skyxplore.service.factory;
 
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,9 @@ import skyxplore.exception.NotEnoughMaterialsException;
 import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.IdGenerator;
+import skyxplore.util.DateTimeUtil;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,6 +29,7 @@ import java.util.Set;
 public class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
+    private final DateTimeUtil dateTimeUtil;
     private final FactoryDao factoryDao;
     private final FactoryQueryService factoryQueryService;
     private final GameDataFacade gameDataFacade;
@@ -74,12 +74,12 @@ public class AddToQueueService {
 
     private Product createProduct(String factoryId, FactoryData elementData, Integer amount) {
         return Product.builder()
-            .productId(idGenerator.getRandomId())
+            .productId(idGenerator.generateRandomId())
             .factoryId(factoryId)
             .elementId(elementData.getId())
             .amount(amount)
             .constructionTime(elementData.getConstructionTime() * amount)
-            .addedAt(LocalDateTime.now(ZoneOffset.UTC).toEpochSecond(ZoneOffset.UTC))
+            .addedAt(dateTimeUtil.convertDomain(dateTimeUtil.now()))
             .build();
     }
 

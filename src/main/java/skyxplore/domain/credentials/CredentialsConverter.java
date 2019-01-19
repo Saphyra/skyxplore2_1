@@ -2,21 +2,20 @@ package skyxplore.domain.credentials;
 
 import org.springframework.stereotype.Component;
 
-import skyxplore.domain.ConverterBase;
+import com.github.saphyra.converter.ConverterBase;
 
 @Component
-//TODO unit test
-public class CredentialsConverter extends ConverterBase<CredentialsEntity, Credentials> {
+public class CredentialsConverter extends ConverterBase<CredentialsEntity, SkyXpCredentials> {
     @Override
-    public Credentials convertEntity(CredentialsEntity entity) {
+    public SkyXpCredentials processEntityConversion(CredentialsEntity entity) {
         if(entity == null){
             return null;
         }
-        return new Credentials(entity.getUserId(), entity.getUserName(), entity.getPassword());
+        return new SkyXpCredentials(entity.getUserId(), entity.getUserName(), entity.getPassword());
     }
 
     @Override
-    public CredentialsEntity convertDomain(Credentials domain) {
+    public CredentialsEntity processDomainConversion(SkyXpCredentials domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

@@ -11,20 +11,23 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class CookieUtil {
     public String getCookie(HttpServletRequest request, String name) {
-        Optional<Cookie> cookie = Arrays.stream(request.getCookies())
+        Cookie[] cookieArray = request.getCookies();
+        if (cookieArray == null) {
+            return null;
+        }
+        Optional<Cookie> cookie = Arrays.stream(cookieArray)
             .filter(c -> c.getName().equals(name))
             .findAny();
         return cookie.map(Cookie::getValue).orElse(null);
     }
 
-    public void setCookie(HttpServletResponse response, String name, String value){
+    public void setCookie(HttpServletResponse response, String name, String value) {
         response.addCookie(createCookie(name, value));
     }
 
-    private Cookie createCookie(String name, String value){
+    private Cookie createCookie(String name, String value) {
         Cookie cookie = new Cookie(name, value);
         cookie.setHttpOnly(true);
         cookie.setPath("/");

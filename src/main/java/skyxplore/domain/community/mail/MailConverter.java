@@ -1,20 +1,19 @@
 package skyxplore.domain.community.mail;
 
+import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ConverterBase;
-import skyxplore.encryption.StringEncryptor;
 import skyxplore.util.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class MailConverter extends ConverterBase<MailEntity, Mail> {
     private final DateTimeUtil dateTimeUtil;
     private final StringEncryptor stringEncryptor;
 
     @Override
-    public Mail convertEntity(MailEntity entity) {
+    public Mail processEntityConversion(MailEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -34,7 +33,7 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
     }
 
     @Override
-    public MailEntity convertDomain(Mail domain) {
+    public MailEntity processDomainConversion(Mail domain) {
         if(domain == null){
             throw new IllegalArgumentException("domain must not be null.");
         }

@@ -1,8 +1,11 @@
 package skyxplore.domain.character;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import skyxplore.exception.NotEnoughMoneyException;
-import skyxplore.exception.base.BadRequestException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +14,9 @@ import java.util.Set;
 
 @SuppressWarnings({"unused", "unchecked"})
 @Data
-//TODO unit test
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SkyXpCharacter {
     private String characterId;
     private String characterName;
@@ -50,7 +55,7 @@ public class SkyXpCharacter {
     }
 
     public void spendMoney(Integer money) {
-        if(this.money < money){
+        if (this.money < money) {
             throw new NotEnoughMoneyException(characterId + " wanted to buy items cost " + money + ", while he had only " + this.money);
         }
         this.money -= money;

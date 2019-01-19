@@ -50,7 +50,7 @@
     */
     function getMaterials(){
         try{
-            const path = "factory/materials/" + sessionStorage.characterId;
+            const path = "factory/materials";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 return JSON.parse(result.response);
@@ -66,22 +66,16 @@
     
     /*
     Queries the factory queue
-    Arguments
-        - characterId: the id of the character
     Returns:
         - the queue
         - empty object upon fail
     Throws
-        - IllegalArgument exception if characterId is null or undefined
         - UnknownServerError exception if request fails.
     */
-    function getQueue(characterId){
+    function getQueue(){
         try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characterId must not be null or undefined");
-            }
             
-            const path = "factory/queue/" + characterId
+            const path = "factory/queue";
             const result = dao.sendRequest(dao.GET, path);
             if(result.status == ResponseStatus.OK){
                 const response = JSON.parse(result.response);

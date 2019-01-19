@@ -1,16 +1,15 @@
 package skyxplore.domain.ship;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.Data;
 import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.exception.base.BadRequestException;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @SuppressWarnings({"unchecked", "unused", "WeakerAccess"})
 @Data
-//TODO unit test
 public class EquippedShip {
     private String shipId;
     private String characterId;

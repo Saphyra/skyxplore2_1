@@ -1,13 +1,13 @@
 package skyxplore.exception;
 
-import skyxplore.controller.request.community.AllowBlockedCharacterRequest;
-import skyxplore.exception.base.NotFoundException;
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 
 public class BlockedCharacterNotFoundException extends NotFoundException {
-    public BlockedCharacterNotFoundException(AllowBlockedCharacterRequest request) {
+    public BlockedCharacterNotFoundException(String characterId, String blockedCharacterId) {
         super("Blocked character not found with characterId "
-            + request.getCharacterId()
+            + characterId
             + " and blockedCharacterId "
-            + request.getBlockedCharacterId());
+            + blockedCharacterId
+        );
     }
 }

@@ -1,7 +1,7 @@
 package skyxplore.controller.view.character;
 
 import static org.junit.Assert.assertEquals;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
 import static skyxplore.testutil.TestUtils.createCharacter;
 
@@ -20,7 +20,7 @@ public class CharacterViewConverterTest {
         //WHEN
         CharacterView view = underTest.convertDomain(createCharacter());
         //THEN
-        assertEquals(CHARACTER_ID, view.getCharacterId());
+        assertEquals(CHARACTER_ID_1, view.getCharacterId());
         assertEquals(CHARACTER_NAME, view.getCharacterName());
     }
 }

@@ -106,7 +106,7 @@
             if(shipDao.equipShip(itemId, sessionStorage.characterId)){
                 notificationService.showSuccess("Hajó felszerelve.");
             }else{
-                notificationService.showError("Hiba a hajü felszerelése során.");
+                notificationService.showError("Hiba a hajó felszerelése során.");
             }
             
             pageController.refresh(true);

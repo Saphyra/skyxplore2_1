@@ -16,40 +16,41 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static skyxplore.controller.CharacterController.RENAME_CHARACTER_MAPPING;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+
 @RequiredArgsConstructor
 @Slf4j
 @Component
-//TODO unit test
 public class CharacterAuthFilter extends OncePerRequestFilter {
-    public static final String COOKIE_CHARACTER_ID = "characterid";
-
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
     private static final List<String> allowedUris = Arrays.asList(
         "/",
         "/**/favicon.ico",
         "/login",
-        "/registration",
-        "/isusernameexists",
-        "/isemailexists",
+        "/logout",
         "/css/**",
         "/images/**",
         "/js/**",
         "/characterselect",
         "/character/characters",
         "/account",
-        "/user/*",
+        "/user/**",
         "/character",
         "/character/select/*",
-        "/character/ischarnameexists/*"
+        "/character/name/exist",
+        "/" + RENAME_CHARACTER_MAPPING,
+        "/character/delete/*"
     );
 
     private final CharacterQueryService characterQueryService;
     private final CookieUtil cookieUtil;
+    private final CustomFilterHelper customFilterHelper;
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
@@ -63,13 +64,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
             log.debug("Authentication successful");
             filterChain.doFilter(request, response);
         } else {
-            if ("rest".equals(request.getHeader("Request-Type"))) {
-                log.info("Sending error. Cause: Unauthorized character access.");
-                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Authentication failed.");
-            } else {
-                log.info("Redirect to characterSelect page. Cause: Unauthorized character access.");
-                response.sendRedirect(PageController.CHARACTER_SELECT_MAPPING);
-            }
+            customFilterHelper.handleUnauthorized(request, response, PageController.CHARACTER_SELECT_MAPPING);
         }
     }
 
@@ -78,7 +73,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
     }
 
     private boolean isAuthenticated(HttpServletRequest request) {
-        String userId = cookieUtil.getCookie(request, AuthFilter.COOKIE_USER_ID);
+        String userId = cookieUtil.getCookie(request, COOKIE_USER_ID);
         String characterId = cookieUtil.getCookie(request, COOKIE_CHARACTER_ID);
 
         if (userId == null || characterId == null) {
@@ -86,9 +81,9 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
             return false;
         }
 
-        try{
+        try {
             characterQueryService.findCharacterByIdAuthorized(characterId, userId);
-        }catch (CharacterNotFoundException | InvalidAccessException e){
+        } catch (CharacterNotFoundException | InvalidAccessException e) {
             log.warn("Character authentication failed.", e);
             return false;
         }

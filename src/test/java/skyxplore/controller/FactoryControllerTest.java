@@ -36,9 +36,9 @@ public class FactoryControllerTest {
         //GIVEN
         AddToQueueRequest request = createAddToQueueRequest();
         //WHEN
-        underTest.addToQueue(request, CHARACTER_ID);
+        underTest.addToQueue(request, CHARACTER_ID_1);
         //THEN
-        verify(factoryFacade).addToQueue(CHARACTER_ID, request);
+        verify(factoryFacade).addToQueue(CHARACTER_ID_1, request);
     }
 
     @Test
@@ -47,11 +47,11 @@ public class FactoryControllerTest {
         MaterialView view = createMaterialView();
         Map<String,MaterialView> map = new HashMap<>();
         map.put(MATERIAL_KEY, view);
-        when(factoryFacade.getMaterials(CHARACTER_ID, USER_ID)).thenReturn(map);
+        when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(map);
         //WHEN
-        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID, USER_ID);
+        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
-        verify(factoryFacade).getMaterials(CHARACTER_ID, USER_ID);
+        verify(factoryFacade).getMaterials(CHARACTER_ID_1);
         assertEquals(1, result.size());
         assertEquals(view, result.get(MATERIAL_KEY));
     }
@@ -60,11 +60,11 @@ public class FactoryControllerTest {
     public void testGetQueueShouldCallFacadeAndReturnResult(){
         //GIVEN
         View<ProductViewList> view = createProductViewListView();
-        when(productFacade.getQueue(USER_ID, CHARACTER_ID)).thenReturn(view);
+        when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(view);
         //WHEN
-        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID, USER_ID);
+        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1);
         //THEN
-        verify(productFacade).getQueue(USER_ID, CHARACTER_ID);
+        verify(productFacade).getQueue(CHARACTER_ID_1);
         assertEquals(view, result);
     }
 }

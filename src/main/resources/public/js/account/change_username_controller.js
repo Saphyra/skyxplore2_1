@@ -33,7 +33,6 @@
                     throwException("UnknownServerError", result.toString());
                 }
                 
-                newUserNameInput.value = "";
                 passwordInput.value = "";
             }else{
                 for(let mindex in validationResult.responses){

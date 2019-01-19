@@ -3,7 +3,7 @@ package skyxplore.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createProductViewListView;
 
@@ -29,11 +29,11 @@ public class ProductFacadeTest {
     public void testGetQueueShouldCallService() {
         //GIVEN
         View<ProductViewList> productView = createProductViewListView();
-        when(productQueryService.getQueue(USER_ID, CHARACTER_ID)).thenReturn(productView);
+        when(productQueryService.getQueue(CHARACTER_ID_1)).thenReturn(productView);
         //WHEN
-        View<ProductViewList> result = underTest.getQueue(USER_ID, CHARACTER_ID);
+        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1);
         //THEN
-        verify(productQueryService).getQueue(USER_ID, CHARACTER_ID);
+        verify(productQueryService).getQueue(CHARACTER_ID_1);
         assertEquals(productView, result);
     }
 

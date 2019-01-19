@@ -1,6 +1,6 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.NotFoundException;
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 
 public class CharacterNotFoundException extends NotFoundException {
     public CharacterNotFoundException(String message){

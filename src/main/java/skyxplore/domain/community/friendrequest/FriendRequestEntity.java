@@ -15,12 +15,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class FriendRequestEntity {
     @Id
-    @Column(name = "friend_request_id")
+    @Column(name = "friend_request_id", length = 50)
     private String friendRequestId;
 
-    @Column(name = "character_id")
+    @Column(name = "character_id", length = 50)
     private String characterId;
 
-    @Column(name = "friend_id")
+    @Column(name = "friend_id", length = 50)
     private String friendId;
 }

@@ -1,32 +1,30 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.slot.SlotConverter;
 import skyxplore.dataaccess.db.repository.SlotRepository;
 import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.domain.slot.SlotEntity;
 
 import javax.transaction.Transactional;
 
-@RequiredArgsConstructor
 @Component
 @Slf4j
-public class SlotDao {
-    private final SlotRepository slotRepository;
-    private final SlotConverter slotConverter;
+public class SlotDao extends AbstractDao<SlotEntity, EquippedSlot, String, SlotRepository> {
+
+    public SlotDao(Converter<SlotEntity, EquippedSlot> converter, SlotRepository repository) {
+        super(converter, repository);
+    }
 
     @Transactional
-    public void deleteByShipId(String shipId){
+    public void deleteByShipId(String shipId) {
         log.info("Deleting slots of {}", shipId);
-        slotRepository.deleteByShipId(shipId);
+        repository.deleteByShipId(shipId);
     }
 
-    public EquippedSlot getById(String slotId){
-        return slotConverter.convertEntity(slotRepository.getOne(slotId));
-    }
-
-    public void save(EquippedSlot slot){
-        slotRepository.save(slotConverter.convertDomain(slot));
+    public EquippedSlot getById(String slotId) {
+        return converter.convertEntity(repository.getOne(slotId));
     }
 }

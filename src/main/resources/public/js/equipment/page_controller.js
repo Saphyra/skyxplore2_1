@@ -19,9 +19,6 @@
     function refresh(needReload){
         try{
             const characterId = sessionStorage.characterId;
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalState", "characterId cannot be found.");
-            }
             
             if(needReload == null || needReload == undefined){
                 needReload = true;

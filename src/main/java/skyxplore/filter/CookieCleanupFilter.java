@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
-import skyxplore.controller.PageController;
 import skyxplore.util.CookieUtil;
 
 import javax.servlet.FilterChain;
@@ -14,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static skyxplore.controller.PageController.CHARACTER_SELECT_MAPPING;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class CookieCleanupFilter extends OncePerRequestFilter {
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
 
@@ -28,9 +29,9 @@ public class CookieCleanupFilter extends OncePerRequestFilter {
         log.debug("CookieCleanupFilter");
         String path = request.getRequestURI();
 
-        if (pathMatcher.match(PageController.CHARACTER_SELECT_MAPPING, path)) {
+        if (pathMatcher.match(CHARACTER_SELECT_MAPPING, path)) {
             log.info("Cleaning up characterCookie...");
-            cookieUtil.setCookie(response, CharacterAuthFilter.COOKIE_CHARACTER_ID, "");
+            cookieUtil.setCookie(response, COOKIE_CHARACTER_ID, "");
         }
 
         filterChain.doFilter(request, response);

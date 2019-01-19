@@ -15,7 +15,6 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class MailFacade {
     private final CharacterQueryService characterQueryService;
     private final MailDeleteService mailDeleteService;
@@ -31,8 +30,8 @@ public class MailFacade {
         mailDeleteService.deleteMails(characterId, mailIds);
     }
 
-    public List<SkyXpCharacter> getAddressees(String characterId, String userId, String name) {
-        return characterQueryService.getCharactersCanBeAddressee(name, characterId, userId);
+    public List<SkyXpCharacter> getAddressees(String characterId, String name) {
+        return characterQueryService.getCharactersCanBeAddressee(name, characterId);
     }
 
     public List<Mail> getArchivedMails(String characterId) {
@@ -51,8 +50,8 @@ public class MailFacade {
         return mailQueryService.getSentMails(characterId);
     }
 
-    public void sendMail(SendMailRequest request, String userId) {
-        mailSenderService.sendMail(request, userId);
+    public void sendMail(SendMailRequest request, String characterId) {
+        mailSenderService.sendMail(request, characterId);
     }
 
     public void setMailReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {

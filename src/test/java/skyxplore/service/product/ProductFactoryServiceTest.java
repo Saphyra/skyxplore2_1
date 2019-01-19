@@ -1,11 +1,34 @@
 package skyxplore.service.product;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.CharacterDao;
+import skyxplore.dataaccess.db.FactoryDao;
+import skyxplore.dataaccess.db.ProductDao;
+import skyxplore.dataaccess.gamedata.entity.Material;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.materials.Materials;
+import skyxplore.domain.product.Product;
+import skyxplore.service.GameDataFacade;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.service.factory.FactoryQueryService;
+import skyxplore.testutil.TestGeneralDescription;
+import skyxplore.util.DateTimeUtil;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_2;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_3;
@@ -21,30 +44,12 @@ import static skyxplore.testutil.TestUtils.createFactory;
 import static skyxplore.testutil.TestUtils.createMaterial;
 import static skyxplore.testutil.TestUtils.createProduct;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.db.ProductDao;
-import skyxplore.dataaccess.gamedata.entity.Material;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.product.Product;
-import skyxplore.service.GameDataFacade;
-import skyxplore.testutil.TestGeneralDescription;
-import skyxplore.util.DateTimeUtil;
-
 @RunWith(MockitoJUnitRunner.class)
 public class ProductFactoryServiceTest {
     private static final String PRODUCT_EXCEPTIONAL_ELEMENT = "exceptional";
+
+    @Mock
+    private CharacterQueryService characterQueryService;
 
     @Mock
     private CharacterDao characterDao;
@@ -54,6 +59,9 @@ public class ProductFactoryServiceTest {
 
     @Mock
     private GameDataFacade gameDataFacade;
+
+    @Mock
+    private FactoryQueryService factoryQueryService;
 
     @Mock
     private FactoryDao factoryDao;
@@ -91,7 +99,8 @@ public class ProductFactoryServiceTest {
         when(gameDataFacade.getData(PRODUCT_ELEMENT_ID_MATERIAL)).thenReturn(material);
 
         Factory factoryForMaterialProduct = createFactory(FACTORY_ID_1);
-        when(factoryDao.findById(FACTORY_ID_1)).thenReturn(factoryForMaterialProduct);
+        factoryForMaterialProduct.setMaterials(new Materials());
+        when(factoryQueryService.findByFactoryId(FACTORY_ID_1)).thenReturn(factoryForMaterialProduct);
 
         //===FINISH EXCEPTIONAL PRODUCT===
         when(gameDataFacade.getData(PRODUCT_EXCEPTIONAL_ELEMENT)).thenThrow(new RuntimeException());
@@ -100,10 +109,11 @@ public class ProductFactoryServiceTest {
         GeneralDescription generalDescription = new TestGeneralDescription();
         when(gameDataFacade.getData(PRODUCT_ELEMENT_ID_EQUIPMENT)).thenReturn(generalDescription);
 
-        when(characterDao.findById(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
 
         Factory factoryForEquipmentProduct = createFactory(FACTORY_ID_3);
-        when(factoryDao.findById(FACTORY_ID_3)).thenReturn(factoryForEquipmentProduct);
+        factoryForEquipmentProduct.setMaterials(new Materials());
+        when(factoryQueryService.findByFactoryId(FACTORY_ID_3)).thenReturn(factoryForEquipmentProduct);
 
         //===PRODUCTS TO START===
         Product exceptionalProduct = createProduct(PRODUCT_ID_1);
@@ -124,14 +134,14 @@ public class ProductFactoryServiceTest {
         //THEN
         verify(productDao).getFinishedProducts();
         verify(gameDataFacade).getData(PRODUCT_ELEMENT_ID_MATERIAL);
-        verify(factoryDao).findById(FACTORY_ID_1);
+        verify(factoryQueryService).findByFactoryId(FACTORY_ID_1);
         assertEquals(1, factoryForMaterialProduct.getMaterials().size());
         assertEquals(PRODUCT_AMOUNT, factoryForMaterialProduct.getMaterials().get(PRODUCT_ELEMENT_ID_MATERIAL));
         verify(factoryDao).save(factoryForMaterialProduct);
         verify(gameDataFacade).getData(PRODUCT_EXCEPTIONAL_ELEMENT);
         verify(gameDataFacade).getData(PRODUCT_ELEMENT_ID_EQUIPMENT);
-        verify(factoryDao).findById(FACTORY_ID_3);
-        verify(characterDao).findById(CHARACTER_ID);
+        verify(factoryQueryService).findByFactoryId(FACTORY_ID_3);
+        verify(characterQueryService).findByCharacterId(CHARACTER_ID_1);
         verify(character).addEquipments(PRODUCT_ELEMENT_ID_EQUIPMENT, PRODUCT_AMOUNT);
         verify(characterDao).save(character);
         verify(productDao).delete(finishedMaterialProduct);

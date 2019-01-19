@@ -16,7 +16,6 @@ import skyxplore.service.ship.UnequipService;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class EquippedShipFacade {
     public static final String DEFENSE_SLOT_NAME = "defense";
     public static final String WEAPON_SLOT_NAME = "weapon";
@@ -32,19 +31,19 @@ public class EquippedShipFacade {
     private final ShipQueryService shipQueryService;
     private final UnequipService unequipService;
 
-    public void equip(EquipRequest request, String userId, String characterId) {
-        equipService.equip(request, userId, characterId);
+    public void equip(EquipRequest request, String characterId) {
+        equipService.equip(request, characterId);
     }
 
-    public void equipShip(String userId, String characterId, String shipId) {
-        equipShipService.equipShip(userId, characterId, shipId);
+    public void equipShip(String characterId, String shipId) {
+        equipShipService.equipShip(characterId, shipId);
     }
 
-    public View<ShipView> getShipData(String characterId, String userId) {
-        return shipQueryService.getShipData(characterId, userId);
+    public View<ShipView> getShipData(String characterId) {
+        return shipQueryService.getShipData(characterId);
     }
 
-    public void unequip(UnequipRequest request, String userId, String characterId) {
-        unequipService.unequip(request, userId, characterId);
+    public void unequip(UnequipRequest request, String characterId) {
+        unequipService.unequip(request, characterId);
     }
 }

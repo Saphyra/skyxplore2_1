@@ -1,5 +1,19 @@
 package skyxplore.controller.view;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.controller.GameDataController;
+import skyxplore.controller.request.character.EquipmentCategoryRequest;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
+import skyxplore.dataaccess.gamedata.subservice.CategoryService;
+import skyxplore.service.GameDataFacade;
+
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -7,21 +21,6 @@ import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CATEGORY_CONTENT;
 import static skyxplore.testutil.TestUtils.CATEGORY_ID;
 import static skyxplore.testutil.TestUtils.createGeneralDescriptionMap;
-
-import java.util.Map;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.controller.GameDataController;
-import skyxplore.controller.request.character.EquipmentCategoryRequest;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.dataaccess.gamedata.subservice.CategoryService;
-import skyxplore.exception.base.NotFoundException;
-import skyxplore.service.GameDataFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameDataControllerTest {

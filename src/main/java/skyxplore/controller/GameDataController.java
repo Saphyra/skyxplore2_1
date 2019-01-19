@@ -1,5 +1,6 @@
 package skyxplore.controller;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.CategoryService;
-import skyxplore.exception.base.NotFoundException;
 import skyxplore.service.GameDataFacade;
 
 import java.util.Map;

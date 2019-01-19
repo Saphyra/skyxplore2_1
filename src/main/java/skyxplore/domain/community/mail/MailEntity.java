@@ -19,13 +19,13 @@ import javax.persistence.Table;
 @Builder
 public class MailEntity {
     @Id
-    @Column(name = "mail_id")
+    @Column(name = "mail_id", length = 50)
     private String mailId;
 
-    @Column(name = "mail_from")
+    @Column(name = "mail_from", length = 50)
     private String from;
 
-    @Column(name = "mail_to")
+    @Column(name = "mail_to", length = 50)
     private String to;
 
     @Column(name = "subject")

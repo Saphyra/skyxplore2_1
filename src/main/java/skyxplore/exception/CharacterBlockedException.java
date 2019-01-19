@@ -1,9 +1,10 @@
 package skyxplore.exception;
 
-import skyxplore.exception.base.ForbiddenException;
+import com.github.saphyra.exceptionhandling.exception.RestException;
+import org.springframework.http.HttpStatus;
 
-public class CharacterBlockedException extends ForbiddenException {
+public class CharacterBlockedException extends RestException {
     public CharacterBlockedException(String message) {
-        super(message);
+        super(HttpStatus.LOCKED, message);
     }
 }

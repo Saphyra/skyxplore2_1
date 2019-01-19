@@ -1,44 +1,43 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.converter.Converter;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.ship.EquippedShipConverter;
-import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.dataaccess.db.repository.EquippedShipRepository;
-import skyxplore.exception.ShipNotFoundException;
 import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.ship.EquippedShipEntity;
+import skyxplore.exception.ShipNotFoundException;
 
 @SuppressWarnings("WeakerAccess")
 @Component
-@RequiredArgsConstructor
 @Slf4j
-public class EquippedShipDao {
-    private final EquippedShipRepository equippedShipRepository;
+public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShip, String, EquippedShipRepository> {
     private final SlotDao slotDao;
 
-    private final EquippedShipConverter equippedShipConverter;
+    public EquippedShipDao(
+        Converter<EquippedShipEntity, EquippedShip> converter,
+        EquippedShipRepository repository,
+        SlotDao slotDao
+    ) {
+        super(converter, repository);
+        this.slotDao = slotDao;
+    }
 
     public void deleteByCharacterId(String characterId){
-        EquippedShipEntity ship = equippedShipRepository.getByCharacterId(characterId);
+        EquippedShipEntity ship = repository.getByCharacterId(characterId);
         if(ship == null){
             throw new ShipNotFoundException("Ship not found for character " + characterId);
         }
         slotDao.deleteByShipId(ship.getShipId());
 
         log.info("Deleting ship of {}", characterId);
-        equippedShipRepository.delete(ship);
+        repository.delete(ship);
     }
 
     public EquippedShip getShipByCharacterId(String characterId) {
-        return equippedShipConverter.convertEntity(
-                equippedShipRepository.getByCharacterId(characterId)
-        );
-    }
-
-    public EquippedShip save(EquippedShip ship) {
-        return equippedShipConverter.convertEntity(
-                equippedShipRepository.save(equippedShipConverter.convertDomain(ship))
+        return converter.convertEntity(
+                repository.getByCharacterId(characterId)
         );
     }
 }

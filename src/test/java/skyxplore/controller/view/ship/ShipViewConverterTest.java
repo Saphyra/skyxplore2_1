@@ -2,7 +2,7 @@ package skyxplore.controller.view.ship;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.DATA_ABILITY;
 import static skyxplore.testutil.TestUtils.DATA_CONNECTOR;
 import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
@@ -62,7 +62,7 @@ public class ShipViewConverterTest {
         );
         //THEN
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
-        assertEquals(CHARACTER_ID, result.getCharacterId());
+        assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(EQUIPPED_SHIP_TYPE, result.getShipType());
         assertEquals(DATA_SHIP_COREHULL, result.getCoreHull());
         assertEquals(DATA_SHIP_CONNECTOR_SLOT, result.getConnectorSlot());

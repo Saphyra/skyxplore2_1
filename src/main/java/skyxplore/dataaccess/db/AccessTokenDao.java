@@ -1,63 +1,49 @@
 package skyxplore.dataaccess.db;
 
-import lombok.RequiredArgsConstructor;
+import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.AccessTokenRepository;
-import skyxplore.domain.accesstoken.AccessToken;
-import skyxplore.domain.accesstoken.AccessTokenConverter;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
+import skyxplore.domain.accesstoken.SkyXpAccessTokenConverter;
+import skyxplore.domain.accesstoken.AccessTokenEntity;
+import skyxplore.util.DateTimeUtil;
 
+import javax.transaction.Transactional;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
-@SuppressWarnings("unused")
+
+@SuppressWarnings("WeakerAccess")
 @Component
-@RequiredArgsConstructor
 @Slf4j
-//TODO unit test
-public class AccessTokenDao {
-    private final AccessTokenRepository accessTokenRepository;
-    private final AccessTokenConverter accessTokenConverter;
+public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessToken, String, AccessTokenRepository> {
+    private final DateTimeUtil dateTimeUtil;
 
-    public void delete(AccessToken accessToken) {
-        accessTokenRepository.deleteById(accessToken.getAccessTokenId());
+    public AccessTokenDao(SkyXpAccessTokenConverter converter, AccessTokenRepository repository, DateTimeUtil dateTimeUtil) {
+        super(converter, repository);
+        this.dateTimeUtil = dateTimeUtil;
     }
 
-    public void deleteById(String accessTokenId) {
-        accessTokenRepository.deleteById(accessTokenId);
-    }
-
+    @Transactional
     public void deleteByUserId(String userId) {
         log.info("Deleting accessToken of user {}", userId);
-        accessTokenRepository.deleteByUserId(userId);
+        repository.deleteByUserId(userId);
     }
 
-    public void deleteExpired(Long expiration) {
-        accessTokenRepository.deleteExpired(expiration);
+    public void deleteExpired(OffsetDateTime expiration) {
+        repository.deleteExpired(dateTimeUtil.convertDomain(expiration));
     }
 
-    public AccessToken findByTokenId(String tokenId){
-        return accessTokenRepository.findById(tokenId)
-            .map(accessTokenConverter::convertEntity)
-            .orElse(null);
+    public Optional<SkyXpAccessToken> findByCharacterId(String characterId) {
+        return converter.convertEntityToOptional(repository.findByCharacterId(characterId));
     }
 
-    public AccessToken findByUserId(String userId) {
-        return accessTokenConverter.convertEntity(accessTokenRepository.findByUserId(userId));
+    public Optional<SkyXpAccessToken> findByUserId(String userId) {
+        return converter.convertEntityToOptional(repository.findByUserId(userId));
     }
 
-    public AccessToken findByUserIdOrTokenId(String userId, String tokenId){
-        return accessTokenConverter.convertEntity(accessTokenRepository.findByUserIdOrAccessTokenId(userId, tokenId));
-    }
-
-    public void save(AccessToken accessToken) {
-        accessTokenRepository.save(accessTokenConverter.convertDomain(accessToken));
-    }
-
-    public void update(AccessToken token) {
-        save(token);
-    }
-
-    public Optional<AccessToken> findByCharacterId(String characterId) {
-        return Optional.ofNullable(accessTokenConverter.convertEntity(accessTokenRepository.findByCharacterId(characterId)));
+    public Optional<SkyXpAccessToken> findByUserIdOrTokenId(String userId, String tokenId) {
+        return converter.convertEntityToOptional(repository.findByUserIdOrAccessTokenId(userId, tokenId));
     }
 }

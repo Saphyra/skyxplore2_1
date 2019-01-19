@@ -1,36 +1,41 @@
 package skyxplore.service.community;
 
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
+import skyxplore.exception.CharacterBlockedException;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.util.DateTimeUtil;
-import skyxplore.util.IdGenerator;
 
 @RequiredArgsConstructor
 @Service
-//TODO unit test
 public class MailSenderService {
+    private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
     private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
     private final MailDao mailDao;
 
-    public void sendMail(SendMailRequest request, String userId) {
-        characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
+    public void sendMail(SendMailRequest request, String characterId) {
         characterQueryService.findByCharacterId(request.getAddresseeId());
-        Mail mail = createMail(request);
+        checkBlockStatus(characterId, request.getAddresseeId());
+        Mail mail = createMail(request, characterId);
         mailDao.save(mail);
     }
 
-    private Mail createMail(SendMailRequest request) {
+    private void checkBlockStatus(String characterId, String addresseeId) {
+        if(!blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, addresseeId).isEmpty()){
+            throw new CharacterBlockedException("You blocked each other. Mail cannot be sent.");
+        }
+    }
+
+    private Mail createMail(SendMailRequest request, String characterId) {
         Mail mail = new Mail();
-        mail.setMailId(idGenerator.getRandomId());
-        mail.setFrom(request.getCharacterId());
+        mail.setMailId(idGenerator.generateRandomId());
+        mail.setFrom(characterId);
         mail.setTo(request.getAddresseeId());
         mail.setSubject(request.getSubject());
         mail.setMessage(request.getMessage());

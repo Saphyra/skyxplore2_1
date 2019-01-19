@@ -1,32 +1,30 @@
 package skyxplore.service.gamedata;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
-@Slf4j
-//TODO unit test
 public class EquipmentDataCollectorService {
     private final DataQueryService dataQueryService;
     private final ShipService shipService;
 
 
     public Map<String, GeneralDescription> collectEquipmentData(List<String> ids) {
-        return ids.stream().map(dataQueryService::getData).collect(Collectors.toMap(GeneralDescription::getId, g -> g, (k1, k2) -> k1));
+        return ids.stream()
+            .map(dataQueryService::getData)
+            .collect(Collectors.toMap(GeneralDescription::getId, g -> g, (k1, k2) -> k1));
     }
 
     public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {

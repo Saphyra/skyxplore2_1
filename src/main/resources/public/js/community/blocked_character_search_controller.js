@@ -9,7 +9,7 @@
         try{
             const name = $("#blockcharactername").val();
             if(name.length >= 3){
-                const characters = sortCharacters(communityDao.getBlockableCharacters(sessionStorage.characterId, name));
+                const characters = sortCharacters(communityDao.getBlockableCharacters(name));
                 showCharacters(characters);
             }
         }catch(err){
