@@ -1,16 +1,15 @@
 package selenium.logic.domain;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.Util.hasClass;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import selenium.logic.validator.NotificationValidator;
+
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.Util.hasClass;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -27,6 +26,7 @@ public class Mail {
     private static final String NOTIFICATION_MAIL_DELETED = "Üzenet törölve.";
     private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
+    private static final String SELECTOR_REPLY_BUTTON = ".mailbody button:last-child";
 
     @Getter
     private final WebElement element;
@@ -60,7 +60,7 @@ public class Mail {
     }
 
     public String getSubject() {
-        return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split(": ")[1];
+        return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split("Tárgy: ")[1];
     }
 
     public void restore(NotificationValidator notificationValidator) {
@@ -80,5 +80,9 @@ public class Mail {
 
     public void markAsUnread() {
         element.findElement(By.cssSelector(SELECTOR_MARK_AS_UNREAD_BUTTON)).click();
+    }
+
+    public void reply() {
+        element.findElement(By.cssSelector(SELECTOR_REPLY_BUTTON)).click();
     }
 }

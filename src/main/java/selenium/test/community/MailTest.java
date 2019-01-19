@@ -28,6 +28,7 @@ import selenium.test.community.mail.FilterTestShouldShowMatchingCharacters;
 import selenium.test.community.mail.MarkMailAsReadTest;
 import selenium.test.community.mail.MarkMailAsUnreadTest;
 import selenium.test.community.mail.ReadMailTest;
+import selenium.test.community.mail.ReplyMailTest;
 import selenium.test.community.mail.RestoreMailTest;
 import selenium.test.community.mail.SendMailChangedAddresseeTest;
 import selenium.test.community.mail.SendMailEmptyAddresseeTest;
@@ -340,5 +341,17 @@ public class MailTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .build()
             .testBulkMarkMailsAsUnread();
+    }
+
+    @Test
+    public void testReplyMail(){
+        ReplyMailTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testReplyMail();
     }
 }
