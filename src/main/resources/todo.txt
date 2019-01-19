@@ -10,9 +10,6 @@ Friendship test
 Block character test
     - block character
         - Cannot reply mail
-    - unblock character
-        - Friend request can be sent
-        - Mail can be sent
 
 Eliminate code smells
 logging

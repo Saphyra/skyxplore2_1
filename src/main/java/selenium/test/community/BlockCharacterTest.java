@@ -18,6 +18,7 @@ import selenium.test.community.block.BlockCharacterTestShouldNotSendMail;
 import selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
 import selenium.test.community.block.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.block.FilterTestShouldShowOnlyMatchingCharacter;
+import selenium.test.community.block.UnblockCharacterTest;
 import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
@@ -31,6 +32,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     private SendMailHelper sendMailHelper;
     private FriendshipTestHelper friendshipTestHelper;
     private CommunityPage communityPage;
+    private NotificationValidator notificationValidator;
 
     @Override
     protected void init() {
@@ -48,9 +50,9 @@ public class BlockCharacterTest extends SeleniumTestApplication {
         );
 
         communityPage = new CommunityPage(driver);
-        NotificationValidator notificationValidator = new NotificationValidator(driver);
+        notificationValidator = new NotificationValidator(driver);
 
-        blockTestHelper = new BlockTestHelper(communityPage, notificationValidator);
+        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator);
 
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
         friendshipTestHelper = new FriendshipTestHelper(communityPage, notificationValidator);
@@ -130,5 +132,18 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .build()
             .testBlockCharacterShouldDeleteFriendship();
+    }
+
+    @Test
+    public void testUnblockCharacter(){
+        UnblockCharacterTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .blockTestHelper(blockTestHelper)
+            .friendshipTestHelper(friendshipTestHelper)
+            .notificationValidator(notificationValidator)
+            .sendMailHelper(sendMailHelper)
+            .build()
+            .testUnblockCharacter();
     }
 }

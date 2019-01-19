@@ -1,8 +1,10 @@
 package selenium.test.community.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.BlockableCharacter;
+import selenium.logic.domain.BlockedCharacter;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BlockTestHelper {
     private static final String NOTIFICATION_CHARACTER_BLOCKED = "Karakter blokkolva.";
+
+    private final WebDriver driver;
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
 
@@ -42,5 +46,12 @@ public class BlockTestHelper {
     private void openBlockCharacterWindow() {
         communityPage.getBlockCharactersPageButton().click();
         communityPage.getBlockCharacterWindowButton().click();
+    }
+
+    public List<BlockedCharacter> getBlockedCharacters() {
+         communityPage.getBlockCharactersPageButton().click();
+        return communityPage.getBlockedCharacters().stream()
+        .map(element -> new BlockedCharacter(driver, element))
+        .collect(Collectors.toList());
     }
 }
