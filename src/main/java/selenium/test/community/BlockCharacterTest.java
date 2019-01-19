@@ -11,6 +11,7 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
+import selenium.test.community.block.BlockCharacterShouldUnableReplyMail;
 import selenium.test.community.block.BlockCharacterTestShouldDeleteFriendRequest;
 import selenium.test.community.block.BlockCharacterTestShouldDeleteFriendship;
 import selenium.test.community.block.BlockCharacterTestShouldNotSendFriendRequest;
@@ -23,6 +24,7 @@ import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.FriendshipTestHelper;
+import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
 
 public class BlockCharacterTest extends SeleniumTestApplication {
@@ -33,6 +35,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     private FriendshipTestHelper friendshipTestHelper;
     private CommunityPage communityPage;
     private NotificationValidator notificationValidator;
+    private MailTestHelper mailTestHelper;
 
     @Override
     protected void init() {
@@ -56,6 +59,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
 
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
         friendshipTestHelper = new FriendshipTestHelper(communityPage, notificationValidator);
+        mailTestHelper = new MailTestHelper(communityPage, driver);
     }
 
     @Test
@@ -132,6 +136,20 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .build()
             .testBlockCharacterShouldDeleteFriendship();
+    }
+
+    @Test
+    public void testBlockCharacterShouldUnableToReplyMail(){
+        BlockCharacterShouldUnableReplyMail.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .blockTestHelper(blockTestHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .build()
+            .testBlockCharacterShouldUnableToReplyMail();
     }
 
     @Test

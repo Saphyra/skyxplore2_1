@@ -1,7 +1,4 @@
 ===Selenium===
-Block character test
-    - block character
-        - Cannot reply mail
 
 Eliminate code smells
     - Split communityTests

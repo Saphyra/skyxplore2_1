@@ -83,6 +83,9 @@ public class Mail {
     }
 
     public void reply() {
+        if (!isRead()) {
+            read();
+        }
         element.findElement(By.cssSelector(SELECTOR_REPLY_BUTTON)).click();
     }
 }

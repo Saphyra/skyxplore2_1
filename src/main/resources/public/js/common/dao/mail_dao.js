@@ -282,6 +282,8 @@
             const response = dao.sendRequest(dao.PUT, path, body);
             if(response.status == ResponseStatus.OK){
                 return true;
+            }else if(response.status == ResponseStatus.LOCKED){
+                return false;
             }else{
                 throwException("UnknownBackendError", response.toString());
             }
