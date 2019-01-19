@@ -59,7 +59,8 @@ public class PropertySourceImpl implements PropertySource {
             "/user/email/exist",
             "/css/**",
             "/images/**",
-            "/js/**"
+            "/js/**",
+            "/i18n/**"
         );
     }
 

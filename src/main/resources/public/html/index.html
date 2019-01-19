@@ -1,68 +1,24 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>SkyXplore 2.1</TITLE>
     <META charset="UTF-8"/>
+    
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
     <LINK rel="stylesheet" href="/css/index/index.css">
-
+    
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
-
-    <SCRIPT src="js/index/login_form_controller.js"></SCRIPT>
-    <SCRIPT src="js/index/registration_form_controller.js"></SCRIPT>
+    <SCRIPT src="js/index/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
-
-<DIV class="cover">
-    <HEADER>
-        <H1>SkyXplore 2.1</H1>
-    </HEADER>
-    <MAIN class="textaligncenter">
-        <SECTION>
-            <INPUT type="text" id="login_username" class="logininput" placeholder="Felhasználónév" required autofocus>
-            <INPUT type="password" id="login_password" class="logininput" placeholder="Jelszó" required>
-            <BUTTON id='login_button' onclick="loginController.sendForm()">Bejelentkezés</BUTTON>
-        </SECTION>
-
-        <SECTION class="registrationcontainer">
-            <H2>Regisztráció</H2>
-
-            <DIV>
-                <DIV class="inlineblock textalignright">
-                    <LABEL>
-                        Felhasználónév:
-                        <INPUT type="text" id="registration_username" class="registrationinput"
-                               placeholder="Felhasználónév">
-                        <DIV id="invalid_username" class="invalid">X</DIV>
-                    </LABEL>
-
-                    <LABEL>
-                        Jelszó:
-                        <INPUT type="password" id="registration_password" class="registrationinput"
-                               placeholder="Jelszó">
-                        <DIV id="invalid_password" class="invalid">X</DIV>
-                    </LABEL>
-
-                    <LABEL>
-                        Jelszó megerősítése:
-                        <INPUT type="password" id="registration_confirm_password" class="registrationinput"
-                               placeholder="Jelszó megerősítése">
-                        <DIV id="invalid_confirm_password" class="invalid">X</DIV>
-                    </LABEL>
-
-                    <LABEL>
-                        E-mail cím:
-                        <INPUT type="email" id="registration_email" class="registrationinput" placeholder="E-mail cím">
-                        <DIV id="invalid_email" class="invalid">X</DIV>
-                    </LABEL>
-                </DIV>
-            </DIV>
-            <BUTTON id="registration_button" onclick="registrationController.sendForm()" disabled>Regisztráció</BUTTON>
-        </SECTION>
-    </MAIN>
-</DIV>
-
+    <DIV class="main-page">
+        <HEADER>
+            <H1 id="main-title"></H1>
+        </HEADER>
+        
+        <MAIN>
+        
+        </MAIN>
+    </DIV>
 </BODY>
 </HTML>

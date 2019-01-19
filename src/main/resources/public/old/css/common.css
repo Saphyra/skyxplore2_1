@@ -1,0 +1,22 @@
+/*================TABLE ELEMENTS==================*/
+.formattedtable th{
+    font-size: 1.5rem;
+}
+.formattedtable th, .formattedtable td{
+    padding: 0.25rem;
+    border: 3px inset white;
+    vertical-align: middle;
+}
+
+.formattedtable tr:nth-child(odd){
+    background-color: rgba(200,200,200,0.1);
+}
+.formattedtable tr:nth-child(even){
+    background-color: rgba(255,255,255,0.25);
+}
+.formattedtable thead tr:first-child{
+    background-color: rgba(0,75,150,0.3);
+}
+.formattedtable tbody tr:hover{
+    background-color: rgba(150,150,150,0.8);
+}

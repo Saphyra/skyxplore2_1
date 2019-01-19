@@ -66,19 +66,30 @@
             function createContainer(){
                 try{
                     const mainContainer = document.createElement("DIV");
-                        mainContainer.classList.add("cover");
+                        mainContainer.style.position = "absolute";
+                        mainContainer.style.top = "0";
+                        mainContainer.style.right = "0";
+                        mainContainer.style.bottom = "0";
+                        mainContainer.style.left = "0";
+                        mainContainer.style.overflow = "auto";
+                        mainContainer.style.border = "5px ridge white";
+                        mainContainer.style.background = "black";
+                        
+                        
                         mainContainer.id = "logcontainermain";
                         
                         const title = document.createElement("H1");
                             title.innerHTML = "Log";
-                            title.classList.add("relative");
+                            title.style.position = "relative";
+                            title.style.borderBottom = "5px ridge white";
+                            title.style.textAlign = "center";
                             
                             const closeButton = document.createElement("BUTTON");
                                 closeButton.innerHTML = "X";
-                                closeButton.classList.add("absolute");
-                                closeButton.classList.add("fontsize1rem");
-                                closeButton.classList.add("right2px");
-                                closeButton.classList.add("top2px");
+                                closeButton.style.position = "absolute";
+                                closeButton.style.fontSize = "1rem";
+                                closeButton.style.right = "2px";
+                                closeButton.style.top = "2px";
                                 closeButton.onclick = function(){
                                     document.body.removeChild(mainContainer);
                                 }
@@ -87,7 +98,7 @@
                     
                         const messageContainer = document.createElement("DIV");
                             messageContainer.id = "logcontainermessages";
-                            messageContainer.classList.add("padding0_25rem");
+                            messageContainer.style.padding = "0.25rem";
                     mainContainer.appendChild(messageContainer);
                         
                     document.body.appendChild(mainContainer);
@@ -104,13 +115,13 @@
                 const color = getColor(level);
                 
                 const messageContainer = document.createElement("DIV");
-                    messageContainer.classList.add("margintop0_5rem");
+                    messageContainer.style.margin = "0.5rem";
                     messageContainer.style.color = color;
                     
                     const levelNode = document.createElement("DIV");
-                        levelNode.classList.add("bold");
-                        levelNode.classList.add("inlineblock");
-                        levelNode.classList.add("width10rem");
+                        levelNode.style.fontWeight = "bold";
+                        levelNode.style.display = "inline-block";
+                        levelNode.style.width = "10rem";
                         levelNode.innerHTML = level.toUpperCase();
                 messageContainer.appendChild(levelNode);
                 

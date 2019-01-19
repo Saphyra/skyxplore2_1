@@ -1,0 +1,11 @@
+{
+  "title": "SkyXplore 2.1",
+  "payload": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "SkyXplore 2.1"
+      }
+    ]
+  }
+}
