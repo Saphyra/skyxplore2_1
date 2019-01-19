@@ -1,7 +1,6 @@
 package selenium.test.community;
 
 import org.junit.Test;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -17,11 +16,12 @@ import selenium.test.community.friendship.CancelFriendRequestTest;
 import selenium.test.community.friendship.DeclineFriendRequestTest;
 import selenium.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.friendship.FilterTestShouldNotShowWhenAlreadyFriend;
+import selenium.test.community.friendship.FilterTestShouldNotShowWhenFriendRequestSent;
 import selenium.test.community.friendship.FilterTestShouldShowOnlyMatchingCharacterNames;
 import selenium.test.community.friendship.SendFriendRequestTest;
-import selenium.test.community.helper.FriendshipTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.FriendshipTestHelper;
 
 public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
@@ -66,6 +66,16 @@ public class FriendshipTest extends SeleniumTestApplication {
             .friendshipTestHelper(friendshipTestHelper)
             .build()
             .testFilterShouldShowOnlyMatchingCharacterNames();
+    }
+
+    @Test
+    public void testFilterShouldNotShowWhenFriendRequestSent(){
+        FilterTestShouldNotShowWhenFriendRequestSent.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .build()
+            .testFilterShouldNotShowWhenFriendRequestSent();
     }
 
     @Test
