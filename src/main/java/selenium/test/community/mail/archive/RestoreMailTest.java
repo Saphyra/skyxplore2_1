@@ -1,27 +1,30 @@
-package selenium.test.community.mail;
-
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
+package selenium.test.community.mail.archive;
 
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
+import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 @Builder
-public class MarkMailAsReadTest {
+public class RestoreMailTest {
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
+    private final NotificationValidator notificationValidator;
 
-    public void testMarkMailAsRead() {
+    public void testRestoreMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -34,8 +37,26 @@ public class MarkMailAsReadTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        mailTestHelper.getMail().markAsRead();
+        mailTestHelper.getReceivedMails().stream()
+            .filter(m -> m.getSender().equals(character.getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Mail not found"))
+            .archive(notificationValidator);
 
-        assertTrue(mailTestHelper.getMail().isRead());
+        mailTestHelper.getArchivedMails().stream()
+            .filter(m -> m.getSender().equals(character.getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Archived Mail not found"))
+            .restore(notificationValidator);
+
+        assertFalse(
+            mailTestHelper.getArchivedMails().stream()
+                .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
+        );
+
+        assertTrue(
+            mailTestHelper.getReceivedMails().stream()
+                .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
+        );
     }
 }

@@ -1,25 +1,27 @@
-package selenium.test.community.mail;
+package selenium.test.community.mail.delete;
 
 import lombok.Builder;
+import org.openqa.selenium.WebDriver;
 import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @Builder
-public class BulkMarkMailsAsUnreadTest {
-    private static final String NOTIFICATION_MAILS_MARKED_AS_UNREAD = "Üzenetek olvasatlannak jelölve.";
+public class BulkDeleteByAddresseeTest {
+    private static final String NOTIFICATION_MAILS_DELETED = "Üzenetek törölve.";
 
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -27,7 +29,7 @@ public class BulkMarkMailsAsUnreadTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testBulkMarkMailsAsUnread() {
+    public void testBulkDeleteByAddressee() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -41,17 +43,18 @@ public class BulkMarkMailsAsUnreadTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::read);
-
         mailTestHelper.getReceivedMails().forEach(Mail::select);
 
-        mailTestHelper.selectBulkMarkAsUnreadOption();
+        mailTestHelper.selectBulkDeleteOptionForReceivedMails();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_MARKED_AS_UNREAD);
+        driver.switchTo().alert().accept();
 
-        mailTestHelper.getReceivedMails().forEach(mail -> assertFalse(mail.isRead()));
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
 
-        assertEquals(2, mailTestHelper.getNumberOfUnreadMails());
+        assertTrue(mailTestHelper.getReceivedMails().isEmpty());
+
+        communityTestHelper.goToCommunityPageOf(account, character);
+        assertEquals(2, mailTestHelper.getSentMails().size());
     }
 }

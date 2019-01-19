@@ -1,8 +1,4 @@
-package selenium.test.community.mail;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
+package selenium.test.community.mail.mark;
 
 import lombok.Builder;
 import selenium.logic.domain.Mail;
@@ -15,9 +11,14 @@ import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 @Builder
-public class BulkRestoreMailTest {
-    private static final String NOTIFICATION_MAILS_RESTORED = "Üzenetek visszaállítva.";
+public class BulkMarkMailsAsReadTest {
+    private static final String NOTIFICATION_MAILS_MARKED_AS_READ = "Üzenetek olvasottnak jelölve.";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
@@ -26,7 +27,7 @@ public class BulkRestoreMailTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testBulkRestoreMail() {
+    public void testBulkMarkMailsAsRead() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -41,17 +42,13 @@ public class BulkRestoreMailTest {
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
         mailTestHelper.getReceivedMails().forEach(Mail::select);
-        mailTestHelper.selectBulkArchiveOption();
+
+        mailTestHelper.selectBulkMarkAsReadOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
-        mailTestHelper.getArchivedMails().forEach(Mail::select);
-        mailTestHelper.selectBulkRestoreOption();
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_MARKED_AS_READ);
+        mailTestHelper.getReceivedMails().forEach(mail -> assertTrue(mail.isRead()));
 
-        communityPage.getExecuteBulkEditButtonForArchivedMails().click();
-
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
-        assertEquals(0, mailTestHelper.getArchivedMails().size());
-
-        assertEquals(2, mailTestHelper.getReceivedMails().size());
+        assertEquals(0, mailTestHelper.getNumberOfUnreadMails());
     }
 }

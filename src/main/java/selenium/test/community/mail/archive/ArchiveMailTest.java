@@ -1,9 +1,4 @@
-package selenium.test.community.mail;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
+package selenium.test.community.mail.archive;
 
 import lombok.Builder;
 import selenium.logic.domain.Mail;
@@ -16,8 +11,14 @@ import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 @Builder
-public class DeleteBySenderTest {
+public class ArchiveMailTest {
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -25,7 +26,7 @@ public class DeleteBySenderTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testDeleteBySender() {
+    public void testArchiveMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -36,15 +37,24 @@ public class DeleteBySenderTest {
         SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
         sendMailHelper.sendMailTo(otherCharacter);
 
-        Mail mail = mailTestHelper.getSentMails().stream()
-            .findAny()
-            .orElseThrow(() -> new RuntimeException("Sent Mail not found"));
-
-        mail.delete(notificationValidator);
-
-        assertTrue(mailTestHelper.getSentMails().isEmpty());
-
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
-        assertEquals(1, mailTestHelper.getReceivedMails().size());
+
+        Mail mail = findMail(character)
+            .orElseThrow(() -> new RuntimeException("Mail not found"));
+
+        mail.archive(notificationValidator);
+
+        assertFalse(findMail(character).isPresent());
+
+        assertTrue(
+            mailTestHelper.getArchivedMails().stream()
+                .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
+        );
+    }
+
+    private Optional<Mail> findMail(SeleniumCharacter character) {
+        return mailTestHelper.getReceivedMails().stream()
+            .filter(m -> m.getSender().equals(character.getCharacterName()))
+            .findFirst();
     }
 }

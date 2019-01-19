@@ -1,14 +1,11 @@
-package selenium.test.community.mail;
+package selenium.test.community.mail.delete;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import lombok.Builder;
-import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -19,10 +16,7 @@ import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
 @Builder
-public class BulkDeleteArchivedMailsTest {
-    private static final String NOTIFICATION_MAILS_DELETED = "Üzenetek törölve.";
-
-    private final WebDriver driver;
+public class DeleteArchivedMailTest {
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -30,7 +24,7 @@ public class BulkDeleteArchivedMailsTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testBulkDeleteArchivedMails() {
+    public void testDeleteArchivedMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -40,26 +34,22 @@ public class BulkDeleteArchivedMailsTest {
         SeleniumAccount otherAccount = accounts.get(1);
         SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
         sendMailHelper.sendMailTo(otherCharacter);
-        sendMailHelper.sendMailTo(otherCharacter);
 
-        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
+        communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::select);
-        mailTestHelper.selectBulkArchiveOption();
-        communityPage.getExecuteBulkEditButtonForReceivedMails().click();
+        mailTestHelper.getReceivedMails().stream()
+            .findAny()
+            .orElseThrow(() -> new RuntimeException("Mail not found"))
+            .archive(notificationValidator);
 
-        mailTestHelper.getArchivedMails().forEach(Mail::select);
-
-        mailTestHelper.selectBulkDeleteOptionForArchivedMails();
-        communityPage.getExecuteBulkEditButtonForArchivedMails().click();
-
-        driver.switchTo().alert().accept();
-
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
+        mailTestHelper.getArchivedMails().stream()
+            .findAny()
+            .orElseThrow(() -> new RuntimeException("Mail not found"))
+            .delete(notificationValidator);
 
         assertTrue(mailTestHelper.getArchivedMails().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(account, character);
-        assertEquals(2, mailTestHelper.getSentMails().size());
+        assertEquals(1, mailTestHelper.getSentMails().size());
     }
 }

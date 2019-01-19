@@ -1,7 +1,4 @@
 ===Selenium===
-
-Eliminate code smells
-    - Split communityTests
 logging
 
 ==========Conventions==========

@@ -1,4 +1,4 @@
-package selenium.test.community.mail;
+package selenium.test.community.mail.filter;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
@@ -9,19 +9,20 @@ import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
+import java.util.Arrays;
 import java.util.List;
-
-import static selenium.logic.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Builder
-public class FilterTestShouldNotShowOwnCharacters {
+public class FilterTestShouldShowMatchingCharacters {
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final MailTestHelper mailTestHelper;
 
-    public void testFilterShouldNotShowOwnCharacters() {
-        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{2, 1});
+    public void testFilterShouldShowMatchingCharacters() {
+        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{2, 2});
 
         SeleniumAccount account = accounts.get(0);
         SeleniumCharacter character = account.getCharacter(0);
@@ -30,11 +31,12 @@ public class FilterTestShouldNotShowOwnCharacters {
         communityPage.getWriteNewMailButton().click();
 
         WebElement addresseeInputField = communityPage.getAddresseeInputField();
-        addresseeInputField.sendKeys(CHARACTER_NAME_PREFIX);
+        SeleniumAccount otherAccount = accounts.get(1);
+        addresseeInputField.sendKeys(otherAccount.getCharacter(0).getCharacterName());
 
         mailTestHelper.verifySearchResult(
-            accounts.get(1).getCharacters(),
-            account.getCharacters()
+            Arrays.asList(otherAccount.getCharacter(0)),
+            Stream.concat(account.getCharacters().stream(), Stream.of(otherAccount.getCharacter(1))).collect(Collectors.toList())
         );
 
     }

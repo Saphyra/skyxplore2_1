@@ -1,7 +1,9 @@
-package selenium.test.community.mail;
+package selenium.test.community.mail.send;
 
 import lombok.Builder;
+import org.openqa.selenium.WebElement;
 import selenium.logic.domain.SeleniumAccount;
+import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
@@ -10,7 +12,7 @@ import selenium.test.community.helper.CommunityTestInitializer;
 import java.util.List;
 
 @Builder
-public class SendMailEmptyAddresseeTest {
+public class SendMailChangedAddresseeTest {
     private static final String NOTIFICATION_ADDRESSEE_IS_EMPTY = "A címzett megadása kötelező!";
 
     private final CommunityTestInitializer communityTestInitializer;
@@ -18,8 +20,8 @@ public class SendMailEmptyAddresseeTest {
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
 
-    public void testSendMailEmptyAddressee() {
-        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1});
+    public void testSendMailChangedAddressee() {
+        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
         communityTestHelper.goToCommunityPageOf(account, account.getCharacter(0));
@@ -27,7 +29,14 @@ public class SendMailEmptyAddresseeTest {
         communityPage.getWriteNewMailButton().click();
 
         sendMailHelper.setSubject()
-            .setMessage()
-            .verifyCannotSendMail(NOTIFICATION_ADDRESSEE_IS_EMPTY);
+            .setAddressee(accounts.get(1).getCharacter(0))
+            .setMessage();
+
+
+        WebElement addresseeField = communityPage.getAddresseeInputField();
+        addresseeField.clear();
+        addresseeField.sendKeys(SeleniumCharacter.createRandomCharacterName());
+
+        sendMailHelper.verifyCannotSendMail(NOTIFICATION_ADDRESSEE_IS_EMPTY);
     }
 }

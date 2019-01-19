@@ -1,11 +1,4 @@
-package selenium.test.community.mail;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
+package selenium.test.community.mail.archive;
 
 import lombok.Builder;
 import selenium.logic.domain.Mail;
@@ -13,16 +6,19 @@ import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @Builder
-public class BulkDeleteBySenderTest {
-    private static final String NOTIFICATION_MAILS_DELETED = "Üzenetek törölve.";
+public class BulkRestoreMailTest {
+    private static final String NOTIFICATION_MAILS_RESTORED = "Üzenetek visszaállítva.";
 
-    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
@@ -30,7 +26,7 @@ public class BulkDeleteBySenderTest {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
 
-    public void testBulkDeleteBySender() {
+    public void testBulkRestoreMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
 
         SeleniumAccount account = accounts.get(0);
@@ -42,17 +38,20 @@ public class BulkDeleteBySenderTest {
         sendMailHelper.sendMailTo(otherCharacter);
         sendMailHelper.sendMailTo(otherCharacter);
 
-        mailTestHelper.getSentMails().forEach(Mail::select);
-
-        mailTestHelper.selectBulkDeleteOptionForSentMails();
-        communityPage.getExecuteBulkEditButtonForSentMails().click();
-
-        driver.switchTo().alert().accept();
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
-
-        assertTrue(mailTestHelper.getSentMails().isEmpty());
-
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
+
+        mailTestHelper.getReceivedMails().forEach(Mail::select);
+        mailTestHelper.selectBulkArchiveOption();
+        communityPage.getExecuteBulkEditButtonForReceivedMails().click();
+
+        mailTestHelper.getArchivedMails().forEach(Mail::select);
+        mailTestHelper.selectBulkRestoreOption();
+
+        communityPage.getExecuteBulkEditButtonForArchivedMails().click();
+
+        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
+        assertEquals(0, mailTestHelper.getArchivedMails().size());
+
         assertEquals(2, mailTestHelper.getReceivedMails().size());
     }
 }

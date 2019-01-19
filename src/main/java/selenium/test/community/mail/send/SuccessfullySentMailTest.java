@@ -1,4 +1,4 @@
-package selenium.test.community.mail;
+package selenium.test.community.mail.send;
 
 import lombok.Builder;
 import selenium.logic.domain.Mail;
