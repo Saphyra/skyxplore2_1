@@ -1,4 +1,4 @@
-package selenium.test.community.friendship.helper;
+package selenium.test.community.helper;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebElement;

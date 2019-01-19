@@ -1,4 +1,4 @@
-package selenium.test.community.mail.helper;
+package selenium.test.community.helper;
 
 import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.SeleniumCharacter;

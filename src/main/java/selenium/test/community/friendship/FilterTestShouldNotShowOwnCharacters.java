@@ -3,9 +3,9 @@ package selenium.test.community.friendship;
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
-import selenium.test.community.friendship.helper.FriendshipTestHelper;
-import selenium.test.community.util.CommunityTestHelper;
-import selenium.test.community.util.CommunityTestInitializer;
+import selenium.test.community.helper.FriendshipTestHelper;
+import selenium.test.community.helper.CommunityTestHelper;
+import selenium.test.community.helper.CommunityTestInitializer;
 
 import java.util.List;
 

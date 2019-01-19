@@ -1,20 +1,19 @@
-package selenium.test.community.mail.helper;
+package selenium.test.community.helper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Mail;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Mail;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CommunityPage;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 //TODO refactor - extract constants
@@ -124,5 +123,15 @@ public class MailTestHelper {
         return getReceivedMails().stream()
             .findAny()
             .orElseThrow(() -> new RuntimeException("Mail not found"));
+    }
+
+    public void selectBulkMarkAsUnreadOption() {
+        communityPage.getReceivedMailsPageButton().click();
+        WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
+        inputField.click();
+
+        inputField.findElement(By.cssSelector("option[value='markasunread']")).click();
+
+        assertEquals("markasunread", inputField.getAttribute("value"));
     }
 }

@@ -11,10 +11,10 @@ import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.mail.helper.MailTestHelper;
-import selenium.test.community.mail.helper.SendMailHelper;
-import selenium.test.community.util.CommunityTestHelper;
-import selenium.test.community.util.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
+import selenium.test.community.helper.CommunityTestHelper;
+import selenium.test.community.helper.CommunityTestInitializer;
 
 @Builder
 public class DeleteBySenderTest {

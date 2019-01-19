@@ -1,9 +1,4 @@
 ===Community Test===
-Send Mail test
-    - Mark as read / mark as unread
-        - bulk
-        - normal
-
 Block character test
     - block character
         - Existing friendship disappears
@@ -13,6 +8,7 @@ Block character test
         - Friend request can be sent
         - Mail can be sent
 
+Eliminate code smells
 
 ==========Conventions==========
 FrontEnd:

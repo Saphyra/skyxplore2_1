@@ -1,4 +1,4 @@
-package selenium.test.community.util;
+package selenium.test.community.helper;
 
 import static org.junit.Assert.assertEquals;
 

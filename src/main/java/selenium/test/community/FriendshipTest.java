@@ -18,9 +18,9 @@ import selenium.test.community.friendship.DeclineFriendRequestTest;
 import selenium.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.friendship.FilterTestShouldShowOnlyMatchingCharacterNames;
 import selenium.test.community.friendship.SendFriendRequestTest;
-import selenium.test.community.friendship.helper.FriendshipTestHelper;
-import selenium.test.community.util.CommunityTestHelper;
-import selenium.test.community.util.CommunityTestInitializer;
+import selenium.test.community.helper.FriendshipTestHelper;
+import selenium.test.community.helper.CommunityTestHelper;
+import selenium.test.community.helper.CommunityTestInitializer;
 
 public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;

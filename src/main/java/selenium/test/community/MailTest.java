@@ -18,6 +18,7 @@ import selenium.test.community.mail.BulkDeleteArchivedMailsTest;
 import selenium.test.community.mail.BulkDeleteByAddresseeTest;
 import selenium.test.community.mail.BulkDeleteBySenderTest;
 import selenium.test.community.mail.BulkMarkMailsAsReadTest;
+import selenium.test.community.mail.BulkMarkMailsAsUnreadTest;
 import selenium.test.community.mail.BulkRestoreMailTest;
 import selenium.test.community.mail.DeleteArchivedMailTest;
 import selenium.test.community.mail.DeleteByAddresseeTest;
@@ -33,10 +34,10 @@ import selenium.test.community.mail.SendMailEmptyAddresseeTest;
 import selenium.test.community.mail.SendMailEmptyMessageTest;
 import selenium.test.community.mail.SendMailEmptySubjectTest;
 import selenium.test.community.mail.SuccessfullySentMailTest;
-import selenium.test.community.mail.helper.MailTestHelper;
-import selenium.test.community.mail.helper.SendMailHelper;
-import selenium.test.community.util.CommunityTestHelper;
-import selenium.test.community.util.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
+import selenium.test.community.helper.CommunityTestHelper;
+import selenium.test.community.helper.CommunityTestInitializer;
 
 public class MailTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
@@ -310,6 +311,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
             .build()
             .testBulkMarkMailsAsRead();
     }
@@ -325,5 +327,18 @@ public class MailTest extends SeleniumTestApplication {
             .mailTestHelper(mailTestHelper)
             .build()
             .testMarkMailAsUnread();
+    }
+
+    @Test
+    public void testBulkMarkMailsAsUnread(){
+        BulkMarkMailsAsUnreadTest.builder()
+            .communityTestInitializer(communityTestInitializer)
+            .communityTestHelper(communityTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .notificationValidator(notificationValidator)
+            .build()
+            .testBulkMarkMailsAsUnread();
     }
 }

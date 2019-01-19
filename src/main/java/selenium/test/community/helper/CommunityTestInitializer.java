@@ -1,4 +1,4 @@
-package selenium.test.community.util;
+package selenium.test.community.helper;
 
 import java.util.LinkedList;
 import java.util.List;
