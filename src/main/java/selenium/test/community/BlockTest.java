@@ -11,7 +11,7 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.block.BlockCharacterTest;
+import selenium.test.community.block.BlockCharacterTestShouldNotSendMail;
 import selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
 import selenium.test.community.block.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.block.FilterTestShouldShowOnlyMatchingCharacter;
@@ -84,16 +84,13 @@ public class BlockTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacter() {
-        BlockCharacterTest.builder()
-            .driver(driver)
-            .communityPage(communityPage)
-            .blockTestHelper(blockTestHelper)
+    public void testBlockCharacterShouldNotSendMail() {
+        BlockCharacterTestShouldNotSendMail.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
+            .blockTestHelper(blockTestHelper)
             .sendMailHelper(sendMailHelper)
-            .friendshipTestHelper(friendshipTestHelper)
             .build()
-            .testBlockCharacter();
+            .testBlockCharacterShouldNotSendMail();
     }
 }

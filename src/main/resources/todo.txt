@@ -11,7 +11,6 @@ Block character test
     - block character
         - Existing friendship disappears
         - Cannot send friendRequest
-        - Cannot send mail
         - Cannot reply mail
     - unblock character
         - Friend request can be sent
