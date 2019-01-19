@@ -11,13 +11,6 @@ import java.time.ZoneOffset;
 @Component
 @Slf4j
 public class DateTimeUtil extends ConverterBase<Long, OffsetDateTime> {
-    public static final Integer EXPIRATION_TIME_IN_MINUTES = 15;
-
-    public OffsetDateTime getExpirationDate() {
-        OffsetDateTime expirationDate = now();
-        return expirationDate.minusMinutes(EXPIRATION_TIME_IN_MINUTES);
-    }
-
     @Override
     public OffsetDateTime processEntityConversion(Long entity) {
         if (entity == null) {

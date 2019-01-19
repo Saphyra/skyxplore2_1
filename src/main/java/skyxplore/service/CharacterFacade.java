@@ -3,13 +3,16 @@ package skyxplore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.service.character.*;
+import skyxplore.service.character.BuyItemService;
+import skyxplore.service.character.CharacterCreatorService;
+import skyxplore.service.character.CharacterDeleteService;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.service.character.CharacterRenameService;
 
 import java.util.List;
 import java.util.Map;

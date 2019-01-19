@@ -18,9 +18,4 @@ public class CharacterSelectTestHelper {
     public SeleniumCharacter createCharacter() {
         return createCharacter.createCharacter();
     }
-
-    public SeleniumCharacter registerAndCreateCharacter(){
-        registerUser();
-        return createCharacter();
-    }
 }

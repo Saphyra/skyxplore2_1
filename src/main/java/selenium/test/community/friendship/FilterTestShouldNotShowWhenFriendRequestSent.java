@@ -35,6 +35,5 @@ public class FilterTestShouldNotShowWhenFriendRequestSent {
 
         friendshipTestHelper.searchForPossibleFriends(character);
         friendshipTestHelper.verifySearchResult(account.getCharacters(), Collections.emptyList());
-
     }
 }
