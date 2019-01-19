@@ -12,6 +12,7 @@ import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.block.BlockCharacterTestShouldDeleteFriendRequest;
+import selenium.test.community.block.BlockCharacterTestShouldDeleteFriendship;
 import selenium.test.community.block.BlockCharacterTestShouldNotSendFriendRequest;
 import selenium.test.community.block.BlockCharacterTestShouldNotSendMail;
 import selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
@@ -117,5 +118,17 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .build()
             .testBlockCharacterShouldDeleteFriendRequest();
+    }
+
+    @Test
+    public void testBlockCharacterShouldDeleteFriendship(){
+        BlockCharacterTestShouldDeleteFriendship.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .blockTestHelper(blockTestHelper)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .build()
+            .testBlockCharacterShouldDeleteFriendship();
     }
 }

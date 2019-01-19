@@ -9,7 +9,6 @@ Friendship test
 
 Block character test
     - block character
-        - Existing friendship disappears
         - Cannot reply mail
     - unblock character
         - Friend request can be sent
