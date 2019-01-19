@@ -11,6 +11,7 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
+import selenium.test.community.block.BlockCharacterTestShouldDeleteFriendRequest;
 import selenium.test.community.block.BlockCharacterTestShouldNotSendFriendRequest;
 import selenium.test.community.block.BlockCharacterTestShouldNotSendMail;
 import selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
@@ -22,7 +23,7 @@ import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.FriendshipTestHelper;
 import selenium.test.community.helper.SendMailHelper;
 
-public class BlockTest extends SeleniumTestApplication {
+public class BlockCharacterTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
     private CommunityTestHelper communityTestHelper;
     private BlockTestHelper blockTestHelper;
@@ -104,5 +105,17 @@ public class BlockTest extends SeleniumTestApplication {
             .friendshipTestHelper(friendshipTestHelper)
             .build()
             .testBlockCharacterShouldNotSendFriendRequest();
+    }
+
+    @Test
+    public void testBlockCharacterShouldDeleteFriendRequest(){
+        BlockCharacterTestShouldDeleteFriendRequest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .blockTestHelper(blockTestHelper)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .build()
+            .testBlockCharacterShouldDeleteFriendRequest();
     }
 }
