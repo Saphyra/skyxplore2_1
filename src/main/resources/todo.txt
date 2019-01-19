@@ -1,14 +1,24 @@
 ===Community Test===
+Mail test
+    - Reply mail
+Friendship test
+    - Filter
+        - Not show already friends
+        - Not show friend request already sent
+        - Not show friend request received
+
 Block character test
     - block character
         - Existing friendship disappears
         - Cannot send friendRequest
         - Cannot send mail
+        - Cannot reply mail
     - unblock character
         - Friend request can be sent
         - Mail can be sent
 
 Eliminate code smells
+logging
 
 ==========Conventions==========
 FrontEnd:

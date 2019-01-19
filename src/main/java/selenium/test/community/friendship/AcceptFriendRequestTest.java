@@ -3,11 +3,10 @@ package selenium.test.community.friendship;
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.domain.SeleniumFriendRequest;
 import selenium.logic.page.CommunityPage;
-import selenium.test.community.helper.FriendshipTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.FriendshipTestHelper;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class AcceptFriendRequestTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        acceptFriendRequest(character);
+        friendshipTestHelper.acceptFriendRequest(character);
 
         verifyFriendRequestDisappeared(character);
 
@@ -55,15 +54,7 @@ public class AcceptFriendRequestTest {
         );
     }
 
-    private void acceptFriendRequest(SeleniumCharacter character) {
-        communityPage.getFriendRequestsPageButton().click();
-        List<SeleniumFriendRequest> friendRequests = communityPage.getFriendRequests();
-        friendRequests.stream()
-            .filter(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("FriendRequest not found."))
-            .accept();
-    }
+
 
     private void verifySentFriendRequestDisappeared(SeleniumCharacter otherCharacter) {
         communityPage.getSentFriendRequestsPageButton().click();

@@ -1,6 +1,7 @@
 package selenium.test.community.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebElement;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
@@ -46,6 +47,22 @@ public class SendMailHelper {
             communityPage.getWriteNewMailButton().click();
         }
         communityPage.getMessageField().sendKeys(message);
+        return this;
+    }
+
+    public SendMailHelper verifyAddresseeNotFound(SeleniumCharacter addressee) {
+        if (!communityPage.getSendMailContainer().isDisplayed()) {
+            communityPage.getWriteNewMailButton().click();
+        }
+        WebElement addresseeInputField = communityPage.getAddresseeInputField();
+        addresseeInputField.clear();
+        addresseeInputField.sendKeys(addressee.getCharacterName());
+
+        assertTrue(
+            communityPage.getAddresseeElements().stream()
+                .noneMatch(element -> element.getText().equals(addressee.getCharacterName()))
+        );
+
         return this;
     }
 

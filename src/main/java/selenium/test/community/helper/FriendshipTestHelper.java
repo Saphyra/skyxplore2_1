@@ -30,6 +30,15 @@ public class FriendshipTestHelper {
             .addFriend(notificationValidator);
     }
 
+    public void acceptFriendRequest(SeleniumCharacter character) {
+        communityPage.getFriendRequestsPageButton().click();
+        communityPage.getFriendRequests().stream()
+            .filter(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("FriendRequest not found."))
+            .accept();
+    }
+
     public void searchForPossibleFriends(SeleniumCharacter character) {
         if (!communityPage.getAddFriendContainer().isDisplayed()) {
             openAddFriendPage();

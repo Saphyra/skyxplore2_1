@@ -13,7 +13,7 @@
     function allowBlockedCharacter(blockedCharacter){
         try{
             if(confirm("Biztosan visszavonod " + blockedCharacter.characterName + " blokkolását?")){
-                if(communityDao.allowBlockedCharacter(sessionStorage.characterId, blockedCharacter.characterId)){
+                if(communityDao.allowBlockedCharacter(blockedCharacter.characterId)){
                     notificationService.showSuccess("Blokkolás feloldva.");
                 }else{
                     notificationService.showError("Blokkolás feloldása sikertelen.");
@@ -29,7 +29,7 @@
     
     function block(blockedCharacterId){
         try{
-            const isBlocked = communityDao.blockCharacter(sessionStorage.characterId, blockedCharacterId);
+            const isBlocked = communityDao.blockCharacter(blockedCharacterId);
             if(isBlocked){
                 notificationService.showSuccess("Karakter blokkolva.");
             }else{
