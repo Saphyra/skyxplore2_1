@@ -94,6 +94,7 @@ public class FriendshipTestHelper {
 
     private void openAddFriendPage() {
         communityPage.getFriendsMainPageButton().click();
+        communityPage.getFriendsPageButton().click();
         communityPage.getAddFriendButton().click();
         assertTrue(communityPage.getAddFriendContainer().isDisplayed());
     }

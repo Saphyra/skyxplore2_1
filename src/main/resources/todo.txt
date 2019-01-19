@@ -3,7 +3,6 @@ Mail test
     - Reply mail
 Friendship test
     - Filter
-        - Not show already friends
         - Not show friend request already sent
         - Not show friend request received
 

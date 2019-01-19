@@ -16,6 +16,7 @@ import selenium.test.community.friendship.AcceptFriendRequestTest;
 import selenium.test.community.friendship.CancelFriendRequestTest;
 import selenium.test.community.friendship.DeclineFriendRequestTest;
 import selenium.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
+import selenium.test.community.friendship.FilterTestShouldNotShowWhenAlreadyFriend;
 import selenium.test.community.friendship.FilterTestShouldShowOnlyMatchingCharacterNames;
 import selenium.test.community.friendship.SendFriendRequestTest;
 import selenium.test.community.helper.FriendshipTestHelper;
@@ -65,6 +66,16 @@ public class FriendshipTest extends SeleniumTestApplication {
             .friendshipTestHelper(friendshipTestHelper)
             .build()
             .testFilterShouldShowOnlyMatchingCharacterNames();
+    }
+
+    @Test
+    public void testFilterShouldNotShowFriends(){
+        FilterTestShouldNotShowWhenAlreadyFriend.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .build()
+            .testFilterShouldNotShowFriends();
     }
 
     @Test
