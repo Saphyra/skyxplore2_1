@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
 import selenium.logic.util.Util;
 import skyxplore.Application;
@@ -25,6 +26,7 @@ public abstract class SeleniumTestApplication {
     };
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
+    private static final boolean HEADLESS_MODE = false;
 
     protected WebDriver driver;
 
@@ -35,7 +37,10 @@ public abstract class SeleniumTestApplication {
         }
 
         System.setProperty(CHROME_DRIVER_PROPERTY_NAME, getClass().getClassLoader().getResource(CHROME_DRIVER_EXE_LOCATION).getPath());
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(HEADLESS_MODE);
+
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(HOST);
 
