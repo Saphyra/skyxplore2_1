@@ -54,6 +54,7 @@ public class CommunityPage {
     private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "blockcharactername";
     private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#blockablecharactersfound .blockablecharacter";
     private static final String SELECTOR_CLOSE_WRITE_MAIL_PAGE = "#mailclosebutton ";
+    private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friendlistbuttons button:first-child";
 
     private final WebDriver driver;
 
@@ -223,5 +224,9 @@ public class CommunityPage {
 
     public void closeWriteMailPage() {
         driver.findElement(By.id(SELECTOR_CLOSE_WRITE_MAIL_PAGE)).click();
+    }
+
+    public WebElement getFriendsMainPageButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_FRIENDS_MAIN_PAGE_BUTTON));
     }
 }
