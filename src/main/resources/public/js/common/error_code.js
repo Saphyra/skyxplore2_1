@@ -13,7 +13,7 @@
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(){
             const path = "i18n/" + getLanguage() + "/error_codes.json";
-            const request = new Request(dao.GET, path);
+            const request = new Request(HttpMethod.GET, path);
                 request.convertResponse = function(response){return JSON.parse(response.body)};
                 request.processValidResponse = addErrorCodes;
                 request.processInvalidResponse = createFallBackQuery;
@@ -30,7 +30,7 @@
     
     function createFallBackQuery(response){
         const path = "i18n/hu-hu/error_codes.json";
-        const request = new Request(dao.GET, path);
+        const request = new Request(HttpMethod.GET, path);
             request.convertResponse = function(response){return JSON.parse(response.response)};
             request.processValidResponse = addErrorCodes;
         

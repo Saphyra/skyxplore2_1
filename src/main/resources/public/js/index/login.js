@@ -6,19 +6,17 @@
         login
     ));
     
-    function login(){
-        const userName = $("#login-username").val();
-        const passwordInput = $("#login-password");
-        const password = $(passwordInput).val();
-        $(passwordInput).val("");
+    function login(event){
+        const credentials = new Credentials(event.getPayload());
+        $("#login-password").val("")
         
-        if(userName == "" || password == ""){
+        if(!credentials.isValid()){
             notificationService.showError(ErrorCode.getMessage("EMPTY_CREDENTIALS"));
             return;
         }
         
-        const request = new Request(dao.POST, "login", {userName: userName, password: password});
-            request.processValidResponse = function(){location.href = "characterselect"};
+        const request = new Request(HttpMethod.POST, Mapping.LOGIN, credentials.stringify());
+            request.processValidResponse = function(){location.href = Mapping.CHARACTER_SELECT};
             request.processInvalidResponse = function(response){
                 if(response.status == ResponseStatus.UNAUTHORIZED){
                     notificationService.showError(ErrorCode.getMessage("BAD_CREDENTIALS"));
@@ -28,5 +26,18 @@
             }
             
         dao.sendRequestAsync(request);
+    }
+    
+    function Credentials(payload){
+        const userName = payload ? payload.userName : $("#login-username").val();
+        const password = payload ? payload.password : $("#login-password").val();
+        
+        this.isValid = function(){
+            return userName !== "" && password !== "";
+        }
+        
+        this.stringify = function(){
+            return {userName: userName, password: password};
+        }
     }
 })();

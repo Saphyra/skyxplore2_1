@@ -3,7 +3,7 @@
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(pageName){
             const path = "i18n/" + getLanguage() + "/" + pageName.getPayload() + ".json";
-            const request = new Request(dao.GET, path);
+            const request = new Request(HttpMethod.GET, path);
                 request.state = pageName;
                 request.convertResponse = function(response){return JSON.parse(response.body)};
                 request.processValidResponse = fillPageWithText;
@@ -30,8 +30,8 @@
     
     function createFallBackQuery(response, pageName){
         const path = "i18n/hu-hu/" + pageName.getPayload() + ".json";
-        const request = new Request(dao.GET, path);
-            request.convertResponse = function(response){return JSON.parse(response.response)};
+        const request = new Request(HttpMethod.GET, path);
+            request.convertResponse = function(response){return JSON.parse(response.body)};
             request.processValidResponse = fillPageWithText;
         
         dao.sendRequestAsync(request);

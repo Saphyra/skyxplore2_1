@@ -1,14 +1,13 @@
 (function ScriptLoader(){
-    window.events = {
-        LOAD_LOCALIZATION: "load_localization"
-    };
-    
     window.scriptLoader = new function(){
         this.loadedScripts = [];
         this.loadScript = loadScript;
     }
     
-    scriptLoader.loadScript("js/common/dao.js");
+    scriptLoader.loadScript("js/common/utils.js");
+    scriptLoader.loadScript("js/common/dao/mapping.js");
+    scriptLoader.loadScript("js/common/dao/dao.js");
+    scriptLoader.loadScript("js/common/events.js");
     scriptLoader.loadScript("js/common/event_processor.js");
     
     $(document).ready(function(){
@@ -47,13 +46,3 @@
         this.loadedScripts.push(src);
     }
 })();
-
-function throwException(name, message){
-    name = name == undefined ? "" : name;
-    message = message == undefined ? "" : message;
-    throw {name: name, message: message};
-}
-
-function getLanguage(){
-    return navigator.language.toLowerCase();
-}

@@ -11,16 +11,22 @@
     }
     
     function processEvent(event){
+        if(!event instanceof Event){
+            throwException("IllegalArgument", "event is not a type of Event.");
+        }
+        
+        const eventType = event.getEventType();
+        
         let hasProcessor = false;
         for(pindex in processors){
             const processor = processors[pindex];
-            if(processor.canProcess(event.getEventType())){
+            if(processor.canProcess(eventType)){
                 hasProcessor = true;
                 setTimeout(function(){processor.process(event)}, 0);
             }
         }
         if(!hasProcessor){
-            logService.log("No eventProcessor for eventType " + event.getEventType, "warn");
+            logService.log("No eventProcessor for eventType " + event.getEventType(), "warn");
         }
     }
 })();
