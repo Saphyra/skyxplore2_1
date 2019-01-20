@@ -11,13 +11,16 @@
     }
     
     function processEvent(event){
+        let hasProcessor = false;
         for(pindex in processors){
             const processor = processors[pindex];
             if(processor.canProcess(event.getEventType())){
-                processor.process(event);
-            }else{
-                alert("cannot proccess");
+                hasProcessor = true;
+                setTimeout(function(){processor.process(event)}, 0);
             }
+        }
+        if(!hasProcessor){
+            logService.log("No eventProcessor for eventType " + event.getEventType, "warn");
         }
     }
 })();

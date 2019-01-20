@@ -5,7 +5,7 @@
             const path = "i18n/" + getLanguage() + "/" + pageName.getPayload() + ".json";
             const request = new Request(dao.GET, path);
                 request.state = pageName;
-                request.convertResponse = function(response){return JSON.parse(response.response)};
+                request.convertResponse = function(response){return JSON.parse(response.body)};
                 request.processValidResponse = fillPageWithText;
                 request.processInvalidResponse = createFallBackQuery;
             
@@ -26,10 +26,6 @@
                 
             }else logService.log("Element not found with id " + id, "warn");
         }
-    }
-    
-    function getLanguage(){
-        return navigator.language.toLowerCase();
     }
     
     function createFallBackQuery(response, pageName){

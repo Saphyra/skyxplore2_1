@@ -1,9 +1,8 @@
-$(document).ready(function(){
-    scriptLoader.loadScript("js/common/localization.js");
-    scriptLoader.loadScript("js/common/logservice.js");
-});
-
 (function ScriptLoader(){
+    window.events = {
+        LOAD_LOCALIZATION: "load_localization"
+    };
+    
     window.scriptLoader = new function(){
         this.loadedScripts = [];
         this.loadScript = loadScript;
@@ -11,6 +10,13 @@ $(document).ready(function(){
     
     scriptLoader.loadScript("js/common/dao.js");
     scriptLoader.loadScript("js/common/event_processor.js");
+    
+    $(document).ready(function(){
+        scriptLoader.loadScript("js/common/error_code.js");
+        scriptLoader.loadScript("js/common/localization.js");
+        scriptLoader.loadScript("js/common/log_service.js");
+        scriptLoader.loadScript("js/common/notification_service.js");
+    });
     
     /*
         Loads the script given as argument.
@@ -46,4 +52,8 @@ function throwException(name, message){
     name = name == undefined ? "" : name;
     message = message == undefined ? "" : message;
     throw {name: name, message: message};
+}
+
+function getLanguage(){
+    return navigator.language.toLowerCase();
 }

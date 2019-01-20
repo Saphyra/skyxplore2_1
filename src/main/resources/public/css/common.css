@@ -125,3 +125,8 @@ input:disabled, button:disabled, textarea:disabled, .disabled{
     border-color: rgb(100,100,100) !important;
     cursor: no-drop
 }
+
+#registration-button{
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}

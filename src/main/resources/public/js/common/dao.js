@@ -159,7 +159,7 @@ function Request(method, path, body){
     }
     
     this.processInvalidResponse = function(response, state){
-        logService.log(response.toString(), "warn", "Invalid response from BackEnd: ");
+        logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
     }
     
     this.processErrorResponse = function(response){
@@ -192,10 +192,10 @@ function Response(response){
     
     this.statusKey = statusKey;
     this.status = response.status;
-    this.response = response.responseText;
+    this.body = response.responseText;
     
     this.toString = function(){
-        return this.status + ": " + this.statusKey + " - " + this.response;
+        return this.status + ": " + this.statusKey + " - " + this.body;
     }
 }
 
