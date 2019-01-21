@@ -31,6 +31,47 @@
     }
     
     function register(){
+        if(!registrationAllowed){
+            return;
+        }
         
+        const userName = getUserName();
+        const password = getPassword();
+        const confirmPassword = getConfirmPassword();
+        const email = getEmail();
+        
+        const user = {
+            username: userName,
+            password: password,
+            confirmPassword: confirmPassword,
+            email: email
+        };
+        
+        const request = new Request(HttpMethod.POST, Mapping.REGISTER, user);
+            request.processValidResponse = function(){
+                sessionStorage.successMessage = ErrorCode.getMessage("REGISTRATION_SUCCESSFUL");
+                eventProcessor.processEvent(new Event(events.LOGIN_ATTEMPT, {userName: userName, password: password}));
+            }
+            request.processInvalidResponse = function(){
+                notificationService.showError(ErrorCode.getMessage("REGISTRATION_FAILED"));
+            }
+            
+        dao.sendRequestAsync(request);
+        
+        function getUserName(){
+            return $("#reg-username").val();
+        }
+        
+        function getPassword(){
+            return $("#reg-password").val();
+        }
+        
+        function getConfirmPassword(){
+            return $("#reg-confirm-password").val();
+        }
+        
+        function getEmail(){
+            return $("#reg-email").val();
+        }
     }
 })();

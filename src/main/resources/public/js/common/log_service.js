@@ -1,7 +1,17 @@
 (function LogService(){
     window.logService = new function(){
+        const isConsoleEnabled = false;
+        
         this.log = log;
+        this.logToConsole = logToConsole;
     }
+    
+    function logToConsole(message){
+        if(isConsoleEnabled){
+            console.log(message);
+        }
+    }
+    
     /*
         error: Hibák a kódban (amit a catch elkap)
         warn: Figyelmeztetések (érvénytelen változóérték)

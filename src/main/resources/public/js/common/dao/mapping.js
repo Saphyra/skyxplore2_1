@@ -1,6 +1,7 @@
 window.Mapping = {
-    LOGIN: "login",
     CHARACTER_SELECT: "characterselect",
-    USERNAME_EXISTS: "user/name",
-    EMAIL_EXISTS: "user/email"
+    EMAIL_EXISTS: "user/email",
+    LOGIN: "login",
+    REGISTER: "user/register",
+    USERNAME_EXISTS: "user/name"
 }
