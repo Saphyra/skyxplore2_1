@@ -34,7 +34,7 @@ public class UserController {
     private static final String CHANGE_USERNAME_MAPPING = "user/name/change";
     private static final String DELETE_ACCOUNT_MAPPING = "user";
     private static final String EMAIL_EXISTS_MAPPING = "user/email";
-    private static final String REGISTRATION_MAPPING = "user/register";
+    private static final String REGISTRATION_MAPPING = "user";
     private static final String USERNAME_EXISTS_MAPPING = "user/name";
 
     private final UserNameCache userNameCache;
