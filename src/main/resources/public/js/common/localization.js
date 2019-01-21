@@ -29,7 +29,7 @@
     }
     
     function createFallBackQuery(response, pageName){
-        const path = "i18n/hu-hu/" + pageName.getPayload() + ".json";
+        const path = "i18n/hu/" + pageName.getPayload() + ".json";
         const request = new Request(HttpMethod.GET, path);
             request.convertResponse = function(response){return JSON.parse(response.body)};
             request.processValidResponse = fillPageWithText;

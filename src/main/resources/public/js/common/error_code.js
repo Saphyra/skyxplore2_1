@@ -29,7 +29,7 @@
     }
     
     function createFallBackQuery(response){
-        const path = "i18n/hu-hu/error_codes.json";
+        const path = "i18n/hu/error_codes.json";
         const request = new Request(HttpMethod.GET, path);
             request.convertResponse = function(response){return JSON.parse(response.response)};
             request.processValidResponse = addErrorCodes;

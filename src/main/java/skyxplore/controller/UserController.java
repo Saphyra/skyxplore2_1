@@ -1,18 +1,28 @@
 package skyxplore.controller;
 
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+
+import java.util.concurrent.ExecutionException;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
 import skyxplore.cache.EmailCache;
 import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.user.*;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.service.UserFacade;
-
-import javax.validation.Valid;
-import java.util.concurrent.ExecutionException;
-
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings("ALL")
 @RestController
@@ -23,9 +33,9 @@ public class UserController {
     private static final String CHANGE_PASSWORD_MAPPING = "user/password/change";
     private static final String CHANGE_USERNAME_MAPPING = "user/name/change";
     private static final String DELETE_ACCOUNT_MAPPING = "user";
-    private static final String EMAIL_EXISTS_MAPPING = "user/email/exist";
+    private static final String EMAIL_EXISTS_MAPPING = "user/email";
     private static final String REGISTRATION_MAPPING = "user/register";
-    private static final String USERNAME_EXISTS_MAPPING = "user/name/exist";
+    private static final String USERNAME_EXISTS_MAPPING = "user/name";
 
     private final UserNameCache userNameCache;
     private final EmailCache emailCache;

@@ -1,8 +1,9 @@
 package skyxplore.auth;
 
-import com.github.saphyra.authservice.PropertySource;
-import org.springframework.stereotype.Component;
-import skyxplore.filter.CustomFilterHelper;
+import static skyxplore.controller.PageController.INDEX_MAPPING;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,10 +12,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import static skyxplore.controller.PageController.INDEX_MAPPING;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.authservice.PropertySource;
+import skyxplore.filter.CustomFilterHelper;
 
 @Component
 public class PropertySourceImpl implements PropertySource {
@@ -55,8 +56,8 @@ public class PropertySourceImpl implements PropertySource {
             "/**/favicon.ico",
             "/login",
             "/user/register",
-            "/user/name/exist",
-            "/user/email/exist",
+            "/user/name",
+            "/user/email",
             "/css/**",
             "/images/**",
             "/js/**",

@@ -20,12 +20,12 @@
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.VALIDATION_ONGOING},
-        function(event){event.getPayload().continueValidation()}
+        function(event){event.getPayload().continueValidation(event.getPayload())}
     ));
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.VALIDATION_FINISHED},
-        function(event){logService.log("Displaying validationResult")}
+        function(event){event.getPayload().processValidationResult()}
     ));
     
     function setAttempt(){
