@@ -1,7 +1,6 @@
 package selenium.logic.flow;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.logic.util.LocatorUtil;
@@ -22,8 +21,10 @@ public class Logout {
         this.notificationValidator = new NotificationValidator(driver);
     }
 
-    public void logOut(){
-        LocatorUtil.getLogoutButton(driver).ifPresent(WebElement::click);
+    public void logOut() {
+        LocatorUtil.getLogoutButton(driver)
+            .orElseThrow(() -> new RuntimeException("Logout button not found."))
+            .click();
 
         validateLogout();
     }

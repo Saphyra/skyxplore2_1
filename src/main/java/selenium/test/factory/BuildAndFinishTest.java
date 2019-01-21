@@ -44,7 +44,7 @@ public class BuildAndFinishTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         factoryTestHelper = new FactoryTestHelper(
-            new Registration(driver),
+            new Registration(driver, messageCodes),
             new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver)

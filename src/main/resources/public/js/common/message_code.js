@@ -1,30 +1,30 @@
-(function ErrorCode(){
-    const errorCodes = {};
+(function MessageCode(){
+    const messageCodes = {};
     
-    window.ErrorCode = new function(){
+    window.MessageCode = new function(){
         this.getMessage = getMessage;
     }
     
-    function getMessage(errorCode){
-        return errorCodes[errorCode] || "No errorMessage found for errorCode " + errorCode;
+    function getMessage(messageCode){
+        return messageCodes[messageCode] || "No message found for messageCode " + messageCode;
     }
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(){
-            const path = "i18n/" + getLanguage() + "/error_codes.json";
+            const path = "i18n/" + getLanguage() + "/message_codes.json";
             const request = new Request(HttpMethod.GET, path);
                 request.convertResponse = function(response){return JSON.parse(response.body)};
-                request.processValidResponse = addErrorCodes;
+                request.processValidResponse = addMessageCodes;
                 request.processInvalidResponse = createFallBackQuery;
             
             dao.sendRequestAsync(request);
         }
     ));
     
-    function addErrorCodes(codes){
+    function addMessageCodes(codes){
         for(let eindex in codes){
-            errorCodes[eindex] = codes[eindex];
+            messageCodes[eindex] = codes[eindex];
         }
     }
     
@@ -32,7 +32,7 @@
         const path = "i18n/hu/error_codes.json";
         const request = new Request(HttpMethod.GET, path);
             request.convertResponse = function(response){return JSON.parse(response.response)};
-            request.processValidResponse = addErrorCodes;
+            request.processValidResponse = addMessageCodes;
         
         dao.sendRequestAsync(request);
     }

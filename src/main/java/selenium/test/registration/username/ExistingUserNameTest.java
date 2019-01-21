@@ -11,7 +11,7 @@ import selenium.test.registration.username.helper.UserNameTestHelper;
 
 @Builder
 public class ExistingUserNameTest {
-    private static final String ERROR_MESSAGE_EXISTING_USER_NAME = "Felhasználónév foglalt.";
+    private static final String ERROR_MESSAGE_EXISTING_USER_NAME = "";
 
     private final UserNameTestHelper userNameTestHelper;
     private final Registration registration;

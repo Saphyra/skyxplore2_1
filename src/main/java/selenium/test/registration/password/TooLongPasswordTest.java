@@ -21,7 +21,7 @@ public class TooLongPasswordTest {
         TOO_LONG_PASSWORD = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_TOO_LONG_PASSWORD = "Jelszó túl hosszú (Maximum 30 karakter).";
+    private static final String ERROR_MESSAGE_TOO_LONG_PASSWORD = " túl hosszú (Maximum 30 karakter).";
 
     private final PasswordTestHelper passwordTestHelper;
     private final IndexPage indexPage;

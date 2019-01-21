@@ -45,7 +45,7 @@ function EventProcessor(canProcessCallback, processEventCallback){
 }
 
 function Event(type, data){
-    const eventType = type;
+    const eventType = type || throwException("IllegalArgument", "eventType must not be null.");
     const payload = data || null;
     
     this.getPayload = function(){

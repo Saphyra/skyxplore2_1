@@ -11,7 +11,7 @@
     scriptLoader.loadScript("js/common/event_processor.js");
     
     $(document).ready(function(){
-        scriptLoader.loadScript("js/common/error_code.js");
+        scriptLoader.loadScript("js/common/message_code.js");
         scriptLoader.loadScript("js/common/localization.js");
         scriptLoader.loadScript("js/common/log_service.js");
         scriptLoader.loadScript("js/common/notification_service.js");

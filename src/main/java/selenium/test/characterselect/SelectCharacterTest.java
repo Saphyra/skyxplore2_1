@@ -23,7 +23,7 @@ public class SelectCharacterTest extends SeleniumTestApplication {
 
     @Test
     public void testSelectCharacter() {
-        new Registration(driver).registerUser();
+        new Registration(driver, messageCodes).registerUser();
         SeleniumCharacter character = new CreateCharacter(driver).createCharacter();
 
         characterSelectPage.getCharacterRow(character.getCharacterName())

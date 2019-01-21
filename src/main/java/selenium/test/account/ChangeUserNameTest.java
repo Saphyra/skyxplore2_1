@@ -37,7 +37,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
 
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
-        registration = new Registration(driver);
+        registration = new Registration(driver, messageCodes);
         this.changeUserNameTestHelper = new ChangeUserNameTestHelper(driver, registration, accountPage, new Navigate(driver));
         this.notificationValidator = new NotificationValidator(driver);
         this.login = new Login(driver);

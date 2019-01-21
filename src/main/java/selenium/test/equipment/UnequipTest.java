@@ -25,7 +25,7 @@ public class UnequipTest extends SeleniumTestApplication {
     protected void init() {
         equipmentElementSearcher = new EquipmentElementSearcher(driver);
         equipmentTestHelper = new EquipmentTestHelper(
-            new Registration(driver),
+            new Registration(driver, messageCodes),
             new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver),

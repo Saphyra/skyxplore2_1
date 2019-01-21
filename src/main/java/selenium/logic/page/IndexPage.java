@@ -7,23 +7,23 @@ import org.openqa.selenium.WebElement;
 
 @RequiredArgsConstructor
 public class IndexPage {
-    private static final String ELEMENT_LOGIN_USER_NAME = "login_username";
-    private static final String ELEMENT_LOGIN_PASSWORD = "login_password";
+    private static final String ELEMENT_LOGIN_USER_NAME = "login-username";
+    private static final String ELEMENT_LOGIN_PASSWORD = "login-password";
 
-    private static final String ELEMENT_REGISTRATION_USER_NAME = "registration_username";
-    private static final String ELEMENT_INVALID_USER_NAME = "invalid_username";
+    private static final String ELEMENT_REGISTRATION_USER_NAME = "reg-username";
+    private static final String ELEMENT_INVALID_USER_NAME = "invalid-username";
 
-    private static final String ELEMENT_REGISTRATION_PASSWORD = "registration_password";
-    private static final String ELEMENT_INVALID_PASSWORD = "invalid_password";
+    private static final String ELEMENT_REGISTRATION_PASSWORD = "reg-password";
+    private static final String ELEMENT_INVALID_PASSWORD = "invalid-password";
 
-    private static final String ELEMENT_REGISTRATION_CONFIRM_PASSWORD = "registration_confirm_password";
-    private static final String ELEMENT_INVALID_CONFIRM_PASSWORD = "invalid_confirm_password";
+    private static final String ELEMENT_REGISTRATION_CONFIRM_PASSWORD = "reg-confirm-password";
+    private static final String ELEMENT_INVALID_CONFIRM_PASSWORD = "invalid-confirm-password";
 
-    private static final String ELEMENT_REGISTRATION_EMAIL = "registration_email";
-    private static final String ELEMENT_INVALID_EMAIL = "invalid_email";
+    private static final String ELEMENT_REGISTRATION_EMAIL = "reg-email";
+    private static final String ELEMENT_INVALID_EMAIL = "invalid-email";
 
-    private static final String ELEMENT_REGISTRATION_BUTTON = "registration_button";
-    private static final String SELECTOR_LOGIN_BUTTON = "login_button";
+    private static final String ELEMENT_REGISTRATION_BUTTON = "registration-button";
+    private static final String SELECTOR_LOGIN_BUTTON = "login-button";
 
     private final WebDriver driver;
 

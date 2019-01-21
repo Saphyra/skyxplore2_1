@@ -27,7 +27,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
     protected void init() {
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         accountPage = new AccountPage(driver);
-        registration = new Registration(driver);
+        registration = new Registration(driver, messageCodes);
         Navigate navigate = new Navigate(driver);
         changeEmailTestHelper = new ChangeEmailTestHelper(accountPage, registration, navigate, driver);
         notificationValidator = new NotificationValidator(driver);

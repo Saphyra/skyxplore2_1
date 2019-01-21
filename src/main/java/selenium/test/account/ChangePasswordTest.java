@@ -31,7 +31,7 @@ public class ChangePasswordTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        this.registration = new Registration(driver);
+        this.registration = new Registration(driver, messageCodes);
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         this.navigate = new Navigate(driver);

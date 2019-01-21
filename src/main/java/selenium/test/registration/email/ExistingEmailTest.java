@@ -9,15 +9,18 @@ import selenium.logic.page.IndexPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.registration.email.helper.EmailTestHelper;
 
+import java.util.Map;
+
 @Builder
 public class ExistingEmailTest {
-    private static final String ERROR_MESSAGE_EXISTING_EMAIL = "Már van regisztrált felhasználó a megadott e-mail címmel.";
+    private static final String MESSAGE_CODE_EXISTING_EMAIL = "EMAIL_ALREADY_EXISTS";
 
     private final Registration registration;
     private final Logout logout;
     private final EmailTestHelper emailTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
+    private final Map<String, String> messageCodes;
 
     public void testExistingEmail() {
         SeleniumUser otherUser = registration.registerUser();
@@ -31,7 +34,7 @@ public class ExistingEmailTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidEmailField(),
-            ERROR_MESSAGE_EXISTING_EMAIL,
+            messageCodes.get(MESSAGE_CODE_EXISTING_EMAIL),
             emailField,
             indexPage.getRegisterButton()
         );

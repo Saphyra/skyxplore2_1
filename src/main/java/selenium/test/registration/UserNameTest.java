@@ -26,7 +26,7 @@ public class UserNameTest extends SeleniumTestApplication {
         userNameTestHelper = new UserNameTestHelper(driver, indexPage);
         fieldValidator = new FieldValidator(driver, HOST);
         logout = new Logout(driver);
-        registration = new Registration(driver);
+        registration = new Registration(driver, messageCodes);
     }
 
     @Test

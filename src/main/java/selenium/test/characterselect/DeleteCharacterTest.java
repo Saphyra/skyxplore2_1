@@ -23,7 +23,7 @@ public class DeleteCharacterTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        registration = new Registration(driver);
+        registration = new Registration(driver, messageCodes);
         createCharacter = new CreateCharacter(driver);
         characterSelectPage = new CharacterSelectPage(driver);
         notificationValidator = new NotificationValidator(driver);

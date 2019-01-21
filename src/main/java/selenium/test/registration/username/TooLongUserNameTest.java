@@ -22,7 +22,7 @@ public class TooLongUserNameTest {
     }
 
 
-    private static final String ERROR_MESSAGE_TOO_LONG_USER_NAME = "Felhasználónév túl hosszú (Maximum 30 karakter).";
+    private static final String ERROR_MESSAGE_TOO_LONG_USER_NAME = "";
 
     private final UserNameTestHelper userNameTestHelper;
     private final IndexPage indexPage;

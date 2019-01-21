@@ -74,15 +74,15 @@ function ValidationResult(){
     function getEmail(){
         return $("#reg-email").val();
     }
-    
+
     function validatePasswords(){
         if(password.length < 6){
             passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASWORD_TOO_SHORT")};
         }else if(password.length < 6){
             passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASWORD_TOO_LONG")};
         }else if(password !== confirmPassword){
-            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "BAD_CONFIRM_PASSRORD")};
-            confirmPasswordProcess = function(){errorProcess(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSRORD")};
+            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "BAD_CONFIRM_PASSWORD")};
+            confirmPasswordProcess = function(){errorProcess(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSWORD")};
         }else{
             passwordValid = true;
             confirmPasswordValid = true;
@@ -142,7 +142,7 @@ function ValidationResult(){
     }
     
     function errorProcess(id, code){
-        $(id).prop("title", ErrorCode.getMessage(code))
+        $(id).prop("title", MessageCode.getMessage(code))
             .fadeIn();
     }
 }

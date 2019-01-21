@@ -24,7 +24,7 @@ public class EmailTest extends SeleniumTestApplication {
         indexPage = new IndexPage(driver);
         emailTestHelper = new EmailTestHelper(driver, indexPage);
         fieldValidator = new FieldValidator(driver, HOST);
-        registration = new Registration(driver);
+        registration = new Registration(driver, messageCodes);
         logout = new Logout(driver);
     }
 
@@ -34,6 +34,7 @@ public class EmailTest extends SeleniumTestApplication {
             .emailTestHelper(emailTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testInvalidEmail();
     }
@@ -46,6 +47,7 @@ public class EmailTest extends SeleniumTestApplication {
             .emailTestHelper(emailTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testExistingEmail();
     }

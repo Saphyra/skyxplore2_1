@@ -1,0 +1,13 @@
+{
+  "BAD_CREDENTIALS": "Felhasználónév és jelszó kombinációja ismeretlen.",
+  "BAD_CONFIRM_PASSWORD": "A jelszavak nem egyeznek.",
+  "EMAIL_ALREADY_EXISTS": "Már van regisztrált felhasználó a megadott e-mail címmel.",
+  "EMPTY_CREDENTIALS": "Felhasználónév és jelszó megadása kötelező!",
+  "INVALID_EMAIL": "Érvénytelen e-mail cím.",
+  "PASSWORD_TOO_LONG": "Jelszó túl hosszú (Maximum 30 karakter).",
+  "PASSWORD_TOO_SHORT": "Jelszó túl rövid (Minimum 6 karakter).",
+  "REGISTRATION_SUCCESSFUL": "Sikeres regisztráció!",
+  "USERNAME_ALREADY_EXISTS": "Felhasználónév foglalt.",
+  "USERNAME_TOO_LONG": "Felhasználónév túl hosszú (Maximum 30 karakter).",
+  "USERNAME_TOO_SHORT": "Felhasználónév túl rövid (Minimum 3 karakter)."
+}

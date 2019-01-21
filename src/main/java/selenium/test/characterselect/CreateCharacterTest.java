@@ -23,7 +23,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         characterSelectPage = new CharacterSelectPage(driver);
-        characterSelectTestHelper = new CharacterSelectTestHelper(new Registration(driver), new CreateCharacter(driver));
+        characterSelectTestHelper = new CharacterSelectTestHelper(new Registration(driver, messageCodes), new CreateCharacter(driver));
         fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
     }
 

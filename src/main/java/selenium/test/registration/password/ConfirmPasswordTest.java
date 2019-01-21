@@ -9,7 +9,7 @@ import selenium.test.registration.password.helper.PasswordTestHelper;
 
 @Builder
 public class ConfirmPasswordTest {
-    private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A jelszavak nem egyeznek.";
+    private static final String ERROR_MESSAGE_BAD_CONFIRM_PASSWORD = "A  nem egyeznek.";
 
     private final PasswordTestHelper passwordTestHelper;
     private final IndexPage indexPage;

@@ -30,7 +30,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
         testCase.validateSuccess();
          */
         accountPage = new AccountPage(driver);
-        deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver), new Navigate(driver), accountPage);
+        deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver, messageCodes), new Navigate(driver), accountPage);
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         notificationValidator = new NotificationValidator(driver);
         login = new Login(driver);

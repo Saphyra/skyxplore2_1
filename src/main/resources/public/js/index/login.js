@@ -11,7 +11,7 @@
         $("#login-password").val("")
         
         if(!credentials.isValid()){
-            notificationService.showError(ErrorCode.getMessage("EMPTY_CREDENTIALS"));
+            notificationService.showError(MessageCode.getMessage("EMPTY_CREDENTIALS"));
             return;
         }
         
@@ -19,7 +19,7 @@
             request.processValidResponse = function(){location.href = Mapping.CHARACTER_SELECT};
             request.processInvalidResponse = function(response){
                 if(response.status == ResponseStatus.UNAUTHORIZED){
-                    notificationService.showError(ErrorCode.getMessage("BAD_CREDENTIALS"));
+                    notificationService.showError(MessageCode.getMessage("BAD_CREDENTIALS"));
                 }else{
                     logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
                 }

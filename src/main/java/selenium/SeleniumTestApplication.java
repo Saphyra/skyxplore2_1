@@ -1,5 +1,8 @@
 package selenium;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -9,10 +12,19 @@ import org.springframework.boot.SpringApplication;
 import selenium.logic.util.Util;
 import skyxplore.Application;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+import static java.util.Objects.isNull;
 import static selenium.logic.util.LinkUtil.HOST;
 import static selenium.logic.util.LinkUtil.HOST_LOCAL;
+import static selenium.logic.util.Util.executeScript;
 import static skyxplore.Application.APP_CTX;
 
+@Slf4j
 public abstract class SeleniumTestApplication {
     private static final String ARG_PROFILE = "--spring.profiles.active=test";
     private static final String SKYXPLORE_LOG_LEVEL = "--logging.level=WARN";
@@ -28,10 +40,14 @@ public abstract class SeleniumTestApplication {
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
     private static final boolean HEADLESS_MODE = false;
 
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     protected WebDriver driver;
+    protected String locale;
+    protected Map<String, String> messageCodes;
 
     @Before
-    public void startServices() {
+    public void startServices() throws IOException {
         if (HOST.equals(HOST_LOCAL)) {
             Application.main(ARGS);
         }
@@ -41,10 +57,28 @@ public abstract class SeleniumTestApplication {
         options.setHeadless(HEADLESS_MODE);
 
         driver = new ChromeDriver(options);
+
+        locale = executeScript(driver, "return navigator.language.toLowerCase().split(\"-\")[0]");
+        readMessageCodes();
+
         driver.manage().window().maximize();
         driver.get(HOST);
 
         init();
+    }
+
+    private void readMessageCodes() throws IOException {
+        URL errorMessages = getClass().getClassLoader().getResource("public/i18n/" + locale + "/message_codes.json");
+
+        if (isNull(new File(errorMessages.getFile()))) {
+            errorMessages = getClass().getClassLoader().getResource("public/i18n/hu/message_codes.json");
+        }
+
+
+        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
+        };
+
+        messageCodes = OBJECT_MAPPER.readValue(errorMessages, typeRef);
     }
 
     protected abstract void init();

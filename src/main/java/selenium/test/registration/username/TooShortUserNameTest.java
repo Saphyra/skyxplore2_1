@@ -12,7 +12,7 @@ import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAM
 
 @Builder
 public class TooShortUserNameTest {
-    private static final String ERROR_MESSAGE_TOO_SHORT_USER_NAME = "Felhasználónév túl rövid (Minimum 3 karakter).";
+    private static final String ERROR_MESSAGE_TOO_SHORT_USER_NAME = "";
 
     private final UserNameTestHelper userNameTestHelper;
     private final IndexPage indexPage;
