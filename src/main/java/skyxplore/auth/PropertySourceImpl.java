@@ -1,20 +1,23 @@
 package skyxplore.auth;
 
-import com.github.saphyra.authservice.PropertySource;
-import org.springframework.stereotype.Component;
-import skyxplore.filter.CustomFilterHelper;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
 import static skyxplore.controller.PageController.INDEX_MAPPING;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.authservice.PropertySource;
+import com.github.saphyra.authservice.domain.AllowedUri;
+import com.github.saphyra.authservice.domain.RoleSetting;
+import skyxplore.filter.CustomFilterHelper;
 
 @Component
 public class PropertySourceImpl implements PropertySource {
@@ -49,23 +52,22 @@ public class PropertySourceImpl implements PropertySource {
     }
 
     @Override
-    public List<String> getAllowedUris() {
+    public List<AllowedUri> getAllowedUris() {
         return Arrays.asList(
-            "/",
-            "/**/favicon.ico",
-            "/login",
-            "/user/register",
-            "/user/name/exist",
-            "/user/email/exist",
-            "/css/**",
-            "/images/**",
-            "/js/**"
+            new AllowedUri("/", HttpMethod.GET),
+            new AllowedUri("/**/favicon.ico", HttpMethod.GET),
+            new AllowedUri("/user/register", HttpMethod.POST),
+            new AllowedUri("/user/name/exist", HttpMethod.POST),
+            new AllowedUri("/user/email/exist", HttpMethod.POST),
+            new AllowedUri("/css/**", HttpMethod.GET),
+            new AllowedUri("/images/**", HttpMethod.GET),
+            new AllowedUri("/js/**", HttpMethod.GET)
         );
     }
 
     @Override
-    public Map<String, Set<String>> getRoleSettings() {
-        return new HashMap<>();
+    public Set<RoleSetting> getRoleSettings() {
+        return new HashSet<>();
     }
 
     @Override
