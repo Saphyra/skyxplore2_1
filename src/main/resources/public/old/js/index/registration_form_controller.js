@@ -116,52 +116,6 @@
         }
         
         /*
-        Validates the password and confirmPassword.
-        Requirements:
-            - At least 6 character long
-            - Equals
-        */
-        function validatePasswords(){
-            try{
-                const password = document.getElementById("registration_password").value;
-                const passwordErrorElementName = "#invalid_password";
-                const confirmPassword = document.getElementById("registration_confirm_password").value;
-                const confirmPasswordErrorElementName = "#invalid_confirm_password";
-                
-                let passwordResult = true;
-                let confirmPasswordResult = true;
-                
-                if(password.length < 6){
-                    activateErrorElement(passwordErrorElementName, "Jelszó túl rövid (Minimum 6 karakter).");
-                    passwordResult = false;
-                }
-                
-                if(password.length > 30){
-                    activateErrorElement(passwordErrorElementName, "Jelszó túl hosszú (Maximum 30 karakter).");
-                    passwordResult = false;
-                }
-                
-                if(passwordResult && confirmPasswordResult && confirmPassword != password){
-                    activateErrorElement(passwordErrorElementName, "A jelszavak nem egyeznek.");
-                    activateErrorElement(confirmPasswordErrorElementName, "A jelszavak nem egyeznek.");
-                    passwordResult = false;
-                    confirmPasswordResult = false;
-                }
-                
-                if(passwordResult){
-                    deactivateErrorElement(passwordErrorElementName);
-                }if(confirmPasswordResult){
-                    deactivateErrorElement(confirmPasswordErrorElementName);
-                }
-                
-                return passwordResult && confirmPasswordResult;
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-            }
-        }
-        
-        /*
         Validates the email.
         Requirements:
             - Valid format
