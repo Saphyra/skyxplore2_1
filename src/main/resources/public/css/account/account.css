@@ -1,12 +1,18 @@
 main{
     text-align: center;
+    padding: 1rem;
 }
 
 section{
-    margin: 1rem;
+    margin: auto;
+    max-width: 60rem;
     text-align: center;
     border: 3px ridge white;
     border-radius: 10px;
+}
+
+section:not(:last-child){
+    margin-bottom: 1rem;
 }
 
 section h2{

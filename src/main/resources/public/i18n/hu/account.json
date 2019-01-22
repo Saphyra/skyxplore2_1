@@ -55,6 +55,102 @@
         "message": "Mentés"
       }
     ],
+    "subtitle-change-username": [
+      {
+        "key": "innerHTML",
+        "message": "Felhasználónév megváltoztatása"
+      }
+    ],
+    "new-username-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új felhasználónév"
+      }
+    ],
+    "new-username": [
+      {
+        "key": "placeholder",
+        "message": "Új felhasználónév"
+      }
+    ],
+    "new-username-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó"
+      }
+    ],
+    "new-username-password": [
+      {
+        "key": "placeholder",
+        "message": "Jelszó"
+      }
+    ],
+    "new-username-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
+    "subtitle-change-email": [
+      {
+        "key": "innerHTML",
+        "message": "E-mail cím megváltoztatása"
+      }
+    ],
+    "new-email-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új e-mail cím"
+      }
+    ],
+    "new-email": [
+      {
+        "key": "placeholder",
+        "message": "Új e-mail cím"
+      }
+    ],
+    "new-email-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó"
+      }
+    ],
+    "new-email-password": [
+      {
+        "key": "placeholder",
+        "message": "Jelszó"
+      }
+    ],
+    "new-email-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
+    "subtitle-delete-account": [
+      {
+        "key": "innerHTML",
+        "message": "Accout törlése"
+      }
+    ],
+    "delete-account-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó"
+      }
+    ],
+    "delete-account-password": [
+      {
+        "key": "placeholder",
+        "message": "Jelszó"
+      }
+    ],
+    "delete-account-button": [
+      {
+        "key": "innerHTML",
+        "message": "Törlés"
+      }
+    ],
     "logout-button": [
       {
         "key": "innerHTML",
