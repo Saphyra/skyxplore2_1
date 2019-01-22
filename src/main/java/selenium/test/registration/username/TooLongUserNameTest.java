@@ -1,13 +1,15 @@
 package selenium.test.registration.username;
 
-import lombok.Builder;
+import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+
 import org.openqa.selenium.WebElement;
+
+import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.page.IndexPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.registration.username.helper.UserNameTestHelper;
-
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 
 @Builder
 public class TooLongUserNameTest {
@@ -22,11 +24,12 @@ public class TooLongUserNameTest {
     }
 
 
-    private static final String ERROR_MESSAGE_TOO_LONG_USER_NAME = "";
+    private static final String MESSAGE_CODE_TOO_LONG_USERNAME = "USERNAME_TOO_LONG";
 
     private final UserNameTestHelper userNameTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooLongUserName() {
         SeleniumUser user = SeleniumUser.create();
@@ -37,7 +40,7 @@ public class TooLongUserNameTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidUserNameField(),
-            ERROR_MESSAGE_TOO_LONG_USER_NAME,
+            messageCodes.get(MESSAGE_CODE_TOO_LONG_USERNAME),
             userNameField,
             indexPage.getRegisterButton()
         );
