@@ -1,13 +1,15 @@
 package selenium.test.registration.password;
 
-import lombok.Builder;
+import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
+
 import org.openqa.selenium.WebElement;
+
+import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.page.IndexPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.registration.password.helper.PasswordTestHelper;
-
-import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 
 @Builder
 public class TooLongPasswordTest {
@@ -21,11 +23,12 @@ public class TooLongPasswordTest {
         TOO_LONG_PASSWORD = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_TOO_LONG_PASSWORD = " túl hosszú (Maximum 30 karakter).";
+    private static final String MESSAGE_CODE_PASSWORD_TOO_LONG = "PASSWORD_TOO_LONG";
 
     private final PasswordTestHelper passwordTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooLongPassword() {
         SeleniumUser user = SeleniumUser.create();
@@ -36,7 +39,7 @@ public class TooLongPasswordTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidPasswordField(),
-            ERROR_MESSAGE_TOO_LONG_PASSWORD,
+            messageCodes.get(MESSAGE_CODE_PASSWORD_TOO_LONG),
             passwordField,
             indexPage.getRegisterButton()
         );

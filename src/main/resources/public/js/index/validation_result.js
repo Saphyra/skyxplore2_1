@@ -77,9 +77,9 @@ function ValidationResult(){
 
     function validatePasswords(){
         if(password.length < 6){
-            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASWORD_TOO_SHORT")};
-        }else if(password.length < 6){
-            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASWORD_TOO_LONG")};
+            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASSWORD_TOO_SHORT")};
+        }else if(password.length > 30){
+            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASSWORD_TOO_LONG")};
         }else if(password !== confirmPassword){
             passwordProcess = function(){errorProcess(INVALID_PASSWORD, "BAD_CONFIRM_PASSWORD")};
             confirmPasswordProcess = function(){errorProcess(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSWORD")};
