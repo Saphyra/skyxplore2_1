@@ -1,3 +1,7 @@
+main{
+    text-align: center;
+}
+
 section{
     margin: 1rem;
     text-align: center;
@@ -15,19 +19,27 @@ section article{
     text-align: right;
 }
 
-section article label{
+section button{
     display: block;
-    margin: 0.5rem;
-    padding-right: 2rem;
-    font-size: 1.5rem;
-    position: relative;
-}
-
-section article label input{
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     font-size: 1.25rem;
 }
 
-.invalid{
+label{
+    position: relative;
+    display: block;
+    margin: 0.5rem;
+    font-size: 1.5rem;
+}
+
+label input{
+    margin-right: 2rem;
+    font-size: 1.25rem;
+}
+
+.invalid-input{
     display: none;
     border: 3px outset red;
     position: absolute;
@@ -35,12 +47,4 @@ section article label input{
     top: 0.25rem;
     border-radius: 3px;
     padding: 0.125rem;
-}
-
-section button{
-    display: block;
-    margin: auto;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.25rem;
 }
