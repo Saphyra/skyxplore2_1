@@ -15,6 +15,7 @@
         scriptLoader.loadScript("js/common/localization.js");
         scriptLoader.loadScript("js/common/log_service.js");
         scriptLoader.loadScript("js/common/notification_service.js");
+        scriptLoader.loadScript("js/common/logout_service.js");
     });
     
     /*

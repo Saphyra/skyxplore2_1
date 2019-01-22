@@ -41,7 +41,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
         this.changeUserNameTestHelper = new ChangeUserNameTestHelper(driver, registration, accountPage, new Navigate(driver));
         this.notificationValidator = new NotificationValidator(driver);
         this.login = new Login(driver);
-        this.logout = new Logout(driver);
+        this.logout = new Logout(driver, messageCodes);
     }
 
     @Test

@@ -9,7 +9,6 @@ import static skyxplore.Application.APP_CTX;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +20,7 @@ import org.springframework.boot.SpringApplication;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import selenium.logic.domain.MessageCodes;
 import skyxplore.Application;
 
 @Slf4j
@@ -43,7 +43,7 @@ public abstract class SeleniumTestApplication {
 
     protected WebDriver driver;
     protected String locale;
-    protected Map<String, String> messageCodes;
+    protected MessageCodes messageCodes;
 
     @Before
     public void startServices() throws IOException {
@@ -83,7 +83,7 @@ public abstract class SeleniumTestApplication {
         TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
-        this.messageCodes = OBJECT_MAPPER.readValue(messageCodes, typeRef);
+        this.messageCodes = OBJECT_MAPPER.readValue(messageCodes, MessageCodes.class);
     }
 
     protected abstract void init();

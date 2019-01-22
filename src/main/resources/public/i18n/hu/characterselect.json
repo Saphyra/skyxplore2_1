@@ -1,3 +1,23 @@
 {
-
+  "title": "Karakterválasztás - SkyXplore 2.1",
+  "payload": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Karakterválasztás"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "account-button": [
+      {
+        "key": "innerHTML",
+        "message": "Beállítások"
+      }
+    ]
+  }
 }
