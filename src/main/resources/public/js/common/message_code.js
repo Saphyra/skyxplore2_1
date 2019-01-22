@@ -25,13 +25,14 @@
     function addMessageCodes(codes){
         for(let eindex in codes){
             messageCodes[eindex] = codes[eindex];
+            logService.logToConsole("Loaded message: " + eindex + " - " + codes[eindex]);
         }
     }
     
     function createFallBackQuery(response){
-        const path = "i18n/hu/error_codes.json";
+        const path = "i18n/hu/message_codes.json";
         const request = new Request(HttpMethod.GET, path);
-            request.convertResponse = function(response){return JSON.parse(response.response)};
+            request.convertResponse = function(response){return JSON.parse(response.body)};
             request.processValidResponse = addMessageCodes;
         
         dao.sendRequestAsync(request);

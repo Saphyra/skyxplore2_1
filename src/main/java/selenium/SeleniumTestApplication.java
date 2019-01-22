@@ -1,28 +1,27 @@
 package selenium;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import static java.util.Objects.isNull;
+import static selenium.logic.util.LinkUtil.HOST;
+import static selenium.logic.util.LinkUtil.HOST_LOCAL;
+import static selenium.logic.util.Util.executeScript;
+import static skyxplore.Application.APP_CTX;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
-import selenium.logic.util.Util;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.Application;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.util.Objects.isNull;
-import static selenium.logic.util.LinkUtil.HOST;
-import static selenium.logic.util.LinkUtil.HOST_LOCAL;
-import static selenium.logic.util.Util.executeScript;
-import static skyxplore.Application.APP_CTX;
 
 @Slf4j
 public abstract class SeleniumTestApplication {
@@ -58,7 +57,7 @@ public abstract class SeleniumTestApplication {
 
         driver = new ChromeDriver(options);
 
-        locale = executeScript(driver, "return navigator.language.toLowerCase().split(\"-\")[0]");
+        getLocale();
         readMessageCodes();
 
         driver.manage().window().maximize();
@@ -67,25 +66,30 @@ public abstract class SeleniumTestApplication {
         init();
     }
 
-    private void readMessageCodes() throws IOException {
-        URL errorMessages = getClass().getClassLoader().getResource("public/i18n/" + locale + "/message_codes.json");
+    private void getLocale() {
+        locale = executeScript(driver, "return navigator.language.toLowerCase().split(\"-\")[0]");
+        log.info("Locale: {}", locale);
+    }
 
-        if (isNull(new File(errorMessages.getFile()))) {
-            errorMessages = getClass().getClassLoader().getResource("public/i18n/hu/message_codes.json");
+    private void readMessageCodes() throws IOException {
+        URL messageCodes = getClass().getClassLoader().getResource("public/i18n/" + locale + "/message_codes.json");
+
+        if (isNull(messageCodes)) {
+            log.info("Localization not found for locale {}. Using default locale...", locale);
+            messageCodes = getClass().getClassLoader().getResource("public/i18n/hu/message_codes.json");
         }
 
 
         TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
         };
 
-        messageCodes = OBJECT_MAPPER.readValue(errorMessages, typeRef);
+        this.messageCodes = OBJECT_MAPPER.readValue(messageCodes, typeRef);
     }
 
     protected abstract void init();
 
     @After
     public void tearDown() {
-        Util.sleep(0);
         if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);
         }

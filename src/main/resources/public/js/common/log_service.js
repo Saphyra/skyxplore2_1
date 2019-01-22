@@ -1,6 +1,7 @@
 (function LogService(){
+    const isConsoleEnabled = true;
+    
     window.logService = new function(){
-        const isConsoleEnabled = false;
         
         this.log = log;
         this.logToConsole = logToConsole;
