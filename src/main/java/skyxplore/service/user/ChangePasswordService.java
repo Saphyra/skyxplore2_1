@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
-import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.service.credentials.CredentialsService;
 
 @Service
@@ -27,9 +26,6 @@ public class ChangePasswordService {
     }
 
     private void validateChangePasswordRequest(ChangePasswordRequest request, SkyXpCredentials skyXpCredentials) {
-        if (!request.getNewPassword().equals(request.getConfirmPassword())) {
-            throw new BadlyConfirmedPasswordException("Confirm password does not match.");
-        }
         if (!passwordService.authenticate(request.getOldPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }

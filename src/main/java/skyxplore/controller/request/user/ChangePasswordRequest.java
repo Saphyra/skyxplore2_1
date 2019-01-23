@@ -12,10 +12,6 @@ public class ChangePasswordRequest {
     private String newPassword;
 
     @NotNull
-    @Size(min = 6)
-    private String confirmPassword;
-
-    @NotNull
     @Size(min = 1)
     private String oldPassword;
 }

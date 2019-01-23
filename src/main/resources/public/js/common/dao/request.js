@@ -19,6 +19,7 @@ function Request(method, path, body){
     this.method = method;
     this.path = path;
     this.body = processBody(body);
+    this.handleLogout = true;
     this.state = {};
     
     function processBody(body){
@@ -52,7 +53,11 @@ function Request(method, path, body){
     }
     
     this.processInvalidResponse = function(response, state){
-        logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
+        if(response.status == ResponseStatus.UNAUTHORIZED){
+            eventProcessor.processEvent(events.LOGOUT);
+        }else{
+            logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
+        }
     }
     
     this.processErrorResponse = function(response){

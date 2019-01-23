@@ -2,6 +2,7 @@ package selenium.test.account.changepassword;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.flow.Navigate;
 import selenium.logic.flow.Registration;
 import selenium.logic.page.AccountPage;
@@ -22,13 +23,14 @@ public class TooLongPasswordTest {
         TOO_LONG_PASSWORD = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_PASSWORD_TOO_LONG = "Új jelszó túl hosszú! (Maximum 30 karakter)";
+    private static final String MESSAGE_CODE_PASSWORD_TOO_LONG = "NEW_PASSWORD_TOO_LONG";
 
     private final ChangePasswordTestHelper changePasswordTestHelper;
     private final Registration registration;
     private final Navigate navigate;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooLongPassword() {
         changePasswordTestHelper.setUpWithCurrentPassword();
@@ -38,7 +40,7 @@ public class TooLongPasswordTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidNewPasswordField(),
-            ERROR_MESSAGE_PASSWORD_TOO_LONG,
+            messageCodes.get(MESSAGE_CODE_PASSWORD_TOO_LONG),
             newPasswordField,
             accountPage.getChangePasswordButton(),
             accountPage.getInvalidNewConfirmPasswordField(),

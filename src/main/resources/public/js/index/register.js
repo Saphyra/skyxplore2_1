@@ -37,13 +37,11 @@
         
         const userName = getUserName();
         const password = getPassword();
-        const confirmPassword = getConfirmPassword();
         const email = getEmail();
         
         const user = {
             username: userName,
             password: password,
-            confirmPassword: confirmPassword,
             email: email
         };
         

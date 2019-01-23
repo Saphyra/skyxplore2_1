@@ -1,9 +1,6 @@
 package selenium.test.account;
 
-import static selenium.logic.util.LinkUtil.ACCOUNT;
-
 import org.junit.Test;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.Login;
 import selenium.logic.flow.Navigate;
@@ -15,6 +12,8 @@ import selenium.test.account.deleteaccount.BadPasswordTest;
 import selenium.test.account.deleteaccount.EmptyPasswordTest;
 import selenium.test.account.deleteaccount.SuccessfulAccountDeletionTest;
 import selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
+
+import static selenium.logic.util.LinkUtil.ACCOUNT;
 
 public class DeleteAccountTest extends SeleniumTestApplication {
     private DeleteAccountTestHelper deleteAccountTestHelper;
@@ -33,7 +32,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
         deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver, messageCodes), new Navigate(driver), accountPage);
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         notificationValidator = new NotificationValidator(driver);
-        login = new Login(driver);
+        login = new Login(driver, messageCodes);
     }
 
     @Test

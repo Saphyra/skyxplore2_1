@@ -3,6 +3,7 @@ package selenium.test.account.changepassword;
 import lombok.Builder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.flow.Navigate;
 import selenium.logic.page.AccountPage;
@@ -14,13 +15,14 @@ import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD
 
 @Builder
 public class TooShortPasswordTest {
-    private static final String ERROR_MESSAGE_PASSWORD_TOO_SHORT = "Új jelszó túl rövid! (Minimum 6 karakter)";
+    private static final String MESSAGE_CODE_PASSWORD_TOO_SHORT = "NEW_PASSWORD_TOO_SHORT";
 
     private final WebDriver driver;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
     private final Navigate navigate;
     private final ChangePasswordTestHelper changePasswordTestHelper;
+    private final MessageCodes messageCodes;
 
     public void testTooShortPassword() {
         SeleniumUser user = changePasswordTestHelper.setUpWithCurrentPassword();
@@ -31,7 +33,7 @@ public class TooShortPasswordTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidNewPasswordField(),
-            ERROR_MESSAGE_PASSWORD_TOO_SHORT,
+            messageCodes.get(MESSAGE_CODE_PASSWORD_TOO_SHORT),
             newPasswordField,
             accountPage.getChangePasswordButton(),
             accountPage.getInvalidNewConfirmPasswordField(),

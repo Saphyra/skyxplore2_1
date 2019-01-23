@@ -1,4 +1,5 @@
 window.Mapping = {
+    CHANGE_PASSWORD: "user/password",
     CHARACTER_SELECT: "characterselect",
     EMAIL_EXISTS: "user/email",
     LOGIN: "login",

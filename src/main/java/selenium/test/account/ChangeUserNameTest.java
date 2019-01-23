@@ -1,9 +1,6 @@
 package selenium.test.account;
 
-import static selenium.logic.util.LinkUtil.ACCOUNT;
-
 import org.junit.Test;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.Login;
 import selenium.logic.flow.Logout;
@@ -19,6 +16,8 @@ import selenium.test.account.changeusername.SuccessfulUserNameChangeTest;
 import selenium.test.account.changeusername.TooLongUserNameTest;
 import selenium.test.account.changeusername.TooShortUserNameTest;
 import selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
+
+import static selenium.logic.util.LinkUtil.ACCOUNT;
 
 public class ChangeUserNameTest extends SeleniumTestApplication {
     private AccountPage accountPage;
@@ -40,7 +39,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
         registration = new Registration(driver, messageCodes);
         this.changeUserNameTestHelper = new ChangeUserNameTestHelper(driver, registration, accountPage, new Navigate(driver));
         this.notificationValidator = new NotificationValidator(driver);
-        this.login = new Login(driver);
+        this.login = new Login(driver, messageCodes);
         this.logout = new Logout(driver, messageCodes);
     }
 

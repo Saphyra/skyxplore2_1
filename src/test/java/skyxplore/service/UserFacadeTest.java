@@ -106,6 +106,6 @@ public class UserFacadeTest {
         //WHEN
         underTest.registrateUser(registrationRequest);
         //THEN
-        verify(registrationService).registrateUser(registrationRequest);
+        verify(registrationService).registerUser(registrationRequest);
     }
 }

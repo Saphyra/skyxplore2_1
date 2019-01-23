@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 
 @RequiredArgsConstructor
 public class AccountPage {
-    private static final String ELEMENT_NEW_PASSWORD_FIELD = "newpassword1";
-    private static final String ELEMENT_INVALID_NEW_PASSWORD_FIELD = "invalid_newpassword1";
-    private static final String ELEMENT_NEW_CONFIRM_PASSWORD_FIELD = "newpassword2";
-    private static final String ELEMENT_INVALID_NEW_CONFIRM_PASSWORD_FIELD = "invalid_newpassword2";
-    private static final String ELEMENT_CURRENT_NEW_PASSWORD_FIELD = "newpasswordoldpassword";
-    private static final String ELEMENT_CURRENT_INVALID_NEW_PASSWORD_FIELD = "invalid_newpasswordoldpassword";
+    private static final String ELEMENT_NEW_PASSWORD_FIELD = "new-password";
+    private static final String ELEMENT_INVALID_NEW_PASSWORD_FIELD = "invalid-new-password";
+    private static final String ELEMENT_NEW_CONFIRM_PASSWORD_FIELD = "new-password-confirmation";
+    private static final String ELEMENT_INVALID_NEW_CONFIRM_PASSWORD_FIELD = "invalid-new-password-confirmation";
+    private static final String ELEMENT_CURRENT_NEW_PASSWORD_FIELD = "current-password-for-password-change";
+    private static final String ELEMENT_CURRENT_INVALID_NEW_PASSWORD_FIELD = "invalid-current-password-for-password-change";
 
     private static final String ELEMENT_CHANGE_USER_NAME = "newusername";
     private static final String ELEMENT_INVALID_CHANGE_USER_NAME = "invalid_newusername";
@@ -27,7 +27,7 @@ public class AccountPage {
     private static final String ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD = "deleteaccountpassword";
     private static final String ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD = "invalid_deleteaccountpassword";
 
-    private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "newpasswordbutton";
+    private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "change-password-button";
     private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "newusernamebutton";
     private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "newemailbutton";
     private static final String ELEMENT_DELETE_ACCOUNT_BUTTON = "deleteaccountbutton";

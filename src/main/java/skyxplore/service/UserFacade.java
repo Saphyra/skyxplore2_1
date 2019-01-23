@@ -54,6 +54,6 @@ public class UserFacade {
     }
 
     public void registrateUser(UserRegistrationRequest request) {
-        registrationService.registrateUser(request);
+        registrationService.registerUser(request);
     }
 }

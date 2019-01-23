@@ -21,7 +21,7 @@
                 if(response.status == ResponseStatus.UNAUTHORIZED){
                     notificationService.showError(MessageCode.getMessage("BAD_CREDENTIALS"));
                 }else{
-                    logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
+                    request.processErrorResponse(response);
                 }
             }
             

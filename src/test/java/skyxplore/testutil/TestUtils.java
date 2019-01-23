@@ -287,7 +287,6 @@ public class TestUtils {
     public static ChangePasswordRequest createChangePasswordRequest() {
         ChangePasswordRequest request = new ChangePasswordRequest();
         request.setNewPassword(USER_NEW_PASSWORD);
-        request.setConfirmPassword(USER_NEW_PASSWORD);
         request.setOldPassword(USER_PASSWORD);
         return request;
     }
@@ -724,7 +723,6 @@ public class TestUtils {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setUsername(USER_NAME);
         request.setPassword(USER_PASSWORD);
-        request.setConfirmPassword(USER_PASSWORD);
         request.setEmail(USER_EMAIL);
         return request;
     }

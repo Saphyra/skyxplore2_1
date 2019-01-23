@@ -13,7 +13,6 @@ import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
@@ -24,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CREDENTIALS_HASHED_PASSWORD;
 import static skyxplore.testutil.TestUtils.USER_EMAIL;
-import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.USER_NAME;
 import static skyxplore.testutil.TestUtils.USER_PASSWORD;
@@ -50,22 +48,13 @@ public class RegistrationServiceTest {
     @InjectMocks
     private RegistrationService underTest;
 
-    @Test(expected = BadlyConfirmedPasswordException.class)
-    public void testRegistrateUserShouldThrowExceptionWhenConfirmPasswordNotEquals() {
-        //GIVEN
-        UserRegistrationRequest request = createUserRegistrationRequest();
-        request.setConfirmPassword(USER_FAKE_PASSWORD);
-        //WHEN
-        underTest.registrateUser(request);
-    }
-
     @Test(expected = UserNameAlreadyExistsException.class)
     public void testRegistrateUserShouldThrowExceptionWhenUserNameExists() {
         //GIVEN
         UserRegistrationRequest request = createUserRegistrationRequest();
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(true);
         //WHEN
-        underTest.registrateUser(request);
+        underTest.registerUser(request);
     }
 
     @Test(expected = EmailAlreadyExistsException.class)
@@ -75,7 +64,7 @@ public class RegistrationServiceTest {
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(false);
         when(userQueryService.isEmailExists(USER_EMAIL)).thenReturn(true);
         //WHEN
-        underTest.registrateUser(request);
+        underTest.registerUser(request);
     }
 
     @Test
@@ -87,7 +76,7 @@ public class RegistrationServiceTest {
         when(idGenerator.generateRandomId()).thenReturn(USER_ID);
         when(passwordService.hashPassword(USER_PASSWORD)).thenReturn(CREDENTIALS_HASHED_PASSWORD);
         //WHEN
-        underTest.registrateUser(request);
+        underTest.registerUser(request);
         //THEN
         ArgumentCaptor<SkyXpUser> userCaptor = ArgumentCaptor.forClass(SkyXpUser.class);
         verify(userDao).save(userCaptor.capture());

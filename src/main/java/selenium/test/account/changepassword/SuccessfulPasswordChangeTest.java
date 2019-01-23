@@ -2,6 +2,7 @@ package selenium.test.account.changepassword;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.flow.Login;
 import selenium.logic.flow.Logout;
@@ -12,7 +13,7 @@ import selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
 
 @Builder
 public class SuccessfulPasswordChangeTest {
-    private static final String NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE = "Jelszó megváltoztatása sikeres.";
+    private static final String MESSAGE_CODE_SUCCESSFUL_PASSWORD_CHANGE = "PASSWORD_CHANGE_SUCCESSFUL";
 
     private final ChangePasswordTestHelper changePasswordTestHelper;
     private final AccountPage accountPage;
@@ -20,6 +21,7 @@ public class SuccessfulPasswordChangeTest {
     private final Login login;
     private final Navigate navigate;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void testSuccessfulPasswordChange() {
         SeleniumUser user = changePasswordTestHelper.registerAndNavigateToAccount();
@@ -62,6 +64,6 @@ public class SuccessfulPasswordChangeTest {
     }
 
     private void verifySuccessfulNotification() {
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_SUCCESSFUL_PASSWORD_CHANGE);
+        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_PASSWORD_CHANGE));
     }
 }

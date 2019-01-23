@@ -32,7 +32,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         communityTestHelper = new CommunityTestHelper(
-            new Login(driver),
+            new Login(driver, messageCodes),
             new SelectCharacter(driver),
             new OverviewPage(driver),
             new Navigate(driver)

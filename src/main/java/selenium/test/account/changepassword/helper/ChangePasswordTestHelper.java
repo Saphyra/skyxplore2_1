@@ -41,6 +41,7 @@ public class ChangePasswordTestHelper {
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getCurrentInvalidNewPasswordField()));
 
         WebElement changePasswordButton = accountPage.getChangePasswordButton();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(changePasswordButton));
         assertTrue(changePasswordButton.isEnabled());
         changePasswordButton.click();
     }
