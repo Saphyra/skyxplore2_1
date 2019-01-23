@@ -1,5 +1,5 @@
 (function LogService(){
-    const isConsoleEnabled = true;
+    const isConsoleEnabled = false;
     
     window.logService = new function(){
         

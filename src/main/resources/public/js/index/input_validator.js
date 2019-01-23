@@ -35,9 +35,9 @@
             clearTimeout(timeout);
         }
         timeout = setTimeout(startValidation, 1000);
-    }
-    
-    function startValidation(){
-        eventProcessor.processEvent(new Event(events.VALIDATE));
+        
+        function startValidation(){
+            eventProcessor.processEvent(new Event(events.VALIDATE));
+        }
     }
 })();

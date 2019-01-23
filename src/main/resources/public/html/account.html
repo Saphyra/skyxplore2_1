@@ -25,24 +25,24 @@
             <ARTICLE>
                 <LABEL>
                     <SPAN id="new-password-span"></SPAN>:
-                    <INPUT type='password' id='new-password'>
+                    <INPUT type='password' id='new-password' class='change-password-input'>
                     <DIV id="invalid-new-password" class="invalid-input">X</DIV>
                 </LABEL>
 
                 <LABEL>
                     <SPAN id="new-password-confirmation-span"></SPAN>:
-                    <INPUT type='password' id='new-password-confirmation'>
+                    <INPUT type='password' id='new-password-confirmation' class='change-password-input'>
                     <DIV id="invalid-new-password-confirmation" class="invalid-input">X</DIV>
                 </LABEL>
 
                 <LABEL>
                     <SPAN id="current-password-for-password-change-span"></SPAN>:
-                    <INPUT type='password' id='current-password-for-password-change'>
+                    <INPUT type='password' id='current-password-for-password-change' class='change-password-input'>
                     <DIV id="invalid-current-password-for-password-change" class="invalid-input">X</DIV>
                 </LABEL>
             </ARTICLE>
 
-            <BUTTON id='change-password-button' onclick=''></BUTTON>
+            <BUTTON id='change-password-button' onclick='eventProcessor.processEvent(new Event(events.CHANGE_PASSWORD_ATTEMPT))'></BUTTON>
         </SECTION>
 
         <SECTION>

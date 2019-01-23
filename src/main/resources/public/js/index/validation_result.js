@@ -1,3 +1,5 @@
+scriptLoader.loadScript("js/common/validation_util.js");
+
 function ValidationResult(){
     const INVALID_USERNAME = "#invalid-username";
     const INVALID_PASSWORD = "#invalid-password";
@@ -17,10 +19,10 @@ function ValidationResult(){
     let userNameValidated = false;
     let emailValidated = false;
     
-    let userNameProcess = function(){$(INVALID_USERNAME).fadeOut()}
-    let passwordProcess = function(){$(INVALID_PASSWORD).fadeOut()}
-    let confirmPasswordProcess = function(){$(INVALID_CONFIRM_PASSWORD).fadeOut()}
-    let emailProcess = function(){$(INVALID_EMAIL).fadeOut()}
+    let userNameProcess = createSuccessProcess(INVALID_USERNAME);
+    let passwordProcess = createSuccessProcess(INVALID_PASSWORD);
+    let confirmPasswordProcess = createSuccessProcess(INVALID_CONFIRM_PASSWORD);
+    let emailProcess = createSuccessProcess(INVALID_EMAIL);
     
     this.validate = validate;
     this.continueValidation = continueValidation;
@@ -77,12 +79,12 @@ function ValidationResult(){
 
     function validatePasswords(){
         if(password.length < 6){
-            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASSWORD_TOO_SHORT")};
+            passwordProcess = createErrorProcess(INVALID_PASSWORD, "PASSWORD_TOO_SHORT");
         }else if(password.length > 30){
-            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "PASSWORD_TOO_LONG")};
+            passwordProcess = createErrorProcess(INVALID_PASSWORD, "PASSWORD_TOO_LONG");
         }else if(password !== confirmPassword){
-            passwordProcess = function(){errorProcess(INVALID_PASSWORD, "BAD_CONFIRM_PASSWORD")};
-            confirmPasswordProcess = function(){errorProcess(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSWORD")};
+            passwordProcess = createErrorProcess(INVALID_PASSWORD, "BAD_CONFIRM_PASSWORD");
+            confirmPasswordProcess = createErrorProcess(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSWORD");
         }else{
             passwordValid = true;
             confirmPasswordValid = true;
@@ -92,11 +94,11 @@ function ValidationResult(){
     function validateUserName(payload){
         if(userName.length < 3){
             userNameValidated = true;
-            userNameProcess = function(){errorProcess(INVALID_USERNAME, "USERNAME_TOO_SHORT")};
+            userNameProcess = createErrorProcess(INVALID_USERNAME, "USERNAME_TOO_SHORT");
             eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
         }else if(userName.length > 30){
             userNameValidated = true;
-            userNameProcess = function(){errorProcess(INVALID_USERNAME, "USERNAME_TOO_LONG")};
+            userNameProcess = createErrorProcess(INVALID_USERNAME, "USERNAME_TOO_LONG");
             eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
         }else{
             const request = new Request(HttpMethod.POST, Mapping.USERNAME_EXISTS, {value: userName});
@@ -107,7 +109,7 @@ function ValidationResult(){
                     if(response.body === "false"){
                         userNameValid = true;
                     }else{
-                        userNameProcess = function(){errorProcess(INVALID_USERNAME, "USERNAME_ALREADY_EXISTS")};
+                        userNameProcess = createErrorProcess(INVALID_USERNAME, "USERNAME_ALREADY_EXISTS");
                     }
                     userNameValidated = true;
                     eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
@@ -120,7 +122,7 @@ function ValidationResult(){
     function validateEmail(payload){
         if(!isEmailValid(email)){
             emailValidated = true;
-            emailProcess = function(){errorProcess(INVALID_EMAIL, "INVALID_EMAIL")};
+            emailProcess = createErrorProcess(INVALID_EMAIL, "INVALID_EMAIL");
             eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
         }else{
             const request = new Request(HttpMethod.POST, Mapping.EMAIL_EXISTS, {value: email});
@@ -131,7 +133,7 @@ function ValidationResult(){
                     if(response.body === "false"){
                         emailValid = true;
                     }else{
-                        emailProcess = function(){errorProcess(INVALID_EMAIL, "EMAIL_ALREADY_EXISTS")};
+                        emailProcess = createErrorProcess(INVALID_EMAIL, "EMAIL_ALREADY_EXISTS");
                     }
                     emailValidated = true;
                     eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
@@ -139,10 +141,5 @@ function ValidationResult(){
                 
             dao.sendRequestAsync(request);
         }
-    }
-    
-    function errorProcess(id, code){
-        $(id).prop("title", MessageCode.getMessage(code))
-            .fadeIn();
     }
 }
