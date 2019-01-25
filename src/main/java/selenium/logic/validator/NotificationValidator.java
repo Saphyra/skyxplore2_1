@@ -1,16 +1,17 @@
 package selenium.logic.validator;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
 import static selenium.logic.util.Util.sleep;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class NotificationValidator {
@@ -25,7 +26,7 @@ public class NotificationValidator {
             notifications = getNotifications();
             sleep(100);
             counter++;
-        } while (notifications.isEmpty() || counter > 100);
+        } while (notifications.isEmpty() && counter < 100);
 
         assertEquals(1, notifications.size());
         verifyContains(notifications, text);

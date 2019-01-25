@@ -91,12 +91,12 @@
             <ARTICLE>
                 <LABEL>
                     <SPAN id="delete-account-password-span"></SPAN>:
-                    <INPUT type='password' id='delete-account-password'>
+                    <INPUT type='password' id='delete-account-password' class="delete-account-input">
                     <DIV id="invalid-delete-account-password" class="invalid-input">X</DIV>
                 </LABEL>
             </ARTICLE>
 
-            <BUTTON id='delete-account-button' onclick=''></BUTTON>
+            <BUTTON id='delete-account-button' onclick='eventProcessor.processEvent(new Event(events.DELETE_ACCOUNT_ATTEMPT))'></BUTTON>
         </SECTION>
     </MAIN>
 

@@ -1,9 +1,10 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class AccountPage {
@@ -24,13 +25,13 @@ public class AccountPage {
     private static final String ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD = "newemailpassword";
     private static final String ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD = "invalid_newemailpassword";
 
-    private static final String ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD = "deleteaccountpassword";
-    private static final String ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD = "invalid_deleteaccountpassword";
+    private static final String ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD = "delete-account-password";
+    private static final String ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD = "invalid-delete-account-password";
 
     private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "change-password-button";
     private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "newusernamebutton";
     private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "newemailbutton";
-    private static final String ELEMENT_DELETE_ACCOUNT_BUTTON = "deleteaccountbutton";
+    private static final String ELEMENT_DELETE_ACCOUNT_BUTTON = "delete-account-button";
 
     private final WebDriver driver;
 

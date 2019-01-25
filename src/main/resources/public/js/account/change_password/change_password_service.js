@@ -38,18 +38,17 @@
             request.handleLogout = false;
             request.processValidResponse = function(){
                 notificationService.showSuccess(MessageCode.getMessage("PASSWORD_CHANGE_SUCCESSFUL"));
-                cleanFields();
             }
             request.processInvalidResponse = function(response){
                 if(response.status == ResponseStatus.UNAUTHORIZED){
                     notificationService.showError(MessageCode.getMessage("BAD_PASSWORD"));
-                    cleanFields();
                 }else{
                     request.processErrorResponse(response);
-                    cleanFields();
                 }
             }
         dao.sendRequestAsync(request);
+        
+        cleanFields();
         
         function cleanFields(){
             $("#new-password").val("");

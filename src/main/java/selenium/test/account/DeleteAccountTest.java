@@ -1,6 +1,9 @@
 package selenium.test.account;
 
+import static selenium.logic.util.LinkUtil.ACCOUNT;
+
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.Login;
 import selenium.logic.flow.Navigate;
@@ -13,8 +16,6 @@ import selenium.test.account.deleteaccount.EmptyPasswordTest;
 import selenium.test.account.deleteaccount.SuccessfulAccountDeletionTest;
 import selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
 
-import static selenium.logic.util.LinkUtil.ACCOUNT;
-
 public class DeleteAccountTest extends SeleniumTestApplication {
     private DeleteAccountTestHelper deleteAccountTestHelper;
     private AccountPage accountPage;
@@ -24,10 +25,6 @@ public class DeleteAccountTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        /*
-        testCase.validateBadPassword();
-        testCase.validateSuccess();
-         */
         accountPage = new AccountPage(driver);
         deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver, messageCodes), new Navigate(driver), accountPage);
         fieldValidator = new FieldValidator(driver, ACCOUNT);
@@ -41,6 +38,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testEmptyPassword();
     }
@@ -52,6 +50,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
             .driver(driver)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBadPassword();
     }
@@ -64,6 +63,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
             .login(login)
+            .messageCodes(messageCodes)
             .build()
             .testSuccessfulAccountDeletion();
     }
