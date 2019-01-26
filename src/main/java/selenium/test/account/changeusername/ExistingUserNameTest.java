@@ -1,8 +1,8 @@
 package selenium.test.account.changeusername;
 
-import org.openqa.selenium.WebElement;
-
 import lombok.Builder;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.flow.Registration;
 import selenium.logic.page.AccountPage;
@@ -11,12 +11,13 @@ import selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
 
 @Builder
 public class ExistingUserNameTest {
-    private static final String ERROR_MESSAGE_USER_NAME_EXISTS = "Felhasználónév foglalt.";
+    private static final String MESSAGE_CODE_USERNAME_ALREADY_EXISTS = "USERNAME_ALREADY_EXISTS";
 
     private final Registration registration;
     private final ChangeUserNameTestHelper changeUserNameTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testExistingUserName() {
         SeleniumUser otherUser = registration.registerUser();
@@ -27,7 +28,7 @@ public class ExistingUserNameTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidChangeUserNameField(),
-            ERROR_MESSAGE_USER_NAME_EXISTS,
+            messageCodes.get(MESSAGE_CODE_USERNAME_ALREADY_EXISTS),
             userNameField,
             accountPage.getChangeUserNameButton()
         );

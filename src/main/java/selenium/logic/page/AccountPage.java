@@ -15,10 +15,10 @@ public class AccountPage {
     private static final String ELEMENT_CURRENT_NEW_PASSWORD_FIELD = "current-password-for-password-change";
     private static final String ELEMENT_CURRENT_INVALID_NEW_PASSWORD_FIELD = "invalid-current-password-for-password-change";
 
-    private static final String ELEMENT_CHANGE_USER_NAME = "newusername";
-    private static final String ELEMENT_INVALID_CHANGE_USER_NAME = "invalid_newusername";
-    private static final String ELEMENT_CHANGE_USER_NAME_PASSWORD = "newusernamepassword";
-    private static final String ELEMENT_INVALID_CHANGE_USER_NAME_PASSWORD = "invalid_newusernamepassword";
+    private static final String ELEMENT_CHANGE_USER_NAME = "new-username";
+    private static final String ELEMENT_INVALID_CHANGE_USER_NAME = "invalid-new-username";
+    private static final String ELEMENT_CHANGE_USER_NAME_PASSWORD = "change-username-password";
+    private static final String ELEMENT_INVALID_CHANGE_USER_NAME_PASSWORD = "invalid-change-username-password";
 
     private static final String ELEMENT_CHANGE_EMAIL_FIELD = "newemail";
     private static final String ELEMENT_INVALID_CHANGE_EMAIL_FIELD = "invalid_newemail";
@@ -29,7 +29,7 @@ public class AccountPage {
     private static final String ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD = "invalid-delete-account-password";
 
     private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "change-password-button";
-    private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "newusernamebutton";
+    private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "change-username-button";
     private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "newemailbutton";
     private static final String ELEMENT_DELETE_ACCOUNT_BUTTON = "delete-account-button";
 

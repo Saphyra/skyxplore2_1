@@ -30,10 +30,6 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        /*
-        testCase.validateHappyPath();
-         */
-
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         registration = new Registration(driver, messageCodes);
@@ -49,6 +45,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
             .changeUserNameTestHelper(changeUserNameTestHelper)
+            .messageCodes(messageCodes)
             .build()
             .testTooShortUserName();
     }
@@ -59,6 +56,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testTooLongUserName();
     }
@@ -70,6 +68,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .fieldValidator(fieldValidator)
             .registration(registration)
+            .messageCodes(messageCodes)
             .build()
             .testExistingUserName();
     }
@@ -80,6 +79,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testEmptyPassword();
     }
@@ -90,6 +90,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBadPassword();
     }
@@ -102,6 +103,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .login(login)
             .logout(logout)
+            .messageCodes(messageCodes)
             .build()
             .testSuccessfulUserNameChange();
     }

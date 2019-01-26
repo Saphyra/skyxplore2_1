@@ -1,13 +1,13 @@
 package selenium.test.account.changeusername;
 
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
-
-import org.openqa.selenium.WebElement;
-
 import lombok.Builder;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.page.AccountPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
+
+import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 
 @Builder
 public class TooLongUserNameTest {
@@ -20,11 +20,12 @@ public class TooLongUserNameTest {
         }
         TOO_LONG_USER_NAME = builder.toString();
     }
-    private static final String ERROR_MESSAGE_USER_NAME_TOO_LONG = "Túl hosszú felhasználónév. (Maximum 30 karakter)";
+    private static final String MESSAGE_CODE_USERNAME_TOO_LONG = "USERNAME_TOO_LONG";
 
     private final AccountPage accountPage;
     private final ChangeUserNameTestHelper changeUserNameTestHelper;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooLongUserName() {
         changeUserNameTestHelper.setUpWithCurrentPassword();
@@ -34,7 +35,7 @@ public class TooLongUserNameTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidChangeUserNameField(),
-            ERROR_MESSAGE_USER_NAME_TOO_LONG,
+            messageCodes.get(MESSAGE_CODE_USERNAME_TOO_LONG),
             userNameField,
             accountPage.getChangeUserNameButton()
         );

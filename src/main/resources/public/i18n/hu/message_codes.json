@@ -16,6 +16,7 @@
   "REGISTRATION_SUCCESSFUL": "Sikeres regisztráció!",
   "SUCCESSFUL_LOGOUT": "Sikeres kijelentkezés.",
   "USERNAME_ALREADY_EXISTS": "Felhasználónév foglalt.",
+  "USERNAME_CHANGE_SUCCESSFUL": "Felhasználónév megváltoztatása sikeres.",
   "USERNAME_TOO_LONG": "Felhasználónév túl hosszú (Maximum 30 karakter).",
   "USERNAME_TOO_SHORT": "Felhasználónév túl rövid (Minimum 3 karakter)."
 }

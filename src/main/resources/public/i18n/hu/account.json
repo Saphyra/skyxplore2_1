@@ -73,19 +73,19 @@
         "message": "Új felhasználónév"
       }
     ],
-    "new-username-password-span": [
+    "change-username-password-span": [
       {
         "key": "innerHTML",
         "message": "Jelszó"
       }
     ],
-    "new-username-password": [
+    "change-username-password": [
       {
         "key": "placeholder",
         "message": "Jelszó"
       }
     ],
-    "new-username-button": [
+    "change-username-button": [
       {
         "key": "innerHTML",
         "message": "Mentés"

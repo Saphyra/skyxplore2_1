@@ -51,18 +51,18 @@
             <ARTICLE>
                 <LABEL>
                     <SPAN id="new-username-span"></SPAN>:
-                    <INPUT type='text' id='new-username'>
+                    <INPUT type='text' id='new-username' class="change-username-input">
                     <DIV id="invalid-new-username" class="invalid-input">X</DIV>
                 </LABEL>
 
                 <LABEL>
-                    <SPAN id="new-username-password-span"></SPAN>:
-                    <INPUT type='password' id='new-username-password'>
-                    <DIV id="invalid-new-username-password" class="invalid-input">X</DIV>
+                    <SPAN id="change-username-password-span"></SPAN>:
+                    <INPUT type='password' id='change-username-password' class="change-username-input">
+                    <DIV id="invalid-change-username-password" class="invalid-input">X</DIV>
                 </LABEL>
             </ARTICLE>
 
-            <BUTTON id='new-username-button' onclick=''></BUTTON>
+            <BUTTON id='change-username-button' onclick='eventProcessor.processEvent(new Event(events.CHANGE_USERNAME_ATTEMPT))'></BUTTON>
         </SECTION>
         
         <SECTION>
