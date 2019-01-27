@@ -3,6 +3,8 @@ package selenium.test.account.deleteaccount;
 import org.openqa.selenium.WebDriver;
 
 import lombok.Builder;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.flow.Login;
@@ -27,6 +29,7 @@ public class SuccessfulAccountDeletionTest {
         accountPage.getDeleteAccountPasswordField().sendKeys(user.getPassword());
 
         deleteAccountTestHelper.sendForm();
+        new WebDriverWait(driver, 2).until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
 
         notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_ACCOUNT_DELETED));
