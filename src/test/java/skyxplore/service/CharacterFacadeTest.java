@@ -1,29 +1,10 @@
 package skyxplore.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
-import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
-import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.createCharacter;
-import static skyxplore.testutil.TestUtils.createCharacterDeleteRequest;
-import static skyxplore.testutil.TestUtils.createCreateCharacterRequest;
-import static skyxplore.testutil.TestUtils.createRenameCharacterRequest;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
@@ -34,6 +15,22 @@ import skyxplore.service.character.CharacterCreatorService;
 import skyxplore.service.character.CharacterDeleteService;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.service.character.CharacterRenameService;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.createCreateCharacterRequest;
+import static skyxplore.testutil.TestUtils.createRenameCharacterRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterFacadeTest {
@@ -69,10 +66,14 @@ public class CharacterFacadeTest {
     public void testCreateCharacterShouldCallService() {
         //GIVEN
         CreateCharacterRequest request = createCreateCharacterRequest();
+
+        SkyXpCharacter character = createCharacter();
+        when(characterCreatorService.createCharacter(request, USER_ID)).thenReturn(character);
         //WHEN
-        underTest.createCharacter(request, USER_ID);
+        SkyXpCharacter result = underTest.createCharacter(request, USER_ID);
         //THEN
         verify(characterCreatorService).createCharacter(request, USER_ID);
+        assertEquals(character, result);
     }
 
     @Test

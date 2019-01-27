@@ -1,4 +1,6 @@
 (function PageController(){
+    scriptLoader.loadScript("js/characterselect/create_character/create_character_controller.js");
+    
     $(document).ready(function(){
         init();
     });

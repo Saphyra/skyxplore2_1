@@ -1,5 +1,21 @@
 package skyxplore.service.character;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.controller.request.character.CreateCharacterRequest;
+import skyxplore.dataaccess.db.CharacterDao;
+import skyxplore.dataaccess.db.EquippedShipDao;
+import skyxplore.dataaccess.db.FactoryDao;
+import skyxplore.dataaccess.db.SlotDao;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.exception.CharacterNameAlreadyExistsException;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,23 +31,6 @@ import static skyxplore.testutil.TestUtils.createEquippedDefenseSlot;
 import static skyxplore.testutil.TestUtils.createEquippedShip;
 import static skyxplore.testutil.TestUtils.createEquippedWeaponSlot;
 import static skyxplore.testutil.TestUtils.createFactory;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.dataaccess.db.EquippedShipDao;
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.exception.CharacterNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterCreatorServiceTest {
@@ -90,7 +89,7 @@ public class CharacterCreatorServiceTest {
         Factory factory = createFactory();
         when(newCharacterGenerator.createFactory(CHARACTER_ID_1)).thenReturn(factory);
         //WHEN
-        underTest.createCharacter(request, USER_ID);
+        SkyXpCharacter result = underTest.createCharacter(request, USER_ID);
         //THEN
         verify(characterQueryService).isCharNameExists(CHARACTER_NAME);
         verify(newCharacterGenerator).createCharacter(USER_ID, CHARACTER_NAME);
@@ -104,5 +103,6 @@ public class CharacterCreatorServiceTest {
         verify(factoryDao).save(factory);
         assertEquals(DEFENSE_SLOT_ID, ship.getDefenseSlotId());
         assertEquals(WEAPON_SLOT_ID, ship.getWeaponSlotId());
+        assertEquals(character, result);
     }
 }

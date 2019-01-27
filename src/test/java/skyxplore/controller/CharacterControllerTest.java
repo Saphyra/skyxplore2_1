@@ -58,11 +58,18 @@ public class CharacterControllerTest {
     public void testCreateCharacterShouldCallFacadeAndInvalidateCache() {
         //GIVEN
         CreateCharacterRequest request = new CreateCharacterRequest(CHARACTER_NAME);
+
+        SkyXpCharacter character = createCharacter();
+        when(characterFacade.createCharacter(request, USER_ID)).thenReturn(character);
+
+        CharacterView characterView = createCharacterView(character);
+        when(characterViewConverter.convertDomain(character)).thenReturn(characterView);
         //WHEN
-        underTest.createCharacter(request, USER_ID);
+        CharacterView result = underTest.createCharacter(request, USER_ID);
         //THEN
         verify(characterFacade).createCharacter(request, USER_ID);
         verify(characterNameCache).invalidate(CHARACTER_NAME);
+        assertEquals(characterView, result);
     }
 
     @Test

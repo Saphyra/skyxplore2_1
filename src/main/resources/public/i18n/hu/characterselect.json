@@ -7,6 +7,24 @@
         "message": "Karakterválasztás"
       }
     ],
+    "create-character-span": [
+      {
+        "key": "innerHTML",
+        "message": "Karakter létrehozása"
+      }
+    ],
+    "create-character-name": [
+      {
+        "key": "placeholder",
+        "message": "Karakternév"
+      }
+    ],
+    "create-character-button": [
+      {
+        "key": "innerHTML",
+        "message": "Létrehozás"
+      }
+    ],
     "logout-button": [
       {
         "key": "innerHTML",

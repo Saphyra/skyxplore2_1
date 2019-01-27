@@ -4,26 +4,35 @@
 
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/characterselect/.css">
+    <LINK rel="stylesheet" href="/css/characterselect/characterselect.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
     <SCRIPT src="js/characterselect/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
-<DIV class="main-page">
-    <HEADER>
-        <H1 id="main-title"></H1>
-    </HEADER>
 
-    <MAIN>
+    <DIV class="main-page">
+        <HEADER>
+            <H1 id="main-title"></H1>
+        </HEADER>
 
-    </MAIN>
+        <MAIN>
+            <SECTION id="create-character-section">
+                <LABEL id="create-character-label">
+                    <SPAN id="create-character-span"></SPAN>:
+                    <INPUT type='text' id='create-character-name'>
+                    <DIV id="invalid-create-chararacter-name" class="invalid-input">X</DIV>
+                </LABEL>
+                <BUTTON id="create-character-button" onclick="eventProcessor.processEvent(new Event(events.CREATE_CHARACTER_ATTEMPT))" disabled></BUTTON>
+            </SECTION>
+        </MAIN>
 
-    <FOOTER>
-        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
-        <BUTTON id="account-button" onclick='window.location.href = "account"'></BUTTON>
-    </FOOTER>
-</DIV>
+        <FOOTER>
+            <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+            <BUTTON id="account-button" onclick='window.location.href = "account"'></BUTTON>
+        </FOOTER>
+    </DIV>
+
 </BODY>
 </HTML>

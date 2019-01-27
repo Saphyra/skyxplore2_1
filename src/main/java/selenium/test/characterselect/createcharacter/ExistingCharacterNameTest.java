@@ -10,7 +10,7 @@ import selenium.test.characterselect.common.CharacterSelectTestHelper;
 
 @Builder
 public class ExistingCharacterNameTest {
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "Karakternév foglalt.";
+    private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "aef";
 
     private final CharacterSelectTestHelper characterSelectTestHelper;
     private final CharacterSelectPage characterSelectPage;

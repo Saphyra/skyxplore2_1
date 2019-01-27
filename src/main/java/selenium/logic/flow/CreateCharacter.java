@@ -13,7 +13,7 @@ import static selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 
 public class CreateCharacter {
     private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
-    private static final String NOTIFICATION_CHARACTER_CREATED = "Karakter létrehozva.";
+    private static final String NOTIFICATION_CHARACTER_CREATED = "as";
 
     private final WebDriver driver;
     private final CharacterSelectPage characterSelectPage;

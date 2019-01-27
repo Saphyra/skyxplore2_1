@@ -28,7 +28,7 @@ public class CharacterCreatorService {
     private final SlotDao slotDao;
 
     @Transactional
-    public void createCharacter(CreateCharacterRequest request, String userId) {
+    public SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
         if (characterQueryService.isCharNameExists(request.getCharacterName())) {
             throw new CharacterNameAlreadyExistsException("Character already exists with name " + request.getCharacterName());
         }
@@ -49,5 +49,7 @@ public class CharacterCreatorService {
         slotDao.save(defenseSlot);
         slotDao.save(weaponSlot);
         factoryDao.save(factory);
+
+        return character;
     }
 }

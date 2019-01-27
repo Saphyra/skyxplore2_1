@@ -32,8 +32,8 @@ public class CharacterFacade {
         buyItemService.buyItems(items, characterId);
     }
 
-    public void createCharacter(CreateCharacterRequest request, String userId) {
-        characterCreatorService.createCharacter(request, userId);
+    public SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
+        return characterCreatorService.createCharacter(request, userId);
     }
 
     public void deleteCharacter(String characterId, String userId) {

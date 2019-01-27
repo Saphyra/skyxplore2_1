@@ -15,18 +15,7 @@
 <BODY>
 
     <DIV class="cover">
-        <HEADER>
-            <H1>Karakterválasztás</H1>
-        </HEADER>
         <MAIN class="textaligncenter">
-            <SECTION class="textaligncenter">
-                <LABEL class='fontsize1_5rem inline'>
-                    Karakternév:
-                    <INPUT type='text' id='newcharactername' class='fontsize1_25rem' placeholder='Karakternév'>
-                    <DIV id="invalid_newcharactername" class="invalid">X</DIV>
-                </LABEL>
-                <BUTTON id="newcharacterbutton" class='fontsize1_25rem' onclick='characterController.createCharacter()'>Új karakter</BUTTON>
-            </SECTION>
             
             <SECTION>
                 <TABLE class='formattedtable marginauto margintop1rem'>
@@ -42,10 +31,6 @@
             </SECTION>
         </MAIN>
         
-        <FOOTER>
-            <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-            <BUTTON onclick='window.location.href = "account"'>Beállítások</BUTTON>
-        </FOOTER>
     </DIV>
     
     <DIV id='renamecharactercontainer' class='cover' style='display: none;'>

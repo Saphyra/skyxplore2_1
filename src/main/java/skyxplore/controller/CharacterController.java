@@ -18,6 +18,7 @@ import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
+import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
 
 import javax.validation.Valid;
@@ -34,12 +35,12 @@ import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment";
     private static final String CREATE_CHARACTER_MAPPING = "character";
-    public static final String DELETE_CHARACTER_MAPPING = "character/delete/{characterId}";
-    private static final String GET_CHARACTERS_MAPPING = "character/characters";
+    public static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
+    private static final String GET_CHARACTERS_MAPPING = "character";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
-    private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name/exist";
-    public static final String RENAME_CHARACTER_MAPPING = "character/rename";
+    private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name";
+    public static final String RENAME_CHARACTER_MAPPING = "character";
 
     private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;
@@ -49,21 +50,24 @@ public class CharacterController {
     public void buyEquipments(
         @RequestBody HashMap<String, Integer> items,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
-    ){
-        log.info("{} wants to buy {}",characterId, items.toString());
+    ) {
+        log.info("{} wants to buy {}", characterId, items.toString());
         characterFacade.buyItems(items, characterId);
         log.info("Items are bought successfully.");
     }
 
-    @PutMapping(CREATE_CHARACTER_MAPPING)
-    public void createCharacter(
+    @PostMapping(CREATE_CHARACTER_MAPPING)
+    public CharacterView createCharacter(
         @RequestBody @Valid CreateCharacterRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
         log.info("Creating new character with name {}", request.getCharacterName());
-        characterFacade.createCharacter(request, userId);
+        SkyXpCharacter character = characterFacade.createCharacter(request, userId);
         log.info("Character created successfully.");
+
+        //TODO move to service
         characterNameCache.invalidate(request.getCharacterName());
+        return characterViewConverter.convertDomain(character);
     }
 
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
@@ -85,7 +89,7 @@ public class CharacterController {
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
     public View<EquipmentViewList> getEquipmentsOfCharacter(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
-        ) {
+    ) {
         log.info("{} wants to know his equipments.", characterId);
         return characterFacade.getEquipmentsOfCharacter(characterId);
     }
@@ -104,7 +108,7 @@ public class CharacterController {
         return characterNameCache.get(request.getValue()).orElse(true);
     }
 
-    @PostMapping(RENAME_CHARACTER_MAPPING)
+    @PutMapping(RENAME_CHARACTER_MAPPING)
     public void renameCharacter(
         @RequestBody @Valid RenameCharacterRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId) {
