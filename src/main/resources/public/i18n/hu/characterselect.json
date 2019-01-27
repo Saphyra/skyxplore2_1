@@ -25,6 +25,24 @@
         "message": "Létrehozás"
       }
     ],
+    "character-list-header-character-name": [
+      {
+        "key": "innerHTML",
+        "message": "Karakternév"
+      }
+    ],
+    "character-list-header-operations": [
+      {
+        "key": "innerHTML",
+        "message": "Műveletek"
+      }
+    ],
+    "no-character": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs karakter."
+      }
+    ],
     "logout-button": [
       {
         "key": "innerHTML",

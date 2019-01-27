@@ -24,7 +24,25 @@
                     <INPUT type='text' id='create-character-name'>
                     <DIV id="invalid-create-chararacter-name" class="invalid-input">X</DIV>
                 </LABEL>
+                
                 <BUTTON id="create-character-button" onclick="eventProcessor.processEvent(new Event(events.CREATE_CHARACTER_ATTEMPT))" disabled></BUTTON>
+            </SECTION>
+            
+            <SECTION>
+                <TABLE id="table-character-list" class='formattedtable'>
+                    <THEAD>
+                        <TR>
+                            <TH id="character-list-header-character-name"></TH>
+                            <TH id="character-list-header-operations"></TH>
+                        </TR>
+                    </THEAD>
+                    
+                    <TR>
+                        <TD id="no-character" colspan="2"></TD>
+                    </TR>
+                    
+                    <TBODY id='characters'></TBODY>
+                </TABLE>
             </SECTION>
         </MAIN>
 

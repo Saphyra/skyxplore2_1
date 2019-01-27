@@ -20,6 +20,7 @@
   "PASSWORD_TOO_LONG": "Jelszó túl hosszú (Maximum 30 karakter).",
   "PASSWORD_TOO_SHORT": "Jelszó túl rövid (Minimum 6 karakter).",
   "REGISTRATION_SUCCESSFUL": "Sikeres regisztráció!",
+  "SELECT_CHARACTER": "Karakter kiválasztása",
   "SUCCESSFUL_LOGOUT": "Sikeres kijelentkezés.",
   "USERNAME_ALREADY_EXISTS": "Felhasználónév foglalt.",
   "USERNAME_CHANGE_SUCCESSFUL": "Felhasználónév megváltoztatása sikeres.",
