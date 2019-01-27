@@ -34,7 +34,7 @@
         const newPassword = getNewPassword();
         const currentPassword = getCurrentPassword();
         
-        const request = new Request(HttpMethod.POST, Mapping.CHANGE_PASSWORD, {newPassword: newPassword, oldPassword: currentPassword});
+        const request = new Request(HttpMethod.PUT, Mapping.CHANGE_PASSWORD, {newPassword: newPassword, oldPassword: currentPassword});
             request.handleLogout = false;
             request.processValidResponse = function(){
                 notificationService.showSuccess(MessageCode.getMessage("PASSWORD_CHANGE_SUCCESSFUL"));

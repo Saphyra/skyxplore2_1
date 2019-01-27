@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.EmailCache;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.SkyXpCredentials;
@@ -39,6 +40,9 @@ public class ChangeEmailServiceTest {
 
     @Mock
     private  UserDao userDao;
+
+    @Mock
+    private EmailCache emailCache;
 
     @InjectMocks
     private ChangeEmailService underTest;
@@ -86,5 +90,6 @@ public class ChangeEmailServiceTest {
         verify(credentialsService).getByUserId(USER_ID);
         verify(userDao).save(user);
         assertEquals(USER_NEW_EMAIL, user.getEmail());
+        verify(emailCache).invalidate(USER_NEW_EMAIL);
     }
 }

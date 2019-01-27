@@ -109,19 +109,19 @@
         "message": "Új e-mail cím"
       }
     ],
-    "new-email-password-span": [
+    "change-email-password-span": [
       {
         "key": "innerHTML",
         "message": "Jelszó"
       }
     ],
-    "new-email-password": [
+    "change-email-password": [
       {
         "key": "placeholder",
         "message": "Jelszó"
       }
     ],
-    "new-email-button": [
+    "change-email-button": [
       {
         "key": "innerHTML",
         "message": "Mentés"

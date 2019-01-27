@@ -39,14 +39,15 @@ public class ChangeEmailTestHelper {
     }
 
     public void submitForm(){
+        WebElement submitButton = accountPage.getChangeEmailButton();
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeEmailField()));
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeEmailPasswordField()));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(submitButton));
 
         assertFalse(accountPage.getInvalidChangeEmailField().isDisplayed());
         assertFalse(accountPage.getInvalidChangeEmailPasswordField().isDisplayed());
 
-        WebElement submitButton = accountPage.getChangeEmailButton();
         assertTrue(submitButton.isEnabled());
         submitButton.click();
     }

@@ -39,6 +39,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .changeEmailTestHelper(changeEmailTestHelper)
             .fieldValidator(fieldValidator)
             .accountPage(accountPage)
+            .messageCodes(messageCodes)
             .build()
             .testInvalidEmail();
     }
@@ -50,6 +51,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .changeEmailTestHelper(changeEmailTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testExistingEmail();
     }
@@ -60,27 +62,30 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .changeEmailTestHelper(changeEmailTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testEmptyPassword();
     }
 
     @Test
-    public void badPasswordTest(){
+    public void badPasswordTest() {
         BadPasswordTest.builder()
             .accountPage(accountPage)
             .changeEmailTestHelper(changeEmailTestHelper)
             .fieldValidator(fieldValidator)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBadPassword();
     }
 
     @Test
-    public void successfulEmailChangeTest(){
+    public void successfulEmailChangeTest() {
         SuccessfulEmailChangeTest.builder()
             .accountPage(accountPage)
             .changeEmailTestHelper(changeEmailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testSuccessfulEmailChange();
     }

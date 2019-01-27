@@ -71,18 +71,18 @@
             <ARTICLE>
                 <LABEL>
                     <SPAN id="new-email-span"></SPAN>:
-                    <INPUT type='email' id='new-email'>
+                    <INPUT type='email' id='new-email' class="change-email-input">
                     <DIV id="invalid-new-email" class="invalid-input">X</DIV>
                 </LABEL>
 
                 <LABEL>
-                    <SPAN id="new-email-password-span"></SPAN>:
-                    <INPUT type='password' id='new-email-password'>
-                    <DIV id="invalid-new-email-password" class="invalid-input">X</DIV>
+                    <SPAN id="change-email-password-span"></SPAN>:
+                    <INPUT type='password' id='change-email-password' class="change-email-input">
+                    <DIV id="invalid-change-email-password" class="invalid-input">X</DIV>
                 </LABEL>
             </ARTICLE>
 
-            <BUTTON id='new-email-button' onclick=''></BUTTON>
+            <BUTTON id='change-email-button' onclick='eventProcessor.processEvent(new Event(events.CHANGE_EMAIL_ATTEMPT))'></BUTTON>
         </SECTION>
         
         <SECTION>

@@ -28,7 +28,7 @@ import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
-    private static final String CHANGE_EMAIL_MAPPING = "user/email/change";
+    private static final String CHANGE_EMAIL_MAPPING = "user/email";
     private static final String CHANGE_PASSWORD_MAPPING = "user/password";
     private static final String CHANGE_USERNAME_MAPPING = "user/name";
     private static final String DELETE_ACCOUNT_MAPPING = "user";
@@ -40,7 +40,7 @@ public class UserController {
     private final EmailCache emailCache;
     private final UserFacade userFacade;
 
-    @PostMapping(CHANGE_EMAIL_MAPPING)
+    @PutMapping(CHANGE_EMAIL_MAPPING)
     public void changeEmail(
         @RequestBody @Valid ChangeEmailRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
@@ -49,7 +49,7 @@ public class UserController {
         userFacade.changeEmail(request, userId);
     }
 
-    @PostMapping(CHANGE_PASSWORD_MAPPING)
+    @PutMapping(CHANGE_PASSWORD_MAPPING)
     public void changePassword(
         @RequestBody @Valid ChangePasswordRequest request,
         @CookieValue(COOKIE_USER_ID) String userId

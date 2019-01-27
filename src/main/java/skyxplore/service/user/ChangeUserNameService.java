@@ -4,6 +4,7 @@ import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
@@ -16,6 +17,7 @@ import skyxplore.service.credentials.CredentialsService;
 public class ChangeUserNameService {
     private final PasswordService passwordService;
     private final CredentialsService credentialsService;
+    private final UserNameCache userNameCache;
 
     public void changeUserName(ChangeUserNameRequest request, String userId) {
         SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
@@ -29,5 +31,7 @@ public class ChangeUserNameService {
         log.info("Changing username of user {}", userId);
         credentialsService.save(skyXpCredentials);
         log.info("Username successfully changed.");
+
+        userNameCache.invalidate(request.getNewUserName());
     }
 }

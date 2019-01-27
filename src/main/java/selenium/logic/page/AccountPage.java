@@ -20,17 +20,17 @@ public class AccountPage {
     private static final String ELEMENT_CHANGE_USER_NAME_PASSWORD = "change-username-password";
     private static final String ELEMENT_INVALID_CHANGE_USER_NAME_PASSWORD = "invalid-change-username-password";
 
-    private static final String ELEMENT_CHANGE_EMAIL_FIELD = "newemail";
-    private static final String ELEMENT_INVALID_CHANGE_EMAIL_FIELD = "invalid_newemail";
-    private static final String ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD = "newemailpassword";
-    private static final String ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD = "invalid_newemailpassword";
+    private static final String ELEMENT_CHANGE_EMAIL_FIELD = "new-email";
+    private static final String ELEMENT_INVALID_CHANGE_EMAIL_FIELD = "invalid-new-email";
+    private static final String ELEMENT_CHANGE_EMAIL_PASSWORD_FIELD = "change-email-password";
+    private static final String ELEMENT_INVALID_CHANGE_EMAIL_PASSWORD_FIELD = "invalid-change-email-password";
 
     private static final String ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD = "delete-account-password";
     private static final String ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD = "invalid-delete-account-password";
 
     private static final String ELEMENT_CHANGE_PASSWORD_BUTTON = "change-password-button";
     private static final String ELEMENT_CHANGE_USER_NAME_BUTTON = "change-username-button";
-    private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "newemailbutton";
+    private static final String ELEMENT_CHANGE_EMAIL_BUTTON = "change-email-button";
     private static final String ELEMENT_DELETE_ACCOUNT_BUTTON = "delete-account-button";
 
     private final WebDriver driver;

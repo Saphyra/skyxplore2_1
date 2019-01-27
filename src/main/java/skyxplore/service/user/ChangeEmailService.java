@@ -4,6 +4,7 @@ import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import skyxplore.cache.EmailCache;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.SkyXpCredentials;
@@ -20,6 +21,7 @@ public class ChangeEmailService {
     private final CredentialsService credentialsService;
     private final UserQueryService userQueryService;
     private final UserDao userDao;
+    private final EmailCache emailCache;
 
     public void changeEmail(ChangeEmailRequest request, String userId) {
         SkyXpUser user = userQueryService.getUserById(userId);
@@ -32,8 +34,10 @@ public class ChangeEmailService {
             throw new BadCredentialsException("Wrong password");
         }
         user.setEmail(request.getNewEmail());
-        log.info("Changeing email of user {}", userId);
+        log.info("Changing email of user {}", userId);
         userDao.save(user);
         log.info("Email changed successfully.");
+
+        emailCache.invalidate(request.getNewEmail());
     }
 }
