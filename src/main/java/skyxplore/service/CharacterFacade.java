@@ -8,6 +8,7 @@ import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.character.BuyItemService;
 import skyxplore.service.character.CharacterCreatorService;
 import skyxplore.service.character.CharacterDeleteService;
@@ -27,6 +28,7 @@ public class CharacterFacade {
     private final CharacterDeleteService characterDeleteService;
     private final CharacterQueryService characterQueryService;
     private final CharacterRenameService characterRenameService;
+    private final CharacterSelectService characterSelectService;
 
     public void buyItems(Map<String, Integer> items, String characterId) {
         buyItemService.buyItems(items, characterId);
@@ -54,5 +56,9 @@ public class CharacterFacade {
 
     public void renameCharacter(RenameCharacterRequest request, String userId) {
         characterRenameService.renameCharacter(request, userId);
+    }
+
+    public void selectCharacter(String characterId, String userId) {
+        characterSelectService.selectCharacter(characterId, userId);
     }
 }

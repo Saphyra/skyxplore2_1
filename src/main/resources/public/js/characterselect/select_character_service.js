@@ -7,6 +7,12 @@
     ));
     
     function selectCharacter(event){
-        logService.log(event.getPayload(), "info", "Character selected with id ");
+        const characterId = event.getPayload();
+        
+        const request = new Request(HttpMethod.PUT, Mapping.concat(Mapping.SELECT_CHARACTER, characterId));
+            request.processValidResponse = function(){
+                window.location.href = "overview";
+            }
+        dao.sendRequestAsync(request);
     }
 })();

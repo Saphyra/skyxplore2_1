@@ -17,7 +17,9 @@ import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
+import skyxplore.util.CookieUtil;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +30,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,6 +43,12 @@ public class CharacterControllerTest {
 
     @Mock
     private CharacterNameCache characterNameCache;
+
+    @Mock
+    private CookieUtil cookieUtil;
+
+    @Mock
+    private HttpServletResponse httpServletResponse;
 
     @InjectMocks
     private CharacterController underTest;
@@ -146,5 +155,14 @@ public class CharacterControllerTest {
         //THEN
         verify(characterFacade).renameCharacter(request, CHARACTER_ID_1);
         verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
+    }
+
+    @Test
+    public void testSelectCharacterShouldCallFacadeAndSetCookie(){
+        //WHEN
+        underTest.selectCharacter(CHARACTER_ID_1, USER_ID, httpServletResponse);
+        //THEN
+        verify(characterFacade).selectCharacter(CHARACTER_ID_1, USER_ID);
+        verify(cookieUtil).setCookie(httpServletResponse, COOKIE_CHARACTER_ID, CHARACTER_ID_1);
     }
 }

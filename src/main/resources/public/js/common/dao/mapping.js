@@ -11,5 +11,10 @@ window.Mapping = {
     LOGIN: "login",
     LOGOUT: "logout",
     REGISTER: "user",
-    USERNAME_EXISTS: "user/name"
+    SELECT_CHARACTER: "character/*",
+    USERNAME_EXISTS: "user/name",
+    
+    concat: function(path, id){
+        return path.replace("*", id);
+    }
 }

@@ -1,30 +1,28 @@
 package skyxplore.filter;
 
-import static skyxplore.controller.CharacterController.RENAME_CHARACTER_MAPPING;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
+import skyxplore.controller.PageController;
+import skyxplore.exception.CharacterNotFoundException;
+import skyxplore.exception.InvalidAccessException;
+import skyxplore.service.character.CharacterQueryService;
+import skyxplore.util.CookieUtil;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.PageController;
-import skyxplore.exception.CharacterNotFoundException;
-import skyxplore.exception.InvalidAccessException;
-import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.CookieUtil;
+import static skyxplore.controller.CharacterController.RENAME_CHARACTER_MAPPING;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -44,7 +42,7 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/account",
         "/user/**",
         "/character",
-        "/character/select/*",
+        "/character/*",
         "/character/name",
         "/" + RENAME_CHARACTER_MAPPING,
         "/character/delete/*",

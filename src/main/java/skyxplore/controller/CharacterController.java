@@ -20,7 +20,9 @@ import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
+import skyxplore.util.CookieUtil;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -41,10 +43,12 @@ public class CharacterController {
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name";
     public static final String RENAME_CHARACTER_MAPPING = "character";
+    private static final String SELECT_CHARACTER_MAPPING = "character/{characterId}";
 
     private final CharacterFacade characterFacade;
     private final CharacterViewConverter characterViewConverter;
     private final CharacterNameCache characterNameCache;
+    private final CookieUtil cookieUtil;
 
     @PutMapping(BUY_EQUIPMENTS_MAPPING)
     public void buyEquipments(
@@ -116,5 +120,16 @@ public class CharacterController {
         characterFacade.renameCharacter(request, userId);
         characterNameCache.invalidate(request.getNewCharacterName());
         log.info("Character renamed successfully.");
+    }
+
+    @PutMapping(SELECT_CHARACTER_MAPPING)
+    public void selectCharacter(
+        @PathVariable("characterId") String characterId,
+        @CookieValue(COOKIE_USER_ID) String userId,
+        HttpServletResponse response
+    ) {
+        log.info("{} selected character {}", userId, characterId);
+        characterFacade.selectCharacter(characterId, userId);
+        cookieUtil.setCookie(response, COOKIE_CHARACTER_ID, characterId);
     }
 }

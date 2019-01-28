@@ -10,6 +10,7 @@ import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.View;
 import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.character.BuyItemService;
 import skyxplore.service.character.CharacterCreatorService;
 import skyxplore.service.character.CharacterDeleteService;
@@ -48,6 +49,9 @@ public class CharacterFacadeTest {
 
     @Mock
     private CharacterRenameService characterRenameService;
+
+    @Mock
+    private CharacterSelectService characterSelectService;
 
     @InjectMocks
     private CharacterFacade underTest;
@@ -132,5 +136,13 @@ public class CharacterFacadeTest {
         underTest.renameCharacter(request, USER_ID);
         //THEN
         verify(characterRenameService).renameCharacter(request, USER_ID);
+    }
+
+    @Test
+    public void testSelectCharacter(){
+        //WHEN
+        underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
+        //THEN
+        verify(characterSelectService).selectCharacter(CHARACTER_ID_1, USER_ID);
     }
 }
