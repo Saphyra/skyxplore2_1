@@ -1,0 +1,12 @@
+#create-character-section{
+    text-align: center;
+}
+
+#create-character-label{
+    display: inline;
+    font-size: 1.5rem;
+}
+
+#create-character-button{
+    font-size: 1.25rem;
+}

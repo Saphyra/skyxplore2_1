@@ -36,6 +36,21 @@
             
                 const operationsCell = document.createElement("TD");
                     operationsCell.classList.add("character-operations");
+
+                    const renameButton = document.createElement("BUTTON");
+                        renameButton.innerHTML = Localization.getAdditionalContent("rename-character-button");
+                        renameButton.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.RENAME_CHARACTER_ATTEMPT, character));
+                        }
+                operationsCell.appendChild(renameButton);
+
+                    const deleteButton = document.createElement("BUTTON");
+                        deleteButton.innerHTML = Localization.getAdditionalContent("delete-character-button");
+                        deleteButton.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.DELETE_CHARACTER, character.characterId));
+                        }
+                operationsCell.appendChild(deleteButton);
+
             row.appendChild(operationsCell);
             return row;
         }

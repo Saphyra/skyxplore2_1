@@ -18,36 +18,3 @@ label input{
     border-radius: 3px;
     padding: 0.125rem;
 }
-
-#create-character-section{
-    text-align: center;
-}
-
-#create-character-label{
-    display: inline;
-    font-size: 1.5rem;
-}
-
-#create-character-button{
-    font-size: 1.25rem;
-}
-
-#table-character-list{
-    margin: auto;
-    margin-top: 1rem;
-}
-
-#no-character{
-    text-align: center;
-    font-size: 1.25rem;
-}
-
-.character-name-cell{
-    cursor: pointer;
-    font-size: 1.25rem;
-    text-align: center;
-}
-
-.character-operations{
-    text-align: center;
-}

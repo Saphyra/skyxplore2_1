@@ -1,6 +1,6 @@
 {
   "title": "Karakterválasztás - SkyXplore 2.1",
-  "payload": {
+  "staticText": {
     "main-title": [
       {
         "key": "innerHTML",
@@ -55,5 +55,9 @@
         "message": "Beállítások"
       }
     ]
+  },
+  "additionalContent": {
+    "rename-character-button": "Átnevezés",
+    "delete-character-button": "Törlés"
   }
 }
