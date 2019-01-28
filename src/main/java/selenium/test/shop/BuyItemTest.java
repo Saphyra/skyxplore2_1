@@ -24,7 +24,7 @@ public class BuyItemTest extends SeleniumTestApplication {
     protected void init() {
         shopTestInitializer = new ShopTestInitializer(
             new Registration(driver, messageCodes),
-            new CreateCharacter(driver),
+            new CreateCharacter(driver, messageCodes),
             new SelectCharacter(driver),
             new Navigate(driver)
         );

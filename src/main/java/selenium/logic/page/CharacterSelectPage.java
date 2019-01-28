@@ -1,15 +1,16 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static org.junit.Assert.assertEquals;
+import static selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static selenium.logic.util.LinkUtil.CHARACTER_SELECT;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CharacterSelectPage {
@@ -20,9 +21,9 @@ public class CharacterSelectPage {
 
     private static final String ELEMENT_RENAME_CHARACTER_WINDOW = "renamecharactercontainer";
 
-    private static final String ELEMENT_NEW_CHARACTER_NAME = "newcharactername";
-    private static final String ELEMENT_INVALID_NEW_CHARACTER_NAME = "invalid_newcharactername";
-    private static final String ELEMENT_NEW_CHARACTER_BUTTON = "newcharacterbutton";
+    private static final String ELEMENT_NEW_CHARACTER_NAME = "create-character-name";
+    private static final String ELEMENT_INVALID_NEW_CHARACTER_NAME = "invalid-create-character-name";
+    private static final String ELEMENT_NEW_CHARACTER_BUTTON = "create-character-button";
 
     private static final String ELEMENT_RENAME_CHARACTER_NAME = "renamecharacterinput";
     private static final String ELEMENT_INVALID_RENAME_CHARACTER_NAME = "invalid_renamecharactername";

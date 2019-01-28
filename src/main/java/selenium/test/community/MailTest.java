@@ -59,7 +59,7 @@ public class MailTest extends SeleniumTestApplication {
 
         communityTestInitializer = new CommunityTestInitializer(
             new Registration(driver, messageCodes),
-            new CreateCharacter(driver),
+            new CreateCharacter(driver, messageCodes),
             new Logout(driver, messageCodes)
         );
 

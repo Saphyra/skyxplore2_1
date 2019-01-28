@@ -20,31 +20,41 @@ public class NotificationValidator {
     private final WebDriver driver;
 
     public void verifyOnlyOneNotification(String text) {
-        List<WebElement> notifications;
-        int counter = 0;
-        do {
-            notifications = getNotifications();
-            sleep(100);
-            counter++;
-        } while (notifications.isEmpty() && counter < 100);
+        List<WebElement> notifications = getNotifications();
 
         assertEquals(1, notifications.size());
         verifyContains(notifications, text);
     }
 
     public void verifyNotificationVisibility(String text) {
-        List<WebElement> notifications = getNotifications();
-        verifyContains(notifications, text);
+        int counter = 0;
+        boolean contains;
+        do {
+            List<WebElement> notifications = getNotifications();
+            contains = contains(notifications, text);
+            counter++;
+            sleep(100);
+        } while (!contains && counter < 100);
+        assertTrue(contains);
     }
 
     private List<WebElement> getNotifications() {
-        return driver.findElements(getNotificationElementsLocator());
+        List<WebElement> notifications;
+        int counter = 0;
+        do {
+            notifications = driver.findElements(getNotificationElementsLocator());
+            sleep(100);
+            counter++;
+        } while (notifications.isEmpty() && counter < 100);
+        return notifications;
     }
 
     private void verifyContains(List<WebElement> elements, String text) {
-        assertTrue(
-            elements.stream()
-                .anyMatch(w -> w.findElement(By.cssSelector(SELECTOR_NOTIFICATION_TEXT)).getText().equals(text))
-        );
+        assertTrue(contains(elements, text));
+    }
+
+    private boolean contains(List<WebElement> elements, String text) {
+        return elements.stream()
+            .anyMatch(w -> w.findElement(By.cssSelector(SELECTOR_NOTIFICATION_TEXT)).getText().equals(text));
     }
 }

@@ -24,7 +24,7 @@ public class SelectCharacterTest extends SeleniumTestApplication {
     @Test
     public void testSelectCharacter() {
         new Registration(driver, messageCodes).registerUser();
-        SeleniumCharacter character = new CreateCharacter(driver).createCharacter();
+        SeleniumCharacter character = new CreateCharacter(driver, messageCodes).createCharacter();
 
         characterSelectPage.getCharacterRow(character.getCharacterName())
             .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))

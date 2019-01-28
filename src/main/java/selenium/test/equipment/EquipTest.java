@@ -27,7 +27,7 @@ public class EquipTest extends SeleniumTestApplication {
         equipmentElementSearcher = new EquipmentElementSearcher(driver);
         equipmentTestHelper = new EquipmentTestHelper(
             new Registration(driver, messageCodes),
-            new CreateCharacter(driver),
+            new CreateCharacter(driver, messageCodes),
             new SelectCharacter(driver),
             new Navigate(driver),
             equipmentElementSearcher

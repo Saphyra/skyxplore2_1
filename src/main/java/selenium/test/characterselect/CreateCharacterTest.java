@@ -9,11 +9,11 @@ import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Registration;
 import selenium.logic.page.CharacterSelectPage;
 import selenium.logic.validator.FieldValidator;
+import selenium.test.characterselect.common.CharacterSelectTestHelper;
 import selenium.test.characterselect.createcharacter.ExistingCharacterNameTest;
 import selenium.test.characterselect.createcharacter.SuccessfulCharacterCreationTest;
 import selenium.test.characterselect.createcharacter.TooLongCharacterNameTest;
 import selenium.test.characterselect.createcharacter.TooShortCharacterNameTest;
-import selenium.test.characterselect.common.CharacterSelectTestHelper;
 
 public class CreateCharacterTest extends SeleniumTestApplication {
     private CharacterSelectTestHelper characterSelectTestHelper;
@@ -23,7 +23,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         characterSelectPage = new CharacterSelectPage(driver);
-        characterSelectTestHelper = new CharacterSelectTestHelper(new Registration(driver, messageCodes), new CreateCharacter(driver));
+        characterSelectTestHelper = new CharacterSelectTestHelper(new Registration(driver, messageCodes), new CreateCharacter(driver, messageCodes));
         fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
     }
 
@@ -33,6 +33,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .characterSelectTestHelper(characterSelectTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testTooShortCharacterName();
     }
@@ -43,6 +44,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .characterSelectTestHelper(characterSelectTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testTooLongCharacterName();
     }
@@ -53,6 +55,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .characterSelectTestHelper(characterSelectTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testExistingCharacterName();
     }

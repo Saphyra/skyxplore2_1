@@ -1,15 +1,16 @@
 package selenium.logic.validator;
 
-import lombok.RequiredArgsConstructor;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class FieldValidator {
@@ -21,6 +22,7 @@ public class FieldValidator {
     public void verifySuccess(WebElement errorField, WebElement button) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.invisibilityOf(errorField));
+        wait.until(ExpectedConditions.elementToBeClickable(button));
         assertFalse(errorField.isDisplayed());
         assertTrue(button.isEnabled());
     }

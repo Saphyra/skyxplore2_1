@@ -28,7 +28,7 @@ public class RenameCharacterTest extends SeleniumTestApplication {
         renameCharacterTestHelper = new RenameCharacterTestHelper(
             driver,
             new Registration(driver, messageCodes),
-            new CreateCharacter(driver),
+            new CreateCharacter(driver, messageCodes),
             characterSelectPage,
             fieldValidator
         );

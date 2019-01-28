@@ -4,7 +4,7 @@
     
     events.VALIDATE_CREATE_CHARACTER = "validate_create_character";
     
-    const INVALID_CHARACTERNAME = "#invalid-create-chararacter-name";
+    const INVALID_CHARACTERNAME = "#invalid-create-character-name";
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.VALIDATE_CREATE_CHARACTER},

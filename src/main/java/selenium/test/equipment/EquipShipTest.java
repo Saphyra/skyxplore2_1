@@ -29,7 +29,7 @@ public class EquipShipTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         registration = new Registration(driver, messageCodes);
-        createCharacter = new CreateCharacter(driver);
+        createCharacter = new CreateCharacter(driver, messageCodes);
         selectCharacter = new SelectCharacter(driver);
         navigate = new Navigate(driver);
         buyItem = new BuyItem(driver);

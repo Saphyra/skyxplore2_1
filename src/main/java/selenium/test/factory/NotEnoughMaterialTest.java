@@ -21,7 +21,7 @@ public class NotEnoughMaterialTest extends SeleniumTestApplication {
     protected void init() {
         factoryTestHelper = new FactoryTestHelper(
             new Registration(driver, messageCodes),
-            new CreateCharacter(driver),
+            new CreateCharacter(driver, messageCodes),
             new SelectCharacter(driver),
             new Navigate(driver)
         );
