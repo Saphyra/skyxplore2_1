@@ -118,7 +118,7 @@ public class CharacterFacadeTest {
     }
 
     @Test
-    public void testGetMoneyOfCharacterShouldCallServiceAndReturn(){
+    public void testGetMoneyOfCharacterShouldCallServiceAndReturn() {
         //GIVEN
         when(characterQueryService.getMoneyOfCharacter(CHARACTER_ID_1)).thenReturn(CHARACTER_MONEY);
         //WHEN
@@ -129,17 +129,20 @@ public class CharacterFacadeTest {
     }
 
     @Test
-    public void testRenameCharacterShouldCallService(){
+    public void testRenameCharacterShouldCallService() {
         //GIVEN
         RenameCharacterRequest request = createRenameCharacterRequest();
+        SkyXpCharacter character = createCharacter();
+        when(characterRenameService.renameCharacter(request, USER_ID)).thenReturn(character);
         //WHEN
-        underTest.renameCharacter(request, USER_ID);
+        SkyXpCharacter result = underTest.renameCharacter(request, USER_ID);
         //THEN
         verify(characterRenameService).renameCharacter(request, USER_ID);
+        assertEquals(character, result);
     }
 
     @Test
-    public void testSelectCharacter(){
+    public void testSelectCharacter() {
         //WHEN
         underTest.selectCharacter(CHARACTER_ID_1, USER_ID);
         //THEN

@@ -5,8 +5,9 @@
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/characterselect/characterselect.css">
-    <LINK rel="stylesheet" href="/css/characterselect/character-list.css">
-    <LINK rel="stylesheet" href="/css/characterselect/create-character.css">
+    <LINK rel="stylesheet" href="/css/characterselect/character_list.css">
+    <LINK rel="stylesheet" href="/css/characterselect/create_character.css">
+    <LINK rel="stylesheet" href="/css/characterselect/rename_character.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -14,7 +15,7 @@
 </HEAD>
 <BODY>
 
-    <DIV class="main-page">
+    <DIV id="main-container" class="main-page">
         <HEADER>
             <H1 id="main-title"></H1>
         </HEADER>
@@ -51,6 +52,23 @@
             <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
             <BUTTON id="account-button" onclick='window.location.href = "account"'></BUTTON>
         </FOOTER>
+    </DIV>
+    
+    <DIV id='rename-character-container' class='main-page'>
+        <HEADER>
+            <H1 id="rename-character-title"></H1>
+            <BUTTON id="close-rename-page-button" onclick='switchTab("main-page", "main-container")'>X</BUTTON>
+        </HEADER>
+        
+        <MAIN>
+            <LABEL id="rename-character-label">
+                <SPAN id="new-character-name-span"></SPAN>:
+                <INPUT type='text' id='new-character-name'>
+                <DIV id="invalid-new-character-name" class="invalid-input">X</DIV>
+            </LABEL>
+            
+            <BUTTON id="rename-character-button"></BUTTON>
+        </MAIN>
     </DIV>
 
 </BODY>

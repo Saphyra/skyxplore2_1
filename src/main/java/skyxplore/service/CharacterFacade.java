@@ -54,8 +54,8 @@ public class CharacterFacade {
         return characterQueryService.getMoneyOfCharacter(characterId);
     }
 
-    public void renameCharacter(RenameCharacterRequest request, String userId) {
-        characterRenameService.renameCharacter(request, userId);
+    public SkyXpCharacter renameCharacter(RenameCharacterRequest request, String userId) {
+        return characterRenameService.renameCharacter(request, userId);
     }
 
     public void selectCharacter(String characterId, String userId) {

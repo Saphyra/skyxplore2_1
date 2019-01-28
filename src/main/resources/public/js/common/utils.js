@@ -25,3 +25,8 @@ function isEmailValid(email){
     }
     return result;
 }
+
+function switchTab(clazz, id){
+    $("." + clazz).hide();
+    $("#" + id).show();
+}

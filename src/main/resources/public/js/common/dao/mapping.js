@@ -12,6 +12,7 @@ window.Mapping = {
     LOGIN: "login",
     LOGOUT: "logout",
     REGISTER: "user",
+    RENAME_CHARACTER: "character",
     SELECT_CHARACTER: "character/*",
     USERNAME_EXISTS: "user/name",
     

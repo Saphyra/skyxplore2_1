@@ -150,11 +150,18 @@ public class CharacterControllerTest {
     public void testRenameCharacterShouldCallFacadeAndInvalidateCache(){
         //GIVEN
         RenameCharacterRequest request = createRenameCharacterRequest();
+
+        SkyXpCharacter character = createCharacter();
+        when(characterFacade.renameCharacter(request, USER_ID)).thenReturn(character);
+
+        CharacterView characterView = createCharacterView(character);
+        when(characterViewConverter.convertDomain(character)).thenReturn(characterView);
         //WHEN
-        underTest.renameCharacter(request, CHARACTER_ID_1);
+        CharacterView result = underTest.renameCharacter(request, USER_ID);
         //THEN
-        verify(characterFacade).renameCharacter(request, CHARACTER_ID_1);
+        verify(characterFacade).renameCharacter(request, USER_ID);
         verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
+        assertEquals(characterView, result);
     }
 
     @Test

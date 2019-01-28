@@ -1,16 +1,15 @@
 package selenium.logic.validator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import lombok.RequiredArgsConstructor;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class FieldValidator {
@@ -59,7 +58,7 @@ public class FieldValidator {
 
         for (WebElement inactiveErrorField : inactiveErrorFields) {
             if (inactiveErrorField == null) {
-                continue;
+                break;
             }
             wait.until(ExpectedConditions.invisibilityOf(inactiveErrorField));
             assertFalse(inactiveErrorField.isDisplayed());

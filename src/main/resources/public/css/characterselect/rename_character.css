@@ -1,0 +1,27 @@
+#close-rename-page-button{
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    font-size: 1.25rem;
+}
+
+#rename-character-container main{
+    text-align: center;
+}
+
+#rename-character-label{
+    font-size: 1.25rem;
+    display: inline;
+}
+
+#new-character-name{
+    font-size: 1.25rem;
+}
+
+#rename-character-button{
+    display: block;
+    font-size: 1.5rem;
+    margin: auto;
+    margin-top: 1rem;
+    width: 60vw;
+}

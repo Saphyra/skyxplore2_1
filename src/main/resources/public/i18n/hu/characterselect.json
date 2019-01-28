@@ -54,6 +54,30 @@
         "key": "innerHTML",
         "message": "Beállítások"
       }
+    ],
+    "rename-character-title": [
+      {
+        "key": "innerHTML",
+        "message": "Karakter átnevezése"
+      }
+    ],
+    "new-character-name-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új karakternév"
+      }
+    ],
+    "new-character-name": [
+      {
+        "key": "placeholder",
+        "message": "Új karakternév"
+      }
+    ],
+    "rename-character-button": [
+      {
+        "key": "innerHTML",
+        "message": "Átnevezés"
+      }
     ]
   },
   "additionalContent": {

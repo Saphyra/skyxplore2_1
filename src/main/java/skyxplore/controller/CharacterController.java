@@ -113,13 +113,14 @@ public class CharacterController {
     }
 
     @PutMapping(RENAME_CHARACTER_MAPPING)
-    public void renameCharacter(
+    public CharacterView renameCharacter(
         @RequestBody @Valid RenameCharacterRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to rename character {}", userId, request);
-        characterFacade.renameCharacter(request, userId);
+        SkyXpCharacter character = characterFacade.renameCharacter(request, userId);
         characterNameCache.invalidate(request.getNewCharacterName());
         log.info("Character renamed successfully.");
+        return characterViewConverter.convertDomain(character);
     }
 
     @PutMapping(SELECT_CHARACTER_MAPPING)
