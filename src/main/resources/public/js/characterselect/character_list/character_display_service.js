@@ -1,5 +1,6 @@
 (function CharacterDisplayService(){
     events.DISPLAY_CHARACTER = "display_character";
+    events.CHARACTER_DELETED = "character_deleted";
     
     const ID_PREFIX = "character-";
     
@@ -8,6 +9,11 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.DISPLAY_CHARACTER},
         displayCharacter
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.CHARACTER_DELETED},
+        removeCharacter
     ));
     
     function displayCharacter(event){
@@ -80,8 +86,32 @@
         }
     }
     
+    function removeCharacter(event){
+        const characterId = event.getPayload();
+        document.getElementById("characters").removeChild(document.getElementById(getId(characterId)));
+        const characterIndex = getIndex(characterId);
+        
+        if (characterIndex != null) {
+          characters.splice(characterIndex, 1);
+        }
+        
+        if(!characters.length){
+            displayNoCharacter();
+        }
+        
+        function getIndex(characterId){
+            for(let cindex in characters){
+                if(characters[cindex].characterId === characterId){
+                    return cindex;
+                }
+            }
+            
+            return null;
+        }
+    }
+    
     function displayNoCharacter(){
-        document.getElementById("no-character").style.display = "block";
+        document.getElementById("no-character").style.display = "table-cell";
     }
     
     function hideNoCharacter(){

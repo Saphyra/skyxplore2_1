@@ -14,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 public class DeleteCharacterTest extends SeleniumTestApplication {
     private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
     private static final String SELECTOR_DELETE_CHARACTER_BUTTON = "button:nth-child(2)";
-    private static final String NOTIFICATION_CHARACTER_DELETED = "Karakter törölve.";
+    private static final String MESSAGE_CODE_CHARACTER_DELETED = "CHARACTER_DELETED";
 
     private Registration registration;
     private CreateCharacter createCharacter;
@@ -37,7 +37,7 @@ public class DeleteCharacterTest extends SeleniumTestApplication {
         clickDeleteButton(character);
         driver.switchTo().alert().accept();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_CHARACTER_DELETED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_CHARACTER_DELETED));
 
         assertFalse(characterSelectPage.isCharacterExists(character.getCharacterName()));
     }

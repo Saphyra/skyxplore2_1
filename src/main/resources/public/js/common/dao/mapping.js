@@ -6,6 +6,7 @@ window.Mapping = {
     CHARACTER_SELECT: "characterselect",
     CREATE_CHARACTER: "character",
     DELETE_ACCOUNT: "user",
+    DELETE_CHARACTER: "character/*",
     EMAIL_EXISTS: "user/email",
     GET_CHARACTERS: "character",
     LOGIN: "login",

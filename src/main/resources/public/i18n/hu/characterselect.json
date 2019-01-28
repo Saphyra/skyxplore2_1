@@ -58,6 +58,7 @@
   },
   "additionalContent": {
     "rename-character-button": "Átnevezés",
-    "delete-character-button": "Törlés"
+    "delete-character-button": "Törlés",
+    "confirm-character-deletion": "Biztosan törlöd a karaktert?\nAz adatokat már nem lehet vissazállítani."
   }
 }
