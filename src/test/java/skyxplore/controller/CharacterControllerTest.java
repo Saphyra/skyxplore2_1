@@ -1,12 +1,35 @@
 package skyxplore.controller;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
+import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
+import static skyxplore.testutil.TestUtils.CHARACTER_NEW_NAME;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.createCharacterView;
+import static skyxplore.testutil.TestUtils.createRenameCharacterRequest;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
@@ -18,20 +41,6 @@ import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
 import skyxplore.util.CookieUtil;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {
@@ -77,7 +86,6 @@ public class CharacterControllerTest {
         CharacterView result = underTest.createCharacter(request, USER_ID);
         //THEN
         verify(characterFacade).createCharacter(request, USER_ID);
-        verify(characterNameCache).invalidate(CHARACTER_NAME);
         assertEquals(characterView, result);
     }
 

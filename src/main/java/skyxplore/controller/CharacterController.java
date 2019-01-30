@@ -1,7 +1,14 @@
 package skyxplore.controller;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
@@ -21,14 +31,6 @@ import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
 import skyxplore.util.CookieUtil;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings({"UnstableApiUsage", "WeakerAccess"})
 @RestController
@@ -69,8 +71,6 @@ public class CharacterController {
         SkyXpCharacter character = characterFacade.createCharacter(request, userId);
         log.info("Character created successfully.");
 
-        //TODO move to service
-        characterNameCache.invalidate(request.getCharacterName());
         return characterViewConverter.convertDomain(character);
     }
 
