@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+    <TITLE></TITLE>
+    <META charset="UTF-8"/>
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+    <LINK rel="stylesheet" href="/css/ship_table.css">
+    <LINK rel="stylesheet" href="/css/overview/overview.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+
+    <SCRIPT src="js/overview/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN>
+        <SECTION class='menu-container'>
+            <A id="equipment-button" href='equipment'></A>
+            <A id="factory-button" href='factory'></A>
+            <A id="shop-button" href='shop'>Bolt</A>
+            <A id="hangar-button" href='hangar'>Hangár</A>
+        </SECTION>
+        
+        <SECTION class='content-container'>
+            <TABLE class="ship-table">
+                <TR>
+                    <TH colspan='5'>
+                        <H2 id="ship-table-header">Felszerelés</H2>
+                    </TH>
+                </TR>
+                
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='front-weapon' class='frontslot slot-container'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='front-defense' class='frontslot slot-container'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD rowspan='2'>
+                        <DIV id='left-weapon' class='sideslot slot-container'></DIV>
+                    </TD>
+                    
+                    <TD rowspan='2'>
+                        <DIV id='left-defense' class='sideslot slot-container'></DIV>
+                    </TD>
+                    
+                    <TD>
+                        <DIV id='ship-details'></DIV>
+                    </TD>
+                    
+                    <TD rowspan='2'>
+                        <DIV id='right-defense' class='sideslot slotcontainer'></DIV>
+                    </TD>
+                    <TD rowspan='2'>
+                        <DIV id='right-weapon' class='sideslot slotcontainer'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD>
+                        <DIV id='connectors' class='slot-container'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='back-defense' class='frontslot slot-container'></DIV>
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD colspan='5'>
+                        <DIV id='back-weapon' class='frontslot slot-container'></DIV>
+                    </TD>
+                </TR>
+            </TABLE>
+        </SECTION>
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="characterselect-button" onclick='window.location.href = "characterselect"'></BUTTON>
+        <BUTTON id="community-button" onclick='window.location.href = "community"'><SPAN id='notificationnum' class='colorred'></SPAN></BUTTON>
+    </FOOTER>
+</DIV>
+
+</BODY>
+</HTML>

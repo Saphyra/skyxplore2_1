@@ -1,0 +1,27 @@
+.menu-container{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 15rem;
+    border-right: 5px ridge white;
+    overflow: auto;
+}
+
+.menu-container a{
+    display: block;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.content-container{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - 15rem);
+    overflow: auto;
+    text-align: center;
+    padding: 1rem;
+    overflow: auto;
+}

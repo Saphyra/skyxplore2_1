@@ -11,9 +11,11 @@ window.Mapping = {
     GET_CHARACTERS: "character",
     LOGIN: "login",
     LOGOUT: "logout",
+    NUMBER_OF_NOTIFICATIONS: "notification",
     REGISTER: "user",
     RENAME_CHARACTER: "character",
     SELECT_CHARACTER: "character/*",
+    SHIP_DATA: "ship",
     USERNAME_EXISTS: "user/name",
     
     concat: function(path, id){

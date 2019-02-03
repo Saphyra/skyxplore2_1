@@ -33,7 +33,6 @@ public class CommunityController {
     private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/namelike";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/namelike";
     private static final String GET_FRIENDS_MAPPING = "friend";
-    private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/request/num";
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/request/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
 
@@ -129,14 +128,6 @@ public class CommunityController {
     ) {
         log.info("{} wants to know his community list.", characterId);
         return friendViewConverter.convertDomain(communityFacade.getFriends(characterId), characterId);
-    }
-
-    @GetMapping(GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING)
-    public Integer getNumberOfFriendRequests(
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId
-    ) {
-        log.info("{} wants to know the number of his friend requests.", characterId);
-        return communityFacade.getNumberOfFriendRequests(characterId);
     }
 
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)

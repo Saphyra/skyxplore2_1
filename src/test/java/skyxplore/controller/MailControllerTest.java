@@ -112,16 +112,6 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testGetNumberOfUnreadMailsShouldCallFacadeAndReturn(){
-        //GIVEN
-        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID_1)).thenReturn(2);
-        //WHEN
-        Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID_1);
-        //THEN
-        assertEquals(new Integer(2), result);
-    }
-
-    @Test
     public void testGetSentMailsShouldCallFacadeAndReturnView(){
         //GIVEN
         Mail mail = createMail();

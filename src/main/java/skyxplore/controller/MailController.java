@@ -1,11 +1,7 @@
 package skyxplore.controller;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-
-import java.util.List;
-
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
@@ -23,6 +16,11 @@ import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.service.MailFacade;
+
+import javax.validation.Valid;
+import java.util.List;
+
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -34,7 +32,6 @@ public class MailController {
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee";
     private static final String GET_ARCHIVED_MAILS_MAPPING = "mail/archived";
     private static final String GET_MAILS_MAPPING = "mail";
-    private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "mail/unread";
     private static final String GET_SENT_MAILS_MAPPING = "mail/sent";
     private static final String MARK_MAILS_READ_MAPPING = "mail/mark/read";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/mark/unread";
@@ -86,14 +83,6 @@ public class MailController {
     ) {
         log.info("{} wants to know his mails.", characterId);
         return mailViewConverter.convertDomain(mailFacade.getMails(characterId));
-    }
-
-    @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
-    public Integer getNumberOfUnreadMails(
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId
-    ) {
-        log.info("{} wants to know the number of his unread mails.", characterId);
-        return mailFacade.getNumberOfUnreadMails(characterId);
     }
 
     @GetMapping(GET_SENT_MAILS_MAPPING)
