@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.service.ship.EquipService;
 import skyxplore.service.ship.EquipShipService;
@@ -39,7 +38,7 @@ public class EquippedShipFacade {
         equipShipService.equipShip(characterId, shipId);
     }
 
-    public View<ShipView> getShipData(String characterId) {
+    public ShipView getShipData(String characterId) {
         return shipQueryService.getShipData(characterId);
     }
 

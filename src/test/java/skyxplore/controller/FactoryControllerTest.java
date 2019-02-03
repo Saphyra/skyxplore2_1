@@ -6,13 +6,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.material.MaterialView;
-import skyxplore.controller.view.product.ProductViewList;
+import skyxplore.controller.view.product.ProductView;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
@@ -59,12 +60,12 @@ public class FactoryControllerTest {
     @Test
     public void testGetQueueShouldCallFacadeAndReturnResult(){
         //GIVEN
-        View<ProductViewList> view = createProductViewListView();
-        when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(view);
+        List<ProductView> productViews = Arrays.asList(createProductView());
+        when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(productViews);
         //WHEN
-        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1);
+        List<ProductView> result = underTest.getQueue(CHARACTER_ID_1);
         //THEN
         verify(productFacade).getQueue(CHARACTER_ID_1);
-        assertEquals(view, result);
+        assertEquals(productViews, result);
     }
 }

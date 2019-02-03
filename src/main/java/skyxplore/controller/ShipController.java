@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.service.EquippedShipFacade;
 
@@ -44,7 +43,7 @@ public class ShipController {
     }
 
     @GetMapping(GET_SHIP_DATA_MAPPING)
-    public View<ShipView> getShipData(
+    public ShipView getShipData(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Querying ship data of character {}", characterId);

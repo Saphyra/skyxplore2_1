@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.character.BuyItemService;
@@ -46,7 +44,7 @@ public class CharacterFacade {
         return characterQueryService.getCharactersByUserId(userId);
     }
 
-    public View<EquipmentViewList> getEquipmentsOfCharacter(String characterId) {
+    public List<String> getEquipmentsOfCharacter(String characterId) {
         return characterQueryService.getEquipmentsOfCharacter(characterId);
     }
 

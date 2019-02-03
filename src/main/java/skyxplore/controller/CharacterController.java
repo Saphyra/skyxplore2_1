@@ -1,14 +1,7 @@
 package skyxplore.controller;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,20 +10,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
-import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
 import skyxplore.util.CookieUtil;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @SuppressWarnings({"UnstableApiUsage", "WeakerAccess"})
 @RestController
@@ -91,7 +87,7 @@ public class CharacterController {
     }
 
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
-    public View<EquipmentViewList> getEquipmentsOfCharacter(
+    public List<String> getEquipmentsOfCharacter(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his equipments.", characterId);

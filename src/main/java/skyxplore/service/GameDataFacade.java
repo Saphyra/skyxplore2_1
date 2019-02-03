@@ -7,13 +7,9 @@ import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.service.gamedata.CategoryQueryService;
 import skyxplore.service.gamedata.DataQueryService;
-import skyxplore.service.gamedata.EquipmentDataCollectorService;
 
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
@@ -23,18 +19,9 @@ import java.util.Map;
 public class GameDataFacade {
     private final CategoryQueryService categoryQueryService;
     private final DataQueryService dataQueryService;
-    private final EquipmentDataCollectorService equipmentDataCollectorService;
 
     public GeneralDescription getData(String id){
         return dataQueryService.getData(id);
-    }
-
-    public Map<String, GeneralDescription> collectEquipmentData(List<String> ids) {
-        return equipmentDataCollectorService.collectEquipmentData(ids);
-    }
-
-    public Map<String, GeneralDescription> collectEquipmentData(EquippedShip ship, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {
-        return equipmentDataCollectorService.collectEquipmentData(ship, defenseSlot, weaponSlot);
     }
 
     public FactoryData getFactoryData(String elementId) {

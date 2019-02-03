@@ -9,38 +9,32 @@ import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.Armor;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.service.gamedata.CategoryQueryService;
 import skyxplore.service.gamedata.DataQueryService;
-import skyxplore.service.gamedata.EquipmentDataCollectorService;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
+import static skyxplore.testutil.TestUtils.createGeneralDescription;
+import static skyxplore.testutil.TestUtils.createGeneralDescriptionMap;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class GameDataFacadeTest {
     @Mock
-    private  CategoryQueryService categoryQueryService;
+    private CategoryQueryService categoryQueryService;
 
     @Mock
-    private  DataQueryService dataQueryService;
-
-    @Mock
-    private  EquipmentDataCollectorService equipmentDataCollectorService;
+    private DataQueryService dataQueryService;
 
     @InjectMocks
     private GameDataFacade underTest;
 
     @Test
-    public void testGetDataShouldCallServiceAndReturn(){
+    public void testGetDataShouldCallServiceAndReturn() {
         //GIVEN
         GeneralDescription generalDescription = createGeneralDescription();
         when(dataQueryService.getData(DATA_ELEMENT)).thenReturn(generalDescription);
@@ -52,37 +46,7 @@ public class GameDataFacadeTest {
     }
 
     @Test
-    public void testCollectEquipmentDataListShouldCallServiceAndReturn(){
-        //GIVEN
-        List<String> param = Arrays.asList(DATA_ELEMENT);
-
-        Map<String, GeneralDescription> generalDescriptionMap = createGeneralDescriptionMap();
-        when(equipmentDataCollectorService.collectEquipmentData(param)).thenReturn(generalDescriptionMap);
-        //WHEN
-        Map<String, GeneralDescription> result = underTest.collectEquipmentData(param);
-        //THEN
-        verify(equipmentDataCollectorService).collectEquipmentData(param);
-        assertEquals(generalDescriptionMap, result);
-    }
-
-    @Test
-    public void testCollectEquipmentDataShipShouldCallServiceAndReturn(){
-        //GIVEN
-        EquippedShip ship = createEquippedShip();
-        EquippedSlot defenseSlot = createEquippedDefenseSlot();
-        EquippedSlot weaponSlot = createEquippedWeaponSlot();
-
-        Map<String, GeneralDescription> generalDescriptionMap = createGeneralDescriptionMap();
-        when(equipmentDataCollectorService.collectEquipmentData(ship, defenseSlot, weaponSlot)).thenReturn(generalDescriptionMap);
-        //WHEN
-        Map<String, GeneralDescription> result = underTest.collectEquipmentData(ship, defenseSlot, weaponSlot);
-        //THEN
-        verify(equipmentDataCollectorService).collectEquipmentData(ship, defenseSlot, weaponSlot);
-        assertEquals(generalDescriptionMap, result);
-    }
-
-    @Test
-    public void testGetFactoryDataShouldCallServiceAndReturn(){
+    public void testGetFactoryDataShouldCallServiceAndReturn() {
         //GIVEN
         Armor armor = new Armor();
         armor.setId(DATA_ELEMENT);
@@ -95,7 +59,7 @@ public class GameDataFacadeTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldCallServiceAndReturn(){
+    public void testGetElementsOfCategoryShouldCallServiceAndReturn() {
         //GIVEN
         Map<String, GeneralDescription> generalDescriptionMap = createGeneralDescriptionMap();
         when(categoryQueryService.getElementsOfCategory(EquipmentCategoryRequest.ALL)).thenReturn(generalDescriptionMap);
@@ -107,7 +71,7 @@ public class GameDataFacadeTest {
     }
 
     @Test
-    public void testFindBuyableShouldCallServiceAndReturn(){
+    public void testFindBuyableShouldCallServiceAndReturn() {
         //GIVEN
         Armor armor = new Armor();
         armor.setId(DATA_ELEMENT);

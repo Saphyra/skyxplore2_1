@@ -1,28 +1,25 @@
 package skyxplore.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
-import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
-import static skyxplore.testutil.TestUtils.createUnequipRequest;
-
-import java.util.HashMap;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.service.ship.EquipService;
 import skyxplore.service.ship.EquipShipService;
 import skyxplore.service.ship.ShipQueryService;
 import skyxplore.service.ship.UnequipService;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
+import static skyxplore.testutil.TestUtils.createShipView;
+import static skyxplore.testutil.TestUtils.createUnequipRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipFacadeTest {
@@ -62,13 +59,13 @@ public class EquippedShipFacadeTest {
     @Test
     public void testGetShiDataShouldCallServiceAndReturn() {
         //GIVEN
-        View<ShipView> view = new View<ShipView>(new ShipView(), new HashMap<>());
-        when(shipQueryService.getShipData(CHARACTER_ID_1)).thenReturn(view);
+        ShipView shipView = createShipView();
+        when(shipQueryService.getShipData(CHARACTER_ID_1)).thenReturn(shipView);
         //WHEN
-        View<ShipView> result = underTest.getShipData(CHARACTER_ID_1);
+        ShipView result = underTest.getShipData(CHARACTER_ID_1);
         //THEN
         verify(shipQueryService).getShipData(CHARACTER_ID_1);
-        assertEquals(view, result);
+        assertEquals(shipView, result);
     }
 
     @Test

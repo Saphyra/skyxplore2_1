@@ -5,31 +5,29 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.ship.ShipViewConverter;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.ShipNotFoundException;
-import skyxplore.service.GameDataFacade;
-
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
+import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
+import static skyxplore.testutil.TestUtils.createEquippedDefenseSlot;
+import static skyxplore.testutil.TestUtils.createEquippedShip;
+import static skyxplore.testutil.TestUtils.createEquippedWeaponSlot;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShipQueryServiceTest {
     @Mock
     private EquippedShipDao equippedShipDao;
-
-    @Mock
-    private GameDataFacade gameDataFacade;
 
     @Mock
     private ShipViewConverter shipViewConverter;
@@ -75,16 +73,12 @@ public class ShipQueryServiceTest {
         shipView.setShipId(EQUIPPED_SHIP_ID);
         when(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot)).thenReturn(shipView);
 
-        Map<String, GeneralDescription> generalDescriptionMap = createGeneralDescriptionMap();
-        when(gameDataFacade.collectEquipmentData(ship, defenseSlot, weaponSlot)).thenReturn(generalDescriptionMap);
         //WHEN
-        View<ShipView> result = underTest.getShipData(CHARACTER_ID_1);
+        ShipView result = underTest.getShipData(CHARACTER_ID_1);
         //THEN
         verify(slotDao).getById(DEFENSE_SLOT_ID);
         verify(slotDao).getById(WEAPON_SLOT_ID);
         verify(shipViewConverter).convertDomain(ship, defenseSlot, weaponSlot);
-        verify(gameDataFacade).collectEquipmentData(ship, defenseSlot, weaponSlot);
-        assertEquals(shipView, result.getInfo());
-        assertEquals(generalDescriptionMap, result.getData());
+        assertEquals(shipView, result);
     }
 }

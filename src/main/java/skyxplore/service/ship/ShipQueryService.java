@@ -3,7 +3,6 @@ package skyxplore.service.ship;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.view.View;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.ship.ShipViewConverter;
 import skyxplore.dataaccess.db.EquippedShipDao;
@@ -30,15 +29,12 @@ public class ShipQueryService {
         return ship;
     }
 
-    public View<ShipView> getShipData(String characterId) {
+    public ShipView getShipData(String characterId) {
         EquippedShip ship = getShipByCharacterId(characterId);
 
         EquippedSlot defenseSlot = slotDao.getById(ship.getDefenseSlotId());
         EquippedSlot weaponSlot = slotDao.getById(ship.getWeaponSlotId());
 
-        return new View<>(
-            shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot),
-            gameDataFacade.collectEquipmentData(ship, defenseSlot, weaponSlot)
-        );
+        return shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot);
     }
 }

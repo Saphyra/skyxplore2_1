@@ -1,6 +1,29 @@
 package skyxplore.controller;
 
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.CharacterNameCache;
+import skyxplore.controller.request.OneStringParamRequest;
+import skyxplore.controller.request.character.CreateCharacterRequest;
+import skyxplore.controller.request.character.RenameCharacterRequest;
+import skyxplore.controller.view.character.CharacterView;
+import skyxplore.controller.view.character.CharacterViewConverter;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.service.CharacterFacade;
+import skyxplore.util.CookieUtil;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -10,37 +33,11 @@ import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.CHARACTER_MONEY;
 import static skyxplore.testutil.TestUtils.CHARACTER_NAME;
 import static skyxplore.testutil.TestUtils.CHARACTER_NEW_NAME;
+import static skyxplore.testutil.TestUtils.EQUIP_ITEM_ID;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createCharacterView;
 import static skyxplore.testutil.TestUtils.createRenameCharacterRequest;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.cache.CharacterNameCache;
-import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.character.CharacterView;
-import skyxplore.controller.view.character.CharacterViewConverter;
-import skyxplore.controller.view.equipment.EquipmentViewList;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.service.CharacterFacade;
-import skyxplore.util.CookieUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {
@@ -120,16 +117,13 @@ public class CharacterControllerTest {
     @Test
     public void testGetEquipmentsOfCharacterShouldCallFacadeAndReturnResponse() {
         //GIVEN
-        View<EquipmentViewList> view = new View<>(
-            new EquipmentViewList(),
-            new HashMap<>()
-        );
-        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(view);
+        List<String> equipments = Arrays.asList(EQUIP_ITEM_ID);
+        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(equipments);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
+        List<String> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
         //THEN
         verify(characterFacade).getEquipmentsOfCharacter(CHARACTER_ID_1);
-        assertEquals(view, result);
+        assertEquals(equipments, result);
     }
 
     @Test

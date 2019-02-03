@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.cache.CharacterNameLikeCache;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
@@ -103,13 +101,8 @@ public class CharacterQueryService {
         return characterDao.findByUserId(userId);
     }
 
-    public View<EquipmentViewList> getEquipmentsOfCharacter(String characterId) {
-        SkyXpCharacter character = findByCharacterId(characterId);
-
-        return new View<>(
-            new EquipmentViewList(character.getEquipments()),
-            gameDataFacade.collectEquipmentData(character.getEquipments())
-        );
+    public List<String> getEquipmentsOfCharacter(String characterId) {
+        return findByCharacterId(characterId).getEquipments();
     }
 
     public Integer getMoneyOfCharacter(String characterId) {

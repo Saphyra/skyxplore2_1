@@ -6,21 +6,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.cache.CharacterNameLikeCache;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.InvalidAccessException;
-import skyxplore.service.GameDataFacade;
 import skyxplore.service.community.BlockedCharacterQueryService;
 import skyxplore.service.community.FriendshipQueryService;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -40,7 +35,6 @@ import static skyxplore.testutil.TestUtils.USER_FAKE_ID;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createBlockedCharacter;
 import static skyxplore.testutil.TestUtils.createCharacter;
-import static skyxplore.testutil.TestUtils.createGeneralDescriptionMap;
 
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
@@ -53,9 +47,6 @@ public class CharacterQueryServiceTest {
 
     @Mock
     private  CharacterDao characterDao;
-
-    @Mock
-    private  GameDataFacade gameDataFacade;
 
     @Mock
     private  FriendshipQueryService friendshipQueryService;
@@ -292,15 +283,11 @@ public class CharacterQueryServiceTest {
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
 
-        Map<String, GeneralDescription> equipmentDataMap = createGeneralDescriptionMap();
-        when(gameDataFacade.collectEquipmentData(character.getEquipments())).thenReturn(equipmentDataMap);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
+        List<String> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
         //THEN
         verify(characterDao).findById(CHARACTER_ID_1);
-        verify(gameDataFacade).collectEquipmentData(character.getEquipments());
-        assertEquals(character.getEquipments(), result.getInfo());
-        assertEquals(equipmentDataMap, result.getData());
+        assertEquals(character.getEquipments(), result);
     }
 
     @Test

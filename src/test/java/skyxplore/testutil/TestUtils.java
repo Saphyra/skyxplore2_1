@@ -1,25 +1,33 @@
 package skyxplore.testutil;
 
-import skyxplore.controller.request.user.LoginRequest;
-import skyxplore.controller.request.character.*;
+import skyxplore.controller.request.character.AddToQueueRequest;
+import skyxplore.controller.request.character.CharacterDeleteRequest;
+import skyxplore.controller.request.character.CreateCharacterRequest;
+import skyxplore.controller.request.character.EquipRequest;
+import skyxplore.controller.request.character.RenameCharacterRequest;
+import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.request.community.SendMailRequest;
-import skyxplore.controller.request.user.*;
-import skyxplore.controller.view.View;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.LoginRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductView;
-import skyxplore.controller.view.product.ProductViewList;
+import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
+import skyxplore.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.domain.character.CharacterEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
@@ -30,8 +38,8 @@ import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
-import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.credentials.CredentialsEntity;
+import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.factory.FactoryEntity;
 import skyxplore.domain.materials.Materials;
@@ -48,17 +56,20 @@ import skyxplore.domain.user.UserEntity;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 public class TestUtils {
     //ACCESS TOKEN
     public static final String ACCESS_TOKEN_ID = "access_token_id";
-    public static final String ACCESS_TOKEN_FAKE_ID = "access_token_fake_id";
     public static final Long ACCESS_TOKEN_LAST_ACCESS_EPOCH = 414184L;
     public static final OffsetDateTime ACCESS_TOKEN_LAST_ACCESS = OffsetDateTime.of(LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
     public static final Long ACCESS_TOKEN_EXPIRATION_EPOCH = 1642L;
-    public static final LocalDateTime ACCESS_TOKEN_EXPIRATION = LocalDateTime.ofEpochSecond(ACCESS_TOKEN_EXPIRATION_EPOCH, 0, ZoneOffset.UTC);
 
     //Blocked Character
     public static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
@@ -383,6 +394,20 @@ public class TestUtils {
         return entity;
     }
 
+    public static ShipView createShipView(){
+        return ShipView.builder()
+            .shipId(EQUIPPED_SHIP_ID)
+            .characterId(CHARACTER_ID_1)
+            .shipType(EQUIPPED_SHIP_TYPE)
+            .coreHull(DATA_SHIP_COREHULL)
+            .connectorSlot(DATA_SHIP_CONNECTOR_SLOT)
+            .connectorEquipped(Arrays.asList(DATA_CONNECTOR))
+            .defenseSlot(createSlotView(createEquippedDefenseSlot()))
+            .defenseSlot(createSlotView(createEquippedWeaponSlot()))
+            .ability(Arrays.asList(DATA_ABILITY))
+            .build();
+    }
+
     public static EquippedSlot createEquippedSlot(String slotId) {
         EquippedSlot slot = createEquippedSlot();
         slot.setSlotId(slotId);
@@ -634,16 +659,6 @@ public class TestUtils {
         view.setStartTime(PRODUCT_START_TIME_EPOCH);
         view.setEndTime(PRODUCT_END_TIME_EPOCH);
         return view;
-    }
-
-    public static ProductViewList createProductViewList() {
-        return new ProductViewList(Arrays.asList(createProductView()));
-    }
-
-    public static View<ProductViewList> createProductViewListView() {
-        ProductViewList productViews = createProductViewList();
-        Map<String, GeneralDescription> data = createGeneralDescriptionMap();
-        return new View<>(productViews, data);
     }
 
     public static RenameCharacterRequest createRenameCharacterRequest() {

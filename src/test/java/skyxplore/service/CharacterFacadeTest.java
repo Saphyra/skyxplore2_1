@@ -7,8 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.character.BuyItemService;
@@ -105,16 +103,13 @@ public class CharacterFacadeTest {
     @Test
     public void testGetEquipmentsOfCharacterShouldCallServiceAndReturn() {
         //GIVEN
-        View<EquipmentViewList> view = new View<>(
-            new EquipmentViewList(Arrays.asList(DATA_ELEMENT)),
-            new HashMap<>()
-        );
-        when(characterQueryService.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(view);
+        List<String> equipments = Arrays.asList(DATA_ELEMENT);
+        when(characterQueryService.getEquipmentsOfCharacter(CHARACTER_ID_1)).thenReturn(equipments);
         //WHEN
-        View<EquipmentViewList> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
+        List<String> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID_1);
         //THEN
         verify(characterQueryService).getEquipmentsOfCharacter(CHARACTER_ID_1);
-        assertEquals(view, result);
+        assertEquals(equipments, result);
     }
 
     @Test
