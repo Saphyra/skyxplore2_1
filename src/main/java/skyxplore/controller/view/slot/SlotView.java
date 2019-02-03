@@ -1,14 +1,13 @@
 package skyxplore.controller.view.slot;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
 
 @Data
+@Builder
 public class SlotView {
-    private String slotId;
-    private String shipId;
-
     private Integer frontSlot;
     private ArrayList<String> frontEquipped;
 

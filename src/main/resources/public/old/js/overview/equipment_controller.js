@@ -16,54 +16,11 @@
         - IllegalState exception, if characterId cannot be found.
     */
     function showEquipment(){
-        try{
-            const characterId = sessionStorage.characterId;
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalState", "characterId cannot be found.");
-            }
-            const shipData = shipDao.getShip(characterId);
-            
-            showSlots("frontweapon", shipData.weaponSlot.frontSlot, shipData.weaponSlot.frontEquipped);
-            showSlots("frontdefense", shipData.defenseSlot.frontSlot, shipData.defenseSlot.frontEquipped);
-            
-            showSlots("leftweapon", shipData.weaponSlot.leftSlot, shipData.weaponSlot.leftEquipped);
-            showSlots("leftdefense", shipData.defenseSlot.leftSlot, shipData.defenseSlot.leftEquipped);
-            
-            showSlots("rightweapon", shipData.weaponSlot.rightSlot, shipData.weaponSlot.rightEquipped);
-            showSlots("rightdefense", shipData.defenseSlot.rightSlot, shipData.defenseSlot.rightEquipped);
-            
-            showSlots("backweapon", shipData.weaponSlot.backSlot, shipData.weaponSlot.backEquipped);
-            showSlots("backdefense", shipData.defenseSlot.backSlot, shipData.defenseSlot.backEquipped);
-            
-            showSlots("connectors", shipData.connectorSlot, shipData.connectorEquipped);
-            
-            fillShipDetails(shipData);
-            
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-        
         function showSlots(containerId, slotNum, equipped){
             try{
-                const container = document.getElementById(containerId);
                 
-                let actual = 0;
-                for(let eindex in equipped){
-                    const equipmentData = cache.get(equipped[eindex]);
-                    
-                    const slotElement = createSlotElement();
-                        slotElement.innerHTML = equipmentData.name;
-                        slotElement.title = titleService.getTitleForOverview(equipmentData.id);
-                    container.appendChild(slotElement);
-                    actual++;
-                }
                 
-                for(actual; actual < slotNum; actual++){
-                    const emptySlot = createSlotElement();
-                        emptySlot.innerHTML = "Üres";
-                    container.appendChild(emptySlot);
-                }
+                
             }catch(err){
                 const message = arguments.callee.name + " - " + err.name + ": " + err.message;
                 logService.log(message, "error");

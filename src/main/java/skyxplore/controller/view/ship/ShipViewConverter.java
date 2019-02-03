@@ -15,8 +15,6 @@ public class ShipViewConverter {
 
     public ShipView convertDomain(EquippedShip domain, EquippedSlot defenseSlot, EquippedSlot weaponSlot){
         ShipView view = new ShipView();
-        view.setShipId(domain.getShipId());
-        view.setCharacterId(domain.getCharacterId());
         view.setShipType(domain.getShipType());
         view.setCoreHull(domain.getCoreHull());
         view.setConnectorSlot(domain.getConnectorSlot());

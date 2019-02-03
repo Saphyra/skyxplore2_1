@@ -1,7 +1,6 @@
 package skyxplore.testutil;
 
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
@@ -11,7 +10,6 @@ import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.controller.request.user.LoginRequest;
 import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.community.friend.FriendView;
@@ -69,7 +67,6 @@ public class TestUtils {
     public static final String ACCESS_TOKEN_ID = "access_token_id";
     public static final Long ACCESS_TOKEN_LAST_ACCESS_EPOCH = 414184L;
     public static final OffsetDateTime ACCESS_TOKEN_LAST_ACCESS = OffsetDateTime.of(LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
-    public static final Long ACCESS_TOKEN_EXPIRATION_EPOCH = 1642L;
 
     //Blocked Character
     public static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
@@ -166,7 +163,6 @@ public class TestUtils {
 
     //Filter
     public static final String USER_ID_COOKIE = "user_id_cookie";
-    public static final String ACCESS_TOKEN_COOKIE = "access_token_cookie";
     public static final String CHARACTER_ID_COOKIE = "character_iid_cookie";
     public static final String AUTHENTICATED_PATH = "authenticated_path";
     public static final String REDIRECTION_PATH = "redirection_path";
@@ -319,10 +315,6 @@ public class TestUtils {
         return character;
     }
 
-    public static CharacterDeleteRequest createCharacterDeleteRequest() {
-        return new CharacterDeleteRequest(CHARACTER_ID_1);
-    }
-
     public static CharacterEntity createCharacterEntity() {
         CharacterEntity entity = new CharacterEntity();
         entity.setCharacterId(CHARACTER_ID_1);
@@ -396,8 +388,6 @@ public class TestUtils {
 
     public static ShipView createShipView(){
         return ShipView.builder()
-            .shipId(EQUIPPED_SHIP_ID)
-            .characterId(CHARACTER_ID_1)
             .shipType(EQUIPPED_SHIP_TYPE)
             .coreHull(DATA_SHIP_COREHULL)
             .connectorSlot(DATA_SHIP_CONNECTOR_SLOT)
@@ -530,13 +520,6 @@ public class TestUtils {
         Map<String, GeneralDescription> map = new HashMap<>();
         map.put(DATA_ELEMENT, createGeneralDescription());
         return map;
-    }
-
-    public static LoginRequest createLoginRequest() {
-        LoginRequest request = new LoginRequest();
-        request.setUserName(USER_NAME);
-        request.setPassword(USER_PASSWORD);
-        return request;
     }
 
     public static Mail createMail() {
@@ -701,10 +684,16 @@ public class TestUtils {
     }
 
     public static SlotView createSlotView(EquippedSlot slot) {
-        SlotView view = new SlotView();
-        view.setSlotId(slot.getSlotId());
-        view.setShipId(slot.getShipId());
-        return view;
+        return SlotView.builder()
+            .frontSlot(slot.getFrontSlot())
+            .frontEquipped(slot.getFrontEquipped())
+            .rightSlot(slot.getRightSlot())
+            .rightEquipped(slot.getRightEquipped())
+            .backSlot(slot.getBackSlot())
+            .backEquipped(slot.getBackEquipped())
+            .leftSlot(slot.getLeftSlot())
+            .leftEquipped(slot.getLeftEquipped())
+            .build();
     }
 
     public static UnequipRequest createUnequipRequest() {

@@ -13,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShipView {
-    private String shipId;
-    private String characterId;
     private String shipType;
     private Integer coreHull;
     private Integer connectorSlot;

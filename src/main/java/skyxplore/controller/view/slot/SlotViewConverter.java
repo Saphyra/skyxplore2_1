@@ -7,17 +7,15 @@ import skyxplore.controller.view.AbstractViewConverter;
 @Component
 public class SlotViewConverter extends AbstractViewConverter<EquippedSlot, SlotView> {
     public SlotView convertDomain(EquippedSlot domain){
-        SlotView view = new SlotView();
-        view.setSlotId(domain.getSlotId());
-        view.setShipId(domain.getShipId());
-        view.setFrontSlot(domain.getFrontSlot());
-        view.setFrontEquipped(domain.getFrontEquipped());
-        view.setLeftSlot(domain.getLeftSlot());
-        view.setLeftEquipped(domain.getLeftEquipped());
-        view.setRightSlot(domain.getRightSlot());
-        view.setRightEquipped(domain.getRightEquipped());
-        view.setBackSlot(domain.getBackSlot());
-        view.setBackEquipped(domain.getBackEquipped());
-        return view;
+        return SlotView.builder()
+            .frontSlot(domain.getFrontSlot())
+            .frontEquipped(domain.getFrontEquipped())
+            .rightSlot(domain.getRightSlot())
+            .rightEquipped(domain.getRightEquipped())
+            .backSlot(domain.getBackSlot())
+            .backEquipped(domain.getBackEquipped())
+            .leftSlot(domain.getLeftSlot())
+            .leftEquipped(domain.getLeftEquipped())
+            .build();
     }
 }

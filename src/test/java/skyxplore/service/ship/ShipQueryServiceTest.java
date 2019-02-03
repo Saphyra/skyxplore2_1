@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
-import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
+import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_TYPE;
 import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createEquippedDefenseSlot;
 import static skyxplore.testutil.TestUtils.createEquippedShip;
@@ -70,7 +70,7 @@ public class ShipQueryServiceTest {
         when(slotDao.getById(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
 
         ShipView shipView = new ShipView();
-        shipView.setShipId(EQUIPPED_SHIP_ID);
+        shipView.setShipType(EQUIPPED_SHIP_TYPE);
         when(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot)).thenReturn(shipView);
 
         //WHEN
