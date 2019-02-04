@@ -1,0 +1,11 @@
+{
+    "id": "cable",
+    "slot": "material",
+    "buildable": true,
+    "materials": {
+        "xebryum": 2,
+        "mithril": 1
+    },
+    "constructiontime": 10,
+    "type": "material"
+}

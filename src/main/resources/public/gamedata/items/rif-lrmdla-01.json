@@ -1,0 +1,23 @@
+{
+    "id": "rif-lrmdla-01",
+    "attackSpeed": 2,
+    "criticalRate": 300,
+    "range": 2,
+    "hullDamage": 6000,
+    "shieldDamage": 4000,
+    "accuracy": 250,
+    "constructiontime": 600,
+    "buildprice": 600,
+    "materials": {
+        "cable": 1,
+        "condensator": 1,
+        "hullplate": 3,
+        "adamantium": 10
+    },
+    "type": "weapon",
+    "slot": "weapon",
+    "level": 1,
+    "score": 1,
+    "buyprice": 15000,
+    "sellprice": 5000
+}

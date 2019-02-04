@@ -1,0 +1,11 @@
+{
+  "id": "energyrecharge",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 350,
+  "active": 1,
+  "reload": 15,
+  "effect": {
+    "recharge": 350
+  }
+}

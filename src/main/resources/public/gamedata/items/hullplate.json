@@ -1,0 +1,11 @@
+{
+    "id": "hullplate",
+    "slot": "material",
+    "buildable": true,
+    "materials": {
+        "duranium": 2,
+        "mithril": 2
+    },
+    "constructiontime": 10,
+    "type": "material"
+}

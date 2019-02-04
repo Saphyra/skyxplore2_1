@@ -1,0 +1,11 @@
+{
+    "id": "shieldregeneration",
+    "slot": "ability",
+    "energyusage": 200,
+    "active": 5,
+    "reload": 20,
+    "effect": {
+        "recharge": 5
+    },
+    "type": "ability"
+}

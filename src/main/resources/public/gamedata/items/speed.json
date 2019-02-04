@@ -1,0 +1,8 @@
+{
+    "id": "speed",
+    "slot": "ability",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 15,
+    "type": "ability"
+}

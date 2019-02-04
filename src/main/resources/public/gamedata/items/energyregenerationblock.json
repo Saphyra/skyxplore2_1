@@ -1,0 +1,11 @@
+{
+  "id": "energyregenerationblock",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 3,
+  "reload": 15,
+  "effect": {
+    "range": 6
+  }
+}

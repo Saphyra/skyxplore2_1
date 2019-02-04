@@ -1,0 +1,11 @@
+{
+    "id": "teleportation",
+    "slot": "ability",
+    "energyusage": 400,
+    "active": 0,
+    "reload": 20,
+    "effect": {
+        "range": 4
+    },
+    "type": "ability"
+}

@@ -1,0 +1,22 @@
+{
+    "id": "cex-03",
+    "extendedslot": "connector",
+    "extendednum": 13,
+    "constructiontime": 7200,
+    "buildprice": 7200,
+    "materials": {
+        "cable": 36,
+        "hullplate": 27,
+        "energycell": 18,
+        "mithril": 225,
+        "duranium": 135,
+        "uridium": 90,
+        "xebryum": 180
+    },
+    "type": "extender",
+    "slot": "connector",
+    "level": 3,
+    "score": 0,
+    "buyprice": 1350000,
+    "sellprice": 450000
+}

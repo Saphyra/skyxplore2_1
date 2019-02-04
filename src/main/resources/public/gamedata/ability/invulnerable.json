@@ -1,9 +1,0 @@
-{
-  "id": "invulnerable",
-  "name": "Sebezhetetlenség",
-  "description": "Sebezhetetlenné teszi a hajót.",
-  "slot": "ability",
-  "energyusage": 400,
-  "active": 3,
-  "reload": 15
-}

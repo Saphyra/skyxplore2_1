@@ -1,0 +1,11 @@
+{
+  "id": "damagereduction",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 5,
+  "reload": 15,
+  "effect": {
+    "reduction": 40
+  }
+}

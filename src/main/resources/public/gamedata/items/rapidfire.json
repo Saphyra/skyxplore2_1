@@ -1,0 +1,11 @@
+{
+    "id": "rapidfire",
+    "slot": "ability",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 20,
+    "effect": {
+        "attackspeed": 50
+    },
+    "type": "ability"
+}

@@ -1,0 +1,11 @@
+{
+    "id": "shieldregenerationblock",
+    "slot": "ability",
+    "energyusage": 300,
+    "active": 5,
+    "reload": 15,
+    "effect": {
+        "range": 6
+    },
+    "type": "ability"
+}

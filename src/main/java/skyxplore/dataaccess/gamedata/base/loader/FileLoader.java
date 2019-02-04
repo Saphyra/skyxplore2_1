@@ -32,6 +32,7 @@ public class FileLoader<T> extends AbstractLoader<T> {
         }
         File[] files = root.listFiles(jsonFilter);
         for (File file : files) {
+            log.debug("Loading item {}", file.getName());
             TypedItem typedItem = getTypedItem(file);
             if (isTypeMatches(typedItem)) {
                 loadFile(file);

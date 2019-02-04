@@ -1,0 +1,22 @@
+{
+    "id": "dex-03",
+    "extendedslot": "defense",
+    "extendednum": 4,
+    "constructiontime": 7200,
+    "buildprice": 7200,
+    "materials": {
+        "cable": 36,
+        "condensator": 27,
+        "energycell": 36,
+        "hullplate": 54,
+        "mithril": 180,
+        "duranium": 315,
+        "uridium": 225
+    },
+    "type": "extender",
+    "slot": "connector",
+    "level": 3,
+    "score": 0,
+    "buyprice": 1350000,
+    "sellprice": 450000
+}

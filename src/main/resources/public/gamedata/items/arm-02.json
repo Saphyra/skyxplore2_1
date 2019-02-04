@@ -1,0 +1,16 @@
+{
+    "id": "arm-02",
+    "capacity": 300000,
+    "constructiontime": 2700,
+    "buildprice": 2700,
+    "materials": {
+        "duranium": 60,
+        "hullplate": 30
+    },
+    "type": "armor",
+    "slot": "defense",
+    "level": 2,
+    "score": 2,
+    "buyprice": 67500,
+    "sellprice": 22500
+}

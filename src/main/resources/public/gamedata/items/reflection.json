@@ -1,0 +1,11 @@
+{
+    "id": "reflection",
+    "slot": "ability",
+    "energyusage": 200,
+    "active": 5,
+    "reload": 15,
+    "effect": {
+        "reflectrate": 30
+    },
+    "type": "ability"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "shi-hclr-02",
+    "capacity": 150000,
+    "regeneration": 3750,
+    "energyusage": 75,
+    "constructiontime": 2700,
+    "buildprice": 2700,
+    "materials": {
+        "uridium": 45,
+        "cable": 6,
+        "energycell": 9,
+        "hullplate": 6
+    },
+    "type": "shield",
+    "slot": "defense",
+    "level": 2,
+    "score": 2,
+    "buyprice": 67500,
+    "sellprice": 22500
+}

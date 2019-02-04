@@ -1,0 +1,23 @@
+{
+    "id": "rla-lrhdma-02",
+    "attackSpeed": 6,
+    "criticalRate": 500,
+    "range": 2,
+    "hullDamage": 45000,
+    "shieldDamage": 45000,
+    "accuracy": 500,
+    "constructiontime": 1800,
+    "buildprice": 1800,
+    "materials": {
+        "cable": 3,
+        "condensator": 3,
+        "hullplate": 15,
+        "adamantium": 15
+    },
+    "type": "weapon",
+    "slot": "weapon",
+    "level": 2,
+    "score": 2,
+    "buyprice": 45000,
+    "sellprice": 15000
+}

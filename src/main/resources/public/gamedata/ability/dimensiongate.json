@@ -1,9 +1,0 @@
-{
-  "id": "dimensiongate",
-  "name": "Dimenziókapu",
-  "description": "Átmenetileg egy másik dimenzióba küld egy szövetséges vagy ellenséges hajót, így az se támadni, se sérülni nem tud.",
-  "slot": "ability",
-  "energyusage": 400,
-  "active": 5,
-  "reload": 30
-}

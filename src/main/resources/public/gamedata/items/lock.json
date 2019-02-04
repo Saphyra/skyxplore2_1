@@ -1,0 +1,8 @@
+{
+  "id": "lock",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": -1,
+  "reload": 20
+}

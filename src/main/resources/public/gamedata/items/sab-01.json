@@ -1,0 +1,42 @@
+{
+    "id": "sab-01",
+    "corehull": 1000000,
+    "connector": 18,
+    "defense": {
+        "front": 6,
+        "side": 5,
+        "back": 4
+    },
+    "weapon": {
+        "front": 4,
+        "side": 3,
+        "back": 2
+    },
+    "ability": [
+        "abilityblock",
+        "shieldregenerationblock",
+        "energyregenerationblock",
+        "blind",
+        "freeze",
+        "disableweapons"
+    ],
+    "constructiontime": 43200,
+    "buildprice": 43200,
+    "materials": {
+        "cable": 40,
+        "condensator": 25,
+        "energycell": 35,
+        "hullplate": 20,
+        "etherium": 200,
+        "mithril": 200,
+        "duranium": 200,
+        "uridium": 250,
+        "xebryum": 300
+    },
+    "type": "ship",
+    "slot": "ship",
+    "level": 1,
+    "score": 10,
+    "buyprice": 3000000,
+    "sellprice": 1000000
+}
