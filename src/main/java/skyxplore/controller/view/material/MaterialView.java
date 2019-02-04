@@ -7,7 +7,5 @@ import lombok.Data;
 @Builder
 public class MaterialView {
     private String materialId;
-    private String name;
-    private String description;
     private Integer amount;
 }

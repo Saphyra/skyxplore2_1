@@ -36,7 +36,7 @@ public class ReplyMailTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        Mail mail  = mailTestHelper.getMail();
+        Mail mail = mailTestHelper.getMail();
         mail.read();
         mail.reply();
 

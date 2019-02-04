@@ -1,13 +1,13 @@
 {
-    "id": "energyregeneration",
-    "name": "Generátor túlhajtás",
-    "description": "Növeli egy szövetséges hajó energiatermelését",
-    "slot": "ability",
-    "energyusage": 200,
-    "active": 5,
-    "reload": 10,
-    "effect": {
-        "staticregeneration": 20,
-        "relativeregeneration": 50
-    }
+  "id": "energyregeneration",
+  "name": "Generátor túlhajtás",
+  "description": "Növeli egy szövetséges hajó energiatermelését",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 5,
+  "reload": 10,
+  "effect": {
+    "staticregeneration": 20,
+    "relativeregeneration": 50
+  }
 }

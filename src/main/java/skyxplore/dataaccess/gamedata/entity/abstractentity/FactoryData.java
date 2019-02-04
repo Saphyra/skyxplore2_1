@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 @Data
 @ToString(callSuper = true)
-public abstract class FactoryData extends GeneralDescription{
+public abstract class FactoryData extends GeneralDescription {
     @JsonProperty("constructiontime")
     private Integer constructionTime;
 

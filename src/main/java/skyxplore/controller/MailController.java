@@ -72,7 +72,7 @@ public class MailController {
     @GetMapping(GET_ARCHIVED_MAILS_MAPPING)
     public List<MailView> getArchivedMails(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to know his archived mails.");
         return mailViewConverter.convertDomain(mailFacade.getArchivedMails(characterId));
     }
@@ -124,7 +124,7 @@ public class MailController {
     public void unarchiveMails(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
-    ){
+    ) {
         log.info("{} wants to unarchive mails {}", characterId, mailIds);
         mailFacade.archiveMails(characterId, mailIds, false);
     }

@@ -443,8 +443,6 @@ public class TestUtils {
     public static FactoryData createFactoryData() {
         TestFactoryData factoryData = new TestFactoryData();
         factoryData.setId(DATA_ELEMENT);
-        factoryData.setName(DATA_NAME);
-        factoryData.setDescription(DATA_DESCRIPTION);
         factoryData.setSlot(DATA_SLOT);
         factoryData.setConstructionTime(PRODUCT_CONSTRUCTION_TIME);
         factoryData.setBuildPrice(PRODUCT_BUILD_PRICE);
@@ -578,8 +576,6 @@ public class TestUtils {
         material.setConstructionTime(MATERIAL_CONSTRUCTION_TIME);
         material.setBuildPrice(MATERIAL_BUILDPRICE);
         material.setId(MATERIAL_ID);
-        material.setName(MATERIAL_NAME);
-        material.setDescription(MATERIAL_DESCRIPTION);
         material.setSlot(MATERIAL_SLOT);
         return material;
     }
@@ -593,8 +589,6 @@ public class TestUtils {
     public static MaterialView createMaterialView() {
         return MaterialView.builder()
             .materialId(MATERIAL_KEY)
-            .name(MATERIAL_NAME)
-            .description(MATERIAL_DESCRIPTION)
             .amount(MATERIAL_AMOUNT)
             .build();
     }

@@ -16,13 +16,13 @@ public enum EquipmentCategoryRequest {
 
     private String value;
 
-    EquipmentCategoryRequest(String value){
+    EquipmentCategoryRequest(String value) {
         this.value = value;
     }
 
-    public static EquipmentCategoryRequest fromValue(String value){
-        for(EquipmentCategoryRequest element : values()){
-            if(element.value.equalsIgnoreCase(value)){
+    public static EquipmentCategoryRequest fromValue(String value) {
+        for (EquipmentCategoryRequest element : values()) {
+            if (element.value.equalsIgnoreCase(value)) {
                 return element;
             }
         }

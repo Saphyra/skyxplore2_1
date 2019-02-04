@@ -8,7 +8,7 @@ import skyxplore.controller.view.AbstractViewConverter;
 public class CharacterViewConverter extends AbstractViewConverter<SkyXpCharacter, CharacterView> {
 
     @Override
-    public CharacterView convertDomain(SkyXpCharacter domain){
+    public CharacterView convertDomain(SkyXpCharacter domain) {
         CharacterView view = new CharacterView();
         view.setCharacterId(domain.getCharacterId());
         view.setCharacterName(domain.getCharacterName());

@@ -8,5 +8,6 @@ import skyxplore.domain.factory.FactoryEntity;
 @Repository
 public interface FactoryRepository extends JpaRepository<FactoryEntity, String> {
     void deleteByCharacterId(String characterId);
+
     FactoryEntity findByCharacterId(String characterId);
 }

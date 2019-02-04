@@ -17,7 +17,7 @@ public class EquipmentTestHelper {
     private final Navigate navigate;
     private final EquipmentElementSearcher equipmentElementSearcher;
 
-    public SeleniumCharacter registerAndGoToEquipmentPage(){
+    public SeleniumCharacter registerAndGoToEquipmentPage() {
         registration.registerUser();
         SeleniumCharacter character = createCharacter.createCharacter();
         selectCharacter.selectCharacter(character);
@@ -25,7 +25,7 @@ public class EquipmentTestHelper {
         return character;
     }
 
-    public void verifyItemInStorage(String itemId, int amount){
+    public void verifyItemInStorage(String itemId, int amount) {
         assertEquals(amount, equipmentElementSearcher.getUnequippedEquipmentById(itemId).getAmount());
     }
 }

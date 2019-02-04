@@ -1,0 +1,11 @@
+{
+  "id": "aftermath",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 0,
+  "active": -1,
+  "reload": 0,
+  "effect": {
+    "damage": 1
+  }
+}

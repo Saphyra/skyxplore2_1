@@ -20,6 +20,7 @@ public class TooLongUserNameTest {
         }
         TOO_LONG_USER_NAME = builder.toString();
     }
+
     private static final String MESSAGE_CODE_USERNAME_TOO_LONG = "USERNAME_TOO_LONG";
 
     private final AccountPage accountPage;
@@ -31,7 +32,7 @@ public class TooLongUserNameTest {
         changeUserNameTestHelper.setUpWithCurrentPassword();
 
         WebElement userNameField = accountPage.getChangeUserNameField();
-            userNameField.sendKeys(TOO_LONG_USER_NAME);
+        userNameField.sendKeys(TOO_LONG_USER_NAME);
 
         fieldValidator.verifyError(
             accountPage.getInvalidChangeUserNameField(),

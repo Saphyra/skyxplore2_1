@@ -1,15 +1,16 @@
 package skyxplore.dataaccess.gamedata.subservice;
 
+import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
 import skyxplore.dataaccess.gamedata.entity.Ability;
 
-public class AbilityService extends AbstractGameDataService<Ability> {
-    public AbilityService(String source){
-        super(source);
-    }
+import javax.annotation.PostConstruct;
 
+@Component
+public class AbilityService extends AbstractGameDataService<Ability> {
     @Override
-    public void init(){
+    @PostConstruct
+    public void init() {
         super.load(Ability.class);
     }
 }

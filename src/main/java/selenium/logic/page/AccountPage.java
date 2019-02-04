@@ -99,7 +99,7 @@ public class AccountPage {
         return driver.findElement(By.id(ELEMENT_DELETE_ACCOUNT_PASSWORD_FIELD));
     }
 
-    public WebElement getInvalidDeleteAccountPasswordField(){
+    public WebElement getInvalidDeleteAccountPasswordField() {
         return driver.findElement(By.id(ELEMENT_INVALID_DELETE_ACCOUNT_PASSWORD_FIELD));
     }
 

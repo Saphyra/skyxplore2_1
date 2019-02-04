@@ -1,12 +1,12 @@
 {
-    "id": "penetration",
-    "name": "Pajzsátütés",
-    "description": "A támadások figyelmen kívül hagyják a célpont pajzsát és közvetlenül a burkolatot sebzik.",
-    "slot": "ability",
-    "energyusage": 400,
-    "active": 10,
-    "reload": 30,
-    "effect": {
-        "chance": 35
-    }
+  "id": "penetration",
+  "name": "Pajzsátütés",
+  "description": "A támadások figyelmen kívül hagyják a célpont pajzsát és közvetlenül a burkolatot sebzik.",
+  "slot": "ability",
+  "energyusage": 400,
+  "active": 10,
+  "reload": 30,
+  "effect": {
+    "chance": 35
+  }
 }

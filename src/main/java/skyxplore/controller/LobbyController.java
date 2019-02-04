@@ -25,8 +25,8 @@ public class LobbyController {
     @PostMapping(CREATE_LOBBY_MAPPING)
     public void createLobby(
         @RequestBody @Valid CreateLobbyRequest request,
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId){
-        log.info("{} wants to create a lobby with parameters {}", characterId,  request);
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId) {
+        log.info("{} wants to create a lobby with parameters {}", characterId, request);
         gameFacade.createLobby(request, characterId);
     }
 }

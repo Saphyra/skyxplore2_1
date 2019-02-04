@@ -1,12 +1,12 @@
 {
-    "id": "energyregenerationblock",
-    "name": "Energia regeneráció blokkolás",
-    "description": "A kijelölt ellenséges hajónak nem töltődik az energiája.",
-    "slot": "ability",
-    "energyusage": 200,
-    "active": 3,
-    "reload": 15,
-    "effect": {
-        "range": 6
-    }
+  "id": "energyregenerationblock",
+  "name": "Energia regeneráció blokkolás",
+  "description": "A kijelölt ellenséges hajónak nem töltődik az energiája.",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 3,
+  "reload": 15,
+  "effect": {
+    "range": 6
+  }
 }

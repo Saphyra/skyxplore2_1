@@ -6,7 +6,7 @@ import skyxplore.controller.view.AbstractViewConverter;
 
 @Component
 public class SlotViewConverter extends AbstractViewConverter<EquippedSlot, SlotView> {
-    public SlotView convertDomain(EquippedSlot domain){
+    public SlotView convertDomain(EquippedSlot domain) {
         return SlotView.builder()
             .frontSlot(domain.getFrontSlot())
             .frontEquipped(domain.getFrontEquipped())

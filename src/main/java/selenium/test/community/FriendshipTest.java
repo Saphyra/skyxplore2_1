@@ -69,7 +69,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testFilterShouldNotShowWhenFriendRequestSent(){
+    public void testFilterShouldNotShowWhenFriendRequestSent() {
         FilterTestShouldNotShowWhenFriendRequestSent.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -79,7 +79,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testFilterShouldNotShowFriends(){
+    public void testFilterShouldNotShowFriends() {
         FilterTestShouldNotShowWhenAlreadyFriend.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -122,7 +122,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testAcceptFriendRequest(){
+    public void testAcceptFriendRequest() {
         AcceptFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)

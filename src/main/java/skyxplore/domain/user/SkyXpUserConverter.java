@@ -24,7 +24,7 @@ public class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
     @Override
     public UserEntity processDomainConversion(SkyXpUser domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
 

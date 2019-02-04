@@ -22,13 +22,13 @@ public class UserEntity {
     @Column(name = "user_id", length = 50)
     private String userId;
 
-    @Column(name = "roles", nullable =  false)
+    @Column(name = "roles", nullable = false)
     private HashSet<Role> roles;
 
     @Column(nullable = false)
     private String email;
 
-    public HashSet<Role> getRoles(){
+    public HashSet<Role> getRoles() {
         return new HashSet<>(roles);
     }
 }

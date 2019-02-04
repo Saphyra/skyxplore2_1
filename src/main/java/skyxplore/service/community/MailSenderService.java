@@ -27,7 +27,7 @@ public class MailSenderService {
     }
 
     private void checkBlockStatus(String characterId, String addresseeId) {
-        if(!blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, addresseeId).isEmpty()){
+        if (!blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, addresseeId).isEmpty()) {
             throw new CharacterBlockedException("You blocked each other. Mail cannot be sent.");
         }
     }

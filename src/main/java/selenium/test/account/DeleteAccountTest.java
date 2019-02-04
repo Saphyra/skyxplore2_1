@@ -33,7 +33,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testEmptyPassword(){
+    public void testEmptyPassword() {
         EmptyPasswordTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .accountPage(accountPage)
@@ -44,7 +44,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBadPassword(){
+    public void testBadPassword() {
         BadPasswordTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .driver(driver)
@@ -56,7 +56,7 @@ public class DeleteAccountTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testSuccessfulAccountDeletion(){
+    public void testSuccessfulAccountDeletion() {
         SuccessfulAccountDeletionTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .driver(driver)

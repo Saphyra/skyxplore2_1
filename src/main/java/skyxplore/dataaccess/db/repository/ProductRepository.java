@@ -13,6 +13,7 @@ import java.util.List;
 //TODO unit test
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
     void deleteByFactoryId(String factoryId);
+
     List<ProductEntity> findByFactoryId(String factoryId);
 
     @Query("select p from ProductEntity p where p.endTime < :finishTime")

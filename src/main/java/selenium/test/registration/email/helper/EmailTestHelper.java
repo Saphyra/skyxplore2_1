@@ -13,7 +13,7 @@ public class EmailTestHelper {
     private final WebDriver driver;
     private final IndexPage indexPage;
 
-    public void fillFields(SeleniumUser user){
+    public void fillFields(SeleniumUser user) {
         WebElement userNameField = indexPage.getRegistrationUserNameField();
         userNameField.sendKeys(user.getUserName());
 

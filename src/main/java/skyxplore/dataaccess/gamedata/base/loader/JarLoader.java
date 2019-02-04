@@ -1,5 +1,11 @@
 package skyxplore.dataaccess.gamedata.base.loader;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
+import skyxplore.dataaccess.gamedata.base.TypedItem;
+import skyxplore.util.FileUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,24 +17,19 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.io.FilenameUtils;
-
-import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
+import static java.util.Objects.isNull;
 
 @SuppressWarnings({"unchecked", "WeakerAccess"})
 @Slf4j
 public class JarLoader<T> extends AbstractLoader<T> {
-    private final Class<T> clazz;
     private final String jarPath;
     private final AbstractGameDataService<T> gameDataService;
 
     public JarLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
-        this.clazz = clazz;
+        super(clazz);
         this.gameDataService = gameDataService;
         this.jarPath = gameDataService.getJarPath();
     }
-
 
     @Override
     public void load() {
@@ -58,30 +59,43 @@ public class JarLoader<T> extends AbstractLoader<T> {
 
     private void loadJarEntry(JarFile jarFile, JarEntry entry) {
         String entryName = entry.getName();
-        try {
-            if (entryName.startsWith(jarPath) && entryName.endsWith(".json")) {
+        if (entryName.startsWith(jarPath) && entryName.endsWith(".json")) {
+            TypedItem typedItem = getTypedItem(jarFile, entry);
+            if (isTypeMatches(typedItem)) {
                 log.info("Matched element: {}", entryName);
                 String contentString = readJarEntry(jarFile, entry);
                 if (clazz == String.class) {
                     String[] splitted = FilenameUtils.removeExtension(entry.getName()).split("/");
                     gameDataService.put(splitted[splitted.length - 1], (T) contentString);
                 } else {
-                    T content = objectMapper.readValue(contentString, clazz);
+                    T content = FileUtil.readValue(objectMapper, contentString, clazz);
                     putGeneralDescription(content, gameDataService, jarPath);
                 }
+            } else {
+                log.debug("Skipping {}, it is not the type of {}, it is a {}", entryName, getClassName(), typedItem.getType());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
-    private String readJarEntry(JarFile jarFile, JarEntry entry) throws IOException {
+    private TypedItem getTypedItem(JarFile jarFile, JarEntry entry) {
+        String json = readJarEntry(jarFile, entry);
+        TypedItem typedItem = FileUtil.readValue(objectMapper, json, TypedItem.class);
+        if (isNull(typedItem.getType())) {
+            log.info("{} has no type.", entry.getName());
+        }
+        return typedItem;
+    }
+
+    private String readJarEntry(JarFile jarFile, JarEntry entry) {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(jarFile.getInputStream(entry)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         return new String(builder.toString().getBytes(), Charset.forName("UTF-8"));

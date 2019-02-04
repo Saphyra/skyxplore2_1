@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.controller.view.material.MaterialView;
 import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
@@ -53,11 +52,8 @@ public class FactoryQueryService {
     }
 
     private MaterialView createMaterialView(String key, Integer amount) {
-        Material material = materialService.get(key);
         return MaterialView.builder()
             .materialId(key)
-            .name(material.getName())
-            .description(material.getDescription())
             .amount(amount)
             .build();
     }

@@ -1,0 +1,30 @@
+{
+  "abilityblock": {
+    "name": "Képességblokkolás",
+    "description": "A megcélzott ellenséges hajó nem használhat képességeket."
+  },
+  "accuracy": {
+    "name": "Precizitás",
+    "description": "Növeli a fegyverek találati pontosságát."
+  },
+  "aftermath": {
+    "name": "Utóhatás",
+    "description": "Minden találat ideiglenesen növeli a célpont által elszenvedett sebzést. (Passzív)"
+  },
+  "blind": {
+    "name": "Találati pontosság csökkenés",
+    "description": "Csökkenti a kijelölt ellenséges hajó fegyvereinek találati pontosságát."
+  },
+  "cloak": {
+    "name": "Álcázó berendezés",
+    "description": "Elrejti a hajót az ellenséges radarok elől"
+  },
+  "corehullrepair": {
+    "name": "Magburkolat javítás",
+    "description": "Körönként javítja a magburkolat sérüléseit."
+  },
+  "damageovertime": {
+    "name": "Folyamatos sebzés",
+    "description": "A célpont minden körben sebzést szenved el."
+  }
+}

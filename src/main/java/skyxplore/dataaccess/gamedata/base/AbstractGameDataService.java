@@ -14,14 +14,12 @@ public abstract class AbstractGameDataService<V> extends HashMap<String, V> {
     private final ContentLoaderFactory<V> contentLoaderFactory;
 
     @Getter
-    private final String path;
+    private final String path = BASE_DIR;
 
     @Getter
-    private final String jarPath;
+    private final String jarPath = RESOURCES_DIR;
 
-    public AbstractGameDataService(String source) {
-        this.jarPath = RESOURCES_DIR + source;
-        this.path = BASE_DIR + source;
+    public AbstractGameDataService() {
         this.contentLoaderFactory = new ContentLoaderFactory<>();
     }
 

@@ -49,9 +49,9 @@ public class BlockTestHelper {
     }
 
     public List<BlockedCharacter> getBlockedCharacters() {
-         communityPage.getBlockCharactersPageButton().click();
+        communityPage.getBlockCharactersPageButton().click();
         return communityPage.getBlockedCharacters().stream()
-        .map(element -> new BlockedCharacter(driver, element))
-        .collect(Collectors.toList());
+            .map(element -> new BlockedCharacter(driver, element))
+            .collect(Collectors.toList());
     }
 }

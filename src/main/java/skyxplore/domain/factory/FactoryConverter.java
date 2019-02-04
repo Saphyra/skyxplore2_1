@@ -12,7 +12,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
 
     @Override
     public Factory processEntityConversion(FactoryEntity entity) {
-        if(entity == null){
+        if (entity == null) {
             return null;
         }
         Factory domain = new Factory();
@@ -25,7 +25,7 @@ public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
 
     @Override
     public FactoryEntity processDomainConversion(Factory domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         FactoryEntity entity = new FactoryEntity();

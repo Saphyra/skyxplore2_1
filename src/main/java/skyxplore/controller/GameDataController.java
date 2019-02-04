@@ -28,14 +28,14 @@ public class GameDataController {
     public String getCategories(@PathVariable(name = "categoryId") String categoryId) {
         log.info("Request arrived to {}", EQUIPMENT_CATEGORIES_MAPPING);
         String content = categoryService.get(categoryId + "_categories");
-        if(content == null){
+        if (content == null) {
             throw new NotFoundException("Category list not found with id " + categoryId);
         }
         return content;
     }
-    
+
     @GetMapping(EQUIPMENTS_OF_CATEGORY_MAPPING)
-    public Map<String, GeneralDescription> getElementsOfCategory(@PathVariable String category){
+    public Map<String, GeneralDescription> getElementsOfCategory(@PathVariable String category) {
         log.info("Request arrived to {} with argument {}", EQUIPMENTS_OF_CATEGORY_MAPPING, category);
         return gameDataFacade.getElementsOfCategory(EquipmentCategoryRequest.fromValue(category));
     }

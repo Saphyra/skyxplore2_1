@@ -33,7 +33,7 @@ public class Login {
         this.messageCodes = messageCodes;
     }
 
-    public void login(SeleniumUser user){
+    public void login(SeleniumUser user) {
         navigate.toIndexPage();
         sendRequest(user);
         validateSuccessfulLogin();
@@ -64,7 +64,7 @@ public class Login {
         validateLoginFailure();
     }
 
-    private void validateLoginFailure(){
+    private void validateLoginFailure() {
         assertEquals(HOST, driver.getCurrentUrl());
         notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_BAD_CREDENTIALS));
     }

@@ -13,7 +13,7 @@ public class UserNameTestHelper {
     private final WebDriver driver;
     private final IndexPage indexPage;
 
-    public void setUpForUserNameTest(SeleniumUser user){
+    public void setUpForUserNameTest(SeleniumUser user) {
         WebElement passwordElement = indexPage.getRegistrationPasswordField();
         passwordElement.sendKeys(user.getPassword());
 

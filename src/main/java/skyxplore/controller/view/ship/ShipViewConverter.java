@@ -13,7 +13,7 @@ public class ShipViewConverter {
     private final SlotViewConverter slotViewConverter;
     private final ShipService shipService;
 
-    public ShipView convertDomain(EquippedShip domain, EquippedSlot defenseSlot, EquippedSlot weaponSlot){
+    public ShipView convertDomain(EquippedShip domain, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {
         ShipView view = new ShipView();
         view.setShipType(domain.getShipType());
         view.setCoreHull(domain.getCoreHull());

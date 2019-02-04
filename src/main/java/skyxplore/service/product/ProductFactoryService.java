@@ -48,9 +48,9 @@ public class ProductFactoryService {
         List<Product> products = productDao.getFinishedProducts();
         log.info("Number of finished products: {}", products.size());
         products.forEach(product -> {
-            try{
+            try {
                 finishProduct(product);
-            }catch (Exception e){
+            } catch (Exception e) {
                 log.error("Error occurred during finishing product {}", product, e);
             }
         });

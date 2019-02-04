@@ -68,18 +68,14 @@ public class FactoryQueryServiceTest {
         keySet.add(MATERIAL_ID);
         when(materialService.keySet()).thenReturn(keySet);
         Material material = createMaterial();
-        when(materialService.get(MATERIAL_ID)).thenReturn(material);
         //WHEN
         Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
         verify(characterQueryService).findByCharacterId(CHARACTER_ID_1);
         verify(factoryDao).findByCharacterId(CHARACTER_ID_1);
-        verify(materialService).get(MATERIAL_KEY);
         assertEquals(1, result.size());
         assertTrue(result.containsKey(MATERIAL_ID));
         assertEquals(MATERIAL_ID, result.get(MATERIAL_ID).getMaterialId());
-        assertEquals(MATERIAL_NAME, result.get(MATERIAL_ID).getName());
-        assertEquals(MATERIAL_DESCRIPTION, result.get(MATERIAL_ID).getDescription());
         assertEquals(MATERIAL_AMOUNT, result.get(MATERIAL_ID).getAmount());
     }
 

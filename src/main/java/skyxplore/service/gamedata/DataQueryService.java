@@ -75,17 +75,17 @@ public class DataQueryService {
         return result;
     }
 
-    public FactoryData getFactoryData(String elementId){
+    public FactoryData getFactoryData(String elementId) {
         GeneralDescription element = getData(elementId);
-        if(element instanceof FactoryData){
+        if (element instanceof FactoryData) {
             return (FactoryData) element;
         }
         throw new IllegalArgumentException(elementId + " is not instance of FactoryData");
     }
 
-    public ShopData findBuyable(String elementId){
+    public ShopData findBuyable(String elementId) {
         GeneralDescription data = getData(elementId);
-        if(data instanceof ShopData){
+        if (data instanceof ShopData) {
             return (ShopData) data;
         }
         throw new IllegalArgumentException(elementId + " is not instance of ShopData.");

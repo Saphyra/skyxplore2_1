@@ -41,7 +41,7 @@ public class EmailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testExistingEmail(){
+    public void testExistingEmail() {
         ExistingEmailTest.builder()
             .registration(registration)
             .logout(logout)

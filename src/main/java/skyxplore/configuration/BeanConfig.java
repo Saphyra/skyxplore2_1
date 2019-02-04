@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public IdGenerator idGenerator(){
+    public IdGenerator idGenerator() {
         return new IdGenerator();
     }
 }

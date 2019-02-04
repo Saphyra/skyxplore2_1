@@ -266,7 +266,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testDeleteArchivedMail(){
+    public void testDeleteArchivedMail() {
         DeleteArchivedMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -279,7 +279,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBulkDeleteArchivedMails(){
+    public void testBulkDeleteArchivedMails() {
         BulkDeleteArchivedMailsTest.builder()
             .driver(driver)
             .communityTestInitializer(communityTestInitializer)
@@ -293,7 +293,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testMarkMailAsRead(){
+    public void testMarkMailAsRead() {
         MarkMailAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -305,7 +305,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBulkMarkMailsAsRead(){
+    public void testBulkMarkMailsAsRead() {
         BulkMarkMailsAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -318,7 +318,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testMarkMailAsUnread(){
+    public void testMarkMailAsUnread() {
         MarkMailAsUnreadTest.builder()
             .driver(driver)
             .communityTestInitializer(communityTestInitializer)
@@ -331,7 +331,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBulkMarkMailsAsUnread(){
+    public void testBulkMarkMailsAsUnread() {
         BulkMarkMailsAsUnreadTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -344,7 +344,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testReplyMail(){
+    public void testReplyMail() {
         ReplyMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)

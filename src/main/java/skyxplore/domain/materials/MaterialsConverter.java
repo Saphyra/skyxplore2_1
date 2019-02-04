@@ -17,17 +17,17 @@ public class MaterialsConverter extends ConverterBase<String, Materials> {
     private final ObjectMapper objectMapper;
     private final StringEncryptor stringEncryptor;
 
-    public Materials convertEntity(String entity, String key){
+    public Materials convertEntity(String entity, String key) {
         return convertEntity(stringEncryptor.decryptEntity(entity, key));
     }
 
-    public String convertDomain(Materials domain, String key){
+    public String convertDomain(Materials domain, String key) {
         return stringEncryptor.encryptEntity(convertDomain(domain), key);
     }
 
     @Override
     public Materials processEntityConversion(String entity) {
-        if(entity == null){
+        if (entity == null) {
             return null;
         }
         try {
@@ -39,7 +39,7 @@ public class MaterialsConverter extends ConverterBase<String, Materials> {
 
     @Override
     public String processDomainConversion(Materials domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         try {

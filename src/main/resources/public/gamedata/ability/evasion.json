@@ -1,12 +1,12 @@
 {
-    "id": "evasion",
-    "name": "Kitérés",
-    "description": "Növeli a hajó kitérési esélyét.",
-    "slot": "ability",
-    "energyusage": 200,
-    "active": 5,
-    "reload": 15,
-    "effect": {
-        "evasion": 35
-    }
+  "id": "evasion",
+  "name": "Kitérés",
+  "description": "Növeli a hajó kitérési esélyét.",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 5,
+  "reload": 15,
+  "effect": {
+    "evasion": 35
+  }
 }

@@ -36,7 +36,7 @@ public class ProductConverter extends ConverterBase<ProductEntity, Product> {
 
     @Override
     public ProductEntity processDomainConversion(Product domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         ProductEntity entity = new ProductEntity();

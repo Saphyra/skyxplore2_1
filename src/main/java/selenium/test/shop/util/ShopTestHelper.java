@@ -9,7 +9,7 @@ import selenium.logic.helper.ShopElementSearcher;
 public class ShopTestHelper {
     private final ShopElementSearcher shopElementSearcher;
 
-    public void addToCart(String itemId){
+    public void addToCart(String itemId) {
         ShopItem shopItem = shopElementSearcher.searchShopItemById(itemId);
         shopItem.addToCart();
     }

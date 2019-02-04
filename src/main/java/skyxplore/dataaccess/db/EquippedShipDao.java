@@ -24,9 +24,9 @@ public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShi
         this.slotDao = slotDao;
     }
 
-    public void deleteByCharacterId(String characterId){
+    public void deleteByCharacterId(String characterId) {
         EquippedShipEntity ship = repository.getByCharacterId(characterId);
-        if(ship == null){
+        if (ship == null) {
             throw new ShipNotFoundException("Ship not found for character " + characterId);
         }
         slotDao.deleteByShipId(ship.getShipId());
@@ -37,7 +37,7 @@ public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShi
 
     public EquippedShip getShipByCharacterId(String characterId) {
         return converter.convertEntity(
-                repository.getByCharacterId(characterId)
+            repository.getByCharacterId(characterId)
         );
     }
 }

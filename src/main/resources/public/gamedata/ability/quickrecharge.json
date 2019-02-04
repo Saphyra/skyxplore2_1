@@ -1,13 +1,13 @@
 {
-    "id": "quickrecharge",
-    "name": "Gyors újratöltés",
-    "description": "Csökkenti a közelben tartózkodó szövetségesek képességeinek töltési idejét.",
-    "slot": "ability",
-    "energyusage": 200,
-    "active": 10,
-    "reload": 20,
-    "effect": {
-        "range": 4,
-        "rechargerate": 50
-    }
+  "id": "quickrecharge",
+  "name": "Gyors újratöltés",
+  "description": "Csökkenti a közelben tartózkodó szövetségesek képességeinek töltési idejét.",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 10,
+  "reload": 20,
+  "effect": {
+    "range": 4,
+    "rechargerate": 50
+  }
 }

@@ -24,7 +24,7 @@ public class SeleniumCharacter {
         return crop(CHARACTER_NAME_PREFIX + randomUID(), CHARACTER_NAME_MAX_LENGTH);
     }
 
-    public SeleniumCharacter cloneCharacter(){
+    public SeleniumCharacter cloneCharacter() {
         return new SeleniumCharacter(characterName);
     }
 }

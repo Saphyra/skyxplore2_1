@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "credentials")
 public class CredentialsEntity {
     @Id
-    @Column(name ="user_id", length = 50)
+    @Column(name = "user_id", length = 50)
     private String userId;
 
     @Column(name = "user_name")

@@ -21,14 +21,14 @@ public class BuyItem {
     private final CartVerifier cartVerifier;
     private final NotificationValidator notificationValidator;
 
-    public BuyItem(WebDriver driver){
+    public BuyItem(WebDriver driver) {
         this.shopElementSearcher = new ShopElementSearcher(driver);
         this.costCounter = new CostCounter(driver, shopElementSearcher);
         this.cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter);
         this.notificationValidator = new NotificationValidator(driver);
     }
 
-    public void buyItem(String itemId, int amount){
+    public void buyItem(String itemId, int amount) {
         ShopItem equipmentToBuy = shopElementSearcher.searchShopItemById(itemId);
         int cost = equipmentToBuy.getCost();
         int currentMoney = costCounter.getCurrentMoney();

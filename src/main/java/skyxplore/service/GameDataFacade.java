@@ -20,7 +20,7 @@ public class GameDataFacade {
     private final CategoryQueryService categoryQueryService;
     private final DataQueryService dataQueryService;
 
-    public GeneralDescription getData(String id){
+    public GeneralDescription getData(String id) {
         return dataQueryService.getData(id);
     }
 

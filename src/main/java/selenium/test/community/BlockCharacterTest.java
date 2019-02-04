@@ -83,7 +83,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testFilterShouldNotShowAlreadyBlocked(){
+    public void testFilterShouldNotShowAlreadyBlocked() {
         FilterTestShouldNotShowAlreadyBlocked.builder()
             .blockTestHelper(blockTestHelper)
             .communityTestHelper(communityTestHelper)
@@ -104,7 +104,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldNotSendFriendRequest(){
+    public void testBlockCharacterShouldNotSendFriendRequest() {
         BlockCharacterTestShouldNotSendFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -115,7 +115,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldDeleteFriendRequest(){
+    public void testBlockCharacterShouldDeleteFriendRequest() {
         BlockCharacterTestShouldDeleteFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -127,7 +127,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldDeleteFriendship(){
+    public void testBlockCharacterShouldDeleteFriendship() {
         BlockCharacterTestShouldDeleteFriendship.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -139,7 +139,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldUnableToReplyMail(){
+    public void testBlockCharacterShouldUnableToReplyMail() {
         BlockCharacterShouldUnableReplyMail.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -153,7 +153,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testUnblockCharacter(){
+    public void testUnblockCharacter() {
         UnblockCharacterTest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)

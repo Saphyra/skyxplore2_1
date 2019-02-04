@@ -37,16 +37,16 @@ public class EquippedShip {
         }
     }
 
-    public void addConnectorSlot(Integer extraSlot){
+    public void addConnectorSlot(Integer extraSlot) {
         connectorSlot += extraSlot;
     }
 
-    public void removeConnectorSlot(Integer slot, SkyXpCharacter character, ExtenderService extenderService){
+    public void removeConnectorSlot(Integer slot, SkyXpCharacter character, ExtenderService extenderService) {
         connectorSlot -= slot;
 
-        while(connectorSlot < connectorEquipped.size()){
-            for(String item : connectorEquipped){
-                if(extenderService.get(item) == null){
+        while (connectorSlot < connectorEquipped.size()) {
+            for (String item : connectorEquipped) {
+                if (extenderService.get(item) == null) {
                     removeConnector(item);
                     character.addEquipment(item);
                     break;

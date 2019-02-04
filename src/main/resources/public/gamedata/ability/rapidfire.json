@@ -1,12 +1,12 @@
 {
-    "id": "rapidfire",
-    "name": "Gyorstüzelés",
-    "description": "Növeli a fegyverek támadási sebességét.",
-    "slot": "ability",
-    "energyusage": 300,
-    "active": 5,
-    "reload": 20,
-    "effect": {
-        "attackspeed": 50
-    }
+  "id": "rapidfire",
+  "name": "Gyorstüzelés",
+  "description": "Növeli a fegyverek támadási sebességét.",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 5,
+  "reload": 20,
+  "effect": {
+    "attackspeed": 50
+  }
 }

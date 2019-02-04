@@ -51,8 +51,8 @@ public class ReadMailTest {
 
     private Mail getMail(SeleniumCharacter character) {
         return mailTestHelper.getReceivedMails().stream()
-                .filter(mail -> mail.getSender().equals(character.getCharacterName()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Received mail not found."));
+            .filter(mail -> mail.getSender().equals(character.getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Received mail not found."));
     }
 }

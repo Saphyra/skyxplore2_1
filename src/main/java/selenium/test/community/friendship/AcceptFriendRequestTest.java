@@ -55,7 +55,6 @@ public class AcceptFriendRequestTest {
     }
 
 
-
     private void verifySentFriendRequestDisappeared(SeleniumCharacter otherCharacter) {
         communityPage.getSentFriendRequestsPageButton().click();
         assertFalse(
