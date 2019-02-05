@@ -16,7 +16,7 @@
     }
     
     function loadItem(itemId){
-        const response = dao.sendRequest(HttpMethod.GET, "gamedata/" + itemId + ".json");
+        const response = dao.sendRequest(HttpMethod.GET, "gamedata/items/" + itemId + ".json");
         if(response.status == ResponseStatus.OK){
             return JSON.parse(response.body);
         }else{

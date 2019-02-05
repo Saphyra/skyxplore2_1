@@ -16,28 +16,6 @@
         - IllegalState exception, if characterId cannot be found.
     */
     function showEquipment(){
-        function showSlots(containerId, slotNum, equipped){
-            try{
-                
-                
-                
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-            }
-            
-            function createSlotElement(){
-                try{
-                    const element = document.createElement("DIV");
-                        element.classList.add("slot");
-                    return element;
-                }catch(err){
-                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                    logService.log(message, "error");
-                }
-            }
-        }
-        
         function fillShipDetails(shipData){
             try{
                 const container = document.getElementById("shipdetails");

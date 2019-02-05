@@ -1,4 +1,5 @@
 (function EquipmentService(){
+    scriptLoader.loadScript("js/common/title_service.js");
     events.LOAD_EQUIPMENT = "load_equipment";
     
     eventProcessor.registerProcessor(new EventProcessor(
@@ -43,7 +44,7 @@
                 
                 const slotElement = createSlotElement();
                     slotElement.innerHTML = equipmentData.name;
-                    slotElement.title = titleService.getTitleForOverview(equipmentData.id);
+                    slotElement.title = titleService.assembleTitleOfItem(equipmentData);
                 container.appendChild(slotElement);
                 actual++;
             }
@@ -52,6 +53,12 @@
                 const emptySlot = createSlotElement();
                     emptySlot.innerHTML = "Üres";
                 container.appendChild(emptySlot);
+            }
+            
+            function createSlotElement(){
+                const element = document.createElement("DIV");
+                    element.classList.add("slot");
+                return element;
             }
         }
     }
