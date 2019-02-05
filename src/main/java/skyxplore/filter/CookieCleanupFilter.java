@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static skyxplore.controller.PageController.CHARACTER_SELECT_MAPPING;
+import static skyxplore.controller.PageController.INDEX_MAPPING;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @Component
@@ -29,11 +30,15 @@ public class CookieCleanupFilter extends OncePerRequestFilter {
         log.debug("CookieCleanupFilter");
         String path = request.getRequestURI();
 
-        if (pathMatcher.match(CHARACTER_SELECT_MAPPING, path)) {
+        if (isCleanupNeeded(path)) {
             log.info("Cleaning up characterCookie...");
             cookieUtil.setCookie(response, COOKIE_CHARACTER_ID, "");
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isCleanupNeeded(String path) {
+        return pathMatcher.match(CHARACTER_SELECT_MAPPING, path) || pathMatcher.match(INDEX_MAPPING, path);
     }
 }
