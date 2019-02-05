@@ -1,8 +1,8 @@
-(function TitleService(){
+(function EquipmentLabelService(){
     scriptLoader.loadScript("js/common/localization/items.js");
     scriptLoader.loadScript("js/common/localization/description.js");
 
-    window.titleService = new function(){
+    window.equipmentLabelService = new function(){
         this.assembleTitleOfItem = assembleTitleOfItem;
     }
     

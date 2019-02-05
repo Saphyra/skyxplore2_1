@@ -1,5 +1,5 @@
 (function EquipmentService(){
-    scriptLoader.loadScript("js/common/title_service.js");
+    scriptLoader.loadScript("js/common/equipment_label_service.js");
     scriptLoader.loadScript("js/common/localization/items.js");
 
     events.LOAD_EQUIPMENT = "load_equipment";
@@ -46,7 +46,7 @@
                 
                 const slotElement = createSlotElement();
                     slotElement.innerHTML = Items.getItem(equipmentData.id).name;
-                    slotElement.title = titleService.assembleTitleOfItem(equipmentData);
+                    slotElement.title = equipmentLabelService.assembleTitleOfItem(equipmentData);
                 container.appendChild(slotElement);
                 actual++;
             }
