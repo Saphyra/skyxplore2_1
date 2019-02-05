@@ -1,16 +1,18 @@
 (function EquipmentLabelService(){
+    scriptLoader.loadScript("js/common/equipment/item_cache.js");
     scriptLoader.loadScript("js/common/localization/items.js");
     scriptLoader.loadScript("js/common/localization/description.js");
 
     window.equipmentLabelService = new function(){
         this.assembleTitleOfItem = assembleTitleOfItem;
+        this.createShipDetails = createShipDetails;
     }
     
-    function assembleTitleOfItem(data){
-        if(data == null || data == undefined){
+    function assembleTitleOfItem(itemId){
+        if(itemId == null || itemId == undefined || typeof itemId !== "string"){
             throwException("IllegalArgument", "data must not be null or undefined");
         }
-
+        const data = itemCache.get(itemId);
         const itemName = Items.getItem(data.id);
 
         let title = "";
@@ -80,5 +82,86 @@
         }
         
         return title;
+    }
+    
+    function createShipDetails(shipData){
+        const container = document.createElement("DIV");
+            
+            const shipDetailsContainer = document.createElement("DIV");
+                shipDetailsContainer.classList.add("ship-details-container");
+                shipDetailsContainer.title = assembleTitleOfItem(shipData.shipType);
+                
+                const coreHullContainer = document.createElement("DIV");
+                    coreHullContainer.innerHTML = Description.getDescription("corehull") + ": " + shipData.coreHull;
+            shipDetailsContainer.appendChild(coreHullContainer);
+            
+                const energyContainer = document.createElement("DIV");
+                    const energy = countEnergy(shipData.connectorEquipped);
+                    const energyRegeneration = countEnergyRegen(shipData.connectorEquipped);
+                    energyContainer.innerHTML = Description.getDescription("energy") + ": " + energy + " - " + Description.getDescription("energyregen") + ": " + energyRegeneration;
+            shipDetailsContainer.appendChild(energyContainer);
+            
+                const storageContainer = document.createElement("DIV");
+                    const storage = countStorage(shipData.connectorEquipped);
+                    storageContainer.innerHTML = Description.getDescription("storage") + ": " + storage;
+            shipDetailsContainer.appendChild(storageContainer);
+            
+        container.appendChild(shipDetailsContainer);
+        
+                const abilityTitle = document.createElement("DIV");
+                    abilityTitle.innerHTML = "Képességek";
+                    abilityTitle.classList.add("ship-details-ability-title");
+            container.appendChild(abilityTitle);
+                
+                const abilityContainer = document.createElement("DIV");
+                    abilityContainer.classList.add("ship-details-ability-container");
+                    
+                    for(let aindex in shipData.ability){
+                        const abilityData = itemCache.get(shipData.ability[aindex]);
+                        const abilityElement = document.createElement("DIV");
+                            abilityElement.classList.add("ship-details-ability");
+                            abilityElement.innerHTML = Items.getItem(abilityData.id).name;
+                            abilityElement.title = assembleTitleOfItem(abilityData.id);
+                        abilityContainer.appendChild(abilityElement);
+                    }
+            container.appendChild(abilityContainer);
+            
+        return container;
+        
+        function countEnergy(connectors){
+            let result = 0;
+            for(let cindex in connectors){
+                const connectorData = itemCache.get(connectors[cindex]);
+                if(connectorData.type == "battery"){
+                    result += connectorData.capacity;
+                }
+            }
+            
+            return result;
+        }
+        
+        function countEnergyRegen(connectors){
+            let result = 0;
+            for(let cindex in connectors){
+                const connectorData = itemCache.get(connectors[cindex]);
+                if(connectorData.type == "generator"){
+                    result += connectorData.energyrecharge;
+                }
+            }
+            
+            return result;
+        }
+        
+        function countStorage(connectors){
+            let result = 0;
+            for(let cindex in connectors){
+                const connectorData = itemCache.get(connectors[cindex]);
+                if(connectorData.type == "storage"){
+                    result += connectorData.capacity;
+                }
+            }
+            
+            return result;
+        }
     }
 })();

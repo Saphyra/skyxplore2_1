@@ -21,5 +21,7 @@
   "critical-rate": "Kritikus találati esély",
   "hull-damage": "Burkolatsebzés",
   "shield-damage": "Pajzs sebzés",
-  "accuracy": "Pontosság"
+  "accuracy": "Pontosság",
+  "energy": "Energia",
+  "storage": "Raktér"
 }

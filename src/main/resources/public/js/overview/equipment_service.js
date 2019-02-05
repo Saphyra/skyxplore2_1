@@ -1,5 +1,5 @@
 (function EquipmentService(){
-    scriptLoader.loadScript("js/common/equipment_label_service.js");
+    scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     scriptLoader.loadScript("js/common/localization/items.js");
 
     events.LOAD_EQUIPMENT = "load_equipment";
@@ -42,11 +42,11 @@
             
             let actual = 0;
             for(let eindex in equipped){
-                const equipmentData = itemCache.get(equipped[eindex]);
+                const itemId = equipped[eindex];
                 
                 const slotElement = createSlotElement();
-                    slotElement.innerHTML = Items.getItem(equipmentData.id).name;
-                    slotElement.title = equipmentLabelService.assembleTitleOfItem(equipmentData);
+                    slotElement.innerHTML = Items.getItem(itemId).name;
+                    slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
                 container.appendChild(slotElement);
                 actual++;
             }
@@ -62,6 +62,10 @@
                     element.classList.add("slot");
                 return element;
             }
+        }
+        
+        function fillShipDetails(shipData){
+            document.getElementById("ship-details").appendChild(equipmentLabelService.createShipDetails(shipData));
         }
     }
 })();

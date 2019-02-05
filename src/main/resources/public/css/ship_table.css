@@ -40,3 +40,25 @@
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
 }
+
+.ship-details-container{
+    border-bottom: 2px ridge white;
+    font-size: 1.25rem;
+    padding: 0.25rem;
+}
+
+.ship-details-ability-title{
+    font-size: 1.5rem;
+}
+
+.ship-details-ability-container{
+    display: inline-block;
+    text-align: left;
+}
+
+.ship-details-ability{
+    border: 2px ridge white;
+    font-size: 1.25rem;
+    margin: 0.25rem;
+    padding: 0.25rem;
+}
