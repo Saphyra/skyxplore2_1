@@ -386,7 +386,7 @@ public class TestUtils {
         return entity;
     }
 
-    public static ShipView createShipView(){
+    public static ShipView createShipView() {
         return ShipView.builder()
             .shipType(EQUIPPED_SHIP_TYPE)
             .coreHull(DATA_SHIP_COREHULL)

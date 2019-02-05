@@ -1,11 +1,11 @@
 {
-    "id": "shieldovercharge",
-    "slot": "ability",
-    "energyusage": 0,
-    "active": 0,
-    "reload": -1,
-    "effect": {
-        "shield": 20
-    },
-    "type": "ability"
+  "id": "shieldovercharge",
+  "slot": "ability",
+  "energyusage": 0,
+  "active": 0,
+  "reload": -1,
+  "effect": {
+    "shield": 20
+  },
+  "type": "ability"
 }

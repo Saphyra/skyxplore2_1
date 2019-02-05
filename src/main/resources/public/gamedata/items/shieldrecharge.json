@@ -1,13 +1,13 @@
 {
-    "id": "shieldrecharge",
-    "slot": "ability",
-    "energyusage": 300,
-    "active": 1,
-    "reload": 20,
-    "effect": {
-        "staticrecharge": 10000,
-        "relativerecharge": 10,
-        "range": 4
-    },
-    "type": "ability"
+  "id": "shieldrecharge",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 1,
+  "reload": 20,
+  "effect": {
+    "staticrecharge": 10000,
+    "relativerecharge": 10,
+    "range": 4
+  },
+  "type": "ability"
 }

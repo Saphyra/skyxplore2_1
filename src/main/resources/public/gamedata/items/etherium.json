@@ -1,6 +1,6 @@
 {
-    "id": "etherium",
-    "slot": "material",
-    "buildable": false,
-    "type": "material"
+  "id": "etherium",
+  "slot": "material",
+  "buildable": false,
+  "type": "material"
 }

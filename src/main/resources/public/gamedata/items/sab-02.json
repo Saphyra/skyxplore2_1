@@ -1,42 +1,42 @@
 {
-    "id": "sab-02",
-    "corehull": 1500000,
-    "connector": 27,
-    "defense": {
-        "front": 8,
-        "side": 8,
-        "back": 6
-    },
-    "weapon": {
-        "front": 7,
-        "side": 4,
-        "back": 3
-    },
-    "ability": [
-        "abilityblock",
-        "shieldregenerationblock",
-        "energyregenerationblock",
-        "blind",
-        "freeze",
-        "disableweapons"
-    ],
-    "constructiontime": 64800,
-    "buildprice": 64800,
-    "materials": {
-        "cable": 120,
-        "condensator": 75,
-        "energycell": 105,
-        "hullplate": 60,
-        "etherium": 600,
-        "mithril": 600,
-        "duranium": 600,
-        "uridium": 750,
-        "xebryum": 900
-    },
-    "type": "ship",
-    "slot": "ship",
-    "level": 2,
-    "score": 15,
-    "buyprice": 9000000,
-    "sellprice": 3000000
+  "id": "sab-02",
+  "corehull": 1500000,
+  "connector": 27,
+  "defense": {
+    "front": 8,
+    "side": 8,
+    "back": 6
+  },
+  "weapon": {
+    "front": 7,
+    "side": 4,
+    "back": 3
+  },
+  "ability": [
+    "abilityblock",
+    "shieldregenerationblock",
+    "energyregenerationblock",
+    "blind",
+    "freeze",
+    "disableweapons"
+  ],
+  "constructiontime": 64800,
+  "buildprice": 64800,
+  "materials": {
+    "cable": 120,
+    "condensator": 75,
+    "energycell": 105,
+    "hullplate": 60,
+    "etherium": 600,
+    "mithril": 600,
+    "duranium": 600,
+    "uridium": 750,
+    "xebryum": 900
+  },
+  "type": "ship",
+  "slot": "ship",
+  "level": 2,
+  "score": 15,
+  "buyprice": 9000000,
+  "sellprice": 3000000
 }

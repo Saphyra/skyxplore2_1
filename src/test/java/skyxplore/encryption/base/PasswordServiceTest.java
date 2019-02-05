@@ -17,7 +17,7 @@ public class PasswordServiceTest {
     private PasswordService underTest;
 
     @Test
-    public void testShouldHashAndReturnTrueWhenSamePassword(){
+    public void testShouldHashAndReturnTrueWhenSamePassword() {
         //GIVEN
         String hashed = underTest.hashPassword(USER_PASSWORD);
         //WHEN
@@ -27,7 +27,7 @@ public class PasswordServiceTest {
     }
 
     @Test
-    public void testShouldHashAndReturnFalseWhenDifferentPassword(){
+    public void testShouldHashAndReturnFalseWhenDifferentPassword() {
         //GIVEN
         String hashed = underTest.hashPassword(USER_PASSWORD);
         //WHEN

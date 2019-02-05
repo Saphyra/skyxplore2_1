@@ -1,6 +1,6 @@
 {
-    "id": "mithril",
-    "slot": "material",
-    "buildable": false,
-    "type": "material"
+  "id": "mithril",
+  "slot": "material",
+  "buildable": false,
+  "type": "material"
 }

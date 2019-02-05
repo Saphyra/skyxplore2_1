@@ -127,7 +127,7 @@ public class CharacterControllerTest {
     }
 
     @Test
-    public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse(){
+    public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse() {
         //GIVEN
         when(characterFacade.getMoneyOfCharacter(CHARACTER_ID_1)).thenReturn(CHARACTER_MONEY);
         //WHEN
@@ -149,7 +149,7 @@ public class CharacterControllerTest {
     }
 
     @Test
-    public void testRenameCharacterShouldCallFacadeAndInvalidateCache(){
+    public void testRenameCharacterShouldCallFacadeAndInvalidateCache() {
         //GIVEN
         RenameCharacterRequest request = createRenameCharacterRequest();
 
@@ -167,7 +167,7 @@ public class CharacterControllerTest {
     }
 
     @Test
-    public void testSelectCharacterShouldCallFacadeAndSetCookie(){
+    public void testSelectCharacterShouldCallFacadeAndSetCookie() {
         //WHEN
         underTest.selectCharacter(CHARACTER_ID_1, USER_ID, httpServletResponse);
         //THEN

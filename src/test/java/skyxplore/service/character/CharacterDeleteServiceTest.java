@@ -18,16 +18,16 @@ import skyxplore.domain.character.SkyXpCharacter;
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterDeleteServiceTest {
     @Mock
-    private  CharacterDao characterDao;
+    private CharacterDao characterDao;
 
     @Mock
-    private  CharacterQueryService characterQueryService;
+    private CharacterQueryService characterQueryService;
 
     @InjectMocks
     private CharacterDeleteService underTest;
 
     @Test
-    public void testDeleteCharacterShouldDelete(){
+    public void testDeleteCharacterShouldDelete() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterQueryService.findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID)).thenReturn(character);

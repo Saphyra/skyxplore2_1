@@ -33,13 +33,13 @@ public class ChangeEmailServiceTest {
     private PasswordService passwordService;
 
     @Mock
-    private  CredentialsService credentialsService;
+    private CredentialsService credentialsService;
 
     @Mock
-    private  UserQueryService userQueryService;
+    private UserQueryService userQueryService;
 
     @Mock
-    private  UserDao userDao;
+    private UserDao userDao;
 
     @Mock
     private EmailCache emailCache;
@@ -48,7 +48,7 @@ public class ChangeEmailServiceTest {
     private ChangeEmailService underTest;
 
     @Test(expected = EmailAlreadyExistsException.class)
-    public void testChangeEmailShouldThrowExceptionWhenEmailExists(){
+    public void testChangeEmailShouldThrowExceptionWhenEmailExists() {
         //GIVEN
         when(userQueryService.isEmailExists(USER_NEW_EMAIL)).thenReturn(true);
         //WHEN
@@ -56,7 +56,7 @@ public class ChangeEmailServiceTest {
     }
 
     @Test(expected = BadCredentialsException.class)
-    public void testChangeEmailShouldThrowExceptionWhenBadPassword(){
+    public void testChangeEmailShouldThrowExceptionWhenBadPassword() {
         //GIVEN
         ChangeEmailRequest request = createChangeEmailRequest();
         request.setPassword(USER_FAKE_PASSWORD);
@@ -71,7 +71,7 @@ public class ChangeEmailServiceTest {
     }
 
     @Test
-    public void testChangeEmailShouldSave(){
+    public void testChangeEmailShouldSave() {
         //GIVEN
         ChangeEmailRequest request = createChangeEmailRequest();
 

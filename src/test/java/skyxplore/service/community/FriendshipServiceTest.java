@@ -108,7 +108,7 @@ public class FriendshipServiceTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAddFriendRequestShouldThrowExceptionWhenOwnCharacter(){
+    public void testAddFriendRequestShouldThrowExceptionWhenOwnCharacter() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, FRIEND_ID)).thenReturn(Collections.emptyList());
         when(friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID_1, FRIEND_ID)).thenReturn(false);
@@ -181,7 +181,7 @@ public class FriendshipServiceTest {
     }
 
     @Test
-    public void testRemoveContactsBetweenShouldDelete(){
+    public void testRemoveContactsBetweenShouldDelete() {
         //GIVEN
         Friendship friendship = createFriendship();
         when(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(friendship));

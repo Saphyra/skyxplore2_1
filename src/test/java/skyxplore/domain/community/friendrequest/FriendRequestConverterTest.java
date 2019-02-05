@@ -15,7 +15,7 @@ public class FriendRequestConverterTest {
     private FriendRequestConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNull(){
+    public void testConvertEntityShouldReturnNull() {
         //GIVEN
         FriendRequestEntity entity = null;
         //WHEN
@@ -25,7 +25,7 @@ public class FriendRequestConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldConvert(){
+    public void testConvertEntityShouldConvert() {
         //GIVEN
         FriendRequestEntity entity = createFriendRequestEntity();
         //WHEN
@@ -37,7 +37,7 @@ public class FriendRequestConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldConvert(){
+    public void testConvertDomainShouldConvert() {
         //GIVEN
         FriendRequest request = createFriendRequest();
         //WHEN

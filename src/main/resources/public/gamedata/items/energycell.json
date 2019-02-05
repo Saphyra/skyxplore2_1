@@ -1,11 +1,11 @@
 {
-    "id": "energycell",
-    "slot": "material",
-    "buildable": true,
-    "materials": {
-        "xebryum": 5,
-        "mithril": 2
-    },
-    "constructiontime": 10,
-    "type": "material"
+  "id": "energycell",
+  "slot": "material",
+  "buildable": true,
+  "materials": {
+    "xebryum": 5,
+    "mithril": 2
+  },
+  "constructiontime": 10,
+  "type": "material"
 }

@@ -13,7 +13,7 @@ public class DateTimeUtilTest {
     private DateTimeUtil underTest = new DateTimeUtil();
 
     @Test
-    public void testConvertEntityShouldReturnDomain(){
+    public void testConvertEntityShouldReturnDomain() {
         //WHEN
         OffsetDateTime result = underTest.convertEntity(PRODUCT_END_TIME_EPOCH);
         //THEN
@@ -21,7 +21,7 @@ public class DateTimeUtilTest {
     }
 
     @Test
-    public void testConvertEntityShouldReturnNull(){
+    public void testConvertEntityShouldReturnNull() {
         //GIVEN
         Long entity = null;
         //WHEN
@@ -31,7 +31,7 @@ public class DateTimeUtilTest {
     }
 
     @Test
-    public void testConvertDomainShouldReturnEntity(){
+    public void testConvertDomainShouldReturnEntity() {
         //WHEN
         Long result = underTest.convertDomain(PRODUCT_END_TIME);
         //THEN
@@ -39,7 +39,7 @@ public class DateTimeUtilTest {
     }
 
     @Test
-    public void testConvertDomainShouldReturnNull(){
+    public void testConvertDomainShouldReturnNull() {
         //GIVEN
         OffsetDateTime domain = null;
         //WHEN

@@ -73,7 +73,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testFindUserByUserNameShouldReturnEmptyWhenCredentialsNotFound(){
+    public void testFindUserByUserNameShouldReturnEmptyWhenCredentialsNotFound() {
         //GIVEN
         when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.empty());
         //WHEN
@@ -84,7 +84,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testFIndUserByUserName(){
+    public void testFIndUserByUserName() {
         //GIVEN
         when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.of(new SkyXpCredentials(USER_ID, USER_NAME, USER_PASSWORD)));
         //WHEN
@@ -94,7 +94,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testDeleteAccessToken(){
+    public void testDeleteAccessToken() {
         //WHEN
         underTest.deleteAccessToken(AccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build());
         //THEN
@@ -102,7 +102,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testDeleteAccessTokenByUserId(){
+    public void testDeleteAccessTokenByUserId() {
         //WHEN
         underTest.deleteAccessTokenByUserId(USER_ID);
         //THEN
@@ -110,7 +110,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testDeleteExpiredAccessTokens(){
+    public void testDeleteExpiredAccessTokens() {
         //GIVEN
         OffsetDateTime expiration = OffsetDateTime.now(ZoneOffset.UTC);
         //WHEN
@@ -120,7 +120,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testFindAccessTokenByTokenId(){
+    public void testFindAccessTokenByTokenId() {
         //GIVEN
         SkyXpAccessToken skyXpAccessToken = SkyXpAccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
         Optional<SkyXpAccessToken> optionalSkyXpAccessToken = Optional.of(skyXpAccessToken);
@@ -136,7 +136,7 @@ public class AuthDaoImplTest {
     }
 
     @Test
-    public void testSaveAccessToken(){
+    public void testSaveAccessToken() {
         //GIVEN
         AccessToken accessToken = AccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
 

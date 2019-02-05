@@ -1,20 +1,20 @@
 {
-    "id": "shi-lchr-01",
-    "capacity": 50000,
-    "regeneration": 5000,
-    "energyusage": 75,
-    "constructiontime": 900,
-    "buildprice": 900,
-    "materials": {
-        "uridium": 15,
-        "cable": 2,
-        "energycell": 3,
-        "hullplate": 2
-    },
-    "type": "shield",
-    "slot": "defense",
-    "level": 1,
-    "score": 1,
-    "buyprice": 22500,
-    "sellprice": 7500
+  "id": "shi-lchr-01",
+  "capacity": 50000,
+  "regeneration": 5000,
+  "energyusage": 75,
+  "constructiontime": 900,
+  "buildprice": 900,
+  "materials": {
+    "uridium": 15,
+    "cable": 2,
+    "energycell": 3,
+    "hullplate": 2
+  },
+  "type": "shield",
+  "slot": "defense",
+  "level": 1,
+  "score": 1,
+  "buyprice": 22500,
+  "sellprice": 7500
 }

@@ -1,6 +1,6 @@
 {
-    "id": "adamantium",
-    "slot": "material",
-    "buildable": false,
-    "type": "material"
+  "id": "adamantium",
+  "slot": "material",
+  "buildable": false,
+  "type": "material"
 }

@@ -39,7 +39,7 @@ public class FactoryQueryServiceTest {
     private FactoryQueryService underTest;
 
     @Test(expected = FactoryNotFoundException.class)
-    public void testFindFactoryOfCharacterValidatedShouldThrowExceptionWhenNotFound(){
+    public void testFindFactoryOfCharacterValidatedShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(factoryDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(null);
         //WHEN
@@ -47,7 +47,7 @@ public class FactoryQueryServiceTest {
     }
 
     @Test
-    public void testFindFactoryOfCharacterValidatedShouldReturn(){
+    public void testFindFactoryOfCharacterValidatedShouldReturn() {
         //GIVEN
         Factory factory = createFactory();
         when(factoryDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(factory);
@@ -59,7 +59,7 @@ public class FactoryQueryServiceTest {
     }
 
     @Test
-    public void testGetMaterialsShouldReturn(){
+    public void testGetMaterialsShouldReturn() {
         //GIVEN
         Factory factory = createFactory();
         when(factoryDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(factory);
@@ -80,7 +80,7 @@ public class FactoryQueryServiceTest {
     }
 
     @Test
-    public void testGetFactoryIdOfCharacterShouldReturn(){
+    public void testGetFactoryIdOfCharacterShouldReturn() {
         //GIVEN
         Factory factory = createFactory();
         when(factoryDao.findByCharacterId(CHARACTER_ID_1)).thenReturn(factory);
@@ -89,7 +89,7 @@ public class FactoryQueryServiceTest {
     }
 
     @Test(expected = FactoryNotFoundException.class)
-    public void testFindByFactoryIdShouldThrowExceptionWhenNotFound(){
+    public void testFindByFactoryIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(factoryDao.findById(FACTORY_ID_1)).thenReturn(Optional.empty());
         //WHEN
@@ -97,7 +97,7 @@ public class FactoryQueryServiceTest {
     }
 
     @Test
-    public void testFindByFactoryIdShouldReturn(){
+    public void testFindByFactoryIdShouldReturn() {
         //GIVEN
         Factory factory = createFactory();
         when(factoryDao.findById(FACTORY_ID_1)).thenReturn(Optional.of(factory));

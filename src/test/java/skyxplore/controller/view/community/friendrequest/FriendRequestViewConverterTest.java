@@ -23,7 +23,7 @@ public class FriendRequestViewConverterTest {
     private FriendRequestViewConverter underTest;
 
     @Test
-    public void testConvertDomainShouldConvert(){
+    public void testConvertDomainShouldConvert() {
         //GIVEN
         FriendRequest friendRequest = createFriendRequest();
 

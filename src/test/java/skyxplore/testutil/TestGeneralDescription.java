@@ -10,7 +10,7 @@ import static skyxplore.testutil.TestUtils.DATA_SLOT;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class TestGeneralDescription extends GeneralDescription {
-    public TestGeneralDescription(){
+    public TestGeneralDescription() {
         setId(DATA_ELEMENT);
         setSlot(DATA_SLOT);
     }

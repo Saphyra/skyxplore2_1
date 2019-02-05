@@ -1,21 +1,21 @@
 {
-    "id": "wex-03",
-    "extendedslot": "weapon",
-    "extendednum": 4,
-    "constructiontime": 7200,
-    "buildprice": 7200,
-    "materials": {
-        "cable": 12,
-        "condensator": 36,
-        "energycell": 18,
-        "hullplate": 18,
-        "adamantium": 360,
-        "mithril": 180
-    },
-    "type": "extender",
-    "slot": "connector",
-    "level": 3,
-    "score": 0,
-    "buyprice": 1350000,
-    "sellprice": 450000
+  "id": "wex-03",
+  "extendedslot": "weapon",
+  "extendednum": 4,
+  "constructiontime": 7200,
+  "buildprice": 7200,
+  "materials": {
+    "cable": 12,
+    "condensator": 36,
+    "energycell": 18,
+    "hullplate": 18,
+    "adamantium": 360,
+    "mithril": 180
+  },
+  "type": "extender",
+  "slot": "connector",
+  "level": 3,
+  "score": 0,
+  "buyprice": 1350000,
+  "sellprice": 450000
 }

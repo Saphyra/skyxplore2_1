@@ -19,6 +19,7 @@ import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.DATA_CONNECTOR;
 import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
 import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ID;
+
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedSlotTest {
@@ -81,7 +82,7 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAddFrontShouldThrowExceptionWhenFull(){
+    public void testAddFrontShouldThrowExceptionWhenFull() {
         //GIVEN
         underTest.setFrontSlot(1);
         //THEN
@@ -90,7 +91,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddFrontShouldAdd(){
+    public void testAddFrontShouldAdd() {
         //GIVEN
         underTest.setFrontSlot(1);
         //WHEN
@@ -100,10 +101,10 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddFrontsShouldAdd(){
+    public void testAddFrontsShouldAdd() {
         //GIVEN
         underTest.setFrontSlot(2);
-        List<String> elements = Arrays.asList(DATA_ELEMENT,DATA_ELEMENT);
+        List<String> elements = Arrays.asList(DATA_ELEMENT, DATA_ELEMENT);
         //WHEN
         underTest.addFront(elements);
         //THEN
@@ -111,12 +112,12 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testRemoveFrontShouldThrowExceptionWhenDoesNotConatins(){
+    public void testRemoveFrontShouldThrowExceptionWhenDoesNotConatins() {
         underTest.removeFront(DATA_ELEMENT);
     }
 
     @Test
-    public void testRemoveFrontShouldRemove(){
+    public void testRemoveFrontShouldRemove() {
         //GIVEN
         underTest.setFrontSlot(2);
         underTest.addFront(DATA_ELEMENT);
@@ -129,7 +130,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testGetFrontShouldReturnCopy(){
+    public void testGetFrontShouldReturnCopy() {
         //GIVEN
         underTest.setFrontSlot(1);
         underTest.addFront(DATA_ELEMENT);
@@ -141,7 +142,7 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAddLeftShouldThrowExceptionWhenFull(){
+    public void testAddLeftShouldThrowExceptionWhenFull() {
         //GIVEN
         underTest.setLeftSlot(1);
         //THEN
@@ -150,7 +151,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddLeftShouldAdd(){
+    public void testAddLeftShouldAdd() {
         //GIVEN
         underTest.setLeftSlot(1);
         //WHEN
@@ -160,10 +161,10 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddLeftsShouldAdd(){
+    public void testAddLeftsShouldAdd() {
         //GIVEN
         underTest.setLeftSlot(2);
-        List<String> elements = Arrays.asList(DATA_ELEMENT,DATA_ELEMENT);
+        List<String> elements = Arrays.asList(DATA_ELEMENT, DATA_ELEMENT);
         //WHEN
         underTest.addLeft(elements);
         //THEN
@@ -171,12 +172,12 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testRemoveLeftShouldThrowExceptionWhenDoesNotConatins(){
+    public void testRemoveLeftShouldThrowExceptionWhenDoesNotConatins() {
         underTest.removeLeft(DATA_ELEMENT);
     }
 
     @Test
-    public void testRemoveLeftShouldRemove(){
+    public void testRemoveLeftShouldRemove() {
         //GIVEN
         underTest.setLeftSlot(2);
         underTest.addLeft(DATA_ELEMENT);
@@ -189,7 +190,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testGetLeftShouldReturnCopy(){
+    public void testGetLeftShouldReturnCopy() {
         //GIVEN
         underTest.setLeftSlot(1);
         underTest.addLeft(DATA_ELEMENT);
@@ -201,7 +202,7 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAddRightShouldThrowExceptionWhenFull(){
+    public void testAddRightShouldThrowExceptionWhenFull() {
         //GIVEN
         underTest.setRightSlot(1);
         //THEN
@@ -210,7 +211,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddRightShouldAdd(){
+    public void testAddRightShouldAdd() {
         //GIVEN
         underTest.setRightSlot(1);
         //WHEN
@@ -220,10 +221,10 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddRightsShouldAdd(){
+    public void testAddRightsShouldAdd() {
         //GIVEN
         underTest.setRightSlot(2);
-        List<String> elements = Arrays.asList(DATA_ELEMENT,DATA_ELEMENT);
+        List<String> elements = Arrays.asList(DATA_ELEMENT, DATA_ELEMENT);
         //WHEN
         underTest.addRight(elements);
         //THEN
@@ -231,12 +232,12 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testRemoveRightShouldThrowExceptionWhenDoesNotConatins(){
+    public void testRemoveRightShouldThrowExceptionWhenDoesNotConatins() {
         underTest.removeRight(DATA_ELEMENT);
     }
 
     @Test
-    public void testRemoveRightShouldRemove(){
+    public void testRemoveRightShouldRemove() {
         //GIVEN
         underTest.setRightSlot(2);
         underTest.addRight(DATA_ELEMENT);
@@ -249,7 +250,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testGetRightShouldReturnCopy(){
+    public void testGetRightShouldReturnCopy() {
         //GIVEN
         underTest.setRightSlot(1);
         underTest.addRight(DATA_ELEMENT);
@@ -261,7 +262,7 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAddBackShouldThrowExceptionWhenFull(){
+    public void testAddBackShouldThrowExceptionWhenFull() {
         //GIVEN
         underTest.setBackSlot(1);
         //THEN
@@ -270,7 +271,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddBackShouldAdd(){
+    public void testAddBackShouldAdd() {
         //GIVEN
         underTest.setBackSlot(1);
         //WHEN
@@ -280,10 +281,10 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testAddBacksShouldAdd(){
+    public void testAddBacksShouldAdd() {
         //GIVEN
         underTest.setBackSlot(2);
-        List<String> elements = Arrays.asList(DATA_ELEMENT,DATA_ELEMENT);
+        List<String> elements = Arrays.asList(DATA_ELEMENT, DATA_ELEMENT);
         //WHEN
         underTest.addBack(elements);
         //THEN
@@ -291,12 +292,12 @@ public class EquippedSlotTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testRemoveBackShouldThrowExceptionWhenDoesNotConatins(){
+    public void testRemoveBackShouldThrowExceptionWhenDoesNotConatins() {
         underTest.removeBack(DATA_ELEMENT);
     }
 
     @Test
-    public void testRemoveBackShouldRemove(){
+    public void testRemoveBackShouldRemove() {
         //GIVEN
         underTest.setBackSlot(2);
         underTest.addBack(DATA_ELEMENT);
@@ -309,7 +310,7 @@ public class EquippedSlotTest {
     }
 
     @Test
-    public void testGetBackShouldReturnCopy(){
+    public void testGetBackShouldReturnCopy() {
         //GIVEN
         underTest.setBackSlot(1);
         underTest.addBack(DATA_ELEMENT);

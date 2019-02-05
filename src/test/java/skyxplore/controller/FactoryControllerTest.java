@@ -24,16 +24,16 @@ import static skyxplore.testutil.TestUtils.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryControllerTest {
     @Mock
-    private  FactoryFacade factoryFacade;
+    private FactoryFacade factoryFacade;
 
     @Mock
-    private  ProductFacade productFacade;
+    private ProductFacade productFacade;
 
     @InjectMocks
     private FactoryController underTest;
 
     @Test
-    public void testAddToQueueShouldCallFacade(){
+    public void testAddToQueueShouldCallFacade() {
         //GIVEN
         AddToQueueRequest request = createAddToQueueRequest();
         //WHEN
@@ -43,10 +43,10 @@ public class FactoryControllerTest {
     }
 
     @Test
-    public void testGetMaterialsShouldCallFacadeAndReturnResponse(){
+    public void testGetMaterialsShouldCallFacadeAndReturnResponse() {
         //GIVEN
         MaterialView view = createMaterialView();
-        Map<String,MaterialView> map = new HashMap<>();
+        Map<String, MaterialView> map = new HashMap<>();
         map.put(MATERIAL_KEY, view);
         when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(map);
         //WHEN
@@ -58,7 +58,7 @@ public class FactoryControllerTest {
     }
 
     @Test
-    public void testGetQueueShouldCallFacadeAndReturnResult(){
+    public void testGetQueueShouldCallFacadeAndReturnResult() {
         //GIVEN
         List<ProductView> productViews = Arrays.asList(createProductView());
         when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(productViews);

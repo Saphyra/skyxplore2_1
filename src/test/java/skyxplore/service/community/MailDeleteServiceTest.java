@@ -50,7 +50,7 @@ public class MailDeleteServiceTest {
     private MailDeleteService underTest;
 
     @Before
-    public void init(){
+    public void init() {
         character = createCharacter();
         when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
 
@@ -59,13 +59,13 @@ public class MailDeleteServiceTest {
     }
 
     @After
-    public void verifyInteractions(){
+    public void verifyInteractions() {
         verify(characterQueryService).findByCharacterId(anyString());
         verify(mailQueryService).findMailById(anyString());
     }
 
     @Test(expected = InvalidMailAccessException.class)
-    public void testDeleteMailShouldThrowExceptionWhenWrongId(){
+    public void testDeleteMailShouldThrowExceptionWhenWrongId() {
         //WHEN
         underTest.deleteMails(CHARACTER_ID_1, MAIL_IDS);
     }
@@ -82,7 +82,7 @@ public class MailDeleteServiceTest {
     }
 
     @Test
-    public void testDeleteMailShouldUpdateDeletedBySender(){
+    public void testDeleteMailShouldUpdateDeletedBySender() {
         //GIVEN
         character.setCharacterId(MAIL_FROM_ID);
         //WHEN

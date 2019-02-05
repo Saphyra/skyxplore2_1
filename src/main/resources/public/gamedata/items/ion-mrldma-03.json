@@ -1,24 +1,24 @@
 {
-    "id": "ion-mrldma-03",
-    "attackSpeed": 4,
-    "criticalRate": 500,
-    "range": 4,
-    "hullDamage": 5000,
-    "shieldDamage": 15000,
-    "accuracy": 500,
-    "constructiontime": 5400,
-    "buildprice": 5400,
-    "materials": {
-        "cable": 18,
-        "condensator": 18,
-        "energycell": 9,
-        "hullplate": 9,
-        "adamantium": 45
-    },
-    "type": "weapon",
-    "slot": "weapon",
-    "level": 3,
-    "score": 3,
-    "buyprice": 135000,
-    "sellprice": 45000
+  "id": "ion-mrldma-03",
+  "attackSpeed": 4,
+  "criticalRate": 500,
+  "range": 4,
+  "hullDamage": 5000,
+  "shieldDamage": 15000,
+  "accuracy": 500,
+  "constructiontime": 5400,
+  "buildprice": 5400,
+  "materials": {
+    "cable": 18,
+    "condensator": 18,
+    "energycell": 9,
+    "hullplate": 9,
+    "adamantium": 45
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 3,
+  "score": 3,
+  "buyprice": 135000,
+  "sellprice": 45000
 }

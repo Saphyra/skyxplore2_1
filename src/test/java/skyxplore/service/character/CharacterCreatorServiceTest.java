@@ -61,7 +61,7 @@ public class CharacterCreatorServiceTest {
     private CharacterCreatorService underTest;
 
     @Test(expected = CharacterNameAlreadyExistsException.class)
-    public void testCreateCharacterShouldThrowExceptionWhenCharacterNameExists(){
+    public void testCreateCharacterShouldThrowExceptionWhenCharacterNameExists() {
         //GIVEN
         CreateCharacterRequest request = createCreateCharacterRequest();
 
@@ -71,7 +71,7 @@ public class CharacterCreatorServiceTest {
     }
 
     @Test
-    public void testCreateCharacterShouldCreateAdSave(){
+    public void testCreateCharacterShouldCreateAdSave() {
         //GIVEN
         CreateCharacterRequest request = createCreateCharacterRequest();
 

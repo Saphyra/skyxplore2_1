@@ -25,7 +25,7 @@ public class BlockedCharacterQueryServiceTest {
     private BlockedCharacterQueryService underTest;
 
     @Test
-    public void testFindByCharacterIdAndBlockedCharacterIdShouldQueryAndReturn(){
+    public void testFindByCharacterIdAndBlockedCharacterIdShouldQueryAndReturn() {
         //GIVEN
         BlockedCharacter blockedCharacter = createBlockedCharacter();
         when(blockedCharacterDao.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(blockedCharacter);
@@ -37,7 +37,7 @@ public class BlockedCharacterQueryServiceTest {
     }
 
     @Test
-    public void testFindByCharacterIdOrBlockedCharacterIdShouldQueryAndReturn(){
+    public void testFindByCharacterIdOrBlockedCharacterIdShouldQueryAndReturn() {
         //GIVEN
         BlockedCharacter blockedCharacter = createBlockedCharacter();
         when(blockedCharacterDao.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(blockedCharacter));
@@ -49,7 +49,7 @@ public class BlockedCharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetBlockedCharactersOf(){
+    public void testGetBlockedCharactersOf() {
         //GIVEN
         BlockedCharacter blockedCharacter = createBlockedCharacter();
         when(blockedCharacterDao.getBlockedCharactersOf(CHARACTER_ID_1)).thenReturn(Arrays.asList(blockedCharacter));

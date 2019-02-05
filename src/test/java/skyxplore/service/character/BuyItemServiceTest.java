@@ -40,7 +40,7 @@ public class BuyItemServiceTest {
     private BuyItemService underTest;
 
     @Test
-    public void testBuyItemsShouldCountCostAndCallCharacter(){
+    public void testBuyItemsShouldCountCostAndCallCharacter() {
         //GIVEN
         Map<String, Integer> map = new HashMap<>();
         map.put(DATA_ELEMENT, 2);

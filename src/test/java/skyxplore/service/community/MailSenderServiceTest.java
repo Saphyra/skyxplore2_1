@@ -53,7 +53,7 @@ public class MailSenderServiceTest {
     private MailSenderService underTest;
 
     @Test(expected = CharacterBlockedException.class)
-    public void testSendMailShouldThrowExceptionWhenBlocked(){
+    public void testSendMailShouldThrowExceptionWhenBlocked() {
         //GIVEN
         SendMailRequest request = createSendMailRequest();
 
@@ -64,7 +64,7 @@ public class MailSenderServiceTest {
     }
 
     @Test
-    public void testSendMailShouldSave(){
+    public void testSendMailShouldSave() {
         SendMailRequest request = createSendMailRequest();
 
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, MAILS_ADDRESSEE_ID)).thenReturn(Collections.emptyList());

@@ -35,7 +35,7 @@ public class FriendshipQueryServiceTest {
     private FriendshipQueryService underTest;
 
     @Test(expected = FriendRequestNotFoundException.class)
-    public void testFindFriendRequestByIdShouldThrowExceptionWhenNull(){
+    public void testFindFriendRequestByIdShouldThrowExceptionWhenNull() {
         //GIVEN
         when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
         //WHEN
@@ -43,7 +43,7 @@ public class FriendshipQueryServiceTest {
     }
 
     @Test
-    public void testFindFriendRequestShouldCallDao(){
+    public void testFindFriendRequestShouldCallDao() {
         //GIVEN
         FriendRequest request = createFriendRequest();
         when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.of(request));
@@ -54,7 +54,7 @@ public class FriendshipQueryServiceTest {
     }
 
     @Test(expected = FriendshipNotFoundException.class)
-    public void testFindFriendshipByIdShouldThrowExceptionWhenNull(){
+    public void testFindFriendshipByIdShouldThrowExceptionWhenNull() {
         //GIVEN
         when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
         //WHEN
@@ -62,7 +62,7 @@ public class FriendshipQueryServiceTest {
     }
 
     @Test
-    public void testFindFriendshipShouldCallDao(){
+    public void testFindFriendshipShouldCallDao() {
         //GIVEN
         Friendship friendship = createFriendship();
         when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.of(friendship));

@@ -1,42 +1,42 @@
 {
-    "id": "def-01",
-    "corehull": 3000000,
-    "connector": 12,
-    "defense": {
-        "front": 11,
-        "side": 7,
-        "back": 5
-    },
-    "weapon": {
-        "front": 3,
-        "side": 1,
-        "back": 1
-    },
-    "ability": [
-        "phalanx",
-        "damagereduction",
-        "teleportation",
-        "shieldovercharge",
-        "dimensiongate",
-        "reflection"
-    ],
-    "constructiontime": 43200,
-    "buildprice": 43200,
-    "materials": {
-        "cable": 15,
-        "condensator": 15,
-        "energycell": 20,
-        "hullplate": 40,
-        "etherium": 100,
-        "mithril": 250,
-        "duranium": 350,
-        "uridium": 200,
-        "xebryum": 200
-    },
-    "type": "ship",
-    "slot": "ship",
-    "level": 1,
-    "score": 10,
-    "buyprice": 3000000,
-    "sellprice": 1000000
+  "id": "def-01",
+  "corehull": 3000000,
+  "connector": 12,
+  "defense": {
+    "front": 11,
+    "side": 7,
+    "back": 5
+  },
+  "weapon": {
+    "front": 3,
+    "side": 1,
+    "back": 1
+  },
+  "ability": [
+    "phalanx",
+    "damagereduction",
+    "teleportation",
+    "shieldovercharge",
+    "dimensiongate",
+    "reflection"
+  ],
+  "constructiontime": 43200,
+  "buildprice": 43200,
+  "materials": {
+    "cable": 15,
+    "condensator": 15,
+    "energycell": 20,
+    "hullplate": 40,
+    "etherium": 100,
+    "mithril": 250,
+    "duranium": 350,
+    "uridium": 200,
+    "xebryum": 200
+  },
+  "type": "ship",
+  "slot": "ship",
+  "level": 1,
+  "score": 10,
+  "buyprice": 3000000,
+  "sellprice": 1000000
 }

@@ -1,16 +1,16 @@
 {
-    "id": "cor-03",
-    "capacity": 100000,
-    "constructiontime": 2400,
-    "buildprice": 2400,
-    "materials": {
-        "hullplate": 45,
-        "duranium": 270
-    },
-    "type": "corehull",
-    "slot": "connector",
-    "level": 3,
-    "score": 3,
-    "buyprice": 305000,
-    "sellprice": 135000
+  "id": "cor-03",
+  "capacity": 100000,
+  "constructiontime": 2400,
+  "buildprice": 2400,
+  "materials": {
+    "hullplate": 45,
+    "duranium": 270
+  },
+  "type": "corehull",
+  "slot": "connector",
+  "level": 3,
+  "score": 3,
+  "buyprice": 305000,
+  "sellprice": 135000
 }

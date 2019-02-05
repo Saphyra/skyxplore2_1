@@ -41,7 +41,7 @@ public class SkyXpAccessTokenDaoTest {
     private AccessTokenDao underTest;
 
     @Test
-    public void testDeleteByIdShouldCallRepository(){
+    public void testDeleteByIdShouldCallRepository() {
         //WHEN
         underTest.deleteById(ACCESS_TOKEN_ID);
         //THEN
@@ -49,7 +49,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testDeleteByUserIdShouldCallRepository(){
+    public void testDeleteByUserIdShouldCallRepository() {
         //WHEN
         underTest.deleteByUserId(USER_ID);
         //THEN
@@ -57,7 +57,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testDeleteExpiredShouldCallRepository(){
+    public void testDeleteExpiredShouldCallRepository() {
         //GIVEN
         OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
         when(dateTimeUtil.convertDomain(now)).thenReturn(0L);
@@ -68,7 +68,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testFindByTokenIdShouldReturnNull(){
+    public void testFindByTokenIdShouldReturnNull() {
         //GIVEN
         when(accessTokenRepository.findById(ACCESS_TOKEN_ID)).thenReturn(Optional.empty());
         //WHEN
@@ -78,7 +78,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testFindByCharacterIdShouldReturnDomain(){
+    public void testFindByCharacterIdShouldReturnDomain() {
         //GIVEN
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(entity);
@@ -95,7 +95,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testFindByTokenIdShouldReturnDomain(){
+    public void testFindByTokenIdShouldReturnDomain() {
         //GIVEN
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findById(ACCESS_TOKEN_ID)).thenReturn(Optional.of(entity));
@@ -112,7 +112,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testFindByUserIdShouldReturnDomain(){
+    public void testFindByUserIdShouldReturnDomain() {
         //GIVEN
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findByUserId(USER_ID)).thenReturn(entity);
@@ -129,7 +129,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testFindByUserIdOrTokenIdShouldReturnDomain(){
+    public void testFindByUserIdOrTokenIdShouldReturnDomain() {
         //GIVEN
         AccessTokenEntity entity = createAccessTokenEntity();
         when(accessTokenRepository.findByUserIdOrAccessTokenId(USER_ID, ACCESS_TOKEN_ID)).thenReturn(entity);
@@ -146,7 +146,7 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     @Test
-    public void testSaveShouldCallRepository(){
+    public void testSaveShouldCallRepository() {
         //GIVEN
         SkyXpAccessToken token = createAccessToken();
 

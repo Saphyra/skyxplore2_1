@@ -40,22 +40,22 @@ import static skyxplore.testutil.TestUtils.createCharacter;
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterQueryServiceTest {
     @Mock
-    private  BlockedCharacterQueryService blockedCharacterQueryService;
+    private BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private  CharacterNameLikeCache characterNameLikeCache;
+    private CharacterNameLikeCache characterNameLikeCache;
 
     @Mock
-    private  CharacterDao characterDao;
+    private CharacterDao characterDao;
 
     @Mock
-    private  FriendshipQueryService friendshipQueryService;
+    private FriendshipQueryService friendshipQueryService;
 
     @InjectMocks
     private CharacterQueryService underTest;
 
     @Test(expected = CharacterNotFoundException.class)
-    public void testFindByCharacterIdShouldThrowExceptionWhenNotFound(){
+    public void testFindByCharacterIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
         //WHEN
@@ -63,7 +63,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testFindByCharacterIdShouldReturnCharacter(){
+    public void testFindByCharacterIdShouldReturnCharacter() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -75,7 +75,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test(expected = CharacterNotFoundException.class)
-    public void testFindCharacterByIdAuthorizesShouldThrowExceptionWhenNotFound(){
+    public void testFindCharacterByIdAuthorizesShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
         //WHEN
@@ -83,7 +83,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test(expected = InvalidAccessException.class)
-    public void testFindCharacterByIdAuthorizesShouldThrowExceptionWhenWrongUserId(){
+    public void testFindCharacterByIdAuthorizesShouldThrowExceptionWhenWrongUserId() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -92,7 +92,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testFindCharacterByIdAuthorizedShouldReturn(){
+    public void testFindCharacterByIdAuthorizedShouldReturn() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -104,7 +104,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetBlockedCharactersShouldReturnList(){
+    public void testGetBlockedCharactersShouldReturnList() {
         //GIVEN
         BlockedCharacter blockedCharacter1 = createBlockedCharacter();
         blockedCharacter1.setBlockedCharacterId(CHARACTER_ID_2);
@@ -266,7 +266,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetCharactersByUserIdShouldCallDaoAndReturn(){
+    public void testGetCharactersByUserIdShouldCallDaoAndReturn() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findByUserId(USER_ID)).thenReturn(Arrays.asList(character));
@@ -278,7 +278,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetEquipmentsOfCharacterShouldReturn(){
+    public void testGetEquipmentsOfCharacterShouldReturn() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -291,7 +291,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetMoneyOfCharacter(){
+    public void testGetMoneyOfCharacter() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
@@ -302,7 +302,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testIsCharNameExists(){
+    public void testIsCharNameExists() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         when(characterDao.findByCharacterName(CHARACTER_NAME)).thenReturn(character);

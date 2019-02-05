@@ -117,7 +117,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutAll(){
+    public void testGetElementsOfCategoryShouldPutAll() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ALL);
         //THEN
@@ -135,7 +135,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutMaterial(){
+    public void testGetElementsOfCategoryShouldPutMaterial() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.MATERIAL);
         //THEN
@@ -144,7 +144,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutConnector(){
+    public void testGetElementsOfCategoryShouldPutConnector() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.CONNECTOR);
         //THEN
@@ -157,7 +157,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutEnergy(){
+    public void testGetElementsOfCategoryShouldPutEnergy() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ENERGY);
         //THEN
@@ -167,7 +167,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutExtender(){
+    public void testGetElementsOfCategoryShouldPutExtender() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.EXTENDER);
         //THEN
@@ -176,7 +176,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutCorehull(){
+    public void testGetElementsOfCategoryShouldPutCorehull() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.COREHULL);
         //THEN
@@ -185,7 +185,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutStorage(){
+    public void testGetElementsOfCategoryShouldPutStorage() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.STORAGE);
         //THEN
@@ -194,7 +194,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutDefense(){
+    public void testGetElementsOfCategoryShouldPutDefense() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.DEFENSE);
         //THEN
@@ -204,7 +204,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutArmor(){
+    public void testGetElementsOfCategoryShouldPutArmor() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ARMOR);
         //THEN
@@ -213,7 +213,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutShield(){
+    public void testGetElementsOfCategoryShouldPutShield() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.SHIELD);
         //THEN
@@ -222,7 +222,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutShip(){
+    public void testGetElementsOfCategoryShouldPutShip() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.SHIP);
         //THEN
@@ -231,7 +231,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutWeapon(){
+    public void testGetElementsOfCategoryShouldPutWeapon() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.WEAPON);
         //THEN

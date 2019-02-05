@@ -1,28 +1,28 @@
 {
-    "id": "sta-01",
-    "corehull": 1000000,
-    "connector": 6,
-    "defense": {
-        "front": 4,
-        "side": 2,
-        "back": 2
-    },
-    "weapon": {
-        "front": 3,
-        "side": 1,
-        "back": 1
-    },
-    "ability": [
-        "invulnerable",
-        "speed"
-    ],
-    "constructiontime": 3600,
-    "buildprice": 0,
-    "materials": {},
-    "type": "ship",
-    "slot": "ship",
-    "level": 1,
-    "score": 4,
-    "buyprice": 30000,
-    "sellprice": 10000
+  "id": "sta-01",
+  "corehull": 1000000,
+  "connector": 6,
+  "defense": {
+    "front": 4,
+    "side": 2,
+    "back": 2
+  },
+  "weapon": {
+    "front": 3,
+    "side": 1,
+    "back": 1
+  },
+  "ability": [
+    "invulnerable",
+    "speed"
+  ],
+  "constructiontime": 3600,
+  "buildprice": 0,
+  "materials": {},
+  "type": "ship",
+  "slot": "ship",
+  "level": 1,
+  "score": 4,
+  "buyprice": 30000,
+  "sellprice": 10000
 }

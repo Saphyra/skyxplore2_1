@@ -1,22 +1,22 @@
 {
-    "id": "cex-01",
-    "extendedslot": "connector",
-    "extendednum": 5,
-    "constructiontime": 3600,
-    "buildprice": 3600,
-    "materials": {
-        "cable": 4,
-        "hullplate": 3,
-        "energycell": 2,
-        "mithril": 25,
-        "duranium": 15,
-        "uridium": 10,
-        "xebryum": 20
-    },
-    "type": "extender",
-    "slot": "connector",
-    "level": 1,
-    "score": 0,
-    "buyprice": 150000,
-    "sellprice": 50000
+  "id": "cex-01",
+  "extendedslot": "connector",
+  "extendednum": 5,
+  "constructiontime": 3600,
+  "buildprice": 3600,
+  "materials": {
+    "cable": 4,
+    "hullplate": 3,
+    "energycell": 2,
+    "mithril": 25,
+    "duranium": 15,
+    "uridium": 10,
+    "xebryum": 20
+  },
+  "type": "extender",
+  "slot": "connector",
+  "level": 1,
+  "score": 0,
+  "buyprice": 150000,
+  "sellprice": 50000
 }

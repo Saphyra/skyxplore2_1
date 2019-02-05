@@ -123,7 +123,7 @@ public class EquippedShipTest {
     }
 
     @Test
-    public void testGetEquipmentsShouldReturnsClone(){
+    public void testGetEquipmentsShouldReturnsClone() {
         //GIVEN
         underTest.addConnector(DATA_CONNECTOR);
         //WHEN

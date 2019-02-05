@@ -1,6 +1,6 @@
 {
-    "id": "duranium",
-    "slot": "material",
-    "buildable": false,
-    "type": "material"
+  "id": "duranium",
+  "slot": "material",
+  "buildable": false,
+  "type": "material"
 }

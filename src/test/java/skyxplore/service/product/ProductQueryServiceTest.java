@@ -38,7 +38,7 @@ public class ProductQueryServiceTest {
     private ProductQueryService underTest;
 
     @Test
-    public void testGetQueue(){
+    public void testGetQueue() {
         //GIVEN
         when(factoryQueryService.getFactoryIdOfCharacter(CHARACTER_ID_1)).thenReturn(PRODUCT_ELEMENT_ID_EQUIPMENT);
 

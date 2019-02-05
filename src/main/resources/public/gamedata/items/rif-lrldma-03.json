@@ -1,23 +1,23 @@
 {
-    "id": "rif-lrldma-03",
-    "attackSpeed": 2,
-    "criticalRate": 300,
-    "range": 2,
-    "hullDamage": 6000,
-    "shieldDamage": 3000,
-    "accuracy": 500,
-    "constructiontime": 5400,
-    "buildprice": 5400,
-    "materials": {
-        "cable": 9,
-        "condensator": 9,
-        "hullplate": 27,
-        "adamantium": 90
-    },
-    "type": "weapon",
-    "slot": "weapon",
-    "level": 3,
-    "score": 3,
-    "buyprice": 135000,
-    "sellprice": 45000
+  "id": "rif-lrldma-03",
+  "attackSpeed": 2,
+  "criticalRate": 300,
+  "range": 2,
+  "hullDamage": 6000,
+  "shieldDamage": 3000,
+  "accuracy": 500,
+  "constructiontime": 5400,
+  "buildprice": 5400,
+  "materials": {
+    "cable": 9,
+    "condensator": 9,
+    "hullplate": 27,
+    "adamantium": 90
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 3,
+  "score": 3,
+  "buyprice": 135000,
+  "sellprice": 45000
 }

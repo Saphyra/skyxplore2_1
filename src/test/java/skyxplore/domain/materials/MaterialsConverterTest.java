@@ -34,7 +34,7 @@ public class MaterialsConverterTest {
     private MaterialsConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNullWhenNull(){
+    public void testConvertEntityShouldReturnNullWhenNull() {
         //WHEN
         Materials result = underTest.convertEntity(null, null);
         //THEN

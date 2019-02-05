@@ -1,24 +1,24 @@
 {
-    "id": "ion-lrmdha-01",
-    "attackSpeed": 4,
-    "criticalRate": 500,
-    "range": 2,
-    "hullDamage": 5000,
-    "shieldDamage": 15000,
-    "accuracy": 750,
-    "constructiontime": 600,
-    "buildprice": 600,
-    "materials": {
-        "cable": 2,
-        "condensator": 2,
-        "energycell": 1,
-        "hullplate": 1,
-        "adamantium": 5
-    },
-    "type": "weapon",
-    "slot": "weapon",
-    "level": 1,
-    "score": 1,
-    "buyprice": 15000,
-    "sellprice": 5000
+  "id": "ion-lrmdha-01",
+  "attackSpeed": 4,
+  "criticalRate": 500,
+  "range": 2,
+  "hullDamage": 5000,
+  "shieldDamage": 15000,
+  "accuracy": 750,
+  "constructiontime": 600,
+  "buildprice": 600,
+  "materials": {
+    "cable": 2,
+    "condensator": 2,
+    "energycell": 1,
+    "hullplate": 1,
+    "adamantium": 5
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 1,
+  "score": 1,
+  "buyprice": 15000,
+  "sellprice": 5000
 }

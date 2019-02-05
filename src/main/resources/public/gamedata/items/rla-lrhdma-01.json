@@ -1,23 +1,23 @@
 {
-    "id": "rla-lrhdma-01",
-    "attackSpeed": 6,
-    "criticalRate": 500,
-    "range": 2,
-    "hullDamage": 30000,
-    "shieldDamage": 30000,
-    "accuracy": 500,
-    "constructiontime": 600,
-    "buildprice": 600,
-    "materials": {
-        "cable": 1,
-        "condensator": 1,
-        "hullplate": 5,
-        "adamantium": 5
-    },
-    "type": "weapon",
-    "slot": "weapon",
-    "level": 1,
-    "score": 1,
-    "buyprice": 15000,
-    "sellprice": 5000
+  "id": "rla-lrhdma-01",
+  "attackSpeed": 6,
+  "criticalRate": 500,
+  "range": 2,
+  "hullDamage": 30000,
+  "shieldDamage": 30000,
+  "accuracy": 500,
+  "constructiontime": 600,
+  "buildprice": 600,
+  "materials": {
+    "cable": 1,
+    "condensator": 1,
+    "hullplate": 5,
+    "adamantium": 5
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 1,
+  "score": 1,
+  "buyprice": 15000,
+  "sellprice": 5000
 }

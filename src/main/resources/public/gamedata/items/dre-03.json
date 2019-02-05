@@ -1,43 +1,43 @@
 {
-    "id": "dre-03",
-    "corehull": 4000000,
-    "connector": 12,
-    "defense": {
-        "front": 8,
-        "side": 14,
-        "back": 4
-    },
-    "weapon": {
-        "front": 5,
-        "side": 8,
-        "back": 3
-    },
-    "ability": [
-        "shieldleech",
-        "rapidfire",
-        "aftermath",
-        "splashdamage",
-        "damageovertime",
-        "evasion"
-    ],
-    "constructiontime": 86400,
-    "buildprice": 86400,
-    "materials": {
-        "cable": 90,
-        "condensator": 90,
-        "energycell": 90,
-        "hullplate": 270,
-        "adamantium": 900,
-        "etherium": 1800,
-        "mithril": 2250,
-        "duranium": 2700,
-        "uridium": 1800,
-        "xebryum": 1800
-    },
-    "type": "ship",
-    "slot": "ship",
-    "level": 3,
-    "score": 20,
-    "buyprice": 27000000,
-    "sellprice": 9000000
+  "id": "dre-03",
+  "corehull": 4000000,
+  "connector": 12,
+  "defense": {
+    "front": 8,
+    "side": 14,
+    "back": 4
+  },
+  "weapon": {
+    "front": 5,
+    "side": 8,
+    "back": 3
+  },
+  "ability": [
+    "shieldleech",
+    "rapidfire",
+    "aftermath",
+    "splashdamage",
+    "damageovertime",
+    "evasion"
+  ],
+  "constructiontime": 86400,
+  "buildprice": 86400,
+  "materials": {
+    "cable": 90,
+    "condensator": 90,
+    "energycell": 90,
+    "hullplate": 270,
+    "adamantium": 900,
+    "etherium": 1800,
+    "mithril": 2250,
+    "duranium": 2700,
+    "uridium": 1800,
+    "xebryum": 1800
+  },
+  "type": "ship",
+  "slot": "ship",
+  "level": 3,
+  "score": 20,
+  "buyprice": 27000000,
+  "sellprice": 9000000
 }

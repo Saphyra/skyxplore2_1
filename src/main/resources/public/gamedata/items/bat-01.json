@@ -1,18 +1,18 @@
 {
-    "id": "bat-01",
-    "capacity": 1000,
-    "constructiontime": 1200,
-    "buildprice": 1200,
-    "materials": {
-        "cable": 2,
-        "hullplate": 1,
-        "energycell": 4,
-        "etherium": 30
-    },
-    "type": "battery",
-    "slot": "connector",
-    "level": 1,
-    "score": 1,
-    "buyprice": 45000,
-    "sellprice": 15000
+  "id": "bat-01",
+  "capacity": 1000,
+  "constructiontime": 1200,
+  "buildprice": 1200,
+  "materials": {
+    "cable": 2,
+    "hullplate": 1,
+    "energycell": 4,
+    "etherium": 30
+  },
+  "type": "battery",
+  "slot": "connector",
+  "level": 1,
+  "score": 1,
+  "buyprice": 45000,
+  "sellprice": 15000
 }

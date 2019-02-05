@@ -28,7 +28,7 @@ public class ShipControllerTest {
     private ShipController underTest;
 
     @Test
-    public void testEquipShouldCallFacade(){
+    public void testEquipShouldCallFacade() {
         //GIVEN
         EquipRequest equipRequest = createEquipRequest();
         //WHEN
@@ -38,7 +38,7 @@ public class ShipControllerTest {
     }
 
     @Test
-    public void testEquipShipShouldCallFacade(){
+    public void testEquipShipShouldCallFacade() {
         //WHEN
         underTest.equipShip(CHARACTER_ID_1, EQUIP_ITEM_ID);
         //THEN
@@ -46,7 +46,7 @@ public class ShipControllerTest {
     }
 
     @Test
-    public void testGetShipDataShouldCallFacadeAndReturnView(){
+    public void testGetShipDataShouldCallFacadeAndReturnView() {
         //GIVEN
         ShipView shipView = createShipView();
         when(equippedShipFacade.getShipData(CHARACTER_ID_1)).thenReturn(shipView);
@@ -57,7 +57,7 @@ public class ShipControllerTest {
     }
 
     @Test
-    public void testUnequipShouldCallFacade(){
+    public void testUnequipShouldCallFacade() {
         //GIVEN
         UnequipRequest unequipRequest = createUnequipRequest();
         //WHEN

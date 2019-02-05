@@ -59,7 +59,7 @@ public class ShipQueryServiceTest {
     }
 
     @Test
-    public void testGetShipDataShouldReturn(){
+    public void testGetShipDataShouldReturn() {
         //GIVEN
         EquippedShip ship = createEquippedShip();
         when(equippedShipDao.getShipByCharacterId(CHARACTER_ID_1)).thenReturn(ship);

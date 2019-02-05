@@ -1,24 +1,24 @@
 {
-    "id": "las-lrmdha-01",
-    "attackSpeed": 4,
-    "criticalRate": 150,
-    "range": 2,
-    "hullDamage": 7500,
-    "shieldDamage": 7500,
-    "accuracy": 750,
-    "constructiontime": 600,
-    "buildprice": 600,
-    "materials": {
-        "cable": 2,
-        "condensator": 1,
-        "energycell": 1,
-        "hullplate": 2,
-        "adamantium": 5
-    },
-    "type": "weapon",
-    "slot": "weapon",
-    "level": 1,
-    "score": 1,
-    "buyprice": 15000,
-    "sellprice": 5000
+  "id": "las-lrmdha-01",
+  "attackSpeed": 4,
+  "criticalRate": 150,
+  "range": 2,
+  "hullDamage": 7500,
+  "shieldDamage": 7500,
+  "accuracy": 750,
+  "constructiontime": 600,
+  "buildprice": 600,
+  "materials": {
+    "cable": 2,
+    "condensator": 1,
+    "energycell": 1,
+    "hullplate": 2,
+    "adamantium": 5
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 1,
+  "score": 1,
+  "buyprice": 15000,
+  "sellprice": 5000
 }

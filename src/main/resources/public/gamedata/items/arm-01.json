@@ -1,16 +1,16 @@
 {
-    "id": "arm-01",
-    "capacity": 200000,
-    "constructiontime": 900,
-    "buildprice": 900,
-    "materials": {
-        "duranium": 20,
-        "hullplate": 10
-    },
-    "type": "armor",
-    "slot": "defense",
-    "level": 1,
-    "score": 1,
-    "buyprice": 22500,
-    "sellprice": 7500
+  "id": "arm-01",
+  "capacity": 200000,
+  "constructiontime": 900,
+  "buildprice": 900,
+  "materials": {
+    "duranium": 20,
+    "hullplate": 10
+  },
+  "type": "armor",
+  "slot": "defense",
+  "level": 1,
+  "score": 1,
+  "buyprice": 22500,
+  "sellprice": 7500
 }

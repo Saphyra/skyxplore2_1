@@ -1,6 +1,6 @@
 {
-    "id": "xebryum",
-    "slot": "material",
-    "buildable": false,
-    "type": "material"
+  "id": "xebryum",
+  "slot": "material",
+  "buildable": false,
+  "type": "material"
 }

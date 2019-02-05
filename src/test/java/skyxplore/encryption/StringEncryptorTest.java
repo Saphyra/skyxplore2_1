@@ -19,17 +19,17 @@ public class StringEncryptorTest {
     private StringEncryptor underTest;
 
     @Test
-    public void testEncryptEntityShouldReturnNullWhenNull(){
+    public void testEncryptEntityShouldReturnNullWhenNull() {
         assertNull(underTest.encryptEntity(null, KEY));
     }
 
     @Test
-    public void testDecryptEntityShouldReturnNullWhenNull(){
+    public void testDecryptEntityShouldReturnNullWhenNull() {
         assertNull(underTest.decryptEntity(null, KEY));
     }
 
     @Test
-    public void testShouldEncryptAndDecrypt(){
+    public void testShouldEncryptAndDecrypt() {
         String encrypted = underTest.encryptEntity(TEST_ENTITY, KEY);
         assertNotEquals(TEST_ENTITY, encrypted);
         String decrypted = underTest.decryptEntity(encrypted, KEY);
