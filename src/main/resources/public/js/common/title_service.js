@@ -1,48 +1,52 @@
 (function TitleService(){
+    scriptLoader.loadScript("js/common/localization/items.js");
+    scriptLoader.loadScript("js/common/localization/description.js");
+
     window.titleService = new function(){
         this.assembleTitleOfItem = assembleTitleOfItem;
     }
     
-    //TODO localization
     function assembleTitleOfItem(data){
         if(data == null || data == undefined){
             throwException("IllegalArgument", "data must not be null or undefined");
         }
-        
+
+        const itemName = Items.getItem(data.id);
+
         let title = "";
         
-        title += data.name;
-        if(data.description != undefined){
-            title += "\n" + data.description;
+        title += itemName.name;
+        if(itemName.description != undefined){
+            title += "\n" + itemName.description;
         }
         if(data.level != undefined){
-            title += "\nSzint: " + data.level;
+            title += "\n" + Description.getDescription("level") + ": " + data.level;
         }
         if(data.score != undefined){
-            title += " - Pont: " + data.score;
+            title += " - " + Description.getDescription("score") + ": " + data.score;
         }
         
         switch(data.slot){
             case "ability":
-                title += "\nEnergiahasználat: " + data.energyusage;
-                title += "\nAktív: " + data.active + " - Újratöltés: " + data.reload;
+                title += "\n" + Description.getDescription("energyusage") + ": " + data.energyusage;
+                title += "\n" + Description.getDescription("active") + ": " + data.active + " - " + Description.getDescription("reload") + ": " + data.reload;
             break;
             case "connector":
                 switch(data.type){
                     case "corehull":
-                        title += "\nExtra magburkolat: " + data.capacity;
+                        title += "\n" + Description.getDescription("extra-corehull") + ": " + data.capacity;
                     break;
                     case "extender":
-                        title += "\nExtra hely: " + data.extendednum;
+                        title += "\n" + Description.getDescription("extra-slots") + ": " + data.extendednum;
                     break;
                     case "generator":
-                        title += "\nEnergiatermelés: " + data.energyrecharge;
+                        title += "\n" + Description.getDescription("energyregen") + ": " + data.energyrecharge;
                     break;
                     case "battery":
-                        title += "\nKapacitás: " + data.capacity;
+                        title += "\n" + Description.getDescription("capacity") + ": " + data.capacity;
                     break;
                     case "storage":
-                        title += "\nKapacitás: " + data.capacity;
+                        title += "\n" + Description.getDescription("capacity") + ": " + data.capacity;
                     break;
                     default:
                         logService.log(data, "warn", "Unknown connector type");
@@ -50,23 +54,23 @@
                 }
             break;
             case "defense":
-                title += "\nKapacitás: " + data.capacity;
+                title += "\n" + Description.getDescription("capacity") + ": " + data.capacity;
                 if(data.type == "shield"){
-                    title += "\nRegeneráció: " + data.regeneration;
-                    title += "\nEnergiahasználat: " + data.energyusage;
+                    title += "\n" + Description.getDescription("shield-recharge") + ": " + data.regeneration;
+                    title += "\n" + Description.getDescription("energyusage") + ": " + data.energyusage;
                 }
             break;
             case "ship":
-                title += "\nMagburkolat: " + data.corehull;
-                title += "\nFegyverzet - Elöl: " + data.weapon.front + " - Oldalt: " + data.weapon.side + " - Hátul: " + data.weapon.side;
-                title += "\nVédelem - Elöl: " + data.defense.front + " - Oldalt: " + data.defense.side + " - Hátul: " + data.defense.side;
-                title += "\nCsatlakozók: " + data.connector;
+                title += "\n" + Description.getDescription("corehull") + ": " + data.corehull;
+                title += "\n" + Description.getDescription("weaponry") + " - " + Description.getDescription("front") + ": " + data.weapon.front + " - " + Description.getDescription("side") + ": " + data.weapon.side + " - " + Description.getDescription("back") + ": " + data.weapon.side;
+                title += "\n" + Description.getDescription("defense") + " - " + Description.getDescription("front") + ": " + data.defense.front + " - " + Description.getDescription("side") + ": " + data.defense.side + " - " + Description.getDescription("back") + ": " + data.defense.side;
+                title += "\n" + Description.getDescription("connector") + ": " + data.connector;
             break;
             case "weapon":
-                title += "\nTámadási sebesség: " + data.attackSpeed + " - Hatótávolság: " + data.range;
-                title += "\nKritikus találati esély: " + data.criticalRate;
-                title += "\nBurkolatsebzés: " + data.hullDamage + " - Pajzs sebzés: " + data.shieldDamage;
-                title += "\nPontosság: " + data.accuracy;
+                title += "\n" + Description.getDescription("attack-speed") + ": " + data.attackSpeed + " - " + Description.getDescription("range") + ": " + data.range;
+                title += "\n" + Description.getDescription("critical-rate") + ": " + data.criticalRate;
+                title += "\n" + Description.getDescription("hull-damage") + ": " + data.hullDamage + " - " + Description.getDescription("shield-damage") + ": " + data.shieldDamage;
+                title += "\n" + Description.getDescription("accuracy") + ": " + data.accuracy;
             break;
             case "material":
             break;

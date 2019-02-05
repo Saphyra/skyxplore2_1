@@ -73,5 +73,6 @@
     ]
   },
   "additionalContent": {
+    "empty-slot": "Üres"
   }
 }

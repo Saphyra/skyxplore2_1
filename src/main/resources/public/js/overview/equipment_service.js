@@ -1,5 +1,7 @@
 (function EquipmentService(){
     scriptLoader.loadScript("js/common/title_service.js");
+    scriptLoader.loadScript("js/common/localization/items.js");
+
     events.LOAD_EQUIPMENT = "load_equipment";
     
     eventProcessor.registerProcessor(new EventProcessor(
@@ -43,7 +45,7 @@
                 const equipmentData = itemCache.get(equipped[eindex]);
                 
                 const slotElement = createSlotElement();
-                    slotElement.innerHTML = equipmentData.name;
+                    slotElement.innerHTML = Items.getItem(equipmentData.id).name;
                     slotElement.title = titleService.assembleTitleOfItem(equipmentData);
                 container.appendChild(slotElement);
                 actual++;
@@ -51,7 +53,7 @@
             
             for(actual; actual < slotNum; actual++){
                 const emptySlot = createSlotElement();
-                    emptySlot.innerHTML = "Üres";
+                    emptySlot.innerHTML = Localization.getAdditionalContent("empty-slot");
                 container.appendChild(emptySlot);
             }
             
