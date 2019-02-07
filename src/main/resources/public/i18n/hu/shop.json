@@ -18,7 +18,8 @@
         "key": "innerHTML",
         "message": "Kosár"
       }
-    ],"money-span": [
+    ],
+    "money-span": [
       {
         "key": "innerHTML",
         "message": "Pénz"
