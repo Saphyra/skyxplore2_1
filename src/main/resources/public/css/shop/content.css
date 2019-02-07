@@ -19,16 +19,16 @@
     overflow: auto;
 }
 
-.elementtitlecontainer{
+.element-title-container{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
 }
 
-.elementtitle{
+.element-title{
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.elementdescription{
+.element-description{
     font-size: 1.25rem;
 }

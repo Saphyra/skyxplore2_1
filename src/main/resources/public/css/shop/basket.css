@@ -1,4 +1,4 @@
-#basketcontainer{
+#basket-container{
     position: absolute;
     right: 0;
     top: 0;
@@ -8,7 +8,7 @@
     overflow: auto;
 }
 
-#basketcontainer h2{
+#basket-container h2{
     position: absolute;
     top: 0;
     left: 0;
@@ -17,11 +17,11 @@
     padding: 0.25rem;
 }
 
-#basketcontainer h2 div{
+#basket-container h2 div{
     font-size: 1.5rem;
 }
 
-#basketfooter{
+#basket-footer{
     position: absolute;
     left: 0;
     right: 0;
@@ -41,13 +41,13 @@
     overflow: auto;
 }
 
-.basketelement{
+.basket-element{
     margin: 0.5rem;
     border: 2px ridge white;
     border-radius: 5px;
 }
 
-.basketelementtitle{
+.basket-element-title{
     border-bottom: 2px ridge white;
     font-size: 1.25rem;
     padding: 0.25rem 0;

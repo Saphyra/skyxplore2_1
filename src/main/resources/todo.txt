@@ -17,8 +17,6 @@ BackEnd
         - findBy...: returns Optional of
 
 ==========Tasks==========
-Remove confirmPassword from registrationRequest
-
 Shop & factory implement filters
 Cancel production
 

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+    <TITLE></TITLE>
+    <META charset="UTF-8">
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+
+    <LINK rel="stylesheet" href="/css/shop/shop.css">
+    <LINK rel="stylesheet" href="/css/shop/menu.css">
+    <LINK rel="stylesheet" href="/css/shop/basket.css">
+    <LINK rel="stylesheet" href="/css/shop/content.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+
+    <SCRIPT src="js/shop/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN>
+        <SECTION id='menu-container'>
+            <H2 id="menu-title"></H2>
+
+            <DIV id='menu'></DIV>
+        </SECTION>
+
+        <SECTION id='content'>
+
+        </SECTION>
+
+        <SECTION id='basket-container'>
+            <H2>
+                <SPAN id="basket-title"></SPAN>
+                <DIV>
+                    <SPAN id="money-span"></SPAN>: <SPAN id='money'></SPAN>
+                </DIV>
+            </H2>
+
+            <DIV id='basket'>
+
+            </DIV>
+
+            <DIV id='basket-footer'>
+                <SPAN id="total-cost-span"></SPAN>: <SPAN id='total-cost'>0</SPAN>
+            </DIV>
+        </SECTION>
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='authService.logout()'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
+    </FOOTER>
+</DIV>
+
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+{
+  "title": "Bolt - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Bolt"
+      }
+    ],
+    "menu-title": [
+      {
+        "key": "innerHTML",
+        "message": "Kategóriák"
+      }
+    ],
+    "basket-title": [
+      {
+        "key": "innerHTML",
+        "message": "Kosár"
+      }
+    ],"money-span": [
+      {
+        "key": "innerHTML",
+        "message": "Pénz"
+      }
+    ],
+    "total-cost-span": [
+      {
+        "key": "innerHTML",
+        "message": "Összesen"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "overview-button": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}
