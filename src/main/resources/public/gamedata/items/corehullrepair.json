@@ -7,5 +7,6 @@
   "reload": 0,
   "effect": {
     "repair": 1
-  }
+  },
+  "category": "ability"
 }

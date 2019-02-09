@@ -20,6 +20,8 @@
         
         const eventType = event.getEventType();
         
+        logService.logToConsole("Processing event: " + eventType);
+        
         let hasProcessor = false;
         for(pindex in processors){
             const processor = processors[pindex];
@@ -29,7 +31,7 @@
             }
         }
         if(!hasProcessor){
-            logService.log("No eventProcessor for eventType " + event.getEventType(), "warn");
+            logService.logToConsole("No eventProcessor for eventType " + event.getEventType());
         }
     }
 })();

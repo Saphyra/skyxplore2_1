@@ -16,5 +16,6 @@
   "level": 3,
   "score": 3,
   "buyprice": 202500,
-  "sellprice": 22500
+  "sellprice": 22500,
+  "category": "shield"
 }

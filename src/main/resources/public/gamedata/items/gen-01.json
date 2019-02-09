@@ -15,5 +15,6 @@
   "level": 1,
   "score": 1,
   "buyprice": 45000,
-  "sellprice": 15000
+  "sellprice": 15000,
+  "category": "energy"
 }

@@ -7,5 +7,6 @@
   "reload": 15,
   "effect": {
     "range": 6
-  }
+  },
+  "category": "ability"
 }

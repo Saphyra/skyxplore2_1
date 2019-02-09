@@ -12,5 +12,6 @@
   "level": 2,
   "score": 2,
   "buyprice": 67500,
-  "sellprice": 22500
+  "sellprice": 22500,
+  "category": "armor"
 }

@@ -105,9 +105,10 @@ public class TestUtils {
     public static final String CREDENTIALS_HASHED_PASSWORD = "credentials_hashed_password";
 
     //Data
+    public static final String DATA_ID_1 = "data_id_1";
+    public static final String DATA_ID_2 = "data_id_2";
     public static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
-    public static final String DATA_DESCRIPTION = "data_description";
     public static final String DATA_ELEMENT = "element";
     public static final Integer DATA_ELEMENT_AMOUNT = 13;
     public static final String DATA_ITEM_FRONT = "item_front";
@@ -116,6 +117,8 @@ public class TestUtils {
     public static final String DATA_ITEM_BACK = "item_back";
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
+    public static final String DATA_CATEGORY_1 = "data_category_1";
+    public static final String DATA_CATEGORY_2 = "data_category_2";
     public static final Integer DATA_BUYPRICE = 2;
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
@@ -509,7 +512,7 @@ public class TestUtils {
     }
 
     public static GeneralDescription createGeneralDescription() {
-        GeneralDescription generalDescription = new TestGeneralDescription();
+        GeneralDescription generalDescription = new TestGeneralDescription(DATA_CATEGORY_1);
         generalDescription.setId(DATA_ELEMENT);
         return generalDescription;
     }

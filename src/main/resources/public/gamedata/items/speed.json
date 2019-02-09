@@ -4,5 +4,6 @@
   "energyusage": 300,
   "active": 5,
   "reload": 15,
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

@@ -24,5 +24,6 @@
   "level": 1,
   "score": 4,
   "buyprice": 30000,
-  "sellprice": 10000
+  "sellprice": 10000,
+  "category": "starter"
 }

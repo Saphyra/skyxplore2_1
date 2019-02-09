@@ -45,5 +45,7 @@
     ]
   },
   "additionalContent": {
+    "cost": "Ár",
+    "add-to-cart": "Kosárba"
   }
 }

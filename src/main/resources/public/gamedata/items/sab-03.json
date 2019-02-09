@@ -38,5 +38,6 @@
   "level": 3,
   "score": 20,
   "buyprice": 27000000,
-  "sellprice": 9000000
+  "sellprice": 9000000,
+  "category": "saboteur"
 }

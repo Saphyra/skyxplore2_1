@@ -9,5 +9,6 @@
     "relativerecharge": 10,
     "range": 4
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

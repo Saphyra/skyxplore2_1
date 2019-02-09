@@ -7,5 +7,6 @@
   "effect": {
     "reflectrate": 30
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

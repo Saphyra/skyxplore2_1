@@ -7,5 +7,6 @@
   "reload": 15,
   "effect": {
     "reduction": 40
-  }
+  },
+  "category": "ability"
 }

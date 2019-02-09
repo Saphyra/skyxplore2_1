@@ -2,5 +2,6 @@
   "id": "xebryum",
   "slot": "material",
   "buildable": false,
-  "type": "material"
+  "type": "material",
+  "category": "material"
 }

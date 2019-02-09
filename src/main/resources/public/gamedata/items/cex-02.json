@@ -18,5 +18,6 @@
   "level": 2,
   "score": 0,
   "buyprice": 450000,
-  "sellprice": 150000
+  "sellprice": 150000,
+  "category": "extender"
 }

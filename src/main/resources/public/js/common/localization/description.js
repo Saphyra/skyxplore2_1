@@ -24,6 +24,8 @@
         for(let dindex in content){
             descriptions[dindex] = content[dindex];
         }
+        
+        eventProcessor.processEvent(new Event(events.DESCRIPTION_LOADED));
     }
 
     function createFallBackQuery(response, pageName){

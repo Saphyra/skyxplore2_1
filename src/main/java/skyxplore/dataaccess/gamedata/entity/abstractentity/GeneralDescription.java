@@ -8,4 +8,5 @@ import lombok.Data;
 public abstract class GeneralDescription {
     private String id;
     private String slot;
+    private String category;
 }

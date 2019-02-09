@@ -8,5 +8,6 @@
   "effect": {
     "damage": 5,
     "wawes": 5
-  }
+  },
+  "category": "ability"
 }

@@ -8,5 +8,6 @@
   "effect": {
     "range": 4,
     "rechargerate": 50
-  }
+  },
+  "category": "ability"
 }

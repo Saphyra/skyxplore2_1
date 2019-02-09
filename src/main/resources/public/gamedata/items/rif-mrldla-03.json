@@ -19,5 +19,6 @@
   "level": 3,
   "score": 3,
   "buyprice": 135000,
-  "sellprice": 45000
+  "sellprice": 45000,
+  "category": "ballistic"
 }

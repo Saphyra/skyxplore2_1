@@ -4,5 +4,6 @@
   "slot": "ability",
   "energyusage": 400,
   "active": 5,
-  "reload": 30
+  "reload": 30,
+  "category": "ability"
 }

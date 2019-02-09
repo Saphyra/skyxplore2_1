@@ -7,5 +7,6 @@
   "reload": 30,
   "effect": {
     "chance": 35
-  }
+  },
+  "category": "ability"
 }

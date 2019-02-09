@@ -7,5 +7,6 @@
   "reload": 40,
   "effect": {
     "damage": 500000
-  }
+  },
+  "category": "ability"
 }

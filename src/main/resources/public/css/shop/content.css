@@ -32,3 +32,12 @@
 .element-description{
     font-size: 1.25rem;
 }
+
+.element-content-container{
+    font-size: 1.5rem;
+    padding: 0.25rem;
+}
+
+.add-to-cart-button{
+    font-size: 1.25rem;
+}

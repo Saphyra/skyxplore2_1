@@ -12,5 +12,6 @@
   "level": 2,
   "score": 0,
   "buyprice": 135000,
-  "sellprice": 45000
+  "sellprice": 45000,
+  "category": "storage"
 }

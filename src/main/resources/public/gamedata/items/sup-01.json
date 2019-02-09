@@ -38,5 +38,6 @@
   "level": 1,
   "score": 10,
   "buyprice": 3000000,
-  "sellprice": 1000000
+  "sellprice": 1000000,
+  "category": "support"
 }

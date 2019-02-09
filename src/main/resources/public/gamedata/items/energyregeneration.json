@@ -8,5 +8,6 @@
   "effect": {
     "staticregeneration": 20,
     "relativeregeneration": 50
-  }
+  },
+  "category": "ability"
 }

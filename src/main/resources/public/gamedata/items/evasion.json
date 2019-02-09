@@ -7,5 +7,6 @@
   "reload": 15,
   "effect": {
     "evasion": 35
-  }
+  },
+  "category": "ability"
 }

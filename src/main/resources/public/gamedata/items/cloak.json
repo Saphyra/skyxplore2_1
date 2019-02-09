@@ -7,5 +7,6 @@
   "reload": 30,
   "effect": {
     "activation": 3
-  }
+  },
+  "category": "ability"
 }

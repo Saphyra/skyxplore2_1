@@ -29,6 +29,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_2;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_3;
@@ -106,7 +107,7 @@ public class ProductFactoryServiceTest {
         when(gameDataFacade.getData(PRODUCT_EXCEPTIONAL_ELEMENT)).thenThrow(new RuntimeException());
 
         //===FINISH EQUIPMENT PRODUCT===
-        GeneralDescription generalDescription = new TestGeneralDescription();
+        GeneralDescription generalDescription = new TestGeneralDescription(DATA_ID_1);
         when(gameDataFacade.getData(PRODUCT_ELEMENT_ID_EQUIPMENT)).thenReturn(generalDescription);
 
         when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);

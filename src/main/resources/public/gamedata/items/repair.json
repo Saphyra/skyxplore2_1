@@ -8,5 +8,6 @@
     "staticrepair": 20000,
     "relativerepair": 10
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

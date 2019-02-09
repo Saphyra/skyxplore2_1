@@ -26,6 +26,7 @@
         for(let iindex in itemMap){
             items[iindex] = itemMap[iindex];
         }
+        eventProcessor.processEvent(new Event(events.ITEMS_LOADED));
     }
     
     function createFallBackQuery(response){

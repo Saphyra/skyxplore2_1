@@ -7,5 +7,6 @@
   "effect": {
     "range": 6
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

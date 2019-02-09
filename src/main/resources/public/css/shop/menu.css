@@ -14,20 +14,19 @@
 }
 
 .menu-item{
+    border: 3px ridge white;
+    text-align: left;
     position: relative;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0.5rem;
 }
 
-.open-menu-button{
-    position: absolute;
-    top: 2px;
-    right: 4px;
-    font-size: 0.75rem;
+.menu-group-title{
+    padding: 0.25rem;
+    border-bottom: 3px ridge white;
+    font-weight: bold;
 }
 
-.menuchild{
-    margin-left: 2rem;
-    margin-right: 2rem;
+.menu-child{
     font-size: 1.25rem;
 }

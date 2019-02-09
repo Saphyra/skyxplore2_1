@@ -19,5 +19,6 @@
   "level": 2,
   "score": 2,
   "buyprice": 45000,
-  "sellprice": 15000
+  "sellprice": 15000,
+  "category": "missile"
 }

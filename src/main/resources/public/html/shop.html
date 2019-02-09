@@ -52,7 +52,7 @@
     </MAIN>
 
     <FOOTER>
-        <BUTTON id="logout-button" onclick='authService.logout()'></BUTTON>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
         <BUTTON id="overview-button" onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
     </FOOTER>
 </DIV>

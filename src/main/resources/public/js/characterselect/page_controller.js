@@ -5,12 +5,26 @@
     scriptLoader.loadScript("js/characterselect/select_character_service.js");
     scriptLoader.loadScript("js/characterselect/delete_character_service.js");
 
+    let charactersLoaded = false;
+    
     $(document).ready(function(){
         init();
     });
     
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return !charactersLoaded
+                && eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.messageCodesLoaded;
+        },
+        function(){
+            charactersLoaded = true;
+            eventProcessor.processEvent(new Event(events.LOAD_CHARACTERS));
+        }
+    ))
+    
     function init(){
         eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "characterselect"));
-        eventProcessor.processEvent(new Event(events.LOAD_CHARACTERS));
     }
 })();

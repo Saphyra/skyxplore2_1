@@ -7,5 +7,6 @@
   "effect": {
     "attackspeed": 50
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

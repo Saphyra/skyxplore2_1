@@ -7,5 +7,6 @@
   "effect": {
     "damage": 30
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

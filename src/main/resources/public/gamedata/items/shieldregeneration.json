@@ -7,5 +7,6 @@
   "effect": {
     "recharge": 5
   },
-  "type": "ability"
+  "type": "ability",
+  "category": "ability"
 }

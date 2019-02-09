@@ -10,6 +10,7 @@
     scriptLoader.loadScript("js/common/dao/dao.js");
     scriptLoader.loadScript("js/common/events.js");
     scriptLoader.loadScript("js/common/event_processor.js");
+    scriptLoader.loadScript("js/common/load_state.js");
     scriptLoader.loadScript("js/common/notification_service.js");
     
     scriptLoader.loadScript("js/common/localization/message_code.js");

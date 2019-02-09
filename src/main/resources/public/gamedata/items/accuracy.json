@@ -7,5 +7,6 @@
   "reload": 15,
   "effect": {
     "accuracy": 200
-  }
+  },
+  "category": "ability"
 }
