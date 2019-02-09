@@ -13,13 +13,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class GeneralDescriptionService extends AbstractGameDataService<GeneralDescription> {
+public class CommonDataQueryService extends AbstractGameDataService<GeneralDescription> {
     private final List<AbstractGameDataService<? extends GeneralDescription>> services;
 
     @Override
     @PostConstruct
     public void init() {
-        log.info("Initializing... Services: {}", services.size());
         services.forEach(this::loadItems);
     }
 

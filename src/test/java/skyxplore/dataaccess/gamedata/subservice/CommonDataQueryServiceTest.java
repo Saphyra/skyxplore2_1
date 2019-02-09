@@ -1,6 +1,5 @@
 package skyxplore.dataaccess.gamedata.subservice;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import skyxplore.dataaccess.gamedata.base.AbstractGameDataService;
@@ -16,13 +15,12 @@ import static skyxplore.testutil.TestUtils.DATA_CATEGORY_2;
 import static skyxplore.testutil.TestUtils.DATA_ID_1;
 import static skyxplore.testutil.TestUtils.DATA_ID_2;
 
-@Slf4j
-public class GeneralDescriptionServiceTest {
-    private GeneralDescriptionService underTest;
+public class CommonDataQueryServiceTest {
+    private CommonDataQueryService underTest;
 
     @Before
     public void setUp() {
-        underTest = new GeneralDescriptionService(givenServices());
+        underTest = new CommonDataQueryService(givenServices());
         underTest.init();
     }
 
