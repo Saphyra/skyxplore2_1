@@ -1,6 +1,6 @@
 (function ContentController(){
     scriptLoader.loadScript("js/common/cache.js");
-    scriptLoader.loadScript("js/common/item_cache.js");
+    scriptLoader.loadScript("js/common/equipment/item_cache.js");
     scriptLoader.loadScript("js/common/localization/items.js");
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     
@@ -59,6 +59,16 @@
                     const buyButton = document.createElement("BUTTON");
                         buyButton.classList.add("add-to-cart-button");
                         buyButton.innerHTML = Localization.getAdditionalContent("add-to-cart");
+                        
+                        if(buyPrice > moneyController.getUsableBalance()){
+                            buyButton.disabled = true;
+                            buyButton.title = Localization.getAdditionalContent("not-enough-money");
+                        }
+                        
+                        buyButton.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.ADD_TO_CART, itemId));
+                        }
+                        
                 contentContainer.appendChild(buyButton);
                     
             container.appendChild(contentContainer);
@@ -67,7 +77,7 @@
     }
     
     function loadItemsOfCategory(categoryId){
-        const response = dao.sendRequest(HttpMethod.GET, "categories/" + categoryId);
+        const response = dao.sendRequest(HttpMethod.GET, Mapping.concat(Mapping.ITEMS_OF_CATEGORY, categoryId));
         return response.status == ResponseStatus.OK ? JSON.parse(response.body) : throwException("InvalidResponse", response.toString());
     }
 })();

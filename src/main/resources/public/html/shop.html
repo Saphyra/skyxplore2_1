@@ -7,7 +7,7 @@
 
     <LINK rel="stylesheet" href="/css/shop/shop.css">
     <LINK rel="stylesheet" href="/css/shop/menu.css">
-    <LINK rel="stylesheet" href="/css/shop/basket.css">
+    <LINK rel="stylesheet" href="/css/shop/cart.css">
     <LINK rel="stylesheet" href="/css/shop/content.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
@@ -33,20 +33,21 @@
 
         </SECTION>
 
-        <SECTION id='basket-container'>
+        <SECTION id='cart-container'>
             <H2>
-                <SPAN id="basket-title"></SPAN>
+                <SPAN id="cart-title"></SPAN>
                 <DIV>
                     <SPAN id="money-span"></SPAN>: <SPAN id='money'></SPAN>
                 </DIV>
             </H2>
-
-            <DIV id='basket'>
-
+            
+            <DIV id='cart'>
+                <DIV id="empty-cart"></DIV>
+                <DIV id="cart-items"></DIV>
             </DIV>
 
-            <DIV id='basket-footer'>
-                <SPAN id="total-cost-span"></SPAN>: <SPAN id='total-cost'>0</SPAN>
+            <DIV id='cart-footer'>
+                <SPAN id="total-cost-span"></SPAN>: <SPAN id='cart-cost'></SPAN>
             </DIV>
         </SECTION>
     </MAIN>

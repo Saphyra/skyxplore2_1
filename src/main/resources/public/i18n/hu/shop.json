@@ -13,7 +13,7 @@
         "message": "Kategóriák"
       }
     ],
-    "basket-title": [
+    "cart-title": [
       {
         "key": "innerHTML",
         "message": "Kosár"
@@ -23,6 +23,12 @@
       {
         "key": "innerHTML",
         "message": "Pénz"
+      }
+    ],
+    "empty-cart": [
+      {
+        "key": "innerHTML",
+        "message": "A kosár üres."
       }
     ],
     "total-cost-span": [
@@ -45,7 +51,9 @@
     ]
   },
   "additionalContent": {
+    "cancel": "Mégse",
     "cost": "Ár",
-    "add-to-cart": "Kosárba"
+    "add-to-cart": "Kosárba",
+    "not-enough-money": "Nincs elég pénzed."
   }
 }
