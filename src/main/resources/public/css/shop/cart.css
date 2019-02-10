@@ -60,3 +60,7 @@
 .cart-element-price-container{
     margin-top: 0.25rem;
 }
+
+#buy-items-button{
+    font-size: 1.25rem;
+}

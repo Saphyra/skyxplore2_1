@@ -21,7 +21,6 @@
         function(eventType){return eventType === events.MONEY_CHANGED},
         function(event){
             const usableBalance = event.getPayload().usableBalance;
-            logService.logToConsole(usableBalance);
             for(let itemId in addToCartButtons){
                 addToCartButtons[itemId].disabled = usableBalance < itemCache.get(itemId).buyprice;
             }

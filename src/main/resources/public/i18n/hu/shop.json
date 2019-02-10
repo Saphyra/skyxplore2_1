@@ -31,6 +31,12 @@
         "message": "A kosár üres."
       }
     ],
+    "buy-items-button": [
+      {
+        "key": "innerHTML",
+        "message": "Vásárlás"
+      }
+    ],
     "total-cost-span": [
       {
         "key": "innerHTML",
