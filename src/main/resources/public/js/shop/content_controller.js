@@ -6,6 +6,8 @@
     
     events.DISPLAY_CATEGORY = "display_category";
     
+    let addToCartButtons = {};
+    
     const categoryCache = new Cache(loadItemsOfCategory);
     
     eventProcessor.registerProcessor(new EventProcessor(
@@ -15,9 +17,21 @@
         }
     ));
     
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.MONEY_CHANGED},
+        function(event){
+            const usableBalance = event.getPayload().usableBalance;
+            logService.logToConsole(usableBalance);
+            for(let itemId in addToCartButtons){
+                addToCartButtons[itemId].disabled = usableBalance < itemCache.get(itemId).buyprice;
+            }
+        }
+    ));
+    
     function displayItemsOfCategory(categoryId){
         const container = document.getElementById("content");
             container.innerHTML = "";
+            addToCartButtons = {};
         const itemIds = categoryCache.get(categoryId);
         
         itemIds.sort(function(a, b){
@@ -68,6 +82,8 @@
                         buyButton.onclick = function(){
                             eventProcessor.processEvent(new Event(events.ADD_TO_CART, itemId));
                         }
+                        
+                        addToCartButtons[itemId] = buyButton;
                         
                 contentContainer.appendChild(buyButton);
                     

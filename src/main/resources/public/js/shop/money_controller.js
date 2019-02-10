@@ -40,4 +40,12 @@
             $("#cart-cost").text(payload.cartCost);
         }
     ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.ADD_TO_CART},
+        function(event){
+            cartCost += itemCache.get(event.getPayload()).buyprice;
+            sendMoneyChangedEvent();
+        }
+    ));
 })();
