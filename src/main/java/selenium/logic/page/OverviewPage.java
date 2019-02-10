@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OverviewPage {
     private static final String ELEMENT_CHARACTER_SELECT_PAGE_BUTTON = "footer button:nth-child(2)";
-    private static final String ELEMENT_EQUIPMENT_PAGE_BUTTON = ".menucontainer a:nth-child(1)";
-    private static final String ELEMENT_FACTORY_PAGE_BUTTON = ".menucontainer a:nth-child(2)";
-    private static final String ELEMENT_SHOP_PAGE_BUTTON = ".menucontainer a:nth-child(3)";
+    private static final String ELEMENT_EQUIPMENT_PAGE_BUTTON = ".menu-container a:nth-child(1)";
+    private static final String ELEMENT_FACTORY_PAGE_BUTTON = ".menu-container a:nth-child(2)";
+    private static final String ELEMENT_SHOP_PAGE_BUTTON = ".menu-container a:nth-child(3)";
     private static final String SELECTOR_NOTIFICATION_NUMBER = "notificationnum";
 
     private final WebDriver driver;

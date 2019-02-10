@@ -45,6 +45,7 @@ public class Navigate {
     }
 
     public void toShop() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(OVERVIEW));
         assertEquals(OVERVIEW, driver.getCurrentUrl());
         new OverviewPage(driver).getShopButton().click();
 
