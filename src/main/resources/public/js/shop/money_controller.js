@@ -48,4 +48,12 @@
             sendMoneyChangedEvent();
         }
     ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.REMOVE_FROM_CART},
+        function(event){
+            cartCost -= itemCache.get(event.getPayload()).buyprice;
+            sendMoneyChangedEvent();
+        }
+    ));
 })();

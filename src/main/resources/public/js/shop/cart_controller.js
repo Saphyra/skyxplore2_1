@@ -2,12 +2,18 @@
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     
     events.ADD_TO_CART = "add_to_cart";
+    events.REMOVE_FROM_CART = "remove_from_cart";
     
     const cart = {};
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.ADD_TO_CART},
         addToCart
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.REMOVE_FROM_CART},
+        removeFromCart
     ));
     
     function addToCart(event){
@@ -55,9 +61,12 @@
                 
                     const cancelButton = document.createElement("BUTTON");
                         cancelButton.innerHTML = Localization.getAdditionalContent("cancel");
+                        cancelButton.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.REMOVE_FROM_CART, itemId));
+                        }
                 container.appendChild(cancelButton);
                 
-                cart[itemId] = new CartItem(itemId, buyPrice, titleAmount, costAmount, totalCost);
+                cart[itemId] = new CartItem(itemId, buyPrice, titleAmount, costAmount, totalCost, container);
                 
                 return container;
             }
@@ -70,17 +79,33 @@
         }
     }
     
-    function CartItem(id, bPrice, tAmountNode, cAmountNode, tCostNode){
+    function removeFromCart(event){
+        const itemId = event.getPayload();
+        cart[itemId].decreaseAmount();
+    }
+    
+    function CartItem(id, bPrice, tAmountNode, cAmountNode, tCostNode, container){
         const itemId = id;
         const buyPrice = bPrice;
         const titleAmountNode = tAmountNode;
         const costAmountNode = cAmountNode;
         const totalCostNode = tCostNode;
+        const itemContainer = container;
         let amount = 1;
         
         this.increaseAmount = function(){
             amount++;
             updateDisplay();
+        }
+        
+        this.decreaseAmount = function(){
+            amount--;
+            if(amount == 0){
+                document.getElementById("cart-items").removeChild(itemContainer);
+                delete cart[itemId];
+            }else{
+                updateDisplay();
+            }
         }
         
         function updateDisplay(){
