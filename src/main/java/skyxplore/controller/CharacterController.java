@@ -48,7 +48,7 @@ public class CharacterController {
     private final CharacterNameCache characterNameCache;
     private final CookieUtil cookieUtil;
 
-    @PutMapping(BUY_EQUIPMENTS_MAPPING)
+    @PostMapping(BUY_EQUIPMENTS_MAPPING)
     public void buyEquipments(
         @RequestBody HashMap<String, Integer> items,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId

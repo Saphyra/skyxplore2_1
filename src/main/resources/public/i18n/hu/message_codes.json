@@ -16,6 +16,7 @@
   "EMPTY_CREDENTIALS": "Felhasználónév és jelszó megadása kötelező!",
   "ERROR_CREATING_CHARACTER": "Hiba a karakter létrehozása során.",
   "INVALID_EMAIL": "Érvénytelen e-mail cím.",
+  "ITEMS_BOUGHT": "Sikeres vásárlás.",
   "NEW_PASSWORD_TOO_LONG": "Új jelszó túl hosszú! (Maximum 30 karakter)",
   "NEW_PASSWORD_TOO_SHORT": "Új jelszó túl rövid! (Minimum 6 karakter)",
   "PASSWORD_CHANGE_SUCCESSFUL": "Jelszó megváltoztatása sikeres.",

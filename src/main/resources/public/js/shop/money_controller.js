@@ -25,13 +25,6 @@
         dao.sendRequestAsync(request);
     }
     
-    function sendMoneyChangedEvent(){
-        eventProcessor.processEvent(new Event(
-            events.MONEY_CHANGED,
-            {money: money, cartCost: cartCost, usableBalance: money - cartCost}
-        ));
-    }
-    
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.MONEY_CHANGED},
         function(event){
@@ -56,4 +49,19 @@
             sendMoneyChangedEvent();
         }
     ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.ITEMS_BOUGHT},
+        function(){
+            cartCost = 0;
+            loadMoney();
+        }
+    ));
+    
+    function sendMoneyChangedEvent(){
+        eventProcessor.processEvent(new Event(
+            events.MONEY_CHANGED,
+            {money: money, cartCost: cartCost, usableBalance: money - cartCost}
+        ));
+    }
 })();

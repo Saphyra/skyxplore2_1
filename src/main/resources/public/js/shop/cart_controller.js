@@ -3,8 +3,10 @@
     
     events.ADD_TO_CART = "add_to_cart";
     events.REMOVE_FROM_CART = "remove_from_cart";
+    events.BUY_ITEMS = "buy_items";
+    events.ITEMS_BOUGHT = "items_bought";
     
-    const cart = {};
+    let cart = {};
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.ADD_TO_CART},
@@ -13,7 +15,23 @@
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.REMOVE_FROM_CART},
-        removeFromCart
+        function removeFromCart(event){
+            const itemId = event.getPayload();
+            cart[itemId].decreaseAmount();
+        }
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.BUY_ITEMS},
+        buyItems
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.ITEMS_BOUGHT},
+        function(){
+            cart = {};
+            document.getElementById("cart-items").innerHTML = "";
+        }
     ));
     
     function addToCart(event){
@@ -79,9 +97,23 @@
         }
     }
     
-    function removeFromCart(event){
-        const itemId = event.getPayload();
-        cart[itemId].decreaseAmount();
+    function buyItems(){
+        if(!Object.keys(cart).length){
+            logService.logToConsole("Cart is empty.");
+            return;
+        }
+        
+        const data = {};
+        for(let itemId in cart){
+            data[itemId] = cart[itemId].getAmount();
+        }
+        
+        const request = new Request(HttpMethod.POST, Mapping.BUY_ITEMS, data);
+            request.processValidResponse = function(){
+                eventProcessor.processEvent(new Event(events.ITEMS_BOUGHT));
+                notificationService.showSuccess(MessageCode.getMessage("ITEMS_BOUGHT"));
+            }
+        dao.sendRequestAsync(request);
     }
     
     function CartItem(id, bPrice, tAmountNode, cAmountNode, tCostNode, container){
@@ -106,6 +138,10 @@
             }else{
                 updateDisplay();
             }
+        }
+        
+        this.getAmount = function(){
+            return amount;
         }
         
         function updateDisplay(){

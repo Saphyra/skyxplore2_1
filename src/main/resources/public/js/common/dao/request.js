@@ -73,7 +73,7 @@ function Request(method, path, body){
             throwException("IllegalArgument", "Unsupported method: " + this.method);
         }
         if(!this.path || typeof this.path !== "string"){
-            throwException("IllegalArgument", "path must be a string.");
+            throwException("IllegalArgument", "path must be a string. It was " + this.path);
         }
     }
 }

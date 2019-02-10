@@ -1,4 +1,5 @@
 window.Mapping = {
+    BUY_ITEMS: "character/equipment",
     CHANGE_EMAIL: "user/email",
     CHANGE_PASSWORD: "user/password",
     CHANGE_USERNAME: "user/name",
