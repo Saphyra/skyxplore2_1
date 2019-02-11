@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.Category;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.ShopItem;
 import selenium.logic.helper.CostCounter;
 import selenium.logic.helper.ShopElementSearcher;
@@ -19,14 +20,15 @@ import selenium.test.shop.util.CategoryNameHelper;
 @RequiredArgsConstructor
 @Builder
 public class BuyItem {
-    public static final String SHOPPING_SUCCESSFUL_MESSAGE = "Tárgyak megvásárolva.";
+    public static final String MESSAGE_CODE_ITEMS_BOUGHT = "ITEMS_BOUGHT";
 
     private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
     private final CartVerifier cartVerifier;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
-    public BuyItem(WebDriver driver, String locale) {
+    public BuyItem(WebDriver driver, String locale, MessageCodes messageCodes) {
         ObjectMapper objectMapper = new ObjectMapper();
         CategoryNameHelper categoryNameHelper = new CategoryNameHelper(objectMapper, locale);
         ShopPage shopPage = new ShopPage(driver);
@@ -34,6 +36,7 @@ public class BuyItem {
         this.costCounter = new CostCounter(driver, shopElementSearcher);
         this.cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter, shopPage);
         this.notificationValidator = new NotificationValidator(driver);
+        this.messageCodes = messageCodes;
     }
 
     public void buyItem(String itemId, int amount) {
@@ -46,10 +49,10 @@ public class BuyItem {
 
         shopElementSearcher.getBuyButton().click();
 
-        int newBalance = costCounter.getCurrentMoney();
+        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_ITEMS_BOUGHT));
 
+        int newBalance = costCounter.getCurrentMoney();
         assertEquals(currentMoney - cost, newBalance);
-        notificationValidator.verifyOnlyOneNotification(SHOPPING_SUCCESSFUL_MESSAGE);
         cartVerifier.verifyEmptyCart();
     }
 }

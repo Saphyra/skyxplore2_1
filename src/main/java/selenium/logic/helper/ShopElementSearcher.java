@@ -18,8 +18,7 @@ import selenium.test.shop.util.CategoryNameHelper;
 public class ShopElementSearcher {
     private static final String SELECTOR_CART_ITEMS = "#cart-items > .cart-element";
     private static final String SELECTOR_SHOP_ITEMS = "#content > .element";
-    private static final String SELECTOR_FIRST_CATEGORY_BUTTON = "#menu .menuitem";
-    private static final String SELECTOR_BUY_BUTTON = "#basket > button:first-of-type";
+    private static final String SELECTOR_BUY_BUTTON = "buy-items-button";
 
     private final WebDriver driver;
     private final CategoryNameHelper categoryNameHelper;
@@ -54,6 +53,6 @@ public class ShopElementSearcher {
     }
 
     public WebElement getBuyButton() {
-        return driver.findElement(By.cssSelector(SELECTOR_BUY_BUTTON));
+        return driver.findElement(By.id(SELECTOR_BUY_BUTTON));
     }
 }

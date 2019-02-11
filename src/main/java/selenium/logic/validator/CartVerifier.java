@@ -2,6 +2,7 @@ package selenium.logic.validator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.Util.sleep;
 
 import java.util.List;
 
@@ -19,7 +20,6 @@ import selenium.logic.page.ShopPage;
 @RequiredArgsConstructor
 public class CartVerifier {
     private static final String SELECTOR_CART_ITEMS = "#basket div";
-    private static final String TEXT_CART_IS_EMPTY = "A kosár üres!";
 
     private final WebDriver driver;
     private final ShopElementSearcher shopElementSearcher;
@@ -68,6 +68,7 @@ public class CartVerifier {
     }
 
     public void verifyEmptyCart() {
+        sleep(1000);
         assertTrue(shopPage.getEmptyCartContainer().isDisplayed());
         List<WebElement> elements = driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS));
         assertEquals(0, elements.size());

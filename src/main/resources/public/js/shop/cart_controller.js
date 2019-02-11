@@ -34,6 +34,7 @@
         function(){
             cart = {};
             document.getElementById("cart-items").innerHTML = "";
+            $("#empty-cart").show();
         }
     ));
     

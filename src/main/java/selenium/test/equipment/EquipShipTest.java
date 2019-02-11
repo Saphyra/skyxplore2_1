@@ -33,7 +33,7 @@ public class EquipShipTest extends SeleniumTestApplication {
         createCharacter = new CreateCharacter(driver, messageCodes);
         selectCharacter = new SelectCharacter(driver);
         navigate = new Navigate(driver);
-        buyItem = new BuyItem(driver, locale);
+        buyItem = new BuyItem(driver, locale, messageCodes);
         equipmentElementSearcher = new EquipmentElementSearcher(driver);
         notificationValidator = new NotificationValidator(driver);
     }
