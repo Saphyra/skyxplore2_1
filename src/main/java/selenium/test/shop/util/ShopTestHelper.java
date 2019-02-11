@@ -2,6 +2,7 @@ package selenium.test.shop.util;
 
 import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.CartItem;
+import selenium.logic.domain.Category;
 import selenium.logic.domain.ShopItem;
 import selenium.logic.helper.ShopElementSearcher;
 
@@ -9,8 +10,8 @@ import selenium.logic.helper.ShopElementSearcher;
 public class ShopTestHelper {
     private final ShopElementSearcher shopElementSearcher;
 
-    public void addToCart(String itemId) {
-        ShopItem shopItem = shopElementSearcher.searchShopItemById(itemId);
+    public void addToCart(Category category, String itemId) {
+        ShopItem shopItem = shopElementSearcher.searchShopItemById(category, itemId);
         shopItem.addToCart();
     }
 

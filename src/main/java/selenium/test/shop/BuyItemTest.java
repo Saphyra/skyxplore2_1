@@ -1,7 +1,10 @@
 package selenium.test.shop;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.BuyItem;
 import selenium.logic.flow.CreateCharacter;
@@ -9,8 +12,6 @@ import selenium.logic.flow.Navigate;
 import selenium.logic.flow.Registration;
 import selenium.logic.flow.SelectCharacter;
 import selenium.test.shop.util.ShopTestInitializer;
-
-import static org.junit.Assert.assertTrue;
 
 public class BuyItemTest extends SeleniumTestApplication {
     private static final String BOUGHT_ITEM_ID = "bat-01";
@@ -28,7 +29,7 @@ public class BuyItemTest extends SeleniumTestApplication {
             new SelectCharacter(driver),
             new Navigate(driver)
         );
-        buyItem = new BuyItem(driver);
+        buyItem = new BuyItem(driver, locale);
         navigate = new Navigate(driver);
     }
 

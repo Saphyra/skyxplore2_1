@@ -1,12 +1,13 @@
 package selenium.test.shop.cart;
 
+import static org.junit.Assert.assertFalse;
+
 import lombok.Builder;
+import selenium.logic.domain.Category;
 import selenium.logic.helper.CostCounter;
 import selenium.logic.helper.ShopElementSearcher;
 import selenium.test.shop.util.ShopTestHelper;
 import selenium.test.shop.util.ShopTestInitializer;
-
-import static org.junit.Assert.assertFalse;
 
 @Builder
 public class TooExpensiveTest {
@@ -20,13 +21,13 @@ public class TooExpensiveTest {
     public void testTooExpensiveItem() {
         shopTestInitializer.registerAndGoToShop();
 
-        int cost = shopElementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).getCost();
+        int cost = shopElementSearcher.searchShopItemById(Category.EXTENDER, EXPENSIVE_ITEM_ID).getCost();
 
         do {
-            shopTestHelper.addToCart(EXPENSIVE_ITEM_ID);
+            shopTestHelper.addToCart(Category.EXTENDER, EXPENSIVE_ITEM_ID);
         } while (canAddMore(cost));
 
-        assertFalse(shopElementSearcher.searchShopItemById(EXPENSIVE_ITEM_ID).canAddToCart());
+        assertFalse(shopElementSearcher.searchShopItemById(Category.EXTENDER, EXPENSIVE_ITEM_ID).canAddToCart());
     }
 
     private boolean canAddMore(int cost) {

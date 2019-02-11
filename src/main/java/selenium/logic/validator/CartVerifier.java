@@ -1,17 +1,19 @@
 package selenium.logic.validator;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.CartItem;
-import selenium.logic.helper.CostCounter;
-import selenium.logic.helper.ShopElementSearcher;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.CartItem;
+import selenium.logic.domain.Category;
+import selenium.logic.helper.CostCounter;
+import selenium.logic.helper.ShopElementSearcher;
 
 @RequiredArgsConstructor
 public class CartVerifier {
@@ -22,9 +24,9 @@ public class CartVerifier {
     private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
 
-    public void verifyCosts(String itemId, int amount) {
+    public void verifyCosts(Category category, String itemId, int amount) {
         verifyAmountInCart(itemId, amount);
-        verifyItemCost(itemId, amount);
+        verifyItemCost(category, itemId, amount);
         verifyCartTotalCost();
     }
 
@@ -33,8 +35,8 @@ public class CartVerifier {
         assertEquals(amount, cartItem.getAmount());
     }
 
-    private void verifyItemCost(String itemId, int amount) {
-        int costPerItem = shopElementSearcher.searchShopItemById(itemId).getCost();
+    private void verifyItemCost(Category category, String itemId, int amount) {
+        int costPerItem = shopElementSearcher.searchShopItemById(category, itemId).getCost();
         int total = costPerItem * amount;
 
         CartItem cartItem = shopElementSearcher.searchCartItemById(itemId);

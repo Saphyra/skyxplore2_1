@@ -1,6 +1,7 @@
 package selenium.test.shop.cart;
 
 import lombok.Builder;
+import selenium.logic.domain.Category;
 import selenium.logic.validator.CartVerifier;
 import selenium.test.shop.util.ShopTestHelper;
 import selenium.test.shop.util.ShopTestInitializer;
@@ -18,7 +19,7 @@ public class RemoveFromCartTest {
         init();
 
         shopTestHelper.removeFromCart(CHEAP_ITEM_ID_1);
-        cartVerifier.verifyCosts(CHEAP_ITEM_ID_1, 1);
+        cartVerifier.verifyCosts(Category.ENERGY, CHEAP_ITEM_ID_1, 1);
 
         shopTestHelper.removeFromCart(CHEAP_ITEM_ID_1);
         cartVerifier.verifyNotInCart(CHEAP_ITEM_ID_1);
@@ -32,8 +33,8 @@ public class RemoveFromCartTest {
     private void init() {
         shopTestInitializer.registerAndGoToShop();
 
-        shopTestHelper.addToCart(CHEAP_ITEM_ID_1);
-        shopTestHelper.addToCart(CHEAP_ITEM_ID_1);
-        shopTestHelper.addToCart(CHEAP_ITEM_ID_2);
+        shopTestHelper.addToCart(Category.ENERGY, CHEAP_ITEM_ID_1);
+        shopTestHelper.addToCart(Category.ENERGY, CHEAP_ITEM_ID_1);
+        shopTestHelper.addToCart(Category.EXTENDER, CHEAP_ITEM_ID_2);
     }
 }

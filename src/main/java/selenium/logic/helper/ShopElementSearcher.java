@@ -1,23 +1,29 @@
 package selenium.logic.helper;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.CartItem;
-import selenium.logic.domain.ShopItem;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.CartItem;
+import selenium.logic.domain.Category;
+import selenium.logic.domain.ShopItem;
+import selenium.logic.page.ShopPage;
+import selenium.test.shop.util.CategoryNameHelper;
+
 @RequiredArgsConstructor
 public class ShopElementSearcher {
-    private static final String SELECTOR_CART_ITEMS = "#basket > .basketelement";
+    private static final String SELECTOR_CART_ITEMS = "#cart-items > .cart-element";
     private static final String SELECTOR_SHOP_ITEMS = "#content > .element";
     private static final String SELECTOR_FIRST_CATEGORY_BUTTON = "#menu .menuitem";
     private static final String SELECTOR_BUY_BUTTON = "#basket > button:first-of-type";
 
     private final WebDriver driver;
+    private final CategoryNameHelper categoryNameHelper;
+    private final ShopPage shopPage;
 
     public List<CartItem> searchAllCartItems() {
         return driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS)).stream()
@@ -31,7 +37,9 @@ public class ShopElementSearcher {
             .collect(Collectors.toList());
     }
 
-    public ShopItem searchShopItemById(String itemId) {
+    public ShopItem searchShopItemById(Category category, String itemId) {
+        String categoryName = categoryNameHelper.getCategoryName(category);
+        shopPage.getCategoryButtonWithName(categoryName).click();
         return searchAllShopItems().stream()
             .filter(shopItem -> itemId.equalsIgnoreCase(shopItem.getId()))
             .findFirst()
@@ -43,12 +51,6 @@ public class ShopElementSearcher {
             .filter(cartItem -> itemId.equalsIgnoreCase(cartItem.getId()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("No CartItem found with id " + itemId));
-    }
-
-    public WebElement findFirstCategoryButton() {
-        return driver.findElements(By.cssSelector(SELECTOR_FIRST_CATEGORY_BUTTON)).stream()
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("Category select menu buttons not found."));
     }
 
     public WebElement getBuyButton() {

@@ -7,38 +7,30 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CartItem {
-    private static final String SELECTOR_TITLE = ".basketelementtitle";
-    private static final String SELECTOR_COST = "div:nth-child(2)";
+    private static final String SELECTOR_ITEM_NAME = ".cart-element-title span:first-child";
+    private static final String SELECTOR_TITLE_AMOUNT = ".cart-element-title span:nth-child(2)";
+    private static final String SELECTOR_COST_PER_ITEM = ".cart-element-price-container span:first-child";
     private static final String SELECTOR_REMOVE_FROM_CART = "button:first-of-type";
-    private static final String REGEX_TOTAL_COST = " = ";
     private static final String REGEX_COST_PER_ITEM = " ";
-    private static final String REGEX_AMOUNT = " x ";
     private static final String REGEX_GET_ID = " ";
+    private static final String SELECTOR_TOTAL_COST = ".cart-element-price-container span:nth-child(4)";
 
     private final WebElement element;
 
     public String getId() {
-        return getTitleText().split(REGEX_GET_ID)[0].toLowerCase();
-    }
-
-    private String getTitleText() {
-        return element.findElement(By.cssSelector(SELECTOR_TITLE)).getText();
+        return element.findElement(By.cssSelector(SELECTOR_ITEM_NAME)).getText().split(REGEX_GET_ID)[0].toLowerCase();
     }
 
     public int getAmount() {
-        return Integer.valueOf(getTitleText().split(REGEX_AMOUNT)[1]);
+        return Integer.valueOf(element.findElement(By.cssSelector(SELECTOR_TITLE_AMOUNT)).getText());
     }
 
     public int getCostPerItem() {
-        return Integer.valueOf(getCostElement().getText().split(REGEX_COST_PER_ITEM)[1]);
-    }
-
-    private WebElement getCostElement() {
-        return element.findElement(By.cssSelector(SELECTOR_COST));
+        return Integer.valueOf(element.findElement(By.cssSelector(SELECTOR_COST_PER_ITEM)).getText().split(REGEX_COST_PER_ITEM)[1]);
     }
 
     public int getTotalCost() {
-        return Integer.valueOf(getCostElement().getText().split(REGEX_TOTAL_COST)[1]);
+        return Integer.valueOf(element.findElement(By.cssSelector(SELECTOR_TOTAL_COST)).getText());
     }
 
     public void removeFromCart() {
