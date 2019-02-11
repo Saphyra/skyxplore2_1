@@ -18,6 +18,9 @@
         function removeFromCart(event){
             const itemId = event.getPayload();
             cart[itemId].decreaseAmount();
+            if(Object.keys(cart).length == 0){
+                $("#empty-cart").show();
+            }
         }
     ));
     

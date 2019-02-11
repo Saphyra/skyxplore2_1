@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ShopPage {
     private static final String SELECTOR_CATEGORY_BUTTONS = ".menu-child .button";
+    private static final String SELECTOR_EMPTY_CART = "empty-cart";
     private final WebDriver driver;
 
     public WebElement getCategoryButtonWithName(String categoryName) {
@@ -16,5 +17,9 @@ public class ShopPage {
             .filter(element -> element.getText().equals(categoryName))
             .findAny()
             .orElseThrow(()->new RuntimeException("Category button not found with categoryName " + categoryName));
+    }
+
+    public WebElement getEmptyCartContainer() {
+        return driver.findElement(By.id(SELECTOR_EMPTY_CART));
     }
 }

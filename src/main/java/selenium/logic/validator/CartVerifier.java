@@ -14,6 +14,7 @@ import selenium.logic.domain.CartItem;
 import selenium.logic.domain.Category;
 import selenium.logic.helper.CostCounter;
 import selenium.logic.helper.ShopElementSearcher;
+import selenium.logic.page.ShopPage;
 
 @RequiredArgsConstructor
 public class CartVerifier {
@@ -23,6 +24,7 @@ public class CartVerifier {
     private final WebDriver driver;
     private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
+    private final ShopPage shopPage;
 
     public void verifyCosts(Category category, String itemId, int amount) {
         verifyAmountInCart(itemId, amount);
@@ -50,8 +52,12 @@ public class CartVerifier {
     private void verifyCartTotalCost() {
         int cartCost = costCounter.sumCartItemCosts();
 
+        verifyCartTotalCost(cartCost);
+    }
+
+    private void verifyCartTotalCost(int expectedCost){
         int totalCartCost = costCounter.getCartTotalCost();
-        assertEquals(cartCost, totalCartCost);
+        assertEquals(expectedCost, totalCartCost);
     }
 
     public void verifyNotInCart(String itemId) {
@@ -62,9 +68,9 @@ public class CartVerifier {
     }
 
     public void verifyEmptyCart() {
+        assertTrue(shopPage.getEmptyCartContainer().isDisplayed());
         List<WebElement> elements = driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS));
-        assertEquals(1, elements.size());
-        assertEquals(TEXT_CART_IS_EMPTY, elements.get(0).getText());
-        verifyCartTotalCost();
+        assertEquals(0, elements.size());
+        verifyCartTotalCost(0);
     }
 }

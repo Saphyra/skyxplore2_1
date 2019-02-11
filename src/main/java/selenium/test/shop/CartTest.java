@@ -33,7 +33,7 @@ public class CartTest extends SeleniumTestApplication {
         ShopPage shopPage = new ShopPage(driver);
         shopElementSearcher = new ShopElementSearcher(driver, categoryNameHelper, shopPage);
         costCounter = new CostCounter(driver, shopElementSearcher);
-        cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter);
+        cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter, shopPage);
         shopTestHelper = new ShopTestHelper(shopElementSearcher);
         shopTestInitializer = new ShopTestInitializer(
             new Registration(driver, messageCodes),

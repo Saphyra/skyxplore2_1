@@ -91,7 +91,7 @@ public abstract class SeleniumTestApplication {
 
     @After
     public void tearDown() {
-        sleep(10000);
+        sleep(0);
         if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);
         }

@@ -32,7 +32,7 @@ public class BuyItem {
         ShopPage shopPage = new ShopPage(driver);
         shopElementSearcher = new ShopElementSearcher(driver, categoryNameHelper, shopPage);
         this.costCounter = new CostCounter(driver, shopElementSearcher);
-        this.cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter);
+        this.cartVerifier = new CartVerifier(driver, shopElementSearcher, costCounter, shopPage);
         this.notificationValidator = new NotificationValidator(driver);
     }
 
