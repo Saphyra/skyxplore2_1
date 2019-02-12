@@ -1,28 +1,27 @@
 package selenium;
 
-import static java.util.Objects.isNull;
-import static selenium.logic.util.LinkUtil.HOST;
-import static selenium.logic.util.LinkUtil.HOST_LOCAL;
-import static selenium.logic.util.Util.executeScript;
-import static selenium.logic.util.Util.sleep;
-import static skyxplore.Application.APP_CTX;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import selenium.logic.domain.MessageCodes;
 import skyxplore.Application;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+
+import static java.util.Objects.isNull;
+import static selenium.logic.util.LinkUtil.HOST;
+import static selenium.logic.util.LinkUtil.HOST_LOCAL;
+import static selenium.logic.util.Util.executeScript;
+import static selenium.logic.util.Util.sleep;
+import static skyxplore.Application.APP_CTX;
 
 @Slf4j
 public abstract class SeleniumTestApplication {
