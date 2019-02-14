@@ -1,71 +1,80 @@
 (function EquipmentService(){
-    scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
+    scriptLoader.loadScript("js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("js/common/localization/category_names.js");
     scriptLoader.loadScript("js/common/localization/items.js");
     
-    events.LOAD_SHIP = "load_ship";
+    events.LOAD_EQUIPMENT = "load_equipment";
     
     eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.LOAD_SHIP},
-        loadShip
+        function(eventType){return eventType === events.LOAD_EQUIPMENT},
+        loadEquipment
     ));
     
-    function loadShip(){
-        const request = new Request(HttpMethod.GET, Mapping.GET_SHIP_DATA);
+    function loadEquipment(){
+        const request = new Request(HttpMethod.GET, Mapping.EQUIPMENT_STORAGE);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
-            request.processValidResponse = function(shipData){
-                displayShip(shipData)
+            request.processValidResponse = function(items){
+                displayItems(items);
             }
         dao.sendRequestAsync(request);
     }
     
-    function displayShip(shipData){
-        showSlots("front-weapon", shipData.weaponSlot.frontSlot, shipData.weaponSlot.frontEquipped);
-        showSlots("front-defense", shipData.defenseSlot.frontSlot, shipData.defenseSlot.frontEquipped);
+    function displayItems(items){
+        const itemMap = mapItems(items);
         
-        showSlots("left-weapon", shipData.weaponSlot.leftSlot, shipData.weaponSlot.leftEquipped);
-        showSlots("left-defense", shipData.defenseSlot.leftSlot, shipData.defenseSlot.leftEquipped);
-        
-        showSlots("right-weapon", shipData.weaponSlot.rightSlot, shipData.weaponSlot.rightEquipped);
-        showSlots("right-defense", shipData.defenseSlot.rightSlot, shipData.defenseSlot.rightEquipped);
-        
-        showSlots("back-weapon", shipData.weaponSlot.backSlot, shipData.weaponSlot.backEquipped);
-        showSlots("back-defense", shipData.defenseSlot.backSlot, shipData.defenseSlot.backEquipped);
-        
-        showSlots("connectors", shipData.connectorSlot, shipData.connectorEquipped);
-        
-        fillShipDetails(shipData);
-        
-        function showSlots(containerId, slotNum, equipped){
-            const container = document.getElementById(containerId);
+        function mapItems(items){
+            const countMap = countItems(items);
+            const categoryMap = mapByCategories(countMap);
+            const orderedMap = orderItems(categoryMap);
             
-            let actual = 0;
-            for(let eindex in equipped){
-                const itemId = equipped[eindex];
+            return orderedMap;
+            
+            function countItems(items){
+                const result = {};
+            
+                for(let index in items){
+                    const itemId = items[index];
+                    if(!result[itemId]){
+                        result[itemId] = 0;
+                    }
+                    result[itemId]++;
+                }
+                return result;
+            }
+            
+            function mapByCategories(map){
+                const result = {};
                 
-                const slotElement = createSlotElement();
-                    slotElement.innerHTML = Items.getItem(itemId).name;
-                    slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
-                container.appendChild(slotElement);
-                actual++;
+                for(let itemId in map){
+                    const itemData = itemCache.get(itemId);
+                    if(!result[itemData.category]){
+                        result[itemData.category] = {};
+                    }
+                    result[itemData.category][itemId] = map[itemId];
+                }
+                return result;
             }
             
-            for(actual; actual < slotNum; actual++){
-                const emptySlot = createSlotElement();
-                    emptySlot.innerHTML = Localization.getAdditionalContent("empty-slot");
-                container.appendChild(emptySlot);
+            function orderItems(map){
+                for(let categoryId in map){
+                    sortedCategory = orderMapByProperty(
+                        map[categoryId],
+                        function(a, b){
+                            return Items.getItem(a.getKey()).name.localeCompare(Items.getItem(b.getKey()));
+                        }
+                    );
+                    map[categoryId] = sortedCategory;
+                }
+                    
+                return orderMapByProperty(
+                    map,
+                    function(a, b){
+                        return CategoryNames.getCategoryName(a.getKey()).localeCompare(CategoryNames.getCategoryName(b.getKey()));
+                    }
+                );
             }
-            
-            function createSlotElement(){
-                const element = document.createElement("DIV");
-                    element.classList.add("slot");
-                return element;
-            }
-        }
-        
-        function fillShipDetails(shipData){
-            document.getElementById("ship-details").appendChild(equipmentLabelService.createShipDetails(shipData));
         }
     }
 })();

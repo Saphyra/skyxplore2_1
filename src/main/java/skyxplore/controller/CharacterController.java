@@ -37,7 +37,7 @@ public class CharacterController {
     private static final String CREATE_CHARACTER_MAPPING = "character";
     public static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
     private static final String GET_CHARACTERS_MAPPING = "character";
-    private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/equipment";
+    private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/storage";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
     private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name";
     public static final String RENAME_CHARACTER_MAPPING = "character";

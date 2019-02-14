@@ -10,6 +10,7 @@ window.Mapping = {
     DELETE_ACCOUNT: "user",
     DELETE_CHARACTER: "character/*",
     EMAIL_EXISTS: "user/email",
+    EQUIPMENT_STORAGE: "character/storage",
     GET_CHARACTERS: "character",
     GET_SHIP_DATA: "ship",
     ITEMS_OF_CATEGORY: "categories/*",
