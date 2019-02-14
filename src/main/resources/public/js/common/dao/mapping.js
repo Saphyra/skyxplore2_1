@@ -11,6 +11,7 @@ window.Mapping = {
     DELETE_CHARACTER: "character/*",
     EMAIL_EXISTS: "user/email",
     GET_CHARACTERS: "character",
+    GET_SHIP_DATA: "ship",
     ITEMS_OF_CATEGORY: "categories/*",
     LOGIN: "login",
     LOGOUT: "logout",
@@ -18,7 +19,6 @@ window.Mapping = {
     REGISTER: "user",
     RENAME_CHARACTER: "character",
     SELECT_CHARACTER: "character/*",
-    SHIP_DATA: "ship",
     USERNAME_EXISTS: "user/name",
     
     concat: function(path, id){

@@ -1,21 +1,21 @@
 (function EquipmentService(){
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     scriptLoader.loadScript("js/common/localization/items.js");
-
-    events.LOAD_EQUIPMENT = "load_equipment";
+    
+    events.LOAD_SHIP = "load_ship";
     
     eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.LOAD_EQUIPMENT},
-        loadEquipment
+        function(eventType){return eventType === events.LOAD_SHIP},
+        loadShip
     ));
     
-    function loadEquipment(){
+    function loadShip(){
         const request = new Request(HttpMethod.GET, Mapping.GET_SHIP_DATA);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
-            request.processValidResponse = function(ship){
-                displayShip(ship);
+            request.processValidResponse = function(shipData){
+                displayShip(shipData)
             }
         dao.sendRequestAsync(request);
     }

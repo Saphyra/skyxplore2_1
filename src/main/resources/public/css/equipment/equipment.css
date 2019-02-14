@@ -1,3 +1,13 @@
+#ship{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(100% - 30rem);
+    border-right: 3px ridge white;
+    padding: 1rem;
+}
+
 #storage {
     position: absolute;
     top: 0;
@@ -6,31 +16,31 @@
     width: 30rem;
 }
 
-.equipmentslotcontainer{
+#storage-title{
+    text-align: center;
+    border-bottom: 3px ridge white;
+}
+
+.equipment-slot-container{
     margin: 1rem;
-    
     text-align: center;
 }
 
-.equipmentslotcontainertitle{
+.equipment-slot-container-title{
     padding: 0.5rem;
     font-size: 1.5rem;
     border: 3px outset white;
     position: relative;
 }
 
-.equipmentslotlistcontainer{
+.equipment-slot-list-container{
     border: 3px outset white;
     border-top: none;
     text-align: left;
 }
 
-.equipmentslotlistcontainer .slot{
+.equipment-slot-list-container .slot{
     width: calc(33% - 0.45rem);
     height: auto;
     min-height: 3rem;
-}
-
-.equipmentlistelement{
-    
 }

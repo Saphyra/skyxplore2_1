@@ -1,0 +1,37 @@
+{
+  "title": "Felszerelés - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Felszerelés"
+      }
+    ],
+    "ship-table-header": [
+      {
+        "key": "innerHTML",
+        "message": "Hajó"
+      }
+    ],"storage-title": [
+      {
+        "key": "innerHTML",
+        "message": "Raktár"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "overview-button": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ]
+  },
+  "additionalContent": {
+    "empty-slot": "Üres"
+  }
+}

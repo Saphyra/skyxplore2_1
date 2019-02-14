@@ -21,30 +21,38 @@
 
     <MAIN>
         <SECTION id='ship'>
-            <TABLE>
+            <TABLE class="ship-table">
+                <TR>
+                    <TH colspan='5'>
+                        <H2 id="ship-table-header"></H2>
+                    </TH>
+                </TR>
+                
                 <TR>
                     <TD colspan='5'>
                         <DIV id='front-weapon' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
+                
                 <TR>
                     <TD colspan='5'>
                         <DIV id='front-defense' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
-
+                
                 <TR>
                     <TD rowspan='2'>
                         <DIV id='left-weapon' class='side-slot slot-container'></DIV>
                     </TD>
+                    
                     <TD rowspan='2'>
                         <DIV id='left-defense' class='side-slot slot-container'></DIV>
                     </TD>
-
+                    
                     <TD>
                         <DIV id='ship-details'></DIV>
                     </TD>
-
+                    
                     <TD rowspan='2'>
                         <DIV id='right-defense' class='side-slot slot-container'></DIV>
                     </TD>
@@ -52,18 +60,19 @@
                         <DIV id='right-weapon' class='side-slot slot-container'></DIV>
                     </TD>
                 </TR>
-
+                
                 <TR>
                     <TD>
                         <DIV id='connectors' class='slot-container'></DIV>
                     </TD>
                 </TR>
-
+                
                 <TR>
                     <TD colspan='5'>
                         <DIV id='back-defense' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
+                
                 <TR>
                     <TD colspan='5'>
                         <DIV id='back-weapon' class='front-slot slot-container'></DIV>
@@ -73,7 +82,7 @@
         </SECTION>
 
         <SECTION id='storage'>
-            <H1>Raktár</H1>
+            <H1 id="storage-title"></H1>
 
             <DIV id='equipment-list'></DIV>
         </SECTION>
