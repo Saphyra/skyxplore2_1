@@ -6,21 +6,18 @@
         init();
     });
     
-    let equipmentLoaded = false;
-    
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
-            return !equipmentLoaded
-                && eventType === events.LOAD_STATE_CHANGED
+            return eventType === events.LOAD_STATE_CHANGED
                 && LoadState.localizationLoaded
                 && LoadState.itemsLoaded
                 && LoadState.descriptionLoaded
                 && LoadState.messageCodesLoaded;
         },
         function(){
-            equipmentLoaded = true;
             eventProcessor.processEvent(new Event(events.LOAD_EQUIPMENT));
-        }
+        },
+        true
     ))
     
     function init(){

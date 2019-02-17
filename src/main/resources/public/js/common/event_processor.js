@@ -23,11 +23,15 @@
         logService.logToConsole("Processing event: " + eventType);
         
         let hasProcessor = false;
-        for(pindex in processors){
+        for(let pindex = processors.length - 1; pindex >= 0; pindex--){
             const processor = processors[pindex];
             if(processor.canProcess(eventType)){
                 hasProcessor = true;
                 setTimeout(function(){processor.process(event)}, 0);
+                if(processor.isOnceRunning()){
+                    logService.logToConsole("OnceRunning processor has run, removing from list...");
+                    processors.splice(pindex, 1);
+                }
             }
         }
         if(!hasProcessor){
@@ -36,9 +40,10 @@
     }
 })();
 
-function EventProcessor(canProcessCallback, processEventCallback){
+function EventProcessor(canProcessCallback, processEventCallback, onceRunningProcessor){
     const canProcess = canProcessCallback;
     const processEvent = processEventCallback;
+    const onceRunning = onceRunningProcessor == null || onceRunningProcessor == undefined ? false : onceRunningProcessor;
     
     this.canProcess = function(eventType){
         return canProcess(eventType);
@@ -46,6 +51,10 @@ function EventProcessor(canProcessCallback, processEventCallback){
     
     this.process = function(event){
         processEvent(event);
+    }
+    
+    this.isOnceRunning = function(){
+        return onceRunning;
     }
 }
 

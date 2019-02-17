@@ -6,6 +6,7 @@
     width: calc(100% - 30rem);
     border-right: 3px ridge white;
     padding: 1rem;
+    overflow: auto;
 }
 
 #storage {
@@ -14,11 +15,18 @@
     right: 0;
     bottom: 0;
     width: 30rem;
+    overflow: auto;
 }
 
 #storage-title{
     text-align: center;
     border-bottom: 3px ridge white;
+}
+
+#empty-storage{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem;
 }
 
 .equipment-slot-container{
@@ -43,4 +51,12 @@
     width: calc(33% - 0.45rem);
     height: auto;
     min-height: 3rem;
+}
+
+.slot, .slot *{
+    cursor: pointer;
+}
+
+.slot:hover{
+    border-color: red;
 }

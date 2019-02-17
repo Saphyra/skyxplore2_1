@@ -12,10 +12,17 @@
         "key": "innerHTML",
         "message": "Hajó"
       }
-    ],"storage-title": [
+    ],
+    "storage-title": [
       {
         "key": "innerHTML",
         "message": "Raktár"
+      }
+    ],
+    "empty-storage": [
+      {
+        "key": "innerHTML",
+        "message": "A raktár üres."
       }
     ],
     "logout-button": [

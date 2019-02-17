@@ -4,17 +4,15 @@
     scriptLoader.loadScript("js/shop/money_controller.js");
     scriptLoader.loadScript("js/shop/cart_controller.js");
     
+    let moneyLoaded = false;
+    
     $(document).ready(function(){
         init();
     });
     
-    let menuLoaded = false;
-    let moneyLoaded = false;
-    
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
-            return !menuLoaded
-                && eventType === events.LOAD_STATE_CHANGED
+            return eventType === events.LOAD_STATE_CHANGED
                 && LoadState.localizationLoaded
                 && LoadState.categoryNamesLoaded
                 && LoadState.descriptionLoaded
@@ -22,9 +20,9 @@
                 && moneyLoaded
         },
         function(){
-            menuLoaded = true;
             eventProcessor.processEvent(new Event(events.DISPLAY_MENU));
-        }
+        },
+        true
     ));
     
     eventProcessor.registerProcessor(new EventProcessor(
