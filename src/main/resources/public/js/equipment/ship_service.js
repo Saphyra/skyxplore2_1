@@ -4,6 +4,10 @@
     
     events.LOAD_SHIP = "load_ship";
     
+    const items = [];
+    
+    let shipType;
+    
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_SHIP},
         loadShip
@@ -13,9 +17,14 @@
         function(eventType){return eventType === events.ITEM_UNEQUIPPED},
         function(event){
             const payload = event.getPayload();
-            document.getElementById(payload.containerId).removeChild(payload.element);
-            document.getElementById(payload.containerId).appendChild(createEmptySlot());
+            document.getElementById(payload.getContainerId()).removeChild(payload.getElement());
+            document.getElementById(payload.getContainerId()).appendChild(createEmptySlot());
         }
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.SHIP_EQUIPPED},
+        prepareNewShip
     ));
     
     function loadShip(){
@@ -24,7 +33,8 @@
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(shipData){
-                displayShip(shipData)
+                displayShip(shipData);
+                shipType = shipData.shipType;
             }
         dao.sendRequestAsync(request);
     }
@@ -48,6 +58,7 @@
         
         function showSlots(containerId, slotNum, equipped){
             const container = document.getElementById(containerId);
+                container.innerHTML = "";
             
             let actual = 0;
             for(let eindex in equipped){
@@ -65,10 +76,14 @@
                 const slotElement = createSlotElement();
                     slotElement.innerHTML = Items.getItem(itemId).name;
                     slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
+                    
+                    const equippedItem = new EquippedItem(containerId, itemId, slotElement);
+                    items.push(equippedItem);
+                    
                     slotElement.onclick = function(){
                         eventProcessor.processEvent(new Event(
                             events.UNEQUIP_ITEM,
-                            {containerId: containerId, itemId: itemId, element: slotElement}
+                            equippedItem
                         ));
                     }
                 return slotElement;
@@ -76,8 +91,19 @@
         }
         
         function fillShipDetails(shipData){
+            document.getElementById("ship-details").innerHTML = "";
             document.getElementById("ship-details").appendChild(equipmentLabelService.createShipDetails(shipData));
         }
+    }
+    
+    function prepareNewShip(event){
+        const oldShipType = shipType;
+        eventProcessor.processEvent(new Event(
+            events.ADD_TO_STORAGE,
+            {getId: function(){return oldShipType;}}
+        ));
+        shipType = event.getPayload();
+        loadShip();
     }
     
     function createEmptySlot(){
@@ -91,5 +117,23 @@
         const element = document.createElement("DIV");
             element.classList.add("slot");
         return element;
+    }
+    
+    function EquippedItem(container, item, elem){
+        const containerId = container;
+        const itemId = item;
+        const itemContainerElement = elem;
+        
+        this.getId = function(){
+            return itemId;
+        }
+        
+        this.getContainerId = function(){
+            return containerId;
+        }
+        
+        this.getElement = function(){
+            return itemContainerElement;
+        }
     }
 })();

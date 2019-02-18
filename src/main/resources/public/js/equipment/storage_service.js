@@ -1,4 +1,4 @@
-(function EquipmentService(){
+(function StorageService(){
     scriptLoader.loadScript("js/common/equipment/item_cache.js");
     scriptLoader.loadScript("js/common/localization/category_names.js");
     scriptLoader.loadScript("js/common/localization/items.js");
@@ -20,8 +20,13 @@
                 || eventType == events.ADD_TO_STORAGE;
         },
         function(event){
-            displayItem(event.getPayload().itemId);
+            displayItem(event.getPayload().getId());
         }
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.SHIP_EQUIPPED},
+        removeFromStorage
     ));
     
     function loadEquipment(){
@@ -47,18 +52,6 @@
         }
         
         category.addItem(itemData);
-        
-        function getCategory(categoryId){
-            let result = null;
-            for(let cindex in categories){
-                const category = categories[cindex];
-                if(category.getId() == categoryId){
-                    result = category;
-                    break;
-                }
-            }
-            return result;
-        }
         
         function createCategory(categoryId){
             const container = document.createElement("DIV");
@@ -98,6 +91,29 @@
         }
     }
     
+    function removeFromStorage(event){
+        const itemId = event.getPayload();
+        const itemData = itemCache.get(itemId);
+        
+        const category = getCategory(itemData.category);
+        if(!category){
+            throwException("IllegalState", "There is no item in storage with categoryId " + itemData.category);
+        }
+            category.removeItem(itemId);
+    }
+    
+    function getCategory(categoryId){
+        let result = null;
+        for(let cindex in categories){
+            const category = categories[cindex];
+            if(category.getId() == categoryId){
+                result = category;
+                break;
+            }
+        }
+        return result;
+    }
+    
     function Category(id, container, list){
         const categoryId = id;
         const categoryContainer = container;
@@ -118,6 +134,72 @@
                 item = createItem(itemData);
             }
             item.increaseAmount();
+            
+            function createItem(itemData){
+                const container = document.createElement("DIV");
+                    container.classList.add("slot");
+                    container.classList.add("equipment-list-element");
+                    container.title = equipmentLabelService.assembleTitleOfItem(itemData.id);
+                    
+                    if(itemData.slot === "ship"){
+                        container.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.EQUIP_SHIP, itemData.id));
+                        }
+                    }
+                    
+                    const titleContainer = document.createElement("DIV");
+                        const itemName = document.createElement("SPAN");
+                            itemName.innerHTML = Items.getItem(itemData.id).name;
+                    titleContainer.appendChild(itemName);
+                        const amountPrefix = document.createElement("SPAN");
+                            amountPrefix.innerHTML = " (";
+                    titleContainer.appendChild(amountPrefix);
+                        const amountElement = document.createElement("SPAN");
+                    titleContainer.appendChild(amountElement);
+                        const amountSuffix = document.createElement("SPAN");
+                            amountSuffix.innerHTML = ")";
+                    titleContainer.appendChild(amountSuffix);
+                container.appendChild(titleContainer);
+                
+                const nextItemIndex = findNextItemAlphabetically(itemData.id);
+                const nextItem = items[nextItemIndex] || null;
+                listContainer.insertBefore(container, nextItem ? nextItem.getContainer() : null);
+                
+                const item = new Item(itemData.id, listContainer, container, amountElement);
+                items.splice(nextItemIndex, 0, item);
+                
+                return item;
+                
+                function findNextItemAlphabetically(itemId){
+                    const itemName = Items.getItem(itemId).name;
+                    let result = 0;
+                    for(result; result < items.length; result++){
+                        const nextItemName = Items.getItem(items[result].getId()).name;
+                        if(itemName.localeCompare(nextItemName) < 0){
+                            break;
+                        }
+                    }
+                    return result;
+                }
+            }
+        }
+        
+        this.removeItem = function(itemId){
+            let item = getItem(itemId);
+            if(!item){
+                throwException("IllegalState", "There is no items left in storage with itemId " + itemId);
+            }
+            item.decreaseAmount();
+            
+            if(!item.getAmount()){
+                listContainer.removeChild(item.getContainer());
+                items.splice(items.indexOf(item), 1);
+                
+                if(!items.length){
+                    document.getElementById("equipment-list").removeChild(categoryContainer);
+                    categories.splice(categories.indexOf(this), 1);
+                }
+            }
         }
         
         function getItem(itemId){
@@ -130,48 +212,6 @@
                 }
             }
             return result;
-        }
-        
-        function createItem(itemData){
-            const container = document.createElement("DIV");
-                container.classList.add("slot");
-                container.classList.add("equipment-list-element");
-                container.title = equipmentLabelService.assembleTitleOfItem(itemData.id);
-                
-                const titleContainer = document.createElement("DIV");
-                    const itemName = document.createElement("SPAN");
-                        itemName.innerHTML = Items.getItem(itemData.id).name;
-                titleContainer.appendChild(itemName);
-                    const amountPrefix = document.createElement("SPAN");
-                        amountPrefix.innerHTML = " (";
-                titleContainer.appendChild(amountPrefix);
-                    const amountElement = document.createElement("SPAN");
-                titleContainer.appendChild(amountElement);
-                    const amountSuffix = document.createElement("SPAN");
-                        amountSuffix.innerHTML = ")";
-                titleContainer.appendChild(amountSuffix);
-            container.appendChild(titleContainer);
-            
-            const nextItemIndex = findNextItemAlphabetically(itemData.id);
-            const nextItem = items[nextItemIndex] || null;
-            listContainer.insertBefore(container, nextItem ? nextItem.getContainer() : null);
-            
-            const item = new Item(itemData.id, listContainer, container, amountElement);
-            items.splice(nextItemIndex, 0, item);
-            
-            return item;
-            
-            function findNextItemAlphabetically(itemId){
-                const itemName = Items.getItem(itemId).name;
-                let result = 0;
-                for(result; result < items.length; result++){
-                    const nextItemName = Items.getItem(items[result].getId()).name;
-                    if(itemName.localeCompare(nextItemName) < 0){
-                        break;
-                    }
-                }
-                return result;
-            }
         }
     }
     
@@ -190,10 +230,19 @@
             return itemContainer;
         }
         
+        this.getAmount = function(){
+            return currentAmount;
+        }
+        
         parent.appendChild(container);
         
         this.increaseAmount = function(){
             currentAmount++;
+            amountElement.innerHTML = currentAmount;
+        }
+        
+        this.decreaseAmount = function(){
+            currentAmount--;
             amountElement.innerHTML = currentAmount;
         }
     }
