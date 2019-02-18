@@ -9,6 +9,15 @@
         loadShip
     ));
     
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.ITEM_UNEQUIPPED},
+        function(event){
+            const payload = event.getPayload();
+            document.getElementById(payload.containerId).removeChild(payload.element);
+            document.getElementById(payload.containerId).appendChild(createEmptySlot());
+        }
+    ));
+    
     function loadShip(){
         const request = new Request(HttpMethod.GET, Mapping.GET_SHIP_DATA);
             request.convertResponse = function(response){
@@ -44,28 +53,43 @@
             for(let eindex in equipped){
                 const itemId = equipped[eindex];
                 
-                const slotElement = createSlotElement();
-                    slotElement.innerHTML = Items.getItem(itemId).name;
-                    slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
-                container.appendChild(slotElement);
+                container.appendChild(createEquippedSlotElement(containerId, itemId));
                 actual++;
             }
             
             for(actual; actual < slotNum; actual++){
-                const emptySlot = createSlotElement();
-                    emptySlot.innerHTML = Localization.getAdditionalContent("empty-slot");
-                container.appendChild(emptySlot);
+                container.appendChild(createEmptySlot());
             }
             
-            function createSlotElement(){
-                const element = document.createElement("DIV");
-                    element.classList.add("slot");
-                return element;
+            function createEquippedSlotElement(containerId, itemId){
+                const slotElement = createSlotElement();
+                    slotElement.innerHTML = Items.getItem(itemId).name;
+                    slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
+                    slotElement.onclick = function(){
+                        eventProcessor.processEvent(new Event(
+                            events.UNEQUIP_ITEM,
+                            {containerId: containerId, itemId: itemId, element: slotElement}
+                        ));
+                    }
+                return slotElement;
             }
         }
         
         function fillShipDetails(shipData){
             document.getElementById("ship-details").appendChild(equipmentLabelService.createShipDetails(shipData));
         }
+    }
+    
+    function createEmptySlot(){
+        const emptySlot = createSlotElement();
+            emptySlot.innerHTML = Localization.getAdditionalContent("empty-slot");
+            emptySlot.classList.add("empty-slot");
+        return emptySlot;
+    }
+    
+    function createSlotElement(){
+        const element = document.createElement("DIV");
+            element.classList.add("slot");
+        return element;
     }
 })();

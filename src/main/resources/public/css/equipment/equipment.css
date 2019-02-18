@@ -53,10 +53,10 @@
     min-height: 3rem;
 }
 
-.slot, .slot *{
+.slot:not(.empty-slot), .slot:not(.empty-slot) *{
     cursor: pointer;
 }
 
-.slot:hover{
+.slot:not(.empty-slot):hover{
     border-color: red;
 }

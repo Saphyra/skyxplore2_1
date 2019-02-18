@@ -1,6 +1,7 @@
 (function PageController(){
     scriptLoader.loadScript("js/equipment/ship_service.js");
-    scriptLoader.loadScript("js/equipment/equipment_service.js");
+    scriptLoader.loadScript("js/equipment/storage_service.js");
+    scriptLoader.loadScript("js/equipment/equip_service.js");
     
     $(document).ready(function(){
         init();
@@ -29,7 +30,7 @@
                 && LoadState.messageCodesLoaded;
         },
         function(){
-            eventProcessor.processEvent(new Event(events.LOAD_EQUIPMENT));
+            eventProcessor.processEvent(new Event(events.LOAD_STORAGE));
         },
         true
     ));
