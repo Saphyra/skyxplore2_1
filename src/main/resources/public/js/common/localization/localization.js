@@ -18,7 +18,8 @@
                 request.processInvalidResponse = createFallBackQuery;
             
             dao.sendRequestAsync(request);
-        }
+        },
+        true
     ));
     
     function fillPageWithText(content){
