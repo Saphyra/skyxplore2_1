@@ -23,11 +23,22 @@
             displayItem(event.getPayload().getId());
         }
     ));
-    
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.SHIP_EQUIPPED},
-        removeFromStorage
+        function(event){
+            const itemId = event.getPayload();
+            removeFromStorage(itemId);
+        }
     ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+            function(eventType){return eventType === events.ITEM_EQUIPPED},
+            function(event){
+                const payload = event.getPayload();
+                removeFromStorage(payload.itemId);
+            }
+        ));
     
     function loadEquipment(){
         const request = new Request(HttpMethod.GET, Mapping.EQUIPMENT_STORAGE);
@@ -91,8 +102,7 @@
         }
     }
     
-    function removeFromStorage(event){
-        const itemId = event.getPayload();
+    function removeFromStorage(itemId){
         const itemData = itemCache.get(itemId);
         
         const category = getCategory(itemData.category);
@@ -145,6 +155,13 @@
                         container.onclick = function(){
                             eventProcessor.processEvent(new Event(events.EQUIP_SHIP, itemData.id));
                         }
+                    }else{
+                        container.draggable = true;
+                        container.ondragstart = function(e){
+                            e.dataTransfer.setData("item", itemData.id);
+                            equipService.dragStart(e);
+                        }
+                        container.ondragend = equipService.dragEnd;
                     }
                     
                     const titleContainer = document.createElement("DIV");

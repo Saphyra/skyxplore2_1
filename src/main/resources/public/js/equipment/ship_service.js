@@ -5,8 +5,11 @@
     events.LOAD_SHIP = "load_ship";
     
     const items = [];
-    
     let shipType;
+
+    window.shipService = new function(){
+        this.isExtenderOfTypeEquipped = isExtenderOfTypeEquipped;
+    }
     
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_SHIP},
@@ -18,7 +21,7 @@
         function(event){
             const payload = event.getPayload();
             document.getElementById(payload.getContainerId()).removeChild(payload.getElement());
-            document.getElementById(payload.getContainerId()).appendChild(createEmptySlot());
+            document.getElementById(payload.getContainerId()).appendChild(createEmptySlot(payload.getContainerId()));
         }
     ));
     
@@ -26,6 +29,27 @@
         function(eventType){return eventType === events.SHIP_EQUIPPED},
         prepareNewShip
     ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.ITEM_EQUIPPED},
+        function(event){
+            const payload = event.getPayload();
+            equipItem(payload.itemId, payload.containerId);
+        }
+    ));
+
+    function isExtenderOfTypeEquipped(extendedSlot){
+        let result = false;
+        for(let iIndex in items){
+            const item = items[iIndex];
+            const itemData = itemCache.get(item.getId());
+            if(itemData.slot === "extender" && itemData.extendedslot === extendedSlot){
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
     
     function loadShip(){
         const request = new Request(HttpMethod.GET, Mapping.GET_SHIP_DATA);
@@ -69,24 +93,7 @@
             }
             
             for(actual; actual < slotNum; actual++){
-                container.appendChild(createEmptySlot());
-            }
-            
-            function createEquippedSlotElement(containerId, itemId){
-                const slotElement = createSlotElement();
-                    slotElement.innerHTML = Items.getItem(itemId).name;
-                    slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
-                    
-                    const equippedItem = new EquippedItem(containerId, itemId, slotElement);
-                    items.push(equippedItem);
-                    
-                    slotElement.onclick = function(){
-                        eventProcessor.processEvent(new Event(
-                            events.UNEQUIP_ITEM,
-                            equippedItem
-                        ));
-                    }
-                return slotElement;
+                container.appendChild(createEmptySlot(containerId));
             }
         }
         
@@ -105,11 +112,38 @@
         shipType = event.getPayload();
         loadShip();
     }
-    
-    function createEmptySlot(){
+
+    function equipItem(itemId, containerId){
+        $(createEquippedSlotElement(containerId, itemId)).insertBefore(getFirstEmptySlotInContainer(containerId));
+        getFirstEmptySlotInContainer(containerId).remove();
+
+        function getFirstEmptySlotInContainer(containerId){
+            return $("#" + containerId + " .empty-slot").first();
+        }
+    }
+
+    function createEquippedSlotElement(containerId, itemId){
+        const slotElement = createSlotElement();
+            slotElement.innerHTML = Items.getItem(itemId).name;
+            slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
+
+            const equippedItem = new EquippedItem(containerId, itemId, slotElement);
+            items.push(equippedItem);
+
+            slotElement.onclick = function(){
+                eventProcessor.processEvent(new Event(
+                    events.UNEQUIP_ITEM,
+                    equippedItem
+                ));
+            }
+        return slotElement;
+    }
+
+    function createEmptySlot(containerId){
         const emptySlot = createSlotElement();
             emptySlot.innerHTML = Localization.getAdditionalContent("empty-slot");
             emptySlot.classList.add("empty-slot");
+            emptySlot.setAttribute("parent-id", containerId);
         return emptySlot;
     }
     
