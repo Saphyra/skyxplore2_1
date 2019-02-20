@@ -66,7 +66,7 @@
             });
 
         function isEquipmentAllowed(itemData){
-            return itemData.slot === "extender" ? !shipService.isExtenderOfTypeEquipped(itemData.extendedslot) : true;
+            return itemData.type === "extender" ? !shipService.isExtenderOfTypeEquipped(itemData.extendedslot) : true;
         }
     }
 })();

@@ -49,11 +49,12 @@
         for(let iIndex in items){
             const item = items[iIndex];
             const itemData = itemCache.get(item.getId());
-            if(itemData.slot === "extender" && itemData.extendedslot === extendedSlot){
+            if(itemData.type === "extender" && itemData.extendedslot === extendedSlot){
                 result = true;
                 break;
             }
         }
+        logService.logToConsole("Is " + extendedSlot + " already equipped: " + result);
         return result;
     }
     
