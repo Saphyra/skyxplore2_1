@@ -4,7 +4,7 @@
     
     events.LOAD_SHIP = "load_ship";
     
-    const equipments = new Equipments();
+    let equipments = new Equipments();
     let shipType;
 
     window.shipService = new function(){
@@ -20,6 +20,12 @@
         function(eventType){return eventType === events.ITEM_UNEQUIPPED},
         function(event){
             const payload = event.getPayload();
+
+            if(itemCache.get(payload.getId()).type == "extender"){
+                eventProcessor.processEvent(new Event(events.LOAD_SHIP));
+                return;
+            }
+
             document.getElementById(payload.getContainerId()).removeChild(payload.getElement());
             document.getElementById(payload.getContainerId()).appendChild(createEmptySlot(payload.getContainerId()));
             equipments.removeItem(payload.getContainerId(), payload.getId());
@@ -37,7 +43,10 @@
             const payload = event.getPayload();
             equipItem(payload.itemId, payload.containerId);
 
-            if(itemCache.get(payload.itemId).slot == "connector"){
+            const itemData = itemCache.get(payload.itemId);
+            if(itemData.type == "extender"){
+                eventProcessor.processEvent(new Event(events.LOAD_SHIP));
+            }else if(itemData.slot == "connector"){
                 equipmentLabelService.updateShipStats(shipType, collectItemIds(equipments.getItems(payload.containerId)));
             }
         }
@@ -64,6 +73,7 @@
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(shipData){
+                equipments = new Equipments();
                 displayShip(shipData);
                 shipType = shipData.shipType;
             }
@@ -117,7 +127,7 @@
             {getId: function(){return oldShipType;}}
         ));
         shipType = event.getPayload();
-        loadShip();
+        eventProcessor.processEvent(new Event(events.LOAD_SHIP));
     }
 
     function equipItem(itemId, containerId){

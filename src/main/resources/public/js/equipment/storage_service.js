@@ -20,7 +20,12 @@
                 || eventType == events.ADD_TO_STORAGE;
         },
         function(event){
-            displayItem(event.getPayload().getId());
+            const payload = event.getPayload();
+            if(itemCache.get(payload.getId()).type == "extender"){
+                eventProcessor.processEvent(new Event(events.LOAD_STORAGE));
+                return;
+            }
+            displayItem(payload.getId());
         }
     ));
 
