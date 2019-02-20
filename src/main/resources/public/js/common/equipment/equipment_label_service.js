@@ -6,6 +6,7 @@
     window.equipmentLabelService = new function(){
         this.assembleTitleOfItem = assembleTitleOfItem;
         this.createShipDetails = createShipDetails;
+        this.updateShipStats = updateShipStats;
     }
     
     function assembleTitleOfItem(itemId){
@@ -140,58 +141,65 @@
             
         return container;
 
-        function countCoreHull(baseHull, connectors){
-            let result = baseHull;
-            for(let cindex in connectors){
-                const connectorData = itemCache.get(connectors[cindex]);
-                if(connectorData.type == "corehull"){
-                    result += connectorData.capacity;
-                }
-            }
-
-            return result;
-        }
-
-        function countEnergy(connectors){
-            let result = 0;
-            for(let cindex in connectors){
-                const connectorData = itemCache.get(connectors[cindex]);
-                if(connectorData.type == "battery"){
-                    result += connectorData.capacity;
-                }
-            }
-            
-            return result;
-        }
-        
-        function countEnergyRegen(connectors){
-            let result = 0;
-            for(let cindex in connectors){
-                const connectorData = itemCache.get(connectors[cindex]);
-                if(connectorData.type == "generator"){
-                    result += connectorData.energyrecharge;
-                }
-            }
-            
-            return result;
-        }
-        
-        function countStorage(connectors){
-            let result = 0;
-            for(let cindex in connectors){
-                const connectorData = itemCache.get(connectors[cindex]);
-                if(connectorData.type == "storage"){
-                    result += connectorData.capacity;
-                }
-            }
-            
-            return result;
-        }
-
         function createSpan(text){
             const label = document.createElement("SPAN");
                 label.innerHTML = text;
             return label;
         }
+    }
+
+    function updateShipStats(shipType, connectors){
+        $("#core-hull-value").text(countCoreHull(itemCache.get(shipType).coreHull, connectors));
+        $("#energy-value").text(countEnergy(connectors));
+        $("#energy-regen-value").text(countEnergyRegen(connectors));
+        $("#storage-value").text(countStorage(connectors));
+    }
+
+    function countCoreHull(baseHull, connectors){
+        let result = baseHull;
+        for(let cindex in connectors){
+            const connectorData = itemCache.get(connectors[cindex]);
+            if(connectorData.type == "corehull"){
+                result += connectorData.capacity;
+            }
+        }
+
+        return result;
+    }
+
+    function countEnergy(connectors){
+        let result = 0;
+        for(let cindex in connectors){
+            const connectorData = itemCache.get(connectors[cindex]);
+            if(connectorData.type == "battery"){
+                result += connectorData.capacity;
+            }
+        }
+
+        return result;
+    }
+
+    function countEnergyRegen(connectors){
+        let result = 0;
+        for(let cindex in connectors){
+            const connectorData = itemCache.get(connectors[cindex]);
+            if(connectorData.type == "generator"){
+                result += connectorData.energyrecharge;
+            }
+        }
+
+        return result;
+    }
+
+    function countStorage(connectors){
+        let result = 0;
+        for(let cindex in connectors){
+            const connectorData = itemCache.get(connectors[cindex]);
+            if(connectorData.type == "storage"){
+                result += connectorData.capacity;
+            }
+        }
+
+        return result;
     }
 })();

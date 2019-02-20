@@ -4,7 +4,7 @@
     
     events.LOAD_SHIP = "load_ship";
     
-    const items = [];
+    const equipments = new Equipments();
     let shipType;
 
     window.shipService = new function(){
@@ -22,6 +22,7 @@
             const payload = event.getPayload();
             document.getElementById(payload.getContainerId()).removeChild(payload.getElement());
             document.getElementById(payload.getContainerId()).appendChild(createEmptySlot(payload.getContainerId()));
+            equipments.removeItem(payload.getContainerId(), payload.getId());
         }
     ));
     
@@ -35,11 +36,16 @@
         function(event){
             const payload = event.getPayload();
             equipItem(payload.itemId, payload.containerId);
+
+            if(itemCache.get(payload.itemId).slot == "connector"){
+                equipmentLabelService.updateShipStats(shipType, collectItemIds(equipments.getItems(payload.containerId)));
+            }
         }
     ));
 
     function isExtenderOfTypeEquipped(extendedSlot){
         let result = false;
+        const items = equipments.getItems("connectors");
         for(let iIndex in items){
             const item = items[iIndex];
             const itemData = itemCache.get(item.getId());
@@ -128,7 +134,7 @@
             slotElement.title = equipmentLabelService.assembleTitleOfItem(itemId);
 
             const equippedItem = new EquippedItem(containerId, itemId, slotElement);
-            items.push(equippedItem);
+            equipments.addEquipment(containerId, equippedItem);
 
             slotElement.onclick = function(){
                 eventProcessor.processEvent(new Event(
@@ -152,7 +158,44 @@
             element.classList.add("slot");
         return element;
     }
-    
+
+        function collectItemIds(items){
+            const result = [];
+                for(let iIndex in items){
+                    result.push(items[iIndex].getId());
+                }
+            return result;
+        }
+
+    function Equipments(){
+        const equipped = {};
+
+        this.addEquipment = function(containerId, equippedItem){
+            if(!equipped[containerId]){
+                equipped[containerId] = [];
+            }
+            equipped[containerId].push(equippedItem);
+        }
+
+        this.getItems = function(containerId){
+            return equipped[containerId] || [];
+        }
+
+        this.removeItem = function(containerId, itemId){
+            const items = this.getItems(containerId);
+            for(let iIndex in items){
+                if(items[iIndex].getId() == itemId){
+                    items.splice(iIndex, 1);
+                    break;
+                }
+            }
+
+            if(itemCache.get(itemId).slot == "connector"){
+                equipmentLabelService.updateShipStats(shipType, collectItemIds(items));
+            }
+        }
+    }
+
     function EquippedItem(container, item, elem){
         const containerId = container;
         const itemId = item;
