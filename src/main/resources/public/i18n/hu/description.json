@@ -2,6 +2,7 @@
   "level": "Szint",
   "score": "Pont",
   "energyusage": "Energiahasználat",
+  "abilities": "Képességek",
   "active": "Aktív",
   "reload": "Újratöltés",
   "extra-corehull": "Extra magburkolat",

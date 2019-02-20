@@ -92,29 +92,41 @@
                 shipDetailsContainer.title = assembleTitleOfItem(shipData.shipType);
                 
                 const coreHullContainer = document.createElement("DIV");
-                    coreHullContainer.innerHTML = Description.getDescription("corehull") + ": " + shipData.coreHull;
+                coreHullContainer.appendChild(createSpan(Description.getDescription("corehull") + ": "));
+                    coreHullValue = createSpan(countCoreHull(shipData.coreHull, shipData.connectorEquipped));
+                    coreHullValue.id = "core-hull-value";
+                coreHullContainer.appendChild(coreHullValue);
             shipDetailsContainer.appendChild(coreHullContainer);
             
                 const energyContainer = document.createElement("DIV");
-                    const energy = countEnergy(shipData.connectorEquipped);
-                    const energyRegeneration = countEnergyRegen(shipData.connectorEquipped);
-                    energyContainer.innerHTML = Description.getDescription("energy") + ": " + energy + " - " + Description.getDescription("energyregen") + ": " + energyRegeneration;
+                energyContainer.appendChild(createSpan(Description.getDescription("energy") + ": "));
+                    const energyValue = createSpan(countEnergy(shipData.connectorEquipped));
+                        energyValue.id = "energy-value";
+                energyContainer.appendChild(energyValue);
+                energyContainer.appendChild(createSpan(" - "));
+                energyContainer.appendChild(createSpan(Description.getDescription("energyregen") + ": "));
+                    const energyRegenValue = createSpan(countEnergyRegen(shipData.connectorEquipped));
+                        energyRegenValue.id = "energy-regen-value";
+                energyContainer.appendChild(energyRegenValue);
             shipDetailsContainer.appendChild(energyContainer);
             
                 const storageContainer = document.createElement("DIV");
-                    const storage = countStorage(shipData.connectorEquipped);
-                    storageContainer.innerHTML = Description.getDescription("storage") + ": " + storage;
+                storageContainer.appendChild(createSpan(Description.getDescription("storage") + ": "));
+                    const storageValue = createSpan(countStorage(shipData.connectorEquipped));
+                        storageValue.id = "storage-value";
+                storageContainer.appendChild(storageValue);
             shipDetailsContainer.appendChild(storageContainer);
             
         container.appendChild(shipDetailsContainer);
         
                 const abilityTitle = document.createElement("DIV");
-                    abilityTitle.innerHTML = "Képességek";
+                    abilityTitle.innerHTML = Description.getDescription("abilities");
                     abilityTitle.classList.add("ship-details-ability-title");
             container.appendChild(abilityTitle);
                 
                 const abilityContainer = document.createElement("DIV");
                     abilityContainer.classList.add("ship-details-ability-container");
+                    abilityContainer.id = "ship-abilities";
                     
                     for(let aindex in shipData.ability){
                         const abilityData = itemCache.get(shipData.ability[aindex]);
@@ -127,7 +139,19 @@
             container.appendChild(abilityContainer);
             
         return container;
-        
+
+        function countCoreHull(baseHull, connectors){
+            let result = baseHull;
+            for(let cindex in connectors){
+                const connectorData = itemCache.get(connectors[cindex]);
+                if(connectorData.type == "corehull"){
+                    result += connectorData.capacity;
+                }
+            }
+
+            return result;
+        }
+
         function countEnergy(connectors){
             let result = 0;
             for(let cindex in connectors){
@@ -162,6 +186,12 @@
             }
             
             return result;
+        }
+
+        function createSpan(text){
+            const label = document.createElement("SPAN");
+                label.innerHTML = text;
+            return label;
         }
     }
 })();
