@@ -5,8 +5,6 @@ function StorageItem(id, parent, container, amount){
     const amountElement = amount;
     let currentAmount = 0;
 
-    parent.appendChild(container);
-
     this.getId = function(){
         return itemId;
     }

@@ -58,7 +58,9 @@ function StorageCategory(id, container, list){
 
             const nextItemIndex = findNextItemAlphabetically(itemData.id);
             const nextItem = items[nextItemIndex] || null;
-            listContainer.insertBefore(container, nextItem ? nextItem.getContainer() : null);
+
+            const otherContainer = nextItem ? nextItem.getContainer() : null;
+            listContainer.insertBefore(container, otherContainer);
 
             const item = new StorageItem(itemData.id, listContainer, container, amountElement);
             items.splice(nextItemIndex, 0, item);
