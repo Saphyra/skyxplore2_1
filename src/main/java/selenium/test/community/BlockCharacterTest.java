@@ -1,5 +1,6 @@
 package selenium.test.community;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
@@ -63,6 +64,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .blockTestHelper(blockTestHelper)
@@ -73,6 +75,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldShowOnlyMatchingCharacters() {
         FilterTestShouldShowOnlyMatchingCharacter.builder()
             .blockTestHelper(blockTestHelper)
@@ -83,6 +86,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldNotShowAlreadyBlocked() {
         FilterTestShouldNotShowAlreadyBlocked.builder()
             .blockTestHelper(blockTestHelper)
@@ -93,6 +97,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBlockCharacterShouldNotSendMail() {
         BlockCharacterTestShouldNotSendMail.builder()
             .communityTestHelper(communityTestHelper)
@@ -104,6 +109,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBlockCharacterShouldNotSendFriendRequest() {
         BlockCharacterTestShouldNotSendFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
@@ -115,6 +121,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBlockCharacterShouldDeleteFriendRequest() {
         BlockCharacterTestShouldDeleteFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
@@ -127,6 +134,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBlockCharacterShouldDeleteFriendship() {
         BlockCharacterTestShouldDeleteFriendship.builder()
             .communityTestHelper(communityTestHelper)
@@ -139,6 +147,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBlockCharacterShouldUnableToReplyMail() {
         BlockCharacterShouldUnableReplyMail.builder()
             .communityTestHelper(communityTestHelper)
@@ -153,6 +162,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testUnblockCharacter() {
         UnblockCharacterTest.builder()
             .communityTestHelper(communityTestHelper)

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -55,6 +56,7 @@ public class BuildAndFinishTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBuildAndFinish() {
         factoryTestHelper.registerAndGoToFactoryPage();
 

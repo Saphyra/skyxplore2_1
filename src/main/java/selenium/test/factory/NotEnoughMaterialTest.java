@@ -1,7 +1,11 @@
 package selenium.test.factory;
 
+import static org.junit.Assert.assertFalse;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.SeleniumProduct;
 import selenium.logic.flow.CreateCharacter;
@@ -10,8 +14,6 @@ import selenium.logic.flow.Registration;
 import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.FactoryPage;
 import selenium.test.factory.util.FactoryTestHelper;
-
-import static org.junit.Assert.assertFalse;
 
 public class NotEnoughMaterialTest extends SeleniumTestApplication {
     private FactoryTestHelper factoryTestHelper;
@@ -29,6 +31,7 @@ public class NotEnoughMaterialTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testNotEnoughMaterial() {
         factoryTestHelper.registerAndGoToFactoryPage();
 

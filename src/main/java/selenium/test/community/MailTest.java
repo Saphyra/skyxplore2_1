@@ -1,5 +1,6 @@
 package selenium.test.community;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import selenium.SeleniumTestApplication;
@@ -70,6 +71,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -81,6 +83,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldShowMatchingCharacters() {
         FilterTestShouldShowMatchingCharacters.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -92,6 +95,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testSendMailEmptySubject() {
         SendMailEmptySubjectTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -103,6 +107,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testSendMailEmptyMessage() {
         SendMailEmptyMessageTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -114,6 +119,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testSendMailEmptyAddressee() {
         SendMailEmptyAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -125,6 +131,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testSendMailChangedAddressee() {
         SendMailChangedAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -136,6 +143,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testSuccessfullySentMail() {
         SuccessfullySentMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -148,6 +156,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testReadMail() {
         ReadMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -160,6 +169,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testArchiveMail() {
         ArchiveMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -173,6 +183,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkArchiveMail() {
         BulkArchiveMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -186,6 +197,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testRestoreMail() {
         RestoreMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -199,6 +211,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkRestoreMail() {
         BulkRestoreMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -212,6 +225,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testDeleteBySender() {
         DeleteBySenderTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -225,6 +239,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkDeleteBySender() {
         BulkDeleteBySenderTest.builder()
             .driver(driver)
@@ -239,6 +254,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testDeleteByAddressee() {
         DeleteByAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -252,6 +268,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkDeleteByAddressee() {
         BulkDeleteByAddresseeTest.builder()
             .driver(driver)
@@ -266,6 +283,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testDeleteArchivedMail() {
         DeleteArchivedMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -279,6 +297,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkDeleteArchivedMails() {
         BulkDeleteArchivedMailsTest.builder()
             .driver(driver)
@@ -293,6 +312,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testMarkMailAsRead() {
         MarkMailAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -305,6 +325,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkMarkMailsAsRead() {
         BulkMarkMailsAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -318,6 +339,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testMarkMailAsUnread() {
         MarkMailAsUnreadTest.builder()
             .driver(driver)
@@ -331,6 +353,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testBulkMarkMailsAsUnread() {
         BulkMarkMailsAsUnreadTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -344,6 +367,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testReplyMail() {
         ReplyMailTest.builder()
             .communityTestInitializer(communityTestInitializer)

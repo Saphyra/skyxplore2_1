@@ -1,5 +1,6 @@
 package selenium.test.community;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
@@ -49,6 +50,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .communityTestHelper(communityTestHelper)
@@ -59,6 +61,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldShowOnlyMatchingCharacterNames() {
         FilterTestShouldShowOnlyMatchingCharacterNames.builder()
             .communityTestHelper(communityTestHelper)
@@ -69,6 +72,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldNotShowWhenFriendRequestSent() {
         FilterTestShouldNotShowWhenFriendRequestSent.builder()
             .communityTestHelper(communityTestHelper)
@@ -79,6 +83,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testFilterShouldNotShowFriends() {
         FilterTestShouldNotShowWhenAlreadyFriend.builder()
             .communityTestHelper(communityTestHelper)
@@ -89,6 +94,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testSendFriendRequest() {
         SendFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)
@@ -100,6 +106,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testCancelFriendRequest() {
         CancelFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)
@@ -111,6 +118,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testDeclineFriendRequestTest() {
         DeclineFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)
@@ -122,6 +130,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    @Ignore
     public void testAcceptFriendRequest() {
         AcceptFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)
