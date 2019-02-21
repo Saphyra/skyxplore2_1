@@ -34,7 +34,7 @@ public abstract class SeleniumTestApplication {
     };
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
-    private static final boolean HEADLESS_MODE = true;
+    private static final boolean HEADLESS_MODE = false;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
