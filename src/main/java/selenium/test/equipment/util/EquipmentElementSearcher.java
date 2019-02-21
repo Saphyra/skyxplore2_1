@@ -1,6 +1,13 @@
 package selenium.test.equipment.util;
 
-import static java.lang.Math.toIntExact;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.ContainerId;
+import selenium.logic.domain.EquippedEquipment;
+import selenium.logic.domain.UnequippedEquipment;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,16 +15,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import selenium.logic.domain.ContainerId;
-import selenium.logic.domain.EquippedEquipment;
-import selenium.logic.domain.UnequippedEquipment;
-import selenium.logic.util.Util;
+import static java.lang.Math.toIntExact;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -73,7 +72,7 @@ public class EquipmentElementSearcher {
         Supplier<Optional<UnequippedEquipment>> supplier = () -> getAllUnequippedEquipments().stream()
             .filter(unequippedEquipment -> itemId.equalsIgnoreCase(unequippedEquipment.getId()))
             .findAny();
-        return Util.getWithWait(supplier, "Querying unequippedEquipment with id " + itemId)
+        return getWithWait(supplier, "Querying unequippedEquipment with id " + itemId)
             .orElseThrow(() -> new RuntimeException("Unequipped equipment not found with itemId " + itemId));
     }
 

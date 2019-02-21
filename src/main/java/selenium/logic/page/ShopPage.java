@@ -1,10 +1,11 @@
 package selenium.logic.page;
 
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import lombok.RequiredArgsConstructor;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class ShopPage {
@@ -13,10 +14,12 @@ public class ShopPage {
     private final WebDriver driver;
 
     public WebElement getCategoryButtonWithName(String categoryName) {
-        return driver.findElements(By.cssSelector(SELECTOR_CATEGORY_BUTTONS)).stream()
-            .filter(element -> element.getText().equals(categoryName))
-            .findAny()
-            .orElseThrow(()->new RuntimeException("Category button not found with categoryName " + categoryName));
+        return getWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_CATEGORY_BUTTONS)).stream()
+                .filter(element -> element.getText().equals(categoryName))
+                .findAny(),
+            "Querying category with name " + categoryName)
+            .orElseThrow(() -> new RuntimeException("Category button not found with categoryName " + categoryName));
     }
 
     public WebElement getEmptyCartContainer() {

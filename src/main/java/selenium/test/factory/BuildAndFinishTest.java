@@ -1,21 +1,9 @@
 package selenium.test.factory;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.Util.sleep;
-import static selenium.logic.util.Util.validateIfPresent;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.SeleniumProduct;
 import selenium.logic.flow.CreateCharacter;
@@ -25,6 +13,17 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.FactoryPage;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.factory.util.FactoryTestHelper;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.Util.validateIfPresent;
+import static selenium.logic.util.WaitUtil.sleep;
 
 public class BuildAndFinishTest extends SeleniumTestApplication {
     private static final int AMOUNT_TO_PRODUCE = 3;

@@ -1,21 +1,19 @@
 package selenium.logic.validator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.Util.sleep;
-
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.CartItem;
 import selenium.logic.domain.Category;
 import selenium.logic.helper.CostCounter;
 import selenium.logic.helper.ShopElementSearcher;
 import selenium.logic.page.ShopPage;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class CartVerifier {
@@ -68,7 +66,6 @@ public class CartVerifier {
     }
 
     public void verifyEmptyCart() {
-        sleep(1000);
         assertTrue(shopPage.getEmptyCartContainer().isDisplayed());
         List<WebElement> elements = driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS));
         assertEquals(0, elements.size());

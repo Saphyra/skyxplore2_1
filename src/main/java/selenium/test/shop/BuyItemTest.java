@@ -1,10 +1,8 @@
 package selenium.test.shop;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.WebElement;
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.Category;
 import selenium.logic.flow.BuyItem;
@@ -13,6 +11,11 @@ import selenium.logic.flow.Navigate;
 import selenium.logic.flow.Registration;
 import selenium.logic.flow.SelectCharacter;
 import selenium.test.shop.util.ShopTestInitializer;
+
+import java.util.Optional;
+
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 public class BuyItemTest extends SeleniumTestApplication {
     private static final String BOUGHT_ITEM_ID = "bat-01";
@@ -45,8 +48,12 @@ public class BuyItemTest extends SeleniumTestApplication {
 
     private void verifyItemInStorage() {
         navigate.toEquipmentPage();
-
-        String boughtItemName = driver.findElement(By.cssSelector(SELECTOR_STORAGE_ITEMS)).getText();
+        Optional<WebElement> boughtItem = getWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_STORAGE_ITEMS)).stream().findFirst(),
+            "Querying item in storage"
+        );
+        String boughtItemName = boughtItem.orElseThrow(()-> new RuntimeException("Item not found in storage."))
+            .getText();
         assertTrue(BOUGHT_ITEM_ID.equalsIgnoreCase(boughtItemName.split(" ")[0]));
     }
 }

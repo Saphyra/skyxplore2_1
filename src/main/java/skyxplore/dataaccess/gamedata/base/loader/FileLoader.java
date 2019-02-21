@@ -26,7 +26,7 @@ public class FileLoader<T> extends AbstractLoader<T> {
 
     @Override
     public void load() {
-        log.info("Loading elements from file.");
+        log.debug("Loading elements from file.");
         if (!root.isDirectory()) {
             throw new IllegalArgumentException("Source must be a directory. Path: " + root.getAbsolutePath());
         }

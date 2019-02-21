@@ -13,7 +13,6 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.logic.util.LinkUtil.HOST;
-import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
 import static selenium.logic.util.Util.cleanNotifications;
 
 public class Registration {
@@ -83,8 +82,7 @@ public class Registration {
     }
 
     private void validateRegistration() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getNotificationElementsLocator()));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(CHARACTER_SELECT));
 
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
         notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_REGISTRATION));

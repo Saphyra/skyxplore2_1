@@ -9,7 +9,6 @@ import selenium.logic.validator.NotificationValidator;
 import java.util.Map;
 
 import static selenium.logic.util.LinkUtil.HOST;
-import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
 
 public class Logout {
     private static final String MESSAGE_CODE_SUCCESSFUL_LOGOUT = "SUCCESSFUL_LOGOUT";
@@ -36,7 +35,6 @@ public class Logout {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.urlToBe(HOST));
 
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getNotificationElementsLocator()));
         notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_LOGOUT));
     }
 }

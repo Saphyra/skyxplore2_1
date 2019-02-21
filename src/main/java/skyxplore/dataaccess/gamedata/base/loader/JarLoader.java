@@ -33,7 +33,7 @@ public class JarLoader<T> extends AbstractLoader<T> {
 
     @Override
     public void load() {
-        log.info("Loading from JAR... JarPath: {}", jarPath);
+        log.debug("Loading from JAR... JarPath: {}", jarPath);
 
         JarFile jarFile = getJarEntries();
         Enumeration<JarEntry> entries = jarFile.entries();
@@ -62,7 +62,7 @@ public class JarLoader<T> extends AbstractLoader<T> {
         if (entryName.startsWith(jarPath) && entryName.endsWith(".json")) {
             TypedItem typedItem = getTypedItem(jarFile, entry);
             if (isTypeMatches(typedItem)) {
-                log.info("Matched element: {}", entryName);
+                log.debug("Matched element: {}", entryName);
                 String contentString = readJarEntry(jarFile, entry);
                 if (clazz == String.class) {
                     String[] splitted = FilenameUtils.removeExtension(entry.getName()).split("/");
@@ -82,7 +82,7 @@ public class JarLoader<T> extends AbstractLoader<T> {
         String json = readJarEntry(jarFile, entry);
         TypedItem typedItem = FileUtil.readValue(objectMapper, json, TypedItem.class);
         if (isNull(typedItem.getType())) {
-            log.info("{} has no type.", entry.getName());
+            log.warn("{} has no type.", entry.getName());
         }
         return typedItem;
     }

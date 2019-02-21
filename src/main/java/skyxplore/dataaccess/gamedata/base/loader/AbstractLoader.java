@@ -19,7 +19,7 @@ public abstract class AbstractLoader<T> implements ContentLoader {
     protected void putGeneralDescription(T content, AbstractGameDataService<T> gameDataService, String path) {
         if (content instanceof GeneralDescription) {
             GeneralDescription d = (GeneralDescription) content;
-            log.info("Loaded element. Key: {}, Value: {}", d.getId(), content);
+            log.debug("Loaded element. Key: {}, Value: {}", d.getId(), content);
             gameDataService.put(d.getId(), content);
         } else {
             throw new RuntimeException(path + " cannot be loaded. Unknown data type.");

@@ -1,11 +1,7 @@
 package selenium.test.equipment;
 
-import static org.junit.Assert.assertEquals;
-import static selenium.logic.util.Util.getWithWait;
-
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.ContainerId;
 import selenium.logic.domain.EquippedEquipment;
@@ -17,6 +13,9 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.equipment.util.EquipmentElementSearcher;
 import selenium.test.equipment.util.EquipmentTestHelper;
+
+import static org.junit.Assert.assertEquals;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 public class EquipTest extends SeleniumTestApplication {
     private EquipmentElementSearcher equipmentElementSearcher;

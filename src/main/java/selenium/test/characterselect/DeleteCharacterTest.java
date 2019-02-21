@@ -2,6 +2,8 @@ package selenium.test.characterselect;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.flow.CreateCharacter;
@@ -35,6 +37,7 @@ public class DeleteCharacterTest extends SeleniumTestApplication {
         SeleniumCharacter character = createCharacter.createCharacter();
 
         clickDeleteButton(character);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
 
         notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_CHARACTER_DELETED));

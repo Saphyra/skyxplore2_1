@@ -24,7 +24,7 @@ public class CommonDataQueryService extends AbstractGameDataService<GeneralDescr
 
     private void loadItems(AbstractGameDataService<? extends GeneralDescription> service) {
         service.entrySet().forEach(entry ->{
-            log.info("Loaded item: {}", entry.toString());
+            log.debug("Loaded item: {}", entry.toString());
             put(entry.getKey(), entry.getValue());
         });
     }
