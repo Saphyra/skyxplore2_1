@@ -1,4 +1,6 @@
 (function EquipService(){
+    scriptLoader.loadScript("js/common/localization/message_codes.js");
+
     events.UNEQUIP_ITEM = "unequip_item";
     events.ITEM_UNEQUIPPED = "item_unequipped";
     
@@ -29,17 +31,35 @@
     
     function unequip(event){
         const payload = event.getPayload();
-        eventProcessor.processEvent(new Event(events.ITEM_UNEQUIPPED, payload));
+
+        const request = new Request(HttpMethod.DELETE, Mapping.UNEQUIP_ITEM, {slot: payload.getContainerId(), itemId: payload.getId()});
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("ITEM_UNEQUIPPED"));
+                eventProcessor.processEvent(new Event(events.ITEM_UNEQUIPPED, payload));
+            }
+        dao.sendRequestAsync(request);
     }
     
     function equipShip(event){
-        const payload = event.getPayload();
-        eventProcessor.processEvent(new Event(events.SHIP_EQUIPPED, payload));
+        const shipId = event.getPayload();
+
+        const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.EQUIP_SHIP, shipId));
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("SHIP_EQUIPPED"));
+                eventProcessor.processEvent(new Event(events.SHIP_EQUIPPED, shipId));
+            }
+        dao.sendRequestAsync(request);
     }
 
     function equipItem(event){
         const payload = event.getPayload();
-        eventProcessor.processEvent(new Event(events.ITEM_EQUIPPED, payload));
+
+        const request = new Request(HttpMethod.POST, Mapping.EQUIP_ITEM, {itemId: payload.itemId, equipTo: payload.containerId});
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("ITEM_EQUIPPED"));
+                eventProcessor.processEvent(new Event(events.ITEM_EQUIPPED, payload));
+            }
+        dao.sendRequestAsync(request);
     }
 
     function dragEnd(){

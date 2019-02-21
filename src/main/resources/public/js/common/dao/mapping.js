@@ -10,6 +10,8 @@ window.Mapping = {
     DELETE_ACCOUNT: "user",
     DELETE_CHARACTER: "character/*",
     EMAIL_EXISTS: "user/email",
+    EQUIP_ITEM: "ship/equipment",
+    EQUIP_SHIP: "ship/equipment/*",
     EQUIPMENT_STORAGE: "character/storage",
     GET_CHARACTERS: "character",
     GET_SHIP_DATA: "ship",
@@ -20,6 +22,7 @@ window.Mapping = {
     REGISTER: "user",
     RENAME_CHARACTER: "character",
     SELECT_CHARACTER: "character/*",
+    UNEQUIP_ITEM: "ship/equipment",
     USERNAME_EXISTS: "user/name",
     
     concat: function(path, id){
