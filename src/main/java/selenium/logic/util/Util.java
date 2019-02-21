@@ -1,18 +1,39 @@
 package selenium.logic.util;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
 
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Supplier;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Util {
     public static final String ATTRIBUTE_VALUE = "value";
+
+    public static <T> Optional<T> getWithWait(Supplier<Optional<T>> supplier) {
+        return getWithWait(supplier, "Querying item...");
+    }
+
+    public static <T> Optional<T> getWithWait(Supplier<Optional<T>> supplier, String logMessage) {
+        log.info(logMessage);
+        int counter = 0;
+        Optional<T> result;
+        do {
+            log.info("Query attempts: {}", counter);
+            result = supplier.get();
+            sleep(100);
+            counter++;
+        } while (!result.isPresent() && counter < 100);
+        return result;
+    }
 
     public static String executeScript(WebDriver driver, String script) {
         if (driver instanceof JavascriptExecutor) {

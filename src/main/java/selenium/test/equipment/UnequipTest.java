@@ -1,6 +1,9 @@
 package selenium.test.equipment;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.ContainerId;
 import selenium.logic.domain.EquippedEquipment;
@@ -12,10 +15,8 @@ import selenium.logic.validator.NotificationValidator;
 import selenium.test.equipment.util.EquipmentElementSearcher;
 import selenium.test.equipment.util.EquipmentTestHelper;
 
-import static org.junit.Assert.assertEquals;
-
 public class UnequipTest extends SeleniumTestApplication {
-    private static final String UNEQUIP_SUCCESFUL_MESSAGE = "Leszerelés sikeres.";
+    private static final String MESSAGE_CODE_ITEM_UNEQUIPPED = "ITEM_UNEQUIPPED";
 
     private EquipmentTestHelper equipmentTestHelper;
     private NotificationValidator notificationValidator;
@@ -48,7 +49,7 @@ public class UnequipTest extends SeleniumTestApplication {
 
 
     private void verifySuccess(int emptySlotCountBeforeUnequip, EquippedEquipment equipment) {
-        notificationValidator.verifyNotificationVisibility(UNEQUIP_SUCCESFUL_MESSAGE);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_ITEM_UNEQUIPPED));
         int emptySlotCountAfterUnequip = equipmentElementSearcher.countEmptySlotsInContainer(ContainerId.FRONT_WEAPON);
         assertEquals(emptySlotCountBeforeUnequip + 1, emptySlotCountAfterUnequip);
 

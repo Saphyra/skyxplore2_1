@@ -12,8 +12,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationValidator {
     private static final String SELECTOR_NOTIFICATION_TEXT = ":first-child";
 
@@ -27,9 +29,11 @@ public class NotificationValidator {
     }
 
     public void verifyNotificationVisibility(String text) {
+        log.info("Verifying notification visibility for text {}", text);
         int counter = 0;
         boolean contains;
         do {
+            log.debug("Searching for notification attempts: {}", counter);
             List<WebElement> notifications = getNotifications();
             contains = contains(notifications, text);
             counter++;
@@ -39,9 +43,11 @@ public class NotificationValidator {
     }
 
     private List<WebElement> getNotifications() {
+        log.debug("Querying notification elements...");
         List<WebElement> notifications;
         int counter = 0;
         do {
+            log.debug("Querying notification element attempts: {}", counter);
             notifications = driver.findElements(getNotificationElementsLocator());
             sleep(100);
             counter++;

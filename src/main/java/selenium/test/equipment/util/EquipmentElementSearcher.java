@@ -1,25 +1,31 @@
 package selenium.test.equipment.util;
 
-import lombok.RequiredArgsConstructor;
+import static java.lang.Math.toIntExact;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import selenium.logic.domain.ContainerId;
 import selenium.logic.domain.EquippedEquipment;
 import selenium.logic.domain.UnequippedEquipment;
-
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import static java.lang.Math.toIntExact;
+import selenium.logic.util.Util;
 
 @RequiredArgsConstructor
+@Slf4j
 public class EquipmentElementSearcher {
     private static final Predicate<EquippedEquipment> IS_EMPTY_SLOT = EquippedEquipment::isEmpty;
     private static final String PREFIX_SELECTOR_SLOT = "#%s .slot";
-    private static final String SELECTOR_UNEQUIPPED_ITEMS = "#equipmentlist div.equipmentlistelement";
-    private static final String PREFIX_SELECTOR_EMPTY_SLOT = "#%s div.emptyslot";
+    private static final String SELECTOR_UNEQUIPPED_ITEMS = "#equipment-list div.equipment-list-element";
+    private static final String PREFIX_SELECTOR_EMPTY_SLOT = "#%s div.empty-slot";
 
     private final WebDriver driver;
 
@@ -42,9 +48,18 @@ public class EquipmentElementSearcher {
     }
 
     public EquippedEquipment findAnyEquippedFromContainer(ContainerId containerId) {
-        return findEquippedEquipmentsOfContainer(containerId).stream()
-            .filter(equippedEquipment -> !IS_EMPTY_SLOT.test(equippedEquipment))
-            .findAny()
+        log.info("Finding an equipped equipment in container {}", containerId);
+        Optional<EquippedEquipment> foundEquipment;
+        int counter = 0;
+        do {
+            log.info("Finding attempt {}", counter);
+            foundEquipment = findEquippedEquipmentsOfContainer(containerId).stream()
+                .filter(equippedEquipment -> !IS_EMPTY_SLOT.test(equippedEquipment))
+                .findAny();
+            counter++;
+        } while (!foundEquipment.isPresent() && counter < 100);
+
+        return foundEquipment
             .orElseThrow(() -> new RuntimeException("No equipped element found in container " + containerId.name()));
     }
 
@@ -55,11 +70,13 @@ public class EquipmentElementSearcher {
     }
 
     public UnequippedEquipment getUnequippedEquipmentById(String itemId) {
-        return getAllUnequippedEquipments().stream()
+        Supplier<Optional<UnequippedEquipment>> supplier = () -> getAllUnequippedEquipments().stream()
             .filter(unequippedEquipment -> itemId.equalsIgnoreCase(unequippedEquipment.getId()))
-            .findAny()
-            .orElseThrow(() -> new RuntimeException("Unequipped equipment not found with id " + itemId));
+            .findAny();
+        return Util.getWithWait(supplier, "Querying unequippedEquipment with id " + itemId)
+            .orElseThrow(() -> new RuntimeException("Unequipped equipment not found with itemId " + itemId));
     }
+
 
     public List<WebElement> getEmptySlotsOfContainer(ContainerId containerId) {
         return driver.findElements(By.cssSelector(String.format(PREFIX_SELECTOR_EMPTY_SLOT, containerId.getId())));

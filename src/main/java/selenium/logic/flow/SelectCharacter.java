@@ -1,12 +1,16 @@
 package selenium.logic.flow;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CharacterSelectPage;
-
 import static org.junit.Assert.assertEquals;
 import static selenium.logic.util.LinkUtil.CHARACTER_SELECT;
+import static selenium.logic.util.LinkUtil.OVERVIEW;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CharacterSelectPage;
 
 public class SelectCharacter {
     private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
@@ -26,5 +30,7 @@ public class SelectCharacter {
             .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
             .orElseThrow(() -> new RuntimeException("Character not found."))
             .click();
+
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(OVERVIEW));
     }
 }

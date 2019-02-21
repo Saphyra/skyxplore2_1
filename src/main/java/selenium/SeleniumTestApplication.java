@@ -2,7 +2,7 @@ package selenium;
 
 import static java.util.Objects.isNull;
 import static selenium.logic.util.LinkUtil.HOST;
-import static selenium.logic.util.LinkUtil.HOST_LOCAL;
+import static selenium.logic.util.LinkUtil.HOST_TEST;
 import static selenium.logic.util.Util.executeScript;
 import static selenium.logic.util.Util.sleep;
 import static skyxplore.Application.APP_CTX;
@@ -25,12 +25,8 @@ import skyxplore.Application;
 @Slf4j
 public abstract class SeleniumTestApplication {
     private static final String ARG_PROFILE = "--spring.profiles.active=test";
-    private static final String SKYXPLORE_LOG_LEVEL = "--logging.level=WARN";
-    private static final String SELENIUM_LOG_LEVEL = "--logging.level.selenium=INFO";
     private static final String[] ARGS = new String[]{
-        ARG_PROFILE,
-        SKYXPLORE_LOG_LEVEL,
-        SELENIUM_LOG_LEVEL
+        ARG_PROFILE
     };
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
@@ -44,7 +40,7 @@ public abstract class SeleniumTestApplication {
 
     @Before
     public void startServices() throws IOException {
-        if (HOST.equals(HOST_LOCAL)) {
+        if (HOST.equals(HOST_TEST)) {
             Application.main(ARGS);
         }
 

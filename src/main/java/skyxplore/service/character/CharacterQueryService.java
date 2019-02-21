@@ -1,21 +1,21 @@
 package skyxplore.service.character;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import skyxplore.cache.CharacterNameLikeCache;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.exception.CharacterNotFoundException;
 import skyxplore.exception.InvalidAccessException;
-import skyxplore.service.GameDataFacade;
 import skyxplore.service.community.BlockedCharacterQueryService;
 import skyxplore.service.community.FriendshipQueryService;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -25,7 +25,6 @@ public class CharacterQueryService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
-    private final GameDataFacade gameDataFacade;
     private final FriendshipQueryService friendshipQueryService;
 
     public SkyXpCharacter findByCharacterId(String characterId) {

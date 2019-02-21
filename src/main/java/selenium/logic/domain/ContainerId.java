@@ -5,15 +5,15 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum ContainerId {
-    FRONT_WEAPON("frontweapon"),
-    RIGHT_WEAPON("rightweapon"),
-    BACK_WEAPON("backweapon"),
-    LEFT_WEAPON("leftweapon"),
+    FRONT_WEAPON("front-weapon"),
+    RIGHT_WEAPON("right-weapon"),
+    BACK_WEAPON("back-weapon"),
+    LEFT_WEAPON("left-weapon"),
 
-    FRONT_DEFENSE("frontdefense"),
-    RIGHT_DEFENSE("rightdefense"),
-    BACK_DEFENSE("backdefense"),
-    LEFT_DEFENSE("leftdefense"),
+    FRONT_DEFENSE("front-defense"),
+    RIGHT_DEFENSE("right-defense"),
+    BACK_DEFENSE("back-defense"),
+    LEFT_DEFENSE("left-defense"),
 
     CONNECTORS("connectors");
 
