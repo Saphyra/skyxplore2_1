@@ -1,6 +1,7 @@
 package selenium.test.equipment;
 
 import static org.junit.Assert.assertEquals;
+import static selenium.logic.util.Util.getWithWait;
 
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -43,8 +44,10 @@ public class EquipTest extends SeleniumTestApplication {
         EquippedEquipment equipment = equipmentElementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
         equipment.unequip();
 
-        String unequippedItemId = equipmentElementSearcher.getAllUnequippedEquipments().stream()
-            .findFirst()
+        String unequippedItemId = getWithWait(
+            () -> equipmentElementSearcher.getAllUnequippedEquipments().stream().findFirst(),
+            "Querying unequipped item..."
+        )
             .orElseThrow(() -> new RuntimeException("No unequippedItem found."))
             .getId();
 
