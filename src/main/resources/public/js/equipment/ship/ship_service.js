@@ -1,7 +1,11 @@
 (function EquipmentService(){
+    scriptLoader.loadScript("js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("js/equipment/ship/equipments.js");
+    scriptLoader.loadScript("js/equipment/ship/equipped_item.js");
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     scriptLoader.loadScript("js/common/localization/items.js");
-    
+
+
     events.LOAD_SHIP = "load_ship";
     
     let equipments = new Equipments();
@@ -9,6 +13,9 @@
 
     window.shipService = new function(){
         this.isExtenderOfTypeEquipped = isExtenderOfTypeEquipped;
+        this.getShipType = function(){
+            return shipType;
+        }
     }
     
     eventProcessor.registerProcessor(new EventProcessor(
@@ -63,7 +70,6 @@
                 break;
             }
         }
-        logService.logToConsole("Is " + extendedSlot + " already equipped: " + result);
         return result;
     }
     
@@ -168,60 +174,5 @@
         const element = document.createElement("DIV");
             element.classList.add("slot");
         return element;
-    }
-
-        function collectItemIds(items){
-            const result = [];
-                for(let iIndex in items){
-                    result.push(items[iIndex].getId());
-                }
-            return result;
-        }
-
-    function Equipments(){
-        const equipped = {};
-
-        this.addEquipment = function(containerId, equippedItem){
-            if(!equipped[containerId]){
-                equipped[containerId] = [];
-            }
-            equipped[containerId].push(equippedItem);
-        }
-
-        this.getItems = function(containerId){
-            return equipped[containerId] || [];
-        }
-
-        this.removeItem = function(containerId, itemId){
-            const items = this.getItems(containerId);
-            for(let iIndex in items){
-                if(items[iIndex].getId() == itemId){
-                    items.splice(iIndex, 1);
-                    break;
-                }
-            }
-
-            if(itemCache.get(itemId).slot == "connector"){
-                equipmentLabelService.updateShipStats(shipType, collectItemIds(items));
-            }
-        }
-    }
-
-    function EquippedItem(container, item, elem){
-        const containerId = container;
-        const itemId = item;
-        const itemContainerElement = elem;
-        
-        this.getId = function(){
-            return itemId;
-        }
-        
-        this.getContainerId = function(){
-            return containerId;
-        }
-        
-        this.getElement = function(){
-            return itemContainerElement;
-        }
     }
 })();

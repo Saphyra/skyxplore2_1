@@ -1,6 +1,7 @@
 (function ScriptLoader(){
+    const loadedScripts = [];
+
     window.scriptLoader = new function(){
-        this.loadedScripts = [];
         this.loadScript = loadScript;
     }
     
@@ -29,8 +30,10 @@
         if(src == undefined || src == null){
             throwException("IllegalArgument", "src must not be null or undefined.");
         }
-        
-        if(this.loadedScripts.indexOf(src) > -1){
+
+        console.log("Loading script " + src);
+        if(loadedScripts.indexOf(src) > -1){
+            console.log(src + " is already loaded.");
             return;
         }
         
@@ -43,6 +46,6 @@
             dataType: "script",
             cache: true
         });
-        this.loadedScripts.push(src);
+        loadedScripts.push(src);
     }
 })();

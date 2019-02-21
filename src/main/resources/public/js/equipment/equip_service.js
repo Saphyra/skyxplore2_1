@@ -1,5 +1,6 @@
 (function EquipService(){
-    scriptLoader.loadScript("js/common/localization/message_codes.js");
+    scriptLoader.loadScript("js/common/localization/message_code.js");
+    scriptLoader.loadScript("js/common/equipment/item_cache.js");
 
     events.UNEQUIP_ITEM = "unequip_item";
     events.ITEM_UNEQUIPPED = "item_unequipped";

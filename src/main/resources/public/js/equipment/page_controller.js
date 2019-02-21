@@ -1,6 +1,6 @@
 (function PageController(){
-    scriptLoader.loadScript("js/equipment/ship_service.js");
-    scriptLoader.loadScript("js/equipment/storage_service.js");
+    scriptLoader.loadScript("js/equipment/ship/ship_service.js");
+    scriptLoader.loadScript("js/equipment/storage/storage_service.js");
     scriptLoader.loadScript("js/equipment/equip_service.js");
     
     $(document).ready(function(){
@@ -39,3 +39,11 @@
         eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "equipment"));
     }
 })();
+
+function collectItemIds(items){
+    const result = [];
+        for(let iIndex in items){
+            result.push(items[iIndex].getId());
+        }
+    return result;
+}
