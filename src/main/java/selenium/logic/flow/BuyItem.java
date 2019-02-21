@@ -39,13 +39,13 @@ public class BuyItem {
         this.messageCodes = messageCodes;
     }
 
-    public void buyItem(String itemId, int amount) {
-        ShopItem equipmentToBuy = shopElementSearcher.searchShopItemById(Category.ENERGY, itemId);
+    public void buyItem(String itemId, Category category, int amount) {
+        ShopItem equipmentToBuy = shopElementSearcher.searchShopItemById(category, itemId);
         int cost = equipmentToBuy.getCost();
         int currentMoney = costCounter.getCurrentMoney();
 
         equipmentToBuy.addToCart();
-        cartVerifier.verifyCosts(Category.ENERGY, itemId, 1);
+        cartVerifier.verifyCosts(category, itemId, 1);
 
         shopElementSearcher.getBuyButton().click();
 

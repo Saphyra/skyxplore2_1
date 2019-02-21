@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import selenium.SeleniumTestApplication;
+import selenium.logic.domain.Category;
 import selenium.logic.flow.BuyItem;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Navigate;
@@ -37,7 +38,7 @@ public class BuyItemTest extends SeleniumTestApplication {
     public void testBuyItem() {
         shopTestInitializer.registerAndGoToShop();
 
-        buyItem.buyItem(BOUGHT_ITEM_ID, 1);
+        buyItem.buyItem(BOUGHT_ITEM_ID, Category.ENERGY, 1);
 
         verifyItemInStorage();
     }

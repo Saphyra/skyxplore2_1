@@ -42,7 +42,7 @@ public class ShopElementSearcher {
         return searchAllShopItems().stream()
             .filter(shopItem -> itemId.equalsIgnoreCase(shopItem.getId()))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException("No ShopItem found with id " + itemId));
+            .orElseThrow(() -> new RuntimeException("No ShopItem found with id " + itemId + " in category " + category));
     }
 
     public CartItem searchCartItemById(String itemId) {

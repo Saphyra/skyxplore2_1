@@ -2,7 +2,6 @@ package selenium.test.equipment;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
@@ -38,7 +37,6 @@ public class EquipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testEquip() {
         equipmentTestHelper.registerAndGoToEquipmentPage();
 

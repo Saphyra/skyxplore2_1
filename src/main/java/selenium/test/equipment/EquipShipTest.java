@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import selenium.SeleniumTestApplication;
+import selenium.logic.domain.Category;
 import selenium.logic.domain.ContainerId;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.flow.BuyItem;
@@ -17,7 +18,7 @@ import selenium.test.equipment.util.EquipmentElementSearcher;
 
 public class EquipShipTest extends SeleniumTestApplication {
     private static final String TEST_SHIP_ID = "sta-02";
-    private static final String NOTIFICATION_SHIP_EQUIPPED = "Hajó felszerelve.";
+    private static final String MESSAGE_CODE_SHIP_EQUIPPED = "SHIP_EQUIPPED";
 
     private Registration registration;
     private CreateCharacter createCharacter;
@@ -52,12 +53,12 @@ public class EquipShipTest extends SeleniumTestApplication {
         SeleniumCharacter character = createCharacter.createCharacter();
         selectCharacter.selectCharacter(character);
         navigate.toShop();
-        buyItem.buyItem(TEST_SHIP_ID, 1);
+        buyItem.buyItem(TEST_SHIP_ID, Category.STARTER_SHIP, 1);
         navigate.toEquipmentPage();
     }
 
     private void verifySuccess() {
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_SHIP_EQUIPPED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_SHIP_EQUIPPED));
 
         verifyEmptyShip();
     }
