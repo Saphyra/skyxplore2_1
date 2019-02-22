@@ -6,7 +6,7 @@
     events.LOAD_STORAGE = "load_storage";
     events.ADD_TO_STORAGE = "add_to_storage";
     
-    const categories = [];
+    let categories = [];
 
     window.storageService = new function(){
         this.getCategories = function(){
@@ -56,6 +56,8 @@
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(items){
+                categories = [];
+                document.getElementById("equipment-list").innerHTML = "";
                 for(let iIndex in items){
                     displayItem(items[iIndex]);
                 }
@@ -86,8 +88,6 @@
                 const equipmentListContainer = document.createElement("DIV");
                     equipmentListContainer.classList.add("equipment-slot-list-container");
             container.appendChild(equipmentListContainer);
-            
-            document.getElementById("equipment-list").appendChild(container);
             
             const nextCategoryIndex = findNextCategoryAlphabetically(categoryId);
             const nextCategory = categories[nextCategoryIndex] || null;
