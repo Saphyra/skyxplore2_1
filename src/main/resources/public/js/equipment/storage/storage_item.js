@@ -1,6 +1,5 @@
-function StorageItem(id, parent, container, amount){
+function StorageItem(id, container, amount){
     const itemId = id;
-    const categoryList = parent;
     const itemContainer = container;
     const amountElement = amount;
     let currentAmount = 0;
