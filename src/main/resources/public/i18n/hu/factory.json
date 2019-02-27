@@ -1,0 +1,43 @@
+{
+  "title": "Gyár - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Gyár"
+      }
+    ],
+    "menu-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kategóriák"
+      }
+    ],
+    "materials-title": [
+      {
+        "key": "innerHTML",
+        "message": "Alapanyagok"
+      }
+    ],
+    "queue-title": [
+      {
+        "key": "innerHTML",
+        "message": "Gyártósor"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "overview-button": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}
