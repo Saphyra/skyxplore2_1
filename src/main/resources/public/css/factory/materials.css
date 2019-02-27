@@ -1,4 +1,4 @@
-#materialscontainer{
+#materials-container{
     position: absolute;
     left: 0;
     top: 0;
@@ -8,7 +8,7 @@
     text-align: center;
 }
 
-#materialscontainer h2{
+#materials-title{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
 }

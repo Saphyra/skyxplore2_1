@@ -1,12 +1,3 @@
-#content{
-    position: absolute;
-    left: 20rem;
-    top: 0;
-    bottom: 0;
-    right: 20rem;
-    overflow: auto;
-}
-
 .contentelement{
     border: 3px ridge white;
     border-radius: 10px;

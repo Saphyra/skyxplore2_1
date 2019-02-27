@@ -1,15 +1,16 @@
-#menucontainer{
+#menu-container{
     text-align: center;
     border-bottom: 3px ridge white;
 }
 
-#menucontainer button{
-    font-size: 1.25rem;
-}
-
-#menu_wrapper{
+#menu-wrapper{
     display: inline-block;
     position: relative;
+}
+
+
+#menu-container button{
+    font-size: 1.25rem;
 }
 
 #menu{

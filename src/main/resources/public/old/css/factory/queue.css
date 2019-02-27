@@ -1,18 +1,3 @@
-#queuecontainer{
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 20rem;
-    border-left: 3px ridge white;
-}
-
-#queuecontainer h2{
-    text-align: center;
-    border-bottom: 3px ridge white;
-    padding: 0.25rem;
-}
-
 .queueelement{
     margin: 0.5rem;
     border: 3px ridge white;
