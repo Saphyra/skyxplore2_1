@@ -17,5 +17,7 @@
   "weapon": "Fegyverzet",
   "ballistic": "Ballisztikus",
   "missile": "Rakéta",
-  "laser": "Lézer"
+  "laser": "Lézer",
+  "other": "Egyéb",
+  "material": "Alapanyag"
 }

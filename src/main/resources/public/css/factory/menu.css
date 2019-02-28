@@ -6,17 +6,10 @@
     width: 20rem;
     border-right: 3px ridge white;
     text-align: center;
+    overflow: auto;
 }
 
 #menu-title{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
-}
-
-#menu{
-    position: absolute;
-    left: 100%;
-    top: 0;
-    white-space: nowrap;
-    text-align: right;
 }

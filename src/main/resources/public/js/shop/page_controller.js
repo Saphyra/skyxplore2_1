@@ -5,7 +5,7 @@
     scriptLoader.loadScript("js/shop/cart_controller.js");
     
     let moneyLoaded = false;
-    
+
     $(document).ready(function(){
         init();
     });
