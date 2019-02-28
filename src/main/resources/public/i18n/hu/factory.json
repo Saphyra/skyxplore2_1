@@ -7,16 +7,16 @@
         "message": "Gyár"
       }
     ],
-    "menu-button": [
-      {
-        "key": "innerHTML",
-        "message": "Kategóriák"
-      }
-    ],
     "materials-title": [
       {
         "key": "innerHTML",
         "message": "Alapanyagok"
+      }
+    ],
+    "menu-title": [
+      {
+        "key": "innerHTML",
+        "message": "Kategóriák"
       }
     ],
     "queue-title": [
