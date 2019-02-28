@@ -1,0 +1,17 @@
+.menu-item{
+    border: 3px ridge white;
+    text-align: left;
+    position: relative;
+    font-size: 1.5rem;
+    margin: 1rem 0.5rem;
+}
+
+.menu-group-title{
+    padding: 0.25rem;
+    border-bottom: 3px ridge white;
+    font-weight: bold;
+}
+
+.menu-child{
+    font-size: 1.25rem;
+}

@@ -1,54 +1,28 @@
 {
-  "all": {
-    "type": "all",
-    "name": "Összes"
-  },
-  "material": {
-    "type": "material",
-    "name": "Alapanyag"
-  },
-  "connector": {
-    "type": "connector",
-    "name": "Csatlakozó",
-    "elements": {
-      "energy": {
-        "type": "energy",
-        "name": "Energiaellátás"
-      },
-      "extender": {
-        "type": "extender",
-        "name": "Bővítő"
-      },
-      "corehull": {
-        "type": "corehull",
-        "name": "Magburkolat"
-      },
-      "storage": {
-        "type": "storage",
-        "name": "Raktér"
-      }
-    }
-  },
-  "defense": {
-    "type": "defense",
-    "name": "Védelem",
-    "elements": {
-      "armor": {
-        "type": "armor",
-        "name": "Burkolat"
-      },
-      "shield": {
-        "type": "shield",
-        "name": "Pajzs"
-      }
-    }
-  },
-  "ship": {
-    "type": "ship",
-    "name": "Hajó"
-  },
-  "weapon": {
-    "type": "weapon",
-    "name": "Fegyver"
-  }
+  "other": [
+    "material"
+  ],
+  "connector": [
+    "energy",
+    "extender",
+    "corehull",
+    "storage"
+  ],
+  "defense": [
+    "armor",
+    "shield"
+  ],
+  "ship": [
+    "tank",
+    "battleship",
+    "fighter",
+    "saboteur",
+    "starter",
+    "support"
+  ],
+  "weapon": [
+    "ballistic",
+    "missile",
+    "laser"
+  ]
 }
