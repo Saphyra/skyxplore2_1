@@ -1,5 +1,15 @@
 package skyxplore.testutil;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.EquipRequest;
@@ -15,7 +25,6 @@ import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;
-import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductView;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
@@ -50,16 +59,6 @@ import skyxplore.domain.slot.SlotEntity;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.domain.user.UserEntity;
-
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 @SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 public class TestUtils {
@@ -587,13 +586,6 @@ public class TestUtils {
         Materials materials = new Materials();
         materials.addMaterial(MATERIAL_KEY, MATERIAL_AMOUNT);
         return materials;
-    }
-
-    public static MaterialView createMaterialView() {
-        return MaterialView.builder()
-            .materialId(MATERIAL_KEY)
-            .amount(MATERIAL_AMOUNT)
-            .build();
     }
 
     public static Product createProduct(String productId) {

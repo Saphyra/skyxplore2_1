@@ -1,14 +1,14 @@
 package skyxplore.service;
 
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.view.material.MaterialView;
 import skyxplore.service.factory.AddToQueueService;
 import skyxplore.service.factory.FactoryQueryService;
-
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +21,7 @@ public class FactoryFacade {
         addToQueueService.addToQueue(characterId, request);
     }
 
-    public Map<String, MaterialView> getMaterials(String characterId) {
+    public Map<String, Integer> getMaterials(String characterId) {
         return factoryQueryService.getMaterials(characterId);
     }
 }

@@ -1,18 +1,15 @@
 package skyxplore.service.factory;
 
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.controller.view.material.MaterialView;
 import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.gamedata.subservice.MaterialService;
 import skyxplore.domain.factory.Factory;
-import skyxplore.domain.materials.Materials;
 import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
 @Service
@@ -21,7 +18,6 @@ import java.util.Map;
 public class FactoryQueryService {
     private final CharacterQueryService characterQueryService;
     private final FactoryDao factoryDao;
-    private final MaterialService materialService;
 
     public Factory findFactoryOfCharacterValidated(String characterId) {
         Factory factory = factoryDao.findByCharacterId(characterId);
@@ -31,31 +27,10 @@ public class FactoryQueryService {
         return factory;
     }
 
-    public Map<String, MaterialView> getMaterials(String characterId) {
+    public Map<String, Integer> getMaterials(String characterId) {
         characterQueryService.findByCharacterId(characterId);
         Factory factory = findFactoryOfCharacterValidated(characterId);
-        Materials materials = factory.getMaterials();
-        Map<String, MaterialView> result = fillWithMaterials(materials);
-        log.info("Materials successfully queried for character {}", characterId);
-        return result;
-    }
-
-    private Map<String, MaterialView> fillWithMaterials(Materials materials) {
-        Map<String, MaterialView> result = new HashMap<>();
-        materialService.keySet().forEach(
-            key -> result.put(
-                key,
-                createMaterialView(key, materials.get(key))
-            )
-        );
-        return result;
-    }
-
-    private MaterialView createMaterialView(String key, Integer amount) {
-        return MaterialView.builder()
-            .materialId(key)
-            .amount(amount)
-            .build();
+        return factory.getMaterials();
     }
 
     public String getFactoryIdOfCharacter(String characterId) {

@@ -14,6 +14,7 @@ window.Mapping = {
     EQUIP_SHIP: "ship/equipment/*",
     EQUIPMENT_STORAGE: "character/storage",
     GET_CHARACTERS: "character",
+    GET_MATERIALS: "factory/materials",
     GET_SHIP_DATA: "ship",
     ITEMS_OF_CATEGORY: "categories/*",
     LOGIN: "login",

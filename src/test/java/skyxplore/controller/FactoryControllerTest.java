@@ -1,25 +1,28 @@
 package skyxplore.controller;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
+import static skyxplore.testutil.TestUtils.createMaterials;
+import static skyxplore.testutil.TestUtils.createProductView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.view.material.MaterialView;
 import skyxplore.controller.view.product.ProductView;
+import skyxplore.domain.materials.Materials;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryControllerTest {
@@ -45,16 +48,13 @@ public class FactoryControllerTest {
     @Test
     public void testGetMaterialsShouldCallFacadeAndReturnResponse() {
         //GIVEN
-        MaterialView view = createMaterialView();
-        Map<String, MaterialView> map = new HashMap<>();
-        map.put(MATERIAL_KEY, view);
-        when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(map);
+        Materials materials = createMaterials();
+        when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(materials);
         //WHEN
-        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1);
+        Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
         verify(factoryFacade).getMaterials(CHARACTER_ID_1);
-        assertEquals(1, result.size());
-        assertEquals(view, result.get(MATERIAL_KEY));
+        assertEquals(materials, result);
     }
 
     @Test
