@@ -13,8 +13,23 @@
     padding: 0.25rem;
 }
 
+#no-materials{
+    font-size: 1.5rem;
+    margin: 1rem;
+}
+
 #materials{
     display: inline-block;
     text-align: right;
     font-size: 1.25rem;
+}
+
+.material-element{
+    border-bottom: 1px ridge white;
+    margin-top: 0.5rem;
+}
+
+.material-element-amount{
+    display: inline-block;
+    min-width: 3rem;
 }
