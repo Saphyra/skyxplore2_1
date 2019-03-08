@@ -2,6 +2,7 @@
     scriptLoader.loadScript("js/common/localization/items.js");
 
     events.LOAD_MATERIALS = "load_materials";
+    events.MATERIALS_LOADED = "materials_loaded";
 
     let materials = [];
 
@@ -19,6 +20,7 @@
                 for(let materialId in payload){
                     displayMaterial(materialId, payload[materialId]);
                 }
+                eventProcessor.processEvent(new Event(events.MATERIALS_LOADED))
             }
 
         dao.sendRequestAsync(request);
