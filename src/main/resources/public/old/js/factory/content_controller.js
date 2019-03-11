@@ -15,37 +15,10 @@
     Displays the elements of the selected category.
     */
     function displayElementsOfCategory(category){
-        try{
-            category = category || contentController.selectedCategory;
-            contentController.selectedCategory = category;
-            
-            const container = document.getElementById("content");
-                container.innerHTML = "";
-            
-            const elements = orderElements(contentController.categoryCache.getElementsOfCategory(category));
-            for(let eindex in elements){
-                if(elements[eindex].materials){
-                    container.appendChild(createElement(elements[eindex]));
-                }
-            }
-            
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
+
         
         function createElement(element){
             try{
-                let isBuildable = true;
-                const container = document.createElement("DIV");
-                    container.classList.add("contentelement");
-                    container.title = titleService.getTitleForOverview(element.id);
-                    
-                    const nameContainer = document.createElement("DIV");
-                        nameContainer.classList.add("contentelementtitle");
-                        nameContainer.innerHTML = element.name;
-                container.appendChild(nameContainer);
-                
                     const materialsContainer = document.createElement("DIV");
                         if(!fillMaterialsContainer(materialsContainer, element, 1)){
                             isBuildable = false;
@@ -208,69 +181,6 @@
                     logService.log(materials, "error", message);
                     return {};
                 }
-            }
-        }
-
-        /*
-        Orders elements by translated slot name.
-        */
-        function orderElements(elements){
-            try{
-                const result = {};
-                const list = [];
-                
-                for(let eindex in elements){
-                    list.push(elements[eindex]);
-                }
-                
-                list.sort(function(a, b){
-                    const aSlot = translator.translateSlot(a.slot);
-                    const bSlot = translator.translateSlot(b.slot);
-                    
-                    if(aSlot === bSlot){
-                        return a.name.localeCompare(b.name);
-                    }else{
-                        return aSlot.localeCompare(bSlot);
-                    }
-                });
-                
-                for(let lindex in list){
-                    const element = list[lindex];
-                    result[element.id] = element;
-                }
-                
-                return result;
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-                return {};
-            }
-        }
-    }
-
-    /*
-    Used for storing category elements.
-    */
-    function CategoryCache(){
-        const storage = {};
-
-        /*
-        Gets the elements of the given category.
-        Returns stored value, or queries from the server if stored values are not found.
-        */
-        this.getElementsOfCategory = function(categoryId){
-            try{
-                if(!storage[categoryId]){
-                    const elements = dataDao.getCategoryEquipments(categoryId);
-                    cache.addAll(elements);
-                    storage[categoryId] = elements;
-                }
-                
-                return storage[categoryId];
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-                return {};
             }
         }
     }

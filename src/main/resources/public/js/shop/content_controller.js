@@ -44,7 +44,7 @@
         function createItem(itemId){
             const container = document.createElement("DIV");
                 container.classList.add("element");
-                container.title = equipmentLabelService.assembleTitleOfItem(itemId)
+                container.title = equipmentLabelService.assembleTitleOfItem(itemId);
                 
                 const titleContainer = document.createElement("DIV");
                     titleContainer.classList.add("element-title-container");
