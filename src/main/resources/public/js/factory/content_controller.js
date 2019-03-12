@@ -2,6 +2,7 @@
     scriptLoader.loadScript("js/common/cache.js");
     scriptLoader.loadScript("js/common/localization/items.js");
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
+    scriptLoader.loadScript("js/common/equipment/item_cache.js");
 
     events.DISPLAY_CATEGORY = "display_category";
 
@@ -33,15 +34,65 @@
                     nameContainer.innerHTML = Items.getItem(itemId).name;
             container.appendChild(nameContainer);
 
+                const materialsContainer = document.createElement("DIV");
+                    const requiredMaterials = getRequiredMaterialsOrdered(itemId);
+
+                    for(let materialId in requiredMaterials){
+                        const requiredAmount = requiredMaterials[materialId];
+                        const materialData = itemCache.get(materialId);
+                        const requiredMaterialContainer = document.createElement("DIV");
+                            requiredMaterialContainer.classList.add("required-material");
+                            requiredMaterialContainer.title = equipmentLabelService.assembleTitleOfItem(materialId);
+
+                            const nameLabel = document.createElement("SPAN");
+                                nameLabel.innerHTML = Items.getItem(materialId).name;
+                        requiredMaterialContainer.appendChild(nameLabel);
+
+                            const nameDelimiter = document.createElement("SPAN");
+                                nameDelimiter.innerHTML = ": ";
+                        requiredMaterialContainer.appendChild(nameDelimiter);
+
+                            const requiredAmountLabel = document.createElement("SPAN");
+                                requiredAmountLabel.innerHTML = requiredAmount;
+                        requiredMaterialContainer.appendChild(requiredAmountLabel);
+
+                            const delimiter = document.createElement("SPAN");
+                                delimiter.innerHTML = " / ";
+                        requiredMaterialContainer.appendChild(delimiter);
+
+                            const storedMaterialAmount = materialsController.getMaterialAmount(materialId);
+                            const storedMaterialAmountLabel = document.createElement("SPAN");
+                                storedMaterialAmountLabel.innerHTML = storedMaterialAmount;
+                        requiredMaterialContainer.appendChild(storedMaterialAmountLabel);
+
+                        materialsContainer.appendChild(requiredMaterialContainer);
+                    }
+            container.appendChild(materialsContainer);
             return container;
         }
 
         function getItemsOfCategoryOrdered(categoryId){
             const itemIds = categoryCache.get(categoryId);
                 itemIds.sort(function(a, b){
-                    return Items.getItem(a).name.localeCompare(Items.getItem(b));
+                    return Items.getItem(a).name.localeCompare(Items.getItem(b).name);
                 });
             return itemIds;
+        }
+
+        function getRequiredMaterialsOrdered(itemId){
+            const itemData = itemCache.get(itemId);
+            const materialMapping = {};
+
+            for(let materialId in itemData.materials){
+                materialMapping[materialId] = itemData.materials[materialId];
+            }
+
+            return orderMapByProperty(
+                materialMapping,
+                function(a, b){
+                    return Items.getItem(a.getKey()).name.localeCompare(Items.getItem(b.getKey())).name;
+                }
+            );
         }
     }
 

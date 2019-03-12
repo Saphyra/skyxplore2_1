@@ -18,3 +18,12 @@
     border-bottom: 3px ridge white;
     font-size: 1.5rem;
 }
+
+.required-material{
+    border: 1px ridge white;
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem;
+}

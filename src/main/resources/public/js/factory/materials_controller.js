@@ -6,10 +6,26 @@
 
     let materials = [];
 
+    window.materialsController = new function(){
+        this.getMaterialAmount = getMaterialAmount;
+    }
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_MATERIALS},
         loadMaterials
     ));
+
+    function getMaterialAmount(materialId){
+        for(let mIndex in materials){
+            const material = materials[mIndex];
+
+            if(material.getId() == materialId){
+                return material.getAmount();
+            }
+        }
+
+        return 0;
+    }
 
     function loadMaterials(){
         const request = new Request(HttpMethod.GET, Mapping.GET_MATERIALS);
@@ -27,7 +43,7 @@
     }
 
     function displayMaterial(materialId, amount){
-        $("#no-material").hide();
+        $("#no-materials").hide();
 
         const material = Items.getItem(materialId);
         const container = document.createElement("DIV");
@@ -74,6 +90,10 @@
 
         this.getId = function(){
             return materialId;
+        }
+
+        this.getAmount = function(){
+            return materialAmount;
         }
 
         this.getContainer = function(){
