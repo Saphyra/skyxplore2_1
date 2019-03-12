@@ -23,6 +23,7 @@
   "weapon": [
     "ballistic",
     "missile",
-    "laser"
+    "laser",
+    "ion"
   ]
 }

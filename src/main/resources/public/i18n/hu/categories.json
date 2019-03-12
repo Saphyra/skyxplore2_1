@@ -18,6 +18,7 @@
   "ballistic": "Ballisztikus",
   "missile": "Rakéta",
   "laser": "Lézer",
+  "ion": "Ionágyú",
   "other": "Egyéb",
   "material": "Alapanyag"
 }
