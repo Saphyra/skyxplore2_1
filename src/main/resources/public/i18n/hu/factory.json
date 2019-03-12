@@ -45,6 +45,9 @@
     ]
   },
   "additionalContent": {
-    "cost": "Pénz"
+    "cost": "Pénz",
+    "construction-time": "Gyártási idő",
+    "amount": "Mennyiség",
+    "start-construction": "Gyártás indítása"
   }
 }

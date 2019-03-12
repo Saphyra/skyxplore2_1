@@ -17,6 +17,7 @@
 .content-element-title{
     border-bottom: 3px ridge white;
     font-size: 1.5rem;
+    padding: 0.25rem;
 }
 
 .required-material{
@@ -30,4 +31,17 @@
 
 .cost-container{
     font-size: 1.25rem;
+}
+
+.construction-time-container{
+    font-size: 1.25rem;
+    margin: 0.25rem;
+}
+
+.amount-container{
+    font-size: 1.25rem;
+}
+
+.amount-container input{
+    width: 4rem;
 }

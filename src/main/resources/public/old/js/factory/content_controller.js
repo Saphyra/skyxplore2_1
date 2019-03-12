@@ -15,31 +15,8 @@
     Displays the elements of the selected category.
     */
     function displayElementsOfCategory(category){
-
-        
         function createElement(element){
             try{
-                
-                    const constructionTimeContainer = document.createElement("DIV");
-                        constructionTimeContainer.classList.add("fontsize1_25rem");
-                        constructionTimeContainer.classList.add("margin0_25rem");
-                        constructionTimeContainer.innerHTML = "Gyártási idő: "
-                        const constructionTime = document.createElement("SPAN");
-                            constructionTime.innerHTML = translator.convertTimeStamp(element.constructiontime).toString();
-                    constructionTimeContainer.appendChild(constructionTime);
-                container.appendChild(constructionTimeContainer);
-                
-                    const amountContainer = document.createElement("LABEL");
-                        amountContainer.classList.add("fontsize1_25rem");
-                        amountContainer.appendChild(document.createTextNode("Mennyiség: "));
-                        const amountInput = document.createElement("INPUT");
-                            amountInput.classList.add("width4rem");
-                            amountInput.type = "number";
-                            amountInput.min = 1;
-                            amountInput.value = 1;
-                            amountInput.placeholder = "Mennyiség";
-                    amountContainer.appendChild(amountInput);
-                container.appendChild(amountContainer);
                 
                     const buildButton = document.createElement("BUTTON");
                         buildButton.innerHTML = "Gyártás indítása";

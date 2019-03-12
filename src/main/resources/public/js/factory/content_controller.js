@@ -1,6 +1,7 @@
 (function ContentController(){
     scriptLoader.loadScript("js/common/cache.js");
     scriptLoader.loadScript("js/common/localization/items.js");
+    scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     scriptLoader.loadScript("js/common/equipment/item_cache.js");
 
@@ -25,6 +26,7 @@
         }
 
         function createElement(itemId){
+            const itemData = itemCache.get(itemId);
             const container = document.createElement("DIV");
                 container.classList.add("content-element");
                 container.title = equipmentLabelService.assembleTitleOfItem(itemId);
@@ -77,7 +79,7 @@
                 costContainer.appendChild(costLabel);
 
                     const costAmount = document.createElement("SPAN");
-                        costAmount.innerHTML = itemCache.get(itemId).buildprice;
+                        costAmount.innerHTML = itemData.buildprice;
                 costContainer.appendChild(costAmount);
 
                     const costDelimiter = document.createElement("SPAN");
@@ -88,6 +90,34 @@
                         moneyLabel.innerHTML = moneyController.getMoney();
                 costContainer.appendChild(moneyLabel);
             container.appendChild(costContainer);
+
+                const constructionTimeContainer = document.createElement("DIV");
+                    constructionTimeContainer.classList.add("construction-time-container");
+
+                    const constructionTimeTitle = document.createElement("SPAN");
+                        constructionTimeTitle.innerHTML = Localization.getAdditionalContent("construction-time") + ": ";
+                constructionTimeContainer.appendChild(constructionTimeTitle);
+
+                    const constructionTimeLabel = document.createElement("SPAN");
+                        constructionTimeLabel.innerHTML = dateTimeFormatter.convertTimeStamp(itemData.constructiontime);
+                constructionTimeContainer.appendChild(constructionTimeLabel);
+            container.appendChild(constructionTimeContainer);
+
+                const amountContainer = document.createElement("LABEL");
+                    amountContainer.classList.add("amount-container");
+                    amountContainer.appendChild(document.createTextNode(Localization.getAdditionalContent("amount") + ": "));
+
+                    const amountInput = document.createElement("INPUT");
+                        amountInput.type = "number";
+                        amountInput.min = 1;
+                        amountInput.value = 1;
+                        amountInput.placeholder = Localization.getAdditionalContent("amount");
+                amountContainer.appendChild(amountInput);
+            container.appendChild(amountContainer);
+
+                const buildButton = document.createElement("BUTTON");
+                    buildButton.innerHTML = Localization.getAdditionalContent("start-construction");
+            container.appendChild(buildButton);
 
             return container;
         }
