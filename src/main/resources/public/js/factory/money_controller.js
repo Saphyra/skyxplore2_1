@@ -3,9 +3,17 @@
 
     let money = null;
 
+    window.moneyController = new function(){
+        this.getMoney = getMoney;
+    }
+
     $(document).ready(function(){
         loadMoney();
     });
+
+    function getMoney(){
+        return money;
+    }
 
     function loadMoney(){
         const request = new Request(HttpMethod.GET, Mapping.CHARACTER_MONEY);

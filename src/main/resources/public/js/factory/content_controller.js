@@ -68,6 +68,27 @@
                         materialsContainer.appendChild(requiredMaterialContainer);
                     }
             container.appendChild(materialsContainer);
+
+                const costContainer = document.createElement("DIV");
+                    costContainer.classList.add("cost-container");
+
+                    const costLabel = document.createElement("SPAN");
+                        costLabel.innerHTML = Localization.getAdditionalContent("cost") + ": ";
+                costContainer.appendChild(costLabel);
+
+                    const costAmount = document.createElement("SPAN");
+                        costAmount.innerHTML = itemCache.get(itemId).buildprice;
+                costContainer.appendChild(costAmount);
+
+                    const costDelimiter = document.createElement("SPAN");
+                        costDelimiter.innerHTML = " / ";
+                costContainer.appendChild(costDelimiter);
+
+                    const moneyLabel = document.createElement("SPAN");
+                        moneyLabel.innerHTML = moneyController.getMoney();
+                costContainer.appendChild(moneyLabel);
+            container.appendChild(costContainer);
+
             return container;
         }
 

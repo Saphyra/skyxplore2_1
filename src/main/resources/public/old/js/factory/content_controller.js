@@ -19,26 +19,6 @@
         
         function createElement(element){
             try{
-                    const materialsContainer = document.createElement("DIV");
-                        if(!fillMaterialsContainer(materialsContainer, element, 1)){
-                            isBuildable = false;
-                        }
-                container.appendChild(materialsContainer);
-                
-                    const costContainer = document.createElement("DIV");
-                        costContainer.classList.add("fontsize1_25rem");
-                        costContainer.innerHTML = "Pénz: ";
-                        const cost = document.createElement("SPAN");
-                            cost.innerHTML = element.buildprice;
-                            if(element.buildprice > pageController.money){
-                                isBuildable = false;
-                            }
-                    costContainer.appendChild(cost);
-                        const current = document.createElement("SPAN");
-                            current.innerHTML = " / " + pageController.money;
-                    costContainer.appendChild(current);
-                    costContainer.style.color = element.buildprice > pageController.money ? "red" : "lightgreen";
-                container.appendChild(costContainer);
                 
                     const constructionTimeContainer = document.createElement("DIV");
                         constructionTimeContainer.classList.add("fontsize1_25rem");
