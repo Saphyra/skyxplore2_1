@@ -2,23 +2,23 @@ scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
 
 function FactoryElement(
     id,
-    rm,
-    me,
-    cl,
-    ml,
-    ctl,
-    ai,
-    bb
+    reqMat,
+    matEls,
+    costLab,
+    monLab,
+    constTimeLab,
+    amInp,
+    buyBut
 ){
     let amount = 1;
     const itemId = id;
-    const requiredMaterials = rm;
-    const materialElements = me;
-    const costLabel = cl;
-    const moneyLabel = ml;
-    const constructionTimeLabel = ctl;
-    const amountInput = ai;
-    const buildButton = bb;
+    const requiredMaterials = reqMat;
+    const materialElements = matEls;
+    const costLabel = costLab;
+    const moneyLabel = monLab;
+    const constructionTimeLabel = constTimeLab;
+    const amountInput = amInp;
+    const buildButton = buyBut;
     const itemData = itemCache.get(itemId);
 
     addListeners();
@@ -27,7 +27,7 @@ function FactoryElement(
     function amountChanged(){
         updateMaterialElements();
 
-        costLabel.innerHTML = itemData.buildprice * amount;
+        costLabel.innerHTML = itemData.buildprice || 0 * amount;
         moneyLabel.innerHTML = moneyController.getMoney();
         constructionTimeLabel.innerHTML = dateTimeFormatter.convertTimeStamp(itemData.constructiontime * amount);
 
