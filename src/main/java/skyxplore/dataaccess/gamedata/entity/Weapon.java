@@ -1,12 +1,13 @@
 package skyxplore.dataaccess.gamedata.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.EquipmentDescription;
 
-@SuppressWarnings("Lombok")
 @Data
 @ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public class Weapon extends EquipmentDescription {
     private Integer attackSpeed;
     private Integer criticalRate;
