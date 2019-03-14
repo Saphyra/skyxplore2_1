@@ -1,9 +1,10 @@
 (function ContentController(){
     scriptLoader.loadScript("js/common/cache.js");
     scriptLoader.loadScript("js/common/localization/items.js");
-    scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
     scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
     scriptLoader.loadScript("js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("js/factory/content/factory_element.js");
+
 
     events.DISPLAY_CATEGORY = "display_category";
 
@@ -26,7 +27,9 @@
         }
 
         function createElement(itemId){
-            const itemData = itemCache.get(itemId);
+            const builder = new FactoryElementBuilder(itemId);
+
+
             const container = document.createElement("DIV");
                 container.classList.add("content-element");
                 container.title = equipmentLabelService.assembleTitleOfItem(itemId);
@@ -38,10 +41,9 @@
 
                 const materialsContainer = document.createElement("DIV");
                     const requiredMaterials = getRequiredMaterialsOrdered(itemId);
+                        builder.requiredMaterials(requiredMaterials);
 
                     for(let materialId in requiredMaterials){
-                        const requiredAmount = requiredMaterials[materialId];
-                        const materialData = itemCache.get(materialId);
                         const requiredMaterialContainer = document.createElement("DIV");
                             requiredMaterialContainer.classList.add("required-material");
                             requiredMaterialContainer.title = equipmentLabelService.assembleTitleOfItem(materialId);
@@ -55,19 +57,20 @@
                         requiredMaterialContainer.appendChild(nameDelimiter);
 
                             const requiredAmountLabel = document.createElement("SPAN");
-                                requiredAmountLabel.innerHTML = requiredAmount;
+                                requiredAmountLabel.innerHTML = requiredMaterials[materialId];;
                         requiredMaterialContainer.appendChild(requiredAmountLabel);
 
                             const delimiter = document.createElement("SPAN");
                                 delimiter.innerHTML = " / ";
                         requiredMaterialContainer.appendChild(delimiter);
 
-                            const storedMaterialAmount = materialsController.getMaterialAmount(materialId);
                             const storedMaterialAmountLabel = document.createElement("SPAN");
-                                storedMaterialAmountLabel.innerHTML = storedMaterialAmount;
                         requiredMaterialContainer.appendChild(storedMaterialAmountLabel);
 
                         materialsContainer.appendChild(requiredMaterialContainer);
+
+                        const materialElement = new MaterialElement(materialId, requiredAmountLabel, storedMaterialAmountLabel);
+                        builder.addMaterialElement(materialElement);
                     }
             container.appendChild(materialsContainer);
 
@@ -79,7 +82,7 @@
                 costContainer.appendChild(costLabel);
 
                     const costAmount = document.createElement("SPAN");
-                        costAmount.innerHTML = itemData.buildprice;
+                        builder.costLabel(costAmount);
                 costContainer.appendChild(costAmount);
 
                     const costDelimiter = document.createElement("SPAN");
@@ -87,7 +90,7 @@
                 costContainer.appendChild(costDelimiter);
 
                     const moneyLabel = document.createElement("SPAN");
-                        moneyLabel.innerHTML = moneyController.getMoney();
+                        builder.moneyLabel(moneyLabel);
                 costContainer.appendChild(moneyLabel);
             container.appendChild(costContainer);
 
@@ -99,7 +102,7 @@
                 constructionTimeContainer.appendChild(constructionTimeTitle);
 
                     const constructionTimeLabel = document.createElement("SPAN");
-                        constructionTimeLabel.innerHTML = dateTimeFormatter.convertTimeStamp(itemData.constructiontime);
+                        builder.constructionTimeLabel(constructionTimeLabel);
                 constructionTimeContainer.appendChild(constructionTimeLabel);
             container.appendChild(constructionTimeContainer);
 
@@ -112,13 +115,16 @@
                         amountInput.min = 1;
                         amountInput.value = 1;
                         amountInput.placeholder = Localization.getAdditionalContent("amount");
+                        builder.amountInput(amountInput);
                 amountContainer.appendChild(amountInput);
             container.appendChild(amountContainer);
 
                 const buildButton = document.createElement("BUTTON");
                     buildButton.innerHTML = Localization.getAdditionalContent("start-construction");
+                    builder.buildButton(buildButton);
             container.appendChild(buildButton);
 
+            builder.build();
             return container;
         }
 
