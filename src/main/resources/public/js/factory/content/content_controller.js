@@ -29,50 +29,78 @@
         function createElement(itemId){
             const builder = new FactoryElementBuilder(itemId);
 
-            const container = document.createElement("DIV");
-                container.classList.add("content-element");
-                container.title = equipmentLabelService.assembleTitleOfItem(itemId);
+            const container = createContainer(itemId);
+                container.appendChild(createNameContainer(itemId));
+                container.appendChild(createMaterialsContainer(itemId, builder));
+                container.appendChild(createCostContainer(builder));
+                container.appendChild(createConstructionTimeContainer(builder));
+                container.appendChild(createAmountInput(builder));
+                container.appendChild(createBuildButton(builder));
 
+            function createContainer(itemId){
+                const container = document.createElement("DIV");
+                    container.classList.add("content-element");
+                    container.title = equipmentLabelService.assembleTitleOfItem(itemId);
+                return container;
+            }
+
+            function createNameContainer(itemId){
                 const nameContainer = document.createElement("DIV");
                     nameContainer.classList.add("content-element-title");
                     nameContainer.innerHTML = Items.getItem(itemId).name;
-            container.appendChild(nameContainer);
+                return nameContainer;
+            }
 
+            function createMaterialsContainer(itemId, builder){
                 const materialsContainer = document.createElement("DIV");
                     const requiredMaterials = getRequiredMaterialsOrdered(itemId);
                         builder.requiredMaterials(requiredMaterials);
 
                     for(let materialId in requiredMaterials){
-                        const requiredMaterialContainer = document.createElement("DIV");
+                        materialsContainer.appendChild(createRequiredMaterial(materialId, builder));
+                    }
+                return materialsContainer;
+
+                function getRequiredMaterialsOrdered(itemId){
+                    const itemData = itemCache.get(itemId);
+                    const materialMapping = {};
+
+                    for(let materialId in itemData.materials){
+                        materialMapping[materialId] = itemData.materials[materialId];
+                    }
+
+                    return orderMapByProperty(
+                        materialMapping,
+                        function(a, b){
+                            return Items.getItem(a.getKey()).name.localeCompare(Items.getItem(b.getKey()).name);
+                        }
+                    );
+                }
+
+                function createRequiredMaterial(materialId, builder){
+                    const requiredMaterialContainer = document.createElement("DIV");
                             requiredMaterialContainer.classList.add("required-material");
                             requiredMaterialContainer.title = equipmentLabelService.assembleTitleOfItem(materialId);
 
-                            const nameLabel = document.createElement("SPAN");
-                                nameLabel.innerHTML = Items.getItem(materialId).name;
-                        requiredMaterialContainer.appendChild(nameLabel);
+                        requiredMaterialContainer.appendChild(createSpan(Items.getItem(materialId).name));
+                        requiredMaterialContainer.appendChild(createSpan(": "));
 
-                            const nameDelimiter = document.createElement("SPAN");
-                                nameDelimiter.innerHTML = ": ";
-                        requiredMaterialContainer.appendChild(nameDelimiter);
-
-                            const requiredAmountLabel = document.createElement("SPAN");
-                                requiredAmountLabel.innerHTML = requiredMaterials[materialId];;
+                            const requiredAmountLabel = createSpan();
                         requiredMaterialContainer.appendChild(requiredAmountLabel);
 
-                            const delimiter = document.createElement("SPAN");
-                                delimiter.innerHTML = " / ";
-                        requiredMaterialContainer.appendChild(delimiter);
+                        requiredMaterialContainer.appendChild(createSpan(" / "));
 
-                            const storedMaterialAmountLabel = document.createElement("SPAN");
+                            const storedMaterialAmountLabel = createSpan();
                         requiredMaterialContainer.appendChild(storedMaterialAmountLabel);
-
-                        materialsContainer.appendChild(requiredMaterialContainer);
 
                         const materialElement = new MaterialElement(materialId, requiredAmountLabel, storedMaterialAmountLabel);
                         builder.addMaterialElement(materialElement);
-                    }
-            container.appendChild(materialsContainer);
 
+                        return requiredMaterialContainer;
+                }
+            }
+
+            function createCostContainer(builder){
                 const costContainer = document.createElement("DIV");
                     costContainer.classList.add("cost-container");
 
@@ -80,34 +108,36 @@
                         costLabel.innerHTML = Localization.getAdditionalContent("cost") + ": ";
                 costContainer.appendChild(costLabel);
 
-                    const costAmount = document.createElement("SPAN");
+                    const costAmount = createSpan();
                         builder.costLabel(costAmount);
                 costContainer.appendChild(costAmount);
 
-                    const costDelimiter = document.createElement("SPAN");
-                        costDelimiter.innerHTML = " / ";
-                costContainer.appendChild(costDelimiter);
+                costContainer.appendChild(createSpan(" / "));
 
-                    const moneyLabel = document.createElement("SPAN");
+                    const moneyLabel = createSpan();
                         builder.moneyLabel(moneyLabel);
                 costContainer.appendChild(moneyLabel);
-            container.appendChild(costContainer);
 
+                return costContainer;
+            }
+
+            function createConstructionTimeContainer(builder){
                 const constructionTimeContainer = document.createElement("DIV");
                     constructionTimeContainer.classList.add("construction-time-container");
 
-                    const constructionTimeTitle = document.createElement("SPAN");
-                        constructionTimeTitle.innerHTML = Localization.getAdditionalContent("construction-time") + ": ";
-                constructionTimeContainer.appendChild(constructionTimeTitle);
+                constructionTimeContainer.appendChild(createSpan(Localization.getAdditionalContent("construction-time") + ": "));
 
-                    const constructionTimeLabel = document.createElement("SPAN");
+                    const constructionTimeLabel = createSpan();
                         builder.constructionTimeLabel(constructionTimeLabel);
                 constructionTimeContainer.appendChild(constructionTimeLabel);
-            container.appendChild(constructionTimeContainer);
 
+                return constructionTimeContainer;
+            }
+
+            function createAmountInput(builder){
                 const amountContainer = document.createElement("LABEL");
                     amountContainer.classList.add("amount-container");
-                    amountContainer.appendChild(document.createTextNode(Localization.getAdditionalContent("amount") + ": "));
+                    amountContainer.appendChild(createSpan(Localization.getAdditionalContent("amount") + ": "));
 
                     const amountInput = document.createElement("INPUT");
                         amountInput.type = "number";
@@ -116,12 +146,16 @@
                         amountInput.placeholder = Localization.getAdditionalContent("amount");
                         builder.amountInput(amountInput);
                 amountContainer.appendChild(amountInput);
-            container.appendChild(amountContainer);
 
+                return amountContainer;
+            }
+
+            function createBuildButton(builder){
                 const buildButton = document.createElement("BUTTON");
                     buildButton.innerHTML = Localization.getAdditionalContent("start-construction");
                     builder.buildButton(buildButton);
-            container.appendChild(buildButton);
+                return buildButton;
+            }
 
             builder.build();
             return container;
@@ -134,26 +168,16 @@
                 });
             return itemIds;
         }
-
-        function getRequiredMaterialsOrdered(itemId){
-            const itemData = itemCache.get(itemId);
-            const materialMapping = {};
-
-            for(let materialId in itemData.materials){
-                materialMapping[materialId] = itemData.materials[materialId];
-            }
-
-            return orderMapByProperty(
-                materialMapping,
-                function(a, b){
-                    return Items.getItem(a.getKey()).name.localeCompare(Items.getItem(b.getKey()).name);
-                }
-            );
-        }
     }
 
     function loadItemsOfCategory(categoryId){
         const response = dao.sendRequest(HttpMethod.GET, Mapping.concat(Mapping.ITEMS_OF_CATEGORY, categoryId));
         return response.status == ResponseStatus.OK ? JSON.parse(response.body) : throwException("InvalidResponse", response.toString());
+    }
+
+    function createSpan(text){
+        const element = document.createElement("SPAN");
+            element.innerHTML = text || "";
+        return element;
     }
 })();
