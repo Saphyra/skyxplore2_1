@@ -10,6 +10,7 @@ function FactoryElement(
     amInp,
     buyBut
 ){
+    let buildable = true;
     let amount = 1;
     const itemId = id;
     const requiredMaterials = reqMat;
@@ -25,17 +26,27 @@ function FactoryElement(
     amountChanged();
 
     function amountChanged(){
+        buildable = true;
         updateMaterialElements();
+        updateCost();
 
-        costLabel.innerHTML = itemData.buildprice || 0 * amount;
-        moneyLabel.innerHTML = moneyController.getMoney();
+        buildButton.disabled = !buildable;
         constructionTimeLabel.innerHTML = dateTimeFormatter.convertTimeStamp(itemData.constructiontime * amount);
+
+        function updateCost(){
+            const cost = (itemData.buildprice || 0) * amount;
+            const money = moneyController.getMoney();
+            costLabel.innerHTML = cost;
+            moneyLabel.innerHTML = money;
+
+            displayBuildStatus(costLabel.parentNode, cost <= money, setBuildable);
+        }
 
         function updateMaterialElements(){
             for(let mIndex in materialElements){
                 const materialElement = materialElements[mIndex];
 
-                materialElement.updateRequiredAmount(amount, requiredMaterials[materialElement.getId()])
+                materialElement.updateRequiredAmount(amount, requiredMaterials[materialElement.getId()], setBuildable);
             }
         }
     }
@@ -52,6 +63,10 @@ function FactoryElement(
             amount = Number(amountInput.value);
             amountChanged();
         });
+    }
+
+    function setBuildable(b){
+        buildable = b;
     }
 }
 
@@ -112,19 +127,33 @@ function MaterialElement(id, requiredAmount, storedAmount){
     const requiredAmountLabel = requiredAmount;
     const storedAmountLabel = storedAmount;
 
-    updateRequiredAmount();
+    updateStoredAmount();
 
-    this.updateRequiredAmount = function(amount, requiredAmount){
-        requiredAmountLabel.innerHTML = amount * requiredAmount;
+    this.updateRequiredAmount = function(amount, requiredAmount, errorCallBack){
+        const amountCost = amount * requiredAmount
+        requiredAmountLabel.innerHTML = amountCost;
+
+        displayBuildStatus(requiredAmountLabel.parentNode, amountCost < materialsController.getMaterialAmount(materialId), errorCallBack);
     }
 
-    this.updateStoredAmount = updateRequiredAmount;
+    this.updateStoredAmount = updateStoredAmount;
 
-    function updateRequiredAmount(){
+    function updateStoredAmount(){
         storedAmountLabel.innerHTML = materialsController.getMaterialAmount(materialId);
     }
 
     this.getId = function(){
         return materialId;
+    }
+}
+
+function displayBuildStatus(node, buildable, errorCallBack){
+    if(buildable){
+        node.classList.remove("not-buildable");
+        node.classList.add("buildable");
+    }else{
+        node.classList.remove("buildable");
+        node.classList.add("not-buildable");
+        errorCallBack(buildable);
     }
 }

@@ -29,7 +29,6 @@
         function createElement(itemId){
             const builder = new FactoryElementBuilder(itemId);
 
-
             const container = document.createElement("DIV");
                 container.classList.add("content-element");
                 container.title = equipmentLabelService.assembleTitleOfItem(itemId);
@@ -147,7 +146,7 @@
             return orderMapByProperty(
                 materialMapping,
                 function(a, b){
-                    return Items.getItem(a.getKey()).name.localeCompare(Items.getItem(b.getKey())).name;
+                    return Items.getItem(a.getKey()).name.localeCompare(Items.getItem(b.getKey()).name);
                 }
             );
         }

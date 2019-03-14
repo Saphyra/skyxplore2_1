@@ -42,7 +42,7 @@ function orderMapByProperty(map, orderFunction){
         for(let eindex in entryList){
             result[entryList[eindex].getKey()] = entryList[eindex].getValue();
         }
-        
+
     return result;
     
     function Entry(k, v){

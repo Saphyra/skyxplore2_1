@@ -45,3 +45,11 @@
 .amount-container input{
     width: 4rem;
 }
+
+.buildable{
+    color: green;
+}
+
+.not-buildable{
+    color: red;
+}
