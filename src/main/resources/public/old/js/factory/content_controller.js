@@ -18,13 +18,6 @@
         function createElement(element){
             try{
                 
-                    const buildButton = document.createElement("BUTTON");
-                        buildButton.innerHTML = "Gyártás indítása";
-                        buildButton.onclick = function(){
-                            queueController.addToQueue(element.id, Number(amountInput.value));
-                        }
-                container.appendChild(buildButton);
-                
                 buildButton.disabled = !isBuildable;
                 
                 $(amountInput).on("change keyup", function(){

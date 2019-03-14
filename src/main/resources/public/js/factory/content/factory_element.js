@@ -21,6 +21,7 @@ function FactoryElement(
     const buildButton = bb;
     const itemData = itemCache.get(itemId);
 
+    addListeners();
     amountChanged();
 
     function amountChanged(){
@@ -28,7 +29,7 @@ function FactoryElement(
 
         costLabel.innerHTML = itemData.buildprice * amount;
         moneyLabel.innerHTML = moneyController.getMoney();
-        constructionTimeLabel.innerHTML = dateTimeFormatter.convertTimeStamp(itemData.constructiontime);
+        constructionTimeLabel.innerHTML = dateTimeFormatter.convertTimeStamp(itemData.constructiontime * amount);
 
         function updateMaterialElements(){
             for(let mIndex in materialElements){
@@ -37,6 +38,20 @@ function FactoryElement(
                 materialElement.updateRequiredAmount(amount, requiredMaterials[materialElement.getId()])
             }
         }
+    }
+
+    function addListeners(){
+        buildButton.onclick = function(){
+            eventProcessor.processEvent(new Event(
+                events.ADD_TO_QUEUE,
+                {itemId: itemId, amount: amount}
+            ));
+        }
+
+        $(amountInput).on("change keyup", function(){
+            amount = Number(amountInput.value);
+            amountChanged();
+        });
     }
 }
 
@@ -100,7 +115,7 @@ function MaterialElement(id, requiredAmount, storedAmount){
     updateRequiredAmount();
 
     this.updateRequiredAmount = function(amount, requiredAmount){
-        requiredAmount.innerHTML = amount * requiredAmount;
+        requiredAmountLabel.innerHTML = amount * requiredAmount;
     }
 
     this.updateStoredAmount = updateRequiredAmount;
