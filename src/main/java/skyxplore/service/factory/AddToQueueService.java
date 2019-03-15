@@ -1,5 +1,6 @@
 package skyxplore.service.factory;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,11 @@ public class AddToQueueService {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Factory factory = factoryQueryService.findFactoryOfCharacterValidated(characterId);
         FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
+
+        //TODO unit test
+        if(!elementData.isBuildable()){
+            throw new BadRequestException("Element with id " + request.getElementId() + " is not buildable.");
+        }
 
         int price = elementData.getBuildPrice() * request.getAmount();
         validateMoney(character.getMoney(), price);

@@ -5,6 +5,7 @@
   "energyusage": 75,
   "constructiontime": 2700,
   "buildprice": 2700,
+  "buildable": true,
   "materials": {
     "uridium": 45,
     "cable": 6,

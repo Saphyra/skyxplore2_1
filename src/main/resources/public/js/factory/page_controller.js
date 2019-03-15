@@ -2,6 +2,7 @@
     scriptLoader.loadScript("js/factory/menu_controller.js");
     scriptLoader.loadScript("js/factory/materials_controller.js");
     scriptLoader.loadScript("js/factory/money_controller.js");
+    scriptLoader.loadScript("js/factory/queue_controller.js");
     scriptLoader.loadScript("js/factory/content/content_controller.js");
 
     $(document).ready(function(){
@@ -34,6 +35,7 @@
         },
         function(){
             eventProcessor.processEvent(new Event(events.LOAD_MATERIALS));
+            eventProcessor.processEvent(new Event(events.LOAD_QUEUE));
         },
         true
     ));
@@ -56,3 +58,9 @@
         true
     ));
 })();
+
+function createSpan(text){
+    const element = document.createElement("SPAN");
+        element.innerHTML = text || "";
+    return element;
+}

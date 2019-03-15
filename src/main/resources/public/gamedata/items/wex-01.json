@@ -4,6 +4,7 @@
   "extendednum": 2,
   "constructiontime": 3600,
   "buildprice": 3600,
+  "buildable": true,
   "materials": {
     "cable": 4,
     "condensator": 4,

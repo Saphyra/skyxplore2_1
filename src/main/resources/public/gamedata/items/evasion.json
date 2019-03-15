@@ -3,6 +3,7 @@
   "type": "ability",
   "slot": "ability",
   "energyusage": 200,
+  "buildable": true,
   "active": 5,
   "reload": 15,
   "effect": {

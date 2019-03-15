@@ -134,7 +134,7 @@ function MaterialElement(id, requiredAmount, storedAmount){
         const amountCost = amount * requiredAmount
         requiredAmountLabel.innerHTML = amountCost;
 
-        displayBuildStatus(requiredAmountLabel.parentNode, amountCost < materialsController.getMaterialAmount(materialId), errorCallBack);
+        displayBuildStatus(requiredAmountLabel.parentNode, amountCost <= materialsController.getMaterialAmount(materialId), errorCallBack);
     }
 
     this.updateStoredAmount = updateStoredAmount;

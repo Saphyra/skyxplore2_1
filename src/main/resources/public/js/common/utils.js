@@ -26,6 +26,10 @@ function isEmailValid(email){
     return result;
 }
 
+function getActualTimeStamp(){
+    return Math.floor(new Date().getTime() / 1000);
+}
+
 function switchTab(clazz, id){
     $("." + clazz).hide();
     $("#" + id).show();

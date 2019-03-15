@@ -11,7 +11,11 @@
     }
 
     eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.LOAD_MATERIALS},
+        function(eventType){
+            return eventType === events.LOAD_MATERIALS
+                || eventType === events.ADDED_TO_QUEUE
+                || eventType === events.PRODUCT_FINISHED
+        },
         loadMaterials
     ));
 
@@ -28,6 +32,10 @@
     }
 
     function loadMaterials(){
+        materials = [];
+        $("#no-materials").show();
+        document.getElementById("materials").innerHTML = "";
+
         const request = new Request(HttpMethod.GET, Mapping.GET_MATERIALS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
@@ -36,7 +44,7 @@
                 for(let materialId in payload){
                     displayMaterial(materialId, payload[materialId]);
                 }
-                eventProcessor.processEvent(new Event(events.MATERIALS_LOADED))
+                eventProcessor.processEvent(new Event(events.MATERIALS_LOADED));
             }
 
         dao.sendRequestAsync(request);

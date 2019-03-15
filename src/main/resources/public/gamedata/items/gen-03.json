@@ -3,6 +3,7 @@
   "energyrecharge": 40,
   "constructiontime": 2400,
   "buildprice": 2400,
+  "buildable": true,
   "materials": {
     "cable": 27,
     "condensator": 18,

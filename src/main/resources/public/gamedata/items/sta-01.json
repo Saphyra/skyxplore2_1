@@ -18,6 +18,7 @@
   ],
   "constructiontime": 3600,
   "buildprice": 0,
+  "buildable": true,
   "materials": {},
   "type": "ship",
   "slot": "ship",

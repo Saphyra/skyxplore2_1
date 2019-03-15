@@ -3,6 +3,7 @@
   "extendedslot": "defense",
   "extendednum": 2,
   "constructiontime": 3600,
+  "buildable": true,
   "buildprice": 3600,
   "materials": {
     "cable": 4,

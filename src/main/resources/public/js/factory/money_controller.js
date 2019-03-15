@@ -11,6 +11,14 @@
         loadMoney();
     });
 
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.ADDED_TO_QUEUE
+                || eventType === events.PRODUCT_FINISHED
+        },
+        loadMoney
+    ));
+
     function getMoney(){
         return money;
     }
@@ -30,8 +38,7 @@
 
     function sendMoneyChangedEvent(){
         eventProcessor.processEvent(new Event(
-            events.MONEY_CHANGED,
-            {money: money}
+            events.MONEY_CHANGED
         ));
     }
 })();

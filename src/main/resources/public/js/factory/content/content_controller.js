@@ -10,20 +10,37 @@
 
     const categoryCache = new Cache(loadItemsOfCategory);
 
+    let currentCategoryId = null;
+    let factoryElements = [];
+
     eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType == events.DISPLAY_CATEGORY},
+        function(eventType){
+            return eventType == events.DISPLAY_CATEGORY
+                || eventType == events.MATERIALS_LOADED
+                || eventType == events.MONEY_CHANGED;
+        },
         function(event){
-            displayCategory(event.getPayload());
+            displayCategory(event.getPayload() || currentCategoryId);
         }
     ));
 
     function displayCategory(categoryId){
+        if(!categoryId){
+            return;
+        }
+
+        currentCategoryId = categoryId;
         const itemIds = getItemsOfCategoryOrdered(categoryId);
         const container = document.getElementById("content");
             container.innerHTML = "";
+        factoryElements = [];
 
         for(let iIndex in itemIds){
-            container.appendChild(createElement(itemIds[iIndex]));
+            const itemId = itemIds[iIndex];
+
+            if(itemCache.get(itemId).buildable){
+                container.appendChild(createElement(itemId));
+            }
         }
 
         function createElement(itemId){
@@ -36,6 +53,8 @@
                 container.appendChild(createConstructionTimeContainer(builder));
                 container.appendChild(createAmountInput(builder));
                 container.appendChild(createBuildButton(builder));
+
+            factoryElements.push(builder.build());
 
             function createContainer(itemId){
                 const container = document.createElement("DIV");
@@ -101,24 +120,25 @@
             }
 
             function createCostContainer(builder){
-                const costContainer = document.createElement("DIV");
-                    costContainer.classList.add("cost-container");
+                const costContainerWrapper = document.createElement("DIV");
+                    const costContainer = createSpan();
+                        costContainer.classList.add("cost-container");
 
-                    const costLabel = document.createElement("SPAN");
-                        costLabel.innerHTML = Localization.getAdditionalContent("cost") + ": ";
-                costContainer.appendChild(costLabel);
+                        const costLabel = document.createElement("SPAN");
+                            costLabel.innerHTML = Localization.getAdditionalContent("cost") + ": ";
+                    costContainer.appendChild(costLabel);
 
-                    const costAmount = createSpan();
-                        builder.costLabel(costAmount);
-                costContainer.appendChild(costAmount);
+                        const costAmount = createSpan();
+                            builder.costLabel(costAmount);
+                    costContainer.appendChild(costAmount);
 
-                costContainer.appendChild(createSpan(" / "));
+                    costContainer.appendChild(createSpan(" / "));
 
-                    const moneyLabel = createSpan();
-                        builder.moneyLabel(moneyLabel);
-                costContainer.appendChild(moneyLabel);
-
-                return costContainer;
+                        const moneyLabel = createSpan();
+                            builder.moneyLabel(moneyLabel);
+                    costContainer.appendChild(moneyLabel);
+                costContainerWrapper.appendChild(costContainer);
+                return costContainerWrapper;
             }
 
             function createConstructionTimeContainer(builder){
@@ -156,8 +176,6 @@
                     builder.buildButton(buildButton);
                 return buildButton;
             }
-
-            builder.build();
             return container;
         }
 
@@ -173,11 +191,5 @@
     function loadItemsOfCategory(categoryId){
         const response = dao.sendRequest(HttpMethod.GET, Mapping.concat(Mapping.ITEMS_OF_CATEGORY, categoryId));
         return response.status == ResponseStatus.OK ? JSON.parse(response.body) : throwException("InvalidResponse", response.toString());
-    }
-
-    function createSpan(text){
-        const element = document.createElement("SPAN");
-            element.innerHTML = text || "";
-        return element;
     }
 })();

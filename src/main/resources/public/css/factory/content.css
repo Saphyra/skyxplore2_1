@@ -47,9 +47,13 @@
 }
 
 .buildable{
-    color: green;
+    color: lightgreen;
+    font-weight: bold;
+    background-color: black;
 }
 
 .not-buildable{
     color: red;
+    font-weight: bold;
+    background-color: black;
 }

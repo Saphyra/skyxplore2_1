@@ -4,6 +4,7 @@
   "extendednum": 9,
   "constructiontime": 5400,
   "buildprice": 5400,
+  "buildable": true,
   "materials": {
     "cable": 12,
     "hullplate": 9,

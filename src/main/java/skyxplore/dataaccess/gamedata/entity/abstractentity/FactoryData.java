@@ -1,11 +1,11 @@
 package skyxplore.dataaccess.gamedata.entity.abstractentity;
 
-import java.util.HashMap;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.HashMap;
 
 @Data
 @ToString(callSuper = true)
@@ -13,6 +13,8 @@ import lombok.ToString;
 public abstract class FactoryData extends GeneralDescription {
     @JsonProperty("constructiontime")
     private Integer constructionTime;
+
+    private boolean buildable;
 
     @JsonProperty("buildprice")
     private Integer buildPrice = 0;

@@ -8,6 +8,7 @@
   "accuracy": 250,
   "constructiontime": 5400,
   "buildprice": 5400,
+  "buildable": true,
   "materials": {
     "cable": 18,
     "condensator": 18,

@@ -3,6 +3,7 @@
   "capacity": 1500,
   "constructiontime": 1800,
   "buildprice": 1800,
+  "buildable": true,
   "materials": {
     "cable": 6,
     "hullplate": 3,

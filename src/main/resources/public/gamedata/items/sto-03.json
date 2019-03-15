@@ -3,6 +3,7 @@
   "capacity": 200,
   "constructiontime": 2400,
   "buildprice": 2400,
+  "buildable": true,
   "materials": {
     "hullplate": 45,
     "mithril": 180

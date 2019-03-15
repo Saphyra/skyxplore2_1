@@ -22,6 +22,7 @@
   ],
   "constructiontime": 86400,
   "buildprice": 86400,
+  "buildable": true,
   "materials": {
     "cable": 135,
     "condensator": 135,

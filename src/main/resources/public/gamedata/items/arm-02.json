@@ -3,6 +3,7 @@
   "capacity": 300000,
   "constructiontime": 2700,
   "buildprice": 2700,
+  "buildable": true,
   "materials": {
     "duranium": 60,
     "hullplate": 30

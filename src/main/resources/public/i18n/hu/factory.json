@@ -31,6 +31,12 @@
         "message": "Gyártósor"
       }
     ],
+    "empty-queue": [
+      {
+        "key": "innerHTML",
+        "message": "A gyártósor üres."
+      }
+    ],
     "logout-button": [
       {
         "key": "innerHTML",
@@ -48,6 +54,7 @@
     "cost": "Pénz",
     "construction-time": "Gyártási idő",
     "amount": "Mennyiség",
-    "start-construction": "Gyártás indítása"
+    "start-construction": "Gyártás indítása",
+    "waiting": "Sorban áll"
   }
 }

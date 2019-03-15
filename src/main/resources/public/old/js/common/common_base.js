@@ -8,7 +8,5 @@ $(document).ready(function(){
 
 
 
-function getActualTimeStamp(){
-    return Math.floor(new Date().getTime() / 1000);
-}
+
 

@@ -1,4 +1,5 @@
 window.Mapping = {
+    ADD_TO_QUEUE: "factory",
     BUY_ITEMS: "character/equipment",
     CHANGE_EMAIL: "user/email",
     CHANGE_PASSWORD: "user/password",
@@ -16,6 +17,7 @@ window.Mapping = {
     GET_CHARACTERS: "character",
     GET_MATERIALS: "factory/materials",
     GET_SHIP_DATA: "ship",
+    GET_QUEUE: "factory/queue",
     ITEMS_OF_CATEGORY: "categories/*",
     LOGIN: "login",
     LOGOUT: "logout",
