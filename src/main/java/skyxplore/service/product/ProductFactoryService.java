@@ -92,6 +92,7 @@ public class ProductFactoryService {
         products.forEach(this::startNextProduct);
     }
 
+    //TODO unit test
     private List<Product> getFirstProductsFromQueue() {
         List<Product> products = productDao.getFirstOfQueue();
         List<Product> result = new ArrayList<>();
