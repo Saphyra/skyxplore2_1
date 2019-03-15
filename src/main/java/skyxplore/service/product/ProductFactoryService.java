@@ -29,6 +29,7 @@ import java.util.List;
 @Service
 @EnableScheduling
 @RequiredArgsConstructor
+//TODO split class
 public class ProductFactoryService {
     private final CharacterQueryService characterQueryService;
     private final CharacterDao characterDao;

@@ -43,7 +43,6 @@ public class AddToQueueService {
         Factory factory = factoryQueryService.findFactoryOfCharacterValidated(characterId);
         FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
 
-        //TODO unit test
         if(!elementData.isBuildable()){
             throw new BadRequestException("Element with id " + request.getElementId() + " is not buildable.");
         }
