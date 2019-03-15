@@ -1,6 +1,10 @@
-package selenium.test.shop.util;
+package selenium.logic.util;
 
-import static java.util.Objects.isNull;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import selenium.logic.domain.Category;
+import selenium.logic.domain.MessageCodes;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,11 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import selenium.logic.domain.Category;
-import selenium.logic.domain.MessageCodes;
+import static java.util.Objects.isNull;
 
 @Slf4j
 public class CategoryNameHelper {

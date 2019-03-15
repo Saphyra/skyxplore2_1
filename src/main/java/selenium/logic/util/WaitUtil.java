@@ -7,6 +7,10 @@ import java.util.function.Supplier;
 
 @Slf4j
 public class WaitUtil {
+    public static void waitUntil(Supplier<Boolean> booleanSupplier){
+        waitUntil(booleanSupplier, "");
+    }
+
     public static void waitUntil(Supplier<Boolean> booleanSupplier, String logMessage) {
         log.info(logMessage);
         int counter = 0;

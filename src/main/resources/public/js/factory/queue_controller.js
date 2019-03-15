@@ -112,6 +112,7 @@
         };
         const request = new Request(HttpMethod.PUT, Mapping.ADD_TO_QUEUE, content);
             request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("PRODUCT_ADDED_TO_QUEUE"))
                 eventProcessor.processEvent(new Event(events.ADDED_TO_QUEUE));
                 if(reloadTimeout){
                     clearTimeout(reloadTimeout)

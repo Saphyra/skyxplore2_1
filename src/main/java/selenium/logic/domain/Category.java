@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum Category {
-    ENERGY("energy"), EXTENDER("extender"), STARTER_SHIP("starter");
+    ENERGY("energy"), EXTENDER("extender"), STARTER_SHIP("starter"), MATERIAL("material");
 
     @Getter
     private final String categoryId;

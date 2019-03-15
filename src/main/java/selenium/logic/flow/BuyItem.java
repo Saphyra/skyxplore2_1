@@ -1,21 +1,20 @@
 package selenium.logic.flow;
 
-import static org.junit.Assert.assertEquals;
-
-import org.openqa.selenium.WebDriver;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebDriver;
 import selenium.logic.domain.Category;
 import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.ShopItem;
 import selenium.logic.helper.CostCounter;
 import selenium.logic.helper.ShopElementSearcher;
 import selenium.logic.page.ShopPage;
+import selenium.logic.util.CategoryNameHelper;
 import selenium.logic.validator.CartVerifier;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.shop.util.CategoryNameHelper;
+
+import static org.junit.Assert.assertEquals;
 
 @RequiredArgsConstructor
 @Builder

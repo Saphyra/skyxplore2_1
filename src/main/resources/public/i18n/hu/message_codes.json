@@ -24,6 +24,7 @@
   "PASSWORD_CHANGE_SUCCESSFUL": "Jelszó megváltoztatása sikeres.",
   "PASSWORD_TOO_LONG": "Jelszó túl hosszú (Maximum 30 karakter).",
   "PASSWORD_TOO_SHORT": "Jelszó túl rövid (Minimum 6 karakter).",
+  "PRODUCT_ADDED_TO_QUEUE": "Megrendelés elküldve.",
   "REGISTRATION_SUCCESSFUL": "Sikeres regisztráció!",
   "SELECT_CHARACTER": "Karakter kiválasztása",
   "SHIP_EQUIPPED": "Hajó felszerelve.",

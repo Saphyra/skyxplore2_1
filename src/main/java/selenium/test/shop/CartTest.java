@@ -15,7 +15,7 @@ import selenium.logic.validator.CartVerifier;
 import selenium.test.shop.cart.AddToCartTest;
 import selenium.test.shop.cart.RemoveFromCartTest;
 import selenium.test.shop.cart.TooExpensiveTest;
-import selenium.test.shop.util.CategoryNameHelper;
+import selenium.logic.util.CategoryNameHelper;
 import selenium.test.shop.util.ShopTestHelper;
 import selenium.test.shop.util.ShopTestInitializer;
 

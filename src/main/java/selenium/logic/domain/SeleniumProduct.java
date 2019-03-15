@@ -15,7 +15,7 @@ public class SeleniumProduct {
     private static final String ELEMENT_MATERIAL_COST = "div:nth-child(2) div:first-child";
     private static final String ELEMENT_BUILD_BUTTON = "button";
     private static final String ELEMENT_MATERIAL_FIELDS = "div:nth-child(2) div";
-    private static final String SELECTOR_NAME = ".contentelementtitle";
+    private static final String SELECTOR_NAME = ".content-element-title";
 
     private final WebElement webElement;
 

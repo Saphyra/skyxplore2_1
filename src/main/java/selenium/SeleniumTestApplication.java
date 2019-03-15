@@ -31,8 +31,7 @@ public abstract class SeleniumTestApplication {
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
     private static final boolean HEADLESS_MODE = true;
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-
+    protected static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     protected WebDriver driver;
     protected String locale;
     protected MessageCodes messageCodes;
@@ -46,6 +45,7 @@ public abstract class SeleniumTestApplication {
         System.setProperty(CHROME_DRIVER_PROPERTY_NAME, getClass().getClassLoader().getResource(CHROME_DRIVER_EXE_LOCATION).getPath());
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(HEADLESS_MODE);
+        options.addArguments("window-size=1920,1080");
 
         driver = new ChromeDriver(options);
 

@@ -1,19 +1,19 @@
 package selenium.test.factory;
 
-import static org.junit.Assert.assertFalse;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
-
 import selenium.SeleniumTestApplication;
+import selenium.logic.domain.Category;
 import selenium.logic.domain.SeleniumProduct;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Navigate;
 import selenium.logic.flow.Registration;
 import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.FactoryPage;
+import selenium.logic.util.CategoryNameHelper;
 import selenium.test.factory.util.FactoryTestHelper;
+
+import static org.junit.Assert.assertFalse;
 
 public class NotEnoughMaterialTest extends SeleniumTestApplication {
     private FactoryTestHelper factoryTestHelper;
@@ -27,14 +27,14 @@ public class NotEnoughMaterialTest extends SeleniumTestApplication {
             new SelectCharacter(driver),
             new Navigate(driver)
         );
-        factoryPage = new FactoryPage(driver);
+        factoryPage = new FactoryPage(driver, new CategoryNameHelper(OBJECT_MAPPER, locale));
     }
 
     @Test
-    @Ignore
     public void testNotEnoughMaterial() {
         factoryTestHelper.registerAndGoToFactoryPage();
 
+        factoryPage.loadItemsOfCategory(Category.MATERIAL);
         WebElement productElement = factoryPage.getProductContainer();
         SeleniumProduct product = new SeleniumProduct(productElement);
 

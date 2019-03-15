@@ -1,18 +1,17 @@
 package selenium.logic.helper;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.CartItem;
 import selenium.logic.domain.Category;
 import selenium.logic.domain.ShopItem;
 import selenium.logic.page.ShopPage;
-import selenium.test.shop.util.CategoryNameHelper;
+import selenium.logic.util.CategoryNameHelper;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class ShopElementSearcher {
