@@ -8,7 +8,6 @@
     overflow: auto;
 }
 
-
 #write-mail-title{
     text-align: center;
     border-bottom: 3px ridge white;
@@ -42,12 +41,17 @@
     font-size: 1.25rem;
 }
 
+.addressee-selected{
+    border-color: green;
+}
+
 #addressee-container{
     position: relative;
     text-align: left;
 }
 
 #addressee-list{
+    display: none;
     position: absolute;
     left: calc(2% + 6.25rem);
     top: 100%;

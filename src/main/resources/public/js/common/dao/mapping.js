@@ -1,5 +1,6 @@
 window.Mapping = {
     ADD_TO_QUEUE: "factory",
+    ADDRESSEES: "mail/addressee",
     BUY_ITEMS: "character/equipment",
     CHANGE_EMAIL: "user/email",
     CHANGE_PASSWORD: "user/password",

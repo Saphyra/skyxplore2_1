@@ -1,5 +1,6 @@
 (function PageController(){
     scriptLoader.loadScript("js/community/notification_controller.js");
+    scriptLoader.loadScript("js/community/write_mail_controller.js");
 
     events.OPEN_WRITE_MAIL_WINDOW = "open_write_mail_window";
     events.OPEN_MAIN_LISTS = "open_mail_lists";

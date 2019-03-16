@@ -1,21 +1,22 @@
 package selenium.test.community.helper;
 
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Mail;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.Util.ATTRIBUTE_VALUE;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Mail;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CommunityPage;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class MailTestHelper {
@@ -35,7 +36,10 @@ public class MailTestHelper {
     private final WebDriver driver;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
-        List<String> searchResult = communityPage.getAddressees();
+        List<String> searchResult = getWithWait(() -> {
+            List<String> result = communityPage.getAddressees();
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }).orElseThrow(() -> new RuntimeException("Characters not found in search result."));
 
         shouldContain.forEach(seleniumCharacter -> assertTrue(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));
         shouldNotContain.forEach(seleniumCharacter -> assertFalse(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));

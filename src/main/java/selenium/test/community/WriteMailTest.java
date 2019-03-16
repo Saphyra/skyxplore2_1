@@ -41,7 +41,7 @@ import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
-public class MailTest extends SeleniumTestApplication {
+public class WriteMailTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
     private CommunityTestHelper communityTestHelper;
     private CommunityPage communityPage;
