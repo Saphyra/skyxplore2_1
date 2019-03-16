@@ -1,0 +1,27 @@
+#mail-lists-header{
+    text-align: center;
+    border-bottom: 3px ridge white;
+}
+
+#mail-list-header-buttons{
+    padding: 0.75rem;
+}
+
+.mail-list-tab:not(:first-child){
+    display: none;
+}
+
+.mail-list-tab h2{
+    text-align: center;
+}
+
+.action-with-selected-mails{
+    text-align: center;
+    border-bottom: 3px ridge white;
+}
+
+#no-incoming-mail{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}

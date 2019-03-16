@@ -1,0 +1,16 @@
+.friend-list-tab{
+    text-align: center;
+}
+
+.friend-list-tab:not(:first-child){
+    display: none;
+}
+
+#no-friends{
+    font-size: 1.25rem;
+}
+
+#friends-header{
+    text-align: center;
+    padding: 0.75rem;
+}

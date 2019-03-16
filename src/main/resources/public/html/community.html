@@ -1,0 +1,233 @@
+<HTML>
+<HEAD>
+    <TITLE></TITLE>
+    <META charset="UTF-8">
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+
+    <LINK rel="stylesheet" href="/css/community/community.css">
+    <LINK rel="stylesheet" href="/css/community/character_lists.css">
+    <LINK rel="stylesheet" href="/css/community/friend_lists.css">
+    <LINK rel="stylesheet" href="/css/community/mail_lists.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+
+    <SCRIPT src="js/community/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN id="main-lists">
+        <SECTION id="list-container">
+            <DIV id="list-header">
+                <BUTTON id="friends-page-button"></BUTTON>
+                <BUTTON id="blocked-characters-page-button"></BUTTON>
+            </DIV>
+
+            <DIV id="character-list-container">
+                <DIV id="friends-container" class="character-list-tab">
+                    <DIV id="friends-header">
+                        <DIV id="friends-tab-button" class="inline-button button"></DIV>
+
+                        <DIV class="inline-button button">
+                            <SPAN id="friend-requests-tab-button"></SPAN>
+
+                            <SPAN class="notification-container">
+                                <SPAN> (</SPAN>
+                                <SPAN id="friend-request-num"></SPAN>
+                                <SPAN>)</SPAN>
+                            </SPAN>
+                        </DIV>
+
+                        <DIV class="inline-button button">
+                            <SPAN id="sent-friend-requests-tab-button"></SPAN>
+
+                            <SPAN class="notification-container">
+                                <SPAN> (</SPAN>
+                                <SPAN id="sent-friend-request-num"></SPAN>
+                                <SPAN>)</SPAN>
+                            </SPAN>
+                        </DIV>
+                    </DIV>
+
+                    <DIV id="friend-lists">
+                        <DIV id="friend-list-container" class="friend-list-tab">
+                            <H3 id="friend-list-title"></H3>
+                            <DIV class="button" id="add-friend-button"></DIV>
+                            <DIV id="no-friends"></DIV>
+                            <DIV id="friend-list"></DIV>
+                        </DIV>
+
+                        <DIV id="friend-request-list-container" class="friend-list-tab">
+                            <H3 id="friend-request-list-title"></H3>
+                            <DIV id="friend-request-list"></DIV>
+                        </DIV>
+
+                        <DIV id="sent-friend-request-list-container" class="friend-list-tab">
+                            <H3 id="sent-friend-request-list-title"></H3>
+                            <DIV id="sent-friend-request-list"></DIV>
+                        </DIV>
+                    </DIV>
+                </DIV>
+
+                <DIV id="blocked-characters-container" class="character-list-tab">
+                    <H3 id="blocked-characters-title"></H3>
+                    <DIV class="button" id="block-character-button"></DIV>
+                    <DIV id="blocked-character-list"></DIV>
+                </DIV>
+            </DIV>
+        </SECTION>
+
+        <SECTION id="mail-lists">
+            <DIV id="mail-lists-header">
+                <H2 id="mail-lists-title"></H2>
+
+                <DIV id="mail-list-header-buttons">
+                    <DIV id="write-mail-button" class="inline-button button"></DIV>
+                    <DIV class="inline-button button">
+                        <SPAN id="incoming-mails-button"></SPAN>
+
+                        <SPAN class="notification-container">
+                            <SPAN> (</SPAN>
+                            <SPAN id="number-of-unread-mails"></SPAN>
+                            <SPAN>)</SPAN>
+                        </SPAN>
+                    </DIV>
+
+                    <DIV id="sent-mails-button" class="inline-button button"></DIV>
+                    <DIV id="archived-mails-button" class="inline-button button"></DIV>
+                </DIV>
+            </DIV>
+
+            <DIV id="mail-list-container">
+                <DIV id="incoming-mail-list-container" class="mail-list-tab">
+                    <H2 id="incoming-mail-list-title"></H2>
+
+                    <DIV class="action-with-selected-mails">
+                        <BUTTON id="select-all-incoming-mail-button"></BUTTON>
+
+                        <SELECT id="action-with-incoming-mails">
+                            <OPTION id="incoming-mail-option-none" value="none"></OPTION>
+                            <OPTION id="incoming-mail-option-delete" value="delete"></OPTION>
+                            <OPTION id="incoming-mail-option-archive" value="archive"></OPTION>
+                            <OPTION id="incoming-mail-option-mark-as-read" value="mark-as-read"></OPTION>
+                            <OPTION id="incoming-mail-option-mark-as-unread" value="mark-as-unread"></OPTION>
+                        </SELECT>
+
+                        <BUTTON id="process-action-with-incoming-mails-button"></BUTTON>
+                    </DIV>
+
+                    <DIV id="no-incoming-mail"></DIV>
+                    <DIV id="incoming-mail-list"></DIV>
+                </DIV>
+
+                <DIV id="sent-mail-list-container" class="mail-list-tab">
+                    <H2 id="sent-mail-list-title"></H2>
+
+                    <DIV class="action-with-selected-mails">
+                        <BUTTON id="select-all-sent-mail-button"></BUTTON>
+
+                        <SELECT id="action-with-sent-mails">
+                            <OPTION id="sent-mail-option-none" value="none"></OPTION>
+                            <OPTION id="sent-mail-option-delete" value="delete"></OPTION>
+                        </SELECT>
+
+                        <BUTTON id="process-action-with-sent-mails-button"></BUTTON>
+                    </DIV>
+
+                    <DIV id="sent-mail-list"></DIV>
+                </DIV>
+
+                <DIV id="archived-mail-list-container" class="mail-list-tab">
+                    <H2 id="archived-mail-list-title"></H2>
+
+                    <DIV class="action-with-selected-mails">
+                        <BUTTON id="select-all-archived-mail-button"></BUTTON>
+
+                        <SELECT id="action-with-archived-mails">
+                            <OPTION id="archived-mail-option-none" value="none"></OPTION>
+                            <OPTION id="archived-mail-option-delete" value="delete"></OPTION>
+                            <OPTION id="archived-mail-option-restore" value="restore"></OPTION>
+                        </SELECT>
+
+                        <BUTTON id="process-action-with-archived-mails-button"></BUTTON>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </SECTION>
+    </MAIN>
+
+    <MAIN id="main-add-friend">
+        <H2 id="add-friend-title"></H2>
+        <BUTTON>X</BUTTON>
+
+        <DIV>
+            <INPUT type="text" id="friend-name">
+        </DIV>
+
+        <DIV id="add-friend-search-result"></DIV>
+    </MAIN>
+
+    <MAIN id="main-block-character">
+        <H2 id="block-character-title"></H2>
+        <BUTTON>X</BUTTON>
+
+        <DIV>
+            <INPUT type="text" id="block-character-name">
+        </DIV>
+
+        <DIV id="block-character-search-result"></DIV>
+    </MAIN>
+
+    <MAIN id="main-write-mail">
+        <H2 id="write-mail-title"></H2>
+        <BUTTON>X</BUTTON>
+
+        <TABLE>
+            <TR>
+                <TD>
+                    <LABEL id='subject-label'>
+                        <SPAN id="subject-label-text"></SPAN>
+                        <SPAN>: </SPAN>
+                        <INPUT type='text' id='subject'>
+                    </LABEL>
+                </TD>
+
+                <TD>
+                    <DIV id="addressee-container">
+                        <LABEL id='addressee-label'>
+                            <SPAN id="addressee-label-text"></SPAN>
+                            <SPAN>: </SPAN>
+                            <INPUT type='text' id='addressee'>
+                        </LABEL>
+
+                        <DIV id="addressee-list"></DIV>
+                    </DIV>
+                </TD>
+            </TR>
+
+            <TR>
+                <TD colspan="2">
+                    <TEXTAREA id="message"></TEXTAREA>
+                </TD>
+            </TR>
+
+            <TR>
+                <TD colspan="2">
+                    <BUTTON id="send-mail-button"></BUTTON>
+                </TD>
+            </TR>
+        </TABLE>
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
+    </FOOTER>
+</DIV>
+</BODY>
+</HTML>

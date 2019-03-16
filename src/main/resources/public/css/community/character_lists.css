@@ -1,0 +1,9 @@
+.character-list-tab:not(:first-child){
+    display: none;
+}
+
+#list-header{
+    text-align: center;
+    padding: 0.25rem;
+    border-bottom: 3px ridge white;
+}
