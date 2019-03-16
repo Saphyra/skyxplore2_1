@@ -92,7 +92,14 @@
     <FOOTER>
         <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
         <BUTTON id="characterselect-button" onclick='window.location.href = "characterselect"'></BUTTON>
-        <BUTTON id="community-button" onclick='window.location.href = "community"'><SPAN id='notificationnum' class='colorred'></SPAN></BUTTON>
+        <BUTTON onclick='window.location.href = "community"'>
+            <SPAN id="community-button"></SPAN>
+            <SPAN>
+                <SPAN> (</SPAN>
+                <SPAN id='notification-num'></SPAN>
+                <SPAN>)</SPAN>
+            </SPAN>
+        </BUTTON>
     </FOOTER>
 </DIV>
 

@@ -62,3 +62,21 @@ function orderMapByProperty(map, orderFunction){
         }
     }
 }
+
+function displayNotificationNum(containerId, notificationNum){
+    const container = document.getElementById(containerId);
+        container.innerHTML = notificationNum;
+
+    if(notificationNum == 0){
+        container.parentNode.classList.remove("notification-container");
+    }else{
+        if(!container.parentNode.classList.contains("notification-container")){
+            container.parentNode.classList.add("notification-container");
+        }
+    }
+}
+
+function setIntervalImmediate(callBack, interval){
+    callBack();
+    return setInterval(callBack, interval);
+}

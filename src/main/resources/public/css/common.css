@@ -153,3 +153,8 @@ input:disabled, button:disabled, textarea:disabled, .disabled{
 .formattedtable tbody tr:hover{
     background-color: rgba(150,150,150,0.8);
 }
+
+/*=======ADDIITIONAL=======*/
+.notification-container{
+    color: red;
+}

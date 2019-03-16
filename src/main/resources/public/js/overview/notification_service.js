@@ -12,14 +12,8 @@
                 return Number(response.body);
             }
             request.processValidResponse = function(numberOfNotifications){
-                displayNumberOfNotifications(numberOfNotifications);
+                displayNotificationNum("notification-num", numberOfNotifications);
             }
         dao.sendRequestAsync(request);
-    }
-    
-    function displayNumberOfNotifications(numberOfNotifications){
-        if(numberOfNotifications > 0){
-            document.getElementById("notificationnum").innerHTML = " (" + notificationNum + ")";
-        }
     }
 })();

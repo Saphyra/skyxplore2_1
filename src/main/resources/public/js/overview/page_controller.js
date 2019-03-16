@@ -22,6 +22,9 @@
     
     function init(){
         eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "overview"));
-        eventProcessor.processEvent(new Event(events.LOAD_NOTIFICATIONS));
+        setIntervalImmediate(
+            function(){eventProcessor.processEvent(new Event(events.LOAD_NOTIFICATIONS))},
+            20000
+        );
     }
 })();
