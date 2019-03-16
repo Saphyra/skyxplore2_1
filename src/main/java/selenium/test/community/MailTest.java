@@ -41,7 +41,7 @@ import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 
-public class WriteMailTest extends SeleniumTestApplication {
+public class MailTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
     private CommunityTestHelper communityTestHelper;
     private CommunityPage communityPage;
@@ -82,7 +82,6 @@ public class WriteMailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldShowMatchingCharacters() {
         FilterTestShouldShowMatchingCharacters.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -94,13 +93,13 @@ public class WriteMailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testSendMailEmptySubject() {
         SendMailEmptySubjectTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailEmptySubject();
     }

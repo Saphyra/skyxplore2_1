@@ -9,14 +9,12 @@ import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.Util.ATTRIBUTE_VALUE;
-import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class MailTestHelper {
@@ -36,10 +34,7 @@ public class MailTestHelper {
     private final WebDriver driver;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
-        List<String> searchResult = getWithWait(() -> {
-            List<String> result = communityPage.getAddressees();
-            return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElseThrow(() -> new RuntimeException("Characters not found in search result."));
+        List<String> searchResult = communityPage.getAddressees();
 
         shouldContain.forEach(seleniumCharacter -> assertTrue(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));
         shouldNotContain.forEach(seleniumCharacter -> assertFalse(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));

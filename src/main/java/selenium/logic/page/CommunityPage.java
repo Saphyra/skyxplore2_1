@@ -10,9 +10,11 @@ import selenium.logic.domain.SeleniumFriendRequest;
 import selenium.logic.domain.SentFriendRequest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -35,7 +37,7 @@ public class CommunityPage {
     private static final String SELECTOR_SUBJECT = "subject";
     private static final String SELECTOR_MESSAGE = "message";
     private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
-    private static final String SELECTOR_MAIL_CONTAINER = "mail";
+    private static final String SELECTOR_MAIL_CONTAINER = "main-write-mail";
     private static final String SELECTOR_RECEIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(2)";
     private static final String SELECTOR_RECEIVED_MAILS = "#incomingmaillist .mailitem";
     private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(3)";
@@ -132,7 +134,10 @@ public class CommunityPage {
     }
 
     public List<WebElement> getAddresseeElements() {
-        return driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }).orElseThrow(() -> new RuntimeException("Characters not found in search result."));
     }
 
     public WebElement getMailSubjectField() {

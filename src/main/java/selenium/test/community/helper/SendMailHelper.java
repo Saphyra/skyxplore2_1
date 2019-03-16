@@ -74,7 +74,7 @@ public class SendMailHelper {
         communityPage.getAddresseeElements().stream()
             .filter(element -> element.getText().equals(addressee.getCharacterName()))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException("AddresseeNotFound"))
+            .orElseThrow(() -> new RuntimeException("AddresseeNotFound with name " + addressee.getCharacterName()))
             .click();
         return this;
     }

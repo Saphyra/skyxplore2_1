@@ -1,8 +1,35 @@
 (function WritMailController(){
+    events.SEND_MAIL = "send_mail";
+
     $(document).ready(init);
 
     let addresseeId = null;
     let addresseeQueryTimeout = null;
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.SEND_MAIL},
+        sendMail
+    ));
+
+    function sendMail(){
+        const subjectField = document.getElementById("subject");
+        const addresseeField = document.getElementById("addressee");
+        const messageField = document.getElementById("message");
+
+        if(addresseeId == null){
+            notificationService.showError(MessageCode.getMessage("ADDRESSEE_MUST_BE_SET"));
+        }else if(subjectField.value.length == 0){
+            notificationService.showError(MessageCode.getMessage("SUBJECT_MUST_NOT_BE_EMPTY"));
+        }else if(subjectField.value.length > 100){
+            notificationService.showError(MessageCode.getMessage("SUBJECT_TOO_LONG"));
+        }else if(messageField.value.length == 0){
+            notificationService.showError(MessageCode.getMessage("MESSAGE_MUST_NOT_BE_EMPTY"));
+        }else if(messageField.value.length > 4000){
+            notificationService.showError(MessageCode.getMessage("MESSAGE_TOO_LONG"));
+        }else{
+            throwException("UnsupportedOperation", "Message sending has not been implemented");
+        }
+    }
 
     function invalidateAddressee(){
         document.getElementById("addressee").classList.remove("addressee-selected");
@@ -63,6 +90,13 @@
                 return container;
             }
         }
+    }
+
+    function setAddressee(addressee){
+        addresseeId = addressee.characterId;
+        const inputField = document.getElementById("addressee");
+            inputField.value = addressee.characterName;
+            inputField.classList.add("addressee-selected");
     }
 
     function init(){

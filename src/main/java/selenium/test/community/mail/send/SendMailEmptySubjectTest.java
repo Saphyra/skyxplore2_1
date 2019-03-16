@@ -1,6 +1,7 @@
 package selenium.test.community.mail.send;
 
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.page.CommunityPage;
 import selenium.test.community.helper.SendMailHelper;
@@ -11,12 +12,13 @@ import java.util.List;
 
 @Builder
 public class SendMailEmptySubjectTest {
-    private static final String NOTIFICATION_SUBJECT_IS_EMPTY = "A tárgy kitöltése kötelező!";
+    private static final String MESSAGE_CODE_EMPTY_SUBJECT = "SUBJECT_MUST_NOT_BE_EMPTY";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
+    private final MessageCodes messageCodes;
 
     public void testSendMailEmptySubject() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -28,6 +30,6 @@ public class SendMailEmptySubjectTest {
 
         sendMailHelper.setAddressee(accounts.get(1).getCharacter(0))
             .setMessage()
-            .verifyCannotSendMail(NOTIFICATION_SUBJECT_IS_EMPTY);
+            .verifyCannotSendMail(messageCodes.get(MESSAGE_CODE_EMPTY_SUBJECT));
     }
 }
