@@ -105,37 +105,37 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testSendMailEmptyMessage() {
         SendMailEmptyMessageTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailEmptyMessage();
     }
 
     @Test
-    @Ignore
     public void testSendMailEmptyAddressee() {
         SendMailEmptyAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailEmptyAddressee();
     }
 
     @Test
-    @Ignore
     public void testSendMailChangedAddressee() {
         SendMailChangedAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailChangedAddressee();
     }
