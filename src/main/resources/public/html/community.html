@@ -9,6 +9,7 @@
     <LINK rel="stylesheet" href="/css/community/character_lists.css">
     <LINK rel="stylesheet" href="/css/community/friend_lists.css">
     <LINK rel="stylesheet" href="/css/community/mail_lists.css">
+    <LINK rel="stylesheet" href="/css/community/write_mail.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -21,7 +22,7 @@
         <H1 id="main-title"></H1>
     </HEADER>
 
-    <MAIN id="main-lists">
+    <MAIN id="main-lists" class="main-tab">
         <SECTION id="list-container">
             <DIV id="list-header">
                 <BUTTON id="friends-page-button"></BUTTON>
@@ -79,7 +80,8 @@
                 <H2 id="mail-lists-title"></H2>
 
                 <DIV id="mail-list-header-buttons">
-                    <DIV id="write-mail-button" class="inline-button button"></DIV>
+                    <DIV id="write-mail-button" class="inline-button button"
+                         onclick="eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW))"></DIV>
                     <DIV class="inline-button button">
                         <SPAN id="incoming-mails-button"></SPAN>
 
@@ -153,7 +155,7 @@
         </SECTION>
     </MAIN>
 
-    <MAIN id="main-add-friend">
+    <MAIN id="main-add-friend" class="main-tab">
         <H2 id="add-friend-title"></H2>
         <BUTTON>X</BUTTON>
 
@@ -164,7 +166,7 @@
         <DIV id="add-friend-search-result"></DIV>
     </MAIN>
 
-    <MAIN id="main-block-character">
+    <MAIN id="main-block-character" class="main-tab">
         <H2 id="block-character-title"></H2>
         <BUTTON>X</BUTTON>
 
@@ -175,45 +177,53 @@
         <DIV id="block-character-search-result"></DIV>
     </MAIN>
 
-    <MAIN id="main-write-mail">
-        <H2 id="write-mail-title"></H2>
-        <BUTTON>X</BUTTON>
+    <MAIN id="main-write-mail" class="main-tab">
+        <DIV id="write-mail-wrapper">
+            <H2 id="write-mail-title"></H2>
 
-        <TABLE>
-            <TR>
-                <TD>
-                    <LABEL id='subject-label'>
-                        <SPAN id="subject-label-text"></SPAN>
-                        <SPAN>: </SPAN>
-                        <INPUT type='text' id='subject'>
-                    </LABEL>
-                </TD>
+            <BUTTON class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X
+            </BUTTON>
 
-                <TD>
-                    <DIV id="addressee-container">
-                        <LABEL id='addressee-label'>
-                            <SPAN id="addressee-label-text"></SPAN>
+            <TABLE id="write-mail-table">
+                <TR>
+                    <TD>
+                        <LABEL id='subject-label'>
+                            <SPAN id="subject-label-text"></SPAN>
                             <SPAN>: </SPAN>
-                            <INPUT type='text' id='addressee'>
+                            <INPUT type='text' id='subject'>
                         </LABEL>
+                    </TD>
 
-                        <DIV id="addressee-list"></DIV>
-                    </DIV>
-                </TD>
-            </TR>
+                    <TD>
+                        <DIV id="addressee-container">
+                            <LABEL id='addressee-label'>
+                                <SPAN id="addressee-label-text"></SPAN>
+                                <SPAN>: </SPAN>
+                                <INPUT type='text' id='addressee'>
+                            </LABEL>
 
-            <TR>
-                <TD colspan="2">
-                    <TEXTAREA id="message"></TEXTAREA>
-                </TD>
-            </TR>
+                            <DIV id="addressee-list">
+                                <DIV id="addressee-not-found"></DIV>
+                                <DIV id="addressee-field-empty"></DIV>
+                                <DIV id="addressee-search-result"></DIV>
+                            </DIV>
+                        </DIV>
+                    </TD>
+                </TR>
 
-            <TR>
-                <TD colspan="2">
-                    <BUTTON id="send-mail-button"></BUTTON>
-                </TD>
-            </TR>
-        </TABLE>
+                <TR>
+                    <TD colspan="2">
+                        <TEXTAREA id="message"></TEXTAREA>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="2">
+                        <BUTTON id="send-mail-button"></BUTTON>
+                    </TD>
+                </TR>
+            </TABLE>
+        </DIV>
     </MAIN>
 
     <FOOTER>

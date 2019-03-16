@@ -22,3 +22,10 @@ main:not(:first-of-type){
 .inline-button{
     display: inline;
 }
+
+.close-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.25rem;
+}

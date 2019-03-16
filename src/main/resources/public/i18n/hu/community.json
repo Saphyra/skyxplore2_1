@@ -284,6 +284,18 @@
         "message": "Címzett"
       }
     ],
+    "addressee-not-found": [
+      {
+        "key": "innerHTML",
+        "message": "Nem található címzett."
+      }
+    ],
+    "addressee-field-empty": [
+      {
+        "key": "innerHTML",
+        "message": "Kezdje el beírni a címzett nevét!"
+      }
+    ],
     "message": [
       {
         "key": "placeholder",

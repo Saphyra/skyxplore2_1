@@ -12,7 +12,7 @@ public class OverviewPage {
     private static final String ELEMENT_EQUIPMENT_PAGE_BUTTON = ".menu-container a:nth-child(1)";
     private static final String ELEMENT_FACTORY_PAGE_BUTTON = ".menu-container a:nth-child(2)";
     private static final String ELEMENT_SHOP_PAGE_BUTTON = ".menu-container a:nth-child(3)";
-    private static final String SELECTOR_NOTIFICATION_NUMBER = "notificationnum";
+    private static final String SELECTOR_NOTIFICATION_NUMBER = "notification-num";
 
     private final WebDriver driver;
 

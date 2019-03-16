@@ -29,9 +29,9 @@ public class CommunityPage {
     private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(1)";
     private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
-    private static final String SELECTOR_WRITE_MAIL_BUTTON = "#maillistbuttons div:first-child";
+    private static final String SELECTOR_WRITE_MAIL_BUTTON = "#write-mail-button";
     private static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
-    private static final String SELECTOR_ADDRESSEES = "#addresseelist .addressee";
+    private static final String SELECTOR_ADDRESSEES = "#addressee-search-result .addressee";
     private static final String SELECTOR_SUBJECT = "subject";
     private static final String SELECTOR_MESSAGE = "message";
     private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";

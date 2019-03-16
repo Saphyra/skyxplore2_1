@@ -1,8 +1,4 @@
-#mail{
-    display: none;
-}
-
-#mailcontainer{
+#write-mail-wrapper{
     position: absolute;
     top: 5%;
     bottom: 5%;
@@ -12,26 +8,28 @@
     overflow: auto;
 }
 
-#mailcontainer h2{
+
+#write-mail-title{
     text-align: center;
     border-bottom: 3px ridge white;
-    padding: 0.5rem;
+    padding: 0.55rem;
 }
 
-#mailcontainer table{
+#write-mail-table{
     margin: auto;
     width: 100%;
     margin-top: 0.5rem;
 }
 
-#mailclosebutton{
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 1.25rem;
+#write-mail-table td[colspan="2"]{
+    text-align: center;
 }
 
-#subjectlabel, #addresseelabel{
+#write-mail-table td:not([colspan="2"]){
+    width: 50%;
+}
+
+#subject-label, #addressee-label{
     margin: auto;
     position: relative;
     width: 95%;
@@ -40,21 +38,21 @@
 }
 
 #subject, #addressee{
-    width: calc(100% - 6rem);
+    width: calc(100% - 7rem);
     font-size: 1.25rem;
 }
 
-#addresseecontainer{
+#addressee-container{
     position: relative;
     text-align: left;
 }
 
-#addresseelist{
+#addressee-list{
     position: absolute;
-    left: calc(2% + 6rem);
+    left: calc(2% + 6.25rem);
     top: 100%;
     background: black;
-    width: calc(95% - 6rem);
+    width: calc(95% - 7rem);
     border: 3px ridge white;
     border-top: none;
     border-radius: 0px 0px 5px 5px;
