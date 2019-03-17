@@ -15,7 +15,7 @@ import static selenium.logic.util.Util.hasClass;
 @Slf4j
 public class Mail {
     private static final String SELECTOR_SENDER = ".mail-header tr:first-child td:nth-child(2) span:nth-child(3)";
-    private static final String CLASS_MAIL_UNREAD = "unreadmail";
+    private static final String CLASS_MAIL_UNREAD = "unread-mail";
     private static final String SELECTOR_ARCHIVE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
     private static final String SELECTOR_SELECT_FIELD = "tr:first-child td:first-child input";
     private static final String SELECTOR_SUBJECT = "tr:nth-child(2) td:first-child";

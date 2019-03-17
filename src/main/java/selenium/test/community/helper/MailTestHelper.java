@@ -62,14 +62,7 @@ public class MailTestHelper {
     }
 
     public int getNumberOfUnreadMails() {
-        WebElement element = communityPage.getNumberOfUnreadMails();
-        return element.getText().isEmpty() ? 0 : parseNumberOfUnreadMails(element.getText());
-    }
-
-    private Integer parseNumberOfUnreadMails(String text) {
-        String split1 = text.trim().substring(1);
-        String split2 = split1.split("\\)")[0];
-        return Integer.valueOf(split2);
+        return Integer.valueOf(communityPage.getNumberOfUnreadMails().getText());
     }
 
     public void selectBulkArchiveOption() {

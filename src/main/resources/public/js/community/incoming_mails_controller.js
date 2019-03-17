@@ -1,5 +1,9 @@
 (function IncomingMailsController(){
+    events.MARK_AS_READ = "mark_as_read";
+    events.MAILS_MARKED_AS_READ = "mails_marked_as_read";
+
     let isActive = false;
+    let mailReadMapping = {};
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
@@ -12,6 +16,11 @@
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.MARK_AS_READ},
+        function(event){markAsRead(event.getPayload())}
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.OPEN_INCOMING_MAILS_TAB},
         function(){
             isActive = true;
@@ -19,26 +28,43 @@
         }
     ));
 
+    function markAsRead(mailIds){
+        const request = new Request(HttpMethod.POST, Mapping.MARK_MAILS_READ, mailIds);
+            request.processValidResponse = function(){
+                for(let mIndex in mailIds){
+                    const mailId = mailIds[mIndex];
+                    document.getElementById(generateIncomingMailId(mailId)).classList.remove("unread-mail");
+                    mailReadMapping[mailId] = true;
+                    setMarkButtonState(mailId, document.getElementById(generateMarkButtonId(mailId)));
+                }
+
+                eventProcessor.processEvent(new Event(events.MAILS_MARKED_AS_READ));
+            }
+        dao.sendRequestAsync(request);
+    }
+
     function loadIncomingMails(){
         const request = new Request(HttpMethod.GET, Mapping.GET_INCOMING_MAILS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
-            request.processValidResponse = function(sentMails){
-                sentMails.sort(function(a, b){
+            request.processValidResponse = function(incomingMails){
+                incomingMails.sort(function(a, b){
                    return b.sendTime - a.sendTime;
                 });
 
                 const container = document.getElementById("incoming-mail-list");
                     container.innerHTML = "";
 
-                if(sentMails.length == 0){
+                if(incomingMails.length == 0){
                     $("#no-incoming-mail").show();
                     return;
                 }else{
                     $("#no-incoming-mail").hide();
-                    for(let mIndex in sentMails){
-                        container.appendChild(createMailItem(sentMails[mIndex]));
+                    for(let mIndex in incomingMails){
+                        const mail = incomingMails[mIndex];
+                        mailReadMapping[mail.mailId] = mail.read;
+                        container.appendChild(createMailItem(mail));
                     }
                 }
             }
@@ -48,7 +74,7 @@
     function createMailItem(mail){
         const container = document.createElement("DIV");
             container.classList.add("mail-item");
-            container.id = mail.mailId;
+            container.id = generateIncomingMailId(mail.mailId);
 
             if(!mail.read){
                 container.classList.add("unread-mail");
@@ -79,7 +105,7 @@
 
             mailHeader.onclick = function(){
                 $(mailBody).fadeToggle();
-                if(!mail.read){
+                if(!mailReadMapping[mail.mailId]){
                     eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mail.mailId]));
                 }
             }
@@ -135,19 +161,8 @@
                     buttonCell.appendChild(archiveButton);
 
                         const markButton = document.createElement("BUTTON");
-                            if(mail.read){
-                                markButton.innerHTML = Localization.getAdditionalContent("mark-as-unread");
-                                markButton.onclick = function(e){
-                                    e.stopPropagation();
-                                    eventProcessor.processEvent(new Event(events.MARK_AS_UNREAD, [mail.mailId]));
-                                }
-                            }else{
-                                markButton.innerHTML = Localization.getAdditionalContent("mark-as-read");
-                                markButton.onclick = function(e){
-                                    e.stopPropagation();
-                                    eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mail.mailId]));
-                                }
-                            }
+                            markButton.id = generateMarkButtonId(mail.mailId);
+                            setMarkButtonState(mail.mailId, markButton);
                     buttonCell.appendChild(markButton);
                 row1.appendChild(buttonCell);
             table.appendChild(row1);
@@ -163,5 +178,29 @@
 
             return table;
         }
+    }
+
+    function setMarkButtonState(mailId, markButton){
+        if(mailReadMapping[mailId]){
+            markButton.innerHTML = Localization.getAdditionalContent("mark-as-unread");
+            markButton.onclick = function(e){
+                e.stopPropagation();
+                eventProcessor.processEvent(new Event(events.MARK_AS_UNREAD, [mailId]));
+            }
+        }else{
+            markButton.innerHTML = Localization.getAdditionalContent("mark-as-read");
+            markButton.onclick = function(e){
+                e.stopPropagation();
+                eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mailId]));
+            }
+        }
+    }
+
+    function generateIncomingMailId(mailId){
+        return "incoming-mail-" + mailId;
+    }
+
+    function generateMarkButtonId(mailId){
+        return "mark-button-" + mailId;
     }
 })();

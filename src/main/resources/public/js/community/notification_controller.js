@@ -1,6 +1,13 @@
 (function NotificationController(){
     $(document).ready(init);
 
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.MAILS_MARKED_AS_READ
+        },
+        displayNumberOfReceivedMails
+    ));
+
 
     function init(){
         setIntervalImmediate(displayNumberOfFriendRequests, 20000);

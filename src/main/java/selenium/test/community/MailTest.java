@@ -154,7 +154,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testReadMail() {
         ReadMailTest.builder()
             .communityTestInitializer(communityTestInitializer)

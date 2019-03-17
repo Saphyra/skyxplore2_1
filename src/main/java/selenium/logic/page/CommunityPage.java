@@ -43,7 +43,7 @@ public class CommunityPage {
     private static final String SELECTOR_INCOMING_MAILS = "#incoming-mail-list .mail-item";
     private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#sent-mails-button";
     private static final String SELECTOR_SENT_MAILS = "#sent-mail-list .mail-item";
-    private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
+    private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "number-of-unread-mails";
     private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(4)";
     private static final String SELECTOR_ARCHIVED_MAILS = "#archivedmaillist .mailitem";
     private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS = "actionwithreceivedmails";
