@@ -22,6 +22,7 @@
   "ITEM_UNEQUIPPED": "Leszerelés sikeres.",
   "ITEMS_BOUGHT": "Sikeres vásárlás.",
   "MAIL_SENT": "Üzenet elküldve.",
+  "MAILS_ARCHIVED": "Üzenet(ek) archiválva.",
   "MESSAGE_MUST_NOT_BE_EMPTY": "Az üzenet kitöltése kötelező!",
   "MESSAGE_TOO_LONG": "Az üzenet túl hosszú (Max 4000 karakter).",
   "NEW_PASSWORD_TOO_LONG": "Új jelszó túl hosszú! (Maximum 30 karakter)",

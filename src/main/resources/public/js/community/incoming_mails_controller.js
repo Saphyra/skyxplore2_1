@@ -1,6 +1,7 @@
 (function IncomingMailsController(){
     events.MARK_AS_READ = "mark_as_read";
     events.MAILS_MARKED_AS_READ = "mails_marked_as_read";
+    events.ARCHIVE_MAILS = "archive_mails";
 
     let isActive = false;
     let mailReadMapping = {};
@@ -28,6 +29,11 @@
         }
     ));
 
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.ARCHIVE_MAILS},
+        function(event){archive(event.getPayload())}
+    ));
+
     function markAsRead(mailIds){
         const request = new Request(HttpMethod.POST, Mapping.MARK_MAILS_READ, mailIds);
             request.processValidResponse = function(){
@@ -43,7 +49,21 @@
         dao.sendRequestAsync(request);
     }
 
+    function archive(mailIds){
+        const request = new Request(HttpMethod.POST, Mapping.ARCHIVE_MAILS, mailIds);
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("MAILS_ARCHIVED"));
+                for(let mIndex in mailIds){
+                    document.getElementById("incoming-mail-list").removeChild(document.getElementById(generateIncomingMailId(mailIds[mIndex])));
+                }
+            }
+        dao.sendRequestAsync(request);
+    }
+
     function loadIncomingMails(){
+        const container = document.getElementById("incoming-mail-list");
+            container.innerHTML = "";
+
         const request = new Request(HttpMethod.GET, Mapping.GET_INCOMING_MAILS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
@@ -52,9 +72,6 @@
                 incomingMails.sort(function(a, b){
                    return b.sendTime - a.sendTime;
                 });
-
-                const container = document.getElementById("incoming-mail-list");
-                    container.innerHTML = "";
 
                 if(incomingMails.length == 0){
                     $("#no-incoming-mail").show();

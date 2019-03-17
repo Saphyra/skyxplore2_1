@@ -6,10 +6,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import static selenium.logic.util.WaitUtil.getWithWait;
 import static selenium.logic.util.WaitUtil.waitUntil;
 
 @RequiredArgsConstructor
@@ -21,9 +24,8 @@ public class NotificationValidator {
 
     public void verifyOnlyOneNotification(String text) {
         log.info("Verifying only one notification with text {}", text);
-        verifyContains(text);
-
         assertEquals(1, getNotifications().size());
+        verifyContains(text);
     }
 
     public void verifyNotificationVisibility(String text) {
@@ -32,11 +34,15 @@ public class NotificationValidator {
     }
 
     private List<WebElement> getNotifications() {
-        return driver.findElements(getNotificationElementsLocator());
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(getNotificationElementsLocator());
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }).orElse(Collections.emptyList());
     }
 
     private void verifyContains(String text) {
         waitUntil(() -> contains(getNotifications(), text), "Waiting until notification with text " + text + " appears...");
+        getNotifications().forEach(WebElement::click);
     }
 
     private boolean contains(List<WebElement> elements, String text) {

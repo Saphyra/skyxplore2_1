@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 
@@ -32,6 +33,7 @@ public class MailTestHelper {
 
     private final CommunityPage communityPage;
     private final WebDriver driver;
+    private final MessageCodes messageCodes;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
         List<String> searchResult = communityPage.getAddressees();
@@ -43,21 +45,21 @@ public class MailTestHelper {
     public List<Mail> getReceivedMails() {
         communityPage.getIncomingMailsPageButton().click();
         return communityPage.getIncomingMails().stream()
-            .map(element -> new Mail(element, driver))
+            .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
 
     public List<Mail> getSentMails() {
         communityPage.getSentMailsPageButton().click();
         return communityPage.getSentMails().stream()
-            .map(element -> new Mail(element, driver))
+            .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
 
     public List<Mail> getArchivedMails() {
         communityPage.getArchivedMailsPageButton().click();
         return communityPage.getArchivedMails().stream()
-            .map(element -> new Mail(element, driver))
+            .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
 

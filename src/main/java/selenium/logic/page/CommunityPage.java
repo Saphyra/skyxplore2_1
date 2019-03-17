@@ -44,8 +44,8 @@ public class CommunityPage {
     private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#sent-mails-button";
     private static final String SELECTOR_SENT_MAILS = "#sent-mail-list .mail-item";
     private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "number-of-unread-mails";
-    private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(4)";
-    private static final String SELECTOR_ARCHIVED_MAILS = "#archivedmaillist .mailitem";
+    private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#archived-mails-button";
+    private static final String SELECTOR_ARCHIVED_MAILS = "#archived-mail-list .mail-item";
     private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS = "actionwithreceivedmails";
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS = "#incomingmaillistcontainer .actionwithselectedmails button:last-child";
     private static final String SELECTOR_BULK_RESTORE_INPUT_FIELD = "actionwitharchivedmails";
@@ -187,7 +187,10 @@ public class CommunityPage {
     }
 
     public List<WebElement> getArchivedMails() {
-        return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }).orElse(Collections.emptyList());
     }
 
     public WebElement getBulkEditInputFieldForReceivedMails() {

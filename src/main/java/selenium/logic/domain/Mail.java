@@ -20,10 +20,10 @@ public class Mail {
     private static final String SELECTOR_SELECT_FIELD = "tr:first-child td:first-child input";
     private static final String SELECTOR_SUBJECT = "tr:nth-child(2) td:first-child";
     private static final String SELECTOR_RESTORE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
-    private static final String NOTIFICATION_MAIL_ARCHIVED = "Üzenet archiválva.";
-    private static final String NOTIFICATION_MAIL_RESTORED = "Üzenet visszaállítva.";
+    private static final String MESSAGE_CODE_MAIL_ARCHIVED = "MAILS_ARCHIVED";
+    private static final String NOTIFICATION_MAIL_RESTORED = "Üzenet visszaállítva.123";
     private static final String SELECTOR_DELETE_BUTTON = "tr:first-child td:nth-child(4) button:first-child";
-    private static final String NOTIFICATION_MAIL_DELETED = "Üzenet törölve.";
+    private static final String NOTIFICATION_MAIL_DELETED = "Üzenet törölve.123";
     private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_REPLY_BUTTON = ".mailbody button:last-child";
@@ -31,6 +31,7 @@ public class Mail {
     @Getter
     private final WebElement element;
     private final WebDriver driver;
+    private final MessageCodes messageCodes;
 
     public String getSender() {
         return element.findElement(By.cssSelector(SELECTOR_SENDER)).getText();
@@ -52,7 +53,7 @@ public class Mail {
 
     public void archive(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_ARCHIVE_BUTTON)).click();
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAIL_ARCHIVED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAIL_ARCHIVED));
     }
 
     public void select() {

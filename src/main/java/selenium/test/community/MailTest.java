@@ -65,7 +65,7 @@ public class MailTest extends SeleniumTestApplication {
         );
 
         communityPage = new CommunityPage(driver);
-        mailTestHelper = new MailTestHelper(communityPage, driver);
+        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
     }
@@ -166,7 +166,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testArchiveMail() {
         ArchiveMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
