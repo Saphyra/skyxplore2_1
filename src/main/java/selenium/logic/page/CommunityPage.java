@@ -40,7 +40,7 @@ public class CommunityPage {
     private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
     private static final String SELECTOR_MAIL_CONTAINER = "main-write-mail";
     private static final String SELECTOR_INCOMING_MAILS_PAGE_BUTTON = "#incoming-mails-button";
-    private static final String SELECTOR_INCOMING_MAILS = "#incomingmaillist .mailitem";
+    private static final String SELECTOR_INCOMING_MAILS = "#incoming-mail-list .mail-item";
     private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#sent-mails-button";
     private static final String SELECTOR_SENT_MAILS = "#sent-mail-list .mail-item";
     private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";

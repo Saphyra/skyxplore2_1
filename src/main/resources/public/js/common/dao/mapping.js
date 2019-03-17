@@ -16,6 +16,7 @@ window.Mapping = {
     EQUIP_SHIP: "ship/equipment/*",
     EQUIPMENT_STORAGE: "character/storage",
     GET_CHARACTERS: "character",
+    GET_INCOMING_MAILS: "mail",
     GET_MATERIALS: "factory/materials",
     GET_SENT_MAILS: "mail/sent",
     GET_SHIP_DATA: "ship",

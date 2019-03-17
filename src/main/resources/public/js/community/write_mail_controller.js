@@ -2,6 +2,10 @@
     events.SEND_MAIL = "send_mail";
     events.MAIL_SENT = "mail_sent";
 
+    window.writeMailController = new function(){
+        this.setAddressee = setAddressee;
+    }
+
     $(document).ready(init);
 
     let addresseeId = null;

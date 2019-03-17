@@ -1,12 +1,10 @@
-(function SentMailsController(){
-    scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
-
+(function IncomingMailsController(){
     let isActive = false;
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
             return eventType === events.OPEN_WRITE_MAIL_WINDOW
-                || eventType === events.OPEN_INCOMING_MAILS_TAB
+                || eventType === events.OPEN_SENT_MAILS_TAB
         },
         function(){
             isActive = false;
@@ -14,24 +12,15 @@
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.MAIL_SENT},
-        function(){
-            if(isActive){
-                loadSentMails();
-            }
-        }
-    ));
-
-    eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.OPEN_SENT_MAILS_TAB},
+        function(eventType){return eventType === events.OPEN_INCOMING_MAILS_TAB},
         function(){
             isActive = true;
-            loadSentMails();
+            loadIncomingMails();
         }
     ));
 
-    function loadSentMails(){
-        const request = new Request(HttpMethod.GET, Mapping.GET_SENT_MAILS);
+    function loadIncomingMails(){
+        const request = new Request(HttpMethod.GET, Mapping.GET_INCOMING_MAILS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
@@ -40,14 +29,14 @@
                    return b.sendTime - a.sendTime;
                 });
 
-                const container = document.getElementById("sent-mail-list");
+                const container = document.getElementById("incoming-mail-list");
                     container.innerHTML = "";
 
                 if(sentMails.length == 0){
-                    $("#no-sent-mail").show();
+                    $("#no-incoming-mail").show();
                     return;
                 }else{
-                    $("#no-sent-mail").hide();
+                    $("#no-incoming-mail").hide();
                     for(let mIndex in sentMails){
                         container.appendChild(createMailItem(sentMails[mIndex]));
                     }
@@ -58,8 +47,12 @@
 
     function createMailItem(mail){
         const container = document.createElement("DIV");
-            container.id = mail.mailId;
             container.classList.add("mail-item");
+            container.id = mail.mailId;
+
+            if(!mail.read){
+                container.classList.add("unread-mail");
+            }
 
             const mailHeader = document.createElement("DIV");
                 mailHeader.classList.add("mail-header");
@@ -73,16 +66,29 @@
                     message.disabled = true;
                     message.value = mail.message;
             mailBody.appendChild(message);
+
+                const replyButton = document.createElement("BUTTON");
+                    replyButton.innerHTML = Localization.getAdditionalContent("reply");
+                    replyButton.onclick = function(){
+                        document.getElementById("subject").value = "Re: " + mail.subject;
+                        writeMailController.setAddressee({characterId: mail.from, characterName: mail.fromName});
+                        eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW));
+                    }
+            mailBody.appendChild(replyButton);
         container.appendChild(mailBody);
 
-        mailHeader.onclick = function(){
-            $(mailBody).fadeToggle();
-        }
+            mailHeader.onclick = function(){
+                $(mailBody).fadeToggle();
+                if(!mail.read){
+                    eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mail.mailId]));
+                }
+            }
 
         return container;
 
         function createMailHeaderTable(mail){
             const table = document.createElement("TABLE");
+
                 const row1 = document.createElement("TR");
                     const checkboxCell = document.createElement("TD");
                         checkboxCell.classList.add("checkbox-cell");
@@ -91,17 +97,17 @@
 
                         const checkbox = document.createElement("INPUT");
                             checkbox.type = "checkbox";
-                            checkbox.name = "sent-mail-checkbox-selected";
+                            checkbox.name = "incoming-mail-checkbox-selected";
                             checkbox.value = mail.mailId;
                             checkbox.onclick = function(e){e.stopPropagation()};
                     checkboxCell.appendChild(checkbox);
                 row1.appendChild(checkboxCell);
 
-                    const addresseeCell = document.createElement("TD");
-                        addresseeCell.appendChild(createSpan(Localization.getAdditionalContent("addressee")));
-                        addresseeCell.appendChild(createSpan(": "));
-                        addresseeCell.appendChild(createSpan(mail.toName));
-                row1.appendChild(addresseeCell)
+                    const fromCell = document.createElement("TD");
+                        fromCell.appendChild(createSpan(Localization.getAdditionalContent("sender")));
+                        fromCell.appendChild(createSpan(": "));
+                        fromCell.appendChild(createSpan(mail.fromName));
+                row1.appendChild(fromCell);
 
                     const sendTimeCell = document.createElement("TD");
                         sendTimeCell.classList.add("send-time-cell");
@@ -119,6 +125,30 @@
                                 eventProcessor.processEvent(new Event(events.DELETE_MAILS, [mail.mailId]));
                             }
                     buttonCell.appendChild(deleteButton);
+
+                        const archiveButton = document.createElement("BUTTON");
+                            archiveButton.innerHTML = Localization.getAdditionalContent("archive");
+                            archiveButton.onclick = function(e){
+                                e.stopPropagation();
+                                eventProcessor.processEvent(new Event(events.ARCHIVE_MAILS, [mail.mailId]));
+                            }
+                    buttonCell.appendChild(archiveButton);
+
+                        const markButton = document.createElement("BUTTON");
+                            if(mail.read){
+                                markButton.innerHTML = Localization.getAdditionalContent("mark-as-unread");
+                                markButton.onclick = function(e){
+                                    e.stopPropagation();
+                                    eventProcessor.processEvent(new Event(events.MARK_AS_UNREAD, [mail.mailId]));
+                                }
+                            }else{
+                                markButton.innerHTML = Localization.getAdditionalContent("mark-as-read");
+                                markButton.onclick = function(e){
+                                    e.stopPropagation();
+                                    eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mail.mailId]));
+                                }
+                            }
+                    buttonCell.appendChild(markButton);
                 row1.appendChild(buttonCell);
             table.appendChild(row1);
 

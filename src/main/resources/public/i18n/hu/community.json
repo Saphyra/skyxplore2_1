@@ -333,6 +333,11 @@
   "additionalContent": {
     "addressee": "Címzett",
     "delete": "Törlés",
-    "subject": "Tárgy"
+    "subject": "Tárgy",
+    "sender": "Feladó",
+    "archive": "Archiválás",
+    "mark-as-unread": "Megjelölés olvasatlanként",
+    "mark-as-read": "Megjelölés olvasottként",
+    "reply": "Válasz"
   }
 }
