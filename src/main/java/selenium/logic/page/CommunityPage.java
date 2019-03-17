@@ -9,6 +9,7 @@ import selenium.logic.domain.PossibleFriend;
 import selenium.logic.domain.SeleniumFriendRequest;
 import selenium.logic.domain.SentFriendRequest;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
-    public static final String SELECTOR_BLOCK_CHARACTER_CONTAINER = "blockcharactercontainer";
+    private static final String SELECTOR_BLOCK_CHARACTER_CONTAINER = "blockcharactercontainer";
     private static final String SELECTOR_ADD_FRIEND = "#friends > div:first-of-type";
     private static final String SELECTOR_ADD_FRIEND_CONTAINER = "addfriendcontainer";
     private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friendname";
@@ -38,10 +39,10 @@ public class CommunityPage {
     private static final String SELECTOR_MESSAGE = "message";
     private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
     private static final String SELECTOR_MAIL_CONTAINER = "main-write-mail";
-    private static final String SELECTOR_RECEIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(2)";
-    private static final String SELECTOR_RECEIVED_MAILS = "#incomingmaillist .mailitem";
-    private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(3)";
-    private static final String SELECTOR_SENT_MAILS = "#sentmaillist .mailitem";
+    private static final String SELECTOR_INCOMING_MAILS_PAGE_BUTTON = "#incoming-mails-button";
+    private static final String SELECTOR_INCOMING_MAILS = "#incomingmaillist .mailitem";
+    private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#sent-mails-button";
+    private static final String SELECTOR_SENT_MAILS = "#sent-mail-list .mail-item";
     private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
     private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(4)";
     private static final String SELECTOR_ARCHIVED_MAILS = "#archivedmaillist .mailitem";
@@ -55,7 +56,6 @@ public class CommunityPage {
     private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#blockedcharacters div.button";
     private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "blockcharactername";
     private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#blockablecharactersfound .blockablecharacter";
-    private static final String SELECTOR_CLOSE_WRITE_MAIL_PAGE = "#mailclosebutton ";
     private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friendlistbuttons button:first-child";
     private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
 
@@ -137,7 +137,7 @@ public class CommunityPage {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
             return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElseThrow(() -> new RuntimeException("Characters not found in search result."));
+        }).orElse(Collections.emptyList());
     }
 
     public WebElement getMailSubjectField() {
@@ -156,12 +156,15 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_MAIL_CONTAINER));
     }
 
-    public WebElement getReceivedMailsPageButton() {
-        return driver.findElement(By.cssSelector(SELECTOR_RECEIVED_MAILS_PAGE_BUTTON));
+    public WebElement getIncomingMailsPageButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_INCOMING_MAILS_PAGE_BUTTON));
     }
 
-    public List<WebElement> getReceivedMails() {
-        return driver.findElements(By.cssSelector(SELECTOR_RECEIVED_MAILS));
+    public List<WebElement> getIncomingMails() {
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }).orElse(Collections.emptyList());
     }
 
     public WebElement getSentMailsPageButton() {
@@ -169,7 +172,10 @@ public class CommunityPage {
     }
 
     public List<WebElement> getSentMails() {
-        return driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }).orElse(Collections.emptyList());
     }
 
     public WebElement getNumberOfUnreadMails() {
@@ -226,10 +232,6 @@ public class CommunityPage {
 
     public List<WebElement> getBlockableCharacters() {
         return driver.findElements(By.cssSelector(SELECTOR_BLOCKABLE_CHARACTERS));
-    }
-
-    public void closeWriteMailPage() {
-        driver.findElement(By.id(SELECTOR_CLOSE_WRITE_MAIL_PAGE)).click();
     }
 
     public WebElement getFriendsMainPageButton() {

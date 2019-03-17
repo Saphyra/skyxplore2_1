@@ -193,6 +193,12 @@
         "message": "Végrehajt"
       }
     ],
+    "no-sent-mail": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs elküldött üzenet."
+      }
+    ],
     "archived-mail-list-title": [
       {
         "key": "innerHTML",
@@ -325,5 +331,8 @@
     ]
   },
   "additionalContent": {
+    "addressee": "Címzett",
+    "delete": "Törlés",
+    "subject": "Tárgy"
   }
 }

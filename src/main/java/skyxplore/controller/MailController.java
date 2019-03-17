@@ -35,7 +35,7 @@ public class MailController {
     private static final String GET_SENT_MAILS_MAPPING = "mail/sent";
     private static final String MARK_MAILS_READ_MAPPING = "mail/mark/read";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/mark/unread";
-    private static final String SEND_MAIL_MAPPING = "mail/send";
+    private static final String SEND_MAIL_MAPPING = "mail";
     private static final String UNARCHIVE_MAILS_MAPPING = "mail/unarchive";
 
     private final CharacterViewConverter characterViewConverter;

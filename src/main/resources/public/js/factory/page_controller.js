@@ -58,9 +58,3 @@
         true
     ));
 })();
-
-function createSpan(text){
-    const element = document.createElement("SPAN");
-        element.innerHTML = text || "";
-    return element;
-}

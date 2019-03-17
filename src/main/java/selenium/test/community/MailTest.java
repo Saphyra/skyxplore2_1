@@ -141,7 +141,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testSuccessfullySentMail() {
         SuccessfullySentMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -149,6 +148,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSuccessfullySentMail();
     }

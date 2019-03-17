@@ -41,8 +41,8 @@ public class MailTestHelper {
     }
 
     public List<Mail> getReceivedMails() {
-        communityPage.getReceivedMailsPageButton().click();
-        return communityPage.getReceivedMails().stream()
+        communityPage.getIncomingMailsPageButton().click();
+        return communityPage.getIncomingMails().stream()
             .map(element -> new Mail(element, driver))
             .collect(Collectors.toList());
     }
@@ -102,7 +102,7 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForReceivedMails() {
-        communityPage.getReceivedMailsPageButton().click();
+        communityPage.getIncomingMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForReceivedMails();
         bulkDeleteInput.click();
 
@@ -122,7 +122,7 @@ public class MailTestHelper {
     }
 
     public void selectBulkMarkAsReadOption() {
-        communityPage.getReceivedMailsPageButton().click();
+        communityPage.getIncomingMailsPageButton().click();
         WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
         inputField.click();
 
@@ -138,7 +138,7 @@ public class MailTestHelper {
     }
 
     public void selectBulkMarkAsUnreadOption() {
-        communityPage.getReceivedMailsPageButton().click();
+        communityPage.getIncomingMailsPageButton().click();
         WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
         inputField.click();
 

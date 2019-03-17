@@ -80,3 +80,12 @@ function setIntervalImmediate(callBack, interval){
     callBack();
     return setInterval(callBack, interval);
 }
+
+function createSpan(text){
+    if(text == null || text == undefined){
+        text = "";
+    }
+    const label = document.createElement("SPAN");
+        label.innerHTML = text;
+    return label;
+}

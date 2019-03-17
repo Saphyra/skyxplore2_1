@@ -60,8 +60,8 @@
                     
                     const title = document.createElement("DIV");
                         title.classList.add("cart-element-title");
-                        const titlePrefix = createSpanWithValue(Items.getItem(itemId).name + " x ");
-                        const titleAmount = createSpanWithValue(1);
+                        const titlePrefix = createSpan(Items.getItem(itemId).name + " x ");
+                        const titleAmount = createSpan(1);
                     title.appendChild(titlePrefix);
                     title.appendChild(titleAmount);
                 container.appendChild(title);
@@ -70,10 +70,10 @@
                     const priceContainer = document.createElement("DIV");
                         priceContainer.classList.add("cart-element-price-container");
                         
-                        const prefix = createSpanWithValue(Localization.getAdditionalContent("cost") + ": " + buyPrice + " x ");
-                        const costAmount = createSpanWithValue(1);
-                        const delimiter = createSpanWithValue(" = ");
-                        const totalCost = createSpanWithValue(buyPrice);
+                        const prefix = createSpan(Localization.getAdditionalContent("cost") + ": " + buyPrice + " x ");
+                        const costAmount = createSpan(1);
+                        const delimiter = createSpan(" = ");
+                        const totalCost = createSpan(buyPrice);
                     priceContainer.appendChild(prefix);    
                     priceContainer.appendChild(costAmount);    
                     priceContainer.appendChild(delimiter);    
@@ -91,12 +91,6 @@
                 cart[itemId] = new CartItem(itemId, buyPrice, titleAmount, costAmount, totalCost, container);
                 
                 return container;
-            }
-            
-            function createSpanWithValue(value){
-                const span = document.createElement("SPAN");
-                    span.innerHTML = value;
-                return span;
             }
         }
     }

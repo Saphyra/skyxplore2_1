@@ -9,6 +9,7 @@
     <LINK rel="stylesheet" href="/css/community/character_lists.css">
     <LINK rel="stylesheet" href="/css/community/friend_lists.css">
     <LINK rel="stylesheet" href="/css/community/mail_lists.css">
+    <LINK rel="stylesheet" href="/css/community/mail_item.css">
     <LINK rel="stylesheet" href="/css/community/write_mail.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
@@ -80,8 +81,7 @@
                 <H2 id="mail-lists-title"></H2>
 
                 <DIV id="mail-list-header-buttons">
-                    <DIV id="write-mail-button" class="inline-button button"
-                         onclick="eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW))"></DIV>
+                    <DIV id="write-mail-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW))"></DIV>
                     <DIV class="inline-button button">
                         <SPAN id="incoming-mails-button"></SPAN>
 
@@ -92,7 +92,7 @@
                         </SPAN>
                     </DIV>
 
-                    <DIV id="sent-mails-button" class="inline-button button"></DIV>
+                    <DIV id="sent-mails-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_MAILS_TAB))"></DIV>
                     <DIV id="archived-mails-button" class="inline-button button"></DIV>
                 </DIV>
             </DIV>
@@ -133,6 +133,7 @@
                         <BUTTON id="process-action-with-sent-mails-button"></BUTTON>
                     </DIV>
 
+                    <DIV id="no-sent-mail"></DIV>
                     <DIV id="sent-mail-list"></DIV>
                 </DIV>
 
@@ -181,8 +182,7 @@
         <DIV id="write-mail-wrapper">
             <H2 id="write-mail-title"></H2>
 
-            <BUTTON class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X
-            </BUTTON>
+            <BUTTON class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X</BUTTON>
 
             <TABLE id="write-mail-table">
                 <TR>

@@ -140,12 +140,6 @@
             container.appendChild(abilityContainer);
             
         return container;
-
-        function createSpan(text){
-            const label = document.createElement("SPAN");
-                label.innerHTML = text;
-            return label;
-        }
     }
 
     function updateShipStats(shipType, connectors){

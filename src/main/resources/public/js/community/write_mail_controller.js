@@ -1,5 +1,6 @@
 (function WritMailController(){
     events.SEND_MAIL = "send_mail";
+    events.MAIL_SENT = "mail_sent";
 
     $(document).ready(init);
 
@@ -27,7 +28,22 @@
         }else if(messageField.value.length > 4000){
             notificationService.showError(MessageCode.getMessage("MESSAGE_TOO_LONG"));
         }else{
-            throwException("UnsupportedOperation", "Message sending has not been implemented");
+            const payload = {
+                addresseeId: addresseeId,
+                subject: subjectField.value,
+                message: messageField.value
+            };
+            const request = new Request(HttpMethod.PUT, Mapping.SEND_MAIL, payload);
+                request.processValidResponse = function(){
+                    notificationService.showSuccess(MessageCode.getMessage("MAIL_SENT"));
+                    subjectField.value = "";
+                    invalidateAddressee();
+                    messageField.value = "";
+                    addresseeField.value = "";
+                    eventProcessor.processEvent(new Event(events.MAIL_SENT));
+                    eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
+                }
+            dao.sendRequestAsync(request);
         }
     }
 

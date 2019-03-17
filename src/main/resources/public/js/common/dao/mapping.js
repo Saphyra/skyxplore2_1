@@ -17,6 +17,7 @@ window.Mapping = {
     EQUIPMENT_STORAGE: "character/storage",
     GET_CHARACTERS: "character",
     GET_MATERIALS: "factory/materials",
+    GET_SENT_MAILS: "mail/sent",
     GET_SHIP_DATA: "ship",
     GET_QUEUE: "factory/queue",
     ITEMS_OF_CATEGORY: "categories/*",
@@ -28,6 +29,7 @@ window.Mapping = {
     REGISTER: "user",
     RENAME_CHARACTER: "character",
     SELECT_CHARACTER: "character/*",
+    SEND_MAIL: "mail",
     UNEQUIP_ITEM: "ship/equipment",
     USERNAME_EXISTS: "user/name",
     

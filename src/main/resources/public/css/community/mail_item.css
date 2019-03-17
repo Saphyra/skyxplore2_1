@@ -1,0 +1,81 @@
+.mail-item{
+    border: 3px ridge white;
+    margin: 0.5rem;
+}
+
+.mail-item:hover{
+    border-color: red;
+}
+
+.unread-mail{
+    border-color: lightgreen;
+}
+
+.mail-header{
+    cursor: pointer;
+    border-bottom: 2px ridge white;
+}
+
+.mail-header *{
+    cursor: pointer;
+}
+
+.mail-header table{
+    width: 100%;
+    padding: 0.25rem;
+}
+
+.mail-header table td{
+    padding: 0.25rem;
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+.mail-header table tr:first-child td:first-child{
+    border-right: 3px ridge white;
+    padding: 0 0.5rem;
+}
+
+.mail-header table td input[type="checkbox"]{
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    padding: 10px;
+}
+
+.checkbox-cell{
+    text-align: center;
+    width: 2rem;
+}
+
+.send-time-cell{
+    text-align: center;
+    width: 11rem;
+}
+
+.button-cell{
+    text-align: center;
+    width: 2rem;
+}
+
+.mail-body{
+    display: none;
+    padding: 0.25rem;
+}
+
+.mail-body textarea{
+    background: transparent;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 3px solid white;
+    resize: none;
+    padding: 0.25rem;
+    font-size: 1.25rem;
+    height: 15rem;
+}
+
+.mail-body textarea:disabled{
+    cursor: initial;
+}
