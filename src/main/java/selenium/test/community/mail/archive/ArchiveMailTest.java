@@ -1,21 +1,22 @@
 package selenium.test.community.mail.archive;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+import java.util.Optional;
+
 import lombok.Builder;
 import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 @Builder
 public class ArchiveMailTest {
@@ -45,6 +46,7 @@ public class ArchiveMailTest {
         mail.archive(notificationValidator);
 
         assertFalse(findMail(character).isPresent());
+        assertEquals(0, mailTestHelper.getNumberOfUnreadMails());
 
         assertTrue(
             mailTestHelper.getArchivedMails().stream()

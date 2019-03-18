@@ -1,21 +1,22 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -137,7 +138,7 @@ public class CommunityPage {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
             return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElse(Collections.emptyList());
+        }, "Querying addressee elements...").orElse(Collections.emptyList());
     }
 
     public WebElement getMailSubjectField() {
@@ -164,7 +165,7 @@ public class CommunityPage {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
             return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElse(Collections.emptyList());
+        }, "Querying incoming mails...").orElse(Collections.emptyList());
     }
 
     public WebElement getSentMailsPageButton() {
@@ -175,7 +176,7 @@ public class CommunityPage {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
             return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElse(Collections.emptyList());
+        }, "Querying sent mails...").orElse(Collections.emptyList());
     }
 
     public WebElement getNumberOfUnreadMails() {
@@ -190,7 +191,7 @@ public class CommunityPage {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
             return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElse(Collections.emptyList());
+        }, "Querying archived mails").orElse(Collections.emptyList());
     }
 
     public WebElement getBulkEditInputFieldForReceivedMails() {

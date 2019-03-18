@@ -84,6 +84,7 @@
 #message{
     margin-top: 0.5rem;
     width: 90%;
-    height: 40rem;
+    height: calc(100vh - 23rem);
+    min-height: 20rem;
     font-size: 1.5rem;
 }

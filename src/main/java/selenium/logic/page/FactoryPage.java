@@ -1,18 +1,19 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Category;
-import selenium.logic.util.CategoryNameHelper;
+import static selenium.logic.util.WaitUtil.getWithWait;
+import static selenium.logic.util.WaitUtil.waitUntil;
 
 import java.util.List;
 import java.util.Optional;
 
-import static selenium.logic.util.WaitUtil.getWithWait;
-import static selenium.logic.util.WaitUtil.waitUntil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import selenium.logic.domain.Category;
+import selenium.logic.util.CategoryNameHelper;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -29,9 +30,8 @@ public class FactoryPage {
         List<WebElement> categoryButtons = getWithWait(() -> {
             List<WebElement> buttons = driver.findElements(By.cssSelector(SELECTOR_CATEGORY_BUTTONS));
             return buttons.isEmpty() ? Optional.empty() : Optional.of(buttons);
-        }).orElseThrow(() -> new RuntimeException("Category buttons not found."));
+        }, "Querying category buttons...").orElseThrow(() -> new RuntimeException("Category buttons not found."));
 
-        log.info(categoryButtons.toString());
         categoryButtons.stream()
             .filter(element -> element.getText().equals(categoryNameHelper.getCategoryName(category)))
             .findFirst()

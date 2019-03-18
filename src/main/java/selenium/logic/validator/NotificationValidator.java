@@ -1,19 +1,20 @@
 package selenium.logic.validator;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static org.junit.Assert.assertEquals;
+import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import static selenium.logic.util.WaitUtil.getWithWait;
+import static selenium.logic.util.WaitUtil.waitUntil;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
-import static selenium.logic.util.WaitUtil.getWithWait;
-import static selenium.logic.util.WaitUtil.waitUntil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -37,7 +38,7 @@ public class NotificationValidator {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(getNotificationElementsLocator());
             return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }).orElse(Collections.emptyList());
+        }, "Querying notifications...").orElse(Collections.emptyList());
     }
 
     private void verifyContains(String text) {

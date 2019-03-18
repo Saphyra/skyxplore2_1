@@ -2,6 +2,7 @@
     events.MARK_AS_READ = "mark_as_read";
     events.MAILS_MARKED_AS_READ = "mails_marked_as_read";
     events.ARCHIVE_MAILS = "archive_mails";
+    events.MAILS_ARCHIVED = "mails_archived";
 
     let isActive = false;
     let mailReadMapping = {};
@@ -56,6 +57,7 @@
                 for(let mIndex in mailIds){
                     document.getElementById("incoming-mail-list").removeChild(document.getElementById(generateIncomingMailId(mailIds[mIndex])));
                 }
+                eventProcessor.processEvent(new Event(events.MAILS_ARCHIVED));
             }
         dao.sendRequestAsync(request);
     }

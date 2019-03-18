@@ -4,6 +4,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
             return eventType === events.MAILS_MARKED_AS_READ
+                || eventType === events.MAILS_ARCHIVED
         },
         displayNumberOfReceivedMails
     ));

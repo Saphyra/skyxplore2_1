@@ -1,16 +1,12 @@
 package selenium.logic.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 public class WaitUtil {
-    public static void waitUntil(Supplier<Boolean> booleanSupplier){
-        waitUntil(booleanSupplier, "");
-    }
-
     public static void waitUntil(Supplier<Boolean> booleanSupplier, String logMessage) {
         log.info(logMessage);
         int counter = 0;
@@ -26,16 +22,12 @@ public class WaitUtil {
         } while (!result);
     }
 
-    public static <T> Optional<T> getWithWait(Supplier<Optional<T>> supplier) {
-        return getWithWait(supplier, "Querying item...");
-    }
-
     public static <T> Optional<T> getWithWait(Supplier<Optional<T>> supplier, String logMessage) {
         log.info(logMessage);
         int counter = 0;
         Optional<T> result;
         do {
-            log.info("Query attempts: {}", counter);
+            log.debug("Query attempts: {}", counter);
             result = supplier.get();
             sleep(100);
             counter++;
