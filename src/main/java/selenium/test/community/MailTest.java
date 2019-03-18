@@ -67,7 +67,7 @@ public class MailTest extends SeleniumTestApplication {
         communityPage = new CommunityPage(driver);
         mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
-        sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
+        sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
     }
 
     @Test
@@ -179,7 +179,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkArchiveMail() {
         BulkArchiveMailTest.builder()
             .communityTestInitializer(communityTestInitializer)

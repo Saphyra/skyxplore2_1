@@ -45,6 +45,7 @@ public class SuccessfullySentMailTest {
         sendMailHelper.setSubject()
             .setAddressee(otherCharacter)
             .setMessage()
+            .sendMail()
             .verifyMailSent(messageCodes.get(MESSAGE_CODE_MAIL_SENT));
 
         verifyMailAtSentMails(otherCharacter);

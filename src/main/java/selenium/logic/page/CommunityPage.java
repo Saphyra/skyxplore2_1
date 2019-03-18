@@ -47,8 +47,8 @@ public class CommunityPage {
     private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "number-of-unread-mails";
     private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#archived-mails-button";
     private static final String SELECTOR_ARCHIVED_MAILS = "#archived-mail-list .mail-item";
-    private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS = "actionwithreceivedmails";
-    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS = "#incomingmaillistcontainer .actionwithselectedmails button:last-child";
+    private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_INCOMING_MAILS = "action-with-incoming-mails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_INCOMING_MAILS = "#process-action-with-incoming-mails-button";
     private static final String SELECTOR_BULK_RESTORE_INPUT_FIELD = "actionwitharchivedmails";
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS = "#archivedmaillistcontainer .actionwithselectedmails button:last-child";
     private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "actionwithdeletedmails";
@@ -198,12 +198,12 @@ public class CommunityPage {
         }, "Querying archived mails").orElse(Collections.emptyList());
     }
 
-    public WebElement getBulkEditInputFieldForReceivedMails() {
-        return driver.findElement(By.id(SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS));
+    public WebElement getBulkEditInputFieldForIncomingMails() {
+        return driver.findElement(By.id(SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_INCOMING_MAILS));
     }
 
     public WebElement getExecuteBulkEditButtonForReceivedMails() {
-        return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS));
+        return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_INCOMING_MAILS));
     }
 
     public WebElement getBulkEditInputFieldForArchivedMails() {

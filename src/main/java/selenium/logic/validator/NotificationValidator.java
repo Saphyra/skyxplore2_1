@@ -1,13 +1,9 @@
 package selenium.logic.validator;
 
-import static org.junit.Assert.assertEquals;
 import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
-import static selenium.logic.util.WaitUtil.getWithWait;
 import static selenium.logic.util.WaitUtil.waitUntil;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +21,13 @@ public class NotificationValidator {
 
     public void verifyOnlyOneNotification(String text) {
         log.info("Verifying only one notification with text {}", text);
-        assertEquals(1, getNotifications().size());
+        waitUntil(() -> {
+            List<WebElement> notifications = getNotifications();
+            if (notifications.size() > 1) {
+                throw new RuntimeException("More than 1 notifications are present.");
+            }
+            return notifications.size() == 1;
+        }, "Waiting until only one notification is present.");
         verifyContains(text);
     }
 
@@ -35,10 +37,7 @@ public class NotificationValidator {
     }
 
     private List<WebElement> getNotifications() {
-        return getWithWait(() -> {
-            List<WebElement> result = driver.findElements(getNotificationElementsLocator());
-            return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }, "Querying notifications...").orElse(Collections.emptyList());
+        return driver.findElements(getNotificationElementsLocator());
     }
 
     private void verifyContains(String text) {

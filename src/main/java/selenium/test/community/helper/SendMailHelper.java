@@ -1,37 +1,46 @@
 package selenium.test.community.helper;
 
-import lombok.RequiredArgsConstructor;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.waitUntil;
+
 import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class SendMailHelper {
     public static final String DEFAULT_MESSAGE = "message";
     public static final String DEFAULT_SUBJECT = "subject";
+    private static final String MESSAGE_CODE_MAIL_SENT = "MAIL_SENT";
 
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void sendMailTo(SeleniumCharacter character) {
-        if (!communityPage.getSendMailContainer().isDisplayed()) {
-            communityPage.getWriteNewMailButton().click();
-        }
+        openWriteMailPage();
 
         setSubject();
         setMessage();
         setAddressee(character);
         sendMail();
+        verifyMailSent(messageCodes.get(MESSAGE_CODE_MAIL_SENT));
     }
 
-    public SendMailHelper setSubject(String subject) {
+    public void openWriteMailPage() {
         if (!communityPage.getSendMailContainer().isDisplayed()) {
             communityPage.getWriteNewMailButton().click();
         }
+        waitUntil(() -> communityPage.getSendMailContainer().isDisplayed(), "Waiting until writeMail page is opened...");
+    }
+
+    public SendMailHelper setSubject(String subject) {
+        openWriteMailPage();
         communityPage.getMailSubjectField().sendKeys(subject);
         return this;
     }
@@ -43,17 +52,13 @@ public class SendMailHelper {
     }
 
     public SendMailHelper setMessage(String message) {
-        if (!communityPage.getSendMailContainer().isDisplayed()) {
-            communityPage.getWriteNewMailButton().click();
-        }
+        openWriteMailPage();
         communityPage.getMessageField().sendKeys(message);
         return this;
     }
 
     public SendMailHelper verifyAddresseeNotFound(SeleniumCharacter addressee) {
-        if (!communityPage.getSendMailContainer().isDisplayed()) {
-            communityPage.getWriteNewMailButton().click();
-        }
+        openWriteMailPage();
         WebElement addresseeInputField = communityPage.getAddresseeInputField();
         addresseeInputField.clear();
         addresseeInputField.sendKeys(addressee.getCharacterName());
@@ -67,9 +72,7 @@ public class SendMailHelper {
     }
 
     public SendMailHelper setAddressee(SeleniumCharacter addressee) {
-        if (!communityPage.getSendMailContainer().isDisplayed()) {
-            communityPage.getWriteNewMailButton().click();
-        }
+        openWriteMailPage();
         communityPage.getAddresseeInputField().sendKeys(addressee.getCharacterName());
         communityPage.getAddresseeElements().stream()
             .filter(element -> element.getText().equals(addressee.getCharacterName()))
@@ -86,13 +89,14 @@ public class SendMailHelper {
     }
 
     public void verifyMailSent(String notification) {
-        sendMail();
+        waitUntil(() -> !communityPage.getSendMailContainer().isDisplayed(), "Waiting until writeMail page is closed...");
         notificationValidator.verifyOnlyOneNotification(notification);
         assertFalse(communityPage.getSendMailContainer().isDisplayed());
     }
 
-    public void sendMail() {
+    public SendMailHelper sendMail() {
         communityPage.getSendMailButton().click();
+        return this;
     }
 
     public SendMailHelper setSubject() {

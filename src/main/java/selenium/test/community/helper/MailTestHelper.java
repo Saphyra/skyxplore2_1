@@ -74,7 +74,7 @@ public class MailTestHelper {
     }
 
     public void selectBulkArchiveOption() {
-        WebElement bulkSelectInput = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement bulkSelectInput = communityPage.getBulkEditInputFieldForIncomingMails();
         bulkSelectInput.click();
 
         bulkSelectInput.findElement(By.cssSelector(SELECTOR_ARCHIVE_OPTION)).click();
@@ -104,7 +104,7 @@ public class MailTestHelper {
 
     public void selectBulkDeleteOptionForReceivedMails() {
         communityPage.getIncomingMailsPageButton().click();
-        WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForIncomingMails();
         bulkDeleteInput.click();
 
         bulkDeleteInput.findElement(By.cssSelector(SELECTOR_DELETE_OPTION)).click();
@@ -124,7 +124,7 @@ public class MailTestHelper {
 
     public void selectBulkMarkAsReadOption() {
         communityPage.getIncomingMailsPageButton().click();
-        WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement inputField = communityPage.getBulkEditInputFieldForIncomingMails();
         inputField.click();
 
         inputField.findElement(By.cssSelector(SELECTOR_MARK_AS_READ_OPTION)).click();
@@ -140,7 +140,7 @@ public class MailTestHelper {
 
     public void selectBulkMarkAsUnreadOption() {
         communityPage.getIncomingMailsPageButton().click();
-        WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement inputField = communityPage.getBulkEditInputFieldForIncomingMails();
         inputField.click();
 
         inputField.findElement(By.cssSelector(SELECTOR_MARK_AS_UNREAD_OPTION)).click();
