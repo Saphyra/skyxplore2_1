@@ -236,6 +236,12 @@
         "message": "Végrehajt"
       }
     ],
+    "no-archived-mail": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs archivált üzenet."
+      }
+    ],
     "add-friend-title": [
       {
         "key": "innerHTML",
@@ -338,6 +344,7 @@
     "archive": "Archiválás",
     "mark-as-unread": "Megjelölés olvasatlanként",
     "mark-as-read": "Megjelölés olvasottként",
-    "reply": "Válasz"
+    "reply": "Válasz",
+    "restore": "Visszaállítás"
   }
 }

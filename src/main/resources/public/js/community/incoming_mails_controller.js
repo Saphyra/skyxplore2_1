@@ -9,8 +9,8 @@
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
-            return eventType === events.OPEN_WRITE_MAIL_WINDOW
-                || eventType === events.OPEN_SENT_MAILS_TAB
+            return eventType === events.OPEN_SENT_MAILS_TAB
+                || eventType === events.OPEN_ARCHIVED_MAILS_TAB
         },
         function(){
             isActive = false;

@@ -1,7 +1,6 @@
 package selenium.test.community.mail.archive;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -45,7 +44,7 @@ public class ArchiveMailTest {
 
         mail.archive(notificationValidator);
 
-        assertFalse(findMail(character).isPresent());
+        mailTestHelper.verifyIncomingNoIncomingMails();
         assertEquals(0, mailTestHelper.getNumberOfUnreadMails());
 
         assertTrue(

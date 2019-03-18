@@ -93,7 +93,7 @@
                     </DIV>
 
                     <DIV id="sent-mails-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_MAILS_TAB))"></DIV>
-                    <DIV id="archived-mails-button" class="inline-button button"></DIV>
+                    <DIV id="archived-mails-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_ARCHIVED_MAILS_TAB))"></DIV>
                 </DIV>
             </DIV>
 
@@ -151,6 +151,9 @@
 
                         <BUTTON id="process-action-with-archived-mails-button"></BUTTON>
                     </DIV>
+
+                    <DIV id="no-archived-mail"></DIV>
+                    <DIV id="archived-mail-list"></DIV>
                 </DIV>
             </DIV>
         </SECTION>

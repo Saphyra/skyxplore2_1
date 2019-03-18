@@ -161,6 +161,10 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_INCOMING_MAILS_PAGE_BUTTON));
     }
 
+    public boolean isIncomingMailExists(){
+        return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS)).size() > 0;
+    }
+
     public List<WebElement> getIncomingMails() {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
