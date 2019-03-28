@@ -1,0 +1,148 @@
+localization
+    localized text content can be found at src/main/resources/public/i18n
+    every .html page has a localization .json with matching name
+        .json structure
+            {
+                "title": "Title of the page",
+                "staticText": {
+                    "id-of-the-html-tag": [
+                        {
+                            "key": "attribute"
+                            "message": "Value of the attribute"
+                        }
+                    ]
+                },
+                "additionalContent": {
+                    "id": "Additional contents are used by JS for several case, eg. notifications, or not static content's labels"
+                }
+            }
+    additional localization files:
+        message_codes.json: stores notification/error messages
+        categories.json: stores names of factory/shop categories
+        description.json: localization used for ship's / item's description
+        items.json: contains names and descriptions of all items can be used in game
+            items' data is stored at src/main/resources/public/gamedata/items
+
+notifications
+    success notification: green background
+    error notification: red background
+    notifications appear on the top left corner with a roll-in effect.
+    notification disappears after 10 seconds with a roll-out effect.
+    notification disappears immediately when user clicks on it.
+
+index
+    registration
+        validation rules:
+            username
+                at least 3 characters long -> USERNAME_TOO_SHORT
+                maximum 30 characters long -> USERNAME_TOO_LONG
+                must not exist -> USERNAME_ALREADY_EXISTS
+            passwords
+                at least 6 characters long -> PASSWORD_TOO_SHORT
+                maximum 30 characters long -> PASSWORD_TOO_LONG
+                password and confirm password must be equal -> BAD_CONFIRM_PASSWORD
+            email
+                must be valid -> INVALID_EMAIL
+                must not exist -> EMAIL_ALREADY_EXISTS
+
+        validation results must be appear approx. 1 sec after the last character is entered
+        form cannot be sent before validation results appear
+
+        if any of the input fields is invalid
+            registration button is disabled
+            registration form cannot be sent (neither by clicking button, neither by pressing enter)
+            'error X' appears next to the invalid field, with an error specific title
+        if all input fields are valid
+            registration button is enabled
+            registration form can be sent (by clicking button or pressing enter)
+
+        send registration form
+            user must be created, and logged in automatically, and redirected to characterselect page
+            -> REGISTRATION_SUCCESSFUL success notification appears
+
+    login
+        sending the form with empty username and/or password
+            EMPTY_CREDENTIALS error notification appears
+        sending the form with bad credentials
+            BAD_CREDENTIALS error notification appears
+        sending the form with correct credentials
+            login successfully, and redirect to characterselect page
+
+characterselect
+    new account has zero characters.
+    one account can create unlimited amount of characters.
+
+    create character
+        character name validation rules:
+            at least 3 characters long -> CHARACTER_NAME_TOO_SHORT
+            maximum 30 characters long -> CHARACTER_NAME_TOO_LONG
+            must not exist -> CHARACTER_NAME_ALREADY_EXISTS
+
+        validation result must be appear approx. 1 sec after the last character is entered
+        form cannot be sent before validation results appear
+
+        if character name is invalid
+            create character button is disabled
+            form cannot be sent (neither by clicking button, neither by pressing enter)
+            'error X' appears next to the invalid field, with an error specific title
+
+        if character name is valid
+            create character button is enabled
+            registration form can be sent (by clicking button or pressing enter)
+
+        send the form
+            CHARACTER_CREATED success notification appears
+            character appear in character list
+
+    select character
+        account's characters must be in abc order.
+        account can be selected by clicking on its name('s table cell)
+        when character is selected, the user is redirected the character's overview page
+
+    delete character
+        press 'Delete character' button
+        -> additionalContent.confirm-character-deletion confirm dialog appears
+            -> click 'no': character is not deleted
+            -> click 'yes'
+                CHARACTER_DELETED success notification appears
+                character is removed from character list
+
+    rename character
+        press 'Rename character' button
+        -> 'Rename character' modal appears
+            modal can be closed by clicking on 'X' button at top right corner
+        character name validation rules:
+            at least 3 characters long -> CHARACTER_NAME_TOO_SHORT
+            maximum 30 characters long -> CHARACTER_NAME_TOO_LONG
+            must not exist -> CHARACTER_NAME_ALREADY_EXISTS
+
+        validation result must be appear approx. 1 sec after the last character is entered
+        form cannot be sent before validation results appear
+
+        if character name is invalid
+            rename character button is disabled
+            form cannot be sent (neither by clicking button, neither by pressing enter)
+            'error X' appears next to the invalid field, with an error specific title
+
+        if character name is valid
+            rename character button is enabled
+            registration form can be sent (by clicking button or pressing enter)
+
+        send the form
+            CHARACTER_RENAMED success notification appears
+            rename character modal is closed
+            character appears with the new name in the character list
+
+account
+
+overview
+
+equipment
+
+factory
+
+shop
+
+hangar
+
+community
