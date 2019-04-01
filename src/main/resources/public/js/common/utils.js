@@ -14,7 +14,7 @@ function isEmailValid(email){
         result = false;
     }else if(email.indexOf("@") < 1){
         result = false;
-    }else if(email.lenght < 4){
+    }else if(email.length < 4){
         result = false;
     }else if(email.indexOf(".") < 0){
         result = false;
