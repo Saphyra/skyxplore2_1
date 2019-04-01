@@ -134,6 +134,30 @@ characterselect
             character appears with the new name in the character list
 
 account
+    Validation rules are the same as registration page
+    If any form is sent with bad password, BAD_PASSWORD error notification should appear
+
+    Change email
+        EMAIL_CHANGE_SUCCESSFUL success notification appears
+
+    Change username
+        USERNAME_CHANGE_SUCCESSFUL success notification appears
+        Cannot login with the old username
+        Can login with the new username
+
+    Change password
+        PASSWORD_CHANGE_SUCCESSFUL success notification appears
+        Cannot login with the old password
+        Can login with the new password
+
+    Delete account
+        Confirm dialog appears with CONFIRM_ACCOUNT_DELETION message
+        no/cancel -> Account is not deleted
+        yes/ok -> ACCOUNT_DELETION_SUCCESSFUL success notification appears
+               -> User is logged out
+               -> Cannot log in again
+        New user can be registered with the deleted character's username and email
+        All user data is deleted from the database
 
 overview
 
