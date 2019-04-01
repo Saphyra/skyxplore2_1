@@ -174,7 +174,34 @@ overview
 
     Equipment table shows the current equipment of the ship.
     Items' title contains their description.
+
 equipment
+    Right side contains the character's equipment placed in storage.
+        Grouped by category, ordered by category name.
+        In category, the item's are also ordered by their name.
+        The item's amount is in parenthesis after the name.
+    Left side contains the character's equipped equipment, like on overview page.
+    Unequipping an item:
+        Click on the equipped item to unequip it.
+        ITEM_UNEQUIPPED success notification appears
+        Unequipped item added to storage.
+            Increasing the existing item's amount, or create a new item (and category) if there is no item in storage with the same ID.
+        Empty slot must appear on the ship where the item was unequipped from.
+        If the unequipped item is a 'Connector', the ship's stats also have to change according to the unequipped item's type.
+        If the unequipped item is an 'Extender', the ship's slots number must be decreased with the correct number.
+            If there are less empty slots in the ship than the reduction, some equipped items should be unequipped too.
+                (BE handles this unequipment, ship data is reloaded.)
+    Equipping items:
+        Drag and drop the item from the storage to one of the empty slots.
+            Items can be dropped only to the corresponding slot.
+            Corresponding slots' border is green.
+        Equipped item must be removed from storage and appear in the ship.
+            The item must disappear from storage if the amount is 0.
+            The category must disappear from storage if no items in it.
+        One of the ship's empty slot must be replaced with the new item, where the item was dropped.
+        If the equipped item is a 'Connector', the ship's stats also have to change according to the unequipped item's type.
+        If the equipped item is an 'Extender', the correct number of empty slots must appear for the given type.
+        Only one extender can be equipped for each type.
 
 factory
 
