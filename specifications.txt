@@ -23,6 +23,10 @@ localization
         items.json: contains names and descriptions of all items can be used in game
             items' data is stored at src/main/resources/public/gamedata/items
 
+    Only Hungarian localization is present yet.
+    To determinate the localization, application uses the browser's language.
+    FE tries to load localization from the server with this language, and if localization not found, it falls back to Hungarian.
+
 notifications
     success notification: green background
     error notification: red background
@@ -160,7 +164,16 @@ account
         All user data is deleted from the database
 
 overview
+    Overview and all pages linked from here are protected with 'characterId'.
+    This means you can open them only after a character is selected.
+    Logging out or returning characterselect page resets the character selection.
+    When a user tries to access a protected page without character
 
+    'Community' button displays the summarized notifications of the user (received friend requests + incoming mails).
+    White color if no notifications, red if there are some.
+
+    Equipment table shows the current equipment of the ship.
+    Items' title contains their description.
 equipment
 
 factory
