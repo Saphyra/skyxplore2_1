@@ -228,7 +228,27 @@ factory
             If the item is material, the product must be added to stored materials
 
 shop
+    column 1: displaying category list.
+        When user clicks on a category, the items belong to it must be shown in column 2.
+    column 2: displaying items of selected category.
+        "Add to cart" button must be disabled if user has no enough money left.
+    column 3: displaying cart.
+        Row 1: the character's current balance must be displayed.
+        Row 2: the items the user added to cart
+            Grouped by item
+            Cancel button
+                Amount in the cart reduced by 1
+                If amount is 0, item must disappear
+            "Buy" button at the end of the item list
+        Row 3: Total cost of cart
 
+    Pressing buy button
+        Does nothing when cart is empty.
+        Buys all the items in the cart
+            Money is reduced by the total cost of the cart
+            Cart is empty
+            ITEMS_BOUGHT success notification appears
 hangar
+    not implemented yet
 
 community
