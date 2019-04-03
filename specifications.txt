@@ -204,6 +204,28 @@ equipment
         Only one extender can be equipped for each type.
 
 factory
+    column 1: displaying all materials the user have in abc order.
+        If the user has no materials "No materials" label must be shown
+    column 2: displaying category list.
+        When user clicks on a category, the items belong to it must be shown in column 3.
+    column 3: displaying items of the selected category.
+        The cost of production must be displayed for each item.
+            Cost of production = cost of one item * entered amount
+            Color must be green if there is enough material / credit in storage, or red if not.
+        The total production time must be displayed (production time of one item * entered amount)
+        "Start production" button must not be enabled until all required materials are present in storage.
+        Clicking on "Start production"
+            PRODUCT_ADDED_TO_QUEUE success notification appears
+            The entered amount of items are added to queue (in one block)
+            The stored materials must be reduced by the used amount.
+            Items of the selected category is reloaded.
+    column 4: displaying queue
+        First item of the queue is "In progress" state, all the others are waiting (It can take 10 seconds til the first item changes state)
+        "In progress" item has a countdown timer and a progress bar.
+        When the item is ready
+            It must be removed from the queue
+            The next item must be started
+            If the item is material, the product must be added to stored materials
 
 shop
 
