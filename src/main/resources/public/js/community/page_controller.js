@@ -61,3 +61,8 @@
         }
     ));
 })();
+
+function getSearchResultTimeout(){
+    const presetTimeout = getCookie("search-result-timeout");
+    return presetTimeout == null ? 1000 : Number(presetTimeout);
+}

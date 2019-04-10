@@ -17,7 +17,7 @@
         if(timeout){
             clearTimeout(timeout);
         }
-        timeout = setTimeout(startValidation, 1000);
+        timeout = setTimeout(startValidation, getValidationTimeout());
         
         function startValidation(){
             eventProcessor.processEvent(new Event(events.VALIDATE_ACCOUNT_DELETION));

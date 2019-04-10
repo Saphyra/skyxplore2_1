@@ -89,3 +89,15 @@ function createSpan(text){
         label.innerHTML = text;
     return label;
 }
+
+function getCookie(key){
+    const cookies = document.cookie.split('; ');
+    for(let cIndex in cookies){
+        const cookie = cookies[cIndex].split("=");
+        if(cookie[0] == key){
+            return cookie[1];
+        }
+    }
+
+    return null;
+}

@@ -64,7 +64,7 @@
             clearTimeout(addresseeQueryTimeout);
         }
 
-        addresseeQueryTimeout = setTimeout(loadAddressees, 500);
+        addresseeQueryTimeout = setTimeout(loadAddressees, getSearchResultTimeout());
 
         function loadAddressees(){
             const container = document.getElementById("addressee-search-result");

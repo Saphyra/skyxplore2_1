@@ -13,3 +13,7 @@ function createErrorProcess(id, code){
     }
 }
 
+function getValidationTimeout(){
+    const presetTimeout = getCookie("validation-timeout");
+    return presetTimeout == null ? 1000 : Number(presetTimeout);
+}
