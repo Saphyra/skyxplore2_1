@@ -43,7 +43,7 @@ public class BulkDeleteByAddresseeTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::select);
+        mailTestHelper.getIncomingMails().forEach(Mail::select);
 
         mailTestHelper.selectBulkDeleteOptionForReceivedMails();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
@@ -52,7 +52,7 @@ public class BulkDeleteByAddresseeTest {
 
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
 
-        assertTrue(mailTestHelper.getReceivedMails().isEmpty());
+        assertTrue(mailTestHelper.getIncomingMails().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(account, character);
         assertEquals(2, mailTestHelper.getSentMails().size());

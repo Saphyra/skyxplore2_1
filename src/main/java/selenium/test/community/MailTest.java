@@ -187,12 +187,12 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkArchiveMail();
     }
 
     @Test
-    @Ignore
     public void testRestoreMail() {
         RestoreMailTest.builder()
             .communityTestInitializer(communityTestInitializer)

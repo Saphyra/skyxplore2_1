@@ -91,7 +91,7 @@
 
                         const checkbox = document.createElement("INPUT");
                             checkbox.type = "checkbox";
-                            checkbox.name = "sent-mail-checkbox-selected";
+                            checkbox.name = "sent-mail-checkbox";
                             checkbox.value = mail.mailId;
                             checkbox.onclick = function(e){e.stopPropagation()};
                     checkboxCell.appendChild(checkbox);

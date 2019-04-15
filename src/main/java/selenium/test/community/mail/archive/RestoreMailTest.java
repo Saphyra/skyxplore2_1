@@ -37,7 +37,7 @@ public class RestoreMailTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        mailTestHelper.getReceivedMails().stream()
+        mailTestHelper.getIncomingMails().stream()
             .filter(m -> m.getSender().equals(character.getCharacterName()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Mail not found"))
@@ -55,7 +55,7 @@ public class RestoreMailTest {
         );
 
         assertTrue(
-            mailTestHelper.getReceivedMails().stream()
+            mailTestHelper.getIncomingMails().stream()
                 .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
         );
     }

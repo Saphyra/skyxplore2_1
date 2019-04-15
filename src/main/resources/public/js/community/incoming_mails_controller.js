@@ -1,9 +1,4 @@
 (function IncomingMailsController(){
-    events.MARK_AS_READ = "mark_as_read";
-    events.MAILS_MARKED_AS_READ = "mails_marked_as_read";
-    events.ARCHIVE_MAILS = "archive_mails";
-    events.MAILS_ARCHIVED = "mails_archived";
-
     let isActive = false;
     let mailReadMapping = {};
 
@@ -18,49 +13,12 @@
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.MARK_AS_READ},
-        function(event){markAsRead(event.getPayload())}
-    ));
-
-    eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.OPEN_INCOMING_MAILS_TAB},
         function(){
             isActive = true;
             loadIncomingMails();
         }
     ));
-
-    eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType === events.ARCHIVE_MAILS},
-        function(event){archive(event.getPayload())}
-    ));
-
-    function markAsRead(mailIds){
-        const request = new Request(HttpMethod.POST, Mapping.MARK_MAILS_READ, mailIds);
-            request.processValidResponse = function(){
-                for(let mIndex in mailIds){
-                    const mailId = mailIds[mIndex];
-                    document.getElementById(generateIncomingMailId(mailId)).classList.remove("unread-mail");
-                    mailReadMapping[mailId] = true;
-                    setMarkButtonState(mailId, document.getElementById(generateMarkButtonId(mailId)));
-                }
-
-                eventProcessor.processEvent(new Event(events.MAILS_MARKED_AS_READ));
-            }
-        dao.sendRequestAsync(request);
-    }
-
-    function archive(mailIds){
-        const request = new Request(HttpMethod.POST, Mapping.ARCHIVE_MAILS, mailIds);
-            request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("MAILS_ARCHIVED"));
-                for(let mIndex in mailIds){
-                    document.getElementById("incoming-mail-list").removeChild(document.getElementById(generateIncomingMailId(mailIds[mIndex])));
-                }
-                eventProcessor.processEvent(new Event(events.MAILS_ARCHIVED));
-            }
-        dao.sendRequestAsync(request);
-    }
 
     function loadIncomingMails(){
         const container = document.getElementById("incoming-mail-list");
@@ -142,7 +100,7 @@
 
                         const checkbox = document.createElement("INPUT");
                             checkbox.type = "checkbox";
-                            checkbox.name = "incoming-mail-checkbox-selected";
+                            checkbox.name = "incoming-mail-checkbox";
                             checkbox.value = mail.mailId;
                             checkbox.onclick = function(e){e.stopPropagation()};
                     checkboxCell.appendChild(checkbox);
@@ -213,10 +171,6 @@
                 eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mailId]));
             }
         }
-    }
-
-    function generateIncomingMailId(mailId){
-        return "incoming-mail-" + mailId;
     }
 
     function generateMarkButtonId(mailId){

@@ -45,6 +45,6 @@ public class DeleteBySenderTest {
         assertTrue(mailTestHelper.getSentMails().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
-        assertEquals(1, mailTestHelper.getReceivedMails().size());
+        assertEquals(1, mailTestHelper.getIncomingMails().size());
     }
 }

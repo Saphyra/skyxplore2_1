@@ -43,7 +43,7 @@ public class BulkDeleteArchivedMailsTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::select);
+        mailTestHelper.getIncomingMails().forEach(Mail::select);
         mailTestHelper.selectBulkArchiveOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 

@@ -37,12 +37,12 @@ public class DeleteByAddresseeTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        mailTestHelper.getReceivedMails().stream()
+        mailTestHelper.getIncomingMails().stream()
             .findAny()
             .orElseThrow(() -> new RuntimeException("Mail not found"))
             .delete(notificationValidator);
 
-        assertTrue(mailTestHelper.getReceivedMails().isEmpty());
+        assertTrue(mailTestHelper.getIncomingMails().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(account, character);
         assertEquals(1, mailTestHelper.getSentMails().size());

@@ -1,22 +1,21 @@
 package selenium.logic.page;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -59,6 +58,7 @@ public class CommunityPage {
     private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#blockablecharactersfound .blockablecharacter";
     private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friendlistbuttons button:first-child";
     private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
+    private static final String SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON = "select-all-incoming-mail-button";
 
     private final WebDriver driver;
 
@@ -165,6 +165,14 @@ public class CommunityPage {
         return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS)).size() > 0;
     }
 
+    public List<WebElement> getIncomingMails(boolean canBeEmpty) {
+        if(canBeEmpty){
+            return  driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
+        }
+
+        return getIncomingMails();
+    }
+
     public List<WebElement> getIncomingMails() {
         return getWithWait(() -> {
             List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
@@ -248,5 +256,9 @@ public class CommunityPage {
 
     public List<WebElement> getBlockedCharacters() {
         return driver.findElements(By.cssSelector(SELECTOR_BLOCKED_CHARACTERS));
+    }
+
+    public WebElement getSelectAllIncomingMailsButton() {
+        return driver.findElement(By.id(SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON));
     }
 }

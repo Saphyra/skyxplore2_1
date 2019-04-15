@@ -102,7 +102,7 @@
                     <H2 id="incoming-mail-list-title"></H2>
 
                     <DIV class="action-with-selected-mails">
-                        <BUTTON id="select-all-incoming-mail-button"></BUTTON>
+                        <BUTTON id="select-all-incoming-mail-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_INCOMING_MAILS))"></BUTTON>
 
                         <SELECT id="action-with-incoming-mails">
                             <OPTION id="incoming-mail-option-none" value="none"></OPTION>
@@ -112,7 +112,7 @@
                             <OPTION id="incoming-mail-option-mark-as-unread" value="mark-as-unread"></OPTION>
                         </SELECT>
 
-                        <BUTTON id="process-action-with-incoming-mails-button"></BUTTON>
+                        <BUTTON id="process-action-with-incoming-mails-button" onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_INCOMING_MAILS))"></BUTTON>
                     </DIV>
 
                     <DIV id="no-incoming-mail"></DIV>

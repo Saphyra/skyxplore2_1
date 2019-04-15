@@ -40,7 +40,7 @@ public class BulkRestoreMailTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::select);
+        mailTestHelper.getIncomingMails().forEach(Mail::select);
         mailTestHelper.selectBulkArchiveOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
@@ -52,6 +52,6 @@ public class BulkRestoreMailTest {
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
         assertEquals(0, mailTestHelper.getArchivedMails().size());
 
-        assertEquals(2, mailTestHelper.getReceivedMails().size());
+        assertEquals(2, mailTestHelper.getIncomingMails().size());
     }
 }

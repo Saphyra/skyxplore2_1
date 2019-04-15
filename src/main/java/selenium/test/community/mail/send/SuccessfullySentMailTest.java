@@ -64,7 +64,7 @@ public class SuccessfullySentMailTest {
     private void verifyMailArrived(SeleniumAccount otherAccount, SeleniumCharacter character) {
         communityTestHelper.goToCommunityPageOf(otherAccount, otherAccount.getCharacter(0), 1);
 
-        List<Mail> receivedMails = mailTestHelper.getReceivedMails();
+        List<Mail> receivedMails = mailTestHelper.getIncomingMails();
         assertTrue(
             receivedMails.stream().anyMatch(mail -> mail.getSender().equals(character.getCharacterName()))
         );

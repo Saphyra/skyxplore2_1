@@ -1,13 +1,9 @@
 package selenium.test.community.mail.archive;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -17,11 +13,15 @@ import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Builder
 @Slf4j
 public class BulkArchiveMailTest {
     private static final String OTHER_SUBJECT = "other_subject";
-    private static final String NOTIFICATION_MAILS_ARCHIVED = "Üzenetek archiválva.";
+    private static final String MESSAGE_CODE_MAILS_ARCHIVED = "MAILS_ARCHIVED";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
@@ -29,6 +29,7 @@ public class BulkArchiveMailTest {
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void testBulkArchiveMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -50,25 +51,25 @@ public class BulkArchiveMailTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        List<Mail> mails = mailTestHelper.getReceivedMails();
-        mails.forEach(Mail::select);
+        communityPage.getSelectAllIncomingMailsButton().click();
 
         mailTestHelper.selectBulkArchiveOption();
 
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_ARCHIVED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_ARCHIVED));
+
+        mailTestHelper.verifyIncomingNoIncomingMails();
 
         List<Mail> archivedMails = mailTestHelper.getArchivedMails();
-        assertEquals(2, archivedMails.size());
+        assertThat(archivedMails).hasSize(2);
 
         verifyContainsSubject(archivedMails, SendMailHelper.DEFAULT_SUBJECT);
         verifyContainsSubject(archivedMails, OTHER_SUBJECT);
     }
 
     private void verifyContainsSubject(List<Mail> archivedMails, String otherSubject) {
-        assertTrue(
-            archivedMails.stream()
-                .anyMatch(mail -> mail.getSubject().equals(otherSubject))
-        );
+        boolean result = archivedMails.stream()
+            .anyMatch(mail -> mail.getSubject().equals(otherSubject));
+        assertThat(result).isTrue();
     }
 }

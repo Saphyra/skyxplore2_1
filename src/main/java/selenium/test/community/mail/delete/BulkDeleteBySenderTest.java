@@ -53,6 +53,6 @@ public class BulkDeleteBySenderTest {
         assertTrue(mailTestHelper.getSentMails().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
-        assertEquals(2, mailTestHelper.getReceivedMails().size());
+        assertEquals(2, mailTestHelper.getIncomingMails().size());
     }
 }

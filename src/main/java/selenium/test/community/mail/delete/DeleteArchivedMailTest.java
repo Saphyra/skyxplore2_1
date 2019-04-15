@@ -37,7 +37,7 @@ public class DeleteArchivedMailTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
 
-        mailTestHelper.getReceivedMails().stream()
+        mailTestHelper.getIncomingMails().stream()
             .findAny()
             .orElseThrow(() -> new RuntimeException("Mail not found"))
             .archive(notificationValidator);

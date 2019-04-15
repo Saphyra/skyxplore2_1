@@ -41,16 +41,16 @@ public class BulkMarkMailsAsUnreadTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::read);
+        mailTestHelper.getIncomingMails().forEach(Mail::read);
 
-        mailTestHelper.getReceivedMails().forEach(Mail::select);
+        mailTestHelper.getIncomingMails().forEach(Mail::select);
 
         mailTestHelper.selectBulkMarkAsUnreadOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_MARKED_AS_UNREAD);
 
-        mailTestHelper.getReceivedMails().forEach(mail -> assertFalse(mail.isRead()));
+        mailTestHelper.getIncomingMails().forEach(mail -> assertFalse(mail.isRead()));
 
         assertEquals(2, mailTestHelper.getNumberOfUnreadMails());
     }

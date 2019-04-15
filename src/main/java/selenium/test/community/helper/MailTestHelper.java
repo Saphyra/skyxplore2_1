@@ -1,23 +1,22 @@
 package selenium.test.community.helper;
 
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.Util.ATTRIBUTE_VALUE;
 import static selenium.logic.util.WaitUtil.waitUntil;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Mail;
-import selenium.logic.domain.MessageCodes;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CommunityPage;
 
 @RequiredArgsConstructor
 public class MailTestHelper {
@@ -48,9 +47,13 @@ public class MailTestHelper {
         waitUntil(() -> !communityPage.isIncomingMailExists(), "Waiting until incoming mails disappear");
     }
 
-    public List<Mail> getReceivedMails() {
+    public List<Mail> getIncomingMails() {
+        return getIncomingMails(false);
+    }
+
+    public List<Mail> getIncomingMails(boolean canBeEmpty){
         communityPage.getIncomingMailsPageButton().click();
-        return communityPage.getIncomingMails().stream()
+        return communityPage.getIncomingMails(canBeEmpty).stream()
             .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
@@ -133,7 +136,7 @@ public class MailTestHelper {
     }
 
     public Mail getMail() {
-        return getReceivedMails().stream()
+        return getIncomingMails().stream()
             .findAny()
             .orElseThrow(() -> new RuntimeException("Mail not found"));
     }
