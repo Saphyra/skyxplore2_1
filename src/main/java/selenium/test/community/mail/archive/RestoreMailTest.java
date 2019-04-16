@@ -1,19 +1,18 @@
 package selenium.test.community.mail.archive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
-
-import java.util.List;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 @Builder
 public class RestoreMailTest {
@@ -49,14 +48,11 @@ public class RestoreMailTest {
             .orElseThrow(() -> new RuntimeException("Archived Mail not found"))
             .restore(notificationValidator);
 
-        assertFalse(
-            mailTestHelper.getArchivedMails().stream()
-                .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
-        );
+        mailTestHelper.verifyNoArchivedMails();
 
-        assertTrue(
+        assertThat(
             mailTestHelper.getIncomingMails().stream()
                 .anyMatch(m -> m.getSender().equals(character.getCharacterName()))
-        );
+        ).isTrue();
     }
 }

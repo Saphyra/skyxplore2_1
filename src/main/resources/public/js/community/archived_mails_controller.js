@@ -49,6 +49,7 @@
     function createMailItem(mail){
         const container = document.createElement("DIV");
             container.classList.add("mail-item");
+            container.id = generateArchivedMailId(mail.mailId);
 
             const mailHeader = document.createElement("DIV");
                 mailHeader.classList.add("mail-header");

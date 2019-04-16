@@ -1,15 +1,16 @@
 package selenium.logic.domain;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.Util.hasClass;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import selenium.logic.validator.NotificationValidator;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.Util.hasClass;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import selenium.logic.validator.NotificationValidator;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -21,7 +22,7 @@ public class Mail {
     private static final String SELECTOR_SUBJECT = "tr:nth-child(2) td:first-child";
     private static final String SELECTOR_RESTORE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
     private static final String MESSAGE_CODE_MAIL_ARCHIVED = "MAILS_ARCHIVED";
-    private static final String NOTIFICATION_MAIL_RESTORED = "Üzenet visszaállítva.123";
+    private static final String MESSAGE_CODE_MAIL_RESTORED = "MAILS_RESTORED";
     private static final String SELECTOR_DELETE_BUTTON = "tr:first-child td:nth-child(4) button:first-child";
     private static final String NOTIFICATION_MAIL_DELETED = "Üzenet törölve.123";
     private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
@@ -68,7 +69,7 @@ public class Mail {
 
     public void restore(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_RESTORE_BUTTON)).click();
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAIL_RESTORED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAIL_RESTORED));
     }
 
     public void delete(NotificationValidator notificationValidator) {

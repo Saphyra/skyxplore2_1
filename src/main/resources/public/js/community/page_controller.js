@@ -72,3 +72,7 @@ function getSearchResultTimeout(){
 function generateIncomingMailId(mailId){
     return "incoming-mail-" + mailId;
 }
+
+function generateArchivedMailId(mailId){
+    return "archived-mail-" + mailId;
+}

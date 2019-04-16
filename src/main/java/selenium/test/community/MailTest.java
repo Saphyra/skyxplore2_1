@@ -206,7 +206,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkRestoreMail() {
         BulkRestoreMailTest.builder()
             .communityTestInitializer(communityTestInitializer)

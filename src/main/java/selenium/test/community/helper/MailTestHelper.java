@@ -1,22 +1,23 @@
 package selenium.test.community.helper;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Mail;
-import selenium.logic.domain.MessageCodes;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CommunityPage;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.Util.ATTRIBUTE_VALUE;
 import static selenium.logic.util.WaitUtil.waitUntil;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
 
 @RequiredArgsConstructor
 public class MailTestHelper {
@@ -45,6 +46,10 @@ public class MailTestHelper {
 
     public void verifyIncomingNoIncomingMails(){
         waitUntil(() -> !communityPage.isIncomingMailExists(), "Waiting until incoming mails disappear");
+    }
+
+    public void verifyNoArchivedMails() {
+        waitUntil(() -> !communityPage.isArchivedMailExists(), "Waiting until archived mails disappear");
     }
 
     public List<Mail> getIncomingMails() {

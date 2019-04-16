@@ -164,7 +164,7 @@ public class MailControllerTest {
         //GIVEN
         List<String> mailIds = Arrays.asList(MAIL_ID_1);
         //WHEN
-        underTest.unarchiveMails(mailIds, CHARACTER_ID_1);
+        underTest.restoreMails(mailIds, CHARACTER_ID_1);
         //THEN
         verify(mailFacade).archiveMails(CHARACTER_ID_1, mailIds, false);
     }

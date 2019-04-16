@@ -32,6 +32,7 @@ window.Mapping = {
     NUMBER_OF_UNREAD_MAILS: "notification/unread-mail",
     REGISTER: "user",
     RENAME_CHARACTER: "character",
+    RESTORE_MAILS: "mail/restore",
     SELECT_CHARACTER: "character/*",
     SEND_MAIL: "mail",
     UNEQUIP_ITEM: "ship/equipment",

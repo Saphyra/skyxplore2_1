@@ -1,7 +1,11 @@
 package skyxplore.controller;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
@@ -16,11 +23,6 @@ import skyxplore.controller.view.character.CharacterViewConverter;
 import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.service.MailFacade;
-
-import javax.validation.Valid;
-import java.util.List;
-
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @SuppressWarnings("WeakerAccess")
 @Slf4j
@@ -36,7 +38,7 @@ public class MailController {
     private static final String MARK_MAILS_READ_MAPPING = "mail/mark/read";
     private static final String MARK_MAILS_UNREAD_MAPPING = "mail/mark/unread";
     private static final String SEND_MAIL_MAPPING = "mail";
-    private static final String UNARCHIVE_MAILS_MAPPING = "mail/unarchive";
+    private static final String RESTORE_MAILS_MAPPING = "mail/restore";
 
     private final CharacterViewConverter characterViewConverter;
     private final MailFacade mailFacade;
@@ -120,8 +122,8 @@ public class MailController {
         mailFacade.sendMail(request, characterId);
     }
 
-    @PostMapping(UNARCHIVE_MAILS_MAPPING)
-    public void unarchiveMails(
+    @PostMapping(RESTORE_MAILS_MAPPING)
+    public void restoreMails(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {

@@ -1,21 +1,22 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -165,6 +166,10 @@ public class CommunityPage {
         return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS)).size() > 0;
     }
 
+    public boolean isArchivedMailExists() {
+        return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS)).size() > 0;
+    }
+
     public List<WebElement> getIncomingMails(boolean canBeEmpty) {
         if(canBeEmpty){
             return  driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
@@ -261,4 +266,5 @@ public class CommunityPage {
     public WebElement getSelectAllIncomingMailsButton() {
         return driver.findElement(By.id(SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON));
     }
+
 }

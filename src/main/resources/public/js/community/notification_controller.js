@@ -5,10 +5,10 @@
         function(eventType){
             return eventType === events.MAILS_MARKED_AS_READ
                 || eventType === events.MAILS_ARCHIVED
+                || eventType === events.MAILS_RESTORED
         },
         displayNumberOfReceivedMails
     ));
-
 
     function init(){
         setIntervalImmediate(displayNumberOfFriendRequests, 20000);
