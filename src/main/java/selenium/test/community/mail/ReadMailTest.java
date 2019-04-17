@@ -49,9 +49,9 @@ public class ReadMailTest {
         assertTrue(getMail(character).isRead());
     }
 
-    private Mail getMail(SeleniumCharacter character) {
+    private Mail getMail(SeleniumCharacter from) {
         return mailTestHelper.getIncomingMails().stream()
-            .filter(mail -> mail.getSender().equals(character.getCharacterName()))
+            .filter(mail -> mail.getSender().equals(from.getCharacterName()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Received mail not found."));
     }

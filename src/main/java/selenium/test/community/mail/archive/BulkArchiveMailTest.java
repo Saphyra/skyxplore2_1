@@ -1,5 +1,9 @@
 package selenium.test.community.mail.archive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import selenium.logic.domain.Mail;
@@ -12,10 +16,6 @@ import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Builder
 @Slf4j
@@ -54,7 +54,6 @@ public class BulkArchiveMailTest {
         communityPage.getSelectAllIncomingMailsButton().click();
 
         mailTestHelper.selectBulkArchiveOption();
-
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
         notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_ARCHIVED));
 

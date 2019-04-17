@@ -2,6 +2,11 @@
     let isActive = false;
     let mailReadMapping = {};
 
+    window.incomingMailsController = new function(){
+        this.mailReadMapping = mailReadMapping;
+        this.setMarkButtonState = setMarkButtonState;
+    }
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
             return eventType === events.OPEN_SENT_MAILS_TAB
@@ -171,9 +176,5 @@
                 eventProcessor.processEvent(new Event(events.MARK_AS_READ, [mailId]));
             }
         }
-    }
-
-    function generateMarkButtonId(mailId){
-        return "mark-button-" + mailId;
     }
 })();

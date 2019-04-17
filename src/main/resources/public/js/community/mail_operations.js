@@ -22,13 +22,18 @@
     ));
 
     function markAsRead(mailIds){
+        if(mailIds.length == 0){
+            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            return;
+        }
+
         const request = new Request(HttpMethod.POST, Mapping.MARK_MAILS_READ, mailIds);
             request.processValidResponse = function(){
                 for(let mIndex in mailIds){
                     const mailId = mailIds[mIndex];
                     document.getElementById(generateIncomingMailId(mailId)).classList.remove("unread-mail");
-                    mailReadMapping[mailId] = true;
-                    setMarkButtonState(mailId, document.getElementById(generateMarkButtonId(mailId)));
+                    incomingMailsController.mailReadMapping[mailId] = true;
+                    incomingMailsController.setMarkButtonState(mailId, document.getElementById(generateMarkButtonId(mailId)));
                 }
 
                 eventProcessor.processEvent(new Event(events.MAILS_MARKED_AS_READ));
@@ -37,6 +42,11 @@
     }
 
     function archive(mailIds){
+        if(mailIds.length == 0){
+            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            return;
+        }
+
         const request = new Request(HttpMethod.POST, Mapping.ARCHIVE_MAILS, mailIds);
             request.processValidResponse = function(){
                 notificationService.showSuccess(MessageCode.getMessage("MAILS_ARCHIVED"));
@@ -49,6 +59,11 @@
     }
 
     function restore(mailIds){
+        if(mailIds.length == 0){
+            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            return;
+        }
+
         const request = new Request(HttpMethod.POST, Mapping.RESTORE_MAILS, mailIds);
             request.processValidResponse = function(){
                 notificationService.showSuccess(MessageCode.getMessage("MAILS_RESTORED"));

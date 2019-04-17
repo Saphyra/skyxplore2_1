@@ -1,7 +1,12 @@
 package selenium.test.community.mail.archive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static selenium.logic.util.WaitUtil.waitUntil;
+
+import java.util.List;
+
 import lombok.Builder;
-import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -11,13 +16,9 @@ import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-
 @Builder
 public class BulkRestoreMailTest {
-    private static final String NOTIFICATION_MAILS_RESTORED = "Üzenetek visszaállítva.";
+    private static final String MESSAGE_CODE_MAILS_RESTORED = "MAILS_RESTORED";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
@@ -25,6 +26,7 @@ public class BulkRestoreMailTest {
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void testBulkRestoreMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -40,18 +42,21 @@ public class BulkRestoreMailTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getIncomingMails().forEach(Mail::select);
+
+        communityPage.getSelectAllIncomingMailsButton().click();
         mailTestHelper.selectBulkArchiveOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
-        mailTestHelper.getArchivedMails().forEach(Mail::select);
+        communityPage.getArchivedMailsPageButton().click();
+        waitUntil(() -> mailTestHelper.getArchivedMails().size() > 0, "Waiting until archived mails loaded");
+        communityPage.getSelectAllArchivedMailsButton().click();
         mailTestHelper.selectBulkRestoreOption();
 
         communityPage.getExecuteBulkEditButtonForArchivedMails().click();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_RESTORED);
-        assertEquals(0, mailTestHelper.getArchivedMails().size());
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_RESTORED));
+        mailTestHelper.verifyNoArchivedMails();
 
-        assertEquals(2, mailTestHelper.getIncomingMails().size());
+        assertThat(mailTestHelper.getIncomingMails()).hasSize(2);
     }
 }

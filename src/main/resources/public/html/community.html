@@ -141,7 +141,7 @@
                     <H2 id="archived-mail-list-title"></H2>
 
                     <DIV class="action-with-selected-mails">
-                        <BUTTON id="select-all-archived-mail-button"></BUTTON>
+                        <BUTTON id="select-all-archived-mail-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_ARCHIVED_MAILS))"></BUTTON>
 
                         <SELECT id="action-with-archived-mails">
                             <OPTION id="archived-mail-option-none" value="none"></OPTION>
@@ -149,7 +149,7 @@
                             <OPTION id="archived-mail-option-restore" value="restore"></OPTION>
                         </SELECT>
 
-                        <BUTTON id="process-action-with-archived-mails-button"></BUTTON>
+                        <BUTTON id="process-action-with-archived-mails-button" onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_ARCHIVED_MAILS))"></BUTTON>
                     </DIV>
 
                     <DIV id="no-archived-mail"></DIV>

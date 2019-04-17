@@ -24,8 +24,8 @@ public class MailTestHelper {
     private static final String SELECTOR_BASE_OPTION = "option[value='%s']";
     private static final String VALUE_ARCHIVE = "archive";
     private static final String SELECTOR_ARCHIVE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_ARCHIVE);
-    private static final String VALUE_UNARCHIVE = "unarchive";
-    private static final String SELECTOR_UNARCHIVE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_UNARCHIVE);
+    private static final String VALUE_RESTORE = "restore";
+    private static final String SELECTOR_RESTORE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_RESTORE);
     private static final String VALUE_DELETE = "delete";
     private static final String SELECTOR_DELETE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_DELETE);
     private static final String VALUE_MARK_AS_READ = "markasread";
@@ -91,13 +91,12 @@ public class MailTestHelper {
     }
 
     public void selectBulkRestoreOption() {
-        communityPage.getArchivedMailsPageButton().click();
         WebElement bulkRestoreInput = communityPage.getBulkEditInputFieldForArchivedMails();
         bulkRestoreInput.click();
 
-        bulkRestoreInput.findElement(By.cssSelector(SELECTOR_UNARCHIVE_OPTION)).click();
+        bulkRestoreInput.findElement(By.cssSelector(SELECTOR_RESTORE_OPTION)).click();
 
-        assertEquals(VALUE_UNARCHIVE, bulkRestoreInput.getAttribute(ATTRIBUTE_VALUE));
+        assertEquals(VALUE_RESTORE, bulkRestoreInput.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public void selectBulkDeleteOptionForSentMails() {

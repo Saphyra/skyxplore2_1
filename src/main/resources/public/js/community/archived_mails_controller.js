@@ -80,7 +80,7 @@
 
                         const checkbox = document.createElement("INPUT");
                             checkbox.type = "checkbox";
-                            checkbox.name = "archived-mail-checkbox-selected";
+                            checkbox.name = "archived-mail-checkbox";
                             checkbox.value = mail.mailId;
                             checkbox.onclick = function(e){e.stopPropagation()};
                     checkboxCell.appendChild(checkbox);
