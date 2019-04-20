@@ -1,22 +1,21 @@
 package selenium.logic.page;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -169,6 +168,10 @@ public class CommunityPage {
 
     public boolean isArchivedMailExists() {
         return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS)).size() > 0;
+    }
+
+    public boolean isSentMailExists() {
+        return driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS)).size() > 0;
     }
 
     public List<WebElement> getIncomingMails(boolean canBeEmpty) {

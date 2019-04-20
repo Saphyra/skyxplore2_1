@@ -78,6 +78,10 @@ function generateArchivedMailId(mailId){
     return "archived-mail-" + mailId;
 }
 
+function generateSentMailId(mailId){
+    return "sent-mail-" + mailId;
+}
+
 function generateMarkButtonId(mailId){
     return "mark-button-" + mailId;
 }

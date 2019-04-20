@@ -130,7 +130,7 @@
                             deleteButton.innerHTML = Localization.getAdditionalContent("delete");
                             deleteButton.onclick = function(e){
                                 e.stopPropagation();
-                                eventProcessor.processEvent(new Event(events.DELETE_MAILS, [mail.mailId]));
+                                eventProcessor.processEvent(new Event(events.DELETE_MAILS, {mailIds: [mail.mailId], mode: Mode.INCOMING}));
                             }
                     buttonCell.appendChild(deleteButton);
 

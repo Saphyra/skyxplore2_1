@@ -12,6 +12,7 @@ window.Mapping = {
     CREATE_CHARACTER: "character",
     DELETE_ACCOUNT: "user",
     DELETE_CHARACTER: "character/*",
+    DELETE_MAILS: "mail",
     EMAIL_EXISTS: "user/email",
     EQUIP_ITEM: "ship/equipment",
     EQUIP_SHIP: "ship/equipment/*",

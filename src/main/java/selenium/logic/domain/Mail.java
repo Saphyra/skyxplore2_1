@@ -1,16 +1,15 @@
 package selenium.logic.domain;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.Util.hasClass;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import selenium.logic.validator.NotificationValidator;
+
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.Util.hasClass;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -24,7 +23,7 @@ public class Mail {
     private static final String MESSAGE_CODE_MAIL_ARCHIVED = "MAILS_ARCHIVED";
     private static final String MESSAGE_CODE_MAIL_RESTORED = "MAILS_RESTORED";
     private static final String SELECTOR_DELETE_BUTTON = "tr:first-child td:nth-child(4) button:first-child";
-    private static final String NOTIFICATION_MAIL_DELETED = "Üzenet törölve.123";
+    private static final String MESSAGE_CODE_MAILS_DELETED = "MAILS_DELETED";
     private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_REPLY_BUTTON = ".mailbody button:last-child";
@@ -75,7 +74,7 @@ public class Mail {
     public void delete(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_DELETE_BUTTON)).click();
         driver.switchTo().alert().accept();
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAIL_DELETED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_DELETED));
     }
 
     public void markAsRead() {

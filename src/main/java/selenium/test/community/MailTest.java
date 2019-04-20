@@ -220,7 +220,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testDeleteBySender() {
         DeleteBySenderTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -234,7 +233,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkDeleteBySender() {
         BulkDeleteBySenderTest.builder()
             .driver(driver)

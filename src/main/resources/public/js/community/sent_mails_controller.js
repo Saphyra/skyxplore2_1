@@ -58,7 +58,7 @@
 
     function createMailItem(mail){
         const container = document.createElement("DIV");
-            container.id = mail.mailId;
+            container.id = generateSentMailId(mail.mailId);
             container.classList.add("mail-item");
 
             const mailHeader = document.createElement("DIV");
@@ -116,7 +116,7 @@
                             deleteButton.innerHTML = Localization.getAdditionalContent("delete");
                             deleteButton.onclick = function(e){
                                 e.stopPropagation();
-                                eventProcessor.processEvent(new Event(events.DELETE_MAILS, [mail.mailId]));
+                                eventProcessor.processEvent(new Event(events.DELETE_MAILS, {mailIds: [mail.mailId], mode: Mode.SENT}));
                             }
                     buttonCell.appendChild(deleteButton);
                 row1.appendChild(buttonCell);
