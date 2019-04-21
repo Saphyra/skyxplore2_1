@@ -276,7 +276,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testDeleteArchivedMail() {
         DeleteArchivedMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -290,7 +289,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkDeleteArchivedMails() {
         BulkDeleteArchivedMailsTest.builder()
             .driver(driver)
