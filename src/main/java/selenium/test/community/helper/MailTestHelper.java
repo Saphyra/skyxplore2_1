@@ -112,7 +112,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForReceivedMails() {
-        communityPage.getIncomingMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForIncomingMails();
         bulkDeleteInput.click();
 
