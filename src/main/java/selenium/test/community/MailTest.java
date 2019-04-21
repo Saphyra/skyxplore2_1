@@ -242,12 +242,12 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteBySender();
     }
 
     @Test
-    @Ignore
     public void testDeleteByAddressee() {
         DeleteByAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)

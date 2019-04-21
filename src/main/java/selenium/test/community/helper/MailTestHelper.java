@@ -43,7 +43,7 @@ public class MailTestHelper {
         shouldNotContain.forEach(seleniumCharacter -> assertFalse(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));
     }
 
-    public void verifyIncomingNoIncomingMails() {
+    public void verifyNoIncomingMails() {
         waitUntil(() -> !communityPage.isIncomingMailExists(), "Waiting until incoming mails disappear");
     }
 
@@ -103,7 +103,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForSentMails() {
-        communityPage.getSentMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForSentMails();
         bulkDeleteInput.click();
 

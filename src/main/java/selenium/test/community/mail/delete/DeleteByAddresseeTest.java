@@ -1,19 +1,18 @@
 package selenium.test.community.mail.delete;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @Builder
 public class DeleteByAddresseeTest {
@@ -42,7 +41,7 @@ public class DeleteByAddresseeTest {
             .orElseThrow(() -> new RuntimeException("Mail not found"))
             .delete(notificationValidator);
 
-        assertTrue(mailTestHelper.getIncomingMails().isEmpty());
+        mailTestHelper.verifyNoIncomingMails();
 
         communityTestHelper.goToCommunityPageOf(account, character);
         assertEquals(1, mailTestHelper.getSentMails().size());

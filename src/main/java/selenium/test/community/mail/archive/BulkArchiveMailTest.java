@@ -57,7 +57,7 @@ public class BulkArchiveMailTest {
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
         notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_ARCHIVED));
 
-        mailTestHelper.verifyIncomingNoIncomingMails();
+        mailTestHelper.verifyNoIncomingMails();
 
         List<Mail> archivedMails = mailTestHelper.getArchivedMails();
         assertThat(archivedMails).hasSize(2);

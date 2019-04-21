@@ -50,8 +50,8 @@ public class CommunityPage {
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_INCOMING_MAILS = "#process-action-with-incoming-mails-button";
     private static final String SELECTOR_BULK_RESTORE_INPUT_FIELD = "action-with-archived-mails";
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS = "#process-action-with-archived-mails-button";
-    private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "actionwithdeletedmails";
-    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS = "#sentmaillistcontainer .actionwithselectedmails button:last-child";
+    private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "action-with-sent-mails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS = "#process-action-with-sent-mails-button";
     private static final String SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON = "#friendlistbuttons button:nth-child(2)";
     private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#blockedcharacters div.button";
     private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "blockcharactername";
@@ -60,6 +60,7 @@ public class CommunityPage {
     private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
     private static final String SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON = "select-all-incoming-mail-button";
     private static final String SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON = "select-all-archived-mail-button";
+    private static final String SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON = "select-all-sent-mail-button";
 
     private final WebDriver driver;
 
@@ -273,5 +274,9 @@ public class CommunityPage {
 
     public WebElement getSelectAllArchivedMailsButton() {
         return driver.findElement(By.id(SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON));
+    }
+
+    public WebElement getSelectAllSentMailsButton() {
+        return driver.findElement(By.id(SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON));
     }
 }
