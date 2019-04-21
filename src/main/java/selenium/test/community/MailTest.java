@@ -298,12 +298,12 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteArchivedMails();
     }
 
     @Test
-    @Ignore
     public void testMarkMailAsRead() {
         MarkMailAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)

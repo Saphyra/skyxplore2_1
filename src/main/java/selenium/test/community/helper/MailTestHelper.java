@@ -121,7 +121,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForArchivedMails() {
-        communityPage.getArchivedMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForArchivedMails();
         bulkDeleteInput.click();
 
