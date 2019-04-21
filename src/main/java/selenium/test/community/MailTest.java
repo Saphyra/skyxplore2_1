@@ -261,7 +261,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkDeleteByAddressee() {
         BulkDeleteByAddresseeTest.builder()
             .driver(driver)

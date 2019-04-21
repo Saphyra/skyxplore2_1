@@ -128,7 +128,7 @@
         function generateItemId(mode, mailId){
             switch(mode){
                 case Mode.INCOMING:
-                    generateIncomingMailId(mailId);
+                    return generateIncomingMailId(mailId);
                 break;
                 case Mode.ARCHIVED:
                     return generateArchivedMailId(mailId);
