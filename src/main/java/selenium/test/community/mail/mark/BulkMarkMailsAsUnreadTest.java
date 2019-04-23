@@ -5,11 +5,10 @@ import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
-import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 import java.util.List;
 
@@ -18,14 +17,11 @@ import static org.junit.Assert.assertFalse;
 
 @Builder
 public class BulkMarkMailsAsUnreadTest {
-    private static final String NOTIFICATION_MAILS_MARKED_AS_UNREAD = "Üzenetek olvasatlannak jelölve.";
-
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
-    private final NotificationValidator notificationValidator;
 
     public void testBulkMarkMailsAsUnread() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -43,12 +39,10 @@ public class BulkMarkMailsAsUnreadTest {
 
         mailTestHelper.getIncomingMails().forEach(Mail::read);
 
-        mailTestHelper.getIncomingMails().forEach(Mail::select);
+        communityPage.getSelectAllIncomingMailsButton().click();
 
         mailTestHelper.selectBulkMarkAsUnreadOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
-
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_MARKED_AS_UNREAD);
 
         mailTestHelper.getIncomingMails().forEach(mail -> assertFalse(mail.isRead()));
 

@@ -1,31 +1,26 @@
 package selenium.test.community.mail.mark;
 
 import lombok.Builder;
-import selenium.logic.domain.Mail;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
-import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @Builder
 public class BulkMarkMailsAsReadTest {
-    private static final String NOTIFICATION_MAILS_MARKED_AS_READ = "Üzenetek olvasottnak jelölve.";
-
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
-    private final NotificationValidator notificationValidator;
 
     public void testBulkMarkMailsAsRead() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -41,14 +36,13 @@ public class BulkMarkMailsAsReadTest {
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
 
-        mailTestHelper.getIncomingMails().forEach(Mail::select);
+        communityPage.getSelectAllIncomingMailsButton().click();
 
         mailTestHelper.selectBulkMarkAsReadOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_MARKED_AS_READ);
         mailTestHelper.getIncomingMails().forEach(mail -> assertTrue(mail.isRead()));
 
-        assertEquals(0, mailTestHelper.getNumberOfUnreadMails());
+        assertThat(mailTestHelper.getNumberOfUnreadMails()).isEqualTo(0);
     }
 }

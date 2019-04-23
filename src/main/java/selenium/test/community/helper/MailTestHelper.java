@@ -27,9 +27,9 @@ public class MailTestHelper {
     private static final String SELECTOR_RESTORE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_RESTORE);
     private static final String VALUE_DELETE = "delete";
     private static final String SELECTOR_DELETE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_DELETE);
-    private static final String VALUE_MARK_AS_READ = "markasread";
+    private static final String VALUE_MARK_AS_READ = "mark-as-read";
     private static final String SELECTOR_MARK_AS_READ_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_MARK_AS_READ);
-    private static final String VALUE_MARK_AS_UNREAD = "markasunread";
+    private static final String VALUE_MARK_AS_UNREAD = "mark-as-unread";
     private static final String SELECTOR_MARK_AS_UNREAD_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_MARK_AS_UNREAD);
 
     private final CommunityPage communityPage;
@@ -130,7 +130,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkMarkAsReadOption() {
-        communityPage.getIncomingMailsPageButton().click();
         WebElement inputField = communityPage.getBulkEditInputFieldForIncomingMails();
         inputField.click();
 
@@ -146,7 +145,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkMarkAsUnreadOption() {
-        communityPage.getIncomingMailsPageButton().click();
         WebElement inputField = communityPage.getBulkEditInputFieldForIncomingMails();
         inputField.click();
 

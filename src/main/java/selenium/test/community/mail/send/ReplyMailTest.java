@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 @Builder
 public class ReplyMailTest {
     private static final String REPLY_PREFIX = "Re: ";
+
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;

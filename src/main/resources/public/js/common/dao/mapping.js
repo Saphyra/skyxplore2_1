@@ -28,6 +28,7 @@ window.Mapping = {
     LOGIN: "login",
     LOGOUT: "logout",
     MARK_MAILS_READ: "mail/mark/read",
+    MARK_MAILS_UNREAD: "mail/mark/unread",
     NUMBER_OF_FRIEND_REQUEST: "notification/friend-request",
     NUMBER_OF_NOTIFICATIONS: "notification",
     NUMBER_OF_UNREAD_MAILS: "notification/unread-mail",

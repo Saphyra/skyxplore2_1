@@ -4,6 +4,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
             return eventType === events.MAILS_MARKED_AS_READ
+                || eventType === events.MAILS_MARKED_AS_UNREAD
                 || eventType === events.MAILS_ARCHIVED
                 || eventType === events.MAILS_RESTORED
                 || eventType === events.MAILS_DELETED

@@ -1,6 +1,8 @@
 (function MailOperations(){
     events.MARK_AS_READ = "mark_as_read";
     events.MAILS_MARKED_AS_READ = "mails_marked_as_read";
+    events.MARK_AS_UNREAD = "mark_as_unread";
+    events.MAILS_MARKED_AS_UNREAD = "mails_marked_as_unread";
     events.ARCHIVE_MAILS = "archive_mails";
     events.MAILS_ARCHIVED = "mails_archived";
     events.RESTORE_MAILS = "restore_mails";
@@ -17,6 +19,11 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.MARK_AS_READ},
         function(event){markAsRead(event.getPayload())}
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.MARK_AS_UNREAD},
+        function(event){markAsUnread(event.getPayload())}
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
@@ -50,6 +57,26 @@
                 }
 
                 eventProcessor.processEvent(new Event(events.MAILS_MARKED_AS_READ));
+            }
+        dao.sendRequestAsync(request);
+    }
+
+    function markAsUnread(mailIds){
+        if(mailIds.length == 0){
+            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            return;
+        }
+
+        const request = new Request(HttpMethod.POST, Mapping.MARK_MAILS_UNREAD, mailIds);
+            request.processValidResponse = function(){
+                for(let mIndex in mailIds){
+                    const mailId = mailIds[mIndex];
+                    document.getElementById(generateIncomingMailId(mailId)).classList.add("unread-mail");
+                    incomingMailsController.mailReadMapping[mailId] = false;
+                    incomingMailsController.setMarkButtonState(mailId, document.getElementById(generateMarkButtonId(mailId)));
+                }
+
+                eventProcessor.processEvent(new Event(events.MAILS_MARKED_AS_UNREAD));
             }
         dao.sendRequestAsync(request);
     }

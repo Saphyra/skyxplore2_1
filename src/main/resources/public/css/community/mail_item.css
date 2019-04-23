@@ -62,6 +62,7 @@
 .mail-body{
     display: none;
     padding: 0.25rem;
+    text-align: center;
 }
 
 .mail-body textarea{

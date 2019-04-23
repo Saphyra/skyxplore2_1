@@ -22,6 +22,12 @@
                 case "archive":
                     eventProcessor.processEvent(new Event(events.ARCHIVE_MAILS, mailIds));
                 break;
+                case "mark-as-read":
+                    eventProcessor.processEvent(new Event(events.MARK_AS_READ, mailIds));
+                break;
+                case "mark-as-unread":
+                    eventProcessor.processEvent(new Event(events.MARK_AS_UNREAD, mailIds));
+                break;
                 case "delete":
                     eventProcessor.processEvent(new Event(events.DELETE_MAILS, {mailIds: mailIds, mode: Mode.INCOMING}));
                 break;

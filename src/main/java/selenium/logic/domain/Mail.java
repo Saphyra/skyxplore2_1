@@ -26,7 +26,7 @@ public class Mail {
     private static final String MESSAGE_CODE_MAILS_DELETED = "MAILS_DELETED";
     private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
-    private static final String SELECTOR_REPLY_BUTTON = ".mailbody button:last-child";
+    private static final String SELECTOR_REPLY_BUTTON = ".mail-body button:last-child";
 
     @Getter
     private final WebElement element;

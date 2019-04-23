@@ -2,6 +2,8 @@ package selenium.test.community.mail.delete;
 
 import lombok.Builder;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
@@ -48,6 +50,7 @@ public class BulkDeleteByAddresseeTest {
         mailTestHelper.selectBulkDeleteOptionForReceivedMails();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
 
+        new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
 
         notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_DELETED));
