@@ -64,6 +64,7 @@ public class Mail {
     }
 
     public String getSubject() {
+        //TODO get subject from additionalContent
         return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split("Tárgy: ")[1];
     }
 
