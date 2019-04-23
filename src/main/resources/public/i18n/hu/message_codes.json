@@ -23,6 +23,7 @@
   "ITEMS_BOUGHT": "Sikeres vásárlás.",
   "MAIL_SENT": "Üzenet elküldve.",
   "MAILS_ARCHIVED": "Üzenet(ek) archiválva.",
+  "MAILS_DELETED": "Üzenet(ek) törölve.",
   "MAILS_RESTORED": "Üzenet(ek) visszaállítva.",
   "MESSAGE_MUST_NOT_BE_EMPTY": "Az üzenet kitöltése kötelező!",
   "MESSAGE_TOO_LONG": "Az üzenet túl hosszú (Max 4000 karakter).",

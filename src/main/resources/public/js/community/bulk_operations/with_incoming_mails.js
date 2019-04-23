@@ -22,6 +22,9 @@
                 case "archive":
                     eventProcessor.processEvent(new Event(events.ARCHIVE_MAILS, mailIds));
                 break;
+                case "delete":
+                    eventProcessor.processEvent(new Event(events.DELETE_MAILS, {mailIds: mailIds, mode: Mode.INCOMING}));
+                break;
                 default:
                     throwException("UnsupportedOperation", "Not implemented: " + selection);
                 break;

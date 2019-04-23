@@ -1,23 +1,22 @@
 package selenium.test.community.helper;
 
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static selenium.logic.util.Util.ATTRIBUTE_VALUE;
 import static selenium.logic.util.WaitUtil.waitUntil;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Mail;
-import selenium.logic.domain.MessageCodes;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.page.CommunityPage;
 
 @RequiredArgsConstructor
 public class MailTestHelper {
@@ -44,7 +43,7 @@ public class MailTestHelper {
         shouldNotContain.forEach(seleniumCharacter -> assertFalse(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));
     }
 
-    public void verifyIncomingNoIncomingMails(){
+    public void verifyNoIncomingMails() {
         waitUntil(() -> !communityPage.isIncomingMailExists(), "Waiting until incoming mails disappear");
     }
 
@@ -52,11 +51,15 @@ public class MailTestHelper {
         waitUntil(() -> !communityPage.isArchivedMailExists(), "Waiting until archived mails disappear");
     }
 
+    public void verifyNoSentMails() {
+        waitUntil(() -> !communityPage.isSentMailExists(), "Waiting until sent mails disappear");
+    }
+
     public List<Mail> getIncomingMails() {
         return getIncomingMails(false);
     }
 
-    public List<Mail> getIncomingMails(boolean canBeEmpty){
+    public List<Mail> getIncomingMails(boolean canBeEmpty) {
         communityPage.getIncomingMailsPageButton().click();
         return communityPage.getIncomingMails(canBeEmpty).stream()
             .map(element -> new Mail(element, driver, messageCodes))
@@ -100,7 +103,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForSentMails() {
-        communityPage.getSentMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForSentMails();
         bulkDeleteInput.click();
 
@@ -110,7 +112,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForReceivedMails() {
-        communityPage.getIncomingMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForIncomingMails();
         bulkDeleteInput.click();
 
@@ -120,7 +121,6 @@ public class MailTestHelper {
     }
 
     public void selectBulkDeleteOptionForArchivedMails() {
-        communityPage.getArchivedMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForArchivedMails();
         bulkDeleteInput.click();
 

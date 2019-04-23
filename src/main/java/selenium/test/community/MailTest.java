@@ -220,7 +220,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testDeleteBySender() {
         DeleteBySenderTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -234,7 +233,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkDeleteBySender() {
         BulkDeleteBySenderTest.builder()
             .driver(driver)
@@ -244,12 +242,12 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteBySender();
     }
 
     @Test
-    @Ignore
     public void testDeleteByAddressee() {
         DeleteByAddresseeTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -263,7 +261,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkDeleteByAddressee() {
         BulkDeleteByAddresseeTest.builder()
             .driver(driver)
@@ -273,12 +270,12 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteByAddressee();
     }
 
     @Test
-    @Ignore
     public void testDeleteArchivedMail() {
         DeleteArchivedMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
@@ -292,7 +289,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkDeleteArchivedMails() {
         BulkDeleteArchivedMailsTest.builder()
             .driver(driver)
@@ -302,12 +298,12 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteArchivedMails();
     }
 
     @Test
-    @Ignore
     public void testMarkMailAsRead() {
         MarkMailAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)

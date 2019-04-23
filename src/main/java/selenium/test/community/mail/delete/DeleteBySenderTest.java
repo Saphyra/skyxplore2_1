@@ -14,7 +14,6 @@ import selenium.test.community.helper.SendMailHelper;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @Builder
 public class DeleteBySenderTest {
@@ -42,7 +41,7 @@ public class DeleteBySenderTest {
 
         mail.delete(notificationValidator);
 
-        assertTrue(mailTestHelper.getSentMails().isEmpty());
+        mailTestHelper.verifyNoSentMails();
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 1);
         assertEquals(1, mailTestHelper.getIncomingMails().size());

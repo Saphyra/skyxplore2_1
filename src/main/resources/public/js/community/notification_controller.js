@@ -6,6 +6,7 @@
             return eventType === events.MAILS_MARKED_AS_READ
                 || eventType === events.MAILS_ARCHIVED
                 || eventType === events.MAILS_RESTORED
+                || eventType === events.MAILS_DELETED
         },
         displayNumberOfReceivedMails
     ));

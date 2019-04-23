@@ -7,6 +7,7 @@
     scriptLoader.loadScript("js/community/archived_mails_controller.js");
     scriptLoader.loadScript("js/community/bulk_operations/with_incoming_mails.js");
     scriptLoader.loadScript("js/community/bulk_operations/with_archived_mails.js");
+    scriptLoader.loadScript("js/community/bulk_operations/with_sent_mails.js");
 
     events.OPEN_WRITE_MAIL_WINDOW = "open_write_mail_window";
     events.OPEN_MAIN_LISTS = "open_mail_lists";
@@ -76,6 +77,10 @@ function generateIncomingMailId(mailId){
 
 function generateArchivedMailId(mailId){
     return "archived-mail-" + mailId;
+}
+
+function generateSentMailId(mailId){
+    return "sent-mail-" + mailId;
 }
 
 function generateMarkButtonId(mailId){

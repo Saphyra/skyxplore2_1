@@ -44,7 +44,7 @@ public class ArchiveMailTest {
 
         mail.archive(notificationValidator);
 
-        mailTestHelper.verifyIncomingNoIncomingMails();
+        mailTestHelper.verifyNoIncomingMails();
         assertEquals(0, mailTestHelper.getNumberOfUnreadMails());
 
         assertTrue(

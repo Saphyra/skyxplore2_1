@@ -123,14 +123,14 @@
                     <H2 id="sent-mail-list-title"></H2>
 
                     <DIV class="action-with-selected-mails">
-                        <BUTTON id="select-all-sent-mail-button"></BUTTON>
+                        <BUTTON id="select-all-sent-mail-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_SENT_MAILS))"></BUTTON>
 
                         <SELECT id="action-with-sent-mails">
                             <OPTION id="sent-mail-option-none" value="none"></OPTION>
                             <OPTION id="sent-mail-option-delete" value="delete"></OPTION>
                         </SELECT>
 
-                        <BUTTON id="process-action-with-sent-mails-button"></BUTTON>
+                        <BUTTON id="process-action-with-sent-mails-button" onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_SENT_MAILS))"></BUTTON>
                     </DIV>
 
                     <DIV id="no-sent-mail"></DIV>
