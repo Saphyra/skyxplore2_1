@@ -316,7 +316,6 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBulkMarkMailsAsRead() {
         BulkMarkMailsAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
