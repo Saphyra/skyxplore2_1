@@ -254,6 +254,12 @@
         "message": "Karakter keresése"
       }
     ],
+    "no-character-can-be-friend": [
+      {
+        "key": "innerHTML",
+        "message": "Játékos nem található."
+      }
+    ],
     "block-character-title": [
       {
         "key": "innerHTML",
@@ -345,6 +351,7 @@
     "mark-as-unread": "Megjelölés olvasatlanként",
     "mark-as-read": "Megjelölés olvasottként",
     "reply": "Válasz",
-    "restore": "Visszaállítás"
+    "restore": "Visszaállítás",
+    "add-friend": "Barát felvétele"
   }
 }

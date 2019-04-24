@@ -1,25 +1,26 @@
 package selenium;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.boot.SpringApplication;
-import selenium.logic.domain.MessageCodes;
-import skyxplore.Application;
-
-import java.io.IOException;
-import java.net.URL;
-
 import static java.util.Objects.isNull;
 import static selenium.logic.util.LinkUtil.HOST;
 import static selenium.logic.util.LinkUtil.HOST_TEST;
 import static selenium.logic.util.Util.executeScript;
 import static selenium.logic.util.WaitUtil.sleep;
 import static skyxplore.Application.APP_CTX;
+
+import java.io.IOException;
+import java.net.URL;
+
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.boot.SpringApplication;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import selenium.logic.domain.MessageCodes;
+import skyxplore.Application;
 
 @Slf4j
 public abstract class SeleniumTestApplication {
@@ -29,7 +30,7 @@ public abstract class SeleniumTestApplication {
     };
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
-    private static final boolean HEADLESS_MODE = true;
+    private static final boolean HEADLESS_MODE = false;
 
     protected static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     protected WebDriver driver;

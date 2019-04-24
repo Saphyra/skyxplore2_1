@@ -1,29 +1,34 @@
 package selenium.test.community.helper;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.page.CommunityPage;
-import selenium.logic.validator.NotificationValidator;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.page.CommunityPage;
+import selenium.logic.validator.NotificationValidator;
 
 @RequiredArgsConstructor
 public class FriendshipTestHelper {
+    private final WebDriver driver;
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
 
     public void sendFriendRequestTo(SeleniumCharacter character) {
         searchForPossibleFriends(character);
 
-        communityPage.getCharactersCanBeFriendList().stream()
+        communityPage.getAddFriendSearchResult().stream()
             .filter(p -> p.getCharacterName().equals(character.getCharacterName()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Friend not found in search result."))
@@ -83,8 +88,7 @@ public class FriendshipTestHelper {
     }
 
     public void verifySearchResult(List<SeleniumCharacter> shouldNotContain, List<SeleniumCharacter> shouldContain) {
-        List<PossibleFriend> searchResult = communityPage.getCharactersCanBeFriendList();
-        List<String> characterNames = searchResult.stream()
+        List<String> characterNames = communityPage.getAddFriendSearchResult().stream()
             .map(PossibleFriend::getCharacterName)
             .collect(Collectors.toList());
 
@@ -94,8 +98,8 @@ public class FriendshipTestHelper {
 
     private void openAddFriendPage() {
         communityPage.getFriendsMainPageButton().click();
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         communityPage.getAddFriendButton().click();
-        assertTrue(communityPage.getAddFriendContainer().isDisplayed());
+        new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOf(communityPage.getAddFriendContainer()));
     }
 }

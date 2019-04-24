@@ -46,11 +46,10 @@ public class FriendshipTest extends SeleniumTestApplication {
         );
 
         communityPage = new CommunityPage(driver);
-        friendshipTestHelper = new FriendshipTestHelper(communityPage, new NotificationValidator(driver));
+        friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, new NotificationValidator(driver));
     }
 
     @Test
-    @Ignore
     public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .communityTestHelper(communityTestHelper)
@@ -61,7 +60,6 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldShowOnlyMatchingCharacterNames() {
         FilterTestShouldShowOnlyMatchingCharacterNames.builder()
             .communityTestHelper(communityTestHelper)
@@ -72,7 +70,6 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldNotShowWhenFriendRequestSent() {
         FilterTestShouldNotShowWhenFriendRequestSent.builder()
             .communityTestHelper(communityTestHelper)

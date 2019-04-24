@@ -19,6 +19,7 @@ window.Mapping = {
     EQUIPMENT_STORAGE: "character/storage",
     GET_ARCHIVED_MAILS: "mail/archived",
     GET_CHARACTERS: "character",
+    GET_CHARACTERS_CAN_BE_FRIEND: "friend/name",
     GET_INCOMING_MAILS: "mail",
     GET_MATERIALS: "factory/materials",
     GET_SENT_MAILS: "mail/sent",

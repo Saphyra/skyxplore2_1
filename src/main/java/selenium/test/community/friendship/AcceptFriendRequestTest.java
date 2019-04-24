@@ -37,7 +37,7 @@ public class AcceptFriendRequestTest {
 
         verifyFriendRequestDisappeared(character);
 
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         verifyFriendInList(character);
 
         communityTestHelper.goToCommunityPageOf(account, character);
@@ -47,7 +47,7 @@ public class AcceptFriendRequestTest {
     }
 
     private void verifyFriendRequestDisappeared(SeleniumCharacter character) {
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         assertFalse(
             communityPage.getFriendRequests().stream()
                 .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))

@@ -37,7 +37,7 @@ public class CancelFriendRequestTest {
             .orElseThrow(() -> new RuntimeException("SentFriendRequest not found."));
         friendRequest.cancel();
 
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         friendshipTestHelper.verifyFriendRequestCanBeSentTo(character);
 
         communityTestHelper.goToCommunityPageOf(accounts.get(1), character, 0);

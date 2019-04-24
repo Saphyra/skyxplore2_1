@@ -1,40 +1,36 @@
-#addfriend{
-    display: none;
-    top: 3.1rem;
-    bottom: 3rem;
-}
-
-#addfriendcontainer{
+#add-friend-wrapper{
     position: absolute;
-    top: 10%;
-    bottom: 10%;
-    left: 10%;
-    right: 10%;
+    top: 5%;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
     border: 3px ridge white;
+    overflow: auto;
 }
 
-#addfriendcontainer h2{
+#add-friend-title{
     text-align: center;
     border-bottom: 3px ridge white;
+    padding: 0.55rem;
+}
+
+#add-friend-input-container{
+    text-align: center;
     padding: 0.5rem;
 }
 
-#addfriendclosebutton{
-    position: absolute;
-    right: 0;
-    top: 0;
+#friend-name{
+    width: 50%;
     font-size: 1.25rem;
 }
 
-#friendname{
-    font-size: 1.25rem;
-    width: calc(100% - 2rem);
+#no-character-can-be-friend{
     text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    display: none;
 }
 
-#usersfoundfornewfriend{
+#add-friend-search-result{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -42,7 +38,7 @@
     top: 8rem;
 }
 
-.maybefriend{
+.character-can-be-friend{
     position: relative;
     border: 1px ridge white;
     margin: 0.5rem;
@@ -51,11 +47,15 @@
     font-weight: bold;
 }
 
-.maybefriend div{
+.character-can-be-friend:hover{
+    border-color: red;
+}
+
+.character-can-be-friend div{
     margin-right: 7rem;
 }
 
-.addfriendbutton{
+.add-friend-button{
     position: absolute;
     right: 0;
     top: 0;

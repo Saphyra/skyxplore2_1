@@ -33,7 +33,7 @@ public class DeclineFriendRequestTest {
 
         verifyFriendRequestDeclined(otherCharacter);
 
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         friendshipTestHelper.verifyFriendRequestCanBeSentTo(account.getCharacter(0));
 
         communityTestHelper.goToCommunityPageOf(account, account.getCharacter(0));

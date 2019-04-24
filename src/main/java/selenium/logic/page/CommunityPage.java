@@ -1,36 +1,37 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 @RequiredArgsConstructor
 public class CommunityPage {
     private static final String SELECTOR_BLOCK_CHARACTER_CONTAINER = "blockcharactercontainer";
-    private static final String SELECTOR_ADD_FRIEND = "#friends > div:first-of-type";
-    private static final String SELECTOR_ADD_FRIEND_CONTAINER = "addfriendcontainer";
-    private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friendname";
-    private static final String SELECTOR_CHARACTERS_CAN_BE_FRIEND = "#usersfoundfornewfriend > div.maybefriend";
+    private static final String SELECTOR_ADD_FRIEND = "#add-friend-button";
+    private static final String SELECTOR_ADD_FRIEND_CONTAINER = "main-add-friend";
+    private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friend-name";
+    private static final String SELECTOR_ADD_FRIEND_SEARCH_RESULT = ".character-can-be-friend";
     private static final String SELECTOR_SENT_FRIEND_REQUESTS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(3)";
     private static final String SELECTOR_SENT_FRIEND_REQUESTS = "#sentfriendrequestitems > div.friendlistitem";
     private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "addfriendclosebutton";
     private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friendrequestnum";
     private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(2)";
     private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
-    private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(1)";
+    private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#friends-tab-button";
     private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
     private static final String SELECTOR_WRITE_MAIL_BUTTON = "#write-mail-button";
     private static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
@@ -56,7 +57,7 @@ public class CommunityPage {
     private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#blockedcharacters div.button";
     private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "blockcharactername";
     private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#blockablecharactersfound .blockablecharacter";
-    private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friendlistbuttons button:first-child";
+    private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friends-page-button";
     private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
     private static final String SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON = "select-all-incoming-mail-button";
     private static final String SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON = "select-all-archived-mail-button";
@@ -76,8 +77,13 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_ADD_FRIEND_INPUT_FIELD));
     }
 
-    public List<PossibleFriend> getCharactersCanBeFriendList() {
-        return driver.findElements(By.cssSelector(SELECTOR_CHARACTERS_CAN_BE_FRIEND)).stream()
+    public List<PossibleFriend> getAddFriendSearchResult() {
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }, "Querying possible friends...")
+            .orElseThrow(() -> new RuntimeException("No characters can be friend"))
+            .stream()
             .map(PossibleFriend::new)
             .collect(Collectors.toList());
     }
@@ -112,7 +118,7 @@ public class CommunityPage {
             .collect(Collectors.toList());
     }
 
-    public WebElement getFriendsPageButton() {
+    public WebElement getOpenFriendsPageButton() {
         return driver.findElement(By.cssSelector(SELECTOR_FRIENDS_PAGE_BUTTON));
     }
 
@@ -163,7 +169,7 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_INCOMING_MAILS_PAGE_BUTTON));
     }
 
-    public boolean isIncomingMailExists(){
+    public boolean isIncomingMailExists() {
         return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS)).size() > 0;
     }
 
@@ -176,8 +182,8 @@ public class CommunityPage {
     }
 
     public List<WebElement> getIncomingMails(boolean canBeEmpty) {
-        if(canBeEmpty){
-            return  driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
+        if (canBeEmpty) {
+            return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
         }
 
         return getIncomingMails();

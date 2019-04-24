@@ -11,6 +11,7 @@
     <LINK rel="stylesheet" href="/css/community/mail_lists.css">
     <LINK rel="stylesheet" href="/css/community/mail_item.css">
     <LINK rel="stylesheet" href="/css/community/write_mail.css">
+    <LINK rel="stylesheet" href="/css/community/add_friend.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -51,7 +52,7 @@
                     <DIV id="friend-lists">
                         <DIV id="friend-list-container" class="friend-list-tab">
                             <H3 id="friend-list-title"></H3>
-                            <DIV class="button" id="add-friend-button"></DIV>
+                            <DIV id="add-friend-button" class="button" onclick="eventProcessor.processEvent(new Event(events.OPEN_ADD_FRIEND_WINDOW))"></DIV>
                             <DIV id="no-friends"></DIV>
                             <DIV id="friend-list"></DIV>
                         </DIV>
@@ -160,14 +161,17 @@
     </MAIN>
 
     <MAIN id="main-add-friend" class="main-tab">
-        <H2 id="add-friend-title"></H2>
-        <BUTTON>X</BUTTON>
+        <DIV id="add-friend-wrapper">
+            <H2 id="add-friend-title"></H2>
+            <BUTTON class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X</BUTTON>
 
-        <DIV>
-            <INPUT type="text" id="friend-name">
+            <DIV id="add-friend-input-container">
+                <INPUT type="text" id="friend-name">
+            </DIV>
+
+            <DIV id="no-character-can-be-friend"></DIV>
+            <DIV id="add-friend-search-result"></DIV>
         </DIV>
-
-        <DIV id="add-friend-search-result"></DIV>
     </MAIN>
 
     <MAIN id="main-block-character" class="main-tab">

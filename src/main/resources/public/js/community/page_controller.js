@@ -1,16 +1,20 @@
 (function PageController(){
     scriptLoader.loadScript("js/community/notification_controller.js");
-    scriptLoader.loadScript("js/community/mail_operations.js");
-    scriptLoader.loadScript("js/community/write_mail_controller.js");
-    scriptLoader.loadScript("js/community/sent_mails_controller.js");
-    scriptLoader.loadScript("js/community/incoming_mails_controller.js");
-    scriptLoader.loadScript("js/community/archived_mails_controller.js");
-    scriptLoader.loadScript("js/community/bulk_operations/with_incoming_mails.js");
-    scriptLoader.loadScript("js/community/bulk_operations/with_archived_mails.js");
-    scriptLoader.loadScript("js/community/bulk_operations/with_sent_mails.js");
+
+    scriptLoader.loadScript("js/community/mail/mail_operations.js");
+    scriptLoader.loadScript("js/community/mail/write_mail_controller.js");
+    scriptLoader.loadScript("js/community/mail/sent_mails_controller.js");
+    scriptLoader.loadScript("js/community/mail/incoming_mails_controller.js");
+    scriptLoader.loadScript("js/community/mail/archived_mails_controller.js");
+        scriptLoader.loadScript("js/community/mail/bulk_operations/with_incoming_mails.js");
+        scriptLoader.loadScript("js/community/mail/bulk_operations/with_archived_mails.js");
+        scriptLoader.loadScript("js/community/mail/bulk_operations/with_sent_mails.js");
+
+    scriptLoader.loadScript("js/community/friend/add_friend_controller.js");
 
     events.OPEN_WRITE_MAIL_WINDOW = "open_write_mail_window";
-    events.OPEN_MAIN_LISTS = "open_mail_lists";
+    events.OPEN_ADD_FRIEND_WINDOW = "open_add_friend_window";
+    events.OPEN_MAIN_LISTS = "open_main_lists";
     events.OPEN_SENT_MAILS_TAB = "open_sent_mails_tab";
     events.OPEN_INCOMING_MAILS_TAB = "open_incoming_mails_tab";
     events.OPEN_ARCHIVED_MAILS_TAB = "open_archived_mails_tab";
@@ -28,6 +32,13 @@
             eventProcessor.processEvent(new Event(events.OPEN_INCOMING_MAILS_TAB));
         },
         true
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.OPEN_ADD_FRIEND_WINDOW},
+        function(){
+            switchTab("main-tab", "main-add-friend");
+        }
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
