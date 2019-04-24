@@ -7,8 +7,10 @@ import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.FriendshipTestHelper;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+
+import static selenium.logic.domain.SeleniumCharacter.CHARACTER_NAME_PREFIX;
 
 @Builder
 public class FilterTestShouldNotShowWhenAlreadyFriend {
@@ -17,7 +19,8 @@ public class FilterTestShouldNotShowWhenAlreadyFriend {
     private final FriendshipTestHelper friendshipTestHelper;
 
     public void testFilterShouldNotShowFriends() {
-        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
+        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{2, 2});
+        SeleniumCharacter searchCharacter = new SeleniumCharacter(CHARACTER_NAME_PREFIX);
 
         SeleniumAccount account = accounts.get(0);
         SeleniumCharacter character = account.getCharacter(0);
@@ -31,11 +34,17 @@ public class FilterTestShouldNotShowWhenAlreadyFriend {
         friendshipTestHelper.acceptFriendRequest(character);
 
 
-        friendshipTestHelper.searchForPossibleFriends(character);
-        friendshipTestHelper.verifySearchResult(account.getCharacters(), Collections.emptyList());
+        friendshipTestHelper.searchForPossibleFriends(searchCharacter);
+        friendshipTestHelper.verifySearchResult(
+            Arrays.asList(account.getCharacter(0)),
+            Arrays.asList(account.getCharacter(1))
+        );
 
         communityTestHelper.goToCommunityPageOf(account, character);
-        friendshipTestHelper.searchForPossibleFriends(character);
-        friendshipTestHelper.verifySearchResult(otherAccount.getCharacters(), Collections.emptyList());
+        friendshipTestHelper.searchForPossibleFriends(searchCharacter);
+        friendshipTestHelper.verifySearchResult(
+            Arrays.asList(otherAccount.getCharacter(0)),
+            Arrays.asList(otherAccount.getCharacter(1))
+        );
     }
 }

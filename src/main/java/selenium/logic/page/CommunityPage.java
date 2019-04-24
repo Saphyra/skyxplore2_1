@@ -30,7 +30,7 @@ public class CommunityPage {
     private static final String SELECTOR_SENT_FRIEND_REQUESTS = "#sentfriendrequestitems > div.friendlistitem";
     private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "addfriendclosebutton";
     private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friendrequestnum";
-    private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(2)";
+    private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#friend-requests-tab-button";
     private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#friends-tab-button";
     private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";

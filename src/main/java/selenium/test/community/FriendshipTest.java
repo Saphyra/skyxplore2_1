@@ -80,7 +80,6 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldNotShowFriends() {
         FilterTestShouldNotShowWhenAlreadyFriend.builder()
             .communityTestHelper(communityTestHelper)
