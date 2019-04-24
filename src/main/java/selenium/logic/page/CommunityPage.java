@@ -1,6 +1,7 @@
 package selenium.logic.page;
 
 import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getListWithWait;
 import static selenium.logic.util.WaitUtil.getWithWait;
 
 import java.util.Collections;
@@ -78,11 +79,7 @@ public class CommunityPage {
     }
 
     public List<PossibleFriend> getAddFriendSearchResult() {
-        return getWithWait(() -> {
-            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT));
-            return result.isEmpty() ? Optional.empty() : Optional.of(result);
-        }, "Querying possible friends...")
-            .orElseThrow(() -> new RuntimeException("No characters can be friend"))
+        return getListWithWait(() -> driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT)), "Querying possible friends...")
             .stream()
             .map(PossibleFriend::new)
             .collect(Collectors.toList());
