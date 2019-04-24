@@ -45,7 +45,7 @@ public class FriendshipTest extends SeleniumTestApplication {
             new Logout(driver, messageCodes)
         );
 
-        communityPage = new CommunityPage(driver);
+        communityPage = new CommunityPage(driver, messageCodes);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, new NotificationValidator(driver));
     }
 

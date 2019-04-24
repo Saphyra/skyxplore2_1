@@ -1,4 +1,5 @@
 window.Mapping = {
+    ADD_FRIEND: "friend/request",
     ADD_TO_QUEUE: "factory",
     ADDRESSEES: "mail/addressee",
     ARCHIVE_MAILS: "mail/archive",

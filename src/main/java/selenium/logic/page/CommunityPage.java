@@ -1,23 +1,23 @@
 package selenium.logic.page;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getListWithWait;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.MessageCodes;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getListWithWait;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -65,6 +65,7 @@ public class CommunityPage {
     private static final String SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON = "select-all-sent-mail-button";
 
     private final WebDriver driver;
+    private final MessageCodes messageCodes;
 
     public WebElement getAddFriendButton() {
         return driver.findElement(By.cssSelector(SELECTOR_ADD_FRIEND));
@@ -81,7 +82,7 @@ public class CommunityPage {
     public List<PossibleFriend> getAddFriendSearchResult() {
         return getListWithWait(() -> driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT)), "Querying possible friends...")
             .stream()
-            .map(PossibleFriend::new)
+            .map(element -> new PossibleFriend(element, messageCodes))
             .collect(Collectors.toList());
     }
 

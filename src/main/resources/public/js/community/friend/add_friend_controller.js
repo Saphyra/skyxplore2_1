@@ -1,5 +1,6 @@
 (function AddFriendController(){
     events.SEARCH_POSSIBLE_FRIENDS_ATTEMPT = "search_possible_friends_attempt";
+    events.ADD_FRIEND = "add_friend";
 
     $(document).ready(init);
 
@@ -13,6 +14,13 @@
             }
 
             timeout = setTimeout(searchCharactersCanBeFriend, getSearchResultTimeout());
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.ADD_FRIEND},
+        function(event){
+            sendFriendRequest(event.getPayload());
         }
     ));
 
@@ -57,12 +65,25 @@
                         addFriendButton.classList.add("add-friend-button");
                         addFriendButton.innerHTML = Localization.getAdditionalContent("add-friend");
                         addFriendButton.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.ADD_FRIEND, character.characterId));
                         }
                 container.appendChild(addFriendButton);
 
                 return container;
             }
         }
+    }
+
+    function sendFriendRequest(friendId){
+        const request = new Request(HttpMethod.PUT, Mapping.ADD_FRIEND, {value: friendId});
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_SENT"));
+                document.getElementById("add-friend-search-result").innerHTML = "";
+                document.getElementById("friend-name").value = "";
+            }
+        dao.sendRequestAsync(request);
+
+        eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
     }
 
     function init(){

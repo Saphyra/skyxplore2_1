@@ -53,7 +53,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             new Logout(driver, messageCodes)
         );
 
-        communityPage = new CommunityPage(driver);
+        communityPage = new CommunityPage(driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
 
         blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator);

@@ -17,6 +17,7 @@
   "EMAIL_CHANGE_SUCCESSFUL": "E-mail cím sikeresen megváltoztatva.",
   "EMPTY_CREDENTIALS": "Felhasználónév és jelszó megadása kötelező!",
   "ERROR_CREATING_CHARACTER": "Hiba a karakter létrehozása során.",
+  "FRIEND_REQUEST_SENT": "Barátkérelem elküldve.",
   "INVALID_EMAIL": "Érvénytelen e-mail cím.",
   "ITEM_EQUIPPED": "Felszerelés sikeres.",
   "ITEM_UNEQUIPPED": "Leszerelés sikeres.",

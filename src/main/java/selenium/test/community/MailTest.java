@@ -62,7 +62,7 @@ public class MailTest extends SeleniumTestApplication {
             new Logout(driver, messageCodes)
         );
 
-        communityPage = new CommunityPage(driver);
+        communityPage = new CommunityPage(driver, messageCodes);
         mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
