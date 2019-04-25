@@ -15,6 +15,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
             return eventType === events.FRIEND_REQUEST_ACCEPTED
+                || eventType === events.FRIEND_REQUEST_DECLINED
         },
         displayNumberOfFriendRequests
     ));

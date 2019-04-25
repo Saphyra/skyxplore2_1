@@ -1,7 +1,7 @@
 package selenium.test.community;
 
-import org.junit.Ignore;
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -123,7 +123,6 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testAcceptFriendRequest() {
         AcceptFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)

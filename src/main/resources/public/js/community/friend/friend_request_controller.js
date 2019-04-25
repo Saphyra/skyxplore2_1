@@ -2,6 +2,9 @@
     events.ACCEPT_FRIEND_REQUEST = "accept_friend_request";
     events.FRIEND_REQUEST_ACCEPTED = "friend_request_accepted";
 
+    events.DECLINE_FRIEND_REQUEST = "decline_friend_request";
+    events.FRIEND_REQUEST_DECLINED = "friend_request_declined";
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.OPEN_FRIEND_REQUESTS_TAB},
         function(){loadFriendRequests()}
@@ -10,6 +13,11 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.ACCEPT_FRIEND_REQUEST},
         function(event){acceptFriendRequest(event.getPayload())}
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.DECLINE_FRIEND_REQUEST},
+        function(event){declineFriendRequest(event.getPayload())}
     ));
 
     function loadFriendRequests(){
@@ -54,6 +62,9 @@
 
                             const declineButton = document.createElement("BUTTON");
                                 declineButton.innerHTML = Localization.getAdditionalContent("decline-friend-request");
+                                declineButton.onclick = function(){
+                                    eventProcessor.processEvent(new Event(events.DECLINE_FRIEND_REQUEST, friendRequest.friendRequestId));
+                                }
                         wrapperSpan.appendChild(declineButton);
 
                     buttonWrapper.appendChild(wrapperSpan);
@@ -79,6 +90,16 @@
                 notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_ACCEPTED"));
                 document.getElementById("friend-request-list").removeChild(document.getElementById(generateFriendRequestId(friendRequestId)));
                 eventProcessor.processEvent(new Event(events.FRIEND_REQUEST_ACCEPTED));
+            }
+        dao.sendRequestAsync(request);
+    }
+
+    function declineFriendRequest(friendRequestId){
+        const request = new Request(HttpMethod.DELETE, Mapping.DECLINE_FRIEND_REQUEST, {value: friendRequestId});
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_DECLINED"));
+                document.getElementById("friend-request-list").removeChild(document.getElementById(generateFriendRequestId(friendRequestId)));
+                eventProcessor.processEvent(new Event(events.FRIEND_REQUEST_DECLINED));
             }
         dao.sendRequestAsync(request);
     }
