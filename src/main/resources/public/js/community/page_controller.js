@@ -10,6 +10,7 @@
         scriptLoader.loadScript("js/community/mail/bulk_operations/with_archived_mails.js");
         scriptLoader.loadScript("js/community/mail/bulk_operations/with_sent_mails.js");
 
+    scriptLoader.loadScript("js/community/friend/friend_controller.js");
     scriptLoader.loadScript("js/community/friend/add_friend_controller.js");
     scriptLoader.loadScript("js/community/friend/friend_request_controller.js");
     scriptLoader.loadScript("js/community/friend/sent_friend_request_controller.js");

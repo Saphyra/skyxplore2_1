@@ -34,7 +34,7 @@ public class CommunityPage {
     private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#friend-requests-tab-button";
     private static final String SELECTOR_FRIEND_REQUESTS = "#friend-request-list > .friend-list-item";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#friends-tab-button";
-    private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
+    private static final String SELECTOR_FRIENDS = "#friend-list > .friend-list-item";
     private static final String SELECTOR_WRITE_MAIL_BUTTON = "#write-mail-button";
     private static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
     private static final String SELECTOR_ADDRESSEES = "#addressee-search-result .addressee";
@@ -127,9 +127,12 @@ public class CommunityPage {
     }
 
     public List<Friend> getFriends() {
-        return driver.findElements(By.cssSelector(SELECTOR_FRIENDS)).stream()
-            .map(Friend::new)
-            .collect(Collectors.toList());
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_FRIENDS)).stream()
+                .map(Friend::new)
+                .collect(Collectors.toList()),
+            "Querying friends..."
+        );
     }
 
     public WebElement getWriteNewMailButton() {

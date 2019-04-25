@@ -25,6 +25,7 @@ window.Mapping = {
     GET_CHARACTERS: "character",
     GET_CHARACTERS_CAN_BE_FRIEND: "friend/name",
     GET_FRIEND_REQUESTS: "friend/request/received",
+    GET_FRIENDS: "friend",
     GET_INCOMING_MAILS: "mail",
     GET_MATERIALS: "factory/materials",
     GET_SENT_FRIEND_REQUESTS: "friend/request/sent",
