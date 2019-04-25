@@ -25,6 +25,7 @@ window.Mapping = {
     GET_FRIEND_REQUESTS: "friend/request/received",
     GET_INCOMING_MAILS: "mail",
     GET_MATERIALS: "factory/materials",
+    GET_SENT_FRIEND_REQUESTS: "friend/request/sent",
     GET_SENT_MAILS: "mail/sent",
     GET_SHIP_DATA: "ship",
     GET_QUEUE: "factory/queue",

@@ -27,10 +27,10 @@ public class CommunityPage {
     private static final String SELECTOR_ADD_FRIEND_CONTAINER = "main-add-friend";
     private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friend-name";
     private static final String SELECTOR_ADD_FRIEND_SEARCH_RESULT = ".character-can-be-friend";
-    private static final String SELECTOR_SENT_FRIEND_REQUESTS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(3)";
-    private static final String SELECTOR_SENT_FRIEND_REQUESTS = "#sentfriendrequestitems > div.friendlistitem";
-    private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "addfriendclosebutton";
-    private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friendrequestnum";
+    private static final String SELECTOR_SENT_FRIEND_REQUESTS_PAGE_BUTTON = "#sent-friend-requests-tab-button";
+    private static final String SELECTOR_SENT_FRIEND_REQUESTS = "#sent-friend-request-list > .friend-list-item";
+    private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "add-friend-close-button";
+    private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friend-request-num";
     private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#friend-requests-tab-button";
     private static final String SELECTOR_FRIEND_REQUESTS = "#friend-request-list > .friend-list-item";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#friends-tab-button";
@@ -92,9 +92,12 @@ public class CommunityPage {
     }
 
     public List<SentFriendRequest> getSentFriendRequests() {
-        return driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
-            .map(element -> new SentFriendRequest(driver, element))
-            .collect(Collectors.toList());
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
+                .map(element -> new SentFriendRequest(driver, element))
+                .collect(Collectors.toList()),
+            "Querying sent friend requests"
+        );
     }
 
     public void closeAddFriendPage() {

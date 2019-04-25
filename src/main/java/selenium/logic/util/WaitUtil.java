@@ -1,5 +1,6 @@
 package selenium.logic.util;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class WaitUtil {
             log.debug("Wait attempt: {}", counter);
             result = booleanSupplier.get();
             counter++;
-            if (counter >= 100) {
+            if (counter >= 20) {
                 throw new RuntimeException("Condition failed after 100 attempts");
             }
             sleep(100);
@@ -33,7 +34,7 @@ public class WaitUtil {
             result = supplier.get();
             sleep(100);
             counter++;
-            if (counter >= 100) {
+            if (counter >= 20) {
                 return Optional.empty();
             }
         } while (!result.isPresent());
@@ -50,8 +51,8 @@ public class WaitUtil {
             Objects.requireNonNull(result);
             sleep(100);
             counter++;
-            if (counter >= 100) {
-                throw new RuntimeException("List cannot be loaded.");
+            if (counter >= 20) {
+                return Collections.emptyList();
             }
         } while (result.isEmpty());
         return result;

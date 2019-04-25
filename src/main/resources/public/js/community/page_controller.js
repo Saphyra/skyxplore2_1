@@ -12,6 +12,7 @@
 
     scriptLoader.loadScript("js/community/friend/add_friend_controller.js");
     scriptLoader.loadScript("js/community/friend/friend_request_controller.js");
+    scriptLoader.loadScript("js/community/friend/sent_friend_request_controller.js");
 
     events.OPEN_MAIN_LISTS = "open_main_lists";
     events.OPEN_WRITE_MAIL_WINDOW = "open_write_mail_window";
@@ -19,6 +20,7 @@
 
     events.OPEN_FRIENDS_TAB = "open_friends_tab";
     events.OPEN_FRIEND_REQUESTS_TAB = "open_friend_requests_tab";
+    events.OPEN_SENT_FRIEND_REQUESTS_TAB = "open_sent_friend_requests_tab";
 
     events.OPEN_SENT_MAILS_TAB = "open_sent_mails_tab";
     events.OPEN_INCOMING_MAILS_TAB = "open_incoming_mails_tab";
@@ -57,6 +59,13 @@
         function(eventType){return eventType === events.OPEN_FRIEND_REQUESTS_TAB},
         function(){
             switchTab("friend-list-tab", "friend-request-list-container");
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.OPEN_SENT_FRIEND_REQUESTS_TAB},
+        function(){
+            switchTab("friend-list-tab", "sent-friend-request-list-container");
         }
     ));
 

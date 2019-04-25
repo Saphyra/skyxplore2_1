@@ -6,7 +6,7 @@
     display: none;
 }
 
-#no-friends, #no-friend-requests{
+#no-friends, #no-friend-requests, #no-sent-friend-requests{
     font-size: 1.25rem;
     margin-top: 1rem;
 }
@@ -43,4 +43,10 @@
 
 .friend-list-item-button-wrapper > span{
     display: none;
+}
+
+.friend-list-item-button{
+    position: absolute;
+    right: 0;
+    top: 0;
 }

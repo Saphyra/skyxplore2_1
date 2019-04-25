@@ -73,6 +73,12 @@
         "message": "Elküldött barátkérelmek"
       }
     ],
+    "no-sent-friend-requests": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek elküldött barátkérelmek"
+      }
+    ],
     "blocked-characters-title": [
       {
         "key": "innerHTML",
@@ -361,6 +367,7 @@
     "add-friend": "Barát felvétele",
     "block-character": "Blokkolás",
     "decline-friend-request": "Elutasítás",
-    "accept-friend-request": "Elfogadás"
+    "accept-friend-request": "Elfogadás",
+    "cancel-friend-request": "Visszavonás"
   }
 }
