@@ -25,6 +25,10 @@
     font-weight: bold;
 }
 
+.active-friend{
+    border-color: green;
+}
+
 .friend-list-item:hover{
     border-color: red;
 }

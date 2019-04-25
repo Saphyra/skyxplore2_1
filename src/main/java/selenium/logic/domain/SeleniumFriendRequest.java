@@ -28,12 +28,11 @@ public class SeleniumFriendRequest {
     }
 
     public void decline() {
-        WebElement acceptButton = getAcceptButton();
-        WebElement buttonContainer = element.findElement(By.cssSelector(SELECTOR_BUTTON_CONTAINER));
-
         Actions actions = new Actions(driver);
-        actions.moveToElement(acceptButton);
+        actions.moveToElement(getAcceptButton());
         actions.perform();
+
+        WebElement buttonContainer = element.findElement(By.cssSelector(SELECTOR_BUTTON_CONTAINER));
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(buttonContainer));
         buttonContainer.findElement(By.cssSelector(SELECTOR_DECLINE_BUTTON)).click();
 

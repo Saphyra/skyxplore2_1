@@ -19,7 +19,7 @@ public class WaitUtil {
             result = booleanSupplier.get();
             counter++;
             if (counter >= 20) {
-                throw new RuntimeException("Condition failed after 100 attempts");
+                throw new RuntimeException("Condition failed after 20 attempts");
             }
             sleep(100);
         } while (!result);

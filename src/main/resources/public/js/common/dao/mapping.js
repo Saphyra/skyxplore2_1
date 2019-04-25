@@ -16,6 +16,7 @@ window.Mapping = {
     DECLINE_FRIEND_REQUEST: "friend/request",
     DELETE_ACCOUNT: "user",
     DELETE_CHARACTER: "character/*",
+    DELETE_FRIEND: "friend",
     DELETE_MAILS: "mail",
     EMAIL_EXISTS: "user/email",
     EQUIP_ITEM: "ship/equipment",

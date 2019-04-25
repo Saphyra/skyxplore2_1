@@ -15,6 +15,7 @@ import selenium.logic.validator.NotificationValidator;
 import selenium.test.community.friendship.AcceptFriendRequestTest;
 import selenium.test.community.friendship.CancelFriendRequestTest;
 import selenium.test.community.friendship.DeclineFriendRequestTest;
+import selenium.test.community.friendship.DeleteFriendTest;
 import selenium.test.community.friendship.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.friendship.FilterTestShouldNotShowWhenAlreadyFriend;
 import selenium.test.community.friendship.FilterTestShouldNotShowWhenFriendRequestSent;
@@ -29,6 +30,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestHelper communityTestHelper;
     private FriendshipTestHelper friendshipTestHelper;
     private CommunityPage communityPage;
+    private NotificationValidator notificationValidator;
 
     @Override
     protected void init() {
@@ -46,7 +48,9 @@ public class FriendshipTest extends SeleniumTestApplication {
         );
 
         communityPage = new CommunityPage(driver, messageCodes);
-        friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, new NotificationValidator(driver));
+
+        notificationValidator = new NotificationValidator(driver);
+        friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
     }
 
     @Test
@@ -131,5 +135,23 @@ public class FriendshipTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .build()
             .testAcceptFriendRequest();
+    }
+
+    @Test
+    public void testDeleteFriend() {
+        DeleteFriendTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
+            .build()
+            .testDeleteFriend();
+    }
+
+    @Test
+    public void testSendMailToFriend() {
+        //TODO implement
     }
 }

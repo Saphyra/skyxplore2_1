@@ -129,7 +129,7 @@ public class CommunityPage {
     public List<Friend> getFriends() {
         return getListWithWait(
             () -> driver.findElements(By.cssSelector(SELECTOR_FRIENDS)).stream()
-                .map(Friend::new)
+                .map(element -> new Friend(driver, element))
                 .collect(Collectors.toList()),
             "Querying friends..."
         );

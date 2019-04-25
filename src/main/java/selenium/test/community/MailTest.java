@@ -15,7 +15,7 @@ import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
-import selenium.test.community.mail.ReadMailTest;
+import selenium.test.community.mail.mark.ReadMailTest;
 import selenium.test.community.mail.archive.ArchiveMailTest;
 import selenium.test.community.mail.archive.BulkArchiveMailTest;
 import selenium.test.community.mail.archive.BulkRestoreMailTest;
