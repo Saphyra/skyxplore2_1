@@ -94,7 +94,7 @@ public class CommunityPage {
     public List<SentFriendRequest> getSentFriendRequests() {
         return getListWithWait(
             () -> driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
-                .map(element -> new SentFriendRequest(driver, element))
+                .map(element -> new SentFriendRequest(driver, element, messageCodes))
                 .collect(Collectors.toList()),
             "Querying sent friend requests"
         );

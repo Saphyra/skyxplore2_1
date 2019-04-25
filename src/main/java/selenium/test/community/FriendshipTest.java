@@ -112,8 +112,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    public void testDeclineFriendRequestTest() {
+    public void testDeclineFriendRequest() {
         DeclineFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)

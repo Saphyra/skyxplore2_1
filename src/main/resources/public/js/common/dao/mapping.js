@@ -5,6 +5,7 @@ window.Mapping = {
     ADDRESSEES: "mail/addressee",
     ARCHIVE_MAILS: "mail/archive",
     BUY_ITEMS: "character/equipment",
+    CANCEL_FRIEND_REQUEST: "friend/request",
     CHANGE_EMAIL: "user/email",
     CHANGE_PASSWORD: "user/password",
     CHANGE_USERNAME: "user/name",

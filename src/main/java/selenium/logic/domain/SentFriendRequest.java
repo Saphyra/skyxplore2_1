@@ -1,19 +1,21 @@
 package selenium.logic.domain;
 
-import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
 import selenium.logic.validator.NotificationValidator;
 
 @RequiredArgsConstructor
 public class SentFriendRequest {
     private static final String SELECTOR_CHARACTER_NAME = "div:first-child";
-    private static final String SELECTOR_CANCEL_FRIEND_REQUEST = "button.friendlistitembutton:first-of-type";
-    private static final String NOTIFICATION_FRIEND_REQUEST_CANCELLED = "Barátkérelem elutasítva.";
+    private static final String SELECTOR_CANCEL_FRIEND_REQUEST = "button.friend-list-item-button:first-of-type";
+    private static final String MESSAGE_CODE_FRIEND_REQUEST_CANCELLED = "FRIEND_REQUEST_CANCELLED";
 
     private final WebDriver driver;
     private final WebElement element;
+    private final MessageCodes messageCodes;
 
     public String getCharacterName() {
         return element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)).getText();
@@ -21,7 +23,6 @@ public class SentFriendRequest {
 
     public void cancel() {
         element.findElement(By.cssSelector(SELECTOR_CANCEL_FRIEND_REQUEST)).click();
-        driver.switchTo().alert().accept();
-        new NotificationValidator(driver).verifyNotificationVisibility(NOTIFICATION_FRIEND_REQUEST_CANCELLED);
+        new NotificationValidator(driver).verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_FRIEND_REQUEST_CANCELLED));
     }
 }

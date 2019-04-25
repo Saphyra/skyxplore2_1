@@ -18,6 +18,8 @@
   "EMPTY_CREDENTIALS": "Felhasználónév és jelszó megadása kötelező!",
   "ERROR_CREATING_CHARACTER": "Hiba a karakter létrehozása során.",
   "FRIEND_REQUEST_ACCEPTED": "Barátkérelem elfogadva.",
+  "FRIEND_REQUEST_CANCELLED": "Barátkérelem visszavonva.",
+  "FRIEND_REQUEST_DECLINED": "Barátkérelem elutasítva.",
   "FRIEND_REQUEST_SENT": "Barátkérelem elküldve.",
   "INVALID_EMAIL": "Érvénytelen e-mail cím.",
   "ITEM_EQUIPPED": "Felszerelés sikeres.",
