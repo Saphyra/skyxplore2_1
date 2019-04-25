@@ -21,9 +21,12 @@ import selenium.test.community.friendship.FilterTestShouldNotShowWhenAlreadyFrie
 import selenium.test.community.friendship.FilterTestShouldNotShowWhenFriendRequestSent;
 import selenium.test.community.friendship.FilterTestShouldShowOnlyMatchingCharacterNames;
 import selenium.test.community.friendship.SendFriendRequestTest;
+import selenium.test.community.friendship.SendMailToFriendTest;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.FriendshipTestHelper;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
@@ -31,6 +34,8 @@ public class FriendshipTest extends SeleniumTestApplication {
     private FriendshipTestHelper friendshipTestHelper;
     private CommunityPage communityPage;
     private NotificationValidator notificationValidator;
+    private MailTestHelper mailTestHelper;
+    private SendMailHelper sendMailHelper;
 
     @Override
     protected void init() {
@@ -51,6 +56,8 @@ public class FriendshipTest extends SeleniumTestApplication {
 
         notificationValidator = new NotificationValidator(driver);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
+        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
+        sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
     }
 
     @Test
@@ -152,6 +159,14 @@ public class FriendshipTest extends SeleniumTestApplication {
 
     @Test
     public void testSendMailToFriend() {
-        //TODO implement
+        SendMailToFriendTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .sendMailHelper(sendMailHelper)
+            .mailTestHelper(mailTestHelper)
+            .build()
+            .testSendMailToFriend();
     }
 }

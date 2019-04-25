@@ -36,7 +36,12 @@ public class Friend {
         driver.switchTo().alert().accept();
     }
 
-    public WebElement getWriteMailButton() {
+    public void sendMail() {
+        getWriteMailButton().click();
+    }
+
+    private WebElement getWriteMailButton() {
         return element.findElement(By.cssSelector(SELECTOR_WRITE_MAIL_BUTTON));
     }
+
 }

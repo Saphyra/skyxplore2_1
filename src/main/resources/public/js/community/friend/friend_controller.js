@@ -77,6 +77,10 @@
 
                         const writeMailButton = document.createElement("BUTTON");
                             writeMailButton.innerHTML = Localization.getAdditionalContent("write-mail-to-friend");
+                            writeMailButton.onclick = function(){
+                                writeMailController.setAddressee({characterId: friend.friendId, characterName: friend.friendName});
+                                eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW));
+                            }
                     buttonWrapper.appendChild(writeMailButton);
 
                 $(buttonWrapper).hover(function(){$(wrapperSpan).fadeIn()}, function(){$(wrapperSpan).fadeOut()});

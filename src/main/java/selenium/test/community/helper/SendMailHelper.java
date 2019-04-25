@@ -1,16 +1,15 @@
 package selenium.test.community.helper;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.waitUntil;
-
-import org.openqa.selenium.WebElement;
-
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebElement;
 import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.waitUntil;
 
 @RequiredArgsConstructor
 public class SendMailHelper {
