@@ -12,6 +12,13 @@
         displayNumberOfReceivedMails
     ));
 
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.FRIEND_REQUEST_ACCEPTED
+        },
+        displayNumberOfFriendRequests
+    ));
+
     function init(){
         setIntervalImmediate(displayNumberOfFriendRequests, 20000);
         setIntervalImmediate(displayNumberOfReceivedMails, 20000);

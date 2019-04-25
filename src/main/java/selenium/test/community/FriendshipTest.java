@@ -90,7 +90,6 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testSendFriendRequest() {
         SendFriendRequestTest.builder()
             .communityTestHelper(communityTestHelper)

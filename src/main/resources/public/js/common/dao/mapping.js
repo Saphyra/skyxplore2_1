@@ -1,4 +1,5 @@
 window.Mapping = {
+    ACCEPT_FRIEND_REQUEST: "friend/request/accept",
     ADD_FRIEND: "friend/request",
     ADD_TO_QUEUE: "factory",
     ADDRESSEES: "mail/addressee",
@@ -21,6 +22,7 @@ window.Mapping = {
     GET_ARCHIVED_MAILS: "mail/archived",
     GET_CHARACTERS: "character",
     GET_CHARACTERS_CAN_BE_FRIEND: "friend/name",
+    GET_FRIEND_REQUESTS: "friend/request/received",
     GET_INCOMING_MAILS: "mail",
     GET_MATERIALS: "factory/materials",
     GET_SENT_MAILS: "mail/sent",

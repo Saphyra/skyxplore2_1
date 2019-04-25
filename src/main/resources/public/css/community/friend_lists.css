@@ -6,11 +6,41 @@
     display: none;
 }
 
-#no-friends{
+#no-friends, #no-friend-requests{
     font-size: 1.25rem;
+    margin-top: 1rem;
 }
 
 #friends-header{
     text-align: center;
     padding: 0.75rem;
+}
+
+.friend-list-item{
+    position: relative;
+    border: 1px ridge white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.friend-list-item:hover{
+    border-color: red;
+}
+
+.friend-list-item div:first-child{
+    text-align: left;
+    margin-right: 7rem;
+}
+
+.friend-list-item-button-wrapper{
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}
+
+.friend-list-item-button-wrapper > span{
+    display: none;
 }

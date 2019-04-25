@@ -61,6 +61,12 @@
         "message": "Barátkérelmek"
       }
     ],
+    "no-friend-requests": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek barátkérelmek"
+      }
+    ],
     "sent-friend-request-list-title": [
       {
         "key": "innerHTML",
@@ -352,6 +358,9 @@
     "mark-as-read": "Megjelölés olvasottként",
     "reply": "Válasz",
     "restore": "Visszaállítás",
-    "add-friend": "Barát felvétele"
+    "add-friend": "Barát felvétele",
+    "block-character": "Blokkolás",
+    "decline-friend-request": "Elutasítás",
+    "accept-friend-request": "Elfogadás"
   }
 }

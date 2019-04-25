@@ -1,23 +1,24 @@
 package selenium.logic.page;
 
-import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.MessageCodes;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getListWithWait;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getListWithWait;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.RequiredArgsConstructor;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.MessageCodes;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -31,7 +32,7 @@ public class CommunityPage {
     private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "addfriendclosebutton";
     private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friendrequestnum";
     private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#friend-requests-tab-button";
-    private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
+    private static final String SELECTOR_FRIEND_REQUESTS = "#friend-request-list > .friend-list-item";
     private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#friends-tab-button";
     private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
     private static final String SELECTOR_WRITE_MAIL_BUTTON = "#write-mail-button";
@@ -111,9 +112,11 @@ public class CommunityPage {
     }
 
     public List<SeleniumFriendRequest> getFriendRequests() {
-        return driver.findElements(By.cssSelector(SELECTOR_FRIEND_REQUESTS)).stream()
-            .map(element -> new SeleniumFriendRequest(driver, element))
-            .collect(Collectors.toList());
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_FRIEND_REQUESTS)).stream()
+                .map(element -> new SeleniumFriendRequest(driver, element, messageCodes))
+                .collect(Collectors.toList()),
+            "Querying friend requests...");
     }
 
     public WebElement getOpenFriendsPageButton() {

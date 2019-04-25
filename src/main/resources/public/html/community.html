@@ -34,9 +34,9 @@
             <DIV id="character-list-container">
                 <DIV id="friends-container" class="character-list-tab">
                     <DIV id="friends-header">
-                        <DIV id="friends-tab-button" class="inline-button button"></DIV>
+                        <DIV id="friends-tab-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIENDS_TAB))"></DIV>
 
-                        <DIV class="inline-button button">
+                        <DIV class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIEND_REQUESTS_TAB))">
                             <SPAN id="friend-requests-tab-button"></SPAN>
 
                             <SPAN>
@@ -59,6 +59,8 @@
 
                         <DIV id="friend-request-list-container" class="friend-list-tab">
                             <H3 id="friend-request-list-title"></H3>
+
+                            <DIV id="no-friend-requests"></DIV>
                             <DIV id="friend-request-list"></DIV>
                         </DIV>
 
