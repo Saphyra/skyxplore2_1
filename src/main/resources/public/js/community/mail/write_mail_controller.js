@@ -47,6 +47,15 @@
                     eventProcessor.processEvent(new Event(events.MAIL_SENT));
                     eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
                 }
+                request.processInvalidResponse = function(response){
+                    if(response.status == ResponseStatus.UNAUTHORIZED){
+                        eventProcessor.processEvent(events.LOGOUT);
+                    }else if(response.status == ResponseStatus.LOCKED){
+                        notificationService.showError(MessageCode.getMessage("ERROR_SENDING_MAIL"));
+                    }else{
+                        logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
+                    }
+                }
             dao.sendRequestAsync(request);
         }
     }

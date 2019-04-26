@@ -50,6 +50,7 @@ window.ResponseStatus = new function(){
     this.FORBIDDEN = 403
     this.NOT_FOUND = 404;
     this.CONFLICT = 409;
+    this.LOCKED = 423;
     this.INTERNAL_SERVER_ERROR = 500;
     this.CONNECTION_REFUSED = 0;
 }

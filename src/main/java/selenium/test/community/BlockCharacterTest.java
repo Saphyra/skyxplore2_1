@@ -1,7 +1,7 @@
 package selenium.test.community;
 
-import org.junit.Ignore;
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -149,12 +149,12 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testBlockCharacterShouldUnableToReplyMail();
     }
 
     @Test
-    @Ignore
     public void testUnblockCharacter() {
         UnblockCharacterTest.builder()
             .communityTestHelper(communityTestHelper)

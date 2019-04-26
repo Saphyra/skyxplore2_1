@@ -20,6 +20,7 @@
   "EMAIL_CHANGE_SUCCESSFUL": "E-mail cím sikeresen megváltoztatva.",
   "EMPTY_CREDENTIALS": "Felhasználónév és jelszó megadása kötelező!",
   "ERROR_CREATING_CHARACTER": "Hiba a karakter létrehozása során.",
+  "ERROR_SENDING_MAIL": "Üzenet küldése sikertelen.",
   "FRIEND_DELETED": "Barát törölve.",
   "FRIEND_REQUEST_ACCEPTED": "Barátkérelem elfogadva.",
   "FRIEND_REQUEST_CANCELLED": "Barátkérelem visszavonva.",
