@@ -16,7 +16,7 @@
     "blocked-characters-page-button": [
       {
         "key": "innerHTML",
-        "message": "Blokkolva"
+        "message": "Letiltva"
       }
     ],
     "friends-tab-button": [
@@ -82,13 +82,19 @@
     "blocked-characters-title": [
       {
         "key": "innerHTML",
-        "message": "Blokkolt felhasználók"
+        "message": "Letiltott játékosok"
+      }
+    ],
+    "no-blocked-characters": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek letiltott játékosok"
       }
     ],
     "block-character-button": [
       {
         "key": "innerHTML",
-        "message": "Játékos blokkolása"
+        "message": "Játékos letiltása"
       }
     ],
     "mail-lists-title": [
@@ -275,7 +281,7 @@
     "block-character-title": [
       {
         "key": "innerHTML",
-        "message": "Barát felvétele"
+        "message": "Játékos tiltása"
       }
     ],
     "block-character-name": [
@@ -368,7 +374,7 @@
     "delete-friend": "Törlés",
     "view-profile": "Profil",
     "write-mail-to-friend": "Üzenetírás",
-    "block-character": "Blokkolás",
+    "block-character": "Letiltás",
     "decline-friend-request": "Elutasítás",
     "accept-friend-request": "Elfogadás",
     "cancel-friend-request": "Visszavonás"

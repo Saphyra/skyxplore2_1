@@ -6,7 +6,7 @@
     display: none;
 }
 
-#no-friends, #no-friend-requests, #no-sent-friend-requests{
+#no-friends, #no-friend-requests, #no-sent-friend-requests, #no-blocked-characters{
     font-size: 1.25rem;
     margin-top: 1rem;
 }

@@ -64,7 +64,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldNotShowOwnCharacters() {
         FilterTestShouldNotShowOwnCharacters.builder()
             .blockTestHelper(blockTestHelper)

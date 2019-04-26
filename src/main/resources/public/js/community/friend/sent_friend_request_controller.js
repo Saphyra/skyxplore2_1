@@ -1,8 +1,31 @@
 (function SentFriendRequestController(){
     events.CANCEL_FRIEND_REQUEST = "cancel_friend_request";
 
+    let isActive = false;
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.OPEN_SENT_FRIEND_REQUESTS_TAB},
+        function(){
+            loadSentFriendRequests();
+            isActive = true;
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType == events.OPEN_FRIEND_REQUESTS_TAB
+                || eventType == events.OPEN_FRIENDS_TAB
+        },
+        function(){
+            isActive = false;
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType == events.OPEN_FRIEND_CHARACTERS_TAB
+                && isActive
+        },
         loadSentFriendRequests
     ));
 

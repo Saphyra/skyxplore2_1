@@ -29,7 +29,7 @@ public class FilterTestShouldShowOnlyMatchingCharacter {
         SeleniumAccount otherAccount = accounts.get(1);
         SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
 
-        List<BlockableCharacter> blockableCharacters = blockTestHelper.searchForBlockableCharacters(otherCharacter.getCharacterName());
+        List<BlockableCharacter> blockableCharacters = blockTestHelper.searchCharacterCanBeBlocked(otherCharacter.getCharacterName());
         assertEquals(1, blockableCharacters.size());
         assertTrue(
             blockableCharacters.stream()

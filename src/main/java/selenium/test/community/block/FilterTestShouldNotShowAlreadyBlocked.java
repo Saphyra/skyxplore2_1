@@ -27,6 +27,6 @@ public class FilterTestShouldNotShowAlreadyBlocked {
         SeleniumCharacter otherCharacter = accounts.get(1).getCharacter(0);
         blockTestHelper.blockCharacter(otherCharacter);
 
-        assertTrue(blockTestHelper.searchForBlockableCharacters(otherCharacter.getCharacterName()).isEmpty());
+        assertTrue(blockTestHelper.searchCharacterCanBeBlocked(otherCharacter.getCharacterName()).isEmpty());
     }
 }

@@ -1,16 +1,19 @@
 package selenium.test.community.helper;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.BlockableCharacter;
 import selenium.logic.domain.BlockedCharacter;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class BlockTestHelper {
@@ -21,7 +24,7 @@ public class BlockTestHelper {
     private final NotificationValidator notificationValidator;
 
     public void blockCharacter(SeleniumCharacter character) {
-        searchForBlockableCharacters(character.getCharacterName()).stream()
+        searchCharacterCanBeBlocked(character.getCharacterName()).stream()
             .findFirst()
             .orElseThrow(() -> new RuntimeException("BlockableCharacter not found"))
             .block();
@@ -29,8 +32,8 @@ public class BlockTestHelper {
         notificationValidator.verifyNotificationVisibility(NOTIFICATION_CHARACTER_BLOCKED);
     }
 
-    public List<BlockableCharacter> searchForBlockableCharacters(String characterName) {
-        if (!communityPage.getBlockableCharacterInputField().isDisplayed()) {
+    public List<BlockableCharacter> searchCharacterCanBeBlocked(String characterName) {
+        if (!communityPage.getBlockCharacterWindow().isDisplayed()) {
             openBlockCharacterWindow();
         }
 
@@ -38,14 +41,17 @@ public class BlockTestHelper {
         blockCharacterNameInputField.clear();
         blockCharacterNameInputField.sendKeys(characterName);
 
-        return communityPage.getBlockableCharacters().stream()
+        return communityPage.getCharactersCanBeBlocked().stream()
             .map(BlockableCharacter::new)
             .collect(Collectors.toList());
     }
 
     private void openBlockCharacterWindow() {
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
         communityPage.getBlockCharactersPageButton().click();
+        webDriverWait.until(ExpectedConditions.visibilityOf(communityPage.getBlockedCharactersContainer()));
         communityPage.getBlockCharacterWindowButton().click();
+        webDriverWait.until(ExpectedConditions.visibilityOf(communityPage.getBlockCharacterWindow()));
     }
 
     public List<BlockedCharacter> getBlockedCharacters() {

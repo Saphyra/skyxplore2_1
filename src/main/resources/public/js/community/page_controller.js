@@ -10,6 +10,8 @@
         scriptLoader.loadScript("js/community/mail/bulk_operations/with_archived_mails.js");
         scriptLoader.loadScript("js/community/mail/bulk_operations/with_sent_mails.js");
 
+    scriptLoader.loadScript("js/community/blocked/block_character_controller.js");
+
     scriptLoader.loadScript("js/community/friend/friend_controller.js");
     scriptLoader.loadScript("js/community/friend/add_friend_controller.js");
     scriptLoader.loadScript("js/community/friend/friend_request_controller.js");
@@ -18,6 +20,10 @@
     events.OPEN_MAIN_LISTS = "open_main_lists";
     events.OPEN_WRITE_MAIL_WINDOW = "open_write_mail_window";
     events.OPEN_ADD_FRIEND_WINDOW = "open_add_friend_window";
+    events.OPEN_BLOCK_CHARACTER_WINDOW = "open_block_character_window";
+
+    events.OPEN_FRIEND_CHARACTERS_TAB = "open_friend_characters_tab";
+    events.OPEN_BLOCKED_CHARACTERS_TAB = "open_blocked_characters_tab";
 
     events.OPEN_FRIENDS_TAB = "open_friends_tab";
     events.OPEN_FRIEND_REQUESTS_TAB = "open_friend_requests_tab";
@@ -46,6 +52,27 @@
         function(eventType){return eventType === events.OPEN_ADD_FRIEND_WINDOW},
         function(){
             switchTab("main-tab", "main-add-friend");
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.OPEN_BLOCK_CHARACTER_WINDOW},
+        function(){
+            switchTab("main-tab", "main-block-character");
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.OPEN_FRIEND_CHARACTERS_TAB},
+        function(){
+            switchTab("character-list-tab", "friends-container");
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.OPEN_BLOCKED_CHARACTERS_TAB},
+        function(){
+            switchTab("character-list-tab", "blocked-characters-container");
         }
     ));
 

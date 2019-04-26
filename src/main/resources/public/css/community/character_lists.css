@@ -7,3 +7,7 @@
     padding: 0.25rem;
     border-bottom: 3px ridge white;
 }
+
+#blocked-characters-container{
+    text-align: center;
+}

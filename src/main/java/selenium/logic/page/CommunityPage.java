@@ -22,7 +22,7 @@ import selenium.logic.domain.SentFriendRequest;
 
 @RequiredArgsConstructor
 public class CommunityPage {
-    private static final String SELECTOR_BLOCK_CHARACTER_CONTAINER = "blockcharactercontainer";
+    private static final String SELECTOR_BLOCKED_CHARACTERS_CONTAINER = "blocked-characters-container";
     private static final String SELECTOR_ADD_FRIEND = "#add-friend-button";
     private static final String SELECTOR_ADD_FRIEND_CONTAINER = "main-add-friend";
     private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friend-name";
@@ -55,15 +55,16 @@ public class CommunityPage {
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS = "#process-action-with-archived-mails-button";
     private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "action-with-sent-mails";
     private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS = "#process-action-with-sent-mails-button";
-    private static final String SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON = "#friendlistbuttons button:nth-child(2)";
-    private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#blockedcharacters div.button";
-    private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "blockcharactername";
-    private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#blockablecharactersfound .blockablecharacter";
+    private static final String SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON = "#blocked-characters-page-button";
+    private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#block-character-button";
+    private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "block-character-name";
+    private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#block-character-search-result .character-can-be-blocked";
     private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friends-page-button";
     private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
     private static final String SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON = "select-all-incoming-mail-button";
     private static final String SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON = "select-all-archived-mail-button";
     private static final String SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON = "select-all-sent-mail-button";
+    private static final String SELECTOR_BLOCK_CHARACTER_WINDOW = "main-block-character";
 
     private final WebDriver driver;
     private final MessageCodes messageCodes;
@@ -253,10 +254,6 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS));
     }
 
-    public WebElement getBlockableCharacterInputField() {
-        return driver.findElement(By.id(SELECTOR_BLOCK_CHARACTER_CONTAINER));
-    }
-
     public WebElement getBlockCharactersPageButton() {
         return driver.findElement(By.cssSelector(SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON));
     }
@@ -269,8 +266,10 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD));
     }
 
-    public List<WebElement> getBlockableCharacters() {
-        return driver.findElements(By.cssSelector(SELECTOR_BLOCKABLE_CHARACTERS));
+    public List<WebElement> getCharactersCanBeBlocked() {
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_BLOCKABLE_CHARACTERS)),
+            "Querying characters can be blocked");
     }
 
     public WebElement getFriendsMainPageButton() {
@@ -291,5 +290,13 @@ public class CommunityPage {
 
     public WebElement getSelectAllSentMailsButton() {
         return driver.findElement(By.id(SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON));
+    }
+
+    public WebElement getBlockedCharactersContainer() {
+        return driver.findElement(By.id(SELECTOR_BLOCKED_CHARACTERS_CONTAINER));
+    }
+
+    public WebElement getBlockCharacterWindow() {
+        return driver.findElement(By.id(SELECTOR_BLOCK_CHARACTER_WINDOW));
     }
 }

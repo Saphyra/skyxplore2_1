@@ -12,6 +12,7 @@
     <LINK rel="stylesheet" href="/css/community/mail_item.css">
     <LINK rel="stylesheet" href="/css/community/write_mail.css">
     <LINK rel="stylesheet" href="/css/community/add_friend.css">
+    <LINK rel="stylesheet" href="/css/community/block_character.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -27,14 +28,15 @@
     <MAIN id="main-lists" class="main-tab">
         <SECTION id="list-container">
             <DIV id="list-header">
-                <BUTTON id="friends-page-button"></BUTTON>
-                <BUTTON id="blocked-characters-page-button"></BUTTON>
+                <BUTTON id="friends-page-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIEND_CHARACTERS_TAB))"></BUTTON>
+                <BUTTON id="blocked-characters-page-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_BLOCKED_CHARACTERS_TAB))"></BUTTON>
             </DIV>
 
             <DIV id="character-list-container">
                 <DIV id="friends-container" class="character-list-tab">
                     <DIV id="friends-header">
-                        <DIV id="friends-tab-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIENDS_TAB))"></DIV>
+                        <DIV id="friends-tab-button" class="inline-button button"
+                             onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIENDS_TAB))"></DIV>
 
                         <DIV class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIEND_REQUESTS_TAB))">
                             <SPAN id="friend-requests-tab-button"></SPAN>
@@ -46,7 +48,8 @@
                             </SPAN>
                         </DIV>
 
-                        <DIV id="sent-friend-requests-tab-button" class="inline-button button"  onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_FRIEND_REQUESTS_TAB))"></DIV>
+                        <DIV id="sent-friend-requests-tab-button" class="inline-button button"
+                             onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_FRIEND_REQUESTS_TAB))"></DIV>
                     </DIV>
 
                     <DIV id="friend-lists">
@@ -75,7 +78,10 @@
 
                 <DIV id="blocked-characters-container" class="character-list-tab">
                     <H3 id="blocked-characters-title"></H3>
-                    <DIV class="button" id="block-character-button"></DIV>
+
+                    <DIV class="button" id="block-character-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_BLOCK_CHARACTER_WINDOW))"></DIV>
+
+                    <DIV id="no-blocked-characters"></DIV>
                     <DIV id="blocked-character-list"></DIV>
                 </DIV>
             </DIV>
@@ -86,7 +92,8 @@
                 <H2 id="mail-lists-title"></H2>
 
                 <DIV id="mail-list-header-buttons">
-                    <DIV id="write-mail-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW))"></DIV>
+                    <DIV id="write-mail-button" class="inline-button button"
+                         onclick="eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW))"></DIV>
                     <DIV class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_INCOMING_MAILS_TAB))">
                         <SPAN id="incoming-mails-button"></SPAN>
 
@@ -98,7 +105,8 @@
                     </DIV>
 
                     <DIV id="sent-mails-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_MAILS_TAB))"></DIV>
-                    <DIV id="archived-mails-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_ARCHIVED_MAILS_TAB))"></DIV>
+                    <DIV id="archived-mails-button" class="inline-button button"
+                         onclick="eventProcessor.processEvent(new Event(events.OPEN_ARCHIVED_MAILS_TAB))"></DIV>
                 </DIV>
             </DIV>
 
@@ -107,7 +115,8 @@
                     <H2 id="incoming-mail-list-title"></H2>
 
                     <DIV class="action-with-selected-mails">
-                        <BUTTON id="select-all-incoming-mail-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_INCOMING_MAILS))"></BUTTON>
+                        <BUTTON id="select-all-incoming-mail-button"
+                                onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_INCOMING_MAILS))"></BUTTON>
 
                         <SELECT id="action-with-incoming-mails">
                             <OPTION id="incoming-mail-option-none" value="none"></OPTION>
@@ -117,7 +126,8 @@
                             <OPTION id="incoming-mail-option-mark-as-unread" value="mark-as-unread"></OPTION>
                         </SELECT>
 
-                        <BUTTON id="process-action-with-incoming-mails-button" onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_INCOMING_MAILS))"></BUTTON>
+                        <BUTTON id="process-action-with-incoming-mails-button"
+                                onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_INCOMING_MAILS))"></BUTTON>
                     </DIV>
 
                     <DIV id="no-incoming-mail"></DIV>
@@ -135,7 +145,8 @@
                             <OPTION id="sent-mail-option-delete" value="delete"></OPTION>
                         </SELECT>
 
-                        <BUTTON id="process-action-with-sent-mails-button" onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_SENT_MAILS))"></BUTTON>
+                        <BUTTON id="process-action-with-sent-mails-button"
+                                onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_SENT_MAILS))"></BUTTON>
                     </DIV>
 
                     <DIV id="no-sent-mail"></DIV>
@@ -146,7 +157,8 @@
                     <H2 id="archived-mail-list-title"></H2>
 
                     <DIV class="action-with-selected-mails">
-                        <BUTTON id="select-all-archived-mail-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_ARCHIVED_MAILS))"></BUTTON>
+                        <BUTTON id="select-all-archived-mail-button"
+                                onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_ARCHIVED_MAILS))"></BUTTON>
 
                         <SELECT id="action-with-archived-mails">
                             <OPTION id="archived-mail-option-none" value="none"></OPTION>
@@ -154,7 +166,8 @@
                             <OPTION id="archived-mail-option-restore" value="restore"></OPTION>
                         </SELECT>
 
-                        <BUTTON id="process-action-with-archived-mails-button" onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_ARCHIVED_MAILS))"></BUTTON>
+                        <BUTTON id="process-action-with-archived-mails-button"
+                                onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_ARCHIVED_MAILS))"></BUTTON>
                     </DIV>
 
                     <DIV id="no-archived-mail"></DIV>
@@ -179,14 +192,17 @@
     </MAIN>
 
     <MAIN id="main-block-character" class="main-tab">
-        <H2 id="block-character-title"></H2>
-        <BUTTON>X</BUTTON>
+        <DIV id="block-character-wrapper">
+            <H2 id="block-character-title"></H2>
+            <BUTTON id="block-character-close-button" class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X</BUTTON>
 
-        <DIV>
-            <INPUT type="text" id="block-character-name">
+            <DIV id="block-character-input-container">
+                <INPUT type="text" id="block-character-name">
+            </DIV>
+
+            <DIV id="no-character-can-be-blocked"></DIV>
+            <DIV id="block-character-search-result"></DIV>
         </DIV>
-
-        <DIV id="block-character-search-result"></DIV>
     </MAIN>
 
     <MAIN id="main-write-mail" class="main-tab">

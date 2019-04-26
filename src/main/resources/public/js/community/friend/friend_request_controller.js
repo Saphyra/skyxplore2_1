@@ -5,9 +5,32 @@
     events.DECLINE_FRIEND_REQUEST = "decline_friend_request";
     events.FRIEND_REQUEST_DECLINED = "friend_request_declined";
 
+    let isActive = false;
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.OPEN_FRIEND_REQUESTS_TAB},
-        function(){loadFriendRequests()}
+        function(){
+            loadFriendRequests();
+            isActive = true;
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType == events.OPEN_FRIENDS_TAB
+                || eventType == events.OPEN_SENT_FRIEND_REQUESTS_TAB
+        },
+        function(){
+            isActive = false;
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType == events.OPEN_FRIEND_CHARACTERS_TAB
+                && isActive
+        },
+        loadFriendRequests
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
