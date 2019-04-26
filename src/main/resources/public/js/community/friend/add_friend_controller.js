@@ -80,10 +80,9 @@
                 notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_SENT"));
                 document.getElementById("add-friend-search-result").innerHTML = "";
                 document.getElementById("friend-name").value = "";
+                eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
             }
         dao.sendRequestAsync(request);
-
-        eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
     }
 
     function init(){

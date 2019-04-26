@@ -56,7 +56,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
         communityPage = new CommunityPage(driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
 
-        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator);
+        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator, messageCodes);
 
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
@@ -94,7 +94,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBlockCharacterShouldNotSendMail() {
         BlockCharacterTestShouldNotSendMail.builder()
             .communityTestHelper(communityTestHelper)
@@ -106,7 +105,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBlockCharacterShouldNotSendFriendRequest() {
         BlockCharacterTestShouldNotSendFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
@@ -118,7 +116,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBlockCharacterShouldDeleteFriendRequest() {
         BlockCharacterTestShouldDeleteFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
@@ -131,7 +128,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBlockCharacterShouldDeleteFriendship() {
         BlockCharacterTestShouldDeleteFriendship.builder()
             .communityTestHelper(communityTestHelper)
@@ -144,7 +140,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testBlockCharacterShouldUnableToReplyMail() {
         BlockCharacterShouldUnableReplyMail.builder()
             .communityTestHelper(communityTestHelper)

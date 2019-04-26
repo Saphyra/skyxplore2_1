@@ -1,5 +1,9 @@
 package selenium.test.community.block;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
@@ -8,10 +12,6 @@ import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.FriendshipTestHelper;
-
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
 
 @Builder
 public class BlockCharacterTestShouldDeleteFriendRequest {
@@ -35,9 +35,12 @@ public class BlockCharacterTestShouldDeleteFriendRequest {
 
         blockTestHelper.blockCharacter(otherCharacter);
 
+        communityPage.getFriendsMainPageButton().click();
+        communityPage.getSentFriendRequestsPageButton().click();
         assertTrue(communityPage.getSentFriendRequests().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter);
+        communityPage.getSentFriendRequestsPageButton().click();
         assertTrue(communityPage.getFriendRequests().isEmpty());
     }
 }

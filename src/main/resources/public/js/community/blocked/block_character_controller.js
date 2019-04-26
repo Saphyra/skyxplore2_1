@@ -1,5 +1,6 @@
 (function BlockCharacterController(){
     events.SEARCH_CHARACTERS_CAN_BE_BLOCKED_ATTEMPT = "search_characters_can_be_blocked_attempt";
+    events.BLOCK_CHARACTER = "block_character";
 
     $(document).ready(init);
 
@@ -13,6 +14,13 @@
             }
 
             timeout = setTimeout(searchCharactersCanBeBlocked, getSearchResultTimeout());
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.BLOCK_CHARACTER},
+        function(event){
+            blockCharacter(event.getPayload());
         }
     ));
 
@@ -56,13 +64,36 @@
                         addFriendButton.classList.add("block-character-button");
                         addFriendButton.innerHTML = Localization.getAdditionalContent("block-character");
                         addFriendButton.onclick = function(){
-                            eventProcessor.processEvent(new Event(events.BLOCK_CHARACTER, character.characterId));
+                            eventProcessor.processEvent(new Event(events.BLOCK_CHARACTER, {characterId: character.characterId}));
                         }
                 container.appendChild(addFriendButton);
 
                 return container;
             }
         }
+    }
+
+    function blockCharacter(data){
+        if(!confirm(MessageCode.getMessage("CONFIRM_BLOCK_CHARACTER"))){
+            return;
+        }
+
+        const characterId = data.characterId;
+        const listItem = data.listItem;
+
+        const request = new Request(HttpMethod.POST, Mapping.BLOCK_CHARACTER, {value: characterId});
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("CHARACTER_BLOCKED"));
+                if(listItem){
+                    document.getElementById("friend-request-list").removeChild(listItem);
+                }else{
+                    eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
+                }
+
+                document.getElementById("block-character-search-result").innerHTML = "";
+                document.getElementById("block-character-name").value = "";
+            }
+        dao.sendRequestAsync(request);
     }
 
     function init(){

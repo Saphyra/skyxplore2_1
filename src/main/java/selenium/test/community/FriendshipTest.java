@@ -145,6 +145,11 @@ public class FriendshipTest extends SeleniumTestApplication {
     }
 
     @Test
+    public void testReportFriendRequestSender(){
+        //TODO implement
+    }
+
+    @Test
     public void testDeleteFriend() {
         DeleteFriendTest.builder()
             .communityTestHelper(communityTestHelper)

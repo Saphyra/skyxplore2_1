@@ -4,6 +4,7 @@ window.Mapping = {
     ADD_TO_QUEUE: "factory",
     ADDRESSEES: "mail/addressee",
     ARCHIVE_MAILS: "mail/archive",
+    BLOCK_CHARACTER: "blockcharacter",
     BUY_ITEMS: "character/equipment",
     CANCEL_FRIEND_REQUEST: "friend/request",
     CHANGE_EMAIL: "user/email",

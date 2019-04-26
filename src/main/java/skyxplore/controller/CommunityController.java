@@ -34,7 +34,7 @@ public class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/request";
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
-    private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
+    private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter";
     private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request"; //Also used for cancelling
     private static final String DELETE_FRIEND_MAPPING = "friend";
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";

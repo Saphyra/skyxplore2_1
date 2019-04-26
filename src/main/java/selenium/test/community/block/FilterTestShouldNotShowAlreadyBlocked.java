@@ -1,15 +1,15 @@
 package selenium.test.community.block;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
-
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
 
 @Builder
 public class FilterTestShouldNotShowAlreadyBlocked {
@@ -18,15 +18,18 @@ public class FilterTestShouldNotShowAlreadyBlocked {
     private final BlockTestHelper blockTestHelper;
 
     public void testFilterShouldNotShowAlreadyBlocked() {
-        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
+        List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 2});
 
         SeleniumAccount account = accounts.get(0);
         SeleniumCharacter character = account.getCharacter(0);
         communityTestHelper.goToCommunityPageOf(account, character);
 
-        SeleniumCharacter otherCharacter = accounts.get(1).getCharacter(0);
+        SeleniumAccount otherAccount = accounts.get(1);
+        SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
         blockTestHelper.blockCharacter(otherCharacter);
 
-        assertTrue(blockTestHelper.searchCharacterCanBeBlocked(otherCharacter.getCharacterName()).isEmpty());
+        assertThat(blockTestHelper.searchCharacterCanBeBlocked(otherAccount.getCharacter(1).getCharacterName()).stream()
+            .anyMatch(blockableCharacter -> blockableCharacter.getCharacterName().equals(otherAccount.getCharacter(1).getCharacterName())))
+            .isTrue();
     }
 }
