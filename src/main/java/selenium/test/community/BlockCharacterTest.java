@@ -74,7 +74,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldShowOnlyMatchingCharacters() {
         FilterTestShouldShowOnlyMatchingCharacter.builder()
             .blockTestHelper(blockTestHelper)
@@ -85,7 +84,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
     public void testFilterShouldNotShowAlreadyBlocked() {
         FilterTestShouldNotShowAlreadyBlocked.builder()
             .blockTestHelper(blockTestHelper)

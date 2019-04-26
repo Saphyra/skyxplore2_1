@@ -1,5 +1,10 @@
 package selenium.test.community.block;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import lombok.Builder;
 import selenium.logic.domain.BlockableCharacter;
 import selenium.logic.domain.SeleniumAccount;
@@ -7,11 +12,6 @@ import selenium.logic.domain.SeleniumCharacter;
 import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
-
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @Builder
 public class FilterTestShouldShowOnlyMatchingCharacter {
@@ -31,9 +31,8 @@ public class FilterTestShouldShowOnlyMatchingCharacter {
 
         List<BlockableCharacter> blockableCharacters = blockTestHelper.searchCharacterCanBeBlocked(otherCharacter.getCharacterName());
         assertEquals(1, blockableCharacters.size());
-        assertTrue(
-            blockableCharacters.stream()
-                .anyMatch(blockableCharacter -> blockableCharacter.getCharacterName().equals(otherCharacter.getCharacterName()))
-        );
+        assertThat(blockableCharacters.stream()
+            .anyMatch(blockableCharacter -> blockableCharacter.getCharacterName().equals(otherCharacter.getCharacterName())))
+            .isTrue();
     }
 }
