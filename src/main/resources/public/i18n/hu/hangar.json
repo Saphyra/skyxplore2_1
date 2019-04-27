@@ -1,0 +1,164 @@
+{
+  "title": "Hangár - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Hangár"
+      }
+    ],
+    "select-game-mode": [
+      {
+        "key": "innerHTML",
+        "message": "Válassz játékmódot!"
+      }
+    ],
+
+    "mode-arcade-title": [
+      {
+        "key": "innerHTML",
+        "message": "Arcade"
+      }
+    ],
+    "mode-arcade-description": [
+      {
+        "key": "innerHTML",
+        "message": "Szabad kóborlás a bolygóközi térben. Döntsd el Te, hogy ki az ellenség, és ki a szövetséges, de vigyázz! Veszélyes idegen lények, és kegyetlen kalózok állnak lesben, hogy elvegyék tőled azt, ami a tiéd!"
+      }
+    ],
+
+    "mode-battle-royale-title": [
+      {
+        "key": "innerHTML",
+        "message": "Battle Royale"
+      }
+    ],
+    "mode-battle-royale-description": [
+      {
+        "key": "innerHTML",
+        "message": "Egy győztes, mindenki más vesztes. Légy Te az utolsó, aki életben marad!"
+      }
+    ],
+
+    "mode-clan-wars-title": [
+      {
+        "key": "innerHTML",
+        "message": "Klánok harca"
+      }
+    ],
+    "mode-clan-wars-description": [
+      {
+        "key": "innerHTML",
+        "message": "Két hajótípus csap össze ebben a kaotikus háborúban."
+      }
+    ],
+    "mode-clan-wars-label": [
+      {
+        "key": "innerHTML",
+        "message": "Ellenfél"
+      }
+    ],
+    "clan-wars-mode-random": [
+      {
+        "key": "innerHTML",
+        "message": "Véletlenszerű"
+      }
+    ],
+    "clan-wars-mode-defender": [
+      {
+        "key": "innerHTML",
+        "message": "Defender"
+      }
+    ],
+    "clan-wars-mode-dreadnought": [
+      {
+        "key": "innerHTML",
+        "message": "Dreadnought"
+      }
+    ],
+    "clan-wars-mode-eclipse": [
+      {
+        "key": "innerHTML",
+        "message": "Eclipse"
+      }
+    ],
+    "clan-wars-mode-saboteur": [
+      {
+        "key": "innerHTML",
+        "message": "Saboteur"
+      }
+    ],
+    "clan-wars-mode-starter": [
+      {
+        "key": "innerHTML",
+        "message": "Starter"
+      }
+    ],
+    "clan-wars-mode-supporter": [
+      {
+        "key": "innerHTML",
+        "message": "Supporter"
+      }
+    ],
+
+    "mode-teamfight-title": [
+      {
+        "key": "innerHTML",
+        "message": "Teamfight"
+      }
+    ],
+    "mode-teamfight-description": [
+      {
+        "key": "innerHTML",
+        "message": "Vezesd győzelemre a csapatod, és zsebeld be a dicsőséget ebben a csapatjátékra épülő módban!."
+      }
+    ],
+    "mode-teamfight-label": [
+      {
+        "key": "innerHTML",
+        "message": "Csapatméret"
+      }
+    ],
+
+    "mode-1v1-title": [
+      {
+        "key": "innerHTML",
+        "message": "1 vs 1"
+      }
+    ],
+    "mode-1v1-description": [
+      {
+        "key": "innerHTML",
+        "message": "Vajon jobb vagy, mint az ellenfeled? Győztes csak egy lehet!"
+      }
+    ],
+
+    "mode-tournament-title": [
+      {
+        "key": "innerHTML",
+        "message": "Bajnokság"
+      }
+    ],
+    "mode-tournament-description": [
+      {
+        "key": "innerHTML",
+        "message": "1 vs 1 harcok sorozata, és a legtöbb győzelmet elérő játékos nyeri meg az aréna királya címet."
+      }
+    ],
+
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "overview-button": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

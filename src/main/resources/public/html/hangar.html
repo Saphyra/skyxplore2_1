@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+    <TITLE>Hangár - SkyXplore 2.1</TITLE>
+    <META charset="UTF-8">
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+    <LINK rel="stylesheet" href="/css/hangar/hangar.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+
+    <SCRIPT src="js/hangar/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN>
+        <SECTION id="title-container">
+            <H2 id="select-game-mode"></H2>
+        </SECTION>
+
+        <SECTION id="mode-container">
+            <DIV class="mode" onclick="eventProcessor.processEvent(new Event(events.CREATE_LOBBY, GameMode.ARCADE))">
+                <H3 id="mode-arcade-title"></H3>
+                <P id="mode-arcade-description"></P>
+            </DIV>
+
+            <DIV class="mode" onclick="eventProcessor.processEvent(new Event(events.CREATE_LOBBY, GameMode.BATTLE_ROYALE))">
+                <H3 id="mode-battle-royale-title"></H3>
+                <P id="mode-battle-royale-description"></P>
+            </DIV>
+
+            <DIV class="mode" onclick="eventProcessor.processEvent(new Event(events.CREATE_LOBBY, GameMode.CLAN_WARS))">
+                <H3 id="mode-clan-wars-title"></H3>
+                <P id="mode-clan-wars-description"></P>
+
+                <LABEL>
+                    <SPAN id="mode-clan-wars-label"></SPAN>:
+                    <SELECT id='clan-wars-mode'>
+                        <OPTION id="clan-wars-mode-random" value='random'></OPTION>
+                        <OPTION id="clan-wars-mode-defender" value='defender'></OPTION>
+                        <OPTION id="clan-wars-mode-dreadnought" value='dreadnought'></OPTION>
+                        <OPTION id="clan-wars-mode-eclipse" value='eclipse'></OPTION>
+                        <OPTION id="clan-wars-mode-saboteur" value='saboteur'></OPTION>
+                        <OPTION id="clan-wars-mode-starter" value='starter'></OPTION>
+                        <OPTION id="clan-wars-mode-supporter" value='supporter'></OPTION>
+                    </SELECT>
+                </LABEL>
+            </DIV>
+
+            <DIV class="mode" onclick="eventProcessor.processEvent(new Event(events.CREATE_LOBBY, GameMode.TEAMFIGHT))">
+                <H3 id="mode-teamfight-title"></H3>
+                <P id="mode-teamfight-description"></P>
+
+                <LABEL>
+                    <SPAN id="mode-teamfight-label"></SPAN>:
+                    <SELECT id='teamfight-size'>
+                        <OPTION>2</OPTION>
+                        <OPTION>3</OPTION>
+                        <OPTION>5</OPTION>
+                        <OPTION>10</OPTION>
+                        <OPTION>25</OPTION>
+                        <OPTION>33</OPTION>
+                        <OPTION>50</OPTION>
+                    </SELECT>
+                </LABEL>
+            </DIV>
+
+            <DIV class="mode" onclick="eventProcessor.processEvent(new Event(events.CREATE_LOBBY, GameMode.VS))">
+                <H3 id="mode-1v1-title"></H3>
+                <P id="mode-1v1-description"></P>
+            </DIV>
+
+            <DIV class="mode" onclick="eventProcessor.processEvent(new Event(events.CREATE_LOBBY, GameMode.TOURNAMENT))">
+                <H3 id="mode-tournament-title"></H3>
+                <P id="mode-tournament-description"></P>
+            </DIV>
+        </SECTION>
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
+    </FOOTER>
+</DIV>
+</BODY>
+</HTML>

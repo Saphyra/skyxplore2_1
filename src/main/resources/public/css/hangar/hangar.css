@@ -1,0 +1,51 @@
+main{
+    text-align: center;
+}
+
+#title-container{
+    border-bottom: 3px ridge white;
+    padding: 0.25rem;
+}
+
+#mode-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 1rem;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.mode{
+    border: 3px outset white;
+    position: relative;
+}
+
+.mode *{
+    cursor: pointer;
+}
+
+.mode:hover{
+    border-color: red;
+}
+
+.mode h3{
+    border-bottom: inherit;
+    font-size: 2rem;
+}
+
+.mode p{
+    margin: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    min-height: 15rem;
+    min-width: 25rem;
+}
+
+.mode label{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 1.5rem;
+}

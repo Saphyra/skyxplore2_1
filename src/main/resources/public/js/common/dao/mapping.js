@@ -15,6 +15,7 @@ window.Mapping = {
     CHARACTER_NAME_EXISTS: "character/name",
     CHARACTER_SELECT: "characterselect",
     CREATE_CHARACTER: "character",
+    CREATE_LOBBY: "lobby",
     DECLINE_FRIEND_REQUEST: "friend/request",
     DELETE_ACCOUNT: "user",
     DELETE_CHARACTER: "character/*",

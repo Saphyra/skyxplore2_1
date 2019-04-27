@@ -12,5 +12,6 @@ public class LobbyCreatorService {
 
     public void createLobby(CreateLobbyRequest request, String characterId) {
         //TODO implement
+        throw new UnsupportedOperationException();
     }
 }
