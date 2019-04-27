@@ -12,6 +12,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -90,15 +92,15 @@ public class SlotConverterTest {
         SlotEntity entity = createSlotEntity();
         when(integerEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_FRONT_SLOT);
         when(stringEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT_DATA_ITEM_STRING);
-        ArrayList<String> list = new ArrayList<>();
-        list.add(DATA_ELEMENT);
-        when(objectMapper.readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, ArrayList.class)).thenReturn(list);
+        String[] dataArray = new String[]{DATA_ELEMENT};
+        List<String> list = Arrays.asList(dataArray);
+        when(objectMapper.readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, String[].class)).thenReturn(dataArray);
         //WHEN
         EquippedSlot result = underTest.convertEntity(entity);
         //THEN
         verify(integerEncryptor, times(4)).decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID));
         verify(stringEncryptor, times(4)).decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID));
-        verify(objectMapper, times(4)).readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, ArrayList.class);
+        verify(objectMapper, times(4)).readValue(EQUIPPED_SLOT_DATA_ITEM_STRING, String[].class);
         assertEquals(EQUIPPED_SLOT_ID, result.getSlotId());
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
         assertEquals(EQUIPPED_SLOT_FRONT_SLOT, result.getFrontSlot());

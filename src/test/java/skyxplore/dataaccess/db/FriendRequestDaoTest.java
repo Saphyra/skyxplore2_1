@@ -21,7 +21,6 @@ import static skyxplore.testutil.TestUtils.FRIEND_ID;
 import static skyxplore.testutil.TestUtils.createFriendRequest;
 import static skyxplore.testutil.TestUtils.createFriendRequestEntity;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class FriendRequestDaoTest {
     @Mock

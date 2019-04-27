@@ -8,16 +8,26 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.cache.EmailCache;
 import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.user.*;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.service.UserFacade;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.USER_EMAIL;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.USER_NAME;
+import static skyxplore.testutil.TestUtils.createAccountDeleteRequest;
+import static skyxplore.testutil.TestUtils.createChangeEmailRequest;
+import static skyxplore.testutil.TestUtils.createChangePasswordRequest;
+import static skyxplore.testutil.TestUtils.createChangeUserNameRequest;
+import static skyxplore.testutil.TestUtils.createUserRegistrationRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
@@ -75,7 +85,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testIsEmailExistsShouldCallCacheAndReturn() throws ExecutionException {
+    public void testIsEmailExistsShouldCallCacheAndReturn() {
         //GIVEN
         when(emailCache.get(USER_EMAIL)).thenReturn(Optional.of(true));
         //WHEN
@@ -98,7 +108,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testIsUserNameExistsShouldCallFacadeAndReturn() throws ExecutionException {
+    public void testIsUserNameExistsShouldCallFacadeAndReturn() {
         //GIVEN
         when(userNameCache.get(USER_NAME)).thenReturn(Optional.of(true));
         //WHEN

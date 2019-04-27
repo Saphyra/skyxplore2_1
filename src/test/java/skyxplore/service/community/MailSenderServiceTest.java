@@ -31,7 +31,6 @@ import static skyxplore.testutil.TestUtils.MAIL_SUBJECT;
 import static skyxplore.testutil.TestUtils.createBlockedCharacter;
 import static skyxplore.testutil.TestUtils.createSendMailRequest;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class MailSenderServiceTest {
     @Mock

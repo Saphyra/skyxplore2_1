@@ -36,7 +36,6 @@ import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createBlockedCharacter;
 import static skyxplore.testutil.TestUtils.createCharacter;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterQueryServiceTest {
     @Mock

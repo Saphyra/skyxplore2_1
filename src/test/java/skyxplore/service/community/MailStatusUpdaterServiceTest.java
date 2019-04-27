@@ -1,5 +1,19 @@
 package skyxplore.service.community;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.MailDao;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.community.mail.Mail;
+import skyxplore.exception.InvalidMailAccessException;
+import skyxplore.service.character.CharacterQueryService;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -9,23 +23,7 @@ import static skyxplore.testutil.TestUtils.MAIL_TO_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createMail;
 
-import java.util.Arrays;
-import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.community.mail.Mail;
-import skyxplore.exception.InvalidMailAccessException;
-import skyxplore.service.character.CharacterQueryService;
-
-
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class MailStatusUpdaterServiceTest {
     private static final List<String> MAIL_IDS = Arrays.asList(MAIL_ID_1);

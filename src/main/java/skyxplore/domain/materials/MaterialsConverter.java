@@ -1,6 +1,7 @@
 package skyxplore.domain.materials;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.StringEncryptor;
@@ -9,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-@SuppressWarnings("unchecked")
 public class MaterialsConverter extends ConverterBase<String, Materials> {
     private final ObjectMapper objectMapper;
     private final StringEncryptor stringEncryptor;
@@ -31,7 +32,10 @@ public class MaterialsConverter extends ConverterBase<String, Materials> {
             return null;
         }
         try {
-            return new Materials(objectMapper.readValue(entity, HashMap.class));
+            TypeReference<HashMap<String, Integer>> typeReference = new TypeReference<HashMap<String, Integer>>() {
+            };
+            Map<String, Integer> elements = objectMapper.readValue(entity, typeReference);
+            return new Materials(elements);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

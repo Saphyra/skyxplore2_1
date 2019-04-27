@@ -22,7 +22,6 @@ import static skyxplore.testutil.TestUtils.PRODUCT_ELEMENT_ID_EQUIPMENT;
 import static skyxplore.testutil.TestUtils.createProduct;
 import static skyxplore.testutil.TestUtils.createProductView;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class ProductQueryServiceTest {
     @Mock

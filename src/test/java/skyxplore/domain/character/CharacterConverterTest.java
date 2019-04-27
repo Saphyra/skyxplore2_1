@@ -11,7 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -26,7 +27,6 @@ import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createCharacterEntity;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterConverterTest {
     @Mock
@@ -59,9 +59,9 @@ public class CharacterConverterTest {
 
         when(stringEncryptor.decryptEntity(CHARACTER_ENCRYPTED_EQUIPMENTS, CHARACTER_ID_1)).thenReturn(CHARACTER_EQUIPMENT);
 
-        ArrayList<String> equipmentList = new ArrayList<>();
-        equipmentList.add(CHARACTER_EQUIPMENT);
-        when(objectMapper.readValue(CHARACTER_EQUIPMENT, ArrayList.class)).thenReturn(equipmentList);
+        String[] equipmentArray = new String[]{CHARACTER_EQUIPMENT};
+        List<String> equipmentList = Arrays.asList(equipmentArray);
+        when(objectMapper.readValue(CHARACTER_EQUIPMENT, String[].class)).thenReturn(equipmentArray);
         //WHEN
         SkyXpCharacter result = underTest.convertEntity(entity);
         //THEN

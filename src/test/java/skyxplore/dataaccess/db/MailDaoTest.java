@@ -25,7 +25,6 @@ import static skyxplore.testutil.TestUtils.MAIL_SEND_TIME_EPOCH;
 import static skyxplore.testutil.TestUtils.createMail;
 import static skyxplore.testutil.TestUtils.createMailEntity;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class MailDaoTest {
     @Mock

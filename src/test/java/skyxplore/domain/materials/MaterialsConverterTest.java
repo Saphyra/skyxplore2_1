@@ -1,12 +1,14 @@
 package skyxplore.domain.materials;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
@@ -47,12 +50,12 @@ public class MaterialsConverterTest {
         when(stringEncryptor.decryptEntity(MATERIAL_ENCRYPTED_ENTITY, FACTORY_ID_1)).thenReturn(MATERIAL_ENTITY);
         HashMap<String, Integer> map = new HashMap<>();
         map.put(MATERIAL_ID, MATERIAL_AMOUNT);
-        when(objectMapper.readValue(MATERIAL_ENTITY, HashMap.class)).thenReturn(map);
+        when(objectMapper.readValue(eq(MATERIAL_ENTITY), Mockito.<TypeReference<HashMap<String, Integer>>>any())).thenReturn(map);
         //WHEN
         Materials result = underTest.convertEntity(MATERIAL_ENCRYPTED_ENTITY, FACTORY_ID_1);
         //THEN
         verify(stringEncryptor).decryptEntity(MATERIAL_ENCRYPTED_ENTITY, FACTORY_ID_1);
-        verify(objectMapper).readValue(MATERIAL_ENTITY, HashMap.class);
+        verify(objectMapper).readValue(eq(MATERIAL_ENTITY), Mockito.<TypeReference<HashMap<String, Integer>>>any());
         assertEquals(map, result);
     }
 

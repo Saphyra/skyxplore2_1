@@ -1,15 +1,5 @@
 package skyxplore.testutil;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.EquipRequest;
@@ -31,7 +21,6 @@ import skyxplore.controller.view.slot.SlotView;
 import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.accesstoken.AccessTokenEntity;
 import skyxplore.domain.accesstoken.SkyXpAccessToken;
@@ -60,7 +49,15 @@ import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.domain.user.UserEntity;
 
-@SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
 public class TestUtils {
     //ACCESS TOKEN
     public static final String ACCESS_TOKEN_ID = "access_token_id";
@@ -73,7 +70,6 @@ public class TestUtils {
 
     //Category
     public static final String CATEGORY_ID = "category_id";
-    public static final String CATEGORY_CONTENT = "category_content";
 
     //Character
     public static final String CHARACTER_ID_1 = "character_id_1";
@@ -125,8 +121,8 @@ public class TestUtils {
 
     //Equip
     public static final String EQUIP_ITEM_ID = "equip_item_id";
-    public static final String EQUIP_TO = "equip_to";
-    public static final String UNEQUIP_FROM = "unequip_from";
+    private static final String EQUIP_TO = "equip_to";
+    private static final String UNEQUIP_FROM = "unequip_from";
 
     //EquippedShip
     public static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
@@ -148,14 +144,14 @@ public class TestUtils {
     public static final String EQUIPPED_SLOT_ENCRYPTED_SLOT_ITEM = "equipped_slot_encrypted_slot_item";
     public static final String EQUIPPED_SLOT_DATA_ITEM_STRING = "equipped_slot_data_item_string";
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_SLOT = "equipped_slot_encrypted_front_slot";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_SLOT = "equipped_slot_encrypted_left_slot";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_SLOT = "equipped_slot_encrypted_right_slot";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_BACK_SLOT = "equipped_slot_encrypted_back_slot";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_ITEM = "equipped_slot_encrypted_front_item";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_ITEM = "equipped_slot_encrypted_left_item";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_ITEM = "equipped_slot_encrypted_right_item";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_BACK_ITEM = "equipped_slot_encrypted_back_item";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_SLOT = "equipped_slot_encrypted_front_slot";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_SLOT = "equipped_slot_encrypted_left_slot";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_SLOT = "equipped_slot_encrypted_right_slot";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_BACK_SLOT = "equipped_slot_encrypted_back_slot";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_ITEM = "equipped_slot_encrypted_front_item";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_ITEM = "equipped_slot_encrypted_left_item";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_ITEM = "equipped_slot_encrypted_right_item";
+    private static final String EQUIPPED_SLOT_ENCRYPTED_BACK_ITEM = "equipped_slot_encrypted_back_item";
 
     //Factory
     public static final String FACTORY_ID_1 = "factory_id_1";
@@ -194,16 +190,14 @@ public class TestUtils {
     public static final String MATERIAL_ENCRYPTED_ENTITY = "material_encrypted_entity";
     public static final String MATERIAL_ENTITY = "material_entity";
     public static final Integer MATERIAL_AMOUNT = 2;
-    public static final Boolean MATERIAL_BUILDABLE = true;
-    public static final Integer MATERIAL_BUILDPRICE = 100;
-    public static final Integer MATERIAL_CONSTRUCTION_TIME = 20;
-    public static final String MATERIAL_DESCRIPTION = "material_description";
+    private static final Boolean MATERIAL_BUILDABLE = true;
+    private static final Integer MATERIAL_BUILDPRICE = 100;
+    private static final Integer MATERIAL_CONSTRUCTION_TIME = 20;
     public static final String MATERIAL_ID = "material_id";
-    public static final String MATERIAL_KEY = "material_id";
+    public static final String MATERIAL_KEY = "material_KEY";
     public static final Integer MATERIAL_MATERIAL_AMOUNT = 3;
-    public static final String MATERIAL_MATERIAL_ID = "material_material_id";
-    public static final String MATERIAL_NAME = "material_name";
-    public static final String MATERIAL_SLOT = "material_slot";
+    private static final String MATERIAL_MATERIAL_ID = "material_material_id";
+    private static final String MATERIAL_SLOT = "material_slot";
 
     //Product
     public static final Long PRODUCT_ADDED_AT = 1000L;
@@ -222,15 +216,6 @@ public class TestUtils {
     public static final OffsetDateTime PRODUCT_START_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_START_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
     public static final Long PRODUCT_END_TIME_EPOCH = 20000L;
     public static final OffsetDateTime PRODUCT_END_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
-
-    //Slot
-    public static Integer SLOT_DEFENSE_FRONT = 2;
-    public static Integer SLOT_DEFENSE_SIDE = 3;
-    public static Integer SlOT_DEFENSE_BACK = 5;
-
-    public static Integer SLOT_WEAPON_FRONT = 7;
-    public static Integer SLOT_WEAPON_SIDE = 11;
-    public static Integer SLOT_WEAPON_BACK = 13;
 
     //User
     public static final String USER_EMAIL = "user_email";
@@ -346,11 +331,15 @@ public class TestUtils {
         return new CredentialsEntity(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
-    public static Slot createDefenseSlot() {
+    private static Slot createDefenseSlot() {
         Slot slot = new Slot();
+        //Slot
+        Integer SLOT_DEFENSE_FRONT = 2;
         slot.setFront(SLOT_DEFENSE_FRONT);
+        Integer SLOT_DEFENSE_SIDE = 3;
         slot.setSide(SLOT_DEFENSE_SIDE);
-        slot.setBack(SlOT_DEFENSE_BACK);
+        Integer slOT_DEFENSE_BACK = 5;
+        slot.setBack(slOT_DEFENSE_BACK);
         return slot;
     }
 
@@ -442,16 +431,6 @@ public class TestUtils {
         return factory;
     }
 
-    public static FactoryData createFactoryData() {
-        TestFactoryData factoryData = new TestFactoryData();
-        factoryData.setId(DATA_ELEMENT);
-        factoryData.setSlot(DATA_SLOT);
-        factoryData.setConstructionTime(PRODUCT_CONSTRUCTION_TIME);
-        factoryData.setBuildPrice(PRODUCT_BUILD_PRICE);
-        factoryData.setMaterials(createMaterials());
-        return factoryData;
-    }
-
     public static FactoryEntity createFactoryEntity() {
         FactoryEntity entity = new FactoryEntity();
         entity.setFactoryId(FACTORY_ID_1);
@@ -514,12 +493,6 @@ public class TestUtils {
         GeneralDescription generalDescription = new TestGeneralDescription(DATA_CATEGORY_1);
         generalDescription.setId(DATA_ELEMENT);
         return generalDescription;
-    }
-
-    public static Map<String, GeneralDescription> createGeneralDescriptionMap() {
-        Map<String, GeneralDescription> map = new HashMap<>();
-        map.put(DATA_ELEMENT, createGeneralDescription());
-        return map;
     }
 
     public static Mail createMail() {
@@ -720,10 +693,13 @@ public class TestUtils {
         return request;
     }
 
-    public static Slot createWeaponSlot() {
+    private static Slot createWeaponSlot() {
         Slot slot = new Slot();
+        Integer SLOT_WEAPON_FRONT = 7;
         slot.setFront(SLOT_WEAPON_FRONT);
+        Integer SLOT_WEAPON_SIDE = 11;
         slot.setSide(SLOT_WEAPON_SIDE);
+        Integer SLOT_WEAPON_BACK = 13;
         slot.setBack(SLOT_WEAPON_BACK);
         return slot;
     }

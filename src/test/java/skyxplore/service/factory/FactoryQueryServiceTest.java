@@ -1,5 +1,17 @@
 package skyxplore.service.factory;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.FactoryDao;
+import skyxplore.domain.factory.Factory;
+import skyxplore.exception.FactoryNotFoundException;
+
+import java.util.Map;
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -7,28 +19,11 @@ import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.MATERIAL_AMOUNT;
-import static skyxplore.testutil.TestUtils.MATERIAL_ID;
+import static skyxplore.testutil.TestUtils.MATERIAL_KEY;
 import static skyxplore.testutil.TestUtils.createFactory;
-
-import java.util.Map;
-import java.util.Optional;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.domain.factory.Factory;
-import skyxplore.exception.FactoryNotFoundException;
-import skyxplore.service.character.CharacterQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryQueryServiceTest {
-    @Mock
-    private CharacterQueryService characterQueryService;
-
     @Mock
     private FactoryDao factoryDao;
 
@@ -64,11 +59,10 @@ public class FactoryQueryServiceTest {
         //WHEN
         Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
-        verify(characterQueryService).findByCharacterId(CHARACTER_ID_1);
         verify(factoryDao).findByCharacterId(CHARACTER_ID_1);
         assertEquals(1, result.size());
-        assertTrue(result.containsKey(MATERIAL_ID));
-        assertEquals(result.get(MATERIAL_ID), MATERIAL_AMOUNT);
+        assertTrue(result.containsKey(MATERIAL_KEY));
+        assertEquals(result.get(MATERIAL_KEY), MATERIAL_AMOUNT);
     }
 
     @Test

@@ -31,9 +31,6 @@ public class DeleteAccountServiceTest {
     private CredentialsService credentialsService;
 
     @Mock
-    private UserQueryService userQueryService;
-
-    @Mock
     private PasswordService passwordService;
 
     @Mock

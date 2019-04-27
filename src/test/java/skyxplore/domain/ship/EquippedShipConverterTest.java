@@ -13,9 +13,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,7 +34,6 @@ import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createEquippedShip;
 import static skyxplore.testutil.TestUtils.createEquippedShipEntity;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipConverterTest {
     @Mock
@@ -68,9 +67,8 @@ public class EquippedShipConverterTest {
         when(integerEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID)).thenReturn(DATA_SHIP_COREHULL);
         when(integerEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(DATA_SHIP_CONNECTOR_SLOT);
         when(stringEncryptor.decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID)).thenReturn(EQUIPPED_SHIP_CONNECTOR_EQUIPPED);
-        ArrayList<String> connectors = new ArrayList<>();
-        connectors.add(EQUIPPED_SHIP_CONNECTOR_EQUIPPED);
-        when(objectMapper.readValue(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, ArrayList.class)).thenReturn(connectors);
+        String[] connectorsArray = new String[]{EQUIPPED_SHIP_CONNECTOR_EQUIPPED};
+        when(objectMapper.readValue(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, String[].class)).thenReturn(connectorsArray);
         //WHEN
         EquippedShip result = underTest.convertEntity(equippedShipEntity);
         //THEN
@@ -78,13 +76,13 @@ public class EquippedShipConverterTest {
         verify(integerEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID);
         verify(integerEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID);
         verify(stringEncryptor).decryptEntity(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID);
-        verify(objectMapper).readValue(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, ArrayList.class);
+        verify(objectMapper).readValue(EQUIPPED_SHIP_CONNECTOR_EQUIPPED, String[].class);
         assertEquals(EQUIPPED_SHIP_ID, result.getShipId());
         assertEquals(CHARACTER_ID_1, result.getCharacterId());
         assertEquals(EQUIPPED_SHIP_TYPE, result.getShipType());
         assertEquals(DATA_SHIP_COREHULL, result.getCoreHull());
         assertEquals(DATA_SHIP_CONNECTOR_SLOT, result.getConnectorSlot());
-        assertTrue(result.getConnectorEquipped().contains(EQUIPPED_SHIP_CONNECTOR_EQUIPPED));
+        assertThat(result.getConnectorEquipped()).containsOnly(EQUIPPED_SHIP_CONNECTOR_EQUIPPED);
         assertEquals(DEFENSE_SLOT_ID, result.getDefenseSlotId());
         assertEquals(WEAPON_SLOT_ID, result.getWeaponSlotId());
     }

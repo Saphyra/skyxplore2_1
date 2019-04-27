@@ -31,7 +31,6 @@ import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createFriendRequest;
 import static skyxplore.testutil.TestUtils.createFriendship;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class CommunityFacadeTest {
     @Mock

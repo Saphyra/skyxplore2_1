@@ -9,11 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@SuppressWarnings("unchecked")
 public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
@@ -73,47 +73,26 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
             domain.setSlotId(entity.getSlotId());
             domain.setShipId(entity.getShipId());
             domain.setFrontSlot(integerEncryptor.decryptEntity(entity.getFrontSlot(), entity.getSlotId()));
-            domain.addFront(
-                objectMapper.readValue(
-                    stringEncryptor.decryptEntity(
-                        entity.getFrontEquipped(),
-                        entity.getSlotId()
-                    ),
-                    ArrayList.class
-                )
-            );
+            domain.addFront(getElements(entity.getSlotId(), entity.getFrontEquipped()));
             domain.setLeftSlot(integerEncryptor.decryptEntity(entity.getLeftSlot(), entity.getSlotId()));
-            domain.addLeft(
-                objectMapper.readValue(
-                    stringEncryptor.decryptEntity(
-                        entity.getLeftEquipped(),
-                        entity.getSlotId()
-                    ),
-                    ArrayList.class
-                )
-            );
+            domain.addLeft(getElements(entity.getSlotId(), entity.getLeftEquipped()));
             domain.setRightSlot(integerEncryptor.decryptEntity(entity.getRightSlot(), entity.getSlotId()));
-            domain.addRight(
-                objectMapper.readValue(
-                    stringEncryptor.decryptEntity(
-                        entity.getRightEquipped(),
-                        entity.getSlotId()
-                    ),
-                    ArrayList.class)
-            );
+            domain.addRight(getElements(entity.getSlotId(), entity.getRightEquipped()));
             domain.setBackSlot(integerEncryptor.decryptEntity(entity.getBackSlot(), entity.getSlotId()));
-            domain.addBack(
-                objectMapper.readValue(
-                    stringEncryptor.decryptEntity(
-                        entity.getBackEquipped(),
-                        entity.getSlotId()
-                    ),
-                    ArrayList.class
-                )
-            );
+            domain.addBack(getElements(entity.getSlotId(), entity.getBackEquipped()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return domain;
+    }
+
+    private List<String> getElements(String slotId, String frontEquipped) throws IOException {
+        return Arrays.asList(objectMapper.readValue(
+            stringEncryptor.decryptEntity(
+                frontEquipped,
+                slotId
+            ),
+            String[].class
+        ));
     }
 }

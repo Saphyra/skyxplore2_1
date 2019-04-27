@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -138,7 +137,7 @@ public class CharacterControllerTest {
     }
 
     @Test
-    public void testIsCharNameExistsShouldCallCacheAndReturnResponse() throws ExecutionException {
+    public void testIsCharNameExistsShouldCallCacheAndReturnResponse() {
         //GIVEN
         when(characterNameCache.get(CHARACTER_NAME)).thenReturn(Optional.of(true));
         //WHEN

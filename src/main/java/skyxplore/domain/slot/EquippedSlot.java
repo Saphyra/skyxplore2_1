@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
-@SuppressWarnings({"unused", "unchecked", "WeakerAccess"})
 public class EquippedSlot {
     private String slotId;
     private String shipId;
@@ -59,7 +58,7 @@ public class EquippedSlot {
         frontEquipped.add(element);
     }
 
-    public void addFront(Collection<String> elements) {
+    void addFront(Collection<String> elements) {
         elements.forEach(this::addFront);
     }
 
@@ -76,7 +75,7 @@ public class EquippedSlot {
         leftEquipped.add(element);
     }
 
-    public void addLeft(Collection<String> elements) {
+    void addLeft(Collection<String> elements) {
         elements.forEach(this::addLeft);
     }
 
@@ -93,7 +92,7 @@ public class EquippedSlot {
         rightEquipped.add(element);
     }
 
-    public void addRight(Collection<String> elements) {
+    void addRight(Collection<String> elements) {
         elements.forEach(this::addRight);
     }
 
@@ -110,7 +109,7 @@ public class EquippedSlot {
         backEquipped.add(element);
     }
 
-    public void addBack(Collection<String> elements) {
+    void addBack(Collection<String> elements) {
         elements.forEach(this::addBack);
     }
 
@@ -121,33 +120,34 @@ public class EquippedSlot {
     }
 
     public ArrayList<String> getFrontEquipped() {
-        return (ArrayList<String>) frontEquipped.clone();
+        return new ArrayList<>(frontEquipped);
     }
 
+    @SuppressWarnings("unused")
     private void setFrontEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
     public ArrayList<String> getBackEquipped() {
-        return (ArrayList<String>) backEquipped.clone();
+        return new ArrayList<>(backEquipped);
     }
-
+    @SuppressWarnings("unused")
     private void setBackEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
     public ArrayList<String> getLeftEquipped() {
-        return (ArrayList<String>) leftEquipped.clone();
+        return new ArrayList<>(leftEquipped);
     }
-
+    @SuppressWarnings("unused")
     private void setLeftEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
     public ArrayList<String> getRightEquipped() {
-        return (ArrayList<String>) rightEquipped.clone();
+        return new ArrayList<>(rightEquipped);
     }
-
+    @SuppressWarnings("unused")
     private void setRightEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }

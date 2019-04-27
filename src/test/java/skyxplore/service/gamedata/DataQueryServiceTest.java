@@ -19,33 +19,42 @@ import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
 @RunWith(MockitoJUnitRunner.class)
 public class DataQueryServiceTest {
     @Mock
+    @SuppressWarnings("unused")
     private AbilityService abilityService;
 
     @Mock
+    @SuppressWarnings("unused")
     private ArmorService armorService;
 
     @Mock
+    @SuppressWarnings("unused")
     private BatteryService batteryService;
 
     @Mock
+    @SuppressWarnings("unused")
     private CoreHullService coreHullService;
 
     @Mock
+    @SuppressWarnings("unused")
     private ExtenderService extenderService;
 
     @Mock
+    @SuppressWarnings("unused")
     private GeneratorService generatorService;
 
     @Mock
     private MaterialService materialService;
 
     @Mock
+    @SuppressWarnings("unused")
     private ShieldService shieldService;
 
     @Mock
+    @SuppressWarnings("unused")
     private ShipService shipService;
 
     @Mock
+    @SuppressWarnings("unused")
     private StorageService storageService;
 
     @Mock

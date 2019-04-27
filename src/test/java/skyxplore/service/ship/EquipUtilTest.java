@@ -1,5 +1,17 @@
 package skyxplore.service.ship;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.SlotDao;
+import skyxplore.dataaccess.gamedata.entity.Extender;
+import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.exception.BadSlotNameException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,19 +22,6 @@ import static skyxplore.service.EquippedShipFacade.WEAPON_SLOT_NAME;
 import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
 import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createEquippedShip;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.dataaccess.gamedata.entity.Extender;
-import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.exception.BadSlotNameException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipUtilTest {
@@ -41,7 +40,7 @@ public class EquipUtilTest {
         String testId = "id";
         when(extenderService.get("id")).thenReturn(new Extender());
         //WHEN
-        Boolean result = underTest.isExtender(testId);
+        boolean result = underTest.isExtender(testId);
         //THEN
         assertTrue(result);
     }
@@ -52,7 +51,7 @@ public class EquipUtilTest {
         String testId = "id";
         when(extenderService.get("id")).thenReturn(null);
         //WHEN
-        Boolean result = underTest.isExtender(testId);
+        boolean result = underTest.isExtender(testId);
         //THEN
         assertFalse(result);
     }

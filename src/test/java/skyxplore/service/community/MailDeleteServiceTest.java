@@ -1,5 +1,21 @@
 package skyxplore.service.community;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.dataaccess.db.MailDao;
+import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.domain.community.mail.Mail;
+import skyxplore.exception.InvalidMailAccessException;
+import skyxplore.service.character.CharacterQueryService;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -11,24 +27,6 @@ import static skyxplore.testutil.TestUtils.MAIL_TO_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 import static skyxplore.testutil.TestUtils.createMail;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.community.mail.Mail;
-import skyxplore.exception.InvalidMailAccessException;
-import skyxplore.service.character.CharacterQueryService;
-
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class MailDeleteServiceTest {
     private static final List<String> MAIL_IDS = Arrays.asList(MAIL_ID_1);

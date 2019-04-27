@@ -5,28 +5,19 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.character.EquipmentCategoryRequest;
 import skyxplore.dataaccess.gamedata.entity.Armor;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.service.gamedata.CategoryQueryService;
 import skyxplore.service.gamedata.DataQueryService;
-
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
 import static skyxplore.testutil.TestUtils.createGeneralDescription;
-import static skyxplore.testutil.TestUtils.createGeneralDescriptionMap;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @RunWith(MockitoJUnitRunner.class)
 public class GameDataFacadeTest {
-    @Mock
-    private CategoryQueryService categoryQueryService;
-
     @Mock
     private DataQueryService dataQueryService;
 
@@ -56,18 +47,6 @@ public class GameDataFacadeTest {
         //THEN
         verify(dataQueryService).getFactoryData(DATA_ELEMENT);
         assertEquals(armor, result);
-    }
-
-    @Test
-    public void testGetElementsOfCategoryShouldCallServiceAndReturn() {
-        //GIVEN
-        Map<String, GeneralDescription> generalDescriptionMap = createGeneralDescriptionMap();
-        when(categoryQueryService.getElementsOfCategory(EquipmentCategoryRequest.ALL)).thenReturn(generalDescriptionMap);
-        //WHEN
-        Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ALL);
-        //THEN
-        verify(categoryQueryService).getElementsOfCategory(EquipmentCategoryRequest.ALL);
-        assertEquals(generalDescriptionMap, result);
     }
 
     @Test

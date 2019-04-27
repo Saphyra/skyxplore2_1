@@ -28,14 +28,13 @@ import java.util.List;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
-@SuppressWarnings({"UnstableApiUsage", "WeakerAccess"})
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment";
     private static final String CREATE_CHARACTER_MAPPING = "character";
-    public static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
+    private static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
     private static final String GET_CHARACTERS_MAPPING = "character";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/storage";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";

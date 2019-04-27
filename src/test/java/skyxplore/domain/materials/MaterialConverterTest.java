@@ -1,10 +1,12 @@
 package skyxplore.domain.materials;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CONVERTER_ENTITY;
 import static skyxplore.testutil.TestUtils.CONVERTER_INT_VALUE;
@@ -41,7 +44,7 @@ public class MaterialConverterTest {
         //GIVEN
         HashMap<String, Integer> map = new HashMap<>();
         map.put(CONVERTER_KEY, CONVERTER_INT_VALUE);
-        when(objectMapper.readValue(CONVERTER_ENTITY, HashMap.class)).thenReturn(map);
+        when(objectMapper.readValue(eq(CONVERTER_ENTITY), Mockito.<TypeReference<HashMap<String, Integer>>>any())).thenReturn(map);
         //WHEN
         Materials result = underTest.convertEntity(CONVERTER_ENTITY);
         //THEN

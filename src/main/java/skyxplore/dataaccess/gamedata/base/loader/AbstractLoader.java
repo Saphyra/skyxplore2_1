@@ -8,7 +8,6 @@ import skyxplore.dataaccess.gamedata.base.ContentLoader;
 import skyxplore.dataaccess.gamedata.base.TypedItem;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
-@SuppressWarnings("WeakerAccess")
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractLoader<T> implements ContentLoader {
@@ -16,7 +15,7 @@ public abstract class AbstractLoader<T> implements ContentLoader {
 
     protected final Class<T> clazz;
 
-    protected void putGeneralDescription(T content, AbstractGameDataService<T> gameDataService, String path) {
+    void putGeneralDescription(T content, AbstractGameDataService<T> gameDataService, String path) {
         if (content instanceof GeneralDescription) {
             GeneralDescription d = (GeneralDescription) content;
             log.debug("Loaded element. Key: {}, Value: {}", d.getId(), content);
@@ -26,11 +25,11 @@ public abstract class AbstractLoader<T> implements ContentLoader {
         }
     }
 
-    protected String getClassName() {
+    String getClassName() {
         return clazz.getSimpleName().toLowerCase();
     }
 
-    protected boolean isTypeMatches(TypedItem typedItem) {
+    boolean isTypeMatches(TypedItem typedItem) {
         return getClassName().equals(typedItem.getType().toLowerCase());
     }
 }

@@ -8,7 +8,6 @@ import skyxplore.domain.character.SkyXpCharacter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@SuppressWarnings({"unchecked", "unused", "WeakerAccess"})
 @Data
 public class EquippedShip {
     private String shipId;
@@ -27,7 +26,7 @@ public class EquippedShip {
         connectorEquipped.add(element);
     }
 
-    public void addConnectors(Collection<String> connectors) {
+    void addConnectors(Collection<String> connectors) {
         connectors.forEach(this::addConnector);
     }
 
@@ -56,9 +55,10 @@ public class EquippedShip {
     }
 
     public ArrayList<String> getConnectorEquipped() {
-        return (ArrayList<String>) connectorEquipped.clone();
+        return new ArrayList<>(connectorEquipped);
     }
 
+    @SuppressWarnings("unused")
     private void setConnectorEquipped(ArrayList<String> a) {
         throw new UnsupportedOperationException("Setting equipped connectors is not supported.");
     }

@@ -10,12 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("unchecked")
 public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
@@ -57,13 +56,13 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
             domain.setShipType(stringEncryptor.decryptEntity(entity.getShipType(), entity.getShipId()));
             domain.setCoreHull(integerEncryptor.decryptEntity(entity.getCoreHull(), entity.getShipId()));
             domain.setConnectorSlot(integerEncryptor.decryptEntity(entity.getConnectorSlot(), entity.getShipId()));
-            domain.addConnectors(objectMapper.readValue(
+            domain.addConnectors(Arrays.asList(objectMapper.readValue(
                 stringEncryptor.decryptEntity(
                     entity.getConnectorEquipped(),
                     entity.getShipId()
                 ),
-                ArrayList.class)
-            );
+                String[].class)
+            ));
             domain.setDefenseSlotId(entity.getDefenseSlotId());
             domain.setWeaponSlotId(entity.getWeaponSlotId());
         } catch (IOException e) {

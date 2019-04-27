@@ -19,13 +19,12 @@ import java.util.jar.JarFile;
 
 import static java.util.Objects.isNull;
 
-@SuppressWarnings({"unchecked", "WeakerAccess"})
 @Slf4j
 public class JarLoader<T> extends AbstractLoader<T> {
     private final String jarPath;
     private final AbstractGameDataService<T> gameDataService;
 
-    public JarLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
+    JarLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
         super(clazz);
         this.gameDataService = gameDataService;
         this.jarPath = gameDataService.getJarPath();
@@ -57,6 +56,7 @@ public class JarLoader<T> extends AbstractLoader<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void loadJarEntry(JarFile jarFile, JarEntry entry) {
         String entryName = entry.getName();
         if (entryName.startsWith(jarPath) && entryName.endsWith(".json")) {

@@ -10,7 +10,6 @@ import java.io.File;
 
 import static java.util.Objects.isNull;
 
-@SuppressWarnings({"WeakerAccess", "ConstantConditions", "unchecked"})
 @Slf4j
 public class FileLoader<T> extends AbstractLoader<T> {
     private static final JsonFileFilter jsonFilter = new JsonFileFilter();
@@ -18,7 +17,7 @@ public class FileLoader<T> extends AbstractLoader<T> {
     private final File root;
     private final AbstractGameDataService<T> gameDataService;
 
-    public FileLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
+    FileLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
         super(clazz);
         this.gameDataService = gameDataService;
         this.root = new File(gameDataService.getPath());
@@ -50,6 +49,7 @@ public class FileLoader<T> extends AbstractLoader<T> {
         return typedItem;
     }
 
+    @SuppressWarnings("unchecked")
     private void loadFile(File file) {
         if (clazz == String.class) {
             String key = FilenameUtils.removeExtension(file.getName());

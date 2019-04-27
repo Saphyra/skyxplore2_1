@@ -28,34 +28,24 @@ public class CategoryQueryServiceTest {
     private static final String WEAPON_ID = "weapon_id";
 
     private Armor armor = new Armor();
-    private ArmorService armorService;
 
     private Battery battery = new Battery();
-    private BatteryService batteryService;
 
     private CoreHull coreHull = new CoreHull();
-    private CoreHullService coreHullService;
 
     private Extender extender = new Extender();
-    private ExtenderService extenderService;
 
     private Generator generator = new Generator();
-    private GeneratorService generatorService;
 
     private Material material = new Material();
-    private MaterialService materialService;
 
     private Shield shield = new Shield();
-    private ShieldService shieldService;
 
     private Ship ship = new Ship();
-    private ShipService shipService;
 
     private Storage storage = new Storage();
-    private StorageService storageService;
 
     private Weapon weapon = new Weapon();
-    private WeaponService weaponService;
 
     @InjectMocks
     private CategoryQueryService underTest;
@@ -63,43 +53,43 @@ public class CategoryQueryServiceTest {
     @Before
     public void init() {
         armor.setId(ARMOR_ID);
-        armorService = new ArmorService();
+        ArmorService armorService = new ArmorService();
         armorService.put(ARMOR_ID, armor);
 
         battery.setId(BATTERY_ID);
-        batteryService = new BatteryService();
+        BatteryService batteryService = new BatteryService();
         batteryService.put(BATTERY_ID, battery);
 
         coreHull.setId(COREHULL_ID);
-        coreHullService = new CoreHullService();
+        CoreHullService coreHullService = new CoreHullService();
         coreHullService.put(COREHULL_ID, coreHull);
 
         extender.setId(EXTENDER_ID);
-        extenderService = new ExtenderService();
+        ExtenderService extenderService = new ExtenderService();
         extenderService.put(EXTENDER_ID, extender);
 
         generator.setId(GENERATOR_ID);
-        generatorService = new GeneratorService();
+        GeneratorService generatorService = new GeneratorService();
         generatorService.put(GENERATOR_ID, generator);
 
         material.setId(MATERIAL_ID);
-        materialService = new MaterialService();
+        MaterialService materialService = new MaterialService();
         materialService.put(MATERIAL_ID, material);
 
         shield.setId(SHIELD_ID);
-        shieldService = new ShieldService();
+        ShieldService shieldService = new ShieldService();
         shieldService.put(SHIELD_ID, shield);
 
         ship.setId(SHIP_ID);
-        shipService = new ShipService();
+        ShipService shipService = new ShipService();
         shipService.put(SHIP_ID, ship);
 
         storage.setId(STORAGE_ID);
-        storageService = new StorageService();
+        StorageService storageService = new StorageService();
         storageService.put(STORAGE_ID, storage);
 
         weapon.setId(WEAPON_ID);
-        weaponService = new WeaponService();
+        WeaponService weaponService = new WeaponService();
         weaponService.put(WEAPON_ID, weapon);
 
         underTest = new CategoryQueryService(
