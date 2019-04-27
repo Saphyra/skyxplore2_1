@@ -37,6 +37,7 @@ public class BlockFriendRequestSenderTest {
         friendshipTestHelper.blockFriendRequestSender(character);
         assertThat(communityPage.getFriendRequests()).isEmpty();
 
+        communityPage.getBlockCharactersPageButton().click();
         assertThat(blockTestHelper.getBlockedCharacters().stream()
             .anyMatch(blockedCharacter -> blockedCharacter.getCharacterName().equals(character.getCharacterName())))
             .isTrue();

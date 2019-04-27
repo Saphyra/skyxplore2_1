@@ -377,6 +377,7 @@
     "block-character": "Letiltás",
     "decline-friend-request": "Elutasítás",
     "accept-friend-request": "Elfogadás",
-    "cancel-friend-request": "Visszavonás"
+    "cancel-friend-request": "Visszavonás",
+    "allow-blocked-character": "Feloldás"
   }
 }

@@ -1,12 +1,7 @@
 package skyxplore.controller;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-
-import java.util.List;
-
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
@@ -26,6 +18,12 @@ import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestViewConverter;
 import skyxplore.service.CommunityFacade;
 
+import javax.validation.Valid;
+import java.util.List;
+
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+
 @SuppressWarnings("WeakerAccess")
 @RestController
 @Slf4j
@@ -33,7 +31,7 @@ import skyxplore.service.CommunityFacade;
 public class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/request";
-    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
+    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter";
     private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter";
     private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request"; //Also used for cancelling
     private static final String DELETE_FRIEND_MAPPING = "friend";
@@ -68,7 +66,7 @@ public class CommunityController {
         communityFacade.addFriendRequest(request.getValue(), characterId, userId);
     }
 
-    @PostMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)
+    @DeleteMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)
     public void allowBlockedCharacter(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId

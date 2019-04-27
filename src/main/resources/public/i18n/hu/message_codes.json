@@ -4,6 +4,7 @@
   "BAD_CREDENTIALS": "Felhasználónév és jelszó kombinációja ismeretlen.",
   "BAD_CONFIRM_PASSWORD": "A jelszavak nem egyeznek.",
   "BAD_PASSWORD": "Hibás jelszó.",
+  "CHARACTER_ALLOWED": "Tiltás feloldva.",
   "CHARACTER_BLOCKED": "Felhasználó letiltva.",
   "CHARACTER_CREATED": "Karakter létrehozva.",
   "CHARACTER_DELETED": "Karakter törölve.",

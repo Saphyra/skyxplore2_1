@@ -1,20 +1,19 @@
 package selenium.test.community.helper;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.BlockableCharacter;
 import selenium.logic.domain.BlockedCharacter;
 import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class BlockTestHelper {
@@ -57,9 +56,8 @@ public class BlockTestHelper {
     }
 
     public List<BlockedCharacter> getBlockedCharacters() {
-        communityPage.getBlockCharactersPageButton().click();
         return communityPage.getBlockedCharacters().stream()
-            .map(element -> new BlockedCharacter(driver, element))
+            .map(element -> new BlockedCharacter(element, messageCodes))
             .collect(Collectors.toList());
     }
 }
