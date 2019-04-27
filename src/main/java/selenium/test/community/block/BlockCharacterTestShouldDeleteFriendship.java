@@ -39,6 +39,8 @@ public class BlockCharacterTestShouldDeleteFriendship {
         communityTestHelper.goToCommunityPageOf(account, character);
         blockTestHelper.blockCharacter(otherCharacter);
 
+        communityPage.getFriendsMainPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         assertTrue(communityPage.getFriends().isEmpty());
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter);
