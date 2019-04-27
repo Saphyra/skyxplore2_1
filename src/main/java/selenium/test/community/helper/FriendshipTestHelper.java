@@ -1,23 +1,22 @@
 package selenium.test.community.helper;
 
-import static org.junit.Assert.assertTrue;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.page.CommunityPage;
+import selenium.logic.validator.NotificationValidator;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.page.CommunityPage;
-import selenium.logic.validator.NotificationValidator;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class FriendshipTestHelper {
@@ -42,6 +41,15 @@ public class FriendshipTestHelper {
             .findFirst()
             .orElseThrow(() -> new RuntimeException("FriendRequest not found."))
             .accept();
+    }
+
+    public void blockFriendRequestSender(SeleniumCharacter character) {
+        communityPage.getFriendRequestsPageButton().click();
+        communityPage.getFriendRequests().stream()
+            .filter(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("FriendRequest not found."))
+            .blockSender();
     }
 
     public void searchForPossibleFriends(SeleniumCharacter character) {

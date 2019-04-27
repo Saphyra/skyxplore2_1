@@ -11,6 +11,7 @@
         scriptLoader.loadScript("js/community/mail/bulk_operations/with_sent_mails.js");
 
     scriptLoader.loadScript("js/community/blocked/block_character_controller.js");
+    scriptLoader.loadScript("js/community/blocked/blocked_characters_controller.js");
 
     scriptLoader.loadScript("js/community/friend/friend_controller.js");
     scriptLoader.loadScript("js/community/friend/add_friend_controller.js");

@@ -18,6 +18,8 @@ public class SeleniumFriendRequest {
     private static final String MESSAGE_CODE_FRIEND_REQUEST_DECLINED = "FRIEND_REQUEST_DECLINED";
     private static final String SELECTOR_ACCEPT_BUTTON = "div:last-child > button:last-child";
     private static final String MESSAGE_CODE_FRIEND_REQUEST_ACCEPTED = "FRIEND_REQUEST_ACCEPTED";
+    private static final String SELECTOR_BLOCK_BUTTON = "button:first-child";
+    private static final String MESSAGE_CODE_CHARACTER_BLOCKED = "CHARACTER_BLOCKED";
 
     private final WebDriver driver;
     private final WebElement element;
@@ -33,7 +35,7 @@ public class SeleniumFriendRequest {
         actions.perform();
 
         WebElement buttonContainer = element.findElement(By.cssSelector(SELECTOR_BUTTON_CONTAINER));
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(buttonContainer));
+        new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(buttonContainer));
         buttonContainer.findElement(By.cssSelector(SELECTOR_DECLINE_BUTTON)).click();
 
         new NotificationValidator(driver).verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_FRIEND_REQUEST_DECLINED));
@@ -46,5 +48,20 @@ public class SeleniumFriendRequest {
     public void accept() {
         getAcceptButton().click();
         new NotificationValidator(driver).verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_FRIEND_REQUEST_ACCEPTED));
+    }
+
+    public void blockSender() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(getAcceptButton());
+        actions.perform();
+
+        WebElement buttonContainer = element.findElement(By.cssSelector(SELECTOR_BUTTON_CONTAINER));
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+        webDriverWait.until(ExpectedConditions.visibilityOf(buttonContainer));
+        buttonContainer.findElement(By.cssSelector(SELECTOR_BLOCK_BUTTON)).click();
+
+        webDriverWait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+        new NotificationValidator(driver).verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_CHARACTER_BLOCKED));
     }
 }

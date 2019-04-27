@@ -21,6 +21,7 @@ import selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
 import selenium.test.community.block.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.block.FilterTestShouldShowOnlyMatchingCharacter;
 import selenium.test.community.block.UnblockCharacterTest;
+import selenium.test.community.block.BlockFriendRequestSenderTest;
 import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
@@ -152,6 +153,18 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .messageCodes(messageCodes)
             .build()
             .testBlockCharacterShouldUnableToReplyMail();
+    }
+
+    @Test
+    public void testBlockFriendRequestSender(){
+        BlockFriendRequestSenderTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .blockTestHelper(blockTestHelper)
+            .build()
+            .testBlockFriendRequestSender();
     }
 
     @Test

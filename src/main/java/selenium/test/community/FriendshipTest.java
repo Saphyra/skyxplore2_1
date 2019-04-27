@@ -1,7 +1,6 @@
 package selenium.test.community;
 
 import org.junit.Test;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -142,11 +141,6 @@ public class FriendshipTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .build()
             .testAcceptFriendRequest();
-    }
-
-    @Test
-    public void testReportFriendRequestSender(){
-        //TODO implement
     }
 
     @Test

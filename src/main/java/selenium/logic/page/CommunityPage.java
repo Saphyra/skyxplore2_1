@@ -1,24 +1,23 @@
 package selenium.logic.page;
 
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.WaitUtil.getListWithWait;
-import static selenium.logic.util.WaitUtil.getWithWait;
+import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import selenium.logic.domain.Friend;
+import selenium.logic.domain.MessageCodes;
+import selenium.logic.domain.PossibleFriend;
+import selenium.logic.domain.SeleniumFriendRequest;
+import selenium.logic.domain.SentFriendRequest;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.RequiredArgsConstructor;
-import selenium.logic.domain.Friend;
-import selenium.logic.domain.MessageCodes;
-import selenium.logic.domain.PossibleFriend;
-import selenium.logic.domain.SeleniumFriendRequest;
-import selenium.logic.domain.SentFriendRequest;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getListWithWait;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
@@ -60,7 +59,7 @@ public class CommunityPage {
     private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "block-character-name";
     private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#block-character-search-result .character-can-be-blocked";
     private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friends-page-button";
-    private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
+    private static final String SELECTOR_BLOCKED_CHARACTERS = "#blocked-character-list .friend-list-item";
     private static final String SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON = "select-all-incoming-mail-button";
     private static final String SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON = "select-all-archived-mail-button";
     private static final String SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON = "select-all-sent-mail-button";
@@ -277,7 +276,10 @@ public class CommunityPage {
     }
 
     public List<WebElement> getBlockedCharacters() {
-        return driver.findElements(By.cssSelector(SELECTOR_BLOCKED_CHARACTERS));
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_BLOCKED_CHARACTERS)),
+            "Querying blocked characters"
+        );
     }
 
     public WebElement getSelectAllIncomingMailsButton() {

@@ -81,6 +81,9 @@
 
                             const blockButton = document.createElement("BUTTON");
                                 blockButton.innerHTML = Localization.getAdditionalContent("block-character");
+                                blockButton.onclick = function(){
+                                    eventProcessor.processEvent(new Event(events.BLOCK_CHARACTER, {characterId: friendRequest.friendId, listItem: container}));
+                                }
                         wrapperSpan.appendChild(blockButton);
 
                             const declineButton = document.createElement("BUTTON");
