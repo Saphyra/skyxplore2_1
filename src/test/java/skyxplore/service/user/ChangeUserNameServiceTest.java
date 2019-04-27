@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;

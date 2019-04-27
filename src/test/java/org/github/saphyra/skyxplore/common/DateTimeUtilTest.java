@@ -1,24 +1,24 @@
 package org.github.saphyra.skyxplore.common;
 
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
-import static skyxplore.testutil.TestUtils.PRODUCT_END_TIME;
-import static skyxplore.testutil.TestUtils.PRODUCT_END_TIME_EPOCH;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DateTimeUtilTest {
+    private static final OffsetDateTime TIME = OffsetDateTime.now(ZoneOffset.UTC).withNano(0);
+    private static final Long TIME_EPOCH = TIME.toEpochSecond();
     private DateTimeUtil underTest = new DateTimeUtil();
 
     @Test
     public void testConvertEntityShouldReturnDomain() {
         //WHEN
-        OffsetDateTime result = underTest.convertEntity(PRODUCT_END_TIME_EPOCH);
+        OffsetDateTime result = underTest.convertEntity(TIME_EPOCH);
         //THEN
-        assertEquals(PRODUCT_END_TIME, result);
+        assertThat(result).isEqualTo(TIME);
     }
 
     @Test
@@ -34,9 +34,9 @@ public class DateTimeUtilTest {
     @Test
     public void testConvertDomainShouldReturnEntity() {
         //WHEN
-        Long result = underTest.convertDomain(PRODUCT_END_TIME);
+        Long result = underTest.convertDomain(TIME);
         //THEN
-        assertEquals(PRODUCT_END_TIME_EPOCH, result);
+        assertThat(result).isEqualTo(TIME_EPOCH);
     }
 
     @Test

@@ -8,8 +8,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.dataaccess.db.CharacterDao;
-import org.github.saphyra.skyxplore.user.UserDao;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.repository.user.UserDao;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 

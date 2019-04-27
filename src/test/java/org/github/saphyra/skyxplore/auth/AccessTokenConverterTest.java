@@ -1,27 +1,29 @@
 package org.github.saphyra.skyxplore.auth;
 
 import com.github.saphyra.authservice.domain.AccessToken;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_ID;
-import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_LAST_ACCESS;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
-import static skyxplore.testutil.TestUtils.USER_ID;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessTokenConverterTest {
+    private static final String ACCESS_TOKEN_ID = "access_token_id";
+    private static final String USER_ID = "user_id";
+    private static final OffsetDateTime LAST_ACCESS = OffsetDateTime.now(ZoneOffset.UTC);
+    private static final String CHARACTER_ID = "character_id";
+
     @Mock
     private AccessTokenDao accessTokenDao;
 
@@ -34,15 +36,15 @@ public class AccessTokenConverterTest {
         SkyXpAccessToken skyXpAccessToken = SkyXpAccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)
             .userId(USER_ID)
-            .lastAccess(ACCESS_TOKEN_LAST_ACCESS)
+            .lastAccess(LAST_ACCESS)
             .build();
         //WHEN
         AccessToken result = underTest.convertEntity(skyXpAccessToken);
         //THEN
-        assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());
-        assertEquals(USER_ID, result.getUserId());
-        assertEquals(ACCESS_TOKEN_LAST_ACCESS, result.getLastAccess());
-        assertFalse(result.isPersistent());
+        assertThat(result.getAccessTokenId()).isEqualTo(ACCESS_TOKEN_ID);
+        assertThat(result.getUserId()).isEqualTo(USER_ID);
+        assertThat(result.getLastAccess()).isEqualTo(LAST_ACCESS);
+        assertThat(result.isPersistent()).isFalse();
     }
 
     @Test
@@ -51,7 +53,7 @@ public class AccessTokenConverterTest {
         AccessToken accessToken = AccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)
             .userId(USER_ID)
-            .lastAccess(ACCESS_TOKEN_LAST_ACCESS)
+            .lastAccess(LAST_ACCESS)
             .build();
 
         when(accessTokenDao.findByUserId(USER_ID)).thenReturn(Optional.empty());
@@ -59,10 +61,10 @@ public class AccessTokenConverterTest {
         SkyXpAccessToken result = underTest.convertDomain(accessToken);
         //THEN
         verify(accessTokenDao).findByUserId(USER_ID);
-        assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());
-        assertEquals(USER_ID, result.getUserId());
-        assertEquals(ACCESS_TOKEN_LAST_ACCESS, result.getLastAccess());
-        assertNull(result.getCharacterId());
+        assertThat(result.getAccessTokenId()).isEqualTo(ACCESS_TOKEN_ID);
+        assertThat(result.getUserId()).isEqualTo(USER_ID);
+        assertThat(result.getLastAccess()).isEqualTo(LAST_ACCESS);
+        assertThat(result.getCharacterId()).isNull();
     }
 
     @Test
@@ -71,14 +73,14 @@ public class AccessTokenConverterTest {
         AccessToken accessToken = AccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)
             .userId(USER_ID)
-            .lastAccess(ACCESS_TOKEN_LAST_ACCESS)
+            .lastAccess(LAST_ACCESS)
             .build();
 
         SkyXpAccessToken skyXpAccessToken = SkyXpAccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)
             .userId(USER_ID)
-            .lastAccess(ACCESS_TOKEN_LAST_ACCESS)
-            .characterId(CHARACTER_ID_1)
+            .lastAccess(LAST_ACCESS)
+            .characterId(CHARACTER_ID)
             .build();
 
         when(accessTokenDao.findByUserId(USER_ID)).thenReturn(Optional.of(skyXpAccessToken));
@@ -86,9 +88,9 @@ public class AccessTokenConverterTest {
         SkyXpAccessToken result = underTest.convertDomain(accessToken);
         //THEN
         verify(accessTokenDao).findByUserId(USER_ID);
-        assertEquals(ACCESS_TOKEN_ID, result.getAccessTokenId());
-        assertEquals(USER_ID, result.getUserId());
-        assertEquals(ACCESS_TOKEN_LAST_ACCESS, result.getLastAccess());
-        assertEquals(CHARACTER_ID_1, result.getCharacterId());
+        assertThat(result.getAccessTokenId()).isEqualTo(ACCESS_TOKEN_ID);
+        assertThat(result.getUserId()).isEqualTo(USER_ID);
+        assertThat(result.getLastAccess()).isEqualTo(LAST_ACCESS);
+        assertThat(result.getCharacterId()).isEqualTo(CHARACTER_ID);
     }
 }

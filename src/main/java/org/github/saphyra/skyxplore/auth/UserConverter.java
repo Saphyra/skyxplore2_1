@@ -5,9 +5,9 @@ import com.github.saphyra.authservice.domain.User;
 import com.github.saphyra.converter.ConverterBase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.user.CredentialsDao;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
-import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
+import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 
 import java.util.HashSet;
 

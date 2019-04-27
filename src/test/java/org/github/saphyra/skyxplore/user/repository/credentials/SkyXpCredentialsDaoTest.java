@@ -1,8 +1,6 @@
-package org.github.saphyra.skyxplore.user;
+package org.github.saphyra.skyxplore.user.repository.credentials;
 
-import org.github.saphyra.skyxplore.user.domain.credentials.CredentialsConverter;
-import org.github.saphyra.skyxplore.user.domain.credentials.CredentialsEntity;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,18 +9,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NAME;
-import static skyxplore.testutil.TestUtils.createCredentials;
-import static skyxplore.testutil.TestUtils.createCredentialsEntity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCredentialsDaoTest {
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
+    private static final String PASSWORD = "password";
+
     @Mock
     private CredentialsConverter credentialsConverter;
 
@@ -48,7 +44,7 @@ public class SkyXpCredentialsDaoTest {
         SkyXpCredentials result = underTest.getByUserId(USER_ID);
         //THEN
         verify(credentialsRepository).findById(USER_ID);
-        assertNull(result);
+        assertThat(result).isNull();
     }
 
     @Test
@@ -64,7 +60,7 @@ public class SkyXpCredentialsDaoTest {
         //THEN
         verify(credentialsRepository).findById(USER_ID);
         verify(credentialsConverter).convertEntity(entity);
-        assertEquals(skyXpCredentials, result);
+        assertThat(result).isEqualTo(skyXpCredentials);
     }
 
     @Test
@@ -80,8 +76,7 @@ public class SkyXpCredentialsDaoTest {
         //THEN
         verify(credentialsRepository).getByUserName(USER_NAME);
         verify(credentialsConverter).convertEntityToOptional(entity);
-        assertTrue(result.isPresent());
-        assertEquals(skyXpCredentials, result.get());
+        assertThat(result).contains(skyXpCredentials);
     }
 
     @Test
@@ -96,5 +91,21 @@ public class SkyXpCredentialsDaoTest {
         //THEN
         verify(credentialsConverter).convertDomain(skyXpCredentials);
         verify(credentialsRepository).save(entity);
+    }
+
+    private CredentialsEntity createCredentialsEntity() {
+        CredentialsEntity entity = new CredentialsEntity();
+        entity.setUserId(USER_ID);
+        entity.setPassword(PASSWORD);
+        entity.setUserName(USER_NAME);
+        return entity;
+    }
+
+    private SkyXpCredentials createCredentials() {
+        SkyXpCredentials credentials = new SkyXpCredentials();
+        credentials.setUserId(USER_ID);
+        credentials.setPassword(PASSWORD);
+        credentials.setUserName(USER_NAME);
+        return credentials;
     }
 }

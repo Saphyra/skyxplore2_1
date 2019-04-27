@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.user.UserDao;
-import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
+import org.github.saphyra.skyxplore.user.repository.user.UserDao;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import skyxplore.exception.UserNotFoundException;
 
 import java.util.Optional;

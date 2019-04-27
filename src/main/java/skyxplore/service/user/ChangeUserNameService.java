@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;

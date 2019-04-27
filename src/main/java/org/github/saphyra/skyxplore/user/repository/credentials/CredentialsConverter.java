@@ -1,11 +1,12 @@
-package org.github.saphyra.skyxplore.user.domain.credentials;
+package org.github.saphyra.skyxplore.user.repository.credentials;
 
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.converter.ConverterBase;
 
 @Component
-public class CredentialsConverter extends ConverterBase<CredentialsEntity, SkyXpCredentials> {
+class CredentialsConverter extends ConverterBase<CredentialsEntity, SkyXpCredentials> {
     @Override
     public SkyXpCredentials processEntityConversion(CredentialsEntity entity) {
         if (entity == null) {

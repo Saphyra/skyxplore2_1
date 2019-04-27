@@ -3,8 +3,9 @@ package org.github.saphyra.skyxplore.auth;
 import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.converter.ConverterBase;
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 
 import java.util.Optional;
 

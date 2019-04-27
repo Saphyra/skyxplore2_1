@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.auth.domain.accesstoken;
+package org.github.saphyra.skyxplore.auth.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,9 +1,10 @@
-package org.github.saphyra.skyxplore.user.domain.user;
+package org.github.saphyra.skyxplore.user.repository.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.github.saphyra.skyxplore.user.domain.Role;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import java.util.HashSet;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+class UserEntity {
     @Id
     @Column(name = "user_id", length = 50)
     private String userId;

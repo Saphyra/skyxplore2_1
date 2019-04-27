@@ -1,5 +1,8 @@
 package skyxplore.testutil;
 
+import org.github.saphyra.skyxplore.user.domain.Role;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.EquipRequest;
@@ -22,8 +25,6 @@ import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.AccessTokenEntity;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.domain.character.CharacterEntity;
 import skyxplore.domain.character.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
@@ -34,8 +35,6 @@ import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
-import org.github.saphyra.skyxplore.user.domain.credentials.CredentialsEntity;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.factory.FactoryEntity;
 import skyxplore.domain.materials.Materials;
@@ -45,9 +44,6 @@ import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.slot.SlotEntity;
-import org.github.saphyra.skyxplore.user.domain.user.Role;
-import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
-import org.github.saphyra.skyxplore.user.domain.user.UserEntity;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -59,11 +55,6 @@ import java.util.HashSet;
 import java.util.List;
 
 public class TestUtils {
-    //ACCESS TOKEN
-    public static final String ACCESS_TOKEN_ID = "access_token_id";
-    public static final Long ACCESS_TOKEN_LAST_ACCESS_EPOCH = 414184L;
-    public static final OffsetDateTime ACCESS_TOKEN_LAST_ACCESS = OffsetDateTime.of(LocalDateTime.ofEpochSecond(ACCESS_TOKEN_LAST_ACCESS_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
-
     //Blocked Character
     public static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
     public static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
@@ -224,24 +215,6 @@ public class TestUtils {
     public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
 
-    public static SkyXpAccessToken createAccessToken() {
-        SkyXpAccessToken token = new SkyXpAccessToken();
-        token.setAccessTokenId(ACCESS_TOKEN_ID);
-        token.setUserId(USER_ID);
-        token.setLastAccess(ACCESS_TOKEN_LAST_ACCESS);
-        token.setCharacterId(CHARACTER_ID_1);
-        return token;
-    }
-
-    public static AccessTokenEntity createAccessTokenEntity() {
-        AccessTokenEntity entity = new AccessTokenEntity();
-        entity.setAccessTokenId(ACCESS_TOKEN_ID);
-        entity.setUserId(USER_ID);
-        entity.setLastAccess(ACCESS_TOKEN_LAST_ACCESS_EPOCH);
-        entity.setCharacterId(CHARACTER_ID_1);
-        return entity;
-    }
-
     public static AccountDeleteRequest createAccountDeleteRequest() {
         AccountDeleteRequest request = new AccountDeleteRequest();
         request.setPassword(USER_PASSWORD);
@@ -327,9 +300,6 @@ public class TestUtils {
         return new SkyXpCredentials(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
     }
 
-    public static CredentialsEntity createCredentialsEntity() {
-        return new CredentialsEntity(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
-    }
 
     private static Slot createDefenseSlot() {
         Slot slot = new Slot();
@@ -667,16 +637,6 @@ public class TestUtils {
 
     public static SkyXpUser createUser() {
         SkyXpUser user = new SkyXpUser();
-        user.setUserId(USER_ID);
-        user.setEmail(USER_EMAIL);
-        HashSet<Role> roles = new HashSet<>();
-        roles.add(Role.USER);
-        user.setRoles(roles);
-        return user;
-    }
-
-    public static UserEntity createUserEntity() {
-        UserEntity user = new UserEntity();
         user.setUserId(USER_ID);
         user.setEmail(USER_EMAIL);
         HashSet<Role> roles = new HashSet<>();

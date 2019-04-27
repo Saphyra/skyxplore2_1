@@ -1,8 +1,7 @@
-package org.github.saphyra.skyxplore.user;
+package org.github.saphyra.skyxplore.user.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.github.saphyra.skyxplore.user.domain.user.UserEntity;
 
 @Repository
 //TODO unit test

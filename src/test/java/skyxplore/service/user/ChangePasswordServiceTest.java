@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.ChangePasswordRequest;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 

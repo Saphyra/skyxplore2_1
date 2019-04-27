@@ -6,18 +6,19 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.user.CredentialsDao;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
-import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
+import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NAME;
-import static skyxplore.testutil.TestUtils.USER_PASSWORD;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserConverterTest {
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
+    private static final String PASSWORD = "password";
+
     @Mock
     private CredentialsDao credentialsDao;
 
@@ -30,14 +31,14 @@ public class UserConverterTest {
         SkyXpUser skyXpUser = new SkyXpUser();
         skyXpUser.setUserId(USER_ID);
 
-        SkyXpCredentials skyXpCredentials = new SkyXpCredentials(USER_ID, USER_NAME, USER_PASSWORD);
+        SkyXpCredentials skyXpCredentials = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
         when(credentialsDao.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
         //WHEN
         User result = underTest.convertEntity(skyXpUser);
         //THEN
-        assertEquals(USER_ID, result.getUserId());
-        assertEquals(USER_NAME, result.getCredentials().getUserName());
-        assertEquals(USER_PASSWORD, result.getCredentials().getPassword());
-        assertTrue(result.getRoles().isEmpty());
+        assertThat(result.getUserId()).isEqualTo(USER_ID);
+        assertThat(result.getCredentials().getUserName()).isEqualTo(USER_NAME);
+        assertThat(result.getCredentials().getPassword()).isEqualTo(PASSWORD);
+        assertThat(result.getRoles()).isEmpty();
     }
 }

@@ -1,13 +1,14 @@
-package org.github.saphyra.skyxplore.user.domain.user;
+package org.github.saphyra.skyxplore.user.repository.user;
 
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.converter.ConverterBase;
 
 @Component
 @RequiredArgsConstructor
-public class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
+class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
 
     @Override
     public SkyXpUser processEntityConversion(UserEntity entity) {

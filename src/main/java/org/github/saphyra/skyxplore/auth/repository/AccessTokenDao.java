@@ -1,11 +1,9 @@
-package org.github.saphyra.skyxplore.auth;
+package org.github.saphyra.skyxplore.auth.repository;
 
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessTokenConverter;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.AccessTokenEntity;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import javax.transaction.Transactional;

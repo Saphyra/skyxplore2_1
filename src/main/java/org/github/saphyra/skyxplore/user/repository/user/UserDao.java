@@ -1,11 +1,11 @@
-package org.github.saphyra.skyxplore.user;
+package org.github.saphyra.skyxplore.user.repository.user;
 
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
-import org.github.saphyra.skyxplore.user.domain.user.UserEntity;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 
 import javax.transaction.Transactional;
 

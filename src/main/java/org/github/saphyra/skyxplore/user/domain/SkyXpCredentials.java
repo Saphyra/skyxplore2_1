@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.user.domain.credentials;
+package org.github.saphyra.skyxplore.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

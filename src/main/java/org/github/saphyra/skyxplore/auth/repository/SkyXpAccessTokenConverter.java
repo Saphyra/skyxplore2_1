@@ -1,13 +1,14 @@
-package org.github.saphyra.skyxplore.auth.domain.accesstoken;
+package org.github.saphyra.skyxplore.auth.repository;
 
 import com.github.saphyra.converter.ConverterBase;
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-public class SkyXpAccessTokenConverter extends ConverterBase<AccessTokenEntity, SkyXpAccessToken> {
+class SkyXpAccessTokenConverter extends ConverterBase<AccessTokenEntity, SkyXpAccessToken> {
     private final DateTimeUtil dateTimeUtil;
 
 

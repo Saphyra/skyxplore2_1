@@ -2,6 +2,12 @@ package org.github.saphyra.skyxplore.auth;
 
 import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.authservice.domain.User;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import org.github.saphyra.skyxplore.user.repository.user.UserDao;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,29 +15,22 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.user.CredentialsDao;
-import org.github.saphyra.skyxplore.user.UserDao;
-import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
-import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
-import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.ACCESS_TOKEN_ID;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NAME;
-import static skyxplore.testutil.TestUtils.USER_PASSWORD;
-import static skyxplore.testutil.TestUtils.createUser;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthDaoImplTest {
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
+    private static final String ACCESS_TOKEN_ID = "access_token_id";
+    private static final String PASSWORD = "password";
+
     @Mock
     private AccessTokenConverter accessTokenConverter;
 
@@ -50,11 +49,13 @@ public class AuthDaoImplTest {
     @InjectMocks
     private AuthDaoImpl underTest;
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private Optional<User> optionalUser;
 
     @Before
     public void init() {
-        SkyXpUser skyXpUser = createUser();
+        SkyXpUser skyXpUser = new SkyXpUser();
+        skyXpUser.setUserId(USER_ID);
         Optional<SkyXpUser> optionalSkyXpUser = Optional.of(skyXpUser);
         when(userDao.findById(USER_ID)).thenReturn(optionalSkyXpUser);
 
@@ -68,7 +69,7 @@ public class AuthDaoImplTest {
         //WHEN
         Optional<User> result = underTest.findUserById(USER_ID);
         //THEN
-        assertEquals(optionalUser, result);
+        assertThat(result).isEqualTo(optionalUser);
     }
 
     @Test
@@ -79,17 +80,17 @@ public class AuthDaoImplTest {
         Optional<User> result = underTest.findUserByUserName(USER_NAME);
         //THEN
         verify(credentialsDao).getCredentialsByName(USER_NAME);
-        assertFalse(result.isPresent());
+        assertThat(result).isEmpty();
     }
 
     @Test
-    public void testFIndUserByUserName() {
+    public void testFindUserByUserName() {
         //GIVEN
-        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.of(new SkyXpCredentials(USER_ID, USER_NAME, USER_PASSWORD)));
+        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.of(new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD)));
         //WHEN
         Optional<User> result = underTest.findUserByUserName(USER_NAME);
         //THEN
-        assertEquals(optionalUser, result);
+        assertThat(result).isEqualTo(optionalUser);
     }
 
     @Test
@@ -130,8 +131,8 @@ public class AuthDaoImplTest {
         //WHEN
         Optional<AccessToken> result = underTest.findAccessTokenByTokenId(ACCESS_TOKEN_ID);
         //THEN
-        assertTrue(result.isPresent());
-        assertEquals(accessToken, result.get());
+        assertThat(result.isPresent());
+        assertThat(result).contains(accessToken);
     }
 
     @Test
@@ -147,6 +148,6 @@ public class AuthDaoImplTest {
         //THEN
         ArgumentCaptor<SkyXpAccessToken> argumentCaptor = ArgumentCaptor.forClass(SkyXpAccessToken.class);
         verify(accessTokenDao).save(argumentCaptor.capture());
-        assertEquals(skyXpAccessToken, argumentCaptor.getValue());
+        assertThat(argumentCaptor.getValue()).isEqualTo(skyXpAccessToken);
     }
 }
