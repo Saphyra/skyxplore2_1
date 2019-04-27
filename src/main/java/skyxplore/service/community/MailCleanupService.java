@@ -21,8 +21,8 @@ public class MailCleanupService {
     private final DateTimeUtil dateTimeUtil;
     private final MailDao mailDao;
 
-    @Scheduled(fixedDelay = 1000*60*60L)
-    public void deleteExpiredMails(){
+    @Scheduled(fixedDelay = 1000 * 60 * 60L)
+    public void deleteExpiredMails() {
         log.info("Deleting deleted mails...");
         mailDao.deleteBothSideDeleted();
         log.info("Deleting expired mails...");

@@ -36,7 +36,7 @@ public class EquipUtilTest {
     private EquipUtil underTest;
 
     @Test
-    public void testIsExtenderShouldReturnTrue(){
+    public void testIsExtenderShouldReturnTrue() {
         //GIVEN
         String testId = "id";
         when(extenderService.get("id")).thenReturn(new Extender());
@@ -47,7 +47,7 @@ public class EquipUtilTest {
     }
 
     @Test
-    public void testIsExtenderShouldReturnFalse(){
+    public void testIsExtenderShouldReturnFalse() {
         //GIVEN
         String testId = "id";
         when(extenderService.get("id")).thenReturn(null);
@@ -58,7 +58,7 @@ public class EquipUtilTest {
     }
 
     @Test(expected = BadSlotNameException.class)
-    public void testGetSlotByNameShouldThrowExceptionWhenBadSlotName(){
+    public void testGetSlotByNameShouldThrowExceptionWhenBadSlotName() {
         //GIVEN
         String slotName = "imnotaslotname";
         //WHEN
@@ -66,7 +66,7 @@ public class EquipUtilTest {
     }
 
     @Test
-    public void testSlotByNameShouldReturnDefenseSlotWhenDefense(){
+    public void testSlotByNameShouldReturnDefenseSlotWhenDefense() {
         //GIVEN
         EquippedShip ship = createEquippedShip();
         EquippedSlot slot = new EquippedSlot();
@@ -80,7 +80,7 @@ public class EquipUtilTest {
     }
 
     @Test
-    public void testSlotByNameShouldReturnWeaponSlotWhenWeapon(){
+    public void testSlotByNameShouldReturnWeaponSlotWhenWeapon() {
         //GIVEN
         EquippedShip ship = createEquippedShip();
         EquippedSlot slot = new EquippedSlot();

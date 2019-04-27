@@ -1,0 +1,31 @@
+main:not(:first-of-type){
+    display: none;
+}
+
+#list-container{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 35rem;
+    border-right: 5px ridge white;
+}
+
+#mail-lists{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(100% - 35rem);
+}
+
+.inline-button{
+    display: inline;
+}
+
+.close-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.25rem;
+}

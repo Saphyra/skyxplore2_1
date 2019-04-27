@@ -31,7 +31,7 @@ public class EquippedShipDaoTest {
     private EquippedShipDao underTest;
 
     @Test(expected = ShipNotFoundException.class)
-    public void testDeleteByCharacterIdShouldThrowExceptionWhenShipNotFound(){
+    public void testDeleteByCharacterIdShouldThrowExceptionWhenShipNotFound() {
         //GIVEN
         when(equippedShipRepository.getByCharacterId(CHARACTER_ID_1)).thenReturn(null);
         //WHEN
@@ -39,7 +39,7 @@ public class EquippedShipDaoTest {
     }
 
     @Test
-    public void testDeleteByCharacterIdShouldDelete(){
+    public void testDeleteByCharacterIdShouldDelete() {
         //GIVEN
         EquippedShipEntity equippedShip = createEquippedShipEntity();
         when(equippedShipRepository.getByCharacterId(CHARACTER_ID_1)).thenReturn(equippedShip);
@@ -52,7 +52,7 @@ public class EquippedShipDaoTest {
     }
 
     @Test
-    public void testGetShipByCharacterIdShouldCallRepositoryAndConvert(){
+    public void testGetShipByCharacterIdShouldCallRepositoryAndConvert() {
         //GIVEN
         EquippedShipEntity equippedShipEntity = createEquippedShipEntity();
         when(equippedShipRepository.getByCharacterId(CHARACTER_ID_1)).thenReturn(equippedShipEntity);

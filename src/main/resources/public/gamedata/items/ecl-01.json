@@ -1,0 +1,45 @@
+{
+  "id": "ecl-01",
+  "corehull": 1000000,
+  "connector": 12,
+  "defense": {
+    "front": 4,
+    "side": 2,
+    "back": 2
+  },
+  "weapon": {
+    "front": 10,
+    "side": 3,
+    "back": 2
+  },
+  "ability": [
+    "accuracy",
+    "cloak",
+    "penetration",
+    "lock",
+    "instantdamage",
+    "corehullrepair"
+  ],
+  "constructiontime": 43200,
+  "buildprice": 43200,
+  "buildable": true,
+  "materials": {
+    "cable": 10,
+    "condensator": 15,
+    "energycell": 15,
+    "hullplate": 15,
+    "adamantium": 250,
+    "etherium": 200,
+    "mithril": 150,
+    "duranium": 200,
+    "uridium": 150,
+    "xebryum": 200
+  },
+  "type": "ship",
+  "slot": "ship",
+  "level": 1,
+  "score": 10,
+  "buyprice": 3000000,
+  "sellprice": 1000000,
+  "category": "fighter"
+}

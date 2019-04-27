@@ -9,7 +9,7 @@ import selenium.logic.domain.CartItem;
 @RequiredArgsConstructor
 public class CostCounter {
     private static final String SELECTOR_CURRENT_MONEY = "money";
-    private static final String SELECTOR_CART_TOTAL_COST = "cost";
+    private static final String SELECTOR_CART_TOTAL_COST = "cart-cost";
 
     private final WebDriver driver;
     private final ShopElementSearcher shopElementSearcher;

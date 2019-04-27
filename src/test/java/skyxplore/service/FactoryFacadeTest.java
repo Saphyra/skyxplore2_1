@@ -5,8 +5,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
+import static skyxplore.testutil.TestUtils.createMaterials;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.view.material.MaterialView;
+import skyxplore.domain.materials.Materials;
 import skyxplore.service.factory.AddToQueueService;
 import skyxplore.service.factory.FactoryQueryService;
 
@@ -44,11 +44,12 @@ public class FactoryFacadeTest {
     @Test
     public void testGetMaterialsShouldCallServiceAndReturn() {
         //GIVEN
-        when(factoryQueryService.getMaterials(CHARACTER_ID_1)).thenReturn(new HashMap<>());
+        Materials materials = createMaterials();
+        when(factoryQueryService.getMaterials(CHARACTER_ID_1)).thenReturn(materials);
         //WHEN
-        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1);
+        Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
         verify(factoryQueryService).getMaterials(CHARACTER_ID_1);
-        assertEquals(new HashMap<>(), result);
+        assertEquals(materials, result);
     }
 }

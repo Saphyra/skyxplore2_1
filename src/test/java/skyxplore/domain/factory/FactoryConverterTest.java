@@ -27,7 +27,7 @@ public class FactoryConverterTest {
     private FactoryConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNull(){
+    public void testConvertEntityShouldReturnNull() {
         //GIVEN
         FactoryEntity entity = null;
         //WHEN
@@ -37,7 +37,7 @@ public class FactoryConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldConvert(){
+    public void testConvertEntityShouldConvert() {
         //GIVEN
         FactoryEntity entity = createFactoryEntity();
 
@@ -52,7 +52,7 @@ public class FactoryConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldConvert(){
+    public void testConvertDomainShouldConvert() {
         //GIVEN
         Factory factory = createFactory();
         when(materialsConverter.convertDomain(factory.getMaterials(), FACTORY_ID_1)).thenReturn(FACTORY_MATERIALS);

@@ -1,16 +1,31 @@
-.registrationcontainer{
-    border: 3px ridge white;
-    display: inline-block;
-    margin: 2rem;
+#login-container{
+    text-align: center;
 }
 
-.registrationcontainer h2:first-child{
+#login-container input, #login-container button{
+    font-size: 1.25rem;
+}
+
+#registration-container{
+    text-align: center;
+}
+
+#registration-container h2{
     border-bottom: 3px ridge white;
     padding: 0.5rem;
 }
 
-.registrationcontainer > div{
+#placeholder-align{
+    border: 3px ridge white;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 2rem;
+}
+
+#registration-label-container{
+    text-align: right;
     padding: 2rem;
+    padding-bottom: 1rem;
 }
 
 label{
@@ -22,9 +37,10 @@ label{
 
 label input{
     margin-right: 2rem;
+    font-size: 1.25rem;
 }
 
-.invalid{
+.invalid-input{
     display: none;
     border: 3px outset red;
     position: absolute;
@@ -32,8 +48,4 @@ label input{
     top: 0.25rem;
     border-radius: 3px;
     padding: 0.125rem;
-}
-
-input, button{
-    font-size: 1.25rem;
 }

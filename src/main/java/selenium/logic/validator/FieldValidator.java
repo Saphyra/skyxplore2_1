@@ -21,6 +21,7 @@ public class FieldValidator {
     public void verifySuccess(WebElement errorField, WebElement button) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.invisibilityOf(errorField));
+        wait.until(ExpectedConditions.elementToBeClickable(button));
         assertFalse(errorField.isDisplayed());
         assertTrue(button.isEnabled());
     }
@@ -57,7 +58,7 @@ public class FieldValidator {
 
         for (WebElement inactiveErrorField : inactiveErrorFields) {
             if (inactiveErrorField == null) {
-                continue;
+                break;
             }
             wait.until(ExpectedConditions.invisibilityOf(inactiveErrorField));
             assertFalse(inactiveErrorField.isDisplayed());

@@ -66,13 +66,13 @@ public class EquipShipServiceTest {
     private EquipShipService underTest;
 
     @Before
-    public void init(){
+    public void init() {
         when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
         when(shipQueryService.getShipByCharacterId(CHARACTER_ID_1)).thenReturn(equippedShip);
     }
 
     @Test(expected = BadRequestException.class)
-    public void testEquipShipShouldThrowExceptionWhenInvalidItemId(){
+    public void testEquipShipShouldThrowExceptionWhenInvalidItemId() {
         //GIVEN
         when(shipService.get(DATA_ELEMENT)).thenReturn(null);
         //WHEN
@@ -80,7 +80,7 @@ public class EquipShipServiceTest {
     }
 
     @Test
-    public void testEquipShipShouldEquip(){
+    public void testEquipShipShouldEquip() {
         //GIVEN
         Ship ship = new Ship();
         ship.setId(EQUIPPED_SHIP_TYPE);

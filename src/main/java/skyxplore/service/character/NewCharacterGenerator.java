@@ -134,7 +134,7 @@ public class NewCharacterGenerator {
 
     private Materials createMaterials() {
         Materials materials = new Materials();
-        materialService.keySet().forEach(materialId ->materials.addMaterial(materialId, config.getStartMaterials()));
+        materialService.keySet().forEach(materialId -> materials.addMaterial(materialId, config.getStartMaterials()));
         return materials;
     }
 }

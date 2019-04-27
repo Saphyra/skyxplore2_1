@@ -1,0 +1,19 @@
+#table-character-list{
+    margin: auto;
+    margin-top: 1rem;
+}
+
+#no-character{
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.character-name-cell{
+    cursor: pointer;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.character-operations{
+    text-align: center;
+}

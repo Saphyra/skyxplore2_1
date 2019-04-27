@@ -8,7 +8,7 @@ import com.github.saphyra.converter.ConverterBase;
 public class CredentialsConverter extends ConverterBase<CredentialsEntity, SkyXpCredentials> {
     @Override
     public SkyXpCredentials processEntityConversion(CredentialsEntity entity) {
-        if(entity == null){
+        if (entity == null) {
             return null;
         }
         return new SkyXpCredentials(entity.getUserId(), entity.getUserName(), entity.getPassword());
@@ -16,7 +16,7 @@ public class CredentialsConverter extends ConverterBase<CredentialsEntity, SkyXp
 
     @Override
     public CredentialsEntity processDomainConversion(SkyXpCredentials domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         return new CredentialsEntity(domain.getUserId(), domain.getUserName(), domain.getPassword());

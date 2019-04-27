@@ -5,59 +5,68 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.Friend;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.PossibleFriend;
 import selenium.logic.domain.SeleniumFriendRequest;
 import selenium.logic.domain.SentFriendRequest;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.getListWithWait;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 @RequiredArgsConstructor
 public class CommunityPage {
-    public static final String SELECTOR_BLOCK_CHARACTER_CONTAINER = "blockcharactercontainer";
-    private static final String SELECTOR_ADD_FRIEND = "#friends > div:first-of-type";
-    private static final String SELECTOR_ADD_FRIEND_CONTAINER = "addfriendcontainer";
-    private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friendname";
-    private static final String SELECTOR_CHARACTERS_CAN_BE_FRIEND = "#usersfoundfornewfriend > div.maybefriend";
-    private static final String SELECTOR_SENT_FRIEND_REQUESTS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(3)";
-    private static final String SELECTOR_SENT_FRIEND_REQUESTS = "#sentfriendrequestitems > div.friendlistitem";
-    private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "addfriendclosebutton";
-    private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friendrequestnum";
-    private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(2)";
-    private static final String SELECTOR_FRIEND_REQUESTS = "#friendrequestitems > div.friendlistitem";
-    private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#listfriends div:first-child div:nth-child(1)";
-    private static final String SELECTOR_FRIENDS = "#friendlistitems > div.friendlistitem";
-    private static final String SELECTOR_WRITE_MAIL_BUTTON = "#maillistbuttons div:first-child";
+    private static final String SELECTOR_BLOCKED_CHARACTERS_CONTAINER = "blocked-characters-container";
+    private static final String SELECTOR_ADD_FRIEND = "#add-friend-button";
+    private static final String SELECTOR_ADD_FRIEND_CONTAINER = "main-add-friend";
+    private static final String SELECTOR_ADD_FRIEND_INPUT_FIELD = "friend-name";
+    private static final String SELECTOR_ADD_FRIEND_SEARCH_RESULT = ".character-can-be-friend";
+    private static final String SELECTOR_SENT_FRIEND_REQUESTS_PAGE_BUTTON = "#sent-friend-requests-tab-button";
+    private static final String SELECTOR_SENT_FRIEND_REQUESTS = "#sent-friend-request-list > .friend-list-item";
+    private static final String SELECTOR_CLOSE_ADD_FRIEND_PAGE_BUTTON = "add-friend-close-button";
+    private static final String SELECTOR_NUMBER_OF_FRIEND_REQUESTS = "friend-request-num";
+    private static final String SELECTOR_FRIEND_REQUESTS_PAGE_BUTTON = "#friend-requests-tab-button";
+    private static final String SELECTOR_FRIEND_REQUESTS = "#friend-request-list > .friend-list-item";
+    private static final String SELECTOR_FRIENDS_PAGE_BUTTON = "#friends-tab-button";
+    private static final String SELECTOR_FRIENDS = "#friend-list > .friend-list-item";
+    private static final String SELECTOR_WRITE_MAIL_BUTTON = "#write-mail-button";
     private static final String SELECTOR_ADDRESSEE_INPUT_FIELD = "addressee";
-    private static final String SELECTOR_ADDRESSEES = "#addresseelist .addressee";
+    private static final String SELECTOR_ADDRESSEES = "#addressee-search-result .addressee";
     private static final String SELECTOR_SUBJECT = "subject";
     private static final String SELECTOR_MESSAGE = "message";
     private static final String SELECTOR_SEND_MAIL_BUTTON = "tr:nth-child(3) button";
-    private static final String SELECTOR_MAIL_CONTAINER = "mail";
-    private static final String SELECTOR_RECEIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(2)";
-    private static final String SELECTOR_RECEIVED_MAILS = "#incomingmaillist .mailitem";
-    private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(3)";
-    private static final String SELECTOR_SENT_MAILS = "#sentmaillist .mailitem";
-    private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "numberofunreadmails";
-    private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#maillistbuttons div:nth-child(4)";
-    private static final String SELECTOR_ARCHIVED_MAILS = "#archivedmaillist .mailitem";
-    private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS = "actionwithreceivedmails";
-    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS = "#incomingmaillistcontainer .actionwithselectedmails button:last-child";
-    private static final String SELECTOR_BULK_RESTORE_INPUT_FIELD = "actionwitharchivedmails";
-    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS = "#archivedmaillistcontainer .actionwithselectedmails button:last-child";
-    private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "actionwithdeletedmails";
-    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS = "#sentmaillistcontainer .actionwithselectedmails button:last-child";
-    private static final String SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON = "#friendlistbuttons button:nth-child(2)";
-    private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#blockedcharacters div.button";
-    private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "blockcharactername";
-    private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#blockablecharactersfound .blockablecharacter";
-    private static final String SELECTOR_CLOSE_WRITE_MAIL_PAGE = "#mailclosebutton ";
-    private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friendlistbuttons button:first-child";
-    private static final String SELECTOR_BLOCKED_CHARACTERS = "#blockedcharacterlist .blockedcharacterlistitem";
+    private static final String SELECTOR_MAIL_CONTAINER = "main-write-mail";
+    private static final String SELECTOR_INCOMING_MAILS_PAGE_BUTTON = "#incoming-mails-button";
+    private static final String SELECTOR_INCOMING_MAILS = "#incoming-mail-list .mail-item";
+    private static final String SELECTOR_SENT_MAILS_PAGE_BUTTON = "#sent-mails-button";
+    private static final String SELECTOR_SENT_MAILS = "#sent-mail-list .mail-item";
+    private static final String SELECTOR_NUMBER_OF_UNREAD_MAILS = "number-of-unread-mails";
+    private static final String SELECTOR_ARCHIVED_MAILS_PAGE_BUTTON = "#archived-mails-button";
+    private static final String SELECTOR_ARCHIVED_MAILS = "#archived-mail-list .mail-item";
+    private static final String SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_INCOMING_MAILS = "action-with-incoming-mails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_INCOMING_MAILS = "#process-action-with-incoming-mails-button";
+    private static final String SELECTOR_BULK_RESTORE_INPUT_FIELD = "action-with-archived-mails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_ARCHIVED_MAILS = "#process-action-with-archived-mails-button";
+    private static final String SELECTOR_BULK_DELETE_INPUT_FIELD_FOR_SENT_MAILS = "action-with-sent-mails";
+    private static final String SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS = "#process-action-with-sent-mails-button";
+    private static final String SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON = "#blocked-characters-page-button";
+    private static final String SELECTOR_BLOC_CHARACTER_WINDOW_BUTTON = "#block-character-button";
+    private static final String SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD = "block-character-name";
+    private static final String SELECTOR_BLOCKABLE_CHARACTERS = "#block-character-search-result .character-can-be-blocked";
+    private static final String SELECTOR_FRIENDS_MAIN_PAGE_BUTTON = "#friends-page-button";
+    private static final String SELECTOR_BLOCKED_CHARACTERS = "#blocked-character-list .friend-list-item";
+    private static final String SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON = "select-all-incoming-mail-button";
+    private static final String SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON = "select-all-archived-mail-button";
+    private static final String SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON = "select-all-sent-mail-button";
+    private static final String SELECTOR_BLOCK_CHARACTER_WINDOW = "main-block-character";
 
     private final WebDriver driver;
+    private final MessageCodes messageCodes;
 
     public WebElement getAddFriendButton() {
         return driver.findElement(By.cssSelector(SELECTOR_ADD_FRIEND));
@@ -71,9 +80,10 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_ADD_FRIEND_INPUT_FIELD));
     }
 
-    public List<PossibleFriend> getCharactersCanBeFriendList() {
-        return driver.findElements(By.cssSelector(SELECTOR_CHARACTERS_CAN_BE_FRIEND)).stream()
-            .map(PossibleFriend::new)
+    public List<PossibleFriend> getAddFriendSearchResult() {
+        return getListWithWait(() -> driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT)), "Querying possible friends...")
+            .stream()
+            .map(element -> new PossibleFriend(element, messageCodes))
             .collect(Collectors.toList());
     }
 
@@ -82,9 +92,12 @@ public class CommunityPage {
     }
 
     public List<SentFriendRequest> getSentFriendRequests() {
-        return driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
-            .map(element -> new SentFriendRequest(driver, element))
-            .collect(Collectors.toList());
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
+                .map(element -> new SentFriendRequest(driver, element, messageCodes))
+                .collect(Collectors.toList()),
+            "Querying sent friend requests"
+        );
     }
 
     public void closeAddFriendPage() {
@@ -102,19 +115,24 @@ public class CommunityPage {
     }
 
     public List<SeleniumFriendRequest> getFriendRequests() {
-        return driver.findElements(By.cssSelector(SELECTOR_FRIEND_REQUESTS)).stream()
-            .map(element -> new SeleniumFriendRequest(driver, element))
-            .collect(Collectors.toList());
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_FRIEND_REQUESTS)).stream()
+                .map(element -> new SeleniumFriendRequest(driver, element, messageCodes))
+                .collect(Collectors.toList()),
+            "Querying friend requests...");
     }
 
-    public WebElement getFriendsPageButton() {
+    public WebElement getOpenFriendsPageButton() {
         return driver.findElement(By.cssSelector(SELECTOR_FRIENDS_PAGE_BUTTON));
     }
 
     public List<Friend> getFriends() {
-        return driver.findElements(By.cssSelector(SELECTOR_FRIENDS)).stream()
-            .map(Friend::new)
-            .collect(Collectors.toList());
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_FRIENDS)).stream()
+                .map(element -> new Friend(driver, element))
+                .collect(Collectors.toList()),
+            "Querying friends..."
+        );
     }
 
     public WebElement getWriteNewMailButton() {
@@ -132,7 +150,10 @@ public class CommunityPage {
     }
 
     public List<WebElement> getAddresseeElements() {
-        return driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ADDRESSEES));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }, "Querying addressee elements...").orElse(Collections.emptyList());
     }
 
     public WebElement getMailSubjectField() {
@@ -151,12 +172,35 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_MAIL_CONTAINER));
     }
 
-    public WebElement getReceivedMailsPageButton() {
-        return driver.findElement(By.cssSelector(SELECTOR_RECEIVED_MAILS_PAGE_BUTTON));
+    public WebElement getIncomingMailsPageButton() {
+        return driver.findElement(By.cssSelector(SELECTOR_INCOMING_MAILS_PAGE_BUTTON));
     }
 
-    public List<WebElement> getReceivedMails() {
-        return driver.findElements(By.cssSelector(SELECTOR_RECEIVED_MAILS));
+    public boolean isIncomingMailExists() {
+        return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS)).size() > 0;
+    }
+
+    public boolean isArchivedMailExists() {
+        return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS)).size() > 0;
+    }
+
+    public boolean isSentMailExists() {
+        return driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS)).size() > 0;
+    }
+
+    public List<WebElement> getIncomingMails(boolean canBeEmpty) {
+        if (canBeEmpty) {
+            return driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
+        }
+
+        return getIncomingMails();
+    }
+
+    public List<WebElement> getIncomingMails() {
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_INCOMING_MAILS));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }, "Querying incoming mails...").orElse(Collections.emptyList());
     }
 
     public WebElement getSentMailsPageButton() {
@@ -164,7 +208,10 @@ public class CommunityPage {
     }
 
     public List<WebElement> getSentMails() {
-        return driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_SENT_MAILS));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }, "Querying sent mails...").orElse(Collections.emptyList());
     }
 
     public WebElement getNumberOfUnreadMails() {
@@ -176,15 +223,18 @@ public class CommunityPage {
     }
 
     public List<WebElement> getArchivedMails() {
-        return driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
+        return getWithWait(() -> {
+            List<WebElement> result = driver.findElements(By.cssSelector(SELECTOR_ARCHIVED_MAILS));
+            return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        }, "Querying archived mails").orElse(Collections.emptyList());
     }
 
-    public WebElement getBulkEditInputFieldForReceivedMails() {
-        return driver.findElement(By.id(SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_RECEIVED_MAILS));
+    public WebElement getBulkEditInputFieldForIncomingMails() {
+        return driver.findElement(By.id(SELECTOR_BULK_EDIT_SELECT_INPUT_FIELD_FOR_INCOMING_MAILS));
     }
 
     public WebElement getExecuteBulkEditButtonForReceivedMails() {
-        return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_RECEIVED_MAILS));
+        return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_INCOMING_MAILS));
     }
 
     public WebElement getBulkEditInputFieldForArchivedMails() {
@@ -203,10 +253,6 @@ public class CommunityPage {
         return driver.findElement(By.cssSelector(SELECTOR_EXECUTE_BULK_EDIT_BUTTON_FOR_SENT_MAILS));
     }
 
-    public WebElement getBlockableCharacterInputField() {
-        return driver.findElement(By.id(SELECTOR_BLOCK_CHARACTER_CONTAINER));
-    }
-
     public WebElement getBlockCharactersPageButton() {
         return driver.findElement(By.cssSelector(SELECTOR_BLOCK_CHARACTERS_PAGE_BUTTON));
     }
@@ -219,12 +265,10 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_BLOCK_CHARACTER_NAME_INPUT_FIELD));
     }
 
-    public List<WebElement> getBlockableCharacters() {
-        return driver.findElements(By.cssSelector(SELECTOR_BLOCKABLE_CHARACTERS));
-    }
-
-    public void closeWriteMailPage() {
-        driver.findElement(By.id(SELECTOR_CLOSE_WRITE_MAIL_PAGE)).click();
+    public List<WebElement> getCharactersCanBeBlocked() {
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_BLOCKABLE_CHARACTERS)),
+            "Querying characters can be blocked");
     }
 
     public WebElement getFriendsMainPageButton() {
@@ -232,6 +276,29 @@ public class CommunityPage {
     }
 
     public List<WebElement> getBlockedCharacters() {
-        return driver.findElements(By.cssSelector(SELECTOR_BLOCKED_CHARACTERS));
+        return getListWithWait(
+            () -> driver.findElements(By.cssSelector(SELECTOR_BLOCKED_CHARACTERS)),
+            "Querying blocked characters"
+        );
+    }
+
+    public WebElement getSelectAllIncomingMailsButton() {
+        return driver.findElement(By.id(SELECTOR_SELECT_ALL_INCOMING_MAIL_BUTTON));
+    }
+
+    public WebElement getSelectAllArchivedMailsButton() {
+        return driver.findElement(By.id(SELECTOR_SELECT_ALL_ARCHIVED_MAIL_BUTTON));
+    }
+
+    public WebElement getSelectAllSentMailsButton() {
+        return driver.findElement(By.id(SELECTOR_SELECT_ALL_SENT_MAILS_BUTTON));
+    }
+
+    public WebElement getBlockedCharactersContainer() {
+        return driver.findElement(By.id(SELECTOR_BLOCKED_CHARACTERS_CONTAINER));
+    }
+
+    public WebElement getBlockCharacterWindow() {
+        return driver.findElement(By.id(SELECTOR_BLOCK_CHARACTER_WINDOW));
     }
 }

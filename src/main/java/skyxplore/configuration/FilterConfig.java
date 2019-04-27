@@ -10,7 +10,7 @@ import skyxplore.filter.CookieCleanupFilter;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class FilterConfig {
     @Bean
-    public FilterRegistrationBean<CharacterAuthFilter> characterAuthFilterBean(CharacterAuthFilter characterAuthFilter){
+    public FilterRegistrationBean<CharacterAuthFilter> characterAuthFilterBean(CharacterAuthFilter characterAuthFilter) {
         FilterRegistrationBean<CharacterAuthFilter> characterAuthFilterBean = new FilterRegistrationBean<>();
         characterAuthFilterBean.setFilter(characterAuthFilter);
         characterAuthFilterBean.setOrder(10);
@@ -18,7 +18,7 @@ public class FilterConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean(CookieCleanupFilter cookieCleanupFilter){
+    public FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean(CookieCleanupFilter cookieCleanupFilter) {
         FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean = new FilterRegistrationBean<>();
         cookieCleanupFilterBean.setFilter(cookieCleanupFilter);
         cookieCleanupFilterBean.setOrder(100);

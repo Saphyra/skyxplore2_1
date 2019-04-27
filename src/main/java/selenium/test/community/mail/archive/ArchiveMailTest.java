@@ -6,15 +6,15 @@ import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @Builder
@@ -44,7 +44,8 @@ public class ArchiveMailTest {
 
         mail.archive(notificationValidator);
 
-        assertFalse(findMail(character).isPresent());
+        mailTestHelper.verifyNoIncomingMails();
+        assertEquals(0, mailTestHelper.getNumberOfUnreadMails());
 
         assertTrue(
             mailTestHelper.getArchivedMails().stream()
@@ -53,7 +54,7 @@ public class ArchiveMailTest {
     }
 
     private Optional<Mail> findMail(SeleniumCharacter character) {
-        return mailTestHelper.getReceivedMails().stream()
+        return mailTestHelper.getIncomingMails().stream()
             .filter(m -> m.getSender().equals(character.getCharacterName()))
             .findFirst();
     }

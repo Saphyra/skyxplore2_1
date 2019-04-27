@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 
@@ -14,12 +15,26 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.Util.ATTRIBUTE_VALUE;
+import static selenium.logic.util.WaitUtil.waitUntil;
 
 @RequiredArgsConstructor
-//TODO refactor - extract constants
 public class MailTestHelper {
+    private static final String SELECTOR_BASE_OPTION = "option[value='%s']";
+    private static final String VALUE_ARCHIVE = "archive";
+    private static final String SELECTOR_ARCHIVE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_ARCHIVE);
+    private static final String VALUE_RESTORE = "restore";
+    private static final String SELECTOR_RESTORE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_RESTORE);
+    private static final String VALUE_DELETE = "delete";
+    private static final String SELECTOR_DELETE_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_DELETE);
+    private static final String VALUE_MARK_AS_READ = "mark-as-read";
+    private static final String SELECTOR_MARK_AS_READ_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_MARK_AS_READ);
+    private static final String VALUE_MARK_AS_UNREAD = "mark-as-unread";
+    private static final String SELECTOR_MARK_AS_UNREAD_OPTION = String.format(SELECTOR_BASE_OPTION, VALUE_MARK_AS_UNREAD);
+
     private final CommunityPage communityPage;
     private final WebDriver driver;
+    private final MessageCodes messageCodes;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
         List<String> searchResult = communityPage.getAddressees();
@@ -28,110 +43,113 @@ public class MailTestHelper {
         shouldNotContain.forEach(seleniumCharacter -> assertFalse(searchResult.stream().anyMatch(characterName -> characterName.equals(seleniumCharacter.getCharacterName()))));
     }
 
-    public List<Mail> getReceivedMails() {
-        communityPage.getReceivedMailsPageButton().click();
-        return communityPage.getReceivedMails().stream()
-            .map(element -> new Mail(element, driver))
+    public void verifyNoIncomingMails() {
+        waitUntil(() -> !communityPage.isIncomingMailExists(), "Waiting until incoming mails disappear");
+    }
+
+    public void verifyNoArchivedMails() {
+        waitUntil(() -> !communityPage.isArchivedMailExists(), "Waiting until archived mails disappear");
+    }
+
+    public void verifyNoSentMails() {
+        waitUntil(() -> !communityPage.isSentMailExists(), "Waiting until sent mails disappear");
+    }
+
+    public List<Mail> getIncomingMails() {
+        return getIncomingMails(false);
+    }
+
+    public List<Mail> getIncomingMails(boolean canBeEmpty) {
+        communityPage.getIncomingMailsPageButton().click();
+        return communityPage.getIncomingMails(canBeEmpty).stream()
+            .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
 
     public List<Mail> getSentMails() {
         communityPage.getSentMailsPageButton().click();
         return communityPage.getSentMails().stream()
-            .map(element -> new Mail(element, driver))
+            .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
 
     public List<Mail> getArchivedMails() {
         communityPage.getArchivedMailsPageButton().click();
         return communityPage.getArchivedMails().stream()
-            .map(element -> new Mail(element, driver))
+            .map(element -> new Mail(element, driver, messageCodes))
             .collect(Collectors.toList());
     }
 
     public int getNumberOfUnreadMails() {
-        WebElement element = communityPage.getNumberOfUnreadMails();
-        return element.getText().isEmpty() ? 0 : parseNumberOfUnreadMails(element.getText());
-    }
-
-    private Integer parseNumberOfUnreadMails(String text) {
-        String split1 = text.trim().substring(1);
-        String split2 = split1.split("\\)")[0];
-        return Integer.valueOf(split2);
+        return Integer.valueOf(communityPage.getNumberOfUnreadMails().getText());
     }
 
     public void selectBulkArchiveOption() {
-        WebElement bulkSelectInput = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement bulkSelectInput = communityPage.getBulkEditInputFieldForIncomingMails();
         bulkSelectInput.click();
 
-        bulkSelectInput.findElement(By.cssSelector("option[value='archive']")).click();
+        bulkSelectInput.findElement(By.cssSelector(SELECTOR_ARCHIVE_OPTION)).click();
 
-        assertEquals("archive", bulkSelectInput.getAttribute("value"));
+        assertEquals(VALUE_ARCHIVE, bulkSelectInput.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public void selectBulkRestoreOption() {
-        communityPage.getArchivedMailsPageButton().click();
         WebElement bulkRestoreInput = communityPage.getBulkEditInputFieldForArchivedMails();
         bulkRestoreInput.click();
 
-        bulkRestoreInput.findElement(By.cssSelector("option[value='unarchive']")).click();
+        bulkRestoreInput.findElement(By.cssSelector(SELECTOR_RESTORE_OPTION)).click();
 
-        assertEquals("unarchive", bulkRestoreInput.getAttribute("value"));
+        assertEquals(VALUE_RESTORE, bulkRestoreInput.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public void selectBulkDeleteOptionForSentMails() {
-        communityPage.getSentMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForSentMails();
         bulkDeleteInput.click();
 
-        bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();
+        bulkDeleteInput.findElement(By.cssSelector(SELECTOR_DELETE_OPTION)).click();
 
-        assertEquals("delete", bulkDeleteInput.getAttribute("value"));
+        assertEquals(VALUE_DELETE, bulkDeleteInput.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public void selectBulkDeleteOptionForReceivedMails() {
-        communityPage.getReceivedMailsPageButton().click();
-        WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForIncomingMails();
         bulkDeleteInput.click();
 
-        bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();
+        bulkDeleteInput.findElement(By.cssSelector(SELECTOR_DELETE_OPTION)).click();
 
-        assertEquals("delete", bulkDeleteInput.getAttribute("value"));
+        assertEquals(VALUE_DELETE, bulkDeleteInput.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public void selectBulkDeleteOptionForArchivedMails() {
-        communityPage.getArchivedMailsPageButton().click();
         WebElement bulkDeleteInput = communityPage.getBulkEditInputFieldForArchivedMails();
         bulkDeleteInput.click();
 
-        bulkDeleteInput.findElement(By.cssSelector("option[value='delete']")).click();
+        bulkDeleteInput.findElement(By.cssSelector(SELECTOR_DELETE_OPTION)).click();
 
-        assertEquals("delete", bulkDeleteInput.getAttribute("value"));
+        assertEquals(VALUE_DELETE, bulkDeleteInput.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public void selectBulkMarkAsReadOption() {
-        communityPage.getReceivedMailsPageButton().click();
-        WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement inputField = communityPage.getBulkEditInputFieldForIncomingMails();
         inputField.click();
 
-        inputField.findElement(By.cssSelector("option[value='markasread']")).click();
+        inputField.findElement(By.cssSelector(SELECTOR_MARK_AS_READ_OPTION)).click();
 
-        assertEquals("markasread", inputField.getAttribute("value"));
+        assertEquals(VALUE_MARK_AS_READ, inputField.getAttribute(ATTRIBUTE_VALUE));
     }
 
     public Mail getMail() {
-        return getReceivedMails().stream()
+        return getIncomingMails().stream()
             .findAny()
             .orElseThrow(() -> new RuntimeException("Mail not found"));
     }
 
     public void selectBulkMarkAsUnreadOption() {
-        communityPage.getReceivedMailsPageButton().click();
-        WebElement inputField = communityPage.getBulkEditInputFieldForReceivedMails();
+        WebElement inputField = communityPage.getBulkEditInputFieldForIncomingMails();
         inputField.click();
 
-        inputField.findElement(By.cssSelector("option[value='markasunread']")).click();
+        inputField.findElement(By.cssSelector(SELECTOR_MARK_AS_UNREAD_OPTION)).click();
 
-        assertEquals("markasunread", inputField.getAttribute("value"));
+        assertEquals(VALUE_MARK_AS_UNREAD, inputField.getAttribute(ATTRIBUTE_VALUE));
     }
 }

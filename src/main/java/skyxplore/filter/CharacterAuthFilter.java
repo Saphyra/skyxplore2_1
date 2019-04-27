@@ -42,10 +42,11 @@ public class CharacterAuthFilter extends OncePerRequestFilter {
         "/account",
         "/user/**",
         "/character",
-        "/character/select/*",
-        "/character/name/exist",
+        "/character/*",
+        "/character/name",
         "/" + RENAME_CHARACTER_MAPPING,
-        "/character/delete/*"
+        "/character/delete/*",
+        "/i18n/**"
     );
 
     private final CharacterQueryService characterQueryService;

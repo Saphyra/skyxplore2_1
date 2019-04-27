@@ -1,0 +1,62 @@
+#ship{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(100% - 30rem);
+    border-right: 3px ridge white;
+    padding: 1rem;
+    overflow: auto;
+}
+
+#storage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30rem;
+    overflow: auto;
+}
+
+#storage-title{
+    text-align: center;
+    border-bottom: 3px ridge white;
+}
+
+#empty-storage{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.equipment-slot-container{
+    margin: 1rem;
+    text-align: center;
+}
+
+.equipment-slot-container-title{
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border: 3px outset white;
+    position: relative;
+}
+
+.equipment-slot-list-container{
+    border: 3px outset white;
+    border-top: none;
+    text-align: left;
+}
+
+.equipment-slot-list-container .slot{
+    width: calc(33% - 0.45rem);
+    height: auto;
+    min-height: 3rem;
+}
+
+.slot:not(.empty-slot), .slot:not(.empty-slot) *{
+    cursor: pointer;
+}
+
+.slot:not(.empty-slot):hover{
+    border-color: red;
+}

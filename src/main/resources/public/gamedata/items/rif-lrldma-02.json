@@ -1,0 +1,25 @@
+{
+  "id": "rif-lrldma-02",
+  "attackSpeed": 2,
+  "criticalRate": 300,
+  "range": 2,
+  "hullDamage": 4500,
+  "shieldDamage": 3000,
+  "accuracy": 500,
+  "constructiontime": 1800,
+  "buildprice": 1800,
+  "buildable": true,
+  "materials": {
+    "cable": 3,
+    "condensator": 3,
+    "hullplate": 9,
+    "adamantium": 30
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 2,
+  "score": 2,
+  "buyprice": 45000,
+  "sellprice": 15000,
+  "category": "ballistic"
+}

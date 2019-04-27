@@ -116,7 +116,7 @@ public class SkyXpCharacterTest {
     }
 
     @Test
-    public void testGetEquipmentsShouldReturnCopy(){
+    public void testGetEquipmentsShouldReturnCopy() {
         //GIVEN
         underTest.addEquipment(CHARACTER_EQUIPMENT);
         //WHEN

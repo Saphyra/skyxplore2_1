@@ -1,6 +1,7 @@
 package selenium.test.community;
 
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -20,6 +21,7 @@ import selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
 import selenium.test.community.block.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.block.FilterTestShouldShowOnlyMatchingCharacter;
 import selenium.test.community.block.UnblockCharacterTest;
+import selenium.test.community.block.BlockFriendRequestSenderTest;
 import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
@@ -40,26 +42,26 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         communityTestHelper = new CommunityTestHelper(
-            new Login(driver),
+            new Login(driver, messageCodes),
             new SelectCharacter(driver),
             new OverviewPage(driver),
             new Navigate(driver)
         );
 
         communityTestInitializer = new CommunityTestInitializer(
-            new Registration(driver),
-            new CreateCharacter(driver),
-            new Logout(driver)
+            new Registration(driver, messageCodes),
+            new CreateCharacter(driver, messageCodes),
+            new Logout(driver, messageCodes)
         );
 
-        communityPage = new CommunityPage(driver);
+        communityPage = new CommunityPage(driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
 
-        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator);
+        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator, messageCodes);
 
-        sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
-        friendshipTestHelper = new FriendshipTestHelper(communityPage, notificationValidator);
-        mailTestHelper = new MailTestHelper(communityPage, driver);
+        sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
+        friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
+        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
     }
 
     @Test
@@ -83,7 +85,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testFilterShouldNotShowAlreadyBlocked(){
+    public void testFilterShouldNotShowAlreadyBlocked() {
         FilterTestShouldNotShowAlreadyBlocked.builder()
             .blockTestHelper(blockTestHelper)
             .communityTestHelper(communityTestHelper)
@@ -104,7 +106,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldNotSendFriendRequest(){
+    public void testBlockCharacterShouldNotSendFriendRequest() {
         BlockCharacterTestShouldNotSendFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -115,7 +117,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldDeleteFriendRequest(){
+    public void testBlockCharacterShouldDeleteFriendRequest() {
         BlockCharacterTestShouldDeleteFriendRequest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -127,7 +129,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldDeleteFriendship(){
+    public void testBlockCharacterShouldDeleteFriendship() {
         BlockCharacterTestShouldDeleteFriendship.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -139,7 +141,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBlockCharacterShouldUnableToReplyMail(){
+    public void testBlockCharacterShouldUnableToReplyMail() {
         BlockCharacterShouldUnableReplyMail.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
@@ -148,12 +150,25 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testBlockCharacterShouldUnableToReplyMail();
     }
 
     @Test
-    public void testUnblockCharacter(){
+    public void testBlockFriendRequestSender(){
+        BlockFriendRequestSenderTest.builder()
+            .communityTestHelper(communityTestHelper)
+            .communityTestInitializer(communityTestInitializer)
+            .friendshipTestHelper(friendshipTestHelper)
+            .communityPage(communityPage)
+            .blockTestHelper(blockTestHelper)
+            .build()
+            .testBlockFriendRequestSender();
+    }
+
+    @Test
+    public void testUnblockCharacter() {
         UnblockCharacterTest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)

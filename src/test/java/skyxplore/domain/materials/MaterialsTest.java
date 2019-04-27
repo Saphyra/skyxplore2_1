@@ -77,7 +77,7 @@ public class MaterialsTest {
     }
 
     @Test
-    public void testPutAllShouldPut(){
+    public void testPutAllShouldPut() {
         //GIVEN
         Map<String, Integer> map = new HashMap<>();
         map.put(MATERIAL_ID, MATERIAL_AMOUNT);
@@ -90,12 +90,12 @@ public class MaterialsTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void testRemoveShouldThrowException(){
+    public void testRemoveShouldThrowException() {
         underTest.remove(MATERIAL_ID);
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void testClearShouldThrowException(){
+    public void testClearShouldThrowException() {
         underTest.clear();
     }
 }

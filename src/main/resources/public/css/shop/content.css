@@ -19,16 +19,25 @@
     overflow: auto;
 }
 
-.elementtitlecontainer{
+.element-title-container{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
 }
 
-.elementtitle{
+.element-title{
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.elementdescription{
+.element-description{
+    font-size: 1.25rem;
+}
+
+.element-content-container{
+    font-size: 1.5rem;
+    padding: 0.25rem;
+}
+
+.add-to-cart-button{
     font-size: 1.25rem;
 }

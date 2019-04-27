@@ -1,17 +1,18 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Közösség - SkyXplore 2.1</TITLE>
+    <TITLE></TITLE>
     <META charset="UTF-8">
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
 
-    <LINK rel="stylesheet" href="/css/community/add_friend.css">
-    <LINK rel="stylesheet" href="/css/community/blocked_character.css">
     <LINK rel="stylesheet" href="/css/community/community.css">
-    <LINK rel="stylesheet" href="/css/community/friend_list.css">
-    <LINK rel="stylesheet" href="/css/community/mail_list.css">
-    <LINK rel="stylesheet" href="/css/community/mail.css">
+    <LINK rel="stylesheet" href="/css/community/character_lists.css">
+    <LINK rel="stylesheet" href="/css/community/friend_lists.css">
+    <LINK rel="stylesheet" href="/css/community/mail_lists.css">
+    <LINK rel="stylesheet" href="/css/community/mail_item.css">
+    <LINK rel="stylesheet" href="/css/community/write_mail.css">
+    <LINK rel="stylesheet" href="/css/community/add_friend.css">
+    <LINK rel="stylesheet" href="/css/community/block_character.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -19,175 +20,233 @@
     <SCRIPT src="js/community/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
-
-<DIV class="cover">
+<DIV class="main-page">
     <HEADER>
-        <H1>Közösség</H1>
+        <H1 id="main-title"></H1>
     </HEADER>
 
-    <MAIN id='lists' class="textaligncenter mainlabel">
-        <SECTION id='friendlist'>
-            <DIV id='friendlistheader'>
-                <H2>Játékosok</H2>
-
-                <DIV id='friendlistbuttons'>
-                    <BUTTON onclick='pageController.showFriendList()'>Barátok</BUTTON>
-                    <BUTTON onclick='pageController.showBlockedCharacters()'>Blokkolva</BUTTON>
-                    <BUTTON>Jelentés</BUTTON>
-                </DIV>
+    <MAIN id="main-lists" class="main-tab">
+        <SECTION id="list-container">
+            <DIV id="list-header">
+                <BUTTON id="friends-page-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIEND_CHARACTERS_TAB))"></BUTTON>
+                <BUTTON id="blocked-characters-page-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_BLOCKED_CHARACTERS_TAB))"></BUTTON>
             </DIV>
 
-            <DIV id='friendlistcontainer'>
-                <DIV id='listfriends' class='absolute0 listlabel'>
-                    <DIV class='margintop0_75rem marginbottom0_5rem'>
-                        <DIV class='button inline' onclick='switchTab("friendlistscontainer", "friends")'>Barátok</DIV>
-                        <DIV class='button inline' onclick='switchTab("friendlistscontainer", "friendrequests")'>Barátkérelmek (<SPAN id='friendrequestnum'></SPAN>)</DIV>
-                        <DIV class='button inline' onclick='switchTab("friendlistscontainer", "sentfriendrequests")'>Elküldött barátkérelmek (<SPAN id='sentfriendrequestnum'></SPAN>)</DIV>
+            <DIV id="character-list-container">
+                <DIV id="friends-container" class="character-list-tab">
+                    <DIV id="friends-header">
+                        <DIV id="friends-tab-button" class="inline-button button"
+                             onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIENDS_TAB))"></DIV>
+
+                        <DIV class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_FRIEND_REQUESTS_TAB))">
+                            <SPAN id="friend-requests-tab-button"></SPAN>
+
+                            <SPAN>
+                                <SPAN> (</SPAN>
+                                <SPAN id="friend-request-num"></SPAN>
+                                <SPAN>)</SPAN>
+                            </SPAN>
+                        </DIV>
+
+                        <DIV id="sent-friend-requests-tab-button" class="inline-button button"
+                             onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_FRIEND_REQUESTS_TAB))"></DIV>
                     </DIV>
-                    
-                    <DIV id='friendlists'>
-                        <DIV id='friends' class='friendlistscontainer'>
-                            <H3 class='marginbottom0_5rem'>Barátlista</H3>
-                            <DIV class='button' onclick='pageController.showAddFriendWindow()'>Barát felvétele</DIV>
-                            <DIV id='friendlistitems'></DIV>
+
+                    <DIV id="friend-lists">
+                        <DIV id="friend-list-container" class="friend-list-tab">
+                            <H3 id="friend-list-title"></H3>
+                            <DIV id="add-friend-button" class="button" onclick="eventProcessor.processEvent(new Event(events.OPEN_ADD_FRIEND_WINDOW))"></DIV>
+                            <DIV id="no-friends"></DIV>
+                            <DIV id="friend-list"></DIV>
                         </DIV>
-                        
-                        <DIV id='friendrequests' class='friendlistscontainer'>
-                            <H3 class='marginbottom0_5rem'>Barátkérelmek</H3>
-                            <DIV id='friendrequestitems'></DIV>
+
+                        <DIV id="friend-request-list-container" class="friend-list-tab">
+                            <H3 id="friend-request-list-title"></H3>
+
+                            <DIV id="no-friend-requests"></DIV>
+                            <DIV id="friend-request-list"></DIV>
                         </DIV>
-                        
-                        <DIV id='sentfriendrequests' class='friendlistscontainer'>
-                            <H3 class='marginbottom0_5rem'>Elküldött barátkérelmek</H3>
-                            <DIV id='sentfriendrequestitems'></DIV>
+
+                        <DIV id="sent-friend-request-list-container" class="friend-list-tab">
+                            <H3 id="sent-friend-request-list-title"></H3>
+
+                            <DIV id="no-sent-friend-requests"></DIV>
+                            <DIV id="sent-friend-request-list"></DIV>
                         </DIV>
                     </DIV>
                 </DIV>
 
-                <DIV id='blockedcharacters' class='absolute0 listlabel'>
-                    <H3>Blokkolt felhasználók</H3>
-                    <DIV class='button' onclick='pageController.showBlockableCharactersWindow()'>Játékos blokkolása</DIV>
-                    <DIV id='blockedcharacterlist'></DIV>
+                <DIV id="blocked-characters-container" class="character-list-tab">
+                    <H3 id="blocked-characters-title"></H3>
+
+                    <DIV class="button" id="block-character-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_BLOCK_CHARACTER_WINDOW))"></DIV>
+
+                    <DIV id="no-blocked-characters"></DIV>
+                    <DIV id="blocked-character-list"></DIV>
                 </DIV>
             </DIV>
         </SECTION>
 
-        <SECTION id='maillist'>
-            <DIV id='maillistheader'>
-                <H2>Üzenetek</H2>
+        <SECTION id="mail-lists">
+            <DIV id="mail-lists-header">
+                <H2 id="mail-lists-title"></H2>
 
-                <DIV id='maillistbuttons'  class='margintop0_75rem marginbottom0_5rem'>
-                    <DIV class='button inline' onclick='switchTab("mainlabel", "mail")'>Üzenet írása</DIV>
-                    <DIV class='button inline' onclick='switchTab("maillistcontainer", "incomingmaillistcontainer")'>Bejövő<SPAN id='numberofunreadmails' class='colorred'></SPAN></DIV>
-                    <DIV class='button inline' onclick='switchTab("maillistcontainer", "sentmaillistcontainer")'>Elküldött</DIV>
-                    <DIV class='button inline' onclick='switchTab("maillistcontainer", "archivedmaillistcontainer")'>Archivált</DIV>
+                <DIV id="mail-list-header-buttons">
+                    <DIV id="write-mail-button" class="inline-button button"
+                         onclick="eventProcessor.processEvent(new Event(events.OPEN_WRITE_MAIL_WINDOW))"></DIV>
+                    <DIV class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_INCOMING_MAILS_TAB))">
+                        <SPAN id="incoming-mails-button"></SPAN>
+
+                        <SPAN>
+                            <SPAN> (</SPAN>
+                            <SPAN id="number-of-unread-mails"></SPAN>
+                            <SPAN>)</SPAN>
+                        </SPAN>
+                    </DIV>
+
+                    <DIV id="sent-mails-button" class="inline-button button" onclick="eventProcessor.processEvent(new Event(events.OPEN_SENT_MAILS_TAB))"></DIV>
+                    <DIV id="archived-mails-button" class="inline-button button"
+                         onclick="eventProcessor.processEvent(new Event(events.OPEN_ARCHIVED_MAILS_TAB))"></DIV>
                 </DIV>
             </DIV>
 
-            <DIV id='maillistcontainer'>
-                <DIV id='incomingmaillistcontainer' class='maillistcontainer'>
-                    <H2>Bejövő üzenetek</H2>
-                    
-                    <DIV class='actionwithselectedmails'>
-                        <BUTTON onclick='mailController.selectAll("receivedmailselected")'>Mindet kiválaszt</BUTTON>
-                        <SELECT id='actionwithreceivedmails'>
-                            <OPTION value='none'>Művelet választása</OPTION>
-                            <OPTION value='delete'>Kiválasztottak törlése</OPTION>
-                            <OPTION value='archive'>Kiválasztottak archiválása</OPTION>
-                            <OPTION value='markasread'>Kiválasztottak olvasottnak jelölése</OPTION>
-                            <OPTION value='markasunread'>Kiválasztottak olvasatlannak jelölése</OPTION>
+            <DIV id="mail-list-container">
+                <DIV id="incoming-mail-list-container" class="mail-list-tab">
+                    <H2 id="incoming-mail-list-title"></H2>
+
+                    <DIV class="action-with-selected-mails">
+                        <BUTTON id="select-all-incoming-mail-button"
+                                onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_INCOMING_MAILS))"></BUTTON>
+
+                        <SELECT id="action-with-incoming-mails">
+                            <OPTION id="incoming-mail-option-none" value="none"></OPTION>
+                            <OPTION id="incoming-mail-option-delete" value="delete"></OPTION>
+                            <OPTION id="incoming-mail-option-archive" value="archive"></OPTION>
+                            <OPTION id="incoming-mail-option-mark-as-read" value="mark-as-read"></OPTION>
+                            <OPTION id="incoming-mail-option-mark-as-unread" value="mark-as-unread"></OPTION>
                         </SELECT>
-                        <BUTTON onclick='mailController.processOnSelected("actionwithreceivedmails","receivedmailselected")'>Végrehajt</BUTTON>
+
+                        <BUTTON id="process-action-with-incoming-mails-button"
+                                onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_INCOMING_MAILS))"></BUTTON>
                     </DIV>
-                    
-                    <DIV id='incomingmaillist' class='maillistitemcontainer'></DIV>
+
+                    <DIV id="no-incoming-mail"></DIV>
+                    <DIV id="incoming-mail-list"></DIV>
                 </DIV>
-                
-                <DIV id='sentmaillistcontainer' class='maillistcontainer displaynone'>
-                    <H2>Elküldött üzenetek</H2>
-                    
-                    <DIV class='actionwithselectedmails'>
-                        <BUTTON onclick='mailController.selectAll("sentmailselected")'>Mindet kiválaszt</BUTTON>
-                        <SELECT id='actionwithdeletedmails'>
-                            <OPTION value='none'>Művelet választása</OPTION>
-                            <OPTION value='delete'>Kiválasztottak törlése</OPTION>
+
+                <DIV id="sent-mail-list-container" class="mail-list-tab">
+                    <H2 id="sent-mail-list-title"></H2>
+
+                    <DIV class="action-with-selected-mails">
+                        <BUTTON id="select-all-sent-mail-button" onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_SENT_MAILS))"></BUTTON>
+
+                        <SELECT id="action-with-sent-mails">
+                            <OPTION id="sent-mail-option-none" value="none"></OPTION>
+                            <OPTION id="sent-mail-option-delete" value="delete"></OPTION>
                         </SELECT>
-                        <BUTTON onclick='mailController.processOnSelected("actionwithdeletedmails", "sentmailselected")'>Végrehajt</BUTTON>
+
+                        <BUTTON id="process-action-with-sent-mails-button"
+                                onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_SENT_MAILS))"></BUTTON>
                     </DIV>
-                    
-                    <DIV id='sentmaillist' class='maillistitemcontainer'></DIV>
+
+                    <DIV id="no-sent-mail"></DIV>
+                    <DIV id="sent-mail-list"></DIV>
                 </DIV>
-                
-                <DIV id='archivedmaillistcontainer' class='maillistcontainer displaynone'>
-                    <H2>Archivált üzenetek</H2>
-                    
-                    <DIV class='actionwithselectedmails'>
-                        <BUTTON onclick='mailController.selectAll("archivedmailselected")'>Mindet kiválaszt</BUTTON>
-                        <SELECT id='actionwitharchivedmails'>
-                            <OPTION value='none'>Művelet választása</OPTION>
-                            <OPTION value='delete'>Kiválasztottak törlése</OPTION>
-                            <OPTION value='unarchive'>Kiválasztottak visszaállítása</OPTION>
+
+                <DIV id="archived-mail-list-container" class="mail-list-tab">
+                    <H2 id="archived-mail-list-title"></H2>
+
+                    <DIV class="action-with-selected-mails">
+                        <BUTTON id="select-all-archived-mail-button"
+                                onclick="eventProcessor.processEvent(new Event(events.SELECT_ALL_ARCHIVED_MAILS))"></BUTTON>
+
+                        <SELECT id="action-with-archived-mails">
+                            <OPTION id="archived-mail-option-none" value="none"></OPTION>
+                            <OPTION id="archived-mail-option-delete" value="delete"></OPTION>
+                            <OPTION id="archived-mail-option-restore" value="restore"></OPTION>
                         </SELECT>
-                        <BUTTON onclick='mailController.processOnSelected("actionwitharchivedmails", "archivedmailselected")'>Végrehajt</BUTTON>
+
+                        <BUTTON id="process-action-with-archived-mails-button"
+                                onclick="eventProcessor.processEvent(new Event(events.PROCESS_BULK_OPERATION_WITH_ARCHIVED_MAILS))"></BUTTON>
                     </DIV>
-                    
-                    <DIV id='archivedmaillist' class='maillistitemcontainer'></DIV>
+
+                    <DIV id="no-archived-mail"></DIV>
+                    <DIV id="archived-mail-list"></DIV>
                 </DIV>
             </DIV>
         </SECTION>
     </MAIN>
 
-    <MAIN id='addfriend' class='mainlabel'>
-        <DIV id='addfriendcontainer'>
-            <H2>Barát felvétele</H2>
-            <BUTTON id='addfriendclosebutton' onclick='pageController.showLists()'>X</BUTTON>
-            
-            <DIV class='textaligncenter'>
-                <INPUT type='text' id='friendname' placeholder='Karakter keresése' onkeyup='friendSearchController.search()'>
+    <MAIN id="main-add-friend" class="main-tab">
+        <DIV id="add-friend-wrapper">
+            <H2 id="add-friend-title"></H2>
+            <BUTTON id="add-friend-close-button" class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X</BUTTON>
+
+            <DIV id="add-friend-input-container">
+                <INPUT type="text" id="friend-name">
             </DIV>
-            
-            <DIV id='usersfoundfornewfriend'></DIV>
-        </DIV>
-    </MAIN>
-    
-    <MAIN id='blockedcharacter' class='mainlabel'>
-        <DIV id='blockcharactercontainer'>
-            <H2>Felhasználó blokkolása</H2>
-            <BUTTON id='blockcharacterclosebutton' onclick='pageController.showLists()'>X</BUTTON>
-            
-            <DIV class='textaligncenter'>
-                <INPUT type='text' id='blockcharactername' placeholder='Karakter keresése' onkeyup='blockedCharacterSearchController.search()'>
-            </DIV>
-            
-            <DIV id='blockablecharactersfound'></DIV>
+
+            <DIV id="no-character-can-be-friend"></DIV>
+            <DIV id="add-friend-search-result"></DIV>
         </DIV>
     </MAIN>
 
-    <MAIN id='mail' class='mainlabel'>
-        <DIV id='mailcontainer'>
-            <H2>Üzenet írása</H2>
-            <BUTTON id='mailclosebutton' onclick='pageController.showLists()'>X</BUTTON>
-            
-            <TABLE>
+    <MAIN id="main-block-character" class="main-tab">
+        <DIV id="block-character-wrapper">
+            <H2 id="block-character-title"></H2>
+            <BUTTON id="block-character-close-button" class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X</BUTTON>
+
+            <DIV id="block-character-input-container">
+                <INPUT type="text" id="block-character-name">
+            </DIV>
+
+            <DIV id="no-character-can-be-blocked"></DIV>
+            <DIV id="block-character-search-result"></DIV>
+        </DIV>
+    </MAIN>
+
+    <MAIN id="main-write-mail" class="main-tab">
+        <DIV id="write-mail-wrapper">
+            <H2 id="write-mail-title"></H2>
+
+            <BUTTON class="close-button" onclick="eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS))">X</BUTTON>
+
+            <TABLE id="write-mail-table">
                 <TR>
-                    <TD class='width50percent'>
-                        <LABEL id='subjectlabel'>Tárgy: <INPUT type='text' id='subject' placeholder='Tárgy'></LABEL>
-                    </TD>
                     <TD>
-                        <DIV id='addresseecontainer'>
-                            <LABEL id='addresseelabel'>Címzett: <INPUT type='text' id='addressee' placeholder='Címzett'></LABEL>
-                            <DIV id='addresseelist' class='displaynone'></DIV>
+                        <LABEL id='subject-label'>
+                            <SPAN id="subject-label-text"></SPAN>
+                            <SPAN>: </SPAN>
+                            <INPUT type='text' id='subject'>
+                        </LABEL>
+                    </TD>
+
+                    <TD>
+                        <DIV id="addressee-container">
+                            <LABEL id='addressee-label'>
+                                <SPAN id="addressee-label-text"></SPAN>
+                                <SPAN>: </SPAN>
+                                <INPUT type='text' id='addressee'>
+                            </LABEL>
+
+                            <DIV id="addressee-list">
+                                <DIV id="addressee-not-found"></DIV>
+                                <DIV id="addressee-field-empty"></DIV>
+                                <DIV id="addressee-search-result"></DIV>
+                            </DIV>
                         </DIV>
                     </TD>
                 </TR>
+
                 <TR>
-                    <TD colspan='2' class='textaligncenter'>
-                        <TEXTAREA id='message' placeholder='Üzenet'></TEXTAREA>
+                    <TD colspan="2">
+                        <TEXTAREA id="message"></TEXTAREA>
                     </TD>
                 </TR>
+
                 <TR>
-                    <TD colspan='2' class='textaligncenter'>
-                        <BUTTON class='fontsize1_25rem' onclick='newMailController.sendMail()'>Küldés</BUTTON>
+                    <TD colspan="2">
+                        <BUTTON id="send-mail-button" onclick="eventProcessor.processEvent(new Event(events.SEND_MAIL))"></BUTTON>
                     </TD>
                 </TR>
             </TABLE>
@@ -195,10 +254,9 @@
     </MAIN>
 
     <FOOTER>
-        <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-        <BUTTON onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
     </FOOTER>
 </DIV>
-
 </BODY>
 </HTML>

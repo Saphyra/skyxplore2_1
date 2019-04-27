@@ -1,9 +1,0 @@
-{
-    "id": "speed",
-    "name": "Gyorsítás",
-    "description": "Megnöveli a hajó mozgási sebességét.",
-    "slot": "ability",
-    "energyusage": 300,
-    "active": 5,
-    "reload": 15
-}

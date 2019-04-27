@@ -25,13 +25,13 @@ public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepo
     }
 
     @Transactional
-    public void delete(String userId){
+    public void delete(String userId) {
         log.info("Deleting user {}", userId);
         repository.deleteById(userId);
         credentialsDao.deleteById(userId);
     }
 
-    public SkyXpUser findUserByEmail(String email){
+    public SkyXpUser findUserByEmail(String email) {
         return converter.convertEntity(repository.findByEmail(email));
     }
 }

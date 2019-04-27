@@ -30,7 +30,7 @@ public class AccessTokenConverterTest {
     private AccessTokenConverter underTest;
 
     @Test
-    public void testConvertEntityShouldConvert(){
+    public void testConvertEntityShouldConvert() {
         //GIVEN
         SkyXpAccessToken skyXpAccessToken = SkyXpAccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)
@@ -47,7 +47,7 @@ public class AccessTokenConverterTest {
     }
 
     @Test
-    public void testConvertDomain(){
+    public void testConvertDomain() {
         //GIVEN
         AccessToken accessToken = AccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)
@@ -67,7 +67,7 @@ public class AccessTokenConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldFillCharacterId(){
+    public void testConvertDomainShouldFillCharacterId() {
         //GIVEN
         AccessToken accessToken = AccessToken.builder()
             .accessTokenId(ACCESS_TOKEN_ID)

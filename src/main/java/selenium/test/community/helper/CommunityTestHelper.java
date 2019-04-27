@@ -1,16 +1,15 @@
 package selenium.test.community.helper;
 
-import static org.junit.Assert.assertEquals;
-
-import org.openqa.selenium.WebElement;
-
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.WebElement;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.flow.Login;
 import selenium.logic.flow.Navigate;
 import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.OverviewPage;
+
+import static org.junit.Assert.assertEquals;
 
 @RequiredArgsConstructor
 public class CommunityTestHelper {
@@ -33,10 +32,7 @@ public class CommunityTestHelper {
     private void verifyNotificationNum(int numberOfNotifications) {
         WebElement notificationElement = overviewPage.getNotificationNumberElement();
         String notificationText = notificationElement.getText();
-        int displayedNumber = 0;
-        if (!notificationText.isEmpty()) {
-            displayedNumber = Integer.valueOf(notificationText.split("\\(")[1].split("\\)")[0]);
-        }
-        assertEquals(numberOfNotifications, displayedNumber);
+
+        assertEquals(numberOfNotifications, (int) Integer.valueOf(notificationText));
     }
 }

@@ -1,5 +1,11 @@
 package selenium.test.community.friendship;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static selenium.logic.util.WaitUtil.sleep;
+
+import java.util.List;
+
 import lombok.Builder;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
@@ -7,11 +13,6 @@ import selenium.logic.page.CommunityPage;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.FriendshipTestHelper;
-
-import java.util.List;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 @Builder
 public class AcceptFriendRequestTest {
@@ -37,7 +38,6 @@ public class AcceptFriendRequestTest {
 
         verifyFriendRequestDisappeared(character);
 
-        communityPage.getFriendsPageButton().click();
         verifyFriendInList(character);
 
         communityTestHelper.goToCommunityPageOf(account, character);
@@ -47,13 +47,12 @@ public class AcceptFriendRequestTest {
     }
 
     private void verifyFriendRequestDisappeared(SeleniumCharacter character) {
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         assertFalse(
             communityPage.getFriendRequests().stream()
                 .anyMatch(seleniumFriendRequest -> seleniumFriendRequest.getCharacterName().equals(character.getCharacterName()))
         );
     }
-
 
 
     private void verifySentFriendRequestDisappeared(SeleniumCharacter otherCharacter) {
@@ -65,6 +64,8 @@ public class AcceptFriendRequestTest {
     }
 
     private void verifyFriendInList(SeleniumCharacter character) {
+        communityPage.getOpenFriendsPageButton().click();
+        sleep(500);
         assertTrue(
             communityPage.getFriends().stream()
                 .anyMatch(friend -> friend.getCharacterName().equals(character.getCharacterName()))

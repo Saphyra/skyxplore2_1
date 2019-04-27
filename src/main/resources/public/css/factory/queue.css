@@ -1,32 +1,37 @@
-#queuecontainer{
+#queue-container{
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
     width: 20rem;
     border-left: 3px ridge white;
+    text-align: center;
 }
 
-#queuecontainer h2{
-    text-align: center;
+#queue-title{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
 }
 
-.queueelement{
+#empty-queue{
+    font-size: 1.5rem;
+    margin: 0.25rem;
+}
+
+.queue-element{
     margin: 0.5rem;
     border: 3px ridge white;
     border-radius: 10px;
     text-align: center;
 }
 
-.queueelementtitle{
+.queue-element-title{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
     font-size: 1.25rem;
 }
 
-.queueprocess{
+.queue-process{
     border: 2px ridge white;
     margin: 0.5rem;
     padding: 0.25rem;
@@ -34,7 +39,7 @@
     min-height: 1.75rem;
 }
 
-.processbar{
+.process-bar{
     position: absolute;
     left: 0;
     top: 0;
@@ -44,7 +49,7 @@
     transition-timing-function: linear;
 }
 
-.processbartext{
+.process-bar-text{
     position: absolute;
     padding: 0.25rem;
     left: 0;

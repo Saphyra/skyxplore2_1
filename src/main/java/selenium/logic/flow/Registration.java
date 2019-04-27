@@ -8,27 +8,30 @@ import selenium.logic.domain.SeleniumUser;
 import selenium.logic.page.IndexPage;
 import selenium.logic.validator.NotificationValidator;
 
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 import static selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 import static selenium.logic.util.LinkUtil.HOST;
-import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
 import static selenium.logic.util.Util.cleanNotifications;
 
 public class Registration {
-    private static final String SUCCESSFUL_REGISTRATION_NOTIFICATION = "Sikeres regisztráció!";
+    private static final String MESSAGE_CODE_SUCCESSFUL_REGISTRATION = "REGISTRATION_SUCCESSFUL";
 
     private final WebDriver driver;
     private final IndexPage indexPage;
     private final NotificationValidator notificationValidator;
+    private final Map<String, String> messageCodes;
 
-    public Registration(WebDriver driver) {
-        this(driver, new IndexPage(driver));
+    public Registration(WebDriver driver, Map<String, String> messageCodes) {
+        this(driver, new IndexPage(driver), messageCodes);
     }
 
-    public Registration(WebDriver driver, IndexPage indexPage) {
+    public Registration(WebDriver driver, IndexPage indexPage, Map<String, String> messageCodes) {
         this.driver = driver;
         this.indexPage = indexPage;
         this.notificationValidator = new NotificationValidator(driver);
+        this.messageCodes = messageCodes;
     }
 
     public SeleniumUser registerUser() {
@@ -73,14 +76,15 @@ public class Registration {
     }
 
     private void sendForm() {
-        indexPage.getRegisterButton().click();
+        WebElement registerButton = indexPage.getRegisterButton();
+        new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(registerButton));
+        registerButton.click();
     }
 
     private void validateRegistration() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getNotificationElementsLocator()));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(CHARACTER_SELECT));
 
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
-        notificationValidator.verifyOnlyOneNotification(SUCCESSFUL_REGISTRATION_NOTIFICATION);
+        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_REGISTRATION));
     }
 }

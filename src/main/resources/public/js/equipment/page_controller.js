@@ -1,39 +1,49 @@
 (function PageController(){
-    window.pageController = new function(){
-        scriptLoader.loadScript("js/equipment/ship_controller.js")
-        scriptLoader.loadScript("js/equipment/equipment_controller.js")
-        scriptLoader.loadScript("js/equipment/equipment_service.js")
-        
-        this.refresh = refresh;
-        
-        $(document).ready(function(){
-            refresh()
-        });
-    }
+    scriptLoader.loadScript("js/equipment/ship/ship_service.js");
+    scriptLoader.loadScript("js/equipment/storage/storage_service.js");
+    scriptLoader.loadScript("js/equipment/equip_service.js");
+    
+    $(document).ready(function(){
+        init();
+    });
 
-    /*
-    Reloads the content of the page.
-    Arguments:
-        - needReload: If true, queries the actual state of the character.
-    */
-    function refresh(needReload){
-        try{
-            const characterId = sessionStorage.characterId;
-            
-            if(needReload == null || needReload == undefined){
-                needReload = true;
-            }
-            
-            if(needReload){
-                shipController.loadShipEquipment();
-                equipmentController.loadEquipment();
-            }
-            
-            shipController.showShipEquipment();
-            equipmentController.showEquipment();
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.itemsLoaded
+                && LoadState.descriptionLoaded
+                && LoadState.messageCodesLoaded;
+        },
+        function(){
+            eventProcessor.processEvent(new Event(events.LOAD_SHIP));
+        },
+        true
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.itemsLoaded
+                && LoadState.descriptionLoaded
+                && LoadState.messageCodesLoaded;
+        },
+        function(){
+            eventProcessor.processEvent(new Event(events.LOAD_STORAGE));
+        },
+        true
+    ));
+
+    function init(){
+        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "equipment"));
     }
 })();
+
+function collectItemIds(items){
+    const result = [];
+        for(let iIndex in items){
+            result.push(items[iIndex].getId());
+        }
+    return result;
+}

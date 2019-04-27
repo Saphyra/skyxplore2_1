@@ -43,7 +43,7 @@ public class ProductConverterTest {
     private ProductConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNull(){
+    public void testConvertEntityShouldReturnNull() {
         //GIVEN
         ProductEntity entity = null;
         //WHEN
@@ -53,7 +53,7 @@ public class ProductConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldDecryptAndConvert(){
+    public void testConvertEntityShouldDecryptAndConvert() {
         //GIVEN
         ProductEntity entity = createProductEntity();
 
@@ -76,7 +76,7 @@ public class ProductConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldEncryptAndConvert(){
+    public void testConvertDomainShouldEncryptAndConvert() {
         //GIVEN
         Product product = createProduct();
 

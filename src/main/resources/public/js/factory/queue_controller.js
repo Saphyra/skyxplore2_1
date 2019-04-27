@@ -1,149 +1,127 @@
 (function QueueController(){
-    window.queueController = new function(){
-        scriptLoader.loadScript("js/common/dao/factory_dao.js");
-        scriptLoader.loadScript("js/common/translator/translator.js");
-        this.queue = [];
-        
-        this.addToQueue = addToQueue;
-        this.displayQueue = displayQueue;
-        this.loadQueue = loadQueue;
-    }
-    
-    /*
-    Adds the selected element to the factory queue.
-    Arguments:
-        - elementId: the id of the element to add.
-        - amount: the amount
-    Throws:
-        - UnknownServerError exception if request fails
-    */
-    function addToQueue(elementId, amount){
-        try{
-            const result = factoryDao.addToQueue(elementId, amount);
-            if(result.status == ResponseStatus.OK){
-                notificationService.showSuccess("Megrendelés elküldve.");
-            }else{
-                throwException("UnknownServerError", result.toString());
-            }
-            pageController.refresh(true);
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
+    scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
 
-    function displayQueue(){
-        try{
-            const container = document.getElementById("queue");
-                container.innerHTML = "";
-                
-            if(queueController.queue.length == 0){
-                container.appendChild(createEmptyMessage());
-            }else{
-                for(let qindex in queueController.queue){
-                    container.appendChild(createQueueElement(queueController.queue[qindex]));
-                }
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-        
-        function createEmptyMessage(){
-            try{
-                const element = document.createElement("DIV");
-                    element.innerHTML = "A gyártósor üres.";
-                    element.classList.add("textaligncenter");
-                    element.classList.add("margintop0_5rem");
-                    element.classList.add("fontsize1_5rem");
-                return element;
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-            }
-        }
-        
-        function createQueueElement(element){
-            try{
-                const elementData = cache.get(element.elementId);
-                const container = document.createElement("DIV");
-                    container.classList.add("queueelement");
-                
-                    const title = document.createElement("DIV");
-                        title.classList.add("queueelementtitle");
-                        title.innerHTML = elementData.name + " x " + element.amount;
-                container.appendChild(title);
-                
-                    const processContainer = document.createElement("DIV");
-                        processContainer.classList.add("queueprocess");
-                        if(element.startTime != null){
-                            const processBar = document.createElement("DIV");
-                                processBar.classList.add("processbar");
-                            processContainer.appendChild(processBar);
-                            
-                            const textContainer = document.createElement("DIV");
-                                textContainer.classList.add("processbartext");
-                            processContainer.appendChild(textContainer);
-                            
-                            const interval = setInterval(function(){
-                                const timeLeft = countTimeLeft(element.endTime);
-                                
-                                const processRate = 100 - timeLeft / element.constructionTime * 100;
-                                processBar.style.width = processRate + "%";
-                                
-                                textContainer.innerHTML = translator.convertTimeStamp(timeLeft);
-                                
-                                if(timeLeft == 0){
-                                    clearInterval(interval);
-                                    setTimeout(function(){
-                                        loadQueue();
-                                        displayQueue();
-                                    }, 11000);
-                                }
-                            }, 1000);
-                        }else{
-                            processContainer.innerHTML = "Sorban áll";
-                        }
-                container.appendChild(processContainer);
-                return container;
-            }catch(err){
-                const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                logService.log(message, "error");
-                return document.createElement("DIV");
-            }
-            
-            function countTimeLeft(endTime){
-                try{
-                    const now = getActualTimeStamp();
-                    const result = endTime - now;
-                    return result < 0 ? 0 : result;
-                }catch(err){
-                    const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-                    logService.log(message, "error");
-                    return 0;
-                }
-            }
-        }
-    }
+    events.LOAD_QUEUE = "load_queue";
+    events.PRODUCT_FINISHED = "product_finished";
+    events.ADD_TO_QUEUE = "add_to_queue";
+    events.ADDED_TO_QUEUE = "added_to_queue";
 
-    /*
-    Queries the queue from the server, and orders by startTime, and addedAt
-    */
+    let reloadTimeout = null;
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType == events.LOAD_QUEUE
+                || eventType == events.ADDED_TO_QUEUE
+                || eventType == events.PRODUCT_FINISHED
+        },
+        loadQueue
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+            function(eventType){return eventType == events.ADD_TO_QUEUE},
+            function(event){
+                addToQueue(event.getPayload().itemId, event.getPayload().amount);
+            }
+    ));
+
     function loadQueue(){
-        try{
-            const result = factoryDao.getQueue(sessionStorage.characterId);
-            
-            result.sort(function(a, b){
-                if(a.startTime != null){
-                    return -1;
+        $("#empty-queue").show();
+        document.getElementById("queue").innerHTML = "";
+
+        const request = new Request(HttpMethod.GET, Mapping.GET_QUEUE);
+            request.convertResponse = function(response){
+                return JSON.parse(response.body);
+            }
+            request.processValidResponse = function(queue){
+                queue.sort(function(a, b){
+                    if(a.startTime != null){
+                        return -1;
+                    }
+                    return a.addedAt - b.addedAt;
+                });
+                for(let qIndex in queue){
+                    displayQueueElement(queue[qIndex]);
                 }
-                return a.addedAt - b.addedAt;
-            })
-            
-            queueController.queue = result;
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
+            }
+        dao.sendRequestAsync(request);
+    }
+
+    function displayQueueElement(queueItem){
+        $("#empty-queue").hide();
+        const container = document.createElement("DIV");
+            container.classList.add("queue-element");
+
+            const titleContainer = document.createElement("DIV");
+                titleContainer.classList.add("queue-element-title");
+
+                titleContainer.appendChild(createSpan(Items.getItem(queueItem.elementId).name));
+                titleContainer.appendChild(createSpan(" x "));
+                titleContainer.appendChild(createSpan(queueItem.amount));
+        container.appendChild(titleContainer);
+
+            const processContainer = document.createElement("DIV");
+                processContainer.classList.add("queue-process");
+                if(queueItem.startTime == null){
+                    processContainer.innerHTML = Localization.getAdditionalContent("waiting");
+                }else{
+                    const processBar = document.createElement("DIV");
+                        processBar.classList.add("process-bar");
+                    processContainer.appendChild(processBar);
+
+                    const textContainer = document.createElement("DIV");
+                        textContainer.classList.add("process-bar-text");
+                    processContainer.appendChild(textContainer);
+
+                    const interval = setInterval(
+                        function(){
+                            const timeLeft = countTimeLeft(queueItem.endTime);
+
+                            const processRate = 100 - timeLeft / queueItem.constructionTime * 100;
+                            processBar.style.width = processRate + "%";
+
+                            textContainer.innerHTML = dateTimeFormatter.convertTimeStamp(timeLeft);
+
+                            if(timeLeft == 0){
+                                clearInterval(interval);
+
+                                setTimeout(
+                                    function(){
+                                        eventProcessor.processEvent(new Event(events.PRODUCT_FINISHED));
+                                    },
+                                    11000
+                                )
+                            }
+
+                            function countTimeLeft(endTime){
+                                const now = getActualTimeStamp();
+                                const result = endTime - now;
+                                return result < 0 ? 0 : result;
+                            }
+                        },
+                        1000
+                    );
+                }
+        container.appendChild(processContainer);
+        document.getElementById("queue").appendChild(container);
+    }
+
+    function addToQueue(itemId, amount){
+        const content = {
+            elementId: itemId,
+            amount: amount
+        };
+        const request = new Request(HttpMethod.PUT, Mapping.ADD_TO_QUEUE, content);
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("PRODUCT_ADDED_TO_QUEUE"))
+                eventProcessor.processEvent(new Event(events.ADDED_TO_QUEUE));
+                if(reloadTimeout){
+                    clearTimeout(reloadTimeout)
+                }
+                reloadTimeout = setTimeout(
+                    function(){eventProcessor.processEvent(new Event(events.LOAD_QUEUE))},
+                    11000
+                )
+            }
+        dao.sendRequestAsync(request);
     }
 })();

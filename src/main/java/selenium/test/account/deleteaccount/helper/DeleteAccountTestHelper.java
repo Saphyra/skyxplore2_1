@@ -29,6 +29,7 @@ public class DeleteAccountTestHelper {
     public void sendForm() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidDeleteAccountPasswordField()));
+        wait.until(ExpectedConditions.elementToBeClickable(accountPage.getDeleteAccountButton()));
 
         assertFalse(accountPage.getInvalidDeleteAccountPasswordField().isDisplayed());
         assertTrue(accountPage.getDeleteAccountButton().isEnabled());

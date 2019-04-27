@@ -1,61 +1,66 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Bolt - SkyXplore 2.1</TITLE>
+    <TITLE></TITLE>
     <META charset="UTF-8">
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
-    
+    <LINK rel="stylesheet" href="/css/category_menu.css">
+
+    <LINK rel="stylesheet" href="/css/shop/shop.css">
     <LINK rel="stylesheet" href="/css/shop/menu.css">
-    <LINK rel="stylesheet" href="/css/shop/basket.css">
+    <LINK rel="stylesheet" href="/css/shop/cart.css">
     <LINK rel="stylesheet" href="/css/shop/content.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
-    
+
     <SCRIPT src="js/shop/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
-    <DIV class="cover">
-        <HEADER>
-            <H1>Bolt</H1>
-        </HEADER>
-        
-        <MAIN class="textaligncenter">
-            <SECTION id='menucontainer'>
-                <H2>Kategóriák</H2>
-                
-                <DIV id='menu'></DIV>
-            </SECTION>
-            
-            <SECTION id='content'>
-                
-            </SECTION>
-            
-            <SECTION id='basketcontainer'>
-                <H2>
-                    Kosár
-                    <DIV>
-                        Pénz: <SPAN id='money'></SPAN>
-                    </DIV>
-                </H2>
-                
-                <DIV id='basket'>
-                
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN>
+        <SECTION id='menu-container'>
+            <H2 id="menu-title"></H2>
+
+            <DIV id='menu'></DIV>
+        </SECTION>
+
+        <SECTION id='content'>
+
+        </SECTION>
+
+        <SECTION id='cart-container'>
+            <H2>
+                <SPAN id="cart-title"></SPAN>
+                <DIV>
+                    <SPAN id="money-span"></SPAN>: <SPAN id='money'></SPAN>
                 </DIV>
-                
-                <DIV id='basketfooter'>
-                    Összesen: <SPAN id='cost'>0</SPAN>
-                </DIV>
-            </SECTION>
-        </MAIN>
+            </H2>
             
-        <FOOTER>
-            <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-            <BUTTON onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
-        </FOOTER>
-    </DIV>
+            <DIV id='cart'>
+                <DIV id="empty-cart"></DIV>
+                
+                <DIV id="cart-items"></DIV>
+                
+                <BUTTON id="buy-items-button" onclick='eventProcessor.processEvent(new Event(events.BUY_ITEMS))'></BUTTON>
+            </DIV>
+
+            <DIV id='cart-footer'>
+                <SPAN id="total-cost-span"></SPAN>: <SPAN id='cart-cost'></SPAN>
+            </DIV>
+        </SECTION>
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
+    </FOOTER>
+</DIV>
 
 </BODY>
 </HTML>

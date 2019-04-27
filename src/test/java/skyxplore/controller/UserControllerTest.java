@@ -34,7 +34,7 @@ public class UserControllerTest {
     private UserController underTest;
 
     @Test
-    public void testChangeEmailShouldCallFacade(){
+    public void testChangeEmailShouldCallFacade() {
         //GIVEN
         ChangeEmailRequest request = createChangeEmailRequest();
         //WHEN
@@ -44,7 +44,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testChangePasswordShouldCallFacade(){
+    public void testChangePasswordShouldCallFacade() {
         //GIVEN
         ChangePasswordRequest request = createChangePasswordRequest();
         //WHEN
@@ -54,7 +54,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testChangeUserNameShouldCallFacadeAndInvalidate(){
+    public void testChangeUserNameShouldCallFacadeAndInvalidate() {
         //GIVEN
         ChangeUserNameRequest request = createChangeUserNameRequest();
         //WHEN
@@ -65,7 +65,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testDeleteAccountShouldCallFacade(){
+    public void testDeleteAccountShouldCallFacade() {
         //GIVEN
         AccountDeleteRequest request = createAccountDeleteRequest();
         //WHEN
@@ -86,7 +86,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testRegistrationShouldCallFacadeAndInvalidate(){
+    public void testRegistrationShouldCallFacadeAndInvalidate() {
         //GIVEN
         UserRegistrationRequest registrationRequest = createUserRegistrationRequest();
         //WHEN

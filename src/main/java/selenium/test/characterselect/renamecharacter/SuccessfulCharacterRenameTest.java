@@ -2,6 +2,7 @@ package selenium.test.characterselect.renamecharacter;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CharacterSelectPage;
 import selenium.logic.validator.NotificationValidator;
@@ -16,11 +17,12 @@ public class SuccessfulCharacterRenameTest {
     private static final String SELECTOR_CHARACTER_MODIFICATION_MENU = "td:nth-child(2)";
     private static final String SELECTOR_RENAME_CHARACTER_BUTTON = "button:first-child";
 
-    private static final String NOTIFICATION_CHARACTER_RENAMED = "Karakter átnevezve.";
+    private static final String MESSAGE_CODE_CHARACTER_RENAMED = "CHARACTER_RENAMED";
 
     private final RenameCharacterTestHelper renameCharacterTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void testSuccessfulCharacterRename() {
         SeleniumCharacter character = renameCharacterTestHelper.initAndOpenRenamePage();
@@ -33,7 +35,7 @@ public class SuccessfulCharacterRenameTest {
 
         renameCharacterTestHelper.sendForm();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_CHARACTER_RENAMED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_CHARACTER_RENAMED));
 
         assertTrue(
             characterSelectPage.isCharacterExists(newName)

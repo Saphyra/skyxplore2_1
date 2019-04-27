@@ -1,26 +1,26 @@
 package selenium.test.community.mail.delete;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-
 import lombok.Builder;
-import selenium.logic.domain.Mail;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.validator.NotificationValidator;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @Builder
 public class BulkDeleteBySenderTest {
-    private static final String NOTIFICATION_MAILS_DELETED = "Üzenetek törölve.";
+    private static final String MESSAGE_CODE_MAILS_DELETED = "MAILS_DELETED";
 
     private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
@@ -29,6 +29,7 @@ public class BulkDeleteBySenderTest {
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void testBulkDeleteBySender() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -42,17 +43,19 @@ public class BulkDeleteBySenderTest {
         sendMailHelper.sendMailTo(otherCharacter);
         sendMailHelper.sendMailTo(otherCharacter);
 
-        mailTestHelper.getSentMails().forEach(Mail::select);
+        communityPage.getSentMailsPageButton().click();
+        communityPage.getSelectAllSentMailsButton().click();
 
         mailTestHelper.selectBulkDeleteOptionForSentMails();
         communityPage.getExecuteBulkEditButtonForSentMails().click();
 
+        new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_MAILS_DELETED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_DELETED));
 
-        assertTrue(mailTestHelper.getSentMails().isEmpty());
+        mailTestHelper.verifyNoSentMails();
 
         communityTestHelper.goToCommunityPageOf(otherAccount, otherCharacter, 2);
-        assertEquals(2, mailTestHelper.getReceivedMails().size());
+        assertEquals(2, mailTestHelper.getIncomingMails().size());
     }
 }

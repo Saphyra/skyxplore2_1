@@ -1,0 +1,18 @@
+{
+  "id": "sto-03",
+  "capacity": 200,
+  "constructiontime": 2400,
+  "buildprice": 2400,
+  "buildable": true,
+  "materials": {
+    "hullplate": 45,
+    "mithril": 180
+  },
+  "type": "storage",
+  "slot": "connector",
+  "level": 3,
+  "score": 0,
+  "buyprice": 305000,
+  "sellprice": 135000,
+  "category": "storage"
+}

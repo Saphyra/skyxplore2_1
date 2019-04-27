@@ -1,6 +1,9 @@
 package selenium.test.registration;
 
+import static selenium.logic.util.LinkUtil.HOST;
+
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.Logout;
 import selenium.logic.flow.Registration;
@@ -10,8 +13,6 @@ import selenium.test.registration.username.ExistingUserNameTest;
 import selenium.test.registration.username.TooLongUserNameTest;
 import selenium.test.registration.username.TooShortUserNameTest;
 import selenium.test.registration.username.helper.UserNameTestHelper;
-
-import static selenium.logic.util.LinkUtil.HOST;
 
 public class UserNameTest extends SeleniumTestApplication {
     private UserNameTestHelper userNameTestHelper;
@@ -25,38 +26,41 @@ public class UserNameTest extends SeleniumTestApplication {
         indexPage = new IndexPage(driver);
         userNameTestHelper = new UserNameTestHelper(driver, indexPage);
         fieldValidator = new FieldValidator(driver, HOST);
-        logout = new Logout(driver);
-        registration = new Registration(driver);
+        logout = new Logout(driver, messageCodes);
+        registration = new Registration(driver, messageCodes);
     }
 
     @Test
-    public void testTooShortUserName(){
+    public void testTooShortUserName() {
         TooShortUserNameTest.builder()
             .userNameTestHelper(userNameTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
+            .messageCodes(messageCodes)
             .build()
             .testTooShortUserName();
     }
 
     @Test
-    public void testTooLongUserName(){
+    public void testTooLongUserName() {
         TooLongUserNameTest.builder()
             .userNameTestHelper(userNameTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testTooLongUserName();
     }
 
     @Test
-    public void testExistingUserName(){
+    public void testExistingUserName() {
         ExistingUserNameTest.builder()
             .userNameTestHelper(userNameTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
             .registration(registration)
             .logout(logout)
+            .messageCodes(messageCodes)
             .build()
             .testExistingUserName();
     }

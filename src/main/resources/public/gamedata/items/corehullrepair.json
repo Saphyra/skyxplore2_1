@@ -1,0 +1,12 @@
+{
+  "id": "corehullrepair",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 0,
+  "active": -1,
+  "reload": 0,
+  "effect": {
+    "repair": 1
+  },
+  "category": "ability"
+}

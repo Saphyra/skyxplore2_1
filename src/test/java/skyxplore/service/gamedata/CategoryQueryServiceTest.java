@@ -17,8 +17,6 @@ import static skyxplore.testutil.TestUtils.MATERIAL_ID;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryQueryServiceTest {
-    private static final String SOURCE = "source";
-
     private static final String ARMOR_ID = "armor_id";
     private static final String BATTERY_ID = "battery_id";
     private static final String COREHULL_ID = "corehull_id";
@@ -65,43 +63,43 @@ public class CategoryQueryServiceTest {
     @Before
     public void init() {
         armor.setId(ARMOR_ID);
-        armorService = new ArmorService(SOURCE);
+        armorService = new ArmorService();
         armorService.put(ARMOR_ID, armor);
 
         battery.setId(BATTERY_ID);
-        batteryService = new BatteryService(SOURCE);
+        batteryService = new BatteryService();
         batteryService.put(BATTERY_ID, battery);
 
         coreHull.setId(COREHULL_ID);
-        coreHullService = new CoreHullService(SOURCE);
+        coreHullService = new CoreHullService();
         coreHullService.put(COREHULL_ID, coreHull);
 
         extender.setId(EXTENDER_ID);
-        extenderService = new ExtenderService(SOURCE);
+        extenderService = new ExtenderService();
         extenderService.put(EXTENDER_ID, extender);
 
         generator.setId(GENERATOR_ID);
-        generatorService = new GeneratorService(SOURCE);
+        generatorService = new GeneratorService();
         generatorService.put(GENERATOR_ID, generator);
 
         material.setId(MATERIAL_ID);
-        materialService = new MaterialService(SOURCE);
+        materialService = new MaterialService();
         materialService.put(MATERIAL_ID, material);
 
         shield.setId(SHIELD_ID);
-        shieldService = new ShieldService(SOURCE);
+        shieldService = new ShieldService();
         shieldService.put(SHIELD_ID, shield);
 
         ship.setId(SHIP_ID);
-        shipService = new ShipService(SOURCE);
+        shipService = new ShipService();
         shipService.put(SHIP_ID, ship);
 
         storage.setId(STORAGE_ID);
-        storageService = new StorageService(SOURCE);
+        storageService = new StorageService();
         storageService.put(STORAGE_ID, storage);
 
         weapon.setId(WEAPON_ID);
-        weaponService = new WeaponService(SOURCE);
+        weaponService = new WeaponService();
         weaponService.put(WEAPON_ID, weapon);
 
         underTest = new CategoryQueryService(
@@ -119,7 +117,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutAll(){
+    public void testGetElementsOfCategoryShouldPutAll() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ALL);
         //THEN
@@ -137,7 +135,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutMaterial(){
+    public void testGetElementsOfCategoryShouldPutMaterial() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.MATERIAL);
         //THEN
@@ -146,7 +144,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutConnector(){
+    public void testGetElementsOfCategoryShouldPutConnector() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.CONNECTOR);
         //THEN
@@ -159,7 +157,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutEnergy(){
+    public void testGetElementsOfCategoryShouldPutEnergy() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ENERGY);
         //THEN
@@ -169,7 +167,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutExtender(){
+    public void testGetElementsOfCategoryShouldPutExtender() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.EXTENDER);
         //THEN
@@ -178,7 +176,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutCorehull(){
+    public void testGetElementsOfCategoryShouldPutCorehull() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.COREHULL);
         //THEN
@@ -187,7 +185,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutStorage(){
+    public void testGetElementsOfCategoryShouldPutStorage() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.STORAGE);
         //THEN
@@ -196,7 +194,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutDefense(){
+    public void testGetElementsOfCategoryShouldPutDefense() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.DEFENSE);
         //THEN
@@ -206,7 +204,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutArmor(){
+    public void testGetElementsOfCategoryShouldPutArmor() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.ARMOR);
         //THEN
@@ -215,7 +213,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutShield(){
+    public void testGetElementsOfCategoryShouldPutShield() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.SHIELD);
         //THEN
@@ -224,7 +222,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutShip(){
+    public void testGetElementsOfCategoryShouldPutShip() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.SHIP);
         //THEN
@@ -233,7 +231,7 @@ public class CategoryQueryServiceTest {
     }
 
     @Test
-    public void testGetElementsOfCategoryShouldPutWeapon(){
+    public void testGetElementsOfCategoryShouldPutWeapon() {
         //WHEN
         Map<String, GeneralDescription> result = underTest.getElementsOfCategory(EquipmentCategoryRequest.WEAPON);
         //THEN

@@ -19,7 +19,7 @@ public class FriendshipConverterTest {
     private FriendshipConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNullWhenNull(){
+    public void testConvertEntityShouldReturnNullWhenNull() {
         //GIVEN
         FriendshipEntity entity = null;
         //WHEN
@@ -29,7 +29,7 @@ public class FriendshipConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldConvert(){
+    public void testConvertEntityShouldConvert() {
         //GIVEN
         FriendshipEntity entity = createFriendshipEntity();
         //WHEN
@@ -41,7 +41,7 @@ public class FriendshipConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldConvert(){
+    public void testConvertDomainShouldConvert() {
         //GIVEN
         Friendship friendship = createFriendship();
         //WHEN

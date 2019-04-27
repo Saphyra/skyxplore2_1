@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 public class EquippedEquipment {
     private static final String REGEX_GET_ID = " ";
     private static final String ATTRIBUTE_CLASS = "class";
-    private static final String VALUE_EMPTY_SLOT = "emptyslot";
+    private static final String VALUE_EMPTY_SLOT = "empty-slot";
 
     private final WebElement element;
     private final String text;

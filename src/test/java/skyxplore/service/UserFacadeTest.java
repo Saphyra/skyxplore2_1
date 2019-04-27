@@ -49,7 +49,7 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testChangePassword(){
+    public void testChangePassword() {
         //GIVEN
         ChangePasswordRequest request = createChangePasswordRequest();
         //WHEN
@@ -59,7 +59,7 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testChangeUserName(){
+    public void testChangeUserName() {
         //GIVEN
         ChangeUserNameRequest request = createChangeUserNameRequest();
         //WHEN
@@ -69,7 +69,7 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testDeleteAccount(){
+    public void testDeleteAccount() {
         //GIVEN
         AccountDeleteRequest request = createAccountDeleteRequest();
         //WHEN
@@ -79,7 +79,7 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testGetUserById(){
+    public void testGetUserById() {
         //GIVEN
         SkyXpUser user = createUser();
         when(userQueryService.getUserById(USER_ID)).thenReturn(user);
@@ -91,7 +91,7 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testIsEmailExists(){
+    public void testIsEmailExists() {
         //GIVEN
         when(userQueryService.isEmailExists(USER_EMAIL)).thenReturn(true);
         //WHEN
@@ -100,12 +100,12 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testRegistrateUser(){
+    public void testRegistrateUser() {
         //GIVEN
         UserRegistrationRequest registrationRequest = createUserRegistrationRequest();
         //WHEN
         underTest.registrateUser(registrationRequest);
         //THEN
-        verify(registrationService).registrateUser(registrationRequest);
+        verify(registrationService).registerUser(registrationRequest);
     }
 }

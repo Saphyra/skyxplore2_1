@@ -1,7 +1,6 @@
 package selenium.test.community;
 
 import org.junit.Test;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Login;
@@ -12,33 +11,33 @@ import selenium.logic.flow.SelectCharacter;
 import selenium.logic.page.CommunityPage;
 import selenium.logic.page.OverviewPage;
 import selenium.logic.validator.NotificationValidator;
+import selenium.test.community.helper.CommunityTestHelper;
+import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.MailTestHelper;
+import selenium.test.community.helper.SendMailHelper;
+import selenium.test.community.mail.mark.ReadMailTest;
 import selenium.test.community.mail.archive.ArchiveMailTest;
 import selenium.test.community.mail.archive.BulkArchiveMailTest;
+import selenium.test.community.mail.archive.BulkRestoreMailTest;
+import selenium.test.community.mail.archive.RestoreMailTest;
 import selenium.test.community.mail.delete.BulkDeleteArchivedMailsTest;
 import selenium.test.community.mail.delete.BulkDeleteByAddresseeTest;
 import selenium.test.community.mail.delete.BulkDeleteBySenderTest;
-import selenium.test.community.mail.mark.BulkMarkMailsAsReadTest;
-import selenium.test.community.mail.mark.BulkMarkMailsAsUnreadTest;
-import selenium.test.community.mail.archive.BulkRestoreMailTest;
 import selenium.test.community.mail.delete.DeleteArchivedMailTest;
 import selenium.test.community.mail.delete.DeleteByAddresseeTest;
 import selenium.test.community.mail.delete.DeleteBySenderTest;
 import selenium.test.community.mail.filter.FilterTestShouldNotShowOwnCharacters;
 import selenium.test.community.mail.filter.FilterTestShouldShowMatchingCharacters;
+import selenium.test.community.mail.mark.BulkMarkMailsAsReadTest;
+import selenium.test.community.mail.mark.BulkMarkMailsAsUnreadTest;
 import selenium.test.community.mail.mark.MarkMailAsReadTest;
 import selenium.test.community.mail.mark.MarkMailAsUnreadTest;
-import selenium.test.community.mail.ReadMailTest;
 import selenium.test.community.mail.send.ReplyMailTest;
-import selenium.test.community.mail.archive.RestoreMailTest;
 import selenium.test.community.mail.send.SendMailChangedAddresseeTest;
 import selenium.test.community.mail.send.SendMailEmptyAddresseeTest;
 import selenium.test.community.mail.send.SendMailEmptyMessageTest;
 import selenium.test.community.mail.send.SendMailEmptySubjectTest;
 import selenium.test.community.mail.send.SuccessfullySentMailTest;
-import selenium.test.community.helper.MailTestHelper;
-import selenium.test.community.helper.SendMailHelper;
-import selenium.test.community.helper.CommunityTestHelper;
-import selenium.test.community.helper.CommunityTestInitializer;
 
 public class MailTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
@@ -51,22 +50,22 @@ public class MailTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         communityTestHelper = new CommunityTestHelper(
-            new Login(driver),
+            new Login(driver, messageCodes),
             new SelectCharacter(driver),
             new OverviewPage(driver),
             new Navigate(driver)
         );
 
         communityTestInitializer = new CommunityTestInitializer(
-            new Registration(driver),
-            new CreateCharacter(driver),
-            new Logout(driver)
+            new Registration(driver, messageCodes),
+            new CreateCharacter(driver, messageCodes),
+            new Logout(driver, messageCodes)
         );
 
-        communityPage = new CommunityPage(driver);
-        mailTestHelper = new MailTestHelper(communityPage, driver);
+        communityPage = new CommunityPage(driver, messageCodes);
+        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
         notificationValidator = new NotificationValidator(driver);
-        sendMailHelper = new SendMailHelper(communityPage, notificationValidator);
+        sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
     }
 
     @Test
@@ -98,6 +97,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailEmptySubject();
     }
@@ -109,6 +109,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailEmptyMessage();
     }
@@ -120,6 +121,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailEmptyAddressee();
     }
@@ -131,6 +133,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSendMailChangedAddressee();
     }
@@ -143,6 +146,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .messageCodes(messageCodes)
             .build()
             .testSuccessfullySentMail();
     }
@@ -181,6 +185,7 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkArchiveMail();
     }
@@ -207,6 +212,7 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkRestoreMail();
     }
@@ -234,6 +240,7 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteBySender();
     }
@@ -261,12 +268,13 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteByAddressee();
     }
 
     @Test
-    public void testDeleteArchivedMail(){
+    public void testDeleteArchivedMail() {
         DeleteArchivedMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -279,7 +287,7 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBulkDeleteArchivedMails(){
+    public void testBulkDeleteArchivedMails() {
         BulkDeleteArchivedMailsTest.builder()
             .driver(driver)
             .communityTestInitializer(communityTestInitializer)
@@ -288,12 +296,13 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBulkDeleteArchivedMails();
     }
 
     @Test
-    public void testMarkMailAsRead(){
+    public void testMarkMailAsRead() {
         MarkMailAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
@@ -305,20 +314,19 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBulkMarkMailsAsRead(){
+    public void testBulkMarkMailsAsRead() {
         BulkMarkMailsAsReadTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
-            .notificationValidator(notificationValidator)
             .build()
             .testBulkMarkMailsAsRead();
     }
 
     @Test
-    public void testMarkMailAsUnread(){
+    public void testMarkMailAsUnread() {
         MarkMailAsUnreadTest.builder()
             .driver(driver)
             .communityTestInitializer(communityTestInitializer)
@@ -331,20 +339,19 @@ public class MailTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testBulkMarkMailsAsUnread(){
+    public void testBulkMarkMailsAsUnread() {
         BulkMarkMailsAsUnreadTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
-            .notificationValidator(notificationValidator)
             .build()
             .testBulkMarkMailsAsUnread();
     }
 
     @Test
-    public void testReplyMail(){
+    public void testReplyMail() {
         ReplyMailTest.builder()
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)

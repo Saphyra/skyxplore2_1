@@ -84,7 +84,7 @@ public class DataQueryServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testFindBuyableShouldThrowExceptionWhenNotBuyable(){
+    public void testFindBuyableShouldThrowExceptionWhenNotBuyable() {
         //GIVEN
         Material material = new Material();
         material.setId(DATA_ELEMENT);
@@ -94,7 +94,7 @@ public class DataQueryServiceTest {
     }
 
     @Test
-    public void testFindBuyableShouldReturnWhenFound(){
+    public void testFindBuyableShouldReturnWhenFound() {
         //GIVEN
         Weapon weapon = new Weapon();
         weapon.setId(DATA_ELEMENT);

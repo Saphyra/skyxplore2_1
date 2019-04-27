@@ -45,7 +45,7 @@ public class UserFacade {
         deleteAccountService.deleteAccount(request, userId);
     }
 
-    public SkyXpUser getUserById(String userId){
+    public SkyXpUser getUserById(String userId) {
         return userQueryService.getUserById(userId);
     }
 
@@ -54,6 +54,6 @@ public class UserFacade {
     }
 
     public void registrateUser(UserRegistrationRequest request) {
-        registrationService.registrateUser(request);
+        registrationService.registerUser(request);
     }
 }

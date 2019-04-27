@@ -14,15 +14,12 @@ public class UserRegistrationRequest {
     public static final int PASSWORD_MIN_LENGTH = 6;
 
     @NotNull
-    @Size(min=USER_NAME_MIN_LENGTH, max = USER_NAME_MAX_LENGTH)
+    @Size(min = USER_NAME_MIN_LENGTH, max = USER_NAME_MAX_LENGTH)
     private String username;
 
     @NotNull
-    @Size(min=PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
+    @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
-
-    @NotNull
-    private String confirmPassword;
 
     @Email
     @NotNull
@@ -30,7 +27,7 @@ public class UserRegistrationRequest {
     private String email;
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Username: " + username + ", Email: " + email;
     }
 }

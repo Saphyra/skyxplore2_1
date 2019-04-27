@@ -1,18 +1,17 @@
 package selenium.test.account.changeusername.helper;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.flow.Navigate;
 import selenium.logic.flow.Registration;
 import selenium.logic.page.AccountPage;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 public class ChangeUserNameTestHelper {
@@ -39,14 +38,16 @@ public class ChangeUserNameTestHelper {
     }
 
     public void sendForm() {
+        WebElement submitButton = accountPage.getChangeUserNameButton();
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNameField()));
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeUserNamePasswordField()));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(submitButton));
 
         assertFalse(accountPage.getInvalidChangeUserNameField().isDisplayed());
         assertFalse(accountPage.getInvalidChangeUserNamePasswordField().isDisplayed());
 
-        WebElement submitButton = accountPage.getChangeUserNameButton();
+
         assertTrue(submitButton.isEnabled());
         submitButton.click();
     }

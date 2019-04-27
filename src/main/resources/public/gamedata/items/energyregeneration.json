@@ -1,0 +1,13 @@
+{
+  "id": "energyregeneration",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 5,
+  "reload": 10,
+  "effect": {
+    "staticregeneration": 20,
+    "relativeregeneration": 50
+  },
+  "category": "ability"
+}

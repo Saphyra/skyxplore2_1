@@ -5,9 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.equipment.EquipmentViewList;
 import skyxplore.domain.character.SkyXpCharacter;
+import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.character.BuyItemService;
 import skyxplore.service.character.CharacterCreatorService;
 import skyxplore.service.character.CharacterDeleteService;
@@ -27,13 +26,14 @@ public class CharacterFacade {
     private final CharacterDeleteService characterDeleteService;
     private final CharacterQueryService characterQueryService;
     private final CharacterRenameService characterRenameService;
+    private final CharacterSelectService characterSelectService;
 
     public void buyItems(Map<String, Integer> items, String characterId) {
         buyItemService.buyItems(items, characterId);
     }
 
-    public void createCharacter(CreateCharacterRequest request, String userId) {
-        characterCreatorService.createCharacter(request, userId);
+    public SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
+        return characterCreatorService.createCharacter(request, userId);
     }
 
     public void deleteCharacter(String characterId, String userId) {
@@ -44,7 +44,7 @@ public class CharacterFacade {
         return characterQueryService.getCharactersByUserId(userId);
     }
 
-    public View<EquipmentViewList> getEquipmentsOfCharacter(String characterId) {
+    public List<String> getEquipmentsOfCharacter(String characterId) {
         return characterQueryService.getEquipmentsOfCharacter(characterId);
     }
 
@@ -52,7 +52,11 @@ public class CharacterFacade {
         return characterQueryService.getMoneyOfCharacter(characterId);
     }
 
-    public void renameCharacter(RenameCharacterRequest request, String userId) {
-        characterRenameService.renameCharacter(request, userId);
+    public SkyXpCharacter renameCharacter(RenameCharacterRequest request, String userId) {
+        return characterRenameService.renameCharacter(request, userId);
+    }
+
+    public void selectCharacter(String characterId, String userId) {
+        characterSelectService.selectCharacter(characterId, userId);
     }
 }

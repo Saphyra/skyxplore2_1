@@ -1,0 +1,64 @@
+.ship-table{
+    border: 3px ridge white;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.ship-table th, .ship-table td{
+    border: 2px ridge white;
+    padding: 0.25rem;
+    vertical-align: middle;
+}
+
+.ship-table tr:nth-child(4) td:nth-child(3){
+    text-align: center;
+}
+
+.slot-container{
+    text-align: center;
+}
+
+.slot{
+    border: 3px outset white;
+    margin: 0.25rem;
+    padding: 0.25rem;
+    display: inline-block;
+    width: 8rem;
+    height: 3rem;
+    text-align: center;
+    white-space: initial;
+    vertical-align: top;
+}
+
+.side-slot{
+    width: 9rem;
+}
+
+.side-slot .slot{
+    display: block;
+    margin: auto;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.ship-details-container{
+    border-bottom: 2px ridge white;
+    font-size: 1.25rem;
+    padding: 0.25rem;
+}
+
+.ship-details-ability-title{
+    font-size: 1.5rem;
+}
+
+.ship-details-ability-container{
+    display: inline-block;
+    text-align: left;
+}
+
+.ship-details-ability{
+    border: 2px ridge white;
+    font-size: 1.25rem;
+    margin: 0.25rem;
+    padding: 0.25rem;
+}

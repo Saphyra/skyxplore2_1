@@ -15,7 +15,7 @@ public class SkyXpUserConverterTest {
     private SkyXpUserConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNullWhenNull(){
+    public void testConvertEntityShouldReturnNullWhenNull() {
         //GIVEN
         UserEntity entity = null;
         //WHEN
@@ -25,7 +25,7 @@ public class SkyXpUserConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldConvert(){
+    public void testConvertEntityShouldConvert() {
         //GIVEN
         UserEntity entity = createUserEntity();
         //WHEN
@@ -38,7 +38,7 @@ public class SkyXpUserConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldConvert(){
+    public void testConvertDomainShouldConvert() {
         //GIVEN
         SkyXpUser user = createUser();
         //WHEN

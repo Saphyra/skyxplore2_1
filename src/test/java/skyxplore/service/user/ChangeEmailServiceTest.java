@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.EmailCache;
 import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.SkyXpCredentials;
@@ -32,19 +33,22 @@ public class ChangeEmailServiceTest {
     private PasswordService passwordService;
 
     @Mock
-    private  CredentialsService credentialsService;
+    private CredentialsService credentialsService;
 
     @Mock
-    private  UserQueryService userQueryService;
+    private UserQueryService userQueryService;
 
     @Mock
-    private  UserDao userDao;
+    private UserDao userDao;
+
+    @Mock
+    private EmailCache emailCache;
 
     @InjectMocks
     private ChangeEmailService underTest;
 
     @Test(expected = EmailAlreadyExistsException.class)
-    public void testChangeEmailShouldThrowExceptionWhenEmailExists(){
+    public void testChangeEmailShouldThrowExceptionWhenEmailExists() {
         //GIVEN
         when(userQueryService.isEmailExists(USER_NEW_EMAIL)).thenReturn(true);
         //WHEN
@@ -52,7 +56,7 @@ public class ChangeEmailServiceTest {
     }
 
     @Test(expected = BadCredentialsException.class)
-    public void testChangeEmailShouldThrowExceptionWhenBadPassword(){
+    public void testChangeEmailShouldThrowExceptionWhenBadPassword() {
         //GIVEN
         ChangeEmailRequest request = createChangeEmailRequest();
         request.setPassword(USER_FAKE_PASSWORD);
@@ -67,7 +71,7 @@ public class ChangeEmailServiceTest {
     }
 
     @Test
-    public void testChangeEmailShouldSave(){
+    public void testChangeEmailShouldSave() {
         //GIVEN
         ChangeEmailRequest request = createChangeEmailRequest();
 
@@ -86,5 +90,6 @@ public class ChangeEmailServiceTest {
         verify(credentialsService).getByUserId(USER_ID);
         verify(userDao).save(user);
         assertEquals(USER_NEW_EMAIL, user.getEmail());
+        verify(emailCache).invalidate(USER_NEW_EMAIL);
     }
 }

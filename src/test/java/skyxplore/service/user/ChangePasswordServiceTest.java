@@ -9,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
-import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.service.credentials.CredentialsService;
 
 import static org.junit.Assert.assertEquals;
@@ -49,20 +48,6 @@ public class ChangePasswordServiceTest {
         //THEN
         verify(credentialsService).getByUserId(USER_ID);
         verify(passwordService).authenticate(USER_FAKE_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
-    }
-
-    @Test(expected = BadlyConfirmedPasswordException.class)
-    public void testChangePasswordShouldThrowExceptionWhenConfirmPasswordNotEquals() {
-        //GIVEN
-        SkyXpCredentials skyXpCredentials = createCredentials();
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
-
-        ChangePasswordRequest request = createChangePasswordRequest();
-        request.setConfirmPassword(USER_FAKE_PASSWORD);
-        //WHEN
-        underTest.changePassword(request, USER_ID);
-        //THEN
-        verify(credentialsService).getByUserId(USER_ID);
     }
 
     @Test

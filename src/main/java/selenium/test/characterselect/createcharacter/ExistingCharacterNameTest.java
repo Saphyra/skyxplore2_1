@@ -3,6 +3,7 @@ package selenium.test.characterselect.createcharacter;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CharacterSelectPage;
 import selenium.logic.validator.FieldValidator;
@@ -10,11 +11,12 @@ import selenium.test.characterselect.common.CharacterSelectTestHelper;
 
 @Builder
 public class ExistingCharacterNameTest {
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS = "Karakternév foglalt.";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_ALREADY_EXISTS = "CHARACTER_NAME_ALREADY_EXISTS";
 
     private final CharacterSelectTestHelper characterSelectTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testExistingCharacterName() {
         characterSelectTestHelper.registerUser();
@@ -25,7 +27,7 @@ public class ExistingCharacterNameTest {
 
         fieldValidator.verifyError(
             characterSelectPage.getInvalidNewCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_ALREADY_EXISTS,
+            messageCodes.get(MESSAGE_CODE_CHARACTER_NAME_ALREADY_EXISTS),
             newCharacterNameField,
             characterSelectPage.getCreateCharacterButton()
         );

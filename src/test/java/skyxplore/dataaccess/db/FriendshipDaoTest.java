@@ -100,7 +100,7 @@ public class FriendshipDaoTest {
     }
 
     @Test
-    public void testGetFriendshipsOfCharacterShouldCallRepositoryAndReturnDomain(){
+    public void testGetFriendshipsOfCharacterShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         FriendshipEntity entity = createFriendshipEntity();
         List<FriendshipEntity> entityList = Arrays.asList(entity);
@@ -118,7 +118,7 @@ public class FriendshipDaoTest {
     }
 
     @Test
-    public void testSaveShouldCallRepository(){
+    public void testSaveShouldCallRepository() {
         //GIVEN
         Friendship friendship = createFriendship();
 

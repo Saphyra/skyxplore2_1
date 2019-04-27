@@ -1,0 +1,566 @@
+{
+  "abilityblock": {
+    "name": "Képességblokkolás",
+    "description": "A megcélzott ellenséges hajó nem használhat képességeket."
+  },
+  "accuracy": {
+    "name": "Precizitás",
+    "description": "Növeli a fegyverek találati pontosságát."
+  },
+  "aftermath": {
+    "name": "Utóhatás",
+    "description": "Minden találat ideiglenesen növeli a célpont által elszenvedett sebzést. (Passzív)"
+  },
+  "blind": {
+    "name": "Találati pontosság csökkenés",
+    "description": "Csökkenti a kijelölt ellenséges hajó fegyvereinek találati pontosságát."
+  },
+  "cloak": {
+    "name": "Álcázó berendezés",
+    "description": "Elrejti a hajót az ellenséges radarok elől"
+  },
+  "corehullrepair": {
+    "name": "Magburkolat javítás",
+    "description": "Körönként javítja a magburkolat sérüléseit."
+  },
+  "damageovertime": {
+    "name": "Folyamatos sebzés",
+    "description": "A célpont minden körben sebzést szenved el."
+  },
+  "damagereduction": {
+    "name": "Sebzéscsökentés",
+    "description": "Csökkenti a hajót érő sebzés mértékét"
+  },
+  "dimensiongate": {
+    "name": "Dimenziókapu",
+    "description": "Átmenetileg egy másik dimenzióba küld egy szövetséges vagy ellenséges hajót, így az se támadni, se sérülni nem tud."
+  },
+  "disableweapons": {
+    "name": "Fegyverleállás",
+    "description": "Kikapcsolja egy kijelölt ellenséges hajó fegyvereit."
+  },
+  "energyrecharge": {
+    "name": "Energiatöltés",
+    "description": "Feltölti egy szövetséges hajó akkumulátorait."
+  },
+  "energyregeneration": {
+    "name": "Generátor túlhajtás",
+    "description": "Növeli egy szövetséges hajó energiatermelését"
+  },
+  "energyregenerationblock": {
+    "name": "Energia regeneráció blokkolás",
+    "description": "A kijelölt ellenséges hajónak nem töltődik az energiája."
+  },
+  "evasion": {
+    "name": "Kitérés",
+    "description": "Növeli a hajó kitérési esélyét."
+  },
+  "freeze": {
+    "name": "Mozgáskorlátozás",
+    "description": "Leállítja a kijelölt ellenséges hajó hajtóműveit."
+  },
+  "instantdamage": {
+    "name": "Azonnali sebzés",
+    "description": "Azonnali sebzést okoz a bemért ellenséges hajónak."
+  },
+  "invulnerable": {
+    "name": "Sebezhetetlenség",
+    "description": "Sebezhetetlenné teszi a hajót."
+  },
+  "lock": {
+    "name": "Célpont bemérve",
+    "description": "A fegyverek a kijelölt ellenséget támadják, megkerülve a célpontot védő hajókat."
+  },
+  "penetration": {
+    "name": "Pajzsátütés",
+    "description": "A támadások figyelmen kívül hagyják a célpont pajzsát és közvetlenül a burkolatot sebzik."
+  },
+  "phalanx": {
+    "name": "Phalanx",
+    "description": "A hajó kiterjeszti védelmét, és felfogja a szomszédos szövetségeseire érkező sebzést."
+  },
+  "quickrecharge": {
+    "name": "Gyors újratöltés",
+    "description": "Csökkenti a közelben tartózkodó szövetségesek képességeinek töltési idejét."
+  },
+  "rapidfire": {
+    "name": "Gyorstüzelés",
+    "description": "Növeli a fegyverek támadási sebességét."
+  },
+  "reflection": {
+    "name": "Reflekció",
+    "description": "A kapott sebzés egy részét a támadó fél is elszenvedi."
+  },
+  "repair": {
+    "name": "Burkolatjavítás",
+    "description": "Megjavítja egy szövetséges hajó burkolatát."
+  },
+  "shieldleech": {
+    "name": "Pajzslopás",
+    "description": "Az okozott sebzés egy részét pajzsenergiaként hasznosítja újra."
+  },
+  "shieldovercharge": {
+    "name": "Pajzsenergia növelés",
+    "description": "Növeli a hajó pajzsenergiáját."
+  },
+  "shieldrecharge": {
+    "name": "Pajzstöltés",
+    "description": "Visszatölti egy szövetséges hajó pajzsenergiáját."
+  },
+  "shieldregeneration": {
+    "name": "Pajzsregeneráció növelés",
+    "description": "Növeli egy szövetséges hajó pajzsregenerációját."
+  },
+  "shieldregenerationblock": {
+    "name": "Pajzsregeneráció blokkolás",
+    "description": "A kijelölt ellenséges hajó pajzsregenerációja megáll."
+  },
+  "speed": {
+    "name": "Gyorsítás",
+    "description": "Megnöveli a hajó mozgási sebességét."
+  },
+  "splashdamage": {
+    "name": "Repeszlövedék",
+    "description": "Az okozott sebzés egy részét elszenvedik a környező ellenséges egységek is."
+  },
+  "teleportation": {
+    "name": "Teleportáció",
+    "description": "A hajó egy kis távolságon belül a kijelölt helyre teleportál."
+  },
+  "bat-01": {
+    "name": "BAT-01 Akkumulátor",
+    "description": "Energiatároló a hajók rendszereinek ellátásához."
+  },
+  "bat-02": {
+    "name": "BAT-02 Akkumulátor",
+    "description": "Energiatároló a hajók rendszereinek ellátásához."
+  },
+  "bat-03": {
+    "name": "BAT-03 Akkumulátor",
+    "description": "Energiatároló a hajók rendszereinek ellátásához."
+  },
+  "cor-01": {
+    "name": "COR-01 Magburkolat erősítés",
+    "description": "Növeli a hajó központi egységének védelmét."
+  },
+  "cor-02": {
+    "name": "COR-02 Magburkolat erősítés",
+    "description": "Növeli a hajó központi egységének védelmét."
+  },
+  "cor-03": {
+    "name": "COR-03 Magburkolat erősítés",
+    "description": "Növeli a hajó központi egységének védelmét."
+  },
+  "cex-01": {
+    "name": "CEX-01 Csatlakozó bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó csatlakozóinak számát."
+  },
+  "cex-02": {
+    "name": "CEX-02 Csatlakozó bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó csatlakozóinak számát."
+  },
+  "cex-03": {
+    "name": "CEX-03 Csatlakozó bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó csatlakozóinak számát."
+  },
+  "dex-01": {
+    "name": "DEX-01 Védelem bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó védelmi moduljainak számát."
+  },
+  "dex-02": {
+    "name": "DEX-02 Védelem bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó védelmi moduljainak számát."
+  },
+  "dex-03": {
+    "name": "DEX-03 Védelem bővítő",
+    "description": "Bővítő egység, mely megnöveli a hajó védelmi moduljainak számát."
+  },
+  "wex-01": {
+    "name": "WEX-01 Fegyver bővítő",
+    "description": "Növeli a hajóra szerelhető fegyverek számát."
+  },
+  "wex-02": {
+    "name": "WEX-02 Fegyver bővítő",
+    "description": "Növeli a hajóra szerelhető fegyverek számát."
+  },
+  "wex-03": {
+    "name": "WEX-03 Fegyver bővítő",
+    "description": "Növeli a hajóra szerelhető fegyverek számát."
+  },
+  "gen-01": {
+    "name": "GEN-01 Generátor",
+    "description": "Akkumulátorok töltéséhez szükséges energia biztosítása."
+  },
+  "gen-02": {
+    "name": "GEN-02 Generátor",
+    "description": "Akkumulátorok töltéséhez szükséges energia biztosítása."
+  },
+  "gen-03": {
+    "name": "GEN-03 Generátor",
+    "description": "Akkumulátorok töltéséhez szükséges energia biztosítása."
+  },
+  "sto-01": {
+    "name": "STO-01 Raktér",
+    "description": "Konténer a csatatéren szerzett zsákmány elszállítására."
+  },
+  "sto-02": {
+    "name": "STO-02 Raktér",
+    "description": "Konténer a csatatéren szerzett zsákmány elszállítására."
+  },
+  "sto-03": {
+    "name": "STO-03 Raktér",
+    "description": "Konténer a csatatéren szerzett zsákmány elszállítására."
+  },
+  "arm-01": {
+    "name": "ARM-01 Páncélzat",
+    "description": "Űrhajó páncélzat növeli a védelmet."
+  },
+  "arm-02": {
+    "name": "ARM-02 Páncélzat",
+    "description": "Űrhajó páncélzat növeli a védelmet."
+  },
+  "arm-03": {
+    "name": "ARM-03 Páncélzat",
+    "description": "Űrhajó páncélzat növeli a védelmet."
+  },
+  "shi-hclr-01": {
+    "name": "HCLR-01 Pajzs",
+    "description": "Nagy kapacitású pajzs alacsony regenerációval."
+  },
+  "shi-hclr-02": {
+    "name": "HCLR-02 Pajzs",
+    "description": "Nagy kapacitású pajzs alacsony regenerációval."
+  },
+  "shi-hclr-03": {
+    "name": "HCLR-03 Pajzs",
+    "description": "Nagy kapacitású pajzs alacsony regenerációval."
+  },
+  "shi-lchr-01": {
+    "name": "LCHR-01 Pajzs",
+    "description": "Kis kapacitású pajzs magas regenerációval."
+  },
+  "shi-lchr-02": {
+    "name": "LCHR-02 Pajzs",
+    "description": "Kis kapacitású pajzs magas regenerációval."
+  },
+  "shi-lchr-03": {
+    "name": "LCHR-03 Pajzs",
+    "description": "Kis kapacitású pajzs magas regenerációval."
+  },
+  "adamantium": {
+    "name": "Adamantium",
+    "description": ""
+  },
+  "cable": {
+    "name": "Kábel",
+    "description": "Vezeték a különböző elektromos rendszerek összekapcsolásához."
+  },
+  "condensator": {
+    "name": "Kondenzátor",
+    "description": "A gyorsan tölthető, magas feszültségű kondenzátorok alkalmassá teszik nagy mennyiségű energia rövid idő alatt történő kisütését."
+  },
+  "duranium": {
+    "name": "Duranium",
+    "description": ""
+  },
+  "energycell": {
+    "name": "Energiacella",
+    "description": "Az energiatárolás alapja. Kis méretű, kis kapacitással, de sok kicsi sokra megy..."
+  },
+  "etherium": {
+    "name": "Etherium",
+    "description": ""
+  },
+  "hullplate": {
+    "name": "Burkolatlemez",
+    "description": "Modulok alapkonzolai, vagy csatahajók páncélzata - ezeknek a kemény fémből készült lemezek felhasználási módjainak száma végetlen."
+  },
+  "mithril": {
+    "name": "Mithril",
+    "description": ""
+  },
+  "uridium": {
+    "name": "Uridium",
+    "description": ""
+  },
+  "xebryum": {
+    "name": "Xebryum",
+    "description": ""
+  },
+  "def-01": {
+    "name": "DEF-01 Defender",
+    "description": "Ezt a hajót nagy védelme teszi alkalmassá a sérülékenyebb szövetségesek védelmezésére, habár tűzereje elmarad társai mögött."
+  },
+  "def-02": {
+    "name": "DEF-02 Defender",
+    "description": "Ezt a hajót nagy védelme teszi alkalmassá a sérülékenyebb szövetségesek védelmezésére, habár tűzereje elmarad társai mögött."
+  },
+  "def-03": {
+    "name": "DEF-03 Defender",
+    "description": "Ezt a hajót nagy védelme teszi alkalmassá a sérülékenyebb szövetségesek védelmezésére, habár tűzereje elmarad társai mögött."
+  },
+  "dre-01": {
+    "name": "DRE-01 Dreadnought",
+    "description": "Az igazi csatahajó. Egyszerre rendelkezik erős védelemmel és támadással, hogy minden helyzetben megállja a helyét."
+  },
+  "dre-02": {
+    "name": "DRE-02 Dreadnought",
+    "description": "Az igazi csatahajó. Egyszerre rendelkezik erős védelemmel és támadással, hogy minden helyzetben megállja a helyét."
+  },
+  "dre-03": {
+    "name": "DRE-03 Dreadnought",
+    "description": "Az igazi csatahajó. Egyszerre rendelkezik erős védelemmel és támadással, hogy minden helyzetben megállja a helyét."
+  },
+  "ecl-01": {
+    "name": "ECL-01 Eclipse",
+    "description": "A tökéletes csapásmérő egység: előbukkan a semmiből, végez a célpontjával és nyomtalanul eltűnik."
+  },
+  "ecl-02": {
+    "name": "ECL-02 Eclipse",
+    "description": "A tökéletes csapásmérő egység: előbukkan a semmiből, végez a célpontjával és nyomtalanul eltűnik."
+  },
+  "ecl-03": {
+    "name": "ECL-03 Eclipse",
+    "description": "A tökéletes csapásmérő egység: előbukkan a semmiből, végez a célpontjával és nyomtalanul eltűnik."
+  },
+  "sab-01": {
+    "name": "SAB-01 Saboteur",
+    "description": "Ha szeretsz keresztbe tenni másoknak, ez a hajó az ideális választás a számodra. Cél: az ellenség bénítása ahol, és ahogyan csak lehetséges."
+  },
+  "sab-02": {
+    "name": "SAB-02 Saboteur",
+    "description": "Ha szeretsz keresztbe tenni másoknak, ez a hajó az ideális választás a számodra. Cél: az ellenség bénítása ahol, és ahogyan csak lehetséges."
+  },
+  "sab-03": {
+    "name": "SAB-03 Saboteur",
+    "description": "Ha szeretsz keresztbe tenni másoknak, ez a hajó az ideális választás a számodra. Cél: az ellenség bénítása ahol, és ahogyan csak lehetséges."
+  },
+  "sta-01": {
+    "name": "STA-01 Starter",
+    "description": "Az újonc pilóták (és őrült veteránok) első számú hajója. Kicsi, gyenge, de gyors."
+  },
+  "sta-02": {
+    "name": "STA-02 Starter",
+    "description": "Az újonc pilóták (és őrült veteránok) első számú hajója. Kicsi, gyenge, de gyors."
+  },
+  "sta-03": {
+    "name": "STA-03 Starter",
+    "description": "Az újonc pilóták (és őrült veteránok) első számú hajója. Kicsi, gyenge, de gyors."
+  },
+  "sup-01": {
+    "name": "SUP-01 Supporter",
+    "description": "Támogató hajó, melynek elsődleges feladata a szövetségesek ellátása."
+  },
+  "sup-02": {
+    "name": "SUP-02 Supporter",
+    "description": "Támogató hajó, melynek elsődleges feladata a szövetségesek ellátása."
+  },
+  "sup-03": {
+    "name": "SUP-03 Supporter",
+    "description": "Támogató hajó, melynek elsődleges feladata a szövetségesek ellátása."
+  },
+  "ion-lrhdma-01": {
+    "name": "LRHDMA-01 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú nagy sebzéssel és közepes találati pontossággal."
+  },
+  "ion-lrhdma-02": {
+    "name": "LRHDMA-02 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú nagy sebzéssel és közepes találati pontossággal."
+  },
+  "ion-lrhdma-03": {
+    "name": "LRHDMA-03 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú nagy sebzéssel és közepes találati pontossággal."
+  },
+  "ion-lrmdha-01": {
+    "name": "LRMDHA-01 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú közepes sebzéssel és nagy találati pontossággal."
+  },
+  "ion-lrmdha-02": {
+    "name": "LRMDHA-02 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú közepes sebzéssel és nagy találati pontossággal."
+  },
+  "ion-lrmdha-03": {
+    "name": "LRMDHA-03 Ionágyú",
+    "description": "Kis hatótávolságú ionágyú közepes sebzéssel és nagy találati pontossággal."
+  },
+  "ion-mrldma-01": {
+    "name": "MRLDMA-01 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "ion-mrldma-02": {
+    "name": "MRLDMA-02 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "ion-mrldma-03": {
+    "name": "MRLDMA-03 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "ion-mrmdla-01": {
+    "name": "MRMDLA-01 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "ion-mrmdla-02": {
+    "name": "MRMDLA-02 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "ion-mrmdla-03": {
+    "name": "MRMDLA-03 Ionágyú",
+    "description": "Közepes hatótávolságú ionágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "las-lrhdma-01": {
+    "name": "LRHDMA-01 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú nagy sebzéssel és közepes találati pontossággal."
+  },
+  "las-lrhdma-02": {
+    "name": "LRHDMA-02 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú nagy sebzéssel és közepes találati pontossággal."
+  },
+  "las-lrhdma-03": {
+    "name": "LRHDMA-03 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú nagy sebzéssel és közepes találati pontossággal."
+  },
+  "las-lrmdha-01": {
+    "name": "LRMDHA-01 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú közepes sebzéssel és nagy találati pontossággal."
+  },
+  "las-lrmdha-02": {
+    "name": "LRMDHA-02 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú közepes sebzéssel és nagy találati pontossággal."
+  },
+  "las-lrmdha-03": {
+    "name": "LRMDHA-03 Lézerágyú",
+    "description": "Kis hatótávolságú lézerágyú közepes sebzéssel és nagy találati pontossággal."
+  },
+  "las-mrldma-01": {
+    "name": "MRLDMA-01 Lézerágyú",
+    "description": "Közepes hatótávolságú lézerágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "las-mrldma-02": {
+    "name": "MRLDMA-02 Lézerágyú",
+    "description": "Közepes hatótávolságú lézerágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "las-mrldma-03": {
+    "name": "MRLDMA-03 Lézerágyú",
+    "description": "Közepes hatótávolságú lézerágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "las-mrmdla-01": {
+    "name": "MRMDLA-01 Lézerágyú",
+    "description": "Közepes hatótávolságú lézerágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "las-mrmdla-02": {
+    "name": "MRMDLA-02 Lézerágyú",
+    "description": "Közepes hatótávolságú lézerágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "las-mrmdla-03": {
+    "name": "MRMDLA-03 Lézerágyú",
+    "description": "Közepes hatótávolságú lézerágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "rif-lrldma-01": {
+    "name": "LRLDMA-01 Gépágyú",
+    "description": "Kis hatótávolságú gépágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "rif-lrldma-02": {
+    "name": "LRLDMA-02 Gépágyú",
+    "description": "Kis hatótávolságú gépágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "rif-lrldma-03": {
+    "name": "LRLDMA-03 Gépágyú",
+    "description": "Kis hatótávolságú gépágyú kis sebzéssel és közepes találati pontossággal."
+  },
+  "rif-lrmdla-01": {
+    "name": "LRMDLA-01 Gépágyú",
+    "description": "Kis hatótávolságú gépágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "rif-lrmdla-02": {
+    "name": "LRMDLA-02 Gépágyú",
+    "description": "Kis hatótávolságú gépágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "rif-lrmdla-03": {
+    "name": "LRMDLA-03 Gépágyú",
+    "description": "Kis hatótávolságú gépágyú közepes sebzéssel és kis találati pontossággal."
+  },
+  "rif-mrldla-01": {
+    "name": "MRLDLA-01 Gépágyú",
+    "description": "Közepes hatótávolságú gépágyú kis sebzéssel és kis találati pontossággal."
+  },
+  "rif-mrldla-02": {
+    "name": "MRLDLA-02 Gépágyú",
+    "description": "Közepes hatótávolságú gépágyú kis sebzéssel és kis találati pontossággal."
+  },
+  "rif-mrldla-03": {
+    "name": "MRLDLA-03 Gépágyú",
+    "description": "Közepes hatótávolságú gépágyú kis sebzéssel és kis találati pontossággal."
+  },
+  "rla-hrldma-01": {
+    "name": "HRLDMA-01 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő kis sebzéssel és közepes találati pontossággal."
+  },
+  "rla-hrldma-02": {
+    "name": "HRLDMA-02 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő kis sebzéssel és közepes találati pontossággal."
+  },
+  "rla-hrldma-03": {
+    "name": "HRLDMA-03 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő kis sebzéssel és közepes találati pontossággal."
+  },
+  "rla-hrmdla-01": {
+    "name": "HRMDLA-01 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő közepes sebzéssel és kis találati pontossággal."
+  },
+  "rla-hrmdla-02": {
+    "name": "HRMDLA-02 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő közepes sebzéssel és kis találati pontossággal."
+  },
+  "rla-hrmdla-03": {
+    "name": "HRMDLA-03 Rakétakilövő",
+    "description": "Nagy hatótávolságú rakétakilövő közepes sebzéssel és kis találati pontossággal."
+  },
+  "rla-lrhdma-01": {
+    "name": "LRHDMA-01 Rakétakilövő",
+    "description": "Kis hatótávolságú rakétakilövő nagy sebzéssel és közepes találati pontossággal."
+  },
+  "rla-lrhdma-02": {
+    "name": "LRHDMA-02 Rakétakilövő",
+    "description": "Kis hatótávolságú rakétakilövő nagy sebzéssel és közepes találati pontossággal."
+  },
+  "rla-lrhdma-03": {
+    "name": "LRHDMA-03 Rakétakilövő",
+    "description": "Kis hatótávolságú rakétakilövő nagy sebzéssel és közepes találati pontossággal."
+  },
+  "rla-lrmdha-01": {
+    "name": "LRMDHA-01 Rakétakilövő",
+    "description": "Kis hatótávolságú rakétakilövő közepes sebzéssel és nagy találati pontossággal."
+  },
+  "rla-lrmdha-02": {
+    "name": "LRMDHA-02 Rakétakilövő",
+    "description": "Kis hatótávolságú rakétakilövő közepes sebzéssel és nagy találati pontossággal."
+  },
+  "rla-lrmdha-03": {
+    "name": "LRMDHA-03 Rakétakilövő",
+    "description": "Kis hatótávolságú rakétakilövő közepes sebzéssel és nagy találati pontossággal."
+  },
+  "rla-mrhdla-01": {
+    "name": "MRHDLA-01 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő nagy sebzéssel és kis találati pontossággal."
+  },
+  "rla-mrhdla-02": {
+    "name": "MRHDLA-02 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő nagy sebzéssel és kis találati pontossággal."
+  },
+  "rla-mrhdla-03": {
+    "name": "MRHDLA-01 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő nagy sebzéssel és kis találati pontossággal."
+  },
+  "rla-mrmdma-01": {
+    "name": "MRMDMA-01 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő közepes sebzéssel és közepes találati pontossággal."
+  },
+  "rla-mrmdma-02": {
+    "name": "MRMDMA-02 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő közepes sebzéssel és közepes találati pontossággal."
+  },
+  "rla-mrmdma-03": {
+    "name": "MRMDMA-03 Rakétakilövő",
+    "description": "Közepes hatótávolságú rakétakilövő közepes sebzéssel és közepes találati pontossággal."
+  }
+}

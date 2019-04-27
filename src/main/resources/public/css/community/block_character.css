@@ -1,0 +1,62 @@
+#block-character-wrapper{
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    border: 3px ridge white;
+    overflow: auto;
+}
+
+#block-character-title{
+    text-align: center;
+    border-bottom: 3px ridge white;
+    padding: 0.55rem;
+}
+
+#block-character-input-container{
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#block-character-name{
+    width: 50%;
+    font-size: 1.25rem;
+}
+
+#no-character-can-be-blocked{
+    text-align: center;
+    font-size: 1.5rem;
+    display: none;
+}
+
+#block-character-search-result{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 8rem;
+}
+
+.character-can-be-blocked{
+    position: relative;
+    border: 1px ridge white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.character-can-be-friend:hover{
+    border-color: red;
+}
+
+.character-can-be-friend div{
+    margin-right: 7rem;
+}
+
+.block-character-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+}

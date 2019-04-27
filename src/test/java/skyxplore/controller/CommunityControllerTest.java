@@ -164,16 +164,6 @@ public class CommunityControllerTest {
     }
 
     @Test
-    public void testGetNumberOfFriendRequestShouldCalFacadeAndReturn() {
-        //GIVEN
-        when(communityFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
-        //WHEN
-        Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID_1);
-        //THEN
-        assertEquals(new Integer(2), result);
-    }
-
-    @Test
     public void testGetReceivedFriendRequestsShouldCallFacadeAndReturnView() {
         //GIVEN
         FriendRequest friendRequest = createFriendRequest();

@@ -1,0 +1,18 @@
+{
+  "id": "sto-01",
+  "capacity": 100,
+  "constructiontime": 1200,
+  "buildprice": 1200,
+  "buildable": true,
+  "materials": {
+    "hullplate": 5,
+    "mithril": 20
+  },
+  "type": "storage",
+  "slot": "connector",
+  "level": 1,
+  "score": 0,
+  "buyprice": 45000,
+  "sellprice": 15000,
+  "category": "storage"
+}

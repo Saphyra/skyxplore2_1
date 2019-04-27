@@ -1,21 +1,15 @@
-#menucontainer{
-    text-align: center;
-    border-bottom: 3px ridge white;
-}
-
-#menucontainer button{
-    font-size: 1.25rem;
-}
-
-#menu_wrapper{
-    display: inline-block;
-    position: relative;
-}
-
-#menu{
+#menu-container{
     position: absolute;
-    left: 100%;
+    left: 20rem;
     top: 0;
-    white-space: nowrap;
-    text-align: right;
+    bottom: 0;
+    width: 20rem;
+    border-right: 3px ridge white;
+    text-align: center;
+    overflow: auto;
+}
+
+#menu-title{
+    border-bottom: 3px ridge white;
+    padding: 0.25rem;
 }

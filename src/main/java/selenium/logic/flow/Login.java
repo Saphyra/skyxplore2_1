@@ -3,6 +3,9 @@ package selenium.logic.flow;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.page.IndexPage;
 import selenium.logic.validator.NotificationValidator;
@@ -14,21 +17,23 @@ import static selenium.logic.util.Util.cleanNotifications;
 
 @Slf4j
 public class Login {
-    private static final String NOTIFICATION_LOGIN_FAILED = "Hibás felhasználónév vagy jelszó.";
+    private static final String MESSAGE_CODE_BAD_CREDENTIALS = "BAD_CREDENTIALS";
 
     private final WebDriver driver;
     private final IndexPage indexPage;
     private final NotificationValidator notificationValidator;
     private final Navigate navigate;
+    private final MessageCodes messageCodes;
 
-    public Login(WebDriver driver) {
+    public Login(WebDriver driver, MessageCodes messageCodes) {
         this.driver = driver;
         indexPage = new IndexPage(driver);
         notificationValidator = new NotificationValidator(driver);
         navigate = new Navigate(driver);
+        this.messageCodes = messageCodes;
     }
 
-    public void login(SeleniumUser user){
+    public void login(SeleniumUser user) {
         navigate.toIndexPage();
         sendRequest(user);
         validateSuccessfulLogin();
@@ -48,6 +53,7 @@ public class Login {
     }
 
     private void validateSuccessfulLogin() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(CHARACTER_SELECT));
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
     }
 
@@ -58,8 +64,8 @@ public class Login {
         validateLoginFailure();
     }
 
-    private void validateLoginFailure(){
+    private void validateLoginFailure() {
         assertEquals(HOST, driver.getCurrentUrl());
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_LOGIN_FAILED);
+        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_BAD_CREDENTIALS));
     }
 }

@@ -1,38 +1,42 @@
 package skyxplore.controller;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
+import static skyxplore.testutil.TestUtils.createMaterials;
+import static skyxplore.testutil.TestUtils.createProductView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.material.MaterialView;
-import skyxplore.controller.view.product.ProductViewList;
+import skyxplore.controller.view.product.ProductView;
+import skyxplore.domain.materials.Materials;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryControllerTest {
     @Mock
-    private  FactoryFacade factoryFacade;
+    private FactoryFacade factoryFacade;
 
     @Mock
-    private  ProductFacade productFacade;
+    private ProductFacade productFacade;
 
     @InjectMocks
     private FactoryController underTest;
 
     @Test
-    public void testAddToQueueShouldCallFacade(){
+    public void testAddToQueueShouldCallFacade() {
         //GIVEN
         AddToQueueRequest request = createAddToQueueRequest();
         //WHEN
@@ -42,29 +46,26 @@ public class FactoryControllerTest {
     }
 
     @Test
-    public void testGetMaterialsShouldCallFacadeAndReturnResponse(){
+    public void testGetMaterialsShouldCallFacadeAndReturnResponse() {
         //GIVEN
-        MaterialView view = createMaterialView();
-        Map<String,MaterialView> map = new HashMap<>();
-        map.put(MATERIAL_KEY, view);
-        when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(map);
+        Materials materials = createMaterials();
+        when(factoryFacade.getMaterials(CHARACTER_ID_1)).thenReturn(materials);
         //WHEN
-        Map<String, MaterialView> result = underTest.getMaterials(CHARACTER_ID_1);
+        Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID_1);
         //THEN
         verify(factoryFacade).getMaterials(CHARACTER_ID_1);
-        assertEquals(1, result.size());
-        assertEquals(view, result.get(MATERIAL_KEY));
+        assertEquals(materials, result);
     }
 
     @Test
-    public void testGetQueueShouldCallFacadeAndReturnResult(){
+    public void testGetQueueShouldCallFacadeAndReturnResult() {
         //GIVEN
-        View<ProductViewList> view = createProductViewListView();
-        when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(view);
+        List<ProductView> productViews = Arrays.asList(createProductView());
+        when(productFacade.getQueue(CHARACTER_ID_1)).thenReturn(productViews);
         //WHEN
-        View<ProductViewList> result = underTest.getQueue(CHARACTER_ID_1);
+        List<ProductView> result = underTest.getQueue(CHARACTER_ID_1);
         //THEN
         verify(productFacade).getQueue(CHARACTER_ID_1);
-        assertEquals(view, result);
+        assertEquals(productViews, result);
     }
 }

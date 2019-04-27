@@ -1,9 +1,0 @@
-{
-    "id": "phalanx",
-    "name": "Phalanx",
-    "description": "A hajó kiterjeszti védelmét, és felfogja a szomszédos szövetségeseire érkező sebzést.",
-    "slot": "ability",
-    "energyusage": 200,
-    "active": 5,
-    "reload": 10
-}

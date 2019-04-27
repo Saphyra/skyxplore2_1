@@ -1,0 +1,12 @@
+{
+  "id": "penetration",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 400,
+  "active": 10,
+  "reload": 30,
+  "effect": {
+    "chance": 35
+  },
+  "category": "ability"
+}

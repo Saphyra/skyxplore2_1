@@ -17,7 +17,7 @@ public class CharacterRenameService {
     private final CharacterNameCache characterNameCache;
     private final CharacterQueryService characterQueryService;
 
-    public void renameCharacter(RenameCharacterRequest request, String userId) {
+    public SkyXpCharacter renameCharacter(RenameCharacterRequest request, String userId) {
         if (characterQueryService.isCharNameExists(request.getNewCharacterName())) {
             throw new CharacterNameAlreadyExistsException("Character name already exists: " + request.getNewCharacterName());
         }
@@ -25,5 +25,6 @@ public class CharacterRenameService {
         character.setCharacterName(request.getNewCharacterName());
         characterDao.save(character);
         characterNameCache.invalidate(character.getCharacterName());
+        return character;
     }
 }

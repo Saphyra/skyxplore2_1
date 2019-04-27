@@ -3,17 +3,19 @@ package selenium.test.account.changeusername;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.page.AccountPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
 
 @Builder
 public class EmptyPasswordTest {
-    private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
+    private static final String MESSAGE_CODE_PASSWORD_IS_EMPTY = "CURRENT_PASSWORD_IS_EMPTY";
 
     private final ChangeUserNameTestHelper changeUserNameTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testEmptyPassword() {
         changeUserNameTestHelper.setUpWithRandomUserName();
@@ -22,7 +24,7 @@ public class EmptyPasswordTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidChangeUserNamePasswordField(),
-            ERROR_MESSAGE_EMPTY_PASSWORD,
+            messageCodes.get(MESSAGE_CODE_PASSWORD_IS_EMPTY),
             changePasswordField,
             accountPage.getChangeUserNameButton()
         );

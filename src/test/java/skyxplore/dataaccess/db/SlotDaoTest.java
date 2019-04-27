@@ -31,7 +31,7 @@ public class SlotDaoTest {
     private SlotDao underTest;
 
     @Test
-    public void testDeleteByShipIdShouldCallRepository(){
+    public void testDeleteByShipIdShouldCallRepository() {
         //WHEN
         underTest.deleteByShipId(EQUIPPED_SHIP_ID);
         //THEN
@@ -39,7 +39,7 @@ public class SlotDaoTest {
     }
 
     @Test
-    public void tesGetByIdShouldConvertAndReturn(){
+    public void tesGetByIdShouldConvertAndReturn() {
         //GIVEN
         SlotEntity entity = createSlotEntity();
         when(slotRepository.getOne(EQUIPPED_SLOT_ID)).thenReturn(entity);

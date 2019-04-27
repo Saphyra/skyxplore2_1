@@ -161,7 +161,7 @@ public class MailDaoTest {
     }
 
     @Test
-    public void testSaveShouldCallRepository(){
+    public void testSaveShouldCallRepository() {
         //GIVEN
         Mail mail = createMail();
         MailEntity entity = createMailEntity();

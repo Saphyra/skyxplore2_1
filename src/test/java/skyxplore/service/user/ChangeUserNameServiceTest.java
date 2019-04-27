@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
@@ -30,6 +31,9 @@ public class ChangeUserNameServiceTest {
 
     @Mock
     private PasswordService passwordService;
+
+    @Mock
+    private UserNameCache userNameCache;
 
     @InjectMocks
     private ChangeUserNameService underTest;
@@ -75,5 +79,6 @@ public class ChangeUserNameServiceTest {
         verify(credentialsService).isUserNameExists(USER_NEW_NAME);
         verify(credentialsService).save(skyXpCredentials);
         assertEquals(USER_NEW_NAME, skyXpCredentials.getUserName());
+        verify(userNameCache).invalidate(USER_NEW_NAME);
     }
 }

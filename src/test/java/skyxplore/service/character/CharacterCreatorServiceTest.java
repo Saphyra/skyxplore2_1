@@ -22,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
@@ -53,11 +54,14 @@ public class CharacterCreatorServiceTest {
     @Mock
     private SlotDao slotDao;
 
+    @Mock
+    private CharacterNameCache characterNameCache;
+
     @InjectMocks
     private CharacterCreatorService underTest;
 
     @Test(expected = CharacterNameAlreadyExistsException.class)
-    public void testCreateCharacterShouldThrowExceptionWhenCharacterNameExists(){
+    public void testCreateCharacterShouldThrowExceptionWhenCharacterNameExists() {
         //GIVEN
         CreateCharacterRequest request = createCreateCharacterRequest();
 
@@ -67,7 +71,7 @@ public class CharacterCreatorServiceTest {
     }
 
     @Test
-    public void testCreateCharacterShouldCreateAdSave(){
+    public void testCreateCharacterShouldCreateAdSave() {
         //GIVEN
         CreateCharacterRequest request = createCreateCharacterRequest();
 
@@ -90,7 +94,7 @@ public class CharacterCreatorServiceTest {
         Factory factory = createFactory();
         when(newCharacterGenerator.createFactory(CHARACTER_ID_1)).thenReturn(factory);
         //WHEN
-        underTest.createCharacter(request, USER_ID);
+        SkyXpCharacter result = underTest.createCharacter(request, USER_ID);
         //THEN
         verify(characterQueryService).isCharNameExists(CHARACTER_NAME);
         verify(newCharacterGenerator).createCharacter(USER_ID, CHARACTER_NAME);
@@ -104,5 +108,7 @@ public class CharacterCreatorServiceTest {
         verify(factoryDao).save(factory);
         assertEquals(DEFENSE_SLOT_ID, ship.getDefenseSlotId());
         assertEquals(WEAPON_SLOT_ID, ship.getWeaponSlotId());
+        assertEquals(character, result);
+        verify(characterNameCache).invalidate(CHARACTER_NAME);
     }
 }

@@ -1,9 +1,0 @@
-{
-    "id": "lock",
-    "name": "Célpont bemérve",
-    "description": "A fegyverek a kijelölt ellenséget támadják, megkerülve a célpontot védő hajókat.",
-    "slot": "ability",
-    "energyusage": 200,
-    "active": -1,
-    "reload": 20
-}

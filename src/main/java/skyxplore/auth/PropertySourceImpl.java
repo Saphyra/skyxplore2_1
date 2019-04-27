@@ -1,9 +1,11 @@
 package skyxplore.auth;
 
-import static skyxplore.controller.PageController.INDEX_MAPPING;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
+import com.github.saphyra.authservice.PropertySource;
+import com.github.saphyra.authservice.domain.AllowedUri;
+import com.github.saphyra.authservice.domain.RoleSetting;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+import skyxplore.filter.CustomFilterHelper;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,13 +13,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-
-import com.github.saphyra.authservice.PropertySource;
-import com.github.saphyra.authservice.domain.AllowedUri;
-import com.github.saphyra.authservice.domain.RoleSetting;
-import skyxplore.filter.CustomFilterHelper;
+import static skyxplore.controller.PageController.INDEX_MAPPING;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
+import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
 
 @Component
 public class PropertySourceImpl implements PropertySource {
@@ -56,12 +55,13 @@ public class PropertySourceImpl implements PropertySource {
         return Arrays.asList(
             new AllowedUri("/", HttpMethod.GET),
             new AllowedUri("/**/favicon.ico", HttpMethod.GET),
-            new AllowedUri("/user/register", HttpMethod.POST),
-            new AllowedUri("/user/name/exist", HttpMethod.POST),
-            new AllowedUri("/user/email/exist", HttpMethod.POST),
+            new AllowedUri("/user", HttpMethod.POST),
+            new AllowedUri("/user/name", HttpMethod.POST),
+            new AllowedUri("/user/email", HttpMethod.POST),
             new AllowedUri("/css/**", HttpMethod.GET),
             new AllowedUri("/images/**", HttpMethod.GET),
-            new AllowedUri("/js/**", HttpMethod.GET)
+            new AllowedUri("/js/**", HttpMethod.GET),
+            new AllowedUri("/i18n/**", HttpMethod.GET)
         );
     }
 

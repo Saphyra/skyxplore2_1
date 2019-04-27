@@ -1,23 +1,25 @@
 package selenium.test.registration.username;
 
-import lombok.Builder;
+import static selenium.logic.util.Util.crop;
+import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
+
 import org.openqa.selenium.WebElement;
+
+import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.page.IndexPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.registration.username.helper.UserNameTestHelper;
 
-import static selenium.logic.util.Util.crop;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
-
 @Builder
 public class TooShortUserNameTest {
-    private static final String ERROR_MESSAGE_TOO_SHORT_USER_NAME = "Felhasználónév túl rövid (Minimum 3 karakter).";
+    private static final String MESSAGE_CODE_TOO_SHORT_USERNAME = "USERNAME_TOO_SHORT";
 
     private final UserNameTestHelper userNameTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
-
+    private final MessageCodes messageCodes;
 
     public void testTooShortUserName() {
         SeleniumUser user = SeleniumUser.create();
@@ -28,7 +30,7 @@ public class TooShortUserNameTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidUserNameField(),
-            ERROR_MESSAGE_TOO_SHORT_USER_NAME,
+            messageCodes.get(MESSAGE_CODE_TOO_SHORT_USERNAME),
             userNameField,
             indexPage.getRegisterButton()
         );

@@ -7,10 +7,12 @@ import selenium.logic.page.IndexPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.registration.email.helper.EmailTestHelper;
 
+import java.util.Map;
+
 @Builder
 public class InvalidEmailTest {
     private static final String INVALID_EMAIL = "aa.a";
-    private static final String ERROR_MESSAGE_INVALID_EMAIL = "Érvénytelen e-mail cím.";
+    private static final String MESSAGE_CODE_INVALID_EMAIL = "INVALID_EMAIL";
 
     //TODO restore after fixing FE validation
     //private static final String INVALID_EMAIL = "aa.a@";
@@ -18,6 +20,7 @@ public class InvalidEmailTest {
     private final EmailTestHelper emailTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
+    private final Map<String, String> messageCodes;
 
     public void testInvalidEmail() {
         SeleniumUser user = SeleniumUser.create();
@@ -28,7 +31,7 @@ public class InvalidEmailTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidEmailField(),
-            ERROR_MESSAGE_INVALID_EMAIL,
+            messageCodes.get(MESSAGE_CODE_INVALID_EMAIL),
             emailField,
             indexPage.getRegisterButton()
         );

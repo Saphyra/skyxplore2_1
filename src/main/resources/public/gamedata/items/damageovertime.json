@@ -1,0 +1,13 @@
+{
+  "id": "damageovertime",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 5,
+  "reload": 10,
+  "effect": {
+    "damage": 5,
+    "wawes": 5
+  },
+  "category": "ability"
+}

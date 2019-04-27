@@ -1,11 +1,11 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Gyár - SkyXplore 2.1</TITLE>
+    <TITLE></TITLE>
     <META charset="UTF-8"/>
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
-    
+    <LINK rel="stylesheet" href="/css/category_menu.css">
+
     <LINK rel="stylesheet" href="/css/factory/content.css">
     <LINK rel="stylesheet" href="/css/factory/materials.css">
     <LINK rel="stylesheet" href="/css/factory/menu.css">
@@ -13,49 +13,41 @@
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
-    
-    
     <SCRIPT src="js/factory/page_controller.js"></SCRIPT>
 </HEAD>
-<BODY>
+    <DIV class="main-page">
+        <HEADER>
+            <H1 id="main-title"></H1>
+        </HEADER>
 
-<DIV class="cover">
-    <HEADER>
-        <H1>Gyár</H1>
-    </HEADER>
-    
-    <MAIN>
-        <SECTION id='content'>
-        
-        </SECTION>
-        
-        <SECTION id='queuecontainer'>
-            <H2>Gyártósor</H2>
-            
-            <DIV id='queue'></DIV>
-        </SECTION>
-        
-        <SECTION id='materialscontainer'>
-        
-            <DIV id='menucontainer'>
-                <DIV id='menu_wrapper'>
-                    <BUTTON onclick='$("#menu").fadeToggle();'>Kategóriák</BUTTON>
-                    
-                    <DIV id='menu' style='display: none'></DIV>
-                </DIV>
-            </DIV>
-            
-            <H2>Alapanyagok</H2>
-            
-            <DIV id='materials'></DIV>
-        </SECTION>
-    </MAIN>
-    
-    <FOOTER>
-        <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-        <BUTTON onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
-    </FOOTER>
-</DIV>
+        <MAIN>
+            <SECTION id="materials-container">
+                <H2 id="materials-title"></H2>
 
-</BODY>
+                <DIV id="no-materials"></DIV>
+
+                <DIV id="materials"></DIV>
+            </SECTION>
+
+            <SECTION id="menu-container">
+                <H2 id="menu-title"></H2>
+
+                <DIV id="menu"></DIV>
+            </SECTION>
+
+            <SECTION id="content"></SECTION>
+
+            <SECTION id="queue-container">
+                <H2 id="queue-title"></H2>
+
+                <DIV id="empty-queue"></DIV>
+                <DIV id="queue"></DIV>
+            </SECTION>
+        </MAIN>
+
+        <FOOTER>
+            <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+            <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
+        </FOOTER>
+    </DIV>
 </HTML>

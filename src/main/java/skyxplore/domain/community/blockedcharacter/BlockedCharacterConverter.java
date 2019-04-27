@@ -20,7 +20,7 @@ public class BlockedCharacterConverter extends ConverterBase<BlockedCharacterEnt
 
     @Override
     public BlockedCharacterEntity processDomainConversion(BlockedCharacter domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
         return BlockedCharacterEntity.builder()

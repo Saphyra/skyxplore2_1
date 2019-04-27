@@ -1,0 +1,12 @@
+{
+  "id": "shieldleech",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 10,
+  "reload": 30,
+  "effect": {
+    "leechrate": 50
+  },
+  "type": "ability",
+  "category": "ability"
+}

@@ -27,7 +27,7 @@ public class MailViewConverterTest {
     private MailViewConverter underTest;
 
     @Test
-    public void testConvertDomainShouldConvertAndReturn(){
+    public void testConvertDomainShouldConvertAndReturn() {
         //GIVEN
         Mail mail = createMail();
 

@@ -25,7 +25,7 @@ public class UserConverterTest {
     private UserConverter underTest;
 
     @Test
-    public void testConvert(){
+    public void testConvert() {
         //GIVEN
         SkyXpUser skyXpUser = new SkyXpUser();
         skyXpUser.setUserId(USER_ID);

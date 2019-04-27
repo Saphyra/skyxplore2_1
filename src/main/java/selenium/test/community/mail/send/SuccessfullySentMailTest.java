@@ -1,7 +1,9 @@
 package selenium.test.community.mail.send;
 
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import selenium.logic.domain.Mail;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -12,17 +14,20 @@ import selenium.test.community.helper.CommunityTestInitializer;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @Builder
+@Slf4j
 public class SuccessfullySentMailTest {
-    public static final String NOTIFICATION_MESSAGE_SENT = "Üzenet elküldve.";
+    public static final String MESSAGE_CODE_MAIL_SENT = "MAIL_SENT";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
+    private final MessageCodes messageCodes;
 
     public void testSuccessfullySentMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -40,7 +45,8 @@ public class SuccessfullySentMailTest {
         sendMailHelper.setSubject()
             .setAddressee(otherCharacter)
             .setMessage()
-            .verifyMailSent(NOTIFICATION_MESSAGE_SENT);
+            .sendMail()
+            .verifyMailSent(messageCodes.get(MESSAGE_CODE_MAIL_SENT));
 
         verifyMailAtSentMails(otherCharacter);
         verifyMailArrived(otherAccount, character);
@@ -48,6 +54,8 @@ public class SuccessfullySentMailTest {
 
     private void verifyMailAtSentMails(SeleniumCharacter addressee) {
         List<Mail> sentMails = mailTestHelper.getSentMails();
+        log.info("{}", sentMails);
+        assertEquals(1, sentMails.size());
         assertTrue(
             sentMails.stream().anyMatch(mail -> mail.getAddressee().equals(addressee.getCharacterName()))
         );
@@ -56,7 +64,7 @@ public class SuccessfullySentMailTest {
     private void verifyMailArrived(SeleniumAccount otherAccount, SeleniumCharacter character) {
         communityTestHelper.goToCommunityPageOf(otherAccount, otherAccount.getCharacter(0), 1);
 
-        List<Mail> receivedMails = mailTestHelper.getReceivedMails();
+        List<Mail> receivedMails = mailTestHelper.getIncomingMails();
         assertTrue(
             receivedMails.stream().anyMatch(mail -> mail.getSender().equals(character.getCharacterName()))
         );

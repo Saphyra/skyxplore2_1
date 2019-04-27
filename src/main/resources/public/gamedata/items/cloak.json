@@ -1,0 +1,12 @@
+{
+  "id": "cloak",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 10,
+  "reload": 30,
+  "effect": {
+    "activation": 3
+  },
+  "category": "ability"
+}

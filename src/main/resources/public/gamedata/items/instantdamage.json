@@ -1,0 +1,12 @@
+{
+  "id": "instantdamage",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 400,
+  "active": 1,
+  "reload": 40,
+  "effect": {
+    "damage": 500000
+  },
+  "category": "ability"
+}

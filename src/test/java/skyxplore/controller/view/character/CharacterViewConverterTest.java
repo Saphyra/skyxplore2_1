@@ -16,7 +16,7 @@ public class CharacterViewConverterTest {
     private CharacterViewConverter underTest;
 
     @Test
-    public void testConvertShouldReturnView(){
+    public void testConvertShouldReturnView() {
         //WHEN
         CharacterView view = underTest.convertDomain(createCharacter());
         //THEN

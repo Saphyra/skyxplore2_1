@@ -54,7 +54,7 @@ public class EquipShipService {
         return shipToEquip;
     }
 
-    private void updateShipConnectors(SkyXpCharacter character, EquippedShip ship, Ship shipToEquip){
+    private void updateShipConnectors(SkyXpCharacter character, EquippedShip ship, Ship shipToEquip) {
         ship.setShipType(shipToEquip.getId());
         ship.getConnectorEquipped().forEach(i -> {
             character.addEquipment(i);
@@ -63,7 +63,7 @@ public class EquipShipService {
         ship.setConnectorSlot(shipToEquip.getConnector());
     }
 
-    private void updateSlots(SkyXpCharacter character, EquippedShip ship, Ship shipToEquip){
+    private void updateSlots(SkyXpCharacter character, EquippedShip ship, Ship shipToEquip) {
         EquippedSlot defenseSlot = slotDao.getById(ship.getDefenseSlotId());
         EquippedSlot weaponSlot = slotDao.getById(ship.getWeaponSlotId());
         List<EquippedSlot> slots = Arrays.asList(defenseSlot, weaponSlot);
@@ -84,7 +84,7 @@ public class EquipShipService {
         slotDao.save(weaponSlot);
     }
 
-    private void emptySlots(SkyXpCharacter character, List<EquippedSlot> slots){
+    private void emptySlots(SkyXpCharacter character, List<EquippedSlot> slots) {
         slots.forEach(slot -> {
             slot.getFrontEquipped().forEach(i -> {
                 character.addEquipment(i);

@@ -2,6 +2,7 @@ package selenium.test.community.mail.send;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -13,12 +14,13 @@ import java.util.List;
 
 @Builder
 public class SendMailChangedAddresseeTest {
-    private static final String NOTIFICATION_ADDRESSEE_IS_EMPTY = "A címzett megadása kötelező!";
+    private static final String MESSAGE_CODE_NO_ADDRESSEE = "ADDRESSEE_MUST_BE_SET";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
+    private final MessageCodes messageCodes;
 
     public void testSendMailChangedAddressee() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -37,6 +39,6 @@ public class SendMailChangedAddresseeTest {
         addresseeField.clear();
         addresseeField.sendKeys(SeleniumCharacter.createRandomCharacterName());
 
-        sendMailHelper.verifyCannotSendMail(NOTIFICATION_ADDRESSEE_IS_EMPTY);
+        sendMailHelper.verifyCannotSendMail(messageCodes.get(MESSAGE_CODE_NO_ADDRESSEE));
     }
 }

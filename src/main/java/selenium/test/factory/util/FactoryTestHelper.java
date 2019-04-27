@@ -14,7 +14,7 @@ public class FactoryTestHelper {
     private final SelectCharacter selectCharacter;
     private final Navigate navigate;
 
-    public SeleniumCharacter registerAndGoToFactoryPage(){
+    public SeleniumCharacter registerAndGoToFactoryPage() {
         registration.registerUser();
         SeleniumCharacter character = createCharacter.createCharacter();
         selectCharacter.selectCharacter(character);

@@ -1,17 +1,16 @@
 package selenium.test.community.friendship;
 
-import lombok.Builder;
-import selenium.logic.domain.SeleniumAccount;
-import selenium.logic.domain.SeleniumCharacter;
-import selenium.logic.domain.SentFriendRequest;
-import selenium.logic.page.CommunityPage;
-import selenium.test.community.helper.FriendshipTestHelper;
-import selenium.test.community.helper.CommunityTestHelper;
-import selenium.test.community.helper.CommunityTestInitializer;
+import static junit.framework.TestCase.assertEquals;
 
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
+import lombok.Builder;
+import selenium.logic.domain.SeleniumAccount;
+import selenium.logic.domain.SeleniumCharacter;
+import selenium.logic.page.CommunityPage;
+import selenium.test.community.helper.CommunityTestHelper;
+import selenium.test.community.helper.CommunityTestInitializer;
+import selenium.test.community.helper.FriendshipTestHelper;
 
 @Builder
 public class CancelFriendRequestTest {
@@ -31,13 +30,13 @@ public class CancelFriendRequestTest {
 
         communityPage.getSentFriendRequestsPageButton().click();
 
-        SentFriendRequest friendRequest = communityPage.getSentFriendRequests().stream()
+        communityPage.getSentFriendRequests().stream()
             .filter(sentFriendRequest -> sentFriendRequest.getCharacterName().equals(character.getCharacterName()))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException("SentFriendRequest not found."));
-        friendRequest.cancel();
+            .orElseThrow(() -> new RuntimeException("SentFriendRequest not found."))
+            .cancel();
 
-        communityPage.getFriendsPageButton().click();
+        communityPage.getOpenFriendsPageButton().click();
         friendshipTestHelper.verifyFriendRequestCanBeSentTo(character);
 
         communityTestHelper.goToCommunityPageOf(accounts.get(1), character, 0);

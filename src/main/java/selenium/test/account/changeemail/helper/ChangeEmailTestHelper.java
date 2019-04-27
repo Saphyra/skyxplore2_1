@@ -32,21 +32,22 @@ public class ChangeEmailTestHelper {
         return user;
     }
 
-    public SeleniumUser setUpWithRandomEmail(){
+    public SeleniumUser setUpWithRandomEmail() {
         SeleniumUser user = registerAndNavigateToAccount();
         accountPage.getChangeEmailField().sendKeys(SeleniumUser.createRandomEmail());
         return user;
     }
 
-    public void submitForm(){
+    public void submitForm() {
+        WebElement submitButton = accountPage.getChangeEmailButton();
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeEmailField()));
         webDriverWait.until(ExpectedConditions.invisibilityOf(accountPage.getInvalidChangeEmailPasswordField()));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(submitButton));
 
         assertFalse(accountPage.getInvalidChangeEmailField().isDisplayed());
         assertFalse(accountPage.getInvalidChangeEmailPasswordField().isDisplayed());
 
-        WebElement submitButton = accountPage.getChangeEmailButton();
         assertTrue(submitButton.isEnabled());
         submitButton.click();
     }

@@ -1,6 +1,9 @@
 package selenium.test.registration;
 
+import static selenium.logic.util.LinkUtil.HOST;
+
 import org.junit.Test;
+
 import selenium.SeleniumTestApplication;
 import selenium.logic.page.IndexPage;
 import selenium.logic.validator.FieldValidator;
@@ -8,8 +11,6 @@ import selenium.test.registration.password.ConfirmPasswordTest;
 import selenium.test.registration.password.TooLongPasswordTest;
 import selenium.test.registration.password.TooShortPasswordTest;
 import selenium.test.registration.password.helper.PasswordTestHelper;
-
-import static selenium.logic.util.LinkUtil.HOST;
 
 public class PasswordTest extends SeleniumTestApplication {
     private PasswordTestHelper passwordTestHelper;
@@ -24,31 +25,34 @@ public class PasswordTest extends SeleniumTestApplication {
     }
 
     @Test
-    public void testTooShortPassword(){
+    public void testTooShortPassword() {
         TooShortPasswordTest.builder()
             .passwordTestHelper(passwordTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testTooShortPassword();
     }
 
     @Test
-    public void testTooLongPassword(){
+    public void testTooLongPassword() {
         TooLongPasswordTest.builder()
             .passwordTestHelper(passwordTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
+            .messageCodes(messageCodes)
             .build()
             .testTooLongPassword();
     }
 
     @Test
-    public void testConfirmPassword(){
+    public void testConfirmPassword() {
         ConfirmPasswordTest.builder()
             .passwordTestHelper(passwordTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testConfirmPassword();
     }

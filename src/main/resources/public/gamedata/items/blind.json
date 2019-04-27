@@ -1,0 +1,12 @@
+{
+  "id": "blind",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 5,
+  "reload": 15,
+  "effect": {
+    "range": 6
+  },
+  "category": "ability"
+}

@@ -2,6 +2,8 @@ package selenium.test.characterselect;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.flow.CreateCharacter;
@@ -23,14 +25,15 @@ public class SelectCharacterTest extends SeleniumTestApplication {
 
     @Test
     public void testSelectCharacter() {
-        new Registration(driver).registerUser();
-        SeleniumCharacter character = new CreateCharacter(driver).createCharacter();
+        new Registration(driver, messageCodes).registerUser();
+        SeleniumCharacter character = new CreateCharacter(driver, messageCodes).createCharacter();
 
         characterSelectPage.getCharacterRow(character.getCharacterName())
             .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))
             .orElseThrow(() -> new RuntimeException("CharacterName column not found."))
             .click();
 
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(OVERVIEW));
         assertEquals(OVERVIEW, driver.getCurrentUrl());
     }
 }

@@ -1,0 +1,21 @@
+{
+  "id": "gen-01",
+  "energyrecharge": 20,
+  "constructiontime": 1200,
+  "buildprice": 1200,
+  "buildable": true,
+  "materials": {
+    "cable": 3,
+    "condensator": 2,
+    "energycell": 1,
+    "hullplate": 1,
+    "uridium": 20
+  },
+  "type": "generator",
+  "slot": "connector",
+  "level": 1,
+  "score": 1,
+  "buyprice": 45000,
+  "sellprice": 15000,
+  "category": "energy"
+}

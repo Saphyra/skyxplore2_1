@@ -32,7 +32,7 @@ public class ProductViewConverterTest {
     private ProductViewConverter underTest;
 
     @Test
-    public void testConvertShouldReturnView(){
+    public void testConvertShouldReturnView() {
         //GIVEN
         when(dateTimeUtil.convertDomain(PRODUCT_START_TIME)).thenReturn(PRODUCT_START_TIME_EPOCH);
         when(dateTimeUtil.convertDomain(PRODUCT_END_TIME)).thenReturn(PRODUCT_END_TIME_EPOCH);

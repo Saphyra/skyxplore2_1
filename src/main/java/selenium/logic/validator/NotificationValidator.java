@@ -1,41 +1,52 @@
 package selenium.logic.validator;
 
-import lombok.RequiredArgsConstructor;
+import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import static selenium.logic.util.WaitUtil.waitUntil;
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationValidator {
     private static final String SELECTOR_NOTIFICATION_TEXT = ":first-child";
 
     private final WebDriver driver;
 
-    public void verifyOnlyOneNotification(String text){
-        List<WebElement> notifications = getNotifications();
-        assertEquals(1, notifications.size());
-        verifyContains(notifications, text);
+    public void verifyOnlyOneNotification(String text) {
+        log.info("Verifying only one notification with text {}", text);
+        waitUntil(() -> {
+            List<WebElement> notifications = getNotifications();
+            if (notifications.size() > 1) {
+                throw new RuntimeException("More than 1 notifications are present.");
+            }
+            return notifications.size() == 1;
+        }, "Waiting until only one notification is present.");
+        verifyContains(text);
     }
 
-    public void verifyNotificationVisibility(String text){
-        List<WebElement> notifications = getNotifications();
-        verifyContains(notifications, text);
+    public void verifyNotificationVisibility(String text) {
+        log.info("Verifying notification visibility with text {}", text);
+        verifyContains(text);
     }
 
     private List<WebElement> getNotifications() {
         return driver.findElements(getNotificationElementsLocator());
     }
 
-    private void verifyContains(List<WebElement> elements, String text){
-        assertTrue(
-            elements.stream()
-                .anyMatch(w -> w.findElement(By.cssSelector(SELECTOR_NOTIFICATION_TEXT)).getText().equals(text))
-        );
+    private void verifyContains(String text) {
+        waitUntil(() -> contains(getNotifications(), text), "Waiting until notification with text " + text + " appears...");
+        getNotifications().forEach(WebElement::click);
+    }
+
+    private boolean contains(List<WebElement> elements, String text) {
+        return elements.stream()
+            .anyMatch(w -> w.findElement(By.cssSelector(SELECTOR_NOTIFICATION_TEXT)).getText().equals(text));
     }
 }

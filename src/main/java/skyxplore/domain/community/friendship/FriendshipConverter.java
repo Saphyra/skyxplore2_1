@@ -8,7 +8,7 @@ import com.github.saphyra.converter.ConverterBase;
 public class FriendshipConverter extends ConverterBase<FriendshipEntity, Friendship> {
     @Override
     public Friendship processEntityConversion(FriendshipEntity entity) {
-        if(entity == null){
+        if (entity == null) {
             return null;
         }
         Friendship friendship = new Friendship();
@@ -20,7 +20,7 @@ public class FriendshipConverter extends ConverterBase<FriendshipEntity, Friends
 
     @Override
     public FriendshipEntity processDomainConversion(Friendship domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("Friendship must not be null.");
         }
         FriendshipEntity entity = new FriendshipEntity();

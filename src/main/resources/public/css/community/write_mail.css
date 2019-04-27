@@ -1,0 +1,90 @@
+#write-mail-wrapper{
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    border: 3px ridge white;
+    overflow: auto;
+}
+
+#write-mail-title{
+    text-align: center;
+    border-bottom: 3px ridge white;
+    padding: 0.55rem;
+}
+
+#write-mail-table{
+    margin: auto;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+#write-mail-table td[colspan="2"]{
+    text-align: center;
+}
+
+#write-mail-table td:not([colspan="2"]){
+    width: 50%;
+}
+
+#subject-label, #addressee-label{
+    margin: auto;
+    position: relative;
+    width: 95%;
+    display: block;
+    font-size: 1.5rem;
+}
+
+#subject, #addressee{
+    width: calc(100% - 7rem);
+    font-size: 1.25rem;
+}
+
+.addressee-selected{
+    border-color: green;
+}
+
+#addressee-container{
+    position: relative;
+    text-align: left;
+}
+
+#addressee-list{
+    display: none;
+    position: absolute;
+    left: calc(2% + 6.25rem);
+    top: 100%;
+    background: black;
+    width: calc(95% - 7rem);
+    border: 3px ridge white;
+    border-top: none;
+    border-radius: 0px 0px 5px 5px;
+    max-height: 50vh;
+    overflow-y: auto;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+.addressee{
+    margin: 0.25rem;
+    padding: 0.25rem;
+    border: 3px outset white;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.addressee:hover{
+    border-color: red;
+    border-style: inset;
+    cursor: pointer;
+}
+
+#message{
+    margin-top: 0.5rem;
+    width: 90%;
+    height: calc(100vh - 23rem);
+    min-height: 20rem;
+    font-size: 1.5rem;
+}

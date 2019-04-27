@@ -17,8 +17,6 @@ BackEnd
         - findBy...: returns Optional of
 
 ==========Tasks==========
-Replace Optional return types
-
 Shop & factory implement filters
 Cancel production
 

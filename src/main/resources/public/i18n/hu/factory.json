@@ -1,0 +1,60 @@
+{
+  "title": "Gyár - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Gyár"
+      }
+    ],
+    "materials-title": [
+      {
+        "key": "innerHTML",
+        "message": "Alapanyagok"
+      }
+    ],
+    "no-materials": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs alapanyag a raktárban."
+      }
+    ],
+    "menu-title": [
+      {
+        "key": "innerHTML",
+        "message": "Kategóriák"
+      }
+    ],
+    "queue-title": [
+      {
+        "key": "innerHTML",
+        "message": "Gyártósor"
+      }
+    ],
+    "empty-queue": [
+      {
+        "key": "innerHTML",
+        "message": "A gyártósor üres."
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "overview-button": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ]
+  },
+  "additionalContent": {
+    "cost": "Pénz",
+    "construction-time": "Gyártási idő",
+    "amount": "Mennyiség",
+    "start-construction": "Gyártás indítása",
+    "waiting": "Sorban áll"
+  }
+}

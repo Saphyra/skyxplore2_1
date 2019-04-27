@@ -5,6 +5,7 @@ import static skyxplore.controller.request.character.CreateCharacterRequest.CHAR
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.page.CharacterSelectPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.characterselect.common.CharacterSelectTestHelper;
@@ -12,7 +13,7 @@ import selenium.test.characterselect.common.CharacterSelectTestHelper;
 @Builder
 public class TooLongCharacterNameTest {
     private static final String TOO_LONG_CHARACTER_NAME;
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG = "Karakternév túl hosszú. (Maximum 30 karakter)";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "CHARACTER_NAME_TOO_LONG";
 
     static {
         StringBuilder builder = new StringBuilder();
@@ -25,6 +26,7 @@ public class TooLongCharacterNameTest {
     private final CharacterSelectTestHelper characterSelectTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooLongCharacterName() {
         characterSelectTestHelper.registerUser();
@@ -34,7 +36,7 @@ public class TooLongCharacterNameTest {
 
         fieldValidator.verifyError(
             characterSelectPage.getInvalidNewCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG,
+            messageCodes.get(MESSAGE_CODE_CHARACTER_NAME_TOO_LONG),
             newCharacterNameField,
             characterSelectPage.getCreateCharacterButton()
         );

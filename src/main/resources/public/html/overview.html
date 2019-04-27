@@ -1,97 +1,105 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Áttekintés - SkyXplore 2.1</TITLE>
+    <TITLE></TITLE>
     <META charset="UTF-8"/>
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
-    <LINK rel="stylesheet" href="/css/overview/menu.css">
-    <LINK rel="stylesheet" href="/css/overview/content.css">
+    <LINK rel="stylesheet" href="/css/ship_table.css">
+    <LINK rel="stylesheet" href="/css/overview/overview.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
-    
-    
+
     <SCRIPT src="js/overview/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
-<DIV class="cover">
+<DIV class="main-page">
     <HEADER>
-        <H1>Áttekintés</H1>
+        <H1 id="main-title"></H1>
     </HEADER>
-    
+
     <MAIN>
-        <SECTION class='menucontainer'>
-            <A href='equipment' title='Űrhajó felszerelésének módosítása'>Felszerelés</A>
-            <A href='factory' title='Tárgyak készítése'>Gyár</A>
-            <A href='shop' title='Tárgyak vásárlása, eladása'>Bolt</A>
-            <A href='hangar' title='Felszállás'>Hangár</A>
+        <SECTION class='menu-container'>
+            <A id="equipment-button" href='equipment'></A>
+            <A id="factory-button" href='factory'></A>
+            <A id="shop-button" href='shop'>Bolt</A>
+            <A id="hangar-button" href='hangar'>Hangár</A>
         </SECTION>
         
-        <SECTION class='contentcontainer'>
-            <TABLE>
+        <SECTION class='content-container'>
+            <TABLE class="ship-table">
                 <TR>
                     <TH colspan='5'>
-                        <H2>Felszerelés</H2>
+                        <H2 id="ship-table-header"></H2>
                     </TH>
                 </TR>
                 
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='frontweapon' class='frontslot slotcontainer'></DIV>
+                        <DIV id='front-weapon' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
+                
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='frontdefense' class='frontslot slotcontainer'></DIV>
+                        <DIV id='front-defense' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
                 
                 <TR>
                     <TD rowspan='2'>
-                        <DIV id='leftweapon' class='sideslot slotcontainer'></DIV>
-                    </TD>
-                    <TD rowspan='2'>
-                        <DIV id='leftdefense' class='sideslot slotcontainer'></DIV>
-                    </TD>
-                    
-                    <TD>
-                        <DIV id='shipdetails' class='textaligncenter'></DIV>
+                        <DIV id='left-weapon' class='side-slot slot-container'></DIV>
                     </TD>
                     
                     <TD rowspan='2'>
-                        <DIV id='rightdefense' class='sideslot slotcontainer'></DIV>
+                        <DIV id='left-defense' class='side-slot slot-container'></DIV>
+                    </TD>
+                    
+                    <TD>
+                        <DIV id='ship-details'></DIV>
+                    </TD>
+                    
+                    <TD rowspan='2'>
+                        <DIV id='right-defense' class='side-slot slot-container'></DIV>
                     </TD>
                     <TD rowspan='2'>
-                        <DIV id='rightweapon' class='sideslot slotcontainer'></DIV>
+                        <DIV id='right-weapon' class='side-slot slot-container'></DIV>
                     </TD>
                 </TR>
                 
                 <TR>
                     <TD>
-                        <DIV id='connectors' class='slotcontainer'></DIV>
+                        <DIV id='connectors' class='slot-container'></DIV>
                     </TD>
                 </TR>
                 
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='backdefense' class='frontslot slotcontainer'></DIV>
+                        <DIV id='back-defense' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
+                
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='backweapon' class='frontslot slotcontainer'></DIV>
+                        <DIV id='back-weapon' class='front-slot slot-container'></DIV>
                     </TD>
                 </TR>
             </TABLE>
         </SECTION>
     </MAIN>
-    
+
     <FOOTER>
-        <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-        <BUTTON onclick='window.location.href = "characterselect"'>Karakterválasztás</BUTTON>
-        <BUTTON onclick='window.location.href = "community"'>Közösség<SPAN id='notificationnum' class='colorred'></SPAN></BUTTON>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="characterselect-button" onclick='window.location.href = "characterselect"'></BUTTON>
+        <BUTTON onclick='window.location.href = "community"'>
+            <SPAN id="community-button"></SPAN>
+            <SPAN>
+                <SPAN> (</SPAN>
+                <SPAN id='notification-num'></SPAN>
+                <SPAN>)</SPAN>
+            </SPAN>
+        </BUTTON>
     </FOOTER>
 </DIV>
 

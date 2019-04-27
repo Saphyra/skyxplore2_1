@@ -124,7 +124,7 @@ public class MailFacadeTest {
     }
 
     @Test
-    public void testSendMail(){
+    public void testSendMail() {
         //GIVEN
         SendMailRequest request = createSendMailRequest();
         //WHEN
@@ -134,7 +134,7 @@ public class MailFacadeTest {
     }
 
     @Test
-    public void testSetMailReadStatus(){
+    public void testSetMailReadStatus() {
         //WHEN
         underTest.setMailReadStatus(MAIL_IDS, CHARACTER_ID_1, true);
         //THEN

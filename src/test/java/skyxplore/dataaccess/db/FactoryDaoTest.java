@@ -34,7 +34,7 @@ public class FactoryDaoTest {
     private FactoryDao underTest;
 
     @Test
-    public void testDeleteByCharacterIdShouldCallDeleteMethods(){
+    public void testDeleteByCharacterIdShouldCallDeleteMethods() {
         //GIVEN
         FactoryEntity factoryEntity = createFactoryEntity();
         when(factoryRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(factoryEntity);
@@ -46,7 +46,7 @@ public class FactoryDaoTest {
     }
 
     @Test
-    public void testFindByCharacterIdShouldCallRepositoryAndReturnDomain(){
+    public void testFindByCharacterIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         FactoryEntity entity = createFactoryEntity();
         when(factoryRepository.findByCharacterId(CHARACTER_ID_1)).thenReturn(entity);

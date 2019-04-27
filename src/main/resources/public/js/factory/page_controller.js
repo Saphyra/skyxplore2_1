@@ -1,50 +1,60 @@
 (function PageController(){
-    window.pageController = new function(){
-        scriptLoader.loadScript("js/common/dao/character_dao.js");
-        scriptLoader.loadScript("js/factory/content_controller.js");
-        scriptLoader.loadScript("js/factory/materials_controller.js");
-        scriptLoader.loadScript("js/factory/menu_controller.js");
-        scriptLoader.loadScript("js/factory/queue_controller.js");
-        
-        this.refresh = refresh;
-        this.money = 0;
-        
-        $(document).ready(function(){
-            refresh(true);
-        });
-    }
+    scriptLoader.loadScript("js/factory/menu_controller.js");
+    scriptLoader.loadScript("js/factory/materials_controller.js");
+    scriptLoader.loadScript("js/factory/money_controller.js");
+    scriptLoader.loadScript("js/factory/queue_controller.js");
+    scriptLoader.loadScript("js/factory/content/content_controller.js");
 
-    /*
-    Reloads the content of the page.
-    Arguments:
-        - needReload: If true, queries the actual state from the server, uses stored values otherwise.
-    */
-    function refresh(needReload){
-        try{
-            if(needReload){
-                materialsController.loadMaterials();
-                updateMoney();
-                queueController.loadQueue();
-            }
-            
-            materialsController.displayMaterials();
-            queueController.displayQueue();
-            contentController.displayElementsOfCategory();
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
+    $(document).ready(function(){
+        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "factory"));
+    });
 
-    /*
-    Queries the actual money of the character.
-    */
-    function updateMoney(){
-        try{
-            pageController.money = characterDao.getMoney(sessionStorage.characterId);
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
+    let materialsLoaded = false;
+    let moneyLoaded = false;
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.categoryNamesLoaded
+                && materialsLoaded
+                && moneyLoaded
+        },
+        function(){
+            eventProcessor.processEvent(new Event(events.DISPLAY_MENU));
+        },
+        true
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.categoryNamesLoaded
+                && LoadState.itemsLoaded
+        },
+        function(){
+            eventProcessor.processEvent(new Event(events.LOAD_MATERIALS));
+            eventProcessor.processEvent(new Event(events.LOAD_QUEUE));
+        },
+        true
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.MATERIALS_LOADED},
+        function(){
+            materialsLoaded = true;
+            eventProcessor.processEvent(new Event(events.LOAD_STATE_CHANGED));
+        },
+        true
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.MONEY_CHANGED},
+        function(){
+            moneyLoaded = true;
+            eventProcessor.processEvent(new Event(events.LOAD_STATE_CHANGED));
+        },
+        true
+    ));
 })();

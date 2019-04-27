@@ -1,0 +1,44 @@
+{
+  "id": "def-03",
+  "corehull": 6000000,
+  "connector": 24,
+  "defense": {
+    "front": 22,
+    "side": 14,
+    "back": 10
+  },
+  "weapon": {
+    "front": 6,
+    "side": 2,
+    "back": 2
+  },
+  "ability": [
+    "phalanx",
+    "damagereduction",
+    "teleportation",
+    "shieldovercharge",
+    "dimensiongate",
+    "reflection"
+  ],
+  "constructiontime": 86400,
+  "buildprice": 86400,
+  "buildable": true,
+  "materials": {
+    "cable": 135,
+    "condensator": 135,
+    "energycell": 180,
+    "hullplate": 360,
+    "etherium": 900,
+    "mithril": 2250,
+    "duranium": 3150,
+    "uridium": 1800,
+    "xebryum": 1800
+  },
+  "type": "ship",
+  "slot": "ship",
+  "level": 3,
+  "score": 20,
+  "buyprice": 27000000,
+  "sellprice": 9000000,
+  "category": "tank"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "freeze",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 400,
+  "buildable": true,
+  "active": 3,
+  "reload": 20,
+  "effect": {
+    "range": 6
+  },
+  "category": "ability"
+}

@@ -19,7 +19,7 @@ public class SkyXpCredentialsConverterTest {
     private CredentialsConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNull(){
+    public void testConvertEntityShouldReturnNull() {
         //GIVEN
         CredentialsEntity entity = null;
         //WHEN
@@ -29,7 +29,7 @@ public class SkyXpCredentialsConverterTest {
     }
 
     @Test
-    public void tstConvertEntityShouldConvert(){
+    public void tstConvertEntityShouldConvert() {
         //GIVEN
         CredentialsEntity entity = createCredentialsEntity();
         //WHEN
@@ -41,7 +41,7 @@ public class SkyXpCredentialsConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldConvert(){
+    public void testConvertDomainShouldConvert() {
         //GIVEN
         SkyXpCredentials skyXpCredentials = createCredentials();
         //WHEN

@@ -25,46 +25,45 @@ public class DeleteAccountTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        /*
-        testCase.validateBadPassword();
-        testCase.validateSuccess();
-         */
         accountPage = new AccountPage(driver);
-        deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver), new Navigate(driver), accountPage);
+        deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver, messageCodes), new Navigate(driver), accountPage);
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         notificationValidator = new NotificationValidator(driver);
-        login = new Login(driver);
+        login = new Login(driver, messageCodes);
     }
 
     @Test
-    public void testEmptyPassword(){
+    public void testEmptyPassword() {
         EmptyPasswordTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
+            .messageCodes(messageCodes)
             .build()
             .testEmptyPassword();
     }
 
     @Test
-    public void testBadPassword(){
+    public void testBadPassword() {
         BadPasswordTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .driver(driver)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
+            .messageCodes(messageCodes)
             .build()
             .testBadPassword();
     }
 
     @Test
-    public void testSuccessfulAccountDeletion(){
+    public void testSuccessfulAccountDeletion() {
         SuccessfulAccountDeletionTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .driver(driver)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
             .login(login)
+            .messageCodes(messageCodes)
             .build()
             .testSuccessfulAccountDeletion();
     }

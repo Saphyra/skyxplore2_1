@@ -28,7 +28,7 @@ public class MailCleanupServiceTest {
     private MailCleanupService underTest;
 
     @Test
-    public void testDeleteExpiredMails(){
+    public void testDeleteExpiredMails() {
         //GIVEN
         when(dateTimeUtil.now()).thenReturn(MAIL_SEND_TIME);
         when(dateTimeUtil.convertDomain(any(OffsetDateTime.class))).thenReturn(MAIL_SEND_TIME_EPOCH);

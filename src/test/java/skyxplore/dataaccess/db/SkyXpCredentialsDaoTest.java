@@ -31,7 +31,7 @@ public class SkyXpCredentialsDaoTest {
     private CredentialsDao underTest;
 
     @Test
-    public void testDeleteShouldCallRepository(){
+    public void testDeleteShouldCallRepository() {
         //WHEN
         underTest.deleteById(USER_ID);
         //THEN
@@ -39,7 +39,7 @@ public class SkyXpCredentialsDaoTest {
     }
 
     @Test
-    public void testGetByUserIdShouldReturnNull(){
+    public void testGetByUserIdShouldReturnNull() {
         //GIVEN
         when(credentialsRepository.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
@@ -50,7 +50,7 @@ public class SkyXpCredentialsDaoTest {
     }
 
     @Test
-    public void testGetByUserIdShouldCallRepositoryAndReturnDomain(){
+    public void testGetByUserIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CredentialsEntity entity = createCredentialsEntity();
         when(credentialsRepository.findById(USER_ID)).thenReturn(Optional.of(entity));
@@ -66,7 +66,7 @@ public class SkyXpCredentialsDaoTest {
     }
 
     @Test
-    public void testGetByNameShouldCallRepositoryAndReturnDomain(){
+    public void testGetByNameShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CredentialsEntity entity = createCredentialsEntity();
         when(credentialsRepository.getByUserName(USER_NAME)).thenReturn(entity);
@@ -83,7 +83,7 @@ public class SkyXpCredentialsDaoTest {
     }
 
     @Test
-    public void testSaveShouldCallRepository(){
+    public void testSaveShouldCallRepository() {
         //GIVEN
         SkyXpCredentials skyXpCredentials = createCredentials();
 

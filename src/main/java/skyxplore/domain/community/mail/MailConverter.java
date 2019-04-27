@@ -34,7 +34,7 @@ public class MailConverter extends ConverterBase<MailEntity, Mail> {
 
     @Override
     public MailEntity processDomainConversion(Mail domain) {
-        if(domain == null){
+        if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
 

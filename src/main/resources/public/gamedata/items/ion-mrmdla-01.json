@@ -1,0 +1,26 @@
+{
+  "id": "ion-mrmdla-01",
+  "attackSpeed": 4,
+  "criticalRate": 500,
+  "range": 4,
+  "hullDamage": 5000,
+  "shieldDamage": 15000,
+  "accuracy": 250,
+  "constructiontime": 600,
+  "buildprice": 600,
+  "buildable": true,
+  "materials": {
+    "cable": 2,
+    "condensator": 2,
+    "energycell": 1,
+    "hullplate": 1,
+    "adamantium": 5
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 1,
+  "score": 1,
+  "buyprice": 15000,
+  "sellprice": 5000,
+  "category": "ion"
+}

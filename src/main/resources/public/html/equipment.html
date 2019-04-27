@@ -1,13 +1,11 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Felszerelés - SkyXplore 2.1</TITLE>
-    <META charset="UTF-8"/>
+    <TITLE></TITLE>
+    <META charset="UTF-8">
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
-
-    <LINK rel="stylesheet" href="/css/equipment/ship.css">
-    <LINK rel="stylesheet" href="/css/equipment/storage.css">
+    <LINK rel="stylesheet" href="/css/ship_table.css">
+    <LINK rel="stylesheet" href="/css/equipment/equipment.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
@@ -16,74 +14,85 @@
 </HEAD>
 <BODY>
 
-<DIV class="cover">
+<DIV class="main-page">
     <HEADER>
-        <H1>Felszerelés</H1>
+        <H1 id="main-title"></H1>
     </HEADER>
 
     <MAIN>
         <SECTION id='ship'>
-            <TABLE>
+            <TABLE class="ship-table">
+                <TR>
+                    <TH colspan='5'>
+                        <H2 id="ship-table-header"></H2>
+                    </TH>
+                </TR>
+                
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='frontweapon' class='frontslot slotcontainer'></DIV>
+                        <DIV id='front-weapon' class='front-slot slot-container weapon-slot'></DIV>
                     </TD>
                 </TR>
+                
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='frontdefense' class='frontslot slotcontainer'></DIV>
+                        <DIV id='front-defense' class='front-slot slot-container defense-slot'></DIV>
                     </TD>
                 </TR>
-
+                
                 <TR>
                     <TD rowspan='2'>
-                        <DIV id='leftweapon' class='sideslot slotcontainer'></DIV>
+                        <DIV id='left-weapon' class='side-slot slot-container weapon-slot'></DIV>
                     </TD>
+                    
                     <TD rowspan='2'>
-                        <DIV id='leftdefense' class='sideslot slotcontainer'></DIV>
+                        <DIV id='left-defense' class='side-slot slot-container defense-slot'></DIV>
                     </TD>
-
+                    
                     <TD>
-                        <DIV id='shipdetails' class='textaligncenter'></DIV>
+                        <DIV id='ship-details'></DIV>
                     </TD>
-
+                    
                     <TD rowspan='2'>
-                        <DIV id='rightdefense' class='sideslot slotcontainer'></DIV>
+                        <DIV id='right-defense' class='side-slot slot-container defense-slot'></DIV>
                     </TD>
                     <TD rowspan='2'>
-                        <DIV id='rightweapon' class='sideslot slotcontainer'></DIV>
+                        <DIV id='right-weapon' class='side-slot slot-container weapon-slot'></DIV>
                     </TD>
                 </TR>
-
+                
                 <TR>
                     <TD>
-                        <DIV id='connectors' class='slotcontainer'></DIV>
+                        <DIV id='connectors' class='slot-container connector-slot'></DIV>
                     </TD>
                 </TR>
-
+                
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='backdefense' class='frontslot slotcontainer'></DIV>
+                        <DIV id='back-defense' class='front-slot slot-container defense-slot'></DIV>
                     </TD>
                 </TR>
+                
                 <TR>
                     <TD colspan='5'>
-                        <DIV id='backweapon' class='frontslot slotcontainer'></DIV>
+                        <DIV id='back-weapon' class='front-slot slot-container weapon-slot'></DIV>
                     </TD>
                 </TR>
             </TABLE>
         </SECTION>
 
         <SECTION id='storage'>
-            <H1>Raktár</H1>
-
-            <DIV id='equipmentlist'></DIV>
+            <H1 id="storage-title"></H1>
+            
+            <DIV id="empty-storage"></DIV>
+            
+            <DIV id='equipment-list'></DIV>
         </SECTION>
     </MAIN>
 
     <FOOTER>
-        <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-        <BUTTON onclick='window.location.href = "overview"'>Áttekintés</BUTTON>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
     </FOOTER>
 </DIV>
 

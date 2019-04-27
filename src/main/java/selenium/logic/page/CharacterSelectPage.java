@@ -18,15 +18,15 @@ public class CharacterSelectPage {
     private static final String SELECTOR_CHARACTERS = "#characters tr";
     private static final String SELECTOR_CHARACTER_NAME = "td:first-child";
 
-    private static final String ELEMENT_RENAME_CHARACTER_WINDOW = "renamecharactercontainer";
+    private static final String ELEMENT_RENAME_CHARACTER_WINDOW = "rename-character-container";
 
-    private static final String ELEMENT_NEW_CHARACTER_NAME = "newcharactername";
-    private static final String ELEMENT_INVALID_NEW_CHARACTER_NAME = "invalid_newcharactername";
-    private static final String ELEMENT_NEW_CHARACTER_BUTTON = "newcharacterbutton";
+    private static final String ELEMENT_NEW_CHARACTER_NAME = "create-character-name";
+    private static final String ELEMENT_INVALID_NEW_CHARACTER_NAME = "invalid-create-character-name";
+    private static final String ELEMENT_NEW_CHARACTER_BUTTON = "create-character-button";
 
-    private static final String ELEMENT_RENAME_CHARACTER_NAME = "renamecharacterinput";
-    private static final String ELEMENT_INVALID_RENAME_CHARACTER_NAME = "invalid_renamecharactername";
-    private static final String ELEMENT_RENAME_CHARACTER_BUTTON = "renamecharacterbutton";
+    private static final String ELEMENT_RENAME_CHARACTER_NAME = "new-character-name";
+    private static final String ELEMENT_INVALID_RENAME_CHARACTER_NAME = "invalid-new-character-name";
+    private static final String ELEMENT_RENAME_CHARACTER_BUTTON = "rename-character-button";
 
     private final WebDriver driver;
 

@@ -1,5 +1,6 @@
 package skyxplore.service.factory;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.util.IdGenerator;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,6 +91,15 @@ public class AddToQueueServiceTest {
         when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
         when(factoryQueryService.findFactoryOfCharacterValidated(CHARACTER_ID_1)).thenReturn(factory);
         when(gameDataFacade.getFactoryData(DATA_ELEMENT)).thenReturn(factoryData);
+        when(factoryData.isBuildable()).thenReturn(true);
+    }
+
+    @Test(expected = BadRequestException.class)
+    public void testAddToQueueShouldThrowExceptionWhenNotBuildable(){
+        //GIVEN
+        when(factoryData.isBuildable()).thenReturn(false);
+        //WHEN
+        underTest.addToQueue(CHARACTER_ID_1, addToQueueRequest);
     }
 
     @Test(expected = NotEnoughMoneyException.class)

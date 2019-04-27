@@ -2,11 +2,20 @@ package skyxplore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import skyxplore.cache.EmailCache;
 import skyxplore.cache.UserNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.user.*;
+import skyxplore.controller.request.user.AccountDeleteRequest;
+import skyxplore.controller.request.user.ChangeEmailRequest;
+import skyxplore.controller.request.user.ChangePasswordRequest;
+import skyxplore.controller.request.user.ChangeUserNameRequest;
+import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.service.UserFacade;
 
 import javax.validation.Valid;
@@ -19,19 +28,19 @@ import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
-    private static final String CHANGE_EMAIL_MAPPING = "user/email/change";
-    private static final String CHANGE_PASSWORD_MAPPING = "user/password/change";
-    private static final String CHANGE_USERNAME_MAPPING = "user/name/change";
+    private static final String CHANGE_EMAIL_MAPPING = "user/email";
+    private static final String CHANGE_PASSWORD_MAPPING = "user/password";
+    private static final String CHANGE_USERNAME_MAPPING = "user/name";
     private static final String DELETE_ACCOUNT_MAPPING = "user";
-    private static final String EMAIL_EXISTS_MAPPING = "user/email/exist";
-    private static final String REGISTRATION_MAPPING = "user/register";
-    private static final String USERNAME_EXISTS_MAPPING = "user/name/exist";
+    private static final String EMAIL_EXISTS_MAPPING = "user/email";
+    private static final String REGISTRATION_MAPPING = "user";
+    private static final String USERNAME_EXISTS_MAPPING = "user/name";
 
     private final UserNameCache userNameCache;
     private final EmailCache emailCache;
     private final UserFacade userFacade;
 
-    @PostMapping(CHANGE_EMAIL_MAPPING)
+    @PutMapping(CHANGE_EMAIL_MAPPING)
     public void changeEmail(
         @RequestBody @Valid ChangeEmailRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
@@ -40,7 +49,7 @@ public class UserController {
         userFacade.changeEmail(request, userId);
     }
 
-    @PostMapping(CHANGE_PASSWORD_MAPPING)
+    @PutMapping(CHANGE_PASSWORD_MAPPING)
     public void changePassword(
         @RequestBody @Valid ChangePasswordRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
@@ -49,7 +58,7 @@ public class UserController {
         userFacade.changePassword(request, userId);
     }
 
-    @PostMapping(CHANGE_USERNAME_MAPPING)
+    @PutMapping(CHANGE_USERNAME_MAPPING)
     public void changeUserName(
         @RequestBody @Valid ChangeUserNameRequest request,
         @CookieValue(COOKIE_USER_ID) String userId

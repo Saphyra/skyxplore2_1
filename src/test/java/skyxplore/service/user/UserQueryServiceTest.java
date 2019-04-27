@@ -26,7 +26,7 @@ public class UserQueryServiceTest {
     private UserQueryService underTest;
 
     @Test(expected = UserNotFoundException.class)
-    public void testGetUserByIdShouldThrowExceptionWhenNotFound(){
+    public void testGetUserByIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(userDao.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
@@ -34,7 +34,7 @@ public class UserQueryServiceTest {
     }
 
     @Test
-    public void testGetUserByIdShouldQueryAndReturn(){
+    public void testGetUserByIdShouldQueryAndReturn() {
         //GIVEN
         SkyXpUser user = createUser();
         when(userDao.findById(USER_ID)).thenReturn(Optional.of(user));
@@ -46,7 +46,7 @@ public class UserQueryServiceTest {
     }
 
     @Test
-    public void testIsEmailExists(){
+    public void testIsEmailExists() {
         //GIVEN
         SkyXpUser user = createUser();
         when(userDao.findUserByEmail(USER_EMAIL)).thenReturn(user);

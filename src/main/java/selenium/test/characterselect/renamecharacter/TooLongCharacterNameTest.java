@@ -2,6 +2,7 @@ package selenium.test.characterselect.renamecharacter;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.page.CharacterSelectPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
@@ -20,11 +21,12 @@ public class TooLongCharacterNameTest {
         TOO_LONG_CHARACTER_NAME = builder.toString();
     }
 
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG = "Karakternév túl hosszú. (Maximum 30 karakter)";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "CHARACTER_NAME_TOO_LONG";
 
     private final RenameCharacterTestHelper renameCharacterTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooLongCharacterName() {
         renameCharacterTestHelper.initAndOpenRenamePage();
@@ -35,7 +37,7 @@ public class TooLongCharacterNameTest {
 
         fieldValidator.verifyError(
             characterSelectPage.getInvalidRenameCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_TOO_LONG,
+            messageCodes.get(MESSAGE_CODE_CHARACTER_NAME_TOO_LONG),
             renameCharacterField,
             characterSelectPage.getRenameCharacterButton()
         );

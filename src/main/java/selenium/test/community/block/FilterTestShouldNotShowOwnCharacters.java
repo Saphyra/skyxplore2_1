@@ -1,15 +1,16 @@
 package selenium.test.community.block;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import lombok.Builder;
+import selenium.logic.domain.BlockableCharacter;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.test.community.helper.BlockTestHelper;
 import selenium.test.community.helper.CommunityTestHelper;
 import selenium.test.community.helper.CommunityTestInitializer;
-
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
 
 @Builder
 public class FilterTestShouldNotShowOwnCharacters {
@@ -24,9 +25,16 @@ public class FilterTestShouldNotShowOwnCharacters {
         SeleniumCharacter character = account.getCharacter(0);
         communityTestHelper.goToCommunityPageOf(account, character);
 
-        assertTrue(
-            blockTestHelper.searchForBlockableCharacters(SeleniumCharacter.CHARACTER_NAME_PREFIX).stream()
-                .noneMatch(blockableCharacter -> blockableCharacter.getCharacterName().equals(account.getCharacter(1).getCharacterName()))
-        );
+        List<BlockableCharacter> blockableCharacters = blockTestHelper.searchCharacterCanBeBlocked(SeleniumCharacter.CHARACTER_NAME_PREFIX);
+        assertThat(blockableCharacters.stream()
+            .noneMatch(blockableCharacter -> blockableCharacter.getCharacterName().equals(account.getCharacter(1).getCharacterName())))
+            .isTrue();
+
+        SeleniumAccount otherAccount = accounts.get(1);
+        SeleniumCharacter otherCharacter = otherAccount.getCharacter(0);
+        assertThat(
+            blockableCharacters.stream()
+                .anyMatch(blockableCharacter -> blockableCharacter.getCharacterName().equals(otherCharacter.getCharacterName()))
+        ).isTrue();
     }
 }

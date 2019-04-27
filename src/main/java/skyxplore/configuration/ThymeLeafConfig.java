@@ -9,7 +9,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Configuration
 public class ThymeLeafConfig {
     @Bean
-    public ClassLoaderTemplateResolver thymeLeafTemplateResolverConfig(){
+    public ClassLoaderTemplateResolver thymeLeafTemplateResolverConfig() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("public/html/");
         templateResolver.setSuffix(".html");

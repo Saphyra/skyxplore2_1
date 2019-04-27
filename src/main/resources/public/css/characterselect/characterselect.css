@@ -6,9 +6,10 @@ label{
 
 label input{
     margin-right: 2rem;
+    font-size: 1.25rem;
 }
 
-.invalid{
+.invalid-input{
     display: none;
     border: 3px outset red;
     position: absolute;

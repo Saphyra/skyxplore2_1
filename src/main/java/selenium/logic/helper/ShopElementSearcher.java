@@ -5,19 +5,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.CartItem;
+import selenium.logic.domain.Category;
 import selenium.logic.domain.ShopItem;
+import selenium.logic.page.ShopPage;
+import selenium.logic.util.CategoryNameHelper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class ShopElementSearcher {
-    private static final String SELECTOR_CART_ITEMS = "#basket > .basketelement";
+    private static final String SELECTOR_CART_ITEMS = "#cart-items > .cart-element";
     private static final String SELECTOR_SHOP_ITEMS = "#content > .element";
-    private static final String SELECTOR_FIRST_CATEGORY_BUTTON = "#menu .menuitem";
-    private static final String SELECTOR_BUY_BUTTON = "#basket > button:first-of-type";
+    private static final String SELECTOR_BUY_BUTTON = "buy-items-button";
 
     private final WebDriver driver;
+    private final CategoryNameHelper categoryNameHelper;
+    private final ShopPage shopPage;
 
     public List<CartItem> searchAllCartItems() {
         return driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS)).stream()
@@ -31,11 +35,13 @@ public class ShopElementSearcher {
             .collect(Collectors.toList());
     }
 
-    public ShopItem searchShopItemById(String itemId) {
+    public ShopItem searchShopItemById(Category category, String itemId) {
+        String categoryName = categoryNameHelper.getCategoryName(category);
+        shopPage.getCategoryButtonWithName(categoryName).click();
         return searchAllShopItems().stream()
             .filter(shopItem -> itemId.equalsIgnoreCase(shopItem.getId()))
             .findFirst()
-            .orElseThrow(() -> new RuntimeException("No ShopItem found with id " + itemId));
+            .orElseThrow(() -> new RuntimeException("No ShopItem found with id " + itemId + " in category " + category));
     }
 
     public CartItem searchCartItemById(String itemId) {
@@ -45,13 +51,7 @@ public class ShopElementSearcher {
             .orElseThrow(() -> new RuntimeException("No CartItem found with id " + itemId));
     }
 
-    public WebElement findFirstCategoryButton() {
-        return driver.findElements(By.cssSelector(SELECTOR_FIRST_CATEGORY_BUTTON)).stream()
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("Category select menu buttons not found."));
-    }
-
     public WebElement getBuyButton() {
-        return driver.findElement(By.cssSelector(SELECTOR_BUY_BUTTON));
+        return driver.findElement(By.id(SELECTOR_BUY_BUTTON));
     }
 }

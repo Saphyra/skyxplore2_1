@@ -69,7 +69,7 @@ public class MailConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldEncryptAndConvert(){
+    public void testConvertDomainShouldEncryptAndConvert() {
         //GIVEN
         Mail mail = createMail();
 

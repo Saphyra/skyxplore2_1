@@ -34,7 +34,7 @@ public class FriendRequestDaoTest {
     private FriendRequestDao underTest;
 
     @Test
-    public void testDeleteShouldCallRepository(){
+    public void testDeleteShouldCallRepository() {
         //GIVEN
         FriendRequest request = createFriendRequest();
 
@@ -48,7 +48,7 @@ public class FriendRequestDaoTest {
     }
 
     @Test
-    public void testDeleteByCharacterIdShouldCallRepository(){
+    public void testDeleteByCharacterIdShouldCallRepository() {
         //WHEN
         underTest.deleteByCharacterId(CHARACTER_ID_1);
         //THEN
@@ -56,7 +56,7 @@ public class FriendRequestDaoTest {
     }
 
     @Test
-    public void testGetByCharacterIdShouldCallRepositoryAndReturnDomain(){
+    public void testGetByCharacterIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         FriendRequestEntity entity = createFriendRequestEntity();
         List<FriendRequestEntity> entityList = Arrays.asList(entity);
@@ -74,7 +74,7 @@ public class FriendRequestDaoTest {
     }
 
     @Test
-    public void testGetByCharacterIdOrFriendIdShouldCallRepositoryAndReturnDomain(){
+    public void testGetByCharacterIdOrFriendIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         FriendRequestEntity entity = createFriendRequestEntity();
         List<FriendRequestEntity> entityList = Arrays.asList(entity);
@@ -92,7 +92,7 @@ public class FriendRequestDaoTest {
     }
 
     @Test
-    public void testGetByFriendIdShouldCallRepositoryAndReturnDomain(){
+    public void testGetByFriendIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         FriendRequestEntity entity = createFriendRequestEntity();
         List<FriendRequestEntity> entityList = Arrays.asList(entity);
@@ -110,7 +110,7 @@ public class FriendRequestDaoTest {
     }
 
     @Test
-    public void testSaveShouldCallRepository(){
+    public void testSaveShouldCallRepository() {
         //GIVEN
         FriendRequest request = createFriendRequest();
 

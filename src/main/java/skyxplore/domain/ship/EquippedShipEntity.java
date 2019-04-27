@@ -16,16 +16,16 @@ public class EquippedShipEntity {
     @Column(name = "ship_id", length = 50)
     private String shipId;
 
-    @Column(name = "character_id", nullable =  false)
+    @Column(name = "character_id", nullable = false)
     private String characterId;
 
-    @Column(name = "ship_type", nullable =  false)
+    @Column(name = "ship_type", nullable = false)
     private String shipType;
 
-    @Column(name = "corehull", nullable =  false)
+    @Column(name = "corehull", nullable = false)
     private String coreHull;
 
-    @Column(name = "connector_slot", nullable =  false)
+    @Column(name = "connector_slot", nullable = false)
     private String connectorSlot;
 
     @Column(name = "connector_equipepd", nullable = false)

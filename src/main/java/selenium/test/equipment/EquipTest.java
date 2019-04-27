@@ -15,6 +15,7 @@ import selenium.test.equipment.util.EquipmentElementSearcher;
 import selenium.test.equipment.util.EquipmentTestHelper;
 
 import static org.junit.Assert.assertEquals;
+import static selenium.logic.util.WaitUtil.getWithWait;
 
 public class EquipTest extends SeleniumTestApplication {
     private EquipmentElementSearcher equipmentElementSearcher;
@@ -26,8 +27,8 @@ public class EquipTest extends SeleniumTestApplication {
     protected void init() {
         equipmentElementSearcher = new EquipmentElementSearcher(driver);
         equipmentTestHelper = new EquipmentTestHelper(
-            new Registration(driver),
-            new CreateCharacter(driver),
+            new Registration(driver, messageCodes),
+            new CreateCharacter(driver, messageCodes),
             new SelectCharacter(driver),
             new Navigate(driver),
             equipmentElementSearcher
@@ -42,8 +43,10 @@ public class EquipTest extends SeleniumTestApplication {
         EquippedEquipment equipment = equipmentElementSearcher.findAnyEquippedFromContainer(ContainerId.FRONT_WEAPON);
         equipment.unequip();
 
-        String unequippedItemId = equipmentElementSearcher.getAllUnequippedEquipments().stream()
-            .findFirst()
+        String unequippedItemId = getWithWait(
+            () -> equipmentElementSearcher.getAllUnequippedEquipments().stream().findFirst(),
+            "Querying unequipped item..."
+        )
             .orElseThrow(() -> new RuntimeException("No unequippedItem found."))
             .getId();
 

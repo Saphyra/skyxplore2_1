@@ -1,32 +1,43 @@
 (function PageController(){
-    window.pageController = new function(){
-        scriptLoader.loadScript("js/common/dao/game_dao.js");
-        
-        this.createLobby = createLobby;
-        
-        $(document).ready(function(){
-            $("label").on("click", function(e){e.stopPropagation()});
-        });
-    }
-    
-    function createLobby(gameMode){
-        try{
-            let data = null;
-            if(gameMode == "clanwar"){
-                data = $("#clanwarmode").val();
-            }else if(gameMode == "teamfight"){
-                data = $("#teamfightsize").val();
-            }
-            
-            if(gameDao.createLobby({gameMode: gameMode, data: data})){
-                //TODO redirect to lobby
-                notificationService.showSuccess("Lobby created");
-            }else{
-                notificationService.showError("Hiba a kötelék létrehozása közben.");
-            }
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
+    events.CREATE_LOBBY = "create_lobby";
+
+    $(document).ready(function(){
+        init();
+    });
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.CREATE_LOBBY},
+        function(event){
+            createLobby(event.getPayload())
         }
+    ));
+
+    function createLobby(gameMode){
+        let data = null;
+        if(gameMode == GameMode.CLAN_WARS){
+            data = $("#clan-wars-mode").val();
+        }else if(gameMode == GameMode.TEAMFIGHT){
+            data = $("#teamfight-size").val();
+        }
+
+        const request = new Request(HttpMethod.PUT, Mapping.CREATE_LOBBY, {gameMode: gameMode, data: data});
+                request.processValidResponse = function(){
+                    window.location.href = "lobby";
+                }
+        dao.sendRequestAsync(request);
+    }
+
+    function init(){
+        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "hangar"));
+        $("label").on("click", function(e){e.stopPropagation()});
     }
 })();
+
+window.GameMode = {
+    ARCADE: "arcade",
+    BATTLE_ROYALE: "battle_royale",
+    CLAN_WARS: "clan_wars",
+    TEAMFIGHT: "teamfight",
+    VS: "vs",
+    TOURNAMENT: "tournament"
+}

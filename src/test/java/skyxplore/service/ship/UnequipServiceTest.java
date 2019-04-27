@@ -62,13 +62,13 @@ public class UnequipServiceTest {
     private UnequipService underTest;
 
     @Before
-    public void init(){
+    public void init() {
         when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
         when(shipQueryService.getShipByCharacterId(CHARACTER_ID_1)).thenReturn(equippedShip);
     }
 
     @Test
-    public void testUnequipExtenderShouldUnequipConnector(){
+    public void testUnequipExtenderShouldUnequipConnector() {
         //GIVEN
         UnequipRequest request = createUnequipRequest();
         request.setSlot(CONNECTOR_SLOT_NAME);
@@ -90,7 +90,7 @@ public class UnequipServiceTest {
     }
 
     @Test
-    public void testUnequipExtenderShouldUnequipExtender(){
+    public void testUnequipExtenderShouldUnequipExtender() {
         //GIVEN
         UnequipRequest request = createUnequipRequest();
         request.setSlot(CONNECTOR_SLOT_NAME);
@@ -115,7 +115,7 @@ public class UnequipServiceTest {
     }
 
     @Test
-    public void testUnequipConnectorShouldUnequip(){
+    public void testUnequipConnectorShouldUnequip() {
         //GIVEN
         UnequipRequest request = createUnequipRequest();
         request.setSlot(CONNECTOR_SLOT_NAME);
@@ -133,7 +133,7 @@ public class UnequipServiceTest {
     }
 
     @Test(expected = BadSlotNameException.class)
-    public void testUnequipEquipmentShouldThrowExceptionWhenBadSlotName(){
+    public void testUnequipEquipmentShouldThrowExceptionWhenBadSlotName() {
         //GIVEN
         UnequipRequest request = createUnequipRequest();
         request.setSlot(DEFENSE_SLOT_NAME);
@@ -144,7 +144,7 @@ public class UnequipServiceTest {
     }
 
     @Test
-    public void testUnequipEquipmentShouldUnequip(){
+    public void testUnequipEquipmentShouldUnequip() {
         //GIVEN
         UnequipRequest request = createUnequipRequest();
         request.setSlot(FRONT_SLOT_NAME + DEFENSE_SLOT_NAME);

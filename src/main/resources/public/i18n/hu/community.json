@@ -1,0 +1,383 @@
+{
+  "title": "Közösség - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Közösség"
+      }
+    ],
+    "friends-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Barátok"
+      }
+    ],
+    "blocked-characters-page-button": [
+      {
+        "key": "innerHTML",
+        "message": "Letiltva"
+      }
+    ],
+    "friends-tab-button": [
+      {
+        "key": "innerHTML",
+        "message": "Barátok"
+      }
+    ],
+    "friend-requests-tab-button": [
+      {
+        "key": "innerHTML",
+        "message": "Barátkérelmek"
+      }
+    ],
+    "sent-friend-requests-tab-button": [
+      {
+        "key": "innerHTML",
+        "message": "Elküldött barátkérelmek"
+      }
+    ],
+    "friend-list-title": [
+      {
+        "key": "innerHTML",
+        "message": "Barátlista"
+      }
+    ],
+    "add-friend-button": [
+      {
+        "key": "innerHTML",
+        "message": "Barát felvétele"
+      }
+    ],
+    "no-friends": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek barátok"
+      }
+    ],
+    "friend-request-list-title": [
+      {
+        "key": "innerHTML",
+        "message": "Barátkérelmek"
+      }
+    ],
+    "no-friend-requests": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek barátkérelmek"
+      }
+    ],
+    "sent-friend-request-list-title": [
+      {
+        "key": "innerHTML",
+        "message": "Elküldött barátkérelmek"
+      }
+    ],
+    "no-sent-friend-requests": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek elküldött barátkérelmek"
+      }
+    ],
+    "blocked-characters-title": [
+      {
+        "key": "innerHTML",
+        "message": "Letiltott játékosok"
+      }
+    ],
+    "no-blocked-characters": [
+      {
+        "key": "innerHTML",
+        "message": "Nincsenek letiltott játékosok"
+      }
+    ],
+    "block-character-button": [
+      {
+        "key": "innerHTML",
+        "message": "Játékos letiltása"
+      }
+    ],
+    "mail-lists-title": [
+      {
+        "key": "innerHTML",
+        "message": "Üzenetek"
+      }
+    ],
+    "write-mail-button": [
+      {
+        "key": "innerHTML",
+        "message": "Üzenet írása"
+      }
+    ],
+    "incoming-mails-button": [
+      {
+        "key": "innerHTML",
+        "message": "Bejövő"
+      }
+    ],
+    "archived-mails-button": [
+      {
+        "key": "innerHTML",
+        "message": "Archivált"
+      }
+    ],
+    "sent-mails-button": [
+      {
+        "key": "innerHTML",
+        "message": "Elküldött"
+      }
+    ],
+    "incoming-mail-list-title": [
+      {
+        "key": "innerHTML",
+        "message": "Bejövő üzenetek"
+      }
+    ],
+    "select-all-incoming-mail-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kiválaszt"
+      }
+    ],
+    "incoming-mail-option-none": [
+      {
+        "key": "innerHTML",
+        "message": "Művelet kiválasztása"
+      }
+    ],
+    "incoming-mail-option-delete": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak törlése"
+      }
+    ],
+    "incoming-mail-option-archive": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak archiválása"
+      }
+    ],
+    "incoming-mail-option-mark-as-read": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak olvasottnak jelölése"
+      }
+    ],
+    "incoming-mail-option-mark-as-unread": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak olvasatlannak jelölése"
+      }
+    ],
+    "process-action-with-incoming-mails-button": [
+      {
+        "key": "innerHTML",
+        "message": "Végrehajt"
+      }
+    ],
+    "no-incoming-mail": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs bejövő üzenet."
+      }
+    ],
+    "sent-mail-list-title": [
+      {
+        "key": "innerHTML",
+        "message": "Elküldött üzenetek"
+      }
+    ],
+    "select-all-sent-mail-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kiválaszt"
+      }
+    ],
+    "sent-mail-option-none": [
+      {
+        "key": "innerHTML",
+        "message": "Művelet kiválasztása"
+      }
+    ],
+    "sent-mail-option-delete": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak törlése"
+      }
+    ],
+    "process-action-with-sent-mails-button": [
+      {
+        "key": "innerHTML",
+        "message": "Végrehajt"
+      }
+    ],
+    "no-sent-mail": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs elküldött üzenet."
+      }
+    ],
+    "archived-mail-list-title": [
+      {
+        "key": "innerHTML",
+        "message": "Archivált üzenetek"
+      }
+    ],
+
+    "select-all-archived-mail-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mindet kiválaszt"
+      }
+    ],
+    "archived-mail-option-none": [
+      {
+        "key": "innerHTML",
+        "message": "Művelet kiválasztása"
+      }
+    ],
+    "archived-mail-option-delete": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak törlése"
+      }
+    ],
+    "archived-mail-option-restore": [
+      {
+        "key": "innerHTML",
+        "message": "Kiválasztottak visszaállítása"
+      }
+    ],
+    "process-action-with-archived-mails-button": [
+      {
+        "key": "innerHTML",
+        "message": "Végrehajt"
+      }
+    ],
+    "no-archived-mail": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs archivált üzenet."
+      }
+    ],
+    "add-friend-title": [
+      {
+        "key": "innerHTML",
+        "message": "Barát felvétele"
+      }
+    ],
+    "friend-name": [
+      {
+        "key": "placeholder",
+        "message": "Karakter keresése"
+      }
+    ],
+    "no-character-can-be-friend": [
+      {
+        "key": "innerHTML",
+        "message": "Játékos nem található."
+      }
+    ],
+    "block-character-title": [
+      {
+        "key": "innerHTML",
+        "message": "Játékos tiltása"
+      }
+    ],
+    "block-character-name": [
+      {
+        "key": "placeholder",
+        "message": "Karakter keresése"
+      }
+    ],
+    "write-mail-title": [
+      {
+        "key": "innerHTML",
+        "message": "Üzenet írása"
+      }
+    ],
+    "subject-label-text": [
+      {
+        "key": "innerHTML",
+        "message": "Tárgy"
+      }
+    ],
+    "subject": [
+      {
+        "key": "placeholder",
+        "message": "Tárgy"
+      }
+    ],
+    "addressee-label-text": [
+      {
+        "key": "innerHTML",
+        "message": "Címzett"
+      }
+    ],
+    "addressee": [
+      {
+        "key": "placeholder",
+        "message": "Címzett"
+      }
+    ],
+    "addressee-not-found": [
+      {
+        "key": "innerHTML",
+        "message": "Nem található címzett."
+      }
+    ],
+    "addressee-field-empty": [
+      {
+        "key": "innerHTML",
+        "message": "Kezdje el beírni a címzett nevét!"
+      }
+    ],
+    "message": [
+      {
+        "key": "placeholder",
+        "message": "Üzenet"
+      }
+    ],
+    "send-mail-button": [
+      {
+        "key": "innerHTML",
+        "message": "Küldés"
+      }
+    ],
+
+
+
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "overview-button": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ]
+  },
+  "additionalContent": {
+    "addressee": "Címzett",
+    "delete": "Törlés",
+    "subject": "Tárgy",
+    "sender": "Feladó",
+    "archive": "Archiválás",
+    "mark-as-unread": "Megjelölés olvasatlanként",
+    "mark-as-read": "Megjelölés olvasottként",
+    "reply": "Válasz",
+    "restore": "Visszaállítás",
+    "add-friend": "Barát felvétele",
+    "delete-friend": "Törlés",
+    "view-profile": "Profil",
+    "write-mail-to-friend": "Üzenetírás",
+    "block-character": "Letiltás",
+    "decline-friend-request": "Elutasítás",
+    "accept-friend-request": "Elfogadás",
+    "cancel-friend-request": "Visszavonás",
+    "allow-blocked-character": "Feloldás"
+  }
+}

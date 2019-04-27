@@ -1,17 +1,18 @@
 package selenium.logic.domain;
 
-import lombok.RequiredArgsConstructor;
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.junit.Assert.assertTrue;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ShopItem {
-    private static final String SELECTOR_TITLE = ".elementtitle";
+    private static final String SELECTOR_TITLE = ".element-title";
     private static final String REGEX_ID = " ";
     private static final String SELECTOR_ADD_TO_CART_BUTTON = "div:nth-child(2) button";
-    private static final String SELECTOR_COST = "div:nth-child(2) div:first-child";
+    private static final String SELECTOR_COST = ".element-content-container div:first-child";
     private static final String REGEX_COST = " ";
 
     private final WebElement element;

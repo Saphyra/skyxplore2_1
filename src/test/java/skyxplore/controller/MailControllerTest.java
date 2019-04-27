@@ -39,7 +39,7 @@ public class MailControllerTest {
     private MailController underTest;
 
     @Test
-    public void testArchiveMailsShouldCallFacade(){
+    public void testArchiveMailsShouldCallFacade() {
         //GIVEN
         List<String> mailIds = createMailIdList(MAIL_ID_1);
         //WHEN
@@ -49,7 +49,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testDeleteMailsShouldCallFacade(){
+    public void testDeleteMailsShouldCallFacade() {
         //GIVEN
         List<String> mailIds = createMailIdList(MAIL_ID_1);
         //WHEN
@@ -59,7 +59,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testGetAddresseesShouldCallFacadeAndReturnView(){
+    public void testGetAddresseesShouldCallFacadeAndReturnView() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
@@ -76,7 +76,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testGetArchivedMailsShouldCallFacadeAndReturnView(){
+    public void testGetArchivedMailsShouldCallFacadeAndReturnView() {
         //GIVEN
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
@@ -94,7 +94,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testGetMailsShouldCallFacadeAndReturnView(){
+    public void testGetMailsShouldCallFacadeAndReturnView() {
         //GIVEN
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
@@ -112,17 +112,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testGetNumberOfUnreadMailsShouldCallFacadeAndReturn(){
-        //GIVEN
-        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID_1)).thenReturn(2);
-        //WHEN
-        Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID_1);
-        //THEN
-        assertEquals(new Integer(2), result);
-    }
-
-    @Test
-    public void testGetSentMailsShouldCallFacadeAndReturnView(){
+    public void testGetSentMailsShouldCallFacadeAndReturnView() {
         //GIVEN
         Mail mail = createMail();
         List<Mail> mailList = Arrays.asList(mail);
@@ -140,7 +130,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testMarkMailsReadShouldCallFacade(){
+    public void testMarkMailsReadShouldCallFacade() {
         //GIVEN
         List<String> mailIds = Arrays.asList(MAIL_ID_1);
         //WHEN
@@ -150,7 +140,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testMarkMailsUnreadShouldCallFacade(){
+    public void testMarkMailsUnreadShouldCallFacade() {
         //GIVEN
         List<String> mailIds = Arrays.asList(MAIL_ID_1);
         //WHEN
@@ -160,7 +150,7 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testSendMailShouldCallFacade(){
+    public void testSendMailShouldCallFacade() {
         //GIVEN
         SendMailRequest request = createSendMailRequest();
         //WHEN
@@ -170,11 +160,11 @@ public class MailControllerTest {
     }
 
     @Test
-    public void testUnarchiveMailsShouldCallFacade(){
+    public void testUnarchiveMailsShouldCallFacade() {
         //GIVEN
         List<String> mailIds = Arrays.asList(MAIL_ID_1);
         //WHEN
-        underTest.unarchiveMails(mailIds, CHARACTER_ID_1);
+        underTest.restoreMails(mailIds, CHARACTER_ID_1);
         //THEN
         verify(mailFacade).archiveMails(CHARACTER_ID_1, mailIds, false);
     }

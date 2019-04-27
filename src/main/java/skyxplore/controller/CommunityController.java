@@ -2,7 +2,13 @@ package skyxplore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
@@ -24,16 +30,15 @@ import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 @RequiredArgsConstructor
 public class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
-    private static final String ADD_FRIEND_MAPPING = "friend/request/add";
-    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter/allow";
-    private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter/block";
-    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request/decline";
+    private static final String ADD_FRIEND_MAPPING = "friend/request";
+    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter";
+    private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter";
+    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request"; //Also used for cancelling
     private static final String DELETE_FRIEND_MAPPING = "friend";
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";
-    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/namelike";
-    private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/namelike";
+    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/name";
+    private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/name";
     private static final String GET_FRIENDS_MAPPING = "friend";
-    private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "friend/request/num";
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/request/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
 
@@ -51,7 +56,7 @@ public class CommunityController {
         communityFacade.acceptFriendRequest(request.getValue(), characterId);
     }
 
-    @PostMapping(ADD_FRIEND_MAPPING)
+    @PutMapping(ADD_FRIEND_MAPPING)
     public void addFriend(
         @Valid @RequestBody OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId,
@@ -61,7 +66,7 @@ public class CommunityController {
         communityFacade.addFriendRequest(request.getValue(), characterId, userId);
     }
 
-    @PostMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)
+    @DeleteMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)
     public void allowBlockedCharacter(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
@@ -79,7 +84,7 @@ public class CommunityController {
         communityFacade.blockCharacter(request.getValue(), characterId);
     }
 
-    @PostMapping(DECLINE_FRIEND_REQUEST_MAPPING)
+    @DeleteMapping(DECLINE_FRIEND_REQUEST_MAPPING)
     public void declineFriendRequestMapping(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
@@ -129,14 +134,6 @@ public class CommunityController {
     ) {
         log.info("{} wants to know his community list.", characterId);
         return friendViewConverter.convertDomain(communityFacade.getFriends(characterId), characterId);
-    }
-
-    @GetMapping(GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING)
-    public Integer getNumberOfFriendRequests(
-        @CookieValue(COOKIE_CHARACTER_ID) String characterId
-    ) {
-        log.info("{} wants to know the number of his friend requests.", characterId);
-        return communityFacade.getNumberOfFriendRequests(characterId);
     }
 
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)

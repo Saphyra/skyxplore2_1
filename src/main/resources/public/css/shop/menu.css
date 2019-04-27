@@ -1,4 +1,4 @@
-#menucontainer{
+#menu-container{
     position: absolute;
     left: 0;
     top: 0;
@@ -8,26 +8,7 @@
     overflow: auto;
 }
 
-#menucontainer h2{
+#menu-title{
     border-bottom: 3px ridge white;
     padding: 0.25rem;
-}
-
-.menuitem{
-    position: relative;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.openmenubutton{
-    position: absolute;
-    top: 2px;
-    right: 4px;
-    font-size: 0.75rem;
-}
-
-.menuchild{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    font-size: 1.25rem;
 }

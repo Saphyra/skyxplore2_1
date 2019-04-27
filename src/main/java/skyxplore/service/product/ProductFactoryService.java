@@ -21,6 +21,7 @@ import skyxplore.util.DateTimeUtil;
 
 import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -28,6 +29,7 @@ import java.util.List;
 @Service
 @EnableScheduling
 @RequiredArgsConstructor
+//TODO split class
 public class ProductFactoryService {
     private final CharacterQueryService characterQueryService;
     private final CharacterDao characterDao;
@@ -48,9 +50,9 @@ public class ProductFactoryService {
         List<Product> products = productDao.getFinishedProducts();
         log.info("Number of finished products: {}", products.size());
         products.forEach(product -> {
-            try{
+            try {
                 finishProduct(product);
-            }catch (Exception e){
+            } catch (Exception e) {
                 log.error("Error occurred during finishing product {}", product, e);
             }
         });
@@ -84,9 +86,29 @@ public class ProductFactoryService {
 
     private void startNextProduct() {
         log.info("Starting the next product in the queue");
-        List<Product> products = productDao.getFirstOfQueue();
+        List<Product> products = getFirstProductsFromQueue();
+
         log.info("Items to start: {}", products.size());
+        log.debug("Starting items: {}", products);
         products.forEach(this::startNextProduct);
+    }
+
+    //TODO unit test
+    private List<Product> getFirstProductsFromQueue() {
+        List<Product> products = productDao.getFirstOfQueue();
+        List<Product> result = new ArrayList<>();
+        List<String> factoryIds = new ArrayList<>();
+
+        products.forEach(product -> {
+            if (!factoryIds.contains(product.getFactoryId())) {
+                result.add(product);
+                factoryIds.add(product.getFactoryId());
+            }else{
+                log.info("{} is filtered, factory {} is already busy.", product.getProductId(), product.getFactoryId());
+            }
+        });
+
+        return result;
     }
 
     private void startNextProduct(Product product) {

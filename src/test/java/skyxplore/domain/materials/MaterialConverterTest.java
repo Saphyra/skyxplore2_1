@@ -27,7 +27,7 @@ public class MaterialConverterTest {
     private MaterialsConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNullWhenNull(){
+    public void testConvertEntityShouldReturnNullWhenNull() {
         //GIVEN
         String entity = null;
         //WHEN

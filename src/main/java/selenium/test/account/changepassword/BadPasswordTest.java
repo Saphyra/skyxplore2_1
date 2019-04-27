@@ -2,6 +2,7 @@ package selenium.test.account.changepassword;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumUser;
 import selenium.logic.page.AccountPage;
 import selenium.logic.validator.NotificationValidator;
@@ -9,11 +10,12 @@ import selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
 
 @Builder
 public class BadPasswordTest {
-    private static final String NOTIFICATION_BAD_PASSWORD = "Hibás jelszó.";
+    private static final String MESSAGE_CODE_BAD_PASSWORD = "BAD_PASSWORD";
 
     private final ChangePasswordTestHelper changePasswordTestHelper;
     private final AccountPage accountPage;
     private final NotificationValidator notificationValidator;
+    private final MessageCodes messageCodes;
 
     public void testBadPassword() {
         changePasswordTestHelper.registerAndNavigateToAccount();
@@ -31,7 +33,7 @@ public class BadPasswordTest {
 
         changePasswordTestHelper.sendForm();
 
-        notificationValidator.verifyOnlyOneNotification(NOTIFICATION_BAD_PASSWORD);
+        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_BAD_PASSWORD));
 
         changePasswordTestHelper.verifyInputFieldsAreEmpty();
     }

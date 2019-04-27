@@ -1,0 +1,26 @@
+{
+  "connector": [
+    "energy",
+    "extender",
+    "corehull",
+    "storage"
+  ],
+  "defense": [
+    "armor",
+    "shield"
+  ],
+  "ship": [
+    "tank",
+    "battleship",
+    "fighter",
+    "saboteur",
+    "starter",
+    "support"
+  ],
+  "weapon": [
+    "ballistic",
+    "missile",
+    "laser",
+    "ion"
+  ]
+}

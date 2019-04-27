@@ -1,0 +1,25 @@
+{
+  "id": "rla-mrmdma-03",
+  "attackSpeed": 6,
+  "criticalRate": 500,
+  "range": 6,
+  "hullDamage": 40000,
+  "shieldDamage": 40000,
+  "accuracy": 500,
+  "constructiontime": 5400,
+  "buildprice": 5400,
+  "buildable": true,
+  "materials": {
+    "cable": 9,
+    "condensator": 9,
+    "hullplate": 45,
+    "adamantium": 45
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 3,
+  "score": 3,
+  "buyprice": 135000,
+  "sellprice": 45000,
+  "category": "missile"
+}

@@ -6,6 +6,7 @@ import static skyxplore.controller.request.character.CreateCharacterRequest.CHAR
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CharacterSelectPage;
 import selenium.logic.validator.FieldValidator;
@@ -13,11 +14,12 @@ import selenium.test.characterselect.common.CharacterSelectTestHelper;
 
 @Builder
 public class TooShortCharacterNameTest {
-    private static final String ERROR_MESSAGE_CHARACTER_NAME_TOO_SHORT = "Karakternév túl rövid. (Minimum 3 karakter)";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_SHORT = "CHARACTER_NAME_TOO_SHORT";
 
     private final CharacterSelectTestHelper characterSelectTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testTooShortCharacterName() {
         characterSelectTestHelper.registerUser();
@@ -27,7 +29,7 @@ public class TooShortCharacterNameTest {
 
         fieldValidator.verifyError(
             characterSelectPage.getInvalidNewCharacterNameField(),
-            ERROR_MESSAGE_CHARACTER_NAME_TOO_SHORT,
+            messageCodes.get(MESSAGE_CODE_CHARACTER_NAME_TOO_SHORT),
             newCharacterNameField,
             characterSelectPage.getCreateCharacterButton()
         );

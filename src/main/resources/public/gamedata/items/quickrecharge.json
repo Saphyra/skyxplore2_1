@@ -1,0 +1,13 @@
+{
+  "id": "quickrecharge",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 10,
+  "reload": 20,
+  "effect": {
+    "range": 4,
+    "rechargerate": 50
+  },
+  "category": "ability"
+}

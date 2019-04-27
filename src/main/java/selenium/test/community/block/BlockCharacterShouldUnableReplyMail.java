@@ -1,6 +1,11 @@
 package selenium.test.community.block;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
 import selenium.logic.page.CommunityPage;
@@ -11,13 +16,9 @@ import selenium.test.community.helper.CommunityTestInitializer;
 import selenium.test.community.helper.MailTestHelper;
 import selenium.test.community.helper.SendMailHelper;
 
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-
 @Builder
 public class BlockCharacterShouldUnableReplyMail {
-    private static final String NOTIFICATION_CHARACTER_BLOCKED = "Üzenet küldése sikertelen.";
+    private static final String MESSAGE_CODE_ERROR_SENDING_MAIL = "ERROR_SENDING_MAIL";
 
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
@@ -26,6 +27,7 @@ public class BlockCharacterShouldUnableReplyMail {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
     private final CommunityPage communityPage;
+    private final MessageCodes messageCodes;
 
     public void testBlockCharacterShouldUnableToReplyMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -45,7 +47,7 @@ public class BlockCharacterShouldUnableReplyMail {
         sendMailHelper.setMessage()
             .sendMail();
 
-        notificationValidator.verifyNotificationVisibility(NOTIFICATION_CHARACTER_BLOCKED);
+        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_ERROR_SENDING_MAIL));
         assertTrue(communityPage.getSendMailContainer().isDisplayed());
     }
 }

@@ -14,7 +14,7 @@ public class BlockedCharacter {
     private String characterId;
     private String blockedCharacterId;
 
-    public BlockedCharacter(String characterId, String blockedCharacterId){
+    public BlockedCharacter(String characterId, String blockedCharacterId) {
         this.characterId = characterId;
         this.blockedCharacterId = blockedCharacterId;
     }

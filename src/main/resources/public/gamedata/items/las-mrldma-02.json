@@ -1,0 +1,26 @@
+{
+  "id": "las-mrldma-02",
+  "attackSpeed": 4,
+  "criticalRate": 150,
+  "range": 4,
+  "hullDamage": 7500,
+  "shieldDamage": 7500,
+  "accuracy": 500,
+  "constructiontime": 1800,
+  "buildprice": 1800,
+  "buildable": true,
+  "materials": {
+    "cable": 6,
+    "condensator": 3,
+    "energycell": 3,
+    "hullplate": 6,
+    "adamantium": 15
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 2,
+  "score": 2,
+  "buyprice": 45000,
+  "sellprice": 15000,
+  "category": "laser"
+}

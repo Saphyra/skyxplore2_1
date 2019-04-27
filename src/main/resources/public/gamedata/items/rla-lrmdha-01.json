@@ -1,0 +1,25 @@
+{
+  "id": "rla-lrmdha-01",
+  "attackSpeed": 6,
+  "criticalRate": 500,
+  "range": 2,
+  "hullDamage": 20000,
+  "shieldDamage": 20000,
+  "accuracy": 750,
+  "constructiontime": 600,
+  "buildprice": 600,
+  "buildable": true,
+  "materials": {
+    "cable": 1,
+    "condensator": 1,
+    "hullplate": 5,
+    "adamantium": 5
+  },
+  "type": "weapon",
+  "slot": "weapon",
+  "level": 1,
+  "score": 1,
+  "buyprice": 15000,
+  "sellprice": 5000,
+  "category": "missile"
+}

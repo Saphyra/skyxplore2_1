@@ -2,6 +2,7 @@ package skyxplore.controller;
 
 import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.view.View;
-import skyxplore.controller.view.material.MaterialView;
-import skyxplore.controller.view.product.ProductViewList;
+import skyxplore.controller.view.product.ProductView;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
 
@@ -44,13 +43,13 @@ public class FactoryController {
     }
 
     @GetMapping(GET_MATERIALS_MAPPING)
-    public Map<String, MaterialView> getMaterials(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
+    public Map<String, Integer> getMaterials(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his materials", characterId);
         return factoryFacade.getMaterials(characterId);
     }
 
     @GetMapping(GET_QUEUE_MAPPING)
-    public View<ProductViewList> getQueue(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
+    public List<ProductView> getQueue(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his queue", characterId);
         return productFacade.getQueue(characterId);
     }

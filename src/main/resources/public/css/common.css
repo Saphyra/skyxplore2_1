@@ -1,18 +1,3 @@
-/*================BASE TAGS==================*/
-h1{
-    font-weight: 700;
-    font-size: 2.5rem;
-}
-h2{
-    font-weight: 700;
-    font-size: 2rem;
-}
-h3{
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-/*================BASE ELEMENTS==================*/
 body{
     background-image: url("/images/background.jpg");
     background-position: center;
@@ -21,30 +6,19 @@ body{
     color: white;
 }
 
-body > div.cover{
-    border: 5px ridge white;
-}
-
-body > div.cover h1{
-    text-align: center;
-    border-bottom: 5px ridge white;
-    font-size: 2.5rem;
-    padding-top: 0.25rem;
-}
-
-.cover{
+.main-page{
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     overflow: auto;
-}
-.cover:first-child{
+    border: 5px ridge white;
     background-color: rgba(0,0,0,0.5);
 }
-.cover:not(:first-child){
-    background-color: black;
+
+.main-page:not(:first-child){
+    display: none;
 }
 
 header{
@@ -52,14 +26,22 @@ header{
     top: 0;
     left: 0;
     right: 0;
+    height: 3.5rem;
+    border-bottom: 5px ridge white;
+    background: black;
+}
+
+header > h1{
+    text-align: center;
+    padding-top: 0.25rem;
 }
 
 main{
     position: absolute;
-    top: 3.1rem;
+    top: 3.5rem;
     left: 0;
     right: 0;
-    bottom: 3.0rem;
+    bottom: 3.1rem;
     overflow: auto;
     padding: 0.5rem 0;
 }
@@ -72,9 +54,25 @@ footer{
     right: 0;
     border-top: 5px ridge white;
     white-space: nowrap;
+    height: 3.1rem;
 }
+
 footer button{
     font-size: 1.25rem;
+}
+
+/*================BASE TAGS==================*/
+h1{
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+h2{
+    font-weight: 700;
+    font-size: 2rem;
+}
+h3{
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 /*================INPUT/NAVIGATION ELEMENTS==================*/
@@ -128,6 +126,11 @@ input:disabled, button:disabled, textarea:disabled, .disabled{
     cursor: no-drop
 }
 
+#registration-button{
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
 /*================TABLE ELEMENTS==================*/
 .formattedtable th{
     font-size: 1.5rem;
@@ -149,4 +152,9 @@ input:disabled, button:disabled, textarea:disabled, .disabled{
 }
 .formattedtable tbody tr:hover{
     background-color: rgba(150,150,150,0.8);
+}
+
+/*=======ADDIITIONAL=======*/
+.notification-container{
+    color: red;
 }

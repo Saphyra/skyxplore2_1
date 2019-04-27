@@ -10,7 +10,6 @@ import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.credentials.SkyXpCredentials;
 import skyxplore.domain.user.Role;
 import skyxplore.domain.user.SkyXpUser;
-import skyxplore.exception.BadlyConfirmedPasswordException;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 import skyxplore.service.credentials.CredentialsService;
@@ -29,7 +28,7 @@ public class RegistrationService {
     private final UserDao userDao;
     private final UserQueryService userQueryService;
 
-    public void registrateUser(UserRegistrationRequest request) {
+    public void registerUser(UserRegistrationRequest request) {
         validateRegistrationRequest(request);
         SkyXpUser user = new SkyXpUser(
             idGenerator.generateRandomId(),
@@ -43,9 +42,6 @@ public class RegistrationService {
     }
 
     private void validateRegistrationRequest(UserRegistrationRequest request) {
-        if (!request.getPassword().equals(request.getConfirmPassword())) {
-            throw new BadlyConfirmedPasswordException("Confirm password does not match");
-        }
         if (credentialsService.isUserNameExists(request.getUsername())) {
             throw new UserNameAlreadyExistsException(request.getUsername() + " user name is already exists.");
         }

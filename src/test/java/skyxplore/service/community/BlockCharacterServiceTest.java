@@ -23,22 +23,22 @@ import static skyxplore.testutil.TestUtils.createBlockedCharacter;
 @RunWith(MockitoJUnitRunner.class)
 public class BlockCharacterServiceTest {
     @Mock
-    private  BlockedCharacterDao blockedCharacterDao;
+    private BlockedCharacterDao blockedCharacterDao;
 
     @Mock
-    private  BlockedCharacterQueryService blockedCharacterQueryService;
+    private BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private  CharacterQueryService characterQueryService;
+    private CharacterQueryService characterQueryService;
 
     @Mock
-    private  FriendshipService friendshipService;
+    private FriendshipService friendshipService;
 
     @InjectMocks
     private BlockCharacterService underTest;
 
     @Test(expected = BlockedCharacterNotFoundException.class)
-    public void testAllowBlockedCharacterShouldThrowExceptionWhenNotFound(){
+    public void testAllowBlockedCharacterShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(null);
         //WHEN
@@ -46,7 +46,7 @@ public class BlockCharacterServiceTest {
     }
 
     @Test
-    public void testAllowBlockedCharacterShouldDeleteBlock(){
+    public void testAllowBlockedCharacterShouldDeleteBlock() {
         //GIVEN
         BlockedCharacter blockedCharacter = createBlockedCharacter();
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(blockedCharacter);
@@ -58,12 +58,12 @@ public class BlockCharacterServiceTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testBlockCharacterShouldThrowExceptionWhenIdsEqual(){
+    public void testBlockCharacterShouldThrowExceptionWhenIdsEqual() {
         underTest.blockCharacter(CHARACTER_ID_1, CHARACTER_ID_1);
     }
 
     @Test(expected = CharacterAlreadyBlockedException.class)
-    public void testBlockCharacterShouldThrowExceptionWhenAlreadyBlocked(){
+    public void testBlockCharacterShouldThrowExceptionWhenAlreadyBlocked() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(new BlockedCharacter());
         //WHEN
@@ -71,7 +71,7 @@ public class BlockCharacterServiceTest {
     }
 
     @Test
-    public void testBlockCharacterShouldBlock(){
+    public void testBlockCharacterShouldBlock() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID)).thenReturn(null);
         //WHEN

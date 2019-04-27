@@ -5,8 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.logic.domain.CartItem;
+import selenium.logic.domain.Category;
 import selenium.logic.helper.CostCounter;
 import selenium.logic.helper.ShopElementSearcher;
+import selenium.logic.page.ShopPage;
 
 import java.util.List;
 
@@ -16,15 +18,15 @@ import static org.junit.Assert.assertTrue;
 @RequiredArgsConstructor
 public class CartVerifier {
     private static final String SELECTOR_CART_ITEMS = "#basket div";
-    private static final String TEXT_CART_IS_EMPTY = "A kosár üres!";
 
     private final WebDriver driver;
     private final ShopElementSearcher shopElementSearcher;
     private final CostCounter costCounter;
+    private final ShopPage shopPage;
 
-    public void verifyCosts(String itemId, int amount) {
+    public void verifyCosts(Category category, String itemId, int amount) {
         verifyAmountInCart(itemId, amount);
-        verifyItemCost(itemId, amount);
+        verifyItemCost(category, itemId, amount);
         verifyCartTotalCost();
     }
 
@@ -33,8 +35,8 @@ public class CartVerifier {
         assertEquals(amount, cartItem.getAmount());
     }
 
-    private void verifyItemCost(String itemId, int amount) {
-        int costPerItem = shopElementSearcher.searchShopItemById(itemId).getCost();
+    private void verifyItemCost(Category category, String itemId, int amount) {
+        int costPerItem = shopElementSearcher.searchShopItemById(category, itemId).getCost();
         int total = costPerItem * amount;
 
         CartItem cartItem = shopElementSearcher.searchCartItemById(itemId);
@@ -48,8 +50,12 @@ public class CartVerifier {
     private void verifyCartTotalCost() {
         int cartCost = costCounter.sumCartItemCosts();
 
+        verifyCartTotalCost(cartCost);
+    }
+
+    private void verifyCartTotalCost(int expectedCost){
         int totalCartCost = costCounter.getCartTotalCost();
-        assertEquals(cartCost, totalCartCost);
+        assertEquals(expectedCost, totalCartCost);
     }
 
     public void verifyNotInCart(String itemId) {
@@ -60,9 +66,9 @@ public class CartVerifier {
     }
 
     public void verifyEmptyCart() {
+        assertTrue(shopPage.getEmptyCartContainer().isDisplayed());
         List<WebElement> elements = driver.findElements(By.cssSelector(SELECTOR_CART_ITEMS));
-        assertEquals(1, elements.size());
-        assertEquals(TEXT_CART_IS_EMPTY, elements.get(0).getText());
-        verifyCartTotalCost();
+        assertEquals(0, elements.size());
+        verifyCartTotalCost(0);
     }
 }

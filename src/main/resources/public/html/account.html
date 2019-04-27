@@ -1,111 +1,110 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Account - SkyXplore 2.1</TITLE>
+    <TITLE></TITLE>
     <META charset="UTF-8"/>
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
     <LINK rel="stylesheet" href="/css/account/account.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
-    
+
     <SCRIPT src="js/account/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
-    <DIV class="cover">
-        <HEADER>
-            <H1>Account beállítások</H1>
-        </HEADER>
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN>
+        <SECTION>
+            <H2 id="subtitle-change-password"></H2>
+
+            <ARTICLE>
+                <LABEL>
+                    <SPAN id="new-password-span"></SPAN>:
+                    <INPUT type='password' id='new-password' class='change-password-input'>
+                    <DIV id="invalid-new-password" class="invalid-input">X</DIV>
+                </LABEL>
+
+                <LABEL>
+                    <SPAN id="new-password-confirmation-span"></SPAN>:
+                    <INPUT type='password' id='new-password-confirmation' class='change-password-input'>
+                    <DIV id="invalid-new-password-confirmation" class="invalid-input">X</DIV>
+                </LABEL>
+
+                <LABEL>
+                    <SPAN id="current-password-for-password-change-span"></SPAN>:
+                    <INPUT type='password' id='current-password-for-password-change' class='change-password-input'>
+                    <DIV id="invalid-current-password-for-password-change" class="invalid-input">X</DIV>
+                </LABEL>
+            </ARTICLE>
+
+            <BUTTON id='change-password-button' onclick='eventProcessor.processEvent(new Event(events.CHANGE_PASSWORD_ATTEMPT))'></BUTTON>
+        </SECTION>
+
+        <SECTION>
+            <H2 id="subtitle-change-username"></H2>
+
+            <ARTICLE>
+                <LABEL>
+                    <SPAN id="new-username-span"></SPAN>:
+                    <INPUT type='text' id='new-username' class="change-username-input">
+                    <DIV id="invalid-new-username" class="invalid-input">X</DIV>
+                </LABEL>
+
+                <LABEL>
+                    <SPAN id="change-username-password-span"></SPAN>:
+                    <INPUT type='password' id='change-username-password' class="change-username-input">
+                    <DIV id="invalid-change-username-password" class="invalid-input">X</DIV>
+                </LABEL>
+            </ARTICLE>
+
+            <BUTTON id='change-username-button' onclick='eventProcessor.processEvent(new Event(events.CHANGE_USERNAME_ATTEMPT))'></BUTTON>
+        </SECTION>
         
-        <MAIN class="textaligncenter">
-            <SECTION>
-                <H2>Jelszó módosítása</H2>
-                
-                <ARTICLE>
-                    <LABEL>
-                        Új jelszó:
-                        <INPUT type='password' id='newpassword1' placeholder='Új jelszó'>
-                        <DIV id="invalid_newpassword1" class="invalid">X</DIV>
-                    </LABEL>
-                    
-                    <LABEL>
-                        Új jelszó megismétlése:
-                        <INPUT type='password' id='newpassword2' placeholder='Új jelszó megismétlése'>
-                        <DIV id="invalid_newpassword2" class="invalid">X</DIV>
-                    </LABEL>
-                    
-                    <LABEL>
-                        Régi jelszó:
-                        <INPUT type='password' id='newpasswordoldpassword' placeholder='Régi jelszó'>
-                        <DIV id="invalid_newpasswordoldpassword" class="invalid">X</DIV>
-                    </LABEL>
-                </ARTICLE>
-                
-                <BUTTON id='newpasswordbutton' onclick='changePasswordController.changePassword()'>Mentés</BUTTON>
-            </SECTION>
-            
-            <SECTION>
-                <H2>Felhasználónév módosítása</H2>
-                
-                <ARTICLE>
-                    <LABEL>
-                        Új felhasználónév:
-                        <INPUT type='text' id='newusername' placeholder='Új felhasználónév'>
-                        <DIV id="invalid_newusername" class="invalid">X</DIV>
-                    </LABEL>
-                    
-                    <LABEL>
-                        Jelszó:
-                        <INPUT type='password' id='newusernamepassword' placeholder='Jelszó'>
-                        <DIV id="invalid_newusernamepassword" class="invalid">X</DIV>
-                    </LABEL>
-                </ARTICLE>
-                
-                <BUTTON id='newusernamebutton' onclick='changeUserNameController.changeUserName()'>Mentés</BUTTON>
-            </SECTION>
-            
-            <SECTION>
-                <H2>E-mail cím módosítása</H2>
-                
-                <ARTICLE>
-                    <LABEL>
-                        Új felhasználónév:
-                        <INPUT type='email' id='newemail' placeholder='Új e-mail cím'>
-                        <DIV id="invalid_newemail" class="invalid">X</DIV>
-                    </LABEL>
-                    
-                    <LABEL>
-                        Jelszó:
-                        <INPUT type='password' id='newemailpassword' placeholder='Jelszó'>
-                        <DIV id="invalid_newemailpassword" class="invalid">X</DIV>
-                    </LABEL>
-                </ARTICLE>
-                
-                <BUTTON id='newemailbutton' onclick='changeEmailController.changeEmail()'>Mentés</BUTTON>
-            </SECTION>
-            
-            <SECTION>
-                <H2>Account törlése</H2>
-                
-                <ARTICLE>
-                    <LABEL>
-                        Jelszó:
-                        <INPUT type='password' id='deleteaccountpassword' placeholder='Jelszó'>
-                        <DIV id="invalid_deleteaccountpassword" class="invalid">X</DIV>
-                    </LABEL>
-                </ARTICLE>
-                
-                <BUTTON id='deleteaccountbutton' onclick='deleteAccountController.deleteAccount()'>Account törlése</BUTTON>
-            </SECTION>
-        </MAIN>
+        <SECTION>
+            <H2 id="subtitle-change-email"></H2>
+
+            <ARTICLE>
+                <LABEL>
+                    <SPAN id="new-email-span"></SPAN>:
+                    <INPUT type='email' id='new-email' class="change-email-input">
+                    <DIV id="invalid-new-email" class="invalid-input">X</DIV>
+                </LABEL>
+
+                <LABEL>
+                    <SPAN id="change-email-password-span"></SPAN>:
+                    <INPUT type='password' id='change-email-password' class="change-email-input">
+                    <DIV id="invalid-change-email-password" class="invalid-input">X</DIV>
+                </LABEL>
+            </ARTICLE>
+
+            <BUTTON id='change-email-button' onclick='eventProcessor.processEvent(new Event(events.CHANGE_EMAIL_ATTEMPT))'></BUTTON>
+        </SECTION>
         
-        <FOOTER>
-            <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-            <BUTTON onclick='window.location.href = "characterselect"'>Karakterválasztás</BUTTON>
-        </FOOTER>
-    </DIV>
+        <SECTION>
+            <H2 id="subtitle-delete-account"></H2>
+
+            <ARTICLE>
+                <LABEL>
+                    <SPAN id="delete-account-password-span"></SPAN>:
+                    <INPUT type='password' id='delete-account-password' class="delete-account-input">
+                    <DIV id="invalid-delete-account-password" class="invalid-input">X</DIV>
+                </LABEL>
+            </ARTICLE>
+
+            <BUTTON id='delete-account-button' onclick='eventProcessor.processEvent(new Event(events.DELETE_ACCOUNT_ATTEMPT))'></BUTTON>
+        </SECTION>
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="characterselect-button" onclick='window.location.href = "characterselect"'></BUTTON>
+    </FOOTER>
+</DIV>
 
 </BODY>
 </HTML>

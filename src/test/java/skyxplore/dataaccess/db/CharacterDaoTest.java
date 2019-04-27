@@ -26,34 +26,34 @@ import static skyxplore.testutil.TestUtils.createCharacterEntity;
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterDaoTest {
     @Mock
-    private  BlockedCharacterDao blockedCharacterDao;
+    private BlockedCharacterDao blockedCharacterDao;
 
     @Mock
-    private  CharacterConverter characterConverter;
+    private CharacterConverter characterConverter;
 
     @Mock
-    private  CharacterRepository characterRepository;
+    private CharacterRepository characterRepository;
 
     @Mock
-    private  EquippedShipDao equippedShipDao;
+    private EquippedShipDao equippedShipDao;
 
     @Mock
-    private  FactoryDao factoryDao;
+    private FactoryDao factoryDao;
 
     @Mock
-    private  FriendRequestDao friendRequestDao;
+    private FriendRequestDao friendRequestDao;
 
     @Mock
-    private  FriendshipDao friendshipDao;
+    private FriendshipDao friendshipDao;
 
     @Mock
-    private  MailDao mailDao;
+    private MailDao mailDao;
 
     @InjectMocks
     private CharacterDao underTest;
 
     @Test
-    public void testDeleteByIdShouldCallRepositoryAndDaos(){
+    public void testDeleteByIdShouldCallRepositoryAndDaos() {
         //WHEN
         underTest.deleteById(CHARACTER_ID_1);
         //THEN
@@ -67,7 +67,7 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void testDeleteByUserIdShouldDeleteAllCharactersOfUser(){
+    public void testDeleteByUserIdShouldDeleteAllCharactersOfUser() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         List<CharacterEntity> entityList = Arrays.asList(entity);
@@ -84,7 +84,7 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void testFindByCharacterNameShouldCallRepositoryAndReturnDomain(){
+    public void testFindByCharacterNameShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         when(characterRepository.findByCharacterName(CHARACTER_NAME)).thenReturn(entity);
@@ -100,7 +100,7 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void testFindCharacterByNameLikeShouldCallRepositoryAndReturnDomain(){
+    public void testFindCharacterByNameLikeShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         List<CharacterEntity> entityList = Arrays.asList(entity);
@@ -118,7 +118,7 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void testFindByUserIdShouldCallRepositoryAndReturnDomain(){
+    public void testFindByUserIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         List<CharacterEntity> entityList = Arrays.asList(entity);
@@ -136,7 +136,7 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void testSaveShouldCallRepository(){
+    public void testSaveShouldCallRepository() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
 

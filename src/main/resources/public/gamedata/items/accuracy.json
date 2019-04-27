@@ -1,0 +1,12 @@
+{
+  "id": "accuracy",
+  "type": "ability",
+  "slot": "ability",
+  "energyusage": 300,
+  "active": 5,
+  "reload": 15,
+  "effect": {
+    "accuracy": 200
+  },
+  "category": "ability"
+}

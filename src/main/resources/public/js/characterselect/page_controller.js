@@ -1,67 +1,27 @@
 (function PageController(){
-    window.pageController = new function(){
-        scriptLoader.loadScript("js/characterselect/character_controller.js");
-        
-        this.refresh = refresh;
-        this.renameCharacter = renameCharacter;
-        this.setRenameCharacterContainerDisplayStatus = setRenameCharacterContainerDisplayStatus;
-        
-        $(document).ready(function(){
-            pageController.refresh();
-        });
-    }
+    scriptLoader.loadScript("js/characterselect/create_character/create_character_controller.js");
+    scriptLoader.loadScript("js/characterselect/character_list/character_list_controller.js");
+    scriptLoader.loadScript("js/characterselect/rename_character/rename_character_controller.js");
+    scriptLoader.loadScript("js/characterselect/select_character_service.js");
+    scriptLoader.loadScript("js/characterselect/delete_character_service.js");
     
-    /*
-    Refreshes the page.
-    */
-    function refresh(){
-        try{
-            characterController.showCharacters();
-            pageController.setRenameCharacterContainerDisplayStatus(false);
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
+    $(document).ready(function(){
+        init();
+    });
     
-    /*
-    Opens the "Rename Character" window with the given parameters.
-    Parameters:
-        - characterId: The id of the selected character.
-        - characterName: The name of the selected character.
-    Throws:
-        - IllegalArgument if characerId / characterName is null or undefined.
-    */
-    function renameCharacter(characterId, characterName){
-        try{
-            if(characterId == null || characterId == undefined){
-                throwException("IllegalArgument", "characerId must not be null or undefined");
-            }
-            if(characterName == null || characterName == undefined){
-                throwException("IllegalArgument", "characterName must not be null or undefined");
-            }
-            
-            document.getElementById("renamecharacterid").value = characterId;
-            const inputField = document.getElementById("renamecharacterinput");
-                inputField.value = characterName;
-            pageController.setRenameCharacterContainerDisplayStatus(true);
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.messageCodesLoaded;
+        },
+        function(){
+            eventProcessor.processEvent(new Event(events.LOAD_CHARACTERS));
+        },
+        true
+    ))
     
-    /*
-    Displays or hides the "Rename Character" window.
-    Parameters:
-        - status: the window should be shown.
-    */
-    function setRenameCharacterContainerDisplayStatus(status){
-        try{
-            document.getElementById("renamecharactercontainer").style.display = status ? "block" : "none";
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
+    function init(){
+        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "characterselect"));
     }
 })();

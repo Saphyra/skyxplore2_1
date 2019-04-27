@@ -16,7 +16,7 @@ public class SeleniumUser {
     private String password;
     private String email;
 
-    public static SeleniumUser create(){
+    public static SeleniumUser create() {
         SeleniumUser user = new SeleniumUser();
         user.setUserName(createRandomUserName());
         user.setPassword(createRandomPassword());
@@ -24,15 +24,15 @@ public class SeleniumUser {
         return user;
     }
 
-    public static String createRandomUserName(){
+    public static String createRandomUserName() {
         return crop(USER_NAME_PREFIX + randomUID(), USER_NAME_MAX_LENGTH);
     }
 
-    public static String createRandomPassword(){
+    public static String createRandomPassword() {
         return crop(randomUID(), PASSWORD_MAX_LENGTH);
     }
 
-    public static String createRandomEmail(){
+    public static String createRandomEmail() {
         return randomUID() + USER_EMAIL_SUFFIX;
     }
 

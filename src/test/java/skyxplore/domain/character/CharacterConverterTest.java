@@ -42,7 +42,7 @@ public class CharacterConverterTest {
     private CharacterConverter underTest;
 
     @Test
-    public void testConvertEntityShouldReturnNullWhenNull(){
+    public void testConvertEntityShouldReturnNullWhenNull() {
         //GIVEN
         CharacterEntity entity = null;
         //WHEN

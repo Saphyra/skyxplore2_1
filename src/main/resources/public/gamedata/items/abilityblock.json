@@ -1,0 +1,12 @@
+{
+  "type": "ability",
+  "id": "abilityblock",
+  "slot": "ability",
+  "energyusage": 200,
+  "active": 3,
+  "reload": 10,
+  "effect": {
+    "range": 6
+  },
+  "category": "ability"
+}

@@ -1,78 +1,39 @@
 (function PageController(){
-    window.pageController = new function(){
-        scriptLoader.loadScript("js/shop/basket_controller.js");
-        scriptLoader.loadScript("js/shop/content_controller.js");
-        scriptLoader.loadScript("js/shop/menu_controller.js");
-        scriptLoader.loadScript("js/common/dao/character_dao.js");
-        
-        this.money = null;
-        
-        this.displayMoney = displayMoney;
-        this.getMoney = getMoney;
-        this.refresh = refresh;
-        
-        $(document).ready(function(){
-            refresh();
-        });
-    }
+    scriptLoader.loadScript("js/shop/menu_controller.js");
+    scriptLoader.loadScript("js/shop/content_controller.js");
+    scriptLoader.loadScript("js/shop/money_controller.js");
+    scriptLoader.loadScript("js/shop/cart_controller.js");
     
-    /*
-    Displays the money of the user.
-    */
-    function displayMoney(needReload){
-        try{
-            const moneyField = document.getElementById("money");
-            
-            moneyField.innerHTML = getMoney(needReload);
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
-    }
+    let moneyLoaded = false;
 
-    /*
-    Returns the money of the user.
-    Arguments:
-        - needUpdate: if true, queries the actual money from the server
-    Returns:
-        - the stored money of the character.
-    */
-    function getMoney(needUpdate){
-        try{
-            if(needUpdate == null || needUpdate == undefined){
-                needUpdate = false;
-            }
-            
-            if(pageController.money == null || needUpdate == true){
-                pageController.money = characterDao.getMoney(sessionStorage.characterId);
-            }
-            
-            return pageController.money;
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
+    $(document).ready(function(){
+        init();
+    });
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){
+            return eventType === events.LOAD_STATE_CHANGED
+                && LoadState.localizationLoaded
+                && LoadState.categoryNamesLoaded
+                && LoadState.descriptionLoaded
+                && LoadState.itemsLoaded
+                && moneyLoaded
+        },
+        function(){
+            eventProcessor.processEvent(new Event(events.DISPLAY_MENU));
+        },
+        true
+    ));
+    
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.MONEY_CHANGED},
+        function(){
+            moneyLoaded = true;
+            eventProcessor.processEvent(new Event(events.LOAD_STATE_CHANGED));
         }
-    }
+    ));
 
-    /*
-    Reloads the contents of the page.
-    Arguments:
-        - filter: the specified filter for the displayed elements
-        - needReload: if true, queries the actual state from the server
-    */
-    function refresh(filter, needReload){
-        try{
-            filter = filter || contentController.filter || "all";
-            if(needReload == null || needReload == undefined){
-                needReload = true;
-            }
-            
-            displayMoney(needReload);
-            contentController.displayElements(filter, needReload);
-            basketController.displayBasket();
-        }catch(err){
-            const message = arguments.callee.name + " - " + err.name + ": " + err.message;
-            logService.log(message, "error");
-        }
+    function init(){
+        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "shop"));
     }
 })();

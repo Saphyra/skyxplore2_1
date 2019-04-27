@@ -19,19 +19,19 @@ import static skyxplore.testutil.TestUtils.*;
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterRenameServiceTest {
     @Mock
-    private  CharacterDao characterDao;
+    private CharacterDao characterDao;
 
     @Mock
     private CharacterNameCache characterNameCache;
 
     @Mock
-    private  CharacterQueryService characterQueryService;
+    private CharacterQueryService characterQueryService;
 
     @InjectMocks
     private CharacterRenameService underTest;
 
     @Test(expected = CharacterNameAlreadyExistsException.class)
-    public void testRenameCharacterShouldThrowExceptionWhenCharacterNameExists(){
+    public void testRenameCharacterShouldThrowExceptionWhenCharacterNameExists() {
         //GIVEN
         RenameCharacterRequest renameCharacterRequest = createRenameCharacterRequest();
 
@@ -41,7 +41,7 @@ public class CharacterRenameServiceTest {
     }
 
     @Test
-    public void testRenameCharacterShouldRenameAndInvalidate(){
+    public void testRenameCharacterShouldRenameAndInvalidate() {
         //GIVEN
         RenameCharacterRequest renameCharacterRequest = createRenameCharacterRequest();
 
@@ -50,12 +50,13 @@ public class CharacterRenameServiceTest {
         SkyXpCharacter character = createCharacter();
         when(characterQueryService.findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID)).thenReturn(character);
         //WHEN
-        underTest.renameCharacter(renameCharacterRequest, USER_ID);
+        SkyXpCharacter result = underTest.renameCharacter(renameCharacterRequest, USER_ID);
         //THEN
         verify(characterQueryService).isCharNameExists(CHARACTER_NEW_NAME);
         verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID_1, USER_ID);
         verify(characterDao).save(character);
         verify(characterNameCache).invalidate(CHARACTER_NEW_NAME);
+        assertEquals(character, result);
         assertEquals(CHARACTER_NEW_NAME, character.getCharacterName());
     }
 }

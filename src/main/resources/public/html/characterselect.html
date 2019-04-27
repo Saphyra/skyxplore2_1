@@ -1,39 +1,45 @@
-<HTML xmlns:th="http://www.thymeleaf.org">
+<HTML>
 <HEAD>
-    <TITLE>Karakterválasztás - SkyXplore 2.1</TITLE>
     <META charset="UTF-8"/>
+
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
-    <LINK rel="stylesheet" href="/css/classes.css">
     <LINK rel="stylesheet" href="/css/characterselect/characterselect.css">
+    <LINK rel="stylesheet" href="/css/characterselect/character_list.css">
+    <LINK rel="stylesheet" href="/css/characterselect/create_character.css">
+    <LINK rel="stylesheet" href="/css/characterselect/rename_character.css">
 
     <SCRIPT src="js/common/jquery.js"></SCRIPT>
     <SCRIPT src="js/common/common_base.js"></SCRIPT>
-    
     <SCRIPT src="js/characterselect/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
-    <DIV class="cover">
+    <DIV id="main-container" class="main-page">
         <HEADER>
-            <H1>Karakterválasztás</H1>
+            <H1 id="main-title"></H1>
         </HEADER>
-        <MAIN class="textaligncenter">
-            <SECTION class="textaligncenter">
-                <LABEL class='fontsize1_5rem inline'>
-                    Karakternév:
-                    <INPUT type='text' id='newcharactername' class='fontsize1_25rem' placeholder='Karakternév'>
-                    <DIV id="invalid_newcharactername" class="invalid">X</DIV>
+
+        <MAIN>
+            <SECTION id="create-character-section">
+                <LABEL id="create-character-label">
+                    <SPAN id="create-character-span"></SPAN>:
+                    <INPUT type='text' id='create-character-name'>
+                    <DIV id="invalid-create-character-name" class="invalid-input">X</DIV>
                 </LABEL>
-                <BUTTON id="newcharacterbutton" class='fontsize1_25rem' onclick='characterController.createCharacter()'>Új karakter</BUTTON>
+                
+                <BUTTON id="create-character-button" onclick="eventProcessor.processEvent(new Event(events.CREATE_CHARACTER_ATTEMPT))" disabled></BUTTON>
             </SECTION>
             
             <SECTION>
-                <TABLE class='formattedtable marginauto margintop1rem'>
+                <TABLE id="table-character-list" class='formattedtable'>
                     <THEAD>
                         <TR>
-                            <TH>Karakternév</TH>
-                            <TH>Műveletek</TH>
+                            <TH id="character-list-header-character-name"></TH>
+                            <TH id="character-list-header-operations"></TH>
+                        </TR>
+                        <TR>
+                            <TD id="no-character" colspan="2"></TD>
                         </TR>
                     </THEAD>
                     
@@ -41,29 +47,27 @@
                 </TABLE>
             </SECTION>
         </MAIN>
-        
+
         <FOOTER>
-            <BUTTON onclick='authService.logout()'>Kijelentkezés</BUTTON>
-            <BUTTON onclick='window.location.href = "account"'>Beállítások</BUTTON>
+            <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+            <BUTTON id="account-button" onclick='window.location.href = "account"'></BUTTON>
         </FOOTER>
     </DIV>
     
-    <DIV id='renamecharactercontainer' class='cover' style='display: none;'>
+    <DIV id='rename-character-container' class='main-page'>
         <HEADER>
-            <H1>Karakter átnevezése</H1>
-            <BUTTON class='absolute right2px top2px' onclick='pageController.setRenameCharacterContainerDisplayStatus(false)'>X</BUTTON>
+            <H1 id="rename-character-title"></H1>
+            <BUTTON id="close-rename-page-button" onclick='switchTab("main-page", "main-container")'>X</BUTTON>
         </HEADER>
         
-        <MAIN class='textaligncenter'>
-            <LABEL class='fontsize1_25rem inline'>
-                Új karakternév:
-                <INPUT type='text' id='renamecharacterinput' class='fontsize1_25rem' placeholder='Új karakternév'>
-                <DIV id="invalid_renamecharactername" class="invalid">X</DIV>
+        <MAIN>
+            <LABEL id="rename-character-label">
+                <SPAN id="new-character-name-span"></SPAN>:
+                <INPUT type='text' id='new-character-name'>
+                <DIV id="invalid-new-character-name" class="invalid-input">X</DIV>
             </LABEL>
             
-            <INPUT type='hidden' id='renamecharacterid'>
-            
-            <BUTTON id="renamecharacterbutton" class='block fontsize1_5rem marginauto margintop1rem width60vw' onclick='characterController.renameCharacter()'>Átnevezés</BUTTON>
+            <BUTTON id="rename-character-button"></BUTTON>
         </MAIN>
     </DIV>
 

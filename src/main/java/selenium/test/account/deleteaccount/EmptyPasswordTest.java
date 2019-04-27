@@ -3,17 +3,19 @@ package selenium.test.account.deleteaccount;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
+import selenium.logic.domain.MessageCodes;
 import selenium.logic.page.AccountPage;
 import selenium.logic.validator.FieldValidator;
 import selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
 
 @Builder
 public class EmptyPasswordTest {
-    private static final String ERROR_MESSAGE_EMPTY_PASSWORD = "Jelszó megadása kötelező!";
+    private static final String MESSAGE_CODE_EMPTY_PASSWORD = "CURRENT_PASSWORD_IS_EMPTY";
 
     private final DeleteAccountTestHelper deleteAccountTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
+    private final MessageCodes messageCodes;
 
     public void testEmptyPassword() {
         deleteAccountTestHelper.registerAndNavigateToAccount();
@@ -23,7 +25,7 @@ public class EmptyPasswordTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidDeleteAccountPasswordField(),
-            ERROR_MESSAGE_EMPTY_PASSWORD,
+            messageCodes.get(MESSAGE_CODE_EMPTY_PASSWORD),
             passwordField,
             accountPage.getDeleteAccountButton()
         );

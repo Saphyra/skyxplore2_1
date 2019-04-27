@@ -1,8 +1,12 @@
 package skyxplore.service.character;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
@@ -14,8 +18,6 @@ import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 
-import javax.transaction.Transactional;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -26,9 +28,10 @@ public class CharacterCreatorService {
     private final FactoryDao factoryDao;
     private final NewCharacterGenerator newCharacterGenerator;
     private final SlotDao slotDao;
+    private final CharacterNameCache characterNameCache;
 
     @Transactional
-    public void createCharacter(CreateCharacterRequest request, String userId) {
+    public SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
         if (characterQueryService.isCharNameExists(request.getCharacterName())) {
             throw new CharacterNameAlreadyExistsException("Character already exists with name " + request.getCharacterName());
         }
@@ -49,5 +52,9 @@ public class CharacterCreatorService {
         slotDao.save(defenseSlot);
         slotDao.save(weaponSlot);
         factoryDao.save(factory);
+
+        characterNameCache.invalidate(request.getCharacterName());
+
+        return character;
     }
 }
