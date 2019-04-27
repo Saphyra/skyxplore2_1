@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import skyxplore.controller.view.AbstractViewConverter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor

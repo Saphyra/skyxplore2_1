@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.dataaccess.db.CredentialsDao;
-import skyxplore.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.CredentialsDao;
+import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 
 import java.util.Optional;

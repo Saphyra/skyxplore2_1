@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.controller.request.user.AccountDeleteRequest;
 import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.dataaccess.db.UserDao;
-import skyxplore.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.UserDao;
+import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.service.credentials.CredentialsService;
 

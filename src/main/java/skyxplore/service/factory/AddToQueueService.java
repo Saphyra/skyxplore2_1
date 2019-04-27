@@ -18,7 +18,7 @@ import skyxplore.exception.NotEnoughMaterialsException;
 import skyxplore.exception.NotEnoughMoneyException;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import javax.transaction.Transactional;
 import java.util.Map;

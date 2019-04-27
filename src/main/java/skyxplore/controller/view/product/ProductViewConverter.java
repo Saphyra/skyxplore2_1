@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.domain.product.Product;
 import skyxplore.controller.view.AbstractViewConverter;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor

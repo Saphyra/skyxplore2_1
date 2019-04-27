@@ -13,7 +13,7 @@ import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import java.util.Arrays;
 import java.util.Collections;

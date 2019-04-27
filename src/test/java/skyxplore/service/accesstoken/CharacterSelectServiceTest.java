@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.dataaccess.db.AccessTokenDao;
-import skyxplore.domain.accesstoken.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.AccessTokenDao;
+import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.service.character.CharacterQueryService;
 
 import java.util.Optional;

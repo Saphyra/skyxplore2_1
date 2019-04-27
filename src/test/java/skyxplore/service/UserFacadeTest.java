@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.user.*;
-import skyxplore.domain.user.SkyXpUser;
+import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
 import skyxplore.service.user.*;
 
 

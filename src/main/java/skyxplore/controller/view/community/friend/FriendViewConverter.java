@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.controller.view.AbstractViewConverter;
-import skyxplore.dataaccess.db.AccessTokenDao;
+import org.github.saphyra.skyxplore.auth.AccessTokenDao;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.character.CharacterQueryService;
 

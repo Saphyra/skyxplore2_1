@@ -9,7 +9,7 @@ import skyxplore.controller.request.user.ChangeEmailRequest;
 import skyxplore.controller.request.user.ChangePasswordRequest;
 import skyxplore.controller.request.user.ChangeUserNameRequest;
 import skyxplore.controller.request.user.UserRegistrationRequest;
-import skyxplore.domain.user.SkyXpUser;
+import org.github.saphyra.skyxplore.user.domain.user.SkyXpUser;
 import skyxplore.service.user.ChangeEmailService;
 import skyxplore.service.user.ChangePasswordService;
 import skyxplore.service.user.ChangeUserNameService;

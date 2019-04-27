@@ -17,7 +17,7 @@ import skyxplore.domain.product.Product;
 import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.service.factory.FactoryQueryService;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import javax.transaction.Transactional;
 import java.time.OffsetDateTime;

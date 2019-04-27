@@ -19,7 +19,7 @@ import skyxplore.service.GameDataFacade;
 import skyxplore.service.character.CharacterQueryService;
 import skyxplore.service.factory.FactoryQueryService;
 import skyxplore.testutil.TestGeneralDescription;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import java.util.Arrays;
 import java.util.List;

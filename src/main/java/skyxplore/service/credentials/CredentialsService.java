@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.db.CredentialsDao;
-import skyxplore.domain.credentials.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.CredentialsDao;
+import org.github.saphyra.skyxplore.user.domain.credentials.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
 
 @Service

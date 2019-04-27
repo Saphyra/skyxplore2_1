@@ -8,7 +8,7 @@ import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.service.character.CharacterQueryService;
-import skyxplore.util.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @RequiredArgsConstructor
 @Service

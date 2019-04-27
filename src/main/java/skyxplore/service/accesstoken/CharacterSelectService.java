@@ -4,8 +4,8 @@ import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.db.AccessTokenDao;
-import skyxplore.domain.accesstoken.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.AccessTokenDao;
+import org.github.saphyra.skyxplore.auth.domain.accesstoken.SkyXpAccessToken;
 import skyxplore.service.character.CharacterQueryService;
 
 @Service
