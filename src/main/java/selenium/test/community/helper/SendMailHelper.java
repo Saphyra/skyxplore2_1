@@ -13,7 +13,7 @@ import static selenium.logic.util.WaitUtil.waitUntil;
 
 @RequiredArgsConstructor
 public class SendMailHelper {
-    public static final String DEFAULT_MESSAGE = "message";
+    private static final String DEFAULT_MESSAGE = "message";
     public static final String DEFAULT_SUBJECT = "subject";
     private static final String MESSAGE_CODE_MAIL_SENT = "MAIL_SENT";
 
@@ -56,6 +56,7 @@ public class SendMailHelper {
         return this;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public SendMailHelper verifyAddresseeNotFound(SeleniumCharacter addressee) {
         openWriteMailPage();
         WebElement addresseeInputField = communityPage.getAddresseeInputField();

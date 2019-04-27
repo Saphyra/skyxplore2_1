@@ -29,7 +29,7 @@ public class ShopElementSearcher {
             .collect(Collectors.toList());
     }
 
-    public List<ShopItem> searchAllShopItems() {
+    private List<ShopItem> searchAllShopItems() {
         return driver.findElements(By.cssSelector(SELECTOR_SHOP_ITEMS)).stream()
             .map(ShopItem::new)
             .collect(Collectors.toList());

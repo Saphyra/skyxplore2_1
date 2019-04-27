@@ -10,14 +10,12 @@ import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.ShipNotFoundException;
-import skyxplore.service.GameDataFacade;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ShipQueryService {
     private final EquippedShipDao equippedShipDao;
-    private final GameDataFacade gameDataFacade;
     private final ShipViewConverter shipViewConverter;
     private final SlotDao slotDao;
 

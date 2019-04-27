@@ -26,7 +26,7 @@ public class FriendshipDao extends AbstractDao<FriendshipEntity, Friendship, Str
         return converter.convertEntity(repository.getByCharacterIdOrFriendId(characterId, friendId));
     }
 
-    public Friendship getByFriendshipId(String friendshipId) {
+    Friendship getByFriendshipId(String friendshipId) {
         return repository.findById(friendshipId).map(converter::convertEntity).orElse(null);
     }
 

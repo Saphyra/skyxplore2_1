@@ -24,11 +24,10 @@ import java.util.List;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
-@SuppressWarnings("WeakerAccess")
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class CommunityController {
+class CommunityController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/request";
     private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter";
@@ -48,7 +47,7 @@ public class CommunityController {
     private final FriendViewConverter friendViewConverter;
 
     @PostMapping(ACCEPT_FRIEND_REQUEST_MAPPING)
-    public void acceptFriendRequest(
+    void acceptFriendRequest(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -57,7 +56,7 @@ public class CommunityController {
     }
 
     @PutMapping(ADD_FRIEND_MAPPING)
-    public void addFriend(
+    void addFriend(
         @Valid @RequestBody OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId,
         @CookieValue(COOKIE_USER_ID) String userId
@@ -67,7 +66,7 @@ public class CommunityController {
     }
 
     @DeleteMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)
-    public void allowBlockedCharacter(
+    void allowBlockedCharacter(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -76,7 +75,7 @@ public class CommunityController {
     }
 
     @PostMapping(BLOCK_CHARACTER_MAPPING)
-    public void blockCharacter(
+    void blockCharacter(
         @Valid @RequestBody OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -85,7 +84,7 @@ public class CommunityController {
     }
 
     @DeleteMapping(DECLINE_FRIEND_REQUEST_MAPPING)
-    public void declineFriendRequestMapping(
+    void declineFriendRequestMapping(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -94,7 +93,7 @@ public class CommunityController {
     }
 
     @DeleteMapping(DELETE_FRIEND_MAPPING)
-    public void deleteFriend(
+    void deleteFriend(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -103,7 +102,7 @@ public class CommunityController {
     }
 
     @GetMapping(GET_BLOCKED_CHARACTERS_MAPPING)
-    public List<CharacterView> getBlockedCharacters(
+    List<CharacterView> getBlockedCharacters(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his blocked characters list.", characterId);
@@ -111,7 +110,7 @@ public class CommunityController {
     }
 
     @PostMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)
-    public List<CharacterView> getCharactersCanBeBlocked(
+    List<CharacterView> getCharactersCanBeBlocked(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -120,7 +119,7 @@ public class CommunityController {
     }
 
     @PostMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
-    public List<CharacterView> getCharactersCanBeFriend(
+    List<CharacterView> getCharactersCanBeFriend(
         @RequestBody @Valid OneStringParamRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -129,7 +128,7 @@ public class CommunityController {
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)
-    public List<FriendView> getFriends(
+    List<FriendView> getFriends(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his community list.", characterId);
@@ -137,7 +136,7 @@ public class CommunityController {
     }
 
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)
-    public List<FriendRequestView> getReceivedFriendRequests(
+    List<FriendRequestView> getReceivedFriendRequests(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his received friendRequests", characterId);
@@ -145,7 +144,7 @@ public class CommunityController {
     }
 
     @GetMapping(GET_SENT_FRIEND_REQUESTS_MAPPING)
-    public List<FriendRequestView> getSentFriendRequests(
+    List<FriendRequestView> getSentFriendRequests(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his sent friendRequests", characterId);

@@ -28,7 +28,7 @@ public class EquipmentElementSearcher {
 
     private final WebDriver driver;
 
-    public List<EquippedEquipment> findEquippedEquipmentsOfContainer(ContainerId containerId) {
+    private List<EquippedEquipment> findEquippedEquipmentsOfContainer(ContainerId containerId) {
         return driver.findElements(By.cssSelector(String.format(PREFIX_SELECTOR_SLOT, containerId.getId()))).stream()
             .map(EquippedEquipment::new)
             .collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class EquipmentElementSearcher {
     }
 
 
-    public List<WebElement> getEmptySlotsOfContainer(ContainerId containerId) {
+    private List<WebElement> getEmptySlotsOfContainer(ContainerId containerId) {
         return driver.findElements(By.cssSelector(String.format(PREFIX_SELECTOR_EMPTY_SLOT, containerId.getId())));
     }
 

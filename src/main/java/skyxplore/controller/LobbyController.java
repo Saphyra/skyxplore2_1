@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import skyxplore.controller.request.character.CreateLobbyRequest;
-import skyxplore.service.GameFacade;
+import skyxplore.service.LobbyFacade;
 
 import javax.validation.Valid;
 
@@ -20,13 +20,13 @@ import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 public class LobbyController {
     private static final String CREATE_LOBBY_MAPPING = "lobby";
 
-    private final GameFacade gameFacade;
+    private final LobbyFacade lobbyFacade;
 
     @PutMapping(CREATE_LOBBY_MAPPING)
     public void createLobby(
         @RequestBody @Valid CreateLobbyRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to create a lobby with parameters {}", characterId, request);
-        gameFacade.createLobby(request, characterId);
+        lobbyFacade.createLobby(request, characterId);
     }
 }

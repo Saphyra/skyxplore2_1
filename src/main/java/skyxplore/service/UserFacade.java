@@ -17,7 +17,6 @@ import skyxplore.service.user.DeleteAccountService;
 import skyxplore.service.user.RegistrationService;
 import skyxplore.service.user.UserQueryService;
 
-@SuppressWarnings({"WeakerAccess", "ArraysAsListWithZeroOrOneArgument"})
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -45,7 +44,7 @@ public class UserFacade {
         deleteAccountService.deleteAccount(request, userId);
     }
 
-    public SkyXpUser getUserById(String userId) {
+    SkyXpUser getUserById(String userId) {
         return userQueryService.getUserById(userId);
     }
 

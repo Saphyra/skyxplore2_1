@@ -8,7 +8,6 @@ import skyxplore.dataaccess.db.UserDao;
 import skyxplore.domain.user.SkyXpUser;
 import skyxplore.exception.UserNotFoundException;
 
-@SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j

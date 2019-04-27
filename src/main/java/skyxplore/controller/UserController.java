@@ -19,15 +19,13 @@ import skyxplore.controller.request.user.UserRegistrationRequest;
 import skyxplore.service.UserFacade;
 
 import javax.validation.Valid;
-import java.util.concurrent.ExecutionException;
 
 import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
-@SuppressWarnings("ALL")
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class UserController {
+class UserController {
     private static final String CHANGE_EMAIL_MAPPING = "user/email";
     private static final String CHANGE_PASSWORD_MAPPING = "user/password";
     private static final String CHANGE_USERNAME_MAPPING = "user/name";
@@ -41,7 +39,7 @@ public class UserController {
     private final UserFacade userFacade;
 
     @PutMapping(CHANGE_EMAIL_MAPPING)
-    public void changeEmail(
+    void changeEmail(
         @RequestBody @Valid ChangeEmailRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
     ) {
@@ -50,7 +48,7 @@ public class UserController {
     }
 
     @PutMapping(CHANGE_PASSWORD_MAPPING)
-    public void changePassword(
+    void changePassword(
         @RequestBody @Valid ChangePasswordRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
     ) {
@@ -59,7 +57,7 @@ public class UserController {
     }
 
     @PutMapping(CHANGE_USERNAME_MAPPING)
-    public void changeUserName(
+    void changeUserName(
         @RequestBody @Valid ChangeUserNameRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
     ) {
@@ -69,7 +67,7 @@ public class UserController {
     }
 
     @DeleteMapping(DELETE_ACCOUNT_MAPPING)
-    public void deleteAccount(
+    void deleteAccount(
         @RequestBody @Valid AccountDeleteRequest request,
         @CookieValue(COOKIE_USER_ID) String userId
     ) {
@@ -78,13 +76,13 @@ public class UserController {
     }
 
     @PostMapping(EMAIL_EXISTS_MAPPING)
-    public boolean isEmailExists(@RequestBody @Valid OneStringParamRequest email) throws ExecutionException {
+    boolean isEmailExists(@RequestBody @Valid OneStringParamRequest email) {
         log.info("Request arrived to {}, request parameter: {}", EMAIL_EXISTS_MAPPING, email.getValue());
         return emailCache.get(email.getValue()).orElse(true);
     }
 
     @PostMapping(REGISTRATION_MAPPING)
-    public void registration(@RequestBody @Valid UserRegistrationRequest request) {
+    void registration(@RequestBody @Valid UserRegistrationRequest request) {
         log.info("{} wants to register!", request.getUsername());
         userFacade.registrateUser(request);
         userNameCache.invalidate(request.getUsername());
@@ -92,7 +90,7 @@ public class UserController {
     }
 
     @PostMapping(USERNAME_EXISTS_MAPPING)
-    public boolean isUsernameExists(@RequestBody @Valid OneStringParamRequest userName) throws ExecutionException {
+    boolean isUsernameExists(@RequestBody @Valid OneStringParamRequest userName) {
         log.info("Request arrived to {}, request parameter: {}", USERNAME_EXISTS_MAPPING, userName.getValue());
         return userNameCache.get(userName.getValue()).orElse(true);
     }

@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings({"unused", "unchecked"})
 @Data
 @Builder
 @NoArgsConstructor
@@ -28,7 +27,7 @@ public class SkyXpCharacter {
         equipments.add(equipmentId);
     }
 
-    public void addEquipments(Collection<String> equipments) {
+    void addEquipments(Collection<String> equipments) {
         equipments.forEach(this::addEquipment);
     }
 
@@ -62,13 +61,15 @@ public class SkyXpCharacter {
     }
 
     public ArrayList<String> getEquipments() {
-        return (ArrayList<String>) equipments.clone();
+        return new ArrayList<>(equipments);
     }
 
+    @SuppressWarnings("unused")
     private void setEquipments(ArrayList<String> equipments) {
         throw new UnsupportedOperationException("Equipments cannot be set.");
     }
 
+    @SuppressWarnings("unused")
     private void setMoney(Integer money) {
         throw new UnsupportedOperationException("Money cannot be set.");
     }

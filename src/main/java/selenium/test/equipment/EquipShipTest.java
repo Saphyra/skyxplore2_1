@@ -1,9 +1,6 @@
 package selenium.test.equipment;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
 import selenium.SeleniumTestApplication;
 import selenium.logic.domain.Category;
 import selenium.logic.domain.ContainerId;
@@ -15,6 +12,8 @@ import selenium.logic.flow.Registration;
 import selenium.logic.flow.SelectCharacter;
 import selenium.logic.validator.NotificationValidator;
 import selenium.test.equipment.util.EquipmentElementSearcher;
+
+import static org.junit.Assert.assertEquals;
 
 public class EquipShipTest extends SeleniumTestApplication {
     private static final String TEST_SHIP_ID = "sta-02";
@@ -53,7 +52,7 @@ public class EquipShipTest extends SeleniumTestApplication {
         SeleniumCharacter character = createCharacter.createCharacter();
         selectCharacter.selectCharacter(character);
         navigate.toShop();
-        buyItem.buyItem(TEST_SHIP_ID, Category.STARTER_SHIP, 1);
+        buyItem.buyItem(TEST_SHIP_ID, Category.STARTER_SHIP);
         navigate.toEquipmentPage();
     }
 

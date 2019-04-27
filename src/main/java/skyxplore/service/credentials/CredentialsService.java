@@ -22,7 +22,7 @@ public class CredentialsService {
         return skyXpCredentials;
     }
 
-    public SkyXpCredentials getCredentialsByName(String userName) {
+    SkyXpCredentials getCredentialsByName(String userName) {
         return credentialsDao.getCredentialsByName(userName)
             .orElseThrow(() -> new BadCredentialsException("SkyXpCredentials cannot be found. Username: " + userName));
     }

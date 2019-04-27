@@ -41,7 +41,7 @@ public class BuyItemTest extends SeleniumTestApplication {
     public void testBuyItem() {
         shopTestInitializer.registerAndGoToShop();
 
-        buyItem.buyItem(BOUGHT_ITEM_ID, Category.ENERGY, 1);
+        buyItem.buyItem(BOUGHT_ITEM_ID, Category.ENERGY);
 
         verifyItemInStorage();
     }

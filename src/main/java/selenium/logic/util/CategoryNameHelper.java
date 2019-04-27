@@ -1,6 +1,5 @@
 package selenium.logic.util;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import selenium.logic.domain.Category;
@@ -8,7 +7,6 @@ import selenium.logic.domain.MessageCodes;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,10 +23,6 @@ public class CategoryNameHelper {
             log.info("Localization not found for locale {}. Using default locale...", locale);
             messageCodes = getClass().getClassLoader().getResource("public/i18n/hu/categories.json");
         }
-
-
-        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
-        };
 
         try {
             this.categories = objectMapper.readValue(messageCodes, MessageCodes.class);

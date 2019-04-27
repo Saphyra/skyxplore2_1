@@ -15,23 +15,22 @@ import skyxplore.domain.materials.Materials;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 
-@SuppressWarnings("WeakerAccess")
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class NewCharacterGenerator {
-    public static final String STARTER_SHIP_ID = "sta-01";
+class NewCharacterGenerator {
+    static final String STARTER_SHIP_ID = "sta-01";
 
-    public static final String GENERATOR_ID = "gen-01";
-    public static final String BATTERY_ID = "bat-01";
-    public static final String STORAGE_ID = "sto-01";
+    static final String GENERATOR_ID = "gen-01";
+    static final String BATTERY_ID = "bat-01";
+    static final String STORAGE_ID = "sto-01";
 
-    public static final String SHIELD_ID = "shi-hclr-01";
-    public static final String ARMOR_ID = "arm-01";
+    static final String SHIELD_ID = "shi-hclr-01";
+    static final String ARMOR_ID = "arm-01";
 
-    public static final String LASER_ID = "las-mrldma-01";
-    public static final String LAUNCHER_ID = "rla-hrldma-01";
-    public static final String RIFLE_ID = "rif-lrldma-01";
+    static final String LASER_ID = "las-mrldma-01";
+    static final String LAUNCHER_ID = "rla-hrldma-01";
+    static final String RIFLE_ID = "rif-lrldma-01";
 
     private final CharacterGeneratorConfig config;
     private final IdGenerator idGenerator;
@@ -48,7 +47,7 @@ public class NewCharacterGenerator {
         return character;
     }
 
-    public EquippedShip createShip(String characterId) {
+    EquippedShip createShip(String characterId) {
         EquippedShip ship = new EquippedShip();
         ship.setShipId(idGenerator.generateRandomId());
         ship.setCharacterId(characterId);
@@ -70,7 +69,7 @@ public class NewCharacterGenerator {
         ship.addConnector(STORAGE_ID);
     }
 
-    public EquippedSlot createDefenseSlot(String shipId) {
+    EquippedSlot createDefenseSlot(String shipId) {
         Ship shipData = shipService.get(STARTER_SHIP_ID);
         EquippedSlot slot = createSlot(shipId, shipData.getDefense());
         fillWithDefense(slot);
@@ -105,7 +104,7 @@ public class NewCharacterGenerator {
         defense.addBack(ARMOR_ID);
     }
 
-    public EquippedSlot createWeaponSlot(String shipId) {
+    EquippedSlot createWeaponSlot(String shipId) {
         Ship shipData = shipService.get(STARTER_SHIP_ID);
         EquippedSlot slot = createSlot(shipId, shipData.getWeapon());
         fillWithWeapon(slot);
@@ -123,7 +122,7 @@ public class NewCharacterGenerator {
         weapon.addBack(RIFLE_ID);
     }
 
-    public Factory createFactory(String characterId) {
+    Factory createFactory(String characterId) {
         Factory factory = new Factory();
         factory.setFactoryId(idGenerator.generateRandomId());
         factory.setCharacterId(characterId);

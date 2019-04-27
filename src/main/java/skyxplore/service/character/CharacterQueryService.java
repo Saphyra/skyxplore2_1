@@ -1,13 +1,8 @@
 package skyxplore.service.character;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.cache.CharacterNameLikeCache;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
@@ -17,7 +12,10 @@ import skyxplore.exception.InvalidAccessException;
 import skyxplore.service.community.BlockedCharacterQueryService;
 import skyxplore.service.community.FriendshipQueryService;
 
-@SuppressWarnings("WeakerAccess")
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service

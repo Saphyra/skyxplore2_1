@@ -1,14 +1,12 @@
 package skyxplore.service.character;
 
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.character.CharacterDeleteRequest;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.CharacterDao;
 import skyxplore.domain.character.SkyXpCharacter;
+
+import javax.transaction.Transactional;
 
 @Service
 @Slf4j

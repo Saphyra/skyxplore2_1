@@ -12,7 +12,7 @@ import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class NotificationController {
+class NotificationController {
     private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "notification/friend-request";
     private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "notification/unread-mail";
     private static final String GET_NUMBER_OF_NOTIFICATIONS = "notification";
@@ -20,7 +20,7 @@ public class NotificationController {
     private final NotificationFacade notificationFacade;
 
     @GetMapping(GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING)
-    public Integer getNumberOfFriendRequests(
+    Integer getNumberOfFriendRequests(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know the number of his friend requests.", characterId);
@@ -28,7 +28,7 @@ public class NotificationController {
     }
 
     @GetMapping(GET_NUMBER_OF_UNREAD_MAILS_MAPPING)
-    public Integer getNumberOfUnreadMails(
+    Integer getNumberOfUnreadMails(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know the number of his unread mails.", characterId);
@@ -36,7 +36,7 @@ public class NotificationController {
     }
 
     @GetMapping(GET_NUMBER_OF_NOTIFICATIONS)
-    public Integer getNumberOfNotifications(
+    Integer getNumberOfNotifications(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know the number of notifications.", characterId);

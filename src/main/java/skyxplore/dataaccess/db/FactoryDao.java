@@ -8,7 +8,6 @@ import skyxplore.dataaccess.db.repository.FactoryRepository;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.factory.FactoryEntity;
 
-@SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
 public class FactoryDao extends AbstractDao<FactoryEntity, Factory, String, FactoryRepository> {

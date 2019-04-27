@@ -17,6 +17,7 @@ public class EquipmentTestHelper {
     private final Navigate navigate;
     private final EquipmentElementSearcher equipmentElementSearcher;
 
+    @SuppressWarnings("UnusedReturnValue")
     public SeleniumCharacter registerAndGoToEquipmentPage() {
         registration.registerUser();
         SeleniumCharacter character = createCharacter.createCharacter();

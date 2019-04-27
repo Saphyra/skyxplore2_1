@@ -12,7 +12,6 @@ import skyxplore.util.DateTimeUtil;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
 public class ProductDao extends AbstractDao<ProductEntity, Product, String, ProductRepository> {
@@ -27,7 +26,7 @@ public class ProductDao extends AbstractDao<ProductEntity, Product, String, Prod
         this.dateTimeUtil = dateTimeUtil;
     }
 
-    public void deleteByFactoryId(String factoryId) {
+    void deleteByFactoryId(String factoryId) {
         repository.deleteByFactoryId(factoryId);
     }
 

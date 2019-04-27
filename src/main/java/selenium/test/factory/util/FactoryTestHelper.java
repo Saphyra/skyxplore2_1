@@ -14,6 +14,7 @@ public class FactoryTestHelper {
     private final SelectCharacter selectCharacter;
     private final Navigate navigate;
 
+    @SuppressWarnings("UnusedReturnValue")
     public SeleniumCharacter registerAndGoToFactoryPage() {
         registration.registerUser();
         SeleniumCharacter character = createCharacter.createCharacter();

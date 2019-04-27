@@ -1,8 +1,5 @@
 package selenium.test.community.helper;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import selenium.logic.domain.SeleniumAccount;
 import selenium.logic.domain.SeleniumCharacter;
@@ -10,6 +7,9 @@ import selenium.logic.domain.SeleniumUser;
 import selenium.logic.flow.CreateCharacter;
 import selenium.logic.flow.Logout;
 import selenium.logic.flow.Registration;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class CommunityTestInitializer {
@@ -26,16 +26,16 @@ public class CommunityTestInitializer {
         return result;
     }
 
-    public SeleniumAccount createAccount(int characterNum) {
+    private SeleniumAccount createAccount(int characterNum) {
         SeleniumUser user = registration.registerUser();
-        List<SeleniumCharacter> characters = createCharactersForUser(user, characterNum);
+        List<SeleniumCharacter> characters = createCharactersForUser(characterNum);
         return SeleniumAccount.builder()
             .user(user)
             .characters(characters)
             .build();
     }
 
-    private List<SeleniumCharacter> createCharactersForUser(SeleniumUser user, int characterNum) {
+    private List<SeleniumCharacter> createCharactersForUser(int characterNum) {
         List<SeleniumCharacter> result = new LinkedList<>();
         for (int i = 0; i < characterNum; i++) {
             result.add(createCharacter.createCharacter());

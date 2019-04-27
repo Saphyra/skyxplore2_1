@@ -38,7 +38,7 @@ public class BuyItem {
         this.messageCodes = messageCodes;
     }
 
-    public void buyItem(String itemId, Category category, int amount) {
+    public void buyItem(String itemId, Category category) {
         ShopItem equipmentToBuy = shopElementSearcher.searchShopItemById(category, itemId);
         int cost = equipmentToBuy.getCost();
         int currentMoney = costCounter.getCurrentMoney();

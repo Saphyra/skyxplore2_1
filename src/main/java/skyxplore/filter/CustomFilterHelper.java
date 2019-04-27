@@ -17,7 +17,7 @@ public class CustomFilterHelper {
     public static final String REQUEST_TYPE_HEADER = "Request-Type";
     public static final String REST_TYPE_REQUEST = "rest";
 
-    public void handleUnauthorized(HttpServletRequest request, HttpServletResponse response, String redirection) throws IOException {
+    void handleUnauthorized(HttpServletRequest request, HttpServletResponse response, String redirection) throws IOException {
         if (REST_TYPE_REQUEST.equals(request.getHeader(REQUEST_TYPE_HEADER))) {
             log.info("Sending error. Cause: Unauthorized access.");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");

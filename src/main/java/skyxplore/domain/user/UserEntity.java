@@ -28,7 +28,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
 
-    public HashSet<Role> getRoles() {
+    HashSet<Role> getRoles() {
         return new HashSet<>(roles);
     }
 }

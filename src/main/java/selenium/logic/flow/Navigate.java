@@ -30,13 +30,6 @@ public class Navigate {
         verifyURL(ACCOUNT);
     }
 
-    public void toCharacterSelectPage() {
-        assertEquals(OVERVIEW, driver.getCurrentUrl());
-        new OverviewPage(driver).getCharacterSelectPageButton().click();
-
-        verifyURL(CHARACTER_SELECT);
-    }
-
     public void toFactory() {
         assertEquals(OVERVIEW, driver.getCurrentUrl());
         new OverviewPage(driver).getFactoryButton().click();
@@ -71,12 +64,12 @@ public class Navigate {
         assertEquals(EQUIPMENT, driver.getCurrentUrl());
     }
 
-    public WebElement getOverviewButton() {
+    private WebElement getOverviewButton() {
         return Optional.ofNullable(driver.findElement(By.cssSelector(SELECTOR_OVERVIEW_BUTTON)))
             .orElseThrow(() -> new RuntimeException("Go to Overview button not found."));
     }
 
-    public void toIndexPage() {
+    void toIndexPage() {
         Optional<WebElement> logoutButton = LocatorUtil.getLogoutButton(driver);
         if (logoutButton.isPresent()) {
             logoutButton.get().click();

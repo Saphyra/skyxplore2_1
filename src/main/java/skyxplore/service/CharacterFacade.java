@@ -16,7 +16,6 @@ import skyxplore.service.character.CharacterRenameService;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
 @RequiredArgsConstructor

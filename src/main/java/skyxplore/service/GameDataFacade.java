@@ -12,7 +12,6 @@ import skyxplore.service.gamedata.DataQueryService;
 
 import java.util.Map;
 
-@SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -28,7 +27,7 @@ public class GameDataFacade {
         return dataQueryService.getFactoryData(elementId);
     }
 
-    public Map<String, GeneralDescription> getElementsOfCategory(EquipmentCategoryRequest request) {
+    Map<String, GeneralDescription> getElementsOfCategory(EquipmentCategoryRequest request) {
         return categoryQueryService.getElementsOfCategory(request);
     }
 

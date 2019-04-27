@@ -20,7 +20,6 @@ import skyxplore.dataaccess.gamedata.subservice.StorageService;
 import skyxplore.dataaccess.gamedata.subservice.WeaponService;
 import skyxplore.exception.EquipmentNotFoundException;
 
-@SuppressWarnings("WeakerAccess")
 @Service
 @RequiredArgsConstructor
 @Slf4j

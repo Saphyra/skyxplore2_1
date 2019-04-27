@@ -1,17 +1,15 @@
 package skyxplore.service.factory;
 
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.domain.factory.Factory;
 import skyxplore.exception.FactoryNotFoundException;
 import skyxplore.service.character.CharacterQueryService;
 
-@SuppressWarnings("WeakerAccess")
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -19,7 +17,7 @@ public class FactoryQueryService {
     private final CharacterQueryService characterQueryService;
     private final FactoryDao factoryDao;
 
-    public Factory findFactoryOfCharacterValidated(String characterId) {
+    Factory findFactoryOfCharacterValidated(String characterId) {
         Factory factory = factoryDao.findByCharacterId(characterId);
         if (factory == null) {
             throw new FactoryNotFoundException("Factory not found for character " + characterId);

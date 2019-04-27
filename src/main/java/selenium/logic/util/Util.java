@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
 
 @Slf4j
@@ -37,8 +37,8 @@ public class Util {
         return source.substring(0, length);
     }
 
-    public static <T> Optional<T> validateIfPresent(Optional<T> optional) {
-        assertTrue(optional.isPresent());
+    public static <T> Optional<T> validateIfPresent(@SuppressWarnings("OptionalUsedAsFieldOrParameterType") Optional<T> optional) {
+        assertThat(optional).isPresent();
         return optional;
     }
 

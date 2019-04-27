@@ -7,7 +7,6 @@ import skyxplore.filter.CharacterAuthFilter;
 import skyxplore.filter.CookieCleanupFilter;
 
 @Configuration
-@SuppressWarnings({"unused", "WeakerAccess"})
 public class FilterConfig {
     @Bean
     public FilterRegistrationBean<CharacterAuthFilter> characterAuthFilterBean(CharacterAuthFilter characterAuthFilter) {

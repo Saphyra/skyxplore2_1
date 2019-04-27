@@ -49,7 +49,7 @@ public class CharacterController {
     private final CookieUtil cookieUtil;
 
     @PostMapping(BUY_EQUIPMENTS_MAPPING)
-    public void buyEquipments(
+    void buyEquipments(
         @RequestBody HashMap<String, Integer> items,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -59,7 +59,7 @@ public class CharacterController {
     }
 
     @PostMapping(CREATE_CHARACTER_MAPPING)
-    public CharacterView createCharacter(
+    CharacterView createCharacter(
         @RequestBody @Valid CreateCharacterRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
@@ -71,7 +71,7 @@ public class CharacterController {
     }
 
     @DeleteMapping(DELETE_CHARACTER_MAPPING)
-    public void deleteCharacter(
+    void deleteCharacter(
         @PathVariable("characterId") String characterId,
         @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
@@ -81,13 +81,13 @@ public class CharacterController {
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)
-    public List<CharacterView> getCharacters(@CookieValue(value = COOKIE_USER_ID) String userId) {
+    List<CharacterView> getCharacters(@CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to know his character list.", userId);
         return characterViewConverter.convertDomain(characterFacade.getCharactersByUserId(userId));
     }
 
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
-    public List<String> getEquipmentsOfCharacter(
+    List<String> getEquipmentsOfCharacter(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his equipments.", characterId);
@@ -95,7 +95,7 @@ public class CharacterController {
     }
 
     @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
-    public Integer getMoney(
+    Integer getMoney(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his money.", characterId);
@@ -103,13 +103,13 @@ public class CharacterController {
     }
 
     @PostMapping(IS_CHAR_NAME_EXISTS_MAPPING)
-    public boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) {
+    boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) {
         log.info("Someone wants to know if character with name {} is exists.", request);
         return characterNameCache.get(request.getValue()).orElse(true);
     }
 
     @PutMapping(RENAME_CHARACTER_MAPPING)
-    public CharacterView renameCharacter(
+    CharacterView renameCharacter(
         @RequestBody @Valid RenameCharacterRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to rename character {}", userId, request);
@@ -120,7 +120,7 @@ public class CharacterController {
     }
 
     @PutMapping(SELECT_CHARACTER_MAPPING)
-    public void selectCharacter(
+    void selectCharacter(
         @PathVariable("characterId") String characterId,
         @CookieValue(COOKIE_USER_ID) String userId,
         HttpServletResponse response

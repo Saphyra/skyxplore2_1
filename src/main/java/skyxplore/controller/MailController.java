@@ -1,11 +1,7 @@
 package skyxplore.controller;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-
-import java.util.List;
-
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.character.CharacterView;
@@ -24,11 +17,15 @@ import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.service.MailFacade;
 
-@SuppressWarnings("WeakerAccess")
+import javax.validation.Valid;
+import java.util.List;
+
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class MailController {
+class MailController {
     private static final String ARCHIVE_MAILS_MAPPING = "mail/archive";
     private static final String DELETE_MAILS_MAPPING = "mail";
     private static final String GET_ADDRESSEES_MAPPING = "mail/addressee";
@@ -45,7 +42,7 @@ public class MailController {
     private final MailViewConverter mailViewConverter;
 
     @PostMapping(ARCHIVE_MAILS_MAPPING)
-    public void archiveMails(
+    void archiveMails(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -54,7 +51,7 @@ public class MailController {
     }
 
     @DeleteMapping(DELETE_MAILS_MAPPING)
-    public void deleteMails(
+    void deleteMails(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -63,7 +60,7 @@ public class MailController {
     }
 
     @PostMapping(GET_ADDRESSEES_MAPPING)
-    public List<CharacterView> getAddressees(
+    List<CharacterView> getAddressees(
         @RequestBody OneStringParamRequest name,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -72,7 +69,7 @@ public class MailController {
     }
 
     @GetMapping(GET_ARCHIVED_MAILS_MAPPING)
-    public List<MailView> getArchivedMails(
+    List<MailView> getArchivedMails(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his archived mails.");
@@ -80,7 +77,7 @@ public class MailController {
     }
 
     @GetMapping(GET_MAILS_MAPPING)
-    public List<MailView> getMails(
+    List<MailView> getMails(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his mails.", characterId);
@@ -88,7 +85,7 @@ public class MailController {
     }
 
     @GetMapping(GET_SENT_MAILS_MAPPING)
-    public List<MailView> getSentMails(
+    List<MailView> getSentMails(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his sent mails.", characterId);
@@ -96,7 +93,7 @@ public class MailController {
     }
 
     @PostMapping(MARK_MAILS_READ_MAPPING)
-    public void markMailsRead(
+    void markMailsRead(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -105,7 +102,7 @@ public class MailController {
     }
 
     @PostMapping(MARK_MAILS_UNREAD_MAPPING)
-    public void markMailsUnread(
+    void markMailsUnread(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -114,7 +111,7 @@ public class MailController {
     }
 
     @PutMapping(SEND_MAIL_MAPPING)
-    public void sendMail(
+    void sendMail(
         @RequestBody @Valid SendMailRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -123,7 +120,7 @@ public class MailController {
     }
 
     @PostMapping(RESTORE_MAILS_MAPPING)
-    public void restoreMails(
+    void restoreMails(
         @RequestBody List<String> mailIds,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {

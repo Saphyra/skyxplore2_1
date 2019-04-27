@@ -13,7 +13,7 @@ import java.util.List;
 public class MailQueryService {
     private final MailDao mailDao;
 
-    public Mail findMailById(String mailId) {
+    Mail findMailById(String mailId) {
         return mailDao.findById(mailId)
             .orElseThrow(() -> new MailNotFoundException("Mail not found with id " + mailId));
     }

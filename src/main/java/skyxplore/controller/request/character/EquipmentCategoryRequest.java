@@ -20,6 +20,7 @@ public enum EquipmentCategoryRequest {
         this.value = value;
     }
 
+    @SuppressWarnings("unused")
     public static EquipmentCategoryRequest fromValue(String value) {
         for (EquipmentCategoryRequest element : values()) {
             if (element.value.equalsIgnoreCase(value)) {

@@ -19,7 +19,7 @@ public class SlotDao extends AbstractDao<SlotEntity, EquippedSlot, String, SlotR
     }
 
     @Transactional
-    public void deleteByShipId(String shipId) {
+    void deleteByShipId(String shipId) {
         log.info("Deleting slots of {}", shipId);
         repository.deleteByShipId(shipId);
     }

@@ -91,7 +91,7 @@ public class FriendshipService {
         friendshipDao.delete(friendship);
     }
 
-    public void removeContactsBetween(String characterId, String blockedCharacterId) {
+    void removeContactsBetween(String characterId, String blockedCharacterId) {
         friendRequestDao.getByCharacterIdOrFriendId(characterId, blockedCharacterId).forEach(friendRequestDao::delete);
         friendshipDao.getByCharacterIdOrFriendId(characterId, blockedCharacterId).forEach(friendshipDao::delete);
     }

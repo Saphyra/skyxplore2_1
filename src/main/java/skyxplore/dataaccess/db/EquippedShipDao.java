@@ -9,7 +9,6 @@ import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.exception.ShipNotFoundException;
 
-@SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
 public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShip, String, EquippedShipRepository> {

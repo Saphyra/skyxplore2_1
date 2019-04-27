@@ -1,9 +1,7 @@
 package skyxplore.controller;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,19 +9,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.service.EquippedShipFacade;
 
-@SuppressWarnings("WeakerAccess")
+import javax.validation.Valid;
+
+import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class ShipController {
+class ShipController {
     private static final String EQUIP_MAPPING = "ship/equipment";
     private static final String EQUIP_SHIP_MAPPING = "ship/equipment/{shipId}";
     private static final String GET_SHIP_DATA_MAPPING = "ship";
@@ -32,7 +30,7 @@ public class ShipController {
     private final EquippedShipFacade equippedShipFacade;
 
     @PostMapping(EQUIP_MAPPING)
-    public void equip(
+    void equip(
         @RequestBody @Valid EquipRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
@@ -41,7 +39,7 @@ public class ShipController {
     }
 
     @PostMapping(EQUIP_SHIP_MAPPING)
-    public void equipShip(
+    void equipShip(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId,
         @PathVariable("shipId") String shipId
     ) {
@@ -50,7 +48,7 @@ public class ShipController {
     }
 
     @GetMapping(GET_SHIP_DATA_MAPPING)
-    public ShipView getShipData(
+    ShipView getShipData(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Querying ship data of character {}", characterId);
@@ -58,7 +56,7 @@ public class ShipController {
     }
 
     @DeleteMapping(UNEQUIP_MAPPING)
-    public void unequip(
+    void unequip(
         @RequestBody @Valid UnequipRequest request,
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {

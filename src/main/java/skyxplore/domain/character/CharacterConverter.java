@@ -9,11 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
-@SuppressWarnings("unchecked")
 public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
@@ -35,14 +34,15 @@ public class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpChar
                 entity.getMoney(),
                 entity.getCharacterId())
             );
+            String[] equipments = objectMapper.readValue(
+                stringEncryptor.decryptEntity(
+                    entity.getEquipments(),
+                    entity.getCharacterId()
+                ),
+                String[].class
+            );
             domain.addEquipments(
-                objectMapper.readValue(
-                    stringEncryptor.decryptEntity(
-                        entity.getEquipments(),
-                        entity.getCharacterId()
-                    ),
-                    ArrayList.class
-                )
+                Arrays.asList(equipments)
             );
         } catch (IOException e) {
             e.printStackTrace();

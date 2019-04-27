@@ -12,13 +12,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class DataController {
+class DataController {
     private static final String GET_ITEMS_OF_CATEGORY_MAPPING = "categories/{categoryId}";
 
     private final CommonDataQueryService commonDataQueryService;
 
     @GetMapping(GET_ITEMS_OF_CATEGORY_MAPPING)
-    public List<String> getItemsOfCategory(@PathVariable("categoryId") String categoryId){
+    List<String> getItemsOfCategory(@PathVariable("categoryId") String categoryId) {
         log.info("Querying items of category {}", categoryId);
         return commonDataQueryService.getItemsOfCategory(categoryId);
     }

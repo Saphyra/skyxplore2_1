@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 @NoArgsConstructor
 @Slf4j
 public class Materials extends HashMap<String, Integer> {
@@ -29,7 +28,7 @@ public class Materials extends HashMap<String, Integer> {
         return super.put(key, get(key) + value);
     }
 
-    public Integer removeMaterial(String key, Integer amount) {
+    public void removeMaterial(String key, Integer amount) {
         Integer actual = get(key);
         log.info("removeMaterial - {} toRemove: {}, actual: {}", key, amount, actual);
         if (actual < amount) {
@@ -38,7 +37,7 @@ public class Materials extends HashMap<String, Integer> {
         actual -= amount;
         super.put(key, actual);
         log.debug("{} after change: {}", key, get(key));
-        return get(key);
+        get(key);
     }
 
     @Override

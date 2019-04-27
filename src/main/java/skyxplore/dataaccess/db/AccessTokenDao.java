@@ -14,7 +14,6 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 
-@SuppressWarnings("WeakerAccess")
 @Component
 @Slf4j
 public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessToken, String, AccessTokenRepository> {
@@ -43,7 +42,7 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessTo
         return converter.convertEntityToOptional(repository.findByUserId(userId));
     }
 
-    public Optional<SkyXpAccessToken> findByUserIdOrTokenId(String userId, String tokenId) {
+    Optional<SkyXpAccessToken> findByUserIdOrTokenId(String userId, String tokenId) {
         return converter.convertEntityToOptional(repository.findByUserIdOrAccessTokenId(userId, tokenId));
     }
 }

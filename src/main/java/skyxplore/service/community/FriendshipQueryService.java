@@ -20,12 +20,12 @@ public class FriendshipQueryService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
 
-    public FriendRequest findFriendRequestById(String friendRequestId) {
+    FriendRequest findFriendRequestById(String friendRequestId) {
         return friendRequestDao.findById(friendRequestId)
             .orElseThrow(() -> new FriendRequestNotFoundException("SeleniumFriendRequest not found with id " + friendRequestId));
     }
 
-    public Friendship findFriendshipById(String friendshipId) {
+    Friendship findFriendshipById(String friendshipId) {
         return friendshipDao.findById(friendshipId)
             .orElseThrow(() -> new FriendshipNotFoundException("Friendship not found with id " + friendshipId));
     }
@@ -63,7 +63,7 @@ public class FriendshipQueryService {
         return friendRequestDao.getByCharacterIdOrFriendId(characterId, friendId).size() > 0;
     }
 
-    public boolean isFriendshipOrFriendRequestAlreadyExists(String characterId, String friendId) {
+    boolean isFriendshipOrFriendRequestAlreadyExists(String characterId, String friendId) {
         return isFriendRequestAlreadyExists(characterId, friendId)
             || isFriendshipAlreadyExists(characterId, friendId);
     }

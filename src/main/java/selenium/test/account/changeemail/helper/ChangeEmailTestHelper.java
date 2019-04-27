@@ -32,6 +32,7 @@ public class ChangeEmailTestHelper {
         return user;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public SeleniumUser setUpWithRandomEmail() {
         SeleniumUser user = registerAndNavigateToAccount();
         accountPage.getChangeEmailField().sendKeys(SeleniumUser.createRandomEmail());

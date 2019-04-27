@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-@SuppressWarnings("unused")
 @Configuration
 public class ThymeLeafConfig {
     @Bean

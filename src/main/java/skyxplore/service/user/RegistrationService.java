@@ -17,7 +17,6 @@ import skyxplore.service.credentials.CredentialsService;
 import java.util.Arrays;
 import java.util.HashSet;
 
-@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 @Service
 @RequiredArgsConstructor
 @Slf4j
