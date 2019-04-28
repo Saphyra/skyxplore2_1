@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.InvalidMailAccessException;
 import skyxplore.service.character.CharacterQueryService;

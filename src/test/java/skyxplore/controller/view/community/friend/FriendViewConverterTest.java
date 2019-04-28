@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.character.CharacterQueryService;
 

@@ -4,8 +4,8 @@ import com.github.saphyra.cache.AbstractCache;
 import com.google.common.cache.CacheBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,22 @@
 package skyxplore.service.character;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import skyxplore.cache.CharacterNameCache;
+import skyxplore.controller.request.character.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import skyxplore.dataaccess.db.EquippedShipDao;
+import skyxplore.dataaccess.db.FactoryDao;
+import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.exception.CharacterNameAlreadyExistsException;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,24 +32,6 @@ import static skyxplore.testutil.TestUtils.createEquippedDefenseSlot;
 import static skyxplore.testutil.TestUtils.createEquippedShip;
 import static skyxplore.testutil.TestUtils.createEquippedWeaponSlot;
 import static skyxplore.testutil.TestUtils.createFactory;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import skyxplore.cache.CharacterNameCache;
-import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.dataaccess.db.EquippedShipDao;
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.domain.character.SkyXpCharacter;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.exception.CharacterNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterCreatorServiceTest {

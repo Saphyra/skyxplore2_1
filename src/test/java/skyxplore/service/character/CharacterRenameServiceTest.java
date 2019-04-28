@@ -7,14 +7,18 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.CHARACTER_NEW_NAME;
+import static skyxplore.testutil.TestUtils.USER_ID;
+import static skyxplore.testutil.TestUtils.createCharacter;
+import static skyxplore.testutil.TestUtils.createRenameCharacterRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterRenameServiceTest {

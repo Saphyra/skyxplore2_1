@@ -1,22 +1,21 @@
 package skyxplore.service.character;
 
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.dataaccess.db.CharacterDao;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
+
+import javax.transaction.Transactional;
 
 @Service
 @Slf4j

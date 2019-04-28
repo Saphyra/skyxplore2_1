@@ -25,8 +25,7 @@ import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.domain.character.CharacterEntity;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
 import skyxplore.domain.community.blockedcharacter.BlockedCharacterEntity;
 import skyxplore.domain.community.friendrequest.FriendRequest;
@@ -73,10 +72,8 @@ public class TestUtils {
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
-    public static final String CHARACTER_ENCRYPTED_MONEY = "character_encrypted_money";
     public static final String FRIEND_NAME = "friend_name";
-    public static final String CHARACTER_ENCRYPTED_EQUIPMENTS = "character_encrypted_equipments";
-    public static final String CHARACTER_EQUIPMENT = "character_equipments";
+    private static final String CHARACTER_EQUIPMENT = "character_equipments";
 
     //Converter
     public static final String CONVERTER_ENTITY = "converter_entity";
@@ -273,16 +270,6 @@ public class TestUtils {
         character.addMoney(CHARACTER_MONEY);
         character.addEquipment(CHARACTER_EQUIPMENT);
         return character;
-    }
-
-    public static CharacterEntity createCharacterEntity() {
-        CharacterEntity entity = new CharacterEntity();
-        entity.setCharacterId(CHARACTER_ID_1);
-        entity.setUserId(USER_ID);
-        entity.setCharacterName(CHARACTER_NAME);
-        entity.setMoney(CHARACTER_ENCRYPTED_MONEY);
-        entity.setEquipments(CHARACTER_ENCRYPTED_EQUIPMENTS);
-        return entity;
     }
 
     public static CharacterView createCharacterView(SkyXpCharacter character) {

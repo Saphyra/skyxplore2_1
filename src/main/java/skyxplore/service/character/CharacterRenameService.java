@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skyxplore.cache.CharacterNameCache;
 import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.dataaccess.db.CharacterDao;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 
 @Service

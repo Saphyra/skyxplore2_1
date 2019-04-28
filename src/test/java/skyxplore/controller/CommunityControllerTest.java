@@ -12,7 +12,7 @@ import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friend.FriendViewConverter;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestViewConverter;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.friendrequest.FriendRequest;
 import skyxplore.domain.community.friendship.Friendship;
 import skyxplore.service.CommunityFacade;

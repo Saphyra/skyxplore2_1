@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.gamedata.entity.Extender;
 import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 import java.util.Arrays;
 import java.util.List;

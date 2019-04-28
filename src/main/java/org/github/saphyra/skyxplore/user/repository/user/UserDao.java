@@ -3,31 +3,29 @@ package org.github.saphyra.skyxplore.user.repository.user;
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
-import org.springframework.stereotype.Component;
+import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
 @Component
 @Slf4j
 public class UserDao extends AbstractDao<UserEntity, SkyXpUser, String, UserRepository> {
-    private final CredentialsDao credentialsDao;
 
     public UserDao(
         Converter<UserEntity, SkyXpUser> converter,
-        UserRepository repository,
-        CredentialsDao credentialsDao
+        UserRepository repository
     ) {
         super(converter, repository);
-        this.credentialsDao = credentialsDao;
     }
 
     @Transactional
-    public void delete(String userId) {
-        log.info("Deleting user {}", userId);
-        repository.deleteById(userId);
-        credentialsDao.deleteById(userId);
+    @EventListener
+    void delete(AccountDeletedEvent accountDeletedEvent) {
+        log.info("Deleting user {}", accountDeletedEvent.getUserId());
+        repository.deleteById(accountDeletedEvent.getUserId());
     }
 
     public SkyXpUser findUserByEmail(String email) {

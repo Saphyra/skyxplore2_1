@@ -3,7 +3,9 @@ package org.github.saphyra.skyxplore.user.repository.credentials;
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -22,5 +24,12 @@ public class CredentialsDao extends AbstractDao<CredentialsEntity, SkyXpCredenti
 
     public Optional<SkyXpCredentials> getCredentialsByName(String userName) {
         return converter.convertEntityToOptional(repository.getByUserName(userName));
+    }
+
+    @EventListener
+    //TODO unit test
+    void deleteByUserId(AccountDeletedEvent accountDeletedEvent){
+        log.info("Deleting credentials for user {}", accountDeletedEvent.getUserId());
+        repository.deleteById(accountDeletedEvent.getUserId());
     }
 }

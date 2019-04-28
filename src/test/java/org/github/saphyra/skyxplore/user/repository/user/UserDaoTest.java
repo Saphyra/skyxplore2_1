@@ -1,8 +1,8 @@
 package org.github.saphyra.skyxplore.user.repository.user;
 
+import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.user.domain.Role;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
-import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,19 +26,15 @@ public class UserDaoTest {
     @Mock
     private SkyXpUserConverter skyXpUserConverter;
 
-    @Mock
-    private CredentialsDao credentialsDao;
-
     @InjectMocks
     private UserDao underTest;
 
     @Test
     public void testDeleteShouldCallRepositoryAndDao() {
         //WHEN
-        underTest.delete(USER_ID);
+        underTest.delete(new AccountDeletedEvent(USER_ID));
         //THEN
         verify(userRepository).deleteById(USER_ID);
-        verify(credentialsDao).deleteById(USER_ID);
     }
 
     @Test

@@ -2,7 +2,7 @@ package skyxplore.domain.slot;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.Data;
-import skyxplore.domain.character.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 import java.util.ArrayList;
 import java.util.Collection;
