@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.util.IdGenerator;
-import skyxplore.controller.request.user.AccountDeleteRequest;
+import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 
 
 @RunWith(SpringRunner.class)

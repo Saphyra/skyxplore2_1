@@ -1,16 +1,15 @@
 package org.github.saphyra.skyxplore.user;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import org.github.saphyra.skyxplore.user.ChangePasswordService;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.user.ChangePasswordRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import skyxplore.exception.BadCredentialsException;
-import org.github.saphyra.skyxplore.user.CredentialsService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;

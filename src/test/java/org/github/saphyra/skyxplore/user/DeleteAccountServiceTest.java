@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
-import skyxplore.controller.request.user.AccountDeleteRequest;
+import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import skyxplore.exception.BadCredentialsException;
 
 import static org.assertj.core.api.Assertions.assertThat;

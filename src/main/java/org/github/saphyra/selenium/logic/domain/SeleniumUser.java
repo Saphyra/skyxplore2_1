@@ -1,11 +1,11 @@
 package org.github.saphyra.selenium.logic.domain;
 
-import lombok.Data;
-
 import static org.github.saphyra.selenium.logic.util.Util.crop;
 import static org.github.saphyra.selenium.logic.util.Util.randomUID;
-import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+
+import lombok.Data;
 
 @Data
 public class SeleniumUser {

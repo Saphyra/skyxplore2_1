@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
-import skyxplore.controller.request.OneStringParamRequest;
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.character.CharacterView;

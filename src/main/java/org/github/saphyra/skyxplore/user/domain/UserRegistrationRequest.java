@@ -1,10 +1,10 @@
-package skyxplore.controller.request.user;
-
-import lombok.Data;
+package org.github.saphyra.skyxplore.user.domain;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import lombok.Data;
 
 @Data
 public class UserRegistrationRequest {

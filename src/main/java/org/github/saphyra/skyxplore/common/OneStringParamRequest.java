@@ -1,4 +1,4 @@
-package skyxplore.controller.request;
+package org.github.saphyra.skyxplore.common;
 
 import javax.validation.constraints.NotNull;
 

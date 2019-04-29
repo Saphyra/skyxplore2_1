@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.github.saphyra.skyxplore.user.cache.EmailCache;
 import org.github.saphyra.skyxplore.user.cache.UserNameCache;
-import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.user.AccountDeleteRequest;
-import skyxplore.controller.request.user.ChangeEmailRequest;
-import skyxplore.controller.request.user.ChangePasswordRequest;
-import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.controller.request.user.UserRegistrationRequest;
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
+import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
+import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
 
 import javax.validation.Valid;
 

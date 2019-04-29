@@ -9,7 +9,7 @@ import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.user.UserRegistrationRequest;
+import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
 import skyxplore.exception.EmailAlreadyExistsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 

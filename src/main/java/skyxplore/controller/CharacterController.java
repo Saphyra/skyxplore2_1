@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
-import skyxplore.controller.request.OneStringParamRequest;
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import skyxplore.controller.view.character.CharacterView;

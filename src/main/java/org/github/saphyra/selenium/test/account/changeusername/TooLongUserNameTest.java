@@ -7,7 +7,7 @@ import org.github.saphyra.selenium.logic.page.AccountPage;
 import org.github.saphyra.selenium.logic.validator.FieldValidator;
 import org.github.saphyra.selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
 
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 
 @Builder
 public class TooLongUserNameTest {

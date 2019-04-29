@@ -7,12 +7,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.OneStringParamRequest;
-import skyxplore.controller.request.user.AccountDeleteRequest;
-import skyxplore.controller.request.user.ChangeEmailRequest;
-import skyxplore.controller.request.user.ChangePasswordRequest;
-import skyxplore.controller.request.user.ChangeUserNameRequest;
-import skyxplore.controller.request.user.UserRegistrationRequest;
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
+import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
+import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
 
 import java.util.Optional;
 

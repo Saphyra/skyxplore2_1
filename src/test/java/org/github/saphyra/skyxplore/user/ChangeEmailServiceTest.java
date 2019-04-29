@@ -1,21 +1,19 @@
 package org.github.saphyra.skyxplore.user;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import org.github.saphyra.skyxplore.user.ChangeEmailService;
-import org.github.saphyra.skyxplore.user.UserQueryService;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.user.cache.EmailCache;
-import skyxplore.controller.request.user.ChangeEmailRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
-import org.github.saphyra.skyxplore.user.CredentialsService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;

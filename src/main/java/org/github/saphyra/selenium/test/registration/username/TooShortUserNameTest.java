@@ -1,7 +1,7 @@
 package org.github.saphyra.selenium.test.registration.username;
 
 import static org.github.saphyra.selenium.logic.util.Util.crop;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
 
 import org.openqa.selenium.WebElement;
 

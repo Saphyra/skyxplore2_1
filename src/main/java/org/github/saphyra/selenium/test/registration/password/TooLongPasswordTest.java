@@ -1,6 +1,6 @@
 package org.github.saphyra.selenium.test.registration.password;
 
-import static skyxplore.controller.request.user.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 
 import org.openqa.selenium.WebElement;
 

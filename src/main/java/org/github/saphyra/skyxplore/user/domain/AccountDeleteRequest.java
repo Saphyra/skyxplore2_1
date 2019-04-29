@@ -1,4 +1,4 @@
-package skyxplore.controller.request.user;
+package org.github.saphyra.skyxplore.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

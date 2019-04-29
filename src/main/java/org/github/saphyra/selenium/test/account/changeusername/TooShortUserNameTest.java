@@ -9,7 +9,7 @@ import org.github.saphyra.selenium.logic.validator.FieldValidator;
 import org.github.saphyra.selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
 
 import static org.github.saphyra.selenium.logic.util.Util.crop;
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.USER_NAME_MIN_LENGTH;
 
 @Builder
 public class TooShortUserNameTest {

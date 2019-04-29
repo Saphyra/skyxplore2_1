@@ -8,7 +8,7 @@ import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.user.ChangeEmailRequest;
+import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.EmailAlreadyExistsException;
 

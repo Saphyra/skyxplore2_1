@@ -1,6 +1,6 @@
 package org.github.saphyra.selenium.test.registration.username;
 
-import static skyxplore.controller.request.user.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+import static org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 
 import org.openqa.selenium.WebElement;
 
