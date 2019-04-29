@@ -28,7 +28,6 @@ import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequ
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterViewConverter;
-import skyxplore.service.CharacterFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {

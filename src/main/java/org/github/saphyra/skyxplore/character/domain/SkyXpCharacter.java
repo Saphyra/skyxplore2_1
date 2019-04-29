@@ -1,16 +1,16 @@
 package org.github.saphyra.skyxplore.character.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import skyxplore.exception.NotEnoughMoneyException;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 
 @Data
 @Builder
@@ -21,6 +21,8 @@ public class SkyXpCharacter {
     private String characterName;
     private String userId;
     private Integer money = 0;
+
+    @Builder.Default
     private ArrayList<String> equipments = new ArrayList<>();
 
     public void addEquipment(String equipmentId) {

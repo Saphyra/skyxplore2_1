@@ -1,9 +1,8 @@
-package skyxplore.service;
+package org.github.saphyra.skyxplore.character;
 
 import java.util.List;
 import java.util.Map;
 
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
