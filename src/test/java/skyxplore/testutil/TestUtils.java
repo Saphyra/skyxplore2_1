@@ -10,25 +10,25 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.user.domain.Role;
-import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
-import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
-
-import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.controller.request.character.CreateCharacterRequest;
-import skyxplore.controller.request.character.EquipRequest;
-import skyxplore.controller.request.character.RenameCharacterRequest;
-import skyxplore.controller.request.character.UnequipRequest;
-import skyxplore.controller.request.community.SendMailRequest;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
+import org.github.saphyra.skyxplore.user.domain.Role;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
-import skyxplore.controller.view.character.CharacterView;
+
+import skyxplore.controller.request.character.AddToQueueRequest;
+import skyxplore.controller.request.character.EquipRequest;
+import skyxplore.controller.request.character.UnequipRequest;
+import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;

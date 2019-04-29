@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
-import skyxplore.controller.request.character.RenameCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.exception.CharacterNameAlreadyExistsException;

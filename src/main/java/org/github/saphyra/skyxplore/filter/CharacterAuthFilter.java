@@ -2,7 +2,7 @@ package org.github.saphyra.skyxplore.filter;
 
 import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-import static skyxplore.controller.CharacterController.RENAME_CHARACTER_MAPPING;
+import static org.github.saphyra.skyxplore.character.CharacterController.RENAME_CHARACTER_MAPPING;
 
 import java.io.IOException;
 import java.util.Arrays;

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
-import skyxplore.controller.request.character.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.FactoryDao;

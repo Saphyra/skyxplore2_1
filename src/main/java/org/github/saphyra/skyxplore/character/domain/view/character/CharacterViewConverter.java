@@ -1,4 +1,4 @@
-package skyxplore.controller.view.character;
+package org.github.saphyra.skyxplore.character.domain.view.character;
 
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;

@@ -9,7 +9,7 @@ import org.github.saphyra.selenium.logic.validator.FieldValidator;
 import org.github.saphyra.selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
 
 import static org.github.saphyra.selenium.logic.util.Util.crop;
-import static skyxplore.controller.request.character.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
+import static org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 @Builder
 public class TooShortCharacterNameTest {

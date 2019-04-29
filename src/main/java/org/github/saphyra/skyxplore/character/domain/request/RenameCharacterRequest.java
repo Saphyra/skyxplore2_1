@@ -1,11 +1,11 @@
-package skyxplore.controller.request.character;
+package org.github.saphyra.skyxplore.character.domain.request;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
