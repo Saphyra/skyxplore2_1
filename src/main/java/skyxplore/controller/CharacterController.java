@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import skyxplore.cache.CharacterNameCache;
+import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import skyxplore.controller.request.OneStringParamRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.RenameCharacterRequest;
@@ -18,15 +18,15 @@ import skyxplore.controller.view.character.CharacterView;
 import skyxplore.controller.view.character.CharacterViewConverter;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.service.CharacterFacade;
-import skyxplore.util.CookieUtil;
+import org.github.saphyra.skyxplore.common.CookieUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @RestController
 @RequiredArgsConstructor

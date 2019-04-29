@@ -19,7 +19,7 @@ import skyxplore.controller.request.user.UserRegistrationRequest;
 
 import javax.validation.Valid;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @RestController
 @RequiredArgsConstructor

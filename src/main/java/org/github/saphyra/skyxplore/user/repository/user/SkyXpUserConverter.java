@@ -1,14 +1,20 @@
 package org.github.saphyra.skyxplore.user.repository.user;
 
-import lombok.RequiredArgsConstructor;
+import java.util.HashSet;
+import java.util.List;
+
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
+import org.github.saphyra.skyxplore.user.domain.Role;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.converter.ConverterBase;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
 class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
+    private final ObjectMapperDelegator objectMapper;
 
     @Override
     public SkyXpUser processEntityConversion(UserEntity entity) {
@@ -19,7 +25,8 @@ class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
         SkyXpUser user = new SkyXpUser();
         user.setUserId(entity.getUserId());
         user.setEmail(entity.getEmail());
-        user.setRoles(entity.getRoles());
+        List<Role> roles = objectMapper.readValue(entity.getRoles(), Role[].class);
+        user.setRoles(new HashSet<>(roles));
         return user;
     }
 
@@ -32,7 +39,7 @@ class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
         UserEntity entity = new UserEntity();
         entity.setUserId(domain.getUserId());
         entity.setEmail(domain.getEmail());
-        entity.setRoles(domain.getRoles());
+        entity.setRoles(objectMapper.writeValueAsString(domain.getRoles()));
 
         return entity;
     }

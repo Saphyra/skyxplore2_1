@@ -2,6 +2,8 @@ package skyxplore.service.character;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;

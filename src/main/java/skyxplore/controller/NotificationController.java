@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import skyxplore.service.NotificationFacade;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @Slf4j
 @RestController

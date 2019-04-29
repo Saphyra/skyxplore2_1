@@ -1,11 +1,12 @@
 package skyxplore.service.character;
 
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.cache.CharacterNameCache;
+import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import skyxplore.controller.request.character.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;

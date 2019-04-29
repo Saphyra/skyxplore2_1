@@ -6,6 +6,7 @@ import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.createCharacter;
 
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

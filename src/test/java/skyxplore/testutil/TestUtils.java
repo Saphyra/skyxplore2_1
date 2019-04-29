@@ -1,8 +1,22 @@
 package skyxplore.testutil;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.github.saphyra.skyxplore.user.domain.Role;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
+
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.CreateCharacterRequest;
 import skyxplore.controller.request.character.EquipRequest;
@@ -25,13 +39,6 @@ import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacterEntity;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendrequest.FriendRequestEntity;
-import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.domain.community.friendship.FriendshipEntity;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
 import skyxplore.domain.factory.Factory;
@@ -44,18 +51,10 @@ import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.slot.SlotEntity;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
+@Deprecated
 public class TestUtils {
     //Blocked Character
-    public static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
+    private static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
     public static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
 
     //Category
@@ -64,11 +63,6 @@ public class TestUtils {
     //Character
     public static final String CHARACTER_ID_1 = "character_id_1";
     public static final String CHARACTER_ID_2 = "character_id_2";
-    public static final String CHARACTER_ID_3 = "character_id_3";
-    public static final String CHARACTER_ID_4 = "character_id_4";
-    public static final String CHARACTER_ID_5 = "character_id_5";
-    public static final String CHARACTER_ID_6 = "character_id_6";
-    public static final String CHARACTER_ID_7 = "character_id_7";
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
     public static final Integer CHARACTER_MONEY = 10;
@@ -147,12 +141,6 @@ public class TestUtils {
     public static final String FACTORY_ID_3 = "factory_id_3";
     public static final String FACTORY_MATERIALS = "factory_materials";
 
-    //Filter
-    public static final String USER_ID_COOKIE = "user_id_cookie";
-    public static final String CHARACTER_ID_COOKIE = "character_iid_cookie";
-    public static final String AUTHENTICATED_PATH = "authenticated_path";
-    public static final String REDIRECTION_PATH = "redirection_path";
-
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
     public static final String FRIENDSHIP_ID = "friendship_id";
@@ -208,7 +196,6 @@ public class TestUtils {
     //User
     public static final String USER_EMAIL = "user_email";
     public static final String USER_ID = "user_id";
-    public static final String USER_FAKE_ID = "user_fake_id";
     public static final String USER_NEW_EMAIL = "user_new_email";
     public static final String USER_NEW_NAME = "user_new_name";
 
@@ -231,14 +218,6 @@ public class TestUtils {
             .blockedCharacterId(BLOCKED_CHARACTER_ID)
             .characterId(CHARACTER_ID_1)
             .build();
-    }
-
-    public static BlockedCharacterEntity createBlockedCharacterEntity() {
-        BlockedCharacterEntity entity = new BlockedCharacterEntity();
-        entity.setBlockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID);
-        entity.setBlockedCharacterId(BLOCKED_CHARACTER_ID);
-        entity.setCharacterId(CHARACTER_ID_1);
-        return entity;
     }
 
     public static ChangeEmailRequest createChangeEmailRequest() {
@@ -404,14 +383,6 @@ public class TestUtils {
             .build();
     }
 
-    public static FriendRequestEntity createFriendRequestEntity() {
-        return FriendRequestEntity.builder()
-            .friendRequestId(FRIEND_REQUEST_ID)
-            .friendId(FRIEND_ID)
-            .characterId(CHARACTER_ID_1)
-            .build();
-    }
-
     public static FriendRequestView createFriendRequestView() {
         FriendRequestView view = new FriendRequestView();
         view.setCharacterId(CHARACTER_ID_1);
@@ -427,14 +398,6 @@ public class TestUtils {
         friendship.setCharacterId(CHARACTER_ID_1);
         friendship.setFriendId(FRIEND_ID);
         return friendship;
-    }
-
-    public static FriendshipEntity createFriendshipEntity() {
-        FriendshipEntity entity = new FriendshipEntity();
-        entity.setFriendshipId(FRIENDSHIP_ID);
-        entity.setCharacterId(CHARACTER_ID_1);
-        entity.setFriendId(FRIEND_ID);
-        return entity;
     }
 
     public static FriendView createFriendView() {

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 @Service
 @RequiredArgsConstructor

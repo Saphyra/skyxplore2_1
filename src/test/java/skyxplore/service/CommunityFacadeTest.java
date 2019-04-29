@@ -6,11 +6,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendship.Friendship;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import skyxplore.service.community.BlockCharacterService;
-import skyxplore.service.community.FriendshipQueryService;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 import skyxplore.service.community.FriendshipService;
 
 import java.util.Arrays;

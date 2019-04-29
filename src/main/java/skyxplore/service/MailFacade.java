@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import skyxplore.controller.request.community.SendMailRequest;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import skyxplore.service.community.MailDeleteService;
 import skyxplore.service.community.MailQueryService;
 import skyxplore.service.community.MailSenderService;

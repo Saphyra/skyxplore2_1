@@ -2,12 +2,14 @@ package skyxplore.service.community;
 
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
+
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.springframework.stereotype.Service;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.CharacterBlockedException;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @RequiredArgsConstructor

@@ -1,22 +1,26 @@
 package skyxplore.service.community;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.db.FriendRequestDao;
-import skyxplore.dataaccess.db.FriendshipDao;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendship.Friendship;
+import org.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
+import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import skyxplore.exception.CharacterBlockedException;
 import skyxplore.exception.FriendshipAlreadyExistsException;
-import skyxplore.service.character.CharacterQueryService;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Slf4j

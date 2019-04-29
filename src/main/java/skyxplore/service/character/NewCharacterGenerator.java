@@ -4,7 +4,7 @@ import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.configuration.CharacterGeneratorConfig;
+import org.github.saphyra.skyxplore.character.CharacterGeneratorConfig;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
 import skyxplore.dataaccess.gamedata.subservice.MaterialService;

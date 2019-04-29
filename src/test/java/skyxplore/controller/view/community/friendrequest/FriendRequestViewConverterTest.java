@@ -6,8 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;

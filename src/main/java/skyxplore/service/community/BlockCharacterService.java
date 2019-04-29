@@ -1,15 +1,17 @@
 package skyxplore.service.community;
 
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import skyxplore.dataaccess.db.BlockedCharacterDao;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import skyxplore.exception.BlockedCharacterNotFoundException;
 import skyxplore.exception.CharacterAlreadyBlockedException;
-import skyxplore.service.character.CharacterQueryService;
 
 @Service
 @Slf4j

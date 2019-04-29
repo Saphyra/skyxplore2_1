@@ -10,7 +10,7 @@ import skyxplore.service.accesstoken.CharacterSelectService;
 import skyxplore.service.character.BuyItemService;
 import skyxplore.service.character.CharacterCreatorService;
 import skyxplore.service.character.CharacterDeleteService;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import skyxplore.service.character.CharacterRenameService;
 
 import java.util.List;

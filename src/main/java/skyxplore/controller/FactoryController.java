@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @RestController
 @Slf4j

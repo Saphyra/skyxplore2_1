@@ -9,7 +9,7 @@ import skyxplore.dataaccess.db.MailDao;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.InvalidMailAccessException;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import java.util.Arrays;
 import java.util.List;

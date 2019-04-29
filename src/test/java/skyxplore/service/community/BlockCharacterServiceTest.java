@@ -1,17 +1,19 @@
 package skyxplore.service.community;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.dataaccess.db.BlockedCharacterDao;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import skyxplore.exception.BlockedCharacterNotFoundException;
 import skyxplore.exception.CharacterAlreadyBlockedException;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;

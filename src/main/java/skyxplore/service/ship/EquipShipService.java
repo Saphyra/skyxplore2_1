@@ -12,7 +12,7 @@ import skyxplore.dataaccess.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;

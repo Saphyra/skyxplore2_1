@@ -1,6 +1,8 @@
 package skyxplore.service.community;
 
 import com.github.saphyra.util.IdGenerator;
+
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -9,10 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.community.blockedcharacter.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.exception.CharacterBlockedException;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import java.util.Arrays;

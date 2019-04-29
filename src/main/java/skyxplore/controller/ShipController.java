@@ -16,7 +16,7 @@ import skyxplore.service.EquippedShipFacade;
 
 import javax.validation.Valid;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @RestController
 @RequiredArgsConstructor

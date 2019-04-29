@@ -1,5 +1,6 @@
 package skyxplore.service.character;
 
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

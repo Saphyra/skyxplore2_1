@@ -3,8 +3,8 @@ package skyxplore.controller.view.community.friendrequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import skyxplore.controller.view.AbstractViewConverter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.service.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 @Component
 @RequiredArgsConstructor

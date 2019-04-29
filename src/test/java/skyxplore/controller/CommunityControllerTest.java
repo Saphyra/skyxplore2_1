@@ -13,8 +13,8 @@ import skyxplore.controller.view.community.friend.FriendViewConverter;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestViewConverter;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.community.friendrequest.FriendRequest;
-import skyxplore.domain.community.friendship.Friendship;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import skyxplore.service.CommunityFacade;
 
 import java.util.Arrays;

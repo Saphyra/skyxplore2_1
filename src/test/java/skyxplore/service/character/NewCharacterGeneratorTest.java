@@ -1,25 +1,5 @@
 package skyxplore.service.character;
 
-import com.github.saphyra.util.IdGenerator;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.configuration.CharacterGeneratorConfig;
-import skyxplore.dataaccess.gamedata.entity.Ship;
-import skyxplore.dataaccess.gamedata.entity.Slot;
-import skyxplore.dataaccess.gamedata.subservice.MaterialService;
-import skyxplore.dataaccess.gamedata.subservice.ShipService;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -45,6 +25,27 @@ import static skyxplore.testutil.TestUtils.MATERIAL_MATERIAL_AMOUNT;
 import static skyxplore.testutil.TestUtils.USER_ID;
 import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createShip;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.github.saphyra.skyxplore.character.CharacterGeneratorConfig;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.util.IdGenerator;
+import skyxplore.dataaccess.gamedata.entity.Ship;
+import skyxplore.dataaccess.gamedata.entity.Slot;
+import skyxplore.dataaccess.gamedata.subservice.MaterialService;
+import skyxplore.dataaccess.gamedata.subservice.ShipService;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.ship.EquippedShip;
+import skyxplore.domain.slot.EquippedSlot;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NewCharacterGeneratorTest {

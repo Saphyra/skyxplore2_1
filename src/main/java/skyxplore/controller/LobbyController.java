@@ -11,7 +11,7 @@ import skyxplore.service.LobbyFacade;
 
 import javax.validation.Valid;
 
-import static skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @RequiredArgsConstructor
 @RestController
