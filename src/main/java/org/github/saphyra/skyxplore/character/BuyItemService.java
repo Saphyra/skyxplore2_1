@@ -1,25 +1,24 @@
-package skyxplore.service.character;
+package org.github.saphyra.skyxplore.character;
+
+import java.util.Map;
+
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.service.GameDataFacade;
-
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class BuyItemService {
+class BuyItemService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final GameDataFacade gameDataFacade;
 
-    public void buyItems(Map<String, Integer> items, String characterId) {
+    void buyItems(Map<String, Integer> items, String characterId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Integer cost = countCost(items);
         character.buyEquipments(items, cost);

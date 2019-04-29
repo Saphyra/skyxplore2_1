@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.service.accesstoken.CharacterSelectService;
-import skyxplore.service.character.BuyItemService;
 import skyxplore.service.character.CharacterCreatorService;
 import skyxplore.service.character.CharacterDeleteService;
 import skyxplore.service.character.CharacterRenameService;

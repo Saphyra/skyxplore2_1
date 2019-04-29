@@ -1,27 +1,30 @@
-package skyxplore.service.character;
-
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.service.GameDataFacade;
-
-import java.util.HashMap;
-import java.util.Map;
+package org.github.saphyra.skyxplore.character;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
+import skyxplore.service.GameDataFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BuyItemServiceTest {
+    private static final String ITEM = "item";
+    private static final String CONNECTOR = "connector";
+    private static final String CHARACTER_ID = "character_id";
+    private static final Integer BUY_PRICE = 3;
     @Mock
     private CharacterDao characterDao;
 
@@ -44,18 +47,18 @@ public class BuyItemServiceTest {
     public void testBuyItemsShouldCountCostAndCallCharacter() {
         //GIVEN
         Map<String, Integer> map = new HashMap<>();
-        map.put(DATA_ELEMENT, 2);
-        map.put(DATA_CONNECTOR, 1);
+        map.put(ITEM, 2);
+        map.put(CONNECTOR, 1);
 
-        when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
+        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
         when(gameDataFacade.findBuyable(anyString())).thenReturn(buyable);
-        when(buyable.getBuyPrice()).thenReturn(DATA_BUYPRICE);
+        when(buyable.getBuyPrice()).thenReturn(BUY_PRICE);
         //WHEN
-        underTest.buyItems(map, CHARACTER_ID_1);
+        underTest.buyItems(map, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(CHARACTER_ID_1);
+        verify(characterQueryService).findByCharacterId(CHARACTER_ID);
         verify(gameDataFacade, times(2)).findBuyable(anyString());
-        verify(character).buyEquipments(map, DATA_BUYPRICE * 3);
+        verify(character).buyEquipments(map, BUY_PRICE * 3);
         verify(characterDao).save(character);
     }
 }

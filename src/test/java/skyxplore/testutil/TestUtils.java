@@ -96,7 +96,6 @@ public class TestUtils {
     public static final String DATA_SLOT = "data_slot";
     public static final String DATA_CATEGORY_1 = "data_category_1";
     public static final String DATA_CATEGORY_2 = "data_category_2";
-    public static final Integer DATA_BUYPRICE = 2;
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
