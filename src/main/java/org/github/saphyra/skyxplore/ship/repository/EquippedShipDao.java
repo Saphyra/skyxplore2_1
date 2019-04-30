@@ -1,12 +1,11 @@
-package skyxplore.dataaccess.db;
+package org.github.saphyra.skyxplore.ship.repository;
 
-import com.github.saphyra.converter.Converter;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.repository.EquippedShipRepository;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.ship.EquippedShipEntity;
+import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.exception.ShipNotFoundException;
 
 @Component
@@ -15,7 +14,7 @@ public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShi
     private final SlotDao slotDao;
 
     public EquippedShipDao(
-        Converter<EquippedShipEntity, EquippedShip> converter,
+        EquippedShipConverter converter,
         EquippedShipRepository repository,
         SlotDao slotDao
     ) {

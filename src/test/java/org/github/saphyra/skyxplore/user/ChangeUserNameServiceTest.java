@@ -1,31 +1,34 @@
 package org.github.saphyra.skyxplore.user;
 
-import com.github.saphyra.encryption.impl.PasswordService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import org.github.saphyra.skyxplore.user.cache.UserNameCache;
+import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.user.cache.UserNameCache;
-import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
-import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+
+import com.github.saphyra.encryption.impl.PasswordService;
 import skyxplore.exception.BadCredentialsException;
 import skyxplore.exception.UserNameAlreadyExistsException;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CREDENTIALS_HASHED_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NEW_NAME;
-import static skyxplore.testutil.TestUtils.USER_PASSWORD;
-import static skyxplore.testutil.TestUtils.createChangeUserNameRequest;
-import static skyxplore.testutil.TestUtils.createCredentials;
-
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeUserNameServiceTest {
+    private static final String NEW_USER_NAME = "new_username";
+    private static final String USER_NAME = "user_name";
+    private static final String PASSWORD = "password";
+    private static final String USER_ID = "user_id";
+    private static final String FAKE_PASSWORD = "fake_password";
+    private static final String HASHED_PASSWORD = "hashed_password";
+
+    private SkyXpCredentials credentials;
+
     @Mock
     private CredentialsService credentialsService;
 
@@ -38,25 +41,28 @@ public class ChangeUserNameServiceTest {
     @InjectMocks
     private ChangeUserNameService underTest;
 
+    @Before
+    public void setUp() {
+        credentials = new SkyXpCredentials(USER_ID, USER_NAME, HASHED_PASSWORD);
+    }
+
     @Test(expected = UserNameAlreadyExistsException.class)
     public void testChangeUserNameShouldThrowExceptionWhenUserNameExists() {
         //GIVEN
-        when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(true);
+        when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(true);
         //WHEN
-        underTest.changeUserName(createChangeUserNameRequest(), USER_ID);
+        underTest.changeUserName(new ChangeUserNameRequest(USER_NAME, PASSWORD), USER_ID);
     }
 
     @Test(expected = BadCredentialsException.class)
     public void testChangeUserNameShouldThrowExceptionWhenWrongPassword() {
         //GIVEN
-        ChangeUserNameRequest request = createChangeUserNameRequest();
-        request.setPassword(USER_FAKE_PASSWORD);
+        ChangeUserNameRequest request = new ChangeUserNameRequest(NEW_USER_NAME, FAKE_PASSWORD);
 
-        SkyXpCredentials skyXpCredentials = createCredentials();
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
-        when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
-        when(passwordService.authenticate(USER_FAKE_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(false);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.isUserNameExists(NEW_USER_NAME)).thenReturn(false);
+        when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
         underTest.changeUserName(request, USER_ID);
     }
@@ -64,21 +70,20 @@ public class ChangeUserNameServiceTest {
     @Test
     public void testChangeUserNameShouldSaveChangedUser() {
         //GIVEN
-        ChangeUserNameRequest request = createChangeUserNameRequest();
+        ChangeUserNameRequest request = new ChangeUserNameRequest(NEW_USER_NAME, PASSWORD);
 
-        SkyXpCredentials skyXpCredentials = createCredentials();
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
-        when(credentialsService.isUserNameExists(USER_NEW_NAME)).thenReturn(false);
-        when(passwordService.authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(true);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.isUserNameExists(NEW_USER_NAME)).thenReturn(false);
+        when(passwordService.authenticate(PASSWORD, HASHED_PASSWORD)).thenReturn(true);
         //WHEN
         underTest.changeUserName(request, USER_ID);
         //THEN
-        verify(passwordService).authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
+        verify(passwordService).authenticate(PASSWORD, HASHED_PASSWORD);
         verify(credentialsService).getByUserId(USER_ID);
-        verify(credentialsService).isUserNameExists(USER_NEW_NAME);
-        verify(credentialsService).save(skyXpCredentials);
-        assertEquals(USER_NEW_NAME, skyXpCredentials.getUserName());
-        verify(userNameCache).invalidate(USER_NEW_NAME);
+        verify(credentialsService).isUserNameExists(NEW_USER_NAME);
+        verify(credentialsService).save(credentials);
+        assertThat(credentials.getUserName()).isEqualTo(NEW_USER_NAME);
+        verify(userNameCache).invalidate(NEW_USER_NAME);
     }
 }

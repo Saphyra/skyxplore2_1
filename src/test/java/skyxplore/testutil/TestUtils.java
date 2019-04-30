@@ -18,6 +18,7 @@ import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
@@ -44,8 +45,6 @@ import skyxplore.domain.factory.FactoryEntity;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductEntity;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.ship.EquippedShipEntity;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.slot.SlotEntity;
 
@@ -103,11 +102,6 @@ public class TestUtils {
     //EquippedShip
     public static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
     public static final String EQUIPPED_SHIP_TYPE = "equipped_ship_type";
-    public static final String EQUIPPED_SHIP_CONNECTOR_EQUIPPED = "equipped_ship_connector_equipped";
-    public static final String EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE = "equipped_ship_encrypted_type";
-    public static final String EQUIPPED_SHIP_ENCRYPTED_COREHULL = "equipped_ship_encrypted_corehull";
-    public static final String EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT = "equipped_ship_encrypted_connector_slot";
-    public static final String EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED = "equipped_ship_encrypted_connector_equipped";
 
     //EquippedSlot
     public static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
@@ -278,7 +272,7 @@ public class TestUtils {
     }
 
     public static EquippedShip createEquippedShip() {
-        EquippedShip ship = new EquippedShip();
+        EquippedShip ship = EquippedShip.builder().build();
         ship.setShipId(EQUIPPED_SHIP_ID);
         ship.setCharacterId(CHARACTER_ID_1);
         ship.setShipType(EQUIPPED_SHIP_TYPE);
@@ -288,19 +282,6 @@ public class TestUtils {
         ship.setDefenseSlotId(DEFENSE_SLOT_ID);
         ship.setWeaponSlotId(WEAPON_SLOT_ID);
         return ship;
-    }
-
-    public static EquippedShipEntity createEquippedShipEntity() {
-        EquippedShipEntity entity = new EquippedShipEntity();
-        entity.setShipId(EQUIPPED_SHIP_ID);
-        entity.setCharacterId(CHARACTER_ID_1);
-        entity.setShipType(EQUIPPED_SHIP_ENCRYPTED_SHIP_TYPE);
-        entity.setCoreHull(EQUIPPED_SHIP_ENCRYPTED_COREHULL);
-        entity.setConnectorSlot(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_SLOT);
-        entity.setConnectorEquipped(EQUIPPED_SHIP_ENCRYPTED_CONNECTOR_EQUIPPED);
-        entity.setDefenseSlotId(DEFENSE_SLOT_ID);
-        entity.setWeaponSlotId(WEAPON_SLOT_ID);
-        return entity;
     }
 
     public static ShipView createShipView() {

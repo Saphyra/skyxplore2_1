@@ -1,17 +1,5 @@
 package skyxplore.service.ship;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.dataaccess.db.SlotDao;
-import org.github.saphyra.skyxplore.gamedata.entity.Extender;
-import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-import skyxplore.domain.ship.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.exception.BadSlotNameException;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -22,6 +10,19 @@ import static skyxplore.service.EquippedShipFacade.WEAPON_SLOT_NAME;
 import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
 import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
 import static skyxplore.testutil.TestUtils.createEquippedShip;
+
+import org.github.saphyra.skyxplore.gamedata.entity.Extender;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import skyxplore.dataaccess.db.SlotDao;
+import skyxplore.domain.slot.EquippedSlot;
+import skyxplore.exception.BadSlotNameException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipUtilTest {
@@ -61,7 +62,7 @@ public class EquipUtilTest {
         //GIVEN
         String slotName = "imnotaslotname";
         //WHEN
-        underTest.getSlotByName(new EquippedShip(), slotName);
+        underTest.getSlotByName(EquippedShip.builder().build(), slotName);
     }
 
     @Test

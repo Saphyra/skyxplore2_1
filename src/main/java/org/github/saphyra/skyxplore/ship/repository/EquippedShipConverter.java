@@ -1,4 +1,10 @@
-package skyxplore.domain.ship;
+package org.github.saphyra.skyxplore.ship.repository;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,15 +13,11 @@ import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
+class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
     private final StringEncryptor stringEncryptor;
@@ -49,7 +51,8 @@ public class EquippedShipConverter extends ConverterBase<EquippedShipEntity, Equ
         if (entity == null) {
             return null;
         }
-        EquippedShip domain = new EquippedShip();
+        //TODO use builder
+        EquippedShip domain = EquippedShip.builder().build();
         try {
             domain.setCharacterId(entity.getCharacterId());
             domain.setShipId(entity.getShipId());

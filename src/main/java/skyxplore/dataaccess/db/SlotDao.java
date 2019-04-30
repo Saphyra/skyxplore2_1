@@ -1,14 +1,15 @@
 package skyxplore.dataaccess.db;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.repository.SlotRepository;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.domain.slot.SlotEntity;
-
-import javax.transaction.Transactional;
 
 @Component
 @Slf4j
@@ -19,7 +20,7 @@ public class SlotDao extends AbstractDao<SlotEntity, EquippedSlot, String, SlotR
     }
 
     @Transactional
-    void deleteByShipId(String shipId) {
+    public void deleteByShipId(String shipId) {
         log.info("Deleting slots of {}", shipId);
         repository.deleteByShipId(shipId);
     }

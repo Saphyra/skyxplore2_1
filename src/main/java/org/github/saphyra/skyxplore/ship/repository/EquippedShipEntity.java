@@ -1,17 +1,24 @@
-package skyxplore.domain.ship;
-
-import lombok.Data;
-import org.hibernate.annotations.Type;
+package org.github.saphyra.skyxplore.ship.repository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Data
 @Table(name = "equipped_ship")
-public class EquippedShipEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+class EquippedShipEntity {
     @Id
     @Column(name = "ship_id", length = 50)
     private String shipId;

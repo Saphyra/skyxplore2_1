@@ -1,4 +1,4 @@
-package skyxplore.domain.ship;
+package org.github.saphyra.skyxplore.ship.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,14 +7,13 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class EquippedShip {
     private String shipId;
@@ -22,7 +21,10 @@ public class EquippedShip {
     private String shipType;
     private Integer coreHull;
     private Integer connectorSlot;
+
+    @Builder.Default
     private ArrayList<String> connectorEquipped = new ArrayList<>();
+
     private String defenseSlotId;
     private String weaponSlotId;
 
@@ -33,7 +35,7 @@ public class EquippedShip {
         connectorEquipped.add(element);
     }
 
-    void addConnectors(Collection<String> connectors) {
+    public void addConnectors(Collection<String> connectors) {
         connectors.forEach(this::addConnector);
     }
 

@@ -1,35 +1,34 @@
 package org.github.saphyra.skyxplore.user;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import org.github.saphyra.skyxplore.user.cache.EmailCache;
 import org.github.saphyra.skyxplore.user.cache.UserNameCache;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
 import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.USER_EMAIL;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NAME;
-import static skyxplore.testutil.TestUtils.createAccountDeleteRequest;
-import static skyxplore.testutil.TestUtils.createChangeEmailRequest;
-import static skyxplore.testutil.TestUtils.createChangePasswordRequest;
-import static skyxplore.testutil.TestUtils.createChangeUserNameRequest;
-import static skyxplore.testutil.TestUtils.createUserRegistrationRequest;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
+    private static final String NEW_EMAIL = "new_email";
+    private static final String PASSWORD = "password";
+    private static final String USER_ID = "user_id";
+    private static final String NEW_PASSWORD = "new_password";
+    private static final String NEW_USERNAME = "new_username";
+    private static final String EMAIL = "email";
+    private static final String USER_NAME = "user_name";
     @Mock
     private UserNameCache userNameCache;
 
@@ -57,7 +56,7 @@ public class UserControllerTest {
     @Test
     public void testChangeEmailShouldCallFacade() {
         //GIVEN
-        ChangeEmailRequest request = createChangeEmailRequest();
+        ChangeEmailRequest request = new ChangeEmailRequest(NEW_EMAIL, PASSWORD);
         //WHEN
         underTest.changeEmail(request, USER_ID);
         //THEN
@@ -67,7 +66,7 @@ public class UserControllerTest {
     @Test
     public void testChangePasswordShouldCallFacade() {
         //GIVEN
-        ChangePasswordRequest request = createChangePasswordRequest();
+        ChangePasswordRequest request = new ChangePasswordRequest(NEW_PASSWORD, PASSWORD);
         //WHEN
         underTest.changePassword(request, USER_ID);
         //THEN
@@ -77,7 +76,7 @@ public class UserControllerTest {
     @Test
     public void testChangeUserNameShouldCallFacadeAndInvalidate() {
         //GIVEN
-        ChangeUserNameRequest request = createChangeUserNameRequest();
+        ChangeUserNameRequest request = new ChangeUserNameRequest(NEW_USERNAME, PASSWORD);
         //WHEN
         underTest.changeUserName(request, USER_ID);
         //THEN
@@ -88,7 +87,7 @@ public class UserControllerTest {
     @Test
     public void testDeleteAccountShouldCallFacade() {
         //GIVEN
-        AccountDeleteRequest request = createAccountDeleteRequest();
+        AccountDeleteRequest request = new AccountDeleteRequest(PASSWORD);
         //WHEN
         underTest.deleteAccount(request, USER_ID);
         //THEN
@@ -98,18 +97,18 @@ public class UserControllerTest {
     @Test
     public void testIsEmailExistsShouldCallCacheAndReturn() {
         //GIVEN
-        when(emailCache.get(USER_EMAIL)).thenReturn(Optional.of(true));
+        when(emailCache.get(EMAIL)).thenReturn(Optional.of(true));
         //WHEN
-        boolean result = underTest.isEmailExists(new OneStringParamRequest(USER_EMAIL));
+        boolean result = underTest.isEmailExists(new OneStringParamRequest(EMAIL));
         //THEN
-        verify(emailCache).get(USER_EMAIL);
+        verify(emailCache).get(EMAIL);
         assertThat(result).isTrue();
     }
 
     @Test
     public void testRegistrationShouldCallFacadeAndInvalidate() {
         //GIVEN
-        UserRegistrationRequest registrationRequest = createUserRegistrationRequest();
+        UserRegistrationRequest registrationRequest = new UserRegistrationRequest(USER_NAME, PASSWORD, EMAIL);
         //WHEN
         underTest.registration(registrationRequest);
         //THEN

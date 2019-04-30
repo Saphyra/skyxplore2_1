@@ -1,5 +1,11 @@
 package org.github.saphyra.skyxplore.user;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.junit.Test;
@@ -7,20 +13,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import skyxplore.exception.UserNotFoundException;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.USER_EMAIL;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.createUser;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserQueryServiceTest {
+    private static final String USER_ID = "user_id";
+    private static final String EMAIL = "email";
+
     @Mock
     private UserDao userDao;
 
@@ -38,7 +38,7 @@ public class UserQueryServiceTest {
     @Test
     public void testGetUserByIdShouldQueryAndReturn() {
         //GIVEN
-        SkyXpUser user = createUser();
+        SkyXpUser user = new SkyXpUser();
         when(userDao.findById(USER_ID)).thenReturn(Optional.of(user));
         //WHEN
         SkyXpUser result = underTest.getUserById(USER_ID);
@@ -50,12 +50,12 @@ public class UserQueryServiceTest {
     @Test
     public void testIsEmailExists() {
         //GIVEN
-        SkyXpUser user = createUser();
-        when(userDao.findUserByEmail(USER_EMAIL)).thenReturn(user);
+        SkyXpUser user = new SkyXpUser();
+        when(userDao.findUserByEmail(EMAIL)).thenReturn(user);
         //WHEN
-        boolean result = underTest.isEmailExists(USER_EMAIL);
+        boolean result = underTest.isEmailExists(EMAIL);
         //THEN
         assertThat(result).isTrue();
-        verify(userDao).findUserByEmail(USER_EMAIL);
+        verify(userDao).findUserByEmail(EMAIL);
     }
 }

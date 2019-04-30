@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import skyxplore.dataaccess.db.EquippedShipDao;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.ship.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 

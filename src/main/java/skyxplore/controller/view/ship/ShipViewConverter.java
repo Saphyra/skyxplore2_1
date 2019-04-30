@@ -3,7 +3,7 @@ package skyxplore.controller.view.ship;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
-import skyxplore.domain.ship.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.controller.view.slot.SlotViewConverter;
 

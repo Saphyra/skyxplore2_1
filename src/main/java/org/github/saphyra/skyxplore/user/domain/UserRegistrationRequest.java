@@ -4,9 +4,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRegistrationRequest {
     public static final int USER_NAME_MAX_LENGTH = 30;
     public static final int USER_NAME_MIN_LENGTH = 3;

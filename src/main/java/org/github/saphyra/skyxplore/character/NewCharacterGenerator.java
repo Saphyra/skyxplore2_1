@@ -5,6 +5,7 @@ import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.util.IdGenerator;
@@ -12,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
-import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 
 @Slf4j
@@ -49,7 +49,8 @@ class NewCharacterGenerator {
     }
 
     EquippedShip createShip(String characterId) {
-        EquippedShip ship = new EquippedShip();
+        //TODO ude builder
+        EquippedShip ship = EquippedShip.builder().build();
         ship.setShipId(idGenerator.generateRandomId());
         ship.setCharacterId(characterId);
         ship.setShipType(STARTER_SHIP_ID);

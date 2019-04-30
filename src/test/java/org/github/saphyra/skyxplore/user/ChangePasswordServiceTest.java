@@ -1,29 +1,31 @@
 package org.github.saphyra.skyxplore.user;
 
-import com.github.saphyra.encryption.impl.PasswordService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
+import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
-import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
-import skyxplore.exception.BadCredentialsException;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CREDENTIALS_HASHED_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_FAKE_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_ID;
-import static skyxplore.testutil.TestUtils.USER_NEW_PASSWORD;
-import static skyxplore.testutil.TestUtils.USER_PASSWORD;
-import static skyxplore.testutil.TestUtils.createChangePasswordRequest;
-import static skyxplore.testutil.TestUtils.createCredentials;
+import com.github.saphyra.encryption.impl.PasswordService;
+import skyxplore.exception.BadCredentialsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangePasswordServiceTest {
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
+    private static final String HASHED_PASSWORD = "hashed_password";
+    private static final String NEW_PASSWORD = "new_password";
+    private static final String FAKE_PASSWORD = "fake_password";
+    private static final String PASSWORD = "password";
+    private static final String NEW_HASHED_PASSWORD = "new_hashed_password";
+
     @Mock
     private CredentialsService credentialsService;
 
@@ -33,39 +35,39 @@ public class ChangePasswordServiceTest {
     @InjectMocks
     private ChangePasswordService underTest;
 
+    private SkyXpCredentials credentials;
+
+    @Before
+    public void setUp(){
+        credentials = new SkyXpCredentials(USER_ID, USER_NAME, HASHED_PASSWORD);
+    }
+
     @Test(expected = BadCredentialsException.class)
     public void testChangePasswordShouldThrowExceptionWhenBadPassword() {
         //GIVEN
-        SkyXpCredentials skyXpCredentials = createCredentials();
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
 
-        ChangePasswordRequest request = createChangePasswordRequest();
-        request.setOldPassword(USER_FAKE_PASSWORD);
+        ChangePasswordRequest request = new ChangePasswordRequest(NEW_PASSWORD, FAKE_PASSWORD);
 
-        when(passwordService.authenticate(USER_FAKE_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(false);
+        when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
         underTest.changePassword(request, USER_ID);
-        //THEN
-        verify(credentialsService).getByUserId(USER_ID);
-        verify(passwordService).authenticate(USER_FAKE_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
     }
 
     @Test
-    public void testChangePasswordShouldCredentials() {
+    public void testChangePasswordShouldUpdateCredentials() {
         //GIVEN
-        SkyXpCredentials skyXpCredentials = createCredentials();
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
+        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
 
-        ChangePasswordRequest request = createChangePasswordRequest();
+        ChangePasswordRequest request = new ChangePasswordRequest(NEW_PASSWORD, PASSWORD);
 
-        when(passwordService.authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD)).thenReturn(true);
-        when(passwordService.hashPassword(USER_NEW_PASSWORD)).thenReturn(CREDENTIALS_HASHED_PASSWORD);
+        when(passwordService.authenticate(PASSWORD, HASHED_PASSWORD)).thenReturn(true);
+        when(passwordService.hashPassword(NEW_PASSWORD)).thenReturn(NEW_HASHED_PASSWORD);
         //WHEN
         underTest.changePassword(request, USER_ID);
         //THEN
         verify(credentialsService).getByUserId(USER_ID);
-        verify(credentialsService).save(skyXpCredentials);
-        verify(passwordService).authenticate(USER_PASSWORD, CREDENTIALS_HASHED_PASSWORD);
-        assertEquals(CREDENTIALS_HASHED_PASSWORD, skyXpCredentials.getPassword());
+        verify(credentialsService).save(credentials);
+        assertThat(credentials.getPassword()).isEqualTo(NEW_HASHED_PASSWORD);
     }
 }

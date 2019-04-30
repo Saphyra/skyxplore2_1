@@ -8,17 +8,17 @@ import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.domain.factory.Factory;
-import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 

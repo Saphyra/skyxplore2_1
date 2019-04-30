@@ -7,9 +7,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.ship.ShipViewConverter;
-import skyxplore.dataaccess.db.EquippedShipDao;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.domain.ship.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.ShipNotFoundException;
 
