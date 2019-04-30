@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
-import skyxplore.service.gamedata.DataQueryService;
 
 @Service
 @RequiredArgsConstructor

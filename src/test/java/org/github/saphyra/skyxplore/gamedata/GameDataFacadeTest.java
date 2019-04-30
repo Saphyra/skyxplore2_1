@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.gamedata.entity.Armor;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
 import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.service.gamedata.DataQueryService;
 import skyxplore.testutil.TestGeneralDescription;
 
 @RunWith(MockitoJUnitRunner.class)

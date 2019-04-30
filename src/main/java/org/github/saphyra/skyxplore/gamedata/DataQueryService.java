@@ -1,4 +1,4 @@
-package skyxplore.service.gamedata;
+package org.github.saphyra.skyxplore.gamedata;
 
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ import skyxplore.exception.EquipmentNotFoundException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class DataQueryService {
+class DataQueryService {
     private final AbilityService abilityService;
     private final ArmorService armorService;
     private final BatteryService batteryService;
@@ -36,7 +36,7 @@ public class DataQueryService {
     private final StorageService storageService;
     private final WeaponService weaponService;
 
-    public GeneralDescription getData(String id) {
+    GeneralDescription getData(String id) {
         GeneralDescription result = abilityService.get(id);
         if (result == null) {
             result = armorService.get(id);
@@ -74,7 +74,7 @@ public class DataQueryService {
         return result;
     }
 
-    public FactoryData getFactoryData(String elementId) {
+    FactoryData getFactoryData(String elementId) {
         GeneralDescription element = getData(elementId);
         if (element instanceof FactoryData) {
             return (FactoryData) element;
@@ -82,7 +82,7 @@ public class DataQueryService {
         throw new IllegalArgumentException(elementId + " is not instance of FactoryData");
     }
 
-    public ShopData findBuyable(String elementId) {
+    ShopData findBuyable(String elementId) {
         GeneralDescription data = getData(elementId);
         if (data instanceof ShopData) {
             return (ShopData) data;
