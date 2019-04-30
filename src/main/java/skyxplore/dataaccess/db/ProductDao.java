@@ -26,7 +26,7 @@ public class ProductDao extends AbstractDao<ProductEntity, Product, String, Prod
         this.dateTimeUtil = dateTimeUtil;
     }
 
-    void deleteByFactoryId(String factoryId) {
+    public void deleteByFactoryId(String factoryId) {
         repository.deleteByFactoryId(factoryId);
     }
 

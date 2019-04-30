@@ -1,4 +1,4 @@
-package skyxplore.domain.materials;
+package org.github.saphyra.skyxplore.factory.domain;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +9,13 @@ import skyxplore.exception.NotEnoughMaterialsException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static skyxplore.testutil.TestUtils.MATERIAL_AMOUNT;
-import static skyxplore.testutil.TestUtils.MATERIAL_ID;
-import static skyxplore.testutil.TestUtils.MATERIAL_KEY;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MaterialsTest {
+    private static final String MATERIAL_ID_1 = "material_id_1";
+    private static final Integer AMOUNT = 3;
+    private static final String MATERIAL_ID_2 = "material_id_2";
 
     private Materials underTest;
 
@@ -27,71 +27,73 @@ public class MaterialsTest {
     @Test
     public void testGetShouldReturnZeroIfNotContains() {
         //WHEN
-        Integer result = underTest.get(MATERIAL_ID);
+        Integer result = underTest.get(MATERIAL_ID_1);
         //THEN
-        assertEquals((Integer) 0, result);
+        assertThat(result).isEqualTo(0);
     }
 
     @Test
     public void testGetShouldReturnValue() {
         //GIVEN
-        underTest.addMaterial(MATERIAL_ID, MATERIAL_AMOUNT);
+        underTest.addMaterial(MATERIAL_ID_1, AMOUNT);
         //WHEN
-        Integer result = underTest.get(MATERIAL_ID);
+        Integer result = underTest.get(MATERIAL_ID_1);
         //THEN
-        assertEquals(MATERIAL_AMOUNT, result);
+        assertThat(result).isEqualTo(AMOUNT);
     }
 
     @Test
     public void testAddMaterialShouldIncrement() {
         //GIVEN
-        underTest.put(MATERIAL_ID, MATERIAL_AMOUNT);
+        underTest.put(MATERIAL_ID_1, AMOUNT);
         //WHEN
-        underTest.addMaterial(MATERIAL_ID, MATERIAL_AMOUNT);
+        underTest.addMaterial(MATERIAL_ID_1, AMOUNT);
         //THEN
-        assertEquals(MATERIAL_AMOUNT * 2, (int) underTest.get(MATERIAL_ID));
+        assertThat(underTest.get(MATERIAL_ID_1)).isEqualTo(AMOUNT + AMOUNT);
     }
 
     @Test(expected = NotEnoughMaterialsException.class)
     public void testRemoveMaterialShouldThrowExceptionWhenNotEnough() {
-        underTest.removeMaterial(MATERIAL_ID, MATERIAL_AMOUNT);
+        //GIVEN
+        underTest.addMaterial(MATERIAL_ID_1, AMOUNT - 1);
+        //WHEN
+        underTest.removeMaterial(MATERIAL_ID_1, AMOUNT);
     }
 
     @Test
     public void testRemoveMaterialShouldRemove() {
         //GIVEN
-        underTest.addMaterial(MATERIAL_ID, 2 * MATERIAL_AMOUNT);
+        underTest.addMaterial(MATERIAL_ID_1, 2 * AMOUNT);
         //WHEN
-        underTest.removeMaterial(MATERIAL_ID, MATERIAL_AMOUNT);
+        underTest.removeMaterial(MATERIAL_ID_1, AMOUNT);
         //THEN
-        assertEquals(MATERIAL_AMOUNT, underTest.get(MATERIAL_ID));
+        assertThat(underTest.get(MATERIAL_ID_1)).isEqualTo(AMOUNT);
     }
 
     @Test
     public void testPutShouldIncrement() {
-        //GIVEN
         //WHEN
-        underTest.put(MATERIAL_ID, MATERIAL_AMOUNT);
+        underTest.put(MATERIAL_ID_1, AMOUNT);
         //THEN
-        assertEquals(MATERIAL_AMOUNT, underTest.get(MATERIAL_ID));
+        assertThat(underTest.get(MATERIAL_ID_1)).isEqualTo(AMOUNT);
     }
 
     @Test
     public void testPutAllShouldPut() {
         //GIVEN
         Map<String, Integer> map = new HashMap<>();
-        map.put(MATERIAL_ID, MATERIAL_AMOUNT);
-        map.put(MATERIAL_KEY, MATERIAL_AMOUNT);
+        map.put(MATERIAL_ID_1, AMOUNT);
+        map.put(MATERIAL_ID_2, AMOUNT + 1);
         //WHEN
         underTest.putAll(map);
         //THEN
-        assertEquals(MATERIAL_AMOUNT, underTest.get(MATERIAL_ID));
-        assertEquals(MATERIAL_AMOUNT, underTest.get(MATERIAL_KEY));
+        assertThat(underTest.get(MATERIAL_ID_1)).isEqualTo(AMOUNT);
+        assertThat(underTest.get(MATERIAL_ID_2)).isEqualTo(AMOUNT + 1);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testRemoveShouldThrowException() {
-        underTest.remove(MATERIAL_ID);
+        underTest.remove(MATERIAL_ID_1);
     }
 
     @Test(expected = UnsupportedOperationException.class)

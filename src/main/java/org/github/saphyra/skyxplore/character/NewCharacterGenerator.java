@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.materials.Materials;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 
 @Slf4j
 @Component

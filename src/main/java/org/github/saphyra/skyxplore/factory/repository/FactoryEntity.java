@@ -1,6 +1,9 @@
-package skyxplore.domain.factory;
+package org.github.saphyra.skyxplore.factory.repository;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -11,7 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "factory")
-public class FactoryEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+class FactoryEntity {
     @Id
     @Column(name = "factory_id", length = 50)
     private String factoryId;

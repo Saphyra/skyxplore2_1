@@ -20,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.view.product.ProductView;
-import skyxplore.domain.materials.Materials;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import skyxplore.service.FactoryFacade;
 import skyxplore.service.ProductFacade;
 

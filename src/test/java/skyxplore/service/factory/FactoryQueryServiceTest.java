@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.domain.factory.Factory;
+import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
 import skyxplore.exception.FactoryNotFoundException;
 
 import java.util.Map;

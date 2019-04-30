@@ -1,4 +1,4 @@
-package skyxplore.domain.materials;
+package org.github.saphyra.skyxplore.factory.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class MaterialsConverter extends ConverterBase<String, Materials> {
+class MaterialsConverter extends ConverterBase<String, Materials> {
     private final ObjectMapper objectMapper;
     private final StringEncryptor stringEncryptor;
 

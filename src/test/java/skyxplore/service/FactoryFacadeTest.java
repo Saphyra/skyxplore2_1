@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.controller.request.character.AddToQueueRequest;
-import skyxplore.domain.materials.Materials;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import skyxplore.service.factory.AddToQueueService;
 import skyxplore.service.factory.FactoryQueryService;
 

@@ -1,10 +1,9 @@
-package skyxplore.domain.factory;
+package org.github.saphyra.skyxplore.factory.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import skyxplore.domain.materials.Materials;
 
 @Data
 @NoArgsConstructor

@@ -1,13 +1,13 @@
-package skyxplore.domain.factory;
+package org.github.saphyra.skyxplore.factory.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.springframework.stereotype.Component;
 import com.github.saphyra.converter.ConverterBase;
-import skyxplore.domain.materials.MaterialsConverter;
 
 @Component
 @RequiredArgsConstructor
-public class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
+class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
     private final MaterialsConverter materialsConverter;
 
     @Override

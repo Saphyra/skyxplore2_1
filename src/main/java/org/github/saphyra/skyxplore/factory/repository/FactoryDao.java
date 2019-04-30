@@ -1,12 +1,11 @@
-package skyxplore.dataaccess.db;
+package org.github.saphyra.skyxplore.factory.repository;
 
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.repository.FactoryRepository;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.factory.FactoryEntity;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import skyxplore.dataaccess.db.ProductDao;
 
 @Component
 @Slf4j

@@ -3,9 +3,9 @@ package skyxplore.service.factory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.materials.Materials;
+import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import skyxplore.exception.FactoryNotFoundException;
 
 @Service

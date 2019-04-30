@@ -1,25 +1,18 @@
 package skyxplore.testutil;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
@@ -32,11 +25,16 @@ import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.factory.FactoryEntity;
-import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductEntity;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 @Deprecated
 public class TestUtils {
@@ -55,11 +53,6 @@ public class TestUtils {
     private static final Integer CHARACTER_MONEY = 10;
     public static final String FRIEND_NAME = "friend_name";
     private static final String CHARACTER_EQUIPMENT = "character_equipments";
-
-    //Converter
-    public static final String CONVERTER_ENTITY = "converter_entity";
-    public static final Integer CONVERTER_INT_VALUE = 316;
-    public static final String CONVERTER_KEY = "converter_key";
 
     //SkyXpCredentials
     public static final String USER_NAME = "user_name";
@@ -102,7 +95,6 @@ public class TestUtils {
     public static final String FACTORY_ID_1 = "factory_id_1";
     public static final String FACTORY_ID_2 = "factory_id_2";
     public static final String FACTORY_ID_3 = "factory_id_3";
-    public static final String FACTORY_MATERIALS = "factory_materials";
 
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
@@ -276,14 +268,6 @@ public class TestUtils {
         factory.setCharacterId(CHARACTER_ID_1);
         factory.setMaterials(createMaterials());
         return factory;
-    }
-
-    public static FactoryEntity createFactoryEntity() {
-        FactoryEntity entity = new FactoryEntity();
-        entity.setFactoryId(FACTORY_ID_1);
-        entity.setCharacterId(CHARACTER_ID_1);
-        entity.setMaterials(FACTORY_MATERIALS);
-        return entity;
     }
 
     public static FriendRequest createFriendRequest() {

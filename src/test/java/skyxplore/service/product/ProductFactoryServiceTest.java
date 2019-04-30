@@ -39,12 +39,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.db.FactoryDao;
+import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import skyxplore.dataaccess.db.ProductDao;
 import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.materials.Materials;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.service.factory.FactoryQueryService;
 import skyxplore.testutil.TestGeneralDescription;

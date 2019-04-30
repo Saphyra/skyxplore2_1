@@ -1,4 +1,4 @@
-package skyxplore.domain.materials;
+package org.github.saphyra.skyxplore.factory.domain;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
