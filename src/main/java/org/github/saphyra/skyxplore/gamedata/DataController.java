@@ -1,4 +1,4 @@
-package skyxplore.controller;
+package org.github.saphyra.skyxplore.gamedata;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

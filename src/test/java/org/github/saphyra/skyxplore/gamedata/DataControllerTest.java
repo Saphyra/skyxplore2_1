@@ -1,16 +1,16 @@
-package skyxplore.controller;
+package org.github.saphyra.skyxplore.gamedata;
 
+import org.github.saphyra.skyxplore.gamedata.subservice.CommonDataQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.gamedata.subservice.CommonDataQueryService;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static skyxplore.testutil.TestUtils.CATEGORY_ID;
 import static skyxplore.testutil.TestUtils.DATA_ID_1;
@@ -31,6 +31,6 @@ public class DataControllerTest {
         //WHEN
         List<String> result = underTest.getItemsOfCategory(CATEGORY_ID);
         //THEN
-        assertEquals(items, result);
+        assertThat(result).isEqualTo(items);
     }
 }
