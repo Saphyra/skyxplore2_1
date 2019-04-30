@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import skyxplore.exception.ShipNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -9,7 +9,7 @@ import skyxplore.controller.view.slot.SlotView;
 import skyxplore.controller.view.slot.SlotViewConverter;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;

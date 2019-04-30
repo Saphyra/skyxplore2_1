@@ -1,15 +1,13 @@
-package skyxplore.dataaccess.db;
+package org.github.saphyra.skyxplore.slot.repository;
 
 import javax.transaction.Transactional;
 
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.db.repository.SlotRepository;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.domain.slot.SlotEntity;
 
 @Component
 @Slf4j

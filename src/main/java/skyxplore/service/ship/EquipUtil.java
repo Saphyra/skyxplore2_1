@@ -3,10 +3,10 @@ package skyxplore.service.ship;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
 
 import static skyxplore.service.EquippedShipFacade.DEFENSE_SLOT_NAME;

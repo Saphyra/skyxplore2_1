@@ -1,31 +1,39 @@
-package skyxplore.domain.slot;
-
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+package org.github.saphyra.skyxplore.slot.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class EquippedSlot {
     private String slotId;
     private String shipId;
     private Integer frontSlot;
-    private ArrayList<String> frontEquipped = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> frontEquipped = new ArrayList<>();
     private Integer leftSlot;
-    private ArrayList<String> leftEquipped = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> leftEquipped = new ArrayList<>();
     private Integer rightSlot;
-    private ArrayList<String> rightEquipped = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> rightEquipped = new ArrayList<>();
     private Integer backSlot;
-    private ArrayList<String> backEquipped = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> backEquipped = new ArrayList<>();
 
     public void addSlot(Integer extraSlot) {
         frontSlot += extraSlot;
@@ -65,7 +73,7 @@ public class EquippedSlot {
         frontEquipped.add(element);
     }
 
-    void addFront(Collection<String> elements) {
+    public void addFront(Collection<String> elements) {
         elements.forEach(this::addFront);
     }
 
@@ -82,7 +90,7 @@ public class EquippedSlot {
         leftEquipped.add(element);
     }
 
-    void addLeft(Collection<String> elements) {
+    public void addLeft(Collection<String> elements) {
         elements.forEach(this::addLeft);
     }
 
@@ -99,7 +107,7 @@ public class EquippedSlot {
         rightEquipped.add(element);
     }
 
-    void addRight(Collection<String> elements) {
+    public void addRight(Collection<String> elements) {
         elements.forEach(this::addRight);
     }
 
@@ -116,7 +124,7 @@ public class EquippedSlot {
         backEquipped.add(element);
     }
 
-    void addBack(Collection<String> elements) {
+    public void addBack(Collection<String> elements) {
         elements.forEach(this::addBack);
     }
 

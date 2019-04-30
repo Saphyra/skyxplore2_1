@@ -8,14 +8,14 @@ import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequ
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.db.SlotDao;
 import skyxplore.domain.factory.Factory;
-import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 
 @Service

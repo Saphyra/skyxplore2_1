@@ -1,17 +1,24 @@
-package skyxplore.domain.slot;
-
-import lombok.Data;
-import org.hibernate.annotations.Type;
+package org.github.saphyra.skyxplore.slot.repository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Data
 @Table(name = "equipped_slot")
-public class SlotEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+class SlotEntity {
     @Id
     @Column(name = "slot_id", length = 50)
     private String slotId;

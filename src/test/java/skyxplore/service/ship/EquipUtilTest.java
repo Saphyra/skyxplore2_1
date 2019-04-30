@@ -20,8 +20,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -69,8 +69,8 @@ public class EquipUtilTest {
     public void testSlotByNameShouldReturnDefenseSlotWhenDefense() {
         //GIVEN
         EquippedShip ship = createEquippedShip();
-        EquippedSlot slot = new EquippedSlot();
-        slot.setSlotId(DEFENSE_SLOT_ID);
+        EquippedSlot slot = EquippedSlot.builder()
+            .slotId(DEFENSE_SLOT_ID).build();
         when(slotDao.getById(DEFENSE_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, DEFENSE_SLOT_NAME);
@@ -83,8 +83,9 @@ public class EquipUtilTest {
     public void testSlotByNameShouldReturnWeaponSlotWhenWeapon() {
         //GIVEN
         EquippedShip ship = createEquippedShip();
-        EquippedSlot slot = new EquippedSlot();
-        slot.setSlotId(WEAPON_SLOT_ID);
+        EquippedSlot slot = EquippedSlot.builder()
+            .slotId(WEAPON_SLOT_ID)
+            .build();
         when(slotDao.getById(WEAPON_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, WEAPON_SLOT_NAME);

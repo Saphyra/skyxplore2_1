@@ -1,7 +1,7 @@
 package skyxplore.controller.view.slot;
 
 import org.springframework.stereotype.Component;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.controller.view.AbstractViewConverter;
 
 @Component

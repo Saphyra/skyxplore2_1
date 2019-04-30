@@ -17,9 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import skyxplore.domain.factory.Factory;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)

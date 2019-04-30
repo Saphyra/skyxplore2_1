@@ -1,26 +1,20 @@
-package skyxplore.dataaccess.db;
+package org.github.saphyra.skyxplore.slot.repository;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.EQUIPPED_SHIP_ID;
-import static skyxplore.testutil.TestUtils.EQUIPPED_SLOT_ID;
-import static skyxplore.testutil.TestUtils.createEquippedSlot;
-import static skyxplore.testutil.TestUtils.createSlotEntity;
 
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.db.repository.SlotRepository;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.domain.slot.SlotConverter;
-import skyxplore.domain.slot.SlotEntity;
-
 @RunWith(MockitoJUnitRunner.class)
 public class SlotDaoTest {
+    private static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
+    private static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
     @Mock
     private SlotConverter slotConverter;
 
@@ -41,16 +35,16 @@ public class SlotDaoTest {
     @Test
     public void tesGetByIdShouldConvertAndReturn() {
         //GIVEN
-        SlotEntity entity = createSlotEntity();
+        SlotEntity entity = SlotEntity.builder().build();
         when(slotRepository.getOne(EQUIPPED_SLOT_ID)).thenReturn(entity);
 
-        EquippedSlot equippedSlot = createEquippedSlot();
+        EquippedSlot equippedSlot = EquippedSlot.builder().build();
         when(slotConverter.convertEntity(entity)).thenReturn(equippedSlot);
         //WHEN
         EquippedSlot result = underTest.getById(EQUIPPED_SLOT_ID);
         //THEN
         verify(slotRepository).getOne(EQUIPPED_SLOT_ID);
         verify(slotConverter).convertEntity(entity);
-        assertEquals(equippedSlot, result);
+        assertThat(result).isEqualTo(equippedSlot);
     }
 }

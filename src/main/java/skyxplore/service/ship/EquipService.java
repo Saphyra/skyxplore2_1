@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import skyxplore.controller.request.character.EquipRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.gamedata.entity.Extender;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.ship.ShipViewConverter;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.exception.ShipNotFoundException;
 
 @Service

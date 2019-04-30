@@ -6,7 +6,6 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
@@ -19,14 +18,7 @@ import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
-import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
-import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
-import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
-import org.github.saphyra.skyxplore.user.domain.Role;
-import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
-import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
-import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 
 import skyxplore.controller.request.character.AddToQueueRequest;
 import skyxplore.controller.request.character.EquipRequest;
@@ -45,8 +37,6 @@ import skyxplore.domain.factory.FactoryEntity;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.domain.product.ProductEntity;
-import skyxplore.domain.slot.EquippedSlot;
-import skyxplore.domain.slot.SlotEntity;
 
 @Deprecated
 public class TestUtils {
@@ -72,11 +62,7 @@ public class TestUtils {
     public static final String CONVERTER_KEY = "converter_key";
 
     //SkyXpCredentials
-    public static final String USER_FAKE_PASSWORD = "user_fake_password";
     public static final String USER_NAME = "user_name";
-    public static final String USER_NEW_PASSWORD = "user_new_password";
-    public static final String USER_PASSWORD = "user_password";
-    public static final String CREDENTIALS_HASHED_PASSWORD = "credentials_hashed_password";
 
     //Data
     public static final String DATA_ID_1 = "data_id_1";
@@ -104,24 +90,13 @@ public class TestUtils {
     public static final String EQUIPPED_SHIP_TYPE = "equipped_ship_type";
 
     //EquippedSlot
-    public static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
+    private static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
     public static final String DEFENSE_SLOT_ID = "defense_slot_id";
     public static final Integer EQUIPPED_SLOT_FRONT_SLOT = 2;
     public static final Integer EQUIPPED_SLOT_LEFT_SLOT = 2;
     public static final Integer EQUIPPED_SLOT_RIGHT_SLOT = 2;
     public static final Integer EQUIPPED_SLOT_BACK_SLOT = 2;
-    public static final String EQUIPPED_SLOT_ENCRYPTED_SLOT = "equipped_slot_encrypted_slot";
-    public static final String EQUIPPED_SLOT_ENCRYPTED_SLOT_ITEM = "equipped_slot_encrypted_slot_item";
-    public static final String EQUIPPED_SLOT_DATA_ITEM_STRING = "equipped_slot_data_item_string";
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_SLOT = "equipped_slot_encrypted_front_slot";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_SLOT = "equipped_slot_encrypted_left_slot";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_SLOT = "equipped_slot_encrypted_right_slot";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_BACK_SLOT = "equipped_slot_encrypted_back_slot";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_FRONT_ITEM = "equipped_slot_encrypted_front_item";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_LEFT_ITEM = "equipped_slot_encrypted_left_item";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_RIGHT_ITEM = "equipped_slot_encrypted_right_item";
-    private static final String EQUIPPED_SLOT_ENCRYPTED_BACK_ITEM = "equipped_slot_encrypted_back_item";
 
     //Factory
     public static final String FACTORY_ID_1 = "factory_id_1";
@@ -182,16 +157,7 @@ public class TestUtils {
     public static final OffsetDateTime PRODUCT_END_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //User
-    public static final String USER_EMAIL = "user_email";
     public static final String USER_ID = "user_id";
-    public static final String USER_NEW_EMAIL = "user_new_email";
-    public static final String USER_NEW_NAME = "user_new_name";
-
-    public static AccountDeleteRequest createAccountDeleteRequest() {
-        AccountDeleteRequest request = new AccountDeleteRequest();
-        request.setPassword(USER_PASSWORD);
-        return request;
-    }
 
     public static AddToQueueRequest createAddToQueueRequest() {
         AddToQueueRequest request = new AddToQueueRequest();
@@ -206,27 +172,6 @@ public class TestUtils {
             .blockedCharacterId(BLOCKED_CHARACTER_ID)
             .characterId(CHARACTER_ID_1)
             .build();
-    }
-
-    public static ChangeEmailRequest createChangeEmailRequest() {
-        ChangeEmailRequest request = new ChangeEmailRequest();
-        request.setNewEmail(USER_NEW_EMAIL);
-        request.setPassword(USER_PASSWORD);
-        return request;
-    }
-
-    public static ChangePasswordRequest createChangePasswordRequest() {
-        ChangePasswordRequest request = new ChangePasswordRequest();
-        request.setNewPassword(USER_NEW_PASSWORD);
-        request.setOldPassword(USER_PASSWORD);
-        return request;
-    }
-
-    public static ChangeUserNameRequest createChangeUserNameRequest() {
-        ChangeUserNameRequest request = new ChangeUserNameRequest();
-        request.setNewUserName(USER_NEW_NAME);
-        request.setPassword(USER_PASSWORD);
-        return request;
     }
 
     public static SkyXpCharacter createCharacter() {
@@ -245,11 +190,6 @@ public class TestUtils {
         view.setCharacterName(character.getCharacterName());
         return view;
     }
-
-    public static SkyXpCredentials createCredentials() {
-        return new SkyXpCredentials(USER_ID, USER_NAME, CREDENTIALS_HASHED_PASSWORD);
-    }
-
 
     private static Slot createDefenseSlot() {
         Slot slot = new Slot();
@@ -303,7 +243,7 @@ public class TestUtils {
     }
 
     public static EquippedSlot createEquippedSlot() {
-        EquippedSlot slot = new EquippedSlot();
+        EquippedSlot slot = EquippedSlot.builder().build();
         slot.setSlotId(EQUIPPED_SLOT_ID);
         slot.setShipId(EQUIPPED_SHIP_ID);
         slot.setFrontSlot(EQUIPPED_SLOT_FRONT_SLOT);
@@ -515,21 +455,6 @@ public class TestUtils {
         return ship;
     }
 
-    public static SlotEntity createSlotEntity() {
-        SlotEntity entity = new SlotEntity();
-        entity.setSlotId(EQUIPPED_SLOT_ID);
-        entity.setShipId(EQUIPPED_SHIP_ID);
-        entity.setFrontSlot(EQUIPPED_SLOT_ENCRYPTED_FRONT_SLOT);
-        entity.setLeftSlot(EQUIPPED_SLOT_ENCRYPTED_LEFT_SLOT);
-        entity.setRightSlot(EQUIPPED_SLOT_ENCRYPTED_RIGHT_SLOT);
-        entity.setBackSlot(EQUIPPED_SLOT_ENCRYPTED_BACK_SLOT);
-        entity.setFrontEquipped(EQUIPPED_SLOT_ENCRYPTED_FRONT_ITEM);
-        entity.setLeftEquipped(EQUIPPED_SLOT_ENCRYPTED_LEFT_ITEM);
-        entity.setRightEquipped(EQUIPPED_SLOT_ENCRYPTED_RIGHT_ITEM);
-        entity.setBackEquipped(EQUIPPED_SLOT_ENCRYPTED_BACK_ITEM);
-        return entity;
-    }
-
     public static SlotView createSlotView(EquippedSlot slot) {
         return SlotView.builder()
             .frontSlot(slot.getFrontSlot())
@@ -547,24 +472,6 @@ public class TestUtils {
         UnequipRequest request = new UnequipRequest();
         request.setItemId(EQUIP_ITEM_ID);
         request.setSlot(UNEQUIP_FROM);
-        return request;
-    }
-
-    public static SkyXpUser createUser() {
-        SkyXpUser user = new SkyXpUser();
-        user.setUserId(USER_ID);
-        user.setEmail(USER_EMAIL);
-        HashSet<Role> roles = new HashSet<>();
-        roles.add(Role.USER);
-        user.setRoles(roles);
-        return user;
-    }
-
-    public static UserRegistrationRequest createUserRegistrationRequest() {
-        UserRegistrationRequest request = new UserRegistrationRequest();
-        request.setUsername(USER_NAME);
-        request.setPassword(USER_PASSWORD);
-        request.setEmail(USER_EMAIL);
         return request;
     }
 

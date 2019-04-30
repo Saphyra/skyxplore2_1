@@ -1,4 +1,11 @@
-package skyxplore.domain.slot;
+package org.github.saphyra.skyxplore.slot.repository;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,15 +13,10 @@ import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
+class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
     private final IntegerEncryptor integerEncryptor;
     private final ObjectMapper objectMapper;
     private final StringEncryptor stringEncryptor;
@@ -68,7 +70,8 @@ public class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
             return null;
         }
 
-        EquippedSlot domain = new EquippedSlot();
+        //TODO use builder
+        EquippedSlot domain = EquippedSlot.builder().build();
         try {
             domain.setSlotId(entity.getSlotId());
             domain.setShipId(entity.getShipId());

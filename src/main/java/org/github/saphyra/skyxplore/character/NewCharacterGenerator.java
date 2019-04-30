@@ -6,6 +6,7 @@ import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.util.IdGenerator;
@@ -13,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
-import skyxplore.domain.slot.EquippedSlot;
 
 @Slf4j
 @Component
@@ -80,7 +80,8 @@ class NewCharacterGenerator {
     }
 
     private EquippedSlot createSlot(String shipId, Slot slot) {
-        EquippedSlot equippedSlot = new EquippedSlot();
+        //TODO use builder
+        EquippedSlot equippedSlot = EquippedSlot.builder().build();
         equippedSlot.setSlotId(idGenerator.generateRandomId());
         equippedSlot.setShipId(shipId);
         equippedSlot.setFrontSlot(slot.getFront());

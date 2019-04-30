@@ -9,13 +9,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import skyxplore.dataaccess.db.SlotDao;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import skyxplore.domain.slot.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import java.util.ArrayList;
