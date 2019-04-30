@@ -1,18 +1,16 @@
 package org.github.saphyra.skyxplore.character;
 
-import java.util.List;
-import java.util.Map;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.springframework.stereotype.Component;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import skyxplore.service.accesstoken.CharacterSelectService;
-import skyxplore.service.character.CharacterDeleteService;
 import skyxplore.service.character.CharacterRenameService;
+
+import java.util.List;
+import java.util.Map;
 
 @Component
 @Slf4j
