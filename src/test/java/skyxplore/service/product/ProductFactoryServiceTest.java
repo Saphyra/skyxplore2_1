@@ -1,36 +1,14 @@
 package skyxplore.service.product;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import skyxplore.dataaccess.db.FactoryDao;
-import skyxplore.dataaccess.db.ProductDao;
-import skyxplore.dataaccess.gamedata.entity.Material;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.factory.Factory;
-import skyxplore.domain.materials.Materials;
-import skyxplore.domain.product.Product;
-import skyxplore.service.GameDataFacade;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import skyxplore.service.factory.FactoryQueryService;
-import skyxplore.testutil.TestGeneralDescription;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CATEGORY_ID;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.DATA_ID_1;
+import static skyxplore.testutil.TestUtils.DATA_SLOT;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_2;
 import static skyxplore.testutil.TestUtils.FACTORY_ID_3;
@@ -45,6 +23,31 @@ import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME;
 import static skyxplore.testutil.TestUtils.createFactory;
 import static skyxplore.testutil.TestUtils.createMaterial;
 import static skyxplore.testutil.TestUtils.createProduct;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import skyxplore.dataaccess.db.FactoryDao;
+import skyxplore.dataaccess.db.ProductDao;
+import skyxplore.dataaccess.gamedata.entity.Material;
+import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
+import skyxplore.domain.factory.Factory;
+import skyxplore.domain.materials.Materials;
+import skyxplore.domain.product.Product;
+import skyxplore.service.factory.FactoryQueryService;
+import skyxplore.testutil.TestGeneralDescription;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductFactoryServiceTest {
@@ -110,7 +113,7 @@ public class ProductFactoryServiceTest {
         when(gameDataFacade.getData(PRODUCT_EXCEPTIONAL_ELEMENT)).thenThrow(new RuntimeException());
 
         //===FINISH EQUIPMENT PRODUCT===
-        GeneralDescription generalDescription = new TestGeneralDescription(DATA_ID_1);
+        GeneralDescription generalDescription = new TestGeneralDescription(DATA_ID_1, CATEGORY_ID, DATA_SLOT);
         when(gameDataFacade.getData(PRODUCT_ELEMENT_ID_EQUIPMENT)).thenReturn(generalDescription);
 
         when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);

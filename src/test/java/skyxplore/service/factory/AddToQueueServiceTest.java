@@ -20,7 +20,7 @@ import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;
 import skyxplore.exception.NotEnoughMaterialsException;
 import skyxplore.exception.NotEnoughMoneyException;
-import skyxplore.service.GameDataFacade;
+import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 

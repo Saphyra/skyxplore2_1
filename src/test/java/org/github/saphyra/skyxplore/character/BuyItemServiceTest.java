@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
-import skyxplore.service.GameDataFacade;
+import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BuyItemServiceTest {

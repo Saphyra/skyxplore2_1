@@ -38,7 +38,6 @@ import skyxplore.controller.view.slot.SlotView;
 import skyxplore.dataaccess.gamedata.entity.Material;
 import skyxplore.dataaccess.gamedata.entity.Ship;
 import skyxplore.dataaccess.gamedata.entity.Slot;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
 import skyxplore.domain.factory.Factory;
@@ -406,12 +405,6 @@ public class TestUtils {
         view.setFriendName(FRIEND_NAME);
         view.setActive(false);
         return view;
-    }
-
-    public static GeneralDescription createGeneralDescription() {
-        GeneralDescription generalDescription = new TestGeneralDescription(DATA_CATEGORY_1);
-        generalDescription.setId(DATA_ELEMENT);
-        return generalDescription;
     }
 
     public static Mail createMail() {
