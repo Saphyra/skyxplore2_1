@@ -6,7 +6,6 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.springframework.stereotype.Component;
-import skyxplore.service.accesstoken.CharacterSelectService;
 
 import java.util.List;
 import java.util.Map;

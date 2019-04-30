@@ -17,8 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.service.accesstoken.CharacterSelectService;
-
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterFacadeTest {
     private static final String CHARACTER_ID = "character_id";
