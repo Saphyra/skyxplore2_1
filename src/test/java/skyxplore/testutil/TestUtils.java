@@ -10,12 +10,14 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.gamedata.entity.Material;
+import org.github.saphyra.skyxplore.gamedata.entity.Ship;
+import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
@@ -35,9 +37,6 @@ import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.product.ProductView;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
-import org.github.saphyra.skyxplore.gamedata.entity.Material;
-import org.github.saphyra.skyxplore.gamedata.entity.Ship;
-import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
 import skyxplore.domain.factory.Factory;
@@ -64,7 +63,7 @@ public class TestUtils {
     public static final String CHARACTER_ID_2 = "character_id_2";
     public static final String CHARACTER_NAME = "character_name";
     public static final String CHARACTER_NEW_NAME = "character_new_name";
-    public static final Integer CHARACTER_MONEY = 10;
+    private static final Integer CHARACTER_MONEY = 10;
     public static final String FRIEND_NAME = "friend_name";
     private static final String CHARACTER_EQUIPMENT = "character_equipments";
 
@@ -82,7 +81,6 @@ public class TestUtils {
 
     //Data
     public static final String DATA_ID_1 = "data_id_1";
-    public static final String DATA_ID_2 = "data_id_2";
     public static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
     public static final String DATA_ELEMENT = "element";
@@ -93,8 +91,6 @@ public class TestUtils {
     public static final String DATA_ITEM_BACK = "item_back";
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
-    public static final String DATA_CATEGORY_1 = "data_category_1";
-    public static final String DATA_CATEGORY_2 = "data_category_2";
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
     public static final Integer DATA_SHIP_COREHULL = 1000;
@@ -169,7 +165,7 @@ public class TestUtils {
     private static final Integer MATERIAL_CONSTRUCTION_TIME = 20;
     public static final String MATERIAL_ID = "material_id";
     public static final String MATERIAL_KEY = "material_KEY";
-    public static final Integer MATERIAL_MATERIAL_AMOUNT = 3;
+    private static final Integer MATERIAL_MATERIAL_AMOUNT = 3;
     private static final String MATERIAL_MATERIAL_ID = "material_material_id";
     private static final String MATERIAL_SLOT = "material_slot";
 
@@ -240,7 +236,7 @@ public class TestUtils {
     }
 
     public static SkyXpCharacter createCharacter() {
-        SkyXpCharacter character = new SkyXpCharacter();
+        SkyXpCharacter character = SkyXpCharacter.builder().build();
         character.setCharacterId(CHARACTER_ID_1);
         character.setCharacterName(CHARACTER_NAME);
         character.setUserId(USER_ID);
@@ -254,10 +250,6 @@ public class TestUtils {
         view.setCharacterId(character.getCharacterId());
         view.setCharacterName(character.getCharacterName());
         return view;
-    }
-
-    public static CreateCharacterRequest createCreateCharacterRequest() {
-        return new CreateCharacterRequest(CHARACTER_NAME);
     }
 
     public static SkyXpCredentials createCredentials() {

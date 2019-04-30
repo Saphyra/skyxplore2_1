@@ -1,28 +1,27 @@
-package skyxplore.service.character;
+package org.github.saphyra.skyxplore.character;
+
+import javax.transaction.Transactional;
+
+import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
-import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import skyxplore.dataaccess.db.EquippedShipDao;
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.db.SlotDao;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.CharacterNameAlreadyExistsException;
 
-import javax.transaction.Transactional;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CharacterCreatorService {
+class CharacterCreatorService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
@@ -32,7 +31,8 @@ public class CharacterCreatorService {
     private final CharacterNameCache characterNameCache;
 
     @Transactional
-    public SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
+    //TODO event driven character generation
+    SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
         if (characterQueryService.isCharNameExists(request.getCharacterName())) {
             throw new CharacterNameAlreadyExistsException("Character already exists with name " + request.getCharacterName());
         }

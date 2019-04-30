@@ -1,15 +1,15 @@
-package skyxplore.service.character;
+package org.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.util.IdGenerator;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.character.CharacterGeneratorConfig;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.util.IdGenerator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.ship.EquippedShip;
@@ -37,8 +37,9 @@ class NewCharacterGenerator {
     private final MaterialService materialService;
     private final ShipService shipService;
 
-    public SkyXpCharacter createCharacter(String userId, String characterName) {
-        SkyXpCharacter character = new SkyXpCharacter();
+    SkyXpCharacter createCharacter(String userId, String characterName) {
+        //TODO update with using builder
+        SkyXpCharacter character = SkyXpCharacter.builder().build();
         character.setCharacterId(idGenerator.generateRandomId());
         character.setCharacterName(characterName);
         character.setUserId(userId);

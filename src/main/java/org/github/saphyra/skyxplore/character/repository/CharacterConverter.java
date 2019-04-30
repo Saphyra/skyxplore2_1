@@ -1,16 +1,17 @@
 package org.github.saphyra.skyxplore.character.repository;
 
+import java.io.IOException;
+import java.util.Arrays;
+
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +26,8 @@ class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> 
             return null;
         }
 
-        SkyXpCharacter domain = new SkyXpCharacter();
+        //TODO update with using builder
+        SkyXpCharacter domain = SkyXpCharacter.builder().build();
 
         try {
             domain.setCharacterId(entity.getCharacterId());

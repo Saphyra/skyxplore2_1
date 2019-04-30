@@ -1,5 +1,12 @@
 package org.github.saphyra.skyxplore.character.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
@@ -10,13 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterDaoTest {
@@ -145,11 +145,12 @@ public class CharacterDaoTest {
     }
 
     private SkyXpCharacter createCharacter() {
-        SkyXpCharacter character = new SkyXpCharacter();
-        character.setCharacterId(CHARACTER_ID);
-        character.setCharacterName(CHARACTER_NAME);
-        character.setUserId(USER_ID);
-        character.addMoney(MONEY);
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(CHARACTER_ID)
+            .characterName(CHARACTER_NAME)
+            .userId(USER_ID)
+            .money(MONEY)
+            .build();
         character.addEquipment(EQUIPMENT);
         return character;
     }

@@ -1,13 +1,20 @@
 package skyxplore.domain.slot;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EquippedSlot {
     private String slotId;
     private String shipId;

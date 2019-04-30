@@ -1,9 +1,12 @@
 package org.github.saphyra.skyxplore.character.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.encryption.impl.IntegerEncryptor;
-import com.github.saphyra.encryption.impl.StringEncryptor;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,12 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterConverterTest {
@@ -102,11 +103,12 @@ public class CharacterConverterTest {
     }
 
     private SkyXpCharacter createCharacter() {
-        SkyXpCharacter character = new SkyXpCharacter();
-        character.setCharacterId(CHARACTER_ID);
-        character.setCharacterName(CHARACTER_NAME);
-        character.setUserId(USER_ID);
-        character.addMoney(MONEY);
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(CHARACTER_ID)
+            .characterName(CHARACTER_NAME)
+            .userId(USER_ID)
+            .money(MONEY)
+            .build();
         character.addEquipment(EQUIPMENT);
         return character;
     }

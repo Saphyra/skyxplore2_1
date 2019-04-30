@@ -1,18 +1,19 @@
 package org.github.saphyra.skyxplore.character.domain;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.exception.NotEnoughMoneyException;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import skyxplore.exception.NotEnoughMoneyException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCharacterTest {
@@ -23,7 +24,7 @@ public class SkyXpCharacterTest {
 
     @Before
     public void init() {
-        underTest = new SkyXpCharacter();
+        underTest = SkyXpCharacter.builder().build();
     }
 
     @Test

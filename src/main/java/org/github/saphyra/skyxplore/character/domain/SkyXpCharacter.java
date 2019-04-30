@@ -6,20 +6,21 @@ import java.util.Map;
 import java.util.Set;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import skyxplore.exception.NotEnoughMoneyException;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SkyXpCharacter {
     private String characterId;
     private String characterName;
     private String userId;
+
+    @Builder.Default
     private Integer money = 0;
 
     @Builder.Default

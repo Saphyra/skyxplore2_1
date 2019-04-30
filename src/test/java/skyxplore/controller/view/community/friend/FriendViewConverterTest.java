@@ -1,25 +1,29 @@
 package skyxplore.controller.view.community.friend;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
+import static skyxplore.testutil.TestUtils.FRIENDSHIP_ID;
+import static skyxplore.testutil.TestUtils.FRIEND_ID;
+import static skyxplore.testutil.TestUtils.FRIEND_NAME;
+import static skyxplore.testutil.TestUtils.createFriendship;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.*;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendViewConverterTest {
@@ -38,7 +42,7 @@ public class FriendViewConverterTest {
         Friendship friendship = createFriendship();
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
-        SkyXpCharacter friend = new SkyXpCharacter();
+        SkyXpCharacter friend = SkyXpCharacter.builder().build();
         friend.setCharacterName(FRIEND_NAME);
 
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
@@ -63,7 +67,7 @@ public class FriendViewConverterTest {
         friendship.setCharacterId(FRIEND_ID);
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
-        SkyXpCharacter friend = new SkyXpCharacter();
+        SkyXpCharacter friend = SkyXpCharacter.builder().build();
         friend.setCharacterName(FRIEND_NAME);
 
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
