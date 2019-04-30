@@ -20,8 +20,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import skyxplore.exception.CharacterNotFoundException;
-import skyxplore.exception.InvalidAccessException;
+import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 
 @RunWith(MockitoJUnitRunner.class)

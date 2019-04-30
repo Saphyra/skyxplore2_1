@@ -13,7 +13,7 @@ import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.springframework.stereotype.Service;
-import skyxplore.exception.CharacterNameAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 
 import javax.transaction.Transactional;
 

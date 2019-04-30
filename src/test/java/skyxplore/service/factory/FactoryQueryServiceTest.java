@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
-import skyxplore.exception.FactoryNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
 
 import java.util.Map;
 import java.util.Optional;

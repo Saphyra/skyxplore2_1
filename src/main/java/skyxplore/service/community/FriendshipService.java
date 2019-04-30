@@ -19,8 +19,8 @@ import org.github.saphyra.skyxplore.community.friendship.repository.friendreques
 import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import skyxplore.exception.CharacterBlockedException;
-import skyxplore.exception.FriendshipAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
+import org.github.saphyra.skyxplore.common.exception.FriendshipAlreadyExistsException;
 
 @Service
 @Slf4j

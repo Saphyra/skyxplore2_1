@@ -9,7 +9,7 @@ import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.exception.ShipNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 
 @Service
 @Slf4j

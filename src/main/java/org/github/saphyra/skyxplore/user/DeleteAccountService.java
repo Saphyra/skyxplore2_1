@@ -8,7 +8,7 @@ import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
-import skyxplore.exception.BadCredentialsException;
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 
 import javax.transaction.Transactional;
 

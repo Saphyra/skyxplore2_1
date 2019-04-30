@@ -13,7 +13,7 @@ import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.exception.BadSlotNameException;
+import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import javax.transaction.Transactional;

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
-import skyxplore.exception.UserNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.UserNotFoundException;
 
 @Service
 @RequiredArgsConstructor

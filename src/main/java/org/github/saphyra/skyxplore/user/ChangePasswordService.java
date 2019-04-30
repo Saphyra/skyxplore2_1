@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
-import skyxplore.exception.BadCredentialsException;
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 
 @Service
 @RequiredArgsConstructor

@@ -21,7 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.exception.CharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.CookieUtil;
 

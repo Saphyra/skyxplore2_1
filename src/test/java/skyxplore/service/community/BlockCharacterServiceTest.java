@@ -11,8 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import skyxplore.exception.BlockedCharacterNotFoundException;
-import skyxplore.exception.CharacterAlreadyBlockedException;
+import org.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import static org.junit.Assert.assertEquals;

@@ -10,8 +10,8 @@ import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
-import skyxplore.exception.EmailAlreadyExistsException;
-import skyxplore.exception.UserNameAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
 
 import java.util.Arrays;
 import java.util.HashSet;

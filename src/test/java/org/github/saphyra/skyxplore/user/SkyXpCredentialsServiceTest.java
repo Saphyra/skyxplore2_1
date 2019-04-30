@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.exception.BadCredentialsException;
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCredentialsServiceTest {

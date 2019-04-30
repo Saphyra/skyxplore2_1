@@ -7,7 +7,7 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.springframework.stereotype.Service;
-import skyxplore.exception.CharacterNameAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 
 @Service
 @Slf4j

@@ -18,8 +18,8 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import skyxplore.exception.CharacterBlockedException;
-import skyxplore.exception.FriendshipAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
+import org.github.saphyra.skyxplore.common.exception.FriendshipAlreadyExistsException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import java.util.Arrays;

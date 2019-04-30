@@ -2,7 +2,7 @@ package org.github.saphyra.skyxplore.factory.domain;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.exception.NotEnoughMaterialsException;
+import org.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
 
 import java.util.HashMap;
 import java.util.Map;

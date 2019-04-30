@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
-import skyxplore.exception.CharacterBlockedException;
+import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 

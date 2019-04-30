@@ -7,8 +7,8 @@ import org.github.saphyra.skyxplore.user.cache.UserNameCache;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
-import skyxplore.exception.BadCredentialsException;
-import skyxplore.exception.UserNameAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import org.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
 
 @Service
 @RequiredArgsConstructor

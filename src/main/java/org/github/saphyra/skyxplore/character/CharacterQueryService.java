@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.exception.CharacterNotFoundException;
-import skyxplore.exception.InvalidAccessException;
+import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 
 @Slf4j
 @RequiredArgsConstructor

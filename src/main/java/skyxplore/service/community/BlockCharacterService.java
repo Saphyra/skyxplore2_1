@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import skyxplore.exception.BlockedCharacterNotFoundException;
-import skyxplore.exception.CharacterAlreadyBlockedException;
+import org.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
 
 @Service
 @Slf4j

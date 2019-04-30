@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
-import skyxplore.exception.MailNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.MailNotFoundException;
 
 import java.util.Arrays;
 import java.util.List;

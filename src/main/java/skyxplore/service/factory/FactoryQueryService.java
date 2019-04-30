@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
-import skyxplore.exception.FactoryNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
 
 @Service
 @RequiredArgsConstructor

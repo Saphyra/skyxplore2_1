@@ -24,7 +24,7 @@ import org.github.saphyra.skyxplore.gamedata.subservice.ShieldService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.gamedata.subservice.StorageService;
 import org.github.saphyra.skyxplore.gamedata.subservice.WeaponService;
-import skyxplore.exception.EquipmentNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataQueryServiceTest {

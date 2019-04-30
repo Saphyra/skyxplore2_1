@@ -1,7 +1,6 @@
 package skyxplore.testutil;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
@@ -48,7 +47,6 @@ public class TestUtils {
     public static final String CHARACTER_ID_1 = "character_id_1";
     public static final String CHARACTER_ID_2 = "character_id_2";
     public static final String CHARACTER_NAME = "character_name";
-    public static final String CHARACTER_NEW_NAME = "character_new_name";
     private static final Integer CHARACTER_MONEY = 10;
     public static final String FRIEND_NAME = "friend_name";
     private static final String CHARACTER_EQUIPMENT = "character_equipments";
@@ -130,13 +128,10 @@ public class TestUtils {
     //Product
     public static final Long PRODUCT_ADDED_AT = 1000L;
     public static final Integer PRODUCT_AMOUNT = 5;
-    public static final String PRODUCT_ENCRYPTED_AMOUNT = "product_encrypted_amount";
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
     public static final Integer PRODUCT_BUILD_PRICE = 50;
-    public static final String PRODUCT_ENCRYPTED_CONSTRUCTION_TIME = "product_encrypted_construction_time";
     public static final String PRODUCT_ELEMENT_ID_EQUIPMENT = "element_id_equipment";
     public static final String PRODUCT_ELEMENT_ID_MATERIAL = "element_id_material";
-    public static final String PRODUCT_ENCRYPTED_ELEMENT_ID = "product_encrypted_element_id";
     public static final String PRODUCT_ID_1 = "product_id_1";
     public static final String PRODUCT_ID_2 = "product_id_2";
     public static final String PRODUCT_ID_3 = "product_id_3";
@@ -397,10 +392,6 @@ public class TestUtils {
         view.setStartTime(PRODUCT_START_TIME_EPOCH);
         view.setEndTime(PRODUCT_END_TIME_EPOCH);
         return view;
-    }
-
-    public static RenameCharacterRequest createRenameCharacterRequest() {
-        return new RenameCharacterRequest(CHARACTER_NEW_NAME, CHARACTER_ID_1);
     }
 
     public static SendMailRequest createSendMailRequest() {

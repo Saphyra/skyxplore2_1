@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import skyxplore.exception.ShipNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 
 @Component
 @Slf4j

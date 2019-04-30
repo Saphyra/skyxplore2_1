@@ -8,7 +8,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.dataaccess.db.MailDao;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
-import skyxplore.exception.InvalidMailAccessException;
+import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import java.util.Arrays;

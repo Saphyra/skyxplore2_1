@@ -15,8 +15,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import skyxplore.exception.BadCredentialsException;
-import skyxplore.exception.UserNameAlreadyExistsException;
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import org.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeUserNameServiceTest {

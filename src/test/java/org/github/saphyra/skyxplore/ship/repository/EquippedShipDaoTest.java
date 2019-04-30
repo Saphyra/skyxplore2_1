@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import skyxplore.exception.ShipNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipDaoTest {

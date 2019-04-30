@@ -7,7 +7,7 @@ import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.exception.BadSlotNameException;
+import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 
 import static skyxplore.service.EquippedShipFacade.DEFENSE_SLOT_NAME;
 import static skyxplore.service.EquippedShipFacade.WEAPON_SLOT_NAME;

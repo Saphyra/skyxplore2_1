@@ -22,7 +22,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.exception.BadSlotNameException;
+import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipUtilTest {

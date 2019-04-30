@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.exception.NotEnoughMaterialsException;
+import org.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
 
 import java.util.HashMap;
 import java.util.Map;

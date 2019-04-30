@@ -10,7 +10,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import skyxplore.exception.NotEnoughMoneyException;
+import org.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
 
 @Data
 @Builder
