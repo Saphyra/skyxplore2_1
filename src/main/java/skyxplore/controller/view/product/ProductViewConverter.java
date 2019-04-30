@@ -2,7 +2,7 @@ package skyxplore.controller.view.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.domain.product.Product;
+import org.github.saphyra.skyxplore.product.domain.Product;
 import skyxplore.controller.view.AbstractViewConverter;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 

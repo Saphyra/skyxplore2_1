@@ -1,4 +1,4 @@
-package skyxplore.domain.product;
+package org.github.saphyra.skyxplore.product.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductEntity {
+class ProductEntity {
     @Id
     @Column(name = "product_id", nullable = false, length = 50)
     private String productId;

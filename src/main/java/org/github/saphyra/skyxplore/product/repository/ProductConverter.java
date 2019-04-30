@@ -1,17 +1,18 @@
-package skyxplore.domain.product;
+package org.github.saphyra.skyxplore.product.repository;
 
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.product.domain.Product;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ProductConverter extends ConverterBase<ProductEntity, Product> {
+class ProductConverter extends ConverterBase<ProductEntity, Product> {
     private final DateTimeUtil dateTimeUtil;
     private final IntegerEncryptor integerEncryptor;
     private final StringEncryptor stringEncryptor;

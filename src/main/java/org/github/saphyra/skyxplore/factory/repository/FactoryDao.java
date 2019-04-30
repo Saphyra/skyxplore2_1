@@ -5,7 +5,7 @@ import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
-import skyxplore.dataaccess.db.ProductDao;
+import org.github.saphyra.skyxplore.product.repository.ProductDao;
 
 @Component
 @Slf4j

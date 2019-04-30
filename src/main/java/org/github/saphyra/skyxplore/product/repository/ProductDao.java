@@ -1,12 +1,10 @@
-package skyxplore.dataaccess.db;
+package org.github.saphyra.skyxplore.product.repository;
 
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.repository.ProductRepository;
-import skyxplore.domain.product.Product;
-import skyxplore.domain.product.ProductEntity;
+import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import java.time.OffsetDateTime;
@@ -14,6 +12,7 @@ import java.util.List;
 
 @Component
 @Slf4j
+//TODO unit test
 public class ProductDao extends AbstractDao<ProductEntity, Product, String, ProductRepository> {
     private final DateTimeUtil dateTimeUtil;
 

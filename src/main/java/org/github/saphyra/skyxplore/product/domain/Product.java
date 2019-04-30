@@ -1,4 +1,4 @@
-package skyxplore.domain.product;
+package org.github.saphyra.skyxplore.product.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

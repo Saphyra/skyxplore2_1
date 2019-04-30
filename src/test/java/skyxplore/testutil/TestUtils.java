@@ -11,6 +11,7 @@ import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
+import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.controller.request.character.AddToQueueRequest;
@@ -25,8 +26,6 @@ import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
-import skyxplore.domain.product.Product;
-import skyxplore.domain.product.ProductEntity;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -118,8 +117,6 @@ public class TestUtils {
     public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //Material
-    public static final String MATERIAL_ENCRYPTED_ENTITY = "material_encrypted_entity";
-    public static final String MATERIAL_ENTITY = "material_entity";
     public static final Integer MATERIAL_AMOUNT = 2;
     private static final Boolean MATERIAL_BUILDABLE = true;
     private static final Integer MATERIAL_BUILDPRICE = 100;
@@ -386,19 +383,6 @@ public class TestUtils {
             .constructionTime(PRODUCT_CONSTRUCTION_TIME)
             .startTime(PRODUCT_START_TIME)
             .endTime(PRODUCT_END_TIME)
-            .build();
-    }
-
-    public static ProductEntity createProductEntity() {
-        return ProductEntity.builder()
-            .productId(PRODUCT_ID_1)
-            .factoryId(FACTORY_ID_1)
-            .elementId(PRODUCT_ENCRYPTED_ELEMENT_ID)
-            .amount(PRODUCT_ENCRYPTED_AMOUNT)
-            .addedAt(PRODUCT_ADDED_AT)
-            .constructionTime(PRODUCT_ENCRYPTED_CONSTRUCTION_TIME)
-            .startTime(PRODUCT_START_TIME_EPOCH)
-            .endTime(PRODUCT_END_TIME_EPOCH)
             .build();
     }
 
