@@ -41,8 +41,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import skyxplore.dataaccess.db.FactoryDao;
 import skyxplore.dataaccess.db.ProductDao;
-import skyxplore.dataaccess.gamedata.entity.Material;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.Material;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.materials.Materials;
 import skyxplore.domain.product.Product;

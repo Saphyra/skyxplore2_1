@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import skyxplore.dataaccess.db.SlotDao;
-import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;
 import skyxplore.exception.BadSlotNameException;

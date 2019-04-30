@@ -4,20 +4,20 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.ShopData;
-import skyxplore.dataaccess.gamedata.subservice.AbilityService;
-import skyxplore.dataaccess.gamedata.subservice.ArmorService;
-import skyxplore.dataaccess.gamedata.subservice.BatteryService;
-import skyxplore.dataaccess.gamedata.subservice.CoreHullService;
-import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
-import skyxplore.dataaccess.gamedata.subservice.GeneratorService;
-import skyxplore.dataaccess.gamedata.subservice.MaterialService;
-import skyxplore.dataaccess.gamedata.subservice.ShieldService;
-import skyxplore.dataaccess.gamedata.subservice.ShipService;
-import skyxplore.dataaccess.gamedata.subservice.StorageService;
-import skyxplore.dataaccess.gamedata.subservice.WeaponService;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.ShopData;
+import org.github.saphyra.skyxplore.gamedata.subservice.AbilityService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ArmorService;
+import org.github.saphyra.skyxplore.gamedata.subservice.BatteryService;
+import org.github.saphyra.skyxplore.gamedata.subservice.CoreHullService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.gamedata.subservice.GeneratorService;
+import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShieldService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.gamedata.subservice.StorageService;
+import org.github.saphyra.skyxplore.gamedata.subservice.WeaponService;
 import skyxplore.exception.EquipmentNotFoundException;
 
 @Service

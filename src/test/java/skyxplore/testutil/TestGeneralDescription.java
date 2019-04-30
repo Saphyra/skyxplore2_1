@@ -1,8 +1,9 @@
 package skyxplore.testutil;
 
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
 
 
 @EqualsAndHashCode(callSuper = true)

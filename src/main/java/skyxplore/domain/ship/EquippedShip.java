@@ -2,7 +2,7 @@ package skyxplore.domain.ship;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.Data;
-import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 import java.util.ArrayList;

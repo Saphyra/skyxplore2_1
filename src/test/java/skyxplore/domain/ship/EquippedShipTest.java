@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.dataaccess.gamedata.entity.Extender;
-import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.gamedata.entity.Extender;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 import java.util.Arrays;

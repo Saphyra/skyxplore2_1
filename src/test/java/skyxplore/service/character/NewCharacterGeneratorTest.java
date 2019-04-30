@@ -39,10 +39,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.util.IdGenerator;
-import skyxplore.dataaccess.gamedata.entity.Ship;
-import skyxplore.dataaccess.gamedata.entity.Slot;
-import skyxplore.dataaccess.gamedata.subservice.MaterialService;
-import skyxplore.dataaccess.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.gamedata.entity.Ship;
+import org.github.saphyra.skyxplore.gamedata.entity.Slot;
+import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import skyxplore.domain.factory.Factory;
 import skyxplore.domain.ship.EquippedShip;
 import skyxplore.domain.slot.EquippedSlot;

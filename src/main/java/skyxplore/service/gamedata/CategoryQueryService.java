@@ -1,14 +1,24 @@
 package skyxplore.service.gamedata;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.controller.request.character.EquipmentCategoryRequest;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.dataaccess.gamedata.subservice.*;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.subservice.ArmorService;
+import org.github.saphyra.skyxplore.gamedata.subservice.BatteryService;
+import org.github.saphyra.skyxplore.gamedata.subservice.CoreHullService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.gamedata.subservice.GeneratorService;
+import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShieldService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.gamedata.subservice.StorageService;
+import org.github.saphyra.skyxplore.gamedata.subservice.WeaponService;
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import skyxplore.controller.request.character.EquipmentCategoryRequest;
 
 @Service
 @RequiredArgsConstructor

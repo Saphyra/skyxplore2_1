@@ -1,6 +1,6 @@
 package org.github.saphyra.skyxplore.gamedata;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -9,21 +9,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.gamedata.entity.Material;
-import skyxplore.dataaccess.gamedata.entity.Weapon;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.FactoryData;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.dataaccess.gamedata.subservice.AbilityService;
-import skyxplore.dataaccess.gamedata.subservice.ArmorService;
-import skyxplore.dataaccess.gamedata.subservice.BatteryService;
-import skyxplore.dataaccess.gamedata.subservice.CoreHullService;
-import skyxplore.dataaccess.gamedata.subservice.ExtenderService;
-import skyxplore.dataaccess.gamedata.subservice.GeneratorService;
-import skyxplore.dataaccess.gamedata.subservice.MaterialService;
-import skyxplore.dataaccess.gamedata.subservice.ShieldService;
-import skyxplore.dataaccess.gamedata.subservice.ShipService;
-import skyxplore.dataaccess.gamedata.subservice.StorageService;
-import skyxplore.dataaccess.gamedata.subservice.WeaponService;
+import org.github.saphyra.skyxplore.gamedata.entity.Material;
+import org.github.saphyra.skyxplore.gamedata.entity.Weapon;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.subservice.AbilityService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ArmorService;
+import org.github.saphyra.skyxplore.gamedata.subservice.BatteryService;
+import org.github.saphyra.skyxplore.gamedata.subservice.CoreHullService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.gamedata.subservice.GeneratorService;
+import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShieldService;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.gamedata.subservice.StorageService;
+import org.github.saphyra.skyxplore.gamedata.subservice.WeaponService;
 import skyxplore.exception.EquipmentNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -88,7 +88,7 @@ public class DataQueryServiceTest {
         //WHEN
         GeneralDescription result = underTest.getData(DATA_ID);
         //THEN
-        assertEquals(weapon, result);
+        assertThat(result).isEqualTo(weapon);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class DataQueryServiceTest {
         //WHEN
         FactoryData result = underTest.getFactoryData(DATA_ID);
         //THEN
-        assertEquals(weapon, result);
+        assertThat(result).isEqualTo(weapon);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -122,6 +122,6 @@ public class DataQueryServiceTest {
         //WHEN
         FactoryData result = underTest.findBuyable(DATA_ID);
         //THEN
-        assertEquals(weapon, result);
+        assertThat(result).isEqualTo(weapon);
     }
 }

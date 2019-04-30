@@ -7,8 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.controller.view.slot.SlotViewConverter;
-import skyxplore.dataaccess.gamedata.entity.Ship;
-import skyxplore.dataaccess.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.gamedata.entity.Ship;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import skyxplore.domain.slot.EquippedSlot;
 
 import static org.junit.Assert.assertEquals;

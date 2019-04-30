@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import skyxplore.controller.request.character.EquipmentCategoryRequest;
-import skyxplore.dataaccess.gamedata.entity.*;
-import skyxplore.dataaccess.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.dataaccess.gamedata.subservice.*;
+import org.github.saphyra.skyxplore.gamedata.entity.*;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.subservice.*;
 
 import java.util.Map;
 
