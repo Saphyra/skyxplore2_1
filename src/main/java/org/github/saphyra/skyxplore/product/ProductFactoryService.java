@@ -1,4 +1,4 @@
-package skyxplore.service.product;
+package org.github.saphyra.skyxplore.product;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import java.util.List;
 @EnableScheduling
 @RequiredArgsConstructor
 //TODO split class
-public class ProductFactoryService {
+class ProductFactoryService {
     private final CharacterQueryService characterQueryService;
     private final CharacterDao characterDao;
     private final DateTimeUtil dateTimeUtil;
@@ -39,7 +39,7 @@ public class ProductFactoryService {
     private final ProductDao productDao;
 
     @Scheduled(fixedDelay = 10500L)
-    public void process() {
+    void process() {
         processFinishedProducts();
         startNextProduct();
     }

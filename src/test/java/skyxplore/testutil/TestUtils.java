@@ -5,12 +5,8 @@ import org.github.saphyra.skyxplore.character.domain.view.character.CharacterVie
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.factory.domain.Factory;
-import org.github.saphyra.skyxplore.factory.domain.Materials;
-import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
-import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.controller.request.character.EquipRequest;
@@ -29,7 +25,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 @Deprecated
@@ -85,11 +80,6 @@ public class TestUtils {
     public static final Integer EQUIPPED_SLOT_BACK_SLOT = 2;
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
 
-    //Factory
-    public static final String FACTORY_ID_1 = "factory_id_1";
-    public static final String FACTORY_ID_2 = "factory_id_2";
-    public static final String FACTORY_ID_3 = "factory_id_3";
-
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
     public static final String FRIENDSHIP_ID = "friendship_id";
@@ -112,29 +102,7 @@ public class TestUtils {
     public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //Material
-    private static final Integer MATERIAL_AMOUNT = 2;
-    private static final Boolean MATERIAL_BUILDABLE = true;
-    private static final Integer MATERIAL_BUILDPRICE = 100;
-    private static final Integer MATERIAL_CONSTRUCTION_TIME = 20;
     public static final String MATERIAL_ID = "material_id";
-    private static final String MATERIAL_KEY = "material_KEY";
-    private static final Integer MATERIAL_MATERIAL_AMOUNT = 3;
-    private static final String MATERIAL_MATERIAL_ID = "material_material_id";
-    private static final String MATERIAL_SLOT = "material_slot";
-
-    //Product
-    private static final Long PRODUCT_ADDED_AT = 1000L;
-    public static final Integer PRODUCT_AMOUNT = 5;
-    public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
-    public static final String PRODUCT_ELEMENT_ID_EQUIPMENT = "element_id_equipment";
-    public static final String PRODUCT_ELEMENT_ID_MATERIAL = "element_id_material";
-    public static final String PRODUCT_ID_1 = "product_id_1";
-    public static final String PRODUCT_ID_2 = "product_id_2";
-    public static final String PRODUCT_ID_3 = "product_id_3";
-    private static final Long PRODUCT_START_TIME_EPOCH = 10000L;
-    public static final OffsetDateTime PRODUCT_START_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_START_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
-    private static final Long PRODUCT_END_TIME_EPOCH = 20000L;
-    private static final OffsetDateTime PRODUCT_END_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //User
     public static final String USER_ID = "user_id";
@@ -237,20 +205,6 @@ public class TestUtils {
         return request;
     }
 
-    public static Factory createFactory(String factoryId) {
-        Factory factory = createFactory();
-        factory.setFactoryId(factoryId);
-        return factory;
-    }
-
-    public static Factory createFactory() {
-        Factory factory = new Factory();
-        factory.setFactoryId(FACTORY_ID_1);
-        factory.setCharacterId(CHARACTER_ID_1);
-        factory.setMaterials(createMaterials());
-        return factory;
-    }
-
     public static FriendRequest createFriendRequest() {
         return FriendRequest.builder()
             .friendRequestId(FRIEND_REQUEST_ID)
@@ -329,44 +283,6 @@ public class TestUtils {
             .subject(MAIL_SUBJECT)
             .read(false)
             .sendTime(MAIL_SEND_TIME_EPOCH)
-            .build();
-    }
-
-    public static Material createMaterial() {
-        Material material = new Material();
-        material.setBuildable(MATERIAL_BUILDABLE);
-        HashMap<String, Integer> materials = new HashMap<>();
-        materials.put(MATERIAL_MATERIAL_ID, MATERIAL_MATERIAL_AMOUNT);
-        material.setMaterials(materials);
-        material.setConstructionTime(MATERIAL_CONSTRUCTION_TIME);
-        material.setBuildPrice(MATERIAL_BUILDPRICE);
-        material.setId(MATERIAL_ID);
-        material.setSlot(MATERIAL_SLOT);
-        return material;
-    }
-
-    private static Materials createMaterials() {
-        Materials materials = new Materials();
-        materials.addMaterial(MATERIAL_KEY, MATERIAL_AMOUNT);
-        return materials;
-    }
-
-    public static Product createProduct(String productId) {
-        Product product = createProduct();
-        product.setProductId(productId);
-        return product;
-    }
-
-    public static Product createProduct() {
-        return Product.builder()
-            .productId(PRODUCT_ID_1)
-            .factoryId(FACTORY_ID_1)
-            .elementId(PRODUCT_ELEMENT_ID_EQUIPMENT)
-            .amount(PRODUCT_AMOUNT)
-            .addedAt(PRODUCT_ADDED_AT)
-            .constructionTime(PRODUCT_CONSTRUCTION_TIME)
-            .startTime(PRODUCT_START_TIME)
-            .endTime(PRODUCT_END_TIME)
             .build();
     }
 
