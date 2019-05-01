@@ -6,7 +6,6 @@ import org.github.saphyra.skyxplore.product.domain.ProductView;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import skyxplore.service.ProductFacade;
 
 import java.util.List;
 

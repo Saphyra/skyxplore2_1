@@ -1,11 +1,9 @@
-package skyxplore.service;
-
-import org.springframework.stereotype.Service;
+package org.github.saphyra.skyxplore.product;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.product.domain.ProductView;
-import org.github.saphyra.skyxplore.product.ProductQueryService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

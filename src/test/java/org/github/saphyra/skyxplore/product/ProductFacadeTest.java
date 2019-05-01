@@ -15,23 +15,25 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductControllerTest {
+public class ProductFacadeTest {
     private static final String CHARACTER_ID = "character_id";
+
     @Mock
-    private ProductFacade productFacade;
+    private ProductQueryService productQueryService;
 
     @InjectMocks
-    private ProductController underTest;
+    private ProductFacade underTest;
 
     @Test
-    public void testGetQueueShouldCallFacadeAndReturnResult() {
+    public void testGetQueueShouldCallService() {
         //GIVEN
         List<ProductView> productViews = Arrays.asList(ProductView.builder().build());
-        when(productFacade.getQueue(CHARACTER_ID)).thenReturn(productViews);
+        when(productQueryService.getQueue(CHARACTER_ID)).thenReturn(productViews);
         //WHEN
         List<ProductView> result = underTest.getQueue(CHARACTER_ID);
         //THEN
-        verify(productFacade).getQueue(CHARACTER_ID);
+        verify(productQueryService).getQueue(CHARACTER_ID);
         assertThat(result).isEqualTo(productViews);
     }
+
 }

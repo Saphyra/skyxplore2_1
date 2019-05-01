@@ -11,7 +11,6 @@ import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.product.domain.Product;
-import org.github.saphyra.skyxplore.product.domain.ProductView;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import skyxplore.controller.request.character.EquipRequest;
@@ -369,19 +368,6 @@ public class TestUtils {
             .startTime(PRODUCT_START_TIME)
             .endTime(PRODUCT_END_TIME)
             .build();
-    }
-
-    public static ProductView createProductView() {
-        ProductView view = ProductView.builder().build();
-        view.setProductId(PRODUCT_ID_1);
-        view.setFactoryId(FACTORY_ID_1);
-        view.setElementId(PRODUCT_ELEMENT_ID_EQUIPMENT);
-        view.setAmount(PRODUCT_AMOUNT);
-        view.setAddedAt(PRODUCT_ADDED_AT);
-        view.setConstructionTime(PRODUCT_CONSTRUCTION_TIME);
-        view.setStartTime(PRODUCT_START_TIME_EPOCH);
-        view.setEndTime(PRODUCT_END_TIME_EPOCH);
-        return view;
     }
 
     public static SendMailRequest createSendMailRequest() {
