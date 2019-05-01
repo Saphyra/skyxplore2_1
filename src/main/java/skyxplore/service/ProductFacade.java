@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.view.product.ProductView;
-import skyxplore.service.product.ProductQueryService;
+import org.github.saphyra.skyxplore.product.domain.ProductView;
+import org.github.saphyra.skyxplore.product.ProductQueryService;
 
 import java.util.List;
 

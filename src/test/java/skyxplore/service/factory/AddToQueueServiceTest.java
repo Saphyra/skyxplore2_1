@@ -9,7 +9,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.character.AddToQueueRequest;
+import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;

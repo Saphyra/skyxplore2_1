@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.view.product.ProductView;
-import skyxplore.service.product.ProductQueryService;
+import org.github.saphyra.skyxplore.product.domain.ProductView;
+import org.github.saphyra.skyxplore.product.ProductQueryService;
 
 import java.util.Arrays;
 import java.util.List;

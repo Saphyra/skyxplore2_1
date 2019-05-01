@@ -1,12 +1,11 @@
-package skyxplore.service.product;
+package org.github.saphyra.skyxplore.product;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.controller.view.product.ProductView;
-import skyxplore.controller.view.product.ProductViewConverter;
-import org.github.saphyra.skyxplore.product.repository.ProductDao;
 import org.github.saphyra.skyxplore.product.domain.Product;
+import org.github.saphyra.skyxplore.product.domain.ProductView;
+import org.github.saphyra.skyxplore.product.repository.ProductDao;
+import org.springframework.stereotype.Service;
 import skyxplore.service.factory.FactoryQueryService;
 
 import java.util.List;

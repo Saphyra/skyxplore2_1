@@ -1,8 +1,10 @@
-package skyxplore.controller.view.product;
+package org.github.saphyra.skyxplore.product.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ProductView {
     private String productId;
     private String factoryId;

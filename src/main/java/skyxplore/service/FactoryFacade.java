@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.request.character.AddToQueueRequest;
+import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
 import skyxplore.service.factory.AddToQueueService;
 import skyxplore.service.factory.FactoryQueryService;
 

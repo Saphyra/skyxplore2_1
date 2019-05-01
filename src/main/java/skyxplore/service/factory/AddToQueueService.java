@@ -5,7 +5,7 @@ import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.character.AddToQueueRequest;
+import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;

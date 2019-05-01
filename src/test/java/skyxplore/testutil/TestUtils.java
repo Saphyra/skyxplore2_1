@@ -13,14 +13,14 @@ import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.controller.request.character.AddToQueueRequest;
+import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;
-import skyxplore.controller.view.product.ProductView;
+import org.github.saphyra.skyxplore.product.domain.ProductView;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.domain.community.mail.Mail;
@@ -126,7 +126,7 @@ public class TestUtils {
     private static final String MATERIAL_SLOT = "material_slot";
 
     //Product
-    public static final Long PRODUCT_ADDED_AT = 1000L;
+    private static final Long PRODUCT_ADDED_AT = 1000L;
     public static final Integer PRODUCT_AMOUNT = 5;
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
     public static final Integer PRODUCT_BUILD_PRICE = 50;
@@ -137,8 +137,8 @@ public class TestUtils {
     public static final String PRODUCT_ID_3 = "product_id_3";
     public static final Long PRODUCT_START_TIME_EPOCH = 10000L;
     public static final OffsetDateTime PRODUCT_START_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_START_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
-    public static final Long PRODUCT_END_TIME_EPOCH = 20000L;
-    public static final OffsetDateTime PRODUCT_END_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
+    private static final Long PRODUCT_END_TIME_EPOCH = 20000L;
+    private static final OffsetDateTime PRODUCT_END_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //User
     public static final String USER_ID = "user_id";
@@ -382,7 +382,7 @@ public class TestUtils {
     }
 
     public static ProductView createProductView() {
-        ProductView view = new ProductView();
+        ProductView view = ProductView.builder().build();
         view.setProductId(PRODUCT_ID_1);
         view.setFactoryId(FACTORY_ID_1);
         view.setElementId(PRODUCT_ELEMENT_ID_EQUIPMENT);
