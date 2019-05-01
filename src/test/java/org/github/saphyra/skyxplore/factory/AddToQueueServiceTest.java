@@ -1,4 +1,4 @@
-package skyxplore.service.factory;
+package org.github.saphyra.skyxplore.factory;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.util.IdGenerator;
@@ -24,28 +24,27 @@ import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
-import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
-import static skyxplore.testutil.TestUtils.DATA_ELEMENT_AMOUNT;
-import static skyxplore.testutil.TestUtils.FACTORY_ID_1;
-import static skyxplore.testutil.TestUtils.MATERIAL_AMOUNT;
-import static skyxplore.testutil.TestUtils.MATERIAL_ID;
-import static skyxplore.testutil.TestUtils.PRODUCT_AMOUNT;
-import static skyxplore.testutil.TestUtils.PRODUCT_BUILD_PRICE;
-import static skyxplore.testutil.TestUtils.PRODUCT_CONSTRUCTION_TIME;
-import static skyxplore.testutil.TestUtils.PRODUCT_ID_1;
-import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME;
-import static skyxplore.testutil.TestUtils.PRODUCT_START_TIME_EPOCH;
-import static skyxplore.testutil.TestUtils.createAddToQueueRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddToQueueServiceTest {
+    private static final String ELEMENT_ID = "element_id";
+    private static final Integer AMOUNT = 2;
+    private static final String CHARACTER_ID = "character_id";
+    private static final Integer BUILD_PRICE = 93;
+    private static final String FACTORY_ID = "factory_id";
+    private static final String PRODUCT_ID = "product_id";
+    private static final Integer CONSTRUCTION_TIME = 13213;
+    private static final OffsetDateTime START_TIME = OffsetDateTime.now(ZoneOffset.UTC);
+    private static final Long START_TIME_EPOCH = 7687L;
+
     @Mock
     private CharacterDao characterDao;
 
@@ -86,85 +85,85 @@ public class AddToQueueServiceTest {
 
     @Before
     public void setUp() {
-        addToQueueRequest = createAddToQueueRequest();
+        addToQueueRequest = new AddToQueueRequest(ELEMENT_ID, AMOUNT);
 
-        when(characterQueryService.findByCharacterId(CHARACTER_ID_1)).thenReturn(character);
-        when(factoryQueryService.findFactoryOfCharacterValidated(CHARACTER_ID_1)).thenReturn(factory);
-        when(gameDataFacade.getFactoryData(DATA_ELEMENT)).thenReturn(factoryData);
+        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(factoryQueryService.findFactoryOfCharacterValidated(CHARACTER_ID)).thenReturn(factory);
+        when(gameDataFacade.getFactoryData(ELEMENT_ID)).thenReturn(factoryData);
         when(factoryData.isBuildable()).thenReturn(true);
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAddToQueueShouldThrowExceptionWhenNotBuildable(){
+    public void testAddToQueueShouldThrowExceptionWhenNotBuildable() {
         //GIVEN
         when(factoryData.isBuildable()).thenReturn(false);
         //WHEN
-        underTest.addToQueue(CHARACTER_ID_1, addToQueueRequest);
+        underTest.addToQueue(CHARACTER_ID, addToQueueRequest);
     }
 
     @Test(expected = NotEnoughMoneyException.class)
     public void testAddToQueueShouldThrowExceptionWhenNotEnoughMoney() {
         //GIVEN
         when(character.getMoney()).thenReturn(0);
-        when(factoryData.getBuildPrice()).thenReturn(PRODUCT_BUILD_PRICE);
+        when(factoryData.getBuildPrice()).thenReturn(BUILD_PRICE);
         //WHEN
-        underTest.addToQueue(CHARACTER_ID_1, addToQueueRequest);
+        underTest.addToQueue(CHARACTER_ID, addToQueueRequest);
     }
 
     @Test(expected = NotEnoughMaterialsException.class)
     public void testAddToQueueShouldThrowExceptionWhenNotEnoughMaterials() {
         //GIVEN
-        when(character.getMoney()).thenReturn(PRODUCT_BUILD_PRICE * DATA_ELEMENT_AMOUNT);
-        when(factoryData.getBuildPrice()).thenReturn(PRODUCT_BUILD_PRICE);
+        when(character.getMoney()).thenReturn(BUILD_PRICE * AMOUNT);
+        when(factoryData.getBuildPrice()).thenReturn(BUILD_PRICE);
         when(factory.getMaterials()).thenReturn(new Materials());
 
         HashMap<String, Integer> materials = new HashMap<>();
-        materials.put(MATERIAL_ID, PRODUCT_AMOUNT);
+        materials.put(ELEMENT_ID, AMOUNT);
         when(factoryData.getMaterials()).thenReturn(materials);
         //WHEN
-        underTest.addToQueue(CHARACTER_ID_1, addToQueueRequest);
+        underTest.addToQueue(CHARACTER_ID, addToQueueRequest);
     }
 
     @Test
     public void testAddToQueueShouldProcess() {
         //GIVEN
-        when(character.getMoney()).thenReturn(PRODUCT_BUILD_PRICE * DATA_ELEMENT_AMOUNT);
-        when(factoryData.getBuildPrice()).thenReturn(PRODUCT_BUILD_PRICE);
+        when(character.getMoney()).thenReturn(BUILD_PRICE * AMOUNT);
+        when(factoryData.getBuildPrice()).thenReturn(BUILD_PRICE);
 
         Map<String, Integer> currentMaterials = new HashMap<>();
-        currentMaterials.put(MATERIAL_ID, MATERIAL_AMOUNT * DATA_ELEMENT_AMOUNT);
+        currentMaterials.put(ELEMENT_ID, AMOUNT * AMOUNT);
         Materials materialsDomain = new Materials(currentMaterials);
         when(factory.getMaterials()).thenReturn(materialsDomain);
-        when(factory.getFactoryId()).thenReturn(FACTORY_ID_1);
+        when(factory.getFactoryId()).thenReturn(FACTORY_ID);
 
         HashMap<String, Integer> materials = new HashMap<>();
-        materials.put(MATERIAL_ID, MATERIAL_AMOUNT);
+        materials.put(ELEMENT_ID, AMOUNT);
         when(factoryData.getMaterials()).thenReturn(materials);
 
-        when(idGenerator.generateRandomId()).thenReturn(PRODUCT_ID_1);
-        when(factoryData.getId()).thenReturn(DATA_ELEMENT);
-        when(factoryData.getConstructionTime()).thenReturn(PRODUCT_CONSTRUCTION_TIME);
-        when(dateTimeUtil.now()).thenReturn(PRODUCT_START_TIME);
-        when(dateTimeUtil.convertDomain(PRODUCT_START_TIME)).thenReturn(PRODUCT_START_TIME_EPOCH);
+        when(idGenerator.generateRandomId()).thenReturn(PRODUCT_ID);
+        when(factoryData.getId()).thenReturn(ELEMENT_ID);
+        when(factoryData.getConstructionTime()).thenReturn(CONSTRUCTION_TIME);
+        when(dateTimeUtil.now()).thenReturn(START_TIME);
+        when(dateTimeUtil.convertDomain(START_TIME)).thenReturn(START_TIME_EPOCH);
         //WHEN
-        underTest.addToQueue(CHARACTER_ID_1, addToQueueRequest);
+        underTest.addToQueue(CHARACTER_ID, addToQueueRequest);
         //THEN
-        verify(characterQueryService).findByCharacterId(CHARACTER_ID_1);
-        verify(factoryQueryService).findFactoryOfCharacterValidated(CHARACTER_ID_1);
-        verify(gameDataFacade).getFactoryData(DATA_ELEMENT);
+        verify(characterQueryService).findByCharacterId(CHARACTER_ID);
+        verify(factoryQueryService).findFactoryOfCharacterValidated(CHARACTER_ID);
+        verify(gameDataFacade).getFactoryData(ELEMENT_ID);
 
-        verify(character).spendMoney(PRODUCT_BUILD_PRICE * DATA_ELEMENT_AMOUNT);
+        verify(character).spendMoney(BUILD_PRICE * AMOUNT);
         verify(characterDao).save(character);
         verify(factoryDao).save(factory);
 
         ArgumentCaptor<Product> argumentCaptor = ArgumentCaptor.forClass(Product.class);
         verify(productDao).save(argumentCaptor.capture());
-        assertEquals(PRODUCT_ID_1, argumentCaptor.getValue().getProductId());
-        assertEquals(FACTORY_ID_1, argumentCaptor.getValue().getFactoryId());
-        assertEquals(DATA_ELEMENT, argumentCaptor.getValue().getElementId());
-        assertEquals(DATA_ELEMENT_AMOUNT, argumentCaptor.getValue().getAmount());
-        assertEquals(PRODUCT_START_TIME_EPOCH, argumentCaptor.getValue().getAddedAt());
-        assertEquals((int) PRODUCT_CONSTRUCTION_TIME * DATA_ELEMENT_AMOUNT, (int) argumentCaptor.getValue().getConstructionTime());
-        assertEquals((Integer) 0, materialsDomain.get(MATERIAL_ID));
+        assertThat(argumentCaptor.getValue().getFactoryId()).isEqualTo(FACTORY_ID);
+        assertThat(argumentCaptor.getValue().getProductId()).isEqualTo(PRODUCT_ID);
+        assertThat(argumentCaptor.getValue().getElementId()).isEqualTo(ELEMENT_ID);
+        assertThat(argumentCaptor.getValue().getAmount()).isEqualTo(AMOUNT);
+        assertThat(argumentCaptor.getValue().getAddedAt()).isEqualTo(START_TIME_EPOCH);
+        assertThat(argumentCaptor.getValue().getConstructionTime()).isEqualTo(AMOUNT * CONSTRUCTION_TIME);
+        assertThat(materialsDomain.get(ELEMENT_ID)).isEqualTo(0);
     }
 }

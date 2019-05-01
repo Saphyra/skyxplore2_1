@@ -6,7 +6,7 @@ import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.product.domain.ProductView;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;
 import org.springframework.stereotype.Service;
-import skyxplore.service.factory.FactoryQueryService;
+import org.github.saphyra.skyxplore.factory.FactoryQueryService;
 
 import java.util.List;
 

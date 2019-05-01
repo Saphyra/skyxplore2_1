@@ -1,4 +1,4 @@
-package skyxplore.service.factory;
+package org.github.saphyra.skyxplore.factory;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.util.IdGenerator;
@@ -27,7 +27,8 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AddToQueueService {
+//TODO split
+class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final DateTimeUtil dateTimeUtil;
@@ -38,7 +39,7 @@ public class AddToQueueService {
     private final ProductDao productDao;
 
     @Transactional
-    public void addToQueue(String characterId, AddToQueueRequest request) {
+    void addToQueue(String characterId, AddToQueueRequest request) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Factory factory = factoryQueryService.findFactoryOfCharacterValidated(characterId);
         FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());

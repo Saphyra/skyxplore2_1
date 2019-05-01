@@ -16,7 +16,7 @@ import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import skyxplore.service.factory.FactoryQueryService;
+import org.github.saphyra.skyxplore.factory.FactoryQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import javax.transaction.Transactional;

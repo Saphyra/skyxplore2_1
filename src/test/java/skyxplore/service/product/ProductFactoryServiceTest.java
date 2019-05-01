@@ -46,7 +46,7 @@ import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescri
 import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.product.domain.Product;
-import skyxplore.service.factory.FactoryQueryService;
+import org.github.saphyra.skyxplore.factory.FactoryQueryService;
 import skyxplore.testutil.TestGeneralDescription;
 
 @RunWith(MockitoJUnitRunner.class)

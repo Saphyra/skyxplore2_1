@@ -15,36 +15,36 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FactoryControllerTest {
+public class FactoryFacadeTest {
     private static final String CHARACTER_ID = "character_id";
-    private static final String ELEMENT_ID = "element_id";
-    private static final Integer AMOUNT = 2;
+    @Mock
+    private AddToQueueService addToQueueService;
 
     @Mock
-    private FactoryFacade factoryFacade;
+    private FactoryQueryService factoryQueryService;
 
     @InjectMocks
-    private FactoryController underTest;
+    private FactoryFacade underTest;
 
     @Test
-    public void testAddToQueueShouldCallFacade() {
+    public void testAddToQueueShouldCallService() {
         //GIVEN
-        AddToQueueRequest request = new AddToQueueRequest(ELEMENT_ID, AMOUNT);
+        AddToQueueRequest request = new AddToQueueRequest();
         //WHEN
-        underTest.addToQueue(request, CHARACTER_ID);
+        underTest.addToQueue(CHARACTER_ID, request);
         //THEN
-        verify(factoryFacade).addToQueue(CHARACTER_ID, request);
+        verify(addToQueueService).addToQueue(CHARACTER_ID, request);
     }
 
     @Test
-    public void testGetMaterialsShouldCallFacadeAndReturnResponse() {
+    public void testGetMaterialsShouldCallServiceAndReturn() {
         //GIVEN
         Materials materials = new Materials();
-        when(factoryFacade.getMaterials(CHARACTER_ID)).thenReturn(materials);
+        when(factoryQueryService.getMaterials(CHARACTER_ID)).thenReturn(materials);
         //WHEN
         Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID);
         //THEN
-        verify(factoryFacade).getMaterials(CHARACTER_ID);
+        verify(factoryQueryService).getMaterials(CHARACTER_ID);
         assertThat(result).isEqualTo(materials);
     }
 }

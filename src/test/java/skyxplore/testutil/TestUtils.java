@@ -11,16 +11,15 @@ import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.product.domain.Product;
+import org.github.saphyra.skyxplore.product.domain.ProductView;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
 import skyxplore.controller.request.character.EquipRequest;
 import skyxplore.controller.request.character.UnequipRequest;
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;
-import org.github.saphyra.skyxplore.product.domain.ProductView;
 import skyxplore.controller.view.ship.ShipView;
 import skyxplore.controller.view.slot.SlotView;
 import skyxplore.domain.community.mail.Mail;
@@ -59,7 +58,6 @@ public class TestUtils {
     public static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
     public static final String DATA_ELEMENT = "element";
-    public static final Integer DATA_ELEMENT_AMOUNT = 13;
     public static final String DATA_ITEM_FRONT = "item_front";
     public static final String DATA_ITEM_LEFT = "item_left";
     public static final String DATA_ITEM_RIGHT = "item_right";
@@ -115,12 +113,12 @@ public class TestUtils {
     public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //Material
-    public static final Integer MATERIAL_AMOUNT = 2;
+    private static final Integer MATERIAL_AMOUNT = 2;
     private static final Boolean MATERIAL_BUILDABLE = true;
     private static final Integer MATERIAL_BUILDPRICE = 100;
     private static final Integer MATERIAL_CONSTRUCTION_TIME = 20;
     public static final String MATERIAL_ID = "material_id";
-    public static final String MATERIAL_KEY = "material_KEY";
+    private static final String MATERIAL_KEY = "material_KEY";
     private static final Integer MATERIAL_MATERIAL_AMOUNT = 3;
     private static final String MATERIAL_MATERIAL_ID = "material_material_id";
     private static final String MATERIAL_SLOT = "material_slot";
@@ -129,26 +127,18 @@ public class TestUtils {
     private static final Long PRODUCT_ADDED_AT = 1000L;
     public static final Integer PRODUCT_AMOUNT = 5;
     public static final Integer PRODUCT_CONSTRUCTION_TIME = 100;
-    public static final Integer PRODUCT_BUILD_PRICE = 50;
     public static final String PRODUCT_ELEMENT_ID_EQUIPMENT = "element_id_equipment";
     public static final String PRODUCT_ELEMENT_ID_MATERIAL = "element_id_material";
     public static final String PRODUCT_ID_1 = "product_id_1";
     public static final String PRODUCT_ID_2 = "product_id_2";
     public static final String PRODUCT_ID_3 = "product_id_3";
-    public static final Long PRODUCT_START_TIME_EPOCH = 10000L;
+    private static final Long PRODUCT_START_TIME_EPOCH = 10000L;
     public static final OffsetDateTime PRODUCT_START_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_START_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
     private static final Long PRODUCT_END_TIME_EPOCH = 20000L;
     private static final OffsetDateTime PRODUCT_END_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(PRODUCT_END_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //User
     public static final String USER_ID = "user_id";
-
-    public static AddToQueueRequest createAddToQueueRequest() {
-        AddToQueueRequest request = new AddToQueueRequest();
-        request.setElementId(DATA_ELEMENT);
-        request.setAmount(DATA_ELEMENT_AMOUNT);
-        return request;
-    }
 
     public static BlockedCharacter createBlockedCharacter() {
         return BlockedCharacter.builder()
@@ -356,7 +346,7 @@ public class TestUtils {
         return material;
     }
 
-    public static Materials createMaterials() {
+    private static Materials createMaterials() {
         Materials materials = new Materials();
         materials.addMaterial(MATERIAL_KEY, MATERIAL_AMOUNT);
         return materials;

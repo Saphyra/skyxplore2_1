@@ -1,14 +1,11 @@
-package skyxplore.service;
-
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
+package org.github.saphyra.skyxplore.factory;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
-import skyxplore.service.factory.AddToQueueService;
-import skyxplore.service.factory.FactoryQueryService;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
