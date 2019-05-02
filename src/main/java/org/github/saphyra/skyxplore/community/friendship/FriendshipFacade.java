@@ -7,7 +7,6 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.springframework.stereotype.Component;
-import skyxplore.service.community.FriendshipService;
 
 import java.util.List;
 

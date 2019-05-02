@@ -10,7 +10,7 @@ import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCha
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import skyxplore.service.community.FriendshipService;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipService;
 
 @Service
 @Slf4j

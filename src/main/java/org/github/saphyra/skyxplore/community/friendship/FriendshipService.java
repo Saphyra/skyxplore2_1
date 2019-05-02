@@ -1,26 +1,23 @@
-package skyxplore.service.community;
-
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
-import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
-import org.springframework.stereotype.Service;
+package org.github.saphyra.skyxplore.community.friendship;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
-import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
-import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
-import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
 import org.github.saphyra.skyxplore.common.exception.FriendshipAlreadyExistsException;
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
+import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Slf4j
