@@ -18,8 +18,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 
-import skyxplore.service.community.MailStatusUpdaterService;
-
 @RunWith(MockitoJUnitRunner.class)
 public class MailFacadeTest {
     private static final String MAIL_ID = "mail_id";

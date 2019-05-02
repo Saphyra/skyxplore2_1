@@ -1,30 +1,29 @@
-package skyxplore.service.community;
+package org.github.saphyra.skyxplore.community.mail;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.github.saphyra.skyxplore.community.mail.MailQueryService;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MailStatusUpdaterService {
+class MailStatusUpdaterService {
     private final CharacterQueryService characterQueryService;
     private final MailDao mailDao;
     private final MailQueryService mailQueryService;
 
     @Transactional
-    public void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
+    void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         mailIds.forEach(mailId -> setArchiveStatus(character, mailId, archiveStatus));
     }
@@ -41,7 +40,7 @@ public class MailStatusUpdaterService {
     }
 
     @Transactional
-    public void updateReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
+    void updateReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         mailIds.forEach(mailId -> setMailReadStatus(mailId, character, newStatus));
     }

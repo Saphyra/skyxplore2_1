@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-
-import skyxplore.service.community.MailStatusUpdaterService;
 
 @Component
 @RequiredArgsConstructor
