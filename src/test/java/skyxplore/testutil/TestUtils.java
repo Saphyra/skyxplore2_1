@@ -1,15 +1,10 @@
 package skyxplore.testutil;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
@@ -43,17 +38,6 @@ public class TestUtils {
 
     //Friend Request
     public static final String FRIEND_REQUEST_ID = "friend_request_id";
-
-    //Mail
-    public static final String MAIL_ID_1 = "mail_id_1";
-    public static final String MAIL_FROM_ID = "mail_from_id";
-    public static final String MAIL_TO_ID = "mail_to_id";
-    public static final String MAIL_FROM_NAME = "mail_from_name";
-    public static final String MAIL_TO_NAME = "mail_to_name";
-    public static final String MAIL_SUBJECT = "mail_subject";
-    public static final String MAIL_MESSAGE = "mail_message";
-    public static final Long MAIL_SEND_TIME_EPOCH = 654612L;
-    public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
     //User
     public static final String USER_ID = "user_id";
@@ -115,20 +99,5 @@ public class TestUtils {
         view.setFriendName(FRIEND_NAME);
         view.setActive(false);
         return view;
-    }
-
-    public static Mail createMail() {
-        return Mail.builder()
-            .mailId(MAIL_ID_1)
-            .from(MAIL_FROM_ID)
-            .to(MAIL_TO_ID)
-            .subject(MAIL_SUBJECT)
-            .message(MAIL_MESSAGE)
-            .read(false)
-            .sendTime(MAIL_SEND_TIME)
-            .archived(false)
-            .deletedByAddressee(false)
-            .deletedBySender(false)
-            .build();
     }
 }
