@@ -1,7 +1,12 @@
-package skyxplore.controller;
+package org.github.saphyra.skyxplore.ship;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
+import javax.validation.Valid;
+
+import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
+import org.github.saphyra.skyxplore.ship.domain.ShipView;
+import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,14 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import skyxplore.controller.request.character.EquipRequest;
-import skyxplore.controller.request.character.UnequipRequest;
-import skyxplore.controller.view.ship.ShipView;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.service.EquippedShipFacade;
-
-import javax.validation.Valid;
-
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @RestController
 @RequiredArgsConstructor

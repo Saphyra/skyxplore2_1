@@ -5,12 +5,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.character.EquipRequest;
-import skyxplore.controller.request.character.UnequipRequest;
-import skyxplore.controller.view.ship.ShipView;
+import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
+import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
+import org.github.saphyra.skyxplore.ship.domain.ShipView;
 import skyxplore.service.ship.EquipService;
 import skyxplore.service.ship.EquipShipService;
-import skyxplore.service.ship.ShipQueryService;
+import org.github.saphyra.skyxplore.ship.ShipQueryService;
 import skyxplore.service.ship.UnequipService;
 
 import static org.junit.Assert.assertEquals;

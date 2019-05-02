@@ -1,6 +1,8 @@
 package skyxplore.service.ship;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+
+import org.github.saphyra.skyxplore.ship.ShipQueryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

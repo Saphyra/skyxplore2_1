@@ -1,31 +1,29 @@
 package skyxplore.testutil;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Arrays;
+import java.util.List;
+
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.gamedata.entity.Ship;
-import org.github.saphyra.skyxplore.gamedata.entity.Slot;
+import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.ShipView;
+import org.github.saphyra.skyxplore.ship.domain.SlotView;
+import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.controller.request.character.EquipRequest;
-import skyxplore.controller.request.character.UnequipRequest;
+
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;
-import skyxplore.controller.view.ship.ShipView;
-import skyxplore.controller.view.slot.SlotView;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
-
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Deprecated
 public class TestUtils {
@@ -49,18 +47,18 @@ public class TestUtils {
 
     //Data
     public static final String DATA_ID_1 = "data_id_1";
-    public static final String DATA_ABILITY = "ability";
+    private static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
     public static final String DATA_ELEMENT = "element";
-    public static final String DATA_ITEM_FRONT = "item_front";
-    public static final String DATA_ITEM_LEFT = "item_left";
-    public static final String DATA_ITEM_RIGHT = "item_right";
-    public static final String DATA_ITEM_BACK = "item_back";
+    private static final String DATA_ITEM_FRONT = "item_front";
+    private static final String DATA_ITEM_LEFT = "item_left";
+    private static final String DATA_ITEM_RIGHT = "item_right";
+    private static final String DATA_ITEM_BACK = "item_back";
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
-    public static final Integer DATA_SHIP_COREHULL = 1000;
+    private static final Integer DATA_SHIP_COREHULL = 1000;
 
     //Equip
     public static final String EQUIP_ITEM_ID = "equip_item_id";
@@ -74,10 +72,10 @@ public class TestUtils {
     //EquippedSlot
     private static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
     public static final String DEFENSE_SLOT_ID = "defense_slot_id";
-    public static final Integer EQUIPPED_SLOT_FRONT_SLOT = 2;
-    public static final Integer EQUIPPED_SLOT_LEFT_SLOT = 2;
-    public static final Integer EQUIPPED_SLOT_RIGHT_SLOT = 2;
-    public static final Integer EQUIPPED_SLOT_BACK_SLOT = 2;
+    private static final Integer EQUIPPED_SLOT_FRONT_SLOT = 2;
+    private static final Integer EQUIPPED_SLOT_LEFT_SLOT = 2;
+    private static final Integer EQUIPPED_SLOT_RIGHT_SLOT = 2;
+    private static final Integer EQUIPPED_SLOT_BACK_SLOT = 2;
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
 
     //FRIENDSHIP
@@ -132,23 +130,11 @@ public class TestUtils {
         return view;
     }
 
-    private static Slot createDefenseSlot() {
-        Slot slot = new Slot();
-        //Slot
-        Integer SLOT_DEFENSE_FRONT = 2;
-        slot.setFront(SLOT_DEFENSE_FRONT);
-        Integer SLOT_DEFENSE_SIDE = 3;
-        slot.setSide(SLOT_DEFENSE_SIDE);
-        Integer slOT_DEFENSE_BACK = 5;
-        slot.setBack(slOT_DEFENSE_BACK);
-        return slot;
-    }
-
-    public static EquippedSlot createEquippedDefenseSlot() {
+    private static EquippedSlot createEquippedDefenseSlot() {
         return createEquippedSlot(DEFENSE_SLOT_ID);
     }
 
-    public static EquippedSlot createEquippedWeaponSlot() {
+    private static EquippedSlot createEquippedWeaponSlot() {
         return createEquippedSlot(WEAPON_SLOT_ID);
     }
 
@@ -177,13 +163,13 @@ public class TestUtils {
             .build();
     }
 
-    public static EquippedSlot createEquippedSlot(String slotId) {
+    private static EquippedSlot createEquippedSlot(String slotId) {
         EquippedSlot slot = createEquippedSlot();
         slot.setSlotId(slotId);
         return slot;
     }
 
-    public static EquippedSlot createEquippedSlot() {
+    private static EquippedSlot createEquippedSlot() {
         EquippedSlot slot = EquippedSlot.builder().build();
         slot.setSlotId(EQUIPPED_SLOT_ID);
         slot.setShipId(EQUIPPED_SHIP_ID);
@@ -294,19 +280,7 @@ public class TestUtils {
         return request;
     }
 
-    public static Ship createShip() {
-        Ship ship = new Ship();
-        ship.setCoreHull(DATA_SHIP_COREHULL);
-        ship.setConnector(DATA_SHIP_CONNECTOR_SLOT);
-        ship.setDefense(createDefenseSlot());
-        ship.setWeapon(createWeaponSlot());
-        ArrayList<String> list = new ArrayList<>();
-        list.add(DATA_ABILITY);
-        ship.setAbility(list);
-        return ship;
-    }
-
-    public static SlotView createSlotView(EquippedSlot slot) {
+    private static SlotView createSlotView(EquippedSlot slot) {
         return SlotView.builder()
             .frontSlot(slot.getFrontSlot())
             .frontEquipped(slot.getFrontEquipped())
@@ -324,16 +298,5 @@ public class TestUtils {
         request.setItemId(EQUIP_ITEM_ID);
         request.setSlot(UNEQUIP_FROM);
         return request;
-    }
-
-    private static Slot createWeaponSlot() {
-        Slot slot = new Slot();
-        Integer SLOT_WEAPON_FRONT = 7;
-        slot.setFront(SLOT_WEAPON_FRONT);
-        Integer SLOT_WEAPON_SIDE = 11;
-        slot.setSide(SLOT_WEAPON_SIDE);
-        Integer SLOT_WEAPON_BACK = 13;
-        slot.setBack(SLOT_WEAPON_BACK);
-        return slot;
     }
 }

@@ -1,12 +1,11 @@
-package skyxplore.controller.view.ship;
+package org.github.saphyra.skyxplore.ship.domain;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import skyxplore.controller.view.slot.SlotView;
-
-import java.util.List;
 
 @Data
 @Builder

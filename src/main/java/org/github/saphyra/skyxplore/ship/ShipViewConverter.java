@@ -1,19 +1,20 @@
-package skyxplore.controller.view.ship;
+package org.github.saphyra.skyxplore.ship;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.ShipView;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import skyxplore.controller.view.slot.SlotViewConverter;
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ShipViewConverter {
+class ShipViewConverter {
     private final SlotViewConverter slotViewConverter;
     private final ShipService shipService;
 
-    public ShipView convertDomain(EquippedShip domain, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {
+    ShipView convertDomain(EquippedShip domain, EquippedSlot defenseSlot, EquippedSlot weaponSlot) {
         ShipView view = new ShipView();
         view.setShipType(domain.getShipType());
         view.setCoreHull(domain.getCoreHull());

@@ -3,8 +3,10 @@ package skyxplore.service.ship;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.github.saphyra.skyxplore.ship.ShipQueryService;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.character.EquipRequest;
+import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;

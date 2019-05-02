@@ -2,6 +2,7 @@ package org.github.saphyra.skyxplore.ship.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
@@ -23,7 +24,7 @@ public class EquippedShip {
     private Integer connectorSlot;
 
     @Builder.Default
-    private ArrayList<String> connectorEquipped = new ArrayList<>();
+    private List<String> connectorEquipped = new ArrayList<>();
 
     private String defenseSlotId;
     private String weaponSlotId;

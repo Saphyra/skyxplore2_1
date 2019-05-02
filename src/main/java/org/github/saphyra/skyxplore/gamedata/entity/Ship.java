@@ -1,12 +1,13 @@
 package org.github.saphyra.skyxplore.gamedata.entity;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.EquipmentDescription;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.EquipmentDescription;
 
 @Data
 @ToString(callSuper = true)
@@ -17,5 +18,5 @@ public class Ship extends EquipmentDescription {
     private Integer connector;
     private Slot defense;
     private Slot weapon;
-    private ArrayList<String> ability;
+    private List<String> ability;
 }

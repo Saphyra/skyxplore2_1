@@ -1,15 +1,15 @@
-package skyxplore.service.ship;
+package org.github.saphyra.skyxplore.ship;
+
+import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.ShipView;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import skyxplore.controller.view.ship.ShipView;
-import skyxplore.controller.view.ship.ShipViewConverter;
-import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 
 @Service
 @Slf4j

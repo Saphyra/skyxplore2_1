@@ -1,11 +1,13 @@
-package skyxplore.controller.view.slot;
+package org.github.saphyra.skyxplore.ship;
 
-import org.springframework.stereotype.Component;
+import org.github.saphyra.skyxplore.ship.domain.SlotView;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.springframework.stereotype.Component;
+
 import skyxplore.controller.view.AbstractViewConverter;
 
 @Component
-public class SlotViewConverter extends AbstractViewConverter<EquippedSlot, SlotView> {
+class SlotViewConverter extends AbstractViewConverter<EquippedSlot, SlotView> {
     public SlotView convertDomain(EquippedSlot domain) {
         return SlotView.builder()
             .frontSlot(domain.getFrontSlot())
