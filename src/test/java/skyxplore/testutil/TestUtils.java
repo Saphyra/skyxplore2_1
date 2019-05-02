@@ -42,23 +42,11 @@ public class TestUtils {
 
     //Data
     public static final String DATA_ID_1 = "data_id_1";
-    public static final String DATA_CONNECTOR = "connector";
-    public static final String DATA_ELEMENT = "element";
-    public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
-
-    public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
 
     //Equip
     public static final String EQUIP_ITEM_ID = "equip_item_id";
     private static final String UNEQUIP_FROM = "unequip_from";
-
-    //EquippedShip
-    public static final String EQUIPPED_SHIP_TYPE = "equipped_ship_type";
-
-    //EquippedSlot
-    public static final String DEFENSE_SLOT_ID = "defense_slot_id";
-    public static final String WEAPON_SLOT_ID = "weapon_slot_id";
 
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";

@@ -1,29 +1,30 @@
-package skyxplore.service.ship;
+package org.github.saphyra.skyxplore.ship;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.gamedata.entity.Ship;
+import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
+import org.springframework.stereotype.Service;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.github.saphyra.skyxplore.ship.ShipQueryService;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import org.github.saphyra.skyxplore.gamedata.entity.Ship;
-import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-
-import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class EquipShipService {
+//TODO split class
+ class EquipShipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
@@ -32,7 +33,7 @@ public class EquipShipService {
     private final SlotDao slotDao;
 
     @Transactional
-    public void equipShip(String characterId, String itemId) {
+     void equipShip(String characterId, String itemId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
