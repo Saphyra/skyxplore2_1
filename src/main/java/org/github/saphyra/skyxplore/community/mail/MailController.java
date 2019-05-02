@@ -1,7 +1,15 @@
-package skyxplore.controller;
+package org.github.saphyra.skyxplore.community.mail;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
+import org.github.saphyra.skyxplore.character.domain.view.character.CharacterViewConverter;
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,18 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.github.saphyra.skyxplore.common.OneStringParamRequest;
-import skyxplore.controller.request.community.SendMailRequest;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterViewConverter;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.service.MailFacade;
-
-import javax.validation.Valid;
-import java.util.List;
-
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @Slf4j
 @RestController

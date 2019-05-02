@@ -1,9 +1,9 @@
-package skyxplore.controller.request.community;
-
-import lombok.Data;
+package org.github.saphyra.skyxplore.community.mail.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import lombok.Data;
 
 @Data
 public class SendMailRequest {

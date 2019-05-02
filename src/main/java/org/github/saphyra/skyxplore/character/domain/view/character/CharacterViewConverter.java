@@ -2,7 +2,7 @@ package org.github.saphyra.skyxplore.character.domain.view.character;
 
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.controller.view.AbstractViewConverter;
+import org.github.saphyra.skyxplore.common.AbstractViewConverter;
 
 @Component
 public class CharacterViewConverter extends AbstractViewConverter<SkyXpCharacter, CharacterView> {

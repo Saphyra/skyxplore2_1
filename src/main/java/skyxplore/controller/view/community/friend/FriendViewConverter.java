@@ -3,7 +3,7 @@ package skyxplore.controller.view.community.friend;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.view.AbstractViewConverter;
+import org.github.saphyra.skyxplore.common.AbstractViewConverter;
 import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.springframework.stereotype.Service;
-import skyxplore.controller.request.community.SendMailRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
 import skyxplore.domain.community.mail.Mail;
 import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;

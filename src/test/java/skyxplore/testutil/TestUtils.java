@@ -12,7 +12,7 @@ import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCha
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 
-import skyxplore.controller.request.community.SendMailRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 import skyxplore.controller.view.community.mail.MailView;

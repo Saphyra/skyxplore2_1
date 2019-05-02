@@ -9,7 +9,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.community.SendMailRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import skyxplore.dataaccess.db.MailDao;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import skyxplore.domain.community.mail.Mail;

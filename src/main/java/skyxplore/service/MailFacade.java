@@ -2,7 +2,7 @@ package skyxplore.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import skyxplore.controller.request.community.SendMailRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;

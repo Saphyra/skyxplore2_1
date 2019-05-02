@@ -1,4 +1,4 @@
-package skyxplore.controller.view;
+package org.github.saphyra.skyxplore.common;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.controller.request.community.SendMailRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
