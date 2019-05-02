@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.service.ship.EquipService;
 import skyxplore.service.ship.EquipShipService;
 import skyxplore.service.ship.UnequipService;
 

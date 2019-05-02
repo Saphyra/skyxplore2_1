@@ -11,12 +11,8 @@ import org.github.saphyra.skyxplore.character.domain.view.character.CharacterVie
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.ship.domain.ShipView;
-import org.github.saphyra.skyxplore.ship.domain.SlotView;
 import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
-import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
@@ -47,13 +43,8 @@ public class TestUtils {
 
     //Data
     public static final String DATA_ID_1 = "data_id_1";
-    private static final String DATA_ABILITY = "ability";
     public static final String DATA_CONNECTOR = "connector";
     public static final String DATA_ELEMENT = "element";
-    private static final String DATA_ITEM_FRONT = "item_front";
-    private static final String DATA_ITEM_LEFT = "item_left";
-    private static final String DATA_ITEM_RIGHT = "item_right";
-    private static final String DATA_ITEM_BACK = "item_back";
     public static final String DATA_NAME = "data_name";
     public static final String DATA_SLOT = "data_slot";
 
@@ -62,20 +53,14 @@ public class TestUtils {
 
     //Equip
     public static final String EQUIP_ITEM_ID = "equip_item_id";
-    private static final String EQUIP_TO = "equip_to";
     private static final String UNEQUIP_FROM = "unequip_from";
 
     //EquippedShip
-    public static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
+    private static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
     public static final String EQUIPPED_SHIP_TYPE = "equipped_ship_type";
 
     //EquippedSlot
-    private static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
     public static final String DEFENSE_SLOT_ID = "defense_slot_id";
-    private static final Integer EQUIPPED_SLOT_FRONT_SLOT = 2;
-    private static final Integer EQUIPPED_SLOT_LEFT_SLOT = 2;
-    private static final Integer EQUIPPED_SLOT_RIGHT_SLOT = 2;
-    private static final Integer EQUIPPED_SLOT_BACK_SLOT = 2;
     public static final String WEAPON_SLOT_ID = "weapon_slot_id";
 
     //FRIENDSHIP
@@ -130,14 +115,6 @@ public class TestUtils {
         return view;
     }
 
-    private static EquippedSlot createEquippedDefenseSlot() {
-        return createEquippedSlot(DEFENSE_SLOT_ID);
-    }
-
-    private static EquippedSlot createEquippedWeaponSlot() {
-        return createEquippedSlot(WEAPON_SLOT_ID);
-    }
-
     public static EquippedShip createEquippedShip() {
         EquippedShip ship = EquippedShip.builder().build();
         ship.setShipId(EQUIPPED_SHIP_ID);
@@ -149,46 +126,6 @@ public class TestUtils {
         ship.setDefenseSlotId(DEFENSE_SLOT_ID);
         ship.setWeaponSlotId(WEAPON_SLOT_ID);
         return ship;
-    }
-
-    public static ShipView createShipView() {
-        return ShipView.builder()
-            .shipType(EQUIPPED_SHIP_TYPE)
-            .coreHull(DATA_SHIP_COREHULL)
-            .connectorSlot(DATA_SHIP_CONNECTOR_SLOT)
-            .connectorEquipped(Arrays.asList(DATA_CONNECTOR))
-            .defenseSlot(createSlotView(createEquippedDefenseSlot()))
-            .defenseSlot(createSlotView(createEquippedWeaponSlot()))
-            .ability(Arrays.asList(DATA_ABILITY))
-            .build();
-    }
-
-    private static EquippedSlot createEquippedSlot(String slotId) {
-        EquippedSlot slot = createEquippedSlot();
-        slot.setSlotId(slotId);
-        return slot;
-    }
-
-    private static EquippedSlot createEquippedSlot() {
-        EquippedSlot slot = EquippedSlot.builder().build();
-        slot.setSlotId(EQUIPPED_SLOT_ID);
-        slot.setShipId(EQUIPPED_SHIP_ID);
-        slot.setFrontSlot(EQUIPPED_SLOT_FRONT_SLOT);
-        slot.setLeftSlot(EQUIPPED_SLOT_LEFT_SLOT);
-        slot.setRightSlot(EQUIPPED_SLOT_RIGHT_SLOT);
-        slot.setBackSlot(EQUIPPED_SLOT_BACK_SLOT);
-        slot.addFront(DATA_ITEM_FRONT);
-        slot.addLeft(DATA_ITEM_LEFT);
-        slot.addRight(DATA_ITEM_RIGHT);
-        slot.addBack(DATA_ITEM_BACK);
-        return slot;
-    }
-
-    public static EquipRequest createEquipRequest() {
-        EquipRequest request = new EquipRequest();
-        request.setItemId(EQUIP_ITEM_ID);
-        request.setEquipTo(EQUIP_TO);
-        return request;
     }
 
     public static FriendRequest createFriendRequest() {
@@ -278,19 +215,6 @@ public class TestUtils {
         request.setSubject(MAIL_SUBJECT);
         request.setMessage(MAIL_MESSAGE);
         return request;
-    }
-
-    private static SlotView createSlotView(EquippedSlot slot) {
-        return SlotView.builder()
-            .frontSlot(slot.getFrontSlot())
-            .frontEquipped(slot.getFrontEquipped())
-            .rightSlot(slot.getRightSlot())
-            .rightEquipped(slot.getRightEquipped())
-            .backSlot(slot.getBackSlot())
-            .backEquipped(slot.getBackEquipped())
-            .leftSlot(slot.getLeftSlot())
-            .leftEquipped(slot.getLeftEquipped())
-            .build();
     }
 
     public static UnequipRequest createUnequipRequest() {

@@ -1,25 +1,4 @@
-package skyxplore.service.ship;
-
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.github.saphyra.skyxplore.ship.ShipQueryService;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import org.github.saphyra.skyxplore.gamedata.entity.Extender;
-import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-
-import javax.transaction.Transactional;
-import java.util.List;
+package org.github.saphyra.skyxplore.ship;
 
 import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.BACK_SLOT_NAME;
 import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
@@ -27,10 +6,33 @@ import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NA
 import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.LEFT_SLOT_NAME;
 import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.RIGHT_SLOT_NAME;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
+import org.github.saphyra.skyxplore.gamedata.entity.Extender;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
+import org.springframework.stereotype.Service;
+
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import skyxplore.service.ship.EquipUtil;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class EquipService {
+//TODO split to strategies
+ class EquipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
@@ -40,7 +42,7 @@ public class EquipService {
     private final SlotDao slotDao;
 
     @Transactional
-    public void equip(EquipRequest request, String characterId) {
+     void equip(EquipRequest request, String characterId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
