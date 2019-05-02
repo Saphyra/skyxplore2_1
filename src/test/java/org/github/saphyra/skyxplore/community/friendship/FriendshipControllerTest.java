@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.service.CommunityFacade;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +31,7 @@ public class FriendshipControllerTest {
     private static final String CHARACTER_NAME = "character_name";
 
     @Mock
-    private CommunityFacade communityFacade;
+    private FriendshipFacade friendshipFacade;
 
     @Mock
     private CharacterViewConverter characterViewConverter;
@@ -51,7 +50,7 @@ public class FriendshipControllerTest {
         //WHEN
         underTest.acceptFriendRequest(new OneStringParamRequest(FRIEND_REQUEST_ID), CHARACTER_ID);
         //THEN
-        verify(communityFacade).acceptFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
+        verify(friendshipFacade).acceptFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
     }
 
     @Test
@@ -59,7 +58,7 @@ public class FriendshipControllerTest {
         //WHEN
         underTest.addFriend(new OneStringParamRequest(FRIEND_ID), CHARACTER_ID, USER_ID);
         //THEN
-        verify(communityFacade).addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
+        verify(friendshipFacade).addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
     }
 
     @Test
@@ -67,7 +66,7 @@ public class FriendshipControllerTest {
         //WHEN
         underTest.declineFriendRequestMapping(new OneStringParamRequest(FRIEND_REQUEST_ID), CHARACTER_ID);
         //THEN
-        verify(communityFacade).declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
+        verify(friendshipFacade).declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
     }
 
     @Test
@@ -75,7 +74,7 @@ public class FriendshipControllerTest {
         //GIVEN
         underTest.deleteFriend(new OneStringParamRequest(FRIENDSHIP_ID), CHARACTER_ID);
         //WHEN
-        verify(communityFacade).deleteFriendship(FRIENDSHIP_ID, CHARACTER_ID);
+        verify(friendshipFacade).deleteFriendship(FRIENDSHIP_ID, CHARACTER_ID);
     }
 
     @Test
@@ -83,7 +82,7 @@ public class FriendshipControllerTest {
         //GIVEN
         SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
-        when(communityFacade.getCharactersCanBeFriend(CHARACTER_NAME, CHARACTER_ID)).thenReturn(characterList);
+        when(friendshipFacade.getCharactersCanBeFriend(CHARACTER_NAME, CHARACTER_ID)).thenReturn(characterList);
 
         CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);
@@ -91,7 +90,7 @@ public class FriendshipControllerTest {
         //WHEN
         List<CharacterView> result = underTest.getCharactersCanBeFriend(new OneStringParamRequest(CHARACTER_NAME), CHARACTER_ID);
         //THEN
-        verify(communityFacade).getCharactersCanBeFriend(CHARACTER_NAME, CHARACTER_ID);
+        verify(friendshipFacade).getCharactersCanBeFriend(CHARACTER_NAME, CHARACTER_ID);
         verify(characterViewConverter).convertDomain(characterList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -101,7 +100,7 @@ public class FriendshipControllerTest {
         //GIVEN
         Friendship friendship = Friendship.builder().build();
         List<Friendship> friendshipList = Arrays.asList(friendship);
-        when(communityFacade.getFriends(CHARACTER_ID)).thenReturn(friendshipList);
+        when(friendshipFacade.getFriends(CHARACTER_ID)).thenReturn(friendshipList);
 
         FriendView friendView = FriendView.builder().build();
         List<FriendView> friendViewList = Arrays.asList(friendView);
@@ -109,7 +108,7 @@ public class FriendshipControllerTest {
         //WHEN
         List<FriendView> result = underTest.getFriends(CHARACTER_ID);
         //THEN
-        verify(communityFacade).getFriends(CHARACTER_ID);
+        verify(friendshipFacade).getFriends(CHARACTER_ID);
         verify(friendViewConverter).convertDomain(friendshipList, CHARACTER_ID);
         assertThat(result).isEqualTo(friendViewList);
     }
@@ -119,7 +118,7 @@ public class FriendshipControllerTest {
         //GIVEN
         FriendRequest friendRequest = FriendRequest.builder().build();
         List<FriendRequest> friendRequestList = Arrays.asList(friendRequest);
-        when(communityFacade.getReceivedFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
+        when(friendshipFacade.getReceivedFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
 
         FriendRequestView view = FriendRequestView.builder().build();
         List<FriendRequestView> viewList = Arrays.asList(view);
@@ -127,7 +126,7 @@ public class FriendshipControllerTest {
         //WHEN
         List<FriendRequestView> result = underTest.getReceivedFriendRequests(CHARACTER_ID);
         //THEN
-        verify(communityFacade).getReceivedFriendRequests(CHARACTER_ID);
+        verify(friendshipFacade).getReceivedFriendRequests(CHARACTER_ID);
         verify(friendRequestViewConverter).convertDomain(friendRequestList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -137,7 +136,7 @@ public class FriendshipControllerTest {
         //GIVEN
         FriendRequest friendRequest = FriendRequest.builder().build();
         List<FriendRequest> friendRequestList = Arrays.asList(friendRequest);
-        when(communityFacade.getSentFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
+        when(friendshipFacade.getSentFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
 
         FriendRequestView view = FriendRequestView.builder().build();
         List<FriendRequestView> viewList = Arrays.asList(view);
@@ -145,7 +144,7 @@ public class FriendshipControllerTest {
         //WHEN
         List<FriendRequestView> result = underTest.getSentFriendRequests(CHARACTER_ID);
         //THEN
-        verify(communityFacade).getSentFriendRequests(CHARACTER_ID);
+        verify(friendshipFacade).getSentFriendRequests(CHARACTER_ID);
         verify(friendRequestViewConverter).convertDomain(friendRequestList);
         assertThat(result).isEqualTo(viewList);
     }

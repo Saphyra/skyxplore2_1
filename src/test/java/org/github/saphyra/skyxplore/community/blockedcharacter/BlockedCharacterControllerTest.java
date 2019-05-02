@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import skyxplore.service.CommunityFacade;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,7 @@ public class BlockedCharacterControllerTest {
     private static final String CHARACTER_NAME = "character_name";
 
     @Mock
-    private CommunityFacade communityFacade;
+    private BlockedCharacterFacade blockedCharacterFacade;
 
     @Mock
     private CharacterViewConverter characterViewConverter;
@@ -38,7 +37,7 @@ public class BlockedCharacterControllerTest {
         //WHEN
         underTest.allowBlockedCharacter(new OneStringParamRequest(BLOCKED_CHARACTER_ID), CHARACTER_ID);
         //THEN
-        verify(communityFacade).allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
+        verify(blockedCharacterFacade).allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
     }
 
     @Test
@@ -46,7 +45,7 @@ public class BlockedCharacterControllerTest {
         //WHEN
         underTest.blockCharacter(new OneStringParamRequest(BLOCKED_CHARACTER_ID), CHARACTER_ID);
         //THEN
-        verify(communityFacade).blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
+        verify(blockedCharacterFacade).blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
     }
 
     @Test
@@ -54,7 +53,7 @@ public class BlockedCharacterControllerTest {
         //GIVEN
         SkyXpCharacter blockedCharacter = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(blockedCharacter);
-        when(communityFacade.getBlockedCharacters(CHARACTER_ID)).thenReturn(characterList);
+        when(blockedCharacterFacade.getBlockedCharacters(CHARACTER_ID)).thenReturn(characterList);
 
         CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);
@@ -62,7 +61,7 @@ public class BlockedCharacterControllerTest {
         //WHEN
         List<CharacterView> result = underTest.getBlockedCharacters(CHARACTER_ID);
         //THEN
-        verify(communityFacade).getBlockedCharacters(CHARACTER_ID);
+        verify(blockedCharacterFacade).getBlockedCharacters(CHARACTER_ID);
         verify(characterViewConverter).convertDomain(characterList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -72,7 +71,7 @@ public class BlockedCharacterControllerTest {
         //GIVEN
         SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
-        when(communityFacade.getCharactersCanBeBlocked(CHARACTER_NAME, CHARACTER_ID)).thenReturn(characterList);
+        when(blockedCharacterFacade.getCharactersCanBeBlocked(CHARACTER_NAME, CHARACTER_ID)).thenReturn(characterList);
 
         CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);
@@ -80,7 +79,7 @@ public class BlockedCharacterControllerTest {
         //WHEN
         List<CharacterView> result = underTest.getCharactersCanBeBlocked(new OneStringParamRequest(CHARACTER_NAME), CHARACTER_ID);
         //THEN
-        verify(communityFacade).getCharactersCanBeBlocked(CHARACTER_NAME, CHARACTER_ID);
+        verify(blockedCharacterFacade).getCharactersCanBeBlocked(CHARACTER_NAME, CHARACTER_ID);
         verify(characterViewConverter).convertDomain(characterList);
         assertThat(result).isEqualTo(viewList);
     }

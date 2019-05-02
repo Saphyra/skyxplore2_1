@@ -1,14 +1,12 @@
-package skyxplore.service;
+package org.github.saphyra.skyxplore.community.friendship;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import skyxplore.service.community.BlockCharacterService;
-import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
+import org.springframework.stereotype.Component;
 import skyxplore.service.community.FriendshipService;
 
 import java.util.List;
@@ -16,8 +14,7 @@ import java.util.List;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class CommunityFacade {
-    private final BlockCharacterService blockCharacterService;
+public class FriendshipFacade {
     private final CharacterQueryService characterQueryService;
     private final FriendshipService friendshipService;
     private final FriendshipQueryService friendshipQueryService;
@@ -26,16 +23,8 @@ public class CommunityFacade {
         friendshipService.acceptFriendRequest(friendRequestId, characterId);
     }
 
-    public void allowBlockedCharacter(String blockedCharacterId, String characterId) {
-        blockCharacterService.allowBlockedCharacter(blockedCharacterId, characterId);
-    }
-
     public void addFriendRequest(String friendId, String characterId, String userId) {
         friendshipService.addFriendRequest(friendId, characterId, userId);
-    }
-
-    public void blockCharacter(String blockedCharacterId, String characterId) {
-        blockCharacterService.blockCharacter(blockedCharacterId, characterId);
     }
 
     public void declineFriendRequest(String friendRequestId, String characterId) {
@@ -44,14 +33,6 @@ public class CommunityFacade {
 
     public void deleteFriendship(String friendshipId, String characterId) {
         friendshipService.deleteFriendship(friendshipId, characterId);
-    }
-
-    public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
-        return characterQueryService.getBlockedCharacters(characterId);
-    }
-
-    public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId) {
-        return characterQueryService.getCharactersCanBeBlocked(name, characterId);
     }
 
     public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId) {
@@ -73,4 +54,5 @@ public class CommunityFacade {
     public List<FriendRequest> getSentFriendRequests(String characterId) {
         return friendshipQueryService.getSentFriendRequests(characterId);
     }
+
 }

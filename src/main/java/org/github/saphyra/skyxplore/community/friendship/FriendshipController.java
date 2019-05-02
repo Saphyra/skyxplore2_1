@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendView;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
-import skyxplore.service.CommunityFacade;
 
 import javax.validation.Valid;
 
@@ -26,7 +25,7 @@ import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class FriendshipController {
+class FriendshipController {
     private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
     private static final String ADD_FRIEND_MAPPING = "friend/request";
     private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request"; //Also used for cancelling
@@ -36,7 +35,7 @@ public class FriendshipController {
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/request/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
 
-    private final CommunityFacade communityFacade;
+    private final FriendshipFacade friendshipFacade;
     private final CharacterViewConverter characterViewConverter;
     private final FriendViewConverter friendViewConverter;
     private final FriendRequestViewConverter friendRequestViewConverter;
@@ -47,7 +46,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to accept friendRequest {}", characterId, request.getValue());
-        communityFacade.acceptFriendRequest(request.getValue(), characterId);
+        friendshipFacade.acceptFriendRequest(request.getValue(), characterId);
     }
 
     @PutMapping(ADD_FRIEND_MAPPING)
@@ -57,7 +56,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to add {} as a community.", characterId, request.getValue());
-        communityFacade.addFriendRequest(request.getValue(), characterId, userId);
+        friendshipFacade.addFriendRequest(request.getValue(), characterId, userId);
     }
 
     @DeleteMapping(DECLINE_FRIEND_REQUEST_MAPPING)
@@ -66,7 +65,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to decline / cancel friendRequest {}", characterId, request.getValue());
-        communityFacade.declineFriendRequest(request.getValue(), characterId);
+        friendshipFacade.declineFriendRequest(request.getValue(), characterId);
     }
 
     @DeleteMapping(DELETE_FRIEND_MAPPING)
@@ -75,7 +74,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to deleteById friendship {}", characterId, request.getValue());
-        communityFacade.deleteFriendship(request.getValue(), characterId);
+        friendshipFacade.deleteFriendship(request.getValue(), characterId);
     }
 
     @PostMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
@@ -84,7 +83,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} querying possible community characters by name like {}", characterId, request.getValue());
-        return characterViewConverter.convertDomain(communityFacade.getCharactersCanBeFriend(request.getValue(), characterId));
+        return characterViewConverter.convertDomain(friendshipFacade.getCharactersCanBeFriend(request.getValue(), characterId));
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)
@@ -92,7 +91,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his community list.", characterId);
-        return friendViewConverter.convertDomain(communityFacade.getFriends(characterId), characterId);
+        return friendViewConverter.convertDomain(friendshipFacade.getFriends(characterId), characterId);
     }
 
     @GetMapping(GET_RECEIVED_FRIEND_REQUESTS_MAPPING)
@@ -100,7 +99,7 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his received friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(communityFacade.getReceivedFriendRequests(characterId));
+        return friendRequestViewConverter.convertDomain(friendshipFacade.getReceivedFriendRequests(characterId));
     }
 
     @GetMapping(GET_SENT_FRIEND_REQUESTS_MAPPING)
@@ -108,6 +107,6 @@ public class FriendshipController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his sent friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(communityFacade.getSentFriendRequests(characterId));
+        return friendRequestViewConverter.convertDomain(friendshipFacade.getSentFriendRequests(characterId));
     }
 }

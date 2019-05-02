@@ -2,17 +2,18 @@ package skyxplore.service;
 
 import lombok.RequiredArgsConstructor;
 
+import org.github.saphyra.skyxplore.community.friendship.FriendshipFacade;
 import org.github.saphyra.skyxplore.community.mail.MailFacade;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class NotificationFacade {
-    private final CommunityFacade communityFacade;
+    private final FriendshipFacade friendshipFacade;
     private final MailFacade mailFacade;
 
     public Integer getNumberOfFriendRequests(String characterId) {
-        return communityFacade.getNumberOfFriendRequests(characterId);
+        return friendshipFacade.getNumberOfFriendRequests(characterId);
     }
 
     public Integer getNumberOfUnreadMails(String characterId) {

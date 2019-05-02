@@ -1,5 +1,6 @@
 package skyxplore.service;
 
+import org.github.saphyra.skyxplore.community.friendship.FriendshipFacade;
 import org.github.saphyra.skyxplore.community.mail.MailFacade;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,7 @@ public class NotificationFacadeTest {
     private MailFacade mailFacade;
 
     @Mock
-    private CommunityFacade communityFacade;
+    private FriendshipFacade friendshipFacade;
 
     @InjectMocks
     private NotificationFacade underTest;
@@ -35,7 +36,7 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfFriendRequestShouldCallFacadeAndReturn() {
         //GIVEN
-        when(communityFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
+        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
         //WHEN
         Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID_1);
         //THEN
@@ -45,7 +46,7 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfNotificationsShouldCalFacadeAndReturn() {
         //GIVEN
-        when(communityFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
+        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
         when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID_1)).thenReturn(3);
         //WHEN
         Integer result = underTest.getNumberOfNotifications(CHARACTER_ID_1);
