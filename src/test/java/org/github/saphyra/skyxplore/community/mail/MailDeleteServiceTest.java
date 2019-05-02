@@ -19,8 +19,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.community.mail.Mail;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import skyxplore.service.community.MailQueryService;
 
 @RunWith(MockitoJUnitRunner.class)

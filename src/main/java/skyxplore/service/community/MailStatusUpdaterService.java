@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.db.MailDao;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import skyxplore.domain.community.mail.Mail;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 

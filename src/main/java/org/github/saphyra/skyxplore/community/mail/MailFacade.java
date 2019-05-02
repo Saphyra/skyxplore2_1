@@ -8,7 +8,7 @@ import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import skyxplore.domain.community.mail.Mail;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import skyxplore.service.community.MailQueryService;
 import skyxplore.service.community.MailSenderService;
 import skyxplore.service.community.MailStatusUpdaterService;

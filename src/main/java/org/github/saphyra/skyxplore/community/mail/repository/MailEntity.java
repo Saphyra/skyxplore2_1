@@ -1,15 +1,16 @@
-package skyxplore.domain.community.mail;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
+package org.github.saphyra.skyxplore.community.mail.repository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Table(name = "mail")
 @Data
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MailEntity {
+class MailEntity {
     @Id
     @Column(name = "mail_id", length = 50)
     private String mailId;

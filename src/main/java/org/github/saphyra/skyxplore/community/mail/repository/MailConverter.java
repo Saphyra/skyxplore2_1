@@ -1,14 +1,16 @@
-package skyxplore.domain.community.mail;
+package org.github.saphyra.skyxplore.community.mail.repository;
+
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.springframework.stereotype.Component;
 
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-public class MailConverter extends ConverterBase<MailEntity, Mail> {
+class MailConverter extends ConverterBase<MailEntity, Mail> {
     private final DateTimeUtil dateTimeUtil;
     private final StringEncryptor stringEncryptor;
 

@@ -9,12 +9,11 @@ import org.github.saphyra.skyxplore.character.domain.view.character.CharacterVie
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
-import skyxplore.domain.community.mail.Mail;
-import skyxplore.domain.community.mail.MailEntity;
 
 @Deprecated
 public class TestUtils {
@@ -131,21 +130,6 @@ public class TestUtils {
             .message(MAIL_MESSAGE)
             .read(false)
             .sendTime(MAIL_SEND_TIME)
-            .archived(false)
-            .deletedByAddressee(false)
-            .deletedBySender(false)
-            .build();
-    }
-
-    public static MailEntity createMailEntity() {
-        return MailEntity.builder()
-            .mailId(MAIL_ID_1)
-            .from(MAIL_FROM_ID)
-            .to(MAIL_TO_ID)
-            .subject(MAIL_ENCRYPTED_SUBJECT)
-            .message(MAIL_ENCRYPTED_MESSAGE)
-            .read(false)
-            .sendTime(MAIL_SEND_TIME_EPOCH)
             .archived(false)
             .deletedByAddressee(false)
             .deletedBySender(false)

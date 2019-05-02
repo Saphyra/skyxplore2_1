@@ -3,7 +3,7 @@ package skyxplore.controller.view.community.mail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.common.AbstractViewConverter;
-import skyxplore.domain.community.mail.Mail;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 

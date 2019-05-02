@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.dataaccess.db.MailDao;
-import skyxplore.domain.community.mail.Mail;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import skyxplore.service.community.MailQueryService;
 
 @RequiredArgsConstructor

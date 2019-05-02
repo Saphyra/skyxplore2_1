@@ -1,18 +1,16 @@
-package skyxplore.dataaccess.db;
-
-import com.github.saphyra.converter.Converter;
-import com.github.saphyra.dao.AbstractDao;
-import org.springframework.stereotype.Component;
-import skyxplore.dataaccess.db.repository.MailRepository;
-import skyxplore.domain.community.mail.Mail;
-import skyxplore.domain.community.mail.MailEntity;
+package org.github.saphyra.skyxplore.community.mail.repository;
 
 import java.util.List;
+
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.dao.AbstractDao;
 
 @Component
 public class MailDao extends AbstractDao<MailEntity, Mail, String, MailRepository> {
 
-    public MailDao(Converter<MailEntity, Mail> converter, MailRepository repository) {
+    public MailDao(MailConverter converter, MailRepository repository) {
         super(converter, repository);
     }
 
