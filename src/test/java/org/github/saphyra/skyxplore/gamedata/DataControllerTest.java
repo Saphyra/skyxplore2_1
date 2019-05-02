@@ -12,11 +12,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CATEGORY_ID;
-import static skyxplore.testutil.TestUtils.DATA_ID_1;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataControllerTest {
+    private static final String DATA_ID = "data_id";
+    private static final String CATEGORY_ID = "category_id";
+
     @Mock
     private CommonDataQueryService commonDataQueryService;
 
@@ -26,7 +27,7 @@ public class DataControllerTest {
     @Test
     public void testGetItemsOfCategory() {
         //GIVEN
-        List<String> items = Arrays.asList(DATA_ID_1);
+        List<String> items = Arrays.asList(DATA_ID);
         when(commonDataQueryService.getItemsOfCategory(CATEGORY_ID)).thenReturn(items);
         //WHEN
         List<String> result = underTest.getItemsOfCategory(CATEGORY_ID);

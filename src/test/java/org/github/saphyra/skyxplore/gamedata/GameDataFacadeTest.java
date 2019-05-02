@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.gamedata.entity.Armor;
 import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
 import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
-import skyxplore.testutil.TestGeneralDescription;
+import org.github.saphyra.skyxplore.TestGeneralDescription;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameDataFacadeTest {

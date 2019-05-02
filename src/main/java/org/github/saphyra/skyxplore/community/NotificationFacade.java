@@ -1,4 +1,4 @@
-package skyxplore.service;
+package org.github.saphyra.skyxplore.community;
 
 import lombok.RequiredArgsConstructor;
 

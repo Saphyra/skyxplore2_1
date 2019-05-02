@@ -1,4 +1,4 @@
-package skyxplore.service;
+package org.github.saphyra.skyxplore.community;
 
 import org.github.saphyra.skyxplore.community.friendship.FriendshipFacade;
 import org.github.saphyra.skyxplore.community.mail.MailFacade;
@@ -8,12 +8,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NotificationFacadeTest {
+    private static final String CHARACTER_ID = "character_id";
     @Mock
     private MailFacade mailFacade;
 
@@ -26,31 +26,31 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfUnreadMailsShouldCallFacadeAndReturn() {
         //GIVEN
-        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID_1)).thenReturn(2);
+        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(2);
         //WHEN
-        Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID_1);
+        Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID);
         //THEN
-        assertEquals(new Integer(2), result);
+        assertThat(result).isEqualTo(2);
     }
 
     @Test
     public void testGetNumberOfFriendRequestShouldCallFacadeAndReturn() {
         //GIVEN
-        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
+        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
         //WHEN
-        Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID_1);
+        Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID);
         //THEN
-        assertEquals(new Integer(2), result);
+        assertThat(result).isEqualTo(2);
     }
 
     @Test
     public void testGetNumberOfNotificationsShouldCalFacadeAndReturn() {
         //GIVEN
-        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID_1)).thenReturn(2);
-        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID_1)).thenReturn(3);
+        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
+        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(3);
         //WHEN
-        Integer result = underTest.getNumberOfNotifications(CHARACTER_ID_1);
+        Integer result = underTest.getNumberOfNotifications(CHARACTER_ID);
         //THEN
-        assertEquals(new Integer(5), result);
+        assertThat(result).isEqualTo(5);
     }
 }

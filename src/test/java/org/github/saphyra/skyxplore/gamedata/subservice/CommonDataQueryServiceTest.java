@@ -11,7 +11,7 @@ import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescri
 import org.junit.Before;
 import org.junit.Test;
 
-import skyxplore.testutil.TestGeneralDescription;
+import org.github.saphyra.skyxplore.TestGeneralDescription;
 
 public class CommonDataQueryServiceTest {
     private static final String CATEGORY_ID_1 = "category_id_1";

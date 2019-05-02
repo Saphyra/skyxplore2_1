@@ -1,4 +1,4 @@
-package skyxplore.testutil;
+package org.github.saphyra.skyxplore;
 
 import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
 
