@@ -1,13 +1,11 @@
 package skyxplore.testutil;
 
-import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 
 @Deprecated
 public class TestUtils {
     //Blocked Character
-    private static final Long BLOCKED_CHARACTER_ENTITY_ID = 10L;
     public static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
 
     //Category
@@ -33,14 +31,6 @@ public class TestUtils {
 
     //User
     public static final String USER_ID = "user_id";
-
-    public static BlockedCharacter createBlockedCharacter() {
-        return BlockedCharacter.builder()
-            .blockedCharacterEntityId(BLOCKED_CHARACTER_ENTITY_ID)
-            .blockedCharacterId(BLOCKED_CHARACTER_ID)
-            .characterId(CHARACTER_ID_1)
-            .build();
-    }
 
 
     public static FriendRequest createFriendRequest() {
