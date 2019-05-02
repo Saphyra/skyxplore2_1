@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import skyxplore.domain.community.mail.Mail;
-import skyxplore.service.community.MailDeleteService;
 import skyxplore.service.community.MailQueryService;
 import skyxplore.service.community.MailSenderService;
 import skyxplore.service.community.MailStatusUpdaterService;

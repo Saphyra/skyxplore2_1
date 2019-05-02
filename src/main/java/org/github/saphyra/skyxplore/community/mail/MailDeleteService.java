@@ -1,29 +1,30 @@
-package skyxplore.service.community;
+package org.github.saphyra.skyxplore.community.mail;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import skyxplore.dataaccess.db.MailDao;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
-import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import skyxplore.service.community.MailQueryService;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class MailDeleteService {
+class MailDeleteService {
     private final CharacterQueryService characterQueryService;
     private final MailDao mailDao;
     private final MailQueryService mailQueryService;
 
     @Transactional
-    public void deleteMails(String characterId, List<String> mailIds) {
+    void deleteMails(String characterId, List<String> mailIds) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         mailIds.forEach(mailId -> processDeletion(character, mailId));
     }
