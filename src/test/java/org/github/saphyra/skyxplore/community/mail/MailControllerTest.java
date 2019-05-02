@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterViewConverter;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;

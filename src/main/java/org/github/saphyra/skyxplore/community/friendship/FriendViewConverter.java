@@ -1,7 +1,8 @@
-package skyxplore.controller.view.community.friend;
+package org.github.saphyra.skyxplore.community.friendship;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendView;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.common.AbstractViewConverter;
 import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;

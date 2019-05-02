@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.character.domain.view.character;
+package org.github.saphyra.skyxplore.common.domain.character;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

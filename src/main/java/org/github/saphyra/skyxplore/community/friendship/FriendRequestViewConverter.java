@@ -1,6 +1,7 @@
-package skyxplore.controller.view.community.friendrequest;
+package org.github.saphyra.skyxplore.community.friendship;
 
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
 import org.springframework.stereotype.Component;
 import org.github.saphyra.skyxplore.common.AbstractViewConverter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;

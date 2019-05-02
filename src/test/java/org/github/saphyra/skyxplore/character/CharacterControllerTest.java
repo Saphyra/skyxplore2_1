@@ -26,8 +26,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterViewConverter;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {

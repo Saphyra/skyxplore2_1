@@ -1,22 +1,15 @@
 package org.github.saphyra.skyxplore.character;
 
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterViewConverter;
 import org.github.saphyra.skyxplore.common.CookieUtil;
 import org.github.saphyra.skyxplore.common.OneStringParamRequest;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +19,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @RestController
 @RequiredArgsConstructor

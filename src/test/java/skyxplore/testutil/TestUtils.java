@@ -1,13 +1,9 @@
 package skyxplore.testutil;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-
-import skyxplore.controller.view.community.friend.FriendView;
-import skyxplore.controller.view.community.friendrequest.FriendRequestView;
 
 @Deprecated
 public class TestUtils {
@@ -23,7 +19,6 @@ public class TestUtils {
     public static final String CHARACTER_ID_2 = "character_id_2";
     public static final String CHARACTER_NAME = "character_name";
     private static final Integer CHARACTER_MONEY = 10;
-    public static final String FRIEND_NAME = "friend_name";
     private static final String CHARACTER_EQUIPMENT = "character_equipments";
 
     //SkyXpCredentials
@@ -60,13 +55,6 @@ public class TestUtils {
         return character;
     }
 
-    public static CharacterView createCharacterView(SkyXpCharacter character) {
-        CharacterView view = new CharacterView();
-        view.setCharacterId(character.getCharacterId());
-        view.setCharacterName(character.getCharacterName());
-        return view;
-    }
-
     public static FriendRequest createFriendRequest() {
         return FriendRequest.builder()
             .friendRequestId(FRIEND_REQUEST_ID)
@@ -75,29 +63,11 @@ public class TestUtils {
             .build();
     }
 
-    public static FriendRequestView createFriendRequestView() {
-        FriendRequestView view = new FriendRequestView();
-        view.setCharacterId(CHARACTER_ID_1);
-        view.setFriendRequestId(FRIEND_REQUEST_ID);
-        view.setFriendId(FRIEND_ID);
-        view.setFriendName(FRIEND_NAME);
-        return view;
-    }
-
     public static Friendship createFriendship() {
         Friendship friendship = new Friendship();
         friendship.setFriendshipId(FRIENDSHIP_ID);
         friendship.setCharacterId(CHARACTER_ID_1);
         friendship.setFriendId(FRIEND_ID);
         return friendship;
-    }
-
-    public static FriendView createFriendView() {
-        FriendView view = new FriendView();
-        view.setFriendId(FRIENDSHIP_ID);
-        view.setFriendId(FRIEND_ID);
-        view.setFriendName(FRIEND_NAME);
-        view.setActive(false);
-        return view;
     }
 }
