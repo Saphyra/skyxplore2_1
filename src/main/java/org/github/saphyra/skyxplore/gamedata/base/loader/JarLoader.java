@@ -1,10 +1,6 @@
 package org.github.saphyra.skyxplore.gamedata.base.loader;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FilenameUtils;
-import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
-import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
-import skyxplore.util.FileUtil;
+import static java.util.Objects.isNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +13,11 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import static java.util.Objects.isNull;
+import org.apache.commons.io.FilenameUtils;
+import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
+import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class JarLoader<T> extends AbstractLoader<T> {
@@ -68,7 +68,7 @@ public class JarLoader<T> extends AbstractLoader<T> {
                     String[] splitted = FilenameUtils.removeExtension(entry.getName()).split("/");
                     gameDataService.put(splitted[splitted.length - 1], (T) contentString);
                 } else {
-                    T content = FileUtil.readValue(objectMapper, contentString, clazz);
+                    T content = FileUtil.readValue(contentString, clazz);
                     putGeneralDescription(content, gameDataService, jarPath);
                 }
             } else {
@@ -80,7 +80,7 @@ public class JarLoader<T> extends AbstractLoader<T> {
 
     private TypedItem getTypedItem(JarFile jarFile, JarEntry entry) {
         String json = readJarEntry(jarFile, entry);
-        TypedItem typedItem = FileUtil.readValue(objectMapper, json, TypedItem.class);
+        TypedItem typedItem = FileUtil.readValue(json, TypedItem.class);
         if (isNull(typedItem.getType())) {
             log.warn("{} has no type.", entry.getName());
         }

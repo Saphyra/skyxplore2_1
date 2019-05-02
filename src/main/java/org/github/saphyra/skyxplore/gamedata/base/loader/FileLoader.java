@@ -1,14 +1,14 @@
 package org.github.saphyra.skyxplore.gamedata.base.loader;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FilenameUtils;
-import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
-import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
-import skyxplore.util.FileUtil;
+import static java.util.Objects.isNull;
 
 import java.io.File;
 
-import static java.util.Objects.isNull;
+import org.apache.commons.io.FilenameUtils;
+import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
+import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class FileLoader<T> extends AbstractLoader<T> {
@@ -42,7 +42,7 @@ public class FileLoader<T> extends AbstractLoader<T> {
     }
 
     private TypedItem getTypedItem(File file) {
-        TypedItem typedItem = FileUtil.readValue(objectMapper, file, TypedItem.class);
+        TypedItem typedItem = FileUtil.readValue(file, TypedItem.class);
         if (isNull(typedItem.getType())) {
             log.warn("{} has no type.", file.getName());
         }
@@ -60,7 +60,7 @@ public class FileLoader<T> extends AbstractLoader<T> {
     }
 
     private void parseFile(File file) {
-        T content = FileUtil.readValue(objectMapper, file, clazz);
+        T content = FileUtil.readValue(file, clazz);
         putGeneralDescription(content, gameDataService, gameDataService.getPath());
     }
 }
