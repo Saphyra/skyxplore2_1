@@ -1,4 +1,4 @@
-package skyxplore.service.ship;
+package org.github.saphyra.skyxplore.ship;
 
 import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
 import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.WEAPON_SLOT_NAME;
@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO make package-private
 public class EquipUtil {
     private final ExtenderService extenderService;
     private final SlotDao slotDao;

@@ -29,7 +29,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import skyxplore.service.ship.EquipUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipServiceTest {

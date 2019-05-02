@@ -1,31 +1,30 @@
-package skyxplore.service.ship;
+package org.github.saphyra.skyxplore.ship;
 
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.WEAPON_SLOT_NAME;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.WEAPON_SLOT_NAME;
-import static skyxplore.testutil.TestUtils.DEFENSE_SLOT_ID;
-import static skyxplore.testutil.TestUtils.WEAPON_SLOT_ID;
-import static skyxplore.testutil.TestUtils.createEquippedShip;
 
+import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import org.github.saphyra.skyxplore.gamedata.entity.Extender;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
-
 @RunWith(MockitoJUnitRunner.class)
 public class EquipUtilTest {
+    private static final String DEFENSE_SLOT_ID = "defense_slot_id";
+    private static final String WEAPON_SLOT_ID = "weapon_slot_id";
+
     @Mock
     private ExtenderService extenderService;
 
@@ -68,7 +67,9 @@ public class EquipUtilTest {
     @Test
     public void testSlotByNameShouldReturnDefenseSlotWhenDefense() {
         //GIVEN
-        EquippedShip ship = createEquippedShip();
+        EquippedShip ship = EquippedShip.builder()
+            .defenseSlotId(DEFENSE_SLOT_ID)
+            .build();
         EquippedSlot slot = EquippedSlot.builder()
             .slotId(DEFENSE_SLOT_ID).build();
         when(slotDao.getById(DEFENSE_SLOT_ID)).thenReturn(slot);
@@ -82,7 +83,9 @@ public class EquipUtilTest {
     @Test
     public void testSlotByNameShouldReturnWeaponSlotWhenWeapon() {
         //GIVEN
-        EquippedShip ship = createEquippedShip();
+        EquippedShip ship = EquippedShip.builder()
+            .weaponSlotId(WEAPON_SLOT_ID)
+            .build();
         EquippedSlot slot = EquippedSlot.builder()
             .slotId(WEAPON_SLOT_ID)
             .build();

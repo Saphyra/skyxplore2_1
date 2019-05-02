@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.service.ship.EquipUtil;
 
 @Service
 @Slf4j

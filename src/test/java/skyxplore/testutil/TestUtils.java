@@ -11,7 +11,6 @@ import org.github.saphyra.skyxplore.character.domain.view.character.CharacterVie
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 
 import skyxplore.controller.request.community.SendMailRequest;
@@ -49,14 +48,12 @@ public class TestUtils {
     public static final String DATA_SLOT = "data_slot";
 
     public static final Integer DATA_SHIP_CONNECTOR_SLOT = 5;
-    private static final Integer DATA_SHIP_COREHULL = 1000;
 
     //Equip
     public static final String EQUIP_ITEM_ID = "equip_item_id";
     private static final String UNEQUIP_FROM = "unequip_from";
 
     //EquippedShip
-    private static final String EQUIPPED_SHIP_ID = "equipped_ship_id";
     public static final String EQUIPPED_SHIP_TYPE = "equipped_ship_type";
 
     //EquippedSlot
@@ -113,19 +110,6 @@ public class TestUtils {
         view.setCharacterId(character.getCharacterId());
         view.setCharacterName(character.getCharacterName());
         return view;
-    }
-
-    public static EquippedShip createEquippedShip() {
-        EquippedShip ship = EquippedShip.builder().build();
-        ship.setShipId(EQUIPPED_SHIP_ID);
-        ship.setCharacterId(CHARACTER_ID_1);
-        ship.setShipType(EQUIPPED_SHIP_TYPE);
-        ship.setCoreHull(DATA_SHIP_COREHULL);
-        ship.setConnectorSlot(DATA_SHIP_CONNECTOR_SLOT);
-        ship.addConnector(DATA_CONNECTOR);
-        ship.setDefenseSlotId(DEFENSE_SLOT_ID);
-        ship.setWeaponSlotId(WEAPON_SLOT_ID);
-        return ship;
     }
 
     public static FriendRequest createFriendRequest() {

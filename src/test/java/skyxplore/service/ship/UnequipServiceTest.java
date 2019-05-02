@@ -1,5 +1,6 @@
 package skyxplore.service.ship;
 
+import org.github.saphyra.skyxplore.ship.EquipUtil;
 import org.github.saphyra.skyxplore.ship.ShipQueryService;
 import org.junit.Before;
 import org.junit.Test;
