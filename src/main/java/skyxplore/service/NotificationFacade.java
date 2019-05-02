@@ -1,6 +1,8 @@
 package skyxplore.service;
 
 import lombok.RequiredArgsConstructor;
+
+import org.github.saphyra.skyxplore.community.mail.MailFacade;
 import org.springframework.stereotype.Service;
 
 @Service

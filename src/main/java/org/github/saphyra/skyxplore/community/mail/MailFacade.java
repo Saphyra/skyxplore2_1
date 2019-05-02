@@ -1,17 +1,18 @@
-package skyxplore.service;
+package org.github.saphyra.skyxplore.community.mail;
+
+import java.util.List;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
+import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import skyxplore.domain.community.mail.Mail;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import skyxplore.service.community.MailDeleteService;
 import skyxplore.service.community.MailQueryService;
 import skyxplore.service.community.MailSenderService;
 import skyxplore.service.community.MailStatusUpdaterService;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -22,15 +23,15 @@ public class MailFacade {
     private final MailStatusUpdaterService mailStatusUpdaterService;
     private final MailQueryService mailQueryService;
 
-    public void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
+    void archiveMails(String characterId, List<String> mailIds, Boolean archiveStatus) {
         mailStatusUpdaterService.archiveMails(characterId, mailIds, archiveStatus);
     }
 
-    public void deleteMails(String characterId, List<String> mailIds) {
+    void deleteMails(String characterId, List<String> mailIds) {
         mailDeleteService.deleteMails(characterId, mailIds);
     }
 
-    public List<SkyXpCharacter> getAddressees(String characterId, String name) {
+    List<SkyXpCharacter> getAddressees(String characterId, String name) {
         return characterQueryService.getCharactersCanBeAddressee(name, characterId);
     }
 
@@ -38,7 +39,7 @@ public class MailFacade {
         return mailQueryService.getArchivedMails(characterId);
     }
 
-    public List<Mail> getMails(String characterId) {
+    List<Mail> getMails(String characterId) {
         return mailQueryService.getMails(characterId);
     }
 
@@ -54,7 +55,7 @@ public class MailFacade {
         mailSenderService.sendMail(request, characterId);
     }
 
-    public void setMailReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
+    void setMailReadStatus(List<String> mailIds, String characterId, Boolean newStatus) {
         mailStatusUpdaterService.updateReadStatus(mailIds, characterId, newStatus);
     }
 }

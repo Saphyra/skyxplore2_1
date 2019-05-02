@@ -21,7 +21,6 @@ import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.controller.view.community.mail.MailViewConverter;
 import skyxplore.domain.community.mail.Mail;
-import skyxplore.service.MailFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailControllerTest {

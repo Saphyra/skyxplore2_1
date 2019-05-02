@@ -3,19 +3,16 @@ package skyxplore.testutil;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.Arrays;
-import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.domain.view.character.CharacterView;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-
 import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
+
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
-import skyxplore.controller.view.community.mail.MailView;
 import skyxplore.domain.community.mail.Mail;
 import skyxplore.domain.community.mail.MailEntity;
 
@@ -62,9 +59,6 @@ public class TestUtils {
     public static final String MAILS_ADDRESSEE_ID = "mail_addressee_id";
     public static final Long MAIL_SEND_TIME_EPOCH = 654612L;
     public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
-
-    //Material
-    public static final String MATERIAL_ID = "material_id";
 
     //User
     public static final String USER_ID = "user_id";
@@ -155,23 +149,6 @@ public class TestUtils {
             .archived(false)
             .deletedByAddressee(false)
             .deletedBySender(false)
-            .build();
-    }
-
-    public static List<String> createMailIdList(String... mailIds) {
-        return Arrays.asList(mailIds);
-    }
-
-    public static MailView createMailView() {
-        return MailView.builder()
-            .mailId(MAIL_ID_1)
-            .from(MAIL_FROM_ID)
-            .to(MAIL_TO_ID)
-            .fromName(MAIL_FROM_NAME)
-            .toName(MAIL_TO_NAME)
-            .subject(MAIL_SUBJECT)
-            .read(false)
-            .sendTime(MAIL_SEND_TIME_EPOCH)
             .build();
     }
 
