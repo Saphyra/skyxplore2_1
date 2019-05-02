@@ -7,13 +7,12 @@ import javax.transaction.Transactional;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import skyxplore.service.community.MailQueryService;
 
 @RequiredArgsConstructor
 @Service

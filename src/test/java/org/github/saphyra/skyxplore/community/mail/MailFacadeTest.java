@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import skyxplore.service.community.MailQueryService;
+
 import skyxplore.service.community.MailSenderService;
 import skyxplore.service.community.MailStatusUpdaterService;
 

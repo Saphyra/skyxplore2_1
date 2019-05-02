@@ -21,7 +21,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import skyxplore.service.community.MailQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailDeleteServiceTest {

@@ -1,5 +1,6 @@
 package skyxplore.service.community;
 
+import org.github.saphyra.skyxplore.community.mail.MailQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -52,9 +52,7 @@ public class TestUtils {
     public static final String MAIL_FROM_NAME = "mail_from_name";
     public static final String MAIL_TO_NAME = "mail_to_name";
     public static final String MAIL_SUBJECT = "mail_subject";
-    public static final String MAIL_ENCRYPTED_SUBJECT = "mail_encrypted_subject";
     public static final String MAIL_MESSAGE = "mail_message";
-    public static final String MAIL_ENCRYPTED_MESSAGE = "mail_encrypted_message";
     public static final String MAILS_ADDRESSEE_ID = "mail_addressee_id";
     public static final Long MAIL_SEND_TIME_EPOCH = 654612L;
     public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);

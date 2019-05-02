@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.github.saphyra.skyxplore.community.mail.MailQueryService;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

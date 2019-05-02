@@ -1,12 +1,13 @@
-package skyxplore.service.community;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import org.github.saphyra.skyxplore.common.exception.MailNotFoundException;
+package org.github.saphyra.skyxplore.community.mail;
 
 import java.util.List;
+
+import org.github.saphyra.skyxplore.common.exception.MailNotFoundException;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
