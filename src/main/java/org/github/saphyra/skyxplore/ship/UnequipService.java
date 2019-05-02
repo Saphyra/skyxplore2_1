@@ -1,31 +1,34 @@
-package skyxplore.service.ship;
+package org.github.saphyra.skyxplore.ship;
+
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.BACK_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.LEFT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.RIGHT_SLOT_NAME;
+
+import javax.transaction.Transactional;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
+import org.github.saphyra.skyxplore.gamedata.entity.Extender;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.github.saphyra.skyxplore.ship.EquipUtil;
-import org.github.saphyra.skyxplore.ship.ShipQueryService;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import org.github.saphyra.skyxplore.gamedata.entity.Extender;
-import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-
-import javax.transaction.Transactional;
-
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.*;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UnequipService {
+//TODO split to strategies
+class UnequipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
@@ -36,7 +39,7 @@ public class UnequipService {
 
 
     @Transactional
-    public void unequip(UnequipRequest request, String characterId) {
+    void unequip(UnequipRequest request, String characterId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 

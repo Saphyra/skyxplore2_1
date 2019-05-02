@@ -16,16 +16,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-//TODO make package-private
-public class EquipUtil {
+class EquipUtil {
     private final ExtenderService extenderService;
     private final SlotDao slotDao;
 
-    public boolean isExtender(String itemId) {
+    boolean isExtender(String itemId) {
         return extenderService.get(itemId) != null;
     }
 
-    public EquippedSlot getSlotByName(EquippedShip ship, String slotName) {
+    EquippedSlot getSlotByName(EquippedShip ship, String slotName) {
         if (slotName.contains(DEFENSE_SLOT_NAME)) {
             return slotDao.getById(ship.getDefenseSlotId());
         } else if (slotName.contains(WEAPON_SLOT_NAME)) {

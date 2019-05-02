@@ -13,8 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import skyxplore.service.ship.UnequipService;
-
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipFacadeTest {
     private static final String CHARACTER_ID = "character_id";

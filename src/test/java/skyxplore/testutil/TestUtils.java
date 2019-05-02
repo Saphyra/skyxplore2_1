@@ -11,7 +11,6 @@ import org.github.saphyra.skyxplore.character.domain.view.character.CharacterVie
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 
 import skyxplore.controller.request.community.SendMailRequest;
 import skyxplore.controller.view.community.friend.FriendView;
@@ -42,11 +41,6 @@ public class TestUtils {
 
     //Data
     public static final String DATA_ID_1 = "data_id_1";
-    public static final String DATA_SLOT = "data_slot";
-
-    //Equip
-    public static final String EQUIP_ITEM_ID = "equip_item_id";
-    private static final String UNEQUIP_FROM = "unequip_from";
 
     //FRIENDSHIP
     public static final String FRIEND_ID = "friend_id";
@@ -186,13 +180,6 @@ public class TestUtils {
         request.setAddresseeId(MAILS_ADDRESSEE_ID);
         request.setSubject(MAIL_SUBJECT);
         request.setMessage(MAIL_MESSAGE);
-        return request;
-    }
-
-    public static UnequipRequest createUnequipRequest() {
-        UnequipRequest request = new UnequipRequest();
-        request.setItemId(EQUIP_ITEM_ID);
-        request.setSlot(UNEQUIP_FROM);
         return request;
     }
 }
