@@ -1,12 +1,13 @@
-package skyxplore.service.community;
+package org.github.saphyra.skyxplore.community.mail;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
