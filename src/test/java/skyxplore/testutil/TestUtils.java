@@ -10,7 +10,6 @@ import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCha
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 
 import skyxplore.controller.view.community.friend.FriendView;
 import skyxplore.controller.view.community.friendrequest.FriendRequestView;
@@ -53,7 +52,6 @@ public class TestUtils {
     public static final String MAIL_TO_NAME = "mail_to_name";
     public static final String MAIL_SUBJECT = "mail_subject";
     public static final String MAIL_MESSAGE = "mail_message";
-    public static final String MAILS_ADDRESSEE_ID = "mail_addressee_id";
     public static final Long MAIL_SEND_TIME_EPOCH = 654612L;
     public static final OffsetDateTime MAIL_SEND_TIME = OffsetDateTime.of(LocalDateTime.ofEpochSecond(MAIL_SEND_TIME_EPOCH, 0, ZoneOffset.UTC), ZoneOffset.UTC);
 
@@ -132,13 +130,5 @@ public class TestUtils {
             .deletedByAddressee(false)
             .deletedBySender(false)
             .build();
-    }
-
-    public static SendMailRequest createSendMailRequest() {
-        SendMailRequest request = new SendMailRequest();
-        request.setAddresseeId(MAILS_ADDRESSEE_ID);
-        request.setSubject(MAIL_SUBJECT);
-        request.setMessage(MAIL_MESSAGE);
-        return request;
     }
 }

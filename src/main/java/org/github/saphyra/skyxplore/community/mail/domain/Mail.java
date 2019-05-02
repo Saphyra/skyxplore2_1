@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//TODO builder with default values
 public class Mail {
     private String mailId;
     private String from;

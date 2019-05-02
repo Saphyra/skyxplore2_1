@@ -1,27 +1,27 @@
-package skyxplore.service.community;
+package org.github.saphyra.skyxplore.community.mail;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
+import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
+import org.springframework.stereotype.Service;
 
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 
-import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
-import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import org.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
-
 @RequiredArgsConstructor
 @Service
-public class MailSenderService {
+class MailSenderService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
     private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
     private final MailDao mailDao;
 
-    public void sendMail(SendMailRequest request, String characterId) {
+    void sendMail(SendMailRequest request, String characterId) {
         characterQueryService.findByCharacterId(request.getAddresseeId());
         checkBlockStatus(characterId, request.getAddresseeId());
         Mail mail = createMail(request, characterId);
