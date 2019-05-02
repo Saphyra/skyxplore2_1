@@ -1,15 +1,17 @@
-package skyxplore.controller.view.community.mail;
+package org.github.saphyra.skyxplore.community.mail;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.common.AbstractViewConverter;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.domain.MailView;
+import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.common.AbstractViewConverter;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
-public class MailViewConverter extends AbstractViewConverter<Mail, MailView> {
+class MailViewConverter extends AbstractViewConverter<Mail, MailView> {
     private final CharacterQueryService characterQueryService;
     private final DateTimeUtil dateTimeUtil;
 

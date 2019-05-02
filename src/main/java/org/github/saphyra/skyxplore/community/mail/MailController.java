@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import skyxplore.controller.view.community.mail.MailView;
-import skyxplore.controller.view.community.mail.MailViewConverter;
+import org.github.saphyra.skyxplore.community.mail.domain.MailView;
 
 @Slf4j
 @RestController

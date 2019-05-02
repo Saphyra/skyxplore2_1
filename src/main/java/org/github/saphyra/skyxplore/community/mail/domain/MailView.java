@@ -1,4 +1,4 @@
-package skyxplore.controller.view.community.mail;
+package org.github.saphyra.skyxplore.community.mail.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
