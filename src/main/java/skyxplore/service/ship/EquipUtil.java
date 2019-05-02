@@ -9,8 +9,8 @@ import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 
-import static skyxplore.service.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.WEAPON_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.WEAPON_SLOT_NAME;
 
 @Component
 @Slf4j

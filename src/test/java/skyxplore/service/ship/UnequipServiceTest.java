@@ -22,9 +22,9 @@ import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
-import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NAME;
 import static skyxplore.testutil.TestUtils.*;
 
 @RunWith(MockitoJUnitRunner.class)

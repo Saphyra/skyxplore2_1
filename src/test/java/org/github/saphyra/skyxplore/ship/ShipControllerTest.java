@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
 import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 import org.github.saphyra.skyxplore.ship.domain.ShipView;
-import skyxplore.service.EquippedShipFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShipControllerTest {

@@ -27,9 +27,9 @@ import java.util.Arrays;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NAME;
 import static skyxplore.testutil.TestUtils.CHARACTER_ID_1;
 import static skyxplore.testutil.TestUtils.DATA_ELEMENT;
 import static skyxplore.testutil.TestUtils.DATA_SLOT;

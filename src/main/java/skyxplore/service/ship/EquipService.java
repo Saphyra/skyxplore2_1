@@ -21,11 +21,11 @@ import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static skyxplore.service.EquippedShipFacade.BACK_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.FRONT_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.LEFT_SLOT_NAME;
-import static skyxplore.service.EquippedShipFacade.RIGHT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.BACK_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.LEFT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.RIGHT_SLOT_NAME;
 
 @Service
 @Slf4j

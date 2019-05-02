@@ -1,15 +1,14 @@
-package skyxplore.service;
+package org.github.saphyra.skyxplore.ship;
 
+import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
+import org.github.saphyra.skyxplore.ship.domain.ShipView;
+import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
-import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
-import org.github.saphyra.skyxplore.ship.domain.ShipView;
 import skyxplore.service.ship.EquipService;
 import skyxplore.service.ship.EquipShipService;
-import org.github.saphyra.skyxplore.ship.ShipQueryService;
 import skyxplore.service.ship.UnequipService;
 
 @Service
@@ -30,15 +29,15 @@ public class EquippedShipFacade {
     private final ShipQueryService shipQueryService;
     private final UnequipService unequipService;
 
-    public void equip(EquipRequest request, String characterId) {
+    void equip(EquipRequest request, String characterId) {
         equipService.equip(request, characterId);
     }
 
-    public void equipShip(String characterId, String shipId) {
+    void equipShip(String characterId, String shipId) {
         equipShipService.equipShip(characterId, shipId);
     }
 
-    public ShipView getShipData(String characterId) {
+    ShipView getShipData(String characterId) {
         return shipQueryService.getShipData(characterId);
     }
 

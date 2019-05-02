@@ -19,7 +19,7 @@ import org.github.saphyra.skyxplore.character.CharacterQueryService;
 
 import javax.transaction.Transactional;
 
-import static skyxplore.service.EquippedShipFacade.*;
+import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.*;
 
 @Service
 @Slf4j
