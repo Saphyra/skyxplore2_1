@@ -109,6 +109,6 @@ public class CharacterQueryService {
     }
 
     public boolean isCharNameExists(String charName) {
-        return characterDao.findByCharacterName(charName) != null;
+        return characterDao.findByCharacterName(charName).isPresent();
     }
 }

@@ -276,14 +276,24 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testIsCharNameExists() {
+    public void testIsCharNameExists_optionalIsPresent() {
         //GIVEN
         SkyXpCharacter character = createCharacter(CHARACTER_ID_1);
-        when(characterDao.findByCharacterName(CHARACTER_NAME)).thenReturn(character);
+        when(characterDao.findByCharacterName(CHARACTER_NAME)).thenReturn(Optional.of(character));
         //WHEN
         boolean result = underTest.isCharNameExists(CHARACTER_NAME);
         //THEN
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void testIsCharNameExists_optionalIsEmpty() {
+        //GIVEN
+        when(characterDao.findByCharacterName(CHARACTER_NAME)).thenReturn(Optional.empty());
+        //WHEN
+        boolean result = underTest.isCharNameExists(CHARACTER_NAME);
+        //THEN
+        assertThat(result).isFalse();
     }
 
     private SkyXpCharacter createCharacter(String characterId) {

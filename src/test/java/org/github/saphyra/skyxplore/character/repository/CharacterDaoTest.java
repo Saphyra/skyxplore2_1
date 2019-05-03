@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
@@ -71,13 +72,13 @@ public class CharacterDaoTest {
     @Test
     public void testFindByCharacterNameShouldCallRepositoryAndReturnDomain() {
         //GIVEN
-        CharacterEntity entity = createCharacterEntity();
+        Optional<CharacterEntity> entity = Optional.of(createCharacterEntity());
         when(characterRepository.findByCharacterName(CHARACTER_NAME)).thenReturn(entity);
 
-        SkyXpCharacter character = createCharacter();
+        Optional<SkyXpCharacter> character = Optional.of(createCharacter());
         when(characterConverter.convertEntity(entity)).thenReturn(character);
         //WHEN
-        SkyXpCharacter result = underTest.findByCharacterName(CHARACTER_NAME);
+        Optional<SkyXpCharacter> result = underTest.findByCharacterName(CHARACTER_NAME);
         //THEN
         verify(characterRepository).findByCharacterName(CHARACTER_NAME);
         verify(characterConverter).convertEntity(entity);

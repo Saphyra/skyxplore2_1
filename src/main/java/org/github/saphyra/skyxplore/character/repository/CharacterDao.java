@@ -1,6 +1,7 @@
 package org.github.saphyra.skyxplore.character.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
@@ -38,7 +39,7 @@ public class CharacterDao extends AbstractDao<CharacterEntity, SkyXpCharacter, S
         characters.forEach(e -> deleteById(e.getCharacterId()));
     }
 
-    public SkyXpCharacter findByCharacterName(String characterName) {
+    public Optional<SkyXpCharacter> findByCharacterName(String characterName) {
         return converter.convertEntity(repository.findByCharacterName(characterName));
     }
 
