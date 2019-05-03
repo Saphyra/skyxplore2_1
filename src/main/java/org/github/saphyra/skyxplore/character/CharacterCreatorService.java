@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 class CharacterCreatorService {
     private final CharacterNameCache characterNameCache;
     private final CharacterQueryService characterQueryService;
