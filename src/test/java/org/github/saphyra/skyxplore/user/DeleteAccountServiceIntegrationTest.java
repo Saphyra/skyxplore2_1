@@ -80,9 +80,7 @@ public class DeleteAccountServiceIntegrationTest {
     @EnableTransactionManagement
     @EntityScan(basePackages = "org.github.saphyra.skyxplore.user")
     @Import(DataSourceConfiguration.class)
-    public static class TestConfig {
-
-
+    static class TestConfig {
         @Bean
         public ObjectMapper objectMapper() {
             return new ObjectMapper();

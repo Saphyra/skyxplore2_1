@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
 import org.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
@@ -38,7 +40,7 @@ public class BlockCharacterServiceTest {
     @Test(expected = BlockedCharacterNotFoundException.class)
     public void testAllowBlockedCharacterShouldThrowExceptionWhenNotFound() {
         //GIVEN
-        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(null);
+        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
     }
@@ -47,7 +49,7 @@ public class BlockCharacterServiceTest {
     public void testAllowBlockedCharacterShouldDeleteBlock() {
         //GIVEN
         BlockedCharacter blockedCharacter = BlockedCharacter.builder().build();
-        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(blockedCharacter);
+        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(blockedCharacter));
         //WHEN
         underTest.allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
         //THEN
@@ -63,7 +65,7 @@ public class BlockCharacterServiceTest {
     @Test(expected = CharacterAlreadyBlockedException.class)
     public void testBlockCharacterShouldThrowExceptionWhenAlreadyBlocked() {
         //GIVEN
-        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(new BlockedCharacter());
+        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(new BlockedCharacter()));
         //WHEN
         underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
     }
@@ -71,7 +73,7 @@ public class BlockCharacterServiceTest {
     @Test
     public void testBlockCharacterShouldBlock() {
         //GIVEN
-        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(null);
+        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
         //THEN

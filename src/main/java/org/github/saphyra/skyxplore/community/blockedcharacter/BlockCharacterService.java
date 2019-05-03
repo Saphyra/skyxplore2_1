@@ -21,10 +21,8 @@ public class BlockCharacterService {
     private final FriendshipService friendshipService;
 
     void allowBlockedCharacter(String blockedCharacterId, String characterId) {
-        BlockedCharacter blockedCharacter = blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId);
-        if (blockedCharacter == null) {
-            throw new BlockedCharacterNotFoundException(characterId, blockedCharacterId);
-        }
+        BlockedCharacter blockedCharacter = blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId)
+            .orElseThrow(() -> new BlockedCharacterNotFoundException(characterId, blockedCharacterId));
         blockedCharacterDao.delete(blockedCharacter);
     }
 
@@ -33,7 +31,7 @@ public class BlockCharacterService {
         if (characterId.equals(blockedCharacterId)) {
             throw new BadRequestException("You cannot block yourself.");
         }
-        if (blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId) != null) {
+        if (blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId).isPresent()) {
             throw new CharacterAlreadyBlockedException(blockedCharacterId, characterId);
         }
 

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,12 +32,12 @@ public class BlockedCharacterQueryServiceTest {
     public void testFindByCharacterIdAndBlockedCharacterIdShouldQueryAndReturn() {
         //GIVEN
         BlockedCharacter blockedCharacter = createBlockedCharacter();
-        when(blockedCharacterDao.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(blockedCharacter);
+        when(blockedCharacterDao.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(blockedCharacter));
         //WHEN
-        BlockedCharacter result = underTest.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        Optional<BlockedCharacter> result = underTest.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         //THEN
         verify(blockedCharacterDao).findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
-        assertThat(result).isEqualTo(blockedCharacter);
+        assertThat(result).contains(blockedCharacter);
     }
 
     @Test

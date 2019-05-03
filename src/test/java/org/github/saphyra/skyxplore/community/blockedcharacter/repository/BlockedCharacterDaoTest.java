@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,17 +55,17 @@ public class BlockedCharacterDaoTest {
     @Test
     public void testFindByCharacterIdAndBlockedCharacterIdShouldReturnDomain() {
         //GIVEN
-        BlockedCharacterEntity entity = createBlockedCharacterEntity();
+        Optional<BlockedCharacterEntity> entity = Optional.of(createBlockedCharacterEntity());
         when(blockedCharacterRepository.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(entity);
 
         BlockedCharacter blockedCharacter = createBlockedCharacter();
-        when(blockedCharacterConverter.convertEntity(entity)).thenReturn(blockedCharacter);
+        when(blockedCharacterConverter.convertEntity(entity)).thenReturn(Optional.of(blockedCharacter));
         //WHEN
-        BlockedCharacter result = underTest.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        Optional<BlockedCharacter> result = underTest.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         //THEN
         verify(blockedCharacterRepository).findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         verify(blockedCharacterConverter).convertEntity(entity);
-        assertThat(result).isEqualTo(blockedCharacter);
+        assertThat(result).contains(blockedCharacter);
     }
 
     @Test

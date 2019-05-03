@@ -1,17 +1,18 @@
 package org.github.saphyra.skyxplore.community.blockedcharacter.repository;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-import java.util.List;
-
 @Repository
-//TODO unit test
-public interface BlockedCharacterRepository extends JpaRepository<BlockedCharacterEntity, Long> {
+interface BlockedCharacterRepository extends JpaRepository<BlockedCharacterEntity, Long> {
     @Modifying
     @Transactional
     @Query("DELETE BlockedCharacterEntity b WHERE b.characterId = :characterId OR b.blockedCharacterId = :characterId")
@@ -19,7 +20,7 @@ public interface BlockedCharacterRepository extends JpaRepository<BlockedCharact
 
     List<BlockedCharacterEntity> findByCharacterId(@Param("characterId") String characterId);
 
-    BlockedCharacterEntity findByCharacterIdAndBlockedCharacterId(String characterId, String blockedCharacterId);
+    Optional<BlockedCharacterEntity> findByCharacterIdAndBlockedCharacterId(String characterId, String blockedCharacterId);
 
     @Query("SELECT b FROM BlockedCharacterEntity b WHERE " +
         "(b.characterId = :characterId AND b.blockedCharacterId = :blockedCharacterId)" +
