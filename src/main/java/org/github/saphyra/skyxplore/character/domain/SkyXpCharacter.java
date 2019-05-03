@@ -1,22 +1,23 @@
 package org.github.saphyra.skyxplore.character.domain;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
-
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-
 @Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Slf4j
 public class SkyXpCharacter {
     private final String characterId;
     private String characterName;
@@ -29,6 +30,7 @@ public class SkyXpCharacter {
     private List<String> equipments = new ArrayList<>();
 
     public void addEquipment(String equipmentId) {
+        log.warn(equipments.getClass().getName());
         equipments.add(equipmentId);
     }
 

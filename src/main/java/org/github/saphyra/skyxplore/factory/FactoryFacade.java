@@ -12,10 +12,16 @@ import java.util.Map;
 @Slf4j
 public class FactoryFacade {
     private final AddToQueueService addToQueueService;
+    private final FactoryCreatorService factoryCreatorService;
     private final FactoryQueryService factoryQueryService;
 
-    public void addToQueue(String characterId, AddToQueueRequest request) {
+    void addToQueue(String characterId, AddToQueueRequest request) {
         addToQueueService.addToQueue(characterId, request);
+    }
+
+    //TODO unit test
+    public void createFactory(String characterId){
+        factoryCreatorService.createFactory(characterId);
     }
 
     public Map<String, Integer> getMaterials(String characterId) {

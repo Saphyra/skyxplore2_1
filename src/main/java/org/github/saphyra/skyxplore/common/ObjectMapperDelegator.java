@@ -1,14 +1,14 @@
 package org.github.saphyra.skyxplore.common;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -17,7 +17,7 @@ public class ObjectMapperDelegator {
 
     public <T> List<T> readValue(String source, Class<T[]> clazz) {
         try {
-            return Arrays.asList(objectMapper.readValue(source, clazz));
+            return new ArrayList<>(Arrays.asList(objectMapper.readValue(source, clazz)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
