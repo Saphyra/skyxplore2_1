@@ -284,6 +284,12 @@
         "message": "Játékos tiltása"
       }
     ],
+    "no-character-can-be-blocked": [
+      {
+        "key": "innerHTML",
+        "message": "Játékos nem található."
+      }
+    ],
     "block-character-name": [
       {
         "key": "placeholder",
