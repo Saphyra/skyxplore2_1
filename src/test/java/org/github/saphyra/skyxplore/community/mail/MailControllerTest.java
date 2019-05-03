@@ -1,25 +1,25 @@
 package org.github.saphyra.skyxplore.community.mail;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
-import org.github.saphyra.skyxplore.common.OneStringParamRequest;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.domain.MailView;
+import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
-import org.github.saphyra.skyxplore.community.mail.domain.MailView;
-import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailControllerTest {
@@ -30,7 +30,19 @@ public class MailControllerTest {
     private CharacterViewConverter characterViewConverter;
 
     @Mock
-    private MailFacade mailFacade;
+    private CharacterQueryService characterQueryService;
+
+    @Mock
+    private MailDeleteService mailDeleteService;
+
+    @Mock
+    private MailSenderService mailSenderService;
+
+    @Mock
+    private MailStatusUpdaterService mailStatusUpdaterService;
+
+    @Mock
+    private MailQueryService mailQueryService;
 
     @Mock
     private MailViewConverter mailViewConverter;
@@ -45,7 +57,7 @@ public class MailControllerTest {
         //WHEN
         underTest.archiveMails(mailIds, CHARACTER_ID);
         //THEN
-        verify(mailFacade).archiveMails(CHARACTER_ID, mailIds, true);
+        verify(mailStatusUpdaterService).archiveMails(CHARACTER_ID, mailIds, true);
     }
 
     @Test
@@ -55,7 +67,7 @@ public class MailControllerTest {
         //WHEN
         underTest.deleteMails(mailIds, CHARACTER_ID);
         //THEN
-        verify(mailFacade).deleteMails(CHARACTER_ID, mailIds);
+        verify(mailDeleteService).deleteMails(CHARACTER_ID, mailIds);
     }
 
     @Test
@@ -63,14 +75,13 @@ public class MailControllerTest {
         //GIVEN
         SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
-        when(mailFacade.getAddressees(CHARACTER_ID, CHARACTER_NAME)).thenReturn(characterList);
+        when(characterQueryService.getCharactersCanBeAddressee(CHARACTER_ID, CHARACTER_NAME)).thenReturn(characterList);
 
         List<CharacterView> viewList = Arrays.asList(CharacterView.builder().build());
         when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
         //WHEN
         List<CharacterView> result = underTest.getAddressees(new OneStringParamRequest(CHARACTER_NAME), CHARACTER_ID);
         //THEN
-        verify(mailFacade).getAddressees(CHARACTER_ID, CHARACTER_NAME);
         verify(characterViewConverter).convertDomain(characterList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -80,7 +91,7 @@ public class MailControllerTest {
         //GIVEN
         Mail mail = Mail.builder().build();
         List<Mail> mailList = Arrays.asList(mail);
-        when(mailFacade.getArchivedMails(CHARACTER_ID)).thenReturn(mailList);
+        when(mailQueryService.getArchivedMails(CHARACTER_ID)).thenReturn(mailList);
 
         MailView view = MailView.builder().build();
         List<MailView> viewList = Arrays.asList(view);
@@ -88,7 +99,6 @@ public class MailControllerTest {
         //WHEN
         List<MailView> result = underTest.getArchivedMails(CHARACTER_ID);
         //THEN
-        verify(mailFacade).getArchivedMails(CHARACTER_ID);
         verify(mailViewConverter).convertDomain(mailList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -98,7 +108,7 @@ public class MailControllerTest {
         //GIVEN
         Mail mail = Mail.builder().build();
         List<Mail> mailList = Arrays.asList(mail);
-        when(mailFacade.getMails(CHARACTER_ID)).thenReturn(mailList);
+        when(mailQueryService.getMails(CHARACTER_ID)).thenReturn(mailList);
 
         MailView view = MailView.builder().build();
         List<MailView> viewList = Arrays.asList(view);
@@ -106,7 +116,6 @@ public class MailControllerTest {
         //WHEN
         List<MailView> result = underTest.getMails(CHARACTER_ID);
         //THEN
-        verify(mailFacade).getMails(CHARACTER_ID);
         verify(mailViewConverter).convertDomain(mailList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -116,7 +125,7 @@ public class MailControllerTest {
         //GIVEN
         Mail mail = Mail.builder().build();
         List<Mail> mailList = Arrays.asList(mail);
-        when(mailFacade.getSentMails(CHARACTER_ID)).thenReturn(mailList);
+        when(mailQueryService.getSentMails(CHARACTER_ID)).thenReturn(mailList);
 
         MailView view = MailView.builder().build();
         List<MailView> viewList = Arrays.asList(view);
@@ -124,7 +133,6 @@ public class MailControllerTest {
         //WHEN
         List<MailView> result = underTest.getSentMails(CHARACTER_ID);
         //THEN
-        verify(mailFacade).getSentMails(CHARACTER_ID);
         verify(mailViewConverter).convertDomain(mailList);
         assertThat(result).isEqualTo(viewList);
     }
@@ -136,7 +144,7 @@ public class MailControllerTest {
         //WHEN
         underTest.markMailsRead(mailIds, CHARACTER_ID);
         //THEN
-        verify(mailFacade).setMailReadStatus(mailIds, CHARACTER_ID, true);
+        verify(mailStatusUpdaterService).updateReadStatus(mailIds, CHARACTER_ID, true);
     }
 
     @Test
@@ -146,7 +154,7 @@ public class MailControllerTest {
         //WHEN
         underTest.markMailsUnread(mailIds, CHARACTER_ID);
         //THEN
-        verify(mailFacade).setMailReadStatus(mailIds, CHARACTER_ID, false);
+        verify(mailStatusUpdaterService).updateReadStatus(mailIds, CHARACTER_ID, false);
     }
 
     @Test
@@ -156,7 +164,7 @@ public class MailControllerTest {
         //WHEN
         underTest.sendMail(request, CHARACTER_ID);
         //THEN
-        verify(mailFacade).sendMail(request, CHARACTER_ID);
+        verify(mailSenderService).sendMail(request, CHARACTER_ID);
     }
 
     @Test
@@ -166,6 +174,6 @@ public class MailControllerTest {
         //WHEN
         underTest.restoreMails(mailIds, CHARACTER_ID);
         //THEN
-        verify(mailFacade).archiveMails(CHARACTER_ID, mailIds, false);
+        verify(mailStatusUpdaterService).archiveMails(CHARACTER_ID, mailIds, false);
     }
 }

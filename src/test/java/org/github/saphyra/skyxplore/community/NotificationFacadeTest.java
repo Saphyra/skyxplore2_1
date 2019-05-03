@@ -1,7 +1,7 @@
 package org.github.saphyra.skyxplore.community;
 
-import org.github.saphyra.skyxplore.community.friendship.FriendshipFacade;
-import org.github.saphyra.skyxplore.community.mail.MailFacade;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
+import org.github.saphyra.skyxplore.community.mail.MailQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,10 +15,10 @@ import static org.mockito.Mockito.when;
 public class NotificationFacadeTest {
     private static final String CHARACTER_ID = "character_id";
     @Mock
-    private MailFacade mailFacade;
+    private MailQueryService mailQueryService;
 
     @Mock
-    private FriendshipFacade friendshipFacade;
+    private FriendshipQueryService friendshipQueryService;
 
     @InjectMocks
     private NotificationFacade underTest;
@@ -26,7 +26,7 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfUnreadMailsShouldCallFacadeAndReturn() {
         //GIVEN
-        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(2);
+        when(mailQueryService.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(2);
         //WHEN
         Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID);
         //THEN
@@ -36,7 +36,7 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfFriendRequestShouldCallFacadeAndReturn() {
         //GIVEN
-        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
+        when(friendshipQueryService.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
         //WHEN
         Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID);
         //THEN
@@ -46,8 +46,8 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfNotificationsShouldCalFacadeAndReturn() {
         //GIVEN
-        when(friendshipFacade.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
-        when(mailFacade.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(3);
+        when(friendshipQueryService.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
+        when(mailQueryService.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(3);
         //WHEN
         Integer result = underTest.getNumberOfNotifications(CHARACTER_ID);
         //THEN
