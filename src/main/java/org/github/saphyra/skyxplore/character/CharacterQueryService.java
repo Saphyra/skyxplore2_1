@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameLikeCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
@@ -14,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
-import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -99,11 +99,11 @@ public class CharacterQueryService {
         return characterDao.findByUserId(userId);
     }
 
-    public List<String> getEquipmentsOfCharacter(String characterId) {
+    List<String> getEquipmentsOfCharacter(String characterId) {
         return findByCharacterId(characterId).getEquipments();
     }
 
-    public Integer getMoneyOfCharacter(String characterId) {
+    Integer getMoneyOfCharacter(String characterId) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return character.getMoney();
     }

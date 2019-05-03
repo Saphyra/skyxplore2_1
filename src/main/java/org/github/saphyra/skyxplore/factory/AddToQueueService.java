@@ -1,28 +1,30 @@
 package org.github.saphyra.skyxplore.factory;
 
+import java.util.Map;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
+import org.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
+import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
+import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
+import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
+import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
+import org.github.saphyra.skyxplore.product.domain.Product;
+import org.github.saphyra.skyxplore.product.repository.ProductDao;
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
-import org.github.saphyra.skyxplore.character.repository.CharacterDao;
-import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
-import org.github.saphyra.skyxplore.product.repository.ProductDao;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.factory.domain.Factory;
-import org.github.saphyra.skyxplore.factory.domain.Materials;
-import org.github.saphyra.skyxplore.product.domain.Product;
-import org.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
-import org.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
-import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
-
-import javax.transaction.Transactional;
-import java.util.Map;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor

@@ -1,16 +1,16 @@
 package org.github.saphyra.skyxplore.community.blockedcharacter;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
 import org.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.github.saphyra.skyxplore.community.friendship.FriendshipService;
+
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
@@ -18,7 +18,6 @@ import org.github.saphyra.skyxplore.community.friendship.FriendshipService;
 public class BlockCharacterService {
     private final BlockedCharacterDao blockedCharacterDao;
     private final BlockedCharacterQueryService blockedCharacterQueryService;
-    private final CharacterQueryService characterQueryService;
     private final FriendshipService friendshipService;
 
     void allowBlockedCharacter(String blockedCharacterId, String characterId) {
@@ -34,7 +33,6 @@ public class BlockCharacterService {
         if (characterId.equals(blockedCharacterId)) {
             throw new BadRequestException("You cannot block yourself.");
         }
-        characterQueryService.findByCharacterId(blockedCharacterId);
         if (blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId) != null) {
             throw new CharacterAlreadyBlockedException(blockedCharacterId, characterId);
         }

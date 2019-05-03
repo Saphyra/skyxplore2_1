@@ -1,22 +1,22 @@
 package org.github.saphyra.skyxplore.community.blockedcharacter;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
 import org.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.community.friendship.FriendshipService;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockCharacterServiceTest {
@@ -28,9 +28,6 @@ public class BlockCharacterServiceTest {
 
     @Mock
     private BlockedCharacterQueryService blockedCharacterQueryService;
-
-    @Mock
-    private CharacterQueryService characterQueryService;
 
     @Mock
     private FriendshipService friendshipService;
@@ -78,7 +75,6 @@ public class BlockCharacterServiceTest {
         //WHEN
         underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(BLOCKED_CHARACTER_ID);
         verify(blockedCharacterQueryService).findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         verify(friendshipService).removeContactsBetween(CHARACTER_ID, BLOCKED_CHARACTER_ID);
 
