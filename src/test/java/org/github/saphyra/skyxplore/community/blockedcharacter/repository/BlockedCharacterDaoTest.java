@@ -1,20 +1,20 @@
 package org.github.saphyra.skyxplore.community.blockedcharacter.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockedCharacterDaoTest {
@@ -47,7 +47,7 @@ public class BlockedCharacterDaoTest {
     @Test
     public void testDeleteByCharacterIdShouldCallRepository() {
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.characterDeletedEventProcessor(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
         verify(blockedCharacterRepository).deleteByCharacterId(CHARACTER_ID);
     }

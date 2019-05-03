@@ -1,13 +1,14 @@
 package org.github.saphyra.skyxplore.community.friendship.repository.friendship;
 
-import java.util.List;
-
-import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Slf4j
@@ -17,8 +18,9 @@ public class FriendshipDao extends AbstractDao<FriendshipEntity, Friendship, Str
         super(converter, repository);
     }
 
-    public void deleteByCharacterId(String characterId) {
-        repository.deleteByCharacterId(characterId);
+    @EventListener
+    public void deleteByCharacterId(CharacterDeletedEvent event) {
+        repository.deleteByCharacterId(event.getCharacterId());
     }
 
     public List<Friendship> getByCharacterIdOrFriendId(String characterId, String friendId) {

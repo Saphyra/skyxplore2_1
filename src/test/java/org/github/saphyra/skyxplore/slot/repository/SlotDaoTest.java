@@ -1,15 +1,16 @@
 package org.github.saphyra.skyxplore.slot.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import org.github.saphyra.skyxplore.event.ShipDeletedEvent;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SlotDaoTest {
@@ -27,7 +28,7 @@ public class SlotDaoTest {
     @Test
     public void testDeleteByShipIdShouldCallRepository() {
         //WHEN
-        underTest.deleteByShipId(EQUIPPED_SHIP_ID);
+        underTest.deleteByShipId(new ShipDeletedEvent(EQUIPPED_SHIP_ID));
         //THEN
         verify(slotRepository).deleteByShipId(EQUIPPED_SHIP_ID);
     }

@@ -1,18 +1,19 @@
 package org.github.saphyra.skyxplore.ship.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import org.github.saphyra.skyxplore.event.ShipDeletedEvent;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.ApplicationEventPublisher;
 
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
-import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipDaoTest {
@@ -25,18 +26,10 @@ public class EquippedShipDaoTest {
     private EquippedShipConverter equippedShipConverter;
 
     @Mock
-    private SlotDao slotDao;
+    private ApplicationEventPublisher eventPublisher;
 
     @InjectMocks
     private EquippedShipDao underTest;
-
-    @Test(expected = ShipNotFoundException.class)
-    public void testDeleteByCharacterIdShouldThrowExceptionWhenShipNotFound() {
-        //GIVEN
-        when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(null);
-        //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
-    }
 
     @Test
     public void testDeleteByCharacterIdShouldDelete() {
@@ -46,10 +39,12 @@ public class EquippedShipDaoTest {
             .build();
         when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(equippedShip);
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.deleteByCharacterId(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
         verify(equippedShipRepository).getByCharacterId(CHARACTER_ID);
-        verify(slotDao).deleteByShipId(EQUIPPED_SHIP_ID);
+        ArgumentCaptor<ShipDeletedEvent> argumentCaptor = ArgumentCaptor.forClass(ShipDeletedEvent.class);
+        verify(eventPublisher).publishEvent(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue().getShipId()).isEqualTo(EQUIPPED_SHIP_ID);
         verify(equippedShipRepository).delete(equippedShip);
     }
 

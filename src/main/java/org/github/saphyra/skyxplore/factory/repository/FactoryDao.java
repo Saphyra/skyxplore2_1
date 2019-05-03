@@ -3,28 +3,32 @@ package org.github.saphyra.skyxplore.factory.repository;
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import org.github.saphyra.skyxplore.event.FactoryDeletedEvent;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
-import org.github.saphyra.skyxplore.product.repository.ProductDao;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
 public class FactoryDao extends AbstractDao<FactoryEntity, Factory, String, FactoryRepository> {
-    private final ProductDao productDao;
+    private final ApplicationEventPublisher eventPublisher;
 
     public FactoryDao(
         Converter<FactoryEntity, Factory> converter,
         FactoryRepository repository,
-        ProductDao productDao
+        ApplicationEventPublisher eventPublisher
     ) {
         super(converter, repository);
-        this.productDao = productDao;
+        this.eventPublisher = eventPublisher;
     }
 
-    public void deleteByCharacterId(String characterId) {
-        FactoryEntity factoryEntity = repository.findByCharacterId(characterId);
-        productDao.deleteByFactoryId(factoryEntity.getFactoryId());
-        repository.deleteByCharacterId(characterId);
+    @EventListener
+    public void deleteByCharacterId(CharacterDeletedEvent event) {
+        FactoryEntity factoryEntity = repository.findByCharacterId(event.getCharacterId());
+        eventPublisher.publishEvent(new FactoryDeletedEvent(factoryEntity.getFactoryId()));
+        repository.delete(factoryEntity);
     }
 
     public Factory findByCharacterId(String characterId) {

@@ -1,11 +1,12 @@
 package org.github.saphyra.skyxplore.community.mail.repository;
 
-import java.util.List;
-
+import com.github.saphyra.dao.AbstractDao;
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.dao.AbstractDao;
+import java.util.List;
 
 @Component
 public class MailDao extends AbstractDao<MailEntity, Mail, String, MailRepository> {
@@ -18,8 +19,9 @@ public class MailDao extends AbstractDao<MailEntity, Mail, String, MailRepositor
         repository.deleteBothSideDeleted();
     }
 
-    public void deleteByCharacterId(String characterId) {
-        repository.deleteByCharacterId(characterId);
+    @EventListener
+    void characterDeletedEventListener(CharacterDeletedEvent event) {
+        repository.deleteByCharacterId(event.getCharacterId());
     }
 
     public void deleteExpired(Long expiration) {

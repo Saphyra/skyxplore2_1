@@ -1,14 +1,15 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
-import java.time.OffsetDateTime;
-import java.util.Optional;
-
-import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+import java.time.OffsetDateTime;
+import java.util.Optional;
 
 
 @Component
@@ -24,6 +25,12 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessTo
     public void deleteByUserId(String userId) {
         log.info("Deleting accessToken of user {}", userId);
         repository.deleteByUserId(userId);
+    }
+
+    @EventListener
+    //TODO unit test
+    void deleteByUserId(AccountDeletedEvent event){
+        deleteByUserId(event.getUserId());
     }
 
     public void deleteExpired(OffsetDateTime expiration) {

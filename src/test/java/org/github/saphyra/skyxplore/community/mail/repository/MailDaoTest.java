@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -40,7 +41,7 @@ public class MailDaoTest {
     @Test
     public void testDeleteByCharacterIdShouldCallRepository() {
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.characterDeletedEventListener(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
         verify(mailRepository).deleteByCharacterId(CHARACTER_ID);
     }

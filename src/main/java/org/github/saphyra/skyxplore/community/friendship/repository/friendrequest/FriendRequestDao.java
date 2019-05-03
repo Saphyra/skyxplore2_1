@@ -1,12 +1,13 @@
 package org.github.saphyra.skyxplore.community.friendship.repository.friendrequest;
 
-import java.util.List;
-
-import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Slf4j
@@ -16,8 +17,9 @@ public class FriendRequestDao extends AbstractDao<FriendRequestEntity, FriendReq
         super(converter, repository);
     }
 
-    public void deleteByCharacterId(String characterId) {
-        repository.deleteByCharacterId(characterId);
+    @EventListener
+    void characterDeletedEventProcessor(CharacterDeletedEvent event) {
+        repository.deleteByCharacterId(event.getCharacterId());
     }
 
     public List<FriendRequest> getByCharacterId(String characterId) {

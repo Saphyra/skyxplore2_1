@@ -1,12 +1,15 @@
 package org.github.saphyra.skyxplore.factory.repository;
 
+import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import org.github.saphyra.skyxplore.event.FactoryDeletedEvent;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.product.repository.ProductDao;
+import org.springframework.context.ApplicationEventPublisher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -24,7 +27,7 @@ public class FactoryDaoTest {
     private FactoryConverter factoryConverter;
 
     @Mock
-    private ProductDao productDao;
+    private ApplicationEventPublisher eventPublisher;
 
     @InjectMocks
     private FactoryDao underTest;
@@ -37,10 +40,12 @@ public class FactoryDaoTest {
             .build();
         when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(factoryEntity);
         //WHEN
-        underTest.deleteByCharacterId(CHARACTER_ID);
+        underTest.deleteByCharacterId(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
-        verify(productDao).deleteByFactoryId(FACTORY_ID);
-        verify(factoryRepository).deleteByCharacterId(CHARACTER_ID);
+        ArgumentCaptor<FactoryDeletedEvent> argumentCaptor = ArgumentCaptor.forClass(FactoryDeletedEvent.class);
+        verify(eventPublisher).publishEvent(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue().getFactoryId()).isEqualTo(FACTORY_ID);
+        verify(factoryRepository).delete(factoryEntity);
     }
 
     @Test
