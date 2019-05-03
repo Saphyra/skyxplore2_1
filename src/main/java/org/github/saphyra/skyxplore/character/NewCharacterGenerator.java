@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 //TODO unit test
 class NewCharacterGenerator {
     private final CharacterDao characterDao;
-    private final CharacterGeneratorConfig config;
+    private final CharacterConfig config;
     private final EquippedShipFacade equippedShipFacade;
     private final FactoryFacade factoryFacade;
     private final IdGenerator idGenerator;

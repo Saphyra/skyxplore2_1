@@ -1,17 +1,12 @@
-package org.github.saphyra.skyxplore.character;
+package org.github.saphyra.skyxplore.factory;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.Getter;
-
 @Configuration
 @Getter
-//TODO make package-private
-public class CharacterGeneratorConfig {
+class FactoryConfig {
     @Value("${character.new.materials}")
     private int startMaterials;
-
-    @Value("${character.new.money}")
-    private int startMoney;
 }

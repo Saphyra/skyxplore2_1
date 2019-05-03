@@ -3,7 +3,6 @@ package org.github.saphyra.skyxplore.factory;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.character.CharacterGeneratorConfig;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 //TODO unit test
 class FactoryCreatorService {
-    private final CharacterGeneratorConfig config;
+    private final FactoryConfig config;
     private final FactoryDao factoryDao;
     private final IdGenerator idGenerator;
     private final MaterialService materialService;
