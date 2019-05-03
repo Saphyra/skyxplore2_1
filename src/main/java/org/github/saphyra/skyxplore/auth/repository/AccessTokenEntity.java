@@ -1,15 +1,21 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
-import lombok.Data;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "access_token")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 class AccessTokenEntity {
     @Id
     @Column(name = "access_token_id", length = 50)

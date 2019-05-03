@@ -1,16 +1,18 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-
 @Repository
-//TODO unit test
 interface AccessTokenRepository extends JpaRepository<AccessTokenEntity, String> {
+    @Transactional
     void deleteByUserId(String userId);
 
     @Transactional
@@ -18,9 +20,7 @@ interface AccessTokenRepository extends JpaRepository<AccessTokenEntity, String>
     @Query(value = "DELETE AccessTokenEntity a WHERE a.lastAccess < :expiration")
     void deleteExpired(@Param("expiration") Long expiration);
 
-    AccessTokenEntity findByCharacterId(String characterId);
+    Optional<AccessTokenEntity> findByCharacterId(String characterId);
 
-    AccessTokenEntity findByUserId(String userId);
-
-    AccessTokenEntity findByUserIdOrAccessTokenId(String userId, String accessTokenId);
+    Optional<AccessTokenEntity> findByUserId(String userId);
 }

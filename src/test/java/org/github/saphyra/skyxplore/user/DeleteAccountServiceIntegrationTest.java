@@ -6,9 +6,9 @@ import static org.mockito.BDDMockito.given;
 
 import java.util.HashSet;
 
-import javax.sql.DataSource;
-
 import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
+import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
+import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
@@ -16,16 +16,13 @@ import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -33,7 +30,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.util.IdGenerator;
-import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 
 
 @RunWith(SpringRunner.class)
@@ -82,15 +78,10 @@ public class DeleteAccountServiceIntegrationTest {
     @ComponentScan(basePackageClasses = DeleteAccountService.class)
     @EnableJpaRepositories(basePackages = "org.github.saphyra.skyxplore.user")
     @EnableTransactionManagement
-    @ImportAutoConfiguration(HibernateJpaAutoConfiguration.class)
     @EntityScan(basePackages = "org.github.saphyra.skyxplore.user")
+    @Import(DataSourceConfiguration.class)
     public static class TestConfig {
-        @Bean
-        public DataSource dataSource() {
-            return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .build();
-        }
+
 
         @Bean
         public ObjectMapper objectMapper() {

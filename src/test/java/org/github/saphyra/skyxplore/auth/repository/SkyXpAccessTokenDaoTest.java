@@ -1,5 +1,13 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.junit.Test;
@@ -7,14 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpAccessTokenDaoTest {
@@ -76,16 +76,16 @@ public class SkyXpAccessTokenDaoTest {
     @Test
     public void testFindByCharacterIdShouldReturnDomain() {
         //GIVEN
-        AccessTokenEntity entity = createAccessTokenEntity();
+        Optional<AccessTokenEntity> entity = Optional.of(createAccessTokenEntity());
         when(accessTokenRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entity);
 
         SkyXpAccessToken skyXpAccessToken = createAccessToken();
-        when(skyXpAccessTokenConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpAccessToken));
+        when(skyXpAccessTokenConverter.convertEntity(entity)).thenReturn(Optional.of(skyXpAccessToken));
         //WHEN
         Optional<SkyXpAccessToken> result = underTest.findByCharacterId(CHARACTER_ID);
         //THEN
         verify(accessTokenRepository).findByCharacterId(CHARACTER_ID);
-        verify(skyXpAccessTokenConverter).convertEntityToOptional(entity);
+        verify(skyXpAccessTokenConverter).convertEntity(entity);
         assertThat(result).contains(skyXpAccessToken);
     }
 
@@ -108,32 +108,16 @@ public class SkyXpAccessTokenDaoTest {
     @Test
     public void testFindByUserIdShouldReturnDomain() {
         //GIVEN
-        AccessTokenEntity entity = createAccessTokenEntity();
+        Optional<AccessTokenEntity> entity = Optional.of(createAccessTokenEntity());
         when(accessTokenRepository.findByUserId(USER_ID)).thenReturn(entity);
 
         SkyXpAccessToken skyXpAccessToken = createAccessToken();
-        when(skyXpAccessTokenConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpAccessToken));
+        when(skyXpAccessTokenConverter.convertEntity(entity)).thenReturn(Optional.of(skyXpAccessToken));
         //WHEN
         Optional<SkyXpAccessToken> result = underTest.findByUserId(USER_ID);
         //THEN
         verify(accessTokenRepository).findByUserId(USER_ID);
-        verify(skyXpAccessTokenConverter).convertEntityToOptional(entity);
-        assertThat(result).contains(skyXpAccessToken);
-    }
-
-    @Test
-    public void testFindByUserIdOrTokenIdShouldReturnDomain() {
-        //GIVEN
-        AccessTokenEntity entity = createAccessTokenEntity();
-        when(accessTokenRepository.findByUserIdOrAccessTokenId(USER_ID, ACCESS_TOKEN_ID)).thenReturn(entity);
-
-        SkyXpAccessToken skyXpAccessToken = createAccessToken();
-        when(skyXpAccessTokenConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpAccessToken));
-        //WHEN
-        Optional<SkyXpAccessToken> result = underTest.findByUserIdOrTokenId(USER_ID, ACCESS_TOKEN_ID);
-        //THEN
-        verify(accessTokenRepository).findByUserIdOrAccessTokenId(USER_ID, ACCESS_TOKEN_ID);
-        verify(skyXpAccessTokenConverter).convertEntityToOptional(entity);
+        verify(skyXpAccessTokenConverter).convertEntity(entity);
         assertThat(result).contains(skyXpAccessToken);
     }
 
@@ -160,11 +144,11 @@ public class SkyXpAccessTokenDaoTest {
     }
 
     private SkyXpAccessToken createAccessToken() {
-        SkyXpAccessToken accessToken = new SkyXpAccessToken();
-        accessToken.setAccessTokenId(ACCESS_TOKEN_ID);
-        accessToken.setUserId(USER_ID);
-        accessToken.setLastAccess(LAST_ACCESS);
-        accessToken.setCharacterId(CHARACTER_ID);
-        return accessToken;
+        return SkyXpAccessToken.builder()
+            .accessTokenId(ACCESS_TOKEN_ID)
+            .characterId(CHARACTER_ID)
+            .lastAccess(LAST_ACCESS)
+            .characterId(CHARACTER_ID)
+            .build();
     }
 }

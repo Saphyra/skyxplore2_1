@@ -1,13 +1,14 @@
 package org.github.saphyra.skyxplore.auth;
 
+import java.util.Optional;
+
+import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.converter.ConverterBase;
 import lombok.RequiredArgsConstructor;
-import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -28,11 +29,12 @@ class AccessTokenConverter extends ConverterBase<SkyXpAccessToken, AccessToken> 
     protected SkyXpAccessToken processDomainConversion(AccessToken domain) {
         Optional<SkyXpAccessToken> original = accessTokenDao.findByUserId(domain.getUserId());
 
-        SkyXpAccessToken entity = new SkyXpAccessToken();
-        entity.setAccessTokenId(domain.getAccessTokenId());
-        entity.setUserId(domain.getUserId());
-        entity.setLastAccess(domain.getLastAccess());
-        original.ifPresent(skyXpAccessToken -> entity.setCharacterId(skyXpAccessToken.getCharacterId()));
-        return entity;
+        SkyXpAccessToken.SkyXpAccessTokenBuilder builder = SkyXpAccessToken.builder()
+            .accessTokenId(domain.getAccessTokenId())
+            .userId(domain.getUserId())
+            .lastAccess(domain.getLastAccess());
+
+        original.ifPresent(skyXpAccessToken -> builder.characterId(skyXpAccessToken.getCharacterId()));
+        return builder.build();
     }
 }

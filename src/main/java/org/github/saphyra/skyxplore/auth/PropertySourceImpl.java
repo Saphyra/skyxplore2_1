@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.github.saphyra.skyxplore.common.PageController;
 import org.github.saphyra.skyxplore.filter.CustomFilterHelper;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -88,7 +89,7 @@ class PropertySourceImpl implements PropertySource {
 
     @Override
     public String getSuccessfulLoginRedirection() {
-        return "characterselect";
+        return PageController.CHARACTER_SELECT_MAPPING;
     }
 
     @Override

@@ -1,5 +1,12 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.junit.Test;
@@ -7,13 +14,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpSkyXpAccessTokenConverterTest {
@@ -59,11 +59,12 @@ public class SkyXpSkyXpAccessTokenConverterTest {
     @Test
     public void testConvertDomainShouldConvert() {
         //GIVEN
-        SkyXpAccessToken accessToken = new SkyXpAccessToken();
-        accessToken.setAccessTokenId(ACCESS_TOKEN_ID);
-        accessToken.setUserId(USER_ID);
-        accessToken.setLastAccess(LAST_ACCESS);
-        accessToken.setCharacterId(CHARACTER_ID);
+        SkyXpAccessToken accessToken = SkyXpAccessToken.builder()
+            .accessTokenId(ACCESS_TOKEN_ID)
+            .userId(USER_ID)
+            .lastAccess(LAST_ACCESS)
+            .characterId(CHARACTER_ID)
+            .build();
         when(dateTimeUtil.convertDomain(LAST_ACCESS)).thenReturn(LAST_ACCESS_EPOCH);
         //WHEN
         AccessTokenEntity result = underTest.convertDomain(accessToken);

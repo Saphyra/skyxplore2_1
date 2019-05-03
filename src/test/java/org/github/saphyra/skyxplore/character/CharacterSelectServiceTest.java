@@ -1,6 +1,13 @@
 package org.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.junit.Test;
@@ -9,13 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterSelectServiceTest {
@@ -43,11 +44,11 @@ public class CharacterSelectServiceTest {
     @Test
     public void testSelectCharacterShouldUpdateAccessToken() {
         //GIVEN
-        SkyXpAccessToken accessToken = new SkyXpAccessToken();
-        accessToken.setAccessTokenId(ACCESS_TOKEN_ID);
-        accessToken.setUserId(USER_ID);
-        accessToken.setLastAccess(LAST_ACCESS);
-        accessToken.setCharacterId(null);
+        SkyXpAccessToken accessToken = SkyXpAccessToken.builder()
+            .accessTokenId(ACCESS_TOKEN_ID)
+            .userId(USER_ID)
+            .lastAccess(LAST_ACCESS)
+            .build();
         when(accessTokenDao.findByUserId(USER_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
         underTest.selectCharacter(CHARACTER_ID, USER_ID);
