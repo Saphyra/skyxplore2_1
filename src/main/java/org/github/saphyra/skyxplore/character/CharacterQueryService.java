@@ -1,9 +1,7 @@
 package org.github.saphyra.skyxplore.character;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameLikeCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -14,8 +12,9 @@ import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCha
 import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -39,6 +38,7 @@ public class CharacterQueryService {
         return character;
     }
 
+    //TODO blockedcharacter should call queryService for charactersById
     public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
         return blockedCharacterQueryService.getBlockedCharactersOf(characterId).stream()
             .map(blockedCharacter -> findByCharacterId(blockedCharacter.getBlockedCharacterId()))

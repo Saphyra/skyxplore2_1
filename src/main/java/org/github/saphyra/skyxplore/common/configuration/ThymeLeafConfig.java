@@ -6,9 +6,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
-public class ThymeLeafConfig {
+class ThymeLeafConfig {
     @Bean
-    public ClassLoaderTemplateResolver thymeLeafTemplateResolverConfig() {
+    ClassLoaderTemplateResolver thymeLeafTemplateResolverConfig() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("public/html/");
         templateResolver.setSuffix(".html");
