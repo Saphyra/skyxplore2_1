@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class NewCharacterGenerator {
     private final CharacterDao characterDao;
     private final CharacterConfig config;
