@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.character.domain.request;
+package org.github.saphyra.skyxplore.character.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

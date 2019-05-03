@@ -1,6 +1,8 @@
 package org.github.saphyra.skyxplore.character;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.factory.domain.Factory;
+import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
@@ -12,8 +14,6 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.factory.domain.Factory;
-import org.github.saphyra.skyxplore.factory.domain.Materials;
 
 @Slf4j
 @Component
@@ -39,11 +39,11 @@ class NewCharacterGenerator {
 
     SkyXpCharacter createCharacter(String userId, String characterName) {
         //TODO update with using builder
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
-        character.setCharacterId(idGenerator.generateRandomId());
-        character.setCharacterName(characterName);
-        character.setUserId(userId);
-        character.addMoney(config.getStartMoney());
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(idGenerator.generateRandomId())
+            .userId(userId).characterName(characterName)
+            .money(config.getStartMoney())
+            .build();
         log.info("Character created: {}", character);
         return character;
     }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;

@@ -39,8 +39,6 @@ public class MailDeleteServiceTest {
     @Mock
     private MailQueryService mailQueryService;
 
-    private SkyXpCharacter character;
-
     private Mail mail;
 
     @InjectMocks
@@ -48,11 +46,6 @@ public class MailDeleteServiceTest {
 
     @Before
     public void init() {
-        character = SkyXpCharacter.builder()
-            .characterId(CHARACTER_ID)
-            .build();
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
-
         mail = Mail.builder()
             .from(FROM_ID)
             .to(TO_ID)
@@ -68,6 +61,11 @@ public class MailDeleteServiceTest {
 
     @Test(expected = InvalidMailAccessException.class)
     public void testDeleteMailShouldThrowExceptionWhenWrongId() {
+        //GIVEN
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(CHARACTER_ID)
+            .build();
+        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(CHARACTER_ID, MAIL_IDS);
     }
@@ -75,7 +73,10 @@ public class MailDeleteServiceTest {
     @Test
     public void testDeleteMailShouldUpdateDeletedByAddressee() {
         //GIVEN
-        character.setCharacterId(TO_ID);
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(TO_ID)
+            .build();
+        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(TO_ID, MAIL_IDS);
         //THEN
@@ -86,7 +87,10 @@ public class MailDeleteServiceTest {
     @Test
     public void testDeleteMailShouldUpdateDeletedBySender() {
         //GIVEN
-        character.setCharacterId(FROM_ID);
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(FROM_ID)
+            .build();
+        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(FROM_ID, MAIL_IDS);
         //THEN

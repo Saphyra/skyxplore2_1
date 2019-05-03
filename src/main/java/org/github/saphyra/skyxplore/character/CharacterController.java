@@ -1,12 +1,18 @@
 package org.github.saphyra.skyxplore.character;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
-import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
-import org.github.saphyra.skyxplore.common.CookieUtil;
+import org.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.common.OneStringParamRequest;
 import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
@@ -19,13 +25,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,10 +42,14 @@ public class CharacterController {
     public static final String RENAME_CHARACTER_MAPPING = "character";
     private static final String SELECT_CHARACTER_MAPPING = "character/{characterId}";
 
-    private final CharacterFacade characterFacade;
+    private final BuyItemService buyItemService;
+    private final CharacterCreatorService characterCreatorService;
+    private final CharacterDeleteService characterDeleteService;
+    private final CharacterQueryService characterQueryService;
+    private final CharacterRenameService characterRenameService;
+    private final CharacterSelectService characterSelectService;
     private final CharacterViewConverter characterViewConverter;
     private final CharacterNameCache characterNameCache;
-    private final CookieUtil cookieUtil;
 
     @PostMapping(BUY_EQUIPMENTS_MAPPING)
     void buyEquipments(
@@ -52,7 +57,7 @@ public class CharacterController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to buy {}", characterId, items.toString());
-        characterFacade.buyItems(items, characterId);
+        buyItemService.buyItems(items, characterId);
         log.info("Items are bought successfully.");
     }
 
@@ -62,7 +67,7 @@ public class CharacterController {
         @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
         log.info("Creating new character with name {}", request.getCharacterName());
-        SkyXpCharacter character = characterFacade.createCharacter(request, userId);
+        SkyXpCharacter character = characterCreatorService.createCharacter(request, userId);
         log.info("Character created successfully.");
 
         return characterViewConverter.convertDomain(character);
@@ -74,14 +79,14 @@ public class CharacterController {
         @CookieValue(value = COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to deleteById {}", userId, characterId);
-        characterFacade.deleteCharacter(characterId, userId);
+        characterDeleteService.deleteCharacter(characterId, userId);
         log.info("Character {} is deleted.", characterId);
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)
     List<CharacterView> getCharacters(@CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to know his character list.", userId);
-        return characterViewConverter.convertDomain(characterFacade.getCharactersByUserId(userId));
+        return characterViewConverter.convertDomain(characterQueryService.getCharactersByUserId(userId));
     }
 
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
@@ -89,7 +94,7 @@ public class CharacterController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his equipments.", characterId);
-        return characterFacade.getEquipmentsOfCharacter(characterId);
+        return characterQueryService.getEquipmentsOfCharacter(characterId);
     }
 
     @GetMapping(GET_MONEY_OF_CHARACTER_MAPPING)
@@ -97,7 +102,7 @@ public class CharacterController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his money.", characterId);
-        return characterFacade.getMoneyOfCharacter(characterId);
+        return characterQueryService.getMoneyOfCharacter(characterId);
     }
 
     @PostMapping(IS_CHAR_NAME_EXISTS_MAPPING)
@@ -111,7 +116,7 @@ public class CharacterController {
         @RequestBody @Valid RenameCharacterRequest request,
         @CookieValue(value = COOKIE_USER_ID) String userId) {
         log.info("{} wants to rename character {}", userId, request);
-        SkyXpCharacter character = characterFacade.renameCharacter(request, userId);
+        SkyXpCharacter character = characterRenameService.renameCharacter(request, userId);
         characterNameCache.invalidate(request.getNewCharacterName());
         log.info("Character renamed successfully.");
         return characterViewConverter.convertDomain(character);
@@ -124,7 +129,6 @@ public class CharacterController {
         HttpServletResponse response
     ) {
         log.info("{} selected character {}", userId, characterId);
-        characterFacade.selectCharacter(characterId, userId);
-        cookieUtil.setCookie(response, COOKIE_CHARACTER_ID, characterId);
+        characterSelectService.selectCharacter(characterId, userId, response);
     }
 }

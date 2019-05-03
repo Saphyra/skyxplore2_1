@@ -2,7 +2,6 @@ package org.github.saphyra.skyxplore.character;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,19 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.common.CookieUtil;
+import org.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.common.OneStringParamRequest;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
-import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
-import org.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import org.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {
@@ -39,16 +36,28 @@ public class CharacterControllerTest {
     private static final String NEW_CHARACTER_NAME = "new_character_name";
 
     @Mock
-    private CharacterFacade characterFacade;
+    private BuyItemService buyItemService;
+
+    @Mock
+    private CharacterCreatorService characterCreatorService;
+
+    @Mock
+    private CharacterDeleteService characterDeleteService;
+
+    @Mock
+    private CharacterQueryService characterQueryService;
+
+    @Mock
+    private CharacterRenameService characterRenameService;
+
+    @Mock
+    private CharacterSelectService characterSelectService;
 
     @Mock
     private CharacterViewConverter characterViewConverter;
 
     @Mock
     private CharacterNameCache characterNameCache;
-
-    @Mock
-    private CookieUtil cookieUtil;
 
     @Mock
     private HttpServletResponse httpServletResponse;
@@ -63,7 +72,7 @@ public class CharacterControllerTest {
         //WHEN
         underTest.buyEquipments(inputMap, CHARACTER_ID);
         //THEN
-        verify(characterFacade).buyItems(inputMap, CHARACTER_ID);
+        verify(buyItemService).buyItems(inputMap, CHARACTER_ID);
     }
 
     @Test
@@ -71,15 +80,15 @@ public class CharacterControllerTest {
         //GIVEN
         CreateCharacterRequest request = new CreateCharacterRequest(CHARACTER_NAME);
 
-        SkyXpCharacter character = createCharacter();
-        when(characterFacade.createCharacter(request, USER_ID)).thenReturn(character);
+        SkyXpCharacter character = SkyXpCharacter.builder().build();
+        when(characterCreatorService.createCharacter(request, USER_ID)).thenReturn(character);
 
         CharacterView characterView = createCharacterView(character);
         when(characterViewConverter.convertDomain(character)).thenReturn(characterView);
         //WHEN
         CharacterView result = underTest.createCharacter(request, USER_ID);
         //THEN
-        verify(characterFacade).createCharacter(request, USER_ID);
+        verify(characterCreatorService).createCharacter(request, USER_ID);
         assertThat(result).isEqualTo(characterView);
     }
 
@@ -88,24 +97,24 @@ public class CharacterControllerTest {
         //WHEN
         underTest.deleteCharacter(CHARACTER_ID, USER_ID);
         //THEN
-        verify(characterFacade).deleteCharacter(CHARACTER_ID, USER_ID);
+        verify(characterDeleteService).deleteCharacter(CHARACTER_ID, USER_ID);
     }
 
     @Test
     public void testGetCharactersShouldCallFacadeAndConverterAndReturnResponse() {
         //GIVEN
-        SkyXpCharacter character = createCharacter();
+        SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
 
         CharacterView view = createCharacterView(character);
         List<CharacterView> viewList = Arrays.asList(view);
 
-        when(characterFacade.getCharactersByUserId(USER_ID)).thenReturn(characterList);
+        when(characterQueryService.getCharactersByUserId(USER_ID)).thenReturn(characterList);
         when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
         //WHEN
         List<CharacterView> result = underTest.getCharacters(USER_ID);
         //THEN
-        verify(characterFacade).getCharactersByUserId(USER_ID);
+        verify(characterQueryService).getCharactersByUserId(USER_ID);
         verify(characterViewConverter).convertDomain(Mockito.anyList());
         assertThat(result).containsOnly(view);
     }
@@ -114,22 +123,20 @@ public class CharacterControllerTest {
     public void testGetEquipmentsOfCharacterShouldCallFacadeAndReturnResponse() {
         //GIVEN
         List<String> equipments = Arrays.asList(EQUIP_ITEM_ID);
-        when(characterFacade.getEquipmentsOfCharacter(CHARACTER_ID)).thenReturn(equipments);
+        when(characterQueryService.getEquipmentsOfCharacter(CHARACTER_ID)).thenReturn(equipments);
         //WHEN
         List<String> result = underTest.getEquipmentsOfCharacter(CHARACTER_ID);
         //THEN
-        verify(characterFacade).getEquipmentsOfCharacter(CHARACTER_ID);
         assertThat(result).isEqualTo(equipments);
     }
 
     @Test
     public void testGetMoneyOfCharacterShouldCallFacadeAndReturnResponse() {
         //GIVEN
-        when(characterFacade.getMoneyOfCharacter(CHARACTER_ID)).thenReturn(MONEY);
+        when(characterQueryService.getMoneyOfCharacter(CHARACTER_ID)).thenReturn(MONEY);
         //WHEN
         Integer result = underTest.getMoney(CHARACTER_ID);
         //THEN
-        verify(characterFacade).getMoneyOfCharacter(CHARACTER_ID);
         assertThat(result).isEqualTo(MONEY);
     }
 
@@ -149,15 +156,14 @@ public class CharacterControllerTest {
         //GIVEN
         RenameCharacterRequest request = new RenameCharacterRequest(NEW_CHARACTER_NAME, CHARACTER_ID);
 
-        SkyXpCharacter character = createCharacter();
-        when(characterFacade.renameCharacter(request, USER_ID)).thenReturn(character);
+        SkyXpCharacter character = SkyXpCharacter.builder().build();
+        when(characterRenameService.renameCharacter(request, USER_ID)).thenReturn(character);
 
         CharacterView characterView = createCharacterView(character);
         when(characterViewConverter.convertDomain(character)).thenReturn(characterView);
         //WHEN
         CharacterView result = underTest.renameCharacter(request, USER_ID);
         //THEN
-        verify(characterFacade).renameCharacter(request, USER_ID);
         verify(characterNameCache).invalidate(NEW_CHARACTER_NAME);
         assertThat(result).isEqualTo(characterView);
     }
@@ -167,17 +173,11 @@ public class CharacterControllerTest {
         //WHEN
         underTest.selectCharacter(CHARACTER_ID, USER_ID, httpServletResponse);
         //THEN
-        verify(characterFacade).selectCharacter(CHARACTER_ID, USER_ID);
-        verify(cookieUtil).setCookie(httpServletResponse, COOKIE_CHARACTER_ID, CHARACTER_ID);
+        verify(characterSelectService).selectCharacter(CHARACTER_ID, USER_ID, httpServletResponse);
     }
 
     private CharacterView createCharacterView(SkyXpCharacter character) {
         return new CharacterView(character.getCharacterId(), character.getCharacterName());
     }
 
-    private SkyXpCharacter createCharacter() {
-        return SkyXpCharacter.builder()
-
-            .build();
-    }
 }

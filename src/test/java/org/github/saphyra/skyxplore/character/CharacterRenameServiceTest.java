@@ -2,7 +2,7 @@ package org.github.saphyra.skyxplore.character;
 
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.request.RenameCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;

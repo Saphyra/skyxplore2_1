@@ -12,17 +12,16 @@ import java.util.Optional;
 import org.github.saphyra.skyxplore.character.cache.CharacterNameLikeCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
+import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
-import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
-import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterQueryServiceTest {
@@ -39,9 +38,10 @@ public class CharacterQueryServiceTest {
     private static final Integer MONEY = 5;
     private static final String EQUIPMENT = "equipment";
     private static final ArrayList<String> EQUIPMENTS;
+
     static {
-         EQUIPMENTS = new ArrayList<>();
-         EQUIPMENTS.add(EQUIPMENT);
+        EQUIPMENTS = new ArrayList<>();
+        EQUIPMENTS.add(EQUIPMENT);
     }
 
     @Mock
@@ -141,14 +141,11 @@ public class CharacterQueryServiceTest {
 
         SkyXpCharacter ownCharacter = createCharacter(CHARACTER_ID_5);
 
-        SkyXpCharacter characterBlocked1 = createCharacter(CHARACTER_ID_2);
-        characterBlocked1.setUserId(null);
+        SkyXpCharacter characterBlocked1 = createCharacter(CHARACTER_ID_2, null);
 
-        SkyXpCharacter characterBlocked2 = createCharacter(CHARACTER_ID_3);
-        characterBlocked2.setUserId(null);
+        SkyXpCharacter characterBlocked2 = createCharacter(CHARACTER_ID_3, null);
 
-        SkyXpCharacter canBeAddressee = createCharacter(CHARACTER_ID_4);
-        canBeAddressee.setUserId(null);
+        SkyXpCharacter canBeAddressee = createCharacter(CHARACTER_ID_4, null);
 
         when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Optional.of(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee)));
 
@@ -177,14 +174,11 @@ public class CharacterQueryServiceTest {
 
         SkyXpCharacter ownCharacter = createCharacter(CHARACTER_ID_5);
 
-        SkyXpCharacter characterBlocked1 = createCharacter(CHARACTER_ID_2);
-        characterBlocked1.setUserId(null);
+        SkyXpCharacter characterBlocked1 = createCharacter(CHARACTER_ID_2, null);
 
-        SkyXpCharacter characterBlocked2 = createCharacter(CHARACTER_ID_3);
-        characterBlocked2.setUserId(null);
+        SkyXpCharacter characterBlocked2 = createCharacter(CHARACTER_ID_3, null);
 
-        SkyXpCharacter canBeAddressee = createCharacter(CHARACTER_ID_4);
-        canBeAddressee.setUserId(null);
+        SkyXpCharacter canBeAddressee = createCharacter(CHARACTER_ID_4, null);
 
         when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Optional.of(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee)));
 
@@ -213,20 +207,15 @@ public class CharacterQueryServiceTest {
 
         SkyXpCharacter ownCharacter = createCharacter(CHARACTER_ID_5);
 
-        SkyXpCharacter characterBlocked1 = createCharacter(CHARACTER_ID_2);
-        characterBlocked1.setUserId(null);
+        SkyXpCharacter characterBlocked1 = createCharacter(CHARACTER_ID_2, null);
 
-        SkyXpCharacter characterBlocked2 = createCharacter(CHARACTER_ID_3);
-        characterBlocked2.setUserId(null);
+        SkyXpCharacter characterBlocked2 = createCharacter(CHARACTER_ID_3, null);
 
-        SkyXpCharacter canBeAddressee = createCharacter(CHARACTER_ID_4);
-        canBeAddressee.setUserId(null);
+        SkyXpCharacter canBeAddressee = createCharacter(CHARACTER_ID_4, null);
 
-        SkyXpCharacter friendCharacter = createCharacter(CHARACTER_ID_6);
-        friendCharacter.setUserId(null);
+        SkyXpCharacter friendCharacter = createCharacter(CHARACTER_ID_6, null);
 
-        SkyXpCharacter friendRequestCharacter = createCharacter(CHARACTER_ID_7);
-        friendRequestCharacter.setUserId(null);
+        SkyXpCharacter friendRequestCharacter = createCharacter(CHARACTER_ID_7, null);
 
         when(characterNameLikeCache.get(CHARACTER_NAME)).thenReturn(Optional.of(Arrays.asList(ownCharacter, characterBlocked1, characterBlocked2, canBeAddressee, friendCharacter, friendRequestCharacter)));
 
@@ -298,10 +287,14 @@ public class CharacterQueryServiceTest {
     }
 
     private SkyXpCharacter createCharacter(String characterId) {
+        return createCharacter(characterId, USER_ID);
+    }
+
+    private SkyXpCharacter createCharacter(String characterId, String userId) {
         return SkyXpCharacter.builder()
             .characterId(characterId)
             .equipments(EQUIPMENTS)
-            .userId(USER_ID)
+            .userId(userId)
             .money(MONEY)
             .build();
     }

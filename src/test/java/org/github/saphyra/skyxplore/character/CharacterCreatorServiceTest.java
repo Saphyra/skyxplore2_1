@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 
 import org.github.saphyra.skyxplore.character.cache.CharacterNameCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest;
+import org.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;

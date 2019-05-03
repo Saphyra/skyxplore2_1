@@ -2,7 +2,7 @@ package org.github.saphyra.selenium.logic.domain;
 
 import static org.github.saphyra.selenium.logic.util.Util.crop;
 import static org.github.saphyra.selenium.logic.util.Util.randomUID;
-import static org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
+import static org.github.saphyra.skyxplore.character.domain.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

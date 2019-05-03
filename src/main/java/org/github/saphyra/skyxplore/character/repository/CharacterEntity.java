@@ -1,18 +1,24 @@
 package org.github.saphyra.skyxplore.character.repository;
 
-import lombok.Data;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "skyxp_character")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 class CharacterEntity {
-
     @Id
     @Column(name = "character_id", length = 50)
     private String characterId;

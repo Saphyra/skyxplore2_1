@@ -3,19 +3,17 @@ package org.github.saphyra.skyxplore.character.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 
@@ -34,7 +32,7 @@ public class CharacterConverterTest {
     private IntegerEncryptor integerEncryptor;
 
     @Mock
-    private ObjectMapper objectMapper;
+    private ObjectMapperDelegator objectMapperDelegator;
 
     @Mock
     private StringEncryptor stringEncryptor;
@@ -53,7 +51,7 @@ public class CharacterConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldConvertAndDecrypt() throws IOException {
+    public void testConvertEntityShouldConvertAndDecrypt() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         when(integerEncryptor.decryptEntity(ENCRYPTED_MONEY, CHARACTER_ID)).thenReturn(MONEY);
@@ -62,7 +60,7 @@ public class CharacterConverterTest {
 
         String[] equipmentArray = new String[]{EQUIPMENT};
         List<String> equipmentList = Arrays.asList(equipmentArray);
-        when(objectMapper.readValue(EQUIPMENTS, String[].class)).thenReturn(equipmentArray);
+        when(objectMapperDelegator.readValue(EQUIPMENTS, String[].class)).thenReturn(equipmentList);
         //WHEN
         SkyXpCharacter result = underTest.convertEntity(entity);
         //THEN
@@ -74,13 +72,13 @@ public class CharacterConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldEncryptAndConvert() throws JsonProcessingException {
+    public void testConvertDomainShouldEncryptAndConvert() {
         //GIVEN
         SkyXpCharacter character = createCharacter();
 
         when(integerEncryptor.encryptEntity(MONEY, CHARACTER_ID)).thenReturn(ENCRYPTED_MONEY);
 
-        when(objectMapper.writeValueAsString(character.getEquipments())).thenReturn(EQUIPMENTS);
+        when(objectMapperDelegator.writeValueAsString(character.getEquipments())).thenReturn(EQUIPMENTS);
         when(stringEncryptor.encryptEntity(EQUIPMENTS, CHARACTER_ID)).thenReturn(ENCRYPTED_EQUIPMENTS);
         //WHEN
         CharacterEntity result = underTest.convertDomain(character);

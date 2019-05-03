@@ -1,13 +1,11 @@
 package org.github.saphyra.skyxplore.character.repository;
 
-import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
@@ -17,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> {
     private final IntegerEncryptor integerEncryptor;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapperDelegator objectMapperDelegator;
     private final StringEncryptor stringEncryptor;
 
     @Override
@@ -26,31 +24,16 @@ class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> 
             return null;
         }
 
-        //TODO update with using builder
-        SkyXpCharacter domain = SkyXpCharacter.builder().build();
+        String decryptedEquipments = stringEncryptor.decryptEntity(entity.getEquipments(), entity.getCharacterId());
+        List<String> equipments = objectMapperDelegator.readValue(decryptedEquipments, String[].class);
 
-        try {
-            domain.setCharacterId(entity.getCharacterId());
-            domain.setCharacterName(entity.getCharacterName());
-            domain.setUserId(entity.getUserId());
-            domain.addMoney(integerEncryptor.decryptEntity(
-                entity.getMoney(),
-                entity.getCharacterId())
-            );
-            String[] equipments = objectMapper.readValue(
-                stringEncryptor.decryptEntity(
-                    entity.getEquipments(),
-                    entity.getCharacterId()
-                ),
-                String[].class
-            );
-            domain.addEquipments(
-                Arrays.asList(equipments)
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return domain;
+        return SkyXpCharacter.builder()
+            .characterId(entity.getCharacterId())
+            .userId(entity.getUserId())
+            .characterName(entity.getCharacterName())
+            .money(integerEncryptor.decryptEntity(entity.getMoney(), entity.getCharacterId()))
+            .equipments(equipments)
+            .build();
     }
 
     @Override
@@ -58,24 +41,16 @@ class CharacterConverter extends ConverterBase<CharacterEntity, SkyXpCharacter> 
         if (domain == null) {
             throw new IllegalArgumentException("domain must not be null.");
         }
-        CharacterEntity entity = new CharacterEntity();
-        try {
-            entity.setCharacterId(domain.getCharacterId());
-            entity.setCharacterName(domain.getCharacterName());
-            entity.setUserId(domain.getUserId());
-            entity.setMoney(integerEncryptor.encryptEntity(
-                domain.getMoney(),
-                domain.getCharacterId())
-            );
-            entity.setEquipments(
-                stringEncryptor.encryptEntity(
-                    objectMapper.writeValueAsString(domain.getEquipments()),
-                    domain.getCharacterId()
-                )
-            );
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return entity;
+        String equipments = stringEncryptor.encryptEntity(
+            objectMapperDelegator.writeValueAsString(domain.getEquipments()),
+            domain.getCharacterId()
+        );
+        return CharacterEntity.builder()
+            .characterId(domain.getCharacterId())
+            .characterName(domain.getCharacterName())
+            .userId(domain.getUserId())
+            .money(integerEncryptor.encryptEntity(domain.getMoney(), domain.getCharacterId()))
+            .equipments(equipments)
+            .build();
     }
 }

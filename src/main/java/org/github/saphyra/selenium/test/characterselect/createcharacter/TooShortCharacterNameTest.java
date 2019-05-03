@@ -1,7 +1,7 @@
 package org.github.saphyra.selenium.test.characterselect.createcharacter;
 
 import static org.github.saphyra.selenium.logic.util.Util.crop;
-import static org.github.saphyra.skyxplore.character.domain.request.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
+import static org.github.saphyra.skyxplore.character.domain.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 import org.openqa.selenium.WebElement;
 

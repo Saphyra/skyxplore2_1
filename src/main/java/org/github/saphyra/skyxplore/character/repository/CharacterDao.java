@@ -1,7 +1,7 @@
 package org.github.saphyra.skyxplore.character.repository;
 
-import com.github.saphyra.dao.AbstractDao;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
@@ -9,7 +9,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import com.github.saphyra.dao.AbstractDao;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
@@ -44,7 +45,6 @@ public class CharacterDao extends AbstractDao<CharacterEntity, SkyXpCharacter, S
     public List<SkyXpCharacter> findCharacterByNameLike(String name) {
         return converter.convertEntity(repository.findByCharacterNameContaining(name));
     }
-
 
     public List<SkyXpCharacter> findByUserId(String userId) {
         return converter.convertEntity(repository.findByUserId(userId));
