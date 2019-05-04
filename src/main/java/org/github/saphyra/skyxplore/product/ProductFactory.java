@@ -12,19 +12,18 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class ProductFactory {
     private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
     private final ProductDao productDao;
 
-    void createAndSave(String factoryId, FactoryData elementData, Integer amount) {
+    void createAndSave(String factoryId, FactoryData factoryData, Integer amount) {
         Product product = Product.builder()
             .productId(idGenerator.generateRandomId())
             .factoryId(factoryId)
-            .elementId(elementData.getId())
+            .elementId(factoryData.getId())
             .amount(amount)
-            .constructionTime(elementData.getConstructionTime() * amount)
+            .constructionTime(factoryData.getConstructionTime() * amount)
             .addedAt(dateTimeUtil.convertDomain(dateTimeUtil.now()))
             .build();
         log.debug("Product created: {}", product);
