@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,7 +39,7 @@ public class EquippedShipDaoTest {
         EquippedShipEntity equippedShip = EquippedShipEntity.builder()
             .shipId(EQUIPPED_SHIP_ID)
             .build();
-        when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(equippedShip);
+        when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(equippedShip));
         //WHEN
         underTest.deleteByCharacterId(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
@@ -51,16 +53,14 @@ public class EquippedShipDaoTest {
     @Test
     public void testGetShipByCharacterIdShouldCallRepositoryAndConvert() {
         //GIVEN
-        EquippedShipEntity equippedShipEntity = EquippedShipEntity.builder().build();
+        Optional<EquippedShipEntity> equippedShipEntity = Optional.of(EquippedShipEntity.builder().build());
         when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(equippedShipEntity);
 
         EquippedShip equippedShip = EquippedShip.builder().build();
-        when(equippedShipConverter.convertEntity(equippedShipEntity)).thenReturn(equippedShip);
+        when(equippedShipConverter.convertEntity(equippedShipEntity)).thenReturn(Optional.of(equippedShip));
         //WHEN
-        EquippedShip result = underTest.getShipByCharacterId(CHARACTER_ID);
+        Optional<EquippedShip> result = underTest.getShipByCharacterId(CHARACTER_ID);
         //THEN
-        verify(equippedShipRepository).getByCharacterId(CHARACTER_ID);
-        verify(equippedShipConverter).convertEntity(equippedShipEntity);
-        assertThat(result).isEqualTo(equippedShip);
+        assertThat(result).contains(equippedShip);
     }
 }

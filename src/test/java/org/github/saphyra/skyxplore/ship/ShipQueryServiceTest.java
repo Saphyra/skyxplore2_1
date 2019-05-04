@@ -1,9 +1,5 @@
 package org.github.saphyra.skyxplore.ship;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.domain.ShipView;
@@ -15,6 +11,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShipQueryServiceTest {
@@ -37,7 +39,7 @@ public class ShipQueryServiceTest {
     @Test(expected = ShipNotFoundException.class)
     public void testGetShipByCharacterIdShouldThrowExceptionWhenNull() {
         //GIVEN
-        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(null);
+        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.getShipByCharacterId(CHARACTER_ID);
     }
@@ -46,7 +48,7 @@ public class ShipQueryServiceTest {
     public void testGetShipByCharacterIdShouldQueryAndReturn() {
         //GIVEN
         EquippedShip ship = EquippedShip.builder().build();
-        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(ship);
+        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
         //WHEN
         EquippedShip result = underTest.getShipByCharacterId(CHARACTER_ID);
         //THEN
@@ -61,7 +63,7 @@ public class ShipQueryServiceTest {
             .defenseSlotId(DEFENSE_SLOT_ID)
             .weaponSlotId(WEAPON_SLOT_ID)
             .build();
-        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(ship);
+        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
 
         EquippedSlot defenseSlot = EquippedSlot.builder()
             .slotId(DEFENSE_SLOT_ID)
