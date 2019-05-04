@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class FactoryFacade {
     private final FactoryCreatorService factoryCreatorService;
 
-    public void createFactory(String characterId){
+    public void createFactory(String characterId) {
         factoryCreatorService.createFactory(characterId);
     }
 }
