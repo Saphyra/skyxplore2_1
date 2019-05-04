@@ -22,15 +22,14 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessTo
         this.dateTimeUtil = dateTimeUtil;
     }
 
+    @EventListener
+    void accountDeletedEventListener(AccountDeletedEvent event){
+        deleteByUserId(event.getUserId());
+    }
+
     public void deleteByUserId(String userId) {
         log.info("Deleting accessToken of user {}", userId);
         repository.deleteByUserId(userId);
-    }
-
-    @EventListener
-    //TODO unit test
-    void deleteByUserId(AccountDeletedEvent event){
-        deleteByUserId(event.getUserId());
     }
 
     public void deleteExpired(OffsetDateTime expiration) {

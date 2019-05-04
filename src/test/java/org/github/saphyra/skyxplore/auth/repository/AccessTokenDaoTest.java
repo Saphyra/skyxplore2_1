@@ -1,23 +1,24 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
+import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 @RunWith(MockitoJUnitRunner.class)
-public class SkyXpAccessTokenDaoTest {
+public class AccessTokenDaoTest {
     private static final String ACCESS_TOKEN_ID = "access_token_id";
     private static final String CHARACTER_ID = "character_id";
     private static final String USER_ID = "user_id";
@@ -35,6 +36,14 @@ public class SkyXpAccessTokenDaoTest {
 
     @InjectMocks
     private AccessTokenDao underTest;
+
+    @Test
+    public void accountDeletedEventListener(){
+        //WHEN
+        underTest.accountDeletedEventListener(new AccountDeletedEvent(USER_ID));
+        //THEN
+        verify(accessTokenRepository).deleteByUserId(USER_ID);
+    }
 
     @Test
     public void testDeleteByIdShouldCallRepository() {
