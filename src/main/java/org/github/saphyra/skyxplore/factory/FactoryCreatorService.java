@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class FactoryCreatorService {
     private final FactoryConfig config;
     private final FactoryDao factoryDao;
