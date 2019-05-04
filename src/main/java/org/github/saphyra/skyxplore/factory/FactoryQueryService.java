@@ -14,7 +14,7 @@ import org.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
 public class FactoryQueryService {
     private final FactoryDao factoryDao;
 
-    Factory findFactoryOfCharacterValidated(String characterId) {
+    public Factory findFactoryOfCharacterValidated(String characterId) {
         Factory factory = factoryDao.findByCharacterId(characterId);
         if (factory == null) {
             throw new FactoryNotFoundException("Factory not found for character " + characterId);

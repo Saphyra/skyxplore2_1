@@ -1,0 +1,16 @@
+package org.github.saphyra.skyxplore.product;
+
+import lombok.RequiredArgsConstructor;
+import org.github.saphyra.skyxplore.gamedata.entity.FactoryData;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+//TODO unit test
+public class ProductFacade {
+    private final ProductFactory productFactory;
+
+    public void createAndSave(String factoryId, FactoryData elementData, Integer amount) {
+        productFactory.createAndSave(factoryId, elementData, amount);
+    }
+}
