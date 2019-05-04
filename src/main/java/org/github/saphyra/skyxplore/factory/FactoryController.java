@@ -21,7 +21,8 @@ class FactoryController {
     private static final String ADD_TO_QUEUE_MAPPING = "factory";
     private static final String GET_MATERIALS_MAPPING = "factory/materials";
 
-    private final FactoryFacade factoryFacade;
+    private final AddToQueueService addToQueueService;
+    private final FactoryQueryService factoryQueryService;
 
     @PutMapping(ADD_TO_QUEUE_MAPPING)
     void addToQueue(
@@ -29,12 +30,12 @@ class FactoryController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Character {} wants to add material {}", characterId, request);
-        factoryFacade.addToQueue(characterId, request);
+        addToQueueService.addToQueue(characterId, request);
     }
 
     @GetMapping(GET_MATERIALS_MAPPING)
     Map<String, Integer> getMaterials(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his materials", characterId);
-        return factoryFacade.getMaterials(characterId);
+        return factoryQueryService.getMaterials(characterId);
     }
 }

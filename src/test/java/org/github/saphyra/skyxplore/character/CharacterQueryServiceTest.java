@@ -1,14 +1,5 @@
 package org.github.saphyra.skyxplore.character;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import org.github.saphyra.skyxplore.character.cache.CharacterNameLikeCache;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -22,6 +13,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterQueryServiceTest {
@@ -159,7 +159,7 @@ public class CharacterQueryServiceTest {
         blocked2BlocksCharacter.setBlockedCharacterId(CHARACTER_ID_1);
         when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
         //WHEN
-        List<SkyXpCharacter> result = underTest.getCharactersCanBeAddressee(CHARACTER_NAME, CHARACTER_ID_1);
+        List<SkyXpCharacter> result = underTest.getCharactersCanBeAddressee(CHARACTER_ID_1, CHARACTER_NAME);
         //THEN
         assertThat(result).containsOnly(canBeAddressee);
         verify(characterDao).findById(CHARACTER_ID_1);

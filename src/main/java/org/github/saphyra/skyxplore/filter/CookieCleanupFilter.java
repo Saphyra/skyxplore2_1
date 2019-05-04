@@ -20,7 +20,7 @@ import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHAR
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class CookieCleanupFilter extends OncePerRequestFilter {
+class CookieCleanupFilter extends OncePerRequestFilter {
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     private final CookieUtil cookieUtil;

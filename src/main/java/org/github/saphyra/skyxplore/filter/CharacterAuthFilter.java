@@ -1,35 +1,33 @@
 package org.github.saphyra.skyxplore.filter;
 
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-import static org.github.saphyra.skyxplore.character.CharacterController.RENAME_CHARACTER_MAPPING;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.character.CharacterQueryService;
+import org.github.saphyra.skyxplore.common.CookieUtil;
+import org.github.saphyra.skyxplore.common.PageController;
+import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
+import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
+import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-import org.github.saphyra.skyxplore.character.CharacterQueryService;
-import org.github.saphyra.skyxplore.common.CookieUtil;
-import org.github.saphyra.skyxplore.common.PageController;
-import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
-import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
+import static org.github.saphyra.skyxplore.character.CharacterController.RENAME_CHARACTER_MAPPING;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
 
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public class CharacterAuthFilter extends OncePerRequestFilter {
+class CharacterAuthFilter extends OncePerRequestFilter {
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
     private static final List<String> allowedUris = Arrays.asList(
         "/",

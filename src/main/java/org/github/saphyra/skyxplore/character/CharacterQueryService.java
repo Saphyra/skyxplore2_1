@@ -45,7 +45,7 @@ public class CharacterQueryService {
             .collect(Collectors.toList());
     }
 
-    public List<SkyXpCharacter> getCharactersCanBeAddressee(String name, String characterId) {
+    public List<SkyXpCharacter> getCharactersCanBeAddressee(String characterId, String name) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters

@@ -21,7 +21,10 @@ public class FactoryControllerTest {
     private static final Integer AMOUNT = 2;
 
     @Mock
-    private FactoryFacade factoryFacade;
+    private AddToQueueService addToQueueService;
+
+    @Mock
+    private FactoryQueryService factoryQueryService;
 
     @InjectMocks
     private FactoryController underTest;
@@ -33,18 +36,17 @@ public class FactoryControllerTest {
         //WHEN
         underTest.addToQueue(request, CHARACTER_ID);
         //THEN
-        verify(factoryFacade).addToQueue(CHARACTER_ID, request);
+        verify(addToQueueService).addToQueue(CHARACTER_ID, request);
     }
 
     @Test
     public void testGetMaterialsShouldCallFacadeAndReturnResponse() {
         //GIVEN
         Materials materials = new Materials();
-        when(factoryFacade.getMaterials(CHARACTER_ID)).thenReturn(materials);
+        when(factoryQueryService.getMaterials(CHARACTER_ID)).thenReturn(materials);
         //WHEN
         Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID);
         //THEN
-        verify(factoryFacade).getMaterials(CHARACTER_ID);
         assertThat(result).isEqualTo(materials);
     }
 }
