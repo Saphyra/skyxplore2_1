@@ -1,14 +1,6 @@
 package org.github.saphyra.skyxplore.ship;
 
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NAME;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -28,7 +20,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.CONNECTOR_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.FRONT_SLOT_NAME;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipServiceTest {
@@ -36,7 +35,7 @@ public class EquipServiceTest {
     private static final String ITEM_ID = "item_id";
     private static final String EXTENDED_SLOT = "extended_slot";
     private static final String EQUIPPED_CONNECTOR = "equipped_connector";
-    public static final String UNKNOWN_SLOT_NAME = "asd";
+    private static final String UNKNOWN_SLOT_NAME = "asd";
 
     @Mock
     private CharacterDao characterDao;

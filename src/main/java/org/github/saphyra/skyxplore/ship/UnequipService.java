@@ -1,13 +1,7 @@
 package org.github.saphyra.skyxplore.ship;
 
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.BACK_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.CONNECTOR_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.FRONT_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.LEFT_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.RIGHT_SLOT_NAME;
-
-import javax.transaction.Transactional;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -21,8 +15,14 @@ import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.transaction.Transactional;
+
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.BACK_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.CONNECTOR_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.FRONT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.LEFT_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.RIGHT_SLOT_NAME;
+
 
 @Service
 @Slf4j

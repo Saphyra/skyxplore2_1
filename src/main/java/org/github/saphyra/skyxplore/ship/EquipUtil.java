@@ -1,8 +1,7 @@
 package org.github.saphyra.skyxplore.ship;
 
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.WEAPON_SLOT_NAME;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
@@ -10,8 +9,8 @@ import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.springframework.stereotype.Component;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.WEAPON_SLOT_NAME;
 
 @Component
 @Slf4j

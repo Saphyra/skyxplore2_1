@@ -1,13 +1,5 @@
 package org.github.saphyra.skyxplore.ship;
 
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.DEFENSE_SLOT_NAME;
-import static org.github.saphyra.skyxplore.ship.EquippedShipFacade.WEAPON_SLOT_NAME;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import org.github.saphyra.skyxplore.gamedata.entity.Extender;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
@@ -19,6 +11,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.DEFENSE_SLOT_NAME;
+import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.WEAPON_SLOT_NAME;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipUtilTest {

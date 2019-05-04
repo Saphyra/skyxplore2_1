@@ -27,7 +27,7 @@ public class ShipQueryService {
         return ship;
     }
 
-    public ShipView getShipData(String characterId) {
+    ShipView getShipData(String characterId) {
         EquippedShip ship = getShipByCharacterId(characterId);
 
         EquippedSlot defenseSlot = slotDao.getById(ship.getDefenseSlotId());
