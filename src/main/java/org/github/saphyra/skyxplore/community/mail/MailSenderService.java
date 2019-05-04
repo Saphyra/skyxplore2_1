@@ -35,17 +35,13 @@ class MailSenderService {
     }
 
     private Mail createMail(SendMailRequest request, String characterId) {
-        Mail mail = new Mail();
-        mail.setMailId(idGenerator.generateRandomId());
-        mail.setFrom(characterId);
-        mail.setTo(request.getAddresseeId());
-        mail.setSubject(request.getSubject());
-        mail.setMessage(request.getMessage());
-        mail.setRead(false);
-        mail.setSendTime(dateTimeUtil.now());
-        mail.setArchived(false);
-        mail.setDeletedBySender(false);
-        mail.setDeletedByAddressee(false);
-        return mail;
+        return Mail.builder()
+            .mailId(idGenerator.generateRandomId())
+            .from(characterId)
+            .to(request.getAddresseeId())
+            .subject(request.getSubject())
+            .message(request.getMessage())
+            .sendTime(dateTimeUtil.now())
+            .build();
     }
 }

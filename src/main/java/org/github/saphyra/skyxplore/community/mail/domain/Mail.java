@@ -1,26 +1,32 @@
 package org.github.saphyra.skyxplore.community.mail.domain;
 
-import java.time.OffsetDateTime;
-
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.time.OffsetDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-//TODO builder with default values
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Mail {
     private String mailId;
     private String from;
     private String to;
     private String subject;
     private String message;
-    private Boolean read;
     private OffsetDateTime sendTime;
-    private Boolean archived;
-    private Boolean deletedBySender;
-    private Boolean deletedByAddressee;
+
+    @Builder.Default
+    private Boolean read = false;
+
+    @Builder.Default
+    private Boolean archived = false;
+
+    @Builder.Default
+    private Boolean deletedBySender = false;
+
+    @Builder.Default
+    private Boolean deletedByAddressee = false;
 }
