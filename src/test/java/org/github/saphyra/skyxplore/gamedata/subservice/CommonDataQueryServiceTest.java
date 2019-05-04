@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
 import org.junit.Before;
 import org.junit.Test;
 

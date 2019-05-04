@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
 
 @Data
 @ToString(callSuper = true)

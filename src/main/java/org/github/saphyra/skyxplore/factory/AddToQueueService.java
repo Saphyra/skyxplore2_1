@@ -16,7 +16,7 @@ import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
+import org.github.saphyra.skyxplore.gamedata.entity.FactoryData;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;
 import org.springframework.stereotype.Service;

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

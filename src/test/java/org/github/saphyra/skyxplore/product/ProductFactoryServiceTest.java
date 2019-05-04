@@ -10,7 +10,7 @@ import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
 import org.github.saphyra.skyxplore.gamedata.entity.Material;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;
 import org.junit.Ignore;

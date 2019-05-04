@@ -1,17 +1,16 @@
 package org.github.saphyra.skyxplore.gamedata.base.loader;
 
-import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
-import org.github.saphyra.skyxplore.gamedata.base.ContentLoader;
-import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
+import org.github.saphyra.skyxplore.gamedata.base.ContentLoader;
+import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
+import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
 
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractLoader<T> implements ContentLoader {
+abstract class AbstractLoader<T> implements ContentLoader {
     protected static final ObjectMapper objectMapper = new ObjectMapper();
 
     protected final Class<T> clazz;

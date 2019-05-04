@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.gamedata.entity.abstractentity;
+package org.github.saphyra.skyxplore.gamedata.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

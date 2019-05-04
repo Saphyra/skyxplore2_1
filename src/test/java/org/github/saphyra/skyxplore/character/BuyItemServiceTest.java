@@ -16,7 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.ShopData;
+import org.github.saphyra.skyxplore.gamedata.entity.ShopData;
 import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
 
 @RunWith(MockitoJUnitRunner.class)

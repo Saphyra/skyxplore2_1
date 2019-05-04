@@ -11,8 +11,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.Weapon;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.FactoryData;
-import org.github.saphyra.skyxplore.gamedata.entity.abstractentity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.FactoryData;
+import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
 import org.github.saphyra.skyxplore.gamedata.subservice.AbilityService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ArmorService;
 import org.github.saphyra.skyxplore.gamedata.subservice.BatteryService;

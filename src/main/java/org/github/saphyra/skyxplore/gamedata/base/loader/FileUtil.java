@@ -1,9 +1,9 @@
 package org.github.saphyra.skyxplore.gamedata.base.loader;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
 
 class FileUtil {
     static <T> T readValue(File source, Class<T> clazz) {

@@ -1,17 +1,16 @@
 package org.github.saphyra.skyxplore.gamedata.base.loader;
 
-import static java.util.Objects.isNull;
-
-import java.io.File;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
 import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.File;
+
+import static java.util.Objects.isNull;
 
 @Slf4j
-public class FileLoader<T> extends AbstractLoader<T> {
+class FileLoader<T> extends AbstractLoader<T> {
     private static final JsonFileFilter jsonFilter = new JsonFileFilter();
 
     private final File root;

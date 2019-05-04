@@ -1,6 +1,9 @@
 package org.github.saphyra.skyxplore.gamedata.base.loader;
 
-import static java.util.Objects.isNull;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
+import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,14 +16,10 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.io.FilenameUtils;
-import org.github.saphyra.skyxplore.gamedata.base.AbstractGameDataService;
-import org.github.saphyra.skyxplore.gamedata.base.TypedItem;
-
-import lombok.extern.slf4j.Slf4j;
+import static java.util.Objects.isNull;
 
 @Slf4j
-public class JarLoader<T> extends AbstractLoader<T> {
+class JarLoader<T> extends AbstractLoader<T> {
     private final String jarPath;
     private final AbstractGameDataService<T> gameDataService;
 

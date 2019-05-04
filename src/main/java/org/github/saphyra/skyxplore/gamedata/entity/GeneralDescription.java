@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.gamedata.entity.abstractentity;
+package org.github.saphyra.skyxplore.gamedata.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
