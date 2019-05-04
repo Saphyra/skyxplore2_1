@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class ProductFacade {
     private final ProductFactory productFactory;
 
