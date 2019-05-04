@@ -1,25 +1,22 @@
 package org.github.saphyra.skyxplore.ship.repository;
 
-import java.io.IOException;
-import java.util.Arrays;
-
-import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedShip> {
     private final IntegerEncryptor integerEncryptor;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapperDelegator objectMapperDelegator;
     private final StringEncryptor stringEncryptor;
 
     @Override
@@ -28,21 +25,17 @@ class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedSh
             throw new IllegalArgumentException("domain must not be null.");
         }
         EquippedShipEntity entity = new EquippedShipEntity();
-        try {
-            entity.setCharacterId(domain.getCharacterId());
-            entity.setShipId(domain.getShipId());
-            entity.setShipType(stringEncryptor.encryptEntity(domain.getShipType(), domain.getShipId()));
-            entity.setCoreHull(integerEncryptor.encryptEntity(domain.getCoreHull(), domain.getShipId()));
-            entity.setConnectorSlot(integerEncryptor.encryptEntity(domain.getConnectorSlot(), domain.getShipId()));
-            entity.setConnectorEquipped(stringEncryptor.encryptEntity(
-                objectMapper.writeValueAsString(domain.getConnectorEquipped()),
-                domain.getShipId())
-            );
-            entity.setDefenseSlotId(domain.getDefenseSlotId());
-            entity.setWeaponSlotId(domain.getWeaponSlotId());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        entity.setCharacterId(domain.getCharacterId());
+        entity.setShipId(domain.getShipId());
+        entity.setShipType(stringEncryptor.encryptEntity(domain.getShipType(), domain.getShipId()));
+        entity.setCoreHull(integerEncryptor.encryptEntity(domain.getCoreHull(), domain.getShipId()));
+        entity.setConnectorSlot(integerEncryptor.encryptEntity(domain.getConnectorSlot(), domain.getShipId()));
+        entity.setConnectorEquipped(stringEncryptor.encryptEntity(
+            objectMapperDelegator.writeValueAsString(domain.getConnectorEquipped()),
+            domain.getShipId())
+        );
+        entity.setDefenseSlotId(domain.getDefenseSlotId());
+        entity.setWeaponSlotId(domain.getWeaponSlotId());
         return entity;
     }
 
@@ -51,26 +44,22 @@ class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedSh
         if (entity == null) {
             return null;
         }
-        //TODO use builder
-        EquippedShip domain = EquippedShip.builder().build();
-        try {
-            domain.setCharacterId(entity.getCharacterId());
-            domain.setShipId(entity.getShipId());
-            domain.setShipType(stringEncryptor.decryptEntity(entity.getShipType(), entity.getShipId()));
-            domain.setCoreHull(integerEncryptor.decryptEntity(entity.getCoreHull(), entity.getShipId()));
-            domain.setConnectorSlot(integerEncryptor.decryptEntity(entity.getConnectorSlot(), entity.getShipId()));
-            domain.addConnectors(Arrays.asList(objectMapper.readValue(
-                stringEncryptor.decryptEntity(
-                    entity.getConnectorEquipped(),
-                    entity.getShipId()
-                ),
-                String[].class)
-            ));
-            domain.setDefenseSlotId(entity.getDefenseSlotId());
-            domain.setWeaponSlotId(entity.getWeaponSlotId());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return domain;
+
+        List<String> connectors = objectMapperDelegator.readValue(
+            stringEncryptor.decryptEntity(
+                entity.getConnectorEquipped(),
+                entity.getShipId()
+            ),
+            String[].class);
+        return EquippedShip.builder()
+            .characterId(entity.getCharacterId())
+            .shipId(entity.getShipId())
+            .shipType(stringEncryptor.decryptEntity(entity.getShipType(), entity.getShipId()))
+            .coreHull(integerEncryptor.decryptEntity(entity.getCoreHull(), entity.getShipId()))
+            .connectorSlot(integerEncryptor.decryptEntity(entity.getConnectorSlot(), entity.getShipId()))
+            .connectorEquipped(connectors)
+            .defenseSlotId(entity.getDefenseSlotId())
+            .weaponSlotId(entity.getWeaponSlotId())
+            .build();
     }
 }

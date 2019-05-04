@@ -1,13 +1,8 @@
 package org.github.saphyra.skyxplore.ship.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +10,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.encryption.impl.IntegerEncryptor;
-import com.github.saphyra.encryption.impl.StringEncryptor;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipConverterTest {
@@ -38,7 +36,7 @@ public class EquippedShipConverterTest {
     private IntegerEncryptor integerEncryptor;
 
     @Mock
-    private ObjectMapper objectMapper;
+    private ObjectMapperDelegator objectMapperDelegator;
 
     @Mock
     private StringEncryptor stringEncryptor;
@@ -57,7 +55,7 @@ public class EquippedShipConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldDecryptAndConvert() throws IOException {
+    public void testConvertEntityShouldDecryptAndConvert() {
         //GIVEN
         EquippedShipEntity equippedShipEntity = EquippedShipEntity.builder()
             .shipId(EQUIPPED_SHIP_ID)
@@ -74,8 +72,8 @@ public class EquippedShipConverterTest {
         when(integerEncryptor.decryptEntity(ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID)).thenReturn(COREHULL);
         when(integerEncryptor.decryptEntity(ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(CONNECTOR_SLOT);
         when(stringEncryptor.decryptEntity(ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID)).thenReturn(CONNECTOR_EQUIPPED);
-        String[] connectorsArray = new String[]{CONNECTOR_EQUIPPED};
-        when(objectMapper.readValue(CONNECTOR_EQUIPPED, String[].class)).thenReturn(connectorsArray);
+
+        when(objectMapperDelegator.readValue(CONNECTOR_EQUIPPED, String[].class)).thenReturn(Arrays.asList(CONNECTOR_EQUIPPED));
         //WHEN
         EquippedShip result = underTest.convertEntity(equippedShipEntity);
         //THEN
@@ -83,7 +81,7 @@ public class EquippedShipConverterTest {
         verify(integerEncryptor).decryptEntity(ENCRYPTED_COREHULL, EQUIPPED_SHIP_ID);
         verify(integerEncryptor).decryptEntity(ENCRYPTED_CONNECTOR_SLOT, EQUIPPED_SHIP_ID);
         verify(stringEncryptor).decryptEntity(ENCRYPTED_CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID);
-        verify(objectMapper).readValue(CONNECTOR_EQUIPPED, String[].class);
+        verify(objectMapperDelegator).readValue(CONNECTOR_EQUIPPED, String[].class);
         assertThat(result.getShipId()).isEqualTo(EQUIPPED_SHIP_ID);
         assertThat(result.getCharacterId()).isEqualTo(CHARACTER_ID);
         assertThat(result.getShipType()).isEqualTo(SHIP_TYPE);
@@ -95,7 +93,7 @@ public class EquippedShipConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldEncryptAndConvert() throws JsonProcessingException {
+    public void testConvertDomainShouldEncryptAndConvert() {
         //GIVEN
         EquippedShip equippedShip = EquippedShip.builder()
             .shipId(EQUIPPED_SHIP_ID)
@@ -110,12 +108,12 @@ public class EquippedShipConverterTest {
         when(stringEncryptor.encryptEntity(SHIP_TYPE, EQUIPPED_SHIP_ID)).thenReturn(ENCRYPTED_SHIP_TYPE);
         when(integerEncryptor.encryptEntity(COREHULL, EQUIPPED_SHIP_ID)).thenReturn(ENCRYPTED_COREHULL);
         when(integerEncryptor.encryptEntity(CONNECTOR_SLOT, EQUIPPED_SHIP_ID)).thenReturn(ENCRYPTED_CONNECTOR_SLOT);
-        when(objectMapper.writeValueAsString(any(ArrayList.class))).thenReturn(CONNECTOR_EQUIPPED);
+        when(objectMapperDelegator.writeValueAsString(any(ArrayList.class))).thenReturn(CONNECTOR_EQUIPPED);
         when(stringEncryptor.encryptEntity(CONNECTOR_EQUIPPED, EQUIPPED_SHIP_ID)).thenReturn(ENCRYPTED_CONNECTOR_EQUIPPED);
         //WHEN
         EquippedShipEntity result = underTest.convertDomain(equippedShip);
         //THEN
-        verify(objectMapper).writeValueAsString(any(ArrayList.class));
+        verify(objectMapperDelegator).writeValueAsString(any(ArrayList.class));
         assertThat(result.getShipId()).isEqualTo(EQUIPPED_SHIP_ID);
         assertThat(result.getCharacterId()).isEqualTo(CHARACTER_ID);
         assertThat(result.getShipType()).isEqualTo(ENCRYPTED_SHIP_TYPE);
