@@ -13,12 +13,12 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductQueryService {
+class ProductQueryService {
     private final FactoryQueryService factoryQueryService;
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
 
-    public List<ProductView> getQueue(String characterId) {
+    List<ProductView> getQueue(String characterId) {
         String factoryId = factoryQueryService.getFactoryIdOfCharacter(characterId);
 
         List<Product> queue = productDao.findByFactoryId(factoryId);

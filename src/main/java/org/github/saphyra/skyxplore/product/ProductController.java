@@ -17,11 +17,11 @@ import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHAR
 class ProductController {
     private static final String GET_QUEUE_MAPPING = "factory/queue";
 
-    private final ProductFacade productFacade;
+    private final ProductQueryService productQueryService;
 
     @GetMapping(GET_QUEUE_MAPPING)
     List<ProductView> getQueue(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his queue", characterId);
-        return productFacade.getQueue(characterId);
+        return productQueryService.getQueue(characterId);
     }
 }
