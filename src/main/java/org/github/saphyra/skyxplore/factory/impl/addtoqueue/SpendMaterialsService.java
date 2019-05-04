@@ -9,18 +9,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class SpendMaterialsService {
     private final FactoryDao factoryDao;
 
     void spendMaterials(Factory factory, FactoryData elementData, Integer amount) {
         Materials materials = factory.getMaterials();
-        elementData.getMaterials().keySet()
-            .forEach(materialId -> materials.removeMaterial(
-                materialId,
-                elementData.getMaterials().get(materialId) * amount)
-            );
-
+        elementData.getMaterials().forEach((materialId, requiredAmount) ->
+            materials.removeMaterial(materialId, requiredAmount * amount));
         factoryDao.save(factory);
     }
 }
