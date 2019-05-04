@@ -13,6 +13,7 @@ BackEnd
         - Controller: before and after service call
     Use Optionals
     Repository:
+        //TODO apply conventions
         - getBy...: returns list
         - findBy...: returns Optional of
 
