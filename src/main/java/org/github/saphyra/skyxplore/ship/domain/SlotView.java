@@ -1,26 +1,27 @@
 package org.github.saphyra.skyxplore.ship.domain;
 
-import java.util.ArrayList;
-
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
 public class SlotView {
     private Integer frontSlot;
     @Builder.Default
-    private ArrayList<String> frontEquipped;
+    private List<String> frontEquipped = new ArrayList<>();
 
     private Integer leftSlot;
     @Builder.Default
-    private ArrayList<String> leftEquipped;
+    private List<String> leftEquipped = new ArrayList<>();
 
     private Integer rightSlot;
     @Builder.Default
-    private ArrayList<String> rightEquipped;
+    private List<String> rightEquipped = new ArrayList<>();
 
     private Integer backSlot;
     @Builder.Default
-    private ArrayList<String> backEquipped;
+    private List<String> backEquipped = new ArrayList<>();
 }

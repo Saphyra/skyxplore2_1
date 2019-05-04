@@ -1,25 +1,23 @@
 package org.github.saphyra.skyxplore.product.repository;
 
-import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.github.saphyra.skyxplore.event.FactoryDeletedEvent;
+import org.github.saphyra.skyxplore.product.domain.Product;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.product.domain.Product;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 
 @Component
 @Slf4j
-//TODO unit test
 public class ProductDao extends AbstractDao<ProductEntity, Product, String, ProductRepository> {
     private final DateTimeUtil dateTimeUtil;
 
     public ProductDao(
-        Converter<ProductEntity, Product> converter,
+        ProductConverter converter,
         ProductRepository repository,
         DateTimeUtil dateTimeUtil
     ) {
@@ -28,8 +26,7 @@ public class ProductDao extends AbstractDao<ProductEntity, Product, String, Prod
     }
 
     @EventListener
-    //TODO unit test
-    public void deleteByFactoryId(FactoryDeletedEvent event) {
+    void factoryDeletedEventListener(FactoryDeletedEvent event) {
         repository.deleteByFactoryId(event.getFactoryId());
     }
 
