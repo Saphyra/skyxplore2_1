@@ -5,8 +5,8 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
 import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
-import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +45,7 @@ public class CharacterQueryServiceTest {
     }
 
     @Mock
-    private BlockedCharacterQueryService blockedCharacterQueryService;
+    private BlockedCharacterDao blockedCharacterDao;
 
     @Mock
     private CharacterNameLikeCache characterNameLikeCache;
@@ -127,12 +127,12 @@ public class CharacterQueryServiceTest {
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
         ownBlocked1.setBlockedCharacterId(CHARACTER_ID_2);
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_1)).thenReturn(Arrays.asList(ownBlocked1));
+        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID_1)).thenReturn(Arrays.asList(ownBlocked1));
 
         BlockedCharacter blocked2BlocksCharacter = new BlockedCharacter();
         blocked2BlocksCharacter.setCharacterId(CHARACTER_ID_3);
         blocked2BlocksCharacter.setBlockedCharacterId(CHARACTER_ID_1);
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
+        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
         //WHEN
         List<SkyXpCharacter> result = underTest.getCharactersCanBeAddressee(CHARACTER_ID_1, CHARACTER_NAME);
         //THEN
@@ -160,12 +160,12 @@ public class CharacterQueryServiceTest {
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
         ownBlocked1.setBlockedCharacterId(CHARACTER_ID_2);
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_1)).thenReturn(Arrays.asList(ownBlocked1));
+        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID_1)).thenReturn(Arrays.asList(ownBlocked1));
 
         BlockedCharacter blocked2BlocksCharacter = new BlockedCharacter();
         blocked2BlocksCharacter.setCharacterId(CHARACTER_ID_3);
         blocked2BlocksCharacter.setBlockedCharacterId(CHARACTER_ID_1);
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
+        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
         //WHEN
         List<SkyXpCharacter> result = underTest.getCharactersCanBeBlocked(CHARACTER_NAME, CHARACTER_ID_1);
         //THEN
@@ -197,12 +197,12 @@ public class CharacterQueryServiceTest {
         BlockedCharacter ownBlocked1 = new BlockedCharacter();
         ownBlocked1.setCharacterId(CHARACTER_ID_1);
         ownBlocked1.setBlockedCharacterId(CHARACTER_ID_2);
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_1)).thenReturn(Arrays.asList(ownBlocked1));
+        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID_1)).thenReturn(Arrays.asList(ownBlocked1));
 
         BlockedCharacter blocked2BlocksCharacter = new BlockedCharacter();
         blocked2BlocksCharacter.setCharacterId(CHARACTER_ID_3);
         blocked2BlocksCharacter.setBlockedCharacterId(CHARACTER_ID_1);
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
+        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID_3)).thenReturn(Arrays.asList(blocked2BlocksCharacter));
 
         when(friendshipQueryService.isFriendshipAlreadyExists(CHARACTER_ID_6, CHARACTER_ID_1)).thenReturn(true);
         when(friendshipQueryService.isFriendRequestAlreadyExists(CHARACTER_ID_7, CHARACTER_ID_1)).thenReturn(true);

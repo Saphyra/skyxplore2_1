@@ -27,12 +27,8 @@ public class BlockedCharacterQueryService {
         return blockedCharacterDao.findByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId);
     }
 
-    public List<BlockedCharacter> getBlockedCharactersOf(String characterId) {
-        return blockedCharacterDao.getBlockedCharacters(characterId);
-    }
-
     List<SkyXpCharacter> getBlockedCharacters(String characterId) {
-        return getBlockedCharactersOf(characterId).stream()
+        return blockedCharacterDao.getBlockedCharacters(characterId).stream()
             .map(blockedCharacter -> characterQueryService.findByCharacterId(blockedCharacter.getBlockedCharacterId()))
             .collect(Collectors.toList());
     }

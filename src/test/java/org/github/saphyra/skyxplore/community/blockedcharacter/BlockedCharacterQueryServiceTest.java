@@ -58,19 +58,7 @@ public class BlockedCharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetBlockedCharactersOf() {
-        //GIVEN
-        BlockedCharacter blockedCharacter = createBlockedCharacter();
-        when(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID)).thenReturn(Arrays.asList(blockedCharacter));
-        //WHEN
-        List<BlockedCharacter> result = underTest.getBlockedCharactersOf(CHARACTER_ID);
-        //THEN
-        verify(blockedCharacterDao).getBlockedCharacters(CHARACTER_ID);
-        assertThat(result).containsOnly(blockedCharacter);
-    }
-
-    @Test
-    public void getBlockedCharacters(){
+    public void getBlockedCharacters() {
         //GIVEN
         BlockedCharacter blockedCharacter = BlockedCharacter.builder()
             .blockedCharacterId(BLOCKED_CHARACTER_ID)

@@ -7,8 +7,8 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
 import org.github.saphyra.skyxplore.common.exception.InvalidAccessException;
-import org.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class CharacterQueryService {
-    private final BlockedCharacterQueryService blockedCharacterQueryService;
+    private final BlockedCharacterDao blockedCharacterDao;
     private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
     private final FriendshipQueryService friendshipQueryService;
@@ -84,7 +84,7 @@ public class CharacterQueryService {
     }
 
     private boolean isNotBlocked(SkyXpCharacter character, SkyXpCharacter ownedCharacter) {
-        List<BlockedCharacter> blockedCharacters = blockedCharacterQueryService.getBlockedCharactersOf(character.getCharacterId());
+        List<BlockedCharacter> blockedCharacters = blockedCharacterDao.getBlockedCharacters(character.getCharacterId());
         return blockedCharacters.stream().noneMatch(blocked -> blocked.getBlockedCharacterId().equals(ownedCharacter.getCharacterId()));
     }
 
