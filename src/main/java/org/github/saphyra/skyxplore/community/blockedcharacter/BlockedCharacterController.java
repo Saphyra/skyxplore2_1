@@ -28,6 +28,7 @@ class BlockedCharacterController {
     private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";
     private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/name";
 
+    private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final BlockCharacterService blockCharacterService;
     private final CharacterQueryService characterQueryService;
     private final CharacterViewConverter characterViewConverter;
@@ -55,7 +56,7 @@ class BlockedCharacterController {
         @CookieValue(COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his blocked characters list.", characterId);
-        return characterViewConverter.convertDomain(characterQueryService.getBlockedCharacters(characterId));
+        return characterViewConverter.convertDomain(blockedCharacterQueryService.getBlockedCharacters(characterId));
     }
 
     @PostMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)

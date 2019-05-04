@@ -25,6 +25,9 @@ public class BlockedCharacterControllerTest {
     private static final String CHARACTER_NAME = "character_name";
 
     @Mock
+    private BlockedCharacterQueryService blockedCharacterQueryService;
+
+    @Mock
     private BlockCharacterService blockCharacterService;
 
     @Mock
@@ -57,7 +60,7 @@ public class BlockedCharacterControllerTest {
         //GIVEN
         SkyXpCharacter blockedCharacter = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(blockedCharacter);
-        when(characterQueryService.getBlockedCharacters(CHARACTER_ID)).thenReturn(characterList);
+        when(blockedCharacterQueryService.getBlockedCharacters(CHARACTER_ID)).thenReturn(characterList);
 
         CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);

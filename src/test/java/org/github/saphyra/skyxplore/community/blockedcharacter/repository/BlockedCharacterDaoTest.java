@@ -97,7 +97,7 @@ public class BlockedCharacterDaoTest {
         List<BlockedCharacter> blockedCharacterList = Arrays.asList(blockedCharacter);
         when(blockedCharacterConverter.convertEntity(entityList)).thenReturn(blockedCharacterList);
         //WHEN
-        List<BlockedCharacter> result = underTest.getBlockedCharactersOf(CHARACTER_ID);
+        List<BlockedCharacter> result = underTest.getBlockedCharacters(CHARACTER_ID);
         //THEN
         verify(blockedCharacterRepository).findByCharacterId(CHARACTER_ID);
         verify(blockedCharacterConverter).convertEntity(entityList);

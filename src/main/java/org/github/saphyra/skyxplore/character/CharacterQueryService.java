@@ -38,13 +38,6 @@ public class CharacterQueryService {
         return character;
     }
 
-    //TODO blockedcharacter should call queryService for charactersById
-    public List<SkyXpCharacter> getBlockedCharacters(String characterId) {
-        return blockedCharacterQueryService.getBlockedCharactersOf(characterId).stream()
-            .map(blockedCharacter -> findByCharacterId(blockedCharacter.getBlockedCharacterId()))
-            .collect(Collectors.toList());
-    }
-
     public List<SkyXpCharacter> getCharactersCanBeAddressee(String characterId, String name) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return getCharactersOfNameLike(name).stream()

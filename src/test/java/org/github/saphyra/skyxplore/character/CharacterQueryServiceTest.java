@@ -109,31 +109,6 @@ public class CharacterQueryServiceTest {
     }
 
     @Test
-    public void testGetBlockedCharactersShouldReturnList() {
-        //GIVEN
-        BlockedCharacter blockedCharacter1 = createBlockedCharacter();
-        blockedCharacter1.setBlockedCharacterId(CHARACTER_ID_2);
-
-        BlockedCharacter blockedCharacter2 = createBlockedCharacter();
-        blockedCharacter2.setBlockedCharacterId(CHARACTER_ID_3);
-
-        when(blockedCharacterQueryService.getBlockedCharactersOf(CHARACTER_ID_1)).thenReturn(Arrays.asList(blockedCharacter1, blockedCharacter2));
-
-        SkyXpCharacter character1 = createCharacter(CHARACTER_ID_2);
-
-        SkyXpCharacter character2 = createCharacter(CHARACTER_ID_3);
-        when(characterDao.findById(CHARACTER_ID_2)).thenReturn(Optional.of(character1));
-        when(characterDao.findById(CHARACTER_ID_3)).thenReturn(Optional.of(character2));
-        //WHEN
-        List<SkyXpCharacter> result = underTest.getBlockedCharacters(CHARACTER_ID_1);
-        //THEN
-        assertThat(result).containsExactly(character1, character2);
-        verify(blockedCharacterQueryService).getBlockedCharactersOf(CHARACTER_ID_1);
-        verify(characterDao).findById(CHARACTER_ID_2);
-        verify(characterDao).findById(CHARACTER_ID_3);
-    }
-
-    @Test
     public void testGetCharactersCanBeAddresseeShouldReturnFilteredMatchingCharacters() {
         //GIVEN
         SkyXpCharacter character = createCharacter(CHARACTER_ID_1);
@@ -306,11 +281,6 @@ public class CharacterQueryServiceTest {
             .equipments(EQUIPMENTS)
             .userId(userId)
             .money(MONEY)
-            .build();
-    }
-
-    private BlockedCharacter createBlockedCharacter() {
-        return BlockedCharacter.builder()
             .build();
     }
 }
