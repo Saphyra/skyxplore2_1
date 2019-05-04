@@ -18,7 +18,6 @@ import static org.github.saphyra.skyxplore.common.ShipConstants.STORAGE_ID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class ShipCreatorService {
     private final IdGenerator idGenerator;
     private final EquippedShipDao equippedShipDao;
@@ -26,16 +25,18 @@ class ShipCreatorService {
     private final EquippedSlotFacade equippedSlotFacade;
 
     void createShip(String characterId) {
-        //TODO ude builder
-        EquippedShip ship = EquippedShip.builder().build();
-        ship.setShipId(idGenerator.generateRandomId());
-        ship.setCharacterId(characterId);
-        ship.setShipType(STARTER_SHIP_ID);
         Ship shipData = shipService.get(STARTER_SHIP_ID);
-        ship.setConnectorSlot(shipData.getConnector());
-        ship.setCoreHull(shipData.getCoreHull());
-        ship.setDefenseSlotId(equippedSlotFacade.createDefenseSlot(ship.getShipId()));
-        ship.setWeaponSlotId(equippedSlotFacade.createWeaponSlot(ship.getShipId()));
+
+        String shipId = idGenerator.generateRandomId();
+        EquippedShip ship = EquippedShip.builder()
+            .characterId(characterId)
+            .shipId(shipId)
+            .shipType(STARTER_SHIP_ID)
+            .coreHull(shipData.getCoreHull())
+            .connectorSlot(shipData.getConnector())
+            .defenseSlotId(equippedSlotFacade.createDefenseSlot(shipId))
+            .weaponSlotId(equippedSlotFacade.createWeaponSlot(shipId))
+            .build();
         fillWithConnectors(ship);
         log.info("Ship created: {}", ship);
         equippedShipDao.save(ship);
