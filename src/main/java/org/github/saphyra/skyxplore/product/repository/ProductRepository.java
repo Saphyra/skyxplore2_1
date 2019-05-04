@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-//TODO unit test
 interface ProductRepository extends JpaRepository<ProductEntity, String> {
+    @Transactional
     void deleteByFactoryId(String factoryId);
 
     List<ProductEntity> findByFactoryId(String factoryId);

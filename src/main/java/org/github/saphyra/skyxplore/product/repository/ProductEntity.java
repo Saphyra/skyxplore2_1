@@ -28,7 +28,7 @@ class ProductEntity {
     @Column(name = "amount", nullable = false)
     private String amount;
 
-    @Column(name = "added_at")
+    @Column(name = "added_at", nullable = false)
     private Long addedAt;
 
     @Column(name = "construction_time", nullable = false)
