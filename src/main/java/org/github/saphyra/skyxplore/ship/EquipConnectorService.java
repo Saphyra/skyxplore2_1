@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class EquipConnectorService {
     private final EquippedShipDao equippedShipDao;
     private final EquipUtil equipUtil;

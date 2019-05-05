@@ -17,6 +17,7 @@ import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.RIGHT_SLOT
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 class EquipToSlotService {
     private final EquipUtil equipUtil;
     private final SlotDao slotDao;
