@@ -14,15 +14,15 @@ abstract class AbstractSlotCreator {
     private final SlotDao slotDao;
 
     String createSlot(String shipId) {
-        //TODO use builder
         Slot slot = getSlot();
-        EquippedSlot equippedSlot = EquippedSlot.builder().build();
-        equippedSlot.setSlotId(idGenerator.generateRandomId());
-        equippedSlot.setShipId(shipId);
-        equippedSlot.setFrontSlot(slot.getFront());
-        equippedSlot.setLeftSlot(slot.getSide());
-        equippedSlot.setRightSlot(slot.getSide());
-        equippedSlot.setBackSlot(slot.getBack());
+        EquippedSlot equippedSlot = EquippedSlot.builder()
+            .slotId(idGenerator.generateRandomId())
+            .shipId(shipId)
+            .frontSlot(slot.getFront())
+            .leftSlot(slot.getSide())
+            .rightSlot(slot.getSide())
+            .backSlot(slot.getBack())
+            .build();
         fillSlotWithEquipments(equippedSlot);
 
         slotDao.save(equippedSlot);
