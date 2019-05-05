@@ -1,4 +1,4 @@
-package org.github.saphyra.skyxplore.product;
+package org.github.saphyra.skyxplore.product.factory;
 
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
@@ -9,17 +9,17 @@ import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
 import org.github.saphyra.skyxplore.gamedata.GameDataFacade;
-import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.Material;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;
+import org.github.saphyra.skyxplore.testing.TestGeneralDescription;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.github.saphyra.skyxplore.testing.TestGeneralDescription;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

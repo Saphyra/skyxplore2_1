@@ -8,12 +8,13 @@ import org.github.saphyra.skyxplore.product.repository.ProductDao;
 import org.springframework.stereotype.Service;
 import org.github.saphyra.skyxplore.factory.FactoryQueryService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class ProductQueryService {
+public class ProductQueryService {
     private final FactoryQueryService factoryQueryService;
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
@@ -24,5 +25,23 @@ class ProductQueryService {
         List<Product> queue = productDao.getByFactoryId(factoryId);
 
         return productViewConverter.convertDomain(queue);
+    }
+
+    //TODO unit test
+    public List<Product> getFirstProductsFromQueue() {
+        List<Product> products = productDao.getFirstOfQueue();
+        List<Product> result = new ArrayList<>();
+        List<String> factoryIds = new ArrayList<>();
+
+        products.forEach(product -> {
+            if (!factoryIds.contains(product.getFactoryId())) {
+                result.add(product);
+                factoryIds.add(product.getFactoryId());
+            }else{
+                log.info("{} is filtered, factory {} is already busy.", product.getProductId(), product.getFactoryId());
+            }
+        });
+
+        return result;
     }
 }
