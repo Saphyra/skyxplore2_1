@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-//TODO unit test
 public class SlotQueryService {
     private final SlotDao slotDao;
 
