@@ -1,16 +1,9 @@
 package org.github.saphyra.skyxplore.slot.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.saphyra.encryption.impl.IntegerEncryptor;
+import com.github.saphyra.encryption.impl.StringEncryptor;
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +11,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.encryption.impl.IntegerEncryptor;
-import com.github.saphyra.encryption.impl.StringEncryptor;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SlotConverterTest {
@@ -37,7 +35,7 @@ public class SlotConverterTest {
     private IntegerEncryptor integerEncryptor;
 
     @Mock
-    private ObjectMapper objectMapper;
+    private ObjectMapperDelegator objectMapperDelegator;
 
     @Mock
     private StringEncryptor stringEncryptor;
@@ -63,7 +61,7 @@ public class SlotConverterTest {
             .build();
 
         when(integerEncryptor.encryptEntity(anyInt(), eq(EQUIPPED_SLOT_ID))).thenReturn(ENCRYPTED_SLOT);
-        when(objectMapper.writeValueAsString(any(List.class))).thenReturn(EQUIPPED_ITEMS);
+        when(objectMapperDelegator.writeValueAsString(any(List.class))).thenReturn(EQUIPPED_ITEMS);
         when(stringEncryptor.encryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(ENCRYPTED_EQUIPPED_ITEMS);
         //WHEN
         SlotEntity result = underTest.convertDomain(slot);
@@ -91,7 +89,7 @@ public class SlotConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldDecryptAndConvert() throws IOException {
+    public void testConvertEntityShouldDecryptAndConvert() {
         //GIVEN
         SlotEntity entity = SlotEntity.builder()
             .slotId(EQUIPPED_SLOT_ID)
@@ -107,8 +105,8 @@ public class SlotConverterTest {
             .build();
         when(integerEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_SLOT);
         when(stringEncryptor.decryptEntity(anyString(), eq(EQUIPPED_SLOT_ID))).thenReturn(EQUIPPED_ITEMS);
-        String[] dataArray = new String[]{EQUIPPED_ITEM};
-        when(objectMapper.readValue(EQUIPPED_ITEMS, String[].class)).thenReturn(dataArray);
+
+        when(objectMapperDelegator.readValue(EQUIPPED_ITEMS, String[].class)).thenReturn(Arrays.asList(EQUIPPED_ITEM));
         //WHEN
         EquippedSlot result = underTest.convertEntity(entity);
         //THEN
