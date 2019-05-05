@@ -22,8 +22,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO split class
- class EquipShipService {
+class EquipShipService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final EquippedShipDao equippedShipDao;
@@ -33,7 +32,7 @@ import java.util.List;
     private final SlotQueryService slotQueryService;
 
     @Transactional
-     void equipShip(String characterId, String itemId) {
+    void equipShip(String characterId, String itemId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
