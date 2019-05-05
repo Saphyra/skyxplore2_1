@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.github.saphyra.selenium.logic.domain.BlockableCharacter;
 import org.github.saphyra.selenium.logic.domain.BlockedCharacter;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import org.github.saphyra.selenium.logic.page.CommunityPage;
 import org.github.saphyra.selenium.logic.validator.NotificationValidator;

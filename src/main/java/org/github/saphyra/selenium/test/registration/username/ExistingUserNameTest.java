@@ -3,7 +3,7 @@ package org.github.saphyra.selenium.test.registration.username;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumUser;
 import org.github.saphyra.selenium.logic.flow.Logout;
 import org.github.saphyra.selenium.logic.flow.Registration;

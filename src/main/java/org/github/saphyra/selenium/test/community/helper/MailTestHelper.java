@@ -1,11 +1,12 @@
 package org.github.saphyra.selenium.test.community.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.selenium.logic.domain.localization.PageLocalization;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.github.saphyra.selenium.logic.domain.Mail;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import org.github.saphyra.selenium.logic.page.CommunityPage;
 
@@ -35,6 +36,7 @@ public class MailTestHelper {
     private final CommunityPage communityPage;
     private final WebDriver driver;
     private final MessageCodes messageCodes;
+    private final PageLocalization communityPageLocalization;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
         List<String> searchResult = communityPage.getAddressees();
@@ -62,22 +64,26 @@ public class MailTestHelper {
     public List<Mail> getIncomingMails(boolean canBeEmpty) {
         communityPage.getIncomingMailsPageButton().click();
         return communityPage.getIncomingMails(canBeEmpty).stream()
-            .map(element -> new Mail(element, driver, messageCodes))
+            .map(this::createMail)
             .collect(Collectors.toList());
     }
 
     public List<Mail> getSentMails() {
         communityPage.getSentMailsPageButton().click();
         return communityPage.getSentMails().stream()
-            .map(element -> new Mail(element, driver, messageCodes))
+            .map(this::createMail)
             .collect(Collectors.toList());
     }
 
     public List<Mail> getArchivedMails() {
         communityPage.getArchivedMailsPageButton().click();
         return communityPage.getArchivedMails().stream()
-            .map(element -> new Mail(element, driver, messageCodes))
+            .map(this::createMail)
             .collect(Collectors.toList());
+    }
+
+    private Mail createMail(WebElement element) {
+        return new Mail(element, driver, messageCodes, communityPageLocalization);
     }
 
     public int getNumberOfUnreadMails() {

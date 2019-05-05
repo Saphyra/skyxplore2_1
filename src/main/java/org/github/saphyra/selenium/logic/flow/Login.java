@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumUser;
 import org.github.saphyra.selenium.logic.page.IndexPage;
 import org.github.saphyra.selenium.logic.validator.NotificationValidator;

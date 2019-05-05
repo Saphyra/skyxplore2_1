@@ -1,6 +1,7 @@
 package org.github.saphyra.selenium.logic.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.github.saphyra.selenium.logic.validator.NotificationValidator;

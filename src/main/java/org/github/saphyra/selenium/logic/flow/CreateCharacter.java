@@ -7,7 +7,7 @@ import static org.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import org.github.saphyra.selenium.logic.page.CharacterSelectPage;
 import org.github.saphyra.selenium.logic.validator.FieldValidator;

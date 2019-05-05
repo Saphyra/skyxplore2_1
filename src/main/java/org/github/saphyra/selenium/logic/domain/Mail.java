@@ -1,17 +1,18 @@
 package org.github.saphyra.selenium.logic.domain;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.PageLocalization;
+import org.github.saphyra.selenium.logic.validator.NotificationValidator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.github.saphyra.selenium.logic.validator.NotificationValidator;
 
-import static org.junit.Assert.assertTrue;
 import static org.github.saphyra.selenium.logic.util.Util.hasClass;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -30,10 +31,10 @@ public class Mail {
     private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_REPLY_BUTTON = ".mail-body button:last-child";
 
-    @Getter
     private final WebElement element;
     private final WebDriver driver;
     private final MessageCodes messageCodes;
+    private final PageLocalization communityPageLocalization;
 
     public String getSender() {
         return element.findElement(By.cssSelector(SELECTOR_SENDER)).getText();
@@ -65,8 +66,7 @@ public class Mail {
     }
 
     public String getSubject() {
-        //TODO get subject from additionalContent
-        return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split("Tárgy: ")[1];
+        return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split(communityPageLocalization.getAdditionalContent("subject") + ": ")[1];
     }
 
     public void restore(NotificationValidator notificationValidator) {

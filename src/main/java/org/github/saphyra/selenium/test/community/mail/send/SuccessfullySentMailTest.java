@@ -3,7 +3,7 @@ package org.github.saphyra.selenium.test.community.mail.send;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.selenium.logic.domain.Mail;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import org.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import org.github.saphyra.selenium.logic.page.CommunityPage;

@@ -3,7 +3,7 @@ package org.github.saphyra.selenium.test.characterselect.createcharacter;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import org.github.saphyra.selenium.logic.page.CharacterSelectPage;
 import org.github.saphyra.selenium.logic.validator.FieldValidator;

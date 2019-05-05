@@ -61,7 +61,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
 
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
-        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
+        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes, getPageLocalization("community"));
     }
 
     @Test

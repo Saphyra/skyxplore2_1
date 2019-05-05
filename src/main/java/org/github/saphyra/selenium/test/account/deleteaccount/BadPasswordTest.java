@@ -3,7 +3,7 @@ package org.github.saphyra.selenium.test.account.deleteaccount;
 import org.openqa.selenium.WebDriver;
 
 import lombok.Builder;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumUser;
 import org.github.saphyra.selenium.logic.page.AccountPage;
 import org.github.saphyra.selenium.logic.validator.NotificationValidator;

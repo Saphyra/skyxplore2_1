@@ -1,7 +1,7 @@
 package org.github.saphyra.selenium.test.account.changeusername;
 
 import lombok.Builder;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumUser;
 import org.github.saphyra.selenium.logic.flow.Login;
 import org.github.saphyra.selenium.logic.flow.Logout;

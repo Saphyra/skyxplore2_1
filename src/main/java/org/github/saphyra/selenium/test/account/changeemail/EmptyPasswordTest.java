@@ -1,7 +1,7 @@
 package org.github.saphyra.selenium.test.account.changeemail;
 
 import lombok.Builder;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.page.AccountPage;
 import org.github.saphyra.selenium.logic.validator.FieldValidator;
 import org.github.saphyra.selenium.test.account.changeemail.helper.ChangeEmailTestHelper;

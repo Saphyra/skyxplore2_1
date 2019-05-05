@@ -5,7 +5,7 @@ import static org.github.saphyra.skyxplore.character.domain.CreateCharacterReque
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.page.CharacterSelectPage;
 import org.github.saphyra.selenium.logic.validator.FieldValidator;
 import org.github.saphyra.selenium.test.characterselect.common.CharacterSelectTestHelper;

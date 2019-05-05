@@ -55,7 +55,7 @@ public class FriendshipTest extends SeleniumTestApplication {
 
         notificationValidator = new NotificationValidator(driver);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
-        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes);
+        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes, getPageLocalization("community"));
         sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
     }
 

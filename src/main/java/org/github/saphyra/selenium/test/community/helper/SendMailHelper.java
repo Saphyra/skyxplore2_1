@@ -2,7 +2,7 @@ package org.github.saphyra.selenium.test.community.helper;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebElement;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import org.github.saphyra.selenium.logic.page.CommunityPage;
 import org.github.saphyra.selenium.logic.validator.NotificationValidator;

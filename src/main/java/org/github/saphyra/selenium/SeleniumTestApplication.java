@@ -2,7 +2,8 @@ package org.github.saphyra.selenium;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.PageLocalization;
 import org.github.saphyra.skyxplore.Application;
 import org.junit.After;
 import org.junit.Before;
@@ -75,6 +76,25 @@ public abstract class SeleniumTestApplication {
     }
 
     protected abstract void init();
+
+    protected PageLocalization getPageLocalization(String pageName) {
+        URL source = getClass().getClassLoader().getResource("public/i18n/" + locale + "/" + pageName + ".json");
+
+        if (isNull(source)) {
+            log.info("Localization not found for locale {}. Using default locale...", locale);
+            source = getClass().getClassLoader().getResource("public/i18n/hu/" + pageName + ".json");
+        }
+
+        if(isNull(source)){
+            throw new RuntimeException("PageLocalization not found for page " + pageName);
+        }
+
+        try {
+            return OBJECT_MAPPER.readValue(source, PageLocalization.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @After
     public void tearDown() {

@@ -2,7 +2,7 @@ package org.github.saphyra.selenium.test.account.changepassword;
 
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.SeleniumUser;
 import org.github.saphyra.selenium.logic.page.AccountPage;
 import org.github.saphyra.selenium.logic.validator.NotificationValidator;

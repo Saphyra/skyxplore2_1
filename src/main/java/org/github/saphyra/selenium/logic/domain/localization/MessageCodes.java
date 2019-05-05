@@ -1,4 +1,4 @@
-package org.github.saphyra.selenium.logic.domain;
+package org.github.saphyra.selenium.logic.domain.localization;
 
 import java.util.HashMap;
 import java.util.Optional;

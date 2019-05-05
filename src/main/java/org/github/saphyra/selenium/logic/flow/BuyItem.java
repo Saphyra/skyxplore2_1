@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.github.saphyra.selenium.logic.domain.Category;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.ShopItem;
 import org.github.saphyra.selenium.logic.helper.CostCounter;
 import org.github.saphyra.selenium.logic.helper.ShopElementSearcher;

@@ -3,7 +3,7 @@ package org.github.saphyra.selenium.logic.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.selenium.logic.domain.Category;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 
 import java.io.IOException;
 import java.net.URL;

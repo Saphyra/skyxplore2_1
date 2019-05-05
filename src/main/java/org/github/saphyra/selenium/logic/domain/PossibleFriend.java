@@ -1,5 +1,6 @@
 package org.github.saphyra.selenium.logic.domain;
 
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

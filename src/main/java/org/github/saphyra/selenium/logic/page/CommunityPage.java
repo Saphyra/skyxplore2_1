@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.github.saphyra.selenium.logic.domain.Friend;
-import org.github.saphyra.selenium.logic.domain.MessageCodes;
+import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.PossibleFriend;
 import org.github.saphyra.selenium.logic.domain.SeleniumFriendRequest;
 import org.github.saphyra.selenium.logic.domain.SentFriendRequest;
