@@ -1,5 +1,6 @@
 package org.github.saphyra.skyxplore.user.repository.credentials;
 
+import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,14 @@ public class SkyXpCredentialsDaoTest {
 
     @InjectMocks
     private CredentialsDao underTest;
+
+    @Test
+    public void accountDeletedEventListener(){
+        //WHEN
+        underTest.accountDeletedEventListener(new AccountDeletedEvent(USER_ID));
+        //THEN
+        verify(credentialsRepository).deleteById(USER_ID);
+    }
 
     @Test
     public void testDeleteShouldCallRepository() {
