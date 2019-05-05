@@ -29,12 +29,12 @@ public class SlotRepositoryTest {
     private SlotRepository underTest;
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         underTest.deleteAll();
     }
 
     @Test
-    public void deleteByShipId(){
+    public void deleteByShipId() {
         //GIVEN
         SlotEntity entity1 = createSlotEntity(SLOT_ID_1, SHIP_ID_1);
         SlotEntity entity2 = createSlotEntity(SLOT_ID_2, SHIP_ID_1);
@@ -66,7 +66,7 @@ public class SlotRepositoryTest {
     @EntityScan(basePackageClasses = SlotEntity.class)
     @EnableJpaRepositories(basePackageClasses = SlotRepository.class)
     @Import(DataSourceConfiguration.class)
-    static class TestConfig{
+    static class TestConfig {
 
     }
 }
