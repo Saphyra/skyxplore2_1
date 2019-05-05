@@ -17,7 +17,7 @@ class EquipConnectorService {
 
     void equipConnector(EquipRequest request, EquippedShip ship) {
         if (equipUtil.isExtender(request.getItemId())) {
-            equipExtenderService.equipExtender(request, ship);
+            equipExtenderService.equipExtender(request.getItemId(), ship);
         }
 
         ship.addConnector(request.getItemId());

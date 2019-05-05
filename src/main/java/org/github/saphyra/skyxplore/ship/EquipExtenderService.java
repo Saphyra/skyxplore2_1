@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.gamedata.entity.Extender;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-import org.github.saphyra.skyxplore.ship.domain.EquipRequest;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
@@ -18,16 +17,15 @@ import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.CONNECTOR_
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 class EquipExtenderService {
     private final EquipUtil equipUtil;
     private final ExtenderService extenderService;
     private final SlotDao slotDao;
 
-    void equipExtender(EquipRequest request, EquippedShip ship) {
+    void equipExtender(String itemId, EquippedShip ship) {
         log.info("Equipped item is extender.");
-        Extender extender = extenderService.get(request.getItemId());
-        checkExtenderEquipable(ship.getConnectorEquipped(), request.getItemId(), extender);
+        Extender extender = extenderService.get(itemId);
+        checkExtenderEquipable(ship.getConnectorEquipped(), itemId, extender);
 
         if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
             ship.addConnectorSlot(extender.getExtendedNum());
@@ -39,17 +37,18 @@ class EquipExtenderService {
     }
 
     private void checkExtenderEquipable(List<String> connectors, String itemId, Extender extender) {
-        boolean notEquipable = connectors.stream().anyMatch(i -> {
+        String extendedSlot = extender.getExtendedSlot();
+        boolean alreadyEquipped = connectors.stream().anyMatch(i -> {
             Extender equippedConnector = extenderService.get(i);
             if (equippedConnector == null) {
                 return false;
             } else {
-                return equippedConnector.getExtendedSlot().equals(extender.getExtendedSlot());
+                return equippedConnector.getExtendedSlot().equals(extendedSlot);
             }
         });
 
-        if (notEquipable) {
-            throw new BadRequestException(itemId + " is not equipable. There is already extender equipped for slot " + extender.getExtendedSlot());
+        if (alreadyEquipped) {
+            throw new BadRequestException(itemId + " is not equipable. There is already extender equipped for slot " + extendedSlot);
         }
     }
 }

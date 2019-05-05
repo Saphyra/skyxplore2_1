@@ -1,17 +1,16 @@
 package org.github.saphyra.skyxplore.ship.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -64,7 +63,7 @@ public class EquippedShip {
         }
     }
 
-    public ArrayList<String> getConnectorEquipped() {
+    public List<String> getConnectorEquipped() {
         return new ArrayList<>(connectorEquipped);
     }
 

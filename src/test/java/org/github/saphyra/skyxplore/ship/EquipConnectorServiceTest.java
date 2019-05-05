@@ -41,7 +41,7 @@ public class EquipConnectorServiceTest {
         //WHEN
         underTest.equipConnector(request, ship);
         //THEN
-        verify(equipExtenderService).equipExtender(request, ship);
+        verify(equipExtenderService).equipExtender(EQUIPMENT_ID, ship);
         verify(ship).addConnector(EQUIPMENT_ID);
         verify(equippedShipDao).save(ship);
     }
