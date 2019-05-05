@@ -15,7 +15,6 @@ import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.CONNECTOR_
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 class UnequipExtenderService {
     private final EquipUtil equipUtil;
     private final ExtenderService extenderService;
