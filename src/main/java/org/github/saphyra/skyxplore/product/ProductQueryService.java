@@ -2,11 +2,11 @@ package org.github.saphyra.skyxplore.product;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.factory.FactoryQueryService;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.github.saphyra.skyxplore.product.domain.ProductView;
 import org.github.saphyra.skyxplore.product.repository.ProductDao;
 import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.factory.FactoryQueryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,7 @@ public class ProductQueryService {
     private final ProductDao productDao;
     private final ProductViewConverter productViewConverter;
 
-    List<ProductView> getQueue(String characterId) {
-        String factoryId = factoryQueryService.getFactoryIdOfCharacter(characterId);
-
-        List<Product> queue = productDao.getByFactoryId(factoryId);
-
-        return productViewConverter.convertDomain(queue);
-    }
-
-    //TODO unit test
-    public List<Product> getFirstProductsFromQueue() {
+    public List<Product> getFirstFromQueue() {
         List<Product> products = productDao.getFirstOfQueue();
         List<Product> result = new ArrayList<>();
         List<String> factoryIds = new ArrayList<>();
@@ -43,5 +34,13 @@ public class ProductQueryService {
         });
 
         return result;
+    }
+
+    List<ProductView> getQueue(String characterId) {
+        String factoryId = factoryQueryService.getFactoryIdOfCharacter(characterId);
+
+        List<Product> queue = productDao.getByFactoryId(factoryId);
+
+        return productViewConverter.convertDomain(queue);
     }
 }

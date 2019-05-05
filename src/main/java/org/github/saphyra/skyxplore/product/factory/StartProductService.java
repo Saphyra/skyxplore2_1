@@ -21,7 +21,7 @@ class StartProductService {
 
     void startProducts() {
         log.info("Starting the next product in the queue");
-        List<Product> products = productQueryService.getFirstProductsFromQueue();
+        List<Product> products = productQueryService.getFirstFromQueue();
 
         log.info("Items to start: {}", products.size());
         log.debug("Starting items: {}", products);

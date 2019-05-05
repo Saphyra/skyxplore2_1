@@ -40,7 +40,7 @@ public class StartProductServiceTest {
         Product product = Product.builder()
             .constructionTime(CONSTRUCTION_TIME)
             .build();
-        given(productQueryService.getFirstProductsFromQueue()).willReturn(Arrays.asList(product));
+        given(productQueryService.getFirstFromQueue()).willReturn(Arrays.asList(product));
 
         given(dateTimeUtil.now()).willReturn(NOW);
         //WHEN
