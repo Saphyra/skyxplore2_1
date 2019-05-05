@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class StartProductService {
     private final DateTimeUtil dateTimeUtil;
     private final ProductDao productDao;
