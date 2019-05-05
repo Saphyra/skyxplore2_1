@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class EquippedSlotFacade {
     private final DefenseSlotCreatorService defenseSlotCreatorService;
     private final WeaponSlotCreatorService weaponSlotCreatorService;
