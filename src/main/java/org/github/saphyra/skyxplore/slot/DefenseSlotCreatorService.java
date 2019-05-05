@@ -14,7 +14,6 @@ import static org.github.saphyra.skyxplore.common.ShipConstants.STARTER_SHIP_ID;
 
 @Service
 @Slf4j
-//TODO unit test
 public class DefenseSlotCreatorService extends AbstractSlotCreator{
     private final ShipService shipService;
 
