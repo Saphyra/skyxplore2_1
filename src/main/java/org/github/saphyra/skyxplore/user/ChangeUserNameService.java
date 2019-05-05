@@ -19,7 +19,7 @@ class ChangeUserNameService {
     private final UserNameCache userNameCache;
 
     void changeUserName(ChangeUserNameRequest request, String userId) {
-        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        SkyXpCredentials skyXpCredentials = credentialsService.findByUserId(userId);
         if (credentialsService.isUserNameExists(request.getNewUserName())) {
             throw new UserNameAlreadyExistsException(request.getNewUserName() + " username is already exists.");
         }

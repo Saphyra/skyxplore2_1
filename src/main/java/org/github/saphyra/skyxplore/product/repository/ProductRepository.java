@@ -13,7 +13,7 @@ interface ProductRepository extends JpaRepository<ProductEntity, String> {
     @Transactional
     void deleteByFactoryId(String factoryId);
 
-    List<ProductEntity> findByFactoryId(String factoryId);
+    List<ProductEntity> getByFactoryId(String factoryId);
 
     @Query("select p from ProductEntity p where p.endTime < :finishTime")
     List<ProductEntity> getFinishedProducts(@Param("finishTime") Long finishTime);

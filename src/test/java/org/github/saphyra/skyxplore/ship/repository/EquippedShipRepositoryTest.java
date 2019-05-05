@@ -34,7 +34,7 @@ public class EquippedShipRepositoryTest {
     }
 
     @Test
-    public void getByCharacterId(){
+    public void findByCharacterId(){
         //GIVEN
         EquippedShipEntity entity1 = EquippedShipEntity.builder()
             .shipId(SHIP_ID_1)
@@ -60,7 +60,7 @@ public class EquippedShipRepositoryTest {
 
         underTest.saveAll(Arrays.asList(entity1, entity2));
         //WHEN
-        Optional<EquippedShipEntity> result = underTest.getByCharacterId(CHARACTER_ID_1);
+        Optional<EquippedShipEntity> result = underTest.findByCharacterId(CHARACTER_ID_1);
         //THEN
         assertThat(result).contains(entity1);
     }

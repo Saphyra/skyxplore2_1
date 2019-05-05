@@ -21,7 +21,7 @@ class ProductQueryService {
     List<ProductView> getQueue(String characterId) {
         String factoryId = factoryQueryService.getFactoryIdOfCharacter(characterId);
 
-        List<Product> queue = productDao.findByFactoryId(factoryId);
+        List<Product> queue = productDao.getByFactoryId(factoryId);
 
         return productViewConverter.convertDomain(queue);
     }

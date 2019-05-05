@@ -2,11 +2,11 @@ package org.github.saphyra.skyxplore.factory;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
+import org.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
 import org.github.saphyra.skyxplore.factory.domain.Factory;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
-import org.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
+import org.github.saphyra.skyxplore.factory.repository.FactoryDao;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -15,11 +15,8 @@ public class FactoryQueryService {
     private final FactoryDao factoryDao;
 
     public Factory findFactoryOfCharacterValidated(String characterId) {
-        Factory factory = factoryDao.findByCharacterId(characterId);
-        if (factory == null) {
-            throw new FactoryNotFoundException("Factory not found for character " + characterId);
-        }
-        return factory;
+        return factoryDao.findByCharacterId(characterId)
+            .orElseThrow(() -> new FactoryNotFoundException("Factory not found for character " + characterId));
     }
 
     public Materials getMaterials(String characterId) {

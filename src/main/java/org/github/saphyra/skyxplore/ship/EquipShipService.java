@@ -1,10 +1,8 @@
 package org.github.saphyra.skyxplore.ship;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -12,13 +10,14 @@ import org.github.saphyra.skyxplore.gamedata.entity.Ship;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.SlotQueryService;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.springframework.stereotype.Service;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -31,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
     private final ShipService shipService;
     private final ShipQueryService shipQueryService;
     private final SlotDao slotDao;
+    private final SlotQueryService slotQueryService;
 
     @Transactional
      void equipShip(String characterId, String itemId) {
@@ -67,8 +67,8 @@ import lombok.extern.slf4j.Slf4j;
     }
 
     private void updateSlots(SkyXpCharacter character, EquippedShip ship, Ship shipToEquip) {
-        EquippedSlot defenseSlot = slotDao.getById(ship.getDefenseSlotId());
-        EquippedSlot weaponSlot = slotDao.getById(ship.getWeaponSlotId());
+        EquippedSlot defenseSlot = slotQueryService.findSlotById(ship.getDefenseSlotId());
+        EquippedSlot weaponSlot = slotQueryService.findSlotById(ship.getWeaponSlotId());
         List<EquippedSlot> slots = Arrays.asList(defenseSlot, weaponSlot);
 
         emptySlots(character, slots);

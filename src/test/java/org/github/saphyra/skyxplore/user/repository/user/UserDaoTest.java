@@ -1,9 +1,5 @@
 package org.github.saphyra.skyxplore.user.repository.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.junit.Test;
@@ -11,6 +7,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserDaoTest {
@@ -42,17 +44,17 @@ public class UserDaoTest {
         userEntity.setUserId(USER_ID);
         userEntity.setEmail(EMAIL);
         userEntity.setRoles(ROLES_STRING);
-        when(userRepository.findByEmail(EMAIL)).thenReturn(userEntity);
+        Optional<UserEntity> entityOptional = Optional.of(userEntity);
+        when(userRepository.findByEmail(EMAIL)).thenReturn(entityOptional);
 
         SkyXpUser user = new SkyXpUser();
         user.setUserId(USER_ID);
         user.setEmail(EMAIL);
-        when(skyXpUserConverter.convertEntity(userEntity)).thenReturn(user);
+        when(skyXpUserConverter.convertEntity(entityOptional)).thenReturn(Optional.of(user));
         //WHEN
-        SkyXpUser result = underTest.findUserByEmail(EMAIL);
+        Optional<SkyXpUser> result = underTest.findUserByEmail(EMAIL);
         //THEN
         verify(userRepository).findByEmail(EMAIL);
-        verify(skyXpUserConverter).convertEntity(userEntity);
-        assertThat(result).isEqualTo(user);
+        assertThat(result).contains(user);
     }
 }

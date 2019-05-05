@@ -16,13 +16,13 @@ interface FriendRequestRepository extends JpaRepository<FriendRequestEntity, Str
     @Query("DELETE FriendRequestEntity f WHERE f.characterId = :characterId OR f.friendId = :characterId")
     void deleteByCharacterId(@Param("characterId") String characterId);
 
-    List<FriendRequestEntity> findByCharacterId(String characterId);
+    List<FriendRequestEntity> getByCharacterId(String characterId);
 
     @Query("SELECT f FROM FriendRequestEntity f WHERE " +
         "(f.characterId = :characterId AND f.friendId = :friendId)" +
         " OR " +
         "(f.characterId = :friendId AND f.friendId = :characterId)")
-    List<FriendRequestEntity> findByCharacterIdOrFriendId(@Param("characterId") String characterId, @Param("friendId") String friendId);
+    List<FriendRequestEntity> getByCharacterIdOrFriendId(@Param("characterId") String characterId, @Param("friendId") String friendId);
 
     List<FriendRequestEntity> getByFriendId(String characterId);
 }

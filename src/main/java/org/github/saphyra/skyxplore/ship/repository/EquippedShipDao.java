@@ -28,14 +28,14 @@ public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShi
 
     @EventListener
     void deleteByCharacterId(CharacterDeletedEvent event) {
-        EquippedShipEntity ship = repository.getByCharacterId(event.getCharacterId())
+        EquippedShipEntity ship = repository.findByCharacterId(event.getCharacterId())
             .orElseThrow(() -> new ShipNotFoundException("EquippedShip not found with characterId " + event.getCharacterId()));
         eventPublisher.publishEvent(new ShipDeletedEvent(ship.getShipId()));
         log.info("Deleting ship of {}", event);
         repository.delete(ship);
     }
 
-    public Optional<EquippedShip> getShipByCharacterId(String characterId) {
-        return converter.convertEntity(repository.getByCharacterId(characterId));
+    public Optional<EquippedShip> findShipByCharacterId(String characterId) {
+        return converter.convertEntity(repository.findByCharacterId(characterId));
     }
 }

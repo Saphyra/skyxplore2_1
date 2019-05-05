@@ -45,17 +45,17 @@ public class ProductDaoTest {
     }
 
     @Test
-    public void findByFactoryId(){
+    public void getByFactoryId(){
         //GIVEN
         ProductEntity entity = ProductEntity.builder().build();
         List<ProductEntity> entityList = Arrays.asList(entity);
-        given(repository.findByFactoryId(FACTORY_ID)).willReturn(entityList);
+        given(repository.getByFactoryId(FACTORY_ID)).willReturn(entityList);
 
         Product product = Product.builder().build();
         List<Product> productList = Arrays.asList(product);
         given(converter.convertEntity(entityList)).willReturn(productList);
         //WHEN
-        List<Product> result = underTest.findByFactoryId(FACTORY_ID);
+        List<Product> result = underTest.getByFactoryId(FACTORY_ID);
         //THEN
         assertThat(result).isEqualTo(productList);
     }

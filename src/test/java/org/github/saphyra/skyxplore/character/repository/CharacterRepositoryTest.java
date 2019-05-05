@@ -1,12 +1,6 @@
 package org.github.saphyra.skyxplore.character.repository;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -18,6 +12,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = CharacterRepositoryTest.TestConfig.class)
@@ -64,7 +64,7 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void findByUserId(){
+    public void getByUserId(){
         //GIVEN
         CharacterEntity entity1 = CharacterEntity.builder()
             .characterId(CHARACTER_ID_1)
@@ -91,13 +91,13 @@ public class CharacterRepositoryTest {
             .build();
         underTest.saveAll(Arrays.asList(entity1, entity2, entity3));
         //WHEN
-        List<CharacterEntity> result = underTest.findByUserId(USER_ID_1);
+        List<CharacterEntity> result = underTest.getByUserId(USER_ID_1);
         //THEN
         assertThat(result).containsOnly(entity1, entity2);
     }
 
     @Test
-    public void findByCharacterNameContaining(){
+    public void getByCharacterNameContaining(){
         //GIVEN
         CharacterEntity entity1 = CharacterEntity.builder()
             .characterId(CHARACTER_ID_1)
@@ -124,7 +124,7 @@ public class CharacterRepositoryTest {
             .build();
         underTest.saveAll(Arrays.asList(entity1, entity2, entity3));
         //WHEN
-        List<CharacterEntity> result = underTest.findByCharacterNameContaining("name");
+        List<CharacterEntity> result = underTest.getByCharacterNameContaining("name");
         //THEN
         assertThat(result).containsOnly(entity1, entity2);
     }

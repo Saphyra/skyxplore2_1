@@ -28,7 +28,7 @@ class ChangeEmailService {
             throw new EmailAlreadyExistsException(request.getNewEmail() + " email is already exists.");
         }
 
-        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        SkyXpCredentials skyXpCredentials = credentialsService.findByUserId(userId);
         if (!passwordService.authenticate(request.getPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }

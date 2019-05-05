@@ -21,8 +21,4 @@ public class SlotDao extends AbstractDao<SlotEntity, EquippedSlot, String, SlotR
         log.info("Deleting slots of {}", event);
         repository.deleteByShipId(event.getShipId());
     }
-
-    public EquippedSlot getById(String slotId) {
-        return converter.convertEntity(repository.getOne(slotId));
-    }
 }

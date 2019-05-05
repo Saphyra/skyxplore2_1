@@ -4,8 +4,8 @@ import org.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.domain.ShipView;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.SlotQueryService;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,7 +31,7 @@ public class ShipQueryServiceTest {
     private ShipViewConverter shipViewConverter;
 
     @Mock
-    private SlotDao slotDao;
+    private SlotQueryService slotQueryService;
 
     @InjectMocks
     private ShipQueryService underTest;
@@ -39,7 +39,7 @@ public class ShipQueryServiceTest {
     @Test(expected = ShipNotFoundException.class)
     public void testGetShipByCharacterIdShouldThrowExceptionWhenNull() {
         //GIVEN
-        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
+        when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.getShipByCharacterId(CHARACTER_ID);
     }
@@ -48,11 +48,11 @@ public class ShipQueryServiceTest {
     public void testGetShipByCharacterIdShouldQueryAndReturn() {
         //GIVEN
         EquippedShip ship = EquippedShip.builder().build();
-        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
+        when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
         //WHEN
         EquippedShip result = underTest.getShipByCharacterId(CHARACTER_ID);
         //THEN
-        verify(equippedShipDao).getShipByCharacterId(CHARACTER_ID);
+        verify(equippedShipDao).findShipByCharacterId(CHARACTER_ID);
         assertThat(result).isEqualTo(ship);
     }
 
@@ -63,7 +63,7 @@ public class ShipQueryServiceTest {
             .defenseSlotId(DEFENSE_SLOT_ID)
             .weaponSlotId(WEAPON_SLOT_ID)
             .build();
-        when(equippedShipDao.getShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
+        when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
 
         EquippedSlot defenseSlot = EquippedSlot.builder()
             .slotId(DEFENSE_SLOT_ID)
@@ -71,8 +71,8 @@ public class ShipQueryServiceTest {
         EquippedSlot weaponSlot = EquippedSlot.builder()
             .slotId(WEAPON_SLOT_ID)
             .build();
-        when(slotDao.getById(DEFENSE_SLOT_ID)).thenReturn(defenseSlot);
-        when(slotDao.getById(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
+        when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(defenseSlot);
+        when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
 
         ShipView shipView = new ShipView();
         shipView.setShipType(SHIP_TYPE);
@@ -81,8 +81,6 @@ public class ShipQueryServiceTest {
         //WHEN
         ShipView result = underTest.getShipData(CHARACTER_ID);
         //THEN
-        verify(slotDao).getById(DEFENSE_SLOT_ID);
-        verify(slotDao).getById(WEAPON_SLOT_ID);
         verify(shipViewConverter).convertDomain(ship, defenseSlot, weaponSlot);
         assertThat(result).isEqualTo(shipView);
     }

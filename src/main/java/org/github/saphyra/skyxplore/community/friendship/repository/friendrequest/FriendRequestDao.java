@@ -23,11 +23,11 @@ public class FriendRequestDao extends AbstractDao<FriendRequestEntity, FriendReq
     }
 
     public List<FriendRequest> getByCharacterId(String characterId) {
-        return converter.convertEntity(repository.findByCharacterId(characterId));
+        return converter.convertEntity(repository.getByCharacterId(characterId));
     }
 
     public List<FriendRequest> getByCharacterIdOrFriendId(String characterId, String friendId) {
-        return converter.convertEntity(repository.findByCharacterIdOrFriendId(characterId, friendId));
+        return converter.convertEntity(repository.getByCharacterIdOrFriendId(characterId, friendId));
     }
 
     public List<FriendRequest> getByFriendId(String characterId) {

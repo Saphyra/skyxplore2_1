@@ -1,11 +1,8 @@
 package org.github.saphyra.skyxplore.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-
-import java.util.HashSet;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.encryption.impl.PasswordService;
+import com.github.saphyra.util.IdGenerator;
 import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
@@ -27,13 +24,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.util.IdGenerator;
+import java.util.HashSet;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DeleteAccountServiceIntegrationTest.TestConfig.class)
+//TODO extend with other daos
 public class DeleteAccountServiceIntegrationTest {
     private static final String PASSWORD = "password";
     private static final String USER_ID = "user_id";
@@ -62,6 +62,7 @@ public class DeleteAccountServiceIntegrationTest {
         SkyXpCredentials credentials = new SkyXpCredentials();
         credentials.setUserId(USER_ID);
         credentials.setPassword(PASSWORD);
+        credentials.setUserName("");
         credentialsDao.save(credentials);
 
         given(passwordService.authenticate(anyString(), anyString())).willReturn(true);

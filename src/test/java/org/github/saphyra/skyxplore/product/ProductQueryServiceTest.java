@@ -42,7 +42,7 @@ public class ProductQueryServiceTest {
         Product product = Product.builder()
             .build();
         List<Product> productList = Arrays.asList(product);
-        when(productDao.findByFactoryId(FACTORY_ID)).thenReturn(productList);
+        when(productDao.getByFactoryId(FACTORY_ID)).thenReturn(productList);
 
         ProductView productView = ProductView.builder()
             .build();
@@ -52,7 +52,7 @@ public class ProductQueryServiceTest {
         List<ProductView> result = underTest.getQueue(CHARACTER_ID);
         //THEN
         verify(factoryQueryService).getFactoryIdOfCharacter(CHARACTER_ID);
-        verify(productDao).findByFactoryId(FACTORY_ID);
+        verify(productDao).getByFactoryId(FACTORY_ID);
         verify(productViewConverter).convertDomain(productList);
         assertThat(result).isEqualTo(productViews);
     }

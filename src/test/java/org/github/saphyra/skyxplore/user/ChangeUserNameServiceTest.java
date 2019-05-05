@@ -60,7 +60,7 @@ public class ChangeUserNameServiceTest {
         ChangeUserNameRequest request = new ChangeUserNameRequest(NEW_USER_NAME, FAKE_PASSWORD);
 
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
         when(credentialsService.isUserNameExists(NEW_USER_NAME)).thenReturn(false);
         when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
@@ -73,14 +73,14 @@ public class ChangeUserNameServiceTest {
         ChangeUserNameRequest request = new ChangeUserNameRequest(NEW_USER_NAME, PASSWORD);
 
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
         when(credentialsService.isUserNameExists(NEW_USER_NAME)).thenReturn(false);
         when(passwordService.authenticate(PASSWORD, HASHED_PASSWORD)).thenReturn(true);
         //WHEN
         underTest.changeUserName(request, USER_ID);
         //THEN
         verify(passwordService).authenticate(PASSWORD, HASHED_PASSWORD);
-        verify(credentialsService).getByUserId(USER_ID);
+        verify(credentialsService).findByUserId(USER_ID);
         verify(credentialsService).isUserNameExists(NEW_USER_NAME);
         verify(credentialsService).save(credentials);
         assertThat(credentials.getUserName()).isEqualTo(NEW_USER_NAME);

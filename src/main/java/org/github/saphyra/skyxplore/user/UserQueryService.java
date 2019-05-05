@@ -21,6 +21,6 @@ public class UserQueryService {
 
     public boolean isEmailExists(String email) {
         log.info("Someone wants to know is email {} is exists.", email);
-        return userDao.findUserByEmail(email) != null;
+        return userDao.findUserByEmail(email).isPresent();
     }
 }

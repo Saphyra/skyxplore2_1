@@ -32,7 +32,7 @@ public class FactoryQueryServiceTest {
     @Test(expected = FactoryNotFoundException.class)
     public void testFindFactoryOfCharacterValidatedShouldThrowExceptionWhenNotFound() {
         //GIVEN
-        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(null);
+        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.findFactoryOfCharacterValidated(CHARACTER_ID);
     }
@@ -41,7 +41,7 @@ public class FactoryQueryServiceTest {
     public void testFindFactoryOfCharacterValidatedShouldReturn() {
         //GIVEN
         Factory factory = Factory.builder().build();
-        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(factory);
+        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(factory));
         //WHEN
         Factory result = underTest.findFactoryOfCharacterValidated(CHARACTER_ID);
         //THEN
@@ -58,7 +58,7 @@ public class FactoryQueryServiceTest {
         Factory factory = Factory.builder()
             .materials(materials)
             .build();
-        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(factory);
+        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(factory));
 
         //WHEN
         Map<String, Integer> result = underTest.getMaterials(CHARACTER_ID);
@@ -74,7 +74,7 @@ public class FactoryQueryServiceTest {
         Factory factory = Factory.builder()
             .factoryId(FACTORY_ID)
             .build();
-        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(factory);
+        when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(factory));
         //WHEN
         String result = underTest.getFactoryIdOfCharacter(CHARACTER_ID);
         //THEN

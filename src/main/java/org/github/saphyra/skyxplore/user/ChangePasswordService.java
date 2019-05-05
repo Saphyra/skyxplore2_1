@@ -16,7 +16,7 @@ class ChangePasswordService {
     private final PasswordService passwordService;
 
     void changePassword(ChangePasswordRequest request, String userId) {
-        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        SkyXpCredentials skyXpCredentials = credentialsService.findByUserId(userId);
         validateChangePasswordRequest(request, skyXpCredentials);
         skyXpCredentials.setPassword(passwordService.hashPassword(request.getNewPassword()));
         log.info("Changing password of user " + userId);

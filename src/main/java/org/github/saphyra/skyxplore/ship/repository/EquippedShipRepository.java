@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 interface EquippedShipRepository extends JpaRepository<EquippedShipEntity, String> {
-    Optional<EquippedShipEntity> getByCharacterId(String characterId);
+    Optional<EquippedShipEntity> findByCharacterId(String characterId);
 }

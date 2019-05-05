@@ -45,7 +45,7 @@ public class DeleteAccountServiceTest {
         AccountDeleteRequest request = new AccountDeleteRequest(FAKE_PASSWORD);
         request.setPassword(FAKE_PASSWORD);
 
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(CREDENTIALS);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(CREDENTIALS);
         when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
         underTest.deleteAccount(request, USER_ID);
@@ -55,13 +55,13 @@ public class DeleteAccountServiceTest {
     public void testDeleteAccountShouldDelete() {
         //GIVEN
         AccountDeleteRequest request = new AccountDeleteRequest(PASSWORD);
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(CREDENTIALS);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(CREDENTIALS);
         when(passwordService.authenticate(PASSWORD, HASHED_PASSWORD)).thenReturn(true);
         //WHEN
         underTest.deleteAccount(request, USER_ID);
         //THEN
         verify(passwordService).authenticate(PASSWORD, HASHED_PASSWORD);
-        verify(credentialsService).getByUserId(USER_ID);
+        verify(credentialsService).findByUserId(USER_ID);
 
         ArgumentCaptor<AccountDeletedEvent> argumentCaptor = ArgumentCaptor.forClass(AccountDeletedEvent.class);
         verify(applicationEventPublisher).publishEvent(argumentCaptor.capture());

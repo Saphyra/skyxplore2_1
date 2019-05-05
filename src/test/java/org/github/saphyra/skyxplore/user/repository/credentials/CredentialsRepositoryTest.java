@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,15 +31,15 @@ public class CredentialsRepositoryTest {
     }
 
     @Test
-    public void getByUserName(){
+    public void findByUserName(){
         //GIVEN
         CredentialsEntity credentialsEntity1 = new CredentialsEntity(USER_ID_1, USER_NAME_1, "");
         CredentialsEntity credentialsEntity2 = new CredentialsEntity(USER_ID_2, USER_NAME_2, "");
         underTest.saveAll(Arrays.asList(credentialsEntity1, credentialsEntity2));
         //WHEN
-        CredentialsEntity result = underTest.getByUserName(USER_NAME_1);
+        Optional<CredentialsEntity> result = underTest.findByUserName(USER_NAME_1);
         //THEN
-        assertThat(result).isEqualTo(credentialsEntity1);
+        assertThat(result).contains(credentialsEntity1);
     }
 
     @TestConfiguration

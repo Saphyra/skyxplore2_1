@@ -49,11 +49,11 @@ public class BlockedCharacterQueryServiceTest {
     public void testFindByCharacterIdOrBlockedCharacterIdShouldQueryAndReturn() {
         //GIVEN
         BlockedCharacter blockedCharacter = createBlockedCharacter();
-        when(blockedCharacterDao.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(blockedCharacter));
+        when(blockedCharacterDao.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(blockedCharacter));
         //WHEN
         List<BlockedCharacter> result = underTest.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         //THEN
-        verify(blockedCharacterDao).findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        verify(blockedCharacterDao).getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         assertThat(result).containsOnly(blockedCharacter);
     }
 

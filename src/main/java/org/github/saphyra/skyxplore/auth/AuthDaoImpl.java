@@ -28,7 +28,7 @@ class AuthDaoImpl implements AuthDao {
 
     @Override
     public Optional<User> findUserByUserName(String userName) {
-        return credentialsDao.getCredentialsByName(userName)
+        return credentialsDao.findByName(userName)
             .flatMap(skyXpCredentials -> userConverter.convertEntity(userDao.findById(skyXpCredentials.getUserId())));
     }
 

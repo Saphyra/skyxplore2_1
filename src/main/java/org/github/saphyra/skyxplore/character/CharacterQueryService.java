@@ -89,7 +89,7 @@ public class CharacterQueryService {
     }
 
     public List<SkyXpCharacter> getCharactersByUserId(String userId) {
-        return characterDao.findByUserId(userId);
+        return characterDao.getByUserId(userId);
     }
 
     List<String> getEquipmentsOfCharacter(String characterId) {

@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,7 +40,7 @@ public class FactoryDaoTest {
         FactoryEntity factoryEntity = FactoryEntity.builder()
             .factoryId(FACTORY_ID)
             .build();
-        when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(factoryEntity);
+        when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(factoryEntity));
         //WHEN
         underTest.deleteByCharacterId(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
@@ -51,16 +53,16 @@ public class FactoryDaoTest {
     @Test
     public void testFindByCharacterIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
-        FactoryEntity entity = FactoryEntity.builder().build();
+        Optional<FactoryEntity> entity = Optional.of(FactoryEntity.builder().build());
         when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entity);
 
         Factory factory = Factory.builder().build();
-        when(factoryConverter.convertEntity(entity)).thenReturn(factory);
+        when(factoryConverter.convertEntity(entity)).thenReturn(Optional.of(factory));
         //WHEN
-        Factory result = underTest.findByCharacterId(CHARACTER_ID);
+        Optional<Factory> result = underTest.findByCharacterId(CHARACTER_ID);
         //THEN
         verify(factoryRepository).findByCharacterId(CHARACTER_ID);
         verify(factoryConverter).convertEntity(entity);
-        assertThat(result).isEqualTo(factory);
+        assertThat(result).contains(factory);
     }
 }

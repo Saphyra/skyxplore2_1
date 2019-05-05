@@ -1,12 +1,6 @@
 package org.github.saphyra.skyxplore.ship;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import org.github.saphyra.skyxplore.character.CharacterQueryService;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -15,6 +9,7 @@ import org.github.saphyra.skyxplore.gamedata.entity.Slot;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.SlotQueryService;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.junit.Before;
@@ -24,7 +19,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipShipServiceTest {
@@ -64,6 +64,9 @@ public class EquipShipServiceTest {
     @Mock
     private EquippedSlot equippedSlot;
 
+    @Mock
+    private SlotQueryService slotQueryService;
+
     @InjectMocks
     private EquipShipService underTest;
 
@@ -100,8 +103,8 @@ public class EquipShipServiceTest {
         when(equippedShip.getWeaponSlotId()).thenReturn(WEAPON_SLOT_ID);
         when(equippedShip.getDefenseSlotId()).thenReturn(DEFENSE_SLOT_ID);
 
-        when(slotDao.getById(WEAPON_SLOT_ID)).thenReturn(equippedSlot);
-        when(slotDao.getById(DEFENSE_SLOT_ID)).thenReturn(equippedSlot);
+        when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(equippedSlot);
+        when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(equippedSlot);
         when(equippedSlot.getFrontEquipped()).thenReturn(new ArrayList<>(Arrays.asList(ITEM_ID)));
         when(equippedSlot.getLeftEquipped()).thenReturn(new ArrayList<>(Arrays.asList(ITEM_ID)));
         when(equippedSlot.getRightEquipped()).thenReturn(new ArrayList<>(Arrays.asList(ITEM_ID)));

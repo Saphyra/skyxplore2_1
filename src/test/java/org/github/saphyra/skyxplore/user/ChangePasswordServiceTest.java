@@ -45,7 +45,7 @@ public class ChangePasswordServiceTest {
     @Test(expected = BadCredentialsException.class)
     public void testChangePasswordShouldThrowExceptionWhenBadPassword() {
         //GIVEN
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
 
         ChangePasswordRequest request = new ChangePasswordRequest(NEW_PASSWORD, FAKE_PASSWORD);
 
@@ -57,7 +57,7 @@ public class ChangePasswordServiceTest {
     @Test
     public void testChangePasswordShouldUpdateCredentials() {
         //GIVEN
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
 
         ChangePasswordRequest request = new ChangePasswordRequest(NEW_PASSWORD, PASSWORD);
 
@@ -66,7 +66,7 @@ public class ChangePasswordServiceTest {
         //WHEN
         underTest.changePassword(request, USER_ID);
         //THEN
-        verify(credentialsService).getByUserId(USER_ID);
+        verify(credentialsService).findByUserId(USER_ID);
         verify(credentialsService).save(credentials);
         assertThat(credentials.getPassword()).isEqualTo(NEW_HASHED_PASSWORD);
     }

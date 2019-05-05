@@ -218,12 +218,12 @@ public class CharacterQueryServiceTest {
     public void testGetCharactersByUserIdShouldCallDaoAndReturn() {
         //GIVEN
         SkyXpCharacter character = createCharacter(CHARACTER_ID_1);
-        when(characterDao.findByUserId(USER_ID)).thenReturn(Arrays.asList(character));
+        when(characterDao.getByUserId(USER_ID)).thenReturn(Arrays.asList(character));
         //WHEN
         List<SkyXpCharacter> result = underTest.getCharactersByUserId(USER_ID);
         //THEN
         assertThat(result).containsOnly(character);
-        verify(characterDao).findByUserId(USER_ID);
+        verify(characterDao).getByUserId(USER_ID);
     }
 
     @Test

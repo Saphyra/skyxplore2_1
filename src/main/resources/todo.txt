@@ -13,17 +13,13 @@ BackEnd
         - Controller: before and after service call
     Use Optionals
     Repository:
-        //TODO apply conventions
         - getBy...: returns list
         - findBy...: returns Optional of
 
 ==========Tasks==========
-Grid layout for ship components
+//TODO Grid layout for ship components
 
-Email FE validation: validate special characters
-
-Split packages of type
-Configurations to config file
+//TODO Email FE validation: validate special characters
 
 Create community
     - Friends

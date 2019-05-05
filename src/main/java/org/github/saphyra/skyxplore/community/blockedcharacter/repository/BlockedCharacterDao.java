@@ -27,11 +27,11 @@ public class BlockedCharacterDao extends AbstractDao<BlockedCharacterEntity, Blo
         return converter.convertEntity(repository.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId));
     }
 
-    public List<BlockedCharacter> findByCharacterIdOrBlockedCharacterId(String characterId, String blockedCharacterId) {
-        return converter.convertEntity(repository.findByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId));
+    public List<BlockedCharacter> getByCharacterIdOrBlockedCharacterId(String characterId, String blockedCharacterId) {
+        return converter.convertEntity(repository.getByCharacterIdOrBlockedCharacterId(characterId, blockedCharacterId));
     }
 
     public List<BlockedCharacter> getBlockedCharacters(String characterId) {
-        return converter.convertEntity(repository.findByCharacterId(characterId));
+        return converter.convertEntity(repository.getByCharacterId(characterId));
     }
 }

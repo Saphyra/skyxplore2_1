@@ -39,11 +39,11 @@ public class EquippedShipDaoTest {
         EquippedShipEntity equippedShip = EquippedShipEntity.builder()
             .shipId(EQUIPPED_SHIP_ID)
             .build();
-        when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(equippedShip));
+        when(equippedShipRepository.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(equippedShip));
         //WHEN
         underTest.deleteByCharacterId(new CharacterDeletedEvent(CHARACTER_ID));
         //THEN
-        verify(equippedShipRepository).getByCharacterId(CHARACTER_ID);
+        verify(equippedShipRepository).findByCharacterId(CHARACTER_ID);
         ArgumentCaptor<ShipDeletedEvent> argumentCaptor = ArgumentCaptor.forClass(ShipDeletedEvent.class);
         verify(eventPublisher).publishEvent(argumentCaptor.capture());
         assertThat(argumentCaptor.getValue().getShipId()).isEqualTo(EQUIPPED_SHIP_ID);
@@ -51,15 +51,15 @@ public class EquippedShipDaoTest {
     }
 
     @Test
-    public void testGetShipByCharacterIdShouldCallRepositoryAndConvert() {
+    public void testFindShipByCharacterIdShouldCallRepositoryAndConvert() {
         //GIVEN
         Optional<EquippedShipEntity> equippedShipEntity = Optional.of(EquippedShipEntity.builder().build());
-        when(equippedShipRepository.getByCharacterId(CHARACTER_ID)).thenReturn(equippedShipEntity);
+        when(equippedShipRepository.findByCharacterId(CHARACTER_ID)).thenReturn(equippedShipEntity);
 
         EquippedShip equippedShip = EquippedShip.builder().build();
         when(equippedShipConverter.convertEntity(equippedShipEntity)).thenReturn(Optional.of(equippedShip));
         //WHEN
-        Optional<EquippedShip> result = underTest.getShipByCharacterId(CHARACTER_ID);
+        Optional<EquippedShip> result = underTest.findShipByCharacterId(CHARACTER_ID);
         //THEN
         assertThat(result).contains(equippedShip);
     }

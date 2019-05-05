@@ -1,11 +1,6 @@
 package org.github.saphyra.skyxplore.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 import org.junit.Test;
@@ -14,14 +9,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCredentialsServiceTest {
     private static final String USER_ID = "user_id";
     private static final String USER_NAME = "user_name";
     private static final String PASSWORD = "password";
-    public static final SkyXpCredentials CREDENTIALS = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
+    private static final SkyXpCredentials CREDENTIALS = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
 
     @Mock
     private CredentialsDao credentialsDao;
@@ -32,26 +31,26 @@ public class SkyXpCredentialsServiceTest {
     @Test(expected = BadCredentialsException.class)
     public void testGetByUserIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
-        when(credentialsDao.getByUserId(USER_ID)).thenReturn(null);
+        when(credentialsDao.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.getByUserId(USER_ID);
+        underTest.findByUserId(USER_ID);
     }
 
     @Test
     public void testGetByUserIdShouldCallDaoAndReturn() {
         //GIVEN
-        when(credentialsDao.getByUserId(USER_ID)).thenReturn(CREDENTIALS);
+        when(credentialsDao.findById(USER_ID)).thenReturn(Optional.of(CREDENTIALS));
         //WHEN
-        SkyXpCredentials result = underTest.getByUserId(USER_ID);
+        SkyXpCredentials result = underTest.findByUserId(USER_ID);
         //THEN
-        verify(credentialsDao).getByUserId(USER_ID);
+        verify(credentialsDao).findById(USER_ID);
         assertThat(result).isEqualTo(CREDENTIALS);
     }
 
     @Test
     public void testIsUserNameExistsShouldReturn() {
         //GIVEN
-        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.of(CREDENTIALS));
+        when(credentialsDao.findByName(USER_NAME)).thenReturn(Optional.of(CREDENTIALS));
         //WHEN
         boolean result = underTest.isUserNameExists(USER_NAME);
         //THEN

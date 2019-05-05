@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,9 +37,9 @@ public class UserRepositoryTest {
         UserEntity entity2 = new UserEntity(USER_ID_2, "", EMAIL_2);
         underTest.saveAll(Arrays.asList(entity1, entity2));
         //WHEN
-        UserEntity result = underTest.findByEmail(EMAIL_1);
+        Optional<UserEntity> result = underTest.findByEmail(EMAIL_1);
         //THEN
-        assertThat(result).isEqualTo(entity1);
+        assertThat(result).contains(entity1);
     }
 
 

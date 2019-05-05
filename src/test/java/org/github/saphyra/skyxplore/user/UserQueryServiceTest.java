@@ -1,11 +1,6 @@
 package org.github.saphyra.skyxplore.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
+import org.github.saphyra.skyxplore.common.exception.UserNotFoundException;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.junit.Test;
@@ -14,7 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import org.github.saphyra.skyxplore.common.exception.UserNotFoundException;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserQueryServiceTest {
@@ -51,7 +50,7 @@ public class UserQueryServiceTest {
     public void testIsEmailExists() {
         //GIVEN
         SkyXpUser user = new SkyXpUser();
-        when(userDao.findUserByEmail(EMAIL)).thenReturn(user);
+        when(userDao.findUserByEmail(EMAIL)).thenReturn(Optional.of(user));
         //WHEN
         boolean result = underTest.isEmailExists(EMAIL);
         //THEN

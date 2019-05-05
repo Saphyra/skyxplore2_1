@@ -69,19 +69,19 @@ public class BlockedCharacterDaoTest {
     }
 
     @Test
-    public void testFindByCharacterIdOrBlockedCharacterIdShouldReturnDomain() {
+    public void testGetByCharacterIdOrBlockedCharacterIdShouldReturnDomain() {
         //GIVEN
         BlockedCharacterEntity entity = createBlockedCharacterEntity();
         List<BlockedCharacterEntity> entityList = Arrays.asList(entity);
-        when(blockedCharacterRepository.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(entityList);
+        when(blockedCharacterRepository.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(entityList);
 
         BlockedCharacter blockedCharacter = createBlockedCharacter();
         List<BlockedCharacter> blockedCharacterList = Arrays.asList(blockedCharacter);
         when(blockedCharacterConverter.convertEntity(entityList)).thenReturn(blockedCharacterList);
         //WHEN
-        List<BlockedCharacter> result = underTest.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        List<BlockedCharacter> result = underTest.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         //THEN
-        verify(blockedCharacterRepository).findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        verify(blockedCharacterRepository).getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
         verify(blockedCharacterConverter).convertEntity(entityList);
         assertThat(result).isEqualTo(blockedCharacterList);
     }
@@ -91,7 +91,7 @@ public class BlockedCharacterDaoTest {
         //GIVEN
         BlockedCharacterEntity entity = createBlockedCharacterEntity();
         List<BlockedCharacterEntity> entityList = Arrays.asList(entity);
-        when(blockedCharacterRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entityList);
+        when(blockedCharacterRepository.getByCharacterId(CHARACTER_ID)).thenReturn(entityList);
 
         BlockedCharacter blockedCharacter = createBlockedCharacter();
         List<BlockedCharacter> blockedCharacterList = Arrays.asList(blockedCharacter);
@@ -99,7 +99,7 @@ public class BlockedCharacterDaoTest {
         //WHEN
         List<BlockedCharacter> result = underTest.getBlockedCharacters(CHARACTER_ID);
         //THEN
-        verify(blockedCharacterRepository).findByCharacterId(CHARACTER_ID);
+        verify(blockedCharacterRepository).getByCharacterId(CHARACTER_ID);
         verify(blockedCharacterConverter).convertEntity(entityList);
         assertThat(result).isEqualTo(blockedCharacterList);
     }

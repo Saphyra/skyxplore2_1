@@ -24,11 +24,7 @@ public class CredentialsDao extends AbstractDao<CredentialsEntity, SkyXpCredenti
         repository.deleteById(accountDeletedEvent.getUserId());
     }
 
-    public SkyXpCredentials getByUserId(String userId) {
-        return repository.findById(userId).map(converter::convertEntity).orElse(null);
-    }
-
-    public Optional<SkyXpCredentials> getCredentialsByName(String userName) {
-        return converter.convertEntityToOptional(repository.getByUserName(userName));
+    public Optional<SkyXpCredentials> findByName(String userName) {
+        return converter.convertEntity(repository.findByUserName(userName));
     }
 }

@@ -70,7 +70,7 @@ public class ChangeEmailServiceTest {
 
 
         when(userQueryService.isEmailExists(NEW_EMAIL)).thenReturn(false);
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
         when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
         underTest.changeEmail(request, USER_ID);
@@ -85,7 +85,7 @@ public class ChangeEmailServiceTest {
         user.setEmail(EMAIL);
 
         when(userQueryService.isEmailExists(NEW_EMAIL)).thenReturn(false);
-        when(credentialsService.getByUserId(USER_ID)).thenReturn(credentials);
+        when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
         when(userQueryService.getUserById(USER_ID)).thenReturn(user);
         when(passwordService.authenticate(PASSWORD, HASHED_PASSWORD)).thenReturn(true);
         //WHEN
@@ -93,7 +93,7 @@ public class ChangeEmailServiceTest {
         //THEN
         verify(passwordService).authenticate(PASSWORD, HASHED_PASSWORD);
         verify(userQueryService).isEmailExists(NEW_EMAIL);
-        verify(credentialsService).getByUserId(USER_ID);
+        verify(credentialsService).findByUserId(USER_ID);
         verify(userDao).save(user);
         verify(emailCache).invalidate(NEW_EMAIL);
         assertThat(user.getEmail()).isEqualTo(NEW_EMAIL);

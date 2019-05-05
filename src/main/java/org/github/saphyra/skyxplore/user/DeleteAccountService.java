@@ -22,7 +22,7 @@ class DeleteAccountService {
 
     @Transactional
     void deleteAccount(AccountDeleteRequest request, String userId) {
-        SkyXpCredentials skyXpCredentials = credentialsService.getByUserId(userId);
+        SkyXpCredentials skyXpCredentials = credentialsService.findByUserId(userId);
         if (!passwordService.authenticate(request.getPassword(), skyXpCredentials.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }

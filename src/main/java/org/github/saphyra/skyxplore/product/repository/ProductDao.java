@@ -30,8 +30,8 @@ public class ProductDao extends AbstractDao<ProductEntity, Product, String, Prod
         repository.deleteByFactoryId(event.getFactoryId());
     }
 
-    public List<Product> findByFactoryId(String factoryId) {
-        return converter.convertEntity(repository.findByFactoryId(factoryId));
+    public List<Product> getByFactoryId(String factoryId) {
+        return converter.convertEntity(repository.getByFactoryId(factoryId));
     }
 
     public List<Product> getFinishedProducts() {

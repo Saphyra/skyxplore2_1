@@ -1,8 +1,7 @@
 package org.github.saphyra.skyxplore.character.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.github.saphyra.dao.AbstractDao;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
@@ -10,8 +9,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.dao.AbstractDao;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -35,7 +34,7 @@ public class CharacterDao extends AbstractDao<CharacterEntity, SkyXpCharacter, S
 
     @EventListener
     void deleteByUserId(AccountDeletedEvent accountDeletedEvent) {
-        List<SkyXpCharacter> characters = findByUserId(accountDeletedEvent.getUserId());
+        List<SkyXpCharacter> characters = getByUserId(accountDeletedEvent.getUserId());
         characters.forEach(e -> deleteById(e.getCharacterId()));
     }
 
@@ -43,11 +42,11 @@ public class CharacterDao extends AbstractDao<CharacterEntity, SkyXpCharacter, S
         return converter.convertEntity(repository.findByCharacterName(characterName));
     }
 
-    public List<SkyXpCharacter> findCharacterByNameLike(String name) {
-        return converter.convertEntity(repository.findByCharacterNameContaining(name));
+    public List<SkyXpCharacter> getCharacterByNameLike(String name) {
+        return converter.convertEntity(repository.getByCharacterNameContaining(name));
     }
 
-    public List<SkyXpCharacter> findByUserId(String userId) {
-        return converter.convertEntity(repository.findByUserId(userId));
+    public List<SkyXpCharacter> getByUserId(String userId) {
+        return converter.convertEntity(repository.getByUserId(userId));
     }
 }

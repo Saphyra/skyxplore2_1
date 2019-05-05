@@ -10,6 +10,8 @@ import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +34,7 @@ public class UserConverterTest {
         skyXpUser.setUserId(USER_ID);
 
         SkyXpCredentials skyXpCredentials = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
-        when(credentialsDao.getByUserId(USER_ID)).thenReturn(skyXpCredentials);
+        when(credentialsDao.findById(USER_ID)).thenReturn(Optional.of(skyXpCredentials));
         //WHEN
         User result = underTest.convertEntity(skyXpUser);
         //THEN

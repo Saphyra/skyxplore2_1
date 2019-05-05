@@ -66,7 +66,7 @@ public class FriendRequestRepositoryTest {
     }
 
     @Test
-    public void findByCharacterId() {
+    public void getByCharacterId() {
         //GIVEN
         FriendRequestEntity entity1 = FriendRequestEntity.builder()
             .friendRequestId(FRIEND_REQUEST_ID_1)
@@ -88,13 +88,13 @@ public class FriendRequestRepositoryTest {
 
         underTest.saveAll(Arrays.asList(entity1, entity2, entity3));
         //WHEN
-        List<FriendRequestEntity> result = underTest.findByCharacterId(CHARACTER_ID_1);
+        List<FriendRequestEntity> result = underTest.getByCharacterId(CHARACTER_ID_1);
         //THEN
         assertThat(result).containsOnly(entity1, entity2);
     }
 
     @Test
-    public void findByCharacterIdOrFriendId() {
+    public void getByCharacterIdOrFriendId() {
         //GIVEN
         FriendRequestEntity entity1 = FriendRequestEntity.builder()
             .friendRequestId(FRIEND_REQUEST_ID_1)
@@ -122,7 +122,7 @@ public class FriendRequestRepositoryTest {
 
         underTest.saveAll(Arrays.asList(entity1, entity2, entity3, entity4));
         //WHEN
-        List<FriendRequestEntity> result = underTest.findByCharacterIdOrFriendId(CHARACTER_ID_1, CHARACTER_ID_2);
+        List<FriendRequestEntity> result = underTest.getByCharacterIdOrFriendId(CHARACTER_ID_1, CHARACTER_ID_2);
         //THEN
         assertThat(result).containsOnly(entity1, entity2);
     }

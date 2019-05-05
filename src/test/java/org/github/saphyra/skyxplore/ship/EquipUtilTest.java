@@ -4,8 +4,8 @@ import org.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import org.github.saphyra.skyxplore.gamedata.entity.Extender;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.slot.SlotQueryService;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,6 @@ import static org.github.saphyra.skyxplore.ship.EquippedShipConstants.WEAPON_SLO
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,7 +28,7 @@ public class EquipUtilTest {
     private ExtenderService extenderService;
 
     @Mock
-    private SlotDao slotDao;
+    private SlotQueryService slotQueryService;
 
     @InjectMocks
     private EquipUtil underTest;
@@ -72,11 +71,10 @@ public class EquipUtilTest {
             .build();
         EquippedSlot slot = EquippedSlot.builder()
             .slotId(DEFENSE_SLOT_ID).build();
-        when(slotDao.getById(DEFENSE_SLOT_ID)).thenReturn(slot);
+        when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, DEFENSE_SLOT_NAME);
         //THEN
-        verify(slotDao).getById(DEFENSE_SLOT_ID);
         assertEquals(slot, result);
     }
 
@@ -89,11 +87,10 @@ public class EquipUtilTest {
         EquippedSlot slot = EquippedSlot.builder()
             .slotId(WEAPON_SLOT_ID)
             .build();
-        when(slotDao.getById(WEAPON_SLOT_ID)).thenReturn(slot);
+        when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, WEAPON_SLOT_NAME);
         //THEN
-        verify(slotDao).getById(WEAPON_SLOT_ID);
         assertEquals(slot, result);
     }
 }

@@ -75,18 +75,18 @@ public class AuthDaoImplTest {
     @Test
     public void testFindUserByUserNameShouldReturnEmptyWhenCredentialsNotFound() {
         //GIVEN
-        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.empty());
+        when(credentialsDao.findByName(USER_NAME)).thenReturn(Optional.empty());
         //WHEN
         Optional<User> result = underTest.findUserByUserName(USER_NAME);
         //THEN
-        verify(credentialsDao).getCredentialsByName(USER_NAME);
+        verify(credentialsDao).findByName(USER_NAME);
         assertThat(result).isEmpty();
     }
 
     @Test
     public void testFindUserByUserName() {
         //GIVEN
-        when(credentialsDao.getCredentialsByName(USER_NAME)).thenReturn(Optional.of(new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD)));
+        when(credentialsDao.findByName(USER_NAME)).thenReturn(Optional.of(new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD)));
         //WHEN
         Optional<User> result = underTest.findUserByUserName(USER_NAME);
         //THEN

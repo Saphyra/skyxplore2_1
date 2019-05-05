@@ -1,12 +1,6 @@
 package org.github.saphyra.skyxplore.community.blockedcharacter.repository;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -18,6 +12,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = BlockedCharacterRepositoryTest.TestConfig.class)
@@ -61,7 +61,7 @@ public class BlockedCharacterRepositoryTest {
     }
 
     @Test
-    public void findByCharacterId() {
+    public void getByCharacterId() {
         //GIVEN
         BlockedCharacterEntity entity1 = BlockedCharacterEntity.builder()
             .characterId(CHARACTER_ID_1)
@@ -79,7 +79,7 @@ public class BlockedCharacterRepositoryTest {
             .build();
         underTest.saveAll(Arrays.asList(entity1, entity2, entity3));
         //WHEN
-        List<BlockedCharacterEntity> result = underTest.findByCharacterId(CHARACTER_ID_1);
+        List<BlockedCharacterEntity> result = underTest.getByCharacterId(CHARACTER_ID_1);
         //THEN
         assertThat(result).containsOnly(entity1, entity2);
     }
@@ -109,7 +109,7 @@ public class BlockedCharacterRepositoryTest {
     }
 
     @Test
-    public void findByCharacterIdOrBlockedCharacterId() {
+    public void getByCharacterIdOrBlockedCharacterId() {
         //GIVEN
         BlockedCharacterEntity entity1 = BlockedCharacterEntity.builder()
             .characterId(CHARACTER_ID_1)
@@ -137,7 +137,7 @@ public class BlockedCharacterRepositoryTest {
             .build();
         underTest.saveAll(Arrays.asList(entity1, entity2, entity3, entity4, entity5));
         //WHEN
-        List<BlockedCharacterEntity> result = underTest.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID);
+        List<BlockedCharacterEntity> result = underTest.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID_1, BLOCKED_CHARACTER_ID);
         //THEN
         assertThat(result).containsOnly(entity1, entity2);
     }

@@ -3,11 +3,12 @@ package org.github.saphyra.skyxplore.auth;
 import com.github.saphyra.authservice.domain.Credentials;
 import com.github.saphyra.authservice.domain.User;
 import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
+import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 
@@ -18,7 +19,8 @@ class UserConverter extends ConverterBase<SkyXpUser, User> {
 
     @Override
     public User processEntityConversion(SkyXpUser entity) {
-        SkyXpCredentials skyXpCredentials = credentialsDao.getByUserId(entity.getUserId());
+        SkyXpCredentials skyXpCredentials = credentialsDao.findById(entity.getUserId())
+            .orElseThrow(() -> new NotFoundException("Credentials not found for user " + entity.getUserId()));
         return User.builder()
             .userId(entity.getUserId())
             .credentials(

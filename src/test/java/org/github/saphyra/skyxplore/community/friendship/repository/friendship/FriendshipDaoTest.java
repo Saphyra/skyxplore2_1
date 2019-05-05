@@ -10,7 +10,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -68,33 +67,6 @@ public class FriendshipDaoTest {
         verify(friendshipRepository).getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID);
         verify(friendshipConverter).convertEntity(entityList);
         assertThat(result).isEqualTo(friendshipList);
-    }
-
-    @Test
-    public void testGetByFriendshipIdShouldReturnNull() {
-        //GIVEN
-        when(friendshipRepository.findById(FRIENDSHIP_ID)).thenReturn(Optional.empty());
-        //WHEN
-        Friendship result = underTest.getByFriendshipId(FRIENDSHIP_ID);
-        //THEN
-        verify(friendshipRepository).findById(FRIENDSHIP_ID);
-        assertThat(result).isNull();
-    }
-
-    @Test
-    public void testGetByFriendshipIdShouldCallRepositoryAndReturnDomain() {
-        //GIVEN
-        FriendshipEntity entity = createFriendshipEntity();
-        when(friendshipRepository.findById(FRIENDSHIP_ID)).thenReturn(Optional.of(entity));
-
-        Friendship friendship = createFriendship();
-        when(friendshipConverter.convertEntity(entity)).thenReturn(friendship);
-        //WHEN
-        Friendship result = underTest.getByFriendshipId(FRIENDSHIP_ID);
-        //THEN
-        verify(friendshipRepository).findById(FRIENDSHIP_ID);
-        verify(friendshipConverter).convertEntity(entity);
-        assertThat(result).isEqualTo(friendship);
     }
 
     @Test

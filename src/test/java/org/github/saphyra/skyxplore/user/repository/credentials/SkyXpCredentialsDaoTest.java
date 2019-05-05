@@ -46,45 +46,16 @@ public class SkyXpCredentialsDaoTest {
     }
 
     @Test
-    public void testGetByUserIdShouldReturnNull() {
+    public void testFindByNameShouldCallRepositoryAndReturnDomain() {
         //GIVEN
-        when(credentialsRepository.findById(USER_ID)).thenReturn(Optional.empty());
-        //WHEN
-        SkyXpCredentials result = underTest.getByUserId(USER_ID);
-        //THEN
-        verify(credentialsRepository).findById(USER_ID);
-        assertThat(result).isNull();
-    }
-
-    @Test
-    public void testGetByUserIdShouldCallRepositoryAndReturnDomain() {
-        //GIVEN
-        CredentialsEntity entity = createCredentialsEntity();
-        when(credentialsRepository.findById(USER_ID)).thenReturn(Optional.of(entity));
+        Optional<CredentialsEntity> entity = Optional.of(createCredentialsEntity());
+        when(credentialsRepository.findByUserName(USER_NAME)).thenReturn(entity);
 
         SkyXpCredentials skyXpCredentials = createCredentials();
-        when(credentialsConverter.convertEntity(entity)).thenReturn(skyXpCredentials);
+        when(credentialsConverter.convertEntity(entity)).thenReturn(Optional.of(skyXpCredentials));
         //WHEN
-        SkyXpCredentials result = underTest.getByUserId(USER_ID);
+        Optional<SkyXpCredentials> result = underTest.findByName(USER_NAME);
         //THEN
-        verify(credentialsRepository).findById(USER_ID);
-        verify(credentialsConverter).convertEntity(entity);
-        assertThat(result).isEqualTo(skyXpCredentials);
-    }
-
-    @Test
-    public void testGetByNameShouldCallRepositoryAndReturnDomain() {
-        //GIVEN
-        CredentialsEntity entity = createCredentialsEntity();
-        when(credentialsRepository.getByUserName(USER_NAME)).thenReturn(entity);
-
-        SkyXpCredentials skyXpCredentials = createCredentials();
-        when(credentialsConverter.convertEntityToOptional(entity)).thenReturn(Optional.of(skyXpCredentials));
-        //WHEN
-        Optional<SkyXpCredentials> result = underTest.getCredentialsByName(USER_NAME);
-        //THEN
-        verify(credentialsRepository).getByUserName(USER_NAME);
-        verify(credentialsConverter).convertEntityToOptional(entity);
         assertThat(result).contains(skyXpCredentials);
     }
 

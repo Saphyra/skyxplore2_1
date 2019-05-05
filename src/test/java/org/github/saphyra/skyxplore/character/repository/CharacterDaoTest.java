@@ -1,13 +1,5 @@
 package org.github.saphyra.skyxplore.character.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.event.AccountDeletedEvent;
 import org.github.saphyra.skyxplore.event.CharacterDeletedEvent;
@@ -18,6 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterDaoTest {
@@ -57,7 +57,7 @@ public class CharacterDaoTest {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         List<CharacterEntity> entityList = Arrays.asList(entity);
-        when(characterRepository.findByUserId(USER_ID)).thenReturn(entityList);
+        when(characterRepository.getByUserId(USER_ID)).thenReturn(entityList);
 
         SkyXpCharacter character = createCharacter();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
@@ -65,7 +65,7 @@ public class CharacterDaoTest {
         //WHEN
         underTest.deleteByUserId(new AccountDeletedEvent(USER_ID));
         //THEN
-        verify(characterRepository).findByUserId(USER_ID);
+        verify(characterRepository).getByUserId(USER_ID);
         verify(characterRepository).deleteById(CHARACTER_ID);
     }
 
@@ -86,37 +86,37 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void testFindCharacterByNameLikeShouldCallRepositoryAndReturnDomain() {
+    public void testGetCharacterByNameLikeShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         List<CharacterEntity> entityList = Arrays.asList(entity);
-        when(characterRepository.findByCharacterNameContaining(CHARACTER_NAME)).thenReturn(entityList);
+        when(characterRepository.getByCharacterNameContaining(CHARACTER_NAME)).thenReturn(entityList);
 
         SkyXpCharacter character = createCharacter();
         List<SkyXpCharacter> characters = Arrays.asList(character);
         when(characterConverter.convertEntity(entityList)).thenReturn(characters);
         //WHEN
-        List<SkyXpCharacter> result = underTest.findCharacterByNameLike(CHARACTER_NAME);
+        List<SkyXpCharacter> result = underTest.getCharacterByNameLike(CHARACTER_NAME);
         //THEN
-        verify(characterRepository).findByCharacterNameContaining(CHARACTER_NAME);
+        verify(characterRepository).getByCharacterNameContaining(CHARACTER_NAME);
         verify(characterConverter).convertEntity(entityList);
         assertThat(result).isEqualTo(characters);
     }
 
     @Test
-    public void testFindByUserIdShouldCallRepositoryAndReturnDomain() {
+    public void testGetByUserIdShouldCallRepositoryAndReturnDomain() {
         //GIVEN
         CharacterEntity entity = createCharacterEntity();
         List<CharacterEntity> entityList = Arrays.asList(entity);
-        when(characterRepository.findByUserId(USER_ID)).thenReturn(entityList);
+        when(characterRepository.getByUserId(USER_ID)).thenReturn(entityList);
 
         SkyXpCharacter character = createCharacter();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
         when(characterConverter.convertEntity(entityList)).thenReturn(characterList);
         //WHEN
-        List<SkyXpCharacter> result = underTest.findByUserId(USER_ID);
+        List<SkyXpCharacter> result = underTest.getByUserId(USER_ID);
         //THEN
-        verify(characterRepository).findByUserId(USER_ID);
+        verify(characterRepository).getByUserId(USER_ID);
         verify(characterConverter).convertEntity(entityList);
         assertThat(result).isEqualTo(characterList);
     }
