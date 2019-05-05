@@ -6,7 +6,6 @@ import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.github.saphyra.skyxplore.gamedata.entity.Extender;
 import org.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import org.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,8 @@ class UnequipExtenderService {
     private final ExtenderService extenderService;
     private final SlotDao slotDao;
 
-    void unequipExtender(UnequipRequest request, SkyXpCharacter character, EquippedShip ship) {
-        Extender extender = extenderService.get(request.getItemId());
+    void unequipExtender(String itemId, SkyXpCharacter character, EquippedShip ship) {
+        Extender extender = extenderService.get(itemId);
         if (extender.getExtendedSlot().contains(CONNECTOR_SLOT_NAME)) {
             ship.removeConnectorSlot(extender.getExtendedNum(), character, extenderService);
         } else {

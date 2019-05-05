@@ -54,7 +54,7 @@ public class UnequipServiceTest {
         //WHEN
         underTest.unequip(request, CHARACTER_ID);
         //THEN
-        verify(unequipConnectorService).unequipConnector(request, character, ship);
+        verify(unequipConnectorService).unequipConnector(EQUIPMENT_ID, character, ship);
         verify(character).addEquipment(EQUIPMENT_ID);
         verify(characterDao).save(character);
     }

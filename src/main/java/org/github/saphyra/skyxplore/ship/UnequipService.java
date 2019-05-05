@@ -30,7 +30,7 @@ class UnequipService {
         EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
 
         if (request.getSlot().contains(CONNECTOR_SLOT_NAME)) {
-            unequipConnectorService.unequipConnector(request, character, ship);
+            unequipConnectorService.unequipConnector(request.getItemId(), character, ship);
         } else {
             unequipFromSlotService.unequipFromSlot(request, ship);
         }
