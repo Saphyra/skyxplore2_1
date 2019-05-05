@@ -54,8 +54,9 @@ public class AuthDaoImplTest {
 
     @Before
     public void init() {
-        SkyXpUser skyXpUser = new SkyXpUser();
-        skyXpUser.setUserId(USER_ID);
+        SkyXpUser skyXpUser = SkyXpUser.builder()
+            .userId(USER_ID)
+            .build();
         Optional<SkyXpUser> optionalSkyXpUser = Optional.of(skyXpUser);
         when(userDao.findById(USER_ID)).thenReturn(optionalSkyXpUser);
 

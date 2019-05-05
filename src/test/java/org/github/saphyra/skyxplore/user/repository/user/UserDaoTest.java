@@ -47,9 +47,10 @@ public class UserDaoTest {
         Optional<UserEntity> entityOptional = Optional.of(userEntity);
         when(userRepository.findByEmail(EMAIL)).thenReturn(entityOptional);
 
-        SkyXpUser user = new SkyXpUser();
-        user.setUserId(USER_ID);
-        user.setEmail(EMAIL);
+        SkyXpUser user = SkyXpUser.builder()
+            .userId(USER_ID)
+            .email(EMAIL)
+            .build();
         when(skyXpUserConverter.convertEntity(entityOptional)).thenReturn(Optional.of(user));
         //WHEN
         Optional<SkyXpUser> result = underTest.findUserByEmail(EMAIL);

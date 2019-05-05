@@ -21,30 +21,23 @@ class EquippedShipConverter extends ConverterBase<EquippedShipEntity, EquippedSh
 
     @Override
     public EquippedShipEntity processDomainConversion(EquippedShip domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
-        EquippedShipEntity entity = new EquippedShipEntity();
-        entity.setCharacterId(domain.getCharacterId());
-        entity.setShipId(domain.getShipId());
-        entity.setShipType(stringEncryptor.encryptEntity(domain.getShipType(), domain.getShipId()));
-        entity.setCoreHull(integerEncryptor.encryptEntity(domain.getCoreHull(), domain.getShipId()));
-        entity.setConnectorSlot(integerEncryptor.encryptEntity(domain.getConnectorSlot(), domain.getShipId()));
-        entity.setConnectorEquipped(stringEncryptor.encryptEntity(
-            objectMapperDelegator.writeValueAsString(domain.getConnectorEquipped()),
-            domain.getShipId())
-        );
-        entity.setDefenseSlotId(domain.getDefenseSlotId());
-        entity.setWeaponSlotId(domain.getWeaponSlotId());
-        return entity;
+        return EquippedShipEntity.builder()
+            .characterId(domain.getCharacterId())
+            .shipId(domain.getShipId())
+            .shipType(stringEncryptor.encryptEntity(domain.getShipType(), domain.getShipId()))
+            .coreHull(integerEncryptor.encryptEntity(domain.getCoreHull(), domain.getShipId()))
+            .connectorSlot(integerEncryptor.encryptEntity(domain.getConnectorSlot(), domain.getShipId()))
+            .connectorEquipped(stringEncryptor.encryptEntity(
+                objectMapperDelegator.writeValueAsString(domain.getConnectorEquipped()),
+                domain.getShipId())
+            )
+            .defenseSlotId(domain.getDefenseSlotId())
+            .weaponSlotId(domain.getWeaponSlotId())
+            .build();
     }
 
     @Override
     public EquippedShip processEntityConversion(EquippedShipEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
         List<String> connectors = objectMapperDelegator.readValue(
             stringEncryptor.decryptEntity(
                 entity.getConnectorEquipped(),

@@ -1,14 +1,6 @@
 package org.github.saphyra.skyxplore.user.repository.user;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.user.domain.Role;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
@@ -17,6 +9,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -62,10 +62,11 @@ public class SkyXpUserConverterTest {
     @Test
     public void testConvertDomainShouldConvert() {
         //GIVEN
-        SkyXpUser user = new SkyXpUser();
-        user.setUserId(USER_ID);
-        user.setEmail(EMAIL);
-        user.setRoles(ROLES);
+        SkyXpUser user = SkyXpUser.builder()
+            .userId(USER_ID)
+            .email(EMAIL)
+            .roles(ROLES)
+            .build();
 
         given(objectMapperDelegator.writeValueAsString(ROLES)).willReturn(ROLES_STRING);
         //WHEN

@@ -37,7 +37,7 @@ public class UserQueryServiceTest {
     @Test
     public void testGetUserByIdShouldQueryAndReturn() {
         //GIVEN
-        SkyXpUser user = new SkyXpUser();
+        SkyXpUser user = SkyXpUser.builder().build();
         when(userDao.findById(USER_ID)).thenReturn(Optional.of(user));
         //WHEN
         SkyXpUser result = underTest.getUserById(USER_ID);
@@ -49,7 +49,7 @@ public class UserQueryServiceTest {
     @Test
     public void testIsEmailExists() {
         //GIVEN
-        SkyXpUser user = new SkyXpUser();
+        SkyXpUser user = SkyXpUser.builder().build();
         when(userDao.findUserByEmail(EMAIL)).thenReturn(Optional.of(user));
         //WHEN
         boolean result = underTest.isEmailExists(EMAIL);

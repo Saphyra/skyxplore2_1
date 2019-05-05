@@ -9,9 +9,6 @@ import com.github.saphyra.converter.ConverterBase;
 class FriendRequestConverter extends ConverterBase<FriendRequestEntity, FriendRequest> {
     @Override
     public FriendRequest processEntityConversion(FriendRequestEntity entity) {
-        if (entity == null) {
-            return null;
-        }
         return FriendRequest.builder()
             .friendRequestId(entity.getFriendRequestId())
             .characterId(entity.getCharacterId())
@@ -21,9 +18,6 @@ class FriendRequestConverter extends ConverterBase<FriendRequestEntity, FriendRe
 
     @Override
     public FriendRequestEntity processDomainConversion(FriendRequest domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
         return FriendRequestEntity.builder()
             .friendRequestId(domain.getFriendRequestId())
             .characterId(domain.getCharacterId())

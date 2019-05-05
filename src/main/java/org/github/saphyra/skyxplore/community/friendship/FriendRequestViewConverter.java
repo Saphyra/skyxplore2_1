@@ -14,14 +14,11 @@ public class FriendRequestViewConverter extends AbstractViewConverter<FriendRequ
 
     @Override
     public FriendRequestView convertDomain(FriendRequest domain) {
-        if (domain == null) {
-            return null;
-        }
-        FriendRequestView view = new FriendRequestView();
-        view.setCharacterId(domain.getCharacterId());
-        view.setFriendRequestId(domain.getFriendRequestId());
-        view.setFriendId(domain.getFriendId());
-        view.setFriendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName());
-        return view;
+        return FriendRequestView.builder()
+            .characterId(domain.getCharacterId())
+            .friendRequestId(domain.getFriendRequestId())
+            .friendId(domain.getFriendId())
+            .friendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName())
+            .build();
     }
 }

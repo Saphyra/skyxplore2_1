@@ -12,27 +12,19 @@ class FactoryConverter extends ConverterBase<FactoryEntity, Factory> {
 
     @Override
     public Factory processEntityConversion(FactoryEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        Factory domain = new Factory();
-        domain.setFactoryId(entity.getFactoryId());
-        domain.setCharacterId(entity.getCharacterId());
-        domain.setMaterials(materialsConverter.convertEntity(entity.getMaterials(), entity.getFactoryId()));
-
-        return domain;
+        return Factory.builder()
+            .characterId(entity.getCharacterId())
+            .factoryId(entity.getFactoryId())
+            .materials(materialsConverter.convertEntity(entity.getMaterials(), entity.getFactoryId()))
+            .build();
     }
 
     @Override
     public FactoryEntity processDomainConversion(Factory domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
-        FactoryEntity entity = new FactoryEntity();
-        entity.setFactoryId(domain.getFactoryId());
-        entity.setCharacterId(domain.getCharacterId());
-        entity.setMaterials(materialsConverter.convertDomain(domain.getMaterials(), domain.getFactoryId()));
-
-        return entity;
+        return FactoryEntity.builder()
+            .factoryId(domain.getFactoryId())
+            .characterId(domain.getCharacterId())
+            .materials(materialsConverter.convertDomain(domain.getMaterials(), domain.getFactoryId()))
+            .build();
     }
 }

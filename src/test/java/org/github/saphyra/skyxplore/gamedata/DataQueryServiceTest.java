@@ -1,18 +1,11 @@
 package org.github.saphyra.skyxplore.gamedata;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import org.github.saphyra.skyxplore.gamedata.entity.Material;
-import org.github.saphyra.skyxplore.gamedata.entity.Weapon;
+import org.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
+import org.github.saphyra.skyxplore.gamedata.entity.Ability;
 import org.github.saphyra.skyxplore.gamedata.entity.FactoryData;
 import org.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
+import org.github.saphyra.skyxplore.gamedata.entity.Material;
+import org.github.saphyra.skyxplore.gamedata.entity.Weapon;
 import org.github.saphyra.skyxplore.gamedata.subservice.AbilityService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ArmorService;
 import org.github.saphyra.skyxplore.gamedata.subservice.BatteryService;
@@ -24,7 +17,14 @@ import org.github.saphyra.skyxplore.gamedata.subservice.ShieldService;
 import org.github.saphyra.skyxplore.gamedata.subservice.ShipService;
 import org.github.saphyra.skyxplore.gamedata.subservice.StorageService;
 import org.github.saphyra.skyxplore.gamedata.subservice.WeaponService;
-import org.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataQueryServiceTest {
@@ -91,8 +91,17 @@ public class DataQueryServiceTest {
         assertThat(result).isEqualTo(weapon);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getFactoryData_notFactoryData() {
+        //GIVEN
+        Ability ability = new Ability();
+        when(abilityService.get(DATA_ID)).thenReturn(ability);
+        //WHEN
+        underTest.getFactoryData(DATA_ID);
+    }
+
     @Test
-    public void testGetFactoryDataShouldThrowExceptionWhenNotFactoryData() {
+    public void getFactoryData() {
         //GIVEN
         Weapon weapon = new Weapon();
         weapon.setId(DATA_ID);

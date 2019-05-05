@@ -30,8 +30,9 @@ public class UserConverterTest {
     @Test
     public void testConvert() {
         //GIVEN
-        SkyXpUser skyXpUser = new SkyXpUser();
-        skyXpUser.setUserId(USER_ID);
+        SkyXpUser skyXpUser = SkyXpUser.builder()
+            .userId(USER_ID)
+            .build();
 
         SkyXpCredentials skyXpCredentials = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
         when(credentialsDao.findById(USER_ID)).thenReturn(Optional.of(skyXpCredentials));

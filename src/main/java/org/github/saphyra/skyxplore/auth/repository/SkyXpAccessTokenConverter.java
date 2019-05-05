@@ -1,11 +1,10 @@
 package org.github.saphyra.skyxplore.auth.repository;
 
+import com.github.saphyra.converter.ConverterBase;
+import lombok.RequiredArgsConstructor;
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.springframework.stereotype.Component;
-
-import com.github.saphyra.converter.ConverterBase;
-import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
@@ -15,9 +14,6 @@ class SkyXpAccessTokenConverter extends ConverterBase<AccessTokenEntity, SkyXpAc
 
     @Override
     public SkyXpAccessToken processEntityConversion(AccessTokenEntity entity) {
-        if (entity == null) {
-            return null;
-        }
         return SkyXpAccessToken.builder()
             .accessTokenId(entity.getAccessTokenId())
             .userId(entity.getUserId())
@@ -28,14 +24,11 @@ class SkyXpAccessTokenConverter extends ConverterBase<AccessTokenEntity, SkyXpAc
 
     @Override
     public AccessTokenEntity processDomainConversion(SkyXpAccessToken token) {
-        if (token == null) {
-            throw new IllegalArgumentException("token must not be null");
-        }
-        AccessTokenEntity entity = new AccessTokenEntity();
-        entity.setAccessTokenId(token.getAccessTokenId());
-        entity.setUserId(token.getUserId());
-        entity.setLastAccess(dateTimeUtil.convertDomain(token.getLastAccess()));
-        entity.setCharacterId(token.getCharacterId());
-        return entity;
+        return AccessTokenEntity.builder()
+            .accessTokenId(token.getAccessTokenId())
+            .userId(token.getUserId())
+            .lastAccess(dateTimeUtil.convertDomain(token.getLastAccess()))
+            .characterId(token.getCharacterId())
+            .build();
     }
 }

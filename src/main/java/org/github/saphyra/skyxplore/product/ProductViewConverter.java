@@ -14,9 +14,6 @@ class ProductViewConverter extends AbstractViewConverter<Product, ProductView> {
 
     @Override
     public ProductView convertDomain(Product domain) {
-        if (domain == null) {
-            return null;
-        }
         return ProductView.builder()
             .productId(domain.getProductId())
             .factoryId(domain.getFactoryId())

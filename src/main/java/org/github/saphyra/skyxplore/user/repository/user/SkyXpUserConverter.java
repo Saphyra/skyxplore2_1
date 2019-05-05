@@ -1,46 +1,34 @@
 package org.github.saphyra.skyxplore.user.repository.user;
 
-import java.util.HashSet;
-import java.util.List;
-
+import com.github.saphyra.converter.ConverterBase;
+import lombok.RequiredArgsConstructor;
 import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.user.domain.Role;
 import org.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.converter.ConverterBase;
-import lombok.RequiredArgsConstructor;
+import java.util.HashSet;
 
 @Component
 @RequiredArgsConstructor
 class SkyXpUserConverter extends ConverterBase<UserEntity, SkyXpUser> {
-    private final ObjectMapperDelegator objectMapper;
+    private final ObjectMapperDelegator objectMapperDelegator;
 
     @Override
     public SkyXpUser processEntityConversion(UserEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
-        SkyXpUser user = new SkyXpUser();
-        user.setUserId(entity.getUserId());
-        user.setEmail(entity.getEmail());
-        List<Role> roles = objectMapper.readValue(entity.getRoles(), Role[].class);
-        user.setRoles(new HashSet<>(roles));
-        return user;
+        return SkyXpUser.builder()
+            .userId(entity.getUserId())
+            .email(entity.getEmail())
+            .roles(new HashSet<>(objectMapperDelegator.readValue(entity.getRoles(), Role[].class)))
+            .build();
     }
 
     @Override
     public UserEntity processDomainConversion(SkyXpUser domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
-
-        UserEntity entity = new UserEntity();
-        entity.setUserId(domain.getUserId());
-        entity.setEmail(domain.getEmail());
-        entity.setRoles(objectMapper.writeValueAsString(domain.getRoles()));
-
-        return entity;
+        return UserEntity.builder()
+            .userId(domain.getUserId())
+            .email(domain.getEmail())
+            .roles(objectMapperDelegator.writeValueAsString(domain.getRoles()))
+            .build();
     }
 }

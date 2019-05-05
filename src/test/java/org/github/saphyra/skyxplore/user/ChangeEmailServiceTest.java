@@ -1,9 +1,8 @@
 package org.github.saphyra.skyxplore.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import com.github.saphyra.encryption.impl.PasswordService;
+import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import org.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
 import org.github.saphyra.skyxplore.user.cache.EmailCache;
 import org.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -16,9 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.encryption.impl.PasswordService;
-import org.github.saphyra.skyxplore.common.exception.BadCredentialsException;
-import org.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeEmailServiceTest {
@@ -50,7 +49,7 @@ public class ChangeEmailServiceTest {
     private SkyXpCredentials credentials;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         credentials = new SkyXpCredentials(USER_ID, null, HASHED_PASSWORD);
     }
 
@@ -81,8 +80,9 @@ public class ChangeEmailServiceTest {
         //GIVEN
         ChangeEmailRequest request = new ChangeEmailRequest(NEW_EMAIL, PASSWORD);
 
-        SkyXpUser user = new SkyXpUser();
-        user.setEmail(EMAIL);
+        SkyXpUser user = SkyXpUser.builder()
+            .email(EMAIL)
+            .build();
 
         when(userQueryService.isEmailExists(NEW_EMAIL)).thenReturn(false);
         when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);

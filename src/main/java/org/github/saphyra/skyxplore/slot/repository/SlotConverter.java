@@ -19,10 +19,6 @@ class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
 
     @Override
     public SlotEntity processDomainConversion(EquippedSlot domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
-
         return SlotEntity.builder()
             .slotId(domain.getSlotId())
             .shipId(domain.getShipId())
@@ -51,10 +47,6 @@ class SlotConverter extends ConverterBase<SlotEntity, EquippedSlot> {
 
     @Override
     public EquippedSlot processEntityConversion(SlotEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
         return EquippedSlot.builder()
             .slotId(entity.getSlotId())
             .shipId(entity.getShipId())

@@ -1,9 +1,8 @@
 package org.github.saphyra.skyxplore.factory.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.encryption.impl.StringEncryptor;
+import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.factory.domain.Materials;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +27,7 @@ public class MaterialsConverterTest {
     private static final Integer AMOUNT = 3;
 
     @Mock
-    private ObjectMapper objectMapper;
+    private ObjectMapperDelegator objectMapperDelegator;
 
     @Mock
     private StringEncryptor stringEncryptor;
@@ -46,12 +44,12 @@ public class MaterialsConverterTest {
     }
 
     @Test
-    public void testConvertEntityShouldDecryptAndConvert() throws IOException {
+    public void testConvertEntityShouldDecryptAndConvert() {
         //GIVEN
         when(stringEncryptor.decryptEntity(ENCRYPTED_MATERIAL, FACTORY_ID)).thenReturn(MATERIAL_ENTITY);
         HashMap<String, Integer> map = new HashMap<>();
         map.put(MATERIAL_ID, AMOUNT);
-        when(objectMapper.readValue(eq(MATERIAL_ENTITY), Mockito.<TypeReference<HashMap<String, Integer>>>any())).thenReturn(map);
+        when(objectMapperDelegator.readValue(eq(MATERIAL_ENTITY), Mockito.<TypeReference<HashMap<String, Integer>>>any())).thenReturn(map);
         //WHEN
         Materials result = underTest.convertEntity(ENCRYPTED_MATERIAL, FACTORY_ID);
         //THEN
@@ -59,16 +57,16 @@ public class MaterialsConverterTest {
     }
 
     @Test
-    public void testConvertDomainShouldConvertAndEncrypt() throws JsonProcessingException {
+    public void testConvertDomainShouldConvertAndEncrypt() {
         //GIVEN
         Materials materials = new Materials();
 
-        when(objectMapper.writeValueAsString(materials)).thenReturn(MATERIAL_ENTITY);
+        when(objectMapperDelegator.writeValueAsString(materials)).thenReturn(MATERIAL_ENTITY);
         when(stringEncryptor.encryptEntity(MATERIAL_ENTITY, FACTORY_ID)).thenReturn(ENCRYPTED_MATERIAL);
         //WHEN
         String result = underTest.convertDomain(materials, FACTORY_ID);
         //THEN
-        verify(objectMapper).writeValueAsString(materials);
+        verify(objectMapperDelegator).writeValueAsString(materials);
         verify(stringEncryptor).encryptEntity(MATERIAL_ENTITY, FACTORY_ID);
         assertThat(result).isEqualTo(ENCRYPTED_MATERIAL);
     }

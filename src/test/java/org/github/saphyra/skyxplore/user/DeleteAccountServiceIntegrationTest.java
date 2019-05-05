@@ -24,8 +24,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.HashSet;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -53,10 +51,10 @@ public class DeleteAccountServiceIntegrationTest {
     @Test
     public void testDeleteAccount() {
         //GIVEN
-        SkyXpUser user = new SkyXpUser();
-        user.setUserId(USER_ID);
-        user.setEmail("");
-        user.setRoles(new HashSet<>());
+        SkyXpUser user = SkyXpUser.builder()
+            .userId(USER_ID)
+            .email("")
+            .build();
         userDao.save(user);
 
         SkyXpCredentials credentials = new SkyXpCredentials();

@@ -5,9 +5,9 @@ import com.github.saphyra.encryption.impl.IntegerEncryptor;
 import com.github.saphyra.encryption.impl.StringEncryptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.github.saphyra.skyxplore.product.domain.Product;
 import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.common.DateTimeUtil;
 
 @Component
 @RequiredArgsConstructor
@@ -19,36 +19,29 @@ class ProductConverter extends ConverterBase<ProductEntity, Product> {
 
     @Override
     public Product processEntityConversion(ProductEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        Product domain = new Product();
-        domain.setProductId(entity.getProductId());
-        domain.setFactoryId(entity.getFactoryId());
-        domain.setElementId(stringEncryptor.decryptEntity(entity.getElementId(), entity.getProductId()));
-        domain.setAmount(integerEncryptor.decryptEntity(entity.getAmount(), entity.getProductId()));
-        domain.setConstructionTime(integerEncryptor.decryptEntity(entity.getConstructionTime(), entity.getProductId()));
-        domain.setAddedAt(entity.getAddedAt());
-        domain.setStartTime(dateTimeUtil.convertEntity(entity.getStartTime()));
-        domain.setEndTime(dateTimeUtil.convertEntity(entity.getEndTime()));
-
-        return domain;
+        return Product.builder()
+            .productId(entity.getProductId())
+            .factoryId(entity.getFactoryId())
+            .elementId(stringEncryptor.decryptEntity(entity.getElementId(), entity.getProductId()))
+            .amount(integerEncryptor.decryptEntity(entity.getAmount(), entity.getProductId()))
+            .constructionTime(integerEncryptor.decryptEntity(entity.getConstructionTime(), entity.getProductId()))
+            .addedAt(entity.getAddedAt())
+            .startTime(dateTimeUtil.convertEntity(entity.getStartTime()))
+            .endTime(dateTimeUtil.convertEntity(entity.getEndTime()))
+            .build();
     }
 
     @Override
     public ProductEntity processDomainConversion(Product domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
-        ProductEntity entity = new ProductEntity();
-        entity.setProductId(domain.getProductId());
-        entity.setFactoryId(domain.getFactoryId());
-        entity.setElementId(stringEncryptor.encryptEntity(domain.getElementId(), domain.getProductId()));
-        entity.setAmount(integerEncryptor.encryptEntity(domain.getAmount(), domain.getProductId()));
-        entity.setConstructionTime(integerEncryptor.encryptEntity(domain.getConstructionTime(), domain.getProductId()));
-        entity.setAddedAt(domain.getAddedAt());
-        entity.setStartTime(dateTimeUtil.convertDomain(domain.getStartTime()));
-        entity.setEndTime(dateTimeUtil.convertDomain(domain.getEndTime()));
-        return entity;
+        return ProductEntity.builder()
+            .productId(domain.getProductId())
+            .factoryId(domain.getFactoryId())
+            .elementId(stringEncryptor.encryptEntity(domain.getElementId(), domain.getProductId()))
+            .amount(integerEncryptor.encryptEntity(domain.getAmount(), domain.getProductId()))
+            .constructionTime(integerEncryptor.encryptEntity(domain.getConstructionTime(), domain.getProductId()))
+            .addedAt(domain.getAddedAt())
+            .startTime(dateTimeUtil.convertDomain(domain.getStartTime()))
+            .endTime(dateTimeUtil.convertDomain(domain.getEndTime()))
+            .build();
     }
 }

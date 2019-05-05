@@ -16,10 +16,6 @@ class MailConverter extends ConverterBase<MailEntity, Mail> {
 
     @Override
     public Mail processEntityConversion(MailEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
         return Mail.builder()
             .mailId(entity.getMailId())
             .from(entity.getFrom())
@@ -36,10 +32,6 @@ class MailConverter extends ConverterBase<MailEntity, Mail> {
 
     @Override
     public MailEntity processDomainConversion(Mail domain) {
-        if (domain == null) {
-            throw new IllegalArgumentException("domain must not be null.");
-        }
-
         return MailEntity.builder()
             .mailId(domain.getMailId())
             .from(domain.getFrom())
