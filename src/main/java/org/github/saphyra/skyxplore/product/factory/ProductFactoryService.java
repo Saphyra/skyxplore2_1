@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 @EnableScheduling
 @RequiredArgsConstructor
-//TODO unit test
 class ProductFactoryService {
     private final FinishProductService finishProductService;
     private final StartProductService startProductService;
