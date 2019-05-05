@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-//TODO unit test
 interface SlotRepository extends JpaRepository<SlotEntity, String> {
     @Transactional
     void deleteByShipId(String shipId);
