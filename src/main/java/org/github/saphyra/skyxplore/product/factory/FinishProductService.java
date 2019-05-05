@@ -20,7 +20,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class FinishProductService {
     static final String CATEGORY_MATERIAL = "material";
 
