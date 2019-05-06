@@ -20,6 +20,8 @@ import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
 import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
+import org.github.saphyra.skyxplore.community.mail.domain.Mail;
+import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -84,6 +86,9 @@ public class DeleteAccountServiceIntegrationTest {
     @Autowired
     private FriendshipDao friendshipDao;
 
+    @Autowired
+    private MailDao mailDao;
+
     @Test
     public void testDeleteAccount() {
         //GIVEN
@@ -94,7 +99,7 @@ public class DeleteAccountServiceIntegrationTest {
         saveBlockedCharacters();
         saveFriendRequests();
         saveFriendships();
-        //TODO mail
+        saveMails();
         //TODO ship
         //TODO slot
 
@@ -109,6 +114,31 @@ public class DeleteAccountServiceIntegrationTest {
         assertThat(blockedCharacterDao.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).isEmpty();
         assertThat(friendRequestDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isEmpty();
         assertThat(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isEmpty();
+        assertThat(mailDao.getMails(CHARACTER_ID)).isEmpty();
+        assertThat(mailDao.getSentMails(CHARACTER_ID)).isEmpty();
+    }
+
+    private void saveMails() {
+        Mail mail1 = Mail.builder()
+            .mailId("m1")
+            .from(CHARACTER_ID)
+            .to(FRIEND_ID)
+            .sendTime(NOW)
+            .subject("")
+            .message("")
+            .build();
+
+        Mail mail2 = Mail.builder()
+            .mailId("m1")
+            .from(FRIEND_ID)
+            .to(CHARACTER_ID)
+            .sendTime(NOW)
+            .subject("")
+            .message("")
+            .build();
+
+        mailDao.save(mail1);
+        mailDao.save(mail2);
     }
 
     private void saveFriendships() {
@@ -207,7 +237,8 @@ public class DeleteAccountServiceIntegrationTest {
         CharacterDao.class,
         BlockedCharacterDao.class,
         FriendRequestDao.class,
-        FriendshipDao.class
+        FriendshipDao.class,
+        MailDao.class
     })
     @EnableEncryption
     static class TestConfig {
