@@ -17,14 +17,9 @@ BackEnd
         - findBy...: returns Optional of
 
 ==========Tasks==========
-Shop & factory implement filters
-Cancel production
+//TODO Grid layout for ship components
 
-Email FE validation: validate special characters
-Common validator service
-
-Split packages of type
-Configurations to config file
+//TODO Email FE validation: validate special characters
 
 Create community
     - Friends
