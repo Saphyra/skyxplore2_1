@@ -17,7 +17,9 @@ import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import org.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
+import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -79,6 +81,9 @@ public class DeleteAccountServiceIntegrationTest {
     @Autowired
     private FriendRequestDao friendRequestDao;
 
+    @Autowired
+    private FriendshipDao friendshipDao;
+
     @Test
     public void testDeleteAccount() {
         //GIVEN
@@ -88,7 +93,7 @@ public class DeleteAccountServiceIntegrationTest {
         saveCharacter();
         saveBlockedCharacters();
         saveFriendRequests();
-        //TODO friendsip
+        saveFriendships();
         //TODO mail
         //TODO ship
         //TODO slot
@@ -103,6 +108,24 @@ public class DeleteAccountServiceIntegrationTest {
         assertThat(characterDao.getByUserId(USER_ID)).isEmpty();
         assertThat(blockedCharacterDao.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).isEmpty();
         assertThat(friendRequestDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isEmpty();
+        assertThat(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isEmpty();
+    }
+
+    private void saveFriendships() {
+        Friendship friendship1 = Friendship.builder()
+            .friendshipId("f1")
+            .characterId(CHARACTER_ID)
+            .friendId(FRIEND_ID)
+            .build();
+
+        Friendship friendship2 = Friendship.builder()
+            .friendshipId("f2")
+            .characterId(FRIEND_ID)
+            .friendId(CHARACTER_ID)
+            .build();
+
+        friendshipDao.save(friendship1);
+        friendshipDao.save(friendship2);
     }
 
     private void saveFriendRequests() {
@@ -183,7 +206,8 @@ public class DeleteAccountServiceIntegrationTest {
         AccessTokenDao.class,
         CharacterDao.class,
         BlockedCharacterDao.class,
-        FriendRequestDao.class
+        FriendRequestDao.class,
+        FriendshipDao.class
     })
     @EnableEncryption
     static class TestConfig {
