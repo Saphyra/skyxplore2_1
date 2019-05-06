@@ -16,6 +16,8 @@ import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
 import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import org.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import org.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -54,7 +56,7 @@ public class DeleteAccountServiceIntegrationTest {
     private static final OffsetDateTime NOW = OffsetDateTime.now(ZoneOffset.UTC);
     private static final String CHARACTER_ID = "character_id";
     private static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
-
+    private static final String FRIEND_ID = "friend_id";
 
     @Autowired
     private DeleteAccountService deleteAccountService;
@@ -74,6 +76,9 @@ public class DeleteAccountServiceIntegrationTest {
     @Autowired
     private CharacterDao characterDao;
 
+    @Autowired
+    private FriendRequestDao friendRequestDao;
+
     @Test
     public void testDeleteAccount() {
         //GIVEN
@@ -82,7 +87,7 @@ public class DeleteAccountServiceIntegrationTest {
         saveAccessToken();
         saveCharacter();
         saveBlockedCharacters();
-        //TODO friendrequest
+        saveFriendRequests();
         //TODO friendsip
         //TODO mail
         //TODO ship
@@ -97,6 +102,23 @@ public class DeleteAccountServiceIntegrationTest {
         assertThat(accessTokenDao.findByUserId(USER_ID)).isEmpty();
         assertThat(characterDao.getByUserId(USER_ID)).isEmpty();
         assertThat(blockedCharacterDao.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).isEmpty();
+        assertThat(friendRequestDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isEmpty();
+    }
+
+    private void saveFriendRequests() {
+        FriendRequest friendRequest1 = FriendRequest.builder()
+            .friendRequestId("r1")
+            .characterId(CHARACTER_ID)
+            .friendId(FRIEND_ID)
+            .build();
+
+        FriendRequest friendRequest2 = FriendRequest.builder()
+            .friendRequestId("r2")
+            .characterId(FRIEND_ID)
+            .friendId(CHARACTER_ID)
+            .build();
+        friendRequestDao.save(friendRequest1);
+        friendRequestDao.save(friendRequest2);
     }
 
     private void saveCharacter() {
@@ -160,7 +182,8 @@ public class DeleteAccountServiceIntegrationTest {
         CredentialsDao.class,
         AccessTokenDao.class,
         CharacterDao.class,
-        BlockedCharacterDao.class
+        BlockedCharacterDao.class,
+        FriendRequestDao.class
     })
     @EnableEncryption
     static class TestConfig {
