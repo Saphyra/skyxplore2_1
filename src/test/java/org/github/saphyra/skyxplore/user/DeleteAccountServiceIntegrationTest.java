@@ -22,6 +22,8 @@ import org.github.saphyra.skyxplore.community.friendship.repository.friendreques
 import org.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
 import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
+import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -89,6 +91,9 @@ public class DeleteAccountServiceIntegrationTest {
     @Autowired
     private MailDao mailDao;
 
+    @Autowired
+    private EquippedShipDao equippedShipDao;
+
     @Test
     public void testDeleteAccount() {
         //GIVEN
@@ -100,7 +105,7 @@ public class DeleteAccountServiceIntegrationTest {
         saveFriendRequests();
         saveFriendships();
         saveMails();
-        //TODO ship
+        saveShip();
         //TODO slot
 
         AccountDeleteRequest accountDeleteRequest = new AccountDeleteRequest(PASSWORD);
@@ -116,6 +121,21 @@ public class DeleteAccountServiceIntegrationTest {
         assertThat(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isEmpty();
         assertThat(mailDao.getMails(CHARACTER_ID)).isEmpty();
         assertThat(mailDao.getSentMails(CHARACTER_ID)).isEmpty();
+        assertThat(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).isEmpty();
+    }
+
+    private void saveShip() {
+        EquippedShip ship = EquippedShip.builder()
+            .shipId("s")
+            .characterId(CHARACTER_ID)
+            .defenseSlotId("")
+            .weaponSlotId("")
+            .coreHull(0)
+            .connectorSlot(0)
+            .shipType("")
+            .build();
+
+        equippedShipDao.save(ship);
     }
 
     private void saveMails() {
@@ -238,7 +258,8 @@ public class DeleteAccountServiceIntegrationTest {
         BlockedCharacterDao.class,
         FriendRequestDao.class,
         FriendshipDao.class,
-        MailDao.class
+        MailDao.class,
+        EquippedShipDao.class
     })
     @EnableEncryption
     static class TestConfig {
