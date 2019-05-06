@@ -24,6 +24,8 @@ import org.github.saphyra.skyxplore.community.mail.domain.Mail;
 import org.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.github.saphyra.skyxplore.ship.domain.EquippedShip;
 import org.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import org.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import org.github.saphyra.skyxplore.slot.repository.SlotDao;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -54,7 +56,6 @@ import com.github.saphyra.util.IdGenerator;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DeleteAccountServiceIntegrationTest.TestConfig.class)
-//TODO extend with other daos
 public class DeleteAccountServiceIntegrationTest {
     private static final String PASSWORD = "password";
     private static final String USER_ID = "user_id";
@@ -63,6 +64,9 @@ public class DeleteAccountServiceIntegrationTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
     private static final String FRIEND_ID = "friend_id";
+    private static final String SHIP_ID = "ship_id";
+    private static final String SLOT_ID_1 = "slot_id_1";
+    private static final String SLOT_ID_2 = "slot_id_2";
 
     @Autowired
     private DeleteAccountService deleteAccountService;
@@ -94,6 +98,9 @@ public class DeleteAccountServiceIntegrationTest {
     @Autowired
     private EquippedShipDao equippedShipDao;
 
+    @Autowired
+    private SlotDao slotDao;
+
     @Test
     public void testDeleteAccount() {
         //GIVEN
@@ -106,7 +113,20 @@ public class DeleteAccountServiceIntegrationTest {
         saveFriendships();
         saveMails();
         saveShip();
-        //TODO slot
+        saveSlots();
+
+        assertThat(userDao.findById(USER_ID)).isNotEmpty();
+        assertThat(credentialsDao.findById(USER_ID)).isNotEmpty();
+        assertThat(accessTokenDao.findByUserId(USER_ID)).isNotEmpty();
+        assertThat(characterDao.getByUserId(USER_ID)).isNotEmpty();
+        assertThat(blockedCharacterDao.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).isNotEmpty();
+        assertThat(friendRequestDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isNotEmpty();
+        assertThat(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID, FRIEND_ID)).isNotEmpty();
+        assertThat(mailDao.getMails(CHARACTER_ID)).isNotEmpty();
+        assertThat(mailDao.getSentMails(CHARACTER_ID)).isNotEmpty();
+        assertThat(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).isNotEmpty();
+        assertThat(slotDao.findById(SLOT_ID_1)).isNotEmpty();
+        assertThat(slotDao.findById(SLOT_ID_2)).isNotEmpty();
 
         AccountDeleteRequest accountDeleteRequest = new AccountDeleteRequest(PASSWORD);
         //WHEN
@@ -122,11 +142,36 @@ public class DeleteAccountServiceIntegrationTest {
         assertThat(mailDao.getMails(CHARACTER_ID)).isEmpty();
         assertThat(mailDao.getSentMails(CHARACTER_ID)).isEmpty();
         assertThat(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).isEmpty();
+        assertThat(slotDao.findById(SLOT_ID_1)).isEmpty();
+        assertThat(slotDao.findById(SLOT_ID_2)).isEmpty();
+    }
+
+    private void saveSlots() {
+        EquippedSlot slot1 = EquippedSlot.builder()
+            .slotId(SLOT_ID_1)
+            .shipId(SHIP_ID)
+            .leftSlot(0)
+            .frontSlot(0)
+            .rightSlot(0)
+            .backSlot(0)
+            .build();
+
+        EquippedSlot slot2 = EquippedSlot.builder()
+            .slotId(SLOT_ID_2)
+            .shipId(SHIP_ID)
+            .leftSlot(0)
+            .frontSlot(0)
+            .rightSlot(0)
+            .backSlot(0)
+            .build();
+
+        slotDao.save(slot1);
+        slotDao.save(slot2);
     }
 
     private void saveShip() {
         EquippedShip ship = EquippedShip.builder()
-            .shipId("s")
+            .shipId(SHIP_ID)
             .characterId(CHARACTER_ID)
             .defenseSlotId("")
             .weaponSlotId("")
@@ -149,7 +194,7 @@ public class DeleteAccountServiceIntegrationTest {
             .build();
 
         Mail mail2 = Mail.builder()
-            .mailId("m1")
+            .mailId("m2")
             .from(FRIEND_ID)
             .to(CHARACTER_ID)
             .sendTime(NOW)
@@ -259,7 +304,8 @@ public class DeleteAccountServiceIntegrationTest {
         FriendRequestDao.class,
         FriendshipDao.class,
         MailDao.class,
-        EquippedShipDao.class
+        EquippedShipDao.class,
+        SlotDao.class
     })
     @EnableEncryption
     static class TestConfig {
