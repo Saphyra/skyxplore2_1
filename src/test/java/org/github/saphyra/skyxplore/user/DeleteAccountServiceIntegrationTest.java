@@ -10,8 +10,12 @@ import java.time.ZoneOffset;
 
 import org.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import org.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import org.github.saphyra.skyxplore.character.repository.CharacterDao;
 import org.github.saphyra.skyxplore.common.DateTimeUtil;
 import org.github.saphyra.skyxplore.common.ObjectMapperDelegator;
+import org.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import org.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
 import org.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
@@ -35,6 +39,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.encryption.EnableEncryption;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.util.IdGenerator;
 
@@ -47,6 +52,8 @@ public class DeleteAccountServiceIntegrationTest {
     private static final String USER_ID = "user_id";
     private static final String ACCESS_TOKEN_ID = "access_token_id";
     private static final OffsetDateTime NOW = OffsetDateTime.now(ZoneOffset.UTC);
+    private static final String CHARACTER_ID = "character_id";
+    private static final String BLOCKED_CHARACTER_ID = "blocked_character_id";
 
 
     @Autowired
@@ -61,13 +68,20 @@ public class DeleteAccountServiceIntegrationTest {
     @Autowired
     private AccessTokenDao accessTokenDao;
 
+    @Autowired
+    private BlockedCharacterDao blockedCharacterDao;
+
+    @Autowired
+    private CharacterDao characterDao;
+
     @Test
     public void testDeleteAccount() {
         //GIVEN
-        saveCharacter();
+        saveUser();
         saveCredentials();
         saveAccessToken();
-        //TODO blockedcharacter
+        saveCharacter();
+        saveBlockedCharacters();
         //TODO friendrequest
         //TODO friendsip
         //TODO mail
@@ -81,6 +95,34 @@ public class DeleteAccountServiceIntegrationTest {
         assertThat(userDao.findById(USER_ID)).isEmpty();
         assertThat(credentialsDao.findById(USER_ID)).isEmpty();
         assertThat(accessTokenDao.findByUserId(USER_ID)).isEmpty();
+        assertThat(characterDao.getByUserId(USER_ID)).isEmpty();
+        assertThat(blockedCharacterDao.getByCharacterIdOrBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).isEmpty();
+    }
+
+    private void saveCharacter() {
+        SkyXpCharacter character = SkyXpCharacter.builder()
+            .characterId(CHARACTER_ID)
+            .userId(USER_ID)
+            .characterName("")
+            .build();
+        characterDao.save(character);
+    }
+
+    private void saveBlockedCharacters() {
+        BlockedCharacter blockedCharacter1 = BlockedCharacter.builder()
+            .blockedCharacterEntityId(1L)
+            .characterId(CHARACTER_ID)
+            .blockedCharacterId(BLOCKED_CHARACTER_ID)
+            .build();
+
+        BlockedCharacter blockedCharacter2 = BlockedCharacter.builder()
+            .blockedCharacterEntityId(2L)
+            .characterId(BLOCKED_CHARACTER_ID)
+            .blockedCharacterId(CHARACTER_ID)
+            .build();
+
+        blockedCharacterDao.save(blockedCharacter1);
+        blockedCharacterDao.save(blockedCharacter2);
     }
 
     private void saveAccessToken() {
@@ -100,7 +142,7 @@ public class DeleteAccountServiceIntegrationTest {
         credentialsDao.save(credentials);
     }
 
-    private void saveCharacter() {
+    private void saveUser() {
         SkyXpUser user = SkyXpUser.builder()
             .userId(USER_ID)
             .email("")
@@ -116,8 +158,11 @@ public class DeleteAccountServiceIntegrationTest {
     @ComponentScan(basePackageClasses = {
         UserDao.class,
         CredentialsDao.class,
-        AccessTokenDao.class
+        AccessTokenDao.class,
+        CharacterDao.class,
+        BlockedCharacterDao.class
     })
+    @EnableEncryption
     static class TestConfig {
         @Bean
         public ObjectMapper objectMapper() {
