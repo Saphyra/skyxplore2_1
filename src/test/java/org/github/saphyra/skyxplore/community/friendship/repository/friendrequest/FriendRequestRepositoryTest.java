@@ -1,5 +1,10 @@
 package org.github.saphyra.skyxplore.community.friendship.repository.friendrequest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -8,18 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = FriendRequestRepositoryTest.TestConfig.class)
+@ActiveProfiles("int-test")
 public class FriendRequestRepositoryTest {
     private static final String CHARACTER_ID_1 = "character_id_1";
     private static final String CHARACTER_ID_2 = "character_id_2";
@@ -153,6 +154,7 @@ public class FriendRequestRepositoryTest {
     @EnableJpaRepositories(basePackageClasses = FriendRequestRepository.class)
     @EntityScan(basePackageClasses = FriendRequestEntity.class)
     @Import(DataSourceConfiguration.class)
+    @Profile("int-test")
     static class TestConfig {
 
     }

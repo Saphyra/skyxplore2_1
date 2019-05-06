@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class SeleniumUser {
     private static final String USER_NAME_PREFIX = "user-";
+    private static final String PASSWORD_PREFIX = "pw-";
     private static final String USER_EMAIL_SUFFIX = "@test.com";
 
     private String userName;
@@ -29,7 +30,7 @@ public class SeleniumUser {
     }
 
     public static String createRandomPassword() {
-        return crop(randomUID(), PASSWORD_MAX_LENGTH);
+        return crop(PASSWORD_PREFIX + randomUID(), PASSWORD_MAX_LENGTH);
     }
 
     public static String createRandomEmail() {

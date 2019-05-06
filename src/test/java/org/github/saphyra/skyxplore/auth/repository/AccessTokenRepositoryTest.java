@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = AccessTokenRepositoryTest.TestConfig.class)
+@ActiveProfiles("int-test")
 public class AccessTokenRepositoryTest {
     private static final String ACCESS_TOKEN_ID_1 = "access_token_id_1";
     private static final String ACCESS_TOKEN_ID_2 = "access_token_id_2";
@@ -143,6 +146,7 @@ public class AccessTokenRepositoryTest {
     @EnableJpaRepositories(basePackageClasses = AccessTokenRepository.class)
     @EntityScan(basePackageClasses = AccessTokenEntity.class)
     @Import(DataSourceConfiguration.class)
+    @Profile("int-test")
     static class TestConfig {
 
     }

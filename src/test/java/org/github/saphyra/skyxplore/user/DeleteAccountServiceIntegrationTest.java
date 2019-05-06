@@ -43,7 +43,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -56,6 +58,7 @@ import com.github.saphyra.util.IdGenerator;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DeleteAccountServiceIntegrationTest.TestConfig.class)
+@ActiveProfiles("int-test")
 public class DeleteAccountServiceIntegrationTest {
     private static final String PASSWORD = "password";
     private static final String USER_ID = "user_id";
@@ -308,6 +311,7 @@ public class DeleteAccountServiceIntegrationTest {
         SlotDao.class
     })
     @EnableEncryption
+    @Profile("int-test")
     static class TestConfig {
         @Bean
         public ObjectMapper objectMapper() {

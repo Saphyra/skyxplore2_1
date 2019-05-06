@@ -1,7 +1,15 @@
 package org.github.saphyra.selenium;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import static java.util.Objects.isNull;
+import static org.github.saphyra.selenium.logic.util.LinkUtil.HOST;
+import static org.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
+import static org.github.saphyra.selenium.logic.util.Util.executeScript;
+import static org.github.saphyra.selenium.logic.util.WaitUtil.sleep;
+import static org.github.saphyra.skyxplore.Application.APP_CTX;
+
+import java.io.IOException;
+import java.net.URL;
+
 import org.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import org.github.saphyra.selenium.logic.domain.localization.PageLocalization;
 import org.github.saphyra.skyxplore.Application;
@@ -12,15 +20,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
 
-import java.io.IOException;
-import java.net.URL;
-
-import static java.util.Objects.isNull;
-import static org.github.saphyra.selenium.logic.util.LinkUtil.HOST;
-import static org.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
-import static org.github.saphyra.selenium.logic.util.Util.executeScript;
-import static org.github.saphyra.selenium.logic.util.WaitUtil.sleep;
-import static org.github.saphyra.skyxplore.Application.APP_CTX;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class SeleniumTestApplication {
@@ -30,7 +31,7 @@ public abstract class SeleniumTestApplication {
     };
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String CHROME_DRIVER_EXE_LOCATION = "chromedriver.exe";
-    private static final boolean HEADLESS_MODE = false;
+    private static final boolean HEADLESS_MODE = true;
 
     protected static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     protected WebDriver driver;

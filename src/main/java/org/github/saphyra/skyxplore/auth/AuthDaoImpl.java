@@ -1,16 +1,17 @@
 package org.github.saphyra.skyxplore.auth;
 
+import java.time.OffsetDateTime;
+import java.util.Optional;
+
+import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import org.github.saphyra.skyxplore.user.repository.user.UserDao;
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.authservice.AuthDao;
 import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.authservice.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import org.springframework.stereotype.Component;
-import org.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
-import org.github.saphyra.skyxplore.user.repository.user.UserDao;
-
-import java.time.OffsetDateTime;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor

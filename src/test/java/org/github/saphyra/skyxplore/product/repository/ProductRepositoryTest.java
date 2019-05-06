@@ -1,5 +1,10 @@
 package org.github.saphyra.skyxplore.product.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -8,17 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = ProductRepositoryTest.TestConfig.class)
+@ActiveProfiles("int-test")
 public class ProductRepositoryTest {
     private static final String PRODUCT_ID_1 = "product_id_1";
     private static final String PRODUCT_ID_2 = "product_id_2";
@@ -116,6 +117,7 @@ public class ProductRepositoryTest {
     @EntityScan(basePackageClasses = ProductEntity.class)
     @EnableJpaRepositories(basePackageClasses = ProductRepository.class)
     @Import(DataSourceConfiguration.class)
+    @Profile("int-test")
     static class TestConfig {
 
     }

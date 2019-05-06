@@ -1,5 +1,9 @@
 package org.github.saphyra.skyxplore.slot.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -8,16 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = SlotRepositoryTest.TestConfig.class)
+@ActiveProfiles("int-test")
 public class SlotRepositoryTest {
     private static final String SHIP_ID_1 = "ship_id_1";
     private static final String SHIP_ID_2 = "ship_id_2";
@@ -66,6 +67,7 @@ public class SlotRepositoryTest {
     @EntityScan(basePackageClasses = SlotEntity.class)
     @EnableJpaRepositories(basePackageClasses = SlotRepository.class)
     @Import(DataSourceConfiguration.class)
+    @Profile("int-test")
     static class TestConfig {
 
     }

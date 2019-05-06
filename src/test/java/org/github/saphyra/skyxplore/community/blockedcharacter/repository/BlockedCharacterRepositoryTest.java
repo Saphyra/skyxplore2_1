@@ -1,6 +1,12 @@
 package org.github.saphyra.skyxplore.community.blockedcharacter.repository;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import org.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -9,18 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = BlockedCharacterRepositoryTest.TestConfig.class)
+@ActiveProfiles("int-test")
 public class BlockedCharacterRepositoryTest {
     private static final String CHARACTER_ID_1 = "character_id_1";
     private static final String CHARACTER_ID_2 = "character_id_2";
@@ -146,6 +147,7 @@ public class BlockedCharacterRepositoryTest {
     @EntityScan(basePackageClasses = BlockedCharacterEntity.class)
     @EnableJpaRepositories(basePackageClasses = BlockedCharacterRepository.class)
     @Import(DataSourceConfiguration.class)
+    @Profile("int-test")
     static class TestConfig {
 
     }
