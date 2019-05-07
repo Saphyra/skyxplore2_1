@@ -44,13 +44,13 @@
 .equipment-slot-list-container{
     border: 3px outset white;
     border-top: none;
-    text-align: left;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
 }
 
 .equipment-slot-list-container .slot{
-    width: calc(33% - 0.45rem);
     height: auto;
-    min-height: 3rem;
+    display: inline;
 }
 
 .slot:not(.empty-slot), .slot:not(.empty-slot) *{
