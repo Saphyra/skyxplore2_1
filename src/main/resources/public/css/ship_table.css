@@ -2,6 +2,7 @@
     border: 3px ridge white;
     margin: auto;
     margin-top: 1rem;
+    width: 100%;
 }
 
 .ship-table th, .ship-table td{
@@ -14,6 +15,10 @@
     text-align: center;
 }
 
+td[rowspan="2"]{
+    width: 1px;
+}
+
 .slot-container{
     text-align: center;
 }
@@ -23,8 +28,7 @@
     margin: 0.25rem;
     padding: 0.25rem;
     display: inline-block;
-    width: 8rem;
-    height: 3rem;
+    min-height: 3rem;
     text-align: center;
     white-space: initial;
     vertical-align: top;
@@ -34,11 +38,18 @@
     width: 9rem;
 }
 
+.front-slot, .connector-slot{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 8rem);
+    justify-content: center;
+}
+
 .side-slot .slot{
     display: block;
     margin: auto;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
+    width: 8rem;
 }
 
 .ship-details-container{

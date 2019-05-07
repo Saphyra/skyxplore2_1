@@ -17,8 +17,6 @@ BackEnd
         - findBy...: returns Optional of
 
 ==========Tasks==========
-//TODO Grid layout for ship components
-
 //TODO Email FE validation: validate special characters
 
 Create community
