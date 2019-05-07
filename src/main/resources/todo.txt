@@ -17,8 +17,6 @@ BackEnd
         - findBy...: returns Optional of
 
 ==========Tasks==========
-//TODO Email FE validation: validate special characters
-
 Create community
     - Friends
         - List of friends

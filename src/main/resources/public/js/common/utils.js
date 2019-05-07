@@ -12,18 +12,13 @@ function isEmailValid(email){
     let result;
     if(email == null || email == undefined){
         result = false;
-    }else if(email.indexOf("@") < 1){
-        result = false;
-    }else if(email.length < 4){
-        result = false;
-    }else if(email.indexOf(".") < 0){
-        result = false;
-    }else if(email.lastIndexOf(".") > email.length - 3){
-        result = false;
-    }else{
-        result = true;
     }
-    return result;
+
+    if(email.length < 6){
+        return false;
+    }
+
+    return email.match("^\\s*[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\@[\\w\\-\\+_]+\\.[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\s*$");
 }
 
 function getActualTimeStamp(){
