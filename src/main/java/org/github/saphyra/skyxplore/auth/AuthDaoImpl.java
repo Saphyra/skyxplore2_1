@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.authservice.AuthDao;
 import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.authservice.domain.User;
+import com.github.saphyra.encryption.impl.PasswordService;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -21,6 +22,7 @@ class AuthDaoImpl implements AuthDao {
     private final CredentialsDao credentialsDao;
     private final UserDao userDao;
     private final UserConverter userConverter;
+    private final PasswordService passwordService;
 
     @Override
     public Optional<User> findUserById(String userId) {
@@ -56,5 +58,10 @@ class AuthDaoImpl implements AuthDao {
     @Override
     public void saveAccessToken(AccessToken accessToken) {
         accessTokenDao.save(accessTokenConverter.convertDomain(accessToken));
+    }
+
+    @Override
+    public boolean authenticate(String password, String hash) {
+        return passwordService.authenticate(password, hash);
     }
 }

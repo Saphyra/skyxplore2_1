@@ -1,12 +1,9 @@
 package org.github.saphyra.skyxplore.auth;
 
-import com.github.saphyra.authservice.PropertySource;
-import com.github.saphyra.authservice.domain.AllowedUri;
-import com.github.saphyra.authservice.domain.RoleSetting;
-import org.github.saphyra.skyxplore.common.PageController;
-import org.github.saphyra.skyxplore.filter.CustomFilterHelper;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
+import static org.github.saphyra.skyxplore.common.PageController.INDEX_MAPPING;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,10 +11,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.github.saphyra.skyxplore.common.PageController.INDEX_MAPPING;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-import static org.github.saphyra.skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
+import org.github.saphyra.skyxplore.common.PageController;
+import org.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.authservice.PropertySource;
+import com.github.saphyra.authservice.domain.AllowedUri;
+import com.github.saphyra.authservice.domain.RoleSetting;
 
 @Component
 class PropertySourceImpl implements PropertySource {
@@ -67,6 +68,13 @@ class PropertySourceImpl implements PropertySource {
     }
 
     @Override
+    public List<AllowedUri> getNonSessionExtendingUris(){
+        return Arrays.asList(
+            new AllowedUri("/notification/*", HttpMethod.GET)
+        );
+    }
+
+    @Override
     public Set<RoleSetting> getRoleSettings() {
         return new HashSet<>();
     }
@@ -74,11 +82,6 @@ class PropertySourceImpl implements PropertySource {
     @Override
     public boolean isMultipleLoginAllowed() {
         return false;
-    }
-
-    @Override
-    public long getTokenExpirationMinutes() {
-        return 15;
     }
 
     @Override
