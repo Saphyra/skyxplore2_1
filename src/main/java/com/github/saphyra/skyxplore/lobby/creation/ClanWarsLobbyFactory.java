@@ -35,6 +35,7 @@ class ClanWarsLobbyFactory implements LobbyFactory {
             .gameMode(gameMode)
             .users(users)
             .data(data)
+            .ownerId(characterId)
             .build();
     }
 

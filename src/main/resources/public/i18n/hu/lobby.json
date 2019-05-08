@@ -1,0 +1,25 @@
+{
+  "title": "Előcsarnok - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Előcsarnok - SkyXplore 2.1"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "exit-lobby-button": [
+      {
+        "key": "innerHTML",
+        "message": "Előcsarnok elhagyása"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}

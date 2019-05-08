@@ -22,4 +22,7 @@ public class Lobby {
     private final FixedSizeConcurrentList<String> users;
 
     private final String data;
+
+    @NonNull
+    private volatile String ownerId;
 }
