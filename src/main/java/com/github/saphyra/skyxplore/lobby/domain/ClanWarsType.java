@@ -4,15 +4,15 @@ import static java.util.Objects.isNull;
 
 import java.util.Arrays;
 
-public enum GameMode {
-    ARCADE, BATTLE_ROYALE, CLAN_WARS, TEAMFIGHT, VS, TOURNAMENT;
+public enum ClanWarsType {
+    RANDOM, DEFENDER, DREADNOUGHT, ECLIPSE, SABOTEUR, STARTER, SUPPORTER;
 
-    public static GameMode fromValue(String value) {
+    public static ClanWarsType fromValue(String value) {
         if (isNull(value)) {
             return null;
         }
         return Arrays.stream(values())
-            .filter(gameMode -> gameMode.name().equalsIgnoreCase(value))
+            .filter(teamfightType -> teamfightType.name().equalsIgnoreCase(value))
             .findFirst()
             .orElse(null);
     }

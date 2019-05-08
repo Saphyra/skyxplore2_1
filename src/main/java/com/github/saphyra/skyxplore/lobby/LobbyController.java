@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.lobby;
 
+import com.github.saphyra.skyxplore.lobby.creation.LobbyCreatorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.lobby.domain.CreateLobbyRequest;

@@ -52,5 +52,6 @@ window.ResponseStatus = new function(){
     this.CONFLICT = 409;
     this.LOCKED = 423;
     this.INTERNAL_SERVER_ERROR = 500;
+    this.NOT_IMPLEMENTED = 501;
     this.CONNECTION_REFUSED = 0;
 }

@@ -21,4 +21,5 @@ public class Lobby {
     @NonNull
     private final FixedSizeConcurrentList<String> users;
 
+    private final String data;
 }
