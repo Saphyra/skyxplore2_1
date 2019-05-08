@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CreateLobbyRequest {
-    private String gameMode;
+    private GameMode gameMode;
     private String data;
 }

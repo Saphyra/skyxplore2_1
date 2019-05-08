@@ -34,10 +34,10 @@
 })();
 
 window.GameMode = {
-    ARCADE: "arcade",
-    BATTLE_ROYALE: "battle_royale",
-    CLAN_WARS: "clan_wars",
-    TEAMFIGHT: "teamfight",
-    VS: "vs",
-    TOURNAMENT: "tournament"
+    ARCADE: "ARCADE",
+    BATTLE_ROYALE: "BATTLE_ROYALE",
+    CLAN_WARS: "CLAN_WARS",
+    TEAMFIGHT: "TEAMFIGHT",
+    VS: "VS",
+    TOURNAMENT: "TOURNAMENT"
 }
