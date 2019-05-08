@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
@@ -57,7 +57,7 @@ public class CharacterControllerTest {
     private CharacterViewConverter characterViewConverter;
 
     @Mock
-    private CharacterNameCache characterNameCache;
+    private CharacterNameExistsCache characterNameExistsCache;
 
     @Mock
     private HttpServletResponse httpServletResponse;
@@ -143,11 +143,11 @@ public class CharacterControllerTest {
     @Test
     public void testIsCharNameExistsShouldCallCacheAndReturnResponse() {
         //GIVEN
-        when(characterNameCache.get(CHARACTER_NAME)).thenReturn(Optional.of(true));
+        when(characterNameExistsCache.get(CHARACTER_NAME)).thenReturn(Optional.of(true));
         //WHEN
         boolean result = underTest.isCharNameExists(new OneStringParamRequest(CHARACTER_NAME));
         //THEN
-        verify(characterNameCache).get(CHARACTER_NAME);
+        verify(characterNameExistsCache).get(CHARACTER_NAME);
         assertThat(result).isTrue();
     }
 
@@ -164,7 +164,7 @@ public class CharacterControllerTest {
         //WHEN
         CharacterView result = underTest.renameCharacter(request, USER_ID);
         //THEN
-        verify(characterNameCache).invalidate(NEW_CHARACTER_NAME);
+        verify(characterNameExistsCache).invalidate(NEW_CHARACTER_NAME);
         assertThat(result).isEqualTo(characterView);
     }
 

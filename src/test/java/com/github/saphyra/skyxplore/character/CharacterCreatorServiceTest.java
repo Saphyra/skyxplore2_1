@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
@@ -20,7 +20,7 @@ public class CharacterCreatorServiceTest {
     private static final String USER_ID = "user_id";
 
     @Mock
-    private CharacterNameCache characterNameCache;
+    private CharacterNameExistsCache characterNameExistsCache;
 
     @Mock
     private CharacterQueryService characterQueryService;
@@ -49,6 +49,6 @@ public class CharacterCreatorServiceTest {
         SkyXpCharacter result = underTest.createCharacter(new CreateCharacterRequest(CHARACTER_NAME), USER_ID);
         //THEN
         assertThat(result).isEqualTo(character);
-        verify(characterNameCache).invalidate(CHARACTER_NAME);
+        verify(characterNameExistsCache).invalidate(CHARACTER_NAME);
     }
 }

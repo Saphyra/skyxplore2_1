@@ -15,6 +15,14 @@ class FilterConfig {
     }
 
     @Bean
+    FilterRegistrationBean<AlreadyInLobbyFilter> alreadyInLobbyFilterBean(AlreadyInLobbyFilter alreadyInLobbyFilter) {
+        FilterRegistrationBean<AlreadyInLobbyFilter> alreadyInLobbyFilterBean = new FilterRegistrationBean<>();
+        alreadyInLobbyFilterBean.setFilter(alreadyInLobbyFilter);
+        alreadyInLobbyFilterBean.setOrder(20);
+        return alreadyInLobbyFilterBean;
+    }
+
+    @Bean
     FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean(CookieCleanupFilter cookieCleanupFilter) {
         FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean = new FilterRegistrationBean<>();
         cookieCleanupFilterBean.setFilter(cookieCleanupFilter);

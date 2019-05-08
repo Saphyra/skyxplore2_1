@@ -28,9 +28,9 @@ Error reporting
     - Exceptions to save
 
 Lobby
-    - Create lobby
-    - Redirect to lobby page
     - Invite friends to lobby
+    - Exit from lobby
+    - Boss
 
 Javadoc
 Integration tests

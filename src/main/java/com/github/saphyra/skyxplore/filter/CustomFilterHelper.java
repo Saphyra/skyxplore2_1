@@ -20,12 +20,16 @@ public class CustomFilterHelper {
     public static final String REST_TYPE_REQUEST = "rest";
 
     void handleUnauthorized(HttpServletRequest request, HttpServletResponse response, String redirection) throws IOException {
-        if (REST_TYPE_REQUEST.equals(request.getHeader(REQUEST_TYPE_HEADER))) {
+        if (isRestCall(request)) {
             log.info("Sending error. Cause: Unauthorized access.");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed.");
         } else {
             log.info("Redirect to {}. Cause: Unauthorized access.", redirection);
             response.sendRedirect(redirection);
         }
+    }
+
+    boolean isRestCall(HttpServletRequest request) {
+        return REST_TYPE_REQUEST.equals(request.getHeader(REQUEST_TYPE_HEADER));
     }
 }

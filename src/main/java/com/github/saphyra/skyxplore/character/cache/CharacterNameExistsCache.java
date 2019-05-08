@@ -10,10 +10,10 @@ import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.google.common.cache.CacheBuilder;
 
 @Component
-public class CharacterNameCache extends AbstractCache<String, Boolean> {
+public class CharacterNameExistsCache extends AbstractCache<String, Boolean> {
     private final CharacterQueryService characterQueryService;
 
-    public CharacterNameCache(CharacterQueryService characterQueryService) {
+    public CharacterNameExistsCache(CharacterQueryService characterQueryService) {
         super(CacheBuilder.newBuilder()
             .expireAfterWrite(1, TimeUnit.MINUTES)
             .build()

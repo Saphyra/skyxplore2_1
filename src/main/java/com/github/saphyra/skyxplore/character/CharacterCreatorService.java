@@ -3,7 +3,7 @@ package com.github.saphyra.skyxplore.character;
 import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 class CharacterCreatorService {
-    private final CharacterNameCache characterNameCache;
+    private final CharacterNameExistsCache characterNameExistsCache;
     private final CharacterQueryService characterQueryService;
     private final NewCharacterGenerator newCharacterGenerator;
 
@@ -26,7 +26,7 @@ class CharacterCreatorService {
         }
 
         SkyXpCharacter character = newCharacterGenerator.createCharacter(userId, request.getCharacterName());
-        characterNameCache.invalidate(request.getCharacterName());
+        characterNameExistsCache.invalidate(request.getCharacterName());
         return character;
     }
 }

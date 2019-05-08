@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import com.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -25,7 +25,7 @@ public class CharacterRenameServiceTest {
     private CharacterDao characterDao;
 
     @Mock
-    private CharacterNameCache characterNameCache;
+    private CharacterNameExistsCache characterNameExistsCache;
 
     @Mock
     private CharacterQueryService characterQueryService;
@@ -59,7 +59,7 @@ public class CharacterRenameServiceTest {
         verify(characterQueryService).isCharNameExists(NEW_CHARACTER_NAME);
         verify(characterQueryService).findCharacterByIdAuthorized(CHARACTER_ID, USER_ID);
         verify(characterDao).save(character);
-        verify(characterNameCache).invalidate(NEW_CHARACTER_NAME);
+        verify(characterNameExistsCache).invalidate(NEW_CHARACTER_NAME);
         assertThat(result).isEqualTo(character);
         assertThat(character.getCharacterName()).isEqualTo(NEW_CHARACTER_NAME);
     }

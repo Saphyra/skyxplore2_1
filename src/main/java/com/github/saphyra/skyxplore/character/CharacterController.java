@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
@@ -47,7 +47,7 @@ public class CharacterController {
     private final CharacterRenameService characterRenameService;
     private final CharacterSelectService characterSelectService;
     private final CharacterViewConverter characterViewConverter;
-    private final CharacterNameCache characterNameCache;
+    private final CharacterNameExistsCache characterNameExistsCache;
 
     @PostMapping(BUY_EQUIPMENTS_MAPPING)
     void buyEquipments(
@@ -106,7 +106,7 @@ public class CharacterController {
     @PostMapping(IS_CHAR_NAME_EXISTS_MAPPING)
     boolean isCharNameExists(@RequestBody @Valid OneStringParamRequest request) {
         log.info("Someone wants to know if character with name {} is exists.", request);
-        return characterNameCache.get(request.getValue()).orElse(true);
+        return characterNameExistsCache.get(request.getValue()).orElse(true);
     }
 
     @PutMapping(RENAME_CHARACTER_MAPPING)
@@ -115,7 +115,7 @@ public class CharacterController {
         @CookieValue(value = CustomFilterHelper.COOKIE_USER_ID) String userId) {
         log.info("{} wants to rename character {}", userId, request);
         SkyXpCharacter character = characterRenameService.renameCharacter(request, userId);
-        characterNameCache.invalidate(request.getNewCharacterName());
+        characterNameExistsCache.invalidate(request.getNewCharacterName());
         log.info("Character renamed successfully.");
         return characterViewConverter.convertDomain(character);
     }

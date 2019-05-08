@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameCache;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 class CharacterRenameService {
     private final CharacterDao characterDao;
-    private final CharacterNameCache characterNameCache;
+    private final CharacterNameExistsCache characterNameExistsCache;
     private final CharacterQueryService characterQueryService;
 
     SkyXpCharacter renameCharacter(RenameCharacterRequest request, String userId) {
@@ -25,7 +25,7 @@ class CharacterRenameService {
         SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
         character.setCharacterName(request.getNewCharacterName());
         characterDao.save(character);
-        characterNameCache.invalidate(character.getCharacterName());
+        characterNameExistsCache.invalidate(character.getCharacterName());
         return character;
     }
 }
