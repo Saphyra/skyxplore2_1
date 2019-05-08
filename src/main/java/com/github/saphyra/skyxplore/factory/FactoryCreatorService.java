@@ -1,0 +1,36 @@
+package com.github.saphyra.skyxplore.factory;
+
+import com.github.saphyra.util.IdGenerator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import com.github.saphyra.skyxplore.factory.domain.Factory;
+import com.github.saphyra.skyxplore.factory.domain.Materials;
+import com.github.saphyra.skyxplore.factory.repository.FactoryDao;
+import com.github.saphyra.skyxplore.gamedata.subservice.MaterialService;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+class FactoryCreatorService {
+    private final FactoryConfig config;
+    private final FactoryDao factoryDao;
+    private final IdGenerator idGenerator;
+    private final MaterialService materialService;
+
+    void createFactory(String characterId) {
+        Factory factory = new Factory();
+        factory.setFactoryId(idGenerator.generateRandomId());
+        factory.setCharacterId(characterId);
+        factory.setMaterials(createMaterials());
+        log.info("Factory created: {}", factory);
+
+        factoryDao.save(factory);
+    }
+
+    private Materials createMaterials() {
+        Materials materials = new Materials();
+        materialService.keySet().forEach(materialId -> materials.addMaterial(materialId, config.getStartMaterials()));
+        return materials;
+    }
+}
