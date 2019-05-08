@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+    <TITLE></TITLE>
+    <META charset="UTF-8">
+    <LINK rel="stylesheet" href="/css/reset.css">
+    <LINK rel="stylesheet" href="/css/common.css">
+    <LINK rel="stylesheet" href="/css/lobby/.css">
+
+    <SCRIPT src="js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+
+    <SCRIPT src="js/lobby/page_controller.js"></SCRIPT>
+</HEAD>
+<BODY>
+<DIV class="main-page">
+    <HEADER>
+        <H1 id="main-title"></H1>
+    </HEADER>
+
+    <MAIN>
+
+    </MAIN>
+
+    <FOOTER>
+        <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
+        <BUTTON id="exit-lobby-button" onclick='eventProcessor.processEvent(events.EXIT_LOBBY)'></BUTTON>
+    </FOOTER>
+</DIV>
+</BODY>
+</HTML>

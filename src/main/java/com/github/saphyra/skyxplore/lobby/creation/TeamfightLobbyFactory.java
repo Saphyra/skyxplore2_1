@@ -2,7 +2,6 @@ package com.github.saphyra.skyxplore.lobby.creation;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
@@ -10,10 +9,16 @@ import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.skyxplore.lobby.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.lobby.domain.GameMode;
 import com.github.saphyra.skyxplore.lobby.domain.Lobby;
+import com.github.saphyra.util.IdGenerator;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
+//TODO unit test
 class TeamfightLobbyFactory implements LobbyFactory {
     private static final List<Integer> ALLOWED_TEAM_SIZE = Arrays.asList(2, 5, 10, 25, 33, 50);
+
+    private final IdGenerator idGenerator;
 
     @Override
     public boolean canCreate(GameMode gameMode) {
@@ -27,8 +32,7 @@ class TeamfightLobbyFactory implements LobbyFactory {
 
 
         return Lobby.builder()
-            //TODO use idgenerator
-            .lobbyId(UUID.randomUUID())
+            .lobbyId(idGenerator.randomUUID())
             .gameMode(gameMode)
             .users(users)
             .data(data)

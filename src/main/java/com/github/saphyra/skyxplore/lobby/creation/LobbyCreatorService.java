@@ -33,6 +33,7 @@ public class LobbyCreatorService {
             .orElseThrow(() -> new RestException(HttpStatus.NOT_IMPLEMENTED, "Unsupported gameMode: " + request.getGameMode()))
             .create(request.getGameMode(), characterId, request.getData());
 
+        log.info("lobby created: {}", lobby);
         lobbyStorage.put(lobby.getLobbyId(), lobby);
     }
 }
