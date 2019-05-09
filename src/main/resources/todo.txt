@@ -27,9 +27,24 @@ Create community
 Error reporting
     - Exceptions to save
 
+//TODO cookieUtil returns optional
+
 Lobby
     - Invite friends to lobby
     - Exit from lobby
+    - Display
+        - Number of free spaces (if max members locked)
+        - Current members
+        - Available friends
+            - Invite button
+            - Refresh button
+        - Kick member (Available only for owner)
+        - Transfer ownership (Available only for owner)
+        - Start queueing (Available only for owner)
+        - Exit from lobby
+        - Game mode & options
+        - Chat
+
 
 Javadoc
 Integration tests

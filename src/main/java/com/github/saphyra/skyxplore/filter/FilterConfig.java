@@ -23,6 +23,14 @@ class FilterConfig {
     }
 
     @Bean
+    FilterRegistrationBean<LobbyAccessFilter> lobbyAccessFilterBean(LobbyAccessFilter lobbyAccessFilter) {
+        FilterRegistrationBean<LobbyAccessFilter> lobbyAccessFilterBean = new FilterRegistrationBean<>();
+        lobbyAccessFilterBean.setFilter(lobbyAccessFilter);
+        lobbyAccessFilterBean.setOrder(25);
+        return lobbyAccessFilterBean;
+    }
+
+    @Bean
     FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean(CookieCleanupFilter cookieCleanupFilter) {
         FilterRegistrationBean<CookieCleanupFilter> cookieCleanupFilterBean = new FilterRegistrationBean<>();
         cookieCleanupFilterBean.setFilter(cookieCleanupFilter);

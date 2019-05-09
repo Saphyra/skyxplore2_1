@@ -16,7 +16,7 @@ public class PageController {
     private static final String FACTORY_MAPPING = "/factory";
     private static final String HANGAR_MAPPING = "/hangar";
     public static final String INDEX_MAPPING = "/";
-    private static final String OVERVIEW_MAPPING = "/overview";
+    public static final String OVERVIEW_MAPPING = "/overview";
     private static final String SETTINGS_MAPPING = "/account";
     private static final String SHOP_MAPPING = "/shop";
     public static final String LOBBY_MAPPING = "/lobby";
