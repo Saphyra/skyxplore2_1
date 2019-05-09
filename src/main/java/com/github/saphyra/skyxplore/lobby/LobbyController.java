@@ -37,6 +37,6 @@ class LobbyController {
 
     @DeleteMapping(EXIT_FROM_LOBBY_MAPPING)
     void exitFromLobby(@CookieValue(COOKIE_CHARACTER_ID) String characterId0){
-        lobbyMemberHandler.leaveFromLobby(characterId0);
+        lobbyMemberHandler.exitFromLobby(characterId0);
     }
 }

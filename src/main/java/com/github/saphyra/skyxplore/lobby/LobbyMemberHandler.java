@@ -21,10 +21,10 @@ public class LobbyMemberHandler {
     @EventListener
     void userLoggedOutEventListener(UserLoggedOutEvent event) {
         List<SkyXpCharacter> characters = characterQueryService.getCharactersByUserId(event.getUserId());
-        characters.forEach(skyXpCharacter -> leaveFromLobby(skyXpCharacter.getCharacterId()));
+        characters.forEach(skyXpCharacter -> exitFromLobby(skyXpCharacter.getCharacterId()));
     }
 
-    void leaveFromLobby(String characterId) {
+    void exitFromLobby(String characterId) {
         Optional<Lobby> lobbyOptional = lobbyQueryService.findByCharacterId(characterId);
         if(!lobbyOptional.isPresent()){
             return;
