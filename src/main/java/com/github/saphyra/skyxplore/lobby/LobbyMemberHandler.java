@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 public class LobbyMemberHandler {
     private final CharacterQueryService characterQueryService;
     private final LobbyQueryService lobbyQueryService;
-    private final LobbyStorage lobbyStorage;
 
     @EventListener
     void userLoggedOutEventListener(UserLoggedOutEvent event) {

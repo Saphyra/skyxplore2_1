@@ -24,6 +24,7 @@ class LobbyController {
     private static final String EXIT_FROM_LOBBY_MAPPING = "lobby";
 
     private final LobbyCreatorService lobbyCreatorService;
+    private final LobbyMemberHandler lobbyMemberHandler;
 
     @PutMapping(CREATE_LOBBY_MAPPING)
     void createLobby(
@@ -36,6 +37,6 @@ class LobbyController {
 
     @DeleteMapping(EXIT_FROM_LOBBY_MAPPING)
     void exitFromLobby(@CookieValue(COOKIE_CHARACTER_ID) String characterId0){
-
+        lobbyMemberHandler.leaveFromLobby(characterId0);
     }
 }
