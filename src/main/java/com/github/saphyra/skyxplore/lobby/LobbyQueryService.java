@@ -19,7 +19,6 @@ public class LobbyQueryService {
     }
 
     private boolean containsCharacter(Lobby lobby, String characterId) {
-        return lobby.getUsers().stream()
-            .anyMatch(s -> s.equals(characterId));
+        return lobby.getUsers().contains(characterId);
     }
 }

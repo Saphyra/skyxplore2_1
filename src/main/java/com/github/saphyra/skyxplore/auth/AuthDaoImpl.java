@@ -3,6 +3,7 @@ package com.github.saphyra.skyxplore.auth;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.authservice.AuthDao;
@@ -10,6 +11,7 @@ import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.authservice.domain.User;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;
 import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 import com.github.saphyra.skyxplore.user.repository.user.UserDao;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ class AuthDaoImpl implements AuthDao {
     private final UserDao userDao;
     private final UserConverter userConverter;
     private final PasswordService passwordService;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public Optional<User> findUserById(String userId) {
@@ -63,5 +66,10 @@ class AuthDaoImpl implements AuthDao {
     @Override
     public boolean authenticate(String password, String hash) {
         return passwordService.authenticate(password, hash);
+    }
+
+    //TODO unit test
+    public void successfulLogoutCallback(AccessToken deletedAccessToken){
+        applicationEventPublisher.publishEvent(new UserLoggedOutEvent(deletedAccessToken.getUserId()));
     }
 }

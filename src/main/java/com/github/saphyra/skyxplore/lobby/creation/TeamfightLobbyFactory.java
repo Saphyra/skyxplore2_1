@@ -6,10 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.lobby.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.lobby.domain.GameMode;
 import com.github.saphyra.skyxplore.lobby.domain.Lobby;
-import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -18,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 class TeamfightLobbyFactory implements LobbyFactory {
     private static final List<Integer> ALLOWED_TEAM_SIZE = Arrays.asList(2, 5, 10, 25, 33, 50);
 
-    private final IdGenerator idGenerator;
+    private final LobbyObjectFactory lobbyObjectFactory;
 
     @Override
     public boolean canCreate(GameMode gameMode) {
@@ -27,17 +25,7 @@ class TeamfightLobbyFactory implements LobbyFactory {
 
     @Override
     public Lobby create(GameMode gameMode, String characterId, String data) {
-        FixedSizeConcurrentList<String> users = new FixedSizeConcurrentList<>(parseTeamSize(data));
-        users.add(characterId);
-
-
-        return Lobby.builder()
-            .lobbyId(idGenerator.randomUUID())
-            .gameMode(gameMode)
-            .users(users)
-            .data(data)
-            .ownerId(characterId)
-            .build();
+        return lobbyObjectFactory.create(gameMode, characterId, data, parseTeamSize(data));
     }
 
     private int parseTeamSize(String data) {

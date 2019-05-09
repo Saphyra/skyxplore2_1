@@ -30,8 +30,6 @@ Error reporting
 Lobby
     - Invite friends to lobby
     - Exit from lobby
-    - Auto exit when logout
-    - Boss
 
 Javadoc
 Integration tests
