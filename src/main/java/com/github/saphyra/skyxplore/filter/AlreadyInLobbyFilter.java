@@ -1,26 +1,24 @@
 package com.github.saphyra.skyxplore.filter;
 
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static java.util.Objects.isNull;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import com.github.saphyra.skyxplore.common.PageController;
+import com.github.saphyra.skyxplore.lobby.LobbyQueryService;
+import com.github.saphyra.util.CookieUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.github.saphyra.skyxplore.common.CookieUtil;
-import com.github.saphyra.skyxplore.common.PageController;
-import com.github.saphyra.skyxplore.lobby.LobbyQueryService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -44,8 +42,8 @@ public class AlreadyInLobbyFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.debug("AlreadyInLobbyFilter");
-        String characterId = cookieUtil.getCookie(request, COOKIE_CHARACTER_ID);
-        if (!customFilterHelper.isRestCall(request) && !isAllowedPath(request.getRequestURI()) && !isNull(characterId) && lobbyQueryService.findByCharacterId(characterId).isPresent()) {
+        Optional<String> characterId = cookieUtil.getCookie(request, COOKIE_CHARACTER_ID);
+        if (!customFilterHelper.isRestCall(request) && !isAllowedPath(request.getRequestURI()) && characterId.isPresent() && lobbyQueryService.findByCharacterId(characterId.get()).isPresent()) {
             log.info("{} is already in lobby. Redirecting...", characterId);
             response.sendRedirect(PageController.LOBBY_MAPPING);
         }

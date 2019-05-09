@@ -1,16 +1,9 @@
 package com.github.saphyra.skyxplore.filter;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.common.PageController;
+import com.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
+import com.github.saphyra.util.CookieUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +11,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.common.CookieUtil;
-import com.github.saphyra.skyxplore.common.PageController;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Optional;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterAuthFilterTest {
@@ -52,8 +51,8 @@ public class CharacterAuthFilterTest {
 
     @Before
     public void setUp() {
-        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_CHARACTER_ID)).thenReturn(CHARACTER_ID_COOKIE);
-        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_USER_ID)).thenReturn(USER_ID_COOKIE);
+        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_CHARACTER_ID)).thenReturn(Optional.of(CHARACTER_ID_COOKIE));
+        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_USER_ID)).thenReturn(Optional.of(USER_ID_COOKIE));
         when(request.getRequestURI()).thenReturn(AUTHENTICATED_PATH);
     }
 
@@ -71,7 +70,7 @@ public class CharacterAuthFilterTest {
     @Test
     public void testShouldCallFilterHelperWhenUserIdCookieNotFound() throws ServletException, IOException {
         //GIVEN
-        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_USER_ID)).thenReturn(null);
+        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_USER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.doFilterInternal(request, response, filterChain);
         //THEN
@@ -85,7 +84,7 @@ public class CharacterAuthFilterTest {
     @Test
     public void testShouldCallFilterHelperWhenCharacterIdCookieNotFound() throws ServletException, IOException {
         //GIVEN
-        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_CHARACTER_ID)).thenReturn(null);
+        when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
         underTest.doFilterInternal(request, response, filterChain);
         //THEN

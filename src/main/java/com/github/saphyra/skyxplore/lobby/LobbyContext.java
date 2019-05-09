@@ -1,10 +1,9 @@
 package com.github.saphyra.skyxplore.lobby;
 
-import org.springframework.stereotype.Component;
-
-import com.github.saphyra.skyxplore.common.Random;
+import com.github.saphyra.util.Random;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

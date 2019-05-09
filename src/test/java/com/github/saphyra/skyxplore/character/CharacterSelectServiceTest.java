@@ -1,26 +1,24 @@
 package com.github.saphyra.skyxplore.character;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import com.github.saphyra.skyxplore.common.CookieUtil;
+import com.github.saphyra.util.CookieUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import javax.servlet.http.HttpServletResponse;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
+import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterSelectServiceTest {

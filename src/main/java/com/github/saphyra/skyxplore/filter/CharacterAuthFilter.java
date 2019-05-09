@@ -1,13 +1,12 @@
 package com.github.saphyra.skyxplore.filter;
 
-import com.github.saphyra.skyxplore.common.CookieUtil;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
 import com.github.saphyra.skyxplore.common.exception.InvalidAccessException;
+import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static com.github.saphyra.skyxplore.character.CharacterController.RENAME_CHARACTER_MAPPING;
 import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
@@ -75,16 +75,16 @@ class CharacterAuthFilter extends OncePerRequestFilter {
     }
 
     private boolean isAuthenticated(HttpServletRequest request) {
-        String userId = cookieUtil.getCookie(request, COOKIE_USER_ID);
-        String characterId = cookieUtil.getCookie(request, COOKIE_CHARACTER_ID);
+        Optional<String> userId = cookieUtil.getCookie(request, COOKIE_USER_ID);
+        Optional<String> characterId = cookieUtil.getCookie(request, COOKIE_CHARACTER_ID);
 
-        if (userId == null || characterId == null) {
+        if (!userId.isPresent() || !characterId.isPresent()) {
             log.warn("Cookies not found.");
             return false;
         }
 
         try {
-            characterQueryService.findCharacterByIdAuthorized(characterId, userId);
+            characterQueryService.findCharacterByIdAuthorized(characterId.get(), userId.get());
         } catch (CharacterNotFoundException | InvalidAccessException e) {
             log.warn("Character authentication failed.", e);
             return false;

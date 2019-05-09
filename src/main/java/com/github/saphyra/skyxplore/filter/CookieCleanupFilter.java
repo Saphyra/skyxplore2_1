@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.filter;
 
-import com.github.saphyra.skyxplore.common.CookieUtil;
 import com.github.saphyra.skyxplore.common.PageController;
+import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

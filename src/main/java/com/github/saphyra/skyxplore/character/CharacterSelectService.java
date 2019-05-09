@@ -1,16 +1,15 @@
 package com.github.saphyra.skyxplore.character;
 
-import javax.servlet.http.HttpServletResponse;
-
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import com.github.saphyra.skyxplore.common.CookieUtil;
-import org.springframework.stereotype.Service;
-
-import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 @RequiredArgsConstructor
