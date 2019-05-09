@@ -22,7 +22,7 @@
 
         const request = new Request(HttpMethod.PUT, Mapping.CREATE_LOBBY, {gameMode: gameMode, data: data});
                 request.processValidResponse = function(){
-                    window.location.href = "lobby";
+                    window.location.href = "lobby-page";
                 }
         dao.sendRequestAsync(request);
     }

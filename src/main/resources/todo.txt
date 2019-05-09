@@ -42,9 +42,7 @@ Lobby
         - Transfer ownership (Available only for owner)
         - Start queueing (Available only for owner)
         - Exit from lobby
-        - Game mode & options
         - Chat
-
 
 Javadoc
 Integration tests

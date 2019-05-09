@@ -19,7 +19,7 @@ public class PageController {
     public static final String OVERVIEW_MAPPING = "/overview";
     private static final String SETTINGS_MAPPING = "/account";
     private static final String SHOP_MAPPING = "/shop";
-    public static final String LOBBY_MAPPING = "/lobby";
+    public static final String LOBBY_MAPPING = "/lobby-page";
 
     @GetMapping(CHARACTER_SELECT_MAPPING)
     String characterSelect() {
