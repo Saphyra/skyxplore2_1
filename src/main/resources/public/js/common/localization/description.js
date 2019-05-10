@@ -10,13 +10,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(){
-            const path = "i18n/" + getLanguage() + "/description.json";
-            const request = new Request(HttpMethod.GET, path);
-                request.convertResponse = function(response){return JSON.parse(response.body)};
-                request.processValidResponse = loadDescriptions;
-                request.processInvalidResponse = createFallBackQuery;
-
-            dao.sendRequestAsync(request);
+            loadLocalization("description", loadDescriptions);
         },
         true
     ));
@@ -27,14 +21,5 @@
         }
         
         eventProcessor.processEvent(new Event(events.DESCRIPTION_LOADED));
-    }
-
-    function createFallBackQuery(response, pageName){
-        const path = "i18n/hu/description.json";
-        const request = new Request(HttpMethod.GET, path);
-            request.convertResponse = function(response){return JSON.parse(response.body)};
-            request.processValidResponse = loadDescriptions;
-
-        dao.sendRequestAsync(request);
     }
 })();

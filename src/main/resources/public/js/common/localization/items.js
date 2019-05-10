@@ -12,13 +12,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(){
-            const path = "i18n/" + getLanguage() + "/items.json";
-            const request = new Request(HttpMethod.GET, path);
-                request.convertResponse = function(response){return JSON.parse(response.body)};
-                request.processValidResponse = addItems;
-                request.processInvalidResponse = createFallBackQuery;
-            
-            dao.sendRequestAsync(request);
+            loadLocalization("items", addItems);
         },
         true
     ));
@@ -28,14 +22,5 @@
             items[iindex] = itemMap[iindex];
         }
         eventProcessor.processEvent(new Event(events.ITEMS_LOADED));
-    }
-    
-    function createFallBackQuery(response){
-        const path = "i18n/hu/items.json";
-        const request = new Request(HttpMethod.GET, path);
-            request.convertResponse = function(response){return JSON.parse(response.body)};
-            request.processValidResponse = addItems;
-        
-        dao.sendRequestAsync(request);
     }
 })();

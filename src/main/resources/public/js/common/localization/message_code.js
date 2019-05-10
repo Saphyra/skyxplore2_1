@@ -12,13 +12,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOAD_LOCALIZATION},
         function(){
-            const path = "i18n/" + getLanguage() + "/message_codes.json";
-            const request = new Request(HttpMethod.GET, path);
-                request.convertResponse = function(response){return JSON.parse(response.body)};
-                request.processValidResponse = addMessageCodes;
-                request.processInvalidResponse = createFallBackQuery;
-            
-            dao.sendRequestAsync(request);
+            loadLocalization("message_codes", addMessageCodes)
         },
         true
     ));
@@ -29,14 +23,5 @@
         }
         
         eventProcessor.processEvent(new Event(events.MESSAGE_CODES_LOADED));
-    }
-    
-    function createFallBackQuery(response){
-        const path = "i18n/hu/message_codes.json";
-        const request = new Request(HttpMethod.GET, path);
-            request.convertResponse = function(response){return JSON.parse(response.body)};
-            request.processValidResponse = addMessageCodes;
-        
-        dao.sendRequestAsync(request);
     }
 })();
