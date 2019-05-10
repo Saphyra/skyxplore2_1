@@ -1,0 +1,17 @@
+{
+  "ARCADE": "Arcade",
+  "BATTLE_ROYALE": "Battle Royale",
+  "CLAN_WARS": "Klánok harca",
+  "TEAMFIGHT": "Teamfight",
+  "VS": "1 vs 1",
+  "TOURNAMENT": "Bajnokság",
+  "CLAN_WARS_DATA": "Ellenfél:",
+  "TEAMFIGHT_DATA": "Csapatméret:",
+  "random": "Véletlenszerű",
+  "defender": "Defender",
+  "dreadnought": "Dreadnought",
+  "eclipse": "Eclipse",
+  "saboteur": "Saboteur",
+  "starter": "Starter",
+  "supporter": "Supporter"
+}

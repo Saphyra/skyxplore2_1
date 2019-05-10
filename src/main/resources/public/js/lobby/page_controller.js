@@ -1,10 +1,14 @@
 (function PageController(){
+    scriptLoader.loadScript("js/common/localization/localization_map.js");
+    scriptLoader.loadScript("js/common/game/game_mode.js");
+
     events.EXIT_LOBBY = "exit_lobby";
     events.LOBBY_LOADED = "lobby_loaded";
 
     $(document).ready(init);
 
     let lobbyDetails = null;
+    let gameModeLocalization = new LocalizationMap("game_mode");
 
     window.pageController = new function(){
         this.getLobbyDetails = function(){return lobbyDetails};
@@ -48,13 +52,38 @@
     ))
 
     function displayGameDetails(){
-        document.getElementById("game-mode").innerHTML = lobbyDetails.gameMode; //TODO translate gameMode name
+        document.getElementById("game-mode").innerHTML = gameModeLocalization.getLocalization(lobbyDetails.gameMode);
         if(lobbyDetails.data){
             $("#game-details-container").show();
-            document.getElementById("game-details-name").innerHTML = lobbyDetails.gameMode; //TODO translate gameDetailsName
-            document.getElementById("game-details-value").innerHTML = lobbyDetails.data;
+            document.getElementById("game-details-name").innerHTML = getDataName(lobbyDetails.gameMode);
+            document.getElementById("game-details-value").innerHTML = translateData(lobbyDetails.gameMode, lobbyDetails.data);
         }else{
             $("#game-details-container").hide();
+        }
+
+        function getDataName(gameMode){
+            switch(gameMode){
+                case GameMode.CLAN_WARS:
+                    return gameModeLocalization.getLocalization("CLAN_WARS_DATA");
+                break;
+                case GameMode.TEAMFIGHT:
+                    return gameModeLocalization.getLocalization("TEAMFIGHT_DATA");
+                break;
+                default:
+                    throwException("IllegalArgument", gameMode + " has no data localization");
+                break;
+            }
+        }
+
+        function translateData(gameMode, data){
+            switch(gameMode){
+                case GameMode.CLAN_WARS:
+                    return gameModeLocalization.getLocalization(data);
+                break;
+                default:
+                    return data;
+                break;
+            }
         }
     }
 })();

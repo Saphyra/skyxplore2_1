@@ -1,4 +1,6 @@
 (function PageController(){
+    scriptLoader.loadScript("js/common/game/game_mode.js");
+
     events.CREATE_LOBBY = "create_lobby";
 
     $(document).ready(function(){
@@ -32,12 +34,3 @@
         $("label").on("click", function(e){e.stopPropagation()});
     }
 })();
-
-window.GameMode = {
-    ARCADE: "ARCADE",
-    BATTLE_ROYALE: "BATTLE_ROYALE",
-    CLAN_WARS: "CLAN_WARS",
-    TEAMFIGHT: "TEAMFIGHT",
-    VS: "VS",
-    TOURNAMENT: "TOURNAMENT"
-}
