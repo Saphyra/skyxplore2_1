@@ -15,7 +15,7 @@
     right: 25%;
 }
 
-#write-message-container{
+#write-message-container, #invitation-search-container{
     position: absolute;
     left: 0;
     right: 0;
@@ -24,7 +24,7 @@
     padding: 0.25rem;
 }
 
-#messages{
+#messages, #invitation-search-result{
     position: absolute;
     top: 3rem;
     bottom: 3rem;
@@ -33,17 +33,17 @@
     overflow: auto;
 }
 
-#message{
+#message, #character-name{
     width: calc(100% - 3rem);
 }
 
-#send-message-button{
+#send-message-button, #search-characters-button{
     position: absolute;
     top: 0;
     right: 0;
 }
 
-#send-message-button img{
+#send-message-button img, #search-characters-button img{
     width: 1.25rem;
 }
 
@@ -55,6 +55,12 @@
     bottom: 0;
     width: 25%;
     border-left: 3px ridge white;
+}
+
+#no-character-can-be-invited{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
 }
 
 .container-title{

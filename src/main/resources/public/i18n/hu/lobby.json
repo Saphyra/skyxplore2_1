@@ -37,6 +37,18 @@
         "message": "Meghívás"
       }
     ],
+    "no-character-can-be-invited": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs meghívható karakter."
+      }
+    ],
+    "character-name": [
+      {
+        "key": "placeholder",
+        "message": "Játékos keresése"
+      }
+    ],
     "exit-lobby-button": [
       {
         "key": "innerHTML",
