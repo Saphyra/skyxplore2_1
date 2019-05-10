@@ -1,0 +1,25 @@
+#chat-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 25%;
+    border-right: 3px ridge white;
+}
+
+#members-container{
+    position: absolute;
+    top: 0;
+    left: 25%;
+    bottom: 0;
+    right: 25%;
+}
+
+#invitation-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 25%;
+    border-left: 3px ridge white;
+}

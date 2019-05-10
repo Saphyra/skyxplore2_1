@@ -41,7 +41,6 @@ Lobby
         - Kick member (Available only for owner)
         - Transfer ownership (Available only for owner)
         - Start queueing (Available only for owner)
-        - Exit from lobby
         - Chat
 
 Javadoc
