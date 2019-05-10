@@ -13,6 +13,30 @@
         "message": "Kijelentkezés"
       }
     ],
+    "chat-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Chat"
+      }
+    ],
+    "message": [
+      {
+        "key": "placeholder",
+        "message": "Üzenet írása"
+      }
+    ],
+    "members-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Társak"
+      }
+    ],
+    "invitation-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Meghívás"
+      }
+    ],
     "exit-lobby-button": [
       {
         "key": "innerHTML",

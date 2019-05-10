@@ -42,6 +42,7 @@ Lobby
         - Transfer ownership (Available only for owner)
         - Start queueing (Available only for owner)
         - Chat
+        - Fill group
 
 Javadoc
 Integration tests
