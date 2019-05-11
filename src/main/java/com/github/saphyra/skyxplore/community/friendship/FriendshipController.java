@@ -31,10 +31,12 @@ class FriendshipController {
     private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request"; //Also used for cancelling
     private static final String DELETE_FRIEND_MAPPING = "friend";
     private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/name";
+    private static final String GET_ACTIVE_FRIENDS_MAPPING = "friend/active";
     private static final String GET_FRIENDS_MAPPING = "friend";
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/request/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
 
+    private final ActiveFriendsQueryService activeFriendsQueryService;
     private final CharacterQueryService characterQueryService;
     private final FriendshipService friendshipService;
     private final FriendshipQueryService friendshipQueryService;
@@ -86,6 +88,13 @@ class FriendshipController {
     ) {
         log.info("{} querying possible community characters by name like {}", characterId, request.getValue());
         return characterViewConverter.convertDomain(characterQueryService.getCharactersCanBeFriend(request.getValue(), characterId));
+    }
+
+    @GetMapping(GET_ACTIVE_FRIENDS_MAPPING)
+    //TODO unit test
+    List<CharacterView> getActiveFriends(@CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId){
+        log.info("{} wants to know his active friends.", characterId);
+        return characterViewConverter.convertDomain(activeFriendsQueryService.getActiveFriends(characterId));
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)

@@ -63,6 +63,30 @@
     margin-top: 1rem;
 }
 
+.invitable-character{
+    font-size: 1.5rem;
+    display: relative;
+    border: 2px ridge white;
+    border-radius: 5px;
+    margin: 0.25rem;
+    padding: 0.25rem;
+}
+
+.invitable-character div:first-child{
+    margin-right: 7rem;
+}
+
+.button-wrapper{
+    position: absolute;
+    right: 0.25rem;
+    top: 0.25rem;
+    text-align: right;
+}
+
+.button-wrapper > span{
+    display: none;
+}
+
 .container-title{
     border-bottom: 2px ridge white;
     text-align: center;

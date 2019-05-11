@@ -26,6 +26,7 @@ window.Mapping = {
     EQUIP_SHIP: "ship/equipment/*",
     EQUIPMENT_STORAGE: "character/storage",
     EXIT_FROM_LOBBY: "lobby",
+    GET_ACTIVE_FRIENDS: "friend/active",
     GET_ARCHIVED_MAILS: "mail/archived",
     GET_BLOCKED_CHARACTERS: "blockedcharacter",
     GET_CHARACTERS: "character",

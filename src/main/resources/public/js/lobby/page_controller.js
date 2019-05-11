@@ -1,6 +1,7 @@
 (function PageController(){
     scriptLoader.loadScript("js/common/localization/localization_map.js");
     scriptLoader.loadScript("js/common/game/game_mode.js");
+    scriptLoader.loadScript("js/lobby/invitation/invitation_controller.js");
 
     events.EXIT_LOBBY = "exit_lobby";
     events.LOBBY_LOADED = "lobby_loaded";
