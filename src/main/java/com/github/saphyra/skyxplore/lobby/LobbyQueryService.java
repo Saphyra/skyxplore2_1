@@ -2,6 +2,7 @@ package com.github.saphyra.skyxplore.lobby;
 
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.skyxplore.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.storage.LobbyStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.Optional;
 public class LobbyQueryService {
     private final LobbyStorage lobbyStorage;
 
-    Lobby findByCharacterIdValidated(String characterId) {
+    public Lobby findByCharacterIdValidated(String characterId) {
         return findByCharacterId(characterId)
             .orElseThrow(() -> new NotFoundException("Lobby not found for character " + characterId));
     }

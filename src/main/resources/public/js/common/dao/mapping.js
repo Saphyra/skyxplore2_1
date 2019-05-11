@@ -41,6 +41,7 @@ window.Mapping = {
     GET_SENT_MAILS: "mail/sent",
     GET_SHIP_DATA: "ship",
     GET_QUEUE: "factory/queue",
+    INVITE_TO_LOBBY: "lobby/invitation/*",
     ITEMS_OF_CATEGORY: "categories/*",
     LOGIN: "login",
     LOGOUT: "logout",

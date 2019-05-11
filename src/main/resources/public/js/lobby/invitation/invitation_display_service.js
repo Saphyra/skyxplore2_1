@@ -37,6 +37,9 @@
 
                     const inviteButton = document.createElement("BUTTON");
                         inviteButton.innerHTML = Localization.getAdditionalContent("invite");
+                        inviteButton.onclick = function(){
+                            eventProcessor.processEvent(new Event(events.INVITE_TO_LOBBY, character.characterId));
+                        }
                 buttonWrapper.appendChild(inviteButton);
                 $(buttonWrapper).hover(function(){$(wrapperSpan).fadeIn()}, function(){$(wrapperSpan).fadeOut()});
             container.appendChild(buttonWrapper);

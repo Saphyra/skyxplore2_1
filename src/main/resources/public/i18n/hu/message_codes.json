@@ -29,6 +29,7 @@
   "FRIEND_REQUEST_DECLINED": "Barátkérelem elutasítva.",
   "FRIEND_REQUEST_SENT": "Barátkérelem elküldve.",
   "INVALID_EMAIL": "Érvénytelen e-mail cím.",
+  "INVITED_TO_LOBBY": "Meghívás elküldve",
   "ITEM_EQUIPPED": "Felszerelés sikeres.",
   "ITEM_UNEQUIPPED": "Leszerelés sikeres.",
   "ITEMS_BOUGHT": "Sikeres vásárlás.",
