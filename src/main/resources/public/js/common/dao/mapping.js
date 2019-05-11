@@ -52,6 +52,7 @@ window.Mapping = {
     REGISTER: "user",
     RENAME_CHARACTER: "character",
     RESTORE_MAILS: "mail/restore",
+    SEARCH_INVITABLE_CHARACTERS: "character/active/name",
     SELECT_CHARACTER: "character/*",
     SEND_MAIL: "mail",
     UNEQUIP_ITEM: "ship/equipment",

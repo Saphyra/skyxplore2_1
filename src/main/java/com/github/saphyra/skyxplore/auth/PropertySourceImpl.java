@@ -1,9 +1,12 @@
 package com.github.saphyra.skyxplore.auth;
 
-import static com.github.saphyra.skyxplore.common.PageController.INDEX_MAPPING;
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
+import com.github.saphyra.authservice.PropertySource;
+import com.github.saphyra.authservice.domain.AllowedUri;
+import com.github.saphyra.authservice.domain.RoleSetting;
+import com.github.saphyra.skyxplore.common.PageController;
+import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,14 +14,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.github.saphyra.skyxplore.common.PageController;
-import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-
-import com.github.saphyra.authservice.PropertySource;
-import com.github.saphyra.authservice.domain.AllowedUri;
-import com.github.saphyra.authservice.domain.RoleSetting;
+import static com.github.saphyra.skyxplore.common.PageController.INDEX_MAPPING;
+import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_ACCESS_TOKEN;
+import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.REST_TYPE_REQUEST;
 
 @Component
 class PropertySourceImpl implements PropertySource {
@@ -70,6 +69,7 @@ class PropertySourceImpl implements PropertySource {
     @Override
     public List<AllowedUri> getNonSessionExtendingUris(){
         return Arrays.asList(
+            new AllowedUri("/notification", HttpMethod.GET),
             new AllowedUri("/notification/*", HttpMethod.GET)
         );
     }

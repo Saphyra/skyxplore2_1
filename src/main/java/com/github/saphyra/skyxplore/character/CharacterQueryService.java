@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.character;
 
+import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
 import com.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class CharacterQueryService {
+    private final AccessTokenDao accessTokenDao;
     private final BlockedCharacterDao blockedCharacterDao;
     private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
@@ -36,6 +38,21 @@ public class CharacterQueryService {
             throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
         }
         return character;
+    }
+
+    //TODO unit test
+    List<SkyXpCharacter> getActiveCharactersByName(String characterId, String name) {
+        SkyXpCharacter character = findByCharacterId(characterId);
+        return getCharactersOfNameLike(name).stream()
+            .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
+            .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
+            .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
+            .filter(c -> isActive(c.getCharacterId())) //Filtering active characters
+            .collect(Collectors.toList());
+    }
+
+    private boolean isActive(String characterId) {
+        return accessTokenDao.findByCharacterId(characterId).isPresent();
     }
 
     public List<SkyXpCharacter> getCharactersCanBeAddressee(String characterId, String name) {

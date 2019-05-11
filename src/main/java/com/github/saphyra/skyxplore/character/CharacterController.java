@@ -1,18 +1,15 @@
 package com.github.saphyra.skyxplore.character;
 
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
 import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
+import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +19,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,6 +31,7 @@ public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment";
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
+    private static final String GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING = "character/active/name";
     private static final String GET_CHARACTERS_MAPPING = "character";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/storage";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
@@ -79,6 +78,16 @@ public class CharacterController {
         log.info("{} wants to deleteById {}", userId, characterId);
         characterDeleteService.deleteCharacter(characterId, userId);
         log.info("Character {} is deleted.", characterId);
+    }
+
+    @PostMapping(GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING)
+    //TODO unit test
+    List<CharacterView> getActiveCharactersByName(
+        @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId,
+        @RequestBody @Valid OneStringParamRequest request
+    ) {
+        log.info("{} wants to query active characters with name {}", characterId, request.getValue());
+        return characterViewConverter.convertDomain(characterQueryService.getActiveCharactersByName(characterId, request.getValue()));
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)

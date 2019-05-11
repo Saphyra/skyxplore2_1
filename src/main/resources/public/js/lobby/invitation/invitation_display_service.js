@@ -3,13 +3,14 @@
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.DISPLAY_INVITATION},
-        function(event){displayInvitation(event.getPayload())}
+        function(event){displayInvitation(event.getPayload().characters, event.getPayload().containerId)}
     ));
 
-    function displayInvitation(characters){
+    function displayInvitation(characters, containerId){
         characters.sort(function(a, b){return a.characterName.localeCompare(b.characterName)});
 
-        const container = document.getElementById("invitation-search-result");
+        switchTab("invitation-character-list", containerId);
+        const container = document.getElementById(containerId);
             container.innerHTML = "";
         characters.length == 0 ? $("#no-character-can-be-invited").show() : $("#no-character-can-be-invited").hide()
 
