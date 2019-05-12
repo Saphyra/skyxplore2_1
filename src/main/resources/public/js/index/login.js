@@ -17,6 +17,7 @@
         
         const request = new Request(HttpMethod.POST, Mapping.LOGIN, credentials.stringify());
             request.processValidResponse = function(){location.href = Mapping.CHARACTER_SELECT};
+            request.handleLogout = false;
             request.processInvalidResponse = function(response){
                 if(response.status == ResponseStatus.UNAUTHORIZED){
                     notificationService.showError(MessageCode.getMessage("BAD_CREDENTIALS"));

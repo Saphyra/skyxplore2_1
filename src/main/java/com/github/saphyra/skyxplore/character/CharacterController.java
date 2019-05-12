@@ -32,6 +32,7 @@ public class CharacterController {
     private static final String CREATE_CHARACTER_MAPPING = "character";
     private static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
     private static final String GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING = "character/active/name";
+    private static final String GET_CHARACTER_ID_MAPPING = "character/id";
     private static final String GET_CHARACTERS_MAPPING = "character";
     private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/storage";
     private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
@@ -81,13 +82,19 @@ public class CharacterController {
     }
 
     @PostMapping(GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING)
-    //TODO unit test
+        //TODO unit test
     List<CharacterView> getActiveCharactersByName(
         @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId,
         @RequestBody @Valid OneStringParamRequest request
     ) {
         log.info("{} wants to query active characters with name {}", characterId, request.getValue());
         return characterViewConverter.convertDomain(characterQueryService.getActiveCharactersByName(characterId, request.getValue()));
+    }
+
+    //TODO unit test
+    @GetMapping(GET_CHARACTER_ID_MAPPING)
+    String getCharacterId(@CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId) {
+        return characterId;
     }
 
     @GetMapping(GET_CHARACTERS_MAPPING)

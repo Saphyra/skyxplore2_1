@@ -3,6 +3,8 @@
     scriptLoader.loadScript("js/common/game/game_mode.js");
     scriptLoader.loadScript("js/common/game/game_mode_translation.js");
     scriptLoader.loadScript("js/lobby/invitation/invitation_controller.js");
+    scriptLoader.loadScript("js/lobby/message/message_sender_controller.js");
+    scriptLoader.loadScript("js/lobby/message/message_display_service.js");
 
     events.EXIT_LOBBY = "exit_lobby";
     events.LOBBY_LOADED = "lobby_loaded";

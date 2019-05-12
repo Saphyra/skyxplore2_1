@@ -30,6 +30,7 @@ window.Mapping = {
     GET_ACTIVE_FRIENDS: "friend/active",
     GET_ARCHIVED_MAILS: "mail/archived",
     GET_BLOCKED_CHARACTERS: "blockedcharacter",
+    GET_CHARACTER_ID: "character/id",
     GET_CHARACTERS: "character",
     GET_CHARACTERS_CAN_BE_BLOCKED: "blockcharacter/name",
     GET_CHARACTERS_CAN_BE_FRIEND: "friend/name",
@@ -39,6 +40,7 @@ window.Mapping = {
     GET_INVITATIONS: "lobby/invitation",
     GET_LOBBY: "lobby",
     GET_MATERIALS: "factory/materials",
+    GET_MESSAGES: "lobby/message",
     GET_SENT_FRIEND_REQUESTS: "friend/request/sent",
     GET_SENT_MAILS: "mail/sent",
     GET_SHIP_DATA: "ship",
@@ -58,6 +60,7 @@ window.Mapping = {
     SEARCH_INVITABLE_CHARACTERS: "character/active/name",
     SELECT_CHARACTER: "character/*",
     SEND_MAIL: "mail",
+    SEND_MESSAGE: "lobby/message",
     UNEQUIP_ITEM: "ship/equipment",
     USERNAME_EXISTS: "user/name",
     
