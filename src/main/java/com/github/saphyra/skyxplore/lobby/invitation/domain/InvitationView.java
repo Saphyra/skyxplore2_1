@@ -25,5 +25,5 @@ public class InvitationView {
     private final String characterId;
 
     @NonNull
-    private final UUID lobbyId;
+    private final UUID invitationId;
 }

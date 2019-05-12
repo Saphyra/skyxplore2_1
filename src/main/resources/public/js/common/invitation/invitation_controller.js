@@ -93,6 +93,9 @@
 
                         const acceptButton = document.createElement("BUTTON");
                             acceptButton.innerHTML = invitationLocalization.getLocalization("accept-invitation");
+                            acceptButton.onclick = function(){
+                                acceptInvitation(invitation.invitationId);
+                            }
                     buttons.appendChild(acceptButton);
 
                 container.appendChild(buttons);
@@ -104,6 +107,14 @@
                 document.getElementById("invitation-container").removeChild(invitation);
             }
         }
+    }
+
+    function acceptInvitation(invitationId){
+        const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.ACCEPT_INVITATION, invitationId));
+            request.processValidResponse = function(){
+                window.location.href = "lobby-page";
+            }
+        dao.sendRequestAsync(request);
     }
 
     function init(){

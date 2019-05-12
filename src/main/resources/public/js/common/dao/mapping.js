@@ -1,5 +1,6 @@
 window.Mapping = {
     ACCEPT_FRIEND_REQUEST: "friend/request/accept",
+    ACCEPT_INVITATION: "lobby/invitation/*",
     ADD_FRIEND: "friend/request",
     ADD_TO_QUEUE: "factory",
     ADDRESSEES: "mail/addressee",

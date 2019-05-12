@@ -37,7 +37,7 @@ class InvitationViewQueryService {
             .data(lobby.getData())
             .characterName(characterQueryService.findByCharacterId(invitation.getCharacterId()).getCharacterName())
             .characterId(invitation.getCharacterId())
-            .lobbyId(lobby.getLobbyId())
+            .invitationId(invitation.getInvitationId())
             .build();
     }
 }

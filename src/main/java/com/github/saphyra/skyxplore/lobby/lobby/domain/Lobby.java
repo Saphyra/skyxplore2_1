@@ -1,11 +1,6 @@
 package com.github.saphyra.skyxplore.lobby.lobby.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import javax.validation.constraints.NotNull;
-
+import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,6 +9,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
@@ -56,7 +56,16 @@ public class Lobby {
         }
     }
 
-    public List<String> getUsers(){
+    public List<String> getUsers() {
         return new ArrayList<>(users);
+    }
+
+    public void addMember(String characterId) {
+        log.info("Adding character {} to lobby {}", characterId, lobbyId);
+        try {
+            users.add(characterId);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new PayloadTooLargeException(lobbyId + " lobby is already full.");
+        }
     }
 }
