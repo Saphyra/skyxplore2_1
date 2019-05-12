@@ -35,6 +35,7 @@ window.Mapping = {
     GET_FRIEND_REQUESTS: "friend/request/received",
     GET_FRIENDS: "friend",
     GET_INCOMING_MAILS: "mail",
+    GET_INVITATIONS: "lobby/invitation",
     GET_LOBBY: "lobby",
     GET_MATERIALS: "factory/materials",
     GET_SENT_FRIEND_REQUESTS: "friend/request/sent",

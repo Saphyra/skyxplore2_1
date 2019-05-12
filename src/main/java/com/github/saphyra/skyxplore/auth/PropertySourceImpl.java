@@ -70,7 +70,8 @@ class PropertySourceImpl implements PropertySource {
     public List<AllowedUri> getNonSessionExtendingUris(){
         return Arrays.asList(
             new AllowedUri("/notification", HttpMethod.GET),
-            new AllowedUri("/notification/*", HttpMethod.GET)
+            new AllowedUri("/notification/*", HttpMethod.GET),
+            new AllowedUri("/lobby/invitation", HttpMethod.GET)
         );
     }
 

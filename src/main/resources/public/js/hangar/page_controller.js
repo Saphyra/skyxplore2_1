@@ -1,4 +1,5 @@
 (function PageController(){
+    scriptLoader.loadScript("js/common/invitation/invitation_controller.js");
     scriptLoader.loadScript("js/common/game/game_mode.js");
 
     events.CREATE_LOBBY = "create_lobby";

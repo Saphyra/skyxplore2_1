@@ -51,6 +51,7 @@ window.ResponseStatus = new function(){
     this.NOT_FOUND = 404;
     this.CONFLICT = 409;
     this.LOCKED = 423;
+    this.TOO_MANY_REQUESTS = 429
     this.INTERNAL_SERVER_ERROR = 500;
     this.NOT_IMPLEMENTED = 501;
     this.CONNECTION_REFUSED = 0;

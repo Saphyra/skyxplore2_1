@@ -1,9 +1,24 @@
-function LocalizationMap(fileName){
-    let map = null;
+(function LocalizationMapCache(){
+    const cache = {};
 
-    loadLocalization(fileName, function(localization){map = localization});
+    window.localizationMapCache = new function(){
+        this.getLocalizationMap = function(fileName){
+            if(cache[fileName] == null){
+                cache[fileName] = new LocalizationMap(fileName);
+            }
 
-    this.getLocalization = function(key){
-        return map[key] || throwException("IllegalArgument", "localization not found with key " + key);
+            return cache[fileName];
+        }
     }
-}
+
+    function LocalizationMap(fileName){
+        let map = null;
+
+        loadLocalization(fileName, function(localization){map = localization});
+
+        this.getLocalization = function(key){
+            return map[key] || throwException("IllegalArgument", "localization not found with key " + key);
+        }
+    }
+})();
+

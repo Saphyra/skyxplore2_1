@@ -1,4 +1,6 @@
 (function PageController(){
+    scriptLoader.loadScript("js/common/invitation/invitation_controller.js");
+
     scriptLoader.loadScript("js/overview/notification_service.js");
     scriptLoader.loadScript("js/overview/equipment_service.js");
     
