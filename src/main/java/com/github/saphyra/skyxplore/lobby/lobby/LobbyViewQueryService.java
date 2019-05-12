@@ -1,7 +1,7 @@
-package com.github.saphyra.skyxplore.lobby;
+package com.github.saphyra.skyxplore.lobby.lobby;
 
-import com.github.saphyra.skyxplore.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.lobby.domain.LobbyView;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

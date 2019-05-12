@@ -1,7 +1,6 @@
 package com.github.saphyra.skyxplore.lobby.invitation;
 
-import com.github.saphyra.skyxplore.lobby.domain.Invitation;
-import com.github.saphyra.skyxplore.lobby.storage.InvitationStorage;
+import com.github.saphyra.skyxplore.lobby.invitation.domain.Invitation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

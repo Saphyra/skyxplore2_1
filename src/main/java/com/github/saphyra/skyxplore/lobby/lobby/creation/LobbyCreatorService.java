@@ -1,11 +1,11 @@
-package com.github.saphyra.skyxplore.lobby.creation;
+package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.RestException;
-import com.github.saphyra.skyxplore.lobby.LobbyQueryService;
-import com.github.saphyra.skyxplore.lobby.domain.CreateLobbyRequest;
-import com.github.saphyra.skyxplore.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.lobby.storage.LobbyStorage;
+import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.CreateLobbyRequest;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.lobby.LobbyStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

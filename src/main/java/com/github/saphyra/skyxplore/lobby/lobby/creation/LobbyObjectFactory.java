@@ -1,11 +1,11 @@
-package com.github.saphyra.skyxplore.lobby.creation;
+package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.lobby.LobbyContext;
-import com.github.saphyra.skyxplore.lobby.domain.FixedSizeConcurrentList;
-import com.github.saphyra.skyxplore.lobby.domain.GameMode;
-import com.github.saphyra.skyxplore.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.FixedSizeConcurrentList;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 

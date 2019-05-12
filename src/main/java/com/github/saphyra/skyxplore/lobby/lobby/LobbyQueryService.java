@@ -1,8 +1,7 @@
-package com.github.saphyra.skyxplore.lobby;
+package com.github.saphyra.skyxplore.lobby.lobby;
 
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
-import com.github.saphyra.skyxplore.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.lobby.storage.LobbyStorage;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

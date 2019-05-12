@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.lobby.creation;
+package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

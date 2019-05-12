@@ -1,6 +1,6 @@
-package com.github.saphyra.skyxplore.lobby.storage;
+package com.github.saphyra.skyxplore.lobby.invitation;
 
-import com.github.saphyra.skyxplore.lobby.domain.Invitation;
+import com.github.saphyra.skyxplore.lobby.invitation.domain.Invitation;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

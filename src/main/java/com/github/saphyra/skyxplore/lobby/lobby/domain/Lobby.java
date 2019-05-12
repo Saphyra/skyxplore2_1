@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.lobby.domain;
+package com.github.saphyra.skyxplore.lobby.lobby.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
 
-import com.github.saphyra.skyxplore.lobby.LobbyContext;
+import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

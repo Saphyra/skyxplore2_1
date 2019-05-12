@@ -1,9 +1,9 @@
-package com.github.saphyra.skyxplore.lobby;
+package com.github.saphyra.skyxplore.lobby.lobby;
 
-import com.github.saphyra.skyxplore.lobby.creation.LobbyCreatorService;
-import com.github.saphyra.skyxplore.lobby.domain.CreateLobbyRequest;
-import com.github.saphyra.skyxplore.lobby.domain.InvitationView;
-import com.github.saphyra.skyxplore.lobby.domain.LobbyView;
+import com.github.saphyra.skyxplore.lobby.lobby.creation.LobbyCreatorService;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.CreateLobbyRequest;
+import com.github.saphyra.skyxplore.lobby.invitation.domain.InvitationView;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
 import com.github.saphyra.skyxplore.lobby.invitation.InvitationFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

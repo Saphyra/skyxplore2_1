@@ -82,6 +82,9 @@
 
                         const declineButton = document.createElement("BUTTON");
                             declineButton.innerHTML = invitationLocalization.getLocalization("decline-invitation");
+                            declineButton.onclick = function(){
+                                removeInvitation(container);
+                            }
                     buttons.appendChild(declineButton);
 
                         const profileButton = document.createElement("BUTTON");

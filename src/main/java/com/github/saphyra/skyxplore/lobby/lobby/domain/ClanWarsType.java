@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.lobby.domain;
+package com.github.saphyra.skyxplore.lobby.lobby.domain;
 
 import static java.util.Objects.isNull;
 

@@ -1,5 +1,6 @@
-package com.github.saphyra.skyxplore.lobby.domain;
+package com.github.saphyra.skyxplore.lobby.invitation.domain;
 
+import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

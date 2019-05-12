@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.lobby.creation;
+package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.lobby.domain.GameMode;
-import com.github.saphyra.skyxplore.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 
 @Component

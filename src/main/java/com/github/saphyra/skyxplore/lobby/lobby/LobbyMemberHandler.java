@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.lobby;
+package com.github.saphyra.skyxplore.lobby.lobby;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;
-import com.github.saphyra.skyxplore.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 
 @Component
