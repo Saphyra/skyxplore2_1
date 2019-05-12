@@ -9,4 +9,10 @@ import org.springframework.stereotype.Component;
 public class InvitationProperties {
     @Value("${lobby.invitation.spamming-delay-seconds}")
     private Integer spammingDelaySeconds;
+
+    @Value("${lobby.invitation.expiration-seconds}")
+    private Integer expirationSeconds;
+
+    @Value("${lobby.invitation.extended-expiration-seconds}")
+    private Integer extendedExpirationSeconds;
 }
