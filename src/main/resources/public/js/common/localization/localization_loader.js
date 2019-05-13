@@ -15,12 +15,13 @@ function loadLocalization(fileName, successCallback){
 
     function createFallBackQuery(fileName, successCallback){
         const request = new Request(HttpMethod.GET, getPath(DEFAULT_LOCALE, fileName));
-        request.convertResponse = function(response){
-            return JSON.parse(response.body);
-        }
-        request.processValidResponse = function(localization){
-            successCallback(localization);
-        }
+            request.convertResponse = function(response){
+                return JSON.parse(response.body);
+            }
+            request.processValidResponse = function(localization){
+                successCallback(localization);
+            }
+        dao.sendRequestAsync(request);
     }
 
     function getPath(locale, fileName){

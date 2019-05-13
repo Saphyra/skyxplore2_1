@@ -36,7 +36,7 @@ function Request(method, path, body){
         if(this.isResponseOk(response)){
             this.processValidResponse(this.convertResponse(response), this.state);
         }else{
-            if(this.handleLogout){
+            if(this.handleLogout && response.status == ResponseStatus.UNAUTHORIZED){
                 eventProcessor.processEvent(new Event(events.LOGOUT));
             }
             this.processInvalidResponse(response, this.state);
