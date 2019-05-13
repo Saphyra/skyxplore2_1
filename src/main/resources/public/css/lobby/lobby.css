@@ -15,6 +15,30 @@
     right: 25%;
 }
 
+#members{
+    position: absolute;
+    left: 0;
+    top: 2.75rem;
+    right: 0;
+    bottom: 0;
+}
+
+.member{
+    margin: 0.5rem;
+    display: inline-block;
+    border: 3px ridge white;
+    padding: 0.25rem;
+    width: 30%;
+    height: 10rem;
+}
+
+.member-name{
+    text-align: center;
+    border-bottom: 1px ridge white;
+    font-size: 1.25rem;
+    padding: 0.25rem;
+}
+
 #write-message-container, #invitation-search-container{
     position: absolute;
     left: 0;

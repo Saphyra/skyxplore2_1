@@ -31,7 +31,8 @@ public class AlreadyInLobbyFilter extends OncePerRequestFilter {
         "/css/**",
         "/images/**",
         "/js/**",
-        "/i18n/**"
+        "/i18n/**",
+        "/"
     );
 
     private final AntPathMatcher antPathMatcher;

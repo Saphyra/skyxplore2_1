@@ -71,7 +71,8 @@ class PropertySourceImpl implements PropertySource {
         return Arrays.asList(
             new AllowedUri("/notification", HttpMethod.GET),
             new AllowedUri("/notification/*", HttpMethod.GET),
-            new AllowedUri("/lobby/invitation", HttpMethod.GET)
+            new AllowedUri("/lobby/invitation", HttpMethod.GET),
+            new AllowedUri("/lobby/message", HttpMethod.GET)
         );
     }
 
