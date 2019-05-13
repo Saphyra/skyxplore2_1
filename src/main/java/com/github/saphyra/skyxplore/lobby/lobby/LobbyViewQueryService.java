@@ -1,10 +1,11 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ class LobbyViewQueryService {
         return LobbyView.builder()
             .gameMode(lobby.getGameMode())
             .data(lobby.getData())
+            .ownerId(lobby.getOwnerId())
             .build();
     }
 }

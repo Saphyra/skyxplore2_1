@@ -1,12 +1,13 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class LobbyQueryService {
     }
 
     private boolean containsCharacter(Lobby lobby, String characterId) {
-        return lobby.getUsers().contains(characterId);
+        return lobby.getMembers().contains(characterId);
     }
 
     public Lobby findById(UUID lobbyId) {

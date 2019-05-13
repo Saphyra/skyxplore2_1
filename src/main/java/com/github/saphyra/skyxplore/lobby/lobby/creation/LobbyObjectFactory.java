@@ -23,7 +23,7 @@ public class LobbyObjectFactory {
         return Lobby.builder()
             .lobbyId(idGenerator.randomUUID())
             .gameMode(gameMode)
-            .users(users)
+            .members(users)
             .data(data)
             .ownerId(characterId)
             .lobbyContext(lobbyContext)

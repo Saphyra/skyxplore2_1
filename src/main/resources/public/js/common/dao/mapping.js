@@ -39,6 +39,7 @@ window.Mapping = {
     GET_INCOMING_MAILS: "mail",
     GET_INVITATIONS: "lobby/invitation",
     GET_LOBBY: "lobby",
+    GET_LOBBY_MEMBERS: "lobby/member",
     GET_MATERIALS: "factory/materials",
     GET_MESSAGES: "lobby/message",
     GET_SENT_FRIEND_REQUESTS: "friend/request/sent",

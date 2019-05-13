@@ -5,6 +5,7 @@
     scriptLoader.loadScript("js/lobby/invitation/invitation_controller.js");
     scriptLoader.loadScript("js/lobby/message/message_sender_controller.js");
     scriptLoader.loadScript("js/lobby/message/message_display_service.js");
+    scriptLoader.loadScript("js/lobby/member/member_controller.js");
 
     events.EXIT_LOBBY = "exit_lobby";
     events.LOBBY_LOADED = "lobby_loaded";

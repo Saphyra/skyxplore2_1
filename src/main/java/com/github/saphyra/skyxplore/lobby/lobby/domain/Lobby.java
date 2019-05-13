@@ -1,5 +1,11 @@
 package com.github.saphyra.skyxplore.lobby.lobby.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.validation.constraints.NotNull;
+
 import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
 import lombok.AccessLevel;
@@ -9,11 +15,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
@@ -29,7 +30,7 @@ public class Lobby {
 
     @NonNull
     @Getter(value = AccessLevel.NONE)
-    private final FixedSizeConcurrentList<String> users;
+    private final FixedSizeConcurrentList<String> members;
 
     private final String data;
 
@@ -41,9 +42,9 @@ public class Lobby {
 
     public void removeMember(String characterId) {
         log.info("Removing character {} from lobby {}", characterId, lobbyId);
-        users.remove(characterId);
+        members.remove(characterId);
 
-        if (users.isEmpty()) {
+        if (members.isEmpty()) {
             log.info("Lobby {} has no more members. Deleting...", lobbyId);
             lobbyContext.getLobbyStorage().remove(lobbyId);
             return;
@@ -51,19 +52,19 @@ public class Lobby {
 
         if (ownerId.equals(characterId)) {
             log.info("Owner {} of lobby {} has left the lobby. Selecting new owner...", ownerId, lobbyId);
-            ownerId = users.get(lobbyContext.getRandom().randInt(0, users.size()));
+            ownerId = members.get(lobbyContext.getRandom().randInt(0, members.size()));
             log.info("New owner of lobby {} is: {}", lobbyId, ownerId);
         }
     }
 
-    public List<String> getUsers() {
-        return new ArrayList<>(users);
+    public List<String> getMembers() {
+        return new ArrayList<>(members);
     }
 
     public void addMember(String characterId) {
         log.info("Adding character {} to lobby {}", characterId, lobbyId);
         try {
-            users.add(characterId);
+            members.add(characterId);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new PayloadTooLargeException(lobbyId + " lobby is already full.");
         }

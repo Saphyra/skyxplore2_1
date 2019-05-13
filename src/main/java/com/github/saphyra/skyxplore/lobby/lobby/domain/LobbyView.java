@@ -11,6 +11,9 @@ import lombok.NonNull;
 @Builder
 public class LobbyView {
     @NonNull
-    private GameMode gameMode;
-    private String data;
+    private final GameMode gameMode;
+    private final String data;
+
+    @NonNull
+    private final String ownerId;
 }

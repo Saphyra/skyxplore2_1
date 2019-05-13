@@ -1,5 +1,20 @@
 package com.github.saphyra.skyxplore.character;
 
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
@@ -10,23 +25,11 @@ import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConvert
 import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment";
     private static final String CREATE_CHARACTER_MAPPING = "character";
@@ -47,6 +50,7 @@ public class CharacterController {
     private final CharacterRenameService characterRenameService;
     private final CharacterSelectService characterSelectService;
     private final CharacterViewConverter characterViewConverter;
+    private final CharacterViewQueryService characterViewQueryService;
     private final CharacterNameExistsCache characterNameExistsCache;
 
     @PostMapping(BUY_EQUIPMENTS_MAPPING)
@@ -82,13 +86,12 @@ public class CharacterController {
     }
 
     @PostMapping(GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING)
-        //TODO unit test
     List<CharacterView> getActiveCharactersByName(
         @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId,
         @RequestBody @Valid OneStringParamRequest request
     ) {
         log.info("{} wants to query active characters with name {}", characterId, request.getValue());
-        return characterViewConverter.convertDomain(characterQueryService.getActiveCharactersByName(characterId, request.getValue()));
+        return characterViewQueryService.getActiveCharactersByName(characterId, request.getValue());
     }
 
     //TODO unit test
@@ -100,7 +103,7 @@ public class CharacterController {
     @GetMapping(GET_CHARACTERS_MAPPING)
     List<CharacterView> getCharacters(@CookieValue(value = CustomFilterHelper.COOKIE_USER_ID) String userId) {
         log.info("{} wants to know his character list.", userId);
-        return characterViewConverter.convertDomain(characterQueryService.getCharactersByUserId(userId));
+        return characterViewQueryService.getCharactersByUserId(userId);
     }
 
     @GetMapping(GET_EQUIPMENTS_OF_CHARACTER)
