@@ -27,23 +27,13 @@ Create community
 Error reporting
     - Exceptions to save
 
-//TODO cookieUtil returns optional
+Exception handling:
+    - Return localized exception messages
 
 Lobby
-    - Invite friends to lobby
-    - Exit from lobby
-    - Display
-        - Number of free spaces (if max members locked)
-        - Current members
-        - Available friends
-            - Invite button
-            - Refresh button
-        - Kick member (Available only for owner)
-        - Transfer ownership (Available only for owner)
-        - Start queueing (Available only for owner)
-        - Chat
-        - Fill group
-
+    - Kick from group
+    - Start queueing
+    - Transfer ownership
 Javadoc
 Integration tests
 Logging

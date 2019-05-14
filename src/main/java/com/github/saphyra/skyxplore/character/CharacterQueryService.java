@@ -1,21 +1,23 @@
 package com.github.saphyra.skyxplore.character;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameLikeCache;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
 import com.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import com.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
+import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.character.cache.CharacterNameLikeCache;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.community.friendship.FriendshipQueryService;
-import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ public class CharacterQueryService {
     private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
     private final FriendshipQueryService friendshipQueryService;
+    private final LobbyQueryService lobbyQueryService;
 
     public SkyXpCharacter findByCharacterId(String characterId) {
         return characterDao.findById(characterId)
@@ -48,7 +51,12 @@ public class CharacterQueryService {
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
             .filter(c -> isNotBlocked(c, character))  //Filtering characters that blocks the character
             .filter(c -> isActive(c.getCharacterId())) //Filtering active characters
+            .filter(c -> !isInLobby(c.getCharacterId()))    //Filtering characters already in lobby
             .collect(Collectors.toList());
+    }
+
+    private boolean isInLobby(String characterId) {
+        return lobbyQueryService.findByCharacterId(characterId).isPresent();
     }
 
     private boolean isActive(String characterId) {

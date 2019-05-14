@@ -70,6 +70,13 @@
     <FOOTER>
         <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
         <BUTTON id="exit-lobby-button" onclick='eventProcessor.processEvent(new Event(events.EXIT_LOBBY))'></BUTTON>
+        <SPAN id="owner-control-panel">
+            <LABEL>
+                <INPUT type="checkbox" id="autofill-enabled" checked>
+                <SPAN id="autofill-label"></SPAN>
+            </LABEL>
+            <BUTTON id="start-queueing"></BUTTON>
+        </SPAN>
     </FOOTER>
 </DIV>
 </BODY>

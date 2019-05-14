@@ -6,6 +6,7 @@
     scriptLoader.loadScript("js/lobby/message/message_sender_controller.js");
     scriptLoader.loadScript("js/lobby/message/message_display_service.js");
     scriptLoader.loadScript("js/lobby/member/member_controller.js");
+    scriptLoader.loadScript("js/common/character_id_query_service.js");
 
     events.EXIT_LOBBY = "exit_lobby";
     events.LOBBY_LOADED = "lobby_loaded";
@@ -18,6 +19,16 @@
     window.pageController = new function(){
         this.getLobbyDetails = function(){return lobbyDetails};
     }
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.LOBBY_LOADED},
+        function(){
+            if(lobbyDetails.ownerId === characterIdQueryService.getCharacterId()){
+                $("#owner-control-panel").show();
+            }
+        },
+        true
+    ));
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.EXIT_LOBBY},

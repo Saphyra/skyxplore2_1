@@ -1,4 +1,6 @@
 (function MemberController(){
+    scriptLoader.loadScript("js/common/character_id_query_service.js");
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOBBY_LOADED},
         loadMembers,
@@ -38,6 +40,24 @@
                     nameCell.classList.add("member-name");
             container.appendChild(nameCell);
 
+                const buttonWrapper = document.createElement("DIV");
+                    if(character.characterId !== characterIdQueryService.getCharacterId()){
+                        const profileButton = document.createElement("BUTTON");
+                            profileButton.innerHTML = Localization.getAdditionalContent("visit-profile");
+                        buttonWrapper.appendChild(profileButton);
+                    }
+
+                    if(lobbyDetails.ownerId == characterIdQueryService.getCharacterId() && character.characterId !== characterIdQueryService.getCharacterId()){
+                        const transferOwnershipButton = document.createElement("BUTTON");
+                            transferOwnershipButton.innerHTML = Localization.getAdditionalContent("transfer-ownership");
+                        buttonWrapper.appendChild(transferOwnershipButton);
+
+                        const kickButton = document.createElement("BUTTON");
+                            kickButton.innerHTML = Localization.getAdditionalContent("kick-member");
+                        buttonWrapper.appendChild(kickButton);
+                    }
+
+            container.appendChild(buttonWrapper);
             return container;
         }
     }

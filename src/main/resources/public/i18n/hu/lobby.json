@@ -7,12 +7,6 @@
         "message": "Előcsarnok"
       }
     ],
-    "logout-button": [
-      {
-        "key": "innerHTML",
-        "message": "Kijelentkezés"
-      }
-    ],
     "chat-container-title": [
       {
         "key": "innerHTML",
@@ -49,15 +43,35 @@
         "message": "Játékos keresése"
       }
     ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
     "exit-lobby-button": [
       {
         "key": "innerHTML",
         "message": "Előcsarnok elhagyása"
       }
+    ],
+    "autofill-label": [
+      {
+        "key": "innerHTML",
+        "message": "Automatikus csapatfeltöltés"
+      }
+    ],
+    "start-queueing": [
+      {
+        "key": "innerHTML",
+        "message": "Meccs keresése"
+      }
     ]
   },
   "additionalContent": {
     "visit-profile": "Profil",
-    "invite": "Meghívás"
+    "invite": "Meghívás",
+    "kick-member": "Kirúgás",
+    "transfer-ownership": "Vezetőség átadása"
   }
 }

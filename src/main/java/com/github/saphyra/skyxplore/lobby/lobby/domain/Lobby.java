@@ -52,7 +52,7 @@ public class Lobby {
 
         if (ownerId.equals(characterId)) {
             log.info("Owner {} of lobby {} has left the lobby. Selecting new owner...", ownerId, lobbyId);
-            ownerId = members.get(lobbyContext.getRandom().randInt(0, members.size()));
+            ownerId = members.get(lobbyContext.getRandom().randInt(0, members.size() - 1));
             log.info("New owner of lobby {} is: {}", lobbyId, ownerId);
         }
     }
