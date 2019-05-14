@@ -68,7 +68,6 @@ class AuthDaoImpl implements AuthDao {
         return passwordService.authenticate(password, hash);
     }
 
-    //TODO unit test
     public void successfulLogoutCallback(AccessToken deletedAccessToken){
         applicationEventPublisher.publishEvent(new UserLoggedOutEvent(deletedAccessToken.getUserId()));
     }

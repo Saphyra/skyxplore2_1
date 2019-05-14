@@ -16,12 +16,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.ApplicationEventPublisher;
 
 import com.github.saphyra.authservice.domain.AccessToken;
 import com.github.saphyra.authservice.domain.User;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;
 import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
@@ -52,6 +54,9 @@ public class AuthDaoImplTest {
 
     @Mock
     private PasswordService passwordService;
+
+    @Mock
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @InjectMocks
     private AuthDaoImpl underTest;
@@ -167,5 +172,19 @@ public class AuthDaoImplTest {
         Boolean result = underTest.authenticate(PASSWORD, PASSWORD_HASH);
         //THEN
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void successfulLogoutCallback() {
+        //GIVEN
+        AccessToken accessToken = AccessToken.builder()
+            .userId(USER_ID)
+            .build();
+        //WHEN
+        underTest.successfulLogoutCallback(accessToken);
+        //THEN
+        ArgumentCaptor<UserLoggedOutEvent> argumentCaptor = ArgumentCaptor.forClass(UserLoggedOutEvent.class);
+        verify(applicationEventPublisher).publishEvent(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue().getUserId()).isEqualTo(USER_ID);
     }
 }
