@@ -2,6 +2,7 @@ package com.github.saphyra.skyxplore.character;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,19 +13,19 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
-import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
+import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
+import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterControllerTest {
@@ -61,6 +62,9 @@ public class CharacterControllerTest {
 
     @Mock
     private HttpServletResponse httpServletResponse;
+
+    @Mock
+    private CharacterViewQueryService characterViewQueryService;
 
     @InjectMocks
     private CharacterController underTest;
@@ -104,18 +108,13 @@ public class CharacterControllerTest {
     public void testGetCharactersShouldCallFacadeAndConverterAndReturnResponse() {
         //GIVEN
         SkyXpCharacter character = SkyXpCharacter.builder().build();
-        List<SkyXpCharacter> characterList = Arrays.asList(character);
-
         CharacterView view = createCharacterView(character);
         List<CharacterView> viewList = Arrays.asList(view);
 
-        when(characterQueryService.getCharactersByUserId(USER_ID)).thenReturn(characterList);
-        when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
+        when(characterViewQueryService.getCharactersByUserId(USER_ID)).thenReturn(viewList);
         //WHEN
         List<CharacterView> result = underTest.getCharacters(USER_ID);
         //THEN
-        verify(characterQueryService).getCharactersByUserId(USER_ID);
-        verify(characterViewConverter).convertDomain(Mockito.anyList());
         assertThat(result).containsOnly(view);
     }
 
@@ -174,6 +173,25 @@ public class CharacterControllerTest {
         underTest.selectCharacter(CHARACTER_ID, USER_ID, httpServletResponse);
         //THEN
         verify(characterSelectService).selectCharacter(CHARACTER_ID, USER_ID, httpServletResponse);
+    }
+
+    @Test
+    public void getActiveCharactersByName() {
+        //GIVEN
+        CharacterView characterView = createCharacterView(SkyXpCharacter.builder().build());
+        given(characterViewQueryService.getActiveCharactersByName(CHARACTER_ID, CHARACTER_NAME)).willReturn(Arrays.asList(characterView));
+        //WHEN
+        List<CharacterView> result = underTest.getActiveCharactersByName(CHARACTER_ID, new OneStringParamRequest(CHARACTER_NAME));
+        //THEN
+        assertThat(result).containsOnly(characterView);
+    }
+
+    @Test
+    public void getCharacterId() {
+        //WHEN
+        String result = underTest.getCharacterId(CHARACTER_ID);
+        //THEN
+        assertThat(result).isEqualTo(CHARACTER_ID);
     }
 
     private CharacterView createCharacterView(SkyXpCharacter character) {

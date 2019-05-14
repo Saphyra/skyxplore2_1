@@ -29,7 +29,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class CharacterController {
     private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment";
     private static final String CREATE_CHARACTER_MAPPING = "character";
@@ -94,7 +93,6 @@ public class CharacterController {
         return characterViewQueryService.getActiveCharactersByName(characterId, request.getValue());
     }
 
-    //TODO unit test
     @GetMapping(GET_CHARACTER_ID_MAPPING)
     String getCharacterId(@CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId) {
         return characterId;
