@@ -1,12 +1,8 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
-import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,12 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
+
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
-
-import javax.validation.Valid;
-
-import java.util.List;
+import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
+import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
@@ -91,7 +91,6 @@ class FriendshipController {
     }
 
     @GetMapping(GET_ACTIVE_FRIENDS_MAPPING)
-    //TODO unit test
     List<CharacterView> getActiveFriends(@CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId){
         log.info("{} wants to know his active friends.", characterId);
         return characterViewConverter.convertDomain(activeFriendsQueryService.getActiveFriends(characterId));

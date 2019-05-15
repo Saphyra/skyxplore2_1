@@ -1,5 +1,19 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
@@ -9,18 +23,6 @@ import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
 import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
 import com.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipControllerTest {
@@ -30,6 +32,9 @@ public class FriendshipControllerTest {
     private static final String USER_ID = "user_id";
     private static final String FRIENDSHIP_ID = "friendship_id";
     private static final String CHARACTER_NAME = "character_name";
+
+    @Mock
+    private ActiveFriendsQueryService activeFriendsQueryService;
 
     @Mock
     private CharacterQueryService characterQueryService;
@@ -150,5 +155,19 @@ public class FriendshipControllerTest {
         //THEN
         verify(friendRequestViewConverter).convertDomain(friendRequestList);
         assertThat(result).isEqualTo(viewList);
+    }
+
+    @Test
+    public void getActiveFriends() {
+        //GIVEN
+        List<SkyXpCharacter> characters = Arrays.asList(SkyXpCharacter.builder().build());
+        given(activeFriendsQueryService.getActiveFriends(CHARACTER_ID)).willReturn(characters);
+
+        List<CharacterView> characterViews = Arrays.asList(CharacterView.builder().build());
+        given(characterViewConverter.convertDomain(characters)).willReturn(characterViews);
+        //WHEN
+        List<CharacterView> result = underTest.getActiveFriends(CHARACTER_ID);
+        //THEN
+        assertThat(result).isEqualTo(characterViews);
     }
 }
