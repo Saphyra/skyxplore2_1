@@ -6,9 +6,11 @@
     scriptLoader.loadScript("js/lobby/message/message_sender_controller.js");
     scriptLoader.loadScript("js/lobby/message/message_display_service.js");
     scriptLoader.loadScript("js/lobby/member/member_controller.js");
+    scriptLoader.loadScript("js/lobby/event/lobby_event_controller.js");
     scriptLoader.loadScript("js/common/character_id_query_service.js");
 
     events.EXIT_LOBBY = "exit_lobby";
+    events.LOAD_LOBBY = "load_lobby";
     events.LOBBY_LOADED = "lobby_loaded";
 
     $(document).ready(init);
@@ -26,9 +28,18 @@
             if(lobbyDetails.ownerId === characterIdQueryService.getCharacterId()){
                 $("#owner-control-panel").show();
             }
-        },
-        true
+        }
     ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.LOAD_LOBBY},
+        loadLobby
+    ))
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType == events.LOBBY_LOADED},
+        displayGameDetails
+    ))
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.EXIT_LOBBY},
@@ -45,11 +56,6 @@
         dao.sendRequestAsync(request);
     }
 
-    function init(){
-        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "lobby"));
-        loadLobby();
-    }
-
     function loadLobby(){
         const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY);
             request.convertResponse = function(response){
@@ -62,11 +68,6 @@
         dao.sendRequestAsync(request);
     }
 
-    eventProcessor.registerProcessor(new EventProcessor(
-        function(eventType){return eventType == events.LOBBY_LOADED},
-        displayGameDetails
-    ))
-
     function displayGameDetails(){
         document.getElementById("game-mode").innerHTML = gameModeLocalization.getLocalization(lobbyDetails.gameMode);
         if(lobbyDetails.data){
@@ -76,5 +77,10 @@
         }else{
             $("#game-details-container").hide();
         }
+    }
+
+    function init(){
+        eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "lobby"));
+        eventProcessor.processEvent(new Event(events.LOAD_LOBBY));
     }
 })();

@@ -1,19 +1,32 @@
 (function MemberController(){
     scriptLoader.loadScript("js/common/character_id_query_service.js");
 
+    events.DISPLAY_CHARACTERS = "display_characters";
+    events.MEMBER_LEFT = "member_left";
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOBBY_LOADED},
-        loadMembers,
-        true
+        loadMembers
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.DISPLAY_CHARACTERS},
+        function(event){displayCharacters(event.getPayload())}
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.MEMBER_LEFT},
+        function(event){removeCharacter(event.getPayload())}
     ));
 
     function loadMembers(){
+        document.getElementById("members").innerHTML = "";
         const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY_MEMBERS);
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(characters){
-                displayCharacters(characters);
+                eventProcessor.processEvent(new Event(events.DISPLAY_CHARACTERS, characters));
             }
 
         dao.sendRequestAsync(request);
@@ -60,6 +73,10 @@
             container.appendChild(buttonWrapper);
             return container;
         }
+    }
+
+    function removeCharacter(characterId){
+        document.getElementById("members").removeChild(document.getElementById(createMemberId(characterId)));
     }
 
     function createMemberId(characterId){

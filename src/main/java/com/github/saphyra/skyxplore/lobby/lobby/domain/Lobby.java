@@ -42,11 +42,22 @@ public class Lobby {
     private final List<Message> messages = new Vector<>();
 
     @NonNull
+    @Builder.Default
+    private final List<LobbyEvent> events = new Vector<>();
+
+    @NonNull
     private final LobbyContext lobbyContext;
 
     public void removeMember(String characterId) {
         log.info("Removing character {} from lobby {}", characterId, lobbyId);
         members.remove(characterId);
+
+        events.add(
+            LobbyEvent.builder()
+                .eventType(LobbyEventType.EXIT)
+                .data(characterId)
+                .build()
+        );
 
         if (members.isEmpty()) {
             log.info("Lobby {} has no more members. Deleting...", lobbyId);
@@ -57,6 +68,12 @@ public class Lobby {
         if (ownerId.equals(characterId)) {
             log.info("Owner {} of lobby {} has left the lobby. Selecting new owner...", ownerId, lobbyId);
             ownerId = members.get(lobbyContext.getRandom().randInt(0, members.size() - 1));
+            events.add(
+                LobbyEvent.builder()
+                    .eventType(LobbyEventType.OWNER_CHANGED)
+                    .data(ownerId)
+                    .build()
+            );
             log.info("New owner of lobby {} is: {}", lobbyId, ownerId);
         }
     }
@@ -68,17 +85,23 @@ public class Lobby {
     public void addMember(String characterId) {
         log.info("Adding character {} to lobby {}", characterId, lobbyId);
         try {
+            events.add(
+                LobbyEvent.builder()
+                    .eventType(LobbyEventType.ENTER)
+                    .data(characterId)
+                    .build()
+            );
             members.add(characterId);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new PayloadTooLargeException(lobbyId + " lobby is already full.");
         }
     }
 
-    public void addMessage(Message message){
+    public void addMessage(Message message) {
         messages.add(message);
     }
 
-    public List<Message> getMessages(){
+    public List<Message> getMessages() {
         return new ArrayList<>(messages);
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import com.github.saphyra.skyxplore.lobby.lobby.creation.LobbyCreatorService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.CreateLobbyRequest;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyEventView;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 class LobbyController {
     private static final String CREATE_LOBBY_MAPPING = "lobby";
     private static final String GET_LOBBY_MAPPING = "lobby";
+    private static final String GET_LOBBY_EVENTS_MAPPING = "lobby/event";
     private static final String GET_LOBBY_MEMBERS_MAPPING = "lobby/member";
     private static final String EXIT_FROM_LOBBY_MAPPING = "lobby";
 
@@ -47,6 +49,12 @@ class LobbyController {
     LobbyView getLobby(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to query his lobby.", characterId);
         return lobbyViewQueryService.getLobbyView(characterId);
+    }
+
+    @GetMapping(GET_LOBBY_EVENTS_MAPPING)
+    List<LobbyEventView> getEvents(@CookieValue(COOKIE_CHARACTER_ID) String characterId){
+        log.info("{} wants to know the new events of his lobby.");
+        return lobbyViewQueryService.getEvents(characterId);
     }
 
     @GetMapping(GET_LOBBY_MEMBERS_MAPPING)
