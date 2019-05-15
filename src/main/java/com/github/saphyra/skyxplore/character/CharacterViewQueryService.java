@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-//TODO unit test
 public class CharacterViewQueryService {
     private final CharacterQueryService characterQueryService;
     private final CharacterViewConverter characterViewConverter;
