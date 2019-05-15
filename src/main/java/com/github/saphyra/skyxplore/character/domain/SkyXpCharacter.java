@@ -1,36 +1,36 @@
 package com.github.saphyra.skyxplore.character.domain;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Setter;
+
 @Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Slf4j
 public class SkyXpCharacter {
     private final String characterId;
     private String characterName;
     private final String userId;
 
     @Builder.Default
+    @Setter(AccessLevel.NONE)
     private Integer money = 0;
 
     @Builder.Default
+    @Setter(AccessLevel.NONE)
     private List<String> equipments = new ArrayList<>();
 
     public void addEquipment(String equipmentId) {
-        log.warn(equipments.getClass().getName());
         equipments.add(equipmentId);
     }
 
@@ -69,15 +69,5 @@ public class SkyXpCharacter {
 
     public ArrayList<String> getEquipments() {
         return new ArrayList<>(equipments);
-    }
-
-    @SuppressWarnings("unused")
-    private void setEquipments(ArrayList<String> equipments) {
-        throw new UnsupportedOperationException("Equipments cannot be set.");
-    }
-
-    @SuppressWarnings("unused")
-    private void setMoney(Integer money) {
-        throw new UnsupportedOperationException("Money cannot be set.");
     }
 }
