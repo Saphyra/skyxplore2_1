@@ -15,6 +15,10 @@ BackEnd
     Repository:
         - getBy...: returns list
         - findBy...: returns Optional of
+    Domains
+        - Use Builder only (or AllArgsConstructor when only a few fields)
+        - Add final and NotNull where necessary
+        //TODO apply
 
 ==========Tasks==========
 Create community

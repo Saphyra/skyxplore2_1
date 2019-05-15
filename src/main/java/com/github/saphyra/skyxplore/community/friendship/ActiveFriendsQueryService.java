@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class ActiveFriendsQueryService {
     private final AccessTokenDao accessTokenDao;
     private final CharacterQueryService characterQueryService;
@@ -25,14 +24,11 @@ class ActiveFriendsQueryService {
 
     List<SkyXpCharacter> getActiveFriends(String characterId) {
         List<Friendship> friendships = friendshipQueryService.getFriends(characterId);
-        List<String> friendIds = friendships.stream()
+        return friendships.stream()
             .map(friendship -> fetchCharacterId(friendship, characterId))
-            .collect(Collectors.toList());
-
-        return friendIds.stream()
+            .filter(friendId -> accessTokenDao.findByCharacterId(friendId).isPresent())
+            .filter(friendId -> !lobbyQueryService.findByCharacterId(friendId).isPresent())
             .map(characterQueryService::findByCharacterId)
-            .filter(skyXpCharacter -> accessTokenDao.findByCharacterId(skyXpCharacter.getCharacterId()).isPresent())
-            .filter(skyXpCharacter -> !lobbyQueryService.findByCharacterId(skyXpCharacter.getCharacterId()).isPresent())
             .collect(Collectors.toList());
     }
 
