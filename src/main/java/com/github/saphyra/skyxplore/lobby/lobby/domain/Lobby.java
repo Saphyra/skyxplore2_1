@@ -3,11 +3,11 @@ package com.github.saphyra.skyxplore.lobby.lobby.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import javax.validation.constraints.NotNull;
+import java.util.Vector;
 
 import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
+import com.github.saphyra.skyxplore.lobby.message.domain.Message;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +37,11 @@ public class Lobby {
     @NonNull
     private volatile String ownerId;
 
-    @NotNull
+    @NonNull
+    @Getter(value = AccessLevel.NONE)
+    private final List<Message> messages = new Vector<>();
+
+    @NonNull
     private final LobbyContext lobbyContext;
 
     public void removeMember(String characterId) {
@@ -68,5 +72,13 @@ public class Lobby {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new PayloadTooLargeException(lobbyId + " lobby is already full.");
         }
+    }
+
+    public void addMessage(Message message){
+        messages.add(message);
+    }
+
+    public List<Message> getMessages(){
+        return new ArrayList<>(messages);
     }
 }

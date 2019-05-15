@@ -31,6 +31,7 @@ Exception handling:
     - Return localized exception messages
 
 Lobby
+    - Auto scroll down when new message arrives
     - Kick from group
     - Start queueing
     - Transfer ownership

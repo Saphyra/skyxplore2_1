@@ -1,5 +1,10 @@
 package com.github.saphyra.skyxplore.lobby.message;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
@@ -7,10 +12,6 @@ import com.github.saphyra.skyxplore.lobby.message.domain.Message;
 import com.github.saphyra.skyxplore.lobby.message.domain.MessageView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,12 +20,10 @@ import java.util.stream.Collectors;
 class MessageViewQueryService {
     private final CharacterQueryService characterQueryService;
     private final LobbyQueryService lobbyQueryService;
-    private final MessageStorage messageStorage;
 
     List<MessageView> getMessages(String characterId, Boolean queryAll) {
         Lobby lobby = lobbyQueryService.findByCharacterIdValidated(characterId);
-        return messageStorage.values().stream()
-            .filter(message -> message.getLobbyId().equals(lobby.getLobbyId()))
+        return lobby.getMessages().stream()
             .filter(message -> queryAll || !message.getQueriedBy().contains(characterId))
             .peek(message -> message.addQueriedBy(characterId))
             .map(this::convertToView)
