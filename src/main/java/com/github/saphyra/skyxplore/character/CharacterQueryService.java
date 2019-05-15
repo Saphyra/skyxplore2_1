@@ -43,7 +43,6 @@ public class CharacterQueryService {
         return character;
     }
 
-    //TODO unit test
     List<SkyXpCharacter> getActiveCharactersByName(String characterId, String name) {
         SkyXpCharacter character = findByCharacterId(characterId);
         return getCharactersOfNameLike(name).stream()
