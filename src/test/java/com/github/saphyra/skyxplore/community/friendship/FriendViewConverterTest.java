@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -8,17 +9,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
 import com.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendViewConverterTest {
@@ -33,8 +36,19 @@ public class FriendViewConverterTest {
     @Mock
     private CharacterQueryService characterQueryService;
 
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private SkyXpAccessToken accessToken;
+
     @InjectMocks
     private FriendViewConverter underTest;
+
+    @Before
+    public void setUp() {
+        given(character.getCharacterName()).willReturn(FRIEND_NAME);
+    }
 
     @Test
     public void testConvertDomainShouldConvert() {
@@ -46,10 +60,8 @@ public class FriendViewConverterTest {
             .build();
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
-        SkyXpCharacter friend = SkyXpCharacter.builder().characterName(FRIEND_NAME).build();
-
-        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
-        when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(SkyXpAccessToken.builder().build()));
+        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(character);
+        when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
         List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID);
         //THEN
@@ -71,11 +83,8 @@ public class FriendViewConverterTest {
             .build();
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
-        SkyXpCharacter friend = SkyXpCharacter.builder().build();
-        friend.setCharacterName(FRIEND_NAME);
-
-        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(friend);
-        when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(SkyXpAccessToken.builder().build()));
+        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(character);
+        when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
         List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID);
         //THEN

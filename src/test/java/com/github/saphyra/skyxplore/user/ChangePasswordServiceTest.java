@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +13,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import com.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangePasswordServiceTest {
@@ -38,8 +38,12 @@ public class ChangePasswordServiceTest {
     private SkyXpCredentials credentials;
 
     @Before
-    public void setUp(){
-        credentials = new SkyXpCredentials(USER_ID, USER_NAME, HASHED_PASSWORD);
+    public void setUp() {
+        credentials = SkyXpCredentials.builder()
+            .userId(USER_ID)
+            .userName(USER_NAME)
+            .password(HASHED_PASSWORD)
+            .build();
     }
 
     @Test(expected = BadCredentialsException.class)

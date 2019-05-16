@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
+import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
 import com.github.saphyra.skyxplore.lobby.message.domain.Message;
 import lombok.AccessLevel;

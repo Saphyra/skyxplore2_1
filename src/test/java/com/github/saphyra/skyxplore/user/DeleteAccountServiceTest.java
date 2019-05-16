@@ -4,9 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
-import com.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -17,6 +14,9 @@ import org.springframework.context.ApplicationEventPublisher;
 
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
+import com.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteAccountServiceTest {
@@ -24,8 +24,12 @@ public class DeleteAccountServiceTest {
     private static final String FAKE_PASSWORD = "fake_password";
     private static final String USER_ID = "user_id";
     private static final String USER_NAME = "user_name";
-    private static final String  HASHED_PASSWORD = "hashed_password";
-    private static final SkyXpCredentials CREDENTIALS = new SkyXpCredentials(USER_ID, USER_NAME, HASHED_PASSWORD);
+    private static final String HASHED_PASSWORD = "hashed_password";
+    private static final SkyXpCredentials CREDENTIALS = SkyXpCredentials.builder()
+        .userName(USER_NAME)
+        .userId(USER_ID)
+        .password(HASHED_PASSWORD)
+        .build();
 
     @Mock
     private CredentialsService credentialsService;

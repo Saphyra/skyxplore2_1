@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.lobby.lobby.domain;
+package com.github.saphyra.skyxplore.common.domain;
 
 import java.util.Vector;
 

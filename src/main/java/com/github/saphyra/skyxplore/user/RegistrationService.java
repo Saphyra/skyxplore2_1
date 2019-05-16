@@ -1,9 +1,11 @@
 package com.github.saphyra.skyxplore.user;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.util.IdGenerator;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
 import com.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
 import com.github.saphyra.skyxplore.user.domain.Role;
@@ -11,10 +13,9 @@ import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
 import com.github.saphyra.skyxplore.user.repository.user.UserDao;
-import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.HashSet;
+import com.github.saphyra.util.IdGenerator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,12 @@ class RegistrationService {
 
         userDao.save(user);
         String passwordToken = passwordService.hashPassword(request.getPassword());
-        credentialsService.save(new SkyXpCredentials(user.getUserId(), request.getUsername(), passwordToken));
+        SkyXpCredentials credentials = SkyXpCredentials.builder()
+            .userId(user.getUserId())
+            .userName(request.getUsername())
+            .password(passwordToken)
+            .build();
+        credentialsService.save(credentials);
         log.info("New userId: {}", user.getUserId());
     }
 

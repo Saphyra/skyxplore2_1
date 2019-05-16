@@ -1,17 +1,24 @@
 package com.github.saphyra.skyxplore.community.friendship.domain;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class FriendView {
-    private String friendshipId;
-    private String friendId;
-    private String friendName;
-    private Boolean active;
+    @NonNull
+    private final String friendshipId;
+
+    @NonNull
+    private final String friendId;
+
+    @NonNull
+    private final String friendName;
+
+    @NonNull
+    private final Boolean active;
 }

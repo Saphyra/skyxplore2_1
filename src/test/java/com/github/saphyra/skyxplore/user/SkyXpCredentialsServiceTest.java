@@ -1,26 +1,31 @@
 package com.github.saphyra.skyxplore.user;
 
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
-import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCredentialsServiceTest {
     private static final String USER_ID = "user_id";
     private static final String USER_NAME = "user_name";
     private static final String PASSWORD = "password";
-    private static final SkyXpCredentials CREDENTIALS = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
+    private static final SkyXpCredentials CREDENTIALS = SkyXpCredentials.builder()
+        .userName(USER_NAME)
+        .userId(USER_ID)
+        .password(PASSWORD)
+        .build();
 
     @Mock
     private CredentialsDao credentialsDao;

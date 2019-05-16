@@ -69,6 +69,9 @@ public class CharacterControllerTest {
     @InjectMocks
     private CharacterController underTest;
 
+    @Mock
+    private SkyXpCharacter skyXpCharacter;
+
     @Test
     public void testBuyEquipmentsShouldCallFacade() {
         //GIVEN
@@ -84,11 +87,10 @@ public class CharacterControllerTest {
         //GIVEN
         CreateCharacterRequest request = new CreateCharacterRequest(CHARACTER_NAME);
 
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
-        when(characterCreatorService.createCharacter(request, USER_ID)).thenReturn(character);
+        when(characterCreatorService.createCharacter(request, USER_ID)).thenReturn(skyXpCharacter);
 
-        CharacterView characterView = createCharacterView(character);
-        when(characterViewConverter.convertDomain(character)).thenReturn(characterView);
+        CharacterView characterView = createCharacterView();
+        when(characterViewConverter.convertDomain(skyXpCharacter)).thenReturn(characterView);
         //WHEN
         CharacterView result = underTest.createCharacter(request, USER_ID);
         //THEN
@@ -107,8 +109,7 @@ public class CharacterControllerTest {
     @Test
     public void testGetCharactersShouldCallFacadeAndConverterAndReturnResponse() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
-        CharacterView view = createCharacterView(character);
+        CharacterView view = createCharacterView();
         List<CharacterView> viewList = Arrays.asList(view);
 
         when(characterViewQueryService.getCharactersByUserId(USER_ID)).thenReturn(viewList);
@@ -155,11 +156,10 @@ public class CharacterControllerTest {
         //GIVEN
         RenameCharacterRequest request = new RenameCharacterRequest(NEW_CHARACTER_NAME, CHARACTER_ID);
 
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
-        when(characterRenameService.renameCharacter(request, USER_ID)).thenReturn(character);
+        when(characterRenameService.renameCharacter(request, USER_ID)).thenReturn(skyXpCharacter);
 
-        CharacterView characterView = createCharacterView(character);
-        when(characterViewConverter.convertDomain(character)).thenReturn(characterView);
+        CharacterView characterView = createCharacterView();
+        when(characterViewConverter.convertDomain(skyXpCharacter)).thenReturn(characterView);
         //WHEN
         CharacterView result = underTest.renameCharacter(request, USER_ID);
         //THEN
@@ -178,7 +178,7 @@ public class CharacterControllerTest {
     @Test
     public void getActiveCharactersByName() {
         //GIVEN
-        CharacterView characterView = createCharacterView(SkyXpCharacter.builder().build());
+        CharacterView characterView = createCharacterView();
         given(characterViewQueryService.getActiveCharactersByName(CHARACTER_ID, CHARACTER_NAME)).willReturn(Arrays.asList(characterView));
         //WHEN
         List<CharacterView> result = underTest.getActiveCharactersByName(CHARACTER_ID, new OneStringParamRequest(CHARACTER_NAME));
@@ -194,8 +194,10 @@ public class CharacterControllerTest {
         assertThat(result).isEqualTo(CHARACTER_ID);
     }
 
-    private CharacterView createCharacterView(SkyXpCharacter character) {
-        return new CharacterView(character.getCharacterId(), character.getCharacterName());
+    private CharacterView createCharacterView() {
+        return CharacterView.builder()
+            .characterId(CHARACTER_ID)
+            .characterName(CHARACTER_NAME)
+            .build();
     }
-
 }

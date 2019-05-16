@@ -1,18 +1,13 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
-import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import com.github.saphyra.util.IdGenerator;
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
-import com.github.saphyra.skyxplore.common.exception.FriendshipAlreadyExistsException;
-import com.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
-import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
-import com.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-import com.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
-import com.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -20,12 +15,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
+import com.github.saphyra.skyxplore.common.exception.FriendshipAlreadyExistsException;
+import com.github.saphyra.skyxplore.community.blockedcharacter.BlockedCharacterQueryService;
+import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import com.github.saphyra.skyxplore.community.friendship.domain.Friendship;
+import com.github.saphyra.skyxplore.community.friendship.repository.friendrequest.FriendRequestDao;
+import com.github.saphyra.skyxplore.community.friendship.repository.friendship.FriendshipDao;
+import com.github.saphyra.util.IdGenerator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipServiceTest {
@@ -55,13 +58,22 @@ public class FriendshipServiceTest {
     @Mock
     private IdGenerator idGenerator;
 
+    @Mock
+    private FriendRequest friendRequest;
+
     @InjectMocks
     private FriendshipService underTest;
 
-    @Test(expected = UnauthorizedException.class)
+    @Mock
+    private BlockedCharacter blockedCharacter;
+
+    @Mock
+    private SkyXpCharacter character;
+
+    @Test(expected = ForbiddenException.class)
     public void testAcceptFriendRequestShouldThrowExceptionWhenWrongCharacterId() {
         //GIVEN
-        FriendRequest friendRequest = FriendRequest.builder().friendId(FRIEND_ID).build();
+        given(friendRequest.getFriendId()).willReturn(FRIEND_ID);
         when(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
         //WHEN
         underTest.acceptFriendRequest(FRIEND_REQUEST_ID, FAKE_CHARACTER_ID);
@@ -71,6 +83,7 @@ public class FriendshipServiceTest {
     public void testAcceptFriendRequestShouldAccept() {
         //GIVEN
         FriendRequest friendRequest = FriendRequest.builder()
+            .friendRequestId("")
             .characterId(FRIEND_ID)
             .friendId(CHARACTER_ID)
             .build();
@@ -94,7 +107,7 @@ public class FriendshipServiceTest {
     @Test(expected = CharacterBlockedException.class)
     public void testAddFriendRequestShouldThrowExceptionWhenCharacterBlocked() {
         //GIVEN
-        when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID)).thenReturn(Arrays.asList(new BlockedCharacter()));
+        when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID)).thenReturn(Arrays.asList(blockedCharacter));
         //WHEN
         underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
     }
@@ -113,7 +126,8 @@ public class FriendshipServiceTest {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID)).thenReturn(Collections.emptyList());
         when(friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID)).thenReturn(false);
-        when(characterQueryService.getCharactersByUserId(USER_ID)).thenReturn(Arrays.asList(SkyXpCharacter.builder().characterId(FRIEND_ID).build()));
+        given(character.getCharacterId()).willReturn(FRIEND_ID);
+        when(characterQueryService.getCharactersByUserId(USER_ID)).thenReturn(Arrays.asList(character));
         //WHEN
         underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
     }
@@ -146,6 +160,7 @@ public class FriendshipServiceTest {
         FriendRequest friendRequest = FriendRequest.builder()
             .characterId(CHARACTER_ID)
             .friendId(FRIEND_ID)
+            .friendRequestId("")
             .build();
         when(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
         //WHEN
@@ -158,6 +173,7 @@ public class FriendshipServiceTest {
         FriendRequest friendRequest = FriendRequest.builder()
             .characterId(CHARACTER_ID)
             .friendId(FRIEND_ID)
+            .friendRequestId("")
             .build();
         when(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).thenReturn(friendRequest);
         //WHEN
@@ -199,7 +215,6 @@ public class FriendshipServiceTest {
         Friendship friendship = Friendship.builder().build();
         when(friendshipDao.getByCharacterIdOrFriendId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(friendship));
 
-        FriendRequest friendRequest = FriendRequest.builder().build();
         when(friendRequestDao.getByCharacterIdOrFriendId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Arrays.asList(friendRequest));
         //WHEN
         underTest.removeContactsBetween(CHARACTER_ID, BLOCKED_CHARACTER_ID);

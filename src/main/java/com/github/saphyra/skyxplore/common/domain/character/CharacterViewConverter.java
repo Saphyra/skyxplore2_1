@@ -9,9 +9,9 @@ public class CharacterViewConverter extends AbstractViewConverter<SkyXpCharacter
 
     @Override
     public CharacterView convertDomain(SkyXpCharacter domain) {
-        CharacterView view = new CharacterView();
-        view.setCharacterId(domain.getCharacterId());
-        view.setCharacterName(domain.getCharacterName());
-        return view;
+        return CharacterView.builder()
+            .characterId(domain.getCharacterId())
+            .characterName(domain.getCharacterName())
+            .build();
     }
 }

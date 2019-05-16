@@ -20,11 +20,16 @@ public class SkyXpCharacterTest {
     private static final String EQUIPMENT_1 = "equipment_1";
     private static final String EQUIPMENT_2 = "equipment_2";
     private static final Integer MONEY = 5;
+
     private SkyXpCharacter underTest;
 
     @Before
     public void init() {
-        underTest = SkyXpCharacter.builder().build();
+        underTest = SkyXpCharacter.builder()
+            .characterId("")
+            .characterName("")
+            .userId("")
+            .build();
     }
 
     @Test

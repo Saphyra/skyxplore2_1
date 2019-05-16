@@ -89,7 +89,7 @@ public class FriendshipQueryServiceTest {
     @Test
     public void testGetNumberOfFriendRequests() {
         //GIVEN
-        when(friendRequestDao.getByFriendId(CHARACTER_ID)).thenReturn(Arrays.asList(new FriendRequest()));
+        when(friendRequestDao.getByFriendId(CHARACTER_ID)).thenReturn(Arrays.asList(createFriendRequest()));
         //WHEN
         Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID);
         //THEN
@@ -104,9 +104,9 @@ public class FriendshipQueryServiceTest {
         //WHEN
         List<FriendRequest> result = underTest.getReceivedFriendRequests(CHARACTER_ID);
         //THEN
-        assertThat(result).containsOnly(friendRequest);
-        assertThat(friendRequest.getFriendId()).isEqualTo(CHARACTER_ID);
-        assertThat(friendRequest.getCharacterId()).isEqualTo(FRIEND_ID);
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getFriendId()).isEqualTo(CHARACTER_ID);
+        assertThat(result.get(0).getCharacterId()).isEqualTo(FRIEND_ID);
     }
 
     @Test
@@ -159,6 +159,7 @@ public class FriendshipQueryServiceTest {
 
     private FriendRequest createFriendRequest() {
         return FriendRequest.builder()
+            .friendRequestId("")
             .characterId(CHARACTER_ID)
             .friendId(FRIEND_ID)
             .build();

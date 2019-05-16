@@ -1,12 +1,12 @@
 package com.github.saphyra.skyxplore.character;
 
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.character.domain.RenameCharacterRequest;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +25,7 @@ class CharacterRenameService {
         SkyXpCharacter character = characterQueryService.findCharacterByIdAuthorized(request.getCharacterId(), userId);
         character.setCharacterName(request.getNewCharacterName());
         characterDao.save(character);
-        characterNameExistsCache.invalidate(character.getCharacterName());
+        characterNameExistsCache.invalidate(request.getNewCharacterName());
         return character;
     }
 }

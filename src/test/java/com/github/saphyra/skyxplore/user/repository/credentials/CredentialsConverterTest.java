@@ -1,17 +1,18 @@
 package com.github.saphyra.skyxplore.user.repository.credentials;
 
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class CredentialsConverterTest {
-    private static final String  USER_ID = "user_id";
+    private static final String USER_ID = "user_id";
     private static final String USER_NAME = "user_name";
     private static final String PASSWORD = "password";
 
@@ -61,10 +62,10 @@ public class CredentialsConverterTest {
     }
 
     private SkyXpCredentials createCredentials() {
-        SkyXpCredentials credentials = new SkyXpCredentials();
-        credentials.setUserId(USER_ID);
-        credentials.setPassword(PASSWORD);
-        credentials.setUserName(USER_NAME);
-        return credentials;
+        return SkyXpCredentials.builder()
+            .password(PASSWORD)
+            .userId(USER_ID)
+            .userName(USER_NAME)
+            .build();
     }
 }

@@ -1,23 +1,24 @@
 package com.github.saphyra.skyxplore.community.blockedcharacter;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import com.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import com.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockedCharacterQueryServiceTest {
@@ -29,6 +30,9 @@ public class BlockedCharacterQueryServiceTest {
 
     @Mock
     private CharacterQueryService characterQueryService;
+
+    @Mock
+    private SkyXpCharacter character;
 
     @InjectMocks
     private BlockedCharacterQueryService underTest;
@@ -61,11 +65,11 @@ public class BlockedCharacterQueryServiceTest {
     public void getBlockedCharacters() {
         //GIVEN
         BlockedCharacter blockedCharacter = BlockedCharacter.builder()
+            .characterId("")
             .blockedCharacterId(BLOCKED_CHARACTER_ID)
             .build();
         given(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID)).willReturn(Arrays.asList(blockedCharacter));
 
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         given(characterQueryService.findByCharacterId(BLOCKED_CHARACTER_ID)).willReturn(character);
         //WHEN
         List<SkyXpCharacter> result = underTest.getBlockedCharacters(CHARACTER_ID);
@@ -76,6 +80,7 @@ public class BlockedCharacterQueryServiceTest {
     private BlockedCharacter createBlockedCharacter() {
         return BlockedCharacter.builder()
             .characterId(CHARACTER_ID)
+            .blockedCharacterId("")
             .build();
     }
 }

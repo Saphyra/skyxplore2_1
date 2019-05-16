@@ -1,32 +1,46 @@
 package com.github.saphyra.skyxplore.ship.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class EquippedShip {
-    private String shipId;
-    private String characterId;
+    @NonNull
+    private final String shipId;
+
+    @NonNull
+    private final String characterId;
+
+    @NonNull
     private String shipType;
+
+    @NonNull
     private Integer coreHull;
+
+    @NonNull
     private Integer connectorSlot;
 
     @Builder.Default
+    @NonNull
     private List<String> connectorEquipped = new ArrayList<>();
 
-    private String defenseSlotId;
-    private String weaponSlotId;
+    @NonNull
+    private final String defenseSlotId;
+
+    @NonNull
+    private final String weaponSlotId;
 
     public void addConnector(String element) {
         if (connectorSlot.equals(connectorEquipped.size())) {

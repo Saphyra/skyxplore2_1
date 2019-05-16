@@ -278,10 +278,11 @@ public class DeleteAccountServiceIntegrationTest {
     }
 
     private void saveCredentials() {
-        SkyXpCredentials credentials = new SkyXpCredentials();
-        credentials.setUserId(USER_ID);
-        credentials.setPassword(PASSWORD);
-        credentials.setUserName("");
+        SkyXpCredentials credentials = SkyXpCredentials.builder()
+            .userName("")
+            .userId(USER_ID)
+            .password(PASSWORD)
+            .build();
         credentialsDao.save(credentials);
     }
 
@@ -340,7 +341,12 @@ public class DeleteAccountServiceIntegrationTest {
         @Bean
         public CredentialsService credentialsService() {
             CredentialsService credentialsService = Mockito.mock(CredentialsService.class);
-            given(credentialsService.findByUserId(USER_ID)).willReturn(new SkyXpCredentials(USER_ID, "", PASSWORD));
+            SkyXpCredentials credentials = SkyXpCredentials.builder()
+                .userId(USER_ID)
+                .userName("")
+                .password(PASSWORD)
+                .build();
+            given(credentialsService.findByUserId(USER_ID)).willReturn(credentials);
             return credentialsService;
         }
 

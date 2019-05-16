@@ -4,9 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.github.saphyra.skyxplore.user.cache.UserNameCache;
-import com.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +14,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 import com.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
+import com.github.saphyra.skyxplore.user.cache.UserNameCache;
+import com.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeUserNameServiceTest {
@@ -43,7 +43,11 @@ public class ChangeUserNameServiceTest {
 
     @Before
     public void setUp() {
-        credentials = new SkyXpCredentials(USER_ID, USER_NAME, HASHED_PASSWORD);
+        credentials = SkyXpCredentials.builder()
+            .userName(USER_NAME)
+            .userId(USER_ID)
+            .password(HASHED_PASSWORD)
+            .build();
     }
 
     @Test(expected = UserNameAlreadyExistsException.class)

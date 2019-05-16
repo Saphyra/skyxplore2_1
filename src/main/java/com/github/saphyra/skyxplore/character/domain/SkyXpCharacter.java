@@ -12,22 +12,30 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SkyXpCharacter {
+    @NonNull
     private final String characterId;
+
+    @NonNull
     private String characterName;
+
+    @NonNull
     private final String userId;
 
     @Builder.Default
     @Setter(AccessLevel.NONE)
+    @NonNull
     private Integer money = 0;
 
     @Builder.Default
     @Setter(AccessLevel.NONE)
+    @NonNull
     private List<String> equipments = new ArrayList<>();
 
     public void addEquipment(String equipmentId) {

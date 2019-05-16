@@ -1,15 +1,17 @@
 package com.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.character.repository.CharacterDao;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.character.repository.CharacterDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterDeleteServiceTest {
@@ -22,16 +24,16 @@ public class CharacterDeleteServiceTest {
     @Mock
     private CharacterQueryService characterQueryService;
 
+    @Mock
+    private SkyXpCharacter character;
+
     @InjectMocks
     private CharacterDeleteService underTest;
 
     @Test
     public void testDeleteCharacterShouldDelete() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder()
-            .characterId(CHARACTER_ID)
-            .build();
-
+        given(character.getCharacterId()).willReturn(CHARACTER_ID);
         when(characterQueryService.findCharacterByIdAuthorized(CHARACTER_ID, USER_ID)).thenReturn(character);
         //WHEN
         underTest.deleteCharacter(CHARACTER_ID, USER_ID);

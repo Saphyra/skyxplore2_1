@@ -1,5 +1,18 @@
 package com.github.saphyra.skyxplore.community.mail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
@@ -8,18 +21,6 @@ import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConvert
 import com.github.saphyra.skyxplore.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.community.mail.domain.MailView;
 import com.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailControllerTest {
@@ -50,6 +51,18 @@ public class MailControllerTest {
     @InjectMocks
     private MailController underTest;
 
+    @Mock
+    private Mail mail;
+
+    @Mock
+    private MailView mailView;
+
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private CharacterView characterView;
+
     @Test
     public void testArchiveMailsShouldCallFacade() {
         //GIVEN
@@ -73,11 +86,10 @@ public class MailControllerTest {
     @Test
     public void testGetAddresseesShouldCallFacadeAndReturnView() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
         when(characterQueryService.getCharactersCanBeAddressee(CHARACTER_ID, CHARACTER_NAME)).thenReturn(characterList);
 
-        List<CharacterView> viewList = Arrays.asList(CharacterView.builder().build());
+        List<CharacterView> viewList = Arrays.asList(characterView);
         when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
         //WHEN
         List<CharacterView> result = underTest.getAddressees(new OneStringParamRequest(CHARACTER_NAME), CHARACTER_ID);
@@ -89,12 +101,10 @@ public class MailControllerTest {
     @Test
     public void testGetArchivedMailsShouldCallFacadeAndReturnView() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailQueryService.getArchivedMails(CHARACTER_ID)).thenReturn(mailList);
 
-        MailView view = MailView.builder().build();
-        List<MailView> viewList = Arrays.asList(view);
+        List<MailView> viewList = Arrays.asList(mailView);
         when(mailViewConverter.convertDomain(mailList)).thenReturn(viewList);
         //WHEN
         List<MailView> result = underTest.getArchivedMails(CHARACTER_ID);
@@ -106,12 +116,10 @@ public class MailControllerTest {
     @Test
     public void testGetMailsShouldCallFacadeAndReturnView() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailQueryService.getMails(CHARACTER_ID)).thenReturn(mailList);
 
-        MailView view = MailView.builder().build();
-        List<MailView> viewList = Arrays.asList(view);
+        List<MailView> viewList = Arrays.asList(mailView);
         when(mailViewConverter.convertDomain(mailList)).thenReturn(viewList);
         //WHEN
         List<MailView> result = underTest.getMails(CHARACTER_ID);
@@ -123,12 +131,10 @@ public class MailControllerTest {
     @Test
     public void testGetSentMailsShouldCallFacadeAndReturnView() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         List<Mail> mailList = Arrays.asList(mail);
         when(mailQueryService.getSentMails(CHARACTER_ID)).thenReturn(mailList);
 
-        MailView view = MailView.builder().build();
-        List<MailView> viewList = Arrays.asList(view);
+        List<MailView> viewList = Arrays.asList(mailView);
         when(mailViewConverter.convertDomain(mailList)).thenReturn(viewList);
         //WHEN
         List<MailView> result = underTest.getSentMails(CHARACTER_ID);

@@ -1,18 +1,17 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.AbstractViewConverter;
 import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
+import com.github.saphyra.skyxplore.community.friendship.domain.Friendship;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.stereotype.Component;
-
-import com.github.saphyra.skyxplore.community.friendship.domain.Friendship;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -23,12 +22,12 @@ public class FriendViewConverter extends AbstractViewConverter<Friendship, Frien
 
     @Override
     public FriendView convertDomain(Friendship domain) {
-        FriendView view = new FriendView();
-        view.setFriendshipId(domain.getFriendshipId());
-        view.setFriendId(domain.getFriendId());
-        view.setFriendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName());
-        view.setActive(accessTokenDao.findByCharacterId(domain.getFriendId()).isPresent());
-        return view;
+        return FriendView.builder()
+            .friendshipId(domain.getFriendshipId())
+            .friendId(domain.getFriendId())
+            .friendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName())
+            .active(accessTokenDao.findByCharacterId(domain.getFriendId()).isPresent())
+            .build();
     }
 
     public List<FriendView> convertDomain(List<Friendship> domain, String characterId) {

@@ -58,6 +58,12 @@ public class AuthDaoImplTest {
     @Mock
     private ApplicationEventPublisher applicationEventPublisher;
 
+    @Mock
+    private SkyXpUser skyXpUser;
+
+    @Mock
+    private SkyXpAccessToken skyXpAccessToken;
+
     @InjectMocks
     private AuthDaoImpl underTest;
 
@@ -66,9 +72,6 @@ public class AuthDaoImplTest {
 
     @Before
     public void init() {
-        SkyXpUser skyXpUser = SkyXpUser.builder()
-            .userId(USER_ID)
-            .build();
         Optional<SkyXpUser> optionalSkyXpUser = Optional.of(skyXpUser);
         when(userDao.findById(USER_ID)).thenReturn(optionalSkyXpUser);
 
@@ -99,7 +102,12 @@ public class AuthDaoImplTest {
     @Test
     public void testFindUserByUserName() {
         //GIVEN
-        when(credentialsDao.findByName(USER_NAME)).thenReturn(Optional.of(new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD)));
+        SkyXpCredentials credentials = SkyXpCredentials.builder()
+            .userId(USER_ID)
+            .userName(USER_NAME)
+            .password(PASSWORD)
+            .build();
+        when(credentialsDao.findByName(USER_NAME)).thenReturn(Optional.of(credentials));
         //WHEN
         Optional<User> result = underTest.findUserByUserName(USER_NAME);
         //THEN
@@ -135,7 +143,6 @@ public class AuthDaoImplTest {
     @Test
     public void testFindAccessTokenByTokenId() {
         //GIVEN
-        SkyXpAccessToken skyXpAccessToken = SkyXpAccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
         Optional<SkyXpAccessToken> optionalSkyXpAccessToken = Optional.of(skyXpAccessToken);
         when(accessTokenDao.findById(ACCESS_TOKEN_ID)).thenReturn(optionalSkyXpAccessToken);
 
@@ -153,7 +160,6 @@ public class AuthDaoImplTest {
         //GIVEN
         AccessToken accessToken = AccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
 
-        SkyXpAccessToken skyXpAccessToken = SkyXpAccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
         when(accessTokenConverter.convertDomain(accessToken)).thenReturn(skyXpAccessToken);
 
         //WHEN

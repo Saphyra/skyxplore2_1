@@ -54,6 +54,24 @@ public class FriendshipControllerTest {
     @Mock
     private FriendRequestViewConverter friendRequestViewConverter;
 
+    @Mock
+    private FriendRequest friendRequest;
+
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private CharacterView characterView;
+
+    @Mock
+    private Friendship friendship;
+
+    @Mock
+    private FriendRequestView friendRequestView;
+
+    @Mock
+    private FriendView friendView;
+
     @InjectMocks
     private FriendshipController underTest;
 
@@ -92,11 +110,9 @@ public class FriendshipControllerTest {
     @Test
     public void testGetCharactersCanBeFriendShouldCallFacadeAndReturnView() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
         when(characterQueryService.getCharactersCanBeFriend(CHARACTER_NAME, CHARACTER_ID)).thenReturn(characterList);
 
-        CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);
         when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
         //WHEN
@@ -109,11 +125,9 @@ public class FriendshipControllerTest {
     @Test
     public void testGetFriendsShouldCallFacadeAndReturnView() {
         //GIVEN
-        Friendship friendship = Friendship.builder().build();
         List<Friendship> friendshipList = Arrays.asList(friendship);
         when(friendshipQueryService.getFriends(CHARACTER_ID)).thenReturn(friendshipList);
 
-        FriendView friendView = FriendView.builder().build();
         List<FriendView> friendViewList = Arrays.asList(friendView);
         when(friendViewConverter.convertDomain(friendshipList, CHARACTER_ID)).thenReturn(friendViewList);
         //WHEN
@@ -126,12 +140,10 @@ public class FriendshipControllerTest {
     @Test
     public void testGetReceivedFriendRequestsShouldCallFacadeAndReturnView() {
         //GIVEN
-        FriendRequest friendRequest = FriendRequest.builder().build();
         List<FriendRequest> friendRequestList = Arrays.asList(friendRequest);
         when(friendshipQueryService.getReceivedFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
 
-        FriendRequestView view = FriendRequestView.builder().build();
-        List<FriendRequestView> viewList = Arrays.asList(view);
+        List<FriendRequestView> viewList = Arrays.asList(friendRequestView);
         when(friendRequestViewConverter.convertDomain(friendRequestList)).thenReturn(viewList);
         //WHEN
         List<FriendRequestView> result = underTest.getReceivedFriendRequests(CHARACTER_ID);
@@ -143,12 +155,10 @@ public class FriendshipControllerTest {
     @Test
     public void testGetSentFriendRequestsShouldCallFacadeAndReturnView() {
         //GIVEN
-        FriendRequest friendRequest = FriendRequest.builder().build();
         List<FriendRequest> friendRequestList = Arrays.asList(friendRequest);
         when(friendshipQueryService.getSentFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
 
-        FriendRequestView view = FriendRequestView.builder().build();
-        List<FriendRequestView> viewList = Arrays.asList(view);
+        List<FriendRequestView> viewList = Arrays.asList(friendRequestView);
         when(friendRequestViewConverter.convertDomain(friendRequestList)).thenReturn(viewList);
         //WHEN
         List<FriendRequestView> result = underTest.getSentFriendRequests(CHARACTER_ID);
@@ -160,10 +170,10 @@ public class FriendshipControllerTest {
     @Test
     public void getActiveFriends() {
         //GIVEN
-        List<SkyXpCharacter> characters = Arrays.asList(SkyXpCharacter.builder().build());
+        List<SkyXpCharacter> characters = Arrays.asList(character);
         given(activeFriendsQueryService.getActiveFriends(CHARACTER_ID)).willReturn(characters);
 
-        List<CharacterView> characterViews = Arrays.asList(CharacterView.builder().build());
+        List<CharacterView> characterViews = Arrays.asList(characterView);
         given(characterViewConverter.convertDomain(characters)).willReturn(characterViews);
         //WHEN
         List<CharacterView> result = underTest.getActiveFriends(CHARACTER_ID);

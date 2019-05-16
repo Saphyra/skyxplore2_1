@@ -1,16 +1,13 @@
 package com.github.saphyra.skyxplore.community.mail;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +16,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import com.github.saphyra.skyxplore.community.mail.domain.Mail;
+import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailDeleteServiceTest {
@@ -39,17 +39,19 @@ public class MailDeleteServiceTest {
     @Mock
     private MailQueryService mailQueryService;
 
+    @Mock
     private Mail mail;
 
     @InjectMocks
     private MailDeleteService underTest;
 
+    @Mock
+    private SkyXpCharacter character;
+
     @Before
     public void init() {
-        mail = Mail.builder()
-            .from(FROM_ID)
-            .to(TO_ID)
-            .build();
+        given(mail.getFrom()).willReturn(FROM_ID);
+        given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(anyString())).thenReturn(mail);
     }
 
@@ -62,9 +64,7 @@ public class MailDeleteServiceTest {
     @Test(expected = InvalidMailAccessException.class)
     public void testDeleteMailShouldThrowExceptionWhenWrongId() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder()
-            .characterId(CHARACTER_ID)
-            .build();
+        given(character.getCharacterId()).willReturn(CHARACTER_ID);
         when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(CHARACTER_ID, MAIL_IDS);
@@ -73,28 +73,24 @@ public class MailDeleteServiceTest {
     @Test
     public void testDeleteMailShouldUpdateDeletedByAddressee() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder()
-            .characterId(TO_ID)
-            .build();
+        given(character.getCharacterId()).willReturn(TO_ID);
         when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(TO_ID, MAIL_IDS);
         //THEN
-        assertThat(mail.getDeletedByAddressee()).isTrue();
+        verify(mail).setDeletedByAddressee(true);
         verify(mailDao).save(mail);
     }
 
     @Test
     public void testDeleteMailShouldUpdateDeletedBySender() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder()
-            .characterId(FROM_ID)
-            .build();
+        given(character.getCharacterId()).willReturn(FROM_ID);
         when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(FROM_ID, MAIL_IDS);
         //THEN
-        assertThat(mail.getDeletedBySender()).isTrue();
+        verify(mail).setDeletedBySender(true);
         verify(mailDao).save(mail);
     }
 }

@@ -27,16 +27,20 @@ public class CharacterViewQueryServiceTest {
     @Mock
     private CharacterViewConverter characterViewConverter;
 
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private CharacterView characterView;
+
     @InjectMocks
     private CharacterViewQueryService underTest;
 
     @Test
     public void findByCharacterId() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        CharacterView characterView = CharacterView.builder().build();
         given(characterViewConverter.convertDomain(character)).willReturn(characterView);
         //WHEN
         CharacterView result = underTest.findByCharacterId(CHARACTER_ID);
@@ -47,28 +51,28 @@ public class CharacterViewQueryServiceTest {
     @Test
     public void getActiveCharactersByName() {
         //GIVEN
-        List<SkyXpCharacter> character = Arrays.asList(SkyXpCharacter.builder().build());
-        given(characterQueryService.getActiveCharactersByName(CHARACTER_ID, CHARACTER_NAME)).willReturn(character);
+        List<SkyXpCharacter> characters = Arrays.asList(character);
+        given(characterQueryService.getActiveCharactersByName(CHARACTER_ID, CHARACTER_NAME)).willReturn(characters);
 
-        List<CharacterView> characterView = Arrays.asList(CharacterView.builder().build());
-        given(characterViewConverter.convertDomain(character)).willReturn(characterView);
+        List<CharacterView> characterViews = Arrays.asList(characterView);
+        given(characterViewConverter.convertDomain(characters)).willReturn(characterViews);
         //WHEN
         List<CharacterView> result = underTest.getActiveCharactersByName(CHARACTER_ID, CHARACTER_NAME);
         //THEN
-        assertThat(result).isEqualTo(characterView);
+        assertThat(result).isEqualTo(characterViews);
     }
 
     @Test
     public void getCharactersByUserId() {
         //GIVEN
-        List<SkyXpCharacter> character = Arrays.asList(SkyXpCharacter.builder().build());
-        given(characterQueryService.getCharactersByUserId(USER_ID)).willReturn(character);
+        List<SkyXpCharacter> characters = Arrays.asList(character);
+        given(characterQueryService.getCharactersByUserId(USER_ID)).willReturn(characters);
 
-        List<CharacterView> characterView = Arrays.asList(CharacterView.builder().build());
-        given(characterViewConverter.convertDomain(character)).willReturn(characterView);
+        List<CharacterView> characterViews = Arrays.asList(characterView);
+        given(characterViewConverter.convertDomain(characters)).willReturn(characterViews);
         //WHEN
         List<CharacterView> result = underTest.getCharactersByUserId(USER_ID);
         //THEN
-        assertThat(result).isEqualTo(characterView);
+        assertThat(result).isEqualTo(characterViews);
     }
 }

@@ -1,18 +1,19 @@
 package com.github.saphyra.skyxplore.character;
 
-import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
-import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.skyxplore.character.cache.CharacterNameExistsCache;
+import com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterCreatorServiceTest {
@@ -27,6 +28,9 @@ public class CharacterCreatorServiceTest {
 
     @Mock
     private NewCharacterGenerator newCharacterGenerator;
+
+    @Mock
+    private SkyXpCharacter character;
 
     @InjectMocks
     private CharacterCreatorService underTest;
@@ -43,7 +47,6 @@ public class CharacterCreatorServiceTest {
     public void createCharacter(){
         //GIVEN
         given(characterQueryService.isCharNameExists(CHARACTER_NAME)).willReturn(false);
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         given(newCharacterGenerator.createCharacter(USER_ID, CHARACTER_NAME)).willReturn(character);
         //WHEN
         SkyXpCharacter result = underTest.createCharacter(new CreateCharacterRequest(CHARACTER_NAME), USER_ID);

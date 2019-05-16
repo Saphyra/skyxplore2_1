@@ -6,14 +6,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -25,7 +24,6 @@ public class EquippedSlotTest {
     private static final String ITEM_2 = "item_2";
     private SkyXpCharacter character;
 
-    @InjectMocks
     private EquippedSlot underTest;
 
     @Before

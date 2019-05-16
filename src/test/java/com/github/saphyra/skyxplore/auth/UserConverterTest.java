@@ -1,9 +1,10 @@
 package com.github.saphyra.skyxplore.auth;
 
-import com.github.saphyra.authservice.domain.User;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
-import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
-import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,10 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.authservice.domain.User;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
+import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserConverterTest {
@@ -25,17 +26,22 @@ public class UserConverterTest {
     @Mock
     private CredentialsDao credentialsDao;
 
+    @Mock
+    private SkyXpUser skyXpUser;
+
     @InjectMocks
     private UserConverter underTest;
 
     @Test
     public void testConvert() {
         //GIVEN
-        SkyXpUser skyXpUser = SkyXpUser.builder()
-            .userId(USER_ID)
-            .build();
+        given(skyXpUser.getUserId()).willReturn(USER_ID);
 
-        SkyXpCredentials skyXpCredentials = new SkyXpCredentials(USER_ID, USER_NAME, PASSWORD);
+        SkyXpCredentials skyXpCredentials = SkyXpCredentials.builder()
+            .userName(USER_NAME)
+            .userId(USER_ID)
+            .password(PASSWORD)
+            .build();
         when(credentialsDao.findById(USER_ID)).thenReturn(Optional.of(skyXpCredentials));
         //WHEN
         User result = underTest.convertEntity(skyXpUser);

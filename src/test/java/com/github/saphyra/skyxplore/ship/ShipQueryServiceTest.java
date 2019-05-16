@@ -1,22 +1,23 @@
 package com.github.saphyra.skyxplore.ship;
 
-import com.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
-import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import com.github.saphyra.skyxplore.ship.domain.ShipView;
-import com.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
-import com.github.saphyra.skyxplore.slot.SlotQueryService;
-import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
+import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import com.github.saphyra.skyxplore.ship.domain.ShipView;
+import com.github.saphyra.skyxplore.ship.repository.EquippedShipDao;
+import com.github.saphyra.skyxplore.slot.SlotQueryService;
+import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShipQueryServiceTest {
@@ -74,8 +75,9 @@ public class ShipQueryServiceTest {
         when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(defenseSlot);
         when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
 
-        ShipView shipView = new ShipView();
-        shipView.setShipType(SHIP_TYPE);
+        ShipView shipView = ShipView.builder()
+            .shipType(SHIP_TYPE)
+            .build();
         when(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot)).thenReturn(shipView);
 
         //WHEN

@@ -1,18 +1,20 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
-import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequest;
+import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendRequestViewConverterTest {
@@ -20,8 +22,12 @@ public class FriendRequestViewConverterTest {
     private static final String FRIEND_NAME = "friend_name";
     private static final String CHARACTER_ID = "character_id";
     private static final String FRIEND_REQUEST_ID = "friend_request_id";
+
     @Mock
     private CharacterQueryService characterQueryService;
+
+    @Mock
+    private SkyXpCharacter character;
 
     @InjectMocks
     private FriendRequestViewConverter underTest;
@@ -35,10 +41,7 @@ public class FriendRequestViewConverterTest {
             .friendRequestId(FRIEND_REQUEST_ID)
             .build();
 
-        SkyXpCharacter character = SkyXpCharacter.builder()
-            .characterName(FRIEND_NAME)
-            .build();
-
+        given(character.getCharacterName()).willReturn(FRIEND_NAME);
         when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(character);
         //WHEN
         FriendRequestView result = underTest.convertDomain(friendRequest);

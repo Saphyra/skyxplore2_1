@@ -1,14 +1,14 @@
 package com.github.saphyra.skyxplore.lobby.message.domain;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
 
 @Data
 @Builder
@@ -16,9 +16,6 @@ import java.util.Vector;
 public class Message {
     @NonNull
     private final UUID messageId;
-
-    @NonNull
-    private final UUID lobbyId;
 
     @Builder.Default
     @NonNull

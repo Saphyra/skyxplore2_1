@@ -42,6 +42,12 @@ public class ActiveFriendsQueryServiceTest {
     @Mock
     private Lobby lobby;
 
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private SkyXpAccessToken accessToken;
+
     @InjectMocks
     private ActiveFriendsQueryService underTest;
 
@@ -58,17 +64,16 @@ public class ActiveFriendsQueryServiceTest {
             .characterId(CHARACTER_ID)
             .friendId(FRIEND_ID_2)
             .build();
-        given(accessTokenDao.findByCharacterId(FRIEND_ID_2)).willReturn(Optional.of(SkyXpAccessToken.builder().build()));
+        given(accessTokenDao.findByCharacterId(FRIEND_ID_2)).willReturn(Optional.of(accessToken));
         given(lobbyQueryService.findByCharacterId(FRIEND_ID_2)).willReturn(Optional.of(lobby));
 
         Friendship invitableFriendsip = Friendship.builder()
             .characterId(CHARACTER_ID)
             .friendId(FRIEND_ID_3)
             .build();
-        given(accessTokenDao.findByCharacterId(FRIEND_ID_3)).willReturn(Optional.of(SkyXpAccessToken.builder().build()));
+        given(accessTokenDao.findByCharacterId(FRIEND_ID_3)).willReturn(Optional.of(accessToken));
         given(lobbyQueryService.findByCharacterId(FRIEND_ID_3)).willReturn(Optional.empty());
 
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         given(characterQueryService.findByCharacterId(FRIEND_ID_3)).willReturn(character);
 
         given(friendshipQueryService.getFriends(CHARACTER_ID)).willReturn(Arrays.asList(inactiveFriendship, inLobbyFriendship, invitableFriendsip));

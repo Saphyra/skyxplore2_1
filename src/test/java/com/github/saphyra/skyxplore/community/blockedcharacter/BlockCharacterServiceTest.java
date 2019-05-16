@@ -6,11 +6,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import com.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
-import com.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
-import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
-import com.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
-import com.github.saphyra.skyxplore.community.friendship.FriendshipService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -19,6 +14,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
+import com.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
+import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCharacter;
+import com.github.saphyra.skyxplore.community.blockedcharacter.repository.BlockedCharacterDao;
+import com.github.saphyra.skyxplore.community.friendship.FriendshipService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockCharacterServiceTest {
@@ -37,6 +37,9 @@ public class BlockCharacterServiceTest {
     @InjectMocks
     private BlockCharacterService underTest;
 
+    @Mock
+    private BlockedCharacter blockedCharacter;
+
     @Test(expected = BlockedCharacterNotFoundException.class)
     public void testAllowBlockedCharacterShouldThrowExceptionWhenNotFound() {
         //GIVEN
@@ -48,7 +51,6 @@ public class BlockCharacterServiceTest {
     @Test
     public void testAllowBlockedCharacterShouldDeleteBlock() {
         //GIVEN
-        BlockedCharacter blockedCharacter = BlockedCharacter.builder().build();
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(blockedCharacter));
         //WHEN
         underTest.allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
@@ -65,7 +67,7 @@ public class BlockCharacterServiceTest {
     @Test(expected = CharacterAlreadyBlockedException.class)
     public void testBlockCharacterShouldThrowExceptionWhenAlreadyBlocked() {
         //GIVEN
-        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(new BlockedCharacter()));
+        when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(blockedCharacter));
         //WHEN
         underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
     }

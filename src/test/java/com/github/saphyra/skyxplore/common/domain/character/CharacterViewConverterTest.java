@@ -1,13 +1,14 @@
 package com.github.saphyra.skyxplore.common.domain.character;
 
 
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterViewConverterTest {
@@ -23,6 +24,7 @@ public class CharacterViewConverterTest {
         SkyXpCharacter character = SkyXpCharacter.builder()
             .characterId(CHARACTER_ID)
             .characterName(CHARACTER_NAME)
+            .userId("")
             .build();
         //WHEN
         CharacterView result = underTest.convertDomain(character);

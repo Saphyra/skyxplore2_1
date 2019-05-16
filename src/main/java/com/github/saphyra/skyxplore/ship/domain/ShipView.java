@@ -2,21 +2,34 @@ package com.github.saphyra.skyxplore.ship.domain;
 
 import java.util.List;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ShipView {
-    private String shipType;
-    private Integer coreHull;
-    private Integer connectorSlot;
-    private List<String> connectorEquipped;
-    private SlotView defenseSlot;
-    private SlotView weaponSlot;
-    private List<String> ability;
+    @NonNull
+    private final String shipType;
+
+    @NonNull
+    private final Integer coreHull;
+
+    @NonNull
+    private final Integer connectorSlot;
+
+    @NonNull
+    private final List<String> connectorEquipped;
+
+    @NonNull
+    private final SlotView defenseSlot;
+
+    @NonNull
+    private final SlotView weaponSlot;
+
+    @NonNull
+    private final List<String> ability;
 }

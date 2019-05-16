@@ -23,7 +23,6 @@ class MessageSenderService {
         Lobby lobby = lobbyQueryService.findByCharacterIdValidated(characterId);
         Message message = Message.builder()
             .messageId(idGenerator.randomUUID())
-            .lobbyId(lobby.getLobbyId())
             .sender(characterId)
             .message(text)
             .createdAt(dateTimeUtil.convertDomain(dateTimeUtil.now()))

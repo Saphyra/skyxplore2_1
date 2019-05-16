@@ -4,35 +4,50 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class EquippedSlot {
-    private String slotId;
-    private String shipId;
+    @NonNull
+    private final String slotId;
+
+    @NonNull
+    private final String shipId;
+
+    @NonNull
     private Integer frontSlot;
 
     @Builder.Default
+    @NonNull
     private List<String> frontEquipped = new ArrayList<>();
+
+    @NonNull
     private Integer leftSlot;
 
     @Builder.Default
+    @NonNull
     private List<String> leftEquipped = new ArrayList<>();
+
+    @NonNull
     private Integer rightSlot;
 
     @Builder.Default
+    @NonNull
     private List<String> rightEquipped = new ArrayList<>();
+
+    @NonNull
     private Integer backSlot;
 
     @Builder.Default
+    @NonNull
     private List<String> backEquipped = new ArrayList<>();
 
     public void addSlot(Integer extraSlot) {
@@ -146,6 +161,7 @@ public class EquippedSlot {
     public ArrayList<String> getBackEquipped() {
         return new ArrayList<>(backEquipped);
     }
+
     @SuppressWarnings("unused")
     private void setBackEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
@@ -154,6 +170,7 @@ public class EquippedSlot {
     public ArrayList<String> getLeftEquipped() {
         return new ArrayList<>(leftEquipped);
     }
+
     @SuppressWarnings("unused")
     private void setLeftEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
@@ -162,6 +179,7 @@ public class EquippedSlot {
     public ArrayList<String> getRightEquipped() {
         return new ArrayList<>(rightEquipped);
     }
+
     @SuppressWarnings("unused")
     private void setRightEquipped(ArrayList<String> s) {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");

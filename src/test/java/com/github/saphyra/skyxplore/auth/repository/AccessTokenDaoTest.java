@@ -1,21 +1,22 @@
 package com.github.saphyra.skyxplore.auth.repository;
 
-import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import com.github.saphyra.skyxplore.common.DateTimeUtil;
+import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessTokenDaoTest {
@@ -154,6 +155,7 @@ public class AccessTokenDaoTest {
 
     private SkyXpAccessToken createAccessToken() {
         return SkyXpAccessToken.builder()
+            .userId(USER_ID)
             .accessTokenId(ACCESS_TOKEN_ID)
             .characterId(CHARACTER_ID)
             .lastAccess(LAST_ACCESS)

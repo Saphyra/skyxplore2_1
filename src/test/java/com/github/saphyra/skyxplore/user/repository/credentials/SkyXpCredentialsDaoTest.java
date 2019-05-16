@@ -1,18 +1,19 @@
 package com.github.saphyra.skyxplore.user.repository.credentials;
 
-import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCredentialsDaoTest {
@@ -82,10 +83,10 @@ public class SkyXpCredentialsDaoTest {
     }
 
     private SkyXpCredentials createCredentials() {
-        SkyXpCredentials credentials = new SkyXpCredentials();
-        credentials.setUserId(USER_ID);
-        credentials.setPassword(PASSWORD);
-        credentials.setUserName(USER_NAME);
-        return credentials;
+        return SkyXpCredentials.builder()
+            .userId(USER_ID)
+            .userName(USER_NAME)
+            .password(PASSWORD)
+            .build();
     }
 }

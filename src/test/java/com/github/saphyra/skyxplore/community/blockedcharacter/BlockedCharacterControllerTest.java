@@ -1,22 +1,23 @@
 package com.github.saphyra.skyxplore.community.blockedcharacter;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockedCharacterControllerTest {
@@ -39,6 +40,12 @@ public class BlockedCharacterControllerTest {
     @InjectMocks
     private BlockedCharacterController underTest;
 
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private CharacterView characterView;
+
     @Test
     public void testAllowBlockedCharacterShouldCallFacade() {
         //WHEN
@@ -58,11 +65,9 @@ public class BlockedCharacterControllerTest {
     @Test
     public void testGetBlockedCharactersShouldCallFacadeAndReturnView() {
         //GIVEN
-        SkyXpCharacter blockedCharacter = SkyXpCharacter.builder().build();
-        List<SkyXpCharacter> characterList = Arrays.asList(blockedCharacter);
+        List<SkyXpCharacter> characterList = Arrays.asList(character);
         when(blockedCharacterQueryService.getBlockedCharacters(CHARACTER_ID)).thenReturn(characterList);
 
-        CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);
         when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
         //WHEN
@@ -75,11 +80,9 @@ public class BlockedCharacterControllerTest {
     @Test
     public void testGetCharactersCanBeBlockedShouldCallFacadeAndReturnView() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         List<SkyXpCharacter> characterList = Arrays.asList(character);
         when(characterQueryService.getCharactersCanBeBlocked(CHARACTER_NAME, CHARACTER_ID)).thenReturn(characterList);
 
-        CharacterView characterView = CharacterView.builder().build();
         List<CharacterView> viewList = Arrays.asList(characterView);
         when(characterViewConverter.convertDomain(characterList)).thenReturn(viewList);
         //WHEN
