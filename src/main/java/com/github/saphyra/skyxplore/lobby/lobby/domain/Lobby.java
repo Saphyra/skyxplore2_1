@@ -109,4 +109,14 @@ public class Lobby {
     public List<Message> getMessages() {
         return new ArrayList<>(messages);
     }
+
+    public void transferOwnership(String newOwnerId) {
+        ownerId = newOwnerId;
+        events.add(
+            LobbyEvent.builder()
+                .eventType(LobbyEventType.OWNER_CHANGED)
+                .data(ownerId)
+                .build()
+        );
+    }
 }

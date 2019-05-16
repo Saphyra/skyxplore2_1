@@ -36,7 +36,6 @@ Exception handling:
 
 Lobby
     - Start queueing
-    - Transfer ownership
 Javadoc
 Integration tests
 Logging

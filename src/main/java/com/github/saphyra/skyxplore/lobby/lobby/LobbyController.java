@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,12 +34,14 @@ class LobbyController {
     private static final String GET_LOBBY_EVENTS_MAPPING = "lobby/event";
     private static final String GET_LOBBY_MEMBERS_MAPPING = "lobby/member";
     private static final String KICK_MEMBER_MAPPING = "lobby/member/{memberId}";
+    private static final String TRANSFER_OWNERSHIP_MAPPING = "lobby/owner/{newOwnerId}";
 
 
     private final LobbyCreatorService lobbyCreatorService;
     private final LobbyMemberHandler lobbyMemberHandler;
     private final LobbyViewQueryService lobbyViewQueryService;
     private final KickFromLobbyService kickFromLobbyService;
+    private final TransferOwnershipService transferOwnershipService;
 
     @PutMapping(CREATE_LOBBY_MAPPING)
     void createLobby(
@@ -79,5 +82,14 @@ class LobbyController {
     ) {
         log.info("{} wants to kick {} from lobby.", characterId, memberId);
         kickFromLobbyService.kickFromLobby(characterId, memberId);
+    }
+
+    @PostMapping(TRANSFER_OWNERSHIP_MAPPING)
+    void transferOwnership(
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
+        @PathVariable("newOwnerId") String newOwnerId
+    ) {
+        log.info("{} wants to transfer lobby ownership to {}", characterId, newOwnerId);
+        transferOwnershipService.transferOwnership(characterId, newOwnerId);
     }
 }

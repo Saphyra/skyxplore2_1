@@ -1,10 +1,19 @@
 (function LobbyEventController(){
+    events.LOAD_LOBBY_EVENTS = "load_lobby_events";
+
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOBBY_LOADED},
         function(){
-            setInterval(loadEvents, 5000);
+            setInterval(function(){eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS))}, 5000);
         },
         true
+    ))
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.LOAD_LOBBY_EVENTS},
+        function(){
+            loadEvents();
+        }
     ))
 
     function loadEvents(){
@@ -33,6 +42,7 @@
                     eventProcessor.processEvent(new Event(events.MEMBER_LEFT, event.data.characterId));
                 break;
                 case "OWNER_CHANGED":
+                    $("#owner-control-panel").hide();
                     eventProcessor.processEvent(new Event(events.LOAD_LOBBY));
                 break;
                 default:

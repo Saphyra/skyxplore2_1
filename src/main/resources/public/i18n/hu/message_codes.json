@@ -42,6 +42,7 @@
   "MESSAGE_TOO_LONG": "Az üzenet túl hosszú (Max 4000 karakter).",
   "NEW_PASSWORD_TOO_LONG": "Új jelszó túl hosszú! (Maximum 30 karakter)",
   "NEW_PASSWORD_TOO_SHORT": "Új jelszó túl rövid! (Minimum 6 karakter)",
+  "OWNERSHIP_TRANSFERRED": "Vezetőség átadva.",
   "PASSWORD_CHANGE_SUCCESSFUL": "Jelszó megváltoztatása sikeres.",
   "PASSWORD_TOO_LONG": "Jelszó túl hosszú (Maximum 30 karakter).",
   "PASSWORD_TOO_SHORT": "Jelszó túl rövid (Minimum 6 karakter).",

@@ -63,6 +63,9 @@
                     if(lobbyDetails.ownerId == characterIdQueryService.getCharacterId() && character.characterId !== characterIdQueryService.getCharacterId()){
                         const transferOwnershipButton = document.createElement("BUTTON");
                             transferOwnershipButton.innerHTML = Localization.getAdditionalContent("transfer-ownership");
+                            transferOwnershipButton.onclick = function(){
+                                transferOwnership(character.characterId);
+                            }
                         buttonWrapper.appendChild(transferOwnershipButton);
 
                         const kickButton = document.createElement("BUTTON");
@@ -76,6 +79,15 @@
             container.appendChild(buttonWrapper);
             return container;
         }
+    }
+
+    function transferOwnership(characterId){
+        const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.TRANSFER_OWNERSHIP, characterId));
+            request.processValidResponse = function(){
+                notificationService.showSuccess(MessageCode.getMessage("OWNERSHIP_TRANSFERRED"));
+                eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
+            }
+        dao.sendRequestAsync(request);
     }
 
     function kickFromLobby(characterId){
