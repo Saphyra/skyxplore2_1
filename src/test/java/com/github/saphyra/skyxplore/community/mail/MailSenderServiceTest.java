@@ -9,6 +9,13 @@ import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
 import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
@@ -17,13 +24,6 @@ import com.github.saphyra.skyxplore.community.blockedcharacter.domain.BlockedCha
 import com.github.saphyra.skyxplore.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.community.mail.domain.SendMailRequest;
 import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import com.github.saphyra.util.IdGenerator;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,12 +53,14 @@ public class MailSenderServiceTest {
     @InjectMocks
     private MailSenderService underTest;
 
+    @Mock
+    private BlockedCharacter blockedCharacter;
+
     @Test(expected = CharacterBlockedException.class)
     public void testSendMailShouldThrowExceptionWhenBlocked() {
         //GIVEN
         SendMailRequest request = new SendMailRequest(ADDRESSEE_ID, SUBJECT, MESSAGE);
 
-        BlockedCharacter blockedCharacter = BlockedCharacter.builder().build();
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, ADDRESSEE_ID)).thenReturn(Arrays.asList(blockedCharacter));
         //WHEN
         underTest.sendMail(request, CHARACTER_ID);

@@ -1,22 +1,24 @@
 package com.github.saphyra.skyxplore.community.mail;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.community.mail.domain.Mail;
-import com.github.saphyra.skyxplore.community.mail.domain.MailView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.DateTimeUtil;
+import com.github.saphyra.skyxplore.community.mail.domain.Mail;
+import com.github.saphyra.skyxplore.community.mail.domain.MailView;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailViewConverterTest {
@@ -39,6 +41,12 @@ public class MailViewConverterTest {
     @InjectMocks
     private MailViewConverter underTest;
 
+    @Mock
+    private SkyXpCharacter from;
+
+    @Mock
+    private SkyXpCharacter to;
+
     @Test
     public void testConvertDomainShouldConvertAndReturn() {
         //GIVEN
@@ -52,9 +60,8 @@ public class MailViewConverterTest {
             .read(false)
             .build();
 
-        SkyXpCharacter from = SkyXpCharacter.builder().characterName(FROM_NAME).build();
-
-        SkyXpCharacter to = SkyXpCharacter.builder().characterName(TO_NAME).build();
+        given(from.getCharacterName()).willReturn(FROM_NAME);
+        given(to.getCharacterName()).willReturn(TO_NAME);
 
         when(characterQueryService.findByCharacterId(FROM_ID)).thenReturn(from);
         when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(to);

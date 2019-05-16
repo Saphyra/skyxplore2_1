@@ -8,21 +8,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.saphyra.skyxplore.common.exception.MailNotFoundException;
-import com.github.saphyra.skyxplore.community.mail.domain.Mail;
-import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.skyxplore.common.exception.MailNotFoundException;
+import com.github.saphyra.skyxplore.community.mail.domain.Mail;
+import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
+
 @RunWith(MockitoJUnitRunner.class)
 public class MailQueryServiceTest {
     private static final String MAIL_ID = "mail_id";
     private static final String CHARACTER_ID = "character_id";
+
     @Mock
     private MailDao mailDao;
+
+    @Mock
+    private Mail mail;
 
     @InjectMocks
     private MailQueryService underTest;
@@ -38,7 +43,6 @@ public class MailQueryServiceTest {
     @Test
     public void testFindByMailId() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         when(mailDao.findById(MAIL_ID)).thenReturn(Optional.of(mail));
         //WHEN
         Mail result = underTest.findMailById(MAIL_ID);
@@ -50,7 +54,6 @@ public class MailQueryServiceTest {
     @Test
     public void testGetArchivedMails() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         when(mailDao.getArchivedMails(CHARACTER_ID)).thenReturn(Arrays.asList(mail));
         //WHEN
         List<Mail> result = underTest.getArchivedMails(CHARACTER_ID);
@@ -62,7 +65,6 @@ public class MailQueryServiceTest {
     @Test
     public void testGetMails() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         when(mailDao.getMails(CHARACTER_ID)).thenReturn(Arrays.asList(mail));
         //WHEN
         List<Mail> result = underTest.getMails(CHARACTER_ID);
@@ -74,7 +76,6 @@ public class MailQueryServiceTest {
     @Test
     public void testGetNumberOfUnreadMails() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         when(mailDao.getUnreadMails(CHARACTER_ID)).thenReturn(Arrays.asList(mail));
         //WHEN
         Integer result = underTest.getNumberOfUnreadMails(CHARACTER_ID);
@@ -86,7 +87,6 @@ public class MailQueryServiceTest {
     @Test
     public void testGetSentMails() {
         //GIVEN
-        Mail mail = Mail.builder().build();
         when(mailDao.getSentMails(CHARACTER_ID)).thenReturn(Arrays.asList(mail));
         //WHEN
         List<Mail> result = underTest.getSentMails(CHARACTER_ID);

@@ -1,22 +1,23 @@
 package com.github.saphyra.skyxplore.community.mail;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
-import com.github.saphyra.skyxplore.community.mail.domain.Mail;
-import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
+import com.github.saphyra.skyxplore.community.mail.domain.Mail;
+import com.github.saphyra.skyxplore.community.mail.repository.MailDao;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,13 +39,19 @@ public class MailStatusUpdaterServiceTest {
     @InjectMocks
     private MailStatusUpdaterService underTest;
 
+    @Mock
+    private SkyXpCharacter character;
+
+    @Mock
+    private Mail mail;
+
     @Test(expected = InvalidMailAccessException.class)
     public void testArchiveMailsShouldThrowExceptionWhenWrongId() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().characterId(CHARACTER_ID).build();
+        given(character.getCharacterId()).willReturn(CHARACTER_ID);
         when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
 
-        Mail mail = Mail.builder().to(TO_ID).build();
+        given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.archiveMails(CHARACTER_ID, MAIL_IDS, true);
@@ -53,10 +60,10 @@ public class MailStatusUpdaterServiceTest {
     @Test
     public void testArchiveMailsShouldUpdate() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().characterId(TO_ID).build();
+        given(character.getCharacterId()).willReturn(TO_ID);
         when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(character);
 
-        Mail mail = Mail.builder().to(TO_ID).build();
+        given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.archiveMails(TO_ID, MAIL_IDS, true);
@@ -64,16 +71,16 @@ public class MailStatusUpdaterServiceTest {
         verify(characterQueryService).findByCharacterId(TO_ID);
         verify(mailQueryService).findMailById(MAIL_ID);
         verify(mailDao).save(mail);
-        assertThat(mail.getArchived()).isTrue();
+        verify(mail).setArchived(true);
     }
 
     @Test(expected = InvalidMailAccessException.class)
     public void testUpdateReadStatusShouldThrowExceptionWhenWrongId() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().characterId(CHARACTER_ID).build();
+        given(character.getCharacterId()).willReturn(CHARACTER_ID);
         when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
 
-        Mail mail = Mail.builder().to(TO_ID).build();
+        given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.updateReadStatus(MAIL_IDS, CHARACTER_ID, true);
@@ -82,10 +89,10 @@ public class MailStatusUpdaterServiceTest {
     @Test
     public void testUpdateReadStatusShouldUpdate() {
         //GIVEN
-        SkyXpCharacter character = SkyXpCharacter.builder().characterId(TO_ID).build();
+        given(character.getCharacterId()).willReturn(TO_ID);
         when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(character);
 
-        Mail mail = Mail.builder().to(TO_ID).build();
+        given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.updateReadStatus(MAIL_IDS, TO_ID, true);
@@ -93,6 +100,6 @@ public class MailStatusUpdaterServiceTest {
         verify(characterQueryService).findByCharacterId(TO_ID);
         verify(mailQueryService).findMailById(MAIL_ID);
         verify(mailDao).save(mail);
-        assertThat(mail.getRead()).isTrue();
+        verify(mail).setRead(true);
     }
 }

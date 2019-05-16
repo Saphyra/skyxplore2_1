@@ -9,17 +9,16 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.gamedata.entity.Extender;
-import com.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipTest {
@@ -39,12 +38,12 @@ public class EquippedShipTest {
     @Mock
     private SkyXpCharacter character;
 
-    @InjectMocks
     private EquippedShip underTest;
 
     @Before
     public void init() {
         underTest = EquippedShip.builder()
+            .shipId("")
             .shipId(EQUIPPED_SHIP_ID)
             .characterId(CHARACTER_ID)
             .shipType(SHIP_TYPE)
