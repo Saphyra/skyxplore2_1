@@ -49,6 +49,7 @@ window.Mapping = {
     GET_QUEUE: "factory/queue",
     INVITE_TO_LOBBY: "lobby/invitation/*",
     ITEMS_OF_CATEGORY: "categories/*",
+    KICK_FROM_LOBBY: "lobby/member/*",
     LOGIN: "login",
     LOGOUT: "logout",
     MARK_MAILS_READ: "mail/mark/read",

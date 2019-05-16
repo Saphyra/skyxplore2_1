@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
 import com.github.saphyra.skyxplore.lobby.message.domain.Message;
@@ -50,6 +51,10 @@ public class Lobby {
 
     public void removeMember(String characterId) {
         log.info("Removing character {} from lobby {}", characterId, lobbyId);
+        if (!members.contains(characterId)) {
+            throw new BadRequestException(characterId + " is not a member of lobby " + lobbyId);
+        }
+
         members.remove(characterId);
 
         events.add(

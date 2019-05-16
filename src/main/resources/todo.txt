@@ -35,7 +35,6 @@ Exception handling:
     - Return localized exception messages
 
 Lobby
-    - Kick from group
     - Start queueing
     - Transfer ownership
 Javadoc

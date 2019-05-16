@@ -67,6 +67,9 @@
 
                         const kickButton = document.createElement("BUTTON");
                             kickButton.innerHTML = Localization.getAdditionalContent("kick-member");
+                            kickButton.onclick = function(){
+                                kickFromLobby(character.characterId);
+                            }
                         buttonWrapper.appendChild(kickButton);
                     }
 
@@ -75,8 +78,20 @@
         }
     }
 
+    function kickFromLobby(characterId){
+        const request = new Request(HttpMethod.DELETE, Mapping.concat(Mapping.KICK_FROM_LOBBY, characterId));
+            request.processValidResponse = function(){
+                removeCharacter(characterId);
+                notificationService.showSuccess(MessageCode.getMessage("KICKED_FROM_LOBBY"));
+            }
+        dao.sendRequestAsync(request);
+    }
+
     function removeCharacter(characterId){
-        document.getElementById("members").removeChild(document.getElementById(createMemberId(characterId)));
+        const character = document.getElementById(createMemberId(characterId));
+        if(character){
+            document.getElementById("members").removeChild(character);
+        }
     }
 
     function createMemberId(characterId){
