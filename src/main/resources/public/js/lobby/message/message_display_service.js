@@ -30,6 +30,7 @@
 
             for(let mIndex in messages){
                 container.appendChild(createMessage(messages[mIndex]));
+                container.scrollTop = container.scrollHeight;
             }
 
             function createMessage(message){
