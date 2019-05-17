@@ -25,9 +25,6 @@ public class ProductView {
     @NonNull
     private final Integer constructionTime;
 
-    @NonNull
     private final Long startTime;
-
-    @NonNull
     private final Long endTime;
 }
