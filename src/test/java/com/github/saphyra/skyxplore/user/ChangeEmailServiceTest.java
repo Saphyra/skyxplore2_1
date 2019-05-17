@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +26,6 @@ public class ChangeEmailServiceTest {
     private static final String USER_ID = "user_id";
     private static final String FAKE_PASSWORD = "fake_password";
     private static final String HASHED_PASSWORD = "hashed_password";
-    private static final String EMAIL = "email";
 
     @Mock
     private PasswordService passwordService;
@@ -49,11 +47,15 @@ public class ChangeEmailServiceTest {
 
     private SkyXpCredentials credentials;
 
+    @Mock
+    private SkyXpUser user;
+
     @Before
     public void setUp() {
         credentials = SkyXpCredentials.builder()
             .userId(USER_ID)
             .password(HASHED_PASSWORD)
+            .userName("")
             .build();
     }
 
@@ -84,10 +86,6 @@ public class ChangeEmailServiceTest {
         //GIVEN
         ChangeEmailRequest request = new ChangeEmailRequest(NEW_EMAIL, PASSWORD);
 
-        SkyXpUser user = SkyXpUser.builder()
-            .email(EMAIL)
-            .build();
-
         when(userQueryService.isEmailExists(NEW_EMAIL)).thenReturn(false);
         when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
         when(userQueryService.getUserById(USER_ID)).thenReturn(user);
@@ -100,6 +98,6 @@ public class ChangeEmailServiceTest {
         verify(credentialsService).findByUserId(USER_ID);
         verify(userDao).save(user);
         verify(emailCache).invalidate(NEW_EMAIL);
-        assertThat(user.getEmail()).isEqualTo(NEW_EMAIL);
+        verify(user).setEmail(NEW_EMAIL);
     }
 }

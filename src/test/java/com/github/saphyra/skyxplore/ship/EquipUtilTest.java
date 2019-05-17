@@ -1,21 +1,23 @@
 package com.github.saphyra.skyxplore.ship;
 
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
-import com.github.saphyra.skyxplore.gamedata.entity.Extender;
-import com.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import com.github.saphyra.skyxplore.slot.SlotQueryService;
-import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
+import com.github.saphyra.skyxplore.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.gamedata.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import com.github.saphyra.skyxplore.slot.SlotQueryService;
+import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipUtilTest {
@@ -30,6 +32,12 @@ public class EquipUtilTest {
 
     @InjectMocks
     private EquipUtil underTest;
+
+    @Mock
+    private EquippedShip ship;
+
+    @Mock
+    private EquippedSlot slot;
 
     @Test
     public void testIsExtenderShouldReturnTrue() {
@@ -58,17 +66,13 @@ public class EquipUtilTest {
         //GIVEN
         String slotName = "imnotaslotname";
         //WHEN
-        underTest.getSlotByName(EquippedShip.builder().build(), slotName);
+        underTest.getSlotByName(ship, slotName);
     }
 
     @Test
     public void testSlotByNameShouldReturnDefenseSlotWhenDefense() {
         //GIVEN
-        EquippedShip ship = EquippedShip.builder()
-            .defenseSlotId(DEFENSE_SLOT_ID)
-            .build();
-        EquippedSlot slot = EquippedSlot.builder()
-            .slotId(DEFENSE_SLOT_ID).build();
+        given(ship.getDefenseSlotId()).willReturn(DEFENSE_SLOT_ID);
         when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, EquippedShipConstants.DEFENSE_SLOT_NAME);
@@ -79,12 +83,7 @@ public class EquipUtilTest {
     @Test
     public void testSlotByNameShouldReturnWeaponSlotWhenWeapon() {
         //GIVEN
-        EquippedShip ship = EquippedShip.builder()
-            .weaponSlotId(WEAPON_SLOT_ID)
-            .build();
-        EquippedSlot slot = EquippedSlot.builder()
-            .slotId(WEAPON_SLOT_ID)
-            .build();
+        given(ship.getWeaponSlotId()).willReturn(WEAPON_SLOT_ID);
         when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, EquippedShipConstants.WEAPON_SLOT_NAME);

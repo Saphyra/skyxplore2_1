@@ -2,6 +2,8 @@ package com.github.saphyra.skyxplore.slot.domain;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
@@ -18,19 +21,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedSlotTest {
-    private static final String CHARACTER_ID = "character_id";
     private static final String EQUIPPED_SLOT_ID = "equipped_slot_id";
     private static final String ITEM_1 = "item_1";
     private static final String ITEM_2 = "item_2";
+
+    @Mock
     private SkyXpCharacter character;
 
     private EquippedSlot underTest;
 
     @Before
     public void init() {
-        character = SkyXpCharacter.builder().characterId(CHARACTER_ID).build();
-
         underTest = EquippedSlot.builder()
+            .shipId("")
             .slotId(EQUIPPED_SLOT_ID)
             .frontSlot(0)
             .leftSlot(0)
@@ -67,8 +70,7 @@ public class EquippedSlotTest {
         //WHEN
         underTest.removeSlot(character, 1);
         //THEN
-        assertThat(character.getEquipments()).hasSize(4);
-        assertThat(character.getEquipments()).contains(ITEM_1);
+        verify(character, times(4)).addEquipment(ITEM_1);
 
         assertThat(underTest.getFrontSlot()).isEqualTo(1);
         assertThat(underTest.getLeftSlot()).isEqualTo(1);

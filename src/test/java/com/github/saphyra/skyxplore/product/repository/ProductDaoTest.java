@@ -1,22 +1,23 @@
 package com.github.saphyra.skyxplore.product.repository;
 
-import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.event.FactoryDeletedEvent;
-import com.github.saphyra.skyxplore.product.domain.Product;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.skyxplore.common.DateTimeUtil;
+import com.github.saphyra.skyxplore.event.FactoryDeletedEvent;
+import com.github.saphyra.skyxplore.product.domain.Product;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductDaoTest {
@@ -36,6 +37,9 @@ public class ProductDaoTest {
     @InjectMocks
     private ProductDao underTest;
 
+    @Mock
+    private Product product;
+
     @Test
     public void factoryDeletedEventListener() {
         //WHEN
@@ -51,7 +55,6 @@ public class ProductDaoTest {
         List<ProductEntity> entityList = Arrays.asList(entity);
         given(repository.getByFactoryId(FACTORY_ID)).willReturn(entityList);
 
-        Product product = Product.builder().build();
         List<Product> productList = Arrays.asList(product);
         given(converter.convertEntity(entityList)).willReturn(productList);
         //WHEN
@@ -70,7 +73,6 @@ public class ProductDaoTest {
         List<ProductEntity> entityList = Arrays.asList(entity);
         given(repository.getFinishedProducts(NOW_EPOCH)).willReturn(entityList);
 
-        Product product = Product.builder().build();
         List<Product> productList = Arrays.asList(product);
         given(converter.convertEntity(entityList)).willReturn(productList);
         //WHEN
@@ -86,7 +88,6 @@ public class ProductDaoTest {
         List<ProductEntity> entityList = Arrays.asList(entity);
         given(repository.getFirstOfQueue()).willReturn(entityList);
 
-        Product product = Product.builder().build();
         List<Product> productList = Arrays.asList(product);
         given(converter.convertEntity(entityList)).willReturn(productList);
         //WHEN

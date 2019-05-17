@@ -1,17 +1,18 @@
 package com.github.saphyra.skyxplore.ship;
 
-import com.github.saphyra.skyxplore.ship.domain.EquipRequest;
-import com.github.saphyra.skyxplore.ship.domain.ShipView;
-import com.github.saphyra.skyxplore.ship.domain.UnequipRequest;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.ship.domain.EquipRequest;
+import com.github.saphyra.skyxplore.ship.domain.ShipView;
+import com.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShipControllerTest {
@@ -35,6 +36,9 @@ public class ShipControllerTest {
     @InjectMocks
     private ShipController underTest;
 
+    @Mock
+    private ShipView shipView;
+
     @Test
     public void testEquipShouldCallFacade() {
         //GIVEN
@@ -56,7 +60,6 @@ public class ShipControllerTest {
     @Test
     public void testGetShipDataShouldCallFacadeAndReturnView() {
         //GIVEN
-        ShipView shipView = ShipView.builder().build();
         when(shipQueryService.getShipData(CHARACTER_ID)).thenReturn(shipView);
         //WHEN
         ShipView result = underTest.getShipData(CHARACTER_ID);

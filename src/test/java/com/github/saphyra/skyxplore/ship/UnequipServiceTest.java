@@ -1,18 +1,19 @@
 package com.github.saphyra.skyxplore.ship;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
-import com.github.saphyra.skyxplore.ship.domain.UnequipRequest;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.character.repository.CharacterDao;
+import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import com.github.saphyra.skyxplore.ship.domain.UnequipRequest;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UnequipServiceTest {
@@ -41,12 +42,14 @@ public class UnequipServiceTest {
     @InjectMocks
     private UnequipService underTest;
 
+    @Mock
+    private EquippedShip ship;
+
     @Test
     public void unequip_connector() {
         //GIVEN
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        EquippedShip ship = EquippedShip.builder().build();
         given(shipQueryService.getShipByCharacterId(CHARACTER_ID)).willReturn(ship);
 
         UnequipRequest request = new UnequipRequest(EquippedShipConstants.CONNECTOR_SLOT_NAME, EQUIPMENT_ID);
@@ -63,7 +66,6 @@ public class UnequipServiceTest {
         //GIVEN
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        EquippedShip ship = EquippedShip.builder().build();
         given(shipQueryService.getShipByCharacterId(CHARACTER_ID)).willReturn(ship);
 
         UnequipRequest request = new UnequipRequest(EQUIPMENT_SLOT_NAME, EQUIPMENT_ID);

@@ -1,18 +1,19 @@
 package com.github.saphyra.skyxplore.ship;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.ship.domain.EquipRequest;
-import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.character.repository.CharacterDao;
+import com.github.saphyra.skyxplore.ship.domain.EquipRequest;
+import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipServiceTest {
@@ -40,12 +41,14 @@ public class EquipServiceTest {
     @InjectMocks
     private EquipService underTest;
 
+    @Mock
+    private EquippedShip ship;
+
     @Test
     public void equip_connector() {
         //GIVEN
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        EquippedShip ship = EquippedShip.builder().build();
         given(shipQueryService.getShipByCharacterId(CHARACTER_ID)).willReturn(ship);
         EquipRequest request = new EquipRequest(EQUIPMENT_ID, EquippedShipConstants.CONNECTOR_SLOT_NAME);
         //WHEN
@@ -61,7 +64,6 @@ public class EquipServiceTest {
         //GIVEN
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        EquippedShip ship = EquippedShip.builder().build();
         given(shipQueryService.getShipByCharacterId(CHARACTER_ID)).willReturn(ship);
         EquipRequest request = new EquipRequest(EQUIPMENT_ID, "asd");
         //WHEN

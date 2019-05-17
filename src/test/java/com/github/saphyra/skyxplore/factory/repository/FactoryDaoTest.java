@@ -1,8 +1,11 @@
 package com.github.saphyra.skyxplore.factory.repository;
 
-import com.github.saphyra.skyxplore.event.CharacterDeletedEvent;
-import com.github.saphyra.skyxplore.event.FactoryDeletedEvent;
-import com.github.saphyra.skyxplore.factory.domain.Factory;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -11,11 +14,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import com.github.saphyra.skyxplore.event.FactoryDeletedEvent;
+import com.github.saphyra.skyxplore.factory.domain.Factory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FactoryDaoTest {
@@ -30,6 +31,9 @@ public class FactoryDaoTest {
 
     @Mock
     private ApplicationEventPublisher eventPublisher;
+
+    @Mock
+    private Factory factory;
 
     @InjectMocks
     private FactoryDao underTest;
@@ -56,7 +60,6 @@ public class FactoryDaoTest {
         Optional<FactoryEntity> entity = Optional.of(FactoryEntity.builder().build());
         when(factoryRepository.findByCharacterId(CHARACTER_ID)).thenReturn(entity);
 
-        Factory factory = Factory.builder().build();
         when(factoryConverter.convertEntity(entity)).thenReturn(Optional.of(factory));
         //WHEN
         Optional<Factory> result = underTest.findByCharacterId(CHARACTER_ID);

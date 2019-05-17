@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.ship;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +25,7 @@ public class ShipQueryServiceTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String DEFENSE_SLOT_ID = "defense_slot_id";
     private static final String WEAPON_SLOT_ID = "weapon_slot_id";
-    private static final String SHIP_TYPE = "ship_type";
+
     @Mock
     private EquippedShipDao equippedShipDao;
 
@@ -37,6 +38,18 @@ public class ShipQueryServiceTest {
     @InjectMocks
     private ShipQueryService underTest;
 
+    @Mock
+    private EquippedShip ship;
+
+    @Mock
+    private EquippedSlot defenseSlot;
+
+    @Mock
+    private EquippedSlot weaponSlot;
+
+    @Mock
+    private ShipView shipView;
+
     @Test(expected = ShipNotFoundException.class)
     public void testGetShipByCharacterIdShouldThrowExceptionWhenNull() {
         //GIVEN
@@ -48,7 +61,6 @@ public class ShipQueryServiceTest {
     @Test
     public void testGetShipByCharacterIdShouldQueryAndReturn() {
         //GIVEN
-        EquippedShip ship = EquippedShip.builder().build();
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
         //WHEN
         EquippedShip result = underTest.getShipByCharacterId(CHARACTER_ID);
@@ -60,24 +72,13 @@ public class ShipQueryServiceTest {
     @Test
     public void testGetShipDataShouldReturn() {
         //GIVEN
-        EquippedShip ship = EquippedShip.builder()
-            .defenseSlotId(DEFENSE_SLOT_ID)
-            .weaponSlotId(WEAPON_SLOT_ID)
-            .build();
+        given(ship.getDefenseSlotId()).willReturn(DEFENSE_SLOT_ID);
+        given(ship.getWeaponSlotId()).willReturn(WEAPON_SLOT_ID);
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
 
-        EquippedSlot defenseSlot = EquippedSlot.builder()
-            .slotId(DEFENSE_SLOT_ID)
-            .build();
-        EquippedSlot weaponSlot = EquippedSlot.builder()
-            .slotId(WEAPON_SLOT_ID)
-            .build();
         when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(defenseSlot);
         when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
 
-        ShipView shipView = ShipView.builder()
-            .shipType(SHIP_TYPE)
-            .build();
         when(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot)).thenReturn(shipView);
 
         //WHEN

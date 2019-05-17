@@ -1,8 +1,11 @@
 package com.github.saphyra.skyxplore.ship.repository;
 
-import com.github.saphyra.skyxplore.event.CharacterDeletedEvent;
-import com.github.saphyra.skyxplore.event.ShipDeletedEvent;
-import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -11,11 +14,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.event.CharacterDeletedEvent;
+import com.github.saphyra.skyxplore.event.ShipDeletedEvent;
+import com.github.saphyra.skyxplore.ship.domain.EquippedShip;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquippedShipDaoTest {
@@ -32,6 +33,9 @@ public class EquippedShipDaoTest {
 
     @InjectMocks
     private EquippedShipDao underTest;
+
+    @Mock
+    private EquippedShip equippedShip;
 
     @Test
     public void testDeleteByCharacterIdShouldDelete() {
@@ -56,7 +60,6 @@ public class EquippedShipDaoTest {
         Optional<EquippedShipEntity> equippedShipEntity = Optional.of(EquippedShipEntity.builder().build());
         when(equippedShipRepository.findByCharacterId(CHARACTER_ID)).thenReturn(equippedShipEntity);
 
-        EquippedShip equippedShip = EquippedShip.builder().build();
         when(equippedShipConverter.convertEntity(equippedShipEntity)).thenReturn(Optional.of(equippedShip));
         //WHEN
         Optional<EquippedShip> result = underTest.findShipByCharacterId(CHARACTER_ID);

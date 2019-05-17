@@ -4,12 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 
-import com.github.saphyra.skyxplore.ship.domain.SlotView;
-import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.skyxplore.ship.domain.SlotView;
+import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SlotViewConverterTest {
@@ -28,6 +29,8 @@ public class SlotViewConverterTest {
     @Test
     public void tesConvertShouldReturnView() {
         EquippedSlot slot = EquippedSlot.builder()
+            .slotId("")
+            .shipId("")
             .frontSlot(FRONT_SLOT)
             .leftSlot(LEFT_SLOT)
             .rightSlot(RIGHT_SLOT)

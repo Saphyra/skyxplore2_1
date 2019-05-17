@@ -1,18 +1,19 @@
 package com.github.saphyra.skyxplore.slot;
 
-import com.github.saphyra.skyxplore.common.exception.EquippedSlotNotFoundException;
-import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
-import com.github.saphyra.skyxplore.slot.repository.SlotDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
+import com.github.saphyra.skyxplore.common.exception.EquippedSlotNotFoundException;
+import com.github.saphyra.skyxplore.slot.domain.EquippedSlot;
+import com.github.saphyra.skyxplore.slot.repository.SlotDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SlotQueryServiceTest {
@@ -23,8 +24,11 @@ public class SlotQueryServiceTest {
     @InjectMocks
     private SlotQueryService underTest;
 
+    @Mock
+    private EquippedSlot slot;
+
     @Test(expected = EquippedSlotNotFoundException.class)
-    public void findBySlotId_notFound(){
+    public void findBySlotId_notFound() {
         //GIVEN
         given(slotDao.findById(SLOT_ID)).willReturn(Optional.empty());
         //WHEN
@@ -32,9 +36,8 @@ public class SlotQueryServiceTest {
     }
 
     @Test
-    public void findBySlotId(){
+    public void findBySlotId() {
         //GIVEN
-        EquippedSlot slot = EquippedSlot.builder().build();
         given(slotDao.findById(SLOT_ID)).willReturn(Optional.of(slot));
         //WHEN
         EquippedSlot result = underTest.findSlotById(SLOT_ID);

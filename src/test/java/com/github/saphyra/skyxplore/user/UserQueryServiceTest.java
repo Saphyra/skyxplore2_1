@@ -1,19 +1,20 @@
 package com.github.saphyra.skyxplore.user;
 
-import com.github.saphyra.skyxplore.common.exception.UserNotFoundException;
-import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
-import com.github.saphyra.skyxplore.user.repository.user.UserDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.skyxplore.common.exception.UserNotFoundException;
+import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
+import com.github.saphyra.skyxplore.user.repository.user.UserDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserQueryServiceTest {
@@ -26,6 +27,9 @@ public class UserQueryServiceTest {
     @InjectMocks
     private UserQueryService underTest;
 
+    @Mock
+    private SkyXpUser user;
+
     @Test(expected = UserNotFoundException.class)
     public void testGetUserByIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
@@ -37,7 +41,6 @@ public class UserQueryServiceTest {
     @Test
     public void testGetUserByIdShouldQueryAndReturn() {
         //GIVEN
-        SkyXpUser user = SkyXpUser.builder().build();
         when(userDao.findById(USER_ID)).thenReturn(Optional.of(user));
         //WHEN
         SkyXpUser result = underTest.getUserById(USER_ID);
@@ -49,7 +52,6 @@ public class UserQueryServiceTest {
     @Test
     public void testIsEmailExists() {
         //GIVEN
-        SkyXpUser user = SkyXpUser.builder().build();
         when(userDao.findUserByEmail(EMAIL)).thenReturn(Optional.of(user));
         //WHEN
         boolean result = underTest.isEmailExists(EMAIL);

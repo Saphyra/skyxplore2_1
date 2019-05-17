@@ -1,5 +1,19 @@
 package com.github.saphyra.skyxplore.product.factory;
 
+import static com.github.saphyra.skyxplore.product.factory.FinishProductService.CATEGORY_MATERIAL;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
+import java.util.Arrays;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.character.repository.CharacterDao;
@@ -11,19 +25,6 @@ import com.github.saphyra.skyxplore.gamedata.GameDataFacade;
 import com.github.saphyra.skyxplore.gamedata.entity.GeneralDescription;
 import com.github.saphyra.skyxplore.product.domain.Product;
 import com.github.saphyra.skyxplore.product.repository.ProductDao;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static com.github.saphyra.skyxplore.product.factory.FinishProductService.CATEGORY_MATERIAL;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -57,15 +58,20 @@ public class FinishProductServiceTest {
     @InjectMocks
     private FinishProductService underTest;
 
+    @Mock
     private Product finishedProduct;
+
+    @Mock
+    private Factory factory;
+
+    @Mock
+    private SkyXpCharacter character;
 
     @Before
     public void setUp() {
-        finishedProduct = Product.builder()
-            .factoryId(FACTORY_ID)
-            .elementId(ITEM_ID)
-            .amount(AMOUNT)
-            .build();
+        given(finishedProduct.getFactoryId()).willReturn(FACTORY_ID);
+        given(finishedProduct.getElementId()).willReturn(ITEM_ID);
+        given(finishedProduct.getAmount()).willReturn(AMOUNT);
         given(productDao.getFinishedProducts()).willReturn(Arrays.asList(finishedProduct));
         given(gameDataFacade.getData(ITEM_ID)).willReturn(itemData);
     }
@@ -75,16 +81,15 @@ public class FinishProductServiceTest {
         //GIVEN
         given(itemData.getCategory()).willReturn(CATEGORY_MATERIAL);
 
-        Factory factory = Factory.builder()
-            .materials(new Materials())
-            .build();
+        Materials materials = new Materials();
+        given(factory.getMaterials()).willReturn(materials);
         given(factoryQueryService.findByFactoryId(FACTORY_ID)).willReturn(factory);
         //WHEN
         underTest.finishProducts();
         //THEN
         verify(productDao).delete(finishedProduct);
         verify(factoryDao).save(factory);
-        assertThat(factory.getMaterials().get(ITEM_ID)).isEqualTo(AMOUNT);
+        assertThat(materials.get(ITEM_ID)).isEqualTo(AMOUNT);
     }
 
     @Test
@@ -92,18 +97,15 @@ public class FinishProductServiceTest {
         //GIVEN
         given(itemData.getCategory()).willReturn("asd");
 
-        Factory factory = Factory.builder()
-            .characterId(CHARACTER_ID)
-            .build();
+        given(factory.getCharacterId()).willReturn(CHARACTER_ID);
         given(factoryQueryService.findByFactoryId(FACTORY_ID)).willReturn(factory);
 
-        SkyXpCharacter character = SkyXpCharacter.builder().build();
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
         //WHEN
         underTest.finishProducts();
         //THEN
         verify(productDao).delete(finishedProduct);
         verify(characterDao).save(character);
-        assertThat(character.getEquipments()).containsExactlyInAnyOrder(ITEM_ID, ITEM_ID, ITEM_ID);
+        verify(character).addEquipments(ITEM_ID, 3);
     }
 }
