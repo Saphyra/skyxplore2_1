@@ -45,6 +45,12 @@
                     $("#owner-control-panel").hide();
                     eventProcessor.processEvent(new Event(events.LOAD_LOBBY));
                 break;
+                case "SET_READY":
+                    eventProcessor.processEvent(new Event(events.SET_READY, event.data));
+                break;
+                case "SET_UNREADY":
+                    eventProcessor.processEvent(new Event(events.SET_UNREADY, event.data));
+                break;
                 default:
                     throwException("IllegalArgument", event.eventType + " is not supported eventType");
                 break;

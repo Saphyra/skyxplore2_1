@@ -1,19 +1,19 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.CharacterViewQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyMember;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyMemberView;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -23,11 +23,19 @@ class LobbyMemberHandler {
     private final CharacterViewQueryService characterViewQueryService;
     private final LobbyQueryService lobbyQueryService;
 
-    List<CharacterView> getMembers(String characterId) {
+    List<LobbyMemberView> getMembers(String characterId) {
         return lobbyQueryService.findByCharacterIdValidated(characterId)
             .getMembers().stream()
-            .map(characterViewQueryService::findByCharacterId)
+            .map(this::convertToView)
             .collect(Collectors.toList());
+    }
+
+    private LobbyMemberView convertToView(LobbyMember lobbyMember) {
+        return LobbyMemberView.builder()
+            .characterId(lobbyMember.getCharacterId())
+            .characterName(characterViewQueryService.findByCharacterId(lobbyMember.getCharacterId()).getCharacterName())
+            .isReady(lobbyMember.isReady())
+            .build();
     }
 
     @EventListener

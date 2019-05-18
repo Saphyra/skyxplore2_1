@@ -57,6 +57,7 @@ window.Mapping = {
     NUMBER_OF_FRIEND_REQUEST: "notification/friend-request",
     NUMBER_OF_NOTIFICATIONS: "notification",
     NUMBER_OF_UNREAD_MAILS: "notification/unread-mail",
+    READY_CHARACTER: "lobby/ready",
     REGISTER: "user",
     RENAME_CHARACTER: "character",
     RESTORE_MAILS: "mail/restore",
@@ -66,6 +67,7 @@ window.Mapping = {
     SEND_MESSAGE: "lobby/message",
     TRANSFER_OWNERSHIP: "lobby/owner/*",
     UNEQUIP_ITEM: "ship/equipment",
+    UNREADY_CHARACTER: "lobby/unready",
     USERNAME_EXISTS: "user/name",
     
     concat: function(path, id){

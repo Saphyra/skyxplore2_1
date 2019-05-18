@@ -1,10 +1,5 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.character.CharacterViewQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyEvent;
@@ -12,6 +7,10 @@ import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyEventView;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ class LobbyViewQueryService {
 
     LobbyView getLobbyView(String characterId) {
         Lobby lobby = lobbyQueryService.findByCharacterIdValidated(characterId);
-        lobby.getEvents().forEach(lobbyEvent -> lobbyEvent.adQueriedBy(characterId));
+        lobby.getEvents().forEach(lobbyEvent -> lobbyEvent.addQueriedBy(characterId));
         return LobbyView.builder()
             .gameMode(lobby.getGameMode())
             .data(lobby.getData())
@@ -35,7 +34,7 @@ class LobbyViewQueryService {
         Lobby lobby = lobbyQueryService.findByCharacterIdValidated(characterId);
         return lobby.getEvents().stream()
             .filter(lobbyEvent -> !lobbyEvent.getQueriedBy().contains(characterId))
-            .peek(lobbyEvent -> lobbyEvent.adQueriedBy(characterId))
+            .peek(lobbyEvent -> lobbyEvent.addQueriedBy(characterId))
             .map(this::createLobbyEventView)
             .collect(Collectors.toList());
     }

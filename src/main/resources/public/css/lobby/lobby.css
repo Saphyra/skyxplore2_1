@@ -33,6 +33,14 @@
     text-align: center;
 }
 
+.owner{
+    border-color: red;
+}
+
+.ready-member{
+    background: rgba(0, 255, 0, 0.5);
+}
+
 .member-name{
     border-bottom: 1px ridge white;
     font-size: 1.25rem;

@@ -3,6 +3,10 @@
 
     events.DISPLAY_CHARACTERS = "display_characters";
     events.MEMBER_LEFT = "member_left";
+    events.READY_CHARACTER = "ready_character";
+    events.UNREADY_CHARACTER = "unready_character";
+    events.SET_READY = "set_ready";
+    events.SET_UNREADY = "set_unready";
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOBBY_LOADED},
@@ -17,6 +21,42 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.MEMBER_LEFT},
         function(event){removeCharacter(event.getPayload())}
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.READY_CHARACTER},
+        readyCharacter
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.UNREADY_CHARACTER},
+        unreadyCharacter
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.SET_READY},
+        function(event){
+            const characterId = event.getPayload().characterId;
+            document.getElementById(createMemberId(characterId)).classList.add("ready-member");
+
+            const readyButton = document.getElementById(createReadyButtonId(characterId));
+            if(readyButton){
+                enchantReadyButton(readyButton, true);
+            }
+        }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.SET_UNREADY},
+        function(event){
+            const characterId = event.getPayload().characterId;
+            document.getElementById(createMemberId(characterId)).classList.remove("ready-member");
+
+            const readyButton = document.getElementById(createReadyButtonId(characterId));
+            if(readyButton){
+                enchantReadyButton(readyButton, false);
+            }
+        }
     ));
 
     function loadMembers(){
@@ -44,6 +84,11 @@
             const container = document.createElement("DIV");
                 container.id = createMemberId(character.characterId);
                 container.classList.add("member");
+
+                if(character.ready){
+                    container.classList.add("ready-member");
+                }
+
                 if(character.characterId === lobbyDetails.ownerId){
                     container.classList.add("owner");
                 }
@@ -58,6 +103,12 @@
                         const profileButton = document.createElement("BUTTON");
                             profileButton.innerHTML = Localization.getAdditionalContent("visit-profile");
                         buttonWrapper.appendChild(profileButton);
+                    }else{
+                        const readyButton = document.createElement("BUTTON");
+                            readyButton.id = createReadyButtonId(character.characterId);
+
+                            enchantReadyButton(readyButton, character.ready);
+                        buttonWrapper.appendChild(readyButton);
                     }
 
                     if(lobbyDetails.ownerId == characterIdQueryService.getCharacterId() && character.characterId !== characterIdQueryService.getCharacterId()){
@@ -79,6 +130,15 @@
             container.appendChild(buttonWrapper);
             return container;
         }
+    }
+
+    function enchantReadyButton(readyButton, ready){
+        const contentKey = ready ? "unready-button" : "ready-button";
+            readyButton.innerHTML = Localization.getAdditionalContent(contentKey);
+            readyButton.onclick = function(){
+                const eventName = ready ? events.UNREADY_CHARACTER : events.READY_CHARACTER;
+                eventProcessor.processEvent(new Event(eventName));
+            }
     }
 
     function transferOwnership(characterId){
@@ -106,7 +166,27 @@
         }
     }
 
+    function readyCharacter(){
+        const request = new Request(HttpMethod.POST, Mapping.READY_CHARACTER);
+            request.processValidResponse = function(){
+                eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
+            }
+        dao.sendRequestAsync(request);
+    }
+
+    function unreadyCharacter(){
+        const request = new Request(HttpMethod.POST, Mapping.UNREADY_CHARACTER);
+            request.processValidResponse = function(){
+                eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
+            }
+        dao.sendRequestAsync(request);
+    }
+
     function createMemberId(characterId){
         return "member-" + characterId;
+    }
+
+    function createReadyButtonId(characterId){
+        return "ready-" + characterId;
     }
 })();

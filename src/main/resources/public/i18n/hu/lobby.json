@@ -72,6 +72,8 @@
     "visit-profile": "Profil",
     "invite": "Meghívás",
     "kick-member": "Kirúgás",
-    "transfer-ownership": "Vezetőség átadása"
+    "transfer-ownership": "Vezetőség átadása",
+    "ready-button": "Kész",
+    "unready-button": "Nincs kész"
   }
 }

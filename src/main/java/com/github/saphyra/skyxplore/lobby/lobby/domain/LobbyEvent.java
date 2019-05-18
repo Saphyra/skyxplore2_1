@@ -25,7 +25,7 @@ public class LobbyEvent {
     @Builder.Default
     private final List<String> queriedBy = new Vector<>();
 
-    public void adQueriedBy(String characterId) {
+    public void addQueriedBy(String characterId) {
         queriedBy.add(characterId);
     }
 
