@@ -10,7 +10,18 @@
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.LOBBY_LOADED},
-        loadMembers
+        function(){
+            document.getElementById("members").innerHTML = "";
+            const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY_MEMBERS);
+                request.convertResponse = function(response){
+                    return JSON.parse(response.body);
+                }
+                request.processValidResponse = function(characters){
+                    eventProcessor.processEvent(new Event(events.DISPLAY_CHARACTERS, characters));
+                }
+
+            dao.sendRequestAsync(request);
+        }
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
@@ -25,12 +36,24 @@
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.READY_CHARACTER},
-        readyCharacter
+        function readyCharacter(){
+            const request = new Request(HttpMethod.POST, Mapping.READY_CHARACTER);
+                request.processValidResponse = function(){
+                    eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
+                }
+            dao.sendRequestAsync(request);
+        }
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.UNREADY_CHARACTER},
-        unreadyCharacter
+        function unreadyCharacter(){
+            const request = new Request(HttpMethod.POST, Mapping.UNREADY_CHARACTER);
+                request.processValidResponse = function(){
+                    eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
+                }
+            dao.sendRequestAsync(request);
+        }
     ));
 
     eventProcessor.registerProcessor(new EventProcessor(
@@ -58,19 +81,6 @@
             }
         }
     ));
-
-    function loadMembers(){
-        document.getElementById("members").innerHTML = "";
-        const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY_MEMBERS);
-            request.convertResponse = function(response){
-                return JSON.parse(response.body);
-            }
-            request.processValidResponse = function(characters){
-                eventProcessor.processEvent(new Event(events.DISPLAY_CHARACTERS, characters));
-            }
-
-        dao.sendRequestAsync(request);
-    }
 
     function displayCharacters(characters){
         const container = document.getElementById("members");
@@ -164,22 +174,6 @@
         if(character){
             document.getElementById("members").removeChild(character);
         }
-    }
-
-    function readyCharacter(){
-        const request = new Request(HttpMethod.POST, Mapping.READY_CHARACTER);
-            request.processValidResponse = function(){
-                eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
-            }
-        dao.sendRequestAsync(request);
-    }
-
-    function unreadyCharacter(){
-        const request = new Request(HttpMethod.POST, Mapping.UNREADY_CHARACTER);
-            request.processValidResponse = function(){
-                eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
-            }
-        dao.sendRequestAsync(request);
     }
 
     function createMemberId(characterId){
