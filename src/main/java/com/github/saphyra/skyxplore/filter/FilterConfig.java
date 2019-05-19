@@ -15,19 +15,11 @@ class FilterConfig {
     }
 
     @Bean
-    FilterRegistrationBean<AlreadyInLobbyFilter> alreadyInLobbyFilterBean(AlreadyInLobbyFilter alreadyInLobbyFilter) {
-        FilterRegistrationBean<AlreadyInLobbyFilter> alreadyInLobbyFilterBean = new FilterRegistrationBean<>();
-        alreadyInLobbyFilterBean.setFilter(alreadyInLobbyFilter);
-        alreadyInLobbyFilterBean.setOrder(20);
-        return alreadyInLobbyFilterBean;
-    }
-
-    @Bean
-    FilterRegistrationBean<LobbyAccessFilter> lobbyAccessFilterBean(LobbyAccessFilter lobbyAccessFilter) {
-        FilterRegistrationBean<LobbyAccessFilter> lobbyAccessFilterBean = new FilterRegistrationBean<>();
-        lobbyAccessFilterBean.setFilter(lobbyAccessFilter);
-        lobbyAccessFilterBean.setOrder(25);
-        return lobbyAccessFilterBean;
+    FilterRegistrationBean<LobbyFilter> alreadyInLobbyFilterBean(LobbyFilter lobbyFilter) {
+        FilterRegistrationBean<LobbyFilter> LobbyFilterBean = new FilterRegistrationBean<>();
+        LobbyFilterBean.setFilter(lobbyFilter);
+        LobbyFilterBean.setOrder(20);
+        return LobbyFilterBean;
     }
 
     @Bean

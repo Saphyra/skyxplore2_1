@@ -52,6 +52,9 @@ public class Lobby {
     @NonNull
     private final LobbyContext lobbyContext;
 
+    @Builder.Default
+    private volatile boolean inQueue = false;
+
     public void removeMember(String characterId) {
         log.info("Removing character {} from lobby {}", characterId, lobbyId);
         Optional<LobbyMember> lobbyMember = findMemberByCharacterId(characterId);

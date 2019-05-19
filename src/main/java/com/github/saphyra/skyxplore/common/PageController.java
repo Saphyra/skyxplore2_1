@@ -19,7 +19,8 @@ public class PageController {
     public static final String OVERVIEW_MAPPING = "/overview";
     private static final String SETTINGS_MAPPING = "/account";
     private static final String SHOP_MAPPING = "/shop";
-    public static final String LOBBY_MAPPING = "/lobby-page";
+    public static final String LOBBY_PAGE_MAPPING = "/lobby-page";
+    public static final String LOBBY_QUEUE_MAPPING = "/lobby-queue";
 
     @GetMapping(CHARACTER_SELECT_MAPPING)
     String characterSelect() {
@@ -75,9 +76,9 @@ public class PageController {
         return "shop";
     }
 
-    @GetMapping(LOBBY_MAPPING)
+    @GetMapping(LOBBY_PAGE_MAPPING)
     String lobby() {
-        log.info("Request arrived to {}", LOBBY_MAPPING);
+        log.info("Request arrived to {}", LOBBY_PAGE_MAPPING);
         return "lobby";
     }
 }
