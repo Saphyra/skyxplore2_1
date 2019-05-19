@@ -3,6 +3,7 @@ package com.github.saphyra.skyxplore.lobby.lobby.domain;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
+import com.github.saphyra.exceptionhandling.exception.PreconditionFailedException;
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyContext;
 import com.github.saphyra.skyxplore.lobby.message.domain.Message;
@@ -12,6 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -53,7 +55,12 @@ public class Lobby {
     private final LobbyContext lobbyContext;
 
     @Builder.Default
+    @Setter(AccessLevel.NONE)
     private volatile boolean inQueue = false;
+
+    @Builder.Default
+    @Setter(AccessLevel.NONE)
+    private volatile boolean autoFill = true;
 
     public void removeMember(String characterId) {
         log.info("Removing character {} from lobby {}", characterId, lobbyId);
@@ -157,5 +164,22 @@ public class Lobby {
         return findMemberByCharacterId(characterId)
             .orElseThrow(() -> new NotFoundException(characterId + " is not the member of lobby " + lobbyId));
 
+    }
+
+    public void startQueueing(Boolean autoFill) {
+        members.forEach(lobbyMember -> {
+            if (!lobbyMember.isReady()) {
+                throw new PreconditionFailedException(lobbyMember.getCharacterId() + " is not ready.");
+            }
+        });
+
+        inQueue = true;
+        this.autoFill = autoFill;
+
+        events.add(
+            LobbyEvent.builder()
+                .eventType(LobbyEventType.START_QUEUE)
+                .build()
+        );
     }
 }

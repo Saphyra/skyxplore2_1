@@ -75,7 +75,7 @@
                 <INPUT type="checkbox" id="autofill-enabled" checked>
                 <SPAN id="autofill-label"></SPAN>
             </LABEL>
-            <BUTTON id="start-queueing"></BUTTON>
+            <BUTTON id="start-queueing" onclick="eventProcessor.processEvent(new Event(events.START_QUEUEING))"></BUTTON>
         </SPAN>
     </FOOTER>
 </DIV>

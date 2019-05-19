@@ -12,6 +12,7 @@
     events.EXIT_LOBBY = "exit_lobby";
     events.LOAD_LOBBY = "load_lobby";
     events.LOBBY_LOADED = "lobby_loaded";
+    events.START_QUEUEING = "start_queueing";
 
     $(document).ready(init);
 
@@ -33,51 +34,56 @@
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.LOAD_LOBBY},
-        loadLobby
-    ))
+        function(){
+            const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY);
+                request.convertResponse = function(response){
+                    return JSON.parse(response.body);
+                }
+                request.processValidResponse = function(lobby){
+                    lobbyDetails = lobby;
+                    eventProcessor.processEvent(new Event(events.LOBBY_LOADED));
+                }
+            dao.sendRequestAsync(request);
+        }
+    ));
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.LOBBY_LOADED},
-        displayGameDetails
-    ))
+        function(){
+            document.getElementById("game-mode").innerHTML = gameModeLocalization.getLocalization(lobbyDetails.gameMode);
+            if(lobbyDetails.data){
+                $("#game-details-container").show();
+                document.getElementById("game-details-name").innerHTML = gameModeTranslation.getDataName(lobbyDetails.gameMode);
+                document.getElementById("game-details-value").innerHTML = gameModeTranslation.translateData(lobbyDetails.gameMode, lobbyDetails.data);
+            }else{
+                $("#game-details-container").hide();
+            }
+        }
+    ));
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType === events.EXIT_LOBBY},
-        exitFromLobby
-    ))
+        function(){
+            const request = new Request(HttpMethod.DELETE, Mapping.EXIT_FROM_LOBBY);
+                request.processValidResponse = function(){
+                    sessionStorage.successMessage = MessageCode.getMessage("EXITED_FROM_LOBBY");
+                    window.location.href = "/overview";
+                }
 
-    function exitFromLobby(){
-        const request = new Request(HttpMethod.DELETE, Mapping.EXIT_FROM_LOBBY);
-            request.processValidResponse = function(){
-                sessionStorage.successMessage = MessageCode.getMessage("EXITED_FROM_LOBBY");
-                window.location.href = "/overview";
-            }
-
-        dao.sendRequestAsync(request);
-    }
-
-    function loadLobby(){
-        const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY);
-            request.convertResponse = function(response){
-                return JSON.parse(response.body);
-            }
-            request.processValidResponse = function(lobby){
-                lobbyDetails = lobby;
-                eventProcessor.processEvent(new Event(events.LOBBY_LOADED));
-            }
-        dao.sendRequestAsync(request);
-    }
-
-    function displayGameDetails(){
-        document.getElementById("game-mode").innerHTML = gameModeLocalization.getLocalization(lobbyDetails.gameMode);
-        if(lobbyDetails.data){
-            $("#game-details-container").show();
-            document.getElementById("game-details-name").innerHTML = gameModeTranslation.getDataName(lobbyDetails.gameMode);
-            document.getElementById("game-details-value").innerHTML = gameModeTranslation.translateData(lobbyDetails.gameMode, lobbyDetails.data);
-        }else{
-            $("#game-details-container").hide();
+            dao.sendRequestAsync(request);
         }
-    }
+    ));
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.START_QUEUEING},
+        function(){
+            const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.START_QUEUEING, $("#autofill-enabled").val()));
+                request.processValidResponse = function(){
+                    eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
+                }
+            dao.sendRequestAsync(request);
+        }
+    ));
 
     function init(){
         eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "lobby"));

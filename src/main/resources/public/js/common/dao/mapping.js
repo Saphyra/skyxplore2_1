@@ -65,6 +65,7 @@ window.Mapping = {
     SELECT_CHARACTER: "character/*",
     SEND_MAIL: "mail",
     SEND_MESSAGE: "lobby/message",
+    START_QUEUEING: "lobby/queue/*",
     TRANSFER_OWNERSHIP: "lobby/owner/*",
     UNEQUIP_ITEM: "ship/equipment",
     UNREADY_CHARACTER: "lobby/unready",

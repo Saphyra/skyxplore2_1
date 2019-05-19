@@ -81,4 +81,10 @@ public class PageController {
         log.info("Request arrived to {}", LOBBY_PAGE_MAPPING);
         return "lobby";
     }
+
+    @GetMapping(LOBBY_QUEUE_MAPPING)
+    String lobbyQueue(){
+        log.info("Request arrived to {}", LOBBY_QUEUE_MAPPING);
+        return "lobby_queue";
+    }
 }

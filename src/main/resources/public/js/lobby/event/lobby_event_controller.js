@@ -51,6 +51,9 @@
                 case "SET_UNREADY":
                     eventProcessor.processEvent(new Event(events.SET_UNREADY, event.data));
                 break;
+                case "START_QUEUE":
+                    window.location.href = "lobby-queue";
+                break;
                 default:
                     throwException("IllegalArgument", event.eventType + " is not supported eventType");
                 break;

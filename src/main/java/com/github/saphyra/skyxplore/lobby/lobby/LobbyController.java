@@ -33,11 +33,13 @@ class LobbyController {
     private static final String GET_LOBBY_MEMBERS_MAPPING = "lobby/member";
     private static final String KICK_MEMBER_MAPPING = "lobby/member/{memberId}";
     private static final String SET_READY_MAPPING = "lobby/ready";
+    private static final String START_QUEUE_MAPPING = "lobby/queue/{autoFill}";
     private static final String TRANSFER_OWNERSHIP_MAPPING = "lobby/owner/{newOwnerId}";
     private static final String SET_UNREADY_MAPPING = "lobby/unready";
 
     private final LobbyCreatorService lobbyCreatorService;
     private final LobbyMemberHandler lobbyMemberHandler;
+    private final LobbyQueueService lobbyQueueService;
     private final LobbyViewQueryService lobbyViewQueryService;
     private final KickFromLobbyService kickFromLobbyService;
     private final MemberStatusService memberStatusService;
@@ -94,6 +96,15 @@ class LobbyController {
     void setUnready(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to set himself unready.");
         memberStatusService.setUnready(characterId);
+    }
+
+    @PostMapping(START_QUEUE_MAPPING)
+    void startQueue(
+        @CookieValue(COOKIE_CHARACTER_ID) String characterId,
+        @PathVariable("autoFill") Boolean autoFill
+    ){
+        log.info("{} wants to start queueing", characterId);
+        lobbyQueueService.startQueue(characterId, autoFill);
     }
 
     @PostMapping(TRANSFER_OWNERSHIP_MAPPING)

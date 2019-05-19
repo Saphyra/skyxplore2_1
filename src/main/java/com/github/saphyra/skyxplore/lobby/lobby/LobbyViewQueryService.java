@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -42,7 +43,11 @@ class LobbyViewQueryService {
     private LobbyEventView createLobbyEventView(LobbyEvent lobbyEvent) {
         return LobbyEventView.builder()
             .eventType(lobbyEvent.getEventType())
-            .data(characterViewQueryService.findByCharacterId(lobbyEvent.getData().toString()))
+            .data(Optional.ofNullable(lobbyEvent.getData())
+                .map(Object::toString)
+                .map(characterViewQueryService::findByCharacterId)
+                .orElse(null)
+            )
             .build();
     }
 }
