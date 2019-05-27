@@ -302,9 +302,56 @@ community
             Operation can be selected from a dropdown menu
             There are different operations for each tab.
             The selected operation should be executed on the selected mails when clicking on "Execute bulk operation" button.
+        Notifications
+            Number of friend requests and number of unread mails should be displayed on the community page with red highlight.
+            The summarized number of friend requests and number of unread mails should be displayed on overview page.
+            These numbers should be updated in every 20 seconds automatically, or when user accepts/declines a friend request, or changes a mail's read state.
 
 hangar
-    not implemented yet
+    Available game modes are shown on this page.
+    Some game modes have additional properties, what can be set up by selecting it from a dropdown menu.
+    Clicking on the tile of the selected game mode, the user should be redirected to a new lobby page, with the correct details.
 
 Lobby
-    not implemented yet
+    Group members
+        The current members of the group should be displayed in the middle part of the screen.
+        There should be one and only one group owner, and some other group members.
+        Total amount of group members should not exceed a certain number, depends on the game mode and details.
+        Each member can set his ready state individually.
+            Ready members are highlighted with green background.
+        Group owner can start the match queueing only when all the members are marked as ready.
+        Privileges of group owner:
+            - Starting match queueing, when all the group members are ready
+            - Set "Auto-fill" group (when there are less member in the group than the max group size)
+            - Kick members from the group
+            - Transfer ownership to an other group member
+    Invite group members
+        The right side of the screen is for the member invitation.
+        Active friends, who are not in lobby should be appear here.
+            The list can be refreshed by clicking the "Refresh" button.
+        Members can search invitable characters by name.
+            Search result should show ACTIVE characters with name containing the keyword, except
+                - Characters already in lobby
+                - Blocked characters
+        When invitation is sent, a popup should appear at the bottom right of the invited character's screen.
+            Invitation can be accepted/declined.
+            Invited member should be redirected to the lobby, when he accepts the invitation.
+        You can send only 1 invitation in 10 seconds for the same character.
+        Invitations should disappear after a certain time automatically.
+    Chatting
+        On the left side members can send messages to each other.
+        Messages sent by you should appear on the right side, messages send by the other group members should appear on the left side.
+    Leaving the lobby
+        Any member can leave the lobby by clicking "Leave lobby" button.
+        If the owner leaves the lobby, ownership should be transferred to a random member.
+        If a member logs out, he should leave the lobby automatically.
+    Page access restrictions
+        If a character is in a lobby, he can only access the lobby page.
+            If he tries to reach any other pages, he should be redirected to lobby page.
+        If a character is not in a lobby, he cannot reach the lobby page.
+            If he tries to reach the lobby page, he should be redirected to overview page.
+        If a character is in a lobby what already in queue, he can only access the lobbyQueue page. Or else he should be redirected to there.
+        If a character is not in a lobby what already in queue, he cannot access the lobbyQueue page. Or else he should be redirected to lobby page / overview page.
+        Notes:
+            User can always access the index page.
+            Request to characterSelect page
