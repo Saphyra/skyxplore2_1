@@ -248,7 +248,63 @@ shop
             Money is reduced by the total cost of the cart
             Cart is empty
             ITEMS_BOUGHT success notification appears
+
+community
+    Blocking characters
+        Block character
+            Search result should show characters with name containing the keyword, except user's own, and already blocked characters.
+        Character should not send mail to blocked character (and vice versa)
+            Blocked character should not appear in addressee search result
+            Character should not reply to mail from blocked character (and vice versa)
+        Character should not send friend request to blocked character (and vice versa)
+            Blocked character should not appear in add friend search result
+        Already sent friend request should be deleted when the friend and the character block each other.
+        Friendship should be deleted when the friend and the character block each other.
+        Blocked character can be unblocked only by the one who blocked him.
+            After successful unblock, all the features should be enabled again for both sides.
+    Friendship
+        Sending friend request
+            Search result should show characters with name containing the keyword, except
+                - User's own characters
+                - Blocked characters
+                - Characters where friend request already exists
+                - Friends
+        Friend request can be cancelled by the sender, and accepted/declined by the receiver.
+        Active friends should be highlighted (with green border), and should be placed on the top of the list.
+        Friends can be deleted, and have a shortcut button for sending mails (when clicking on it, addressee field is filled automatically)
+    Mails
+        Sending mail
+            Addressee search result should show characters with name containing the keyword, except user's own, and blocked characters.
+            Validation rules:
+                Subject must be filled (max 100 characters length)
+                Message must be filled (max 4000 characters length)
+                Valid addressee must be selected (addressee field is highlighted with green border)
+            Successfully sent mails should be appear at "Sent mails" tab.
+        Reading mail
+            Unread mails should be highlighted with light green border.
+            When user clicks on the mail header, mail body should appear, and mail should be marked as read.
+            Mail read status can be set by clicking on "Mark as (un)read" buttons
+        Deleting mails
+            Mails can be deleted both by sender and addressee.
+            The sides can delete mails individually (if sender deletes the mail, it still should be visible at addressee side, until he also deletes the mail)
+        Archiving mail
+            Archived mails should appear at "Archived mails" tab.
+            Archived mails should not be deleted automatically, when they are expired.
+            Archived mails can be restored.
+                Restored mails should reappear at "Incoming mails" tab.
+                Restored mails can be deleted automatically.
+        Replying the mail
+            Addressee can reply to an incoming mail.
+            Sender should be set as addressee automatically.
+            Subject should be the same with a "Re: " prefix.
+        Bulk operations
+            Bulk operations can be executed on the selected mails (tick the checkbox on the left side of the mail header)
+            Operation can be selected from a dropdown menu
+            There are different operations for each tab.
+            The selected operation should be executed on the selected mails when clicking on "Execute bulk operation" button.
+
 hangar
     not implemented yet
 
-community
+Lobby
+    not implemented yet
