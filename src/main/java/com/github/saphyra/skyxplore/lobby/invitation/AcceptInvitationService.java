@@ -18,7 +18,7 @@ class AcceptInvitationService {
     private final LobbyQueryService lobbyQueryService;
 
     void acceptInvitation(String characterId, UUID invitationId) {
-        Invitation invitation = invitationQueryService.findByIdValidated(invitationId, characterId);
+        Invitation invitation = invitationQueryService.findByIdAndInvitedCharacterIdValidated(invitationId, characterId);
         Lobby lobby = lobbyQueryService.findById(invitation.getLobbyId());
         lobby.addMember(characterId);
     }

@@ -39,7 +39,7 @@ public class AcceptInvitationServiceTest {
     @Test
     public void acceptInvitation() {
         //GIVEN
-        given(invitationQueryService.findByIdValidated(INVITATION_ID, CHARACTER_ID)).willReturn(invitation);
+        given(invitationQueryService.findByIdAndInvitedCharacterIdValidated(INVITATION_ID, CHARACTER_ID)).willReturn(invitation);
         given(invitation.getLobbyId()).willReturn(LOBBY_ID);
         given(lobbyQueryService.findById(LOBBY_ID)).willReturn(lobby);
         //WHEN
