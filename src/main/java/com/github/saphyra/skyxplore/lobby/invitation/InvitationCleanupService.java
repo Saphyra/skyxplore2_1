@@ -1,19 +1,19 @@
 package com.github.saphyra.skyxplore.lobby.invitation;
 
-import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.lobby.invitation.domain.Invitation;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.OffsetDateTime;
+import java.util.stream.Collectors;
+
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.OffsetDateTime;
-import java.util.stream.Collectors;
+import com.github.saphyra.skyxplore.common.DateTimeUtil;
+import com.github.saphyra.skyxplore.lobby.invitation.domain.Invitation;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @EnableScheduling
 @Component
-//TODO unit test
 @Slf4j
 @RequiredArgsConstructor
 class InvitationCleanupService {
@@ -35,10 +35,14 @@ class InvitationCleanupService {
 
     private boolean isExpired(Invitation invitation) {
         OffsetDateTime now = dateTimeUtil.now();
-        OffsetDateTime expiration = invitation.isQueried() ?
+        OffsetDateTime expiration = getExpiration(invitation, now);
+        return invitation.getCreatedAt().isBefore(expiration);
+    }
+
+    private OffsetDateTime getExpiration(Invitation invitation, OffsetDateTime now) {
+        return invitation.isQueried() ?
             now.minusSeconds(invitationProperties.getExpirationSeconds())
                 .minusSeconds(invitationProperties.getExtendedExpirationSeconds())
             : now.minusSeconds(invitationProperties.getExpirationSeconds());
-        return invitation.getCreatedAt().isBefore(expiration);
     }
 }
