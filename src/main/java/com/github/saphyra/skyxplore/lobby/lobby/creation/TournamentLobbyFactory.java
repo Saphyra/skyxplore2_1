@@ -1,13 +1,13 @@
 package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class TournamentLobbyFactory implements LobbyFactory {
     private final LobbyObjectFactory lobbyObjectFactory;
     private final LobbyCreationConfiguration configuration;
@@ -19,6 +19,6 @@ public class TournamentLobbyFactory implements LobbyFactory {
 
     @Override
     public Lobby create(GameMode gameMode, String characterId, String data) {
-        return lobbyObjectFactory.create(gameMode, characterId, data, configuration.getTournamentLobbySize());
+        return lobbyObjectFactory.create(GameMode.TOURNAMENT, characterId, data, configuration.getTournamentLobbySize());
     }
 }

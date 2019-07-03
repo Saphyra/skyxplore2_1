@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class TeamfightLobbyFactory implements LobbyFactory {
     private static final List<Integer> ALLOWED_TEAM_SIZE = Arrays.asList(2, 5, 10, 25, 33, 50);
 
@@ -25,7 +24,7 @@ class TeamfightLobbyFactory implements LobbyFactory {
 
     @Override
     public Lobby create(GameMode gameMode, String characterId, String data) {
-        return lobbyObjectFactory.create(gameMode, characterId, data, parseTeamSize(data));
+        return lobbyObjectFactory.create(GameMode.TEAMFIGHT, characterId, data, parseTeamSize(data));
     }
 
     private int parseTeamSize(String data) {
