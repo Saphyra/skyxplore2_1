@@ -49,6 +49,7 @@ public class Lobby {
 
     @NonNull
     @Builder.Default
+    @Getter(value = AccessLevel.NONE)
     private final List<LobbyEvent> events = new Vector<>();
 
     @NonNull
@@ -181,5 +182,9 @@ public class Lobby {
                 .eventType(LobbyEventType.START_QUEUE)
                 .build()
         );
+    }
+
+    public List<LobbyEvent> getEvents() {
+        return new ArrayList<>(events);
     }
 }

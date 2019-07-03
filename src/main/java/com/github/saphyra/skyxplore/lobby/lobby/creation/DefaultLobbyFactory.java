@@ -1,15 +1,15 @@
 package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class DefaultLobbyFactory implements LobbyFactory {
+    static final int MAX_LOBBY_SIZE = Integer.MAX_VALUE; //TODO set
+
     private final LobbyObjectFactory lobbyObjectFactory;
 
     @Override
@@ -20,6 +20,9 @@ class DefaultLobbyFactory implements LobbyFactory {
 
     @Override
     public Lobby create(GameMode gameMode, String characterId, String data) {
-        return lobbyObjectFactory.create(gameMode, characterId, data, Integer.MAX_VALUE);
+        if (!canCreate(gameMode)) {
+            throw new IllegalArgumentException("DefaultLobby can not be created for gameMode " + gameMode);
+        }
+        return lobbyObjectFactory.create(gameMode, characterId, data, MAX_LOBBY_SIZE);
     }
 }

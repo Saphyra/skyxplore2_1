@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class LobbyObjectFactory {
     private final IdGenerator idGenerator;
     private final LobbyContext lobbyContext;

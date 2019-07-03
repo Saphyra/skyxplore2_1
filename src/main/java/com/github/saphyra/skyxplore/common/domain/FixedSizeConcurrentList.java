@@ -1,10 +1,10 @@
 package com.github.saphyra.skyxplore.common.domain;
 
-import java.util.Vector;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
+import java.util.Vector;
 
 @ToString(callSuper = true)
 @RequiredArgsConstructor
@@ -14,7 +14,7 @@ public class FixedSizeConcurrentList<T> extends Vector<T> {
     private final int maxSize;
 
     @Override
-    public boolean add(T element) {
+    public synchronized boolean add(T element) {
         if (super.size() == maxSize) {
             throw new ArrayIndexOutOfBoundsException("List has reached max size: " + maxSize);
         }
