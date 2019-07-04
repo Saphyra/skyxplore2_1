@@ -1,19 +1,18 @@
 package com.github.saphyra.skyxplore.lobby.lobby.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
 @Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-//TODO unit test
 public class LobbyEvent {
     @NonNull
     private final LobbyEventType eventType;

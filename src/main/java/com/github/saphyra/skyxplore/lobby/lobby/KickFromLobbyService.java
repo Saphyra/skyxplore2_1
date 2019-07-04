@@ -10,13 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class KickFromLobbyService {
     private final LobbyQueryService lobbyQueryService;
 
     void kickFromLobby(String characterId, String memberId) {
         Lobby lobby = lobbyQueryService.findByCharacterIdValidated(characterId);
-        if(!lobby.getOwnerId() .equals(characterId)){
+        if (!lobby.getOwnerId().equals(characterId)) {
             throw new ForbiddenException(characterId + " is not the owner of lobby " + lobby.getLobbyId());
         }
 
