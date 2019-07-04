@@ -1,6 +1,13 @@
 package com.github.saphyra.skyxplore.lobby.lobby.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.Vector;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.exceptionhandling.exception.PreconditionFailedException;
@@ -16,17 +23,10 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.Vector;
-
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 @Builder
 @Slf4j
-//TODO unit test
 public class Lobby {
     @NonNull
     private final UUID lobbyId;
@@ -72,18 +72,18 @@ public class Lobby {
 
         members.remove(lobbyMember.get());
 
+        if (members.isEmpty()) {
+            log.info("Lobby {} has no more members. Deleting...", lobbyId);
+            lobbyContext.getLobbyStorage().remove(lobbyId);
+            return;
+        }
+
         events.add(
             LobbyEvent.builder()
                 .eventType(LobbyEventType.EXIT)
                 .data(characterId)
                 .build()
         );
-
-        if (members.isEmpty()) {
-            log.info("Lobby {} has no more members. Deleting...", lobbyId);
-            lobbyContext.getLobbyStorage().remove(lobbyId);
-            return;
-        }
 
         if (ownerId.equals(characterId)) {
             log.info("Owner {} of lobby {} has left the lobby. Selecting new owner...", ownerId, lobbyId);
@@ -131,12 +131,18 @@ public class Lobby {
         return new ArrayList<>(messages);
     }
 
-    public void transferOwnership(String newOwnerId) {
+    public void transferOwnership(String currentOwnerId, String newOwnerId) {
+        if (!ownerId.equals(currentOwnerId)) {
+            throw new ForbiddenException(currentOwnerId + " is not the owner of lobby " + lobbyId);
+        }
+        if (!findMemberByCharacterId(newOwnerId).isPresent()) {
+            throw new BadRequestException(newOwnerId + " is not member of lobby " + lobbyId);
+        }
         ownerId = newOwnerId;
         events.add(
             LobbyEvent.builder()
                 .eventType(LobbyEventType.OWNER_CHANGED)
-                .data(ownerId)
+                .data(newOwnerId)
                 .build()
         );
     }
