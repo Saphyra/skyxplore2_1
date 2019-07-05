@@ -1,5 +1,12 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.character.CharacterViewQueryService;
 import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
@@ -8,12 +15,6 @@ import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyMember;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyMemberView;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor

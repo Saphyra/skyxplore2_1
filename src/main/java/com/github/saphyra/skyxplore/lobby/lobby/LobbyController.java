@@ -26,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-//TODO unit test
 class LobbyController {
     private static final String CREATE_LOBBY_MAPPING = "lobby";
     private static final String EXIT_FROM_LOBBY_MAPPING = "lobby";
@@ -57,8 +56,8 @@ class LobbyController {
     }
 
     @DeleteMapping(EXIT_FROM_LOBBY_MAPPING)
-    void exitFromLobby(@CookieValue(COOKIE_CHARACTER_ID) String characterId0) {
-        lobbyMemberHandler.exitFromLobby(characterId0);
+    void exitFromLobby(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
+        lobbyMemberHandler.exitFromLobby(characterId);
     }
 
     @GetMapping(GET_LOBBY_MAPPING)
@@ -90,13 +89,13 @@ class LobbyController {
 
     @PostMapping(SET_READY_MAPPING)
     void setReady(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
-        log.info("{} wants to set himself ready.");
+        log.info("{} wants to set himself ready.", characterId);
         memberStatusService.setReady(characterId);
     }
 
     @PostMapping(SET_UNREADY_MAPPING)
     void setUnready(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
-        log.info("{} wants to set himself unready.");
+        log.info("{} wants to set himself unready.", characterId);
         memberStatusService.setUnready(characterId);
     }
 
@@ -104,7 +103,7 @@ class LobbyController {
     void startQueue(
         @CookieValue(COOKIE_CHARACTER_ID) String characterId,
         @PathVariable("autoFill") Boolean autoFill
-    ){
+    ) {
         log.info("{} wants to start queueing", characterId);
         lobbyQueueService.startQueue(characterId, autoFill);
     }
