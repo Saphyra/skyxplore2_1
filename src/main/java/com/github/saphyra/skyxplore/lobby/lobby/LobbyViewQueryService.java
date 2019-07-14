@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class LobbyViewQueryService {
     private final CharacterViewQueryService characterViewQueryService;
     private final LobbyQueryService lobbyQueryService;
