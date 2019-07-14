@@ -18,7 +18,7 @@ public class InvitationViewConverter extends AbstractViewConverter<Invitation, I
 
     @Override
     public InvitationView convertDomain(Invitation invitation) {
-        Lobby lobby = lobbyQueryService.findById(invitation.getLobbyId());
+        Lobby lobby = lobbyQueryService.findByLobbyIdValidated(invitation.getLobbyId());
         return InvitationView.builder()
             .gameMode(lobby.getGameMode())
             .data(lobby.getData())

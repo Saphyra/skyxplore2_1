@@ -53,7 +53,7 @@ public class AcceptInvitationServiceTest {
 
         given(invitationQueryService.findByIdAndInvitedCharacterIdValidated(INVITATION_ID, CHARACTER_ID)).willReturn(invitation);
         given(invitation.getLobbyId()).willReturn(LOBBY_ID);
-        given(lobbyQueryService.findById(LOBBY_ID)).willReturn(lobby);
+        given(lobbyQueryService.findByLobbyIdValidated(LOBBY_ID)).willReturn(lobby);
         //WHEN
         underTest.acceptInvitation(CHARACTER_ID, INVITATION_ID);
         //THEN

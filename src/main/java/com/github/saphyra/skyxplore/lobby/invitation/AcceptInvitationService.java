@@ -1,15 +1,14 @@
 package com.github.saphyra.skyxplore.lobby.invitation;
 
-import java.util.UUID;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.exceptionhandling.exception.ConflictException;
 import com.github.saphyra.skyxplore.lobby.invitation.domain.Invitation;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ class AcceptInvitationService {
             throw new ConflictException(characterId + " is already in lobby.");
         }
         Invitation invitation = invitationQueryService.findByIdAndInvitedCharacterIdValidated(invitationId, characterId);
-        Lobby lobby = lobbyQueryService.findById(invitation.getLobbyId());
+        Lobby lobby = lobbyQueryService.findByLobbyIdValidated(invitation.getLobbyId());
         lobby.addMember(characterId);
     }
 }

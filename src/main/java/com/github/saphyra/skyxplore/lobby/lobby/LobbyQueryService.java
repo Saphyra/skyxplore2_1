@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class LobbyQueryService {
     private final LobbyStorage lobbyStorage;
 
@@ -29,7 +28,7 @@ public class LobbyQueryService {
         return lobby.findMemberByCharacterId(characterId).isPresent();
     }
 
-    public Lobby findById(UUID lobbyId) {
+    public Lobby findByLobbyIdValidated(UUID lobbyId) {
         return Optional.ofNullable(lobbyStorage.get(lobbyId))
             .orElseThrow(() -> new NotFoundException("Lobby not found with id " + lobbyId));
     }

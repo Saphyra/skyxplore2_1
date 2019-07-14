@@ -52,7 +52,7 @@ public class InvitationViewConverterTest {
         given(invitation.getCharacterId()).willReturn(CHARACTER_ID);
         given(invitation.getInvitationId()).willReturn(INVITATION_ID);
 
-        given(lobbyQueryService.findById(LOBBY_ID)).willReturn(lobby);
+        given(lobbyQueryService.findByLobbyIdValidated(LOBBY_ID)).willReturn(lobby);
         given(lobby.getGameMode()).willReturn(GameMode.TEAMFIGHT);
         given(lobby.getData()).willReturn(LOBBY_DATA);
 
