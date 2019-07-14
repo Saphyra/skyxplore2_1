@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class LobbyQueueService {
     private final LobbyQueryService lobbyQueryService;
 
