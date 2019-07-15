@@ -1,13 +1,13 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
+import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
-//TODO unit test
 class MemberStatusService {
     private final LobbyQueryService lobbyQueryService;
 
