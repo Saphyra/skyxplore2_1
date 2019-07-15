@@ -1,24 +1,28 @@
 package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
-import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import static com.github.saphyra.skyxplore.lobby.lobby.creation.DefaultLobbyFactory.MAX_LOBBY_SIZE;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultLobbyFactoryTest extends AbstractLobbyFactoryTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String DATA = "data";
+    private static final Integer LOBBY_SIZE = 23;
+
+    @Mock
+    private LobbyCreationConfiguration configuration;
 
     @Mock
     private LobbyObjectFactory lobbyObjectFactory;
@@ -48,7 +52,8 @@ public class DefaultLobbyFactoryTest extends AbstractLobbyFactoryTest {
     @Test
     public void create() {
         //GIVEN
-        given(lobbyObjectFactory.create(GameMode.ARCADE, CHARACTER_ID, DATA, MAX_LOBBY_SIZE)).willReturn(lobby);
+        given(configuration.getDefaultLobbySize()).willReturn(LOBBY_SIZE);
+        given(lobbyObjectFactory.create(GameMode.ARCADE, CHARACTER_ID, DATA, LOBBY_SIZE)).willReturn(lobby);
         //WHEN
         Lobby result = underTest.create(GameMode.ARCADE, CHARACTER_ID, DATA);
         //THEN

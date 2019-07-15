@@ -1,28 +1,32 @@
 package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.ClanWarsType;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import static com.github.saphyra.skyxplore.lobby.lobby.creation.ClanWarsLobbyFactory.MAX_LOBBY_SIZE;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.BDDMockito.given;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.ClanWarsType;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClanWarsLobbyFactoryTest extends AbstractLobbyFactoryTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String WRONG_DATA = "wrong_data";
     private static final String DATA = ClanWarsType.DREADNOUGHT.name();
+    private static final Integer LOBBY_SIZE = 34;
+
+    @Mock
+    private LobbyCreationConfiguration configuration;
 
     @Mock
     private LobbyObjectFactory lobbyObjectFactory;
@@ -54,7 +58,8 @@ public class ClanWarsLobbyFactoryTest extends AbstractLobbyFactoryTest {
     @Test
     public void create() {
         //GIVEN
-        given(lobbyObjectFactory.create(GameMode.CLAN_WARS, CHARACTER_ID, DATA, MAX_LOBBY_SIZE)).willReturn(lobby);
+        given(configuration.getClanWarsLobbySize()).willReturn(LOBBY_SIZE);
+        given(lobbyObjectFactory.create(GameMode.CLAN_WARS, CHARACTER_ID, DATA, LOBBY_SIZE)).willReturn(lobby);
         //WHEN
         Lobby result = underTest.create(GameMode.TOURNAMENT, CHARACTER_ID, DATA);
         //THEN

@@ -1,19 +1,19 @@
 package com.github.saphyra.skyxplore.lobby.lobby.creation;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.ClanWarsType;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.GameMode;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 class ClanWarsLobbyFactory implements LobbyFactory {
-     static final int MAX_LOBBY_SIZE = Integer.MAX_VALUE; //TODO set
-
+    private final LobbyCreationConfiguration configuration;
     private final LobbyObjectFactory lobbyObjectFactory;
 
     @Override
@@ -24,7 +24,7 @@ class ClanWarsLobbyFactory implements LobbyFactory {
     @Override
     public Lobby create(GameMode gameMode, String characterId, String data) {
         validateType(data);
-        return lobbyObjectFactory.create(GameMode.CLAN_WARS, characterId, data, MAX_LOBBY_SIZE);
+        return lobbyObjectFactory.create(GameMode.CLAN_WARS, characterId, data, configuration.getClanWarsLobbySize());
     }
 
     private void validateType(String data) {
