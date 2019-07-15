@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class MessageSenderService {
     private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
