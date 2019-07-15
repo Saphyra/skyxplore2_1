@@ -31,6 +31,9 @@ public class Message {
     private final Long createdAt;
 
     public void addQueriedBy(String characterId) {
+        if (queriedBy.contains(characterId)) {
+            return;
+        }
         queriedBy.add(characterId);
     }
 }

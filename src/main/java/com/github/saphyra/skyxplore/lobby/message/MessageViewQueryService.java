@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class MessageViewQueryService {
     private final CharacterQueryService characterQueryService;
     private final LobbyQueryService lobbyQueryService;
