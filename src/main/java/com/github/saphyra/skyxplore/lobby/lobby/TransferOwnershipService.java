@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class TransferOwnershipService {
     private final LobbyQueryService lobbyQueryService;
 
