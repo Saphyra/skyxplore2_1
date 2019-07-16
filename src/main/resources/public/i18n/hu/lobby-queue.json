@@ -1,0 +1,13 @@
+{
+  "title": "Játék keresése - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Játék keresése"
+      }
+    ]
+  },
+  "additionalContent": {
+  }
+}
