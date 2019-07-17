@@ -15,7 +15,7 @@ class FilterConfig {
     }
 
     @Bean
-    FilterRegistrationBean<LobbyFilter> alreadyInLobbyFilterBean(LobbyFilter lobbyFilter) {
+    FilterRegistrationBean<LobbyFilter> lobbyFilterBean(LobbyFilter lobbyFilter) {
         FilterRegistrationBean<LobbyFilter> LobbyFilterBean = new FilterRegistrationBean<>();
         LobbyFilterBean.setFilter(lobbyFilter);
         LobbyFilterBean.setOrder(20);
