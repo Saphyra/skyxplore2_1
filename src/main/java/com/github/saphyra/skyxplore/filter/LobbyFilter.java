@@ -1,26 +1,28 @@
 package com.github.saphyra.skyxplore.filter;
 
+import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +37,7 @@ class LobbyFilter extends OncePerRequestFilter {
         "/"
     );
 
-    private static final AntPathMatcher antPathMatcher = new AntPathMatcher();
+    private final AntPathMatcher antPathMatcher;
     private final CookieUtil cookieUtil;
     private final CustomFilterHelper customFilterHelper;
     private final LobbyQueryService lobbyQueryService;

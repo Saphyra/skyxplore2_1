@@ -1,8 +1,12 @@
 package com.github.saphyra.skyxplore.auth;
 
-import com.github.saphyra.authservice.domain.AccessToken;
-import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.authservice.auth.domain.AccessToken;
+import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccessTokenConverterTest {

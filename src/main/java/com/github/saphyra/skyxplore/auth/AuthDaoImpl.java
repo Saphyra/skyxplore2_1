@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.authservice.AuthDao;
-import com.github.saphyra.authservice.domain.AccessToken;
-import com.github.saphyra.authservice.domain.User;
+import com.github.saphyra.authservice.auth.AuthDao;
+import com.github.saphyra.authservice.auth.domain.AccessToken;
+import com.github.saphyra.authservice.auth.domain.User;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;

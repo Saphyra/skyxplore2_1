@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.authservice.domain.User;
+import com.github.saphyra.authservice.auth.domain.User;
 import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;

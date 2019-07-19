@@ -1,25 +1,26 @@
 package com.github.saphyra.skyxplore.filter;
 
-import com.github.saphyra.skyxplore.common.PageController;
-import com.github.saphyra.util.CookieUtil;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.github.saphyra.skyxplore.common.PageController;
+import com.github.saphyra.util.CookieUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
 class CookieCleanupFilter extends OncePerRequestFilter {
-    private static final AntPathMatcher pathMatcher = new AntPathMatcher();
-
+    private final AntPathMatcher pathMatcher;
     private final CookieUtil cookieUtil;
 
     @Override

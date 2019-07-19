@@ -18,8 +18,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
-import com.github.saphyra.authservice.domain.AccessToken;
-import com.github.saphyra.authservice.domain.User;
+import com.github.saphyra.authservice.auth.domain.AccessToken;
+import com.github.saphyra.authservice.auth.domain.User;
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;

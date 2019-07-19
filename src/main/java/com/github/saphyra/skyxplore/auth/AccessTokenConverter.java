@@ -2,12 +2,12 @@ package com.github.saphyra.skyxplore.auth;
 
 import java.util.Optional;
 
-import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.authservice.domain.AccessToken;
+import com.github.saphyra.authservice.auth.domain.AccessToken;
 import com.github.saphyra.converter.ConverterBase;
+import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import lombok.RequiredArgsConstructor;
 
 @Component
