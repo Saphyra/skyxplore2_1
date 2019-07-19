@@ -22,6 +22,7 @@ window.Mapping = {
     DELETE_CHARACTER: "character/*",
     DELETE_FRIEND: "friend",
     DELETE_MAILS: "mail",
+    DESELECT_CHARACTER: "character/deselect",
     EMAIL_EXISTS: "user/email",
     EQUIP_ITEM: "ship/equipment",
     EQUIP_SHIP: "ship/equipment/*",

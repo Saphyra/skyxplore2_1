@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
 
 @RestController
 @RequiredArgsConstructor

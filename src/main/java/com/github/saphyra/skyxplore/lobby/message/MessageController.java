@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.lobby.message;
 
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
 
 import java.util.List;
 

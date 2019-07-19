@@ -11,14 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PageController {
     public static final String CHARACTER_SELECT_MAPPING = "/characterselect";
-    private static final String COMMUNITY_MAPPING = "/community";
-    private static final String EQUIPMENT_MAPPING = "/equipment";
-    private static final String FACTORY_MAPPING = "/factory";
-    private static final String HANGAR_MAPPING = "/hangar";
+    public static final String COMMUNITY_MAPPING = "/community";
+    public static final String EQUIPMENT_MAPPING = "/equipment";
+    public static final String FACTORY_MAPPING = "/factory";
+    public static final String HANGAR_MAPPING = "/hangar";
     public static final String INDEX_MAPPING = "/";
     public static final String OVERVIEW_MAPPING = "/overview";
-    private static final String SETTINGS_MAPPING = "/account";
-    private static final String SHOP_MAPPING = "/shop";
+    public static final String SETTINGS_MAPPING = "/account";
+    public static final String SHOP_MAPPING = "/shop";
     public static final String LOBBY_PAGE_MAPPING = "/lobby-page";
     public static final String LOBBY_QUEUE_MAPPING = "/lobby-queue";
 

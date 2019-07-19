@@ -91,7 +91,7 @@
 
     <FOOTER>
         <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
-        <BUTTON id="characterselect-button" onclick='window.location.href = "characterselect"'></BUTTON>
+        <BUTTON id="characterselect-button" onclick='eventProcessor.processEvent(new Event(events.DESELECT_CHARACTER))'></BUTTON>
         <BUTTON onclick='window.location.href = "community"'>
             <SPAN id="community-button"></SPAN>
             <SPAN>
