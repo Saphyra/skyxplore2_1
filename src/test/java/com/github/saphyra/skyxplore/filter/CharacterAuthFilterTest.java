@@ -7,9 +7,9 @@ import com.github.saphyra.util.CookieUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -27,6 +27,8 @@ public class CharacterAuthFilterTest {
     private static final String CHARACTER_ID_COOKIE = "character_id_cookie";
     private static final String USER_ID_COOKIE = "user_id_cookie";
     private static final String AUTHENTICATED_PATH = "authenticated";
+
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Mock
     private CharacterQueryService characterQueryService;
@@ -46,11 +48,17 @@ public class CharacterAuthFilterTest {
     @Mock
     private CustomFilterHelper customFilterHelper;
 
-    @InjectMocks
     private CharacterAuthFilter underTest;
 
     @Before
     public void setUp() {
+        underTest = CharacterAuthFilter.builder()
+            .antPathMatcher(antPathMatcher)
+            .characterQueryService(characterQueryService)
+            .cookieUtil(cookieUtil)
+            .customFilterHelper(customFilterHelper)
+            .build();
+
         when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_CHARACTER_ID)).thenReturn(Optional.of(CHARACTER_ID_COOKIE));
         when(cookieUtil.getCookie(request, CustomFilterHelper.COOKIE_USER_ID)).thenReturn(Optional.of(USER_ID_COOKIE));
         when(request.getRequestURI()).thenReturn(AUTHENTICATED_PATH);

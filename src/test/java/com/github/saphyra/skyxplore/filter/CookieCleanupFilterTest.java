@@ -2,11 +2,12 @@ package com.github.saphyra.skyxplore.filter;
 
 import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.util.CookieUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -22,6 +23,8 @@ import static org.mockito.Mockito.when;
 public class CookieCleanupFilterTest {
     private static final String AUTHENTICATED_PATH = "authenticated_path";
 
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+
     @Mock
     private CookieUtil cookieUtil;
 
@@ -34,8 +37,12 @@ public class CookieCleanupFilterTest {
     @Mock
     private FilterChain filterChain;
 
-    @InjectMocks
     private CookieCleanupFilter underTest;
+
+    @Before
+    public void setUp(){
+        underTest = new CookieCleanupFilter(antPathMatcher, cookieUtil);
+    }
 
     @Test
     public void testShouldCallCookieUtilWhenCharacterSelect() throws ServletException, IOException {

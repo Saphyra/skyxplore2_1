@@ -4,12 +4,13 @@ import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import com.github.saphyra.util.CookieUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpMethod;
+import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -28,6 +29,9 @@ public class LobbyFilterTest {
     private static final String ALLOWED_URI = "/js/asd.js";
     private static final String PROTECTED_URI = "/rve";
     private static final String CHARACTER_ID = "character_id";
+
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+
     @Mock
     private CookieUtil cookieUtil;
 
@@ -37,7 +41,6 @@ public class LobbyFilterTest {
     @Mock
     private LobbyQueryService lobbyQueryService;
 
-    @InjectMocks
     private LobbyFilter underTest;
 
     @Mock
@@ -51,6 +54,16 @@ public class LobbyFilterTest {
 
     @Mock
     private Lobby lobby;
+
+    @Before
+    public void setUp(){
+        underTest = LobbyFilter.builder()
+            .antPathMatcher(antPathMatcher)
+            .cookieUtil(cookieUtil)
+            .customFilterHelper(customFilterHelper)
+            .lobbyQueryService(lobbyQueryService)
+            .build();
+    }
 
     @Test
     public void restCall_shouldFilter() throws ServletException, IOException {
