@@ -11,7 +11,6 @@ import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,18 +18,12 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 //TODO unit test
-public class CharacterSelectedFilterSetting implements RedirectionFilterSettings {
+public class InLobbyFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
     private static final List<String> ALLOWED_URIS = Arrays.asList(
-        PageController.COMMUNITY_MAPPING,
-        PageController.EQUIPMENT_MAPPING,
-        PageController.FACTORY_MAPPING,
-        PageController.HANGAR_MAPPING,
-        PageController.OVERVIEW_MAPPING,
-        PageController.SHOP_MAPPING
+        PageController.LOBBY_PAGE_MAPPING
     );
 
-    private final AntPathMatcher antPathMatcher;
     private final CookieUtil cookieUtil;
     private final CharacterStatusCache characterStatusCache;
 
@@ -44,19 +37,19 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
         return
             !redirectionContext.isRest()
                 && !ALLOWED_URIS.contains(redirectionContext.getRequestUri())
-                && isCharacterSelected(redirectionContext);
+                && isCharacterInLobby(redirectionContext);
     }
 
-    private boolean isCharacterSelected(RedirectionContext redirectionContext) {
+    private boolean isCharacterInLobby(RedirectionContext redirectionContext) {
         return cookieUtil.getCookie(redirectionContext.getRequest(), RequestConstants.COOKIE_CHARACTER_ID)
             .flatMap(characterStatusCache::get)
-            .filter(characterStatus -> characterStatus == CharacterStatus.ACTIVE)
+            .filter(characterStatus -> characterStatus == CharacterStatus.IN_LOBBY)
             .isPresent();
     }
 
     @Override
     public String getRedirectionPath(RedirectionContext redirectionContext) {
-        return PageController.OVERVIEW_MAPPING;
+        return PageController.LOBBY_PAGE_MAPPING;
     }
 
     @Override
@@ -66,6 +59,6 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
 
     @Override
     public String toString() {
-        return "CharacterSelectedFilterSetting - " + PROTECTED_URI.toString();
+        return "InLobbyFilterSetting - " + PROTECTED_URI.toString();
     }
 }
