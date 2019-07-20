@@ -11,14 +11,12 @@ import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class CharacterSelectedFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
     private static final List<String> ALLOWED_URIS = Arrays.asList(
@@ -30,7 +28,6 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
         PageController.SHOP_MAPPING
     );
 
-    private final AntPathMatcher antPathMatcher;
     private final CookieUtil cookieUtil;
     private final CharacterStatusCache characterStatusCache;
 
@@ -41,10 +38,8 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
 
     @Override
     public boolean shouldRedirect(RedirectionContext redirectionContext) {
-        return
-            !redirectionContext.isRest()
-                && !ALLOWED_URIS.contains(redirectionContext.getRequestUri())
-                && isCharacterSelected(redirectionContext);
+        return !ALLOWED_URIS.contains(redirectionContext.getRequestUri())
+            && isCharacterSelected(redirectionContext);
     }
 
     private boolean isCharacterSelected(RedirectionContext redirectionContext) {

@@ -17,7 +17,6 @@ import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 class CharacterStatusController {
     private static final String CHARACTER_DESELECT_MAPPING = API_PREFIX + "//character/deselect";
 

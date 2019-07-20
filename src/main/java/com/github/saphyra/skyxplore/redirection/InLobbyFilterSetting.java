@@ -17,7 +17,6 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class InLobbyFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
     private static final List<String> ALLOWED_URIS = Arrays.asList(
