@@ -1,9 +1,5 @@
 package com.github.saphyra.selenium.test.registration;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
-
-import org.junit.Test;
-
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
@@ -11,6 +7,9 @@ import com.github.saphyra.selenium.test.registration.password.ConfirmPasswordTes
 import com.github.saphyra.selenium.test.registration.password.TooLongPasswordTest;
 import com.github.saphyra.selenium.test.registration.password.TooShortPasswordTest;
 import com.github.saphyra.selenium.test.registration.password.helper.PasswordTestHelper;
+import org.junit.Test;
+
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
 
 public class PasswordTest extends SeleniumTestApplication {
     private PasswordTestHelper passwordTestHelper;
@@ -21,7 +20,7 @@ public class PasswordTest extends SeleniumTestApplication {
     protected void init() {
         indexPage = new IndexPage(driver);
         passwordTestHelper = new PasswordTestHelper(driver, indexPage);
-        fieldValidator = new FieldValidator(driver, HOST);
+        fieldValidator = new FieldValidator(driver, INDEX_PAGE);
     }
 
     @Test

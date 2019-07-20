@@ -1,19 +1,19 @@
 package com.github.saphyra.selenium.logic.flow;
 
+import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.page.IndexPage;
+import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.github.saphyra.selenium.logic.domain.SeleniumUser;
-import com.github.saphyra.selenium.logic.page.IndexPage;
-import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
 import static com.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
 import static com.github.saphyra.selenium.logic.util.Util.cleanNotifications;
+import static org.junit.Assert.assertEquals;
 
 public class Registration {
     private static final String MESSAGE_CODE_SUCCESSFUL_REGISTRATION = "REGISTRATION_SUCCESSFUL";
@@ -41,10 +41,10 @@ public class Registration {
     }
 
     public void registerUser(SeleniumUser user) {
-        if (!HOST.equals(driver.getCurrentUrl())) {
+        if (!INDEX_PAGE.equals(driver.getCurrentUrl())) {
             new Navigate(driver).toIndexPage();
         }
-        assertEquals(HOST, driver.getCurrentUrl());
+        assertEquals(INDEX_PAGE, driver.getCurrentUrl());
         cleanNotifications(driver);
         fillRegistrationForm(user);
         sendForm();

@@ -74,10 +74,10 @@ public class Navigate {
         if (logoutButton.isPresent()) {
             logoutButton.get().click();
         } else {
-            driver.navigate().to(HOST);
+            driver.navigate().to(INDEX_PAGE);
         }
 
-        verifyURL(HOST);
+        verifyURL(INDEX_PAGE);
     }
 
     public void toCommunityPage() {

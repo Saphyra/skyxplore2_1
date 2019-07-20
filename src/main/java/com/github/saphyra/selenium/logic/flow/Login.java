@@ -2,6 +2,7 @@ package com.github.saphyra.selenium.logic.flow;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
 import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.saphyra.selenium.logic.page.IndexPage;
-
-import static org.junit.Assert.assertEquals;
 import static com.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
 import static com.github.saphyra.selenium.logic.util.Util.cleanNotifications;
+import static org.junit.Assert.assertEquals;
 
 @Slf4j
 public class Login {
@@ -60,13 +59,13 @@ public class Login {
 
     public void loginFailure(SeleniumUser user) {
         cleanNotifications(driver);
-        assertEquals(HOST, driver.getCurrentUrl());
+        assertEquals(INDEX_PAGE, driver.getCurrentUrl());
         sendRequest(user);
         validateLoginFailure();
     }
 
     private void validateLoginFailure() {
-        assertEquals(HOST, driver.getCurrentUrl());
+        assertEquals(INDEX_PAGE, driver.getCurrentUrl());
         notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_BAD_CREDENTIALS));
     }
 }
