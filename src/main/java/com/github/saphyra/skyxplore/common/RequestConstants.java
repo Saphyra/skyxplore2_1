@@ -12,6 +12,9 @@ public class RequestConstants {
     public static final String COOKIE_CHARACTER_ID = "characterid";
     public static final String COOKIE_USER_ID = "userid";
 
+    public static final String WEB_PREFIX = "/web";
+    public static final String API_PREFIX = "/api";
+
     public static final List<String> PROPERTY_PATHS = Arrays.asList(
         "/**/favicon.ico",
         "/css/**",

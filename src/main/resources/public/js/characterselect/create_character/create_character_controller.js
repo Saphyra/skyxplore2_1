@@ -1,6 +1,6 @@
 (function CreateCharacterController(){
-    scriptLoader.loadScript("js/characterselect/create_character/create_character_validator.js");
-    scriptLoader.loadScript("js/characterselect/create_character/create_character_service.js");
+    scriptLoader.loadScript("/js/characterselect/create_character/create_character_validator.js");
+    scriptLoader.loadScript("/js/characterselect/create_character/create_character_service.js");
     
     events.VALIDATE_CREATE_CHARACTER_ATTEMPT = "validate_create_character_attempt";
     

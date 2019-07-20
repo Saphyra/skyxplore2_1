@@ -25,6 +25,6 @@ function loadLocalization(fileName, successCallback){
     }
 
     function getPath(locale, fileName){
-        return "i18n/" + locale + "/" + fileName + ".json";
+        return "/i18n/" + locale + "/" + fileName + ".json";
     }
 }

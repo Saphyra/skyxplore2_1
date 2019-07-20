@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-class NotificationController {
-    private static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = "notification/friend-request";
-    private static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = "notification/unread-mail";
-    private static final String GET_NUMBER_OF_NOTIFICATIONS = "notification";
+public class NotificationController {
+    public static final String GET_NUMBER_OF_FRIEND_REQUESTS_MAPPING = API_PREFIX + "/notification/friend-request";
+    public static final String GET_NUMBER_OF_UNREAD_MAILS_MAPPING = API_PREFIX + "/notification/unread-mail";
+    public static final String GET_NUMBER_OF_NOTIFICATIONS_MAPPING = API_PREFIX + "/notification";
 
     private final NotificationFacade notificationFacade;
 
@@ -33,7 +35,7 @@ class NotificationController {
         return notificationFacade.getNumberOfUnreadMails(characterId);
     }
 
-    @GetMapping(GET_NUMBER_OF_NOTIFICATIONS)
+    @GetMapping(GET_NUMBER_OF_NOTIFICATIONS_MAPPING)
     Integer getNumberOfNotifications(
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {

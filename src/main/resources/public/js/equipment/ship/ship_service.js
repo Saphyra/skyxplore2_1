@@ -1,9 +1,9 @@
 (function EquipmentService(){
-    scriptLoader.loadScript("js/common/equipment/item_cache.js");
-    scriptLoader.loadScript("js/equipment/ship/equipments.js");
-    scriptLoader.loadScript("js/equipment/ship/equipped_item.js");
-    scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
-    scriptLoader.loadScript("js/common/localization/items.js");
+    scriptLoader.loadScript("/js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("/js/equipment/ship/equipments.js");
+    scriptLoader.loadScript("/js/equipment/ship/equipped_item.js");
+    scriptLoader.loadScript("/js/common/equipment/equipment_label_service.js");
+    scriptLoader.loadScript("/js/common/localization/items.js");
 
 
     events.LOAD_SHIP = "load_ship";

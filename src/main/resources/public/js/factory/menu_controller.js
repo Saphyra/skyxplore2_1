@@ -1,5 +1,5 @@
 (function MenuController(){
-    scriptLoader.loadScript("js/common/equipment/category_menu_display_service.js");
+    scriptLoader.loadScript("/js/common/equipment/category_menu_display_service.js");
 
     events.DISPLAY_MENU = "display_menu";
 
@@ -11,7 +11,7 @@
     function displayMenu(){
         categoryMenuDisplayService.displayCategories(
             "menu",
-            "gamedata/categorylist/factory_categories.json",
+            "/gamedata/categorylist/factory_categories.json",
             function(category){
                 eventProcessor.processEvent(new Event(events.DISPLAY_CATEGORY, category.getId()));
             }

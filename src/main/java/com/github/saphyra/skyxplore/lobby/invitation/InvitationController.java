@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
 import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 public class InvitationController {
-    private static final String ACCEPT_INVITATION_MAPPING = "lobby/invitation/{invitationId}";
-    private static final String GET_INVITATIONS = "lobby/invitation";
-    private static final String INVITE_MAPPING = "lobby/invitation/{invitedId}";
+    private static final String ACCEPT_INVITATION_MAPPING = API_PREFIX + "/lobby/invitation/{invitationId}";
+    public static final String GET_INVITATIONS_MAPPING = API_PREFIX + "/lobby/invitation";
+    private static final String INVITE_MAPPING = API_PREFIX + "/lobby/invitation/{invitedId}";
 
     private final AcceptInvitationService acceptInvitationService;
     private final InvitationViewQueryService invitationViewQueryService;
@@ -36,7 +37,7 @@ public class InvitationController {
         acceptInvitationService.acceptInvitation(characterId, invitationId);
     }
 
-    @GetMapping(GET_INVITATIONS)
+    @GetMapping(GET_INVITATIONS_MAPPING)
     List<InvitationView> getInvitations(@CookieValue(COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his invitations", characterId);
         return invitationViewQueryService.getInvitations(characterId);

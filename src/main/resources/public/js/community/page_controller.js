@@ -1,23 +1,23 @@
 (function PageController(){
-    scriptLoader.loadScript("js/common/invitation/invitation_controller.js");
-    scriptLoader.loadScript("js/community/notification_controller.js");
+    scriptLoader.loadScript("/js/common/invitation/invitation_controller.js");
+    scriptLoader.loadScript("/js/community/notification_controller.js");
 
-    scriptLoader.loadScript("js/community/mail/mail_operations.js");
-    scriptLoader.loadScript("js/community/mail/write_mail_controller.js");
-    scriptLoader.loadScript("js/community/mail/sent_mails_controller.js");
-    scriptLoader.loadScript("js/community/mail/incoming_mails_controller.js");
-    scriptLoader.loadScript("js/community/mail/archived_mails_controller.js");
-        scriptLoader.loadScript("js/community/mail/bulk_operations/with_incoming_mails.js");
-        scriptLoader.loadScript("js/community/mail/bulk_operations/with_archived_mails.js");
-        scriptLoader.loadScript("js/community/mail/bulk_operations/with_sent_mails.js");
+    scriptLoader.loadScript("/js/community/mail/mail_operations.js");
+    scriptLoader.loadScript("/js/community/mail/write_mail_controller.js");
+    scriptLoader.loadScript("/js/community/mail/sent_mails_controller.js");
+    scriptLoader.loadScript("/js/community/mail/incoming_mails_controller.js");
+    scriptLoader.loadScript("/js/community/mail/archived_mails_controller.js");
+        scriptLoader.loadScript("/js/community/mail/bulk_operations/with_incoming_mails.js");
+        scriptLoader.loadScript("/js/community/mail/bulk_operations/with_archived_mails.js");
+        scriptLoader.loadScript("/js/community/mail/bulk_operations/with_sent_mails.js");
 
-    scriptLoader.loadScript("js/community/blocked/block_character_controller.js");
-    scriptLoader.loadScript("js/community/blocked/blocked_characters_controller.js");
+    scriptLoader.loadScript("/js/community/blocked/block_character_controller.js");
+    scriptLoader.loadScript("/js/community/blocked/blocked_characters_controller.js");
 
-    scriptLoader.loadScript("js/community/friend/friend_controller.js");
-    scriptLoader.loadScript("js/community/friend/add_friend_controller.js");
-    scriptLoader.loadScript("js/community/friend/friend_request_controller.js");
-    scriptLoader.loadScript("js/community/friend/sent_friend_request_controller.js");
+    scriptLoader.loadScript("/js/community/friend/friend_controller.js");
+    scriptLoader.loadScript("/js/community/friend/add_friend_controller.js");
+    scriptLoader.loadScript("/js/community/friend/friend_request_controller.js");
+    scriptLoader.loadScript("/js/community/friend/sent_friend_request_controller.js");
 
     events.OPEN_MAIN_LISTS = "open_main_lists";
     events.OPEN_WRITE_MAIL_WINDOW = "open_write_mail_window";

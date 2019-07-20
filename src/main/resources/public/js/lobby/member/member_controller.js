@@ -1,5 +1,5 @@
 (function MemberController(){
-    scriptLoader.loadScript("js/common/character_id_query_service.js");
+    scriptLoader.loadScript("/js/common/character_id_query_service.js");
 
     events.DISPLAY_CHARACTERS = "display_characters";
     events.MEMBER_LEFT = "member_left";

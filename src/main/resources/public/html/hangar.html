@@ -6,10 +6,10 @@
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/hangar/hangar.css">
 
-    <SCRIPT src="js/common/jquery.js"></SCRIPT>
-    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    <SCRIPT src="/js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="/js/common/common_base.js"></SCRIPT>
 
-    <SCRIPT src="js/hangar/page_controller.js"></SCRIPT>
+    <SCRIPT src="/js/hangar/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 <DIV class="main-page">
@@ -83,7 +83,7 @@
 
     <FOOTER>
         <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
-        <BUTTON id="overview-button" onclick='window.location.href = "overview"'></BUTTON>
+        <BUTTON id="overview-button" onclick='window.location.href = Mapping.OVERVIEW_PAGE'></BUTTON>
     </FOOTER>
 </DIV>
 </BODY>

@@ -1,5 +1,5 @@
 (function CartController(){
-    scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
+    scriptLoader.loadScript("/js/common/equipment/equipment_label_service.js");
     
     events.ADD_TO_CART = "add_to_cart";
     events.REMOVE_FROM_CART = "remove_from_cart";

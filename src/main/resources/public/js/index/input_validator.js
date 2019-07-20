@@ -1,5 +1,5 @@
 (function InputValidator(){
-    scriptLoader.loadScript("js/index/validation_result.js");
+    scriptLoader.loadScript("/js/index/validation_result.js");
     
     events.VALIDATION_ATTEMPT = "validation_attempt";
     events.VALIDATE = "validate";

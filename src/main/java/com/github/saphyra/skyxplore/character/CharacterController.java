@@ -24,21 +24,23 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class CharacterController {
-    private static final String BUY_EQUIPMENTS_MAPPING = "character/equipment";
-    private static final String CREATE_CHARACTER_MAPPING = "character";
-    private static final String DELETE_CHARACTER_MAPPING = "character/{characterId}";
-    private static final String GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING = "character/active/name";
-    private static final String GET_CHARACTER_ID_MAPPING = "character/id";
-    private static final String GET_CHARACTERS_MAPPING = "character";
-    private static final String GET_EQUIPMENTS_OF_CHARACTER = "character/storage";
-    private static final String GET_MONEY_OF_CHARACTER_MAPPING = "character/money";
-    private static final String IS_CHAR_NAME_EXISTS_MAPPING = "character/name";
-    public static final String RENAME_CHARACTER_MAPPING = "character";
-    private static final String SELECT_CHARACTER_MAPPING = "character/{characterId}";
+    private static final String BUY_EQUIPMENTS_MAPPING = API_PREFIX + "/character/equipment";
+    private static final String CREATE_CHARACTER_MAPPING = API_PREFIX + "/character";
+    private static final String DELETE_CHARACTER_MAPPING = API_PREFIX + "/character/{characterId}";
+    private static final String GET_ACTIVE_CHARACTERS_BY_NAME_MAPPING = API_PREFIX + "/character/active/name";
+    private static final String GET_CHARACTER_ID_MAPPING = API_PREFIX + "/character/id";
+    private static final String GET_CHARACTERS_MAPPING = API_PREFIX + "/character";
+    private static final String GET_EQUIPMENTS_OF_CHARACTER = API_PREFIX + "/character/storage";
+    private static final String GET_MONEY_OF_CHARACTER_MAPPING = API_PREFIX + "/character/money";
+    private static final String IS_CHAR_NAME_EXISTS_MAPPING = API_PREFIX + "/character/name";
+    private static final String RENAME_CHARACTER_MAPPING = API_PREFIX + "/character";
+    private static final String SELECT_CHARACTER_MAPPING = API_PREFIX + "/character/{characterId}";
 
     private final BuyItemService buyItemService;
     private final CharacterCreatorService characterCreatorService;

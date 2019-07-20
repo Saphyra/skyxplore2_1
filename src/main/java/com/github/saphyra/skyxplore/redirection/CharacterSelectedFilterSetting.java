@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 //TODO unit test
 public class CharacterSelectedFilterSetting implements RedirectionFilterSettings {
-    private static final ProtectedUri PROTECTED_URI = new ProtectedUri("/**", HttpMethod.GET);
+    private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
     private static final List<String> ALLOWED_URIS = Arrays.asList(
         PageController.COMMUNITY_MAPPING,
         PageController.EQUIPMENT_MAPPING,

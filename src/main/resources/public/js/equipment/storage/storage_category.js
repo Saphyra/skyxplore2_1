@@ -1,6 +1,6 @@
-scriptLoader.loadScript("js/equipment/storage/storage_item.js");
-scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
-scriptLoader.loadScript("js/common/localization/items.js");
+scriptLoader.loadScript("/js/equipment/storage/storage_item.js");
+scriptLoader.loadScript("/js/common/equipment/equipment_label_service.js");
+scriptLoader.loadScript("/js/common/localization/items.js");
 
 function StorageCategory(id, container, list){
     const categoryId = id;

@@ -1,6 +1,6 @@
 (function ChangePasswordController(){
-    scriptLoader.loadScript("js/account/change_password/change_password_validator.js");
-    scriptLoader.loadScript("js/account/change_password/change_password_service.js");
+    scriptLoader.loadScript("/js/account/change_password/change_password_validator.js");
+    scriptLoader.loadScript("/js/account/change_password/change_password_service.js");
     
     events.PASSWORD_VALIDATION_ATTEMPT = "password_validation_attempt";
     

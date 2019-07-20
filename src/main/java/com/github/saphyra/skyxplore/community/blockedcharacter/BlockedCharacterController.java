@@ -19,14 +19,16 @@ import javax.validation.Valid;
 
 import java.util.List;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 class BlockedCharacterController {
-    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter";
-    private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter";
-    private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";
-    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/name";
+    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = API_PREFIX + "/blockedcharacter";
+    private static final String BLOCK_CHARACTER_MAPPING = API_PREFIX + "/blockcharacter";
+    private static final String GET_BLOCKED_CHARACTERS_MAPPING = API_PREFIX + "/blockedcharacter";
+    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = API_PREFIX + "/blockcharacter/name";
 
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final BlockCharacterService blockCharacterService;

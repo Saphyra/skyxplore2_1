@@ -1,8 +1,8 @@
 (function PageController(){
-    scriptLoader.loadScript("js/common/invitation/invitation_controller.js");
+    scriptLoader.loadScript("/js/common/invitation/invitation_controller.js");
 
-    scriptLoader.loadScript("js/overview/notification_service.js");
-    scriptLoader.loadScript("js/overview/equipment_service.js");
+    scriptLoader.loadScript("/js/overview/notification_service.js");
+    scriptLoader.loadScript("/js/overview/equipment_service.js");
     
     $(document).ready(function(){
         init();
@@ -29,7 +29,7 @@
         function(){
             const response = dao.sendRequest(HttpMethod.DELETE, Mapping.DESELECT_CHARACTER);
             if(response.status == ResponseStatus.OK){
-                window.location.href = "/characterselect";
+                window.location.href = Mapping.CHARACTER_SELECT_PAGE;
             }else {
                 throwException("UnknownBackendResponse", response.toString());
             }

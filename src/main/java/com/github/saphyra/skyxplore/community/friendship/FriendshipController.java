@@ -1,9 +1,14 @@
 package com.github.saphyra.skyxplore.community.friendship;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
+import com.github.saphyra.skyxplore.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
+import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
+import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,29 +17,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.skyxplore.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
-import com.github.saphyra.skyxplore.community.friendship.domain.FriendRequestView;
-import com.github.saphyra.skyxplore.community.friendship.domain.FriendView;
-import com.github.saphyra.skyxplore.common.RequestConstants;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.validation.Valid;
+import java.util.List;
+
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 class FriendshipController {
-    private static final String ACCEPT_FRIEND_REQUEST_MAPPING = "friend/request/accept";
-    private static final String ADD_FRIEND_MAPPING = "friend/request";
-    private static final String DECLINE_FRIEND_REQUEST_MAPPING = "friend/request"; //Also used for cancelling
-    private static final String DELETE_FRIEND_MAPPING = "friend";
-    private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = "friend/name";
-    private static final String GET_ACTIVE_FRIENDS_MAPPING = "friend/active";
-    private static final String GET_FRIENDS_MAPPING = "friend";
-    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = "friend/request/received";
-    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = "friend/request/sent";
+    private static final String ACCEPT_FRIEND_REQUEST_MAPPING = API_PREFIX + "/friend/request/accept";
+    private static final String ADD_FRIEND_MAPPING = API_PREFIX + "/friend/request";
+    private static final String DECLINE_FRIEND_REQUEST_MAPPING = API_PREFIX + "/friend/request"; //Also used for cancelling
+    private static final String DELETE_FRIEND_MAPPING = API_PREFIX + "/friend";
+    private static final String GET_CHARACTERS_CAN_BE_FRIEND_MAPPING = API_PREFIX + "/friend/name";
+    private static final String GET_ACTIVE_FRIENDS_MAPPING = API_PREFIX + "/friend/active";
+    private static final String GET_FRIENDS_MAPPING = API_PREFIX + "/friend";
+    private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = API_PREFIX + "/friend/request/received";
+    private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = API_PREFIX + "/friend/request/sent";
 
     private final ActiveFriendsQueryService activeFriendsQueryService;
     private final CharacterQueryService characterQueryService;

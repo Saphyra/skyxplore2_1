@@ -1,6 +1,6 @@
 (function ChangeUsernameController(){
-    scriptLoader.loadScript("js/account/change_username/change_username_validator.js");
-    scriptLoader.loadScript("js/account/change_username/change_username_service.js");
+    scriptLoader.loadScript("/js/account/change_username/change_username_validator.js");
+    scriptLoader.loadScript("/js/account/change_username/change_username_service.js");
     
     events.USERNAME_VALIDATION_ATTEMPT = "username_validation_attempt";
     

@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Map;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 class FactoryController {
-    private static final String ADD_TO_QUEUE_MAPPING = "factory";
-    private static final String GET_MATERIALS_MAPPING = "factory/materials";
+    private static final String ADD_TO_QUEUE_MAPPING = API_PREFIX + "/factory";
+    private static final String GET_MATERIALS_MAPPING = API_PREFIX + "/factory/materials";
 
     private final AddToQueueService addToQueueService;
     private final FactoryQueryService factoryQueryService;

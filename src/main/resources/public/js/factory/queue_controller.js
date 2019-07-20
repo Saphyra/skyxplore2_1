@@ -1,5 +1,5 @@
 (function QueueController(){
-    scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
+    scriptLoader.loadScript("/js/common/localization/date_time_formatter.js");
 
     events.LOAD_QUEUE = "load_queue";
     events.PRODUCT_FINISHED = "product_finished";

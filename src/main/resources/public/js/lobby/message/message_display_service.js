@@ -1,5 +1,5 @@
 (function MessageDisplayService(){
-    scriptLoader.loadScript("js/common/character_id_query_service.js");
+    scriptLoader.loadScript("/js/common/character_id_query_service.js");
 
     events.LOAD_MESSAGES = "load_messages";
 

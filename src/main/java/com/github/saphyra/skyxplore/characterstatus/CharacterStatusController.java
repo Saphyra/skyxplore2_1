@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 //TODO unit test
 class CharacterStatusController {
-    private static final String CHARACTER_DESELECT_MAPPING = "/character/deselect";
+    private static final String CHARACTER_DESELECT_MAPPING = API_PREFIX + "//character/deselect";
 
     private final AccessTokenDao accessTokenDao;
     private final CharacterStatusCache characterStatusCache;
