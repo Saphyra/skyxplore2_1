@@ -18,7 +18,8 @@ import static com.github.saphyra.skyxplore.common.RequestConstants.CHARACTER_ACT
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class CharacterSelectedFilterSetting implements RedirectionFilterSettings {
+//TODO unit test
+public class CharacterNotSelectedFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
 
     private final CharacterStatusQueryService characterStatusQueryService;
@@ -31,8 +32,8 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
 
     @Override
     public boolean shouldRedirect(RedirectionContext redirectionContext) {
-        boolean shouldRedirect = !CHARACTER_ACTIVE_ALLOWED_URIS.contains(redirectionContext.getRequestUri())
-            && isCharacterSelected(redirectionContext);
+        boolean shouldRedirect = CHARACTER_ACTIVE_ALLOWED_URIS.contains(redirectionContext.getRequestUri())
+            && !isCharacterSelected(redirectionContext);
         log.debug("shouldRedirect: {}", shouldRedirect);
         return shouldRedirect;
     }
@@ -46,7 +47,7 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
 
     @Override
     public String getRedirectionPath(RedirectionContext redirectionContext) {
-        return PageController.OVERVIEW_MAPPING;
+        return PageController.CHARACTER_SELECT_MAPPING;
     }
 
     @Override
@@ -56,6 +57,6 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
 
     @Override
     public String toString() {
-        return "CharacterSelectedFilterSetting - " + PROTECTED_URI.toString();
+        return "CharacterNotSelectedFilterSetting - " + PROTECTED_URI.toString();
     }
 }

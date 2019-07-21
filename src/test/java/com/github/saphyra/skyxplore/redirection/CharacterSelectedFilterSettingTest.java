@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.redirection;
 
 import com.github.saphyra.authservice.redirection.domain.RedirectionContext;
-import com.github.saphyra.skyxplore.characterstatus.CharacterStatusCache;
+import com.github.saphyra.skyxplore.characterstatus.CharacterStatusQueryService;
 import com.github.saphyra.skyxplore.characterstatus.domain.CharacterStatus;
 import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.skyxplore.common.RequestConstants;
@@ -27,7 +27,7 @@ public class CharacterSelectedFilterSettingTest {
     private CookieUtil cookieUtil;
 
     @Mock
-    private CharacterStatusCache characterStatusCache;
+    private CharacterStatusQueryService characterStatusQueryService;
 
     @InjectMocks
     private CharacterSelectedFilterSetting underTest;
@@ -69,7 +69,7 @@ public class CharacterSelectedFilterSettingTest {
     @Test
     public void shouldRedirect_characterNotStatusNotFound() {
         //GIVEN
-        given(characterStatusCache.get(CHARACTER_ID)).willReturn(Optional.empty());
+        given(characterStatusQueryService.getCharacterStatus(CHARACTER_ID)).willReturn(CharacterStatus.INACTIVE);
         //WHEN
         boolean result = underTest.shouldRedirect(redirectionContext);
         //THEN
@@ -79,7 +79,7 @@ public class CharacterSelectedFilterSettingTest {
     @Test
     public void shouldRedirect_characterNotActive() {
         //GIVEN
-        given(characterStatusCache.get(CHARACTER_ID)).willReturn(Optional.of(CharacterStatus.IN_LOBBY));
+        given(characterStatusQueryService.getCharacterStatus(CHARACTER_ID)).willReturn(CharacterStatus.IN_LOBBY);
         //WHEN
         boolean result = underTest.shouldRedirect(redirectionContext);
         //THEN
@@ -89,7 +89,7 @@ public class CharacterSelectedFilterSettingTest {
     @Test
     public void shouldRedirect_characterActive() {
         //GIVEN
-        given(characterStatusCache.get(CHARACTER_ID)).willReturn(Optional.of(CharacterStatus.ACTIVE));
+        given(characterStatusQueryService.getCharacterStatus(CHARACTER_ID)).willReturn(CharacterStatus.ACTIVE);
         //WHEN
         boolean result = underTest.shouldRedirect(redirectionContext);
         //THEN

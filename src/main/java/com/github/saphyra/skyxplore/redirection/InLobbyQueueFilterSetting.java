@@ -3,12 +3,13 @@ package com.github.saphyra.skyxplore.redirection;
 import com.github.saphyra.authservice.redirection.RedirectionFilterSettings;
 import com.github.saphyra.authservice.redirection.domain.ProtectedUri;
 import com.github.saphyra.authservice.redirection.domain.RedirectionContext;
-import com.github.saphyra.skyxplore.characterstatus.CharacterStatusCache;
+import com.github.saphyra.skyxplore.characterstatus.CharacterStatusQueryService;
 import com.github.saphyra.skyxplore.characterstatus.domain.CharacterStatus;
 import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class InLobbyQueueFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
     private static final List<String> ALLOWED_URIS = Arrays.asList(
@@ -24,7 +26,7 @@ public class InLobbyQueueFilterSetting implements RedirectionFilterSettings {
     );
 
     private final CookieUtil cookieUtil;
-    private final CharacterStatusCache characterStatusCache;
+    private final CharacterStatusQueryService characterStatusQueryService;
 
     @Override
     public ProtectedUri getProtectedUri() {
@@ -33,15 +35,16 @@ public class InLobbyQueueFilterSetting implements RedirectionFilterSettings {
 
     @Override
     public boolean shouldRedirect(RedirectionContext redirectionContext) {
-        return
-            !redirectionContext.isRest()
-                && !ALLOWED_URIS.contains(redirectionContext.getRequestUri())
-                && isCharacterInLobbyQueue(redirectionContext);
+        boolean shouldRedirect = !redirectionContext.isRest()
+            && !ALLOWED_URIS.contains(redirectionContext.getRequestUri())
+            && isCharacterInLobbyQueue(redirectionContext);
+        log.debug("shouldRedirect: {}", shouldRedirect);
+        return shouldRedirect;
     }
 
     private boolean isCharacterInLobbyQueue(RedirectionContext redirectionContext) {
         return cookieUtil.getCookie(redirectionContext.getRequest(), RequestConstants.COOKIE_CHARACTER_ID)
-            .flatMap(characterStatusCache::get)
+            .map(characterStatusQueryService::getCharacterStatus)
             .filter(characterStatus -> characterStatus == CharacterStatus.IN_LOBBY_QUEUE)
             .isPresent();
     }

@@ -17,7 +17,7 @@ public class PageController {
     public static final String EQUIPMENT_MAPPING = WEB_PREFIX + "/equipment";
     public static final String FACTORY_MAPPING = WEB_PREFIX + "/factory";
     public static final String HANGAR_MAPPING = WEB_PREFIX + "/hangar";
-    public static final String INDEX_MAPPING = WEB_PREFIX + "/";
+    public static final String INDEX_MAPPING = WEB_PREFIX ;
     public static final String OVERVIEW_MAPPING = WEB_PREFIX + "/overview";
     public static final String SHOP_MAPPING = WEB_PREFIX + "/shop";
     public static final String LOBBY_PAGE_MAPPING = WEB_PREFIX + "/lobby-page";

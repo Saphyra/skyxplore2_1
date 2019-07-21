@@ -21,7 +21,6 @@ class CharacterStatusController {
     private static final String CHARACTER_DESELECT_MAPPING = API_PREFIX + "//character/deselect";
 
     private final AccessTokenDao accessTokenDao;
-    private final CharacterStatusCache characterStatusCache;
     private final CookieUtil cookieUtil;
 
     @DeleteMapping(CHARACTER_DESELECT_MAPPING)
@@ -37,7 +36,6 @@ class CharacterStatusController {
             }
             accessToken.setCharacterId(null);
             accessTokenDao.save(accessToken);
-            characterStatusCache.invalidate(characterId);
             cookieUtil.setCookie(response, RequestConstants.COOKIE_CHARACTER_ID, "");
         });
     }

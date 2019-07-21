@@ -13,11 +13,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class CharacterStatusQueryService {
+public class CharacterStatusQueryService {
     private final AccessTokenDao accessTokenDao;
     private final LobbyQueryService lobbyQueryService;
 
-    CharacterStatus getCharacterStatus(String characterId) {
+    public CharacterStatus getCharacterStatus(String characterId) {
         //TODO check if character is in game
         Optional<Lobby> lobbyOptional = lobbyQueryService.findByCharacterId(characterId);
         if (lobbyOptional.isPresent()) {

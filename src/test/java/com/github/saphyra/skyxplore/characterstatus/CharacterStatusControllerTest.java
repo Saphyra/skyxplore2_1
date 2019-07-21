@@ -28,9 +28,6 @@ public class CharacterStatusControllerTest {
     private AccessTokenDao accessTokenDao;
 
     @Mock
-    private CharacterStatusCache characterStatusCache;
-
-    @Mock
     private CookieUtil cookieUtil;
 
     @InjectMocks
@@ -56,7 +53,6 @@ public class CharacterStatusControllerTest {
         underTest.characterDeselect(USER_ID, CHARACTER_ID, response);
         //THEN
         verifyZeroInteractions(cookieUtil);
-        verifyZeroInteractions(characterStatusCache);
     }
 
     @Test(expected = ForbiddenException.class)
@@ -71,7 +67,6 @@ public class CharacterStatusControllerTest {
         //THEN
         verify(accessToken).setCharacterId(null);
         verify(accessTokenDao).save(accessToken);
-        verify(characterStatusCache).invalidate(CHARACTER_ID);
         verify(cookieUtil).setCookie(response, RequestConstants.COOKIE_CHARACTER_ID, "");
     }
 }
