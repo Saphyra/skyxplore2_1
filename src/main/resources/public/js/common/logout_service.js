@@ -10,7 +10,7 @@
         const request = new Request(HttpMethod.POST, Mapping.LOGOUT);
             request.processValidResponse = function(){
                 sessionStorage.successMessage = MessageCode.getMessage("SUCCESSFUL_LOGOUT");
-                location.href = "/";
+                location.href = Mapping.INDEX_PAGE;
             }
             
         dao.sendRequestAsync(request);

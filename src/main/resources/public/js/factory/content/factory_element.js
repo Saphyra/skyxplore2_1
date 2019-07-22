@@ -1,5 +1,5 @@
-scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
-scriptLoader.loadScript("js/common/equipment/item_cache.js");
+scriptLoader.loadScript("/js/common/localization/date_time_formatter.js");
+scriptLoader.loadScript("/js/common/equipment/item_cache.js");
 
 function FactoryElement(
     id,

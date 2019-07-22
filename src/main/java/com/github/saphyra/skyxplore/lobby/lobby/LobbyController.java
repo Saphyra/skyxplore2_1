@@ -1,11 +1,12 @@
 package com.github.saphyra.skyxplore.lobby.lobby;
 
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
-
-import java.util.List;
-
-import javax.validation.Valid;
-
+import com.github.saphyra.skyxplore.lobby.lobby.creation.LobbyCreatorService;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.CreateLobbyRequest;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyEventView;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyMemberView;
+import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,28 +16,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.skyxplore.lobby.lobby.creation.LobbyCreatorService;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.CreateLobbyRequest;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyEventView;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyMemberView;
-import com.github.saphyra.skyxplore.lobby.lobby.domain.LobbyView;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.validation.Valid;
+import java.util.List;
+
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
 
 @RequiredArgsConstructor
 @RestController
 @Slf4j
 class LobbyController {
-    private static final String CREATE_LOBBY_MAPPING = "lobby";
-    private static final String EXIT_FROM_LOBBY_MAPPING = "lobby";
-    private static final String GET_LOBBY_MAPPING = "lobby";
-    private static final String GET_LOBBY_EVENTS_MAPPING = "lobby/event";
-    private static final String GET_LOBBY_MEMBERS_MAPPING = "lobby/member";
-    private static final String KICK_MEMBER_MAPPING = "lobby/member/{memberId}";
-    private static final String SET_READY_MAPPING = "lobby/ready";
-    private static final String START_QUEUE_MAPPING = "lobby/queue/{autoFill}";
-    private static final String TRANSFER_OWNERSHIP_MAPPING = "lobby/owner/{newOwnerId}";
-    private static final String SET_UNREADY_MAPPING = "lobby/unready";
+    private static final String CREATE_LOBBY_MAPPING = API_PREFIX + "/lobby";
+    private static final String EXIT_FROM_LOBBY_MAPPING = API_PREFIX + "/lobby";
+    private static final String GET_LOBBY_MAPPING = API_PREFIX + "/lobby";
+    private static final String GET_LOBBY_EVENTS_MAPPING = API_PREFIX + "/lobby/event";
+    private static final String GET_LOBBY_MEMBERS_MAPPING = API_PREFIX + "/lobby/member";
+    private static final String KICK_MEMBER_MAPPING = API_PREFIX + "/lobby/member/{memberId}";
+    private static final String SET_READY_MAPPING = API_PREFIX + "/lobby/ready";
+    private static final String START_QUEUE_MAPPING = API_PREFIX + "/lobby/queue/{autoFill}";
+    private static final String TRANSFER_OWNERSHIP_MAPPING = API_PREFIX + "/lobby/owner/{newOwnerId}";
+    private static final String SET_UNREADY_MAPPING = API_PREFIX + "/lobby/unready";
 
     private final LobbyCreatorService lobbyCreatorService;
     private final LobbyMemberHandler lobbyMemberHandler;

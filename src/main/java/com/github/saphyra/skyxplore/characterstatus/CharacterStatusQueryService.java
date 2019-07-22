@@ -1,15 +1,14 @@
 package com.github.saphyra.skyxplore.characterstatus;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.characterstatus.domain.CharacterStatus;
 import com.github.saphyra.skyxplore.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

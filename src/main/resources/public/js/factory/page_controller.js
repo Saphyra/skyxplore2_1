@@ -1,11 +1,11 @@
 (function PageController(){
-    scriptLoader.loadScript("js/common/invitation/invitation_controller.js");
+    scriptLoader.loadScript("/js/common/invitation/invitation_controller.js");
 
-    scriptLoader.loadScript("js/factory/menu_controller.js");
-    scriptLoader.loadScript("js/factory/materials_controller.js");
-    scriptLoader.loadScript("js/factory/money_controller.js");
-    scriptLoader.loadScript("js/factory/queue_controller.js");
-    scriptLoader.loadScript("js/factory/content/content_controller.js");
+    scriptLoader.loadScript("/js/factory/menu_controller.js");
+    scriptLoader.loadScript("/js/factory/materials_controller.js");
+    scriptLoader.loadScript("/js/factory/money_controller.js");
+    scriptLoader.loadScript("/js/factory/queue_controller.js");
+    scriptLoader.loadScript("/js/factory/content/content_controller.js");
 
     $(document).ready(function(){
         eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "factory"));

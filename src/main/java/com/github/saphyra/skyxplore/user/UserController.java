@@ -1,6 +1,13 @@
 package com.github.saphyra.skyxplore.user;
 
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.user.cache.EmailCache;
 import com.github.saphyra.skyxplore.user.cache.UserNameCache;
+import com.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
+import com.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
+import com.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
+import com.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
+import com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -9,29 +16,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.github.saphyra.skyxplore.user.cache.EmailCache;
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.user.domain.AccountDeleteRequest;
-import com.github.saphyra.skyxplore.user.domain.ChangeEmailRequest;
-import com.github.saphyra.skyxplore.user.domain.ChangePasswordRequest;
-import com.github.saphyra.skyxplore.user.domain.ChangeUserNameRequest;
-import com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest;
 
 import javax.validation.Valid;
 
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_USER_ID;
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_USER_ID;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-class UserController {
-    private static final String CHANGE_EMAIL_MAPPING = "user/email";
-    private static final String CHANGE_PASSWORD_MAPPING = "user/password";
-    private static final String CHANGE_USERNAME_MAPPING = "user/name";
-    private static final String DELETE_ACCOUNT_MAPPING = "user";
-    private static final String EMAIL_EXISTS_MAPPING = "user/email";
-    private static final String REGISTRATION_MAPPING = "user";
-    private static final String USERNAME_EXISTS_MAPPING = "user/name";
+public class UserController {
+    private static final String CHANGE_EMAIL_MAPPING = API_PREFIX + "/user/email";
+    private static final String CHANGE_PASSWORD_MAPPING = API_PREFIX + "/user/password";
+    private static final String CHANGE_USERNAME_MAPPING = API_PREFIX + "/user/name";
+    private static final String DELETE_ACCOUNT_MAPPING = API_PREFIX + "/user";
+    public static final String EMAIL_EXISTS_MAPPING = API_PREFIX + "/user/email";
+    public static final String REGISTRATION_MAPPING = API_PREFIX + "/user";
+    public static final String USERNAME_EXISTS_MAPPING = API_PREFIX + "/user/name";
 
     private final UserNameCache userNameCache;
     private final EmailCache emailCache;

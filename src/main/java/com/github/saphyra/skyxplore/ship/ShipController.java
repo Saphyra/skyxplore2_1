@@ -1,10 +1,10 @@
 package com.github.saphyra.skyxplore.ship;
 
 import com.github.saphyra.skyxplore.ship.domain.EquipRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.ship.domain.ShipView;
 import com.github.saphyra.skyxplore.ship.domain.UnequipRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import static com.github.saphyra.skyxplore.filter.CustomFilterHelper.COOKIE_CHARACTER_ID;
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 class ShipController {
-    private static final String EQUIP_MAPPING = "ship/equipment";
-    private static final String EQUIP_SHIP_MAPPING = "ship/equipment/{shipId}";
-    private static final String GET_SHIP_DATA_MAPPING = "ship";
-    private static final String UNEQUIP_MAPPING = "ship/equipment";
+    private static final String EQUIP_MAPPING = API_PREFIX + "/ship/equipment";
+    private static final String EQUIP_SHIP_MAPPING = API_PREFIX + "/ship/equipment/{shipId}";
+    private static final String GET_SHIP_DATA_MAPPING = API_PREFIX + "/ship";
+    private static final String UNEQUIP_MAPPING = API_PREFIX + "/ship/equipment";
 
     private final EquipService equipService;
     private final EquipShipService equipShipService;

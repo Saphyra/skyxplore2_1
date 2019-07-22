@@ -4,7 +4,7 @@ import com.github.saphyra.skyxplore.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
-import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import com.github.saphyra.skyxplore.common.RequestConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,14 +19,16 @@ import javax.validation.Valid;
 
 import java.util.List;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 class BlockedCharacterController {
-    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = "blockedcharacter";
-    private static final String BLOCK_CHARACTER_MAPPING = "blockcharacter";
-    private static final String GET_BLOCKED_CHARACTERS_MAPPING = "blockedcharacter";
-    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = "blockcharacter/name";
+    private static final String ALLOW_BLOCKED_CHARACTER_MAPPING = API_PREFIX + "/blockedcharacter";
+    private static final String BLOCK_CHARACTER_MAPPING = API_PREFIX + "/blockcharacter";
+    private static final String GET_BLOCKED_CHARACTERS_MAPPING = API_PREFIX + "/blockedcharacter";
+    private static final String GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING = API_PREFIX + "/blockcharacter/name";
 
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final BlockCharacterService blockCharacterService;
@@ -36,7 +38,7 @@ class BlockedCharacterController {
     @DeleteMapping(ALLOW_BLOCKED_CHARACTER_MAPPING)
     void allowBlockedCharacter(
         @RequestBody @Valid OneStringParamRequest request,
-        @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to allow blockedCharacter {}", characterId, request.getValue());
         blockCharacterService.allowBlockedCharacter(request.getValue(), characterId);
@@ -45,7 +47,7 @@ class BlockedCharacterController {
     @PostMapping(BLOCK_CHARACTER_MAPPING)
     void blockCharacter(
         @Valid @RequestBody OneStringParamRequest request,
-        @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to block {}", characterId, request.getValue());
         blockCharacterService.blockCharacter(request.getValue(), characterId);
@@ -53,7 +55,7 @@ class BlockedCharacterController {
 
     @GetMapping(GET_BLOCKED_CHARACTERS_MAPPING)
     List<CharacterView> getBlockedCharacters(
-        @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his blocked characters list.", characterId);
         return characterViewConverter.convertDomain(blockedCharacterQueryService.getBlockedCharacters(characterId));
@@ -62,7 +64,7 @@ class BlockedCharacterController {
     @PostMapping(GET_CHARACTERS_CAN_BE_BLOCKED_MAPPING)
     List<CharacterView> getCharactersCanBeBlocked(
         @RequestBody @Valid OneStringParamRequest request,
-        @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} querying blockable characters by name like {}", characterId, request.getValue());
         return characterViewConverter.convertDomain(characterQueryService.getCharactersCanBeBlocked(request.getValue(), characterId));

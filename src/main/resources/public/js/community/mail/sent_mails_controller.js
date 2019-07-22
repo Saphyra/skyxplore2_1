@@ -1,5 +1,5 @@
 (function SentMailsController(){
-    scriptLoader.loadScript("js/common/localization/date_time_formatter.js");
+    scriptLoader.loadScript("/js/common/localization/date_time_formatter.js");
 
     let isActive = false;
 

@@ -9,11 +9,13 @@ import com.github.saphyra.skyxplore.gamedata.subservice.CommonDataQueryService;
 
 import java.util.List;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 class DataController {
-    private static final String GET_ITEMS_OF_CATEGORY_MAPPING = "categories/{categoryId}";
+    private static final String GET_ITEMS_OF_CATEGORY_MAPPING = API_PREFIX + "/categories/{categoryId}";
 
     private final CommonDataQueryService commonDataQueryService;
 

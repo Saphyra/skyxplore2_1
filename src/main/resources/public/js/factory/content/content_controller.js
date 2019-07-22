@@ -1,9 +1,9 @@
 (function ContentController(){
-    scriptLoader.loadScript("js/common/cache.js");
-    scriptLoader.loadScript("js/common/localization/items.js");
-    scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
-    scriptLoader.loadScript("js/common/equipment/item_cache.js");
-    scriptLoader.loadScript("js/factory/content/factory_element.js");
+    scriptLoader.loadScript("/js/common/cache.js");
+    scriptLoader.loadScript("/js/common/localization/items.js");
+    scriptLoader.loadScript("/js/common/equipment/equipment_label_service.js");
+    scriptLoader.loadScript("/js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("/js/factory/content/factory_element.js");
 
 
     events.DISPLAY_CATEGORY = "display_category";

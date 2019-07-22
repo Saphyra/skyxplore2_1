@@ -6,10 +6,10 @@
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/lobby/lobby.css">
 
-    <SCRIPT src="js/common/jquery.js"></SCRIPT>
-    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    <SCRIPT src="/js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="/js/common/common_base.js"></SCRIPT>
 
-    <SCRIPT src="js/lobby/page_controller.js"></SCRIPT>
+    <SCRIPT src="/js/lobby/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 <DIV class="main-page">
@@ -35,7 +35,7 @@
             <DIV id="write-message-container">
                 <INPUT type="text" id="message">
                 <BUTTON id="send-message-button">
-                    <IMG src="images/send_button.png">
+                    <IMG src="/images/send_button.png">
                 </BUTTON>
             </DIV>
         </SECTION>
@@ -49,7 +49,7 @@
         <SECTION id="invitation-container">
             <h2 id="invitation-container-title" class="container-title"></h2>
             <BUTTON id="reset-invitation-button" onclick="eventProcessor.processEvent(new Event(events.LOAD_ACTIVE_FRIENDS))">
-                <IMG src="images/reset_button.png">
+                <IMG src="/images/reset_button.png">
             </BUTTON>
 
             <DIV id="no-character-can-be-invited"></DIV>
@@ -61,7 +61,7 @@
             <DIV id="invitation-search-container">
                 <INPUT type="text" id="character-name">
                 <BUTTON id="search-characters-button" onclick="eventProcessor.processEvent(new Event(events.SEARCH_INVITABLE_FRIENDS))" disabled>
-                    <IMG src="images/search_button.png">
+                    <IMG src="/images/search_button.png">
                 </BUTTON>
             </DIV>
         </SECTION>

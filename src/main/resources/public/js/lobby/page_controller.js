@@ -1,13 +1,13 @@
 (function PageController(){
-    scriptLoader.loadScript("js/common/localization/localization_map.js");
-    scriptLoader.loadScript("js/common/game/game_mode.js");
-    scriptLoader.loadScript("js/common/game/game_mode_translation.js");
-    scriptLoader.loadScript("js/lobby/invitation/invitation_controller.js");
-    scriptLoader.loadScript("js/lobby/message/message_sender_controller.js");
-    scriptLoader.loadScript("js/lobby/message/message_display_service.js");
-    scriptLoader.loadScript("js/lobby/member/member_controller.js");
-    scriptLoader.loadScript("js/lobby/event/lobby_event_controller.js");
-    scriptLoader.loadScript("js/common/character_id_query_service.js");
+    scriptLoader.loadScript("/js/common/localization/localization_map.js");
+    scriptLoader.loadScript("/js/common/game/game_mode.js");
+    scriptLoader.loadScript("/js/common/game/game_mode_translation.js");
+    scriptLoader.loadScript("/js/lobby/invitation/invitation_controller.js");
+    scriptLoader.loadScript("/js/lobby/message/message_sender_controller.js");
+    scriptLoader.loadScript("/js/lobby/message/message_display_service.js");
+    scriptLoader.loadScript("/js/lobby/member/member_controller.js");
+    scriptLoader.loadScript("/js/lobby/event/lobby_event_controller.js");
+    scriptLoader.loadScript("/js/common/character_id_query_service.js");
 
     events.EXIT_LOBBY = "exit_lobby";
     events.LOAD_LOBBY = "load_lobby";
@@ -67,7 +67,7 @@
             const request = new Request(HttpMethod.DELETE, Mapping.EXIT_FROM_LOBBY);
                 request.processValidResponse = function(){
                     sessionStorage.successMessage = MessageCode.getMessage("EXITED_FROM_LOBBY");
-                    window.location.href = "/overview";
+                    window.location.href = Mapping.OVERVIEW_PAGE;
                 }
 
             dao.sendRequestAsync(request);

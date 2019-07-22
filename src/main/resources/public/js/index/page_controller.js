@@ -5,9 +5,9 @@
     
     function init(){
         eventProcessor.processEvent(new Event(events.LOAD_LOCALIZATION, "index"));
-        scriptLoader.loadScript("js/index/login.js");
-        scriptLoader.loadScript("js/index/register.js");
-        scriptLoader.loadScript("js/index/input_validator.js");
+        scriptLoader.loadScript("/js/index/login.js");
+        scriptLoader.loadScript("/js/index/register.js");
+        scriptLoader.loadScript("/js/index/input_validator.js");
         
         $(".login-input").on("keyup", function(e){
             if(e.which == 13){

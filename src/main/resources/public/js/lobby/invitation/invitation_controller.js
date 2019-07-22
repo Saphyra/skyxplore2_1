@@ -1,6 +1,6 @@
 (function InvitationController(){
-    scriptLoader.loadScript("js/lobby/invitation/invitation_display_service.js");
-    scriptLoader.loadScript("js/lobby/invitation/send_invitation_controller.js");
+    scriptLoader.loadScript("/js/lobby/invitation/invitation_display_service.js");
+    scriptLoader.loadScript("/js/lobby/invitation/send_invitation_controller.js");
 
     events.LOAD_ACTIVE_FRIENDS = "load_active_friends";
     events.SEARCH_INVITABLE_FRIENDS = "search_invitable_friends";

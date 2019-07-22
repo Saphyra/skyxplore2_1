@@ -1,14 +1,15 @@
 package com.github.saphyra.skyxplore.auth;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
+import com.github.saphyra.authservice.auth.domain.AccessToken;
+import com.github.saphyra.authservice.auth.domain.User;
+import com.github.saphyra.encryption.impl.PasswordService;
+import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;
+import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
+import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
+import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
+import com.github.saphyra.skyxplore.user.repository.user.UserDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,16 +19,14 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
-import com.github.saphyra.authservice.domain.AccessToken;
-import com.github.saphyra.authservice.domain.User;
-import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import com.github.saphyra.skyxplore.event.UserLoggedOutEvent;
-import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
-import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
-import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
-import com.github.saphyra.skyxplore.user.repository.user.UserDao;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthDaoImplTest {
@@ -70,6 +69,9 @@ public class AuthDaoImplTest {
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private Optional<User> optionalUser;
 
+    @Mock
+    private AccessToken accessToken;
+
     @Before
     public void init() {
         Optional<SkyXpUser> optionalSkyXpUser = Optional.of(skyXpUser);
@@ -78,6 +80,9 @@ public class AuthDaoImplTest {
         User user = User.builder().userId(USER_ID).build();
         optionalUser = Optional.of(user);
         when(userConverter.convertEntity(optionalSkyXpUser)).thenReturn(optionalUser);
+
+        given(accessToken.getAccessTokenId()).willReturn(ACCESS_TOKEN_ID);
+        given(accessToken.getUserId()).willReturn(USER_ID);
     }
 
     @Test
@@ -117,7 +122,7 @@ public class AuthDaoImplTest {
     @Test
     public void testDeleteAccessToken() {
         //WHEN
-        underTest.deleteAccessToken(AccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build());
+        underTest.deleteAccessToken(accessToken);
         //THEN
         verify(accessTokenDao).deleteById(ACCESS_TOKEN_ID);
     }
@@ -146,7 +151,6 @@ public class AuthDaoImplTest {
         Optional<SkyXpAccessToken> optionalSkyXpAccessToken = Optional.of(skyXpAccessToken);
         when(accessTokenDao.findById(ACCESS_TOKEN_ID)).thenReturn(optionalSkyXpAccessToken);
 
-        AccessToken accessToken = AccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
         when(accessTokenConverter.convertEntity(optionalSkyXpAccessToken)).thenReturn(Optional.of(accessToken));
         //WHEN
         Optional<AccessToken> result = underTest.findAccessTokenByTokenId(ACCESS_TOKEN_ID);
@@ -158,10 +162,7 @@ public class AuthDaoImplTest {
     @Test
     public void testSaveAccessToken() {
         //GIVEN
-        AccessToken accessToken = AccessToken.builder().accessTokenId(ACCESS_TOKEN_ID).build();
-
         when(accessTokenConverter.convertDomain(accessToken)).thenReturn(skyXpAccessToken);
-
         //WHEN
         underTest.saveAccessToken(accessToken);
         //THEN
@@ -182,10 +183,6 @@ public class AuthDaoImplTest {
 
     @Test
     public void successfulLogoutCallback() {
-        //GIVEN
-        AccessToken accessToken = AccessToken.builder()
-            .userId(USER_ID)
-            .build();
         //WHEN
         underTest.successfulLogoutCallback(accessToken);
         //THEN

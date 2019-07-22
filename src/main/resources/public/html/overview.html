@@ -1,16 +1,16 @@
 <HTML>
 <HEAD>
     <TITLE></TITLE>
-    <META charset="UTF-8"/>
+    <META charset="UTF-8">
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
     <LINK rel="stylesheet" href="/css/ship_table.css">
     <LINK rel="stylesheet" href="/css/overview/overview.css">
 
-    <SCRIPT src="js/common/jquery.js"></SCRIPT>
-    <SCRIPT src="js/common/common_base.js"></SCRIPT>
+    <SCRIPT src="/js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="/js/common/common_base.js"></SCRIPT>
 
-    <SCRIPT src="js/overview/page_controller.js"></SCRIPT>
+    <SCRIPT src="/js/overview/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
@@ -21,10 +21,10 @@
 
     <MAIN>
         <SECTION class='menu-container'>
-            <A id="equipment-button" href='equipment'></A>
-            <A id="factory-button" href='factory'></A>
-            <A id="shop-button" href='shop'>Bolt</A>
-            <A id="hangar-button" href='hangar'>Hangár</A>
+            <A id="equipment-button" onclick="window.location.href = Mapping.EQUIPMENT_PAGE"></A>
+            <A id="factory-button" onclick="window.location.href = Mapping.FACTORY_PAGE"></A>
+            <A id="shop-button" onclick="window.location.href = Mapping.SHOP_PAGE">Bolt</A>
+            <A id="hangar-button" onclick="window.location.href = Mapping.HANGAR_PAGE">Hangár</A>
         </SECTION>
         
         <SECTION class='content-container'>
@@ -91,8 +91,8 @@
 
     <FOOTER>
         <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
-        <BUTTON id="characterselect-button" onclick='window.location.href = "characterselect"'></BUTTON>
-        <BUTTON onclick='window.location.href = "community"'>
+        <BUTTON id="characterselect-button" onclick='eventProcessor.processEvent(new Event(events.DESELECT_CHARACTER))'></BUTTON>
+        <BUTTON onclick="window.location.href = Mapping.COMMUNITY_PAGE">
             <SPAN id="community-button"></SPAN>
             <SPAN>
                 <SPAN> (</SPAN>

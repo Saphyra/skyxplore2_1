@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.factory;
 
-import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import com.github.saphyra.skyxplore.common.RequestConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.factory.domain.AddToQueueRequest;
@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Map;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 class FactoryController {
-    private static final String ADD_TO_QUEUE_MAPPING = "factory";
-    private static final String GET_MATERIALS_MAPPING = "factory/materials";
+    private static final String ADD_TO_QUEUE_MAPPING = API_PREFIX + "/factory";
+    private static final String GET_MATERIALS_MAPPING = API_PREFIX + "/factory/materials";
 
     private final AddToQueueService addToQueueService;
     private final FactoryQueryService factoryQueryService;
@@ -26,14 +28,14 @@ class FactoryController {
     @PutMapping(ADD_TO_QUEUE_MAPPING)
     void addToQueue(
         @RequestBody @Valid AddToQueueRequest request,
-        @CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId
+        @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("Character {} wants to add material {}", characterId, request);
         addToQueueService.addToQueue(characterId, request);
     }
 
     @GetMapping(GET_MATERIALS_MAPPING)
-    Map<String, Integer> getMaterials(@CookieValue(CustomFilterHelper.COOKIE_CHARACTER_ID) String characterId) {
+    Map<String, Integer> getMaterials(@CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId) {
         log.info("{} wants to know his materials", characterId);
         return factoryQueryService.getMaterials(characterId);
     }

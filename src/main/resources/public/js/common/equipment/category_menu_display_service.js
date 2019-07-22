@@ -1,5 +1,5 @@
 (function CategoryMenuDisplayService(){
-    scriptLoader.loadScript("js/common/localization/category_names.js");
+    scriptLoader.loadScript("/js/common/localization/category_names.js");
 
     window.categoryMenuDisplayService = new function(){
         this.displayCategories = displayCategories;

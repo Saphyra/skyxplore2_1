@@ -3,7 +3,7 @@ package com.github.saphyra.skyxplore.character;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import com.github.saphyra.skyxplore.filter.CustomFilterHelper;
+import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +27,6 @@ class CharacterSelectService {
         characterQueryService.findCharacterByIdAuthorized(characterId, userId);
         skyXpAccessToken.setCharacterId(characterId);
         accessTokenDao.save(skyXpAccessToken);
-        cookieUtil.setCookie(response, CustomFilterHelper.COOKIE_CHARACTER_ID, characterId);
+        cookieUtil.setCookie(response, RequestConstants.COOKIE_CHARACTER_ID, characterId);
     }
 }

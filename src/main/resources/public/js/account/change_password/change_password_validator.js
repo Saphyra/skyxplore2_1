@@ -1,6 +1,6 @@
 (function PasswordValidator(){
-    scriptLoader.loadScript("js/common/validation_util.js");
-    scriptLoader.loadScript("js/account/validation_result.js");
+    scriptLoader.loadScript("/js/common/validation_util.js");
+    scriptLoader.loadScript("/js/account/validation_result.js");
     
     events.VALIDATE_PASSWORD = "validate_password";
     

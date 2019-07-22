@@ -1,6 +1,6 @@
 (function DeleteAccountController(){
-    scriptLoader.loadScript("js/account/delete_account/delete_account_validator.js");
-    scriptLoader.loadScript("js/account/delete_account/delete_account_service.js");
+    scriptLoader.loadScript("/js/account/delete_account/delete_account_validator.js");
+    scriptLoader.loadScript("/js/account/delete_account/delete_account_service.js");
     
     events.DELETE_ACCOUNT_VALIDATION_ATTEMPT = "delete_account_validation_attempt";
     

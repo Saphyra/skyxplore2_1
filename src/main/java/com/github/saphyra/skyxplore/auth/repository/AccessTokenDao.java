@@ -27,6 +27,12 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessTo
         deleteByUserId(event.getUserId());
     }
 
+    //TODO unit test
+    public void cleanupCharacterId(String characterId) {
+        log.info("Cleaning up characterId {}", characterId);
+        repository.cleanUpCharacterId(characterId);
+    }
+
     public void deleteByUserId(String userId) {
         log.info("Deleting accessToken of user {}", userId);
         repository.deleteByUserId(userId);

@@ -1,10 +1,5 @@
 package com.github.saphyra.skyxplore.auth.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Arrays;
-import java.util.Optional;
-
 import com.github.saphyra.skyxplore.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
@@ -18,6 +13,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = AccessTokenRepositoryTest.TestConfig.class)
@@ -38,6 +38,33 @@ public class AccessTokenRepositoryTest {
     @After
     public void tearDown() {
         underTest.deleteAll();
+    }
+
+    @Test
+    public void cleanUpCharacterId() {
+        //GIVEN
+        AccessTokenEntity entity1 = AccessTokenEntity.builder()
+            .accessTokenId(ACCESS_TOKEN_ID_1)
+            .userId(USER_ID_1)
+            .lastAccess(LAST_ACCESS)
+            .characterId(CHARACTER_ID_1)
+            .build();
+
+        AccessTokenEntity entity2 = AccessTokenEntity.builder()
+            .accessTokenId(ACCESS_TOKEN_ID_2)
+            .userId(USER_ID_1)
+            .lastAccess(LAST_ACCESS)
+            .characterId(CHARACTER_ID_2)
+            .build();
+        underTest.saveAll(Arrays.asList(entity1, entity2));
+        //WHEN
+        underTest.cleanUpCharacterId(CHARACTER_ID_1);
+        //THEN
+        assertThat(underTest.findByCharacterId(CHARACTER_ID_1)).isEmpty();
+        Optional<AccessTokenEntity> optionalAccessTokenEntity = underTest.findById(ACCESS_TOKEN_ID_1);
+        assertThat(optionalAccessTokenEntity).isPresent();
+        assertThat(optionalAccessTokenEntity.get().getCharacterId()).isNull();
+        assertThat(underTest.findByCharacterId(CHARACTER_ID_2)).contains(entity2);
     }
 
     @Test

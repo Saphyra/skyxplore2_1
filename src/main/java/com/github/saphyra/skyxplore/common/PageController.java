@@ -1,26 +1,27 @@
 package com.github.saphyra.skyxplore.common;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.saphyra.skyxplore.common.RequestConstants.WEB_PREFIX;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class PageController {
-    public static final String CHARACTER_SELECT_MAPPING = "/characterselect";
-    private static final String COMMUNITY_MAPPING = "/community";
-    private static final String EQUIPMENT_MAPPING = "/equipment";
-    private static final String FACTORY_MAPPING = "/factory";
-    private static final String HANGAR_MAPPING = "/hangar";
-    public static final String INDEX_MAPPING = "/";
-    public static final String OVERVIEW_MAPPING = "/overview";
-    private static final String SETTINGS_MAPPING = "/account";
-    private static final String SHOP_MAPPING = "/shop";
-    public static final String LOBBY_PAGE_MAPPING = "/lobby-page";
-    public static final String LOBBY_QUEUE_MAPPING = "/lobby-queue";
+    public static final String ACCOUNT_MAPPING = WEB_PREFIX + "/account";
+    public static final String CHARACTER_SELECT_MAPPING = WEB_PREFIX + "/characterselect";
+    public static final String COMMUNITY_MAPPING = WEB_PREFIX + "/community";
+    public static final String EQUIPMENT_MAPPING = WEB_PREFIX + "/equipment";
+    public static final String FACTORY_MAPPING = WEB_PREFIX + "/factory";
+    public static final String HANGAR_MAPPING = WEB_PREFIX + "/hangar";
+    public static final String INDEX_MAPPING = WEB_PREFIX ;
+    public static final String OVERVIEW_MAPPING = WEB_PREFIX + "/overview";
+    public static final String SHOP_MAPPING = WEB_PREFIX + "/shop";
+    public static final String LOBBY_PAGE_MAPPING = WEB_PREFIX + "/lobby-page";
+    public static final String LOBBY_QUEUE_MAPPING = WEB_PREFIX + "/lobby-queue";
 
     @GetMapping(CHARACTER_SELECT_MAPPING)
     String characterSelect() {
@@ -64,9 +65,9 @@ public class PageController {
         return "overview";
     }
 
-    @GetMapping(SETTINGS_MAPPING)
-    String settings() {
-        log.info("Request arrived to {}", SETTINGS_MAPPING);
+    @GetMapping(ACCOUNT_MAPPING)
+    String account() {
+        log.info("Request arrived to {}", ACCOUNT_MAPPING);
         return "account";
     }
 
@@ -83,7 +84,7 @@ public class PageController {
     }
 
     @GetMapping(LOBBY_QUEUE_MAPPING)
-    String lobbyQueue(){
+    String lobbyQueue() {
         log.info("Request arrived to {}", LOBBY_QUEUE_MAPPING);
         return "lobby_queue";
     }

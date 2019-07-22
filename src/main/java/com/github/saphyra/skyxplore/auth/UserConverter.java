@@ -1,16 +1,17 @@
 package com.github.saphyra.skyxplore.auth;
 
-import com.github.saphyra.authservice.domain.Credentials;
-import com.github.saphyra.authservice.domain.User;
+import java.util.HashSet;
+
+import org.springframework.stereotype.Component;
+
+import com.github.saphyra.authservice.auth.domain.Credentials;
+import com.github.saphyra.authservice.auth.domain.User;
 import com.github.saphyra.converter.ConverterBase;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
-import lombok.RequiredArgsConstructor;
 import com.github.saphyra.skyxplore.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.user.domain.SkyXpUser;
 import com.github.saphyra.skyxplore.user.repository.credentials.CredentialsDao;
-import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
