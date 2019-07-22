@@ -6,7 +6,7 @@ public class LinkUtil {
     public static final String HOST_PI_INTERNAL = "http://192.168.0.200:9001/";
     public static final String HOST = HOST_TEST;
 
-    public static final String INDEX_PAGE = HOST + "web/";
+    public static final String INDEX_PAGE = HOST + "web";
     public static final String ACCOUNT = HOST + "web/account";
     public static final String CHARACTER_SELECT = HOST + "web/characterselect";
     public static final String EQUIPMENT = HOST + "web/equipment";
