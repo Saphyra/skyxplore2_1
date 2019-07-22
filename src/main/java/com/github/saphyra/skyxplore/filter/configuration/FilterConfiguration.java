@@ -1,10 +1,12 @@
 package com.github.saphyra.skyxplore.filter.configuration;
 
-import com.github.saphyra.skyxplore.filter.CharacterIdCleanupFilter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.skyxplore.filter.CharacterIdCleanupFilter;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @Slf4j
@@ -19,6 +21,7 @@ public class FilterConfiguration {
         FilterRegistrationBean<CharacterIdCleanupFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(characterIdCleanupFilter);
         filterRegistrationBean.setOrder(FILTER_ORDER);
+        filterRegistrationBean.addUrlPatterns(RequestConstants.WEB_PREFIX + "/*");
         return filterRegistrationBean;
     }
 }
