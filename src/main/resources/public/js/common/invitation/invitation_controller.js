@@ -125,7 +125,7 @@
             const element = document.createElement("link");
                 element.setAttribute("rel", "stylesheet");
                 element.setAttribute("type", "text/css");
-                element.setAttribute("href", "css/invitation.css");
+                element.setAttribute("href", "/css/invitation.css");
             document.getElementsByTagName("head")[0].appendChild(element);
         }
     }
