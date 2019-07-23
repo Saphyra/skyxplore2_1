@@ -1,6 +1,5 @@
 (function PageController(){
-    scriptLoader.loadScript("/js/common/lobby_message/message_sender_controller.js");
-    scriptLoader.loadScript("/js/common/lobby_message/message_display_service.js");
+    scriptLoader.loadScript("/js/common/lobby_message/lobby_message_controller.js");
 
     $(document).ready(function(){
         init();

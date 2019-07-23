@@ -1,12 +1,15 @@
 package com.github.saphyra.skyxplore.game.lobby.lobby;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -31,5 +34,12 @@ public class LobbyQueryService {
     public Lobby findByLobbyIdValidated(UUID lobbyId) {
         return Optional.ofNullable(lobbyStorage.get(lobbyId))
             .orElseThrow(() -> new NotFoundException("Lobby not found with id " + lobbyId));
+    }
+
+    //TODO unit test
+    public List<Lobby> getLobbiesInQueue() {
+        return lobbyStorage.values().stream()
+            .filter(Lobby::isInQueue)
+            .collect(Collectors.toList());
     }
 }
