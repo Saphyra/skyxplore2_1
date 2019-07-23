@@ -6,6 +6,12 @@
         "key": "innerHTML",
         "message": "Játék keresése"
       }
+    ],
+    "chat-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Chat"
+      }
     ]
   },
   "additionalContent": {

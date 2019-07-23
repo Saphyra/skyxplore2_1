@@ -3,7 +3,7 @@
 
     function sendMessage(){
         const message = $("#message").val();
-        const request = new Request(HttpMethod.PUT, Mapping.SEND_MESSAGE , {value: message});
+        const request = new Request(HttpMethod.PUT, Mapping.SEND_LOBBY_MESSAGE , {value: message});
             request.processValidResponse = function(){
                 $("#message").val("");
                 eventProcessor.processEvent(new Event(events.LOAD_MESSAGES));

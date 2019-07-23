@@ -1,10 +1,14 @@
 package com.github.saphyra.skyxplore.characterstatus;
 
-import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
-import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
-import com.github.saphyra.skyxplore.common.RequestConstants;
-import com.github.saphyra.util.CookieUtil;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,20 +16,24 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
-
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
+import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import com.github.saphyra.skyxplore.auth.repository.AccessTokenDao;
+import com.github.saphyra.skyxplore.characterstatus.domain.CharacterStatus;
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.util.CookieUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterStatusControllerTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String USER_ID = "user_id";
     private static final String FAKE_USER_ID = "fake_user_id";
+
     @Mock
     private AccessTokenDao accessTokenDao;
+
+    @Mock
+    private CharacterStatusQueryService characterStatusQueryService;
 
     @Mock
     private CookieUtil cookieUtil;
@@ -43,6 +51,16 @@ public class CharacterStatusControllerTest {
     public void setUp() {
         given(accessToken.getUserId()).willReturn(USER_ID);
         given(accessTokenDao.findByCharacterId(CHARACTER_ID)).willReturn(Optional.of(accessToken));
+    }
+
+    @Test
+    public void getCharacterStatus() {
+        //WHEN
+        given(characterStatusQueryService.getCharacterStatus(CHARACTER_ID)).willReturn(CharacterStatus.INACTIVE);
+        //WHEN
+        String  result = underTest.getCharacterStatus(CHARACTER_ID);
+        //THEN
+        assertThat(result).isEqualTo(CharacterStatus.INACTIVE.name());
     }
 
     @Test

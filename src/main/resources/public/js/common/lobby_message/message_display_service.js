@@ -13,7 +13,7 @@
     ));
 
     function loadMessages(){
-        const request = new Request(HttpMethod.GET, Mapping.GET_MESSAGES + "?all=" + queryAll);
+        const request = new Request(HttpMethod.GET, Mapping.GET_LOBBY_MESSAGES + "?all=" + queryAll);
             request.convertResponse = function(response){
                 const messages = JSON.parse(response.body);
                 messages.sort(function(a, b){return a.createdAt - b.createdAt});

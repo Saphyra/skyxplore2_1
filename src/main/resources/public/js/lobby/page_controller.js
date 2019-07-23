@@ -3,8 +3,8 @@
     scriptLoader.loadScript("/js/common/game/game_mode.js");
     scriptLoader.loadScript("/js/common/game/game_mode_translation.js");
     scriptLoader.loadScript("/js/lobby/invitation/invitation_controller.js");
-    scriptLoader.loadScript("/js/lobby/message/message_sender_controller.js");
-    scriptLoader.loadScript("/js/lobby/message/message_display_service.js");
+    scriptLoader.loadScript("/js/common/lobby_message/message_sender_controller.js");
+    scriptLoader.loadScript("/js/common/lobby_message/message_display_service.js");
     scriptLoader.loadScript("/js/lobby/member/member_controller.js");
     scriptLoader.loadScript("/js/lobby/event/lobby_event_controller.js");
     scriptLoader.loadScript("/js/common/character_id_query_service.js");
