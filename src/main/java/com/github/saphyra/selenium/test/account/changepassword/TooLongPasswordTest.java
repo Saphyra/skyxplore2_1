@@ -9,7 +9,7 @@ import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 
-import static com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
 
 @Builder
 public class TooLongPasswordTest {

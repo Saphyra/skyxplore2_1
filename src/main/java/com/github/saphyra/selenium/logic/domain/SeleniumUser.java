@@ -2,8 +2,8 @@ package com.github.saphyra.selenium.logic.domain;
 
 import static com.github.saphyra.selenium.logic.util.Util.crop;
 import static com.github.saphyra.selenium.logic.util.Util.randomUID;
-import static com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
-import static com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest.PASSWORD_MAX_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest.USER_NAME_MAX_LENGTH;
 
 import lombok.Data;
 

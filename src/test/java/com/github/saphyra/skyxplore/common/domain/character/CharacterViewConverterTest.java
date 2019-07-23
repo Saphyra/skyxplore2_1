@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterViewConverterTest {
