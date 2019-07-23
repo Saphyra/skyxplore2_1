@@ -1,5 +1,10 @@
 package com.github.saphyra.skyxplore.redirection;
 
+import static com.github.saphyra.skyxplore.common.RequestConstants.CHARACTER_SELECT_REQUIRED_URIS;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.authservice.redirection.RedirectionFilterSettings;
 import com.github.saphyra.authservice.redirection.domain.ProtectedUri;
 import com.github.saphyra.authservice.redirection.domain.RedirectionContext;
@@ -10,15 +15,10 @@ import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-
-import static com.github.saphyra.skyxplore.common.RequestConstants.CHARACTER_ACTIVE_ALLOWED_URIS;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class CharacterNotSelectedFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(RequestConstants.WEB_PREFIX + "/**", HttpMethod.GET);
 
@@ -32,7 +32,7 @@ public class CharacterNotSelectedFilterSetting implements RedirectionFilterSetti
 
     @Override
     public boolean shouldRedirect(RedirectionContext redirectionContext) {
-        boolean shouldRedirect = CHARACTER_ACTIVE_ALLOWED_URIS.contains(redirectionContext.getRequestUri())
+        boolean shouldRedirect = CHARACTER_SELECT_REQUIRED_URIS.contains(redirectionContext.getRequestUri())
             && !isCharacterSelected(redirectionContext);
         log.debug("shouldRedirect: {}", shouldRedirect);
         return shouldRedirect;

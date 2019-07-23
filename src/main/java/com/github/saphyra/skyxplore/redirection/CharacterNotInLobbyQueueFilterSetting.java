@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class CharacterNotInLobbyQueueFilterSetting implements RedirectionFilterSettings {
     private static final ProtectedUri PROTECTED_URI = new ProtectedUri(PageController.LOBBY_QUEUE_MAPPING, HttpMethod.GET);
 

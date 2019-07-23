@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import static com.github.saphyra.skyxplore.common.RequestConstants.CHARACTER_ACTIVE_ALLOWED_URIS;
+import static com.github.saphyra.skyxplore.common.RequestConstants.CHARACTER_SELECT_REQUIRED_URIS;
 
 @Component
 @RequiredArgsConstructor
@@ -31,7 +31,7 @@ public class CharacterSelectedFilterSetting implements RedirectionFilterSettings
 
     @Override
     public boolean shouldRedirect(RedirectionContext redirectionContext) {
-        boolean shouldRedirect = !CHARACTER_ACTIVE_ALLOWED_URIS.contains(redirectionContext.getRequestUri())
+        boolean shouldRedirect = !CHARACTER_SELECT_REQUIRED_URIS.contains(redirectionContext.getRequestUri())
             && isCharacterSelected(redirectionContext);
         log.debug("shouldRedirect: {}", shouldRedirect);
         return shouldRedirect;

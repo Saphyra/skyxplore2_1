@@ -16,7 +16,7 @@ public class RequestConstants {
     public static final String WEB_PREFIX = "/web";
     public static final String API_PREFIX = "/api";
 
-    public static final List<String> CHARACTER_ACTIVE_ALLOWED_URIS = Arrays.asList(
+    public static final List<String> CHARACTER_SELECT_REQUIRED_URIS = Arrays.asList(
         PageController.COMMUNITY_MAPPING,
         PageController.EQUIPMENT_MAPPING,
         PageController.FACTORY_MAPPING,

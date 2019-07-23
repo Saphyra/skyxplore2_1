@@ -39,11 +39,19 @@ public class AccessTokenDaoTest {
     private AccessTokenDao underTest;
 
     @Test
-    public void accountDeletedEventListener(){
+    public void accountDeletedEventListener() {
         //WHEN
         underTest.accountDeletedEventListener(new AccountDeletedEvent(USER_ID));
         //THEN
         verify(accessTokenRepository).deleteByUserId(USER_ID);
+    }
+
+    @Test
+    public void cleanupCharacterId() {
+        //WHEN
+        underTest.cleanupCharacterId(CHARACTER_ID);
+        //THEN
+        verify(accessTokenRepository).cleanUpCharacterId(CHARACTER_ID);
     }
 
     @Test

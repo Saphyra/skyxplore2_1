@@ -1,15 +1,16 @@
 package com.github.saphyra.skyxplore.auth.repository;
 
-import com.github.saphyra.dao.AbstractDao;
-import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
-import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.time.OffsetDateTime;
-import java.util.Optional;
+import com.github.saphyra.dao.AbstractDao;
+import com.github.saphyra.skyxplore.auth.domain.SkyXpAccessToken;
+import com.github.saphyra.skyxplore.common.DateTimeUtil;
+import com.github.saphyra.skyxplore.event.AccountDeletedEvent;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Component
@@ -27,7 +28,6 @@ public class AccessTokenDao extends AbstractDao<AccessTokenEntity, SkyXpAccessTo
         deleteByUserId(event.getUserId());
     }
 
-    //TODO unit test
     public void cleanupCharacterId(String characterId) {
         log.info("Cleaning up characterId {}", characterId);
         repository.cleanUpCharacterId(characterId);
