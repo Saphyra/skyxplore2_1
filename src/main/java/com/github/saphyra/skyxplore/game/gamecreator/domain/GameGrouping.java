@@ -21,7 +21,10 @@ public class GameGrouping {
     private final UUID gameGroupingId;
 
     @NonNull
-    private final Integer expectedGameMembersAmount;
+    private final Integer minimumGameMembersAmount;
+
+    @NonNull
+    private final GameGroupSizeRange gameGroupSizeRange;
 
     @NonNull
     private final GameMode gameMode;
@@ -51,5 +54,15 @@ public class GameGrouping {
     public GameGrouping lockLobby(UUID lobbyId) {
         lockedLobbyIds.add(lobbyId);
         return this;
+    }
+
+    public boolean hasEnoughMembers() {
+        return getMembersAmount() >= minimumGameMembersAmount;
+    }
+
+    public int getMembersAmount() {
+        return Math.toIntExact(gameGroups.stream()
+            .map(gameGroup -> gameGroup.getCharacters().size())
+            .count());
     }
 }

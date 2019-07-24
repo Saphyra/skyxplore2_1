@@ -1,15 +1,19 @@
 package com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.fill.fromlobby.vs;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingQueryService;
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameCharacter;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupSizeRange;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
+import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameGroupFactory;
+import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameGroupSizeRangeProvider;
+import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameGroupingFactory;
 import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.fill.fromlobby.AddToGroupingStrategy;
-import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GroupFactory;
-import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GroupingFactory;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +29,9 @@ class VsAddToGroupingStrategy implements AddToGroupingStrategy {
 
     private final GameGroupingQueryService gameGroupingQueryService;
     private final GameGroupingStorage gameGroupingStorage;
-    private final GroupFactory groupFactory;
-    private final GroupingFactory groupingFactory;
+    private final GameGroupFactory gameGroupFactory;
+    private final GameGroupingFactory gameGroupingFactory;
+    private final GameGroupSizeRangeProvider gameGroupSizeRangeProvider;
 
     @Override
     public boolean canAdd(GameMode gameMode) {
@@ -54,12 +59,16 @@ class VsAddToGroupingStrategy implements AddToGroupingStrategy {
     }
 
     private void addToExistingGrouping(Lobby lobby, GameGrouping availableGrouping) {
-        lobby.getMembers().forEach(lobbyMember -> availableGrouping.addGroup(groupFactory.createGroup(lobbyMember, false, MAX_GROUP_SIZE)));
+        lobby.getMembers().forEach(lobbyMember -> {
+            GameCharacter gameCharacter = GameCharacter.builder().characterId(lobbyMember.getCharacterId()).build();
+            availableGrouping.addGroup(gameGroupFactory.createGroup(Arrays.asList(gameCharacter), false, MAX_GROUP_SIZE));
+        });
         availableGrouping.lockLobby(lobby.getLobbyId());
     }
 
     private void createGroupingFrom(Lobby lobby) {
-        GameGrouping gameGrouping = groupingFactory.create(lobby, groupFactory.createGroups(lobby, MAX_GROUP_SIZE), EXPECTED_GAME_MEMBERS_AMOUNT);
+        GameGroupSizeRange gameGroupSizeRange = gameGroupSizeRangeProvider.getGameModeSizeRange(GameMode.VS);
+        GameGrouping gameGrouping = gameGroupingFactory.create(lobby, gameGroupFactory.createGroups(lobby, MAX_GROUP_SIZE), EXPECTED_GAME_MEMBERS_AMOUNT, gameGroupSizeRange);
         gameGroupingStorage.put(gameGrouping.getGameGroupingId(), gameGrouping);
     }
 }

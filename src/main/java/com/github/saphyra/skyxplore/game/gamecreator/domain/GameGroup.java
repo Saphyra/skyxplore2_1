@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.domain;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
@@ -14,7 +13,7 @@ public class GameGroup {
     private final UUID gameGroupId;
 
     @NonNull
-    private final List<GameCharacter> characters;
+    private final FixedSizeConcurrentList<GameCharacter> characters;
 
     private final boolean autoFill;
 
