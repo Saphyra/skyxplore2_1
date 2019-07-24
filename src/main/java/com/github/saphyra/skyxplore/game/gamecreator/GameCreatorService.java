@@ -4,6 +4,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.fill.FillGroupingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,9 @@ public class GameCreatorService {
 
     @Scheduled(fixedDelay = 4000L)
     void createGames() {
-        fillGroupingService.fillGroupings();
+        log.info("Creating games...");
+        fillGroupingService.fillGroupingsWithLobbies();
+        fillGroupingService.fillGroupingsWithAis();
+        //TODO create games from completed groupings
     }
 }

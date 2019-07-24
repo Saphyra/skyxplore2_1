@@ -1,25 +1,26 @@
-package com.github.saphyra.skyxplore.game.gamecreator;
+package com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.fill.fromlobby;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.github.saphyra.skyxplore.game.gamecreator.strategies.AddToGroupingStrategy;
+import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
 @RequiredArgsConstructor
+@Service
 @Slf4j
 //TODO unit test
-class FillGroupingService {
+public class FillFromLobbyService {
     private final LobbyQueryService lobbyQueryService;
     private final GameGroupingStorage gameGroupingStorage;
     private final List<AddToGroupingStrategy> addToGroupingStrategies;
 
-    void fillGroupings() {
+    public void fillGroupingsWithLobbies() {
+        log.info("Creating groupings from lobbies...");
         try {
             lobbyQueryService.getLobbiesInQueue().stream()
                 .filter(lobby -> !isLocked(lobby))
@@ -31,7 +32,7 @@ class FillGroupingService {
                     }
                 });
         } catch (Exception e) {
-            log.error("Exception occurred during fillGroupings:", e);
+            log.error("Exception occurred during fillGroupingsWithLobbies:", e);
         }
     }
 
@@ -41,6 +42,7 @@ class FillGroupingService {
     }
 
     private void addToGrouping(Lobby lobby) {
+        log.info("Adding to GameGrouping: {}, GameMode: {}", lobby.getLobbyId(), lobby.getGameMode());
         addToGroupingStrategies.stream()
             .filter(addToGroupingStrategy -> addToGroupingStrategy.canAdd(lobby.getGameMode()))
             .findFirst()

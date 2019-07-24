@@ -21,6 +21,9 @@ public class GameGrouping {
     private final UUID gameGroupingId;
 
     @NonNull
+    private final Integer expectedGameMembersAmount;
+
+    @NonNull
     private final GameMode gameMode;
 
     private final Object data;
@@ -35,7 +38,6 @@ public class GameGrouping {
     @Builder.Default
     @NonNull
     private final List<UUID> lockedLobbyIds = new Vector<>();
-
 
     public void addGroup(GameGroup group) {
         gameGroups.add(group);
