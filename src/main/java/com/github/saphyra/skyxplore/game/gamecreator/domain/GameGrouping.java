@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.game.gamecreator.domain;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
@@ -9,29 +10,36 @@ import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.ToString;
 
-@Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-//TODO unit test
+@ToString
+@EqualsAndHashCode
 public class GameGrouping {
     @NonNull
+    @Getter
     private final UUID gameGroupingId;
 
     @NonNull
+    @Getter
     private final Integer minimumGameMembersAmount;
 
     @NonNull
+    @Getter
     private final GameGroupSizeRange gameGroupSizeRange;
 
     @NonNull
+    @Getter
     private final GameMode gameMode;
 
     private final Object data;
 
     @NonNull
+    @Getter
     private final OffsetDateTime createdAt;
 
     @NonNull
@@ -64,5 +72,13 @@ public class GameGrouping {
         return Math.toIntExact(gameGroups.stream()
             .map(gameGroup -> gameGroup.getCharacters().size())
             .count());
+    }
+
+    public List<GameGroup> getGameGroups() {
+        return new ArrayList<>(gameGroups);
+    }
+
+    public List<UUID> getLockedLobbyIds() {
+        return new ArrayList<>(lockedLobbyIds);
     }
 }

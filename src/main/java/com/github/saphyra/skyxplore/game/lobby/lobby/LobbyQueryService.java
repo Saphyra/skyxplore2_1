@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class LobbyQueryService {
     private final LobbyStorage lobbyStorage;
 
@@ -36,7 +38,6 @@ public class LobbyQueryService {
             .orElseThrow(() -> new NotFoundException("Lobby not found with id " + lobbyId));
     }
 
-    //TODO unit test
     public List<Lobby> getLobbiesInQueue() {
         return lobbyStorage.values().stream()
             .filter(Lobby::isInQueue)

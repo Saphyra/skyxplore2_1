@@ -17,13 +17,14 @@ import com.github.saphyra.skyxplore.platform.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.common.PageController;
 import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.util.CookieUtil;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
+@Builder
 public class CharacterIdCleanupFilter extends OncePerRequestFilter {
     private static final List<String> PROTECTED_URIS = Arrays.asList(
         PageController.INDEX_MAPPING,

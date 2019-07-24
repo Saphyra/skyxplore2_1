@@ -4,17 +4,22 @@ import java.util.UUID;
 
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.ToString;
 
-@Data
+@EqualsAndHashCode
+@ToString
 public class GameGroup {
     @NonNull
+    @Getter
     private final UUID gameGroupId;
 
     @NonNull
     private final FixedSizeConcurrentList<GameCharacter> characters;
 
+    @Getter
     private final boolean autoFill;
 
     @Builder
@@ -27,5 +32,9 @@ public class GameGroup {
     public GameGroup addCharacter(GameCharacter gameCharacter) {
         characters.add(gameCharacter);
         return this;
+    }
+
+    public FixedSizeConcurrentList<GameCharacter> getCharacters() {
+        return new FixedSizeConcurrentList<>(characters.getMaxSize(), characters);
     }
 }

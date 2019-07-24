@@ -17,7 +17,7 @@ public class GameCharacterFactory {
     public GameCharacter createGameCharacter(String characterId, boolean isAi) {
         GameCharacter gameCharacter = GameCharacter.builder()
             .characterId(characterId)
-            .isAi(false)
+            .isAi(isAi)
             .build();
         log.debug("GameCharacter created: {}", gameCharacter);
         return gameCharacter;
