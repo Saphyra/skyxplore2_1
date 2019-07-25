@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingQueryService;
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
-import com.github.saphyra.skyxplore.game.gamecreator.domain.GameCharacter;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupSizeRange;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
 import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameGroupFactory;
@@ -60,8 +60,8 @@ class VsAddToGroupingStrategy implements AddToGroupingStrategy {
 
     private void addToExistingGrouping(Lobby lobby, GameGrouping availableGrouping) {
         lobby.getMembers().forEach(lobbyMember -> {
-            GameCharacter gameCharacter = GameCharacter.builder().characterId(lobbyMember.getCharacterId()).build();
-            availableGrouping.addGroup(gameGroupFactory.createGroup(Arrays.asList(gameCharacter), false, MAX_GROUP_SIZE));
+            GameGroupCharacter gameGroupCharacter = GameGroupCharacter.builder().characterId(lobbyMember.getCharacterId()).build();
+            availableGrouping.addGroup(gameGroupFactory.createGroup(Arrays.asList(gameGroupCharacter), false, MAX_GROUP_SIZE));
         });
         availableGrouping.lockLobby(lobby.getLobbyId());
     }

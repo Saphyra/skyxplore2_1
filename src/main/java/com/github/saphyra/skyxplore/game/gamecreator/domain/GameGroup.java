@@ -17,7 +17,7 @@ public class GameGroup {
     private final UUID gameGroupId;
 
     @NonNull
-    private final FixedSizeConcurrentList<GameCharacter> characters;
+    private final FixedSizeConcurrentList<GameGroupCharacter> characters;
 
     @Getter
     private final boolean autoFill;
@@ -29,12 +29,12 @@ public class GameGroup {
         this.autoFill = autoFill;
     }
 
-    public GameGroup addCharacter(GameCharacter gameCharacter) {
-        characters.add(gameCharacter);
+    public GameGroup addCharacter(GameGroupCharacter gameGroupCharacter) {
+        characters.add(gameGroupCharacter);
         return this;
     }
 
-    public FixedSizeConcurrentList<GameCharacter> getCharacters() {
+    public FixedSizeConcurrentList<GameGroupCharacter> getCharacters() {
         return new FixedSizeConcurrentList<>(characters.getMaxSize(), characters);
     }
 }

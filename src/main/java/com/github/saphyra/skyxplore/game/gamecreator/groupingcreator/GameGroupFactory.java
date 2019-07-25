@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.game.gamecreator.domain.GameCharacter;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroup;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.LobbyMember;
@@ -23,27 +23,27 @@ public class GameGroupFactory {
     private final IdGenerator idGenerator;
 
     public List<GameGroup> createGroups(Lobby lobby, int maxGroupSize) {
-        List<GameCharacter> gameCharacters = lobby.getMembers().stream()
+        List<GameGroupCharacter> gameGroupCharacters = lobby.getMembers().stream()
             .map(LobbyMember::getCharacterId)
             .map(characterId -> gameCharacterFactory.createGameCharacter(characterId, false))
             .collect(Collectors.toList());
-        return createGroups(gameCharacters, lobby.isAutoFill(), maxGroupSize);
+        return createGroups(gameGroupCharacters, lobby.isAutoFill(), maxGroupSize);
     }
 
-    public List<GameGroup> createGroups(List<GameCharacter> gameCharacters, boolean isAutoFill, int maxGroupSize) {
-        return Lists.partition(gameCharacters, maxGroupSize).stream()
+    public List<GameGroup> createGroups(List<GameGroupCharacter> gameGroupCharacters, boolean isAutoFill, int maxGroupSize) {
+        return Lists.partition(gameGroupCharacters, maxGroupSize).stream()
             .map(members -> createGroup(members, isAutoFill, maxGroupSize))
             .collect(Collectors.toList());
     }
 
-    public GameGroup createGroup(List<GameCharacter> gameCharacters, boolean autoFill, int maxGroupSize) {
+    public GameGroup createGroup(List<GameGroupCharacter> gameGroupCharacters, boolean autoFill, int maxGroupSize) {
         GameGroup gameGroup = GameGroup.builder()
             .gameGroupId(idGenerator.randomUUID())
             .maxGroupSize(maxGroupSize)
             .autoFill(autoFill)
             .build();
 
-        gameCharacters.forEach(gameGroup::addCharacter);
+        gameGroupCharacters.forEach(gameGroup::addCharacter);
         log.debug("Created GameGroup: {}", gameGroup);
         return gameGroup;
     }

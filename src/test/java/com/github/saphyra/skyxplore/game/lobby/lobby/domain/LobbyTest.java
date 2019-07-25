@@ -24,7 +24,7 @@ import com.github.saphyra.exceptionhandling.exception.PreconditionFailedExceptio
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyContext;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
-import com.github.saphyra.skyxplore.game.lobby.message.domain.Message;
+import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.util.Random;
 
 @RunWith(MockitoJUnitRunner.class)

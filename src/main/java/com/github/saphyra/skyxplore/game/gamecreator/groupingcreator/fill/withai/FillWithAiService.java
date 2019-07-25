@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
-import com.github.saphyra.skyxplore.game.gamecreator.domain.GameCharacter;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroup;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupSizeRange;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
@@ -64,15 +64,15 @@ public class FillWithAiService {
         }
 
         log.debug("All emptyPlaces are filled of GameGroups in GameGrouping {}. Remaining missingMembers: {}", gameGrouping.getGameGroupingId(), missingMembers);
-        List<GameCharacter> gameCharacters = new ArrayList<>();
+        List<GameGroupCharacter> gameGroupCharacters = new ArrayList<>();
         for (; missingMembers > 0; missingMembers--) {
-            GameCharacter gameCharacter = GameCharacter.builder()
+            GameGroupCharacter gameGroupCharacter = GameGroupCharacter.builder()
                 .characterId(idGenerator.generateRandomId())
                 .isAi(true)
                 .build();
-            gameCharacters.add(gameCharacter);
+            gameGroupCharacters.add(gameGroupCharacter);
         }
-        gameGroupFactory.createGroups(gameCharacters, false, getGroupSize(gameGrouping))
+        gameGroupFactory.createGroups(gameGroupCharacters, false, getGroupSize(gameGrouping))
             .forEach(gameGrouping::addGroup);
     }
 

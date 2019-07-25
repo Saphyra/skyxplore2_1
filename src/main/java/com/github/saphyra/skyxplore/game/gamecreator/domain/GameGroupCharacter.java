@@ -9,7 +9,7 @@ import lombok.NonNull;
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class GameCharacter {
+public class GameGroupCharacter {
     @NonNull
     private final String  characterId;
 

@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.game.lobby.message.domain;
+package com.github.saphyra.skyxplore.common.domain.message;
 
 import java.util.List;
 import java.util.UUID;

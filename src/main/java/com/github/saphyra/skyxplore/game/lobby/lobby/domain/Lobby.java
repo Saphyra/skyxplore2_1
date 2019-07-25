@@ -13,7 +13,7 @@ import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.exceptionhandling.exception.PreconditionFailedException;
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyContext;
-import com.github.saphyra.skyxplore.game.lobby.message.domain.Message;
+import com.github.saphyra.skyxplore.common.domain.message.Message;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

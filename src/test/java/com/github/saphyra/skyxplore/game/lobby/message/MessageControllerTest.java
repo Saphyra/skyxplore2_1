@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.game.lobby.message.domain.MessageView;
+import com.github.saphyra.skyxplore.common.domain.message.MessageView;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MessageControllerTest {
@@ -25,7 +25,7 @@ public class MessageControllerTest {
     private MessageSenderService messageSenderService;
 
     @Mock
-    private MessageViewQueryService messageViewQueryService;
+    private LobbyMessageViewQueryService lobbyMessageViewQueryService;
 
     @InjectMocks
     private MessageController underTest;
@@ -36,7 +36,7 @@ public class MessageControllerTest {
     @Test
     public void getMessage() {
         //GIVEN
-        given(messageViewQueryService.getMessages(CHARACTER_ID, true)).willReturn(Arrays.asList(messageView));
+        given(lobbyMessageViewQueryService.getMessages(CHARACTER_ID, true)).willReturn(Arrays.asList(messageView));
         //WHEN
         List<MessageView> result = underTest.getMessages(CHARACTER_ID, true);
         //THEN

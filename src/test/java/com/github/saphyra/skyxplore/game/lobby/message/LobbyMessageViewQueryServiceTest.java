@@ -15,15 +15,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.common.domain.message.Message;
+import com.github.saphyra.skyxplore.common.domain.message.MessageView;
+import com.github.saphyra.skyxplore.common.domain.message.MessageViewConverter;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.game.lobby.message.domain.Message;
-import com.github.saphyra.skyxplore.game.lobby.message.domain.MessageView;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MessageViewQueryServiceTest {
+public class LobbyMessageViewQueryServiceTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String SENDER_ID = "sender_id";
     private static final String CHARACTER_NAME = "character_name";
@@ -32,13 +31,13 @@ public class MessageViewQueryServiceTest {
     private static final Long CREATED_AT = 6461L;
 
     @Mock
-    private CharacterQueryService characterQueryService;
-
-    @Mock
     private LobbyQueryService lobbyQueryService;
 
+    @Mock
+    private MessageViewConverter messageViewConverter;
+
     @InjectMocks
-    private MessageViewQueryService underTest;
+    private LobbyMessageViewQueryService underTest;
 
     @Mock
     private Lobby lobby;
@@ -50,7 +49,7 @@ public class MessageViewQueryServiceTest {
     private Message message;
 
     @Mock
-    private SkyXpCharacter character;
+    private MessageView messageView;
 
     @Before
     public void setup() {
@@ -58,17 +57,12 @@ public class MessageViewQueryServiceTest {
         given(lobby.getMessages()).willReturn(Arrays.asList(message, queriedMessage));
 
         given(queriedMessage.getQueriedBy()).willReturn(Arrays.asList(CHARACTER_ID));
-        given(queriedMessage.getSender()).willReturn(SENDER_ID);
-        given(queriedMessage.getMessage()).willReturn(MESSAGE_1);
-        given(queriedMessage.getCreatedAt()).willReturn(CREATED_AT);
 
         given(message.getQueriedBy()).willReturn(Collections.emptyList());
-        given(message.getSender()).willReturn(SENDER_ID);
-        given(message.getMessage()).willReturn(MESSAGE_2);
-        given(message.getCreatedAt()).willReturn(CREATED_AT);
 
-        given(characterQueryService.findByCharacterId(SENDER_ID)).willReturn(character);
-        given(character.getCharacterName()).willReturn(CHARACTER_NAME);
+
+        given(messageViewConverter.convertDomain(message)).willReturn(messageView);
+        given(messageViewConverter.convertDomain(queriedMessage)).willReturn(messageView);
     }
 
     @Test
@@ -78,12 +72,7 @@ public class MessageViewQueryServiceTest {
         //THEN
         verify(message).addQueriedBy(CHARACTER_ID);
 
-        assertThat(result).hasSize(1);
-        MessageView messageView = result.get(0);
-        assertThat(messageView.getSenderId()).isEqualTo(SENDER_ID);
-        assertThat(messageView.getSenderName()).isEqualTo(CHARACTER_NAME);
-        assertThat(messageView.getMessage()).isEqualTo(MESSAGE_2);
-        assertThat(messageView.getCreatedAt()).isEqualTo(CREATED_AT);
+        assertThat(result).containsExactly(messageView);
     }
 
     @Test
@@ -95,5 +84,6 @@ public class MessageViewQueryServiceTest {
         verify(queriedMessage).addQueriedBy(CHARACTER_ID);
 
         assertThat(result).hasSize(2);
+        assertThat(result).containsOnly(messageView);
     }
 }

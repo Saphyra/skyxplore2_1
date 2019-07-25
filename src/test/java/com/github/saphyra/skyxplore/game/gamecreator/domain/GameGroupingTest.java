@@ -39,7 +39,7 @@ public class GameGroupingTest {
     private GameGroup gameGroup;
 
     @Mock
-    private GameCharacter gameCharacter;
+    private GameGroupCharacter gameGroupCharacter;
 
     @Before
     public void setUp() {
@@ -83,9 +83,9 @@ public class GameGroupingTest {
     @Test
     public void hasEnoughMembers() {
         //GIVEN
-        FixedSizeConcurrentList<GameCharacter> gameCharacters = new FixedSizeConcurrentList<>(1);
-        gameCharacters.add(gameCharacter);
-        given(gameGroup.getCharacters()).willReturn(gameCharacters);
+        FixedSizeConcurrentList<GameGroupCharacter> gameGroupCharacters = new FixedSizeConcurrentList<>(1);
+        gameGroupCharacters.add(gameGroupCharacter);
+        given(gameGroup.getCharacters()).willReturn(gameGroupCharacters);
         underTest.addGroup(gameGroup);
         //WHEN
         boolean result = underTest.hasEnoughMembers();
@@ -96,9 +96,9 @@ public class GameGroupingTest {
     @Test
     public void getMembersAmount() {
         //GIVEN
-        FixedSizeConcurrentList<GameCharacter> gameCharacters = new FixedSizeConcurrentList<>(1);
-        gameCharacters.add(gameCharacter);
-        given(gameGroup.getCharacters()).willReturn(gameCharacters);
+        FixedSizeConcurrentList<GameGroupCharacter> gameGroupCharacters = new FixedSizeConcurrentList<>(1);
+        gameGroupCharacters.add(gameGroupCharacter);
+        given(gameGroup.getCharacters()).willReturn(gameGroupCharacters);
         underTest.addGroup(gameGroup);
         //WHEN
         int result = underTest.getMembersAmount();

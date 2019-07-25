@@ -2,7 +2,7 @@ package com.github.saphyra.skyxplore.game.gamecreator.groupingcreator;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.game.gamecreator.domain.GameCharacter;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,16 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 public class GameCharacterFactory {
     private final IdGenerator idGenerator;
 
-    public GameCharacter createGameCharacter(String characterId, boolean isAi) {
-        GameCharacter gameCharacter = GameCharacter.builder()
+    public GameGroupCharacter createGameCharacter(String characterId, boolean isAi) {
+        GameGroupCharacter gameGroupCharacter = GameGroupCharacter.builder()
             .characterId(characterId)
             .isAi(isAi)
             .build();
-        log.debug("GameCharacter created: {}", gameCharacter);
-        return gameCharacter;
+        log.debug("GameGroupCharacter created: {}", gameGroupCharacter);
+        return gameGroupCharacter;
     }
 
-    public GameCharacter createAi() {
+    public GameGroupCharacter createAi() {
         return createGameCharacter(idGenerator.generateRandomId(), true);
     }
 }

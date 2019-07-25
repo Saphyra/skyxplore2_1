@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.game.lobby.message.domain.Message;
+import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

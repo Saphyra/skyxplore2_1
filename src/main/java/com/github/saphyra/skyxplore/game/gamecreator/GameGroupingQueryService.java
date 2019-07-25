@@ -21,4 +21,11 @@ public class GameGroupingQueryService {
             .filter(gameGrouping -> gameGrouping.getGameMode() == gameMode)
             .collect(Collectors.toList());
     }
+
+    //TODO unit test
+    public List<GameGrouping> getGroupingsWithEnoughMembers() {
+        return gameGroupingStorage.values().stream()
+            .filter(GameGrouping::hasEnoughMembers)
+            .collect(Collectors.toList());
+    }
 }

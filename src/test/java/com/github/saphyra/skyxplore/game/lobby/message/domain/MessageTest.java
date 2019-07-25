@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.skyxplore.common.domain.message.Message;
+
 @RunWith(MockitoJUnitRunner.class)
 public class MessageTest {
     private static final UUID MESSAGE_ID = UUID.randomUUID();

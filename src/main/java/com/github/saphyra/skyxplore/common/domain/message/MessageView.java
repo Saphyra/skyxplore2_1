@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.game.lobby.message.domain;
+package com.github.saphyra.skyxplore.common.domain.message;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

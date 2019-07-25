@@ -20,7 +20,7 @@ public class GameGroupTest {
     private GameGroup underTest;
 
     @Mock
-    private GameCharacter gameCharacter;
+    private GameGroupCharacter gameGroupCharacter;
 
     @Before
     public void setUp() {
@@ -34,21 +34,21 @@ public class GameGroupTest {
     @Test
     public void addCharacter() {
         //WHEN
-        GameGroup result = underTest.addCharacter(gameCharacter);
+        GameGroup result = underTest.addCharacter(gameGroupCharacter);
         //THEN
         assertThat(result).isEqualTo(underTest);
-        assertThat(underTest.getCharacters()).containsExactly(gameCharacter);
+        assertThat(underTest.getCharacters()).containsExactly(gameGroupCharacter);
     }
 
     @Test
     public void getCharacters() {
         //GIVEN
-        underTest.addCharacter(gameCharacter);
+        underTest.addCharacter(gameGroupCharacter);
         //WHEN
-        List<GameCharacter> result = underTest.getCharacters();
+        List<GameGroupCharacter> result = underTest.getCharacters();
         //THEN
-        assertThat(result).containsExactly(gameCharacter);
-        result.add(gameCharacter);
-        assertThat(underTest.getCharacters()).containsExactly(gameCharacter);
+        assertThat(result).containsExactly(gameGroupCharacter);
+        result.add(gameGroupCharacter);
+        assertThat(underTest.getCharacters()).containsExactly(gameGroupCharacter);
     }
 }
