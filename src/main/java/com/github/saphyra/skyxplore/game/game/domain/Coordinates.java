@@ -8,6 +8,6 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class Coordinates {
-    private int xCoord;
-    private int yCoord;
+    private volatile int xCoord;
+    private volatile int yCoord;
 }
