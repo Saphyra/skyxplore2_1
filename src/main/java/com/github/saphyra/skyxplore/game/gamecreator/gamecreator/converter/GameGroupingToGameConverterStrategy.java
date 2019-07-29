@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.strategy;
+package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.converter;
 
 import com.github.saphyra.skyxplore.game.game.domain.Game;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;

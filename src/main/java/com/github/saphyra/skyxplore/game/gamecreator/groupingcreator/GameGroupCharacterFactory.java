@@ -11,10 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 //TODO unit test
-public class GameCharacterFactory {
+public class GameGroupCharacterFactory {
     private final IdGenerator idGenerator;
 
-    public GameGroupCharacter createGameCharacter(String characterId, boolean isAi) {
+    GameGroupCharacter createGameCharacter(String characterId, boolean isAi) {
         GameGroupCharacter gameGroupCharacter = GameGroupCharacter.builder()
             .characterId(characterId)
             .isAi(isAi)

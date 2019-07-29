@@ -9,7 +9,7 @@ import com.github.saphyra.skyxplore.game.game.domain.Game;
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingQueryService;
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
-import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.strategy.GameGroupingToGameConverterStrategy;
+import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.converter.GameGroupingToGameConverterStrategy;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

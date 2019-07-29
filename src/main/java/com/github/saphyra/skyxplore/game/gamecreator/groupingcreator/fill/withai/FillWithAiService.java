@@ -11,7 +11,7 @@ import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroup;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupSizeRange;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
-import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameCharacterFactory;
+import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameGroupCharacterFactory;
 import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GameGroupFactory;
 import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GroupingCreatorConfiguration;
 import com.github.saphyra.util.IdGenerator;
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class FillWithAiService {
-    private final GameCharacterFactory gameCharacterFactory;
+    private final GameGroupCharacterFactory gameGroupCharacterFactory;
     private final GroupingCreatorConfiguration configuration;
     private final GameGroupFactory gameGroupFactory;
     private final GameGroupingStorage gameGroupingStorage;
@@ -49,7 +49,7 @@ public class FillWithAiService {
     }
 
     private void fillWithAi(GameGrouping gameGrouping) {
-        log.info("Filling GameGrouping {} with ais...", gameGrouping);
+        log.info("Filling GameGrouping {} with ais...", gameGrouping.getGameGroupingId());
         int missingMembers = gameGrouping.getMinimumGameMembersAmount() - gameGrouping.getMembersAmount();
         log.debug("missingMembers: {}", missingMembers);
 
@@ -59,7 +59,7 @@ public class FillWithAiService {
             log.debug("Filling GameGroup {} with ais...", gameGroup.getGameGroupId());
             for (int emptyPlaces = getEmptyPlaces(gameGroup); emptyPlaces > 0 && missingMembers > 0; emptyPlaces--, missingMembers--) {
                 log.debug("Adding ai to GameGroup {}. emptyPlaces: {}, missingMembers: {}", gameGroup.getGameGroupId(), emptyPlaces, missingMembers);
-                gameGroup.addCharacter(gameCharacterFactory.createAi());
+                gameGroup.addCharacter(gameGroupCharacterFactory.createAi());
             }
         }
 

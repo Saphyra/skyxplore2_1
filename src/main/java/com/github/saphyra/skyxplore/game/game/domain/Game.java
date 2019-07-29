@@ -6,18 +6,25 @@ import java.util.Vector;
 
 import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.skyxplore.game.game.GameContext;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
-@ToString
+@ToString(exclude = "gameContext")
 @EqualsAndHashCode
 //TODO unit test
 public class Game {
     @Getter
     private final UUID gameId;
+
+    @Getter
+    private final GameMode gameMode;
+
+    @Getter
+    private final Object data;
 
     private final GameContext gameContext;
 
@@ -28,9 +35,13 @@ public class Game {
     @Builder
     private Game(
         @NonNull UUID gameId,
+        @NonNull GameMode gameMode,
+        Object data,
         @NonNull GameContext gameContext
     ) {
         this.gameId = gameId;
+        this.gameMode = gameMode;
+        this.data = data;
         this.gameContext = gameContext;
     }
 

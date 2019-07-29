@@ -19,13 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 //TODO unit test
 public class GameGroupFactory {
-    private final GameCharacterFactory gameCharacterFactory;
+    private final GameGroupCharacterFactory gameGroupCharacterFactory;
     private final IdGenerator idGenerator;
 
     public List<GameGroup> createGroups(Lobby lobby, int maxGroupSize) {
         List<GameGroupCharacter> gameGroupCharacters = lobby.getMembers().stream()
             .map(LobbyMember::getCharacterId)
-            .map(characterId -> gameCharacterFactory.createGameCharacter(characterId, false))
+            .map(characterId -> gameGroupCharacterFactory.createGameCharacter(characterId, false))
             .collect(Collectors.toList());
         return createGroups(gameGroupCharacters, lobby.isAutoFill(), maxGroupSize);
     }

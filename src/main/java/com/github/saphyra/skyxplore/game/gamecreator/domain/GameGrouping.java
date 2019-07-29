@@ -36,6 +36,7 @@ public class GameGrouping {
     @Getter
     private final GameMode gameMode;
 
+    @Getter
     private final Object data;
 
     @NonNull
