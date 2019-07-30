@@ -1,13 +1,14 @@
 package com.github.saphyra.skyxplore.userdata.slot.repository;
 
-import com.github.saphyra.skyxplore.common.event.ShipDeletedEvent;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.skyxplore.common.event.ShipDeletedEvent;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SlotDaoTest {

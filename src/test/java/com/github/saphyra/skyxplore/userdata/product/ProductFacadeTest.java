@@ -1,13 +1,14 @@
 package com.github.saphyra.skyxplore.userdata.product;
 
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.skyxplore.data.entity.FactoryData;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductFacadeTest {

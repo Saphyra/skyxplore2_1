@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.skyxplore.game.game.GameContext;
+import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

@@ -1,13 +1,9 @@
 package com.github.saphyra.skyxplore.userdata.factory.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Arrays;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
-
-import com.github.saphyra.testing.configuration.DataSourceConfiguration;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +15,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.github.saphyra.testing.configuration.DataSourceConfiguration;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("int-test")
