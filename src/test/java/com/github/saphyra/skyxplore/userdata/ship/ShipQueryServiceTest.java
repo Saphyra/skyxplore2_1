@@ -55,7 +55,7 @@ public class ShipQueryServiceTest {
         //GIVEN
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.getShipByCharacterId(CHARACTER_ID);
+        underTest.findShipbyCharacterIdValidated(CHARACTER_ID);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ShipQueryServiceTest {
         //GIVEN
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
         //WHEN
-        EquippedShip result = underTest.getShipByCharacterId(CHARACTER_ID);
+        EquippedShip result = underTest.findShipbyCharacterIdValidated(CHARACTER_ID);
         //THEN
         verify(equippedShipDao).findShipByCharacterId(CHARACTER_ID);
         assertThat(result).isEqualTo(ship);
@@ -76,8 +76,8 @@ public class ShipQueryServiceTest {
         given(ship.getWeaponSlotId()).willReturn(WEAPON_SLOT_ID);
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
 
-        when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(defenseSlot);
-        when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
+        when(slotQueryService.findSlotByIdValidated(DEFENSE_SLOT_ID)).thenReturn(defenseSlot);
+        when(slotQueryService.findSlotByIdValidated(WEAPON_SLOT_ID)).thenReturn(weaponSlot);
 
         when(shipViewConverter.convertDomain(ship, defenseSlot, weaponSlot)).thenReturn(shipView);
 

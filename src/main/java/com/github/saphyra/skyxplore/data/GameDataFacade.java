@@ -1,11 +1,13 @@
 package com.github.saphyra.skyxplore.data;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
 import com.github.saphyra.skyxplore.data.entity.ShopData;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -25,4 +27,8 @@ public class GameDataFacade {
         return dataQueryService.findBuyable(elementId);
     }
 
+    //TODO unit test
+    public EquipmentDescription findEquipmentDescription(String itemId) {
+        return dataQueryService.findEquipmentDescription(itemId);
+    }
 }

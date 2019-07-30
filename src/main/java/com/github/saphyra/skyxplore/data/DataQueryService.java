@@ -3,8 +3,7 @@ package com.github.saphyra.skyxplore.data;
 import org.springframework.stereotype.Service;
 
 import com.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
 import com.github.saphyra.skyxplore.data.entity.ShopData;
@@ -19,6 +18,8 @@ import com.github.saphyra.skyxplore.data.subservice.ShieldService;
 import com.github.saphyra.skyxplore.data.subservice.ShipService;
 import com.github.saphyra.skyxplore.data.subservice.StorageService;
 import com.github.saphyra.skyxplore.data.subservice.WeaponService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -88,5 +89,14 @@ class DataQueryService {
             return (ShopData) data;
         }
         throw new IllegalArgumentException(elementId + " is not instance of ShopData.");
+    }
+
+    //TODO unit test
+    EquipmentDescription findEquipmentDescription(String itemId) {
+        GeneralDescription data = getData(itemId);
+        if (data instanceof EquipmentDescription) {
+            return (EquipmentDescription) data;
+        }
+        throw new IllegalArgumentException(itemId + " is not instance of EquipmentDescription.");
     }
 }

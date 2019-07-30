@@ -28,7 +28,7 @@ class EquipService {
     @Transactional
     public void equip(EquipRequest request, String characterId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
+        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
 
         character.removeEquipment(request.getItemId());
 

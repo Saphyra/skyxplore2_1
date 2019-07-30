@@ -33,58 +33,6 @@ Error reporting
 Exception handling:
     - Return localized exception messages
 
-Lobby
-    - Start queueing
 Javadoc
 Integration tests
 Logging
-
-User is not logged in
-    - User can access
-        - IndexPage
-    - Accessing other page redirects to IndexPage.
-
-User is logged in, but no character is selected
-    - User can access
-        - CharacterdSelectPage
-        - AccountPage
-    - Accessing other page redirects to CharacterSelectPage
-
-User is logged in, and character is selected
-    - User can access
-        - CommunityPage
-        - EquipmentPage
-        - FactoryPage
-        - HangarPage
-        - OverviewPage
-        - ShopPage
-    - Accessing other page redirects to OverviewPage
-
-User is logged in, character is selected, and in lobby
-    - User can access
-        - LobbyPage
-    - Accessing other page redirects to LobbyPage
-
-User is logged in, character is selected, and in matchmaking state
-    - User can access
-        - LobbyQueuePage
-    - Accessing other page redirects to LobbyQueuePage
-
-User is logged in, character is selected, and in game
-    - User can access
-        - GamePage
-    - Accessing other page redirects to GamePage
-
-Page urls
-    - AccountPage: /account
-    - CharacterSelectPage: /characterselect
-    - CommunityPage: /community
-    - EquipmentPage: /equipment
-    - FactoryPage: /factory
-    - GamePage: /???
-    - HangarPage: /hangar
-    - IndexPage: /
-    - LobbyPage: /lobby-page
-    - LobbyQueuePage: /lobby-queue
-    - OverviewPage: /overview
-    - ShopPage: /shop

@@ -25,9 +25,9 @@ class EquipUtil {
 
     EquippedSlot getSlotByName(EquippedShip ship, String slotName) {
         if (slotName.contains(DEFENSE_SLOT_NAME)) {
-            return slotDao.findSlotById(ship.getDefenseSlotId());
+            return slotDao.findSlotByIdValidated(ship.getDefenseSlotId());
         } else if (slotName.contains(WEAPON_SLOT_NAME)) {
-            return slotDao.findSlotById(ship.getWeaponSlotId());
+            return slotDao.findSlotByIdValidated(ship.getWeaponSlotId());
         } else {
             throw new BadSlotNameException(slotName);
         }

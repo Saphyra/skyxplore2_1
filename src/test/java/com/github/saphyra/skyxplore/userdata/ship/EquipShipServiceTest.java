@@ -74,7 +74,7 @@ public class EquipShipServiceTest {
     @Before
     public void init() {
         when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
-        when(shipQueryService.getShipByCharacterId(CHARACTER_ID)).thenReturn(equippedShip);
+        when(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).thenReturn(equippedShip);
     }
 
     @Test(expected = BadRequestException.class)
@@ -104,8 +104,8 @@ public class EquipShipServiceTest {
         when(equippedShip.getWeaponSlotId()).thenReturn(WEAPON_SLOT_ID);
         when(equippedShip.getDefenseSlotId()).thenReturn(DEFENSE_SLOT_ID);
 
-        when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(equippedSlot);
-        when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(equippedSlot);
+        when(slotQueryService.findSlotByIdValidated(WEAPON_SLOT_ID)).thenReturn(equippedSlot);
+        when(slotQueryService.findSlotByIdValidated(DEFENSE_SLOT_ID)).thenReturn(equippedSlot);
         when(equippedSlot.getFrontEquipped()).thenReturn(new ArrayList<>(Arrays.asList(ITEM_ID)));
         when(equippedSlot.getLeftEquipped()).thenReturn(new ArrayList<>(Arrays.asList(ITEM_ID)));
         when(equippedSlot.getRightEquipped()).thenReturn(new ArrayList<>(Arrays.asList(ITEM_ID)));

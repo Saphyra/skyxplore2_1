@@ -34,7 +34,7 @@ class EquipShipService {
     @Transactional
     void equipShip(String characterId, String itemId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
+        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
 
         Ship shipToEquip = getShip(itemId);
 
@@ -66,8 +66,8 @@ class EquipShipService {
     }
 
     private void updateSlots(SkyXpCharacter character, EquippedShip ship, Ship shipToEquip) {
-        EquippedSlot defenseSlot = slotQueryService.findSlotById(ship.getDefenseSlotId());
-        EquippedSlot weaponSlot = slotQueryService.findSlotById(ship.getWeaponSlotId());
+        EquippedSlot defenseSlot = slotQueryService.findSlotByIdValidated(ship.getDefenseSlotId());
+        EquippedSlot weaponSlot = slotQueryService.findSlotByIdValidated(ship.getWeaponSlotId());
         List<EquippedSlot> slots = Arrays.asList(defenseSlot, weaponSlot);
 
         emptySlots(character, slots);

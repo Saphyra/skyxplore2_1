@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.game.game.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
@@ -59,5 +60,13 @@ public class Game {
     public Game addShips(@NonNull List<GameShip> ships) {
         this.ships.addAll(ships);
         return this;
+    }
+
+    public void addShip(@NonNull GameShip ship) {
+        this.ships.add(ship);
+    }
+
+    public List<GameShip> getShips(){
+        return new ArrayList<>(ships);
     }
 }

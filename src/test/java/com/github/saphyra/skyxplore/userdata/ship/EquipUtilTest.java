@@ -73,7 +73,7 @@ public class EquipUtilTest {
     public void testSlotByNameShouldReturnDefenseSlotWhenDefense() {
         //GIVEN
         given(ship.getDefenseSlotId()).willReturn(DEFENSE_SLOT_ID);
-        when(slotQueryService.findSlotById(DEFENSE_SLOT_ID)).thenReturn(slot);
+        when(slotQueryService.findSlotByIdValidated(DEFENSE_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, EquippedShipConstants.DEFENSE_SLOT_NAME);
         //THEN
@@ -84,7 +84,7 @@ public class EquipUtilTest {
     public void testSlotByNameShouldReturnWeaponSlotWhenWeapon() {
         //GIVEN
         given(ship.getWeaponSlotId()).willReturn(WEAPON_SLOT_ID);
-        when(slotQueryService.findSlotById(WEAPON_SLOT_ID)).thenReturn(slot);
+        when(slotQueryService.findSlotByIdValidated(WEAPON_SLOT_ID)).thenReturn(slot);
         //WHEN
         EquippedSlot result = underTest.getSlotByName(ship, EquippedShipConstants.WEAPON_SLOT_NAME);
         //THEN

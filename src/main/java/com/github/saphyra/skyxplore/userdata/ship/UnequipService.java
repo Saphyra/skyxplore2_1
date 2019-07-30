@@ -25,7 +25,7 @@ class UnequipService {
     @Transactional
     void unequip(UnequipRequest request, String characterId) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.getShipByCharacterId(characterId);
+        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
 
         if (request.getSlot().contains(EquippedShipConstants.CONNECTOR_SLOT_NAME)) {
             unequipConnectorService.unequipConnector(request.getItemId(), character, ship);

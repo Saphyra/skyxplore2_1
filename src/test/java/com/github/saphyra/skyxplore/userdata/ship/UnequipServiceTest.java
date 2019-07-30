@@ -50,7 +50,7 @@ public class UnequipServiceTest {
         //GIVEN
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        given(shipQueryService.getShipByCharacterId(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
 
         UnequipRequest request = new UnequipRequest(EquippedShipConstants.CONNECTOR_SLOT_NAME, EQUIPMENT_ID);
         //WHEN
@@ -66,7 +66,7 @@ public class UnequipServiceTest {
         //GIVEN
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
-        given(shipQueryService.getShipByCharacterId(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
 
         UnequipRequest request = new UnequipRequest(EQUIPMENT_SLOT_NAME, EQUIPMENT_ID);
         //WHEN

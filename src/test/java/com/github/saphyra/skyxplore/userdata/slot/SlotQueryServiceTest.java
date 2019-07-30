@@ -32,7 +32,7 @@ public class SlotQueryServiceTest {
         //GIVEN
         given(slotDao.findById(SLOT_ID)).willReturn(Optional.empty());
         //WHEN
-        underTest.findSlotById(SLOT_ID);
+        underTest.findSlotByIdValidated(SLOT_ID);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class SlotQueryServiceTest {
         //GIVEN
         given(slotDao.findById(SLOT_ID)).willReturn(Optional.of(slot));
         //WHEN
-        EquippedSlot result = underTest.findSlotById(SLOT_ID);
+        EquippedSlot result = underTest.findSlotByIdValidated(SLOT_ID);
         //THEN
         assertThat(result).isEqualTo(slot);
     }
