@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
+import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -52,7 +53,7 @@ public class UnequipServiceTest {
 
         given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
 
-        UnequipRequest request = new UnequipRequest(EquippedShipConstants.CONNECTOR_SLOT_NAME, EQUIPMENT_ID);
+        UnequipRequest request = new UnequipRequest(CONNECTOR_SLOT_NAME, EQUIPMENT_ID);
         //WHEN
         underTest.unequip(request, CHARACTER_ID);
         //THEN

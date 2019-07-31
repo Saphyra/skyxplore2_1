@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
+import static com.github.saphyra.skyxplore.data.DataConstants.DEFENSE_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.DataConstants.WEAPON_SLOT_NAME;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -75,7 +77,7 @@ public class EquipUtilTest {
         given(ship.getDefenseSlotId()).willReturn(DEFENSE_SLOT_ID);
         when(slotQueryService.findSlotByIdValidated(DEFENSE_SLOT_ID)).thenReturn(slot);
         //WHEN
-        EquippedSlot result = underTest.getSlotByName(ship, EquippedShipConstants.DEFENSE_SLOT_NAME);
+        EquippedSlot result = underTest.getSlotByName(ship, DEFENSE_SLOT_NAME);
         //THEN
         assertEquals(slot, result);
     }
@@ -86,7 +88,7 @@ public class EquipUtilTest {
         given(ship.getWeaponSlotId()).willReturn(WEAPON_SLOT_ID);
         when(slotQueryService.findSlotByIdValidated(WEAPON_SLOT_ID)).thenReturn(slot);
         //WHEN
-        EquippedSlot result = underTest.getSlotByName(ship, EquippedShipConstants.WEAPON_SLOT_NAME);
+        EquippedSlot result = underTest.getSlotByName(ship, WEAPON_SLOT_NAME);
         //THEN
         assertEquals(slot, result);
     }

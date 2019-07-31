@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
+import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -50,7 +51,7 @@ public class EquipServiceTest {
         given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
 
         given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
-        EquipRequest request = new EquipRequest(EQUIPMENT_ID, EquippedShipConstants.CONNECTOR_SLOT_NAME);
+        EquipRequest request = new EquipRequest(EQUIPMENT_ID, CONNECTOR_SLOT_NAME);
         //WHEN
         underTest.equip(request, CHARACTER_ID);
         //THEN

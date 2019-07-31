@@ -1,19 +1,21 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
-import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
-import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
+import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.skyxplore.data.entity.Extender;
+import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
+import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
+import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UnequipExtenderServiceTest {
@@ -49,7 +51,7 @@ public class UnequipExtenderServiceTest {
     public void unequipExtender_connectorExtended() {
         //GIVEN
         given(extenderService.get(EQUIPMENT_ID)).willReturn(extender);
-        given(extender.getExtendedSlot()).willReturn(EquippedShipConstants.CONNECTOR_SLOT_NAME);
+        given(extender.getExtendedSlot()).willReturn(CONNECTOR_SLOT_NAME);
         given(extender.getExtendedNum()).willReturn(EXTENDED_NUM);
         //WHEN
         underTest.unequipExtender(EQUIPMENT_ID, character, ship);

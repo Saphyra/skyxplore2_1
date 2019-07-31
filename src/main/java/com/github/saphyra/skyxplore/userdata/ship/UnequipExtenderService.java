@@ -1,16 +1,17 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
+import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.skyxplore.data.entity.Extender;
 import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
-import org.springframework.stereotype.Service;
-
-import static com.github.saphyra.skyxplore.userdata.ship.EquippedShipConstants.CONNECTOR_SLOT_NAME;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j

@@ -25,7 +25,7 @@ public class PointRangeCalculator {
     PointRange calculate(List<GameShip> gameShips) {
         List<Integer> points = gameShips.stream()
             .map(GameShip::getShipEquipments)
-            .map(this::countPointsOfeEquipments)
+            .map(this::countPointsOfEquipments)
             .collect(Collectors.toList());
 
         int min = points.stream()
@@ -43,7 +43,7 @@ public class PointRangeCalculator {
             .build();
     }
 
-    private Integer countPointsOfeEquipments(ShipEquipments shipEquipments) {
+    Integer countPointsOfEquipments(ShipEquipments shipEquipments) {
         return Stream.of(
             Arrays.asList(shipEquipments.getShipId()),
             shipEquipments.getConnectorEquipped(),

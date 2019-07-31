@@ -1,11 +1,10 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
-import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
-import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
+import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +13,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.data.entity.Extender;
+import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
+import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
+import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipExtenderServiceTest {
@@ -70,7 +71,7 @@ public class EquipExtenderServiceTest {
     @Test
     public void equipExtender_extendedConnector() {
         //GIVEN
-        given(extender.getExtendedSlot()).willReturn(EquippedShipConstants.CONNECTOR_SLOT_NAME);
+        given(extender.getExtendedSlot()).willReturn(CONNECTOR_SLOT_NAME);
         //WHEN
         underTest.equipExtender(EQUIPMENT_ID, ship);
         //THEN
@@ -81,7 +82,7 @@ public class EquipExtenderServiceTest {
     public void equipExtender_extendSlot() {
         //GIVEN
         given(extender.getExtendedSlot()).willReturn(EXTENDED_SLOT);
-        given(equippedExtender.getExtendedSlot()).willReturn(EquippedShipConstants.CONNECTOR_SLOT_NAME);
+        given(equippedExtender.getExtendedSlot()).willReturn(CONNECTOR_SLOT_NAME);
         given(equipUtil.getSlotByName(ship, EXTENDED_SLOT)).willReturn(equippedSlot);
         //WHEN
         underTest.equipExtender(EQUIPMENT_ID, ship);

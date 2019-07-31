@@ -31,4 +31,9 @@ public class GameDataFacade {
     public EquipmentDescription findEquipmentDescription(String itemId) {
         return dataQueryService.findEquipmentDescription(itemId);
     }
+
+    //TODO unit test
+    public boolean isUpgradable(String itemId) {
+        return findEquipmentDescription(itemId).getLevel() < 3;
+    }
 }
