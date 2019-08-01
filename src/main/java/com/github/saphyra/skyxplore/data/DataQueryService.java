@@ -1,8 +1,13 @@
 package com.github.saphyra.skyxplore.data;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
+import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
+import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
@@ -36,6 +41,7 @@ class DataQueryService {
     private final ShipService shipService;
     private final StorageService storageService;
     private final WeaponService weaponService;
+    private final List<AbstractGameDataService<EquipmentDescription>> equipmentDescriptionServices;
 
     GeneralDescription getData(String id) {
         GeneralDescription result = abilityService.get(id);
@@ -98,5 +104,14 @@ class DataQueryService {
             return (EquipmentDescription) data;
         }
         throw new IllegalArgumentException(itemId + " is not instance of EquipmentDescription.");
+    }
+
+    //TODO unit test
+    List<EquipmentDescription> getEquipmentDescriptionBySlotAndLevel(SlotType slotType, int level) {
+        return equipmentDescriptionServices.stream()
+            .flatMap(service -> service.values().stream())
+            .filter(equipmentDescription -> equipmentDescription.getSlot().equalsIgnoreCase(slotType.name()))
+            .filter(equipmentDescription -> equipmentDescription.getLevel() == level)
+            .collect(Collectors.toList());
     }
 }

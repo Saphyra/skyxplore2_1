@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.domain;
+package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

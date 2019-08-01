@@ -11,7 +11,7 @@ import lombok.NonNull;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@Builder(toBuilder = true)
 public class ShipEquipments {
     private final String shipId;
 

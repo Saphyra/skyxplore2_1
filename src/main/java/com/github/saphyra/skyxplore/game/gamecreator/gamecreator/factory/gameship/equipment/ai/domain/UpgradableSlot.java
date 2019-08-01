@@ -3,8 +3,10 @@ package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gamesh
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.github.saphyra.skyxplore.data.DataConstants;
+import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.Extender;
 import com.github.saphyra.skyxplore.data.entity.Ship;
 import com.github.saphyra.skyxplore.game.game.GameContext;
@@ -18,39 +20,48 @@ import lombok.RequiredArgsConstructor;
 public enum UpgradableSlot implements UpgradableSlotMethods {
     CONNECTOR(
         (shipEquipments, gameContext) -> getConnectorSlots(shipEquipments, gameContext) > shipEquipments.getConnectorEquipped().size(),
-        ShipEquipments::getConnectorEquipped
+        ShipEquipments::getConnectorEquipped,
+        () -> SlotType.CONNECTOR
     ),
     FRONT_DEFENSE(
         (shipEquipments, gameContext) -> getFrontDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getFrontDefense
+        ShipEquipments::getFrontDefense,
+        () -> SlotType.DEFENSE
     ),
     LEFT_DEFENSE(
         (shipEquipments, gameContext) -> getSideDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getLeftDefense
+        ShipEquipments::getLeftDefense,
+        () -> SlotType.DEFENSE
     ),
     RIGHT_DEFENSE(
         (shipEquipments, gameContext) -> getSideDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getRightDefense
+        ShipEquipments::getRightDefense,
+        () -> SlotType.DEFENSE
     ),
     BACK_DEFENSE(
         (shipEquipments, gameContext) -> getBackDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getBackDefense
+        ShipEquipments::getBackDefense,
+        () -> SlotType.DEFENSE
     ),
     FRONT_WEAPON(
         (shipEquipments, gameContext) -> getFrontWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getFrontWeapon
+        ShipEquipments::getFrontWeapon,
+        () -> SlotType.WEAPON
     ),
     LEFT_WEAPON(
         (shipEquipments, gameContext) -> getSideWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getLeftWeapon
+        ShipEquipments::getLeftWeapon,
+        () -> SlotType.WEAPON
     ),
     RIGHT_WEAPON(
         (shipEquipments, gameContext) -> getSideWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getRightWeapon
+        ShipEquipments::getRightWeapon,
+        () -> SlotType.WEAPON
     ),
     BACK_WEAPON(
         (shipEquipments, gameContext) -> getBackWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
-        ShipEquipments::getBackWeapon
+        ShipEquipments::getBackWeapon,
+        () -> SlotType.WEAPON
     );
 
     @Getter(value = AccessLevel.PRIVATE)
@@ -59,14 +70,22 @@ public enum UpgradableSlot implements UpgradableSlotMethods {
     @Getter(value = AccessLevel.PRIVATE)
     private final Function<ShipEquipments, List<String>> getItems;
 
+    @Getter(value = AccessLevel.PRIVATE)
+    private final Supplier<SlotType> getSlotTypes;
+
     @Override
     public boolean hasEmptySlot(ShipEquipments equipments, GameContext gameContext) {
-        return this.getHasEmptySlot().apply(equipments, gameContext);
+        return getHasEmptySlot().apply(equipments, gameContext);
     }
 
     @Override
     public List<String> getEquipmentsOfSlot(ShipEquipments shipEquipments) {
-        return this.getGetItems().apply(shipEquipments);
+        return getGetItems().apply(shipEquipments);
+    }
+
+    @Override
+    public SlotType getSlotType() {
+        return getSlotTypes.get();
     }
 
     private static int getConnectorSlots(ShipEquipments shipEquipments, GameContext gameContext) {

@@ -1,7 +1,10 @@
 package com.github.saphyra.skyxplore.data;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
@@ -35,5 +38,10 @@ public class GameDataFacade {
     //TODO unit test
     public boolean isUpgradable(String itemId) {
         return findEquipmentDescription(itemId).getLevel() < 3;
+    }
+
+    //TODO unit test
+    public List<EquipmentDescription> getEquipmentDescriptionBySlotAndLevel(SlotType slotType, int level) {
+        return dataQueryService.getEquipmentDescriptionBySlotAndLevel(slotType, level);
     }
 }

@@ -12,7 +12,7 @@ import com.github.saphyra.skyxplore.data.GameDataFacade;
 import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
-import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.domain.PointRange;
+import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.PointRange;
 import lombok.RequiredArgsConstructor;
 
 @Component
