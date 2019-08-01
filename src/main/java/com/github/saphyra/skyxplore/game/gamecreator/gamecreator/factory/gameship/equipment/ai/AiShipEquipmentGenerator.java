@@ -14,9 +14,11 @@ import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameshi
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item.ItemProvider;
 import com.github.saphyra.util.Random;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 //TODO unit test
 public class AiShipEquipmentGenerator {
     private final ItemProvider itemProvider;
@@ -32,7 +34,9 @@ public class AiShipEquipmentGenerator {
 
     private int getTargetPoints(Game game) {
         PointRange pointRange = pointRangeCalculator.calculate(game.getShips());
-        return random.randInt(pointRange.getMinPoints(), pointRange.getMaxPoints());
+        int targetPoints = random.randInt(pointRange.getMinPoints(), pointRange.getMaxPoints());
+        log.debug("targetPoints: {}", targetPoints);
+        return targetPoints;
     }
 
     private ShipEquipments fillWithEquipments(int targetPoint) {
@@ -50,7 +54,9 @@ public class AiShipEquipmentGenerator {
                 }
             } else {
                 Optional<String> upgradedItem = itemProvider.getUpgradedVersionOf(shipEquipments.getShipId());
+                log.debug("Upgrading ship to {}", upgradedItem);
                 if (!upgradedItem.isPresent()) {
+                    log.debug("Ship cannot be upgraded.");
                     break;
                 }
                 shipEquipments = shipEquipments.toBuilder()
@@ -72,10 +78,14 @@ public class AiShipEquipmentGenerator {
 
     private void upgradeExistingItem(ShipEquipments shipEquipments, UpgradableItem upgradableItem) {
         String itemId = upgradableItem.getUpgradeableItemId().get();
+        log.debug("Upgrading existing item with itemId {}", itemId);
         Optional<String> upgradedItem = itemProvider.getUpgradedVersionOf(itemId);
+        log.debug("New itemId: {}", upgradedItem);
         List<String> equippedItems = upgradableItem.getUpgradableSlot().get().getEquipmentsOfSlot(shipEquipments);
+        log.debug("EquippedItems before update: {}", equippedItems);
         equippedItems.remove(itemId);
         equippedItems.add(upgradedItem.orElseThrow(() -> new RuntimeException(itemId + " cannot be updated.")));
+        log.debug("EquippedItems after update: {}", equippedItems);
     }
 
     private void equipNewItem(ShipEquipments shipEquipments, UpgradableItem upgradableItem) {

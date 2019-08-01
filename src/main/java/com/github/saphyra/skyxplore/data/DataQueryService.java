@@ -41,7 +41,7 @@ class DataQueryService {
     private final ShipService shipService;
     private final StorageService storageService;
     private final WeaponService weaponService;
-    private final List<AbstractGameDataService<EquipmentDescription>> equipmentDescriptionServices;
+    private final List<AbstractGameDataService<? extends EquipmentDescription>> equipmentDescriptionServices;
 
     GeneralDescription getData(String id) {
         GeneralDescription result = abilityService.get(id);
