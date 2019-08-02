@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 
 import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
 import com.github.saphyra.skyxplore.data.entity.Ship;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class ShipService extends AbstractGameDataService<Ship> {
 
     @Override
@@ -19,10 +21,9 @@ public class ShipService extends AbstractGameDataService<Ship> {
         super.load(Ship.class);
     }
 
-    //TODO unit test
     public List<Ship> getShipsByLevel(int level) {
         return values().stream()
-            .filter(ship -> ship.getLevel() == level)
+            .filter(ship -> ship.getLevel().equals(level))
             .collect(Collectors.toList());
     }
 }
