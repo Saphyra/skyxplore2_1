@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class MessageViewConverter extends AbstractViewConverter<Message, MessageView> {
     private final CharacterQueryService characterQueryService;
 

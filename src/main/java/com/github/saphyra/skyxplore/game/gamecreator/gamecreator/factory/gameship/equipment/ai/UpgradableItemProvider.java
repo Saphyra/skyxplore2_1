@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.game.game.GameContext;
+import com.github.saphyra.skyxplore.game.gamecreator.GameCreatorContext;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableItem;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableSlot;
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 //TODO unit test
 class UpgradableItemProvider {
-    private final GameContext gameContext;
+    private final GameCreatorContext gameCreatorContext;
     private final GameDataFacade gameDataFacade;
     private final Random random;
 
@@ -37,7 +37,7 @@ class UpgradableItemProvider {
     }
 
     private Optional<String> getUpgradableItemId(Optional<UpgradableSlot> upgradableSlot, ShipEquipments equipments) {
-        if (upgradableSlot.isPresent() && upgradableSlot.get().hasEmptySlot(equipments, gameContext)) {
+        if (upgradableSlot.isPresent() && upgradableSlot.get().hasEmptySlot(equipments, gameCreatorContext)) {
             log.debug("UpgradableSlot {} has empty slot.", upgradableSlot.get());
             return Optional.empty();
         }
@@ -58,7 +58,7 @@ class UpgradableItemProvider {
 
     private Optional<UpgradableSlot> getRandomEmptySlot(ShipEquipments equipments) {
         Optional<UpgradableSlot> result = Arrays.stream(UpgradableSlot.values())
-            .filter(upgradableSlot -> upgradableSlot.hasEmptySlot(equipments, gameContext))
+            .filter(upgradableSlot -> upgradableSlot.hasEmptySlot(equipments, gameCreatorContext))
             .sorted((o1, o2) -> random.randInt(-1, 1))
             .findFirst();
         log.debug("Random empty slot: {}", result);

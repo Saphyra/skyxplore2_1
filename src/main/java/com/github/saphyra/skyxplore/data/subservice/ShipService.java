@@ -20,7 +20,7 @@ public class ShipService extends AbstractGameDataService<Ship> {
     }
 
     //TODO unit test
-    public List<Ship> getShips(int level) {
+    public List<Ship> getShipsByLevel(int level) {
         return values().stream()
             .filter(ship -> ship.getLevel() == level)
             .collect(Collectors.toList());

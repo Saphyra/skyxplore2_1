@@ -19,7 +19,7 @@ class ShipProvider {
     private final ShipService shipService;
 
     String getRandomShip() {
-        List<Ship> ships = shipService.getShips(1);
+        List<Ship> ships = shipService.getShipsByLevel(1);
         String result = ships.get(random.randInt(0, ships.size() - 1)).getId();
         log.debug("Generated random ship: {}", result);
         return result;
