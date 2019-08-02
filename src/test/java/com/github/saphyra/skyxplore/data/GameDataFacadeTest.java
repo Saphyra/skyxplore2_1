@@ -1,8 +1,12 @@
 package com.github.saphyra.skyxplore.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.Armor;
+import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
 import com.github.saphyra.testing.TestGeneralDescription;
@@ -20,11 +26,15 @@ public class GameDataFacadeTest {
     private static final String DATA_ID = "data_id";
     private static final String DATA_CATEGORY = "data_category";
     private static final String DATA_SLOT = "data_slot";
+
     @Mock
     private DataQueryService dataQueryService;
 
     @InjectMocks
     private GameDataFacade underTest;
+
+    @Mock
+    private EquipmentDescription equipmentDescription;
 
     @Test
     public void testGetDataShouldCallServiceAndReturn() {
@@ -62,5 +72,47 @@ public class GameDataFacadeTest {
         //THEN
         verify(dataQueryService).findBuyable(DATA_ID);
         assertThat(result).isEqualTo(armor);
+    }
+
+    @Test
+    public void findEquipmentDescription() {
+        //GIVEN
+        given(dataQueryService.findEquipmentDescription(DATA_ID)).willReturn(equipmentDescription);
+        //WHEN
+        EquipmentDescription result = underTest.findEquipmentDescription(DATA_ID);
+        //THEN
+        assertThat(result).isEqualTo(equipmentDescription);
+    }
+
+    @Test
+    public void isUpgradeable_true() {
+        //GIVEN
+        given(dataQueryService.findEquipmentDescription(DATA_ID)).willReturn(equipmentDescription);
+        given(equipmentDescription.getLevel()).willReturn(2);
+        //WHEN
+        boolean result = underTest.isUpgradable(DATA_ID);
+        //THEN
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void isUpgradeable_false() {
+        //GIVEN
+        given(dataQueryService.findEquipmentDescription(DATA_ID)).willReturn(equipmentDescription);
+        given(equipmentDescription.getLevel()).willReturn(3);
+        //WHEN
+        boolean result = underTest.isUpgradable(DATA_ID);
+        //THEN
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    public void getEquipmentDescriptionBySlotAndLevel() {
+        //GIVEN
+        given(dataQueryService.getEquipmentDescriptionBySlotAndLevel(SlotType.WEAPON, 1)).willReturn(Arrays.asList(equipmentDescription));
+        //WHEN
+        List<EquipmentDescription> result = underTest.getEquipmentDescriptionBySlotAndLevel(SlotType.WEAPON, 1);
+        //THEN
+        assertThat(result).containsExactly(equipmentDescription);
     }
 }

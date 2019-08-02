@@ -30,17 +30,14 @@ public class GameDataFacade {
         return dataQueryService.findBuyable(elementId);
     }
 
-    //TODO unit test
     public EquipmentDescription findEquipmentDescription(String itemId) {
         return dataQueryService.findEquipmentDescription(itemId);
     }
 
-    //TODO unit test
     public boolean isUpgradable(String itemId) {
         return findEquipmentDescription(itemId).getLevel() < 3;
     }
 
-    //TODO unit test
     public List<EquipmentDescription> getEquipmentDescriptionBySlotAndLevel(SlotType slotType, int level) {
         return dataQueryService.getEquipmentDescriptionBySlotAndLevel(slotType, level);
     }
