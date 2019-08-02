@@ -97,7 +97,6 @@ class DataQueryService {
         throw new IllegalArgumentException(elementId + " is not instance of ShopData.");
     }
 
-    //TODO unit test
     EquipmentDescription findEquipmentDescription(String itemId) {
         GeneralDescription data = getData(itemId);
         if (data instanceof EquipmentDescription) {
@@ -106,7 +105,6 @@ class DataQueryService {
         throw new IllegalArgumentException(itemId + " is not instance of EquipmentDescription.");
     }
 
-    //TODO unit test
     List<EquipmentDescription> getEquipmentDescriptionBySlotAndLevel(SlotType slotType, int level) {
         return equipmentDescriptionServices.stream()
             .flatMap(service -> service.values().stream())
