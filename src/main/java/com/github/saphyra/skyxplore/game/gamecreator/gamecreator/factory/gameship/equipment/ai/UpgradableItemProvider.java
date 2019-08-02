@@ -27,8 +27,7 @@ class UpgradableItemProvider {
 
     UpgradableItem getUpgradableItem(ShipEquipments equipments) {
         Optional<UpgradableSlot> upgradableSlot = getUpgradableSlot(equipments);
-        Optional<String> upgradableItemId = upgradableSlot.map(slot -> slot.getEquipmentsOfSlot(equipments))
-            .flatMap(this::getRandomUpgradableItemOfSlot);
+        Optional<String> upgradableItemId = getUpgradableItemId(upgradableSlot, equipments);
         UpgradableItem result = UpgradableItem.builder()
             .upgradableSlot(upgradableSlot)
             .upgradeableItemId(upgradableItemId)
@@ -37,9 +36,20 @@ class UpgradableItemProvider {
         return result;
     }
 
+    private Optional<String> getUpgradableItemId(Optional<UpgradableSlot> upgradableSlot, ShipEquipments equipments) {
+        if (upgradableSlot.isPresent() && upgradableSlot.get().hasEmptySlot(equipments, gameContext)) {
+            log.debug("UpgradableSlot {} has empty slot.", upgradableSlot.get());
+            return Optional.empty();
+        }
+        log.debug("No more empty slots in UpgradableSlot {}", upgradableSlot);
+        return upgradableSlot.map(slot -> slot.getEquipmentsOfSlot(equipments))
+            .flatMap(this::getRandomUpgradableItemOfSlot);
+    }
+
     private Optional<UpgradableSlot> getUpgradableSlot(ShipEquipments equipments) {
         Optional<UpgradableSlot> randomEmptySlot = getRandomEmptySlot(equipments);
         if (!randomEmptySlot.isPresent()) {
+            log.debug("Ship has no more empty slots. Searching for upgradable item...");
             return getRandomUpgradeableSlot(equipments);
         }
         return randomEmptySlot;

@@ -29,37 +29,37 @@ public enum UpgradableSlot implements UpgradableSlotMethods {
         () -> SlotType.DEFENSE
     ),
     LEFT_DEFENSE(
-        (shipEquipments, gameContext) -> getSideDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getSideDefenseSlots(shipEquipments, gameContext) > shipEquipments.getLeftDefense().size(),
         ShipEquipments::getLeftDefense,
         () -> SlotType.DEFENSE
     ),
     RIGHT_DEFENSE(
-        (shipEquipments, gameContext) -> getSideDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getSideDefenseSlots(shipEquipments, gameContext) > shipEquipments.getRightDefense().size(),
         ShipEquipments::getRightDefense,
         () -> SlotType.DEFENSE
     ),
     BACK_DEFENSE(
-        (shipEquipments, gameContext) -> getBackDefenseSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getBackDefenseSlots(shipEquipments, gameContext) > shipEquipments.getBackDefense().size(),
         ShipEquipments::getBackDefense,
         () -> SlotType.DEFENSE
     ),
     FRONT_WEAPON(
-        (shipEquipments, gameContext) -> getFrontWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getFrontWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontWeapon().size(),
         ShipEquipments::getFrontWeapon,
         () -> SlotType.WEAPON
     ),
     LEFT_WEAPON(
-        (shipEquipments, gameContext) -> getSideWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getSideWeaponSlots(shipEquipments, gameContext) > shipEquipments.getLeftWeapon().size(),
         ShipEquipments::getLeftWeapon,
         () -> SlotType.WEAPON
     ),
     RIGHT_WEAPON(
-        (shipEquipments, gameContext) -> getSideWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getSideWeaponSlots(shipEquipments, gameContext) > shipEquipments.getRightWeapon().size(),
         ShipEquipments::getRightWeapon,
         () -> SlotType.WEAPON
     ),
     BACK_WEAPON(
-        (shipEquipments, gameContext) -> getBackWeaponSlots(shipEquipments, gameContext) > shipEquipments.getFrontDefense().size(),
+        (shipEquipments, gameContext) -> getBackWeaponSlots(shipEquipments, gameContext) > shipEquipments.getBackWeapon().size(),
         ShipEquipments::getBackWeapon,
         () -> SlotType.WEAPON
     );

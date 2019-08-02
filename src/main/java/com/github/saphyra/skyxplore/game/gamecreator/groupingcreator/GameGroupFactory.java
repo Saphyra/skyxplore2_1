@@ -31,6 +31,7 @@ public class GameGroupFactory {
     }
 
     public List<GameGroup> createGroups(List<GameGroupCharacter> gameGroupCharacters, boolean isAutoFill, int maxGroupSize) {
+        log.debug("Creating GameGroups from gameGroupCharacters {}, with autoFill: {}, maxGroupSize: {}", gameGroupCharacters, isAutoFill, maxGroupSize);
         return Lists.partition(gameGroupCharacters, maxGroupSize).stream()
             .map(members -> createGroup(members, isAutoFill, maxGroupSize))
             .collect(Collectors.toList());

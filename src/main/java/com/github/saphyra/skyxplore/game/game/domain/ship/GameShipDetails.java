@@ -21,6 +21,9 @@ public class GameShipDetails {
     private final DefenseDetails defenseDetails;
 
     @NonNull
+    private final WeaponDetails weaponDetails;
+
+    @NonNull
     private final EnergyDetails energyDetails;
 
     @NonNull

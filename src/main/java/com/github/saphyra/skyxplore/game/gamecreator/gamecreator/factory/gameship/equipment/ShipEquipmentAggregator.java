@@ -8,9 +8,11 @@ import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.SlotQueryService;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 //TODO unit test
 class ShipEquipmentAggregator {
     private final ShipQueryService shipQueryService;
@@ -22,8 +24,8 @@ class ShipEquipmentAggregator {
         EquippedSlot defenseSlot = slotQueryService.findSlotByIdValidated(equippedShip.getDefenseSlotId());
         EquippedSlot weaponSlot = slotQueryService.findSlotByIdValidated(equippedShip.getWeaponSlotId());
 
-        return ShipEquipments.builder()
-            .shipId(equippedShip.getShipId())
+        ShipEquipments shipEquipments = ShipEquipments.builder()
+            .shipId(equippedShip.getShipType())
             .connectorEquipped(equippedShip.getConnectorEquipped())
             .frontDefense(defenseSlot.getFrontEquipped())
             .leftDefense(defenseSlot.getLeftEquipped())
@@ -34,5 +36,7 @@ class ShipEquipmentAggregator {
             .rightWeapon(weaponSlot.getRightEquipped())
             .backWeapon(weaponSlot.getBackEquipped())
             .build();
+        log.debug("Aggregated ShipEquipments: {}", shipEquipments);
+        return shipEquipments;
     }
 }

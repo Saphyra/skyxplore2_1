@@ -16,9 +16,11 @@ import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableSlot;
 import com.github.saphyra.util.Random;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 //TODO unit test
 class RandomItemProvider {
     private final ExtenderService extenderService;
@@ -32,7 +34,9 @@ class RandomItemProvider {
             .filter(itemId -> slot != UpgradableSlot.CONNECTOR || extenderNotEquipped(itemId, shipEquipments.getConnectorEquipped()))
             .collect(Collectors.toList());
 
-        return itemIds.get(random.randInt(0, itemIds.size()));
+        String result = itemIds.get(random.randInt(0, itemIds.size() - 1));
+        log.debug("Generated random item: {}", result);
+        return result;
     }
 
     private boolean extenderNotEquipped(String itemId, List<String> connectorEquipped) {

@@ -29,7 +29,9 @@ public class AiShipEquipmentGenerator {
     public ShipEquipments generateEquipments(String characterId, Game game) {
         int targetPoint = getTargetPoints(game);
 
-        return fillWithEquipments(targetPoint);
+        ShipEquipments shipEquipments = fillWithEquipments(targetPoint);
+        log.debug("Generated shipEquipments: {}", shipEquipments);
+        return shipEquipments;
     }
 
     private int getTargetPoints(Game game) {

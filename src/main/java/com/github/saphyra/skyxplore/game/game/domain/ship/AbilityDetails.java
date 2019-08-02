@@ -21,5 +21,5 @@ public class AbilityDetails {
     private final int active;
 
     @NonNull
-    private final Map<String, String> data;
+    private final Map<String, Integer> data;
 }

@@ -8,9 +8,11 @@ import com.github.saphyra.skyxplore.data.GameDataFacade;
 import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 //TODO unit test
 class UpgradedItemProvider {
     private static final String ITEM_ID_DELIMITER = "-0";
@@ -21,7 +23,9 @@ class UpgradedItemProvider {
         EquipmentDescription equipmentDescription = gameDataFacade.findEquipmentDescription(itemId);
         String[] splitted = itemId.split(ITEM_ID_DELIMITER);
         String newItemId = splitted[0] + ITEM_ID_DELIMITER + (equipmentDescription.getLevel() + 1);
-        return Optional.ofNullable(gameDataFacade.findEquipmentDescription(newItemId))
+        Optional<String> result = Optional.ofNullable(gameDataFacade.findEquipmentDescription(newItemId))
             .map(GeneralDescription::getId);
+        log.debug("Upgraded item of {} is: {}", itemId, result);
+        return result;
     }
 }

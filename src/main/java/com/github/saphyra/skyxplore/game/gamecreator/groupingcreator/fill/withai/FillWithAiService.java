@@ -63,7 +63,7 @@ public class FillWithAiService {
             }
         }
 
-        log.debug("All emptyPlaces are filled of GameGroups in GameGrouping {}. Remaining missingMembers: {}", gameGrouping.getGameGroupingId(), missingMembers);
+        log.debug("All emptyPlaces are filled of GameGroups in GameGrouping {}. Remaining missingMembers: {}. Creating missing members...", gameGrouping.getGameGroupingId(), missingMembers);
         List<GameGroupCharacter> gameGroupCharacters = new ArrayList<>();
         for (; missingMembers > 0; missingMembers--) {
             GameGroupCharacter gameGroupCharacter = GameGroupCharacter.builder()
