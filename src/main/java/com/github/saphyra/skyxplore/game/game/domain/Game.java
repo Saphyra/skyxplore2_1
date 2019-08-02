@@ -57,9 +57,8 @@ public class Game {
         return this;
     }
 
-    public Game addShips(@NonNull List<GameShip> ships) {
+    public void addShips(@NonNull List<GameShip> ships) {
         this.ships.addAll(ships);
-        return this;
     }
 
     public void addShip(@NonNull GameShip ship) {

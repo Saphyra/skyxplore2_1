@@ -22,7 +22,6 @@ public class GameGroupingQueryService {
             .collect(Collectors.toList());
     }
 
-    //TODO unit test
     public List<GameGrouping> getGroupingsWithEnoughMembers() {
         return gameGroupingStorage.values().stream()
             .filter(GameGrouping::hasEnoughMembers)

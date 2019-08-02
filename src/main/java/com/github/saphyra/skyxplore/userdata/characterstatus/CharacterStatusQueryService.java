@@ -21,11 +21,9 @@ public class CharacterStatusQueryService {
     private final GameQueryService gameQueryService;
 
     public CharacterStatus getCharacterStatus(String characterId) {
-        //TODO unit test
         if (gameQueryService.findByCharacterId(characterId).isPresent()) {
             return CharacterStatus.IN_GAME;
         }
-        //end
 
         Optional<Lobby> lobbyOptional = lobbyQueryService.findByCharacterId(characterId);
         if (lobbyOptional.isPresent()) {

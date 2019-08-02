@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class GameGroupingFactory {
     private final IdGenerator idGenerator;
     private final OffsetDateTimeProvider offsetDateTimeProvider;

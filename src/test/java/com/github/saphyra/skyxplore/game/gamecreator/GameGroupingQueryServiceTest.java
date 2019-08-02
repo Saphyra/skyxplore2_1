@@ -40,4 +40,16 @@ public class GameGroupingQueryServiceTest {
         //THEN
         assertThat(result).containsExactly(gameGrouping2);
     }
+
+    @Test
+    public void getGroupingsWithEnoughMembers() {
+        //GIVEN
+        given(gameGroupingStorage.values()).willReturn(Arrays.asList(gameGrouping1, gameGrouping2));
+        given(gameGrouping1.hasEnoughMembers()).willReturn(true);
+        given(gameGrouping2.hasEnoughMembers()).willReturn(false);
+        //WHEN
+        List<GameGrouping> result = underTest.getGroupingsWithEnoughMembers();
+        //THEN
+        assertThat(result).containsExactly(gameGrouping1);
+    }
 }
