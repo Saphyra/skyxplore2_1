@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class CharacterNameResolver {
     private final AiNameGenerator aiNameGenerator;
     private final CharacterQueryService characterQueryService;

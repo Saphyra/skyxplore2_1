@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class VsGameGroupingToGameConverterStrategy implements GameGroupingToGameConverterStrategy {
     private final GameFactory gameFactory;
 

@@ -1,12 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item;
 
-import static java.util.Objects.isNull;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.data.GameDataFacade;
 import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.Extender;
@@ -17,11 +10,16 @@ import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameshi
 import com.github.saphyra.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class RandomItemProvider {
     private final ExtenderService extenderService;
     private final GameDataFacade gameDataFacade;
@@ -48,6 +46,6 @@ class RandomItemProvider {
         return connectorEquipped.stream()
             .filter(i -> !isNull(extenderService.get(i)))
             .map(extenderService::get)
-            .anyMatch(e -> e.getExtendedSlot().equals(extender.getExtendedSlot()));
+            .noneMatch(e -> e.getExtendedSlot().equals(extender.getExtendedSlot()));
     }
 }

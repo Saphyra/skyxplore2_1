@@ -1,19 +1,17 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.data.GameDataFacade;
 import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class UpgradedItemProvider {
     private static final String ITEM_ID_DELIMITER = "-0";
 

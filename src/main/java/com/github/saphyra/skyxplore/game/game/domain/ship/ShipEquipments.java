@@ -1,18 +1,19 @@
 package com.github.saphyra.skyxplore.game.game.domain.ship;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(toBuilder = true)
 public class ShipEquipments {
+    @NonNull
     private final String shipId;
 
     @NonNull

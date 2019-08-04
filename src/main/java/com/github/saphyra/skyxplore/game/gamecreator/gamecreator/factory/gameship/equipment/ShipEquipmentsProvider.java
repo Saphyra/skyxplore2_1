@@ -17,7 +17,7 @@ public class ShipEquipmentsProvider {
 
     public ShipEquipments getEquipments(GameGroupCharacter gameGroupCharacter, Game game) {
         return gameGroupCharacter.isAi()
-            ? aiShipEquipmentGenerator.generateEquipments(gameGroupCharacter.getCharacterId(), game)
+            ? aiShipEquipmentGenerator.generateEquipments(game.getShips())
             : shipEquipmentAggregator.aggregateEquipments(gameGroupCharacter.getCharacterId());
     }
 }

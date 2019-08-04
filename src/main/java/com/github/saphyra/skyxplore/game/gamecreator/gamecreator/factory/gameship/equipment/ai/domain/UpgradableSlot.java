@@ -1,22 +1,21 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain;
 
+import com.github.saphyra.skyxplore.data.DataConstants;
+import com.github.saphyra.skyxplore.data.domain.SlotType;
+import com.github.saphyra.skyxplore.data.entity.Extender;
+import com.github.saphyra.skyxplore.data.entity.Ship;
+import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
+import com.github.saphyra.skyxplore.game.gamecreator.GameCreatorContext;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import com.github.saphyra.skyxplore.data.DataConstants;
-import com.github.saphyra.skyxplore.data.domain.SlotType;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.game.gamecreator.GameCreatorContext;
-import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 @RequiredArgsConstructor
-//TODO unit test
 public enum UpgradableSlot implements UpgradableSlotMethods {
     CONNECTOR(
         (shipEquipments, gameContext) -> getConnectorSlots(shipEquipments, gameContext) > shipEquipments.getConnectorEquipped().size(),

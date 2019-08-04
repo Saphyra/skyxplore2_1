@@ -1,22 +1,20 @@
 package com.github.saphyra.skyxplore.game.game.domain;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
-
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
 @ToString
 @EqualsAndHashCode
-//TODO unit test
 public class Team {
     private final UUID teamId;
     private final TeamColor teamColor;
 
-    @Builder.Default
     private final List<GameCharacter> characters = new Vector<>();
 
     @Builder
@@ -33,7 +31,7 @@ public class Team {
         return this;
     }
 
-    public boolean containsCharacter(String characterId) {
+    boolean containsCharacter(String characterId) {
         return characters.stream()
             .anyMatch(gameCharacter -> gameCharacter.getCharacterId().equals(characterId));
     }
