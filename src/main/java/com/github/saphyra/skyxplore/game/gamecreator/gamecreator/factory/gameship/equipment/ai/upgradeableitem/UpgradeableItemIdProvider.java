@@ -12,7 +12,6 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class UpgradeableItemIdProvider {
     private final GameCreatorContext gameCreatorContext;
     private final RandomUpgradeableItemOfSlotProvider randomUpgradeableItemOfSlotProvider;

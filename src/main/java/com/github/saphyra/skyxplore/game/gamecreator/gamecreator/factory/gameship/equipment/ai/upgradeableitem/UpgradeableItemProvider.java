@@ -12,8 +12,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
-public class UpgradableItemProvider {
+public class UpgradeableItemProvider {
     private final UpgradeableItemIdProvider upgradeableItemIdProvider;
     private final UpgradeableSlotProvider upgradeableSlotProvider;
 

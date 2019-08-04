@@ -1,7 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment;
 
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.userdata.ship.ShipQueryService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
@@ -9,6 +7,7 @@ import com.github.saphyra.skyxplore.userdata.slot.SlotQueryService;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

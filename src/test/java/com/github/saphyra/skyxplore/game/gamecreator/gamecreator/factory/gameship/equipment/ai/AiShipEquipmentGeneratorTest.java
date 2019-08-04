@@ -5,7 +5,7 @@ import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableItem;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableSlot;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item.ItemProviderFacade;
-import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.upgradeableitem.UpgradableItemProvider;
+import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.upgradeableitem.UpgradeableItemProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +45,7 @@ public class AiShipEquipmentGeneratorTest {
     private TargetPointCalculator targetPointCalculator;
 
     @Mock
-    private UpgradableItemProvider upgradableItemProvider;
+    private UpgradeableItemProvider upgradeableItemProvider;
 
     @InjectMocks
     private AiShipEquipmentGenerator underTest;
@@ -70,7 +70,7 @@ public class AiShipEquipmentGeneratorTest {
             .upgradableSlot(Optional.of(UpgradableSlot.CONNECTOR))
             .upgradeableItemId(Optional.of(ITEM_ID))
             .build();
-        given(upgradableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
+        given(upgradeableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
         //WHEN
         ShipEquipments result = underTest.generateEquipments(Arrays.asList(gameShip));
         //THEN
@@ -85,7 +85,7 @@ public class AiShipEquipmentGeneratorTest {
             .upgradableSlot(Optional.of(UpgradableSlot.CONNECTOR))
             .upgradeableItemId(Optional.empty())
             .build();
-        given(upgradableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
+        given(upgradeableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
         //WHEN
         ShipEquipments result = underTest.generateEquipments(Arrays.asList(gameShip));
         //THEN
@@ -100,7 +100,7 @@ public class AiShipEquipmentGeneratorTest {
             .upgradableSlot(Optional.empty())
             .upgradeableItemId(Optional.empty())
             .build();
-        given(upgradableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
+        given(upgradeableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
 
         given(itemProviderFacade.getUpgradedVersionOf(SHIP_ID)).willReturn(Optional.of(UPGRADED_SHIP_ID));
         //WHEN
@@ -116,7 +116,7 @@ public class AiShipEquipmentGeneratorTest {
             .upgradableSlot(Optional.empty())
             .upgradeableItemId(Optional.empty())
             .build();
-        given(upgradableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
+        given(upgradeableItemProvider.getUpgradableItem(any())).willReturn(upgradableItem);
 
         given(itemProviderFacade.getUpgradedVersionOf(SHIP_ID)).willReturn(Optional.empty());
         //WHEN

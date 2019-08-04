@@ -13,7 +13,6 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class RandomUpgradeableItemOfSlotProvider {
     private final GameDataFacade gameDataFacade;
     private final Random random;
@@ -23,7 +22,7 @@ class RandomUpgradeableItemOfSlotProvider {
         Optional<String> result = equipmentsOfSlot.stream()
             .filter(gameDataFacade::isUpgradable)
             .sorted((o1, o2) -> random.randInt(-1, 1))
-            .findFirst();
+            .findAny();
         log.debug("Random upgradeable item of slot {}", result);
         return result;
     }

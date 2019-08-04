@@ -11,7 +11,6 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class UpgradeableSlotProvider {
     private final RandomEmptySlotProvider randomEmptySlotProvider;
     private final RandomUpgradeableSlotProvider randomUpgradeableSlotProvider;
@@ -28,6 +27,4 @@ class UpgradeableSlotProvider {
         }
         return slot;
     }
-
-
 }

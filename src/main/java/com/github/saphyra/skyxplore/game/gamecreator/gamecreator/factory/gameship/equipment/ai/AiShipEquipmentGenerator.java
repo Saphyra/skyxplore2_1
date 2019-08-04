@@ -5,7 +5,7 @@ import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableItem;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item.ItemProviderFacade;
-import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.upgradeableitem.UpgradableItemProvider;
+import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.upgradeableitem.UpgradeableItemProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class AiShipEquipmentGenerator {
     private final NewItemEquiper newItemEquiper;
     private final PointCalculator pointCalculator;
     private final TargetPointCalculator targetPointCalculator;
-    private final UpgradableItemProvider upgradableItemProvider;
+    private final UpgradeableItemProvider upgradeableItemProvider;
 
     public ShipEquipments generateEquipments(List<GameShip> gameShips) {
         int targetPoint = targetPointCalculator.getTargetPoints(gameShips);
@@ -38,7 +38,7 @@ public class AiShipEquipmentGenerator {
             .build();
 
         while (pointCalculator.countPointsOfEquipments(shipEquipments) < targetPoint) {
-            UpgradableItem upgradableItem = upgradableItemProvider.getUpgradableItem(shipEquipments);
+            UpgradableItem upgradableItem = upgradeableItemProvider.getUpgradableItem(shipEquipments);
             if (hasUpgradableSlot(upgradableItem)) {
                 if (hasUpgradableItem(upgradableItem)) {
                     existingItemUpgrader.upgradeExistingItem(shipEquipments, upgradableItem);

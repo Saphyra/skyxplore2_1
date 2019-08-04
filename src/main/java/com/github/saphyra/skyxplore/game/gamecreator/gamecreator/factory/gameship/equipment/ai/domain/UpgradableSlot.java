@@ -61,6 +61,16 @@ public enum UpgradableSlot implements UpgradableSlotMethods {
         (shipEquipments, gameContext) -> getBackWeaponSlots(shipEquipments, gameContext) > shipEquipments.getBackWeapon().size(),
         ShipEquipments::getBackWeapon,
         () -> SlotType.WEAPON
+    ),
+    TEST_HAS_EMPTY_SLOT(
+        (shipEquipments, gameCreatorContext) -> true,
+        shipEquipments -> null,
+        () -> null
+    ),
+    TEST_HAS_NOT_EMPTY_SLOT(
+        (shipEquipments, gameCreatorContext) -> false,
+        ShipEquipments::getConnectorEquipped,
+        () -> null
     );
 
     @Getter(value = AccessLevel.PRIVATE)
