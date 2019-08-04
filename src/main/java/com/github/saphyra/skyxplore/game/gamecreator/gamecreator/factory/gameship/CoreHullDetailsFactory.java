@@ -1,12 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship;
 
-import static java.util.Objects.isNull;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.data.entity.CoreHull;
 import com.github.saphyra.skyxplore.data.entity.Ship;
 import com.github.saphyra.skyxplore.data.subservice.CoreHullService;
@@ -15,11 +8,16 @@ import com.github.saphyra.skyxplore.game.game.domain.ship.HullDetails;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.Objects.isNull;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class CoreHullDetailsFactory {
     private final CoreHullService coreHullService;
     private final ShipService shipService;

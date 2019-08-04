@@ -1,12 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.data.entity.Ability;
 import com.github.saphyra.skyxplore.data.subservice.AbilityService;
 import com.github.saphyra.skyxplore.data.subservice.ShipService;
@@ -14,11 +7,16 @@ import com.github.saphyra.skyxplore.game.game.domain.ship.AbilityDetails;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class AbilityDetailsFactory {
     private final AbilityService abilityService;
     private final ShipService shipService;

@@ -1,9 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.slot.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import lombok.AccessLevel;
@@ -11,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -149,7 +149,7 @@ public class EquippedSlot {
         }
     }
 
-    public ArrayList<String> getFrontEquipped() {
+    public List<String> getFrontEquipped() {
         return new ArrayList<>(frontEquipped);
     }
 
@@ -158,7 +158,7 @@ public class EquippedSlot {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
-    public ArrayList<String> getBackEquipped() {
+    public List<String> getBackEquipped() {
         return new ArrayList<>(backEquipped);
     }
 
@@ -167,7 +167,7 @@ public class EquippedSlot {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
-    public ArrayList<String> getLeftEquipped() {
+    public List<String> getLeftEquipped() {
         return new ArrayList<>(leftEquipped);
     }
 
@@ -176,7 +176,7 @@ public class EquippedSlot {
         throw new UnsupportedOperationException("EquippedSlot cannot be set.");
     }
 
-    public ArrayList<String> getRightEquipped() {
+    public List<String> getRightEquipped() {
         return new ArrayList<>(rightEquipped);
     }
 

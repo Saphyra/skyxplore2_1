@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class ShipEquipmentsProvider {
     private final AiShipEquipmentGenerator aiShipEquipmentGenerator;
     private final ShipEquipmentAggregator shipEquipmentAggregator;
