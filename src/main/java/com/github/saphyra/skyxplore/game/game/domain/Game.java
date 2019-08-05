@@ -1,5 +1,10 @@
 package com.github.saphyra.skyxplore.game.game.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
 import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
@@ -9,11 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
 
 @ToString(exclude = "gameContext")
 @EqualsAndHashCode

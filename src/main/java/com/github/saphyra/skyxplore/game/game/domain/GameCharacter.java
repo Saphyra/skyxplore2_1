@@ -8,16 +8,16 @@ import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode
+@Getter
 public class GameCharacter {
     @NonNull
-    @Getter
     private final String characterId;
 
     private final String characterName;
 
     private final boolean originallyAi;
 
-    private volatile boolean isAi = false;
+    private volatile boolean isAi;
 
     @Builder
     public GameCharacter(
@@ -28,5 +28,6 @@ public class GameCharacter {
         this.characterId = characterId;
         this.characterName = characterName;
         this.originallyAi = originallyAi;
+        this.isAi = originallyAi;
     }
 }

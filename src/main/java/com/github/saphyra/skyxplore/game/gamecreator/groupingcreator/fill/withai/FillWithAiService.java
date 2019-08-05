@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO unit test
 public class FillWithAiService {
     private final GameGroupCharacterFactory gameGroupCharacterFactory;
     private final GroupingCreatorConfiguration configuration;

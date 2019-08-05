@@ -11,13 +11,14 @@ import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.converter.GameGroupingToGameConverterStrategy;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
+@Builder
 public class CreateGameService {
     private final GameGroupingQueryService gameGroupingQueryService;
     private final GameGroupingStorage gameGroupingStorage;

@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class StorageDetailsFactory {
     private final StorageService storageService;
 

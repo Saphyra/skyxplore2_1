@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,16 +7,18 @@ import org.springframework.stereotype.Component;
 
 import com.github.saphyra.skyxplore.game.game.domain.TeamColor;
 import com.github.saphyra.util.Random;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
+@Builder
 class TeamColorPicker {
     private final Random random;
+    private final List<TeamColor> teamColors;
 
     TeamColor getRandomColor(List<TeamColor> usedColors) {
-        List<TeamColor> availableColors = Arrays.stream(TeamColor.values())
+        List<TeamColor> availableColors = teamColors.stream()
             .filter(teamColor -> !usedColors.contains(teamColor))
             .collect(Collectors.toList());
 

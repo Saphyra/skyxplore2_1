@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Builder
+@Getter
 public class WeaponDetails {
     @NonNull
     private final List<WeaponSideDetails> frontWeapon;
