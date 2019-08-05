@@ -10,6 +10,7 @@ import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode
+@Getter
 public class GameShip {
     private final UUID gameShipId;
 

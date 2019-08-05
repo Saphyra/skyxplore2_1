@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class DefenseSideDetailsFactory {
     private final HullDetailsFactory hullDetailsFactory;
     private final ShieldDetailsFactory shieldDetailsFactory;

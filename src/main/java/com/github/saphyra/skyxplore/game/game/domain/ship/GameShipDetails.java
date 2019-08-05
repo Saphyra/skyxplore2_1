@@ -1,11 +1,13 @@
 package com.github.saphyra.skyxplore.game.game.domain.ship;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
@@ -13,6 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
+@Getter
 public class GameShipDetails {
     @NonNull
     private final HullDetails coreHull;
@@ -31,4 +34,8 @@ public class GameShipDetails {
 
     @NonNull
     private final List<AbilityDetails> abilityDetails;
+
+    public List<AbilityDetails> getAbilityDetails(){
+        return new ArrayList<>(abilityDetails);
+    }
 }

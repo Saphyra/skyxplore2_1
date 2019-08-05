@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class GameShipFactory {
     private final GameShipDetailsFactory gameShipDetailsFactory;
     private final IdGenerator idGenerator;
