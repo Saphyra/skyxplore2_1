@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingStorage;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
-//TODO unit test
+@Builder
 public class FillFromLobbyService {
     private final LobbyQueryService lobbyQueryService;
     private final GameGroupingStorage gameGroupingStorage;

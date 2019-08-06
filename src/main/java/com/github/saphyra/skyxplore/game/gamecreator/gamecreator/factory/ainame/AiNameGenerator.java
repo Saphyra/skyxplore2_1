@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
 class AiNameGenerator {
     private final FirstNames firstNames;
     private final LastNames lastNames;

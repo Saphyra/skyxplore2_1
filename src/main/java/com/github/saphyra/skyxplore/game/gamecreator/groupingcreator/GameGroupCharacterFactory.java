@@ -10,11 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class GameGroupCharacterFactory {
     private final IdGenerator idGenerator;
 
-    GameGroupCharacter createGameCharacter(String characterId, boolean isAi) {
+    GameGroupCharacter createGameGroupCharacter(String characterId, boolean isAi) {
         GameGroupCharacter gameGroupCharacter = GameGroupCharacter.builder()
             .characterId(characterId)
             .isAi(isAi)
@@ -24,6 +23,6 @@ public class GameGroupCharacterFactory {
     }
 
     public GameGroupCharacter createAi() {
-        return createGameCharacter(idGenerator.generateRandomId(), true);
+        return createGameGroupCharacter(idGenerator.generateRandomId(), true);
     }
 }

@@ -1,21 +1,23 @@
 package com.github.saphyra.skyxplore.game.lobby.lobby.creation;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.exceptionhandling.exception.RestException;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.CreateLobbyRequest;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.RestException;
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.CreateLobbyRequest;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+//TODO unit test
 public class LobbyCreatorService {
     private final LobbyQueryService lobbyQueryService;
     private final LobbyStorage lobbyStorage;

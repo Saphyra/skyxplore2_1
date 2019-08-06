@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+//TODO unit test
 public class GameQueryService {
     private final GameStorage gameStorage;
 

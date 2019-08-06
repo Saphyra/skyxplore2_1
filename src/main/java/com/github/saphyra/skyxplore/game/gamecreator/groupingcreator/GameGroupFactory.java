@@ -25,7 +25,7 @@ public class GameGroupFactory {
     public List<GameGroup> createGroups(Lobby lobby, int maxGroupSize) {
         List<GameGroupCharacter> gameGroupCharacters = lobby.getMembers().stream()
             .map(LobbyMember::getCharacterId)
-            .map(characterId -> gameGroupCharacterFactory.createGameCharacter(characterId, false))
+            .map(characterId -> gameGroupCharacterFactory.createGameGroupCharacter(characterId, false))
             .collect(Collectors.toList());
         return createGroups(gameGroupCharacters, lobby.isAutoFill(), maxGroupSize);
     }

@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class FillGroupingService {
     private final FillFromLobbyService fillFromLobbyService;
     private final FillWithAiService fillWithAiService;

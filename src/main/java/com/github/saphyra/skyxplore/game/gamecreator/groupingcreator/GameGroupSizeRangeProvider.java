@@ -6,6 +6,7 @@ import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupSizeRange;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 
 @Component
+//TODO unit test
 public class GameGroupSizeRangeProvider {
     public GameGroupSizeRange getGameModeSizeRange(GameMode gameMode) {
         return getGameModeSizeRange(gameMode, null);
