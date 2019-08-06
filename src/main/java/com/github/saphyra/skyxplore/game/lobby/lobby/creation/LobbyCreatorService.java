@@ -1,23 +1,22 @@
 package com.github.saphyra.skyxplore.game.lobby.lobby.creation;
 
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.exceptionhandling.exception.RestException;
+import com.github.saphyra.exceptionhandling.exception.NotImplementedException;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.CreateLobbyRequest;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-//TODO unit test
+@Builder
 public class LobbyCreatorService {
     private final LobbyQueryService lobbyQueryService;
     private final LobbyStorage lobbyStorage;
@@ -31,7 +30,7 @@ public class LobbyCreatorService {
         Lobby lobby = lobbyFactories.stream()
             .filter(lobbyFactory -> lobbyFactory.canCreate(request.getGameMode()))
             .findFirst()
-            .orElseThrow(() -> new RestException(HttpStatus.NOT_IMPLEMENTED, "Unsupported gameMode: " + request.getGameMode()))
+            .orElseThrow(() -> new NotImplementedException("Unsupported gameMode: " + request.getGameMode()))
             .create(request.getGameMode(), characterId, request.getData());
 
         log.info("lobby created: {}", lobby);

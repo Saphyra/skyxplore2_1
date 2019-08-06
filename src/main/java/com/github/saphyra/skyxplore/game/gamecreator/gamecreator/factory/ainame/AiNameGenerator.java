@@ -1,23 +1,21 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.ainame;
 
 
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class AiNameGenerator {
     private final FirstNames firstNames;
     private final LastNames lastNames;
     private final Random random;
 
     String generateCharacterName() {
-        String aiName = getFirstName() + " " + getLastName() + " " + random.randInt(0, 1000);
+        String aiName = getLastName() + " " + getFirstName();
         log.debug("Generated ai name: {}", aiName);
         return aiName;
     }

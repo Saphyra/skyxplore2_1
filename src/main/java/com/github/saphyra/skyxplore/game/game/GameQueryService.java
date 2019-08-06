@@ -1,15 +1,13 @@
 package com.github.saphyra.skyxplore.game.game;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.skyxplore.game.game.domain.Game;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-//TODO unit test
 public class GameQueryService {
     private final GameStorage gameStorage;
 

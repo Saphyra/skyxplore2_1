@@ -1,23 +1,21 @@
 package com.github.saphyra.skyxplore.game.gamecreator.groupingcreator;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
-import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroup;
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.LobbyMember;
 import com.github.saphyra.util.IdGenerator;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 public class GameGroupFactory {
     private final GameGroupCharacterFactory gameGroupCharacterFactory;
     private final IdGenerator idGenerator;

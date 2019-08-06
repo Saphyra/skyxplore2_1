@@ -1,11 +1,8 @@
 package com.github.saphyra.skyxplore.game.lobby.invitation;
 
-import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
-import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
-
-import java.util.List;
-import java.util.UUID;
-
+import com.github.saphyra.skyxplore.game.lobby.invitation.domain.InvitationView;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.skyxplore.game.lobby.invitation.domain.InvitationView;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.UUID;
+
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_CHARACTER_ID;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-//TODO unit test
 public class InvitationController {
     private static final String ACCEPT_INVITATION_MAPPING = API_PREFIX + "/lobby/invitation/{invitationId}";
     public static final String GET_INVITATIONS_MAPPING = API_PREFIX + "/lobby/invitation";

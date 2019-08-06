@@ -1,24 +1,34 @@
 package com.github.saphyra.skyxplore.game.gamecreator;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-
-import java.util.Arrays;
-import java.util.List;
-
+import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
+import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GroupingCreatorConfiguration;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
+import com.github.saphyra.util.OffsetDateTimeProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
+import java.time.OffsetDateTime;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameGroupingQueryServiceTest {
+    private static final OffsetDateTime CURRENT_DATE = OffsetDateTime.now();
+
+    @Mock
+    private GroupingCreatorConfiguration configuration;
+
     @Mock
     private GameGroupingStorage gameGroupingStorage;
+
+    @Mock
+    private OffsetDateTimeProvider offsetDateTimeProvider;
 
     @InjectMocks
     private GameGroupingQueryService underTest;
@@ -28,6 +38,29 @@ public class GameGroupingQueryServiceTest {
 
     @Mock
     private GameGrouping gameGrouping2;
+
+    @Mock
+    private GameGrouping gameGrouping3;
+
+    @Test
+    public void getAutoFillableGameGroupings() {
+        //GIVEN
+        given(gameGroupingStorage.values()).willReturn(Arrays.asList(gameGrouping1, gameGrouping2, gameGrouping3));
+
+        given(configuration.getAutoFillDelaySeconds()).willReturn(1);
+        given(offsetDateTimeProvider.getCurrentDate()).willReturn(CURRENT_DATE);
+
+        given(gameGrouping1.getCreatedAt()).willReturn(CURRENT_DATE);
+        given(gameGrouping2.getCreatedAt()).willReturn(CURRENT_DATE.minusSeconds(2));
+        given(gameGrouping3.getCreatedAt()).willReturn(CURRENT_DATE.minusSeconds(2));
+
+        given(gameGrouping2.hasEnoughMembers()).willReturn(true);
+        given(gameGrouping3.hasEnoughMembers()).willReturn(false);
+        //WHEN
+        List<GameGrouping> result = underTest.getAutoFillableGameGroupings();
+        //THEN
+        assertThat(result).containsExactly(gameGrouping3);
+    }
 
     @Test
     public void getGroupingsByGameMode() {
@@ -52,4 +85,5 @@ public class GameGroupingQueryServiceTest {
         //THEN
         assertThat(result).containsExactly(gameGrouping1);
     }
+
 }
