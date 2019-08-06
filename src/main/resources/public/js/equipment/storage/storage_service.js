@@ -1,7 +1,7 @@
 (function StorageService(){
-    scriptLoader.loadScript("js/common/equipment/item_cache.js");
-    scriptLoader.loadScript("js/common/localization/category_names.js");
-    scriptLoader.loadScript("js/equipment/storage/storage_category.js");
+    scriptLoader.loadScript("/js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("/js/common/localization/category_names.js");
+    scriptLoader.loadScript("/js/equipment/storage/storage_category.js");
 
     events.LOAD_STORAGE = "load_storage";
     events.ADD_TO_STORAGE = "add_to_storage";

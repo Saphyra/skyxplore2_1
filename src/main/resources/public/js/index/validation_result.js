@@ -1,4 +1,4 @@
-scriptLoader.loadScript("js/common/validation_util.js");
+scriptLoader.loadScript("/js/common/validation_util.js");
 
 function ValidationResult(){
     const INVALID_USERNAME = "#invalid-username";

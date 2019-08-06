@@ -1,14 +1,14 @@
 package com.github.saphyra.selenium.logic.flow;
 
+import com.github.saphyra.selenium.logic.util.LocatorUtil;
+import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.github.saphyra.selenium.logic.util.LocatorUtil;
-import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 
 import java.util.Map;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
 
 public class Logout {
     private static final String MESSAGE_CODE_SUCCESSFUL_LOGOUT = "SUCCESSFUL_LOGOUT";
@@ -33,7 +33,7 @@ public class Logout {
 
     private void validateLogout() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.urlToBe(HOST));
+        wait.until(ExpectedConditions.urlToBe(INDEX_PAGE));
 
         notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_LOGOUT));
     }

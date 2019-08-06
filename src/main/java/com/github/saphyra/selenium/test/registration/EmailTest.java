@@ -1,9 +1,5 @@
 package com.github.saphyra.selenium.test.registration;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
-
-import org.junit.Test;
-
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Logout;
 import com.github.saphyra.selenium.logic.flow.Registration;
@@ -12,6 +8,9 @@ import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.registration.email.ExistingEmailTest;
 import com.github.saphyra.selenium.test.registration.email.InvalidEmailTest;
 import com.github.saphyra.selenium.test.registration.email.helper.EmailTestHelper;
+import org.junit.Test;
+
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
 
 public class EmailTest extends SeleniumTestApplication {
     private IndexPage indexPage;
@@ -24,7 +23,7 @@ public class EmailTest extends SeleniumTestApplication {
     protected void init() {
         indexPage = new IndexPage(driver);
         emailTestHelper = new EmailTestHelper(driver, indexPage);
-        fieldValidator = new FieldValidator(driver, HOST);
+        fieldValidator = new FieldValidator(driver, INDEX_PAGE);
         registration = new Registration(driver, messageCodes);
         logout = new Logout(driver, messageCodes);
     }

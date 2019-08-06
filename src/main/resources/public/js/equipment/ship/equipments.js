@@ -1,4 +1,4 @@
-scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
+scriptLoader.loadScript("/js/common/equipment/equipment_label_service.js");
 
 function Equipments(){
     const equipped = {};

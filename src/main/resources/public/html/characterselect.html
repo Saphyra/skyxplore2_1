@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-    <META charset="UTF-8"/>
+    <META charset="UTF-8">
 
     <LINK rel="stylesheet" href="/css/reset.css">
     <LINK rel="stylesheet" href="/css/common.css">
@@ -9,9 +9,9 @@
     <LINK rel="stylesheet" href="/css/characterselect/create_character.css">
     <LINK rel="stylesheet" href="/css/characterselect/rename_character.css">
 
-    <SCRIPT src="js/common/jquery.js"></SCRIPT>
-    <SCRIPT src="js/common/common_base.js"></SCRIPT>
-    <SCRIPT src="js/characterselect/page_controller.js"></SCRIPT>
+    <SCRIPT src="/js/common/jquery.js"></SCRIPT>
+    <SCRIPT src="/js/common/common_base.js"></SCRIPT>
+    <SCRIPT src="/js/characterselect/page_controller.js"></SCRIPT>
 </HEAD>
 <BODY>
 
@@ -50,7 +50,7 @@
 
         <FOOTER>
             <BUTTON id="logout-button" onclick='eventProcessor.processEvent(new Event(events.LOGOUT))'></BUTTON>
-            <BUTTON id="account-button" onclick='window.location.href = "account"'></BUTTON>
+            <BUTTON id="account-button" onclick='window.location.href = Mapping.ACCOUNT_PAGE'></BUTTON>
         </FOOTER>
     </DIV>
     

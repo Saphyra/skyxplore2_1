@@ -1,6 +1,6 @@
 (function ChangeEmailController(){
-    scriptLoader.loadScript("js/account/change_email/change_email_validator.js");
-    scriptLoader.loadScript("js/account/change_email/change_email_service.js");
+    scriptLoader.loadScript("/js/account/change_email/change_email_validator.js");
+    scriptLoader.loadScript("/js/account/change_email/change_email_service.js");
     
     events.EMAIL_VALIDATION_ATTEMPT = "email_validation_attempt";
     

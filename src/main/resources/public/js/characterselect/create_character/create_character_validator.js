@@ -1,6 +1,6 @@
 (function CreateCharacterValidator(){
-    scriptLoader.loadScript("js/common/validation_util.js");
-    scriptLoader.loadScript("js/account/validation_result.js");
+    scriptLoader.loadScript("/js/common/validation_util.js");
+    scriptLoader.loadScript("/js/account/validation_result.js");
     
     events.VALIDATE_CREATE_CHARACTER = "validate_create_character";
     

@@ -1,7 +1,7 @@
 (function EquipmentLabelService(){
-    scriptLoader.loadScript("js/common/equipment/item_cache.js");
-    scriptLoader.loadScript("js/common/localization/items.js");
-    scriptLoader.loadScript("js/common/localization/description.js");
+    scriptLoader.loadScript("/js/common/equipment/item_cache.js");
+    scriptLoader.loadScript("/js/common/localization/items.js");
+    scriptLoader.loadScript("/js/common/localization/description.js");
 
     window.equipmentLabelService = new function(){
         this.assembleTitleOfItem = assembleTitleOfItem;

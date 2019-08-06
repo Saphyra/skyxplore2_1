@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import com.github.saphyra.selenium.logic.page.CharacterSelectPage;
 import com.github.saphyra.selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
 
-import static com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 
 @Builder
 public class TooLongCharacterNameTest {

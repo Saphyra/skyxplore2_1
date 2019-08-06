@@ -1,6 +1,6 @@
 (function RenameCharacterController(){
-    scriptLoader.loadScript("js/characterselect/rename_character/rename_character_validator.js");
-    scriptLoader.loadScript("js/characterselect/rename_character/rename_character_service.js");
+    scriptLoader.loadScript("/js/characterselect/rename_character/rename_character_validator.js");
+    scriptLoader.loadScript("/js/characterselect/rename_character/rename_character_service.js");
     
     events.OPEN_RENAME_CHARACTER_PAGE = "open_rename_character_page";
     events.VALIDATE_NEW_CHARACTER_NAME_ATTEMPT = "validate_new_character_name_attempt";

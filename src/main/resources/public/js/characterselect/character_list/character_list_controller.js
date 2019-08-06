@@ -1,5 +1,5 @@
 (function CharacterListController(){
-    scriptLoader.loadScript("js/characterselect/character_list/character_display_service.js");
+    scriptLoader.loadScript("/js/characterselect/character_list/character_display_service.js");
     
     events.LOAD_CHARACTERS = "load_characters";
     

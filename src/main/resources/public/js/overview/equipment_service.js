@@ -1,6 +1,6 @@
 (function EquipmentService(){
-    scriptLoader.loadScript("js/common/equipment/equipment_label_service.js");
-    scriptLoader.loadScript("js/common/localization/items.js");
+    scriptLoader.loadScript("/js/common/equipment/equipment_label_service.js");
+    scriptLoader.loadScript("/js/common/localization/items.js");
 
     events.LOAD_EQUIPMENT = "load_equipment";
     

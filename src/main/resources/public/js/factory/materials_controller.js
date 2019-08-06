@@ -1,5 +1,5 @@
 (function MaterialsController(){
-    scriptLoader.loadScript("js/common/localization/items.js");
+    scriptLoader.loadScript("/js/common/localization/items.js");
 
     events.LOAD_MATERIALS = "load_materials";
     events.MATERIALS_LOADED = "materials_loaded";

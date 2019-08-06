@@ -1,6 +1,6 @@
 (function ChangeUsernameValidator(){
-    scriptLoader.loadScript("js/common/validation_util.js");
-    scriptLoader.loadScript("js/account/validation_result.js");
+    scriptLoader.loadScript("/js/common/validation_util.js");
+    scriptLoader.loadScript("/js/account/validation_result.js");
     
     events.VALIDATE_USERNAME = "validate_username";
     

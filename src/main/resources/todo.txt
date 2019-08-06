@@ -33,8 +33,6 @@ Error reporting
 Exception handling:
     - Return localized exception messages
 
-Lobby
-    - Start queueing
 Javadoc
 Integration tests
 Logging

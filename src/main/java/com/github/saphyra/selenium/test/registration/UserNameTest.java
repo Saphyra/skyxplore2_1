@@ -1,9 +1,5 @@
 package com.github.saphyra.selenium.test.registration;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
-
-import org.junit.Test;
-
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Logout;
 import com.github.saphyra.selenium.logic.flow.Registration;
@@ -13,6 +9,9 @@ import com.github.saphyra.selenium.test.registration.username.ExistingUserNameTe
 import com.github.saphyra.selenium.test.registration.username.TooLongUserNameTest;
 import com.github.saphyra.selenium.test.registration.username.TooShortUserNameTest;
 import com.github.saphyra.selenium.test.registration.username.helper.UserNameTestHelper;
+import org.junit.Test;
+
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
 
 public class UserNameTest extends SeleniumTestApplication {
     private UserNameTestHelper userNameTestHelper;
@@ -25,7 +24,7 @@ public class UserNameTest extends SeleniumTestApplication {
     protected void init() {
         indexPage = new IndexPage(driver);
         userNameTestHelper = new UserNameTestHelper(driver, indexPage);
-        fieldValidator = new FieldValidator(driver, HOST);
+        fieldValidator = new FieldValidator(driver, INDEX_PAGE);
         logout = new Logout(driver, messageCodes);
         registration = new Registration(driver, messageCodes);
     }

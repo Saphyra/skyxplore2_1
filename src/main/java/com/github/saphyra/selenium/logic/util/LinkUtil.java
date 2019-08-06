@@ -6,11 +6,12 @@ public class LinkUtil {
     public static final String HOST_PI_INTERNAL = "http://192.168.0.200:9001/";
     public static final String HOST = HOST_TEST;
 
-    public static final String ACCOUNT = HOST + "account";
-    public static final String CHARACTER_SELECT = HOST + "characterselect";
-    public static final String EQUIPMENT = HOST + "equipment";
-    public static final String OVERVIEW = HOST + "overview";
-    public static final String FACTORY = HOST + "factory";
-    public static final String SHOP = HOST + "shop";
-    public static final String COMMUNITY = HOST + "community";
+    public static final String INDEX_PAGE = HOST + "web";
+    public static final String ACCOUNT = HOST + "web/account";
+    public static final String CHARACTER_SELECT = HOST + "web/characterselect";
+    public static final String EQUIPMENT = HOST + "web/equipment";
+    public static final String OVERVIEW = HOST + "web/overview";
+    public static final String FACTORY = HOST + "web/factory";
+    public static final String SHOP = HOST + "web/shop";
+    public static final String COMMUNITY = HOST + "web/community";
 }

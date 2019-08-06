@@ -1,6 +1,6 @@
 (function InvitationController(){
-    scriptLoader.loadScript("js/common/localization/localization_map.js");
-    scriptLoader.loadScript("js/common/game/game_mode_translation.js");
+    scriptLoader.loadScript("/js/common/localization/localization_map.js");
+    scriptLoader.loadScript("/js/common/game/game_mode_translation.js");
 
     const gameModeLocalization = localizationMapCache.getLocalizationMap("game_mode");
     const invitationLocalization = localizationMapCache.getLocalizationMap("invitation");
@@ -125,7 +125,7 @@
             const element = document.createElement("link");
                 element.setAttribute("rel", "stylesheet");
                 element.setAttribute("type", "text/css");
-                element.setAttribute("href", "css/invitation.css");
+                element.setAttribute("href", "/css/invitation.css");
             document.getElementsByTagName("head")[0].appendChild(element);
         }
     }

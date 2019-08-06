@@ -1,6 +1,6 @@
 package com.github.saphyra.selenium.test.characterselect.createcharacter;
 
-import static com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 
 import org.openqa.selenium.WebElement;
 

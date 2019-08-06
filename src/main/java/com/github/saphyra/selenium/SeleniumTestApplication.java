@@ -1,15 +1,10 @@
 package com.github.saphyra.selenium;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
-import static com.github.saphyra.selenium.logic.util.Util.executeScript;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
-import static com.github.saphyra.skyxplore.Application.APP_CTX;
-import static java.util.Objects.isNull;
-
-import java.io.IOException;
-import java.net.URL;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
+import com.github.saphyra.skyxplore.Application;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +12,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
-import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
-import com.github.saphyra.skyxplore.Application;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.net.URL;
+
+import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
+import static com.github.saphyra.selenium.logic.util.Util.executeScript;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
+import static com.github.saphyra.skyxplore.Application.APP_CTX;
+import static java.util.Objects.isNull;
 
 @Slf4j
 public abstract class SeleniumTestApplication {

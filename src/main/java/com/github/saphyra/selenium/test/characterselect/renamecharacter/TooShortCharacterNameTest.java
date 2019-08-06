@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.github.saphyra.selenium.logic.page.CharacterSelectPage;
 
 import static com.github.saphyra.selenium.logic.util.Util.crop;
-import static com.github.saphyra.skyxplore.character.domain.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 @Builder
 public class TooShortCharacterNameTest {

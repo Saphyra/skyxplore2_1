@@ -1,9 +1,9 @@
 (function PageController(){
-    scriptLoader.loadScript("js/common/invitation/invitation_controller.js");
+    scriptLoader.loadScript("/js/common/invitation/invitation_controller.js");
 
-    scriptLoader.loadScript("js/equipment/ship/ship_service.js");
-    scriptLoader.loadScript("js/equipment/storage/storage_service.js");
-    scriptLoader.loadScript("js/equipment/equip_service.js");
+    scriptLoader.loadScript("/js/equipment/ship/ship_service.js");
+    scriptLoader.loadScript("/js/equipment/storage/storage_service.js");
+    scriptLoader.loadScript("/js/equipment/equip_service.js");
     
     $(document).ready(function(){
         init();

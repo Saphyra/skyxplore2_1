@@ -11,7 +11,7 @@ import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 
 import static com.github.saphyra.selenium.logic.util.Util.crop;
-import static com.github.saphyra.skyxplore.user.domain.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
+import static com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest.PASSWORD_MIN_LENGTH;
 
 @Builder
 public class TooShortPasswordTest {
