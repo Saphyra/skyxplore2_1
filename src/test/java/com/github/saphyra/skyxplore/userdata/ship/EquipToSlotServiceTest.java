@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquipRequest;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;

@@ -2,7 +2,6 @@ package com.github.saphyra.skyxplore.userdata.ship;
 
 import org.springframework.stereotype.Service;
 
-import com.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.domain.ShipView;
 import com.github.saphyra.skyxplore.userdata.ship.repository.EquippedShipDao;

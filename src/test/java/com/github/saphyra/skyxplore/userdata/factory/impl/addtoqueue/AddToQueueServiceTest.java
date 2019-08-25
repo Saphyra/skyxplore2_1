@@ -1,7 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
@@ -26,7 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddToQueueServiceImplTest {
+public class AddToQueueServiceTest {
     private static final String ELEMENT_ID = "element_id";
     private static final Integer AMOUNT = 2;
     private static final String CHARACTER_ID = "character_id";
@@ -64,7 +63,7 @@ public class AddToQueueServiceImplTest {
     private FactoryData factoryData;
 
     @InjectMocks
-    private AddToQueueServiceImpl underTest;
+    private AddToQueueService underTest;
 
     private AddToQueueRequest addToQueueRequest;
 

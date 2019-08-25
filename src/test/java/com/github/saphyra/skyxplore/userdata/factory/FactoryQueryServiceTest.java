@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import com.github.saphyra.skyxplore.userdata.factory.repository.FactoryDao;

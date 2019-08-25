@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCharacterTest {

@@ -2,7 +2,6 @@ package com.github.saphyra.skyxplore.userdata.community.mail;
 
 import java.util.List;
 
-import com.github.saphyra.skyxplore.common.exception.MailNotFoundException;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
 import org.springframework.stereotype.Service;

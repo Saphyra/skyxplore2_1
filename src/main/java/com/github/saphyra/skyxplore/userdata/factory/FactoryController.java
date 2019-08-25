@@ -1,9 +1,10 @@
 package com.github.saphyra.skyxplore.userdata.factory;
 
 import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.skyxplore.userdata.factory.domain.AddToQueueRequest;
+import com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue.AddToQueueService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.userdata.factory.domain.AddToQueueRequest;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;

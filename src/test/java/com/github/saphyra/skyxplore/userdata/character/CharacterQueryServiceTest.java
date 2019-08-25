@@ -23,8 +23,6 @@ import com.github.saphyra.skyxplore.userdata.character.cache.CharacterNameLikeCa
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
-import com.github.saphyra.skyxplore.common.exception.CharacterNotFoundException;
-import com.github.saphyra.skyxplore.common.exception.InvalidAccessException;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
 import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipQueryService;

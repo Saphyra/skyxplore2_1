@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
 import org.springframework.stereotype.Service;

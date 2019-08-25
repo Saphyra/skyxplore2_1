@@ -1,8 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
-import com.github.saphyra.skyxplore.userdata.factory.AddToQueueService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
@@ -21,7 +19,7 @@ import javax.transaction.Transactional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class AddToQueueServiceImpl implements AddToQueueService {
+public class AddToQueueService {
     private final CharacterDao characterDao;
     private final CharacterQueryService characterQueryService;
     private final FactoryQueryService factoryQueryService;
@@ -31,7 +29,6 @@ class AddToQueueServiceImpl implements AddToQueueService {
     private final SpendMaterialsService spendMaterialsService;
 
     @Transactional
-    @Override
     public void addToQueue(String characterId, AddToQueueRequest request) {
         SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
         Factory factory = factoryQueryService.findFactoryOfCharacterValidated(characterId);

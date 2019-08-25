@@ -18,8 +18,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
 import com.github.saphyra.util.IdGenerator;
-import com.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
-import com.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrationServiceTest {

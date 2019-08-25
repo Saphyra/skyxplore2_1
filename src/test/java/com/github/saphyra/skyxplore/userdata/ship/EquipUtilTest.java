@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import com.github.saphyra.skyxplore.data.entity.Extender;
 import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;

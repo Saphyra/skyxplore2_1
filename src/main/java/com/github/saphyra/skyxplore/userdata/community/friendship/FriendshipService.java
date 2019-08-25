@@ -10,8 +10,6 @@ import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
-import com.github.saphyra.skyxplore.common.exception.FriendshipAlreadyExistsException;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;

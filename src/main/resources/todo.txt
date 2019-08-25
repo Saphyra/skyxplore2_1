@@ -1,3 +1,6 @@
+//TODO BE localize error messages
+//TODO FE error handling
+
 ===Selenium===
 logging
 

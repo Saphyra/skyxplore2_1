@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.factory;
 
-import com.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;

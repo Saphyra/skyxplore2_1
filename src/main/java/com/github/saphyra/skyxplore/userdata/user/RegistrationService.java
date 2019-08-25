@@ -1,13 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
-import com.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.user.domain.Role;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpUser;
@@ -16,6 +10,10 @@ import com.github.saphyra.skyxplore.userdata.user.repository.user.UserDao;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -48,10 +46,10 @@ class RegistrationService {
 
     private void validateRegistrationRequest(UserRegistrationRequest request) {
         if (credentialsService.isUserNameExists(request.getUsername())) {
-            throw new UserNameAlreadyExistsException(request.getUsername() + " user name is already exists.");
+            throw ExceptionFactory.userNameAlreadyExists(request.getUsername());
         }
         if (userQueryService.isEmailExists(request.getEmail())) {
-            throw new EmailAlreadyExistsException(request.getEmail() + " email is already exists.");
+            throw ExceptionFactory.emailAlreadyExists(request.getEmail());
         }
     }
 }

@@ -1,19 +1,19 @@
 package com.github.saphyra.skyxplore.userdata.character.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMoneyException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Data
 @Builder
@@ -68,11 +68,11 @@ public class SkyXpCharacter {
         keys.forEach(key -> addEquipments(key, items.get(key)));
     }
 
-    public void spendMoney(Integer money) {
-        if (this.money < money) {
-            throw new NotEnoughMoneyException(characterId + " wanted to buy items cost " + money + ", while he had only " + this.money);
+    public void spendMoney(Integer moneyToSpend) {
+        if (this.money < moneyToSpend) {
+            throw ExceptionFactory.notEnoughMoney(characterId, moneyToSpend, this.money);
         }
-        this.money -= money;
+        this.money -= moneyToSpend;
     }
 
     public ArrayList<String> getEquipments() {

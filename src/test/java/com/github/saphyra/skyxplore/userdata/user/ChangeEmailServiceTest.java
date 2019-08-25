@@ -11,8 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
-import com.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
 import com.github.saphyra.skyxplore.userdata.user.cache.EmailCache;
 import com.github.saphyra.skyxplore.userdata.user.domain.ChangeEmailRequest;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;

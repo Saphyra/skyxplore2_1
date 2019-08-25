@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 import com.github.saphyra.skyxplore.common.event.AccountDeletedEvent;
 import com.github.saphyra.skyxplore.userdata.user.domain.AccountDeleteRequest;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;

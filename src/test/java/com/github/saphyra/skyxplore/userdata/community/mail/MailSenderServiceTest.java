@@ -18,7 +18,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;

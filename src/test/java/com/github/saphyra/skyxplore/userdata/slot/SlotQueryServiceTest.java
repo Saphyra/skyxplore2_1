@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.EquippedSlotNotFoundException;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
 

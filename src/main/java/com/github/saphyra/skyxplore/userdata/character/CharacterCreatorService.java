@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.character;
 
-import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.character.cache.CharacterNameExistsCache;

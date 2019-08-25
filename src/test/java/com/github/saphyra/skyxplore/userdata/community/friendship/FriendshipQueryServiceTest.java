@@ -19,8 +19,6 @@ import com.github.saphyra.skyxplore.userdata.community.friendship.repository.fri
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
-import com.github.saphyra.skyxplore.common.exception.FriendRequestNotFoundException;
-import com.github.saphyra.skyxplore.common.exception.FriendshipNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipQueryServiceTest {

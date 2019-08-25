@@ -14,8 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
-import com.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
 import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipService;

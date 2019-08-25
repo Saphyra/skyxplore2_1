@@ -2,7 +2,6 @@ package com.github.saphyra.skyxplore.userdata.community.mail;
 
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.SendMailRequest;

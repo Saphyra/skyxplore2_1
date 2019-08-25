@@ -5,7 +5,6 @@ import static com.github.saphyra.skyxplore.data.DataConstants.WEAPON_SLOT_NAME;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.SlotQueryService;

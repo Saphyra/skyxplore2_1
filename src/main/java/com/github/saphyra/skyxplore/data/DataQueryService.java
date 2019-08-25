@@ -1,11 +1,6 @@
 package com.github.saphyra.skyxplore.data;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
-import com.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
 import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
@@ -25,6 +20,10 @@ import com.github.saphyra.skyxplore.data.subservice.StorageService;
 import com.github.saphyra.skyxplore.data.subservice.WeaponService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -76,7 +75,7 @@ class DataQueryService {
             result = weaponService.get(id);
         }
         if (result == null) {
-            throw new EquipmentNotFoundException("Equipment not found with id " + id);
+            throw ExceptionFactory.equipmentNotFound(id);
         }
         return result;
     }

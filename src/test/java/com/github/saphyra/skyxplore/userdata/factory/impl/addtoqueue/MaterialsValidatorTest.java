@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import org.junit.Test;

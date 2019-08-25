@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.factory.domain;
 
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +32,7 @@ public class Materials extends HashMap<String, Integer> {
         Integer actual = get(key);
         log.info("removeMaterial - {} toRemove: {}, actual: {}", key, amount, actual);
         if (actual < amount) {
-            throw new NotEnoughMaterialsException("Not enough " + key + ". Needed: " + amount + ", have: " + actual);
+            throw ExceptionFactory.notEnoughMaterials(key, amount, actual);
         }
         actual -= amount;
         super.put(key, actual);

@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.userdata.user.repository.credentials.CredentialsDao;
 

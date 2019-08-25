@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.github.saphyra.skyxplore.common.exception.FriendRequestNotFoundException;
-import com.github.saphyra.skyxplore.common.exception.FriendshipNotFoundException;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;

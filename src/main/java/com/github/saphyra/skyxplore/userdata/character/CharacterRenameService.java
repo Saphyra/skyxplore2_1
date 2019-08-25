@@ -6,7 +6,6 @@ import com.github.saphyra.skyxplore.userdata.character.cache.CharacterNameExists
 import com.github.saphyra.skyxplore.userdata.character.domain.RenameCharacterRequest;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

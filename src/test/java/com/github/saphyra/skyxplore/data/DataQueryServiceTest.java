@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.EquipmentNotFoundException;
 import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
 import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.Ability;

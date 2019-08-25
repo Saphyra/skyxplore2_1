@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.MailNotFoundException;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
 

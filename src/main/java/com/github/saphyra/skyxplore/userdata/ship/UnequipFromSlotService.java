@@ -2,7 +2,6 @@ package com.github.saphyra.skyxplore.userdata.ship;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.domain.UnequipRequest;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;

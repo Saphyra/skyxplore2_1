@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.github.saphyra.skyxplore.userdata.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterCreatorServiceTest {
