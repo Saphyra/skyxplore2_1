@@ -49,7 +49,7 @@ public class CharacterNameResolverTest {
         given(gameGroupCharacter.isAi()).willReturn(false);
         given(character.getCharacterName()).willReturn(CHARACTER_NAME);
         given(gameGroupCharacter.getCharacterId()).willReturn(CHARACTER_ID);
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
         //WHEN
         String result = underTest.getCharacterName(gameGroupCharacter);
         //THEN

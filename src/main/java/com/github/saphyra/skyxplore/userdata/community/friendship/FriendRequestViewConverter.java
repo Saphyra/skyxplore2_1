@@ -19,7 +19,7 @@ public class FriendRequestViewConverter extends AbstractViewConverter<FriendRequ
             .characterId(domain.getCharacterId())
             .friendRequestId(domain.getFriendRequestId())
             .friendId(domain.getFriendId())
-            .friendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName())
+            .friendName(characterQueryService.findByCharacterIdValidated(domain.getFriendId()).getCharacterName())
             .build();
     }
 }

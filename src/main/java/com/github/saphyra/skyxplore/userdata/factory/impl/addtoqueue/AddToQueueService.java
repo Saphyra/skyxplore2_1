@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
@@ -30,7 +31,7 @@ public class AddToQueueService {
 
     @Transactional
     public void addToQueue(String characterId, AddToQueueRequest request) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
         Factory factory = factoryQueryService.findFactoryOfCharacterValidated(characterId);
         FactoryData elementData = gameDataFacade.getFactoryData(request.getElementId());
 
@@ -40,7 +41,7 @@ public class AddToQueueService {
 
         int price = elementData.getBuildPrice() * request.getAmount();
         if (character.getMoney() < price) {
-            throw new NotEnoughMoneyException("Not enough money. Needed: " + price + ", have: " + character.getMoney());
+            throw ExceptionFactory.notEnoughMoney(characterId, character.getMoney(), price);
         }
         materialsValidator.validateMaterials(factory.getMaterials(), elementData, request.getAmount());
 

@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.factory;
 
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
@@ -15,7 +16,7 @@ public class FactoryQueryService {
 
     public Factory findFactoryOfCharacterValidated(String characterId) {
         return factoryDao.findByCharacterId(characterId)
-            .orElseThrow(() -> new FactoryNotFoundException("Factory not found for character " + characterId));
+            .orElseThrow(() -> ExceptionFactory.factoryNotFoundForCharacter(characterId));
     }
 
     public Materials getMaterials(String characterId) {
@@ -28,6 +29,6 @@ public class FactoryQueryService {
 
     public Factory findByFactoryId(String factoryId) {
         return factoryDao.findById(factoryId)
-            .orElseThrow(() -> new FactoryNotFoundException("Factory not found with factoryId " + factoryId));
+            .orElseThrow(() -> ExceptionFactory.factoryNotFoundById(factoryId));
     }
 }

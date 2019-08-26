@@ -38,7 +38,7 @@ public class MessageViewConverterTest {
         given(message.getMessage()).willReturn(MESSAGE);
         given(message.getCreatedAt()).willReturn(CREATED_AT);
 
-        given(characterQueryService.findByCharacterId(SENDER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(SENDER_ID)).willReturn(character);
         given(character.getCharacterName()).willReturn(CHARACTER_NAME);
         //WHEN
         MessageView result = underTest.convertDomain(message);

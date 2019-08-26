@@ -17,6 +17,6 @@ public class CharacterNameResolver {
     public String getCharacterName(GameGroupCharacter gameGroupCharacter) {
         return gameGroupCharacter.isAi() ?
             aiNameGenerator.generateCharacterName()
-            : characterQueryService.findByCharacterId(gameGroupCharacter.getCharacterId()).getCharacterName();
+            : characterQueryService.findByCharacterIdValidated(gameGroupCharacter.getCharacterId()).getCharacterName();
     }
 }

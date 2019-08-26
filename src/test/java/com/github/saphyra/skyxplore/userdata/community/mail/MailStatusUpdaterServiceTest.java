@@ -48,7 +48,7 @@ public class MailStatusUpdaterServiceTest {
     public void testArchiveMailsShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
@@ -60,14 +60,14 @@ public class MailStatusUpdaterServiceTest {
     public void testArchiveMailsShouldUpdate() {
         //GIVEN
         given(character.getCharacterId()).willReturn(TO_ID);
-        when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(TO_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.archiveMails(TO_ID, MAIL_IDS, true);
         //THEN
-        verify(characterQueryService).findByCharacterId(TO_ID);
+        verify(characterQueryService).findByCharacterIdValidated(TO_ID);
         verify(mailQueryService).findMailById(MAIL_ID);
         verify(mailDao).save(mail);
         verify(mail).setArchived(true);
@@ -77,7 +77,7 @@ public class MailStatusUpdaterServiceTest {
     public void testUpdateReadStatusShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
@@ -89,14 +89,14 @@ public class MailStatusUpdaterServiceTest {
     public void testUpdateReadStatusShouldUpdate() {
         //GIVEN
         given(character.getCharacterId()).willReturn(TO_ID);
-        when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(TO_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.updateReadStatus(MAIL_IDS, TO_ID, true);
         //THEN
-        verify(characterQueryService).findByCharacterId(TO_ID);
+        verify(characterQueryService).findByCharacterIdValidated(TO_ID);
         verify(mailQueryService).findMailById(MAIL_ID);
         verify(mailDao).save(mail);
         verify(mail).setRead(true);

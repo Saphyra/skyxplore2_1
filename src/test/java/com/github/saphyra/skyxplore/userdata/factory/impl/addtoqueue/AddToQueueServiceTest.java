@@ -71,7 +71,7 @@ public class AddToQueueServiceTest {
     public void setUp() {
         addToQueueRequest = new AddToQueueRequest(ELEMENT_ID, AMOUNT);
 
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
         when(factoryQueryService.findFactoryOfCharacterValidated(CHARACTER_ID)).thenReturn(factory);
         when(gameDataFacade.getFactoryData(ELEMENT_ID)).thenReturn(factoryData);
         when(factoryData.isBuildable()).thenReturn(true);

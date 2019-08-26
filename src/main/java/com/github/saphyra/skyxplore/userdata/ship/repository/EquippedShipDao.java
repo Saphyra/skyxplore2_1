@@ -1,10 +1,11 @@
 package com.github.saphyra.skyxplore.userdata.ship.repository;
 
 import com.github.saphyra.dao.AbstractDao;
-import lombok.extern.slf4j.Slf4j;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.common.event.CharacterDeletedEvent;
 import com.github.saphyra.skyxplore.common.event.ShipDeletedEvent;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class EquippedShipDao extends AbstractDao<EquippedShipEntity, EquippedShi
     @EventListener
     void deleteByCharacterId(CharacterDeletedEvent event) {
         EquippedShipEntity ship = repository.findByCharacterId(event.getCharacterId())
-            .orElseThrow(() -> new ShipNotFoundException("EquippedShip not found with characterId " + event.getCharacterId()));
+            .orElseThrow(() -> ExceptionFactory.shipNotFound(event.getCharacterId()));
         eventPublisher.publishEvent(new ShipDeletedEvent(ship.getShipId()));
         log.info("Deleting ship of {}", event);
         repository.delete(ship);

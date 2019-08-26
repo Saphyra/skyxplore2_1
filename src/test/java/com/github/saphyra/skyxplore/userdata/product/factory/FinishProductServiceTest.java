@@ -100,7 +100,7 @@ public class FinishProductServiceTest {
         given(factory.getCharacterId()).willReturn(CHARACTER_ID);
         given(factoryQueryService.findByFactoryId(FACTORY_ID)).willReturn(factory);
 
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
         //WHEN
         underTest.finishProducts();
         //THEN

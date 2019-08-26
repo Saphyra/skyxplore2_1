@@ -54,7 +54,7 @@ public class ShipQueryServiceTest {
         //GIVEN
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findShipbyCharacterIdValidated(CHARACTER_ID);
+        underTest.findShipByCharacterIdValidated(CHARACTER_ID);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ShipQueryServiceTest {
         //GIVEN
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
         //WHEN
-        EquippedShip result = underTest.findShipbyCharacterIdValidated(CHARACTER_ID);
+        EquippedShip result = underTest.findShipByCharacterIdValidated(CHARACTER_ID);
         //THEN
         verify(equippedShipDao).findShipByCharacterId(CHARACTER_ID);
         assertThat(result).isEqualTo(ship);

@@ -1,16 +1,16 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -21,12 +21,12 @@ public class FriendshipQueryService {
 
     FriendRequest findFriendRequestById(String friendRequestId) {
         return friendRequestDao.findById(friendRequestId)
-            .orElseThrow(() -> new FriendRequestNotFoundException("SeleniumFriendRequest not found with id " + friendRequestId));
+            .orElseThrow(() -> ExceptionFactory.friendRequestNotFound(friendRequestId));
     }
 
     Friendship findFriendshipById(String friendshipId) {
         return friendshipDao.findById(friendshipId)
-            .orElseThrow(() -> new FriendshipNotFoundException("Friendship not found with id " + friendshipId));
+            .orElseThrow(() -> ExceptionFactory.friendshipNotFound(friendshipId));
     }
 
     List<Friendship> getFriends(String characterId) {

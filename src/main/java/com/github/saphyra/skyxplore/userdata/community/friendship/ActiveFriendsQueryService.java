@@ -28,7 +28,7 @@ class ActiveFriendsQueryService {
             .map(friendship -> fetchCharacterId(friendship, characterId))
             .filter(friendId -> accessTokenDao.findByCharacterId(friendId).isPresent())
             .filter(friendId -> !lobbyQueryService.findByCharacterId(friendId).isPresent())
-            .map(characterQueryService::findByCharacterId)
+            .map(characterQueryService::findByCharacterIdValidated)
             .collect(Collectors.toList());
     }
 

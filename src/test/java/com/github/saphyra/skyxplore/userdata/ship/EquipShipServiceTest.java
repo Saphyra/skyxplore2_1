@@ -73,8 +73,8 @@ public class EquipShipServiceTest {
 
     @Before
     public void init() {
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
-        when(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).thenReturn(equippedShip);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
+        when(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).thenReturn(equippedShip);
     }
 
     @Test(expected = BadRequestException.class)

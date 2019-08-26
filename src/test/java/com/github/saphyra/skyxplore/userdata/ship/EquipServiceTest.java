@@ -48,9 +48,9 @@ public class EquipServiceTest {
     @Test
     public void equip_connector() {
         //GIVEN
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
 
-        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
         EquipRequest request = new EquipRequest(EQUIPMENT_ID, CONNECTOR_SLOT_NAME);
         //WHEN
         underTest.equip(request, CHARACTER_ID);
@@ -63,9 +63,9 @@ public class EquipServiceTest {
     @Test
     public void equip_equipment() {
         //GIVEN
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
 
-        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
         EquipRequest request = new EquipRequest(EQUIPMENT_ID, "asd");
         //WHEN
         underTest.equip(request, CHARACTER_ID);

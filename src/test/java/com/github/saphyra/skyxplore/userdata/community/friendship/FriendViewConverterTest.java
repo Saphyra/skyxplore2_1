@@ -60,12 +60,12 @@ public class FriendViewConverterTest {
             .build();
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
-        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(FRIEND_ID)).thenReturn(character);
         when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
         List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(FRIEND_ID);
+        verify(characterQueryService).findByCharacterIdValidated(FRIEND_ID);
         FriendView view = result.get(0);
         assertThat(view.getFriendshipId()).isEqualTo(FRIENDSHIP_ID);
         assertThat(view.getFriendId()).isEqualTo(FRIEND_ID);
@@ -83,12 +83,12 @@ public class FriendViewConverterTest {
             .build();
         List<Friendship> friendshipList = Arrays.asList(friendship);
 
-        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(FRIEND_ID)).thenReturn(character);
         when(accessTokenDao.findByCharacterId(FRIEND_ID)).thenReturn(Optional.of(accessToken));
         //WHEN
         List<FriendView> result = underTest.convertDomain(friendshipList, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(FRIEND_ID);
+        verify(characterQueryService).findByCharacterIdValidated(FRIEND_ID);
         FriendView view = result.get(0);
         assertThat(view.getFriendshipId()).isEqualTo(FRIENDSHIP_ID);
         assertThat(view.getFriendId()).isEqualTo(FRIEND_ID);

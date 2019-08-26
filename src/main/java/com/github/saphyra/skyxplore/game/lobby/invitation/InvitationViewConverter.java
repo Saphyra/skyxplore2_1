@@ -22,7 +22,7 @@ public class InvitationViewConverter extends AbstractViewConverter<Invitation, I
         return InvitationView.builder()
             .gameMode(lobby.getGameMode())
             .data(lobby.getData())
-            .characterName(characterQueryService.findByCharacterId(invitation.getCharacterId()).getCharacterName())
+            .characterName(characterQueryService.findByCharacterIdValidated(invitation.getCharacterId()).getCharacterName())
             .characterId(invitation.getCharacterId())
             .invitationId(invitation.getInvitationId())
             .build();

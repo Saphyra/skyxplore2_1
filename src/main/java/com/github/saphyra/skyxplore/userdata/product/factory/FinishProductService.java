@@ -64,7 +64,7 @@ class FinishProductService {
     }
 
     private void addEquipmentToCharacter(String characterId, Product product) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
         character.addEquipments(product.getElementId(), product.getAmount());
         characterDao.save(character);
     }

@@ -82,7 +82,7 @@ public class CharacterQueryServiceTest {
         //GIVEN
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findByCharacterId(CHARACTER_ID_1);
+        underTest.findByCharacterIdValidated(CHARACTER_ID_1);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class CharacterQueryServiceTest {
         SkyXpCharacter character = createCharacter(CHARACTER_ID_1, USER_ID_1);
         when(characterDao.findById(CHARACTER_ID_1)).thenReturn(Optional.of(character));
         //WHEN
-        SkyXpCharacter result = underTest.findByCharacterId(CHARACTER_ID_1);
+        SkyXpCharacter result = underTest.findByCharacterIdValidated(CHARACTER_ID_1);
         //THEN
         assertThat(result).isEqualTo(character);
         verify(characterDao).findById(CHARACTER_ID_1);

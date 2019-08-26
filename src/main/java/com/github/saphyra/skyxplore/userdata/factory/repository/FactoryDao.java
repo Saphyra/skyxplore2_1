@@ -30,7 +30,7 @@ public class FactoryDao extends AbstractDao<FactoryEntity, Factory, String, Fact
     @EventListener
     public void deleteByCharacterId(CharacterDeletedEvent event) {
         FactoryEntity factoryEntity = repository.findByCharacterId(event.getCharacterId())
-            .orElseThrow(() -> ExceptionFactory.factoryNotFound(event.getCharacterId()));
+            .orElseThrow(() -> ExceptionFactory.factoryNotFoundForCharacter(event.getCharacterId()));
         eventPublisher.publishEvent(new FactoryDeletedEvent(factoryEntity.getFactoryId()));
         repository.delete(factoryEntity);
     }

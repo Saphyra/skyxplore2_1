@@ -1,14 +1,9 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
@@ -19,10 +14,15 @@ import com.github.saphyra.skyxplore.userdata.community.friendship.repository.fri
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO refactor - split class
 public class FriendshipService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
@@ -49,14 +49,14 @@ public class FriendshipService {
 
     void addFriendRequest(String friendId, String characterId, String userId) {
         //Check if character with the given characterId exists
-        characterQueryService.findByCharacterId(friendId);
+        characterQueryService.findByCharacterIdValidated(friendId);
         List<BlockedCharacter> blockedCharacter = blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, friendId);
 
         if (!blockedCharacter.isEmpty()) {
-            throw new CharacterBlockedException(friendId + " is blocked.");
+            throw ExceptionFactory.characterBlockedException(characterId, friendId);
         }
         if (friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(characterId, friendId)) {
-            throw new FriendshipAlreadyExistsException(friendId, characterId);
+            throw ExceptionFactory.friendshipAlreadyExists(characterId, friendId);
         }
         if (isOwnCharacter(friendId, userId)) {
             throw new BadRequestException("You cannot add your user's characters as friend.");

@@ -74,7 +74,7 @@ public class ActiveFriendsQueryServiceTest {
         given(accessTokenDao.findByCharacterId(FRIEND_ID_3)).willReturn(Optional.of(accessToken));
         given(lobbyQueryService.findByCharacterId(FRIEND_ID_3)).willReturn(Optional.empty());
 
-        given(characterQueryService.findByCharacterId(FRIEND_ID_3)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(FRIEND_ID_3)).willReturn(character);
 
         given(friendshipQueryService.getFriends(CHARACTER_ID)).willReturn(Arrays.asList(inactiveFriendship, inLobbyFriendship, invitableFriendsip));
         //WHEN

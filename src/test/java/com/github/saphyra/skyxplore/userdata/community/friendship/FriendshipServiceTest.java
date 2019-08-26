@@ -140,7 +140,7 @@ public class FriendshipServiceTest {
         //WHEN
         underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(FRIEND_ID);
+        verify(characterQueryService).findByCharacterIdValidated(FRIEND_ID);
         verify(blockedCharacterQueryService).findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID);
         verify(friendshipQueryService).isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID);
 

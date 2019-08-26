@@ -42,11 +42,11 @@ public class FriendRequestViewConverterTest {
             .build();
 
         given(character.getCharacterName()).willReturn(FRIEND_NAME);
-        when(characterQueryService.findByCharacterId(FRIEND_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(FRIEND_ID)).thenReturn(character);
         //WHEN
         FriendRequestView result = underTest.convertDomain(friendRequest);
         //THEN
-        verify(characterQueryService).findByCharacterId(FRIEND_ID);
+        verify(characterQueryService).findByCharacterIdValidated(FRIEND_ID);
         assertThat(result.getCharacterId()).isEqualTo(CHARACTER_ID);
         assertThat(result.getFriendRequestId()).isEqualTo(FRIEND_REQUEST_ID);
         assertThat(result.getFriendId()).isEqualTo(FRIEND_ID);

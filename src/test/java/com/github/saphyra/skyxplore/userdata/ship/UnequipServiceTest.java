@@ -49,9 +49,9 @@ public class UnequipServiceTest {
     @Test
     public void unequip_connector() {
         //GIVEN
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
 
-        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
 
         UnequipRequest request = new UnequipRequest(CONNECTOR_SLOT_NAME, EQUIPMENT_ID);
         //WHEN
@@ -65,9 +65,9 @@ public class UnequipServiceTest {
     @Test
     public void unequip_Equipment() {
         //GIVEN
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
 
-        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
 
         UnequipRequest request = new UnequipRequest(EQUIPMENT_SLOT_NAME, EQUIPMENT_ID);
         //WHEN

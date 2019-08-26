@@ -56,7 +56,7 @@ public class MailDeleteServiceTest {
 
     @After
     public void verifyInteractions() {
-        verify(characterQueryService).findByCharacterId(anyString());
+        verify(characterQueryService).findByCharacterIdValidated(anyString());
         verify(mailQueryService).findMailById(anyString());
     }
 
@@ -64,7 +64,7 @@ public class MailDeleteServiceTest {
     public void testDeleteMailShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(CHARACTER_ID, MAIL_IDS);
     }
@@ -73,7 +73,7 @@ public class MailDeleteServiceTest {
     public void testDeleteMailShouldUpdateDeletedByAddressee() {
         //GIVEN
         given(character.getCharacterId()).willReturn(TO_ID);
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(TO_ID, MAIL_IDS);
         //THEN
@@ -85,7 +85,7 @@ public class MailDeleteServiceTest {
     public void testDeleteMailShouldUpdateDeletedBySender() {
         //GIVEN
         given(character.getCharacterId()).willReturn(FROM_ID);
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(FROM_ID, MAIL_IDS);
         //THEN

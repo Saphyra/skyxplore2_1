@@ -1,11 +1,12 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquipRequest;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,7 +32,7 @@ class EquipToSlotService {
         } else if (request.getEquipTo().contains(EquippedShipConstants.RIGHT_SLOT_NAME)) {
             slot.addRight(request.getItemId());
         } else {
-            throw new BadSlotNameException(request.getEquipTo());
+            throw ExceptionFactory.invalidSlotName(request.getEquipTo());
         }
     }
 }

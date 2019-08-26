@@ -1,11 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.character;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.platform.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.userdata.character.cache.CharacterNameLikeCache;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
@@ -13,9 +9,13 @@ import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
 import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipQueryService;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,21 +28,21 @@ public class CharacterQueryService {
     private final FriendshipQueryService friendshipQueryService;
     private final LobbyQueryService lobbyQueryService;
 
-    public SkyXpCharacter findByCharacterId(String characterId) {
+    public SkyXpCharacter findByCharacterIdValidated(String characterId) {
         return characterDao.findById(characterId)
-            .orElseThrow(() -> new CharacterNotFoundException("Character not found with id " + characterId));
+            .orElseThrow(() -> ExceptionFactory.characterNotFound(characterId));
     }
 
-    public SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
-        SkyXpCharacter character = findByCharacterId(characterId);
+    SkyXpCharacter findCharacterByIdAuthorized(String characterId, String userId) {
+        SkyXpCharacter character = findByCharacterIdValidated(characterId);
         if (!userId.equals(character.getUserId())) {
-            throw new InvalidAccessException("Unauthorized character access. CharacterId: " + character.getCharacterId() + ", userId: " + userId);
+            throw ExceptionFactory.invalidCharacterAccess(characterId, userId);
         }
         return character;
     }
 
     List<SkyXpCharacter> getActiveCharactersByName(String characterId, String name) {
-        SkyXpCharacter character = findByCharacterId(characterId);
+        SkyXpCharacter character = findByCharacterIdValidated(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
@@ -61,7 +61,7 @@ public class CharacterQueryService {
     }
 
     public List<SkyXpCharacter> getCharactersCanBeAddressee(String characterId, String name) {
-        SkyXpCharacter character = findByCharacterId(characterId);
+        SkyXpCharacter character = findByCharacterIdValidated(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
@@ -70,7 +70,7 @@ public class CharacterQueryService {
     }
 
     public List<SkyXpCharacter> getCharactersCanBeBlocked(String name, String characterId) {
-        SkyXpCharacter character = findByCharacterId(characterId);
+        SkyXpCharacter character = findByCharacterIdValidated(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
@@ -79,7 +79,7 @@ public class CharacterQueryService {
     }
 
     public List<SkyXpCharacter> getCharactersCanBeFriend(String name, String characterId) {
-        SkyXpCharacter character = findByCharacterId(characterId);
+        SkyXpCharacter character = findByCharacterIdValidated(characterId);
         return getCharactersOfNameLike(name).stream()
             .filter(c -> isNotOwnCharacter(c, character.getUserId())) //Filtering own characters
             .filter(c -> isNotBlocked(character, c))  //Filtering characters blocked by the character
@@ -115,11 +115,11 @@ public class CharacterQueryService {
     }
 
     List<String> getEquipmentsOfCharacter(String characterId) {
-        return findByCharacterId(characterId).getEquipments();
+        return findByCharacterIdValidated(characterId).getEquipments();
     }
 
     Integer getMoneyOfCharacter(String characterId) {
-        SkyXpCharacter character = findByCharacterId(characterId);
+        SkyXpCharacter character = findByCharacterIdValidated(characterId);
         return character.getMoney();
     }
 

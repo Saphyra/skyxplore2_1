@@ -63,14 +63,14 @@ public class MailViewConverterTest {
         given(from.getCharacterName()).willReturn(FROM_NAME);
         given(to.getCharacterName()).willReturn(TO_NAME);
 
-        when(characterQueryService.findByCharacterId(FROM_ID)).thenReturn(from);
-        when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(to);
+        when(characterQueryService.findByCharacterIdValidated(FROM_ID)).thenReturn(from);
+        when(characterQueryService.findByCharacterIdValidated(TO_ID)).thenReturn(to);
         when(dateTimeUtil.convertDomain(SEND_TIME)).thenReturn(SEND_TIME_EPOCH);
         //WHEN
         MailView result = underTest.convertDomain(mail);
         //THEN
-        verify(characterQueryService).findByCharacterId(FROM_ID);
-        verify(characterQueryService).findByCharacterId(TO_ID);
+        verify(characterQueryService).findByCharacterIdValidated(FROM_ID);
+        verify(characterQueryService).findByCharacterIdValidated(TO_ID);
         verify(dateTimeUtil).convertDomain(SEND_TIME);
 
         assertThat(result.getMailId()).isEqualTo(MAIL_ID);

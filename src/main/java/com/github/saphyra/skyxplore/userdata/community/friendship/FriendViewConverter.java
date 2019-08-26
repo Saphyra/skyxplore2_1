@@ -25,7 +25,7 @@ public class FriendViewConverter extends AbstractViewConverter<Friendship, Frien
         return FriendView.builder()
             .friendshipId(domain.getFriendshipId())
             .friendId(domain.getFriendId())
-            .friendName(characterQueryService.findByCharacterId(domain.getFriendId()).getCharacterName())
+            .friendName(characterQueryService.findByCharacterIdValidated(domain.getFriendId()).getCharacterName())
             .active(accessTokenDao.findByCharacterId(domain.getFriendId()).isPresent())
             .build();
     }

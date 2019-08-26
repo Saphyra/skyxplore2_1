@@ -19,7 +19,7 @@ class BuyItemService {
     private final GameDataFacade gameDataFacade;
 
     void buyItems(Map<String, Integer> items, String characterId) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
         Integer cost = countCost(items);
         character.buyEquipments(items, cost);
         characterDao.save(character);

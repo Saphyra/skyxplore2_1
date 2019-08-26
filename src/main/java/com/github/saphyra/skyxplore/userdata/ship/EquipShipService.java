@@ -33,8 +33,8 @@ class EquipShipService {
 
     @Transactional
     void equipShip(String characterId, String itemId) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
+        EquippedShip ship = shipQueryService.findShipByCharacterIdValidated(characterId);
 
         Ship shipToEquip = getShip(itemId);
 

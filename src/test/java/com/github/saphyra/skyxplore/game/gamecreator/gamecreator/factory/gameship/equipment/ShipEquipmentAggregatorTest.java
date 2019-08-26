@@ -53,7 +53,7 @@ public class ShipEquipmentAggregatorTest {
     @Test
     public void aggregateEquipments() {
         //GIVEN
-        given(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
+        given(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).willReturn(ship);
         given(ship.getDefenseSlotId()).willReturn(DEFENSE_SLOT_ID);
         given(ship.getWeaponSlotId()).willReturn(WEAPON_SLOT_ID);
 

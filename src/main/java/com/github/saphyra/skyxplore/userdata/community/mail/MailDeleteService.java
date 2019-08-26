@@ -1,17 +1,16 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +22,7 @@ class MailDeleteService {
 
     @Transactional
     void deleteMails(String characterId, List<String> mailIds) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
         mailIds.forEach(mailId -> processDeletion(character, mailId));
     }
 
@@ -36,7 +35,7 @@ class MailDeleteService {
         } else if (mail.getFrom().equals(character.getCharacterId())) {
             mail.setDeletedBySender(true);
         } else {
-            throw new InvalidMailAccessException(character.getCharacterId() + " has no access to mail " + mailId);
+            throw ExceptionFactory.invalidMailAccess(character.getCharacterId(), mailId);
         }
 
         mailDao.save(mail);

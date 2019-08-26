@@ -39,7 +39,7 @@ public class CharacterViewQueryServiceTest {
     @Test
     public void findByCharacterId() {
         //GIVEN
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
 
         given(characterViewConverter.convertDomain(character)).willReturn(characterView);
         //WHEN

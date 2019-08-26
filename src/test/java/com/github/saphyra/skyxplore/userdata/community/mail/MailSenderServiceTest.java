@@ -76,7 +76,7 @@ public class MailSenderServiceTest {
         //WHEN
         underTest.sendMail(request, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(ADDRESSEE_ID);
+        verify(characterQueryService).findByCharacterIdValidated(ADDRESSEE_ID);
         verify(blockedCharacterQueryService).findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, ADDRESSEE_ID);
 
         ArgumentCaptor<Mail> argumentCaptor = ArgumentCaptor.forClass(Mail.class);

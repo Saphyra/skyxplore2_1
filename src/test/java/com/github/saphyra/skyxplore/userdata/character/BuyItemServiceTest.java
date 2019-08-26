@@ -50,13 +50,13 @@ public class BuyItemServiceTest {
         map.put(ITEM, 2);
         map.put(CONNECTOR, 1);
 
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
         when(gameDataFacade.findBuyable(anyString())).thenReturn(buyable);
         when(buyable.getBuyPrice()).thenReturn(BUY_PRICE);
         //WHEN
         underTest.buyItems(map, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(CHARACTER_ID);
+        verify(characterQueryService).findByCharacterIdValidated(CHARACTER_ID);
         verify(gameDataFacade, times(2)).findBuyable(anyString());
         verify(character).buyEquipments(map, BUY_PRICE * 3);
         verify(characterDao).save(character);
