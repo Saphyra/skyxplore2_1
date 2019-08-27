@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpUser;
 import com.github.saphyra.skyxplore.userdata.user.repository.user.UserDao;
 
@@ -29,12 +33,14 @@ public class UserQueryServiceTest {
     @Mock
     private SkyXpUser user;
 
-    @Test(expected = UserNotFoundException.class)
+    @Test
     public void testGetUserByIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(userDao.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.getUserById(USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.getUserById(USER_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.USER_NOT_FOUND);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,6 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
 
@@ -31,12 +35,14 @@ public class MailQueryServiceTest {
     @InjectMocks
     private MailQueryService underTest;
 
-    @Test(expected = MailNotFoundException.class)
+    @Test
     public void testFindByMailIdShouldThrowException() {
         //GIVEN
         when(mailDao.findById(MAIL_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findMailById(MAIL_ID);
+        Throwable ex = catchThrowable(() -> underTest.findMailById(MAIL_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.MAIL_NOT_FOUND);
     }
 
     @Test

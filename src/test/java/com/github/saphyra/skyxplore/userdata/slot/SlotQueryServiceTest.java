@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.skyxplore.common.ServerException;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
 
@@ -26,7 +27,7 @@ public class SlotQueryServiceTest {
     @Mock
     private EquippedSlot slot;
 
-    @Test(expected = EquippedSlotNotFoundException.class)
+    @Test(expected = ServerException.class)
     public void findBySlotId_notFound() {
         //GIVEN
         given(slotDao.findById(SLOT_ID)).willReturn(Optional.empty());

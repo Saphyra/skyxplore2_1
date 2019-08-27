@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,8 +18,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.ConflictException;
 import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
@@ -102,21 +106,25 @@ public class FriendshipServiceTest {
         verify(friendRequestDao).delete(friendRequest);
     }
 
-    @Test(expected = CharacterBlockedException.class)
+    @Test
     public void testAddFriendRequestShouldThrowExceptionWhenCharacterBlocked() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID)).thenReturn(Arrays.asList(blockedCharacter));
         //WHEN
-        underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.CHARACTER_BLOCKED);
     }
 
-    @Test(expected = FriendshipAlreadyExistsException.class)
+    @Test
     public void testAddFriendRequestShouldThrowExceptionWhenAlreadyExists() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID)).thenReturn(Collections.emptyList());
         when(friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID)).thenReturn(true);
         //WHEN
-        underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID));
+        //THEN
+        verifyException(ex, ConflictException.class, ErrorCode.FRIENDSHIP_ALREADY_EXISTS);
     }
 
     @Test(expected = BadRequestException.class)

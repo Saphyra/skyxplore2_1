@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,6 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
@@ -44,7 +48,7 @@ public class MailStatusUpdaterServiceTest {
     @Mock
     private Mail mail;
 
-    @Test(expected = InvalidMailAccessException.class)
+    @Test
     public void testArchiveMailsShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
@@ -53,7 +57,9 @@ public class MailStatusUpdaterServiceTest {
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
-        underTest.archiveMails(CHARACTER_ID, MAIL_IDS, true);
+        Throwable ex = catchThrowable(() -> underTest.archiveMails(CHARACTER_ID, MAIL_IDS, true));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.INVALID_MAIL_ACCESS);
     }
 
     @Test
@@ -73,7 +79,7 @@ public class MailStatusUpdaterServiceTest {
         verify(mail).setArchived(true);
     }
 
-    @Test(expected = InvalidMailAccessException.class)
+    @Test
     public void testUpdateReadStatusShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
@@ -82,7 +88,9 @@ public class MailStatusUpdaterServiceTest {
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
-        underTest.updateReadStatus(MAIL_IDS, CHARACTER_ID, true);
+        Throwable ex = catchThrowable(() -> underTest.updateReadStatus(MAIL_IDS, CHARACTER_ID, true));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.INVALID_MAIL_ACCESS);
     }
 
     @Test

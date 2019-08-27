@@ -66,20 +66,20 @@ public final class ExceptionFactory {
         return new LockedException(createErrorMessage(ErrorCode.EMAIL_ALREADY_EXISTS), String.format(EMAIL_ALREADY_EXISTS_PREFIX, newEmail));
     }
 
-    public static RuntimeException equipmentNotFound(String id) {
-        return new RuntimeException(String.format(EQUIPMENT_NOT_FOUND_PREFIX, id));
+    public static RestException equipmentNotFound(String id) {
+        return new NotFoundException(createErrorMessage(ErrorCode.EQUIPMENT_NOT_FOUND), String.format(EQUIPMENT_NOT_FOUND_PREFIX, id));
     }
 
-    public static RuntimeException equippedSlotNotFound(String slotId) {
-        return new RuntimeException(String.format(EQUIPPED_SLOT_NOT_FOUND_PREFIX, slotId));
+    public static ServerException equippedSlotNotFound(String slotId) {
+        return new ServerException(String.format(EQUIPPED_SLOT_NOT_FOUND_PREFIX, slotId));
     }
 
-    public static RuntimeException factoryNotFoundById(String factoryId) {
-        return new RuntimeException(String.format(FACTORY_NOT_FOUND_BY_ID_PREFIX, factoryId));
+    public static ServerException factoryNotFoundById(String factoryId) {
+        return new ServerException(String.format(FACTORY_NOT_FOUND_BY_ID_PREFIX, factoryId));
     }
 
-    public static RuntimeException factoryNotFoundForCharacter(String characterId) {
-        return new RuntimeException(String.format(FACTORY_NOT_FOUND_FOR_CHARACTER_PREFIX, characterId));
+    public static ServerException factoryNotFoundForCharacter(String characterId) {
+        return new ServerException(String.format(FACTORY_NOT_FOUND_FOR_CHARACTER_PREFIX, characterId));
     }
 
     public static RestException friendRequestNotFound(String friendRequestId) {
@@ -118,8 +118,8 @@ public final class ExceptionFactory {
         return new PaymentRequiredException(createErrorMessage(ErrorCode.NOT_ENOUGH_MONEY), String.format(NOT_ENOUGH_MONEY_PREFIX, characterId, moneyToSpend, money));
     }
 
-    public static RuntimeException shipNotFound(String characterId) {
-        return new RuntimeException(String.format(SHIP_NOT_FOUND_PREFIX, characterId));
+    public static ServerException shipNotFound(String characterId) {
+        return new ServerException(String.format(SHIP_NOT_FOUND_PREFIX, characterId));
     }
 
     public static RestException userNameAlreadyExists(String userName) {

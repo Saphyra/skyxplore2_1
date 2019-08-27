@@ -1,16 +1,21 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
-import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
+
+import java.util.HashMap;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.HashMap;
-
-import static org.mockito.BDDMockito.given;
+import com.github.saphyra.exceptionhandling.exception.PaymentRequiredException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MaterialsValidatorTest {
@@ -24,7 +29,7 @@ public class MaterialsValidatorTest {
     @Mock
     private FactoryData factoryData;
 
-    @Test(expected = NotEnoughMaterialsException.class)
+    @Test
     public void validateMaterials_notEnoughMaterials(){
         //GIVEN
         Materials materials = new Materials();
@@ -36,7 +41,9 @@ public class MaterialsValidatorTest {
         requiredMaterials.put(MATERIAL_2, 3);
         given(factoryData.getMaterials()).willReturn(requiredMaterials);
         //WHEN
-        underTest.validateMaterials(materials, factoryData, AMOUNT);
+        Throwable ex = catchThrowable(() -> underTest.validateMaterials(materials, factoryData, AMOUNT));
+        //THEN
+        verifyException(ex, PaymentRequiredException.class, ErrorCode.NOT_ENOUGH_MATERIALS);
     }
 
     @Test

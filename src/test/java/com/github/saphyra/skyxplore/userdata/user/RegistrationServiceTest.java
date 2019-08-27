@@ -1,14 +1,11 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.github.saphyra.skyxplore.userdata.user.domain.Role;
-import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
-import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpUser;
-import com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest;
-import com.github.saphyra.skyxplore.userdata.user.repository.user.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -17,6 +14,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
+import com.github.saphyra.exceptionhandling.exception.LockedException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.userdata.user.domain.Role;
+import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
+import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpUser;
+import com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest;
+import com.github.saphyra.skyxplore.userdata.user.repository.user.UserDao;
 import com.github.saphyra.util.IdGenerator;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -46,25 +50,29 @@ public class RegistrationServiceTest {
     @InjectMocks
     private RegistrationService underTest;
 
-    @Test(expected = UserNameAlreadyExistsException.class)
-    public void testRegistrateUserShouldThrowExceptionWhenUserNameExists() {
+    @Test
+    public void testRegisterUserShouldThrowExceptionWhenUserNameExists() {
         //GIVEN
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(true);
         //WHEN
-        underTest.registerUser(REGISTRATION_REQUEST);
+        Throwable ex = catchThrowable(() -> underTest.registerUser(REGISTRATION_REQUEST));
+        //THEN
+        verifyException(ex, LockedException.class, ErrorCode.USER_NAME_ALREADY_EXISTS);
     }
 
-    @Test(expected = EmailAlreadyExistsException.class)
-    public void testRegistrateUserShouldThrowExceptionWhenEmailExists() {
+    @Test
+    public void testRegisterUserShouldThrowExceptionWhenEmailExists() {
         //GIVEN
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(false);
         when(userQueryService.isEmailExists(EMAIL)).thenReturn(true);
         //WHEN
-        underTest.registerUser(REGISTRATION_REQUEST);
+        Throwable ex = catchThrowable(() -> underTest.registerUser(REGISTRATION_REQUEST));
+        //THEN
+        verifyException(ex, LockedException.class, ErrorCode.EMAIL_ALREADY_EXISTS);
     }
 
     @Test
-    public void testRegistrateUserShouldSave() {
+    public void testRegisterUserShouldSave() {
         //GIVEN
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(false);
         when(userQueryService.isEmailExists(EMAIL)).thenReturn(false);

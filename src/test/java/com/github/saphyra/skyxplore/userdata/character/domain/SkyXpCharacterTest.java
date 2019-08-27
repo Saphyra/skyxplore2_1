@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.character.domain;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +15,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.PaymentRequiredException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkyXpCharacterTest {
@@ -85,9 +89,12 @@ public class SkyXpCharacterTest {
         assertThat(underTest.getMoney()).isEqualTo(MONEY);
     }
 
-    @Test(expected = NotEnoughMoneyException.class)
+    @Test
     public void testBuyEquipmentsShouldThrowExceptionWhenNotEnoughMoney() {
-        underTest.buyEquipments(new HashMap<>(), MONEY);
+        //WHEN
+        Throwable ex = catchThrowable(() -> underTest.buyEquipments(new HashMap<>(), MONEY));
+        //THEN
+        verifyException(ex, PaymentRequiredException.class, ErrorCode.NOT_ENOUGH_MONEY);
     }
 
     @Test
@@ -106,9 +113,12 @@ public class SkyXpCharacterTest {
             .containsExactly(EQUIPMENT_1, EQUIPMENT_1, EQUIPMENT_2);
     }
 
-    @Test(expected = NotEnoughMoneyException.class)
+    @Test
     public void testSpendMoneyShouldThrowExceptionWhenNotEnoughMoney() {
-        underTest.spendMoney(MONEY);
+        //WHEN
+        Throwable ex = catchThrowable(() -> underTest.spendMoney(MONEY));
+        //THEN
+        verifyException(ex, PaymentRequiredException.class, ErrorCode.NOT_ENOUGH_MONEY);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.data;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
@@ -14,6 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
 import com.github.saphyra.skyxplore.data.domain.SlotType;
 import com.github.saphyra.skyxplore.data.entity.Ability;
@@ -89,9 +93,12 @@ public class DataQueryServiceTest {
     @InjectMocks
     private DataQueryService underTest;
 
-    @Test(expected = EquipmentNotFoundException.class)
+    @Test
     public void testGetDataShouldThrowExceptionWhenNotFound() {
-        underTest.getData(DATA_ID);
+        //WHEN
+        Throwable ex = catchThrowable(() -> underTest.getData(DATA_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.EQUIPMENT_NOT_FOUND);
     }
 
     @Test

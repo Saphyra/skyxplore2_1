@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.userdata.user.repository.credentials.CredentialsDao;
 
@@ -32,12 +36,14 @@ public class SkyXpCredentialsServiceTest {
     @InjectMocks
     private CredentialsService underTest;
 
-    @Test(expected = BadCredentialsException.class)
+    @Test
     public void testGetByUserIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(credentialsDao.findById(USER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findByUserId(USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.findByUserId(USER_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.CREDENTIALS_NOT_FOUND);
     }
 
     @Test

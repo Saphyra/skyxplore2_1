@@ -1,16 +1,13 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.userdata.factory.FactoryQueryService;
-import com.github.saphyra.skyxplore.userdata.factory.domain.AddToQueueRequest;
-import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
-import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
-import com.github.saphyra.skyxplore.userdata.product.ProductFacade;
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +15,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.exceptionhandling.exception.PaymentRequiredException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.data.GameDataFacade;
+import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
+import com.github.saphyra.skyxplore.userdata.factory.FactoryQueryService;
+import com.github.saphyra.skyxplore.userdata.factory.domain.AddToQueueRequest;
+import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
+import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
+import com.github.saphyra.skyxplore.userdata.product.ProductFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddToQueueServiceTest {
@@ -85,13 +90,15 @@ public class AddToQueueServiceTest {
         underTest.addToQueue(CHARACTER_ID, addToQueueRequest);
     }
 
-    @Test(expected = NotEnoughMoneyException.class)
+    @Test
     public void testAddToQueueShouldThrowExceptionWhenNotEnoughMoney() {
         //GIVEN
         when(character.getMoney()).thenReturn(0);
         when(factoryData.getBuildPrice()).thenReturn(BUILD_PRICE);
         //WHEN
-        underTest.addToQueue(CHARACTER_ID, addToQueueRequest);
+        Throwable ex = catchThrowable(() -> underTest.addToQueue(CHARACTER_ID, addToQueueRequest));
+        //THEN
+        verifyException(ex, PaymentRequiredException.class, ErrorCode.NOT_ENOUGH_MONEY);
     }
 
     @Test

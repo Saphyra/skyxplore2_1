@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,10 +17,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
-import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
+import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
+import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipQueryServiceTest {
@@ -35,12 +39,14 @@ public class FriendshipQueryServiceTest {
     @InjectMocks
     private FriendshipQueryService underTest;
 
-    @Test(expected = FriendRequestNotFoundException.class)
+    @Test
     public void testFindFriendRequestByIdShouldThrowExceptionWhenNull() {
         //GIVEN
         when(friendRequestDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findFriendRequestById(FRIEND_REQUEST_ID);
+        Throwable ex = catchThrowable(() -> underTest.findFriendRequestById(FRIEND_REQUEST_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.FRIEND_REQUEST_NOT_FOUND);
     }
 
     @Test
@@ -54,12 +60,14 @@ public class FriendshipQueryServiceTest {
         assertThat(result).isEqualTo(request);
     }
 
-    @Test(expected = FriendshipNotFoundException.class)
+    @Test
     public void testFindFriendshipByIdShouldThrowExceptionWhenNull() {
         //GIVEN
         when(friendshipDao.findById(FRIEND_REQUEST_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findFriendshipById(FRIEND_REQUEST_ID);
+        Throwable ex = catchThrowable(() -> underTest.findFriendshipById(FRIEND_REQUEST_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.FRIENDSHIP_NOT_FOUND);
     }
 
     @Test
