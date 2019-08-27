@@ -1,27 +1,37 @@
 function loadLocalization(fileName, successCallback){
     const DEFAULT_LOCALE = "hu";
 
-    const request = new Request(HttpMethod.GET, getPath(getLocale(), fileName));
-        request.convertResponse = function(response){
-            return JSON.parse(response.body);
-        }
-        request.processValidResponse = function(localization){
-            successCallback(localization);
-        }
-        request.processInvalidResponse = function(){
-            createFallBackQuery(fileName, successCallback);
-        }
-    dao.sendRequestAsync(request);
+    createQuery(
+        fileName,
+        getLocale(),
+        successCallback,
+        createQuery(
+            fileName,
+            getBrowserLanguage(),
+            successCallback,
+            createQuery(
+                fileName,
+                DEFAULT_LOCALE,
+                successCallback
+            )
+        )
+    )();
 
-    function createFallBackQuery(fileName, successCallback){
-        const request = new Request(HttpMethod.GET, getPath(DEFAULT_LOCALE, fileName));
+    function createQuery(fileName, locale, successCallback, errorCallback){
+        const request = new Request(HttpMethod.GET, getPath(locale, fileName));
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(localization){
                 successCallback(localization);
             }
-        dao.sendRequestAsync(request);
+            if(errorCallback){
+                request.processInvalidResponse = errorCallback;
+            }
+
+        return function(){
+            dao.sendRequestAsync(request);
+        }
     }
 
     function getPath(locale, fileName){

@@ -8,7 +8,7 @@
                 - Set cookie
 //TODO BE localize error messages
     - Get locale
-        - Update errorHandler lib to allow access to RequestContext
+    - Load error messages
 //TODO FE error handling
     - Default error handler
         - Writes translated error message if present
