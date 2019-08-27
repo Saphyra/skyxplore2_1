@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import org.springframework.stereotype.Component;
 

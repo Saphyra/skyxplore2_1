@@ -69,7 +69,7 @@ public abstract class SeleniumTestApplication {
 
         if (isNull(messageCodes)) {
             log.info("Localization not found for locale {}. Using default locale...", locale);
-            messageCodes = getClass().getClassLoader().getResource("public/i18n/hu/message_codes.json");
+            messageCodes = getClass().getClassLoader().getResource("public/i18n/page/hu/message_codes.json");
         }
 
         this.messageCodes = OBJECT_MAPPER.readValue(messageCodes, MessageCodes.class);
@@ -82,7 +82,7 @@ public abstract class SeleniumTestApplication {
 
         if (isNull(source)) {
             log.info("Localization not found for locale {}. Using default locale...", locale);
-            source = getClass().getClassLoader().getResource("public/i18n/hu/" + pageName + ".json");
+            source = getClass().getClassLoader().getResource("public/i18n/page/hu/" + pageName + ".json");
         }
 
         if(isNull(source)){

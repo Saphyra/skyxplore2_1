@@ -1,8 +1,8 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item;
 
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
-import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.entity.EquipmentDescription;
+import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

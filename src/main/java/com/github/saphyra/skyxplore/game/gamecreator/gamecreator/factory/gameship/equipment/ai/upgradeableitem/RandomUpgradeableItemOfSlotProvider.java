@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.upgradeableitem;
 
-import com.github.saphyra.skyxplore.data.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
 import com.github.saphyra.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

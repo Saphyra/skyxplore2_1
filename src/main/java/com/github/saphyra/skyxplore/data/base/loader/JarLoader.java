@@ -1,9 +1,9 @@
 package com.github.saphyra.skyxplore.data.base.loader;
 
+import com.github.saphyra.skyxplore.data.base.AbstractDataService;
 import com.github.saphyra.skyxplore.data.base.TypedItem;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
-import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,12 +21,12 @@ import static java.util.Objects.isNull;
 @Slf4j
 class JarLoader<T> extends AbstractLoader<T> {
     private final String jarPath;
-    private final AbstractGameDataService<T> gameDataService;
+    private final AbstractDataService<T> dataService;
 
-    JarLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
+    JarLoader(Class<T> clazz, AbstractDataService<T> dataService) {
         super(clazz);
-        this.gameDataService = gameDataService;
-        this.jarPath = gameDataService.getJarPath();
+        this.dataService = dataService;
+        this.jarPath = dataService.getJarPath();
     }
 
     @Override
@@ -42,7 +42,7 @@ class JarLoader<T> extends AbstractLoader<T> {
 
     private JarFile getJarEntries() {
         try {
-            CodeSource src = AbstractGameDataService.class.getProtectionDomain().getCodeSource();
+            CodeSource src = AbstractDataService.class.getProtectionDomain().getCodeSource();
             if (src != null) {
                 URL jar = src.getLocation();
                 JarURLConnection urlcon = (JarURLConnection) (jar.openConnection());
@@ -60,15 +60,15 @@ class JarLoader<T> extends AbstractLoader<T> {
         String entryName = entry.getName();
         if (entryName.startsWith(jarPath) && entryName.endsWith(".json")) {
             TypedItem typedItem = getTypedItem(jarFile, entry);
-            if (isTypeMatches(typedItem)) {
+            if (!dataService.isShouldCheckType() || isTypeMatches(typedItem)) {
                 log.debug("Matched element: {}", entryName);
                 String contentString = readJarEntry(jarFile, entry);
                 if (clazz == String.class) {
                     String[] splitted = FilenameUtils.removeExtension(entry.getName()).split("/");
-                    gameDataService.put(splitted[splitted.length - 1], (T) contentString);
+                    dataService.put(splitted[splitted.length - 1], (T) contentString);
                 } else {
                     T content = FileUtil.readValue(contentString, clazz);
-                    putGeneralDescription(content, gameDataService, jarPath);
+                    putGeneralDescription(content, dataService, entryName.substring(jarPath.length()));
                 }
             } else {
                 log.debug("Skipping {}, it is not the type of {}, it is a {}", entryName, getClassName(), typedItem.getType());

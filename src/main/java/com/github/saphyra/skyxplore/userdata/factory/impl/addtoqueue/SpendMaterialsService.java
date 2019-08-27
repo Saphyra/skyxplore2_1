@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import com.github.saphyra.skyxplore.userdata.factory.repository.FactoryDao;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import org.springframework.stereotype.Component;
 
 @Component

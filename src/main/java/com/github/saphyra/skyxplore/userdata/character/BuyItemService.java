@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.data.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

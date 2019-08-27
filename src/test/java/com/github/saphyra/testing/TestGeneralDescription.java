@@ -1,6 +1,6 @@
 package com.github.saphyra.testing;
 
-import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
+import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductFacadeTest {

@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.CONNECTOR_SLOT_NAME;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 

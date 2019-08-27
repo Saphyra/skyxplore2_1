@@ -3,7 +3,7 @@ package com.github.saphyra.skyxplore.userdata.slot;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.data.entity.Slot;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Slot;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
 

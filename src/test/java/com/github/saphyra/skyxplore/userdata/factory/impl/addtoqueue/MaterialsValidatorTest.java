@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.PaymentRequiredException;
 import com.github.saphyra.skyxplore.common.ErrorCode;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 
 @RunWith(MockitoJUnitRunner.class)

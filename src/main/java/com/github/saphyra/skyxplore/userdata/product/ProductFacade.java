@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.product;
 
 import lombok.RequiredArgsConstructor;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import org.springframework.stereotype.Component;
 
 @Component

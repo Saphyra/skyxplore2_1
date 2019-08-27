@@ -1,8 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
 import com.github.saphyra.skyxplore.common.ShipConstants;
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.repository.EquippedShipDao;
 import com.github.saphyra.skyxplore.userdata.slot.EquippedSlotFacade;

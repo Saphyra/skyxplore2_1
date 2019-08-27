@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
 
 import org.springframework.stereotype.Component;
 

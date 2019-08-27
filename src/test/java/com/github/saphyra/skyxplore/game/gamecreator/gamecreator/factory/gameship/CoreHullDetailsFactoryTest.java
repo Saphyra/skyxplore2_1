@@ -1,9 +1,9 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship;
 
-import com.github.saphyra.skyxplore.data.entity.CoreHull;
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.data.subservice.CoreHullService;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.CoreHull;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.CoreHullService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.HullDetails;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import org.junit.Before;

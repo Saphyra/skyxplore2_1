@@ -21,7 +21,7 @@ public class CategoryNameHelper {
 
         if (isNull(messageCodes)) {
             log.info("Localization not found for locale {}. Using default locale...", locale);
-            messageCodes = getClass().getClassLoader().getResource("public/i18n/hu/categories.json");
+            messageCodes = getClass().getClassLoader().getResource("public/i18n/page/hu/categories.json");
         }
 
         try {

@@ -1,11 +1,11 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain;
 
-import com.github.saphyra.skyxplore.data.domain.SlotType;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.data.entity.Slot;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.domain.SlotType;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Slot;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.GameCreatorContext;
 import org.junit.Before;
@@ -17,9 +17,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
-import static com.github.saphyra.skyxplore.data.DataConstants.DEFENSE_SLOT_NAME;
-import static com.github.saphyra.skyxplore.data.DataConstants.WEAPON_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.CONNECTOR_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.DEFENSE_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.WEAPON_SLOT_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 

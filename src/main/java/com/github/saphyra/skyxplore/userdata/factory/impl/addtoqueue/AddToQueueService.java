@@ -10,8 +10,8 @@ import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.userdata.factory.FactoryQueryService;
 import com.github.saphyra.skyxplore.userdata.factory.domain.AddToQueueRequest;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import com.github.saphyra.skyxplore.userdata.product.ProductFacade;
 import org.springframework.stereotype.Service;
 

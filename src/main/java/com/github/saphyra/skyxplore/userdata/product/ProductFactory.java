@@ -4,7 +4,7 @@ import com.github.saphyra.skyxplore.common.DateTimeUtil;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import com.github.saphyra.skyxplore.userdata.product.domain.Product;
 import com.github.saphyra.skyxplore.userdata.product.repository.ProductDao;
 import org.springframework.stereotype.Component;

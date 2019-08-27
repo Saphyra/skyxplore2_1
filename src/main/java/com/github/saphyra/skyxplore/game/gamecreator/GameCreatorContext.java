@@ -2,8 +2,8 @@ package com.github.saphyra.skyxplore.game.gamecreator;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

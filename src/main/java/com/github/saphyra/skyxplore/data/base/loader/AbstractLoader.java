@@ -1,12 +1,16 @@
 package com.github.saphyra.skyxplore.data.base.loader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
+import com.github.saphyra.skyxplore.data.base.AbstractDataService;
 import com.github.saphyra.skyxplore.data.base.ContentLoader;
 import com.github.saphyra.skyxplore.data.base.TypedItem;
+import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
+
+import java.util.Optional;
+
+import static org.apache.commons.io.FilenameUtils.removeExtension;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -15,13 +19,15 @@ abstract class AbstractLoader<T> implements ContentLoader {
 
     protected final Class<T> clazz;
 
-    void putGeneralDescription(T content, AbstractGameDataService<T> gameDataService, String path) {
+    void putGeneralDescription(T content, AbstractDataService<T> dataService, String fileName) {
         if (content instanceof GeneralDescription) {
             GeneralDescription d = (GeneralDescription) content;
             log.debug("Loaded element. Key: {}, Value: {}", d.getId(), content);
-            gameDataService.put(d.getId(), content);
+            dataService.put(d.getId(), content);
         } else {
-            throw new RuntimeException(path + " cannot be loaded. Unknown data type.");
+            String itemId = removeExtension(fileName);
+            log.debug("ItemId: {}", itemId);
+            dataService.put(itemId, content);
         }
     }
 
@@ -30,6 +36,9 @@ abstract class AbstractLoader<T> implements ContentLoader {
     }
 
     boolean isTypeMatches(TypedItem typedItem) {
-        return getClassName().equals(typedItem.getType().toLowerCase());
+        return Optional.ofNullable(typedItem.getType())
+            .map(String::toLowerCase)
+            .filter(type -> getClassName().equals(type))
+            .isPresent();
     }
 }
