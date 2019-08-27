@@ -100,5 +100,6 @@
         }
         
         request.setRequestHeader("Request-Type", "rest");
+        request.setRequestHeader(HEADER_BROWSER_LANGUAGE, getBrowserLanguage());
     }
 })();

@@ -1,7 +1,7 @@
 function loadLocalization(fileName, successCallback){
     const DEFAULT_LOCALE = "hu";
 
-    const request = new Request(HttpMethod.GET, getPath(getLanguage(), fileName));
+    const request = new Request(HttpMethod.GET, getPath(getLocale(), fileName));
         request.convertResponse = function(response){
             return JSON.parse(response.body);
         }

@@ -1,5 +1,19 @@
+//TODO implement proper localization settings
+    - On Login page
+        - Set locale cookie
+            - Update stored locale when login
+    - On setting page
+        - Store locale in database
+            - Update locale endpoint
+                - Set cookie
 //TODO BE localize error messages
+    - Get locale
+        - Update errorHandler lib to allow access to RequestContext
 //TODO FE error handling
+    - Default error handler
+        - Writes translated error message if present
+        - Handle expired session
+        - Log default error message if error response is unrecognized
 
 ===Selenium===
 logging
