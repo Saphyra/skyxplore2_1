@@ -50,7 +50,7 @@
                 request.processInvalidResponse = function(response){
                     if(response.status == ResponseStatus.UNAUTHORIZED){
                         eventProcessor.processEvent(events.LOGOUT);
-                    }else if(response.status == ResponseStatus.LOCKED){
+                    }else if(response.status == ResponseStatus.FORBIDDEN){
                         notificationService.showError(MessageCode.getMessage("ERROR_SENDING_MAIL"));
                     }else{
                         logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
