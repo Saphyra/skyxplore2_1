@@ -1,5 +1,6 @@
 package com.github.saphyra.skyxplore.platform.filter.configuration;
 
+import com.github.saphyra.skyxplore.platform.filter.LocaleFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FilterConfiguration {
     private static final int FILTER_ORDER = 1;
+
+    @Bean
+    public FilterRegistrationBean<LocaleFilter> localeFilterFilterRegistrationBean(
+        LocaleFilter localeFilter
+    ) {
+        log.info("CharacterIdCleanupFilter order: {}", FILTER_ORDER);
+        FilterRegistrationBean<LocaleFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(localeFilter);
+        filterRegistrationBean.setOrder(FILTER_ORDER);
+        filterRegistrationBean.addUrlPatterns(RequestConstants.WEB_PREFIX + "/*");
+        return filterRegistrationBean;
+    }
 
     @Bean
     public FilterRegistrationBean<CharacterIdCleanupFilter> characterIdCleanupFilterFilterRegistrationBean(
