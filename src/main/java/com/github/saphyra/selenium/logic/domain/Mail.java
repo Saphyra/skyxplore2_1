@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import lombok.RequiredArgsConstructor;

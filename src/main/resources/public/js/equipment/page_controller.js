@@ -14,8 +14,7 @@
             return eventType === events.LOAD_STATE_CHANGED
                 && LoadState.localizationLoaded
                 && LoadState.itemsLoaded
-                && LoadState.descriptionLoaded
-                && LoadState.messageCodesLoaded;
+                && LoadState.descriptionLoaded;
         },
         function(){
             eventProcessor.processEvent(new Event(events.LOAD_SHIP));
@@ -28,8 +27,7 @@
             return eventType === events.LOAD_STATE_CHANGED
                 && LoadState.localizationLoaded
                 && LoadState.itemsLoaded
-                && LoadState.descriptionLoaded
-                && LoadState.messageCodesLoaded;
+                && LoadState.descriptionLoaded;
         },
         function(){
             eventProcessor.processEvent(new Event(events.LOAD_STORAGE));

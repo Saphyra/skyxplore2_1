@@ -81,7 +81,7 @@
     function cancelFriendRequest(friendRequestId){
         const request = new Request(HttpMethod.DELETE, Mapping.CANCEL_FRIEND_REQUEST, {value: friendRequestId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_CANCELLED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("friend-request-cancelled"));
                 document.getElementById("sent-friend-request-list").removeChild(document.getElementById(generateSentFriendRequestId(friendRequestId)));
             }
         dao.sendRequestAsync(request);

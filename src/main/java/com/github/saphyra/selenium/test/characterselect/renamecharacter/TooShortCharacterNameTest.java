@@ -1,7 +1,6 @@
 package com.github.saphyra.selenium.test.characterselect.renamecharacter;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
 import lombok.Builder;

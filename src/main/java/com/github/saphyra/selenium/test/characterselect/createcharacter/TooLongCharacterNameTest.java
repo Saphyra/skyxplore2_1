@@ -4,7 +4,6 @@ import static com.github.saphyra.skyxplore.userdata.character.domain.CreateChara
 
 import org.openqa.selenium.WebElement;
 
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import lombok.Builder;
 import com.github.saphyra.selenium.logic.page.CharacterSelectPage;

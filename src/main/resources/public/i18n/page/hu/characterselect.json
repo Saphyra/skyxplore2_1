@@ -81,8 +81,13 @@
     ]
   },
   "additionalContent": {
-    "rename-character-button": "Átnevezés",
+    "character-created": "Karakter létrehozva.",
+    "character-deleted": "Karakter törölve.",
+    "character-renamed": "Karakter átnevezve.",
+    "confirm-character-deletion": "Biztosan törlöd a karaktert?\nAz adatokat már nem lehet vissazállítani.",
     "delete-character-button": "Törlés",
-    "confirm-character-deletion": "Biztosan törlöd a karaktert?\nAz adatokat már nem lehet vissazállítani."
+    "registration-successful": "Sikeres regisztráció!",
+    "rename-character-button": "Átnevezés",
+    "select-character": "Karakter kiválasztása"
   }
 }

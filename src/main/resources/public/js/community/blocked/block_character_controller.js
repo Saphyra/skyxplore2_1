@@ -74,7 +74,7 @@
     }
 
     function blockCharacter(data){
-        if(!confirm(MessageCode.getMessage("CONFIRM_BLOCK_CHARACTER"))){
+        if(!confirm(Localization.getAdditionalContent("confirm-block-character"))){
             return;
         }
 
@@ -83,7 +83,7 @@
 
         const request = new Request(HttpMethod.POST, Mapping.BLOCK_CHARACTER, {value: characterId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("CHARACTER_BLOCKED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("character-blocked"));
                 if(listItem){
                     document.getElementById("friend-request-list").removeChild(listItem);
                 }else{

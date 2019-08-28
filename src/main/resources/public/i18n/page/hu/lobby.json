@@ -69,11 +69,14 @@
     ]
   },
   "additionalContent": {
-    "visit-profile": "Profil",
     "invite": "Meghívás",
+    "invited-to-lobby": "Meghívás elküldve",
     "kick-member": "Kirúgás",
-    "transfer-ownership": "Vezetőség átadása",
+    "kicked-from-lobby": "Játékos kirúgva",
+    "ownership-transferred": "Vezetőség átadva.",
     "ready-button": "Kész",
-    "unready-button": "Nincs kész"
+    "transfer-ownership": "Vezetőség átadása",
+    "unready-button": "Nincs kész",
+    "visit-profile": "Profil"
   }
 }

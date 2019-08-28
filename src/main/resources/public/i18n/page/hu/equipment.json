@@ -39,6 +39,9 @@
     ]
   },
   "additionalContent": {
-    "empty-slot": "Üres"
+    "empty-slot": "Üres",
+    "item-equipped": "Felszerelés sikeres.",
+    "item-unequipped": "Leszerelés sikeres.",
+    "ship-equipped": "Hajó felszerelve."
   }
 }

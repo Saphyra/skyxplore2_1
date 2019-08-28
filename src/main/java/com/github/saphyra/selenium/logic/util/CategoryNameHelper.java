@@ -1,16 +1,16 @@
 package com.github.saphyra.selenium.logic.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
-import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.selenium.logic.domain.Category;
+import static java.util.Objects.isNull;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Optional;
 
-import static java.util.Objects.isNull;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.selenium.logic.domain.Category;
+import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class CategoryNameHelper {
@@ -25,7 +25,7 @@ public class CategoryNameHelper {
         }
 
         try {
-            this.categories = objectMapper.readValue(messageCodes, MessageCodes.class);
+            this.categories = objectMapper.readValue(messageCodes, StringStringMap.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

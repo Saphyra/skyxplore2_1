@@ -77,7 +77,7 @@
     function sendFriendRequest(friendId){
         const request = new Request(HttpMethod.PUT, Mapping.ADD_FRIEND, {value: friendId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_SENT"));
+                notificationService.showSuccess(Localization.getAdditionalContent("friend-request-sent"));
                 document.getElementById("add-friend-search-result").innerHTML = "";
                 document.getElementById("friend-name").value = "";
                 eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));

@@ -2,7 +2,6 @@ package com.github.saphyra.selenium.logic.flow;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.selenium.logic.domain.ShopItem;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.helper.CostCounter;
 import com.github.saphyra.selenium.logic.helper.ShopElementSearcher;
 import com.github.saphyra.selenium.logic.validator.CartVerifier;

@@ -16,7 +16,6 @@
     scriptLoader.loadScript("/js/common/notification_service.js");
     
     scriptLoader.loadScript("/js/common/localization/localization_loader.js");
-    scriptLoader.loadScript("/js/common/localization/message_code.js");
     scriptLoader.loadScript("/js/common/localization/localization.js");
     scriptLoader.loadScript("/js/common/logout_service.js");
     

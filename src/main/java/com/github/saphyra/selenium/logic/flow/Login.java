@@ -1,7 +1,6 @@
 package com.github.saphyra.selenium.logic.flow;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import lombok.extern.slf4j.Slf4j;

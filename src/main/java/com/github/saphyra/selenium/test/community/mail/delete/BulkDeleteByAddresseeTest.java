@@ -4,7 +4,7 @@ import lombok.Builder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import com.github.saphyra.selenium.logic.page.CommunityPage;

@@ -165,5 +165,9 @@
     ]
   },
   "additionalContent": {
+    "confirm-account-deletion": "Biztosan törölni szeretné felhasználói fiókját?\nA törölt adatokat már nem lehet visszaállítani.",
+    "email-changed": "E-mail cím sikeresen megváltoztatva.",
+    "password-changed": "Jelszó megváltoztatása sikeres.",
+    "username-changed": "Felhasználónév megváltoztatása sikeres."
   }
 }

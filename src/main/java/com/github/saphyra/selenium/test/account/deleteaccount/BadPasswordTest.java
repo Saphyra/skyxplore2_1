@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
 import lombok.Builder;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;

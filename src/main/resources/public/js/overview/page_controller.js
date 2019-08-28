@@ -15,14 +15,13 @@
             return eventType === events.LOAD_STATE_CHANGED
                 && LoadState.localizationLoaded
                 && LoadState.itemsLoaded
-                && LoadState.descriptionLoaded
-                && LoadState.messageCodesLoaded;
+                && LoadState.descriptionLoaded;
         },
         function(){
             eventProcessor.processEvent(new Event(events.LOAD_EQUIPMENT));
         },
         true
-    ))
+    ));
 
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){return eventType == events.DESELECT_CHARACTER},

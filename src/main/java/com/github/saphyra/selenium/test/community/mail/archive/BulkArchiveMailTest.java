@@ -7,7 +7,6 @@ import java.util.List;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.selenium.logic.domain.Mail;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import com.github.saphyra.selenium.logic.page.CommunityPage;

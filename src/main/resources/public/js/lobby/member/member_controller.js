@@ -154,7 +154,7 @@
     function transferOwnership(characterId){
         const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.TRANSFER_OWNERSHIP, characterId));
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("OWNERSHIP_TRANSFERRED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("ownership-transferred"));
                 eventProcessor.processEvent(new Event(events.LOAD_LOBBY_EVENTS));
             }
         dao.sendRequestAsync(request);
@@ -164,7 +164,7 @@
         const request = new Request(HttpMethod.DELETE, Mapping.concat(Mapping.KICK_FROM_LOBBY, characterId));
             request.processValidResponse = function(){
                 removeCharacter(characterId);
-                notificationService.showSuccess(MessageCode.getMessage("KICKED_FROM_LOBBY"));
+                notificationService.showSuccess(Localization.getAdditionalContent("kicked-from-lobby"));
             }
         dao.sendRequestAsync(request);
     }

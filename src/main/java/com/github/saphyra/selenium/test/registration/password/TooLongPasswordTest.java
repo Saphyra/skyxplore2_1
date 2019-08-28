@@ -3,7 +3,6 @@ package com.github.saphyra.selenium.test.registration.password;
 import org.openqa.selenium.WebElement;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.registration.password.helper.PasswordTestHelper;
 import com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest;

@@ -1,7 +1,6 @@
 package com.github.saphyra.selenium.logic.page;
 
 import com.github.saphyra.selenium.logic.domain.SentFriendRequest;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

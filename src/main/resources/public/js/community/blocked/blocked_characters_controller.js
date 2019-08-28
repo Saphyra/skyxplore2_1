@@ -82,7 +82,7 @@
     function allowCharacter(characterId){
         const request = new Request(HttpMethod.DELETE, Mapping.ALLOW_CHARACTER, {value: characterId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("CHARACTER_ALLOWED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("character-allowed"));
                 document.getElementById("blocked-character-list").removeChild(document.getElementById(generateBlockedCharacterId(characterId)));
             }
 

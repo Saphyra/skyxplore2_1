@@ -35,7 +35,7 @@
 
         const request = new Request(HttpMethod.DELETE, Mapping.UNEQUIP_ITEM, {slot: payload.getContainerId(), itemId: payload.getId()});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("ITEM_UNEQUIPPED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("item-unequipped"));
                 eventProcessor.processEvent(new Event(events.ITEM_UNEQUIPPED, payload));
             }
         dao.sendRequestAsync(request);
@@ -46,7 +46,7 @@
 
         const request = new Request(HttpMethod.POST, Mapping.concat(Mapping.EQUIP_SHIP, shipId));
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("SHIP_EQUIPPED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("ship-equipped"));
                 eventProcessor.processEvent(new Event(events.SHIP_EQUIPPED, shipId));
             }
         dao.sendRequestAsync(request);
@@ -57,7 +57,7 @@
 
         const request = new Request(HttpMethod.POST, Mapping.EQUIP_ITEM, {itemId: payload.itemId, equipTo: payload.containerId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("ITEM_EQUIPPED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("item-equipped"));
                 eventProcessor.processEvent(new Event(events.ITEM_EQUIPPED, payload));
             }
         dao.sendRequestAsync(request);

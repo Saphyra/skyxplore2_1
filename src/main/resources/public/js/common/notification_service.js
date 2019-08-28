@@ -114,12 +114,12 @@
     function printStoredMessages(){
         try{
             if(sessionStorage.errorMessage != undefined && sessionStorage.errorMessage != null){
-                showError(sessionStorage.errorMessage);
+                showError(Localization.getAdditionalContent(sessionStorage.errorMessage));
                 delete sessionStorage.errorMessage;
             }
             
             if(sessionStorage.successMessage != undefined && sessionStorage.successMessage != null){
-                showSuccess(sessionStorage.successMessage);
+                showSuccess(Localization.getAdditionalContent(sessionStorage.successMessage));
                 delete sessionStorage.successMessage;
             }
         }catch(err){

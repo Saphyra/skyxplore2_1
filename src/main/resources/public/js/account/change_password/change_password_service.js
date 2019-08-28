@@ -37,14 +37,7 @@
         const request = new Request(HttpMethod.PUT, Mapping.CHANGE_PASSWORD, {newPassword: newPassword, oldPassword: currentPassword});
             request.handleLogout = false;
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("PASSWORD_CHANGE_SUCCESSFUL"));
-            }
-            request.processInvalidResponse = function(response){
-                if(response.status == ResponseStatus.UNAUTHORIZED){
-                    notificationService.showError(MessageCode.getMessage("BAD_PASSWORD"));
-                }else{
-                    request.processErrorResponse(response);
-                }
+                notificationService.showSuccess(Localization.getAdditionalContent("password-changed"));
             }
         dao.sendRequestAsync(request);
         

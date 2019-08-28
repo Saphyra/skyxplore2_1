@@ -31,7 +31,7 @@
             return;
         }
         
-        if(!confirm(MessageCode.getMessage("CONFIRM_ACCOUNT_DELETION"))){
+        if(!confirm(Localization.getAdditionalContent("confirm-account-deletion"))){
             $("#delete-account-password").val("");
             return;
         }
@@ -41,15 +41,8 @@
         const request = new Request(HttpMethod.DELETE, Mapping.DELETE_ACCOUNT, {password: password});
             request.handleLogout = false;
             request.processValidResponse = function(){
-                sessionStorage.successMessage = MessageCode.getMessage("ACCOUNT_DELETION_SUCCESSFUL");
+                sessionStorage.successMessage = "account-deleted";
                 location.href = "/";
-            }
-            request.processInvalidResponse = function(response){
-                if(response.status == ResponseStatus.UNAUTHORIZED){
-                    notificationService.showError(MessageCode.getMessage("BAD_PASSWORD"));
-                }else{
-                    request.processErrorResponse(response);
-                }
             }
             
         dao.sendRequestAsync(request);

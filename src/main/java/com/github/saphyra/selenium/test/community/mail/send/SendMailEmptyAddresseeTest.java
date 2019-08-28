@@ -1,7 +1,6 @@
 package com.github.saphyra.selenium.test.community.mail.send;
 
 import lombok.Builder;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
 import com.github.saphyra.selenium.test.community.helper.SendMailHelper;

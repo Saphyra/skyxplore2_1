@@ -51,9 +51,10 @@
     ]
   },
   "additionalContent": {
-    "cost": "Pénz",
-    "construction-time": "Gyártási idő",
     "amount": "Mennyiség",
+    "construction-time": "Gyártási idő",
+    "cost": "Pénz",
+    "product-added-to-queue": "Megrendelés elküldve.",
     "start-construction": "Gyártás indítása",
     "waiting": "Sorban áll"
   }

@@ -73,6 +73,7 @@
     ]
   },
   "additionalContent": {
-    "empty-slot": "Üres"
+    "empty-slot": "Üres",
+    "exited-from-lobby": "Előcsarnok elhagyva."
   }
 }

@@ -17,7 +17,7 @@
 
             switch(selection){
                 case "none":
-                    notificationService.showError(MessageCode.getMessage("SELECT_OPERATION"));
+                    notificationService.showError(Localization.getAdditionalContent("select-operation"));
                 break;
                 case "restore":
                     eventProcessor.processEvent(new Event(events.RESTORE_MAILS, mailIds));

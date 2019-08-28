@@ -3,7 +3,7 @@ package com.github.saphyra.selenium.test.account.changepassword;
 import com.github.saphyra.selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
 import lombok.Builder;
 import org.openqa.selenium.WebElement;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+
 import com.github.saphyra.selenium.logic.flow.Navigate;
 import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.page.AccountPage;

@@ -6,7 +6,6 @@ import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
 import java.util.List;
 
 import lombok.Builder;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import com.github.saphyra.selenium.logic.page.CommunityPage;

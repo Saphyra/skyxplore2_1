@@ -17,7 +17,7 @@
 
             switch(selection){
                 case "none":
-                    notificationService.showError(MessageCode.getMessage("SELECT_OPERATION"));
+                    notificationService.showError(Localization.getAdditionalContent("select-operation"));
                 break;
                 case "archive":
                     eventProcessor.processEvent(new Event(events.ARCHIVE_MAILS, mailIds));

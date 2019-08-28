@@ -57,9 +57,10 @@
     ]
   },
   "additionalContent": {
+    "add-to-cart": "Kosárba",
     "cancel": "Mégse",
     "cost": "Ár",
-    "add-to-cart": "Kosárba",
+    "items-bought": "Sikeres vásárlás.",
     "not-enough-money": "Nincs elég pénzed."
   }
 }

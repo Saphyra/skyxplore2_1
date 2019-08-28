@@ -37,7 +37,7 @@
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(payload){
-                notificationService.showSuccess(MessageCode.getMessage("CHARACTER_RENAMED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("character-renamed"));
                 eventProcessor.processEvent(new Event(events.CHARACTER_RENAMED, payload));
                 switchTab("main-page", "main-container")
             }
