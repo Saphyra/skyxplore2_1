@@ -1,9 +1,11 @@
 package com.github.saphyra.skyxplore.data.errorcode;
 
-import com.github.saphyra.skyxplore.data.base.AbstractDataService;
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
+import com.github.saphyra.skyxplore.data.base.AbstractDataService;
 
 @Component
 public class ErrorCodeService extends AbstractDataService<ErrorCodeLocalization> {
@@ -15,5 +17,16 @@ public class ErrorCodeService extends AbstractDataService<ErrorCodeLocalization>
     @PostConstruct
     public void init() {
         super.load(ErrorCodeLocalization.class);
+    }
+
+    //TODO unit test
+    public void validateLocale(String locale) {
+        if(!isValidLocale(locale)){
+            throw ExceptionFactory.invalidLocale(locale);
+        }
+    }
+
+    private boolean isValidLocale(String locale) {
+        return containsKey(locale);
     }
 }

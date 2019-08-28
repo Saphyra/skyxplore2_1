@@ -1,28 +1,30 @@
 package com.github.saphyra.skyxplore.platform.filter;
 
-import com.github.saphyra.skyxplore.userdata.settings.locale.LocaleCache;
-import com.github.saphyra.util.CookieUtil;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_LOCALE;
+import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_USER_ID;
+import static com.github.saphyra.skyxplore.common.RequestConstants.DEFAULT_LOCALE;
+import static org.apache.logging.log4j.util.Strings.isBlank;
+
+import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Optional;
 
-import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_USER_ID;
-import static com.github.saphyra.skyxplore.common.RequestConstants.DEFAULT_LOCALE;
-import static org.apache.logging.log4j.util.Strings.isBlank;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.github.saphyra.skyxplore.userdata.settings.locale.LocaleCache;
+import com.github.saphyra.util.CookieUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class LocaleFilter extends OncePerRequestFilter {
-    private static final String COOKIE_LOCALE = "locale";
     private static final String HEADER_BROWSER_LANGUAGE = "BrowserLanguage";
 
     private final CookieUtil cookieUtil;

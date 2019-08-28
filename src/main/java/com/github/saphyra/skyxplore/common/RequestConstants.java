@@ -1,16 +1,18 @@
 package com.github.saphyra.skyxplore.common;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
 public class RequestConstants {
     public static final String DEFAULT_LOCALE = "hu";
     public static final String COOKIE_CHARACTER_ID = "characterid";
+    public static final String COOKIE_LOCALE = "locale";
     public static final String COOKIE_USER_ID = "userid";
 
     public static final String WEB_PREFIX = "/web";

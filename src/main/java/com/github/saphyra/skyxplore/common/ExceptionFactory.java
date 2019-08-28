@@ -29,6 +29,7 @@ public final class ExceptionFactory {
     private static final String FRIENDSHIP_ALREADY_EXISTS_PREFIX = "Friendship already exists between %s and %s";
     private static final String FRIENDSHIP_NOT_FOUND_PREFIX = "Friendship not found with id %s";
     private static final String INVALID_CHARACTER_ACCESS_PREFIX = "%s cannot access character %s";
+    private static final String INVALID_LOCALE_PREFIX = "Locale %s is not supported.";
     private static final String INVALID_MAIL_ACCESS_PREFIX = "%s cannot access to mail %s";
     private static final String INVALID_SLOT_NAME_PREFIX = "Invalid slotName: %s";
     private static final String MAIL_NOT_FOUND_PREFIX = "Mail not found with id %s";
@@ -96,6 +97,10 @@ public final class ExceptionFactory {
 
     public static RestException invalidCharacterAccess(String characterId, String userId) {
         return new ForbiddenException(createErrorMessage(ErrorCode.INVALID_CHARACTER_ACCESS), String.format(INVALID_CHARACTER_ACCESS_PREFIX, userId, characterId));
+    }
+
+    public static RestException invalidLocale(String locale) {
+        return new BadRequestException(createErrorMessage(ErrorCode.INVALID_LOCALE), String.format(INVALID_LOCALE_PREFIX, locale));
     }
 
     public static RestException invalidMailAccess(String characterId, String mailId) {
