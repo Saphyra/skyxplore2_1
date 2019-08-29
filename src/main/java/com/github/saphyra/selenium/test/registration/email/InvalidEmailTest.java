@@ -1,24 +1,25 @@
 package com.github.saphyra.selenium.test.registration.email;
 
-import java.util.Map;
-
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.registration.email.helper.EmailTestHelper;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import lombok.Builder;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 @Builder
 public class InvalidEmailTest {
     private static final String INVALID_EMAIL = "aa.a@";
-    private static final String MESSAGE_CODE_INVALID_EMAIL = "INVALID_EMAIL";
+    private static final String MESSAGE_CODE_INVALID_EMAIL = "invalid-email";
 
+    private final WebDriver driver;
     private final EmailTestHelper emailTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
-    private final Map<String, String> messageCodes;
 
     public void testInvalidEmail() {
         SeleniumUser user = SeleniumUser.create();
@@ -29,7 +30,7 @@ public class InvalidEmailTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidEmailField(),
-            messageCodes.get(MESSAGE_CODE_INVALID_EMAIL),
+            getAdditionalContent(driver, Page.INDEX, MESSAGE_CODE_INVALID_EMAIL),
             emailField,
             indexPage.getRegisterButton()
         );

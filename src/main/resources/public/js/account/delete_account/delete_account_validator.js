@@ -19,7 +19,7 @@
         
         if(password.length == 0){
             passwordValid = false;
-            validationResult.createErrorFieldFor(INVALID_PASSWORD, "CURRENT_PASSWORD_IS_EMPTY");
+            validationResult.createErrorFieldFor(INVALID_PASSWORD, "empty-password");
         }
         
         validationResult.processResult();

@@ -32,6 +32,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .characterSelectTestHelper(characterSelectTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
+            .driver(driver)
             .build()
             .testTooShortCharacterName();
     }
@@ -42,6 +43,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .characterSelectTestHelper(characterSelectTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
+            .driver(driver)
             .build()
             .testTooLongCharacterName();
     }
@@ -52,6 +54,7 @@ public class CreateCharacterTest extends SeleniumTestApplication {
             .characterSelectTestHelper(characterSelectTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
+            .driver(driver)
             .build()
             .testExistingCharacterName();
     }

@@ -5,6 +5,7 @@ import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
 import com.github.saphyra.selenium.logic.domain.localization.PageLocalizations;
 import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
 import com.github.saphyra.skyxplore.common.ErrorCode;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ import static com.github.saphyra.skyxplore.common.RequestConstants.DEFAULT_LOCAL
 @UtilityClass
 @Slf4j
 public class LocalizationUtil {
-    public static String getErrorCode(WebDriver driver, ErrorCode errorCode) {
+    public static String getErrorCode(@NonNull WebDriver driver, ErrorCode errorCode) {
         log.info("Fetching errorCode for key {}", errorCode);
         String locale = getLocale(driver);
         try {

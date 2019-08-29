@@ -5,12 +5,13 @@
         this.showSuccess = showSuccess;
         this.showError = showError;
         this.showMessage = showMessage;
-        
-        $(document).ready(function(){
-            printStoredMessages();
-        });
     }
-    
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.LOCALIZATION_LOADED},
+        printStoredMessages,
+        true
+    ));
     /*
     Shows a success message.
     Arguments:

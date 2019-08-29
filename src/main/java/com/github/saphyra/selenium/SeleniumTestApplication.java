@@ -1,26 +1,28 @@
 package com.github.saphyra.selenium;
 
-import static com.github.saphyra.selenium.logic.util.ErrorCodeLoader.loadErrorCodes;
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
-import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
-import static com.github.saphyra.skyxplore.Application.APP_CTX;
-
-import java.util.Map;
-
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.boot.SpringApplication;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saphyra.selenium.logic.domain.localization.ErrorCodes;
 import com.github.saphyra.selenium.logic.domain.localization.PageLocalizations;
 import com.github.saphyra.selenium.logic.util.PageLocalizationLoader;
 import com.github.saphyra.skyxplore.Application;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.boot.SpringApplication;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.github.saphyra.selenium.logic.util.ErrorCodeLoader.loadErrorCodes;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
+import static com.github.saphyra.skyxplore.Application.APP_CTX;
 
 @Slf4j
 public abstract class SeleniumTestApplication {
@@ -62,6 +64,11 @@ public abstract class SeleniumTestApplication {
 
     @After
     public void tearDown() {
+        List<WebElement> webElements = driver.findElements(By.id("logcontainermain"));
+        if (!webElements.isEmpty()) {
+            log.info(webElements.get(0).getText());
+        }
+
         sleep(2000);
         if (APP_CTX != null) {
             SpringApplication.exit(APP_CTX);

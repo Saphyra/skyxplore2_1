@@ -32,6 +32,7 @@ public class UserNameTest extends SeleniumTestApplication {
     @Test
     public void testTooShortUserName() {
         TooShortUserNameTest.builder()
+            .driver(driver)
             .userNameTestHelper(userNameTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
@@ -42,6 +43,7 @@ public class UserNameTest extends SeleniumTestApplication {
     @Test
     public void testTooLongUserName() {
         TooLongUserNameTest.builder()
+            .driver(driver)
             .userNameTestHelper(userNameTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
@@ -52,6 +54,7 @@ public class UserNameTest extends SeleniumTestApplication {
     @Test
     public void testExistingUserName() {
         ExistingUserNameTest.builder()
+            .driver(driver)
             .userNameTestHelper(userNameTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)

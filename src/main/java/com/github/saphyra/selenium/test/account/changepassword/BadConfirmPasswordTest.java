@@ -13,7 +13,7 @@ import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditio
 
 @Builder
 public class BadConfirmPasswordTest {
-    private static final String MESSAGE_CODE_BAD_CONFIRM_PASSWORD = "bad-confirm-password";
+    private static final String MESSAGE_CODE_INCORRECT_CONFIRM_PASSWORD = "incorrect-confirm-password";
 
     private final WebDriver driver;
     private final ChangePasswordTestHelper changePasswordTestHelper;
@@ -29,7 +29,7 @@ public class BadConfirmPasswordTest {
         WebElement newConfirmPasswordField = accountPage.getNewConfirmPasswordField();
         newConfirmPasswordField.sendKeys(SeleniumUser.createRandomPassword());
 
-        String errorMessage = getAdditionalContent(driver, Page.ACCOUNT, MESSAGE_CODE_BAD_CONFIRM_PASSWORD);
+        String errorMessage = getAdditionalContent(driver, Page.ACCOUNT, MESSAGE_CODE_INCORRECT_CONFIRM_PASSWORD);
         fieldValidator.verifyError(
             accountPage.getInvalidNewPasswordField(),
             errorMessage,

@@ -1,22 +1,21 @@
 package com.github.saphyra.selenium.test.characterselect.createcharacter;
 
-import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
-import static com.github.saphyra.selenium.logic.util.Util.crop;
-import static com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.CharacterSelectPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.characterselect.common.CharacterSelectTestHelper;
 import lombok.Builder;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+import static com.github.saphyra.selenium.logic.util.Util.crop;
+import static com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest.CHARACTER_NAME_MIN_LENGTH;
 
 @Builder
 public class TooShortCharacterNameTest {
-    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_SHORT = "character-name-too-short";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_SHORT = "charactername-too-short";
 
     private final WebDriver driver;
     private final CharacterSelectTestHelper characterSelectTestHelper;

@@ -25,7 +25,7 @@ public class TooLongPasswordTest {
         TOO_LONG_PASSWORD = builder.toString();
     }
 
-    private static final String MESSAGE_CODE_PASSWORD_TOO_LONG = "new-password-too-long";
+    private static final String MESSAGE_CODE_PASSWORD_TOO_LONG = "password-too-long";
 
     private final WebDriver driver;
     private final ChangePasswordTestHelper changePasswordTestHelper;

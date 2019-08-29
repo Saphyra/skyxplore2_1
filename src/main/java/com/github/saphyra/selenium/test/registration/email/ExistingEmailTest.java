@@ -1,27 +1,28 @@
 package com.github.saphyra.selenium.test.registration.email;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
-import com.github.saphyra.selenium.logic.validator.FieldValidator;
-import lombok.Builder;
-import org.openqa.selenium.WebElement;
-
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.flow.Logout;
 import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.page.IndexPage;
+import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.registration.email.helper.EmailTestHelper;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import java.util.Map;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 @Builder
 public class ExistingEmailTest {
-    private static final String MESSAGE_CODE_EXISTING_EMAIL = "EMAIL_ALREADY_EXISTS";
+    private static final String MESSAGE_CODE_EXISTING_EMAIL = "email-already-exists";
 
+    private final WebDriver driver;
     private final Registration registration;
     private final Logout logout;
     private final EmailTestHelper emailTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
-    private final Map<String, String> messageCodes;
 
     public void testExistingEmail() {
         SeleniumUser otherUser = registration.registerUser();
@@ -35,7 +36,7 @@ public class ExistingEmailTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidEmailField(),
-            messageCodes.get(MESSAGE_CODE_EXISTING_EMAIL),
+            getAdditionalContent(driver, Page.INDEX, MESSAGE_CODE_EXISTING_EMAIL),
             emailField,
             indexPage.getRegisterButton()
         );

@@ -146,6 +146,7 @@ public class FriendshipTest extends SeleniumTestApplication {
     @Test
     public void testDeleteFriend() {
         DeleteFriendTest.builder()
+            .driver(driver)
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
             .friendshipTestHelper(friendshipTestHelper)

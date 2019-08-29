@@ -16,7 +16,7 @@ import static com.github.saphyra.skyxplore.userdata.user.domain.UserRegistration
 
 @Builder
 public class TooShortPasswordTest {
-    private static final String MESSAGE_CODE_PASSWORD_TOO_SHORT = "new-password-too-short";
+    private static final String MESSAGE_CODE_PASSWORD_TOO_SHORT = "password-too-short";
 
     private final WebDriver driver;
     private final AccountPage accountPage;

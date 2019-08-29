@@ -368,10 +368,10 @@
   },
   "additionalContent": {
     "accept-friend-request": "Elfogadás",
-    "addressee-empty": "A címzett megadása kötelező!",
-    "allow-blocked-character": "Feloldás",
     "add-friend": "Barát felvétele",
     "addressee": "Címzett",
+    "addressee-empty": "A címzett megadása kötelező!",
+    "allow-blocked-character": "Feloldás",
     "archive": "Archiválás",
     "block-character": "Letiltás",
     "cancel-friend-request": "Visszavonás",

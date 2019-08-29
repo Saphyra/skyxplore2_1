@@ -24,6 +24,7 @@ public class SelectCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    //TODO extend with redirection tests
     public void testSelectCharacter() {
         new Registration(driver).registerUser();
         SeleniumCharacter character = new CreateCharacter(driver).createCharacter();

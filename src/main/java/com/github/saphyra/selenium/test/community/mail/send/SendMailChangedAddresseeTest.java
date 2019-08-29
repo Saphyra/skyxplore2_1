@@ -17,7 +17,7 @@ import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditio
 
 @Builder
 public class SendMailChangedAddresseeTest {
-    private static final String MESSAGE_CODE_EMPTY_ADDRESSEE = "empty-addressee";
+    private static final String MESSAGE_CODE_EMPTY_ADDRESSEE = "addressee-empty";
 
     private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;

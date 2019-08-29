@@ -97,6 +97,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .driver(driver)
             .build()
             .testSendMailEmptySubject();
     }
@@ -104,6 +105,7 @@ public class MailTest extends SeleniumTestApplication {
     @Test
     public void testSendMailEmptyMessage() {
         SendMailEmptyMessageTest.builder()
+            .driver(driver)
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
@@ -115,6 +117,7 @@ public class MailTest extends SeleniumTestApplication {
     @Test
     public void testSendMailEmptyAddressee() {
         SendMailEmptyAddresseeTest.builder()
+            .driver(driver)
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
@@ -130,6 +133,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .driver(driver)
             .build()
             .testSendMailChangedAddressee();
     }
@@ -142,6 +146,7 @@ public class MailTest extends SeleniumTestApplication {
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
+            .driver(driver)
             .build()
             .testSuccessfullySentMail();
     }
@@ -180,6 +185,7 @@ public class MailTest extends SeleniumTestApplication {
             .sendMailHelper(sendMailHelper)
             .mailTestHelper(mailTestHelper)
             .notificationValidator(notificationValidator)
+            .driver(driver)
             .build()
             .testBulkArchiveMail();
     }
@@ -200,6 +206,7 @@ public class MailTest extends SeleniumTestApplication {
     @Test
     public void testBulkRestoreMail() {
         BulkRestoreMailTest.builder()
+            .driver(driver)
             .communityTestInitializer(communityTestInitializer)
             .communityTestHelper(communityTestHelper)
             .communityPage(communityPage)

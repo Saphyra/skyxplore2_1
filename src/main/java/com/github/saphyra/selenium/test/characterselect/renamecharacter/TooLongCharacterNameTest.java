@@ -23,7 +23,7 @@ public class TooLongCharacterNameTest {
         TOO_LONG_CHARACTER_NAME = builder.toString();
     }
 
-    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "character-name-too-long";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "charactername-too-long";
 
     private final WebDriver driver;
     private final RenameCharacterTestHelper renameCharacterTestHelper;

@@ -15,7 +15,7 @@ import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditio
 
 @Builder
 public class SendMailEmptySubjectTest {
-    private static final String MESSAGE_CODE_EMPTY_SUBJECT = "empty-subject";
+    private static final String MESSAGE_CODE_EMPTY_SUBJECT = "subject-empty";
 
     private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;

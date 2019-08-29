@@ -31,6 +31,7 @@ public class EmailTest extends SeleniumTestApplication {
     @Test
     public void testInvalidEmail() {
         InvalidEmailTest.builder()
+            .driver(driver)
             .emailTestHelper(emailTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
@@ -46,6 +47,7 @@ public class EmailTest extends SeleniumTestApplication {
             .emailTestHelper(emailTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
+            .driver(driver)
             .build()
             .testExistingEmail();
     }

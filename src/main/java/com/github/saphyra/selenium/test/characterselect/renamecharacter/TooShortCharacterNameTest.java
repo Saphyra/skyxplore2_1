@@ -15,7 +15,7 @@ import static com.github.saphyra.skyxplore.userdata.character.domain.CreateChara
 
 @Builder
 public class TooShortCharacterNameTest {
-    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_SHORT = "character-name-too-short";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_SHORT = "charactername-too-short";
 
     private final WebDriver driver;
     private final RenameCharacterTestHelper renameCharacterTestHelper;

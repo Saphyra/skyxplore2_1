@@ -1,8 +1,10 @@
 package com.github.saphyra.selenium.logic.util;
 
-import static com.github.saphyra.selenium.SeleniumTestApplication.OBJECT_MAPPER;
-import static java.util.Objects.isNull;
-import static org.apache.commons.io.FilenameUtils.removeExtension;
+import com.github.saphyra.selenium.logic.domain.localization.ErrorCodes;
+import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -10,17 +12,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 
-import org.apache.commons.io.FilenameUtils;
-
-import com.github.saphyra.selenium.logic.domain.localization.ErrorCodes;
-import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
-import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.saphyra.selenium.SeleniumTestApplication.OBJECT_MAPPER;
+import static java.util.Objects.isNull;
+import static org.apache.commons.io.FilenameUtils.removeExtension;
 
 @UtilityClass
 @Slf4j
 public class ErrorCodeLoader {
-    private static final String RESOURCE_PATH = "public/it8n/error_code/";
+    private static final String RESOURCE_PATH = "public/i18n/error_code/";
     private static final String BASE_PATH = "src/main/resources/";
     private static final File BASE_DIR = new File(BASE_PATH + RESOURCE_PATH);
 

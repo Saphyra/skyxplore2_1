@@ -18,19 +18,15 @@ function loadLocalization(fileName, successCallback){
     )();
 
     function createQuery(fileName, locale, successCallback, errorCallback){
-        const request = new Request(HttpMethod.GET, getPath(locale, fileName));
-            request.convertResponse = function(response){
-                return JSON.parse(response.body);
-            }
-            request.processValidResponse = function(localization){
-                successCallback(localization);
-            }
-            if(errorCallback){
-                request.processInvalidResponse = errorCallback;
-            }
-
         return function(){
-            dao.sendRequestAsync(request);
+            const response = dao.sendRequest(HttpMethod.GET, getPath(locale, fileName));
+            if(response.status === ResponseStatus.OK){
+                successCallback(JSON.parse(response.body));
+            }else if(errorCallback){
+                errorCallback();
+            }else{
+                logService.log(response.toString(), "error", "Error loading localization: ");
+            }
         }
     }
 

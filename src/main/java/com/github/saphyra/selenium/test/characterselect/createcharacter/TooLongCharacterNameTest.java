@@ -14,7 +14,7 @@ import static com.github.saphyra.skyxplore.userdata.character.domain.CreateChara
 @Builder
 public class TooLongCharacterNameTest {
     private static final String TOO_LONG_CHARACTER_NAME;
-    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "character-name-too-long";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "charactername-too-long";
 
     static {
         StringBuilder builder = new StringBuilder();

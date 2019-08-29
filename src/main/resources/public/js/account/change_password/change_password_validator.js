@@ -25,20 +25,20 @@
         let currentPasswordValid = true;
         
         if(newPassword.length < 6){
-            validationResult.createErrorFieldFor(INVALID_NEW_PASSWORD, "NEW_PASSWORD_TOO_SHORT");
+            validationResult.createErrorFieldFor(INVALID_NEW_PASSWORD, "password-too-short");
             newPasswordValid = false;
         }else if(newPassword.length > 30){
-            validationResult.createErrorFieldFor(INVALID_NEW_PASSWORD, "NEW_PASSWORD_TOO_LONG");
+            validationResult.createErrorFieldFor(INVALID_NEW_PASSWORD, "password-too-long");
             newPasswordValid = false;
         }else if(newPassword !== confirmPassword){
-            validationResult.createErrorFieldFor(INVALID_NEW_PASSWORD, "BAD_CONFIRM_PASSWORD");
-            validationResult.createErrorFieldFor(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSWORD");
+            validationResult.createErrorFieldFor(INVALID_NEW_PASSWORD, "incorrect-confirm-password");
+            validationResult.createErrorFieldFor(INVALID_CONFIRM_PASSWORD, "incorrect-confirm-password");
             newPasswordValid = false;
             confirmPasswordValid = false;
         }
         
         if(currentPassword.length == 0){
-            validationResult.createErrorFieldFor(INVALID_CURRENT_PASSWORD, "CURRENT_PASSWORD_IS_EMPTY");
+            validationResult.createErrorFieldFor(INVALID_CURRENT_PASSWORD, "empty-password");
             currentPasswordValid = false;
         }
         
