@@ -1,5 +1,6 @@
 package com.github.saphyra.selenium.test.account.deleteaccount;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import lombok.Builder;
@@ -9,12 +10,12 @@ import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccou
 
 @Builder
 public class EmptyPasswordTest {
-    private static final String MESSAGE_CODE_EMPTY_PASSWORD = "CURRENT_PASSWORD_IS_EMPTY";
+    private static final String MESSAGE_CODE_EMPTY_PASSWORD = "empty-password";
 
+    private  final WebDriver driver;
     private final DeleteAccountTestHelper deleteAccountTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
-    private final MessageCodes messageCodes;
 
     public void testEmptyPassword() {
         deleteAccountTestHelper.registerAndNavigateToAccount();
@@ -24,7 +25,7 @@ public class EmptyPasswordTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidDeleteAccountPasswordField(),
-            messageCodes.get(MESSAGE_CODE_EMPTY_PASSWORD),
+            getAdditionalContent(driver, Page.ACCOUNT, MESSAGE_CODE_EMPTY_PASSWORD),
             passwordField,
             accountPage.getDeleteAccountButton()
         );

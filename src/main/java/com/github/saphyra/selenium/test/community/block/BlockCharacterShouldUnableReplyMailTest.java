@@ -1,10 +1,5 @@
 package com.github.saphyra.selenium.test.community.block;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
-import lombok.Builder;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
@@ -14,11 +9,18 @@ import com.github.saphyra.selenium.test.community.helper.CommunityTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestInitializer;
 import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
 import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
+
+import java.util.List;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getErrorCode;
+import static org.junit.Assert.assertTrue;
 
 @Builder
-public class BlockCharacterShouldUnableReplyMail {
-    private static final String MESSAGE_CODE_ERROR_SENDING_MAIL = "ERROR_SENDING_MAIL";
-
+public class BlockCharacterShouldUnableReplyMailTest {
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final BlockTestHelper blockTestHelper;
@@ -26,7 +28,6 @@ public class BlockCharacterShouldUnableReplyMail {
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
     private final CommunityPage communityPage;
-    private final MessageCodes messageCodes;
 
     public void testBlockCharacterShouldUnableToReplyMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -46,7 +47,7 @@ public class BlockCharacterShouldUnableReplyMail {
         sendMailHelper.setMessage()
             .sendMail();
 
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_ERROR_SENDING_MAIL));
+        notificationValidator.verifyNotificationVisibility(getErrorCode(driver, ErrorCode.CHARACTER_BLOCKED));
         assertTrue(communityPage.getSendMailContainer().isDisplayed());
     }
 }

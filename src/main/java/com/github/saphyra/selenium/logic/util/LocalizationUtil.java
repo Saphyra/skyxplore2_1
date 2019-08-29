@@ -1,12 +1,5 @@
 package com.github.saphyra.selenium.logic.util;
 
-import static com.github.saphyra.selenium.SeleniumTestApplication.ERROR_CODES;
-import static com.github.saphyra.selenium.SeleniumTestApplication.PAGE_LOCALIZATIONS;
-import static com.github.saphyra.selenium.logic.util.Util.executeScript;
-import static com.github.saphyra.skyxplore.common.RequestConstants.DEFAULT_LOCALE;
-
-import org.openqa.selenium.WebDriver;
-
 import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
 import com.github.saphyra.selenium.logic.domain.localization.PageLocalizations;
@@ -14,6 +7,12 @@ import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
 import com.github.saphyra.skyxplore.common.ErrorCode;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
+
+import static com.github.saphyra.selenium.SeleniumTestApplication.ERROR_CODES;
+import static com.github.saphyra.selenium.SeleniumTestApplication.PAGE_LOCALIZATIONS;
+import static com.github.saphyra.selenium.logic.util.Util.executeScript;
+import static com.github.saphyra.skyxplore.common.RequestConstants.DEFAULT_LOCALE;
 
 @UtilityClass
 @Slf4j
@@ -67,13 +66,13 @@ public class LocalizationUtil {
         return additionalContent;
     }
 
-    private static String getLocale(WebDriver driver) {
+    public static String getLocale(WebDriver driver) {
         String locale = executeScript(driver, "return getLocale()");
         log.info("Locale: {}", locale);
         return locale;
     }
 
-    private static String getBrowserLanguage(WebDriver driver) {
+    public static String getBrowserLanguage(WebDriver driver) {
         String locale = executeScript(driver, "return getBrowserLanguage()");
         log.info("BrowserLanguage: {}", locale);
         return locale;

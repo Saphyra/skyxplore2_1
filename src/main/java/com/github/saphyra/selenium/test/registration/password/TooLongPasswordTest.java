@@ -1,13 +1,16 @@
 package com.github.saphyra.selenium.test.registration.password;
 
-import org.openqa.selenium.WebElement;
-
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
+import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.registration.password.helper.PasswordTestHelper;
 import com.github.saphyra.skyxplore.userdata.user.domain.UserRegistrationRequest;
 import lombok.Builder;
-import com.github.saphyra.selenium.logic.page.IndexPage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 @Builder
 public class TooLongPasswordTest {
@@ -21,12 +24,12 @@ public class TooLongPasswordTest {
         TOO_LONG_PASSWORD = builder.toString();
     }
 
-    private static final String MESSAGE_CODE_PASSWORD_TOO_LONG = "PASSWORD_TOO_LONG";
+    private static final String MESSAGE_CODE_PASSWORD_TOO_LONG = "password-too-long";
 
+    private final WebDriver driver;
     private final PasswordTestHelper passwordTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
-    private final MessageCodes messageCodes;
 
     public void testTooLongPassword() {
         SeleniumUser user = SeleniumUser.create();
@@ -37,7 +40,7 @@ public class TooLongPasswordTest {
 
         fieldValidator.verifyError(
             indexPage.getInvalidPasswordField(),
-            messageCodes.get(MESSAGE_CODE_PASSWORD_TOO_LONG),
+            getAdditionalContent(driver, Page.INDEX, MESSAGE_CODE_PASSWORD_TOO_LONG),
             passwordField,
             indexPage.getRegisterButton()
         );

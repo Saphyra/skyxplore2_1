@@ -7,7 +7,7 @@ import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-import com.github.saphyra.selenium.test.account.changeemail.BadPasswordTest;
+import com.github.saphyra.selenium.test.account.changeemail.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.EmptyPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.ExistingEmailTest;
 import com.github.saphyra.selenium.test.account.changeemail.InvalidEmailTest;
@@ -69,7 +69,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
 
     @Test
     public void badPasswordTest() {
-        BadPasswordTest.builder()
+        WrongPasswordTest.builder()
             .accountPage(accountPage)
             .changeEmailTestHelper(changeEmailTestHelper)
             .fieldValidator(fieldValidator)

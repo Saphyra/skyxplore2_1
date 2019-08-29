@@ -12,7 +12,7 @@ import com.github.saphyra.selenium.logic.flow.SelectCharacter;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
 import com.github.saphyra.selenium.logic.page.OverviewPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-import com.github.saphyra.selenium.test.community.block.BlockCharacterShouldUnableReplyMail;
+import com.github.saphyra.selenium.test.community.block.BlockCharacterShouldUnableReplyMailTest;
 import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShouldDeleteFriendRequest;
 import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShouldDeleteFriendship;
 import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShouldNotSendFriendRequest;
@@ -142,7 +142,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
 
     @Test
     public void testBlockCharacterShouldUnableToReplyMail() {
-        BlockCharacterShouldUnableReplyMail.builder()
+        BlockCharacterShouldUnableReplyMailTest.builder()
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
             .blockTestHelper(blockTestHelper)

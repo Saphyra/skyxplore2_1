@@ -10,7 +10,7 @@ import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.account.changepassword.BadConfirmPasswordTest;
-import com.github.saphyra.selenium.test.account.changepassword.BadPasswordTest;
+import com.github.saphyra.selenium.test.account.changepassword.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.EmptyCurrentPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.SuccessfulPasswordChangeTest;
 import com.github.saphyra.selenium.test.account.changepassword.TooLongPasswordTest;
@@ -91,7 +91,7 @@ public class ChangePasswordTest extends SeleniumTestApplication {
 
     @Test
     public void testBadPassword() {
-        BadPasswordTest.builder()
+        WrongPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)

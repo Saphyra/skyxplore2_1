@@ -8,7 +8,8 @@ public enum Page {
     ACCOUNT("account"),
     CHARACTER_SELECT("characterselect"),
     COMMUNITY("community"),
-    INDEX("index");
+    INDEX("index"),
+    SHOP("shop");
 
     @Getter
     private final String pageName;

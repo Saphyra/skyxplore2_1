@@ -1,31 +1,34 @@
 package com.github.saphyra.selenium.test.community.mail.archive;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
-
-import java.util.List;
-
-import lombok.Builder;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestInitializer;
 import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
 import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
+
+import java.util.List;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Builder
 public class BulkRestoreMailTest {
-    private static final String MESSAGE_CODE_MAILS_RESTORED = "MAILS_RESTORED";
+    private static final String MESSAGE_CODE_MAILS_RESTORED = "mails-restored";
 
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
-    private final MessageCodes messageCodes;
 
     public void testBulkRestoreMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -53,7 +56,7 @@ public class BulkRestoreMailTest {
 
         communityPage.getExecuteBulkEditButtonForArchivedMails().click();
 
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_RESTORED));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAILS_RESTORED));
         mailTestHelper.verifyNoArchivedMails();
 
         assertThat(mailTestHelper.getIncomingMails()).hasSize(2);

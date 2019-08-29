@@ -1,31 +1,40 @@
 package com.github.saphyra.selenium.logic.util;
 
-import static java.util.Objects.isNull;
+import com.github.saphyra.selenium.logic.domain.Category;
+import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Optional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.saphyra.selenium.logic.domain.Category;
-import com.github.saphyra.selenium.logic.domain.localization.StringStringMap;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.saphyra.selenium.SeleniumTestApplication.OBJECT_MAPPER;
+import static java.util.Objects.isNull;
 
 @Slf4j
 public class CategoryNameHelper {
     private final Map<String, String> categories;
 
-    public CategoryNameHelper(ObjectMapper objectMapper, String locale) {
+    public CategoryNameHelper(WebDriver driver) {
+        String locale = LocalizationUtil.getLocale(driver);
         URL messageCodes = getClass().getClassLoader().getResource("public/i18n/" + locale + "/categories.json");
 
         if (isNull(messageCodes)) {
-            log.info("Localization not found for locale {}. Using default locale...", locale);
-            messageCodes = getClass().getClassLoader().getResource("public/i18n/page/hu/categories.json");
+            String browserLanguage = LocalizationUtil.getBrowserLanguage(driver);
+            log.info("Category Localization not found with locale {}. Using browserLanguage...", browserLanguage);
+            messageCodes = getClass().getClassLoader().getResource("public/i18n/" + browserLanguage + "/categories.json");
+        }
+
+        if (isNull(messageCodes)) {
+            log.info("Localization not found for locale {}. Using default locale...", RequestConstants.DEFAULT_LOCALE);
+            messageCodes = getClass().getClassLoader().getResource("public/i18n/page/" + RequestConstants.DEFAULT_LOCALE + "/categories.json");
         }
 
         try {
-            this.categories = objectMapper.readValue(messageCodes, StringStringMap.class);
+            this.categories = OBJECT_MAPPER.readValue(messageCodes, StringStringMap.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

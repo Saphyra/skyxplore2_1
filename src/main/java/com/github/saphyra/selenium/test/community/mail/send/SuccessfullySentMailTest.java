@@ -1,32 +1,35 @@
 package com.github.saphyra.selenium.test.community.mail.send;
 
-import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.selenium.logic.domain.Mail;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
-import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
-import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestInitializer;
+import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
+import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @Builder
 @Slf4j
 public class SuccessfullySentMailTest {
-    public static final String MESSAGE_CODE_MAIL_SENT = "MAIL_SENT";
+    public static final String MESSAGE_CODE_MAIL_SENT = "mail-sent";
 
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
-    private final MessageCodes messageCodes;
 
     public void testSuccessfullySentMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -45,7 +48,7 @@ public class SuccessfullySentMailTest {
             .setAddressee(otherCharacter)
             .setMessage()
             .sendMail()
-            .verifyMailSent(messageCodes.get(MESSAGE_CODE_MAIL_SENT));
+            .verifyMailSent(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAIL_SENT));
 
         verifyMailAtSentMails(otherCharacter);
         verifyMailArrived(otherAccount, character);

@@ -1,21 +1,24 @@
 package com.github.saphyra.selenium.test.registration.password;
 
-import org.openqa.selenium.WebElement;
-
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
+import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.registration.password.helper.PasswordTestHelper;
 import lombok.Builder;
-import com.github.saphyra.selenium.logic.page.IndexPage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 @Builder
 public class ConfirmPasswordTest {
-    private static final String MESSAGE_CODE_BAD_CONFIRM_PASSWORD = "BAD_CONFIRM_PASSWORD";
+    private static final String MESSAGE_CODE_INCORRECT_CONFIRM_PASSWORD = "incorrect-confirm-password";
 
+    private final WebDriver driver;
     private final PasswordTestHelper passwordTestHelper;
     private final IndexPage indexPage;
     private final FieldValidator fieldValidator;
-    private final MessageCodes messageCodes;
 
     public void testConfirmPassword() {
         SeleniumUser user = SeleniumUser.create();
@@ -27,16 +30,17 @@ public class ConfirmPasswordTest {
         WebElement confirmPasswordField = indexPage.getRegistrationConfirmPasswordField();
         confirmPasswordField.sendKeys(SeleniumUser.createRandomPassword());
 
+        String errorMessage = getAdditionalContent(driver, Page.INDEX, MESSAGE_CODE_INCORRECT_CONFIRM_PASSWORD);
         fieldValidator.verifyError(
             indexPage.getInvalidPasswordField(),
-            messageCodes.get(MESSAGE_CODE_BAD_CONFIRM_PASSWORD),
+            errorMessage,
             passwordField,
             indexPage.getRegisterButton()
         );
 
         fieldValidator.verifyError(
             indexPage.getInvalidConfirmPasswordField(),
-            messageCodes.get(MESSAGE_CODE_BAD_CONFIRM_PASSWORD),
+            errorMessage,
             confirmPasswordField,
             indexPage.getRegisterButton()
         );
