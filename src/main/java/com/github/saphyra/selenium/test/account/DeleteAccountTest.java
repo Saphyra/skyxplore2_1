@@ -1,9 +1,5 @@
 package com.github.saphyra.selenium.test.account;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
-
-import org.junit.Test;
-
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Login;
 import com.github.saphyra.selenium.logic.flow.Navigate;
@@ -15,6 +11,9 @@ import com.github.saphyra.selenium.test.account.deleteaccount.BadPasswordTest;
 import com.github.saphyra.selenium.test.account.deleteaccount.EmptyPasswordTest;
 import com.github.saphyra.selenium.test.account.deleteaccount.SuccessfulAccountDeletionTest;
 import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
+import org.junit.Test;
+
+import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
 public class DeleteAccountTest extends SeleniumTestApplication {
     private DeleteAccountTestHelper deleteAccountTestHelper;
@@ -26,10 +25,10 @@ public class DeleteAccountTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         accountPage = new AccountPage(driver);
-        deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver, messageCodes), new Navigate(driver), accountPage);
+        deleteAccountTestHelper = new DeleteAccountTestHelper(driver, new Registration(driver), new Navigate(driver), accountPage);
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         notificationValidator = new NotificationValidator(driver);
-        login = new Login(driver, messageCodes);
+        login = new Login(driver);
     }
 
     @Test
@@ -38,7 +37,6 @@ public class DeleteAccountTest extends SeleniumTestApplication {
             .deleteAccountTestHelper(deleteAccountTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testEmptyPassword();
     }
@@ -50,7 +48,6 @@ public class DeleteAccountTest extends SeleniumTestApplication {
             .driver(driver)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
             .build()
             .testBadPassword();
     }
@@ -63,7 +60,6 @@ public class DeleteAccountTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
             .login(login)
-            .messageCodes(messageCodes)
             .build()
             .testSuccessfulAccountDeletion();
     }

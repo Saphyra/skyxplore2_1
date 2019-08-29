@@ -27,7 +27,7 @@ public class FriendshipTestHelper {
     public void sendFriendRequestTo(SeleniumCharacter character) {
         searchForPossibleFriends(character);
 
-        communityPage.getAddFriendSearchResult().stream()
+        communityPage.getAddFriendSearchResult(driver).stream()
             .filter(p -> p.getCharacterName().equals(character.getCharacterName()))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Friend not found in search result."))
@@ -96,7 +96,7 @@ public class FriendshipTestHelper {
     }
 
     public void verifySearchResult(List<SeleniumCharacter> shouldNotContain, List<SeleniumCharacter> shouldContain) {
-        List<String> characterNames = communityPage.getAddFriendSearchResult().stream()
+        List<String> characterNames = communityPage.getAddFriendSearchResult(driver).stream()
             .map(PossibleFriend::getCharacterName)
             .collect(Collectors.toList());
 

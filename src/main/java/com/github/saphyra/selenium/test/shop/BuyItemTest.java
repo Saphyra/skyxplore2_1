@@ -28,12 +28,12 @@ public class BuyItemTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         shopTestInitializer = new ShopTestInitializer(
-            new Registration(driver, messageCodes),
-            new CreateCharacter(driver, messageCodes),
+            new Registration(driver),
+            new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver)
         );
-        buyItem = new BuyItem(driver, locale, messageCodes);
+        buyItem = new BuyItem(driver);
         navigate = new Navigate(driver);
     }
 

@@ -1,7 +1,5 @@
 package com.github.saphyra.selenium.test.factory;
 
-import org.junit.Test;
-import org.openqa.selenium.WebElement;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.domain.Category;
 import com.github.saphyra.selenium.logic.domain.SeleniumProduct;
@@ -12,6 +10,8 @@ import com.github.saphyra.selenium.logic.flow.SelectCharacter;
 import com.github.saphyra.selenium.logic.page.FactoryPage;
 import com.github.saphyra.selenium.logic.util.CategoryNameHelper;
 import com.github.saphyra.selenium.test.factory.util.FactoryTestHelper;
+import org.junit.Test;
+import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertFalse;
 
@@ -22,12 +22,12 @@ public class NotEnoughMaterialTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         factoryTestHelper = new FactoryTestHelper(
-            new Registration(driver, messageCodes),
-            new CreateCharacter(driver, messageCodes),
+            new Registration(driver),
+            new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver)
         );
-        factoryPage = new FactoryPage(driver, new CategoryNameHelper(OBJECT_MAPPER, locale));
+        factoryPage = new FactoryPage(driver, new CategoryNameHelper(driver));
     }
 
     @Test

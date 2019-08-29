@@ -1,18 +1,18 @@
 package com.github.saphyra.selenium.logic.domain;
 
-import static com.github.saphyra.selenium.logic.util.Util.hasClass;
-import static org.junit.Assert.assertTrue;
-
+import com.github.saphyra.selenium.logic.domain.localization.Page;
+import com.github.saphyra.selenium.logic.validator.NotificationValidator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
-import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+import static com.github.saphyra.selenium.logic.util.Util.hasClass;
+import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -23,17 +23,16 @@ public class Mail {
     private static final String SELECTOR_SELECT_FIELD = "tr:first-child td:first-child input";
     private static final String SELECTOR_SUBJECT = "tr:nth-child(2) td:first-child";
     private static final String SELECTOR_RESTORE_BUTTON = "tr:first-child td:nth-child(4) button:nth-child(2)";
-    private static final String MESSAGE_CODE_MAIL_ARCHIVED = "MAILS_ARCHIVED";
-    private static final String MESSAGE_CODE_MAIL_RESTORED = "MAILS_RESTORED";
+    private static final String MESSAGE_CODE_MAIL_ARCHIVED = "mails-archived";
+    private static final String MESSAGE_CODE_MAIL_RESTORED = "mails-restored";
     private static final String SELECTOR_DELETE_BUTTON = "tr:first-child td:nth-child(4) button:first-child";
-    private static final String MESSAGE_CODE_MAILS_DELETED = "MAILS_DELETED";
+    private static final String MESSAGE_CODE_MAILS_DELETED = "mails-deleted";
     private static final String SELECTOR_MARK_AS_READ_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_MARK_AS_UNREAD_BUTTON = "tr:first-child td:nth-child(4) button:last-child";
     private static final String SELECTOR_REPLY_BUTTON = ".mail-body button:last-child";
 
     private final WebElement element;
     private final WebDriver driver;
-    private final PageLocalization communityPageLocalization;
 
     public String getSender() {
         return element.findElement(By.cssSelector(SELECTOR_SENDER)).getText();
@@ -55,7 +54,7 @@ public class Mail {
 
     public void archive(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_ARCHIVE_BUTTON)).click();
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAIL_ARCHIVED));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAIL_ARCHIVED));
     }
 
     public void select() {
@@ -65,19 +64,19 @@ public class Mail {
     }
 
     public String getSubject() {
-        return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split(communityPageLocalization.getAdditionalContent("subject") + ": ")[1];
+        return element.findElement(By.cssSelector(SELECTOR_SUBJECT)).getText().split(getAdditionalContent(driver, Page.COMMUNITY, "subject") + ": ")[1];
     }
 
     public void restore(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_RESTORE_BUTTON)).click();
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAIL_RESTORED));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAIL_RESTORED));
     }
 
     public void delete(NotificationValidator notificationValidator) {
         element.findElement(By.cssSelector(SELECTOR_DELETE_BUTTON)).click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_DELETED));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAILS_DELETED));
     }
 
     public void markAsRead() {

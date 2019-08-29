@@ -8,6 +8,8 @@ public enum Page {
     ACCOUNT("account"),
     CHARACTER_SELECT("characterselect"),
     COMMUNITY("community"),
+    EQUIPMENT("equipment"),
+    FACTORY("factory"),
     INDEX("index"),
     SHOP("shop");
 

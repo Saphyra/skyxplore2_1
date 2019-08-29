@@ -29,7 +29,7 @@ public class BuyItem {
 
     public BuyItem(WebDriver driver) {
         this.driver = driver;
-        CategoryNameHelper categoryNameHelper = new CategoryNameHelper();
+        CategoryNameHelper categoryNameHelper = new CategoryNameHelper(driver);
         ShopPage shopPage = new ShopPage(driver);
         shopElementSearcher = new ShopElementSearcher(driver, categoryNameHelper, shopPage);
         this.costCounter = new CostCounter(driver, shopElementSearcher);

@@ -29,7 +29,6 @@ public class PasswordTest extends SeleniumTestApplication {
             .passwordTestHelper(passwordTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testTooShortPassword();
     }
@@ -40,7 +39,6 @@ public class PasswordTest extends SeleniumTestApplication {
             .passwordTestHelper(passwordTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
-            .messageCodes(messageCodes)
             .build()
             .testTooLongPassword();
     }
@@ -51,7 +49,6 @@ public class PasswordTest extends SeleniumTestApplication {
             .passwordTestHelper(passwordTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testConfirmPassword();
     }

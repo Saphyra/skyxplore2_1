@@ -92,7 +92,7 @@ public class CommunityPage {
     public List<SentFriendRequest> getSentFriendRequests() {
         return getListWithWait(
             () -> driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
-                .map(element -> new SentFriendRequest(driver, element, messageCodes))
+                .map(element -> new SentFriendRequest(driver, element))
                 .collect(Collectors.toList()),
             "Querying sent friend requests"
         );
@@ -115,7 +115,7 @@ public class CommunityPage {
     public List<SeleniumFriendRequest> getFriendRequests() {
         return getListWithWait(
             () -> driver.findElements(By.cssSelector(SELECTOR_FRIEND_REQUESTS)).stream()
-                .map(element -> new SeleniumFriendRequest(driver, element, messageCodes))
+                .map(element -> new SeleniumFriendRequest(driver, element))
                 .collect(Collectors.toList()),
             "Querying friend requests...");
     }

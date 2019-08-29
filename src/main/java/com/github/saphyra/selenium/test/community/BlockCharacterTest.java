@@ -42,26 +42,26 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         communityTestHelper = new CommunityTestHelper(
-            new Login(driver, messageCodes),
+            new Login(driver),
             new SelectCharacter(driver),
             new OverviewPage(driver),
             new Navigate(driver)
         );
 
         communityTestInitializer = new CommunityTestInitializer(
-            new Registration(driver, messageCodes),
-            new CreateCharacter(driver, messageCodes),
-            new Logout(driver, messageCodes)
+            new Registration(driver),
+            new CreateCharacter(driver),
+            new Logout(driver)
         );
 
-        communityPage = new CommunityPage(driver, messageCodes);
+        communityPage = new CommunityPage(driver);
         notificationValidator = new NotificationValidator(driver);
 
-        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator, messageCodes);
+        blockTestHelper = new BlockTestHelper(driver, communityPage, notificationValidator);
 
-        sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
+        sendMailHelper = new SendMailHelper(driver, communityPage, notificationValidator);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
-        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes, getPageLocalization("community"));
+        mailTestHelper = new MailTestHelper(communityPage, driver);
     }
 
     @Test
@@ -150,7 +150,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
-            .messageCodes(messageCodes)
             .build()
             .testBlockCharacterShouldUnableToReplyMail();
     }

@@ -1,6 +1,5 @@
 package com.github.saphyra.selenium.test.characterselect;
 
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.CreateCharacter;
 import com.github.saphyra.selenium.logic.flow.Registration;
@@ -12,6 +11,7 @@ import com.github.saphyra.selenium.test.characterselect.renamecharacter.Successf
 import com.github.saphyra.selenium.test.characterselect.renamecharacter.TooLongCharacterNameTest;
 import com.github.saphyra.selenium.test.characterselect.renamecharacter.TooShortCharacterNameTest;
 import com.github.saphyra.selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 
@@ -27,8 +27,8 @@ public class RenameCharacterTest extends SeleniumTestApplication {
         fieldValidator = new FieldValidator(driver, CHARACTER_SELECT);
         renameCharacterTestHelper = new RenameCharacterTestHelper(
             driver,
-            new Registration(driver, messageCodes),
-            new CreateCharacter(driver, messageCodes),
+            new Registration(driver),
+            new CreateCharacter(driver),
             characterSelectPage,
             fieldValidator
         );
@@ -41,7 +41,6 @@ public class RenameCharacterTest extends SeleniumTestApplication {
             .renameCharacterTestHelper(renameCharacterTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testTooShortCharacterName();
     }
@@ -52,7 +51,6 @@ public class RenameCharacterTest extends SeleniumTestApplication {
             .renameCharacterTestHelper(renameCharacterTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testTooLongCharacterName();
     }
@@ -63,7 +61,6 @@ public class RenameCharacterTest extends SeleniumTestApplication {
             .renameCharacterTestHelper(renameCharacterTestHelper)
             .characterSelectPage(characterSelectPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testExistingCharacterName();
     }
@@ -74,7 +71,6 @@ public class RenameCharacterTest extends SeleniumTestApplication {
             .characterSelectPage(characterSelectPage)
             .renameCharacterTestHelper(renameCharacterTestHelper)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
             .build()
             .testSuccessfulCharacterRename();
     }

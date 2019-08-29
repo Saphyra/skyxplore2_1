@@ -1,24 +1,9 @@
 package com.github.saphyra.selenium.test.factory;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static com.github.saphyra.selenium.logic.util.Util.validateIfPresent;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.domain.Category;
 import com.github.saphyra.selenium.logic.domain.SeleniumProduct;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.flow.CreateCharacter;
 import com.github.saphyra.selenium.logic.flow.Navigate;
 import com.github.saphyra.selenium.logic.flow.Registration;
@@ -27,13 +12,29 @@ import com.github.saphyra.selenium.logic.page.FactoryPage;
 import com.github.saphyra.selenium.logic.util.CategoryNameHelper;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.factory.util.FactoryTestHelper;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+import static com.github.saphyra.selenium.logic.util.Util.validateIfPresent;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class BuildAndFinishTest extends SeleniumTestApplication {
     private static final int AMOUNT_TO_PRODUCE = 3;
 
     private static final String ELEMENT_MATERIAL_NAME = "span:first-child";
     private static final String ELEMENT_MATERIAL_AMOUNT = ".material-element-amount";
-    private static final String MESSAGE_CODE_PRODUCT_ADDED_TO_QUEUE = "PRODUCT_ADDED_TO_QUEUE";
+    private static final String MESSAGE_CODE_PRODUCT_ADDED_TO_QUEUE = "product-added-to-queue";
     private static final String SELECTOR_QUEUE_ITEM_NAME = "div:first-child";
     private static final String SELECTOR_PROCESS_BAR_TEXT = ".queue-process .process-bar-text";
 
@@ -47,12 +48,12 @@ public class BuildAndFinishTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         factoryTestHelper = new FactoryTestHelper(
-            new Registration(driver, messageCodes),
-            new CreateCharacter(driver, messageCodes),
+            new Registration(driver),
+            new CreateCharacter(driver),
             new SelectCharacter(driver),
             new Navigate(driver)
         );
-        factoryPage = new FactoryPage(driver, new CategoryNameHelper(OBJECT_MAPPER, locale));
+        factoryPage = new FactoryPage(driver, new CategoryNameHelper(driver));
         notificationValidator = new NotificationValidator(driver);
     }
 
@@ -102,7 +103,7 @@ public class BuildAndFinishTest extends SeleniumTestApplication {
 
     private void verifyBuildStarted(String builtProductName) {
         verifyMaterialsUsed();
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_PRODUCT_ADDED_TO_QUEUE));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.FACTORY, MESSAGE_CODE_PRODUCT_ADDED_TO_QUEUE));
         verifyMaterialInQueue(builtProductName);
     }
 

@@ -25,8 +25,8 @@ public class UserNameTest extends SeleniumTestApplication {
         indexPage = new IndexPage(driver);
         userNameTestHelper = new UserNameTestHelper(driver, indexPage);
         fieldValidator = new FieldValidator(driver, INDEX_PAGE);
-        logout = new Logout(driver, messageCodes);
-        registration = new Registration(driver, messageCodes);
+        logout = new Logout(driver);
+        registration = new Registration(driver);
     }
 
     @Test
@@ -35,7 +35,6 @@ public class UserNameTest extends SeleniumTestApplication {
             .userNameTestHelper(userNameTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
-            .messageCodes(messageCodes)
             .build()
             .testTooShortUserName();
     }
@@ -46,7 +45,6 @@ public class UserNameTest extends SeleniumTestApplication {
             .userNameTestHelper(userNameTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testTooLongUserName();
     }
@@ -59,7 +57,6 @@ public class UserNameTest extends SeleniumTestApplication {
             .indexPage(indexPage)
             .registration(registration)
             .logout(logout)
-            .messageCodes(messageCodes)
             .build()
             .testExistingUserName();
     }

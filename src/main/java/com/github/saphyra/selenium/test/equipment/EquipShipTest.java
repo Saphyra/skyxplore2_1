@@ -1,10 +1,10 @@
 package com.github.saphyra.selenium.test.equipment;
 
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.domain.Category;
 import com.github.saphyra.selenium.logic.domain.ContainerId;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.flow.BuyItem;
 import com.github.saphyra.selenium.logic.flow.CreateCharacter;
 import com.github.saphyra.selenium.logic.flow.Navigate;
@@ -12,12 +12,14 @@ import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.flow.SelectCharacter;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.equipment.util.EquipmentElementSearcher;
+import org.junit.Test;
 
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 import static org.junit.Assert.assertEquals;
 
 public class EquipShipTest extends SeleniumTestApplication {
     private static final String TEST_SHIP_ID = "sta-02";
-    private static final String MESSAGE_CODE_SHIP_EQUIPPED = "SHIP_EQUIPPED";
+    private static final String MESSAGE_CODE_SHIP_EQUIPPED = "ship-equipped";
 
     private Registration registration;
     private CreateCharacter createCharacter;
@@ -29,11 +31,11 @@ public class EquipShipTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        registration = new Registration(driver, messageCodes);
-        createCharacter = new CreateCharacter(driver, messageCodes);
+        registration = new Registration(driver);
+        createCharacter = new CreateCharacter(driver);
         selectCharacter = new SelectCharacter(driver);
         navigate = new Navigate(driver);
-        buyItem = new BuyItem(driver, locale, messageCodes);
+        buyItem = new BuyItem(driver);
         equipmentElementSearcher = new EquipmentElementSearcher(driver);
         notificationValidator = new NotificationValidator(driver);
     }
@@ -57,7 +59,7 @@ public class EquipShipTest extends SeleniumTestApplication {
     }
 
     private void verifySuccess() {
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_SHIP_EQUIPPED));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.EQUIPMENT, MESSAGE_CODE_SHIP_EQUIPPED));
 
         verifyEmptyShip();
     }

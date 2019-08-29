@@ -1,26 +1,24 @@
 package com.github.saphyra.selenium.logic.flow;
 
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.util.LocatorUtil;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Map;
-
 import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 public class Logout {
-    private static final String MESSAGE_CODE_SUCCESSFUL_LOGOUT = "SUCCESSFUL_LOGOUT";
+    private static final String MESSAGE_CODE_SUCCESSFUL_LOGOUT = "successful-logout";
 
     private final WebDriver driver;
     private final NotificationValidator notificationValidator;
-    private final Map<String, String> messageCodes;
 
-    public Logout(WebDriver driver, Map<String, String> messageCodes) {
+    public Logout(WebDriver driver) {
         this.driver = driver;
         this.notificationValidator = new NotificationValidator(driver);
-        this.messageCodes = messageCodes;
     }
 
     public void logOut() {
@@ -35,6 +33,6 @@ public class Logout {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.urlToBe(INDEX_PAGE));
 
-        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_LOGOUT));
+        notificationValidator.verifyOnlyOneNotification(getAdditionalContent(driver, Page.INDEX, MESSAGE_CODE_SUCCESSFUL_LOGOUT));
     }
 }

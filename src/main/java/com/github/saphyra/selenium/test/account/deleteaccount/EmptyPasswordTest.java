@@ -1,18 +1,20 @@
 package com.github.saphyra.selenium.test.account.deleteaccount;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import lombok.Builder;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 @Builder
 public class EmptyPasswordTest {
     private static final String MESSAGE_CODE_EMPTY_PASSWORD = "empty-password";
 
-    private  final WebDriver driver;
+    private final WebDriver driver;
     private final DeleteAccountTestHelper deleteAccountTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
