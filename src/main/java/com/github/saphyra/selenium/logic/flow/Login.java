@@ -1,35 +1,34 @@
 package com.github.saphyra.selenium.logic.flow;
 
-import com.github.saphyra.selenium.logic.domain.SeleniumUser;
-import com.github.saphyra.selenium.logic.page.IndexPage;
-import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-import lombok.extern.slf4j.Slf4j;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
+import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getErrorCode;
+import static com.github.saphyra.selenium.logic.util.Util.cleanNotifications;
+import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
-import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
-import static com.github.saphyra.selenium.logic.util.Util.cleanNotifications;
-import static org.junit.Assert.assertEquals;
+import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.page.IndexPage;
+import com.github.saphyra.selenium.logic.validator.NotificationValidator;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Login {
-    private static final String MESSAGE_CODE_BAD_CREDENTIALS = "BAD_CREDENTIALS";
-
     private final WebDriver driver;
     private final IndexPage indexPage;
     private final NotificationValidator notificationValidator;
     private final Navigate navigate;
-    private final MessageCodes messageCodes;
 
-    public Login(WebDriver driver, MessageCodes messageCodes) {
+    public Login(WebDriver driver) {
         this.driver = driver;
         indexPage = new IndexPage(driver);
         notificationValidator = new NotificationValidator(driver);
         navigate = new Navigate(driver);
-        this.messageCodes = messageCodes;
     }
 
     public void login(SeleniumUser user) {
@@ -65,6 +64,6 @@ public class Login {
 
     private void validateLoginFailure() {
         assertEquals(INDEX_PAGE, driver.getCurrentUrl());
-        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_BAD_CREDENTIALS));
+        notificationValidator.verifyOnlyOneNotification(getErrorCode(driver, ErrorCode.BAD_CREDENTIALS));
     }
 }

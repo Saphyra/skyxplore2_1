@@ -1,25 +1,28 @@
 package com.github.saphyra.selenium.test.community.helper;
 
-import lombok.RequiredArgsConstructor;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class SendMailHelper {
     private static final String DEFAULT_MESSAGE = "message";
     public static final String DEFAULT_SUBJECT = "subject";
-    private static final String MESSAGE_CODE_MAIL_SENT = "MAIL_SENT";
+    private static final String MESSAGE_CODE_MAIL_SENT = "mail-sent";
 
+    private final WebDriver driver;
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
-    private final MessageCodes messageCodes;
 
     public void sendMailTo(SeleniumCharacter character) {
         openWriteMailPage();
@@ -28,7 +31,7 @@ public class SendMailHelper {
         setMessage();
         setAddressee(character);
         sendMail();
-        verifyMailSent(messageCodes.get(MESSAGE_CODE_MAIL_SENT));
+        verifyMailSent(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAIL_SENT));
     }
 
     public void openWriteMailPage() {

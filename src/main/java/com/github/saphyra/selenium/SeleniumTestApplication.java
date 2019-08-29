@@ -1,10 +1,12 @@
 package com.github.saphyra.selenium;
 
+import static com.github.saphyra.selenium.logic.util.ErrorCodeLoader.loadErrorCodes;
 import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST;
 import static com.github.saphyra.selenium.logic.util.LinkUtil.HOST_TEST;
-import static com.github.saphyra.selenium.logic.util.Util.executeScript;
 import static com.github.saphyra.selenium.logic.util.WaitUtil.sleep;
 import static com.github.saphyra.skyxplore.Application.APP_CTX;
+
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +16,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.saphyra.selenium.logic.domain.localization.ErrorCodes;
+import com.github.saphyra.selenium.logic.domain.localization.PageLocalizations;
+import com.github.saphyra.selenium.logic.util.PageLocalizationLoader;
 import com.github.saphyra.skyxplore.Application;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,8 +33,11 @@ public abstract class SeleniumTestApplication {
     private static final boolean HEADLESS_MODE = true;
 
     public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    public static final Map<String, PageLocalizations> PAGE_LOCALIZATIONS = PageLocalizationLoader.loadPageLocalizations();
+    public static final ErrorCodes ERROR_CODES = loadErrorCodes();
+
     protected WebDriver driver;
-    protected String locale;
+
 
     @Before
     public void startServices() {
@@ -44,17 +52,10 @@ public abstract class SeleniumTestApplication {
 
         driver = new ChromeDriver(options);
 
-        getLocale();
-
         driver.manage().window().maximize();
         driver.get(HOST);
 
         init();
-    }
-
-    private void getLocale() {
-        locale = executeScript(driver, "return navigator.language.toLowerCase().split(\"-\")[0]");
-        log.info("Locale: {}", locale);
     }
 
     protected abstract void init();

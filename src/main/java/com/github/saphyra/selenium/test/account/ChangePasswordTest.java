@@ -103,6 +103,7 @@ public class ChangePasswordTest extends SeleniumTestApplication {
     @Test
     public void testSuccessfulPasswordChange() {
         SuccessfulPasswordChangeTest.builder()
+            .driver(driver)
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .logout(logout)

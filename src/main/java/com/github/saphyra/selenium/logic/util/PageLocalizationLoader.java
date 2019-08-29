@@ -3,24 +3,54 @@ package com.github.saphyra.selenium.logic.util;
 import static com.github.saphyra.selenium.SeleniumTestApplication.OBJECT_MAPPER;
 import static java.util.Objects.isNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
+import com.github.saphyra.selenium.logic.domain.localization.PageLocalizations;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class PageLocalizationLoader {
-    public PageLocalization getPageLocalization(String pageName, String locale) {
-        URL source = getClass().getClassLoader().getResource("public/i18n/" + locale + "/" + pageName + ".json");
+    private static final String BASE_PATH = "src/main/resources/";
+    private static final String RESOURCE_PATH = "public/i18n/page/";
+    private static final File BASE_DIR = new File(BASE_PATH + RESOURCE_PATH);
 
-        if (isNull(source)) {
-            log.info("Localization not found for locale {}. Using default locale...", locale);
-            source = getClass().getClassLoader().getResource("public/i18n/page/hu/" + pageName + ".json");
+    public static Map<String, PageLocalizations> loadPageLocalizations() {
+        File[] localizationDirs = BASE_DIR.listFiles(File::isDirectory);
+        log.info("localizationDirs: " + Arrays.toString(localizationDirs));
+        if (isNull(localizationDirs)) {
+            throw new RuntimeException("No page localization was found.");
         }
 
+        Map<String, PageLocalizations> result = new HashMap<>();
+        for (File localizationDir : localizationDirs) {
+            log.info("Loading pageLocalization from localizationDit {}", localizationDir.getName());
+            String locale = localizationDir.getName();
+            result.put(locale, getPageLocalization(locale));
+        }
+        return result;
+    }
+
+    private static PageLocalizations getPageLocalization(String locale) {
+        Map<Page, PageLocalization> pagePageLocalizationMap = new HashMap<>();
+        for (Page page : Page.values()) {
+            log.info("Loading pageLocalization for page {} and locale {}", page, locale);
+            pagePageLocalizationMap.put(page, getPageLocalization(page.getPageName(), locale));
+        }
+        return new PageLocalizations(pagePageLocalizationMap);
+    }
+
+    private static PageLocalization getPageLocalization(String pageName, String locale) {
+        URL source = PageLocalizationLoader.class.getClassLoader().getResource(RESOURCE_PATH + locale + "/" + pageName + ".json");
+
         if (isNull(source)) {
-            throw new RuntimeException("PageLocalization not found for page " + pageName);
+            throw new RuntimeException("PageLocalization not found for page " + pageName + " and locale " + locale);
         }
 
         try {

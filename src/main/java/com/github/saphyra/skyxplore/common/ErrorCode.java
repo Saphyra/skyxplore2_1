@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.common;
 
 public enum ErrorCode {
+    BAD_CREDENTIALS,
     BLOCKED_CHARACTER_NOT_FOUND,
     CHARACTER_ALREADY_BLOCKED,
     CHARACTER_BLOCKED,

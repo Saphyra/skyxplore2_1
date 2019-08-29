@@ -33,7 +33,6 @@ public class Mail {
 
     private final WebElement element;
     private final WebDriver driver;
-    private final MessageCodes messageCodes;
     private final PageLocalization communityPageLocalization;
 
     public String getSender() {

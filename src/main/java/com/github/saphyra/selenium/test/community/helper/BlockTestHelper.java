@@ -21,7 +21,6 @@ public class BlockTestHelper {
     private final WebDriver driver;
     private final CommunityPage communityPage;
     private final NotificationValidator notificationValidator;
-    private final MessageCodes messageCodes;
 
     public void blockCharacter(SeleniumCharacter character) {
         searchCharacterCanBeBlocked(character.getCharacterName()).stream()

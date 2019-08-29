@@ -65,7 +65,6 @@ public class CommunityPage {
     private static final String SELECTOR_BLOCK_CHARACTER_WINDOW = "main-block-character";
 
     private final WebDriver driver;
-    private final MessageCodes messageCodes;
 
     public WebElement getAddFriendButton() {
         return driver.findElement(By.cssSelector(SELECTOR_ADD_FRIEND));
@@ -79,10 +78,10 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_ADD_FRIEND_INPUT_FIELD));
     }
 
-    public List<PossibleFriend> getAddFriendSearchResult() {
+    public List<PossibleFriend> getAddFriendSearchResult(WebDriver driver) {
         return getListWithWait(() -> driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT)), "Querying possible friends...")
             .stream()
-            .map(element -> new PossibleFriend(element, messageCodes))
+            .map(element -> new PossibleFriend(driver, element))
             .collect(Collectors.toList());
     }
 

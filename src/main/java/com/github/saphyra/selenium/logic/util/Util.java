@@ -1,18 +1,21 @@
 package com.github.saphyra.selenium.logic.util;
 
-import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static com.github.saphyra.selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static com.github.saphyra.selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@UtilityClass
 public class Util {
     public static final String ATTRIBUTE_VALUE = "value";
 

@@ -1,27 +1,31 @@
 package com.github.saphyra.selenium.test.account.changepassword;
 
-import com.github.saphyra.selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
-import lombok.Builder;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.flow.Login;
 import com.github.saphyra.selenium.logic.flow.Logout;
 import com.github.saphyra.selenium.logic.flow.Navigate;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
+import com.github.saphyra.selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
+import lombok.Builder;
 
 @Builder
 public class SuccessfulPasswordChangeTest {
-    private static final String MESSAGE_CODE_SUCCESSFUL_PASSWORD_CHANGE = "PASSWORD_CHANGE_SUCCESSFUL";
+    private static final String MESSAGE_CODE_PASSWORD_CHANGED = "password-changed";
 
-    private final ChangePasswordTestHelper changePasswordTestHelper;
+    private final WebDriver driver;
     private final AccountPage accountPage;
+    private final ChangePasswordTestHelper changePasswordTestHelper;
     private final Logout logout;
     private final Login login;
     private final Navigate navigate;
     private final NotificationValidator notificationValidator;
-    private final MessageCodes messageCodes;
 
     public void testSuccessfulPasswordChange() {
         SeleniumUser user = changePasswordTestHelper.registerAndNavigateToAccount();
@@ -64,6 +68,6 @@ public class SuccessfulPasswordChangeTest {
     }
 
     private void verifySuccessfulNotification() {
-        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_PASSWORD_CHANGE));
+        notificationValidator.verifyOnlyOneNotification(getAdditionalContent(driver, Page.ACCOUNT, MESSAGE_CODE_PASSWORD_CHANGED));
     }
 }

@@ -1,22 +1,23 @@
 package com.github.saphyra.selenium.test.community.helper;
 
-import lombok.RequiredArgsConstructor;
-import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import com.github.saphyra.selenium.logic.domain.Mail;
-import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
-import com.github.saphyra.selenium.logic.page.CommunityPage;
+import static com.github.saphyra.selenium.logic.util.Util.ATTRIBUTE_VALUE;
+import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static com.github.saphyra.selenium.logic.util.Util.ATTRIBUTE_VALUE;
-import static com.github.saphyra.selenium.logic.util.WaitUtil.waitUntil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.github.saphyra.selenium.logic.domain.Mail;
+import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
+import com.github.saphyra.selenium.logic.domain.localization.PageLocalization;
+import com.github.saphyra.selenium.logic.page.CommunityPage;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MailTestHelper {
@@ -34,7 +35,6 @@ public class MailTestHelper {
 
     private final CommunityPage communityPage;
     private final WebDriver driver;
-    private final MessageCodes messageCodes;
     private final PageLocalization communityPageLocalization;
 
     public void verifySearchResult(List<SeleniumCharacter> shouldContain, List<SeleniumCharacter> shouldNotContain) {
@@ -82,7 +82,7 @@ public class MailTestHelper {
     }
 
     private Mail createMail(WebElement element) {
-        return new Mail(element, driver, messageCodes, communityPageLocalization);
+        return new Mail(element, driver, communityPageLocalization);
     }
 
     public int getNumberOfUnreadMails() {
