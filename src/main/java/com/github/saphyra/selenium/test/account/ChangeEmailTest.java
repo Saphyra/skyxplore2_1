@@ -1,19 +1,18 @@
 package com.github.saphyra.selenium.test.account;
 
-import org.junit.Ignore;
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Navigate;
 import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-import com.github.saphyra.selenium.test.account.changeemail.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.EmptyPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.ExistingEmailTest;
 import com.github.saphyra.selenium.test.account.changeemail.InvalidEmailTest;
 import com.github.saphyra.selenium.test.account.changeemail.SuccessfulEmailChangeTest;
+import com.github.saphyra.selenium.test.account.changeemail.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.helper.ChangeEmailTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
@@ -69,8 +68,6 @@ public class ChangeEmailTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore after exception handling completed
     public void badPasswordTest() {
         WrongPasswordTest.builder()
             .accountPage(accountPage)

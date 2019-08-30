@@ -1,15 +1,5 @@
 package com.github.saphyra.skyxplore.platform;
 
-import static java.util.Objects.isNull;
-import static org.apache.http.util.TextUtils.isBlank;
-
-import java.util.Map;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.exceptionhandling.ErrorTranslationAdapter;
 import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.skyxplore.data.errorcode.ErrorCodeLocalization;
@@ -19,10 +9,20 @@ import com.github.saphyra.util.CookieUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.Optional;
+
+import static java.util.Objects.isNull;
+import static org.apache.http.util.TextUtils.isBlank;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
+//TODO unit test
+//TODO refactor - split
 public class ErrorTranslationAdapterImpl implements ErrorTranslationAdapter {
     private static final String DEFAULT_ERROR_TRANSLATION_PREFIX = "Could not translate errorCode %s";
 
@@ -98,6 +98,6 @@ public class ErrorTranslationAdapterImpl implements ErrorTranslationAdapter {
     }
 
     private String assembleKey(String key) {
-        return "${" + key + "}";
+        return "\\$\\{" + key + "\\}";
     }
 }

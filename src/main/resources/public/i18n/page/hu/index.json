@@ -94,6 +94,7 @@
     "invalid-email": "Érvénytelen e-mail cím.",
     "password-too-long": "Jelszó túl hosszú (Maximum 30 karakter).",
     "password-too-short": "Jelszó túl rövid (Minimum 6 karakter).",
+    "session-expired": "A bejelentkezés lejárt.",
     "successful-logout": "Sikeres kijelentkezés.",
     "username-already-exists": "Felhasználónév foglalt.",
     "username-too-long": "Felhasználónév túl hosszú (Maximum 30 karakter).",

@@ -1,7 +1,5 @@
 package com.github.saphyra.selenium.test.account;
 
-import org.junit.Ignore;
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Login;
 import com.github.saphyra.selenium.logic.flow.Logout;
@@ -11,12 +9,13 @@ import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.account.changepassword.BadConfirmPasswordTest;
-import com.github.saphyra.selenium.test.account.changepassword.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.EmptyCurrentPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.SuccessfulPasswordChangeTest;
 import com.github.saphyra.selenium.test.account.changepassword.TooLongPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.TooShortPasswordTest;
+import com.github.saphyra.selenium.test.account.changepassword.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
@@ -90,8 +89,6 @@ public class ChangePasswordTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore after exception handling finished
     public void testBadPassword() {
         WrongPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
@@ -103,8 +100,6 @@ public class ChangePasswordTest extends SeleniumTestApplication {
     }
 
     @Test
-    //TODO restore after exception handling finished
-    @Ignore
     public void testSuccessfulPasswordChange() {
         SuccessfulPasswordChangeTest.builder()
             .driver(driver)

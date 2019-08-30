@@ -11,7 +11,6 @@ import com.github.saphyra.selenium.test.account.deleteaccount.BadPasswordTest;
 import com.github.saphyra.selenium.test.account.deleteaccount.EmptyPasswordTest;
 import com.github.saphyra.selenium.test.account.deleteaccount.SuccessfulAccountDeletionTest;
 import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
@@ -44,8 +43,6 @@ public class DeleteAccountTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore
     public void testBadPassword() {
         BadPasswordTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)
@@ -57,8 +54,6 @@ public class DeleteAccountTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore
     public void testSuccessfulAccountDeletion() {
         SuccessfulAccountDeletionTest.builder()
             .deleteAccountTestHelper(deleteAccountTestHelper)

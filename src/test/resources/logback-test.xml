@@ -8,5 +8,4 @@
     <logger name="org.springframework.web" level="error" />
     <logger name="org.springframework.test" level="error" />
     <logger name="org.hibernate" level="error" />
-    <logger name="com.github.saphyra.selenium" level="debug" />
 </configuration>

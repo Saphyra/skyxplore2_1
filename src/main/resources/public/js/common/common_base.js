@@ -9,6 +9,7 @@
     scriptLoader.loadScript("/js/common/utils.js");
     scriptLoader.loadScript("/js/common/log_service.js");
     scriptLoader.loadScript("/js/common/dao/mapping.js");
+    scriptLoader.loadScript("/js/common/dao/error_handler.js");
     scriptLoader.loadScript("/js/common/dao/dao.js");
     scriptLoader.loadScript("/js/common/events.js");
     scriptLoader.loadScript("/js/common/event_processor.js");

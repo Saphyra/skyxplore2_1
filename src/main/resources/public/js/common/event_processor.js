@@ -7,7 +7,7 @@
     }
     
     function registerProcessor(processor){
-        if(!processor instanceof EventProcessor){
+        if(!processor || !processor instanceof EventProcessor){
             throwException("IllegalArgument", "eventProcessor is not type of EventProcessor");
         }
         processors.push(processor);

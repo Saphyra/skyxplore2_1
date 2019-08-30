@@ -1,8 +1,5 @@
 package com.github.saphyra.selenium.test.community;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.CreateCharacter;
 import com.github.saphyra.selenium.logic.flow.Login;
@@ -18,17 +15,18 @@ import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShould
 import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShouldDeleteFriendship;
 import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShouldNotSendFriendRequest;
 import com.github.saphyra.selenium.test.community.block.BlockCharacterTestShouldNotSendMail;
+import com.github.saphyra.selenium.test.community.block.BlockFriendRequestSenderTest;
 import com.github.saphyra.selenium.test.community.block.FilterTestShouldNotShowAlreadyBlocked;
 import com.github.saphyra.selenium.test.community.block.FilterTestShouldNotShowOwnCharacters;
 import com.github.saphyra.selenium.test.community.block.FilterTestShouldShowOnlyMatchingCharacter;
 import com.github.saphyra.selenium.test.community.block.UnblockCharacterTest;
-import com.github.saphyra.selenium.test.community.block.BlockFriendRequestSenderTest;
 import com.github.saphyra.selenium.test.community.helper.BlockTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestInitializer;
 import com.github.saphyra.selenium.test.community.helper.FriendshipTestHelper;
 import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
 import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import org.junit.Test;
 
 public class BlockCharacterTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
@@ -142,8 +140,6 @@ public class BlockCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore
     public void testBlockCharacterShouldUnableToReplyMail() {
         BlockCharacterShouldUnableReplyMailTest.builder()
             .communityTestHelper(communityTestHelper)
@@ -153,6 +149,7 @@ public class BlockCharacterTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .communityPage(communityPage)
             .sendMailHelper(sendMailHelper)
+            .driver(driver)
             .build()
             .testBlockCharacterShouldUnableToReplyMail();
     }

@@ -62,7 +62,7 @@ public class LoggedInFilterSettingTest {
     @Test
     public void shouldRedirect_notGranted() {
         //GIVEN
-        given(authService.canAccess(REQUEST_URI, HttpMethod.GET, USER_ID, ACCESS_TOKEN_ID)).willReturn(AccessStatus.UNAUTHORIZED);
+        given(authService.canAccess(REQUEST_URI, HttpMethod.GET, USER_ID, ACCESS_TOKEN_ID)).willReturn(AccessStatus.ACCESS_TOKEN_EXPIRED);
         //WHEN
         boolean result = underTest.shouldRedirect(redirectionContext);
         //THEN

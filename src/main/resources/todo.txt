@@ -1,11 +1,6 @@
 //TODO implement proper localization settings
     - On setting page
         - Store locale in database
-//TODO FE error handling
-    - Default error handler
-        - Writes translated error message if present
-        - Handle expired session
-        - Log default error message if error response is unrecognized
 
 ===Selenium===
 logging

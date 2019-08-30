@@ -1,7 +1,5 @@
 package com.github.saphyra.selenium.test.account;
 
-import org.junit.Ignore;
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Login;
 import com.github.saphyra.selenium.logic.flow.Logout;
@@ -17,6 +15,7 @@ import com.github.saphyra.selenium.test.account.changeusername.SuccessfulUserNam
 import com.github.saphyra.selenium.test.account.changeusername.TooLongUserNameTest;
 import com.github.saphyra.selenium.test.account.changeusername.TooShortUserNameTest;
 import com.github.saphyra.selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
@@ -86,8 +85,6 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore after exception handling finished
     public void testBadPassword() {
         BadPasswordTest.builder()
             .changeUserNameTestHelper(changeUserNameTestHelper)
@@ -99,8 +96,6 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     }
 
     @Test
-    @Ignore
-    //TODO restore after exception handling finished
     public void testSuccessfulUserNameChange() {
         SuccessfulUserNameChangeTest.builder()
             .changeUserNameTestHelper(changeUserNameTestHelper)
