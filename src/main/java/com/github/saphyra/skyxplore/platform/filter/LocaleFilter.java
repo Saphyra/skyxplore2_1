@@ -3,6 +3,7 @@ package com.github.saphyra.skyxplore.platform.filter;
 import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_LOCALE;
 import static com.github.saphyra.skyxplore.common.RequestConstants.COOKIE_USER_ID;
 import static com.github.saphyra.skyxplore.common.RequestConstants.DEFAULT_LOCALE;
+import static com.github.saphyra.skyxplore.common.RequestConstants.HEADER_BROWSER_LANGUAGE;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 import java.io.IOException;
@@ -25,8 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class LocaleFilter extends OncePerRequestFilter {
-    private static final String HEADER_BROWSER_LANGUAGE = "BrowserLanguage";
-
     private final CookieUtil cookieUtil;
     private final LocaleCache localeCache;
 
