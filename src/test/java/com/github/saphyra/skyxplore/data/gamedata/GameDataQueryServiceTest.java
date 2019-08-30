@@ -1,5 +1,22 @@
 package com.github.saphyra.skyxplore.data.gamedata;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.data.base.AbstractDataService;
@@ -13,30 +30,8 @@ import com.github.saphyra.skyxplore.data.gamedata.entity.Material;
 import com.github.saphyra.skyxplore.data.gamedata.entity.Weapon;
 import com.github.saphyra.skyxplore.data.gamedata.subservice.AbilityService;
 import com.github.saphyra.skyxplore.data.gamedata.subservice.ArmorService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.BatteryService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.CoreHullService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.GeneratorService;
 import com.github.saphyra.skyxplore.data.gamedata.subservice.MaterialService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ShieldService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.StorageService;
 import com.github.saphyra.skyxplore.data.gamedata.subservice.WeaponService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static com.github.saphyra.testing.ExceptionValidator.verifyException;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameDataQueryServiceTest {
@@ -45,52 +40,30 @@ public class GameDataQueryServiceTest {
     private static final String ITEM_ID_2 = "item_id_2";
     private static final String ITEM_ID_3 = "item_id_3";
     @Mock
-    @SuppressWarnings("unused")
     private AbilityService abilityService;
 
     @Mock
-    @SuppressWarnings("unused")
     private ArmorService armorService;
-
-    @Mock
-    @SuppressWarnings("unused")
-    private BatteryService batteryService;
-
-    @Mock
-    @SuppressWarnings("unused")
-    private CoreHullService coreHullService;
-
-    @Mock
-    @SuppressWarnings("unused")
-    private ExtenderService extenderService;
-
-    @Mock
-    @SuppressWarnings("unused")
-    private GeneratorService generatorService;
 
     @Mock
     private MaterialService materialService;
 
     @Mock
-    @SuppressWarnings("unused")
-    private ShieldService shieldService;
-
-    @Mock
-    @SuppressWarnings("unused")
-    private ShipService shipService;
-
-    @Mock
-    @SuppressWarnings("unused")
-    private StorageService storageService;
-
-    @Mock
     private WeaponService weaponService;
+
+    @Mock
+    private List<AbstractDataService<? extends GeneralDescription>> generalDescriptionServices;
 
     @Mock
     private List<AbstractDataService<? extends EquipmentDescription>> equipmentDescriptionServices;
 
     @InjectMocks
     private GameDataQueryService underTest;
+
+    @Before
+    public void setUp(){
+        underTest = new GameDataQueryService(generalDescriptionServices, equipmentDescriptionServices);
+    }
 
     @Test
     public void testGetDataShouldThrowExceptionWhenNotFound() {
@@ -103,8 +76,10 @@ public class GameDataQueryServiceTest {
     @Test
     public void testGetDataShouldReturnWhenFound() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(weaponService));
         Weapon weapon = new Weapon();
         weapon.setId(DATA_ID);
+        when(weaponService.containsKey(DATA_ID)).thenReturn(true);
         when(weaponService.get(DATA_ID)).thenReturn(weapon);
         //WHEN
         GeneralDescription result = underTest.getData(DATA_ID);
@@ -115,7 +90,9 @@ public class GameDataQueryServiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void getFactoryData_notFactoryData() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(abilityService));
         Ability ability = new Ability();
+        when(abilityService.containsKey(DATA_ID)).thenReturn(true);
         when(abilityService.get(DATA_ID)).thenReturn(ability);
         //WHEN
         underTest.getFactoryData(DATA_ID);
@@ -124,8 +101,10 @@ public class GameDataQueryServiceTest {
     @Test
     public void getFactoryData() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(weaponService));
         Weapon weapon = new Weapon();
         weapon.setId(DATA_ID);
+        when(weaponService.containsKey(DATA_ID)).thenReturn(true);
         when(weaponService.get(DATA_ID)).thenReturn(weapon);
         //WHEN
         FactoryData result = underTest.getFactoryData(DATA_ID);
@@ -136,8 +115,10 @@ public class GameDataQueryServiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void testFindBuyableShouldThrowExceptionWhenNotBuyable() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(materialService));
         Material material = new Material();
         material.setId(DATA_ID);
+        when(materialService.containsKey(DATA_ID)).thenReturn(true);
         when(materialService.get(DATA_ID)).thenReturn(material);
         //WHEN
         underTest.findBuyable(DATA_ID);
@@ -146,8 +127,10 @@ public class GameDataQueryServiceTest {
     @Test
     public void testFindBuyableShouldReturnWhenFound() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(weaponService));
         Weapon weapon = new Weapon();
         weapon.setId(DATA_ID);
+        when(weaponService.containsKey(DATA_ID)).thenReturn(true);
         when(weaponService.get(DATA_ID)).thenReturn(weapon);
         //WHEN
         FactoryData result = underTest.findBuyable(DATA_ID);
@@ -158,8 +141,10 @@ public class GameDataQueryServiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void findEquipmentDescription_notEquipmentDescription() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(materialService));
         Material material = new Material();
         material.setId(DATA_ID);
+        when(materialService.containsKey(DATA_ID)).thenReturn(true);
         when(materialService.get(DATA_ID)).thenReturn(material);
         //WHEN
         underTest.findEquipmentDescription(DATA_ID);
@@ -168,8 +153,10 @@ public class GameDataQueryServiceTest {
     @Test
     public void findEquipmentDescription() {
         //GIVEN
+        given(generalDescriptionServices.stream()).willReturn(Stream.of(armorService));
         Armor armor = new Armor();
         armor.setId(DATA_ID);
+        when(armorService.containsKey(DATA_ID)).thenReturn(true);
         when(armorService.get(DATA_ID)).thenReturn(armor);
         //WHEN
         EquipmentDescription result = underTest.findEquipmentDescription(DATA_ID);
@@ -196,6 +183,7 @@ public class GameDataQueryServiceTest {
         armor3.setId(ITEM_ID_3);
         armor3.setSlot(SlotType.DEFENSE.name());
         armor3.setLevel(1);
+        given(armorService.values()).willReturn(Arrays.asList(armor1, armor2, armor3));
         given(armorService.values()).willReturn(Arrays.asList(armor1, armor2, armor3));
         //WHEN
         List<EquipmentDescription> result = underTest.getEquipmentDescriptionBySlotAndLevel(SlotType.WEAPON, 1);

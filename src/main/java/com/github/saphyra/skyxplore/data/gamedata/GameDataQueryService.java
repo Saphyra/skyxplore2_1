@@ -1,5 +1,10 @@
 package com.github.saphyra.skyxplore.data.gamedata;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.data.base.AbstractDataService;
 import com.github.saphyra.skyxplore.data.gamedata.domain.SlotType;
@@ -7,77 +12,22 @@ import com.github.saphyra.skyxplore.data.gamedata.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
 import com.github.saphyra.skyxplore.data.gamedata.entity.ShopData;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.AbilityService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ArmorService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.BatteryService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.CoreHullService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.GeneratorService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.MaterialService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ShieldService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.StorageService;
-import com.github.saphyra.skyxplore.data.gamedata.subservice.WeaponService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 class GameDataQueryService {
-    private final AbilityService abilityService;
-    private final ArmorService armorService;
-    private final BatteryService batteryService;
-    private final CoreHullService coreHullService;
-    private final ExtenderService extenderService;
-    private final GeneratorService generatorService;
-    private final MaterialService materialService;
-    private final ShieldService shieldService;
-    private final ShipService shipService;
-    private final StorageService storageService;
-    private final WeaponService weaponService;
+    private final List<AbstractDataService<? extends GeneralDescription>> dataServices;
     private final List<AbstractDataService<? extends EquipmentDescription>> equipmentDescriptionServices;
 
     GeneralDescription getData(String id) {
-        GeneralDescription result = abilityService.get(id);
-        if (result == null) {
-            result = armorService.get(id);
-        }
-        if (result == null) {
-            result = batteryService.get(id);
-        }
-        if (result == null) {
-            result = coreHullService.get(id);
-        }
-        if (result == null) {
-            result = extenderService.get(id);
-        }
-        if (result == null) {
-            result = generatorService.get(id);
-        }
-        if (result == null) {
-            result = materialService.get(id);
-        }
-        if (result == null) {
-            result = shieldService.get(id);
-        }
-        if (result == null) {
-            result = shipService.get(id);
-        }
-        if (result == null) {
-            result = storageService.get(id);
-        }
-        if (result == null) {
-            result = weaponService.get(id);
-        }
-        if (result == null) {
-            throw ExceptionFactory.equipmentNotFound(id);
-        }
-        return result;
+        return dataServices.stream()
+            .filter(abstractDataService -> abstractDataService.containsKey(id))
+            .findAny()
+            .orElseThrow(() -> ExceptionFactory.equipmentNotFound(id))
+            .get(id);
     }
 
     FactoryData getFactoryData(String elementId) {
