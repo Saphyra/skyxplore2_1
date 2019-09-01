@@ -1,7 +1,3 @@
-//TODO implement proper localization settings
-    - On setting page
-        - Store locale in database
-
 ===Selenium===
 logging
 

@@ -7,6 +7,18 @@
         "message": "Account"
       }
     ],
+    "subtitle-set-language": [
+      {
+        "key": "innerHTML",
+        "message": "Nyelv beállítása"
+      }
+    ],
+    "set-language-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
     "subtitle-change-password": [
       {
         "key": "innerHTML",
@@ -171,6 +183,7 @@
     "empty-password": "A jelszó megadása kötelező!",
     "incorrect-confirm-password": "A jelszavak nem egyeznek.",
     "invalid-email": "Érvénytelen e-mail cím.",
+    "language-changed": "Nyelv beállítva.",
     "password-too-long": "Jelszó túl hosszú (Maximum 30 karakter).",
     "password-too-short": "Jelszó túl rövid (Minimum 6 karakter).",
     "username-already-exists": "Felhasználónév foglalt.",
