@@ -1,19 +1,25 @@
 package com.github.saphyra.skyxplore.userdata.settings.locale;
 
-import com.github.saphyra.cache.AbstractCache;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import com.github.saphyra.cache.AbstractCache;
+import com.google.common.cache.CacheBuilder;
 
 @Component
-@RequiredArgsConstructor
 public class LocaleCache extends AbstractCache<String, String> {
-    private final LocaleService localeService;
+    private final LocaleQueryService localeQueryService;
+
+    public LocaleCache(LocaleQueryService localeQueryService) {
+        super(CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build());
+        this.localeQueryService = localeQueryService;
+    }
+
 
     @Override
-    //TODO unit test
     public Optional<String> get(String key) {
-        return localeService.getLocale(key);
+        return localeQueryService.getLocale(key);
     }
 }

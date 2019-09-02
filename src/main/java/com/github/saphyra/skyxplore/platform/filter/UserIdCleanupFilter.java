@@ -1,19 +1,22 @@
 package com.github.saphyra.skyxplore.platform.filter;
 
-import com.github.saphyra.skyxplore.common.RequestConstants;
-import com.github.saphyra.util.CookieUtil;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.util.CookieUtil;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class UserIdCleanupFilter extends OncePerRequestFilter {
     private final CookieUtil cookieUtil;
 

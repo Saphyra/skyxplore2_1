@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.settings.locale;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -11,24 +13,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Component
-class LocaleService {
+public class LocaleQueryService {
     private final UserSettingsDao userSettingsDao;
-    private final LocaleCache localeCache;
 
     //TODO unit test
-    void setLocale(String userId, String locale) {
-        UserSettings userSettings = getOrCreate(userId);
-        userSettings.setValue(locale);
-        userSettingsDao.save(userSettings);
-        localeCache.invalidate(userId);
-    }
-
-    private UserSettings getOrCreate(String userId) {
+    Optional<String> getLocale(String userId) {
         return userSettingsDao.findByUserIdAndUserSettingKey(userId, UserSettingKey.LOCALE)
-            .orElseGet(() -> UserSettings.builder()
-                .userId(userId)
-                .settingKey(UserSettingKey.LOCALE)
-                .build()
-            );
+            .map(UserSettings::getValue);
     }
 }

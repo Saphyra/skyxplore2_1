@@ -19,7 +19,6 @@ public class ErrorCodeService extends AbstractDataService<ErrorCodeLocalization>
         super.load(ErrorCodeLocalization.class);
     }
 
-    //TODO unit test
     public void validateLocale(String locale) {
         if(!isValidLocale(locale)){
             throw ExceptionFactory.invalidLocale(locale);

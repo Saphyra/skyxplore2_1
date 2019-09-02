@@ -1,5 +1,12 @@
 package com.github.saphyra.skyxplore.platform.auth;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.authservice.auth.ErrorResponseResolver;
 import com.github.saphyra.authservice.auth.domain.AccessStatus;
 import com.github.saphyra.authservice.auth.domain.AuthContext;
@@ -9,14 +16,10 @@ import com.github.saphyra.exceptionhandling.domain.ErrorResponse;
 import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.common.PageController;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 
 @Component
 @RequiredArgsConstructor
+//TODO unit test
 public class ErrorResponseResolverImpl implements ErrorResponseResolver {
     private static final String GENERAL_ERROR_KEY = "generalErrorKey";
     private static final String MESSAGE_UNKNOWN_ACCESS_STATUS = "Unknown accessStatus: %s";
