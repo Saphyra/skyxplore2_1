@@ -1,6 +1,5 @@
 package com.github.saphyra.skyxplore.platform.errortranslation;
 
-import static java.util.Objects.isNull;
 import static org.apache.http.util.TextUtils.isBlank;
 
 import java.util.Optional;
@@ -20,13 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class ErrorCodeLocalizationResolver {
     private final CookieUtil cookieUtil;
     private final ErrorCodeService errorCodeService;
     private final LocaleCache localeCache;
 
-    ErrorCodeLocalization getErrorCodeLocalization(HttpServletRequest request) {
+    Optional<ErrorCodeLocalization> getErrorCodeLocalization(HttpServletRequest request) {
         Optional<String> userIdCookie = cookieUtil.getCookie(request, RequestConstants.COOKIE_USER_ID)
             .filter(s -> !isBlank(s));
         log.debug("userId in cookie: {}", userIdCookie);
@@ -39,32 +37,32 @@ class ErrorCodeLocalizationResolver {
             .filter(bl -> !isBlank(bl));
         log.debug("browserLanguage in header: {}", browserLanguageCookie);
 
-        ErrorCodeLocalization errorCodeLocalization = null;
+        Optional<ErrorCodeLocalization> errorCodeLocalization = Optional.empty();
         if (userIdCookie.isPresent()) {
             String userId = userIdCookie.get();
             errorCodeLocalization = getErrorCodeLocalizationByUserId(userId);
         }
 
-        if (isNull(errorCodeLocalization) && localeCookie.isPresent()) {
+        if (!errorCodeLocalization.isPresent() && localeCookie.isPresent()) {
             log.debug("errorCodeLocalization not found with userSetting. Using localeCookie...");
-            errorCodeLocalization = errorCodeService.get(localeCookie.get());
+            errorCodeLocalization = errorCodeService.getOptional(localeCookie.get());
         }
 
-        if (isNull(errorCodeLocalization) && browserLanguageCookie.isPresent()) {
+        if (!errorCodeLocalization.isPresent() && browserLanguageCookie.isPresent()) {
             log.debug("errorCodeLocalization not found with userSetting and localeCookie. Using browserLanguage...");
-            errorCodeLocalization = errorCodeService.get(browserLanguageCookie.get());
+            errorCodeLocalization = errorCodeService.getOptional(browserLanguageCookie.get());
         }
 
-        if (isNull(errorCodeLocalization)) {
+        if (!errorCodeLocalization.isPresent()) {
             log.debug("errorCodeLocalization not found with userSetting, localeCookie and browserLanguage.. Using defaultLocale...");
-            errorCodeLocalization = errorCodeService.get(RequestConstants.DEFAULT_LOCALE);
+            errorCodeLocalization = errorCodeService.getOptional(RequestConstants.DEFAULT_LOCALE);
         }
         return errorCodeLocalization;
     }
 
-    private ErrorCodeLocalization getErrorCodeLocalizationByUserId(String userId) {
+    private Optional<ErrorCodeLocalization> getErrorCodeLocalizationByUserId(String userId) {
         Optional<String> locale = localeCache.get(userId);
         log.debug("Saved locale for userId {}: {}", userId, locale);
-        return locale.map(errorCodeService::get).orElse(null);
+        return locale.flatMap(errorCodeService::getOptional);
     }
 }

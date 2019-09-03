@@ -35,8 +35,10 @@ public class LocaleFilter extends OncePerRequestFilter {
         log.debug("LocaleFilter");
         Optional<String> localeCookie = cookieUtil.getCookie(request, COOKIE_LOCALE)
             .filter(userIdValue -> !isBlank(userIdValue));
-        Optional<String> userId = cookieUtil.getCookie(request, COOKIE_USER_ID);
-        Optional<String> browserLanguage = Optional.ofNullable(request.getHeader(HEADER_BROWSER_LANGUAGE));
+        Optional<String> userId = cookieUtil.getCookie(request, COOKIE_USER_ID)
+            .filter(value -> !isBlank(value));
+        Optional<String> browserLanguage = Optional.ofNullable(request.getHeader(HEADER_BROWSER_LANGUAGE))
+            .filter(value -> !isBlank(value));
         Optional<String> savedLocale = userId.flatMap(localeCache::get);
 
         try {

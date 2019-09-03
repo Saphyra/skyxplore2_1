@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 public class UserIdCleanupFilter extends OncePerRequestFilter {
     private final CookieUtil cookieUtil;
 

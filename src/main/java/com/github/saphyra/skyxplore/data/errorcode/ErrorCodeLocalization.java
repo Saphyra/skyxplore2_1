@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.data.errorcode;
 
-import java.util.HashMap;
+import com.github.saphyra.skyxplore.common.OptionalMap;
 
-public class ErrorCodeLocalization extends HashMap<String, String> {
+public class ErrorCodeLocalization extends OptionalMap<String, String> {
+
 }
