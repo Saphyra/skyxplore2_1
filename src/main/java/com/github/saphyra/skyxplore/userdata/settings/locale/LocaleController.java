@@ -27,10 +27,9 @@ class LocaleController {
     private final LocaleService localeService;
 
     @PostMapping(SET_LOCALE_MAPPING)
-    //TODO unit test
     void setLocale(
         @PathVariable("locale") String locale,
-        @CookieValue(RequestConstants.COOKIE_USER_ID) String userId,
+        @CookieValue(value = RequestConstants.COOKIE_USER_ID, required = false) String userId,
         HttpServletResponse response
     ) {
         log.info("setLocale endpoint called with locale {} by userId {}", locale, userId);

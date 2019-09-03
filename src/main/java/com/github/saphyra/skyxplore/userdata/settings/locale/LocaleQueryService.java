@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class LocaleQueryService {
     private final UserSettingsDao userSettingsDao;
 
-    //TODO unit test
     Optional<String> getLocale(String userId) {
         return userSettingsDao.findByUserIdAndUserSettingKey(userId, UserSettingKey.LOCALE)
             .map(UserSettings::getValue);
