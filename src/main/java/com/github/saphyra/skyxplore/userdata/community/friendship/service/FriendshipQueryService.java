@@ -1,10 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
@@ -12,10 +7,15 @@ import com.github.saphyra.skyxplore.userdata.community.friendship.repository.fri
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
+//TODO split to friendRequestQueryService
 public class FriendshipQueryService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;

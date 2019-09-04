@@ -13,6 +13,7 @@
   "FRIENDSHIP_NOT_FOUND": "Barát nem található.",
   "GENERAL_ERROR": "Hiba - ${generalErrorKey}",
   "INVALID_CHARACTER_ACCESS": "Játékos hozzáférés megtagadva.",
+  "INVALID_FRIEND_REQUEST_ACCESS": "Hozzáférés megtagadva.",
   "INVALID_LOCALE": "Érvénytelen nyelv.",
   "INVALID_MAIL_ACCESS": "Üzenet hozzáférés megtagadva.",
   "INVALID_SLOT_NAME": "Érvénytelen slot",
