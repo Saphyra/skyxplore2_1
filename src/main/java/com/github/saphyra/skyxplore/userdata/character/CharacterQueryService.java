@@ -8,7 +8,7 @@ import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
-import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

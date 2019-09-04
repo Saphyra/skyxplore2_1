@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.userdata.community.friendship;
+package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
 import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,6 +23,7 @@ import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendR
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipQueryServiceTest {

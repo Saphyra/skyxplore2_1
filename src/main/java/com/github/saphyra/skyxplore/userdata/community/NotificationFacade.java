@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.community;
 
 import lombok.RequiredArgsConstructor;
-import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
 import com.github.saphyra.skyxplore.userdata.community.mail.MailQueryService;
 import org.springframework.stereotype.Service;
 

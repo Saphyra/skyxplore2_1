@@ -1,14 +1,15 @@
 package com.github.saphyra.skyxplore.userdata.community.blockedcharacter;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
-import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BlockCharacterService {
     private final BlockedCharacterDao blockedCharacterDao;
     private final BlockedCharacterQueryService blockedCharacterQueryService;
-    private final FriendshipService friendshipService;
+    private final FriendshipServiceFacade friendshipServiceFacade;
 
     void allowBlockedCharacter(String blockedCharacterId, String characterId) {
         BlockedCharacter blockedCharacter = blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(characterId, blockedCharacterId)
@@ -34,7 +35,7 @@ public class BlockCharacterService {
         }
 
         BlockedCharacter blockedCharacter = new BlockedCharacter(characterId, blockedCharacterId);
-        friendshipService.removeContactsBetween(characterId, blockedCharacterId);
+        friendshipServiceFacade.removeContactsBetween(characterId, blockedCharacterId);
         blockedCharacterDao.save(blockedCharacter);
     }
 }

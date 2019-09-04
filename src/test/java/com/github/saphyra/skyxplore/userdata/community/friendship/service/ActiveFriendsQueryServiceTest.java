@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.userdata.community.friendship;
+package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -13,13 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import com.github.saphyra.skyxplore.platform.auth.domain.SkyXpAccessToken;
 import com.github.saphyra.skyxplore.platform.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ActiveFriendsQueryServiceTest {

@@ -1,4 +1,9 @@
-package com.github.saphyra.skyxplore.userdata.community.friendship;
+package com.github.saphyra.skyxplore.userdata.community.friendship.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
@@ -7,10 +12,6 @@ import com.github.saphyra.skyxplore.userdata.community.friendship.repository.fri
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendship.FriendshipDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -29,7 +30,7 @@ public class FriendshipQueryService {
             .orElseThrow(() -> ExceptionFactory.friendshipNotFound(friendshipId));
     }
 
-    List<Friendship> getFriends(String characterId) {
+    public List<Friendship> getFriends(String characterId) {
         return friendshipDao.getFriendshipsOfCharacter(characterId);
     }
 
@@ -37,7 +38,7 @@ public class FriendshipQueryService {
         return friendRequestDao.getByFriendId(characterId).size();
     }
 
-    List<FriendRequest> getReceivedFriendRequests(String characterId) {
+    public List<FriendRequest> getReceivedFriendRequests(String characterId) {
         return friendRequestDao.getByFriendId(characterId).stream()
             .map(this::swapIds)
             .collect(Collectors.toList());

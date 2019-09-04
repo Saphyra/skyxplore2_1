@@ -1,15 +1,15 @@
-package com.github.saphyra.skyxplore.userdata.community.friendship;
+package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.platform.auth.repository.AccessTokenDao;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

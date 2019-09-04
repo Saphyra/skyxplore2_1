@@ -30,7 +30,6 @@ public class LocaleFilter extends OncePerRequestFilter {
     private final LocaleCache localeCache;
 
     @Override
-    //TODO unit test
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.debug("LocaleFilter");
         Optional<String> localeCookie = cookieUtil.getCookie(request, COOKIE_LOCALE)

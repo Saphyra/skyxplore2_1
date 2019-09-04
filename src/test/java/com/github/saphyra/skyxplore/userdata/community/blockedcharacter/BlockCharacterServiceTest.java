@@ -21,7 +21,7 @@ import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
-import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockCharacterServiceTest {
@@ -35,7 +35,7 @@ public class BlockCharacterServiceTest {
     private BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private FriendshipService friendshipService;
+    private FriendshipServiceFacade friendshipServiceFacade;
 
     @InjectMocks
     private BlockCharacterService underTest;
@@ -87,7 +87,7 @@ public class BlockCharacterServiceTest {
         underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
         //THEN
         verify(blockedCharacterQueryService).findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
-        verify(friendshipService).removeContactsBetween(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        verify(friendshipServiceFacade).removeContactsBetween(CHARACTER_ID, BLOCKED_CHARACTER_ID);
 
         ArgumentCaptor<BlockedCharacter> argumentCaptor = ArgumentCaptor.forClass(BlockedCharacter.class);
         verify(blockedCharacterDao).save(argumentCaptor.capture());
