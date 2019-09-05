@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-//TODO unit test
 class ContactRemovalService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;

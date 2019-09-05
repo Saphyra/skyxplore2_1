@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
@@ -17,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//TODO unit test
 class AddFriendRequestService {
     private final BlockedCharacterQueryService blockedCharacterQueryService;
     private final CharacterQueryService characterQueryService;
@@ -37,16 +35,15 @@ class AddFriendRequestService {
             throw ExceptionFactory.friendshipAlreadyExists(characterId, friendId);
         }
         if (isOwnCharacter(friendId, userId)) {
-            //TODO replace with ExceptionFactory
-            throw new BadRequestException("You cannot add your user's characters as friend.");
+            throw ExceptionFactory.wrongFriendId();
         }
 
         FriendRequest friendRequest = friendRequestFactory.create(characterId, friendId);
         friendRequestDao.save(friendRequest);
     }
 
-    private boolean isOwnCharacter(String characterId, String userId) {
+    private boolean isOwnCharacter(String friendId, String userId) {
         return characterQueryService.getCharactersByUserId(userId).stream()
-            .anyMatch(skyXpCharacter -> skyXpCharacter.getCharacterId().equals(characterId));
+            .anyMatch(skyXpCharacter -> skyXpCharacter.getCharacterId().equals(friendId));
     }
 }

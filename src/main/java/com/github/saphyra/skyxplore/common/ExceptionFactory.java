@@ -30,6 +30,7 @@ public final class ExceptionFactory {
     private static final String FRIENDSHIP_NOT_FOUND_PREFIX = "Friendship not found with id %s";
     private static final String INVALID_CHARACTER_ACCESS_PREFIX = "%s cannot access character %s";
     private static final String INVALID_FRIEND_REQUEST_ACCESS_PREFIX = "%s cannot access FriendRequest %s";
+    private static final String INVALID_FRIENDSHIP_ACCESS_PREFIX = "%s has no access to Friendship %s";
     private static final String INVALID_LOCALE_PREFIX = "Locale %s is not supported.";
     private static final String INVALID_MAIL_ACCESS_PREFIX = "%s cannot access to mail %s";
     private static final String INVALID_SLOT_NAME_PREFIX = "Invalid slotName: %s";
@@ -104,6 +105,10 @@ public final class ExceptionFactory {
         return new ForbiddenException(createErrorMessage(ErrorCode.INVALID_FRIEND_REQUEST_ACCESS), String.format(INVALID_FRIEND_REQUEST_ACCESS_PREFIX, characterId, friendRequestId));
     }
 
+    public static RestException invalidFriendshipAccess(String friendshipId, String characterId) {
+        return new ForbiddenException(createErrorMessage(ErrorCode.INVALID_FRIENDSHIP_ACCESS), String.format(INVALID_FRIENDSHIP_ACCESS_PREFIX, characterId, friendshipId));
+    }
+
     public static RestException invalidLocale(String locale) {
         return new BadRequestException(createErrorMessage(ErrorCode.INVALID_LOCALE), String.format(INVALID_LOCALE_PREFIX, locale));
     }
@@ -138,6 +143,10 @@ public final class ExceptionFactory {
 
     public static RestException userNotFound(String userId) {
         return new NotFoundException(createErrorMessage(ErrorCode.USER_NOT_FOUND), String.format(USER_NOT_FOUND_PREFIX, userId));
+    }
+
+    public static RestException wrongFriendId() {
+        return new BadRequestException("You cannot add your user's characters as friend.");
     }
 
     public static RestException wrongPassword() {

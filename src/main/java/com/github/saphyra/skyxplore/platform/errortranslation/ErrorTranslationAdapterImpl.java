@@ -18,7 +18,7 @@ public class ErrorTranslationAdapterImpl implements ErrorTranslationAdapter {
     private final ErrorMessageResolver errorMessageResolver;
     private final ParameterInserter parameterInserter;
 
-    public String translateMessage(HttpServletRequest request, @NonNull String errorCode, @NonNull Map<String, String> params) {
+    public String translateMessage(HttpServletRequest request, String errorCode, @NonNull Map<String, String> params) {
         log.info("Translating errorCode {} with params {}", errorCode, params);
 
         String errorMessage = errorMessageResolver.getErrorMessage(request, errorCode);
