@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-//TODO unit test
 class FriendRequestFactory {
     private final IdGenerator idGenerator;
 
