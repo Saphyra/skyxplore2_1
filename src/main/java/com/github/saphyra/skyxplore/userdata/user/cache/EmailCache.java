@@ -1,16 +1,14 @@
 package com.github.saphyra.skyxplore.userdata.user.cache;
 
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.cache.AbstractCache;
 import com.github.saphyra.skyxplore.userdata.user.UserQueryService;
 import com.google.common.cache.CacheBuilder;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Component
-//TODO unit test
 public class EmailCache extends AbstractCache<String, Boolean> {
     private final UserQueryService userQueryService;
 
@@ -23,7 +21,7 @@ public class EmailCache extends AbstractCache<String, Boolean> {
     }
 
     @Override
-    public Optional<Boolean> get(String key) {
-        return get(key, () -> Optional.of(userQueryService.isEmailExists(key)));
+    public Optional<Boolean> get(String email) {
+        return get(email, () -> Optional.of(userQueryService.isEmailExists(email)));
     }
 }
