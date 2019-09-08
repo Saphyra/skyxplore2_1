@@ -1,9 +1,12 @@
 package com.github.saphyra.selenium.logic.domain;
 
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +14,10 @@ import lombok.RequiredArgsConstructor;
 public class PossibleFriend {
     private static final String SELECTOR_CHARACTER_NAME = "div:first-child";
     private static final String SELECTOR_ADD_FRIEND_BUTTON = "button:first-of-type";
-    private static final String MESSAGE_CODE_FRIEND_REQUEST_SENT = "FRIEND_REQUEST_SENT";
+    private static final String MESSAGE_CODE_FRIEND_REQUEST_SENT = "friend-request-sent";
 
+    private final WebDriver driver;
     private final WebElement element;
-    private final MessageCodes messageCodes;
 
     public String getCharacterName() {
         return element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)).getText();
@@ -26,6 +29,6 @@ public class PossibleFriend {
     }
 
     private void verifySuccess(NotificationValidator notificationValidator) {
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_FRIEND_REQUEST_SENT));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_FRIEND_REQUEST_SENT));
     }
 }

@@ -1,6 +1,7 @@
 package com.github.saphyra.selenium.logic.flow;
 
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.IndexPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import org.openqa.selenium.WebDriver;
@@ -8,30 +9,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Map;
-
 import static com.github.saphyra.selenium.logic.util.LinkUtil.CHARACTER_SELECT;
 import static com.github.saphyra.selenium.logic.util.LinkUtil.INDEX_PAGE;
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 import static com.github.saphyra.selenium.logic.util.Util.cleanNotifications;
 import static org.junit.Assert.assertEquals;
 
 public class Registration {
-    private static final String MESSAGE_CODE_SUCCESSFUL_REGISTRATION = "REGISTRATION_SUCCESSFUL";
+    private static final String MESSAGE_CODE_SUCCESSFUL_REGISTRATION = "registration-successful";
 
     private final WebDriver driver;
     private final IndexPage indexPage;
     private final NotificationValidator notificationValidator;
-    private final Map<String, String> messageCodes;
 
-    public Registration(WebDriver driver, Map<String, String> messageCodes) {
-        this(driver, new IndexPage(driver), messageCodes);
+    public Registration(WebDriver driver) {
+        this(driver, new IndexPage(driver));
     }
 
-    public Registration(WebDriver driver, IndexPage indexPage, Map<String, String> messageCodes) {
+    public Registration(WebDriver driver, IndexPage indexPage) {
         this.driver = driver;
         this.indexPage = indexPage;
         this.notificationValidator = new NotificationValidator(driver);
-        this.messageCodes = messageCodes;
     }
 
     public SeleniumUser registerUser() {
@@ -85,6 +83,6 @@ public class Registration {
         new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(CHARACTER_SELECT));
 
         assertEquals(CHARACTER_SELECT, driver.getCurrentUrl());
-        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_SUCCESSFUL_REGISTRATION));
+        notificationValidator.verifyOnlyOneNotification(getAdditionalContent(driver, Page.CHARACTER_SELECT, MESSAGE_CODE_SUCCESSFUL_REGISTRATION));
     }
 }

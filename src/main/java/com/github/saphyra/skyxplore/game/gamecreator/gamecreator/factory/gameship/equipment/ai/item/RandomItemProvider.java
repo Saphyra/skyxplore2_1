@@ -1,10 +1,10 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.item;
 
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.domain.SlotType;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.domain.SlotType;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain.UpgradableSlot;
 import com.github.saphyra.util.Random;

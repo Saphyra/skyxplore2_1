@@ -26,10 +26,10 @@ public class PasswordTest extends SeleniumTestApplication {
     @Test
     public void testTooShortPassword() {
         TooShortPasswordTest.builder()
+            .driver(driver)
             .passwordTestHelper(passwordTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testTooShortPassword();
     }
@@ -37,10 +37,10 @@ public class PasswordTest extends SeleniumTestApplication {
     @Test
     public void testTooLongPassword() {
         TooLongPasswordTest.builder()
+            .driver(driver)
             .passwordTestHelper(passwordTestHelper)
             .fieldValidator(fieldValidator)
             .indexPage(indexPage)
-            .messageCodes(messageCodes)
             .build()
             .testTooLongPassword();
     }
@@ -48,10 +48,10 @@ public class PasswordTest extends SeleniumTestApplication {
     @Test
     public void testConfirmPassword() {
         ConfirmPasswordTest.builder()
+            .driver(driver)
             .passwordTestHelper(passwordTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testConfirmPassword();
     }

@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
+import com.github.saphyra.skyxplore.common.ServerException;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import com.github.saphyra.skyxplore.userdata.factory.repository.FactoryDao;
@@ -35,7 +35,7 @@ public class FactoryQueryServiceTest {
     @Mock
     private Factory factory;
 
-    @Test(expected = FactoryNotFoundException.class)
+    @Test(expected = ServerException.class)
     public void testFindFactoryOfCharacterValidatedShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(factoryDao.findByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
@@ -82,7 +82,7 @@ public class FactoryQueryServiceTest {
         assertThat(result).isEqualTo(FACTORY_ID);
     }
 
-    @Test(expected = FactoryNotFoundException.class)
+    @Test(expected = ServerException.class)
     public void testFindByFactoryIdShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(factoryDao.findById(FACTORY_ID)).thenReturn(Optional.empty());

@@ -1,35 +1,37 @@
 package com.github.saphyra.selenium.test.community.mail.archive;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
-import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.selenium.logic.domain.Mail;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
 import com.github.saphyra.selenium.logic.domain.SeleniumCharacter;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestInitializer;
 import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
 import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
+
+import java.util.List;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Builder
 @Slf4j
 public class BulkArchiveMailTest {
     private static final String OTHER_SUBJECT = "other_subject";
-    private static final String MESSAGE_CODE_MAILS_ARCHIVED = "MAILS_ARCHIVED";
+    private static final String MESSAGE_CODE_MAILS_ARCHIVED = "mails-archived";
 
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
     private final MailTestHelper mailTestHelper;
     private final NotificationValidator notificationValidator;
-    private final MessageCodes messageCodes;
 
     public void testBulkArchiveMail() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -55,7 +57,7 @@ public class BulkArchiveMailTest {
 
         mailTestHelper.selectBulkArchiveOption();
         communityPage.getExecuteBulkEditButtonForReceivedMails().click();
-        notificationValidator.verifyNotificationVisibility(messageCodes.get(MESSAGE_CODE_MAILS_ARCHIVED));
+        notificationValidator.verifyNotificationVisibility(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_MAILS_ARCHIVED));
 
         mailTestHelper.verifyNoIncomingMails();
 

@@ -70,7 +70,7 @@ public class BlockedCharacterQueryServiceTest {
             .build();
         given(blockedCharacterDao.getBlockedCharacters(CHARACTER_ID)).willReturn(Arrays.asList(blockedCharacter));
 
-        given(characterQueryService.findByCharacterId(BLOCKED_CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(BLOCKED_CHARACTER_ID)).willReturn(character);
         //WHEN
         List<SkyXpCharacter> result = underTest.getBlockedCharacters(CHARACTER_ID);
         //THEN

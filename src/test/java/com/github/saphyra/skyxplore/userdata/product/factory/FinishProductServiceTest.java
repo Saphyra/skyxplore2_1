@@ -21,8 +21,8 @@ import com.github.saphyra.skyxplore.userdata.factory.FactoryQueryService;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import com.github.saphyra.skyxplore.userdata.factory.repository.FactoryDao;
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.entity.GeneralDescription;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.entity.GeneralDescription;
 import com.github.saphyra.skyxplore.userdata.product.domain.Product;
 import com.github.saphyra.skyxplore.userdata.product.repository.ProductDao;
 
@@ -100,7 +100,7 @@ public class FinishProductServiceTest {
         given(factory.getCharacterId()).willReturn(CHARACTER_ID);
         given(factoryQueryService.findByFactoryId(FACTORY_ID)).willReturn(factory);
 
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
         //WHEN
         underTest.finishProducts();
         //THEN

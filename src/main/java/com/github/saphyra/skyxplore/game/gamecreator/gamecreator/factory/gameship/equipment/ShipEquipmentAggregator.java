@@ -17,7 +17,7 @@ class ShipEquipmentAggregator {
     private final SlotQueryService slotQueryService;
 
     ShipEquipments aggregateEquipments(String characterId) {
-        EquippedShip equippedShip = shipQueryService.findShipbyCharacterIdValidated(characterId);
+        EquippedShip equippedShip = shipQueryService.findShipByCharacterIdValidated(characterId);
 
         EquippedSlot defenseSlot = slotQueryService.findSlotByIdValidated(equippedShip.getDefenseSlotId());
         EquippedSlot weaponSlot = slotQueryService.findSlotByIdValidated(equippedShip.getWeaponSlotId());

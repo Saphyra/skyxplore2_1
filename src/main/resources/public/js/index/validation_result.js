@@ -79,12 +79,12 @@ function ValidationResult(){
 
     function validatePasswords(){
         if(password.length < 6){
-            passwordProcess = createErrorProcess(INVALID_PASSWORD, "PASSWORD_TOO_SHORT");
+            passwordProcess = createErrorProcess(INVALID_PASSWORD, "password-too-short");
         }else if(password.length > 30){
-            passwordProcess = createErrorProcess(INVALID_PASSWORD, "PASSWORD_TOO_LONG");
+            passwordProcess = createErrorProcess(INVALID_PASSWORD, "password-too-long");
         }else if(password !== confirmPassword){
-            passwordProcess = createErrorProcess(INVALID_PASSWORD, "BAD_CONFIRM_PASSWORD");
-            confirmPasswordProcess = createErrorProcess(INVALID_CONFIRM_PASSWORD, "BAD_CONFIRM_PASSWORD");
+            passwordProcess = createErrorProcess(INVALID_PASSWORD, "incorrect-confirm-password");
+            confirmPasswordProcess = createErrorProcess(INVALID_CONFIRM_PASSWORD, "incorrect-confirm-password");
         }else{
             passwordValid = true;
             confirmPasswordValid = true;
@@ -94,11 +94,11 @@ function ValidationResult(){
     function validateUserName(payload){
         if(userName.length < 3){
             userNameValidated = true;
-            userNameProcess = createErrorProcess(INVALID_USERNAME, "USERNAME_TOO_SHORT");
+            userNameProcess = createErrorProcess(INVALID_USERNAME, "username-too-short");
             eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
         }else if(userName.length > 30){
             userNameValidated = true;
-            userNameProcess = createErrorProcess(INVALID_USERNAME, "USERNAME_TOO_LONG");
+            userNameProcess = createErrorProcess(INVALID_USERNAME, "username-too-long");
             eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
         }else{
             const request = new Request(HttpMethod.POST, Mapping.USERNAME_EXISTS, {value: userName});
@@ -109,7 +109,7 @@ function ValidationResult(){
                     if(response.body === "false"){
                         userNameValid = true;
                     }else{
-                        userNameProcess = createErrorProcess(INVALID_USERNAME, "USERNAME_ALREADY_EXISTS");
+                        userNameProcess = createErrorProcess(INVALID_USERNAME, "username-already-exists");
                     }
                     userNameValidated = true;
                     eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
@@ -122,7 +122,7 @@ function ValidationResult(){
     function validateEmail(payload){
         if(!isEmailValid(email)){
             emailValidated = true;
-            emailProcess = createErrorProcess(INVALID_EMAIL, "INVALID_EMAIL");
+            emailProcess = createErrorProcess(INVALID_EMAIL, "invalid-email");
             eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));
         }else{
             const request = new Request(HttpMethod.POST, Mapping.EMAIL_EXISTS, {value: email});
@@ -133,7 +133,7 @@ function ValidationResult(){
                     if(response.body === "false"){
                         emailValid = true;
                     }else{
-                        emailProcess = createErrorProcess(INVALID_EMAIL, "EMAIL_ALREADY_EXISTS");
+                        emailProcess = createErrorProcess(INVALID_EMAIL, "email-already-exists");
                     }
                     emailValidated = true;
                     eventProcessor.processEvent(new Event(events.VALIDATION_ONGOING, payload));

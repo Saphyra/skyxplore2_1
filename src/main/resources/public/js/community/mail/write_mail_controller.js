@@ -22,15 +22,15 @@
         const messageField = document.getElementById("message");
 
         if(addresseeId == null){
-            notificationService.showError(MessageCode.getMessage("ADDRESSEE_MUST_BE_SET"));
+            notificationService.showError(Localization.getAdditionalContent("addressee-empty"));
         }else if(subjectField.value.length == 0){
-            notificationService.showError(MessageCode.getMessage("SUBJECT_MUST_NOT_BE_EMPTY"));
+            notificationService.showError(Localization.getAdditionalContent("subject-empty"));
         }else if(subjectField.value.length > 100){
-            notificationService.showError(MessageCode.getMessage("SUBJECT_TOO_LONG"));
+            notificationService.showError(Localization.getAdditionalContent("subject-too-long"));
         }else if(messageField.value.length == 0){
-            notificationService.showError(MessageCode.getMessage("MESSAGE_MUST_NOT_BE_EMPTY"));
+            notificationService.showError(Localization.getAdditionalContent("message-empty"));
         }else if(messageField.value.length > 4000){
-            notificationService.showError(MessageCode.getMessage("MESSAGE_TOO_LONG"));
+            notificationService.showError(Localization.getAdditionalContent("message-too-long"));
         }else{
             const payload = {
                 addresseeId: addresseeId,
@@ -39,22 +39,13 @@
             };
             const request = new Request(HttpMethod.PUT, Mapping.SEND_MAIL, payload);
                 request.processValidResponse = function(){
-                    notificationService.showSuccess(MessageCode.getMessage("MAIL_SENT"));
+                    notificationService.showSuccess(Localization.getAdditionalContent("mail-sent"));
                     subjectField.value = "";
                     invalidateAddressee();
                     messageField.value = "";
                     addresseeField.value = "";
                     eventProcessor.processEvent(new Event(events.MAIL_SENT));
                     eventProcessor.processEvent(new Event(events.OPEN_MAIN_LISTS));
-                }
-                request.processInvalidResponse = function(response){
-                    if(response.status == ResponseStatus.UNAUTHORIZED){
-                        eventProcessor.processEvent(events.LOGOUT);
-                    }else if(response.status == ResponseStatus.LOCKED){
-                        notificationService.showError(MessageCode.getMessage("ERROR_SENDING_MAIL"));
-                    }else{
-                        logService.log(response.toString(), "warn", "Invalid response from BackEnd: ")
-                    }
                 }
             dao.sendRequestAsync(request);
         }

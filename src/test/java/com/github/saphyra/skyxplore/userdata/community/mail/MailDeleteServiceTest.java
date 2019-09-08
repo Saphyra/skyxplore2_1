@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -16,9 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
 
@@ -57,24 +60,26 @@ public class MailDeleteServiceTest {
 
     @After
     public void verifyInteractions() {
-        verify(characterQueryService).findByCharacterId(anyString());
+        verify(characterQueryService).findByCharacterIdValidated(anyString());
         verify(mailQueryService).findMailById(anyString());
     }
 
-    @Test(expected = InvalidMailAccessException.class)
+    @Test
     public void testDeleteMailShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(anyString())).thenReturn(character);
         //WHEN
-        underTest.deleteMails(CHARACTER_ID, MAIL_IDS);
+        Throwable ex = catchThrowable(() -> underTest.deleteMails(CHARACTER_ID, MAIL_IDS));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.INVALID_MAIL_ACCESS);
     }
 
     @Test
     public void testDeleteMailShouldUpdateDeletedByAddressee() {
         //GIVEN
         given(character.getCharacterId()).willReturn(TO_ID);
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(TO_ID, MAIL_IDS);
         //THEN
@@ -86,7 +91,7 @@ public class MailDeleteServiceTest {
     public void testDeleteMailShouldUpdateDeletedBySender() {
         //GIVEN
         given(character.getCharacterId()).willReturn(FROM_ID);
-        when(characterQueryService.findByCharacterId(anyString())).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(anyString())).thenReturn(character);
         //WHEN
         underTest.deleteMails(FROM_ID, MAIL_IDS);
         //THEN

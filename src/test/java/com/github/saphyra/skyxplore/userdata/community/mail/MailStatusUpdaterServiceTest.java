@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,9 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.exception.InvalidMailAccessException;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
 
@@ -45,59 +48,63 @@ public class MailStatusUpdaterServiceTest {
     @Mock
     private Mail mail;
 
-    @Test(expected = InvalidMailAccessException.class)
+    @Test
     public void testArchiveMailsShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
-        underTest.archiveMails(CHARACTER_ID, MAIL_IDS, true);
+        Throwable ex = catchThrowable(() -> underTest.archiveMails(CHARACTER_ID, MAIL_IDS, true));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.INVALID_MAIL_ACCESS);
     }
 
     @Test
     public void testArchiveMailsShouldUpdate() {
         //GIVEN
         given(character.getCharacterId()).willReturn(TO_ID);
-        when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(TO_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.archiveMails(TO_ID, MAIL_IDS, true);
         //THEN
-        verify(characterQueryService).findByCharacterId(TO_ID);
+        verify(characterQueryService).findByCharacterIdValidated(TO_ID);
         verify(mailQueryService).findMailById(MAIL_ID);
         verify(mailDao).save(mail);
         verify(mail).setArchived(true);
     }
 
-    @Test(expected = InvalidMailAccessException.class)
+    @Test
     public void testUpdateReadStatusShouldThrowExceptionWhenWrongId() {
         //GIVEN
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
-        underTest.updateReadStatus(MAIL_IDS, CHARACTER_ID, true);
+        Throwable ex = catchThrowable(() -> underTest.updateReadStatus(MAIL_IDS, CHARACTER_ID, true));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.INVALID_MAIL_ACCESS);
     }
 
     @Test
     public void testUpdateReadStatusShouldUpdate() {
         //GIVEN
         given(character.getCharacterId()).willReturn(TO_ID);
-        when(characterQueryService.findByCharacterId(TO_ID)).thenReturn(character);
+        when(characterQueryService.findByCharacterIdValidated(TO_ID)).thenReturn(character);
 
         given(mail.getTo()).willReturn(TO_ID);
         when(mailQueryService.findMailById(MAIL_ID)).thenReturn(mail);
         //WHEN
         underTest.updateReadStatus(MAIL_IDS, TO_ID, true);
         //THEN
-        verify(characterQueryService).findByCharacterId(TO_ID);
+        verify(characterQueryService).findByCharacterIdValidated(TO_ID);
         verify(mailQueryService).findMailById(MAIL_ID);
         verify(mailDao).save(mail);
         verify(mail).setRead(true);

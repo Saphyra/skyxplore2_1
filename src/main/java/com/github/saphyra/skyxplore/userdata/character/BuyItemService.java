@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.data.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ class BuyItemService {
     private final GameDataFacade gameDataFacade;
 
     void buyItems(Map<String, Integer> items, String characterId) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
         Integer cost = countCost(items);
         character.buyEquipments(items, cost);
         characterDao.save(character);

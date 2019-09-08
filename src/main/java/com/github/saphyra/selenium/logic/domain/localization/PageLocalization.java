@@ -1,10 +1,10 @@
 package com.github.saphyra.selenium.logic.domain.localization;
 
-import lombok.Data;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import lombok.Data;
 
 @Data
 public class PageLocalization {

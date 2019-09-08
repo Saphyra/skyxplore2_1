@@ -22,12 +22,12 @@
         let passwordValid = true;
         
         if(password.length == 0){
-            validationResult.createErrorFieldFor(INVALID_CURRENT_PASSWORD, "CURRENT_PASSWORD_IS_EMPTY");
+            validationResult.createErrorFieldFor(INVALID_CURRENT_PASSWORD, "empty-password");
             passwordValid = false;
         }
         
         if(!isEmailValid(email)){
-            validationResult.createErrorFieldFor(INVALID_EMAIL, "INVALID_EMAIL");
+            validationResult.createErrorFieldFor(INVALID_EMAIL, "invalid-email");
             emailValid = false;
         }else{
             const request = new Request(HttpMethod.POST, Mapping.EMAIL_EXISTS, {value: email});
@@ -39,7 +39,7 @@
                         emailValid = true;
                     }else{
                         emailValid = false;
-                        validationResult.createErrorFieldFor(INVALID_EMAIL, "EMAIL_ALREADY_EXISTS");
+                        validationResult.createErrorFieldFor(INVALID_EMAIL, "email-already-exists");
                     }
                     processValidationResult();
                 }

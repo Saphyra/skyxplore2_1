@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai;
 
-import com.github.saphyra.skyxplore.data.GameDataFacade;
-import com.github.saphyra.skyxplore.data.entity.EquipmentDescription;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataFacade;
+import com.github.saphyra.skyxplore.data.gamedata.entity.EquipmentDescription;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

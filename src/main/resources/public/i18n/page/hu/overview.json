@@ -1,0 +1,79 @@
+{
+  "title": "Áttekintés - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Áttekintés"
+      }
+    ],
+    "equipment-button": [
+      {
+        "key": "innerHTML",
+        "message": "Felszerelés"
+      },
+      {
+        "key": "title",
+        "message": "Űrhajó felszerelésének módosítása"
+      }
+    ],
+    "factory-button": [
+      {
+        "key": "innerHTML",
+        "message": "Gyár"
+      },
+      {
+        "key": "title",
+        "message": "Tárgyak készítése"
+      }
+    ],
+    "shop-button": [
+      {
+        "key": "innerHTML",
+        "message": "Bolt"
+      },
+      {
+        "key": "title",
+        "message": "Tárgyak vásárlása, eladása"
+      }
+    ],
+    "hangar-button": [
+      {
+        "key": "innerHTML",
+        "message": "Hangár"
+      },
+      {
+        "key": "title",
+        "message": "Felszállás"
+      }
+    ],
+    "ship-table-header": [
+      {
+        "key": "innerHTML",
+        "message": "Felszerelés"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "characterselect-button": [
+      {
+        "key": "innerHTML",
+        "message": "Karakterválasztás"
+      }
+    ],
+    "community-button": [
+      {
+        "key": "innerHTML",
+        "message": "Közösség"
+      }
+    ]
+  },
+  "additionalContent": {
+    "empty-slot": "Üres",
+    "exited-from-lobby": "Előcsarnok elhagyva."
+  }
+}

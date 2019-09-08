@@ -1,0 +1,61 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
+
+character:
+  new:
+    materials: 0
+    money: 10000
+
+lobby:
+  creation:
+    default:
+      size: 100
+    clanwars:
+      size: 50
+    tournament:
+      size: 16
+  invitation:
+    spamming-delay-seconds: 10
+    expiration-seconds: 60
+    extended-expiration-seconds: 120
+    cleanup-cron: "*/10 * * * * *"
+
+game:
+  creation:
+    auto-fill:
+      delay-seconds: 60
+    point-range:
+      min-multiplier: 0.66
+      max-multiplier: 1.5
+
+com:
+  github:
+    saphyra:
+      authservice:
+        auth:
+          filter:
+            order: 100
+          access-token:
+            expiration-seconds: 900
+            cleanup-interval-cron: 0 * * * * *
+          login:
+            multiple-login-allowed: false
+            path: /api/login
+          logout:
+            path: /api/logout
+          cookie:
+            access-token-id: accesstokenid
+            user-id: userid
+          rest:
+            request-type-header: Request-Type
+            rest-type-value: rest
+        redirection:
+          filter:
+            order: 90

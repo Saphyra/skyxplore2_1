@@ -18,10 +18,10 @@
         const validationResult = new ValidationResult([INVALID_CHARACTERNAME]);
         
         if(characterName.length < 3){
-            validationResult.createErrorFieldFor(INVALID_CHARACTERNAME, "CHARACTER_NAME_TOO_SHORT");
+            validationResult.createErrorFieldFor(INVALID_CHARACTERNAME, "charactername-too-short");
             characterNameValid = false;
         }else if(characterName.length > 30){
-            validationResult.createErrorFieldFor(INVALID_CHARACTERNAME, "CHARACTER_NAME_TOO_LONG");
+            validationResult.createErrorFieldFor(INVALID_CHARACTERNAME, "charactername-too-long");
             characterNameValid = false;
         }else{
             const request = new Request(HttpMethod.POST, Mapping.CHARACTER_NAME_EXISTS, {value: characterName});
@@ -33,7 +33,7 @@
                         characterNameValid = true;
                     }else{
                         characterNameValid = false;
-                        validationResult.createErrorFieldFor(INVALID_CHARACTERNAME, "CHARACTER_NAME_ALREADY_EXISTS");
+                        validationResult.createErrorFieldFor(INVALID_CHARACTERNAME, "charactername-already-exists");
                     }
                     processValidationResult();
                 }

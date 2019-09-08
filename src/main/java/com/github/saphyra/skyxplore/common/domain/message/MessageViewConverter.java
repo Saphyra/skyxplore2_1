@@ -15,7 +15,7 @@ public class MessageViewConverter extends AbstractViewConverter<Message, Message
     public MessageView convertDomain(Message message) {
         return MessageView.builder()
             .senderId(message.getSender())
-            .senderName(characterQueryService.findByCharacterId(message.getSender()).getCharacterName())
+            .senderName(characterQueryService.findByCharacterIdValidated(message.getSender()).getCharacterName())
             .message(message.getMessage())
             .createdAt(message.getCreatedAt())
             .build();

@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.repository.EquippedShipDao;
 import com.github.saphyra.skyxplore.userdata.slot.SlotQueryService;
@@ -33,8 +33,8 @@ class EquipShipService {
 
     @Transactional
     void equipShip(String characterId, String itemId) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
+        EquippedShip ship = shipQueryService.findShipByCharacterIdValidated(characterId);
 
         Ship shipToEquip = getShip(itemId);
 

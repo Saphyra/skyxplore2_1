@@ -1,16 +1,15 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
+import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.SendMailRequest;
 import com.github.saphyra.skyxplore.userdata.community.mail.repository.MailDao;
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
@@ -22,7 +21,7 @@ class MailSenderService {
     private final MailDao mailDao;
 
     void sendMail(SendMailRequest request, String characterId) {
-        characterQueryService.findByCharacterId(request.getAddresseeId());
+        characterQueryService.findByCharacterIdValidated(request.getAddresseeId());
         checkBlockStatus(characterId, request.getAddresseeId());
         Mail mail = createMail(request, characterId);
         mailDao.save(mail);
@@ -30,7 +29,7 @@ class MailSenderService {
 
     private void checkBlockStatus(String characterId, String addresseeId) {
         if (!blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(characterId, addresseeId).isEmpty()) {
-            throw new CharacterBlockedException("You blocked each other. Mail cannot be sent.");
+            throw ExceptionFactory.characterBlockedException(characterId, addresseeId);
         }
     }
 

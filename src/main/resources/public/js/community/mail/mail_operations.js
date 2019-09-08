@@ -43,7 +43,7 @@
 
     function markAsRead(mailIds){
         if(mailIds.length == 0){
-            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            notificationService.showError(Localization.getAdditionalContent("select-mails"));
             return;
         }
 
@@ -63,7 +63,7 @@
 
     function markAsUnread(mailIds){
         if(mailIds.length == 0){
-            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            notificationService.showError(Localization.getAdditionalContent("select-mails"));
             return;
         }
 
@@ -83,13 +83,13 @@
 
     function archive(mailIds){
         if(mailIds.length == 0){
-            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            notificationService.showError(Localization.getAdditionalContent("select-mails"));
             return;
         }
 
         const request = new Request(HttpMethod.POST, Mapping.ARCHIVE_MAILS, mailIds);
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("MAILS_ARCHIVED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("mails-archived"));
                 for(let mIndex in mailIds){
                     document.getElementById("incoming-mail-list").removeChild(document.getElementById(generateIncomingMailId(mailIds[mIndex])));
                 }
@@ -100,13 +100,13 @@
 
     function restore(mailIds){
         if(mailIds.length == 0){
-            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            notificationService.showError(Localization.getAdditionalContent("select-mails"));
             return;
         }
 
         const request = new Request(HttpMethod.POST, Mapping.RESTORE_MAILS, mailIds);
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("MAILS_RESTORED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("mails-restored"));
                 for(let mIndex in mailIds){
                     document.getElementById("archived-mail-list").removeChild(document.getElementById(generateArchivedMailId(mailIds[mIndex])));
                 }
@@ -117,17 +117,17 @@
 
     function deleteMails(mailIds, mode){
         if(mailIds.length == 0){
-            notificationService.showError(MessageCode.getMessage("SELECT_MAILS"));
+            notificationService.showError(Localization.getAdditionalContent("select-mails"));
             return;
         }
 
-        if(!confirm(MessageCode.getMessage("CONFIRM_DELETE_MAILS"))){
+        if(!confirm(Localization.getAdditionalContent("confirm-delete-mails"))){
             return;
         }
 
         const request = new Request(HttpMethod.DELETE, Mapping.DELETE_MAILS, mailIds);
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("MAILS_DELETED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("mails-deleted"));
                 for(let mIndex in mailIds){
                     document.getElementById(getContainerId(mode)).removeChild(document.getElementById(generateItemId(mode, mailIds[mIndex])));
                 }

@@ -12,8 +12,7 @@
     eventProcessor.registerProcessor(new EventProcessor(
         function(eventType){
             return eventType === events.LOAD_STATE_CHANGED
-                && LoadState.localizationLoaded
-                && LoadState.messageCodesLoaded;
+                && LoadState.localizationLoaded;
         },
         function(){
             eventProcessor.processEvent(new Event(events.LOAD_CHARACTERS));

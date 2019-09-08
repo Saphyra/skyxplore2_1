@@ -1,28 +1,30 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
+import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequestView;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendView;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendRequestQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequestView;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendView;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.Friendship;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendshipControllerTest {
@@ -34,16 +36,16 @@ public class FriendshipControllerTest {
     private static final String CHARACTER_NAME = "character_name";
 
     @Mock
-    private ActiveFriendsQueryService activeFriendsQueryService;
-
-    @Mock
     private CharacterQueryService characterQueryService;
 
     @Mock
-    private FriendshipService friendshipService;
+    private FriendshipServiceFacade friendshipServiceFacade;
 
     @Mock
     private FriendshipQueryService friendshipQueryService;
+
+    @Mock
+    private FriendRequestQueryService friendRequestQueryService;
 
     @Mock
     private CharacterViewConverter characterViewConverter;
@@ -80,7 +82,7 @@ public class FriendshipControllerTest {
         //WHEN
         underTest.acceptFriendRequest(new OneStringParamRequest(FRIEND_REQUEST_ID), CHARACTER_ID);
         //THEN
-        verify(friendshipService).acceptFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
+        verify(friendshipServiceFacade).acceptFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
     }
 
     @Test
@@ -88,7 +90,7 @@ public class FriendshipControllerTest {
         //WHEN
         underTest.addFriend(new OneStringParamRequest(FRIEND_ID), CHARACTER_ID, USER_ID);
         //THEN
-        verify(friendshipService).addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
+        verify(friendshipServiceFacade).addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID);
     }
 
     @Test
@@ -96,7 +98,7 @@ public class FriendshipControllerTest {
         //WHEN
         underTest.declineFriendRequestMapping(new OneStringParamRequest(FRIEND_REQUEST_ID), CHARACTER_ID);
         //THEN
-        verify(friendshipService).declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
+        verify(friendshipServiceFacade).declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);
     }
 
     @Test
@@ -104,7 +106,7 @@ public class FriendshipControllerTest {
         //GIVEN
         underTest.deleteFriend(new OneStringParamRequest(FRIENDSHIP_ID), CHARACTER_ID);
         //WHEN
-        verify(friendshipService).deleteFriendship(FRIENDSHIP_ID, CHARACTER_ID);
+        verify(friendshipServiceFacade).deleteFriendship(FRIENDSHIP_ID, CHARACTER_ID);
     }
 
     @Test
@@ -141,7 +143,7 @@ public class FriendshipControllerTest {
     public void testGetReceivedFriendRequestsShouldCallFacadeAndReturnView() {
         //GIVEN
         List<FriendRequest> friendRequestList = Arrays.asList(friendRequest);
-        when(friendshipQueryService.getReceivedFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
+        when(friendRequestQueryService.getReceivedFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
 
         List<FriendRequestView> viewList = Arrays.asList(friendRequestView);
         when(friendRequestViewConverter.convertDomain(friendRequestList)).thenReturn(viewList);
@@ -156,7 +158,7 @@ public class FriendshipControllerTest {
     public void testGetSentFriendRequestsShouldCallFacadeAndReturnView() {
         //GIVEN
         List<FriendRequest> friendRequestList = Arrays.asList(friendRequest);
-        when(friendshipQueryService.getSentFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
+        when(friendRequestQueryService.getSentFriendRequests(CHARACTER_ID)).thenReturn(friendRequestList);
 
         List<FriendRequestView> viewList = Arrays.asList(friendRequestView);
         when(friendRequestViewConverter.convertDomain(friendRequestList)).thenReturn(viewList);
@@ -171,7 +173,7 @@ public class FriendshipControllerTest {
     public void getActiveFriends() {
         //GIVEN
         List<SkyXpCharacter> characters = Arrays.asList(character);
-        given(activeFriendsQueryService.getActiveFriends(CHARACTER_ID)).willReturn(characters);
+        given(friendshipServiceFacade.getActiveFriends(CHARACTER_ID)).willReturn(characters);
 
         List<CharacterView> characterViews = Arrays.asList(characterView);
         given(characterViewConverter.convertDomain(characters)).willReturn(characterViews);

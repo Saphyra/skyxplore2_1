@@ -1,6 +1,5 @@
 package com.github.saphyra.selenium.test.account;
 
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Login;
 import com.github.saphyra.selenium.logic.flow.Logout;
@@ -16,6 +15,7 @@ import com.github.saphyra.selenium.test.account.changeusername.SuccessfulUserNam
 import com.github.saphyra.selenium.test.account.changeusername.TooLongUserNameTest;
 import com.github.saphyra.selenium.test.account.changeusername.TooShortUserNameTest;
 import com.github.saphyra.selenium.test.account.changeusername.helper.ChangeUserNameTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
@@ -32,11 +32,11 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
     protected void init() {
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
-        registration = new Registration(driver, messageCodes);
+        registration = new Registration(driver);
         this.changeUserNameTestHelper = new ChangeUserNameTestHelper(driver, registration, accountPage, new Navigate(driver));
         this.notificationValidator = new NotificationValidator(driver);
-        this.login = new Login(driver, messageCodes);
-        this.logout = new Logout(driver, messageCodes);
+        this.login = new Login(driver);
+        this.logout = new Logout(driver);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
             .changeUserNameTestHelper(changeUserNameTestHelper)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testTooShortUserName();
     }
@@ -56,7 +56,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testTooLongUserName();
     }
@@ -68,7 +68,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .fieldValidator(fieldValidator)
             .registration(registration)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testExistingUserName();
     }
@@ -79,7 +79,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testEmptyPassword();
     }
@@ -90,7 +90,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .changeUserNameTestHelper(changeUserNameTestHelper)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testBadPassword();
     }
@@ -103,7 +103,7 @@ public class ChangeUserNameTest extends SeleniumTestApplication {
             .notificationValidator(notificationValidator)
             .login(login)
             .logout(logout)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testSuccessfulUserNameChange();
     }

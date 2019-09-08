@@ -11,21 +11,13 @@
         $("#login-password").val("")
         
         if(!credentials.isValid()){
-            notificationService.showError(MessageCode.getMessage("EMPTY_CREDENTIALS"));
+            notificationService.showError(Localization.getAdditionalContent("empty-credentials"));
             return;
         }
         
         const request = new Request(HttpMethod.POST, Mapping.LOGIN, credentials.stringify());
             request.processValidResponse = function(){location.href = Mapping.CHARACTER_SELECT_PAGE};
             request.handleLogout = false;
-            request.processInvalidResponse = function(response){
-                if(response.status == ResponseStatus.UNAUTHORIZED){
-                    notificationService.showError(MessageCode.getMessage("BAD_CREDENTIALS"));
-                }else{
-                    request.processErrorResponse(response);
-                }
-            }
-            
         dao.sendRequestAsync(request);
     }
     

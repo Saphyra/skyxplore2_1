@@ -10,7 +10,7 @@
         if(confirm(Localization.getAdditionalContent("confirm-character-deletion"))){
             const request = new Request(HttpMethod.DELETE, Mapping.concat(Mapping.DELETE_CHARACTER, event.getPayload()));
                 request.processValidResponse = function(){
-                    notificationService.showSuccess(MessageCode.getMessage("CHARACTER_DELETED"));
+                    notificationService.showSuccess(Localization.getAdditionalContent("character-deleted"));
                     eventProcessor.processEvent(new Event(events.CHARACTER_DELETED, event.getPayload()));
                 }
             dao.sendRequestAsync(request);

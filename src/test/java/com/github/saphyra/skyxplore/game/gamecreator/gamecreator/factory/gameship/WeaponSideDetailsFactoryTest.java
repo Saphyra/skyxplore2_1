@@ -12,8 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.data.entity.Weapon;
-import com.github.saphyra.skyxplore.data.subservice.WeaponService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Weapon;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.WeaponService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.WeaponSideDetails;
 
 @RunWith(MockitoJUnitRunner.class)

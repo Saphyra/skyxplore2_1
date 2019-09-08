@@ -1,24 +1,27 @@
 package com.github.saphyra.selenium.test.community.mail.send;
 
-import lombok.Builder;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumAccount;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.CommunityPage;
-import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestHelper;
 import com.github.saphyra.selenium.test.community.helper.CommunityTestInitializer;
+import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
+
 @Builder
 public class SendMailEmptyMessageTest {
-    private static final String MESSAGE_CODE_EMPTY_MESSAGE = "MESSAGE_MUST_NOT_BE_EMPTY";
+    private static final String MESSAGE_CODE_EMPTY_MESSAGE = "message-empty";
 
+    private final WebDriver driver;
     private final CommunityTestInitializer communityTestInitializer;
     private final CommunityTestHelper communityTestHelper;
     private final CommunityPage communityPage;
     private final SendMailHelper sendMailHelper;
-    private final MessageCodes messageCodes;
 
     public void testSendMailEmptyMessage() {
         List<SeleniumAccount> accounts = communityTestInitializer.registerAccounts(new int[]{1, 1});
@@ -30,6 +33,6 @@ public class SendMailEmptyMessageTest {
 
         sendMailHelper.setAddressee(accounts.get(1).getCharacter(0))
             .setSubject()
-            .verifyCannotSendMail(messageCodes.get(MESSAGE_CODE_EMPTY_MESSAGE));
+            .verifyCannotSendMail(getAdditionalContent(driver, Page.COMMUNITY, MESSAGE_CODE_EMPTY_MESSAGE));
     }
 }

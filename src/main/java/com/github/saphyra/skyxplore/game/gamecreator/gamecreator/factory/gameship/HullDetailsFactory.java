@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.data.entity.Armor;
-import com.github.saphyra.skyxplore.data.subservice.ArmorService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Armor;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ArmorService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.HullDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

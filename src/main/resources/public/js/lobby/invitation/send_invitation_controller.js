@@ -9,7 +9,7 @@
     function inviteToLobby(characterId){
         const request = new Request(HttpMethod.PUT, Mapping.concat(Mapping.INVITE_TO_LOBBY, characterId));
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("INVITED_TO_LOBBY"));
+                notificationService.showSuccess(Localization.getAdditionalContent("invited-to-lobby"));
             }
         dao.sendRequestAsync(request);
     }

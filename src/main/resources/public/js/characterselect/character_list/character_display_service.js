@@ -40,7 +40,7 @@
                 const nameCell = document.createElement("TD");
                     nameCell.innerHTML = character.characterName;
                     nameCell.classList.add("character-name-cell");
-                    nameCell.title = MessageCode.getMessage("SELECT_CHARACTER");
+                    nameCell.title = Localization.getAdditionalContent("select-character");
                     nameCell.onclick = function(){
                         eventProcessor.processEvent(new Event(events.SELECT_CHARACTER, character.characterId));
                     }

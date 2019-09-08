@@ -3,7 +3,7 @@ package com.github.saphyra.skyxplore.userdata.factory;
 import com.github.saphyra.util.IdGenerator;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
 import com.github.saphyra.skyxplore.userdata.factory.repository.FactoryDao;
-import com.github.saphyra.skyxplore.data.subservice.MaterialService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.MaterialService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

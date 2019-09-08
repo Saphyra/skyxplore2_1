@@ -17,7 +17,7 @@
 
             switch(selection){
                 case "none":
-                    notificationService.showError(MessageCode.getMessage("SELECT_OPERATION"));
+                    notificationService.showError(Localization.getAdditionalContent("select-operation"));
                 break;
                 case "delete":
                     eventProcessor.processEvent(new Event(events.DELETE_MAILS, {mailIds: mailIds, mode: Mode.SENT}));

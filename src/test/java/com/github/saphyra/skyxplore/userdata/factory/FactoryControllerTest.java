@@ -2,6 +2,7 @@ package com.github.saphyra.skyxplore.userdata.factory;
 
 import com.github.saphyra.skyxplore.userdata.factory.domain.AddToQueueRequest;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
+import com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue.AddToQueueService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

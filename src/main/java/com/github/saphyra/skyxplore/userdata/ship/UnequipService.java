@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.CONNECTOR_SLOT_NAME;
 
 import javax.transaction.Transactional;
 
@@ -27,8 +27,8 @@ class UnequipService {
 
     @Transactional
     void unequip(UnequipRequest request, String characterId) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
+        EquippedShip ship = shipQueryService.findShipByCharacterIdValidated(characterId);
 
         if (request.getSlot().contains(CONNECTOR_SLOT_NAME)) {
             unequipConnectorService.unequipConnector(request.getItemId(), character, ship);

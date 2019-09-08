@@ -4,7 +4,11 @@ function throwException(name, message){
     throw {name: name, message: message};
 }
 
-function getLanguage(){
+function getLocale(){
+    return getCookie(COOKIE_LOCALE) || getBrowserLanguage();
+}
+
+function getBrowserLanguage(){
     return navigator.language.toLowerCase().split("-")[0];
 }
 

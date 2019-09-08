@@ -113,7 +113,7 @@
     function acceptFriendRequest(friendRequestId){
         const request = new Request(HttpMethod.POST, Mapping.ACCEPT_FRIEND_REQUEST, {value: friendRequestId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_ACCEPTED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("friend-request-accepted"));
                 document.getElementById("friend-request-list").removeChild(document.getElementById(generateFriendRequestId(friendRequestId)));
                 eventProcessor.processEvent(new Event(events.FRIEND_REQUEST_ACCEPTED));
             }
@@ -123,7 +123,7 @@
     function declineFriendRequest(friendRequestId){
         const request = new Request(HttpMethod.DELETE, Mapping.DECLINE_FRIEND_REQUEST, {value: friendRequestId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("FRIEND_REQUEST_DECLINED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("friend-request-declined"));
                 document.getElementById("friend-request-list").removeChild(document.getElementById(generateFriendRequestId(friendRequestId)));
                 eventProcessor.processEvent(new Event(events.FRIEND_REQUEST_DECLINED));
             }

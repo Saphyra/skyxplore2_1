@@ -1,11 +1,11 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.CONNECTOR_SLOT_NAME;
 
 import org.springframework.stereotype.Service;
 
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;

@@ -1,13 +1,14 @@
 package com.github.saphyra.selenium.test.characterselect.renamecharacter;
 
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
+import com.github.saphyra.selenium.logic.page.CharacterSelectPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
+import com.github.saphyra.selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
 import lombok.Builder;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.saphyra.selenium.logic.page.CharacterSelectPage;
-import com.github.saphyra.selenium.test.characterselect.renamecharacter.helper.RenameCharacterTestHelper;
-
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 import static com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest.CHARACTER_NAME_MAX_LENGTH;
 
 @Builder
@@ -22,12 +23,12 @@ public class TooLongCharacterNameTest {
         TOO_LONG_CHARACTER_NAME = builder.toString();
     }
 
-    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "CHARACTER_NAME_TOO_LONG";
+    private static final String MESSAGE_CODE_CHARACTER_NAME_TOO_LONG = "charactername-too-long";
 
+    private final WebDriver driver;
     private final RenameCharacterTestHelper renameCharacterTestHelper;
     private final CharacterSelectPage characterSelectPage;
     private final FieldValidator fieldValidator;
-    private final MessageCodes messageCodes;
 
     public void testTooLongCharacterName() {
         renameCharacterTestHelper.initAndOpenRenamePage();
@@ -38,7 +39,7 @@ public class TooLongCharacterNameTest {
 
         fieldValidator.verifyError(
             characterSelectPage.getInvalidRenameCharacterNameField(),
-            messageCodes.get(MESSAGE_CODE_CHARACTER_NAME_TOO_LONG),
+            getAdditionalContent(driver, Page.CHARACTER_SELECT, MESSAGE_CODE_CHARACTER_NAME_TOO_LONG),
             renameCharacterField,
             characterSelectPage.getRenameCharacterButton()
         );

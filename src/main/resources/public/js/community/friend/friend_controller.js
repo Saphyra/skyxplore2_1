@@ -115,13 +115,13 @@
     }
 
     function deleteFriend(friendshipId){
-        if(!confirm(MessageCode.getMessage("CONFIRM_DELETE_FRIEND"))){
+        if(!confirm(Localization.getAdditionalContent("confirm-delete-friend"))){
             return;
         }
 
         const request = new Request(HttpMethod.DELETE, Mapping.DELETE_FRIEND, {value: friendshipId});
             request.processValidResponse = function(){
-                notificationService.showSuccess(MessageCode.getMessage("FRIEND_DELETED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("friend-deleted"));
                 document.getElementById("friend-list").removeChild(document.getElementById(generateFriendId(friendshipId)));
             }
         

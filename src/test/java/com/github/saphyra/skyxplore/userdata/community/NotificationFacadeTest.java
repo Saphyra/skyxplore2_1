@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.community;
 
-import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendRequestQueryService;
 import com.github.saphyra.skyxplore.userdata.community.mail.MailQueryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class NotificationFacadeTest {
     private MailQueryService mailQueryService;
 
     @Mock
-    private FriendshipQueryService friendshipQueryService;
+    private FriendRequestQueryService friendRequestQueryService;
 
     @InjectMocks
     private NotificationFacade underTest;
@@ -36,7 +36,7 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfFriendRequestShouldCallFacadeAndReturn() {
         //GIVEN
-        when(friendshipQueryService.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
+        when(friendRequestQueryService.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
         //WHEN
         Integer result = underTest.getNumberOfFriendRequests(CHARACTER_ID);
         //THEN
@@ -46,7 +46,7 @@ public class NotificationFacadeTest {
     @Test
     public void testGetNumberOfNotificationsShouldCalFacadeAndReturn() {
         //GIVEN
-        when(friendshipQueryService.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
+        when(friendRequestQueryService.getNumberOfFriendRequests(CHARACTER_ID)).thenReturn(2);
         when(mailQueryService.getNumberOfUnreadMails(CHARACTER_ID)).thenReturn(3);
         //WHEN
         Integer result = underTest.getNumberOfNotifications(CHARACTER_ID);

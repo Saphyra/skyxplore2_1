@@ -1,14 +1,13 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
 import com.github.saphyra.encryption.impl.PasswordService;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.user.cache.UserNameCache;
+import com.github.saphyra.skyxplore.userdata.user.domain.ChangeUserNameRequest;
+import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
 import org.springframework.stereotype.Service;
-import com.github.saphyra.skyxplore.userdata.user.domain.ChangeUserNameRequest;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
-import com.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +20,10 @@ class ChangeUserNameService {
     void changeUserName(ChangeUserNameRequest request, String userId) {
         SkyXpCredentials skyXpCredentials = credentialsService.findByUserId(userId);
         if (credentialsService.isUserNameExists(request.getNewUserName())) {
-            throw new UserNameAlreadyExistsException(request.getNewUserName() + " username is already exists.");
+            throw ExceptionFactory.userNameAlreadyExists(request.getNewUserName());
         }
         if (!passwordService.authenticate(request.getPassword(), skyXpCredentials.getPassword())) {
-            throw new BadCredentialsException("Wrong password");
+            throw ExceptionFactory.wrongPassword();
         }
         skyXpCredentials.setUserName(request.getNewUserName());
         log.info("Changing username of user {}", userId);

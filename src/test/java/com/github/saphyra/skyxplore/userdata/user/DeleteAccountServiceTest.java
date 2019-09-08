@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -13,7 +15,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.ApplicationEventPublisher;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.common.event.AccountDeletedEvent;
 import com.github.saphyra.skyxplore.userdata.user.domain.AccountDeleteRequest;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
@@ -43,7 +46,7 @@ public class DeleteAccountServiceTest {
     @InjectMocks
     private DeleteAccountService underTest;
 
-    @Test(expected = BadCredentialsException.class)
+    @Test
     public void testDeleteAccountShouldThrowExceptionWhenWrongPassword() {
         //GIVEN
         AccountDeleteRequest request = new AccountDeleteRequest(FAKE_PASSWORD);
@@ -52,7 +55,9 @@ public class DeleteAccountServiceTest {
         when(credentialsService.findByUserId(USER_ID)).thenReturn(CREDENTIALS);
         when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
-        underTest.deleteAccount(request, USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.deleteAccount(request, USER_ID));
+        //THEN
+        verifyException(ex, UnauthorizedException.class, ErrorCode.WRONG_PASSWORD);
     }
 
     @Test

@@ -2,11 +2,11 @@ package com.github.saphyra.skyxplore.userdata.factory.repository;
 
 import com.github.saphyra.converter.Converter;
 import com.github.saphyra.dao.AbstractDao;
-import com.github.saphyra.skyxplore.common.exception.FactoryNotFoundException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.common.event.CharacterDeletedEvent;
 import com.github.saphyra.skyxplore.common.event.FactoryDeletedEvent;
-import lombok.extern.slf4j.Slf4j;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class FactoryDao extends AbstractDao<FactoryEntity, Factory, String, Fact
     @EventListener
     public void deleteByCharacterId(CharacterDeletedEvent event) {
         FactoryEntity factoryEntity = repository.findByCharacterId(event.getCharacterId())
-            .orElseThrow(() -> new FactoryNotFoundException("Factory not found for character " + event.getCharacterId()));
+            .orElseThrow(() -> ExceptionFactory.factoryNotFoundForCharacter(event.getCharacterId()));
         eventPublisher.publishEvent(new FactoryDeletedEvent(factoryEntity.getFactoryId()));
         repository.delete(factoryEntity);
     }

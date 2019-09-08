@@ -1,12 +1,12 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.domain.UnequipRequest;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static com.github.saphyra.skyxplore.userdata.ship.EquippedShipConstants.BACK_SLOT_NAME;
@@ -37,7 +37,7 @@ class UnequipFromSlotService {
         } else if (request.getSlot().contains(RIGHT_SLOT_NAME)) {
             slot.removeRight(request.getItemId());
         } else {
-            throw new BadSlotNameException(request.getSlot());
+            throw ExceptionFactory.invalidSlotName(request.getSlot());
         }
     }
 }

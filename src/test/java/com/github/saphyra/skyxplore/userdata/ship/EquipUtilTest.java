@@ -1,7 +1,9 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import static com.github.saphyra.skyxplore.data.DataConstants.DEFENSE_SLOT_NAME;
-import static com.github.saphyra.skyxplore.data.DataConstants.WEAPON_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.DEFENSE_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.WEAPON_SLOT_NAME;
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -14,9 +16,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.SlotQueryService;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
@@ -63,12 +66,14 @@ public class EquipUtilTest {
         assertFalse(result);
     }
 
-    @Test(expected = BadSlotNameException.class)
+    @Test
     public void testGetSlotByNameShouldThrowExceptionWhenBadSlotName() {
         //GIVEN
         String slotName = "imnotaslotname";
         //WHEN
-        underTest.getSlotByName(ship, slotName);
+        Throwable ex = catchThrowable(() -> underTest.getSlotByName(ship, slotName));
+        //THEN
+        verifyException(ex, BadRequestException.class, ErrorCode.INVALID_SLOT_NAME);
     }
 
     @Test

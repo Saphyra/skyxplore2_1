@@ -1,0 +1,195 @@
+{
+  "title": "Account - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Account"
+      }
+    ],
+    "subtitle-set-language": [
+      {
+        "key": "innerHTML",
+        "message": "Nyelv beállítása"
+      }
+    ],
+    "set-language-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
+    "subtitle-change-password": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó módosítása"
+      }
+    ],
+    "new-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új jelszó"
+      }
+    ],
+    "new-password": [
+      {
+        "key": "placeholder",
+        "message": "Új jelszó"
+      }
+    ],
+    "new-password-confirmation-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új jelszó megismétlése"
+      }
+    ],
+    "new-password-confirmation": [
+      {
+        "key": "placeholder",
+        "message": "Új jelszó megismétlése"
+      }
+    ],
+    "current-password-for-password-change-span": [
+      {
+        "key": "innerHTML",
+        "message": "Régi jelszó"
+      }
+    ],
+    "current-password-for-password-change": [
+      {
+        "key": "placeholder",
+        "message": "Régi jelszó"
+      }
+    ],
+    "change-password-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
+    "subtitle-change-username": [
+      {
+        "key": "innerHTML",
+        "message": "Felhasználónév megváltoztatása"
+      }
+    ],
+    "new-username-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új felhasználónév"
+      }
+    ],
+    "new-username": [
+      {
+        "key": "placeholder",
+        "message": "Új felhasználónév"
+      }
+    ],
+    "change-username-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó"
+      }
+    ],
+    "change-username-password": [
+      {
+        "key": "placeholder",
+        "message": "Jelszó"
+      }
+    ],
+    "change-username-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
+    "subtitle-change-email": [
+      {
+        "key": "innerHTML",
+        "message": "E-mail cím megváltoztatása"
+      }
+    ],
+    "new-email-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új e-mail cím"
+      }
+    ],
+    "new-email": [
+      {
+        "key": "placeholder",
+        "message": "Új e-mail cím"
+      }
+    ],
+    "change-email-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó"
+      }
+    ],
+    "change-email-password": [
+      {
+        "key": "placeholder",
+        "message": "Jelszó"
+      }
+    ],
+    "change-email-button": [
+      {
+        "key": "innerHTML",
+        "message": "Mentés"
+      }
+    ],
+    "subtitle-delete-account": [
+      {
+        "key": "innerHTML",
+        "message": "Accout törlése"
+      }
+    ],
+    "delete-account-password-span": [
+      {
+        "key": "innerHTML",
+        "message": "Jelszó"
+      }
+    ],
+    "delete-account-password": [
+      {
+        "key": "placeholder",
+        "message": "Jelszó"
+      }
+    ],
+    "delete-account-button": [
+      {
+        "key": "innerHTML",
+        "message": "Törlés"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "characterselect-button": [
+      {
+        "key": "innerHTML",
+        "message": "Karakterválasztás"
+      }
+    ]
+  },
+  "additionalContent": {
+    "confirm-account-deletion": "Biztosan törölni szeretné felhasználói fiókját?\nA törölt adatokat már nem lehet visszaállítani.",
+    "email-already-exists": "Már van regisztrált felhasználó a megadott e-mail címmel.",
+    "email-changed": "E-mail cím sikeresen megváltoztatva.",
+    "empty-password": "A jelszó megadása kötelező!",
+    "incorrect-confirm-password": "A jelszavak nem egyeznek.",
+    "invalid-email": "Érvénytelen e-mail cím.",
+    "language-changed": "Nyelv beállítva.",
+    "password-too-long": "Jelszó túl hosszú (Maximum 30 karakter).",
+    "password-too-short": "Jelszó túl rövid (Minimum 6 karakter).",
+    "username-already-exists": "Felhasználónév foglalt.",
+    "password-changed": "Jelszó megváltoztatása sikeres.",
+    "username-changed": "Felhasználónév megváltoztatása sikeres.",
+    "username-too-long": "Felhasználónév túl hosszú (Maximum 30 karakter).",
+    "username-too-short": "Felhasználónév túl rövid (Minimum 3 karakter)."
+  }
+}

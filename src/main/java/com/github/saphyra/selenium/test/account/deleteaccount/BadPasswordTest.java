@@ -1,23 +1,22 @@
 package com.github.saphyra.selenium.test.account.deleteaccount;
 
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getErrorCode;
+
 import org.openqa.selenium.WebDriver;
 
-import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
-import lombok.Builder;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
+import com.github.saphyra.selenium.test.account.deleteaccount.helper.DeleteAccountTestHelper;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import lombok.Builder;
 
 @Builder
 public class BadPasswordTest {
-    private static final String MESSAGE_CODE_BAD_PASSWORD = "BAD_PASSWORD";
-
     private final DeleteAccountTestHelper deleteAccountTestHelper;
     private final AccountPage accountPage;
     private final WebDriver driver;
     private final NotificationValidator notificationValidator;
-    private final MessageCodes messageCodes;
 
     public void testBadPassword() {
         deleteAccountTestHelper.registerAndNavigateToAccount();
@@ -27,6 +26,6 @@ public class BadPasswordTest {
         deleteAccountTestHelper.sendForm();
         driver.switchTo().alert().accept();
 
-        notificationValidator.verifyOnlyOneNotification(messageCodes.get(MESSAGE_CODE_BAD_PASSWORD));
+        notificationValidator.verifyOnlyOneNotification(getErrorCode(driver, ErrorCode.WRONG_PASSWORD));
     }
 }

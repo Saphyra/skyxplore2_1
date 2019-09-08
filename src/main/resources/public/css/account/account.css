@@ -45,6 +45,10 @@ label input{
     font-size: 1.25rem;
 }
 
+select{
+    font-size: 1.25rem;
+}
+
 .invalid-input{
     display: none;
     border: 3px outset red;

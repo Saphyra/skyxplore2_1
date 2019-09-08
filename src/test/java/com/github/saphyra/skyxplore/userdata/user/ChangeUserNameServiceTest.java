@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,8 +14,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
-import com.github.saphyra.skyxplore.common.exception.UserNameAlreadyExistsException;
+import com.github.saphyra.exceptionhandling.exception.LockedException;
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.user.cache.UserNameCache;
 import com.github.saphyra.skyxplore.userdata.user.domain.ChangeUserNameRequest;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
@@ -50,15 +53,17 @@ public class ChangeUserNameServiceTest {
             .build();
     }
 
-    @Test(expected = UserNameAlreadyExistsException.class)
+    @Test
     public void testChangeUserNameShouldThrowExceptionWhenUserNameExists() {
         //GIVEN
         when(credentialsService.isUserNameExists(USER_NAME)).thenReturn(true);
         //WHEN
-        underTest.changeUserName(new ChangeUserNameRequest(USER_NAME, PASSWORD), USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.changeUserName(new ChangeUserNameRequest(USER_NAME, PASSWORD), USER_ID));
+        //THEN
+        verifyException(ex, LockedException.class, ErrorCode.USER_NAME_ALREADY_EXISTS);
     }
 
-    @Test(expected = BadCredentialsException.class)
+    @Test
     public void testChangeUserNameShouldThrowExceptionWhenWrongPassword() {
         //GIVEN
         ChangeUserNameRequest request = new ChangeUserNameRequest(NEW_USER_NAME, FAKE_PASSWORD);
@@ -68,7 +73,9 @@ public class ChangeUserNameServiceTest {
         when(credentialsService.isUserNameExists(NEW_USER_NAME)).thenReturn(false);
         when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
-        underTest.changeUserName(request, USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.changeUserName(request, USER_ID));
+        //THEN
+        verifyException(ex, UnauthorizedException.class, ErrorCode.WRONG_PASSWORD);
     }
 
     @Test

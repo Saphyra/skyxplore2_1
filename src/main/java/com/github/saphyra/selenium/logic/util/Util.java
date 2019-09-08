@@ -1,5 +1,7 @@
 package com.github.saphyra.selenium.logic.util;
 
+import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,14 +11,15 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.github.saphyra.selenium.logic.util.LocatorUtil.getNotificationElementsLocator;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
+@UtilityClass
 public class Util {
     public static final String ATTRIBUTE_VALUE = "value";
 
-    public static String executeScript(WebDriver driver, String script) {
+    static String executeScript(@NonNull WebDriver driver, String script) {
         if (driver instanceof JavascriptExecutor) {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             return (String) executor.executeScript(script);

@@ -5,12 +5,13 @@
         this.showSuccess = showSuccess;
         this.showError = showError;
         this.showMessage = showMessage;
-        
-        $(document).ready(function(){
-            printStoredMessages();
-        });
     }
-    
+
+    eventProcessor.registerProcessor(new EventProcessor(
+        function(eventType){return eventType === events.LOCALIZATION_LOADED},
+        printStoredMessages,
+        true
+    ));
     /*
     Shows a success message.
     Arguments:
@@ -114,12 +115,12 @@
     function printStoredMessages(){
         try{
             if(sessionStorage.errorMessage != undefined && sessionStorage.errorMessage != null){
-                showError(sessionStorage.errorMessage);
+                showError(Localization.getAdditionalContent(sessionStorage.errorMessage));
                 delete sessionStorage.errorMessage;
             }
             
             if(sessionStorage.successMessage != undefined && sessionStorage.successMessage != null){
-                showSuccess(sessionStorage.successMessage);
+                showSuccess(Localization.getAdditionalContent(sessionStorage.successMessage));
                 delete sessionStorage.successMessage;
             }
         }catch(err){

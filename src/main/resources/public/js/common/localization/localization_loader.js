@@ -1,30 +1,36 @@
 function loadLocalization(fileName, successCallback){
     const DEFAULT_LOCALE = "hu";
 
-    const request = new Request(HttpMethod.GET, getPath(getLanguage(), fileName));
-        request.convertResponse = function(response){
-            return JSON.parse(response.body);
-        }
-        request.processValidResponse = function(localization){
-            successCallback(localization);
-        }
-        request.processInvalidResponse = function(){
-            createFallBackQuery(fileName, successCallback);
-        }
-    dao.sendRequestAsync(request);
+    createQuery(
+        fileName,
+        getLocale(),
+        successCallback,
+        createQuery(
+            fileName,
+            getBrowserLanguage(),
+            successCallback,
+            createQuery(
+                fileName,
+                DEFAULT_LOCALE,
+                successCallback
+            )
+        )
+    )();
 
-    function createFallBackQuery(fileName, successCallback){
-        const request = new Request(HttpMethod.GET, getPath(DEFAULT_LOCALE, fileName));
-            request.convertResponse = function(response){
-                return JSON.parse(response.body);
+    function createQuery(fileName, locale, successCallback, errorCallback){
+        return function(){
+            const response = dao.sendRequest(HttpMethod.GET, getPath(locale, fileName));
+            if(response.status === ResponseStatus.OK){
+                successCallback(JSON.parse(response.body));
+            }else if(errorCallback){
+                errorCallback();
+            }else{
+                logService.log(response.toString(), "error", "Error loading localization: ");
             }
-            request.processValidResponse = function(localization){
-                successCallback(localization);
-            }
-        dao.sendRequestAsync(request);
+        }
     }
 
     function getPath(locale, fileName){
-        return "/i18n/" + locale + "/" + fileName + ".json";
+        return "/i18n/page/" + locale + "/" + fileName + ".json";
     }
 }

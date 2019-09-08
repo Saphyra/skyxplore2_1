@@ -109,7 +109,7 @@
         const request = new Request(HttpMethod.POST, Mapping.BUY_ITEMS, data);
             request.processValidResponse = function(){
                 eventProcessor.processEvent(new Event(events.ITEMS_BOUGHT));
-                notificationService.showSuccess(MessageCode.getMessage("ITEMS_BOUGHT"));
+                notificationService.showSuccess(Localization.getAdditionalContent("items-bought"));
             }
         dao.sendRequestAsync(request);
     }

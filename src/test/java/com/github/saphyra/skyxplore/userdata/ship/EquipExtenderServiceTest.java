@@ -1,6 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.CONNECTOR_SLOT_NAME;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -14,8 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.subservice.ExtenderService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ExtenderService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
 import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;

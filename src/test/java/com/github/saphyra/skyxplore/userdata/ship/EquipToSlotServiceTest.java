@@ -1,10 +1,12 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
-import com.github.saphyra.skyxplore.common.exception.BadSlotNameException;
-import com.github.saphyra.skyxplore.userdata.ship.domain.EquipRequest;
-import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
-import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
-import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +14,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import com.github.saphyra.exceptionhandling.exception.BadRequestException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.userdata.ship.domain.EquipRequest;
+import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
+import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;
+import com.github.saphyra.skyxplore.userdata.slot.repository.SlotDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EquipToSlotServiceTest {
@@ -41,12 +45,14 @@ public class EquipToSlotServiceTest {
         given(equipUtil.getSlotByName(eq(ship), anyString())).willReturn(equippedSlot);
     }
 
-    @Test(expected = BadSlotNameException.class)
+    @Test
     public void equipToSlot_badSlotName() {
         //GIVEN
         EquipRequest request = new EquipRequest(EQUIPMENT_ID, "");
         //WHEN
-        underTest.equipToSlot(request, ship);
+        Throwable ex = catchThrowable(() -> underTest.equipToSlot(request, ship));
+        //THEN
+        verifyException(ex, BadRequestException.class, ErrorCode.INVALID_SLOT_NAME);
     }
 
     @Test

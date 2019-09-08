@@ -1,9 +1,9 @@
 package com.github.saphyra.skyxplore.data.base.loader;
 
+import com.github.saphyra.skyxplore.data.base.AbstractDataService;
 import com.github.saphyra.skyxplore.data.base.TypedItem;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
-import com.github.saphyra.skyxplore.data.base.AbstractGameDataService;
 
 import java.io.File;
 
@@ -14,12 +14,12 @@ class FileLoader<T> extends AbstractLoader<T> {
     private static final JsonFileFilter jsonFilter = new JsonFileFilter();
 
     private final File root;
-    private final AbstractGameDataService<T> gameDataService;
+    private final AbstractDataService<T> dataService;
 
-    FileLoader(Class<T> clazz, AbstractGameDataService<T> gameDataService) {
+    FileLoader(Class<T> clazz, AbstractDataService<T> dataService) {
         super(clazz);
-        this.gameDataService = gameDataService;
-        this.root = new File(gameDataService.getPath());
+        this.dataService = dataService;
+        this.root = new File(dataService.getPath());
     }
 
     @Override
@@ -32,7 +32,7 @@ class FileLoader<T> extends AbstractLoader<T> {
         for (File file : files) {
             log.debug("Loading item {}", file.getName());
             TypedItem typedItem = getTypedItem(file);
-            if (isTypeMatches(typedItem)) {
+            if (!dataService.isShouldCheckType() || isTypeMatches(typedItem)) {
                 loadFile(file);
             } else {
                 log.debug("Skipping {}, it is not the type of {}, it is a {}", file, getClassName(), typedItem.getType());
@@ -52,7 +52,7 @@ class FileLoader<T> extends AbstractLoader<T> {
     private void loadFile(File file) {
         if (clazz == String.class) {
             String key = FilenameUtils.removeExtension(file.getName());
-            gameDataService.put(key, (T) FileUtil.readFileToString(file));
+            dataService.put(key, (T) FileUtil.readFileToString(file));
         } else {
             parseFile(file);
         }
@@ -60,6 +60,6 @@ class FileLoader<T> extends AbstractLoader<T> {
 
     private void parseFile(File file) {
         T content = FileUtil.readValue(file, clazz);
-        putGeneralDescription(content, gameDataService, gameDataService.getPath());
+        putGeneralDescription(content, dataService, file.getName());
     }
 }

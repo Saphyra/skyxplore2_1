@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.community.mail;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -16,9 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.common.exception.CharacterBlockedException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.mail.domain.Mail;
@@ -56,14 +59,16 @@ public class MailSenderServiceTest {
     @Mock
     private BlockedCharacter blockedCharacter;
 
-    @Test(expected = CharacterBlockedException.class)
+    @Test
     public void testSendMailShouldThrowExceptionWhenBlocked() {
         //GIVEN
         SendMailRequest request = new SendMailRequest(ADDRESSEE_ID, SUBJECT, MESSAGE);
 
         when(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, ADDRESSEE_ID)).thenReturn(Arrays.asList(blockedCharacter));
         //WHEN
-        underTest.sendMail(request, CHARACTER_ID);
+        Throwable ex = catchThrowable(() -> underTest.sendMail(request, CHARACTER_ID));
+        //THEN
+        verifyException(ex, ForbiddenException.class, ErrorCode.CHARACTER_BLOCKED);
     }
 
     @Test
@@ -77,7 +82,7 @@ public class MailSenderServiceTest {
         //WHEN
         underTest.sendMail(request, CHARACTER_ID);
         //THEN
-        verify(characterQueryService).findByCharacterId(ADDRESSEE_ID);
+        verify(characterQueryService).findByCharacterIdValidated(ADDRESSEE_ID);
         verify(blockedCharacterQueryService).findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, ADDRESSEE_ID);
 
         ArgumentCaptor<Mail> argumentCaptor = ArgumentCaptor.forClass(Mail.class);

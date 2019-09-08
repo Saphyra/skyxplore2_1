@@ -1,12 +1,6 @@
 package com.github.saphyra.skyxplore.userdata.ship;
 
 
-import static com.github.saphyra.skyxplore.data.DataConstants.CONNECTOR_SLOT_NAME;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
@@ -14,6 +8,11 @@ import com.github.saphyra.skyxplore.userdata.ship.domain.EquipRequest;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+import static com.github.saphyra.skyxplore.data.gamedata.GameDataConstants.CONNECTOR_SLOT_NAME;
 
 @Service
 @Slf4j
@@ -28,8 +27,8 @@ class EquipService {
     @SuppressWarnings("WeakerAccess")
     @Transactional
     public void equip(EquipRequest request, String characterId) {
-        SkyXpCharacter character = characterQueryService.findByCharacterId(characterId);
-        EquippedShip ship = shipQueryService.findShipbyCharacterIdValidated(characterId);
+        SkyXpCharacter character = characterQueryService.findByCharacterIdValidated(characterId);
+        EquippedShip ship = shipQueryService.findShipByCharacterIdValidated(characterId);
 
         character.removeEquipment(request.getItemId());
 

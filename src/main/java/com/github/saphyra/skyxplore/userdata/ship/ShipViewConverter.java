@@ -2,7 +2,7 @@ package com.github.saphyra.skyxplore.userdata.ship;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.domain.ShipView;
 import com.github.saphyra.skyxplore.userdata.slot.domain.EquippedSlot;

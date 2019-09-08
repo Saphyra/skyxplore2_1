@@ -1,7 +1,6 @@
 package com.github.saphyra.selenium.logic.page;
 
 import com.github.saphyra.selenium.logic.domain.SentFriendRequest;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -66,7 +65,6 @@ public class CommunityPage {
     private static final String SELECTOR_BLOCK_CHARACTER_WINDOW = "main-block-character";
 
     private final WebDriver driver;
-    private final MessageCodes messageCodes;
 
     public WebElement getAddFriendButton() {
         return driver.findElement(By.cssSelector(SELECTOR_ADD_FRIEND));
@@ -80,10 +78,10 @@ public class CommunityPage {
         return driver.findElement(By.id(SELECTOR_ADD_FRIEND_INPUT_FIELD));
     }
 
-    public List<PossibleFriend> getAddFriendSearchResult() {
+    public List<PossibleFriend> getAddFriendSearchResult(WebDriver driver) {
         return getListWithWait(() -> driver.findElements(By.cssSelector(SELECTOR_ADD_FRIEND_SEARCH_RESULT)), "Querying possible friends...")
             .stream()
-            .map(element -> new PossibleFriend(element, messageCodes))
+            .map(element -> new PossibleFriend(driver, element))
             .collect(Collectors.toList());
     }
 
@@ -94,7 +92,7 @@ public class CommunityPage {
     public List<SentFriendRequest> getSentFriendRequests() {
         return getListWithWait(
             () -> driver.findElements(By.cssSelector(SELECTOR_SENT_FRIEND_REQUESTS)).stream()
-                .map(element -> new SentFriendRequest(driver, element, messageCodes))
+                .map(element -> new SentFriendRequest(driver, element))
                 .collect(Collectors.toList()),
             "Querying sent friend requests"
         );
@@ -117,7 +115,7 @@ public class CommunityPage {
     public List<SeleniumFriendRequest> getFriendRequests() {
         return getListWithWait(
             () -> driver.findElements(By.cssSelector(SELECTOR_FRIEND_REQUESTS)).stream()
-                .map(element -> new SeleniumFriendRequest(driver, element, messageCodes))
+                .map(element -> new SeleniumFriendRequest(driver, element))
                 .collect(Collectors.toList()),
             "Querying friend requests...");
     }

@@ -30,7 +30,7 @@ public class BlockedCharacterQueryService {
 
     List<SkyXpCharacter> getBlockedCharacters(String characterId) {
         return blockedCharacterDao.getBlockedCharacters(characterId).stream()
-            .map(blockedCharacter -> characterQueryService.findByCharacterId(blockedCharacter.getBlockedCharacterId()))
+            .map(blockedCharacter -> characterQueryService.findByCharacterIdValidated(blockedCharacter.getBlockedCharacterId()))
             .collect(Collectors.toList());
     }
 }

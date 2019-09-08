@@ -1,6 +1,5 @@
 package com.github.saphyra.selenium.test.community;
 
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.CreateCharacter;
 import com.github.saphyra.selenium.logic.flow.Login;
@@ -26,6 +25,7 @@ import com.github.saphyra.selenium.test.community.helper.CommunityTestInitialize
 import com.github.saphyra.selenium.test.community.helper.FriendshipTestHelper;
 import com.github.saphyra.selenium.test.community.helper.MailTestHelper;
 import com.github.saphyra.selenium.test.community.helper.SendMailHelper;
+import org.junit.Test;
 
 public class FriendshipTest extends SeleniumTestApplication {
     private CommunityTestInitializer communityTestInitializer;
@@ -39,24 +39,24 @@ public class FriendshipTest extends SeleniumTestApplication {
     @Override
     protected void init() {
         communityTestHelper = new CommunityTestHelper(
-            new Login(driver, messageCodes),
+            new Login(driver),
             new SelectCharacter(driver),
             new OverviewPage(driver),
             new Navigate(driver)
         );
 
         communityTestInitializer = new CommunityTestInitializer(
-            new Registration(driver, messageCodes),
-            new CreateCharacter(driver, messageCodes),
-            new Logout(driver, messageCodes)
+            new Registration(driver),
+            new CreateCharacter(driver),
+            new Logout(driver)
         );
 
-        communityPage = new CommunityPage(driver, messageCodes);
+        communityPage = new CommunityPage(driver);
 
         notificationValidator = new NotificationValidator(driver);
         friendshipTestHelper = new FriendshipTestHelper(driver, communityPage, notificationValidator);
-        mailTestHelper = new MailTestHelper(communityPage, driver, messageCodes, getPageLocalization("community"));
-        sendMailHelper = new SendMailHelper(communityPage, notificationValidator, messageCodes);
+        mailTestHelper = new MailTestHelper(communityPage, driver);
+        sendMailHelper = new SendMailHelper(driver, communityPage, notificationValidator);
     }
 
     @Test
@@ -146,12 +146,12 @@ public class FriendshipTest extends SeleniumTestApplication {
     @Test
     public void testDeleteFriend() {
         DeleteFriendTest.builder()
+            .driver(driver)
             .communityTestHelper(communityTestHelper)
             .communityTestInitializer(communityTestInitializer)
             .friendshipTestHelper(friendshipTestHelper)
             .communityPage(communityPage)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
             .build()
             .testDeleteFriend();
     }

@@ -21,7 +21,7 @@
     */
     function log(message, level, prefix){
         try{
-            level = level || "info";
+            level = level ? level.toLowerCase() : "info";
             prefix = prefix || "";
             
             if(!shouldLog(level)){

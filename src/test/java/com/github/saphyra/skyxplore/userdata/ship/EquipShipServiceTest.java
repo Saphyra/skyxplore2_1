@@ -4,9 +4,9 @@ import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.data.entity.Slot;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Slot;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.repository.EquippedShipDao;
 import com.github.saphyra.skyxplore.userdata.slot.SlotQueryService;
@@ -73,8 +73,8 @@ public class EquipShipServiceTest {
 
     @Before
     public void init() {
-        when(characterQueryService.findByCharacterId(CHARACTER_ID)).thenReturn(character);
-        when(shipQueryService.findShipbyCharacterIdValidated(CHARACTER_ID)).thenReturn(equippedShip);
+        when(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).thenReturn(character);
+        when(shipQueryService.findShipByCharacterIdValidated(CHARACTER_ID)).thenReturn(equippedShip);
     }
 
     @Test(expected = BadRequestException.class)

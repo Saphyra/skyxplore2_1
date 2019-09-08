@@ -21,7 +21,7 @@ public class EmailCache extends AbstractCache<String, Boolean> {
     }
 
     @Override
-    public Optional<Boolean> get(String key) {
-        return get(key, () -> Optional.of(userQueryService.isEmailExists(key)));
+    public Optional<Boolean> get(String email) {
+        return get(email, () -> Optional.of(userQueryService.isEmailExists(email)));
     }
 }

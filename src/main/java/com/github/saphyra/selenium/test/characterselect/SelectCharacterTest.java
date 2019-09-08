@@ -24,9 +24,10 @@ public class SelectCharacterTest extends SeleniumTestApplication {
     }
 
     @Test
+    //TODO extend with redirection tests
     public void testSelectCharacter() {
-        new Registration(driver, messageCodes).registerUser();
-        SeleniumCharacter character = new CreateCharacter(driver, messageCodes).createCharacter();
+        new Registration(driver).registerUser();
+        SeleniumCharacter character = new CreateCharacter(driver).createCharacter();
 
         characterSelectPage.getCharacterRow(character.getCharacterName())
             .map(element -> element.findElement(By.cssSelector(SELECTOR_CHARACTER_NAME)))

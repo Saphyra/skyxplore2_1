@@ -1,10 +1,10 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
 import com.github.saphyra.skyxplore.userdata.user.repository.credentials.CredentialsDao;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +15,7 @@ public class CredentialsService {
 
     public SkyXpCredentials findByUserId(String userId) {
         return credentialsDao.findById(userId)
-            .orElseThrow(() -> new BadCredentialsException("SkyXpCredentials cannot be found. UserId: " + userId));
+            .orElseThrow(() -> ExceptionFactory.credentialsNotFound(userId));
     }
 
     public boolean isUserNameExists(String userName) {

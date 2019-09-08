@@ -3,7 +3,8 @@
     scriptLoader.loadScript("/js/common/dao/request.js");
     scriptLoader.loadScript("/js/common/dao/response.js");
     scriptLoader.loadScript("/js/common/dao/response_status.js");
-    
+    scriptLoader.loadScript("/js/common/dao/error_response_error_handler.js");
+
     window.dao = new function(){
         this.sendRequest = sendRequest;
         this.sendRequestAsync = sendRequestAsync;
@@ -100,5 +101,6 @@
         }
         
         request.setRequestHeader("Request-Type", "rest");
+        request.setRequestHeader(HEADER_BROWSER_LANGUAGE, getBrowserLanguage());
     }
 })();

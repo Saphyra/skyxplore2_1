@@ -12,8 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.data.entity.Ship;
-import com.github.saphyra.skyxplore.data.subservice.ShipService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.domain.ShipView;
 import com.github.saphyra.skyxplore.userdata.ship.domain.SlotView;

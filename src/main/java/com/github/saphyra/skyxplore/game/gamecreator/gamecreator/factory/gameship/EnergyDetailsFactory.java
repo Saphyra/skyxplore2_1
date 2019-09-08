@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.data.entity.Battery;
-import com.github.saphyra.skyxplore.data.entity.Generator;
-import com.github.saphyra.skyxplore.data.subservice.BatteryService;
-import com.github.saphyra.skyxplore.data.subservice.GeneratorService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Battery;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Generator;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.BatteryService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.GeneratorService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.EnergyDetails;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import lombok.RequiredArgsConstructor;

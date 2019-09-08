@@ -1,9 +1,9 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship.equipment.ai.domain;
 
-import com.github.saphyra.skyxplore.data.DataConstants;
-import com.github.saphyra.skyxplore.data.domain.SlotType;
-import com.github.saphyra.skyxplore.data.entity.Extender;
-import com.github.saphyra.skyxplore.data.entity.Ship;
+import com.github.saphyra.skyxplore.data.gamedata.GameDataConstants;
+import com.github.saphyra.skyxplore.data.gamedata.domain.SlotType;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Extender;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.gamecreator.GameCreatorContext;
 import lombok.AccessLevel;
@@ -99,37 +99,37 @@ public enum UpgradableSlot implements UpgradableSlotMethods {
 
     private static int getConnectorSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getConnector(), DataConstants.CONNECTOR_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getConnector(), GameDataConstants.CONNECTOR_SLOT_NAME);
     }
 
     private static int getFrontDefenseSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getDefense().getFront(), DataConstants.DEFENSE_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getDefense().getFront(), GameDataConstants.DEFENSE_SLOT_NAME);
     }
 
     private static int getSideDefenseSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getDefense().getSide(), DataConstants.DEFENSE_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getDefense().getSide(), GameDataConstants.DEFENSE_SLOT_NAME);
     }
 
     private static int getBackDefenseSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getDefense().getBack(), DataConstants.DEFENSE_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getDefense().getBack(), GameDataConstants.DEFENSE_SLOT_NAME);
     }
 
     private static int getFrontWeaponSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getWeapon().getFront(), DataConstants.WEAPON_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getWeapon().getFront(), GameDataConstants.WEAPON_SLOT_NAME);
     }
 
     private static int getSideWeaponSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getWeapon().getSide(), DataConstants.WEAPON_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getWeapon().getSide(), GameDataConstants.WEAPON_SLOT_NAME);
     }
 
     private static int getBackWeaponSlots(ShipEquipments shipEquipments, GameCreatorContext gameCreatorContext) {
         Ship ship = getShip(shipEquipments.getShipId(), gameCreatorContext);
-        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getWeapon().getBack(), DataConstants.WEAPON_SLOT_NAME);
+        return getExtendedSlots(shipEquipments, gameCreatorContext, ship.getWeapon().getBack(), GameDataConstants.WEAPON_SLOT_NAME);
     }
 
     private static Ship getShip(String shipId, GameCreatorContext gameCreatorContext) {

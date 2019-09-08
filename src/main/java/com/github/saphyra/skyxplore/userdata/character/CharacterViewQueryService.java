@@ -15,7 +15,7 @@ public class CharacterViewQueryService {
     private final CharacterViewConverter characterViewConverter;
 
     public CharacterView findByCharacterId(String characterId) {
-        return characterViewConverter.convertDomain(characterQueryService.findByCharacterId(characterId));
+        return characterViewConverter.convertDomain(characterQueryService.findByCharacterIdValidated(characterId));
     }
 
     List<CharacterView> getActiveCharactersByName(String characterId, String name) {

@@ -1,6 +1,5 @@
 package com.github.saphyra.selenium.test.account;
 
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Login;
 import com.github.saphyra.selenium.logic.flow.Logout;
@@ -10,12 +9,13 @@ import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
 import com.github.saphyra.selenium.test.account.changepassword.BadConfirmPasswordTest;
-import com.github.saphyra.selenium.test.account.changepassword.BadPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.EmptyCurrentPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.SuccessfulPasswordChangeTest;
 import com.github.saphyra.selenium.test.account.changepassword.TooLongPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.TooShortPasswordTest;
+import com.github.saphyra.selenium.test.account.changepassword.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
@@ -31,14 +31,14 @@ public class ChangePasswordTest extends SeleniumTestApplication {
 
     @Override
     protected void init() {
-        this.registration = new Registration(driver, messageCodes);
+        this.registration = new Registration(driver);
         this.accountPage = new AccountPage(driver);
         this.fieldValidator = new FieldValidator(driver, ACCOUNT);
         this.navigate = new Navigate(driver);
         this.changePasswordTestHelper = new ChangePasswordTestHelper(driver, accountPage, registration, navigate);
         this.notificationValidator = new NotificationValidator(driver);
-        this.logout = new Logout(driver, messageCodes);
-        this.login = new Login(driver, messageCodes);
+        this.logout = new Logout(driver);
+        this.login = new Login(driver);
     }
 
     @Test
@@ -49,7 +49,6 @@ public class ChangePasswordTest extends SeleniumTestApplication {
             .fieldValidator(fieldValidator)
             .navigate(navigate)
             .changePasswordTestHelper(changePasswordTestHelper)
-            .messageCodes(messageCodes)
             .build()
             .testTooShortPassword();
     }
@@ -62,7 +61,7 @@ public class ChangePasswordTest extends SeleniumTestApplication {
             .navigate(navigate)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testTooLongPassword();
     }
@@ -73,7 +72,7 @@ public class ChangePasswordTest extends SeleniumTestApplication {
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testBadConfirmPassword();
     }
@@ -84,18 +83,18 @@ public class ChangePasswordTest extends SeleniumTestApplication {
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testEmptyCurrentPassword();
     }
 
     @Test
     public void testBadPassword() {
-        BadPasswordTest.builder()
+        WrongPasswordTest.builder()
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testBadPassword();
     }
@@ -103,13 +102,13 @@ public class ChangePasswordTest extends SeleniumTestApplication {
     @Test
     public void testSuccessfulPasswordChange() {
         SuccessfulPasswordChangeTest.builder()
+            .driver(driver)
             .changePasswordTestHelper(changePasswordTestHelper)
             .accountPage(accountPage)
             .logout(logout)
             .login(login)
             .navigate(navigate)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
             .build()
             .testSuccessfulPasswordChange();
     }

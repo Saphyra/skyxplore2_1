@@ -1,18 +1,18 @@
 package com.github.saphyra.selenium.test.account;
 
-import org.junit.Test;
 import com.github.saphyra.selenium.SeleniumTestApplication;
 import com.github.saphyra.selenium.logic.flow.Navigate;
 import com.github.saphyra.selenium.logic.flow.Registration;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.logic.validator.NotificationValidator;
-import com.github.saphyra.selenium.test.account.changeemail.BadPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.EmptyPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.ExistingEmailTest;
 import com.github.saphyra.selenium.test.account.changeemail.InvalidEmailTest;
 import com.github.saphyra.selenium.test.account.changeemail.SuccessfulEmailChangeTest;
+import com.github.saphyra.selenium.test.account.changeemail.WrongPasswordTest;
 import com.github.saphyra.selenium.test.account.changeemail.helper.ChangeEmailTestHelper;
+import org.junit.Test;
 
 import static com.github.saphyra.selenium.logic.util.LinkUtil.ACCOUNT;
 
@@ -27,7 +27,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
     protected void init() {
         fieldValidator = new FieldValidator(driver, ACCOUNT);
         accountPage = new AccountPage(driver);
-        registration = new Registration(driver, messageCodes);
+        registration = new Registration(driver);
         Navigate navigate = new Navigate(driver);
         changeEmailTestHelper = new ChangeEmailTestHelper(accountPage, registration, navigate, driver);
         notificationValidator = new NotificationValidator(driver);
@@ -39,7 +39,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .changeEmailTestHelper(changeEmailTestHelper)
             .fieldValidator(fieldValidator)
             .accountPage(accountPage)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testInvalidEmail();
     }
@@ -51,7 +51,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .changeEmailTestHelper(changeEmailTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testExistingEmail();
     }
@@ -62,19 +62,19 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .changeEmailTestHelper(changeEmailTestHelper)
             .accountPage(accountPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testEmptyPassword();
     }
 
     @Test
     public void badPasswordTest() {
-        BadPasswordTest.builder()
+        WrongPasswordTest.builder()
             .accountPage(accountPage)
             .changeEmailTestHelper(changeEmailTestHelper)
             .fieldValidator(fieldValidator)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testBadPassword();
     }
@@ -85,7 +85,7 @@ public class ChangeEmailTest extends SeleniumTestApplication {
             .accountPage(accountPage)
             .changeEmailTestHelper(changeEmailTestHelper)
             .notificationValidator(notificationValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testSuccessfulEmailChange();
     }

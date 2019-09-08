@@ -56,7 +56,7 @@ public class InvitationViewConverterTest {
         given(lobby.getGameMode()).willReturn(GameMode.TEAMFIGHT);
         given(lobby.getData()).willReturn(LOBBY_DATA);
 
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
         given(character.getCharacterName()).willReturn(CHARACTER_NAME);
 
         //WHEN

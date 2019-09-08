@@ -9,7 +9,7 @@
     function logout(){
         const request = new Request(HttpMethod.POST, Mapping.LOGOUT);
             request.processValidResponse = function(){
-                sessionStorage.successMessage = MessageCode.getMessage("SUCCESSFUL_LOGOUT");
+                sessionStorage.successMessage = "successful-logout";
                 location.href = Mapping.INDEX_PAGE;
             }
             

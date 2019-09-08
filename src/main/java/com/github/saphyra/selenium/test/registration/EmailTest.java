@@ -24,17 +24,17 @@ public class EmailTest extends SeleniumTestApplication {
         indexPage = new IndexPage(driver);
         emailTestHelper = new EmailTestHelper(driver, indexPage);
         fieldValidator = new FieldValidator(driver, INDEX_PAGE);
-        registration = new Registration(driver, messageCodes);
-        logout = new Logout(driver, messageCodes);
+        registration = new Registration(driver);
+        logout = new Logout(driver);
     }
 
     @Test
     public void testInvalidEmail() {
         InvalidEmailTest.builder()
+            .driver(driver)
             .emailTestHelper(emailTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
             .build()
             .testInvalidEmail();
     }
@@ -47,7 +47,7 @@ public class EmailTest extends SeleniumTestApplication {
             .emailTestHelper(emailTestHelper)
             .indexPage(indexPage)
             .fieldValidator(fieldValidator)
-            .messageCodes(messageCodes)
+            .driver(driver)
             .build()
             .testExistingEmail();
     }

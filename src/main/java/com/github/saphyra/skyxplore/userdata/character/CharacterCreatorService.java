@@ -1,12 +1,11 @@
 package com.github.saphyra.skyxplore.userdata.character;
 
-import com.github.saphyra.skyxplore.common.exception.CharacterNameAlreadyExistsException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.character.cache.CharacterNameExistsCache;
 import com.github.saphyra.skyxplore.userdata.character.domain.CreateCharacterRequest;
 import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +21,7 @@ class CharacterCreatorService {
     @Transactional
     SkyXpCharacter createCharacter(CreateCharacterRequest request, String userId) {
         if (characterQueryService.isCharNameExists(request.getCharacterName())) {
-            throw new CharacterNameAlreadyExistsException("Character already exists with name " + request.getCharacterName());
+            throw ExceptionFactory.characterNameAlreadyExists(request.getCharacterName());
         }
 
         SkyXpCharacter character = newCharacterGenerator.createCharacter(userId, request.getCharacterName());

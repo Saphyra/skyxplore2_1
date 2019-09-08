@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.userdata.user;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,8 +13,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.encryption.impl.PasswordService;
-import com.github.saphyra.skyxplore.common.exception.BadCredentialsException;
-import com.github.saphyra.skyxplore.common.exception.EmailAlreadyExistsException;
+import com.github.saphyra.exceptionhandling.exception.LockedException;
+import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.user.cache.EmailCache;
 import com.github.saphyra.skyxplore.userdata.user.domain.ChangeEmailRequest;
 import com.github.saphyra.skyxplore.userdata.user.domain.SkyXpCredentials;
@@ -59,16 +62,18 @@ public class ChangeEmailServiceTest {
             .build();
     }
 
-    @Test(expected = EmailAlreadyExistsException.class)
+    @Test
     public void testChangeEmailShouldThrowExceptionWhenEmailExists() {
         //GIVEN
         when(userQueryService.isEmailExists(NEW_EMAIL)).thenReturn(true);
         ChangeEmailRequest request = new ChangeEmailRequest(NEW_EMAIL, PASSWORD);
         //WHEN
-        underTest.changeEmail(request, USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.changeEmail(request, USER_ID));
+        //THEN
+        verifyException(ex, LockedException.class, ErrorCode.EMAIL_ALREADY_EXISTS);
     }
 
-    @Test(expected = BadCredentialsException.class)
+    @Test
     public void testChangeEmailShouldThrowExceptionWhenBadPassword() {
         //GIVEN
         ChangeEmailRequest request = new ChangeEmailRequest(NEW_EMAIL, FAKE_PASSWORD);
@@ -78,7 +83,9 @@ public class ChangeEmailServiceTest {
         when(credentialsService.findByUserId(USER_ID)).thenReturn(credentials);
         when(passwordService.authenticate(FAKE_PASSWORD, HASHED_PASSWORD)).thenReturn(false);
         //WHEN
-        underTest.changeEmail(request, USER_ID);
+        Throwable ex = catchThrowable(() -> underTest.changeEmail(request, USER_ID));
+        //THEN
+        verifyException(ex, UnauthorizedException.class, ErrorCode.WRONG_PASSWORD);
     }
 
     @Test

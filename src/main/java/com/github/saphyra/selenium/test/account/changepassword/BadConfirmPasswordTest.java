@@ -1,21 +1,24 @@
 package com.github.saphyra.selenium.test.account.changepassword;
 
-import lombok.Builder;
-import org.openqa.selenium.WebElement;
-import com.github.saphyra.selenium.logic.domain.localization.MessageCodes;
 import com.github.saphyra.selenium.logic.domain.SeleniumUser;
+import com.github.saphyra.selenium.logic.domain.localization.Page;
 import com.github.saphyra.selenium.logic.page.AccountPage;
 import com.github.saphyra.selenium.logic.validator.FieldValidator;
 import com.github.saphyra.selenium.test.account.changepassword.helper.ChangePasswordTestHelper;
+import lombok.Builder;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import static com.github.saphyra.selenium.logic.util.LocalizationUtil.getAdditionalContent;
 
 @Builder
 public class BadConfirmPasswordTest {
-    private static final String MESSAGE_CODE_BAD_CONFIRM_PASSWORD = "BAD_CONFIRM_PASSWORD";
+    private static final String MESSAGE_CODE_INCORRECT_CONFIRM_PASSWORD = "incorrect-confirm-password";
 
+    private final WebDriver driver;
     private final ChangePasswordTestHelper changePasswordTestHelper;
     private final AccountPage accountPage;
     private final FieldValidator fieldValidator;
-    private final MessageCodes messageCodes;
 
     public void testBadConfirmPassword() {
         changePasswordTestHelper.setUpWithCurrentPassword();
@@ -26,9 +29,10 @@ public class BadConfirmPasswordTest {
         WebElement newConfirmPasswordField = accountPage.getNewConfirmPasswordField();
         newConfirmPasswordField.sendKeys(SeleniumUser.createRandomPassword());
 
+        String errorMessage = getAdditionalContent(driver, Page.ACCOUNT, MESSAGE_CODE_INCORRECT_CONFIRM_PASSWORD);
         fieldValidator.verifyError(
             accountPage.getInvalidNewPasswordField(),
-            messageCodes.get(MESSAGE_CODE_BAD_CONFIRM_PASSWORD),
+            errorMessage,
             newPasswordField,
             accountPage.getChangePasswordButton(),
             accountPage.getCurrentInvalidNewPasswordField()
@@ -36,7 +40,7 @@ public class BadConfirmPasswordTest {
 
         fieldValidator.verifyError(
             accountPage.getInvalidNewConfirmPasswordField(),
-            messageCodes.get(MESSAGE_CODE_BAD_CONFIRM_PASSWORD),
+            errorMessage,
             newConfirmPasswordField,
             accountPage.getChangePasswordButton()
         );

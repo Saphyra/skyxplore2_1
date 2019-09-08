@@ -1,6 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.community.blockedcharacter;
 
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,11 +16,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
-import com.github.saphyra.skyxplore.common.exception.BlockedCharacterNotFoundException;
-import com.github.saphyra.skyxplore.common.exception.CharacterAlreadyBlockedException;
+import com.github.saphyra.exceptionhandling.exception.ConflictException;
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
-import com.github.saphyra.skyxplore.userdata.community.friendship.FriendshipService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlockCharacterServiceTest {
@@ -32,7 +35,7 @@ public class BlockCharacterServiceTest {
     private BlockedCharacterQueryService blockedCharacterQueryService;
 
     @Mock
-    private FriendshipService friendshipService;
+    private FriendshipServiceFacade friendshipServiceFacade;
 
     @InjectMocks
     private BlockCharacterService underTest;
@@ -40,12 +43,14 @@ public class BlockCharacterServiceTest {
     @Mock
     private BlockedCharacter blockedCharacter;
 
-    @Test(expected = BlockedCharacterNotFoundException.class)
+    @Test
     public void testAllowBlockedCharacterShouldThrowExceptionWhenNotFound() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
+        Throwable ex = catchThrowable(() -> underTest.allowBlockedCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID));
+        //THEN
+        verifyException(ex, NotFoundException.class, ErrorCode.BLOCKED_CHARACTER_NOT_FOUND);
     }
 
     @Test
@@ -64,12 +69,14 @@ public class BlockCharacterServiceTest {
         underTest.blockCharacter(CHARACTER_ID, CHARACTER_ID);
     }
 
-    @Test(expected = CharacterAlreadyBlockedException.class)
+    @Test
     public void testBlockCharacterShouldThrowExceptionWhenAlreadyBlocked() {
         //GIVEN
         when(blockedCharacterQueryService.findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID)).thenReturn(Optional.of(blockedCharacter));
         //WHEN
-        underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
+        Throwable ex = catchThrowable(() -> underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID));
+        //THEN
+        verifyException(ex, ConflictException.class, ErrorCode.CHARACTER_ALREADY_BLOCKED);
     }
 
     @Test
@@ -80,7 +87,7 @@ public class BlockCharacterServiceTest {
         underTest.blockCharacter(BLOCKED_CHARACTER_ID, CHARACTER_ID);
         //THEN
         verify(blockedCharacterQueryService).findByCharacterIdAndBlockedCharacterId(CHARACTER_ID, BLOCKED_CHARACTER_ID);
-        verify(friendshipService).removeContactsBetween(CHARACTER_ID, BLOCKED_CHARACTER_ID);
+        verify(friendshipServiceFacade).removeContactsBetween(CHARACTER_ID, BLOCKED_CHARACTER_ID);
 
         ArgumentCaptor<BlockedCharacter> argumentCaptor = ArgumentCaptor.forClass(BlockedCharacter.class);
         verify(blockedCharacterDao).save(argumentCaptor.capture());

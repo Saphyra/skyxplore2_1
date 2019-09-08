@@ -22,15 +22,15 @@
         let passwordValid = true;
         
         if(password.length == 0){
-            validationResult.createErrorFieldFor(INVALID_CURRENT_PASSWORD, "CURRENT_PASSWORD_IS_EMPTY");
+            validationResult.createErrorFieldFor(INVALID_CURRENT_PASSWORD, "empty-password");
             passwordValid = false;
         }
         
         if(username.length < 3){
-            validationResult.createErrorFieldFor(INVALID_USERNAME, "USERNAME_TOO_SHORT");
+            validationResult.createErrorFieldFor(INVALID_USERNAME, "username-too-short");
             usernameValid = false;
         }else if(username.length > 30){
-            validationResult.createErrorFieldFor(INVALID_USERNAME, "USERNAME_TOO_LONG");
+            validationResult.createErrorFieldFor(INVALID_USERNAME, "username-too-long");
             usernameValid = false;
         }else{
             const request = new Request(HttpMethod.POST, Mapping.USERNAME_EXISTS, {value: username});
@@ -42,7 +42,7 @@
                         usernameValid = true;
                     }else{
                         usernameValid = false;
-                        validationResult.createErrorFieldFor(INVALID_USERNAME, "USERNAME_ALREADY_EXISTS");
+                        validationResult.createErrorFieldFor(INVALID_USERNAME, "username-already-exists");
                     }
                     processValidationResult();
                 }

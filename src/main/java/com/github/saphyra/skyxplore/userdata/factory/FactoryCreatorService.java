@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Factory;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
 import com.github.saphyra.skyxplore.userdata.factory.repository.FactoryDao;
-import com.github.saphyra.skyxplore.data.subservice.MaterialService;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.MaterialService;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

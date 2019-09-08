@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.exception.ShipNotFoundException;
+import com.github.saphyra.skyxplore.common.ServerException;
 import com.github.saphyra.skyxplore.userdata.ship.domain.EquippedShip;
 import com.github.saphyra.skyxplore.userdata.ship.domain.ShipView;
 import com.github.saphyra.skyxplore.userdata.ship.repository.EquippedShipDao;
@@ -50,12 +50,12 @@ public class ShipQueryServiceTest {
     @Mock
     private ShipView shipView;
 
-    @Test(expected = ShipNotFoundException.class)
+    @Test(expected = ServerException.class)
     public void testGetShipByCharacterIdShouldThrowExceptionWhenNull() {
         //GIVEN
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.empty());
         //WHEN
-        underTest.findShipbyCharacterIdValidated(CHARACTER_ID);
+        underTest.findShipByCharacterIdValidated(CHARACTER_ID);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ShipQueryServiceTest {
         //GIVEN
         when(equippedShipDao.findShipByCharacterId(CHARACTER_ID)).thenReturn(Optional.of(ship));
         //WHEN
-        EquippedShip result = underTest.findShipbyCharacterIdValidated(CHARACTER_ID);
+        EquippedShip result = underTest.findShipByCharacterIdValidated(CHARACTER_ID);
         //THEN
         verify(equippedShipDao).findShipByCharacterId(CHARACTER_ID);
         assertThat(result).isEqualTo(ship);

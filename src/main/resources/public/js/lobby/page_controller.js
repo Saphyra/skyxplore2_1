@@ -65,7 +65,7 @@
         function(){
             const request = new Request(HttpMethod.DELETE, Mapping.EXIT_FROM_LOBBY);
                 request.processValidResponse = function(){
-                    sessionStorage.successMessage = MessageCode.getMessage("EXITED_FROM_LOBBY");
+                    sessionStorage.successMessage = "exited-from-lobby";
                     window.location.href = Mapping.OVERVIEW_PAGE;
                 }
 

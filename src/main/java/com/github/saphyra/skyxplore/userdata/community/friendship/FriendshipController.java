@@ -1,12 +1,15 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
 import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
 import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
+import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequestView;
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendView;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendRequestQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -36,10 +39,10 @@ class FriendshipController {
     private static final String GET_RECEIVED_FRIEND_REQUESTS_MAPPING = API_PREFIX + "/friend/request/received";
     private static final String GET_SENT_FRIEND_REQUESTS_MAPPING = API_PREFIX + "/friend/request/sent";
 
-    private final ActiveFriendsQueryService activeFriendsQueryService;
     private final CharacterQueryService characterQueryService;
-    private final FriendshipService friendshipService;
+    private final FriendshipServiceFacade friendshipServiceFacade;
     private final FriendshipQueryService friendshipQueryService;
+    private final FriendRequestQueryService friendRequestQueryService;
     private final CharacterViewConverter characterViewConverter;
     private final FriendViewConverter friendViewConverter;
     private final FriendRequestViewConverter friendRequestViewConverter;
@@ -50,7 +53,7 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to accept friendRequest {}", characterId, request.getValue());
-        friendshipService.acceptFriendRequest(request.getValue(), characterId);
+        friendshipServiceFacade.acceptFriendRequest(request.getValue(), characterId);
     }
 
     @PutMapping(ADD_FRIEND_MAPPING)
@@ -60,7 +63,7 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_USER_ID) String userId
     ) {
         log.info("{} wants to add {} as a community.", characterId, request.getValue());
-        friendshipService.addFriendRequest(request.getValue(), characterId, userId);
+        friendshipServiceFacade.addFriendRequest(request.getValue(), characterId, userId);
     }
 
     @DeleteMapping(DECLINE_FRIEND_REQUEST_MAPPING)
@@ -69,7 +72,7 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to decline / cancel friendRequest {}", characterId, request.getValue());
-        friendshipService.declineFriendRequest(request.getValue(), characterId);
+        friendshipServiceFacade.declineFriendRequest(request.getValue(), characterId);
     }
 
     @DeleteMapping(DELETE_FRIEND_MAPPING)
@@ -78,7 +81,7 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to deleteById friendship {}", characterId, request.getValue());
-        friendshipService.deleteFriendship(request.getValue(), characterId);
+        friendshipServiceFacade.deleteFriendship(request.getValue(), characterId);
     }
 
     @PostMapping(GET_CHARACTERS_CAN_BE_FRIEND_MAPPING)
@@ -93,7 +96,7 @@ class FriendshipController {
     @GetMapping(GET_ACTIVE_FRIENDS_MAPPING)
     List<CharacterView> getActiveFriends(@CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId){
         log.info("{} wants to know his active friends.", characterId);
-        return characterViewConverter.convertDomain(activeFriendsQueryService.getActiveFriends(characterId));
+        return characterViewConverter.convertDomain(friendshipServiceFacade.getActiveFriends(characterId));
     }
 
     @GetMapping(GET_FRIENDS_MAPPING)
@@ -109,7 +112,7 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his received friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(friendshipQueryService.getReceivedFriendRequests(characterId));
+        return friendRequestViewConverter.convertDomain(friendRequestQueryService.getReceivedFriendRequests(characterId));
     }
 
     @GetMapping(GET_SENT_FRIEND_REQUESTS_MAPPING)
@@ -117,6 +120,6 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his sent friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(friendshipQueryService.getSentFriendRequests(characterId));
+        return friendRequestViewConverter.convertDomain(friendRequestQueryService.getSentFriendRequests(characterId));
     }
 }

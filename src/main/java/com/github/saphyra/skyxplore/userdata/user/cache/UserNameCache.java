@@ -21,7 +21,7 @@ public class UserNameCache extends AbstractCache<String, Boolean> {
     }
 
     @Override
-    public Optional<Boolean> get(String key) {
-        return get(key, () -> Optional.of(credentialsService.isUserNameExists(key)));
+    public Optional<Boolean> get(String userName) {
+        return get(userName, () -> Optional.of(credentialsService.isUserNameExists(userName)));
     }
 }

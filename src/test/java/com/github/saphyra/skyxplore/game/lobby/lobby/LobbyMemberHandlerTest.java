@@ -52,7 +52,7 @@ public class LobbyMemberHandlerTest {
         given(lobby.getMembers()).willReturn(Arrays.asList(lobbyMember));
         given(lobbyMember.getCharacterId()).willReturn(CHARACTER_ID);
         given(lobbyMember.isReady()).willReturn(true);
-        given(characterQueryService.findByCharacterId(CHARACTER_ID)).willReturn(character);
+        given(characterQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(character);
         given(character.getCharacterName()).willReturn(CHARACTER_NAME);
         //WHEN
         List<LobbyMemberView> result = underTest.getMembers(CHARACTER_ID);

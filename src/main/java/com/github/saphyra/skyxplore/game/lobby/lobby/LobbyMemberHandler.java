@@ -28,7 +28,7 @@ class LobbyMemberHandler {
     private LobbyMemberView convertToView(LobbyMember lobbyMember) {
         return LobbyMemberView.builder()
             .characterId(lobbyMember.getCharacterId())
-            .characterName(characterQueryService.findByCharacterId(lobbyMember.getCharacterId()).getCharacterName())
+            .characterName(characterQueryService.findByCharacterIdValidated(lobbyMember.getCharacterId()).getCharacterName())
             .isReady(lobbyMember.isReady())
             .build();
     }

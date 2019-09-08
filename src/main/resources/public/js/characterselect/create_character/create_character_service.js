@@ -37,11 +37,8 @@
                 return JSON.parse(response.body);
             }
             request.processValidResponse = function(payload){
-                notificationService.showSuccess(MessageCode.getMessage("CHARACTER_CREATED"));
+                notificationService.showSuccess(Localization.getAdditionalContent("character-created"));
                 eventProcessor.processEvent(new Event(events.DISPLAY_CHARACTER, payload));
-            }
-            request.processInvalidResponse = function(){
-                notificationService.showError(MessageCode.getMessage("ERROR_CREATING_CHARACTER"));
             }
         dao.sendRequestAsync(request);
         $("#create-character-name").val("");

@@ -1,8 +1,8 @@
 package com.github.saphyra.skyxplore.userdata.factory.impl.addtoqueue;
 
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
+import com.github.saphyra.skyxplore.data.gamedata.entity.FactoryData;
 import com.github.saphyra.skyxplore.userdata.factory.domain.Materials;
-import com.github.saphyra.skyxplore.data.entity.FactoryData;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +12,7 @@ class MaterialsValidator {
             int required = value * amount;
             Integer current = materials.get(key);
             if (current < required) {
-                throw new NotEnoughMaterialsException("Not enough " + key + ". Needed: " + required + ", have: " + current);
+                throw ExceptionFactory.notEnoughMaterials(key, amount, current);
             }
         });
     }

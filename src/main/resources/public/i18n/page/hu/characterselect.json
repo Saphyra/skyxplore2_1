@@ -1,0 +1,96 @@
+{
+  "title": "Karakterválasztás - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Karakterválasztás"
+      }
+    ],
+    "create-character-span": [
+      {
+        "key": "innerHTML",
+        "message": "Karakter létrehozása"
+      }
+    ],
+    "create-character-name": [
+      {
+        "key": "placeholder",
+        "message": "Karakternév"
+      }
+    ],
+    "create-character-button": [
+      {
+        "key": "innerHTML",
+        "message": "Létrehozás"
+      }
+    ],
+    "character-list-header-character-name": [
+      {
+        "key": "innerHTML",
+        "message": "Karakternév"
+      }
+    ],
+    "character-list-header-operations": [
+      {
+        "key": "innerHTML",
+        "message": "Műveletek"
+      }
+    ],
+    "no-character": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs karakter."
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "account-button": [
+      {
+        "key": "innerHTML",
+        "message": "Beállítások"
+      }
+    ],
+    "rename-character-title": [
+      {
+        "key": "innerHTML",
+        "message": "Karakter átnevezése"
+      }
+    ],
+    "new-character-name-span": [
+      {
+        "key": "innerHTML",
+        "message": "Új karakternév"
+      }
+    ],
+    "new-character-name": [
+      {
+        "key": "placeholder",
+        "message": "Új karakternév"
+      }
+    ],
+    "rename-character-button": [
+      {
+        "key": "innerHTML",
+        "message": "Átnevezés"
+      }
+    ]
+  },
+  "additionalContent": {
+    "character-created": "Karakter létrehozva.",
+    "character-deleted": "Karakter törölve.",
+    "character-renamed": "Karakter átnevezve.",
+    "charactername-already-exists": "Karakternév foglalt.",
+    "charactername-too-long": "Karakternév túl hosszú (maximum 30 karakter).",
+    "charactername-too-short": "Karakternév túl rövid (minimum 3 karakter).",
+    "confirm-character-deletion": "Biztosan törlöd a karaktert?\nAz adatokat már nem lehet vissazállítani.",
+    "delete-character-button": "Törlés",
+    "registration-successful": "Sikeres regisztráció!",
+    "rename-character-button": "Átnevezés",
+    "select-character": "Karakter kiválasztása"
+  }
+}

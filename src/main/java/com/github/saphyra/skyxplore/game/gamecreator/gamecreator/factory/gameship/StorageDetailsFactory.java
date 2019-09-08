@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.github.saphyra.skyxplore.data.entity.Storage;
-import com.github.saphyra.skyxplore.data.subservice.StorageService;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Storage;
+import com.github.saphyra.skyxplore.data.gamedata.subservice.StorageService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.ShipEquipments;
 import com.github.saphyra.skyxplore.game.game.domain.ship.StorageDetails;
 import lombok.RequiredArgsConstructor;

@@ -1,15 +1,19 @@
 package com.github.saphyra.skyxplore.userdata.factory.domain;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-import com.github.saphyra.skyxplore.common.exception.NotEnoughMaterialsException;
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.exceptionhandling.exception.PaymentRequiredException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MaterialsTest {
@@ -52,12 +56,14 @@ public class MaterialsTest {
         assertThat(underTest.get(MATERIAL_ID_1)).isEqualTo(AMOUNT + AMOUNT);
     }
 
-    @Test(expected = NotEnoughMaterialsException.class)
+    @Test
     public void testRemoveMaterialShouldThrowExceptionWhenNotEnough() {
         //GIVEN
         underTest.addMaterial(MATERIAL_ID_1, AMOUNT - 1);
         //WHEN
-        underTest.removeMaterial(MATERIAL_ID_1, AMOUNT);
+        Throwable ex = catchThrowable(() -> underTest.removeMaterial(MATERIAL_ID_1, AMOUNT));
+        //THEN
+        verifyException(ex, PaymentRequiredException.class, ErrorCode.NOT_ENOUGH_MATERIALS);
     }
 
     @Test

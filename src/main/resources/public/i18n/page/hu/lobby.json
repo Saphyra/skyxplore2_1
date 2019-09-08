@@ -1,0 +1,82 @@
+{
+  "title": "Előcsarnok - SkyXplore 2.1",
+  "staticText": {
+    "main-title": [
+      {
+        "key": "innerHTML",
+        "message": "Előcsarnok"
+      }
+    ],
+    "chat-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Chat"
+      }
+    ],
+    "message": [
+      {
+        "key": "placeholder",
+        "message": "Üzenet írása"
+      }
+    ],
+    "members-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Társak"
+      }
+    ],
+    "invitation-container-title": [
+      {
+        "key": "innerHTML",
+        "message": "Meghívás"
+      }
+    ],
+    "no-character-can-be-invited": [
+      {
+        "key": "innerHTML",
+        "message": "Nincs meghívható karakter."
+      }
+    ],
+    "character-name": [
+      {
+        "key": "placeholder",
+        "message": "Játékos keresése"
+      }
+    ],
+    "logout-button": [
+      {
+        "key": "innerHTML",
+        "message": "Kijelentkezés"
+      }
+    ],
+    "exit-lobby-button": [
+      {
+        "key": "innerHTML",
+        "message": "Előcsarnok elhagyása"
+      }
+    ],
+    "autofill-label": [
+      {
+        "key": "innerHTML",
+        "message": "Automatikus csapatfeltöltés"
+      }
+    ],
+    "start-queueing": [
+      {
+        "key": "innerHTML",
+        "message": "Meccs keresése"
+      }
+    ]
+  },
+  "additionalContent": {
+    "invite": "Meghívás",
+    "invited-to-lobby": "Meghívás elküldve",
+    "kick-member": "Kirúgás",
+    "kicked-from-lobby": "Játékos kirúgva",
+    "ownership-transferred": "Vezetőség átadva.",
+    "ready-button": "Kész",
+    "transfer-ownership": "Vezetőség átadása",
+    "unready-button": "Nincs kész",
+    "visit-profile": "Profil"
+  }
+}

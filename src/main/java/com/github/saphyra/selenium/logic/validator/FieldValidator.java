@@ -48,7 +48,7 @@ public class FieldValidator {
         WebElement sendButton,
         WebElement... inactiveErrorFields
     ) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 2);
         wait.until(ExpectedConditions.visibilityOf(errorField));
         assertTrue(errorField.isDisplayed());
 
