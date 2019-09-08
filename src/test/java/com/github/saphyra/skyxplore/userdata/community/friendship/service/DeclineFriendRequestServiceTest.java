@@ -1,20 +1,19 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
-import static com.github.saphyra.testing.ExceptionValidator.verifyException;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
+import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
+import com.github.saphyra.skyxplore.common.ErrorCode;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
+import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
-import com.github.saphyra.skyxplore.common.ErrorCode;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
-import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
+import static com.github.saphyra.testing.ExceptionValidator.verifyException;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeclineFriendRequestServiceTest {
@@ -25,7 +24,7 @@ public class DeclineFriendRequestServiceTest {
     private FriendRequestDao friendRequestDao;
 
     @Mock
-    private FriendshipQueryService friendshipQueryService;
+    private FriendRequestQueryService friendshipQueryService;
 
     @InjectMocks
     private DeclineFriendRequestService underTest;
@@ -36,7 +35,7 @@ public class DeclineFriendRequestServiceTest {
     @Test
     public void declineFriendRequest_invalidAccess() {
         //GIVEN
-        given(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).willReturn(friendRequest);
+        given(friendshipQueryService.findByFriendRequestId(FRIEND_REQUEST_ID)).willReturn(friendRequest);
         given(friendRequest.getFriendId()).willReturn(FRIEND_REQUEST_ID);
         given(friendRequest.getCharacterId()).willReturn(FRIEND_REQUEST_ID);
         //WHEN
@@ -48,7 +47,7 @@ public class DeclineFriendRequestServiceTest {
     @Test
     public void declineFriendRequest() {
         //GIVEN
-        given(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).willReturn(friendRequest);
+        given(friendshipQueryService.findByFriendRequestId(FRIEND_REQUEST_ID)).willReturn(friendRequest);
         given(friendRequest.getCharacterId()).willReturn(CHARACTER_ID);
         //WHEN
         underTest.declineFriendRequest(FRIEND_REQUEST_ID, CHARACTER_ID);

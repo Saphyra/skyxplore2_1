@@ -1,20 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ConflictException;
 import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
@@ -26,6 +11,20 @@ import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.B
 import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequest;
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
 import com.github.saphyra.testing.ExceptionValidator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddFriendRequestServiceTest {
@@ -46,7 +45,7 @@ public class AddFriendRequestServiceTest {
     private FriendRequestFactory friendRequestFactory;
 
     @Mock
-    private FriendshipQueryService friendshipQueryService;
+    private ContactQueryService contactQueryService;
 
     @InjectMocks
     private AddFriendRequestService underTest;
@@ -65,7 +64,7 @@ public class AddFriendRequestServiceTest {
         given(blockedCharacterQueryService.findByCharacterIdOrBlockedCharacterId(CHARACTER_ID, FRIEND_ID)).willReturn(Collections.emptyList());
         given(characterQueryService.getCharactersByUserId(USER_ID)).willReturn(Arrays.asList(character));
         given(character.getCharacterId()).willReturn(CHARACTER_ID);
-        given(friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID)).willReturn(false);
+        given(contactQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID)).willReturn(false);
     }
 
     @After
@@ -86,7 +85,7 @@ public class AddFriendRequestServiceTest {
     @Test
     public void addFriendRequest_alreadyExists() {
         //GIVEN
-        given(friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID)).willReturn(true);
+        given(contactQueryService.isFriendshipOrFriendRequestAlreadyExists(CHARACTER_ID, FRIEND_ID)).willReturn(true);
         //WHEN
         Throwable ex = catchThrowable(() -> underTest.addFriendRequest(FRIEND_ID, CHARACTER_ID, USER_ID));
         //THEN

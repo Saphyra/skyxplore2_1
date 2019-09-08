@@ -8,6 +8,7 @@ import com.github.saphyra.skyxplore.userdata.character.domain.SkyXpCharacter;
 import com.github.saphyra.skyxplore.userdata.character.repository.CharacterDao;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.domain.BlockedCharacter;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.repository.BlockedCharacterDao;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendRequestQueryService;
 import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class CharacterQueryService {
     private final CharacterNameLikeCache characterNameLikeCache;
     private final CharacterDao characterDao;
     private final FriendshipQueryService friendshipQueryService;
+    private final FriendRequestQueryService friendRequestQueryService;
     private final LobbyQueryService lobbyQueryService;
 
     public SkyXpCharacter findByCharacterIdValidated(String characterId) {
@@ -94,7 +96,7 @@ public class CharacterQueryService {
     }
 
     private boolean isRequestSent(SkyXpCharacter c, SkyXpCharacter character) {
-        return !friendshipQueryService.isFriendRequestAlreadyExists(c.getCharacterId(), character.getCharacterId());
+        return !friendRequestQueryService.isFriendRequestAlreadyExists(c.getCharacterId(), character.getCharacterId());
     }
 
     private List<SkyXpCharacter> getCharactersOfNameLike(String name) {

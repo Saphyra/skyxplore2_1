@@ -18,11 +18,11 @@ class AcceptFriendRequestService {
     private final FriendRequestDao friendRequestDao;
     private final FriendshipDao friendshipDao;
     private final FriendshipFactory friendshipFactory;
-    private final FriendshipQueryService friendshipQueryService;
+    private final FriendRequestQueryService friendRequestQueryService;
 
     @Transactional
     void acceptFriendRequest(String friendRequestId, String characterId) {
-        FriendRequest friendRequest = friendshipQueryService.findFriendRequestById(friendRequestId);
+        FriendRequest friendRequest = friendRequestQueryService.findByFriendRequestId(friendRequestId);
         if (!friendRequest.getFriendId().equals(characterId)) {
             throw ExceptionFactory.invalidFriendRequestAccess(friendRequestId, characterId);
         }

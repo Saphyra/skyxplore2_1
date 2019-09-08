@@ -1,11 +1,17 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship;
 
-import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
-
-import java.util.List;
-
-import javax.validation.Valid;
-
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
+import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
+import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequestView;
+import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendView;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendRequestQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
+import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,17 +20,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.RequestConstants;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterView;
-import com.github.saphyra.skyxplore.common.domain.character.CharacterViewConverter;
-import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendRequestView;
-import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendView;
-import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipQueryService;
-import com.github.saphyra.skyxplore.userdata.community.friendship.service.FriendshipServiceFacade;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.validation.Valid;
+import java.util.List;
+
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
 
 @RestController
 @Slf4j
@@ -43,6 +42,7 @@ class FriendshipController {
     private final CharacterQueryService characterQueryService;
     private final FriendshipServiceFacade friendshipServiceFacade;
     private final FriendshipQueryService friendshipQueryService;
+    private final FriendRequestQueryService friendRequestQueryService;
     private final CharacterViewConverter characterViewConverter;
     private final FriendViewConverter friendViewConverter;
     private final FriendRequestViewConverter friendRequestViewConverter;
@@ -112,7 +112,7 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his received friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(friendshipQueryService.getReceivedFriendRequests(characterId));
+        return friendRequestViewConverter.convertDomain(friendRequestQueryService.getReceivedFriendRequests(characterId));
     }
 
     @GetMapping(GET_SENT_FRIEND_REQUESTS_MAPPING)
@@ -120,6 +120,6 @@ class FriendshipController {
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
         log.info("{} wants to know his sent friendRequests", characterId);
-        return friendRequestViewConverter.convertDomain(friendshipQueryService.getSentFriendRequests(characterId));
+        return friendRequestViewConverter.convertDomain(friendRequestQueryService.getSentFriendRequests(characterId));
     }
 }

@@ -1,9 +1,5 @@
 package com.github.saphyra.skyxplore.userdata.community.friendship.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.userdata.character.CharacterQueryService;
 import com.github.saphyra.skyxplore.userdata.community.blockedcharacter.BlockedCharacterQueryService;
@@ -12,6 +8,9 @@ import com.github.saphyra.skyxplore.userdata.community.friendship.domain.FriendR
 import com.github.saphyra.skyxplore.userdata.community.friendship.repository.friendrequest.FriendRequestDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ class AddFriendRequestService {
     private final CharacterQueryService characterQueryService;
     private final FriendRequestDao friendRequestDao;
     private final FriendRequestFactory friendRequestFactory;
-    private final FriendshipQueryService friendshipQueryService;
+    private final ContactQueryService contactQueryService;
 
     void addFriendRequest(String friendId, String characterId, String userId) {
         //Check if character with the given characterId exists
@@ -31,7 +30,7 @@ class AddFriendRequestService {
         if (!blockedCharacter.isEmpty()) {
             throw ExceptionFactory.characterBlockedException(characterId, friendId);
         }
-        if (friendshipQueryService.isFriendshipOrFriendRequestAlreadyExists(characterId, friendId)) {
+        if (contactQueryService.isFriendshipOrFriendRequestAlreadyExists(characterId, friendId)) {
             throw ExceptionFactory.friendshipAlreadyExists(characterId, friendId);
         }
         if (isOwnCharacter(friendId, userId)) {

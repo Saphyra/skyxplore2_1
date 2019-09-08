@@ -34,7 +34,7 @@ public class AcceptFriendRequestServiceTest {
     private FriendshipFactory friendshipFactory;
 
     @Mock
-    private FriendshipQueryService friendshipQueryService;
+    private FriendRequestQueryService friendRequestQueryService;
 
     @InjectMocks
     private AcceptFriendRequestService underTest;
@@ -47,7 +47,7 @@ public class AcceptFriendRequestServiceTest {
 
     @Before
     public void setUp() {
-        given(friendshipQueryService.findFriendRequestById(FRIEND_REQUEST_ID)).willReturn(friendRequest);
+        given(friendRequestQueryService.findByFriendRequestId(FRIEND_REQUEST_ID)).willReturn(friendRequest);
         given(friendRequest.getFriendId()).willReturn(CHARACTER_ID);
     }
 
