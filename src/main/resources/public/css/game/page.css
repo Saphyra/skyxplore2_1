@@ -1,0 +1,19 @@
+#main-panel{
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+    #chat-window{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 30%;
+        height: 25%;
+        border-top: 3px ridge white;
+        border-right: 3px ridge white;
+        background: black;
+    }

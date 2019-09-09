@@ -30,8 +30,7 @@ Create community
 Error reporting
     - Exceptions to save
 
-Exception handling:
-    - Return localized exception messages
+//TODO lobby-queue page: No exception when game started and polling messages
 
 Javadoc
 Integration tests

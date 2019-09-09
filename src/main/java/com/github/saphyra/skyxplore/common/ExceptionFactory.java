@@ -34,6 +34,7 @@ public final class ExceptionFactory {
     private static final String INVALID_LOCALE_PREFIX = "Locale %s is not supported.";
     private static final String INVALID_MAIL_ACCESS_PREFIX = "%s cannot access to mail %s";
     private static final String INVALID_SLOT_NAME_PREFIX = "Invalid slotName: %s";
+    private static final String LOBBY_NOT_FOUND_PREFIX = "Lobby not found with characterId %s";
     private static final String MAIL_NOT_FOUND_PREFIX = "Mail not found with id %s";
     private static final String NOT_ENOUGH_MATERIALS_PREFIX = "Not enough %s. Required: %s, present: %s";
     private static final String NOT_ENOUGH_MONEY_PREFIX = "%s tried to spend %s money, but only has %s";
@@ -119,6 +120,10 @@ public final class ExceptionFactory {
 
     public static RestException invalidSlotName(String slotName) {
         throw new BadRequestException(createErrorMessage(ErrorCode.INVALID_SLOT_NAME), String.format(INVALID_SLOT_NAME_PREFIX, slotName));
+    }
+
+    public static RestException lobbyNotFound(String characterId) {
+        return new NotFoundException(createErrorMessage(ErrorCode.LOBBY_NOT_FOUND), String.format(LOBBY_NOT_FOUND_PREFIX, characterId));
     }
 
     public static RestException mailNotFound(String mailId) {

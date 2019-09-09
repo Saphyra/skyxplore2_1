@@ -16,6 +16,7 @@ public class PageController {
     public static final String COMMUNITY_MAPPING = WEB_PREFIX + "/community";
     public static final String EQUIPMENT_MAPPING = WEB_PREFIX + "/equipment";
     public static final String FACTORY_MAPPING = WEB_PREFIX + "/factory";
+    public static final String GAME_MAPPING = WEB_PREFIX + "/game";
     public static final String HANGAR_MAPPING = WEB_PREFIX + "/hangar";
     public static final String INDEX_MAPPING = WEB_PREFIX ;
     public static final String OVERVIEW_MAPPING = WEB_PREFIX + "/overview";
@@ -45,6 +46,12 @@ public class PageController {
     String factory() {
         log.info("Request arrived to {}", FACTORY_MAPPING);
         return "factory";
+    }
+
+    @GetMapping(GAME_MAPPING)
+    String game() {
+        log.info("Request arrived to {}", HANGAR_MAPPING);
+        return "game";
     }
 
     @GetMapping(HANGAR_MAPPING)

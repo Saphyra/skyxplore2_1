@@ -1,20 +1,20 @@
 package com.github.saphyra.skyxplore.game.lobby.message;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
-import java.util.Arrays;
-import java.util.List;
-
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.domain.message.MessageView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
 
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.message.MessageView;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MessageControllerTest {
@@ -38,9 +38,9 @@ public class MessageControllerTest {
         //GIVEN
         given(lobbyMessageViewQueryService.getMessages(CHARACTER_ID, true)).willReturn(Arrays.asList(messageView));
         //WHEN
-        List<MessageView> result = underTest.getMessages(CHARACTER_ID, true);
+        ResponseEntity<List<MessageView>> result = underTest.getMessages(CHARACTER_ID, true);
         //THEN
-        assertThat(result).containsOnly(messageView);
+        assertThat(result.getBody()).containsOnly(messageView);
     }
 
     @Test

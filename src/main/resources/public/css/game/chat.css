@@ -1,0 +1,47 @@
+#chat-header{
+    border-bottom: 2px ridge white;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5rem;
+    padding: 0.2rem
+}
+
+#chat-rooms{
+    border-bottom: 1px ridge white;
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+    right: 0;
+    height: 1.5rem;
+}
+
+#chat-message-container{
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    right: 0;
+    bottom: 2rem;
+}
+
+    .chat-group{
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+#chat-input-container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2rem;
+    text-align: center;
+}
+
+    #chat-input{
+        width: 98%;
+        border-width: 1px;
+        font-size: 0.75rem;
+    }

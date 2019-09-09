@@ -1,16 +1,15 @@
 package com.github.saphyra.skyxplore.game.lobby.invitation;
 
-import java.time.OffsetDateTime;
-import java.util.stream.Collectors;
-
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
 import com.github.saphyra.skyxplore.common.DateTimeUtil;
 import com.github.saphyra.skyxplore.game.lobby.invitation.domain.Invitation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.time.OffsetDateTime;
+import java.util.stream.Collectors;
 
 @EnableScheduling
 @Component
@@ -23,7 +22,7 @@ class InvitationCleanupService {
 
     @Scheduled(cron = "${lobby.invitation.cleanup-cron}")
     void deleteExpiredInvitations() {
-        log.info("Deleting expired invitations...");
+        log.debug("Deleting expired invitations...");
         invitationStorage.values().stream()
             .filter(this::isExpired)
             .collect(Collectors.toList())

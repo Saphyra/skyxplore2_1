@@ -1,16 +1,16 @@
 package com.github.saphyra.skyxplore.game.lobby.lobby;
 
+import com.github.saphyra.exceptionhandling.exception.NotFoundException;
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
-import com.github.saphyra.exceptionhandling.exception.NotFoundException;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class LobbyQueryService {
 
     public Lobby findByCharacterIdValidated(String characterId) {
         return findByCharacterId(characterId)
-            .orElseThrow(() -> new NotFoundException("Lobby not found for character " + characterId));
+            .orElseThrow(() -> ExceptionFactory.lobbyNotFound(characterId));
     }
 
     public Optional<Lobby> findByCharacterId(String characterId) {

@@ -13,16 +13,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class GameCreatorService {
+class GameCreatorService {
     private final FillGroupingService fillGroupingService;
     private final CreateGameService createGameService;
 
-    @Scheduled(fixedDelay = 4000L)
+    @Scheduled(fixedDelayString = "${game.creation.interval:4000}")
     void createGames() {
-        log.info("Creating games...");
+        log.debug("Creating games...");
         fillGroupingService.fillGroupingsWithLobbies();
         fillGroupingService.fillGroupingsWithAis();
         createGameService.createGameFromGroupings();
-        log.info("Creating games finished...");
+        log.debug("Creating games finished...");
     }
 }

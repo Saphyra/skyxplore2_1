@@ -18,6 +18,7 @@
   "INVALID_LOCALE": "Érvénytelen nyelv.",
   "INVALID_MAIL_ACCESS": "Üzenet hozzáférés megtagadva.",
   "INVALID_SLOT_NAME": "Érvénytelen slot",
+  "LOBBY_NOT_FOUND_PREFIX": "Előcsarnok nem található.",
   "MAIL_NOT_FOUND": "Üzenet nem található.",
   "NOT_ENOUGH_MATERIALS": "Nincs elég nyersanyag.",
   "NOT_ENOUGH_MONEY": "Nincs elég pénz.",

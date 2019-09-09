@@ -32,9 +32,9 @@ class FinishProductService {
     private final ProductDao productDao;
 
     void finishProducts() {
-        log.info("Processing finished products...");
+        log.debug("Processing finished products...");
         List<Product> products = productDao.getFinishedProducts();
-        log.info("Number of finished products: {}", products.size());
+        log.debug("Number of finished products: {}", products.size());
         products.forEach(product -> {
             try {
                 finishProduct(product);

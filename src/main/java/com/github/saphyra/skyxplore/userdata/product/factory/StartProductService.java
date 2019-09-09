@@ -21,10 +21,10 @@ class StartProductService {
     private final ProductQueryService productQueryService;
 
     void startProducts() {
-        log.info("Starting the next product in the queue");
+        log.debug("Starting the next product in the queue");
         List<Product> products = productQueryService.getFirstFromQueue();
 
-        log.info("Items to start: {}", products.size());
+        log.debug("Items to start: {}", products.size());
         log.debug("Starting items: {}", products);
         products.forEach(this::startNextProduct);
     }

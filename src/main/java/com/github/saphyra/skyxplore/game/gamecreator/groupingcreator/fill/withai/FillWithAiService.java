@@ -15,7 +15,7 @@ public class FillWithAiService {
     private final GameGroupingQueryService gameGroupingQueryService;
 
     public void fillWithAi() {
-        log.info("Filling GameGroupings with AI-s...");
+        log.debug("Filling GameGroupings with AI-s...");
         try {
             gameGroupingQueryService.getAutoFillableGameGroupings()
                 .forEach(this::fillWithAi);

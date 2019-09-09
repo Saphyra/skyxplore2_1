@@ -1,9 +1,5 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.github.saphyra.skyxplore.game.game.GameStorage;
 import com.github.saphyra.skyxplore.game.game.domain.Game;
 import com.github.saphyra.skyxplore.game.gamecreator.GameGroupingQueryService;
@@ -14,6 +10,9 @@ import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -27,7 +26,7 @@ public class CreateGameService {
     private final LobbyStorage lobbyStorage;
 
     public void createGameFromGroupings() {
-        log.info("Creating Games for GameGroupings...");
+        log.debug("Creating Games for GameGroupings...");
         try {
             gameGroupingQueryService.getGroupingsWithEnoughMembers().forEach(this::createGameFromGrouping);
         } catch (Exception e) {
