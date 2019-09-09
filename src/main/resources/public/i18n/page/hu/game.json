@@ -1,12 +1,6 @@
 {
   "title": "Harcmező - SkyXplore 2.1",
   "staticText": {
-    "main-title": [
-      {
-        "key": "innerHTML",
-        "message": "Harcmező"
-      }
-    ],
     "chat-header": [
       {
         "key": "innerHTML",
