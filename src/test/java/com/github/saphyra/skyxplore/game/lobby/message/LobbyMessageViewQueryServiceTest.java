@@ -1,13 +1,9 @@
 package com.github.saphyra.skyxplore.game.lobby.message;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessage;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessageView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.domain.message.Message;
-import com.github.saphyra.skyxplore.common.domain.message.MessageView;
-import com.github.saphyra.skyxplore.common.domain.message.MessageViewConverter;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LobbyMessageViewQueryServiceTest {
@@ -34,7 +32,7 @@ public class LobbyMessageViewQueryServiceTest {
     private LobbyQueryService lobbyQueryService;
 
     @Mock
-    private MessageViewConverter messageViewConverter;
+    private LobbyMessageViewConverter lobbyMessageViewConverter;
 
     @InjectMocks
     private LobbyMessageViewQueryService underTest;
@@ -43,47 +41,47 @@ public class LobbyMessageViewQueryServiceTest {
     private Lobby lobby;
 
     @Mock
-    private Message queriedMessage;
+    private LobbyMessage queriedLobbyMessage;
 
     @Mock
-    private Message message;
+    private LobbyMessage lobbyMessage;
 
     @Mock
-    private MessageView messageView;
+    private LobbyMessageView lobbyMessageView;
 
     @Before
     public void setup() {
         given(lobbyQueryService.findByCharacterIdValidated(CHARACTER_ID)).willReturn(lobby);
-        given(lobby.getMessages()).willReturn(Arrays.asList(message, queriedMessage));
+        given(lobby.getLobbyMessages()).willReturn(Arrays.asList(lobbyMessage, queriedLobbyMessage));
 
-        given(queriedMessage.getQueriedBy()).willReturn(Arrays.asList(CHARACTER_ID));
+        given(queriedLobbyMessage.getQueriedBy()).willReturn(Arrays.asList(CHARACTER_ID));
 
-        given(message.getQueriedBy()).willReturn(Collections.emptyList());
+        given(lobbyMessage.getQueriedBy()).willReturn(Collections.emptyList());
 
 
-        given(messageViewConverter.convertDomain(message)).willReturn(messageView);
-        given(messageViewConverter.convertDomain(queriedMessage)).willReturn(messageView);
+        given(lobbyMessageViewConverter.convertDomain(lobbyMessage)).willReturn(lobbyMessageView);
+        given(lobbyMessageViewConverter.convertDomain(queriedLobbyMessage)).willReturn(lobbyMessageView);
     }
 
     @Test
     public void getMessages() {
         //WHEN
-        List<MessageView> result = underTest.getMessages(CHARACTER_ID, false);
+        List<LobbyMessageView> result = underTest.getMessages(CHARACTER_ID, false);
         //THEN
-        verify(message).addQueriedBy(CHARACTER_ID);
+        verify(lobbyMessage).addQueriedBy(CHARACTER_ID);
 
-        assertThat(result).containsExactly(messageView);
+        assertThat(result).containsExactly(lobbyMessageView);
     }
 
     @Test
     public void getMessages_queryAll() {
         //WHEN
-        List<MessageView> result = underTest.getMessages(CHARACTER_ID, true);
+        List<LobbyMessageView> result = underTest.getMessages(CHARACTER_ID, true);
         //THEN
-        verify(message).addQueriedBy(CHARACTER_ID);
-        verify(queriedMessage).addQueriedBy(CHARACTER_ID);
+        verify(lobbyMessage).addQueriedBy(CHARACTER_ID);
+        verify(queriedLobbyMessage).addQueriedBy(CHARACTER_ID);
 
         assertThat(result).hasSize(2);
-        assertThat(result).containsOnly(messageView);
+        assertThat(result).containsOnly(lobbyMessageView);
     }
 }

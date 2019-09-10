@@ -1,4 +1,4 @@
-package com.github.saphyra.skyxplore.common.domain.message;
+package com.github.saphyra.skyxplore.game.lobby.message.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NonNull;
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class MessageView {
+public class LobbyMessageView {
     @NonNull
     private final String senderId;
 

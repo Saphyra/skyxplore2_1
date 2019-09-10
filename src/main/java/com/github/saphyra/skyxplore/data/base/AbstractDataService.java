@@ -5,8 +5,10 @@ import com.github.saphyra.skyxplore.data.base.loader.ContentLoaderFactory;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+
 @Slf4j
-public abstract class AbstractDataService<V> extends OptionalMap<String, V> {
+public abstract class AbstractDataService<V> extends HashMap<String, V> implements OptionalMap<String, V> {
     private static final String DEFAULT_PATH = "public/gamedata/items";
     private static final String BASE_DIR = "src/main/resources/";
 

@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.github.saphyra.skyxplore.data.errorcode.ErrorCodeLocalization;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ErrorMessageResolverTest {
+public class ErrorLobbyMessageResolverTest {
     private static final String ERROR_CODE = "error_code";
     private static final String ERROR_MESSAGE = "error_message";
 

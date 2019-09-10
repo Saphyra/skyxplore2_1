@@ -12,6 +12,8 @@ import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ExceptionFactory {
     private static final String BLOCKED_CHARACTER_NOT_FOUND_PREFIX = "BlockedCharacter not found for characterId %s and blockedCharacterId %s";
@@ -19,6 +21,7 @@ public final class ExceptionFactory {
     private static final String CHARACTER_BLOCKED_PREFIX = "There is a block between characters %s and %s";
     private static final String CHARACTER_NAME_ALREADY_EXISTS_PREFIX = "Character already exists with name %s";
     private static final String CHARACTER_NOT_FOUND_PREFIX = "SkyXpCharacter not found with id %s";
+    private static final String CHAT_ROOM_NOT_FOUND_PREFIX = "ChatRoom not found with roomId %s";
     private static final String CREDENTIALS_NOT_FOUND_PREFIX = "SkyXpCredentials not found with userId %s";
     private static final String EMAIL_ALREADY_EXISTS_PREFIX = "Email %s is already exists.";
     private static final String EQUIPMENT_NOT_FOUND_PREFIX = "Equipment not found with id %s";
@@ -28,6 +31,7 @@ public final class ExceptionFactory {
     private static final String FRIEND_REQUEST_NOT_FOUND_PREFIX = "FriendRequest not found with id %s";
     private static final String FRIENDSHIP_ALREADY_EXISTS_PREFIX = "Friendship already exists between %s and %s";
     private static final String FRIENDSHIP_NOT_FOUND_PREFIX = "Friendship not found with id %s";
+    private static final String GAME_NOT_FOUND_PREFIX = "Game not found for character %s";
     private static final String INVALID_CHARACTER_ACCESS_PREFIX = "%s cannot access character %s";
     private static final String INVALID_FRIEND_REQUEST_ACCESS_PREFIX = "%s cannot access FriendRequest %s";
     private static final String INVALID_FRIENDSHIP_ACCESS_PREFIX = "%s has no access to Friendship %s";
@@ -60,6 +64,10 @@ public final class ExceptionFactory {
 
     public static RestException characterNotFound(String characterId) {
         return new NotFoundException(createErrorMessage(ErrorCode.CHARACTER_NOT_FOUND), String.format(CHARACTER_NOT_FOUND_PREFIX, characterId));
+    }
+
+    public static RestException chatRoomNotFound(UUID roomId) {
+        return new NotFoundException(createErrorMessage(ErrorCode.CHAT_ROOM_NOT_FOUND), String.format(CHAT_ROOM_NOT_FOUND_PREFIX, roomId.toString()));
     }
 
     public static RestException credentialsNotFound(String userId) {
@@ -96,6 +104,10 @@ public final class ExceptionFactory {
 
     public static RestException friendshipNotFound(String friendshipId) {
         return new NotFoundException(createErrorMessage(ErrorCode.FRIENDSHIP_NOT_FOUND), String.format(FRIENDSHIP_NOT_FOUND_PREFIX, friendshipId));
+    }
+
+    public static NotFoundException gameNotFound(String characterId) {
+        return new NotFoundException(createErrorMessage(ErrorCode.GAME_NOT_FOUND), String.format(GAME_NOT_FOUND_PREFIX, characterId));
     }
 
     public static RestException invalidCharacterAccess(String characterId, String userId) {

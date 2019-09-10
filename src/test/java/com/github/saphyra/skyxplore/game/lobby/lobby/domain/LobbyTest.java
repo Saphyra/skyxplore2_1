@@ -1,21 +1,5 @@
 package com.github.saphyra.skyxplore.game.lobby.lobby.domain;
 
-import static java.util.Objects.isNull;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
@@ -24,8 +8,23 @@ import com.github.saphyra.exceptionhandling.exception.PreconditionFailedExceptio
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyContext;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyStorage;
-import com.github.saphyra.skyxplore.common.domain.message.Message;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessage;
 import com.github.saphyra.util.Random;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import static java.util.Objects.isNull;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LobbyTest {
@@ -45,7 +44,7 @@ public class LobbyTest {
     private Lobby.LobbyBuilder lobbyBuilder;
 
     @Mock
-    private Message message;
+    private LobbyMessage lobbyMessage;
 
     @Mock
     private LobbyEvent lobbyEvent;
@@ -206,25 +205,25 @@ public class LobbyTest {
         //GIVEN
         buildLobbyWithDefaultMember();
         //WHEN
-        underTest.addMessage(message);
+        underTest.addMessage(lobbyMessage);
         //THEN
-        assertThat(underTest.getMessages()).hasSize(1);
-        assertThat(underTest.getMessages().get(0)).isEqualTo(message);
+        assertThat(underTest.getLobbyMessages()).hasSize(1);
+        assertThat(underTest.getLobbyMessages().get(0)).isEqualTo(lobbyMessage);
     }
 
     @Test
     public void getMessages() {
         //GIVEN
         buildLobbyWithDefaultMember();
-        underTest.addMessage(message);
+        underTest.addMessage(lobbyMessage);
         //WHEN
-        List<Message> result = underTest.getMessages();
+        List<LobbyMessage> result = underTest.getLobbyMessages();
         //THEN
         assertThat(result).hasSize(1);
-        assertThat(underTest.getMessages().get(0)).isEqualTo(message);
+        assertThat(underTest.getLobbyMessages().get(0)).isEqualTo(lobbyMessage);
 
-        result.add(message);
-        assertThat(underTest.getMessages()).hasSize(1);
+        result.add(lobbyMessage);
+        assertThat(underTest.getLobbyMessages()).hasSize(1);
     }
 
     @Test(expected = ForbiddenException.class)

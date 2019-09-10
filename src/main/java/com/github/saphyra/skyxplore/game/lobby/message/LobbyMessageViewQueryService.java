@@ -1,30 +1,28 @@
 package com.github.saphyra.skyxplore.game.lobby.message;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
-import com.github.saphyra.skyxplore.common.domain.message.MessageView;
-import com.github.saphyra.skyxplore.common.domain.message.MessageViewConverter;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessageView;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 class LobbyMessageViewQueryService {
     private final LobbyQueryService lobbyQueryService;
-    private final MessageViewConverter messageViewConverter;
+    private final LobbyMessageViewConverter lobbyMessageViewConverter;
 
-    List<MessageView> getMessages(String characterId, Boolean queryAll) {
+    List<LobbyMessageView> getMessages(String characterId, Boolean queryAll) {
         Lobby lobby = lobbyQueryService.findByCharacterIdValidated(characterId);
-        return lobby.getMessages().stream()
+        return lobby.getLobbyMessages().stream()
             .filter(message -> queryAll || !message.getQueriedBy().contains(characterId))
             .peek(message -> message.addQueriedBy(characterId))
-            .map(messageViewConverter::convertDomain)
+            .map(lobbyMessageViewConverter::convertDomain)
             .collect(Collectors.toList());
     }
 }

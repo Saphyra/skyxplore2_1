@@ -47,7 +47,7 @@ public class LobbyObjectFactoryTest {
         assertThat(lobby.getOwnerId()).isEqualTo(CHARACTER_ID);
         assertThat(lobby.getLobbyContext()).isEqualTo(lobbyContext);
         assertThat(lobby.getEvents()).isNotNull();
-        assertThat(lobby.getMessages()).isNotNull();
+        assertThat(lobby.getLobbyMessages()).isNotNull();
         assertThat(lobby.isInQueue()).isFalse();
         assertThat(lobby.isAutoFill()).isTrue();
     }

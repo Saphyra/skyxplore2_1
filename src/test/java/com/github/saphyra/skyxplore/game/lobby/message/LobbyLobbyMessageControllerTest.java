@@ -1,7 +1,7 @@
 package com.github.saphyra.skyxplore.game.lobby.message;
 
 import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.domain.message.MessageView;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessageView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LobbyMessageControllerTest {
+public class LobbyLobbyMessageControllerTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String MESSAGE = "message";
 
@@ -31,16 +31,16 @@ public class LobbyMessageControllerTest {
     private LobbyMessageController underTest;
 
     @Mock
-    private MessageView messageView;
+    private LobbyMessageView lobbyMessageView;
 
     @Test
     public void getMessage() {
         //GIVEN
-        given(lobbyMessageViewQueryService.getMessages(CHARACTER_ID, true)).willReturn(Arrays.asList(messageView));
+        given(lobbyMessageViewQueryService.getMessages(CHARACTER_ID, true)).willReturn(Arrays.asList(lobbyMessageView));
         //WHEN
-        ResponseEntity<List<MessageView>> result = underTest.getMessages(CHARACTER_ID, true);
+        ResponseEntity<List<LobbyMessageView>> result = underTest.getMessages(CHARACTER_ID, true);
         //THEN
-        assertThat(result.getBody()).containsOnly(messageView);
+        assertThat(result.getBody()).containsOnly(lobbyMessageView);
     }
 
     @Test

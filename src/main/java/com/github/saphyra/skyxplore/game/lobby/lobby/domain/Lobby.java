@@ -1,11 +1,5 @@
 package com.github.saphyra.skyxplore.game.lobby.lobby.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.Vector;
-
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ForbiddenException;
 import com.github.saphyra.exceptionhandling.exception.NotFoundException;
@@ -13,7 +7,7 @@ import com.github.saphyra.exceptionhandling.exception.PayloadTooLargeException;
 import com.github.saphyra.exceptionhandling.exception.PreconditionFailedException;
 import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyContext;
-import com.github.saphyra.skyxplore.common.domain.message.Message;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessage;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +16,12 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.Vector;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
@@ -45,7 +45,7 @@ public class Lobby {
 
     @NonNull
     @Getter(value = AccessLevel.NONE)
-    private final List<Message> messages = new Vector<>();
+    private final List<LobbyMessage> lobbyMessages = new Vector<>();
 
     @NonNull
     @Builder.Default
@@ -123,12 +123,12 @@ public class Lobby {
         }
     }
 
-    public void addMessage(Message message) {
-        messages.add(message);
+    public void addMessage(LobbyMessage lobbyMessage) {
+        lobbyMessages.add(lobbyMessage);
     }
 
-    public List<Message> getMessages() {
-        return new ArrayList<>(messages);
+    public List<LobbyMessage> getLobbyMessages() {
+        return new ArrayList<>(lobbyMessages);
     }
 
     public void transferOwnership(String currentOwnerId, String newOwnerId) {

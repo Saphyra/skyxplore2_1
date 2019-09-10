@@ -1,13 +1,6 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
+import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.domain.message.ChatRoom;
 import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroup;
@@ -16,6 +9,13 @@ import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -25,10 +25,11 @@ public class GameMessageFactory {
     private static final String GLOBAL_CHAT_DISPLAY_NAME = "global-chat-room";
     private static final String TEAM_CHAT_DISPLAY_NAME = "team-chat-room";
 
+    private final GameContext gameContext;
     private final IdGenerator idGenerator;
 
     public GameMessages create(GameGrouping gameGrouping) {
-        GameMessages gameMessages = new GameMessages();
+        GameMessages gameMessages = new GameMessages(gameContext);
         createChatRooms(gameGrouping).forEach(gameMessages::addRoom);
         return gameMessages;
     }

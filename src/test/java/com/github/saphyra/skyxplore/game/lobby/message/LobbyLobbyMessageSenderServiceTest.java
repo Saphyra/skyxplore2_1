@@ -1,12 +1,10 @@
 package com.github.saphyra.skyxplore.game.lobby.message;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-
-import java.time.OffsetDateTime;
-import java.util.UUID;
-
+import com.github.saphyra.skyxplore.common.DateTimeUtil;
+import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
+import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessage;
+import com.github.saphyra.util.IdGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -14,14 +12,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.github.saphyra.skyxplore.common.DateTimeUtil;
-import com.github.saphyra.skyxplore.game.lobby.lobby.LobbyQueryService;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.Lobby;
-import com.github.saphyra.skyxplore.common.domain.message.Message;
-import com.github.saphyra.util.IdGenerator;
+import java.time.OffsetDateTime;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LobbyMessageSenderServiceTest {
+public class LobbyLobbyMessageSenderServiceTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String MESSAGE = "message";
     private static final UUID MESSAGE_ID = UUID.randomUUID();
@@ -53,7 +52,7 @@ public class LobbyMessageSenderServiceTest {
         //WHEN
         underTest.sendMessage(CHARACTER_ID, MESSAGE);
         //THEN
-        ArgumentCaptor<Message> argumentCaptor = ArgumentCaptor.forClass(Message.class);
+        ArgumentCaptor<LobbyMessage> argumentCaptor = ArgumentCaptor.forClass(LobbyMessage.class);
         verify(lobby).addMessage(argumentCaptor.capture());
 
         assertThat(argumentCaptor.getValue().getMessageId()).isEqualTo(MESSAGE_ID);
