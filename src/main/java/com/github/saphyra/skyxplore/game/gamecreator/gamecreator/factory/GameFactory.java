@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.domain.Game;
 import com.github.saphyra.skyxplore.game.game.domain.Team;
+import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
 import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
@@ -25,13 +26,14 @@ public class GameFactory {
     private final IdGenerator idGenerator;
     private final TeamFactory teamFactory;
 
-    public Game create(GameGrouping gameGrouping) {
+    public Game create(GameGrouping gameGrouping, GameMessages gameMessages) {
         List<Team> teams = teamFactory.create(gameGrouping);
         Game game = Game.builder()
             .gameId(idGenerator.randomUUID())
             .gameMode(gameGrouping.getGameMode())
             .data(gameGrouping.getData())
             .gameContext(gameContext)
+            .messages(gameMessages)
             .build()
             .addTeams(teams);
         game.addShips(createPlayerShips(gameGrouping, game));

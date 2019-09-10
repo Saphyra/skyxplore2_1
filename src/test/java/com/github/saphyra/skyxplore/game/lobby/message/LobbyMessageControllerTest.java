@@ -17,18 +17,18 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MessageControllerTest {
+public class LobbyMessageControllerTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String MESSAGE = "message";
 
     @Mock
-    private MessageSenderService messageSenderService;
+    private LobbyMessageSenderService lobbyMessageSenderService;
 
     @Mock
     private LobbyMessageViewQueryService lobbyMessageViewQueryService;
 
     @InjectMocks
-    private MessageController underTest;
+    private LobbyMessageController underTest;
 
     @Mock
     private MessageView messageView;
@@ -48,6 +48,6 @@ public class MessageControllerTest {
         //WHEN
         underTest.sendMessage(CHARACTER_ID, new OneStringParamRequest(MESSAGE));
         //THEN
-        verify(messageSenderService).sendMessage(CHARACTER_ID, MESSAGE);
+        verify(lobbyMessageSenderService).sendMessage(CHARACTER_ID, MESSAGE);
     }
 }

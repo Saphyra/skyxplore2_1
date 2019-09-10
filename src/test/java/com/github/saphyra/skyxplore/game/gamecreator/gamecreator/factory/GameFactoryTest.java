@@ -7,7 +7,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -20,6 +19,7 @@ import com.github.saphyra.skyxplore.common.domain.FixedSizeConcurrentList;
 import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.domain.Game;
 import com.github.saphyra.skyxplore.game.game.domain.Team;
+import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
 import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroup;
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGroupCharacter;
@@ -69,6 +69,9 @@ public class GameFactoryTest {
     @Mock
     private GameShip aiGameShip;
 
+    @Mock
+    private GameMessages gameMessages;
+
     @Test
     public void create() throws NoSuchFieldException, IllegalAccessException {
         //GIVEN
@@ -85,7 +88,7 @@ public class GameFactoryTest {
         given(gameShipFactory.create(eq(gameGroupCharacter), any())).willReturn(gameShip);
         given(gameShipFactory.create(eq(aiGameGroupCharacter), any())).willReturn(aiGameShip);
         //WHEN
-        Game result = underTest.create(gameGrouping);
+        Game result = underTest.create(gameGrouping, gameMessages);
         //THEN
         assertThat(result.getGameId()).isEqualTo(GAME_ID);
         assertThat(result.getGameMode()).isEqualTo(GameMode.TEAMFIGHT);
@@ -94,7 +97,7 @@ public class GameFactoryTest {
         assertThat(getField(result, "gameContext")).isEqualTo(gameContext);
         assertThat(getField(result, "teams")).isEqualTo(Arrays.asList(team));
         assertThat(getField(result, "ships")).isEqualTo(Arrays.asList(gameShip, aiGameShip));
-        assertThat(getField(result, "messages")).isEqualTo(Collections.emptyList());
+        assertThat(getField(result, "messages")).isEqualTo(gameMessages);
     }
 
 

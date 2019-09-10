@@ -31,6 +31,7 @@ Error reporting
     - Exceptions to save
 
 //TODO lobby-queue page: No exception when game started and polling messages
+//TODO characterInGameRedirectionFilter
 
 Javadoc
 Integration tests

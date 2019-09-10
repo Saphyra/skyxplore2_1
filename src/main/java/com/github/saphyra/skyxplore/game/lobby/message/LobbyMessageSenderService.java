@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class MessageSenderService {
+class LobbyMessageSenderService {
     private final DateTimeUtil dateTimeUtil;
     private final IdGenerator idGenerator;
     private final LobbyQueryService lobbyQueryService;

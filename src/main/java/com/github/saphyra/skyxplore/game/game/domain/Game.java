@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
-import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.skyxplore.game.game.GameContext;
+import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
 import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 import lombok.Builder;
@@ -31,19 +31,23 @@ public class Game {
 
     private final List<Team> teams = new Vector<>();
     private final List<GameShip> ships = new Vector<>();
-    private final List<Message> messages = new Vector<>();
+
+    @Getter
+    private final GameMessages messages;
 
     @Builder
     private Game(
         @NonNull UUID gameId,
         @NonNull GameMode gameMode,
         Object data,
-        @NonNull GameContext gameContext
+        @NonNull GameContext gameContext,
+        @NonNull GameMessages messages
     ) {
         this.gameId = gameId;
         this.gameMode = gameMode;
         this.data = data;
         this.gameContext = gameContext;
+        this.messages = messages;
     }
 
     public boolean containsCharacter(String characterId) {

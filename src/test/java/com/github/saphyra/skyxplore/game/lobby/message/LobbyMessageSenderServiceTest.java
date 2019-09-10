@@ -21,7 +21,7 @@ import com.github.saphyra.skyxplore.common.domain.message.Message;
 import com.github.saphyra.util.IdGenerator;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MessageSenderServiceTest {
+public class LobbyMessageSenderServiceTest {
     private static final String CHARACTER_ID = "character_id";
     private static final String MESSAGE = "message";
     private static final UUID MESSAGE_ID = UUID.randomUUID();
@@ -38,7 +38,7 @@ public class MessageSenderServiceTest {
     private LobbyQueryService lobbyQueryService;
 
     @InjectMocks
-    private MessageSenderService underTest;
+    private LobbyMessageSenderService underTest;
 
     @Mock
     private Lobby lobby;

@@ -19,7 +19,7 @@ import static com.github.saphyra.skyxplore.userdata.community.NotificationContro
 import static com.github.saphyra.skyxplore.userdata.community.NotificationController.GET_NUMBER_OF_NOTIFICATIONS_MAPPING;
 import static com.github.saphyra.skyxplore.userdata.community.NotificationController.GET_NUMBER_OF_UNREAD_MAILS_MAPPING;
 import static com.github.saphyra.skyxplore.game.lobby.invitation.InvitationController.GET_INVITATIONS_MAPPING;
-import static com.github.saphyra.skyxplore.game.lobby.message.MessageController.GET_MESSAGES_MAPPING;
+import static com.github.saphyra.skyxplore.game.lobby.message.LobbyMessageController.GET_MESSAGES_MAPPING;
 import static com.github.saphyra.skyxplore.userdata.user.UserController.EMAIL_EXISTS_MAPPING;
 import static com.github.saphyra.skyxplore.userdata.user.UserController.REGISTRATION_MAPPING;
 import static com.github.saphyra.skyxplore.userdata.user.UserController.USERNAME_EXISTS_MAPPING;

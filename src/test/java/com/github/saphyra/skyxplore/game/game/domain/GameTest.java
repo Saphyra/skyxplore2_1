@@ -1,21 +1,23 @@
 package com.github.saphyra.skyxplore.game.game.domain;
 
-import com.github.saphyra.skyxplore.game.game.GameContext;
-import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
-import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.saphyra.skyxplore.game.game.GameContext;
+import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
+import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
+import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameTest {
@@ -33,12 +35,16 @@ public class GameTest {
     @Mock
     private GameShip gameShip;
 
+    @Mock
+    private GameMessages gameMessages;
+
     @Before
     public void setUp() {
         underTest = Game.builder()
             .gameId(GAME_ID)
             .gameMode(GameMode.ARCADE)
             .gameContext(gameContext)
+            .messages(gameMessages)
             .build();
     }
 
