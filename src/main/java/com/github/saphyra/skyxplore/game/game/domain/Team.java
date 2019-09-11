@@ -1,13 +1,14 @@
 package com.github.saphyra.skyxplore.game.game.domain;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
 
 @ToString
 @EqualsAndHashCode
@@ -34,5 +35,13 @@ public class Team {
     boolean containsCharacter(String characterId) {
         return characters.stream()
             .anyMatch(gameCharacter -> gameCharacter.getCharacterId().equals(characterId));
+    }
+
+    String getNameOfCharacter(String characterId) {
+        return characters.stream()
+            .filter(gameCharacter -> gameCharacter.getCharacterId().equals(characterId))
+            .findFirst()
+            .map(GameCharacter::getCharacterName)
+            .orElseThrow(() -> ExceptionFactory.characterNotInTeam(characterId, teamId));
     }
 }

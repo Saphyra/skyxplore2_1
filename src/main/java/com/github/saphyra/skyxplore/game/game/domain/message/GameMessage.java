@@ -1,14 +1,14 @@
 package com.github.saphyra.skyxplore.game.game.domain.message;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
 
 @Data
 @Builder
@@ -38,5 +38,9 @@ public class GameMessage {
             return;
         }
         queriedBy.add(characterId);
+    }
+
+    public boolean isQueriedBy(String characterId) {
+        return queriedBy.contains(characterId);
     }
 }

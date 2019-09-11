@@ -1,5 +1,13 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.Vector;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.domain.message.ChatRoom;
 import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
@@ -9,13 +17,6 @@ import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
 import com.github.saphyra.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -52,11 +53,10 @@ public class GameMessageFactory {
             .build();
     }
 
-    private List<String> fetchAllCharacterIdsOfGameGrouping(GameGrouping gameGrouping) {
+    private Vector<String> fetchAllCharacterIdsOfGameGrouping(GameGrouping gameGrouping) {
         return gameGrouping.getGameGroups().stream()
             .flatMap(gameGroup -> gameGroup.getCharacters().stream())
-            .map(GameGroupCharacter::getCharacterId)
-            .collect(Collectors.toList());
+            .map(GameGroupCharacter::getCharacterId).collect(Collectors.toCollection(Vector::new));
     }
 
     private Map<UUID, ChatRoom> createTeamRooms(GameGrouping gameGrouping) {
@@ -74,7 +74,7 @@ public class GameMessageFactory {
             .build();
     }
 
-    private List<String> fetchCharacterIdsFromGameGroup(GameGroup gameGroup) {
-        return gameGroup.getCharacters().stream().map(GameGroupCharacter::getCharacterId).collect(Collectors.toList());
+    private Vector<String> fetchCharacterIdsFromGameGroup(GameGroup gameGroup) {
+        return gameGroup.getCharacters().stream().map(GameGroupCharacter::getCharacterId).collect(Collectors.toCollection(Vector::new));
     }
 }

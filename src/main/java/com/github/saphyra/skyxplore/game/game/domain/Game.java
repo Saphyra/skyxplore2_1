@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
+import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.domain.message.GameMessages;
 import com.github.saphyra.skyxplore.game.game.domain.ship.GameShip;
@@ -70,5 +71,13 @@ public class Game {
 
     public List<GameShip> getShips(){
         return new ArrayList<>(ships);
+    }
+
+    public String getNameOfCharacter(String characterId) {
+        return teams.stream()
+            .filter(team -> team.containsCharacter(characterId))
+            .findFirst()
+            .map(team -> team.getNameOfCharacter(characterId))
+            .orElseThrow(() -> ExceptionFactory.characterNotInGame(characterId, gameId));
     }
 }

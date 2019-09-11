@@ -1,5 +1,13 @@
 package com.github.saphyra.skyxplore.game.game.domain.message;
 
+import static java.util.Objects.isNull;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import com.github.saphyra.skyxplore.common.ConcurrentOptionalMap;
 import com.github.saphyra.skyxplore.common.ExceptionFactory;
 import com.github.saphyra.skyxplore.common.OptionalMap;
@@ -7,13 +15,6 @@ import com.github.saphyra.skyxplore.game.game.GameContext;
 import com.github.saphyra.skyxplore.game.game.request.CreateRoomRequest;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.Objects.isNull;
 
 @RequiredArgsConstructor
 //TODO unit test
@@ -35,7 +36,7 @@ public class GameMessages {
         ChatRoom room = ChatRoom.builder()
             .roomId(gameContext.getIdGenerator().randomUUID())
             .displayName(createRoomRequest.getRoomName())
-            .members(members)
+            .members(new Vector<>(members))
             .build();
         addRoom(room.getRoomId(), room);
     }
@@ -47,5 +48,29 @@ public class GameMessages {
     private ChatRoom findRoomByIdValidated(UUID roomId) {
         return chatRooms.getOptional(roomId)
             .orElseThrow(() -> ExceptionFactory.chatRoomNotFound(roomId));
+    }
+
+    public List<ChatRoom> getRoomsOfCharacter(String characterId) {
+        return chatRooms.values().stream()
+            .filter(chatRoom -> chatRoom.isInRoom(characterId))
+            .collect(Collectors.toList());
+    }
+
+    public void inviteToRoom(String characterId, UUID roomId, String invitedCharacterId) {
+        ChatRoom chatRoom = findRoomByIdValidated(roomId);
+        if(!chatRoom.isInRoom(characterId)){
+            throw ExceptionFactory.invalidChatRoomAccess(characterId, roomId);
+        }
+
+        if(chatRoom.isInRoom(invitedCharacterId)){
+            throw ExceptionFactory.alreadyInChatRoom(invitedCharacterId, roomId);
+        }
+
+        chatRoom.addMember(invitedCharacterId);
+    }
+
+    public void sendMessage(String characterId, UUID roomId, String message) {
+        //TODO message length validation
+        findRoomByIdValidated(roomId).sendMessage(characterId, message, gameContext.getGameMessageFactory());
     }
 }

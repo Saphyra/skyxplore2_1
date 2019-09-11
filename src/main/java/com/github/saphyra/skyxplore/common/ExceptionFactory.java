@@ -1,5 +1,7 @@
 package com.github.saphyra.skyxplore.common;
 
+import java.util.UUID;
+
 import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ConflictException;
@@ -12,16 +14,17 @@ import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ExceptionFactory {
+    private static final String ALREADY_IN_CHAT_ROOM_PREFIX = "%s is already in ChatRoom %s";
     private static final String BLOCKED_CHARACTER_NOT_FOUND_PREFIX = "BlockedCharacter not found for characterId %s and blockedCharacterId %s";
     private static final String CHARACTER_ALREADY_BLOCKED_PREFIX = "%s is already blocked by %s";
     private static final String CHARACTER_BLOCKED_PREFIX = "There is a block between characters %s and %s";
     private static final String CHARACTER_NAME_ALREADY_EXISTS_PREFIX = "Character already exists with name %s";
     private static final String CHARACTER_NOT_FOUND_PREFIX = "SkyXpCharacter not found with id %s";
     private static final String CHAT_ROOM_NOT_FOUND_PREFIX = "ChatRoom not found with roomId %s";
+    private static final String CHARACTER_NOT_IN_GAME_PREFIX = "%s is not in Game %s";
+    private static final String CHARACTER_NOT_IN_TEAM_PREFIX = "%s is not in Team %s";
     private static final String CREDENTIALS_NOT_FOUND_PREFIX = "SkyXpCredentials not found with userId %s";
     private static final String EMAIL_ALREADY_EXISTS_PREFIX = "Email %s is already exists.";
     private static final String EQUIPMENT_NOT_FOUND_PREFIX = "Equipment not found with id %s";
@@ -33,6 +36,7 @@ public final class ExceptionFactory {
     private static final String FRIENDSHIP_NOT_FOUND_PREFIX = "Friendship not found with id %s";
     private static final String GAME_NOT_FOUND_PREFIX = "Game not found for character %s";
     private static final String INVALID_CHARACTER_ACCESS_PREFIX = "%s cannot access character %s";
+    private static final String INVALID_CHAT_ROOM_ACCESS_PREFIX = "%s has no access to ChatRoom %s";
     private static final String INVALID_FRIEND_REQUEST_ACCESS_PREFIX = "%s cannot access FriendRequest %s";
     private static final String INVALID_FRIENDSHIP_ACCESS_PREFIX = "%s has no access to Friendship %s";
     private static final String INVALID_LOCALE_PREFIX = "Locale %s is not supported.";
@@ -45,6 +49,10 @@ public final class ExceptionFactory {
     private static final String SHIP_NOT_FOUND_PREFIX = "EquippedShip not found with characterId %s";
     private static final String USER_NAME_ALREADY_EXISTS_PREFIX = "User with name %s already exists.";
     private static final String USER_NOT_FOUND_PREFIX = "User not found with id %s";
+
+    public static RestException alreadyInChatRoom(String invitedCharacterId, UUID roomId) {
+        return new ConflictException(createErrorMessage(ErrorCode.ALREADY_IN_CHAT_ROOM), String.format(ALREADY_IN_CHAT_ROOM_PREFIX, invitedCharacterId, roomId.toString()));
+    }
 
     public static RestException blockedCharacterNotFound(String characterId, String blockedCharacterId) {
         throw new NotFoundException(createErrorMessage(ErrorCode.BLOCKED_CHARACTER_NOT_FOUND), String.format(BLOCKED_CHARACTER_NOT_FOUND_PREFIX, characterId, blockedCharacterId));
@@ -64,6 +72,14 @@ public final class ExceptionFactory {
 
     public static RestException characterNotFound(String characterId) {
         return new NotFoundException(createErrorMessage(ErrorCode.CHARACTER_NOT_FOUND), String.format(CHARACTER_NOT_FOUND_PREFIX, characterId));
+    }
+
+    public static ServerException characterNotInGame(String characterId, UUID gameId) {
+        return new ServerException(String.format(CHARACTER_NOT_IN_GAME_PREFIX, characterId, gameId.toString()));
+    }
+
+    public static ServerException characterNotInTeam(String characterId, UUID teamId) {
+        return new ServerException(String.format(CHARACTER_NOT_IN_TEAM_PREFIX, characterId, teamId.toString()));
     }
 
     public static RestException chatRoomNotFound(UUID roomId) {
@@ -106,12 +122,16 @@ public final class ExceptionFactory {
         return new NotFoundException(createErrorMessage(ErrorCode.FRIENDSHIP_NOT_FOUND), String.format(FRIENDSHIP_NOT_FOUND_PREFIX, friendshipId));
     }
 
-    public static NotFoundException gameNotFound(String characterId) {
+    public static RestException gameNotFound(String characterId) {
         return new NotFoundException(createErrorMessage(ErrorCode.GAME_NOT_FOUND), String.format(GAME_NOT_FOUND_PREFIX, characterId));
     }
 
     public static RestException invalidCharacterAccess(String characterId, String userId) {
         return new ForbiddenException(createErrorMessage(ErrorCode.INVALID_CHARACTER_ACCESS), String.format(INVALID_CHARACTER_ACCESS_PREFIX, userId, characterId));
+    }
+
+    public static RestException invalidChatRoomAccess(String characterId, UUID roomId) {
+        return new ForbiddenException(createErrorMessage(ErrorCode.INVALID_CHAT_ROOM_ACCESS), String.format(INVALID_CHAT_ROOM_ACCESS_PREFIX, characterId, roomId.toString()));
     }
 
     public static RestException invalidFriendRequestAccess(String friendRequestId, String characterId) {

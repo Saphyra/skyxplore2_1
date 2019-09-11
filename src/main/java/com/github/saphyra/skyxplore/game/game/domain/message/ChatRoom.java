@@ -1,15 +1,16 @@
 package com.github.saphyra.skyxplore.game.game.domain.message;
 
-import com.github.saphyra.skyxplore.game.lobby.message.domain.LobbyMessage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
+import com.github.saphyra.skyxplore.game.game.service.message.GameMessageFactory;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
@@ -26,12 +27,28 @@ public class ChatRoom {
     private final boolean defaultRoom = false;
 
     @NonNull
-    private final List<String> members;
+    private final Vector<String> members;
 
     @Builder.Default
-    private final List<LobbyMessage> lobbyMessages = new Vector<>();
+    private final List<GameMessage> messages = new Vector<>();
 
     void exitFromRoom(String characterId) {
         members.remove(characterId);
+    }
+
+    boolean isInRoom(String characterId) {
+        return members.contains(characterId);
+    }
+
+    public List<GameMessage> getMessages() {
+        return new ArrayList<>(messages);
+    }
+
+    void addMember(String invitedCharacterId) {
+        members.add(invitedCharacterId);
+    }
+
+    void sendMessage(String characterId, String message, GameMessageFactory gameMessageFactory) {
+        messages.add(gameMessageFactory.create(characterId, message));
     }
 }

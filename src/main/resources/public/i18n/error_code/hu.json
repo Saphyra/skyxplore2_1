@@ -1,4 +1,5 @@
 {
+  "ALREADY_IN_CHAT_ROOM": "A játékos már tagja a chat szobának."
   "BAD_CREDENTIALS": "Hibás felhasználónév vagy jelszó",
   "BLOCKED_CHARACTER_NOT_FOUND": "Letiltott játékos nem található.",
   "CHARACTER_ALREADY_BLOCKED": "Ez a játékos már le van tiltva.",
@@ -15,6 +16,7 @@
   "GAME_NOT_FOUND": "Játék nem található.",
   "GENERAL_ERROR": "Hiba - ${generalErrorKey}",
   "INVALID_CHARACTER_ACCESS": "Játékos hozzáférés megtagadva.",
+  "INVALID_CHAT_ROOM_ACCESS": "Hozzáférés megtagadva.",
   "INVALID_FRIEND_REQUEST_ACCESS": "Hozzáférés megtagadva.",
   "INVALID_FRIENDSHIP_ACCESS": "Hozzáférés megtagadva.",
   "INVALID_LOCALE": "Érvénytelen nyelv.",
