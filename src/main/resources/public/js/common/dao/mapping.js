@@ -38,6 +38,7 @@ window.Mapping = {
     GET_CHARACTERS_CAN_BE_FRIEND: "/api/friend/name",
     GET_FRIEND_REQUESTS: "/api/friend/request/received",
     GET_FRIENDS: "/api/friend",
+    GET_GAME_MESSAGES: "/api/game/message",
     GET_INCOMING_MAILS: "/api/mail",
     GET_INVITATIONS: "/api/lobby/invitation",
     GET_LANGUAGES: "/gamedata/languages.json",

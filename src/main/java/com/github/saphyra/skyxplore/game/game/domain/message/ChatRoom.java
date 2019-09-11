@@ -21,9 +21,11 @@ public class ChatRoom {
     private final UUID roomId;
 
     @NonNull
+    @Getter
     private final String displayName;
 
     @Builder.Default
+    @Getter
     private final boolean defaultRoom = false;
 
     @NonNull

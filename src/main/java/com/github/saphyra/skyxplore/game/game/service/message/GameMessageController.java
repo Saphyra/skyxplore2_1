@@ -3,9 +3,7 @@ package com.github.saphyra.skyxplore.game.game.service.message;
 import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +19,7 @@ import com.github.saphyra.skyxplore.common.OneStringParamRequest;
 import com.github.saphyra.skyxplore.common.RequestConstants;
 import com.github.saphyra.skyxplore.game.game.GameQueryService;
 import com.github.saphyra.skyxplore.game.game.request.CreateRoomRequest;
-import com.github.saphyra.skyxplore.game.game.view.GameMessageView;
+import com.github.saphyra.skyxplore.game.game.view.ChatRoomView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +35,6 @@ class GameMessageController {
     private static final String SEND_MESSAGES_MAPPING = API_PREFIX + "/game/message/{roomId}";
 
     private final GameMessageQueryService gameMessageQueryService;
-    private final GameMessageViewConverter gameMessageViewConverter;
     private final GameQueryService gameQueryService;
 
     @PutMapping(CREATE_ROOM_MAPPING)
@@ -63,14 +60,11 @@ class GameMessageController {
     }
 
     @GetMapping(GET_MESSAGES_MAPPING)
-    Map<UUID, List<GameMessageView>> getMessages(
+    List<ChatRoomView> getMessages(
         @RequestParam(value = "all", defaultValue = "false") Boolean queryAll,
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
-        return gameMessageQueryService.getMessages(characterId, queryAll)
-            .entrySet()
-            .stream()
-            .collect(Collectors.toMap(Map.Entry::getKey, entry -> gameMessageViewConverter.convertDomain(entry.getValue())));
+        return gameMessageQueryService.getMessages(characterId, queryAll);
     }
 
     @PostMapping(INVITE_TO_ROOM_MAPPING)

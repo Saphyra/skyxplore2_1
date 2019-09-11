@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 //TODO unit test
-public class GameMessageFactory {
+public class GameMessagesFactory {
     private static final String GLOBAL_CHAT_DISPLAY_NAME = "global-chat-room";
     private static final String TEAM_CHAT_DISPLAY_NAME = "team-chat-room";
 

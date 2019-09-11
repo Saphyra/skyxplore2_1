@@ -18,6 +18,37 @@
     height: 1.5rem;
 }
 
+    .room-label{
+        top: 0.3rem;
+        display: inline;
+        border: 1px solid white;
+        padding: 0.125rem;
+        padding-right: 1.25rem;
+        font-size: 0.75rem;
+        margin-right: 0.25rem;
+        position: relative;
+    }
+
+    .room-label:hover{
+        border-color: red;
+    }
+
+    .room-label:first-child{
+        margin-left: 0.25rem;
+    }
+
+        .room-label *{
+            cursor: pointer;
+        }
+
+        .room-label button{
+            border-width: 1px;
+            font-size: 0.4rem;
+            position: absolute;
+            right: -0.125rem;
+            top: -0.125rem;
+        }
+
 #chat-message-container{
     position: absolute;
     top: 3rem;

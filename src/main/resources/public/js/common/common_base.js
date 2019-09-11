@@ -6,6 +6,7 @@
     }
     
     scriptLoader.loadScript("/js/common/constants.js");
+    scriptLoader.loadScript("/js/common/optional.js");
     scriptLoader.loadScript("/js/common/utils.js");
     scriptLoader.loadScript("/js/common/log_service.js");
     scriptLoader.loadScript("/js/common/dao/mapping.js");

@@ -15,5 +15,7 @@
     ]
   },
   "additionalContent": {
+    "global-chat-room": "Általános",
+    "team-chat-room": "Csapat"
   }
 }

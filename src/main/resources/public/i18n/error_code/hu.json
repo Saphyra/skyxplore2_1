@@ -1,5 +1,5 @@
 {
-  "ALREADY_IN_CHAT_ROOM": "A játékos már tagja a chat szobának."
+  "ALREADY_IN_CHAT_ROOM": "A játékos már tagja a chat szobának.",
   "BAD_CREDENTIALS": "Hibás felhasználónév vagy jelszó",
   "BLOCKED_CHARACTER_NOT_FOUND": "Letiltott játékos nem található.",
   "CHARACTER_ALREADY_BLOCKED": "Ez a játékos már le van tiltva.",
