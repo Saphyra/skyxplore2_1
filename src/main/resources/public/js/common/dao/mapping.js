@@ -68,6 +68,7 @@ window.Mapping = {
     SEARCH_INVITABLE_CHARACTERS: "/api/character/active/name",
     SELECT_CHARACTER: "/api/character/*",
     SEND_MAIL: "/api/mail",
+    SEND_GAME_MESSAGE: "/api/game/message/*",
     SEND_LOBBY_MESSAGE: "/api/lobby/message",
     SET_LOCALE: "/api/locale/*",
     START_QUEUEING: "/api/lobby/queue/*",

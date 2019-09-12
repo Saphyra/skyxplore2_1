@@ -1,10 +1,12 @@
 package com.github.saphyra.skyxplore.game.game.service.message;
 
-import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
-
-import java.util.List;
-import java.util.UUID;
-
+import com.github.saphyra.skyxplore.common.OneStringParamRequest;
+import com.github.saphyra.skyxplore.common.RequestConstants;
+import com.github.saphyra.skyxplore.game.game.GameQueryService;
+import com.github.saphyra.skyxplore.game.game.request.CreateRoomRequest;
+import com.github.saphyra.skyxplore.game.game.view.ChatRoomView;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.saphyra.skyxplore.common.OneStringParamRequest;
-import com.github.saphyra.skyxplore.common.RequestConstants;
-import com.github.saphyra.skyxplore.game.game.GameQueryService;
-import com.github.saphyra.skyxplore.game.game.request.CreateRoomRequest;
-import com.github.saphyra.skyxplore.game.game.view.ChatRoomView;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.UUID;
+
+import static com.github.saphyra.skyxplore.common.RequestConstants.API_PREFIX;
 
 @RestController
 @Slf4j
@@ -64,6 +63,7 @@ class GameMessageController {
         @RequestParam(value = "all", defaultValue = "false") Boolean queryAll,
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
+        log.info("{} wants to query his messages. queryAll: {}", characterId, queryAll);
         return gameMessageQueryService.getMessages(characterId, queryAll);
     }
 
@@ -73,6 +73,7 @@ class GameMessageController {
         @PathVariable("characterId") String invitedCharacterId,
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
+        log.info("{} wants to invite {} to room {}", characterId, invitedCharacterId, roomId);
         gameQueryService.findByCharacterIdValidated(characterId)
             .getMessages()
             .inviteToRoom(characterId, roomId, invitedCharacterId);
@@ -84,6 +85,8 @@ class GameMessageController {
         @RequestBody OneStringParamRequest message,
         @CookieValue(RequestConstants.COOKIE_CHARACTER_ID) String characterId
     ) {
+        log.info("{} wants to send a message to room {}", characterId, roomId);
+        log.debug("Message: {}", message);
         gameQueryService.findByCharacterIdValidated(characterId)
             .getMessages()
             .sendMessage(characterId, roomId, message.getValue());

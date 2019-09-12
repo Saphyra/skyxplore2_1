@@ -16,7 +16,7 @@
             if(e.which == 13){
                 sendMessage();
             }
-        })
+        });
 
         $("#send-message-button").on("click", sendMessage);
     }

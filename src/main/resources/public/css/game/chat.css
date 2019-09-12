@@ -41,6 +41,11 @@
             cursor: pointer;
         }
 
+        .room-label span:nth-child(2){
+            color: red;
+            display: none;
+        }
+
         .room-label button{
             border-width: 1px;
             font-size: 0.4rem;
@@ -60,7 +65,30 @@
     .chat-group{
         overflow-x: hidden;
         overflow-y: scroll;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
+
+        .active-chat-room{
+            border-color: green;
+        }
+
+        .message{
+            margin: 0.25rem;
+            margin-left: 1.25rem;
+            text-indent: -1rem;
+        }
+
+            .message-sender{
+                text-decoration: underline;
+            }
+
+            .message-text:before{
+                content: ": ";
+            }
 
 #chat-input-container{
     position: absolute;
