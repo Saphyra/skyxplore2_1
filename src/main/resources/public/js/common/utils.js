@@ -29,9 +29,9 @@ function getActualTimeStamp(){
     return Math.floor(new Date().getTime() / 1000);
 }
 
-function switchTab(clazz, id){
-    $("." + clazz).hide();
-    $("#" + id).show();
+function switchTab(clazz, id, duration){
+    $("." + clazz).hide(duration);
+    $("#" + id).show(duration);
 }
 
 function orderMapByProperty(map, orderFunction){

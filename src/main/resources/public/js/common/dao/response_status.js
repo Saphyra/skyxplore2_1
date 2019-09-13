@@ -50,6 +50,7 @@ window.ResponseStatus = new function(){
     this.FORBIDDEN = 403
     this.NOT_FOUND = 404;
     this.CONFLICT = 409;
+    this.GONE = 410;
     this.PRECONDITION_FAILED = 412;
     this.LOCKED = 423;
     this.TOO_MANY_REQUESTS = 429

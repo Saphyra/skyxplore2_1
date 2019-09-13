@@ -1,15 +1,16 @@
 package com.github.saphyra.skyxplore.game.gamecreator;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.github.saphyra.skyxplore.game.gamecreator.domain.GameGrouping;
 import com.github.saphyra.skyxplore.game.gamecreator.groupingcreator.GroupingCreatorConfiguration;
 import com.github.saphyra.skyxplore.game.lobby.lobby.domain.GameMode;
 import com.github.saphyra.util.OffsetDateTimeProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

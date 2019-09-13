@@ -15,13 +15,13 @@
     top: 1.5rem;
     left: 0;
     right: 0;
-    height: 1.5rem;
+    height: 1.75rem;
 }
 
-    .room-label{
-        top: 0.3rem;
+    .chat-room-label{
+        top: 0.45rem;
         display: inline;
-        border: 1px solid white;
+        border: 2px outset white;
         padding: 0.125rem;
         padding-right: 1.25rem;
         font-size: 0.75rem;
@@ -29,24 +29,33 @@
         position: relative;
     }
 
-    .room-label:hover{
+    .chat-room-label:hover{
         border-color: red;
     }
 
-    .room-label:first-child{
+    .chat-room-label:active{
+        border-color: orange;
+        border-style: inset;
+    }
+
+    .chat-room-label:first-child{
         margin-left: 0.25rem;
     }
 
-        .room-label *{
+        .active-chat-room{
+            border-color: green;
+        }
+
+        .chat-room-label *{
             cursor: pointer;
         }
 
-        .room-label span:nth-child(2){
+        .chat-room-label span:nth-child(2){
             color: red;
             display: none;
         }
 
-        .room-label button{
+        .chat-room-label button{
             border-width: 1px;
             font-size: 0.4rem;
             position: absolute;
@@ -56,7 +65,7 @@
 
 #chat-message-container{
     position: absolute;
-    top: 3rem;
+    top: 3.5rem;
     left: 0;
     right: 0;
     bottom: 2rem;
@@ -71,10 +80,6 @@
         bottom: 0;
         left: 0;
     }
-
-        .active-chat-room{
-            border-color: green;
-        }
 
         .message{
             margin: 0.25rem;

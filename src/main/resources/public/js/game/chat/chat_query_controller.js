@@ -42,7 +42,7 @@
                 if(needScroll){
                     messageContainer.scrollTop = messageContainer.scrollHeight;
                 }
-                switchTab("chat-group", createMessageContainerId(activeChatRoom));
+                switchToActiveChatRoom();
 
                 function getOrCreateRoomLabel(chatRoom){
                     const newMessageMarkerId = createNewMessageMarkerId(chatRoom.roomId);
@@ -51,7 +51,7 @@
 
                     function createRoomLabel(chatRoom){
                         const roomLabel = document.createElement("DIV");
-                            roomLabel.classList.add("room-label");
+                            roomLabel.classList.add("chat-room-label");
                             roomLabel.id = createChatRoomId(chatRoom.roomId);
 
                             if(activeChatRoom == chatRoom.roomId){
@@ -72,6 +72,10 @@
                         roomLabel.appendChild(exitButton);
 
                         document.getElementById("chat-rooms").appendChild(roomLabel);
+
+                        label.onclick = function(){
+                            switchRoom(chatRoom.roomId);
+                        }
 
                         return newMessageMarkerSpan;
                     }
@@ -116,12 +120,22 @@
         }
     }
 
+    function switchRoom(roomId){
+        activeChatRoom = roomId;
+        $(".chat-room-label").removeClass("active-chat-room");
+        $("#" + createChatRoomId(roomId)).addClass("active-chat-room");
+    }
+
     function createChatRoomId(roomId){
         return "room-label-" + roomId;
     }
 
     function createMessageContainerId(roomId){
         return "message-container-" + roomId;
+    }
+
+    function switchToActiveChatRoom(){
+        switchTab("chat-group", createMessageContainerId(activeChatRoom), 0);
     }
 
     function init(){
