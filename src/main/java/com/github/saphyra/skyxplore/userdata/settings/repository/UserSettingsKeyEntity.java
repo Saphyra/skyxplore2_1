@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,8 +18,10 @@ import java.io.Serializable;
 @Builder
 @Data
 class UserSettingsKeyEntity implements Serializable {
+    @Column(length = 36)
     private String userId;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 50)
     private UserSettingKey settingKey;
 }
