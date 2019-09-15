@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -52,9 +53,9 @@ public class AbilityDetailsFactoryTest {
     @Before
     public void setUp() {
         given(shipEquipments.getShipId()).willReturn(SHIP_ID);
-        given(shipService.get(SHIP_ID)).willReturn(ship);
+        given(shipService.getOptional(SHIP_ID)).willReturn(Optional.of(ship));
         given(ship.getAbility()).willReturn(Arrays.asList(ABILITY_ID));
-        given(abilityService.get(ABILITY_ID)).willReturn(ability);
+        given(abilityService.getOptional(ABILITY_ID)).willReturn(Optional.of(ability));
 
         given(ability.getId()).willReturn(ABILITY_ID);
         given(ability.getEnergyUsage()).willReturn(ENERGY_USAGE);

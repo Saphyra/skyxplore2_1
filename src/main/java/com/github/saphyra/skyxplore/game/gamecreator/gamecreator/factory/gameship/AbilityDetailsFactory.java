@@ -28,11 +28,11 @@ public class AbilityDetailsFactory {
     }
 
     private List<AbilityDetails> fetchAbilityDetails(String shipId) {
-        return Optional.ofNullable(shipService.get(shipId))
+        return shipService.getOptional(shipId)
             .orElseThrow(() -> new RuntimeException("No Ship found with shipId " + shipId))
             .getAbility()
             .stream()
-            .map(abilityId -> Optional.ofNullable(abilityService.get(abilityId)))
+            .map(abilityService::getOptional)
             .map(ability -> ability.orElseThrow(() -> new RuntimeException("Ability not found.")))
             .map(this::getAbilityDetails)
             .collect(Collectors.toList());

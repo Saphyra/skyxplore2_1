@@ -1,7 +1,5 @@
 package com.github.saphyra.skyxplore.common;
 
-import java.util.UUID;
-
 import com.github.saphyra.exceptionhandling.domain.ErrorMessage;
 import com.github.saphyra.exceptionhandling.exception.BadRequestException;
 import com.github.saphyra.exceptionhandling.exception.ConflictException;
@@ -11,10 +9,11 @@ import com.github.saphyra.exceptionhandling.exception.NotFoundException;
 import com.github.saphyra.exceptionhandling.exception.PaymentRequiredException;
 import com.github.saphyra.exceptionhandling.exception.RestException;
 import com.github.saphyra.exceptionhandling.exception.UnauthorizedException;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+import java.util.UUID;
+
+@UtilityClass
 public final class ExceptionFactory {
     private static final String ALREADY_IN_CHAT_ROOM_PREFIX = "%s is already in ChatRoom %s";
     private static final String BLOCKED_CHARACTER_NOT_FOUND_PREFIX = "BlockedCharacter not found for characterId %s and blockedCharacterId %s";
