@@ -66,7 +66,7 @@ public class AbilityDetailsFactoryTest {
     @Test(expected = RuntimeException.class)
     public void create_shipNotFound() {
         //GIVEN
-        given(shipService.get(SHIP_ID)).willReturn(null);
+        given(shipService.getOptional(SHIP_ID)).willReturn(Optional.empty());
         //WHEN
         underTest.create(shipEquipments);
     }
@@ -74,7 +74,7 @@ public class AbilityDetailsFactoryTest {
     @Test(expected = RuntimeException.class)
     public void create_abilityNotFound() {
         //GIVEN
-        given(abilityService.get(ABILITY_ID)).willReturn(null);
+        given(abilityService.getOptional(ABILITY_ID)).willReturn(Optional.empty());
         //WHEN
         underTest.create(shipEquipments);
     }

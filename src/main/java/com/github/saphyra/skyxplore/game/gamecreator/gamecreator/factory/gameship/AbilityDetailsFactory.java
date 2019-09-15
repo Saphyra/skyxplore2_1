@@ -1,6 +1,7 @@
 package com.github.saphyra.skyxplore.game.gamecreator.gamecreator.factory.gameship;
 
 import com.github.saphyra.skyxplore.data.gamedata.entity.Ability;
+import com.github.saphyra.skyxplore.data.gamedata.entity.Ship;
 import com.github.saphyra.skyxplore.data.gamedata.subservice.AbilityService;
 import com.github.saphyra.skyxplore.data.gamedata.subservice.ShipService;
 import com.github.saphyra.skyxplore.game.game.domain.ship.AbilityDetails;
@@ -28,14 +29,22 @@ public class AbilityDetailsFactory {
     }
 
     private List<AbilityDetails> fetchAbilityDetails(String shipId) {
-        return shipService.getOptional(shipId)
-            .orElseThrow(() -> new RuntimeException("No Ship found with shipId " + shipId))
+        return getShip(shipId)
             .getAbility()
             .stream()
-            .map(abilityService::getOptional)
-            .map(ability -> ability.orElseThrow(() -> new RuntimeException("Ability not found.")))
+            .map(this::getAbility)
             .map(this::getAbilityDetails)
             .collect(Collectors.toList());
+    }
+
+    private Ship getShip(String shipId) {
+        return shipService.getOptional(shipId)
+            .orElseThrow(() -> new RuntimeException("No Ship found with shipId " + shipId));
+    }
+
+    private Ability getAbility(String abilityId) {
+        return abilityService.getOptional(abilityId)
+            .orElseThrow(() -> new RuntimeException("Ability not found."));
     }
 
     private AbilityDetails getAbilityDetails(Ability ability) {
