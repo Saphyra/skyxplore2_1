@@ -12,10 +12,10 @@ public class Coordinates {
     public static final int DEFAULT_COORDINATES = -1;
 
     @Builder.Default
-    private volatile int xCoord = -1;
+    private volatile double xCoord = -1;
 
     @Builder.Default
-    private volatile int yCoord = -1;
+    private volatile double yCoord = -1;
 
     public static Coordinates createDefault() {
         return new Coordinates(DEFAULT_COORDINATES, DEFAULT_COORDINATES);
