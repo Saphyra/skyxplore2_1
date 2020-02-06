@@ -23,17 +23,27 @@ public class CrossTest {
         log.info("Point C: {}", c);
         log.info("Point D: {}", d);
         //WHEN
-        double ma = ((double) b.getYCoord() - a.getYCoord()) / (b.getXCoord() - a.getXCoord());
-        double mb = ((double) d.getYCoord() - c.getYCoord()) / (d.getXCoord() - c.getXCoord());
+        double a1 = b.getYCoord() - a.getYCoord();
+        double b1 = a.getXCoord() - b.getXCoord();
+        double c1 = a1 * a.getXCoord() + b1 * a.getYCoord();
 
-        log.info("ma: {}", ma);
-        log.info("mb: {}", mb);
+        double a2 = d.getYCoord() - c.getYCoord();
+        double b2 = c.getXCoord() - d.getXCoord();
+        double c2 = a2 * c.getXCoord() + b2 * c.getYCoord();
 
-        double ba = a.getYCoord() - ma * a.getXCoord();
-        double bb = c.getYCoord() - mb * c.getXCoord();
-
-        log.info("ba: {}", ba);
-        log.info("bb: {}", bb);
+        double determinant = a1 * b2 - a2 * b1;
+        if (determinant == 0) {
+            log.info("Lines are parallel.");
+        } else {
+            double x = (b2 * c1 - b1 * c2) / determinant;
+            double y = (a1 * c2 - a2 * c1) / determinant;
+            log.info("x: {}, y: {}", x, y);
+            Coordinates intersection = Coordinates.builder()
+                .xCoord((int) Math.round(x))
+                .yCoord((int) Math.round(y))
+                .build();
+            log.info("Intersection: {}", intersection);
+        }
         //THEN
     }
 
