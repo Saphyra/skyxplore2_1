@@ -32,7 +32,8 @@
         }
         
         const characterName = $("#new-character-name").val();
-        const request = new Request(HttpMethod.PUT, Mapping.RENAME_CHARACTER, {newCharacterName: characterName, characterId: event.getPayload()});
+        const characterId = document.getElementById("rename-character-button").value;
+        const request = new Request(HttpMethod.PUT, Mapping.RENAME_CHARACTER, {newCharacterName: characterName, characterId: characterId});
             request.convertResponse = function(response){
                 return JSON.parse(response.body);
             }

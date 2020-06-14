@@ -20,11 +20,9 @@
     function openRenamePage(event){
         const character = event.getPayload();
         const characterId = character.characterId
-        
-        document.getElementById("rename-character-button").onclick = function(){
-            eventProcessor.processEvent(new Event(events.RENAME_CHARACTER_ATTEMPT, characterId));
-        }
-        
+
+        document.getElementById("rename-character-button").value = characterId;
+
         $("#new-character-name").val(character.characterName);
         document.getElementById("rename-character-button").disabled = true;
         
